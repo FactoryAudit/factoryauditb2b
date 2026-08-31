@@ -1,0 +1,2168 @@
+{
+  "nav": {
+    "tools": "工具",
+    "suppliers": "供應商",
+    "rfq": "RFQ",
+    "audits": "驗廠",
+    "inspections": "驗貨",
+    "logistics": "物流",
+    "resources": "資源",
+    "pricing": "定價",
+    "postRfq": "發布 RFQ",
+    "requestAudit": "申請驗廠",
+    "language": "語言",
+    "trainingPlans": "培訓方案",
+    "about": "關於我們",
+    "services": "服務",
+    "menu": {
+      "title": "服務",
+      "verification": "供應商查核",
+      "verificationDesc": "Confirm the company, the site and the documents before you pay.",
+      "factoryAudit": "工廠驗廠",
+      "factoryAuditDesc": "On-site assessment against the standard your buyer requires.",
+      "inspection": "驗貨",
+      "inspectionDesc": "In-line and pre-shipment checks on your production.",
+      "sourcing": "採購媒合",
+      "sourcingDesc": "Post an RFQ and reach suppliers we can verify.",
+      "improvement": "供應商改善",
+      "improvementDesc": "Turn audit findings into corrective action and training."
+    }
+  },
+  "footer": {
+    "platform": "平臺",
+    "resources": "資源",
+    "coverage": "覆蓋地區",
+    "logistics": "物流",
+    "allTools": "All free tools",
+    "riskCalculator": "Risk calculator",
+    "verificationChecklist": "Verification checklist",
+    "supplierVerification": "Supplier verification",
+    "factoryAudit": "Factory audit",
+    "knowledgeBase": "供應商培訓",
+    "pricing": "價格",
+    "admin": "管理後臺",
+    "tagline": "我們覈查中國及亞洲的工廠，並把原始資料交給你。",
+    "copyright": "© 2026 FactoryAuditB2B.com。我們不出售證書。香港、臺灣、澳門均爲中國的一部分。",
+    "privacy": "隱私政策",
+    "terms": "服務條款",
+    "trainingPlans": "培訓方案",
+    "about": "關於我們",
+    "coverageOnly": "Phase 1 coverage. More countries as we add verified auditor capacity.",
+    "verificationService": "Supplier verification",
+    "inspectionService": "Inspection",
+    "sourcingService": "Sourcing",
+    "improvementService": "Supplier Improvement",
+    "allServices": "All services",
+    "containerCalculator": "Container load calculator",
+    "trustCenter": "Trust Center",
+    "operatedBy": "FactoryAuditB2B is a platform and brand operated by {entity}.",
+    "registeredBusiness": "China Registered Business"
+  },
+  "home": {
+    "badge": "覈查 · 採購 · 驗貨 · 發運",
+    "h1": "付錢之前，先把工廠查清楚",
+    "lead": "於中國及東南亞的現場供應商核查與工廠稽核支援。已啟用範圍：中國、越南、泰國、馬來西亞、菲律賓。",
+    "ctaScore": "免費評估供應商",
+    "ctaRfq": "發佈詢價",
+    "ctaAudit": "申請驗廠",
+    "services": "我們提供供應商驗證、工廠審覈、驗貨與貨運服務。",
+    "toolsTitle": "Free tools for evaluating suppliers",
+    "toolsLead": "八款工具，用於覈查供應商、準備審覈與規劃發運。無需註冊，基礎結果也不設郵箱門檻。",
+    "value1Title": "「已驗證」到底意味着什麼",
+    "value1Body": "只有在覈對工商登記、確認廠房真實存在、並審閱審覈文件之後，供應商纔會被標記爲已驗證。",
+    "value2Title": "結論由人來做",
+    "value2Body": "軟件負責篩出明顯問題，驗證與審覈的最終結論由我們的審覈員出具，報告上會署名。",
+    "value3Title": "每一次覈查都會留檔",
+    "value3Body": "每次驗證與審覈都會留在該供應商的檔案裏。企業無法在我們這裏悄悄清空歷史記錄。",
+    "sub": "Use free tools to assess supplier risk, check verification readiness and prepare for a factory audit. When you need someone on the ground, request an independent verification or factory audit.",
+    "ctaPrimary": "Assess Supplier Risk",
+    "ctaSecondary": "Verify a Supplier",
+    "ctaHighIntent": "Request a Factory Audit",
+    "evaTitle": "Evaluate. Verify. Audit.",
+    "evaLead": "Three steps between a supplier you found online and a supplier you can pay.",
+    "evaluateTitle": "Evaluate",
+    "evaluateBody": "Assess supplier risk before you place an order.",
+    "evaluateCta": "Evaluate a Supplier",
+    "verifyTitle": "Verify",
+    "verifyBody": "Check company information, documents, factory details and available evidence.",
+    "verifyCta": "Verify a Supplier",
+    "auditTitle": "Audit",
+    "auditBody": "Get an independent on-site factory audit with findings, evidence and a written report.",
+    "auditCta": "Request an Audit",
+    "howTitle": "How it works",
+    "howLead": "From a company name to a decision you can defend internally.",
+    "howSteps": [
+      {
+        "title": "評估",
+        "body": "用風險計算器或查核清單跑一遍供應商。你會拿到分數和一份「還缺什麼」的清單。"
+      },
+      {
+        "title": "驗證",
+        "body": "把公司名稱與地址寄給我們。我們核實登記、廠址與文件。"
+      },
+      {
+        "title": "稽核",
+        "body": "當訂單值得投入時，按買方要求的標準派稽核員到現場。"
+      },
+      {
+        "title": "決定",
+        "body": "你會拿到所見、佐證與書面報告，再決定下單、議價或放棄。"
+      }
+    ],
+    "coverageTitle": "Where We Verify Suppliers",
+    "coverageLead": "On-the-ground supplier verification and factory audit support across China and Southeast Asia.",
+    "coveragePhase": "Phase 1 coverage",
+    "coverageService1": "Supplier Verification",
+    "coverageService2": "Factory Audit",
+    "coverageService3": "Inspection",
+    "coverageCta": "See coverage",
+    "whyTitle": "為什麼買家用 FactoryAuditB2B",
+    "whyLead": "我們做對四件事，跟目錄或試算表不一樣。",
+    "why1Title": "真實證據",
+    "why1Body": "每項所見附文件、照片或帶日期的觀察。證據缺失時，報告會寫明。",
+    "why2Title": "透明方法",
+    "why2Body": "風險分數來自固定規則引擎，權重公開。你可以看見哪個回答把數字推了上去。",
+    "why3Title": "獨立核驗",
+    "why3Body": "我們不賣證書，工廠也不付費給我們。我們的工作是如實描述所見。",
+    "why4Title": "實用報告",
+    "why4Body": "你拿到的是可內部轉發的書面報告，含風險摘要與我們建議的下一步。",
+    "guidesTitle": "買家在下單前會讀的指南",
+    "guidesLead": "由實際執行這些核查的人撰寫的實用指南。",
+    "casesTitle": "What the checks turn up",
+    "casesLead": "Supplier names removed. Findings and outcomes come from real engagements.",
+    "bottomTitle": "Have a supplier already?",
+    "bottomLead": "Send us the company name and address. We will tell you what we can confirm, what we cannot, and what it costs.",
+    "bottomCta": "Verify This Supplier",
+    "otherRegionTitle": "Other Regions",
+    "otherRegionBody": "Don't see your country? We accept enquiries for any region and review each one based on scope, location and inspector availability.",
+    "otherRegionCta": "Tell us where you source",
+    "primary": "評估供應商風險",
+    "secondary": "驗證供應商",
+    "highIntent": "申請工廠稽核",
+    "guide1Title": "如何驗證中國供應商",
+    "guide2Title": "工廠稽核檢查表",
+    "guide3Title": "供應商風險評估"
+  },
+  "toolsIndex": {
+    "badge": "Free tools",
+    "h1": "Free Supplier & Factory Audit Tools",
+    "lead": "七款工具用於篩選供應商、覈對文件與準備審覈。無需註冊。",
+    "flagship": "主推",
+    "ctaTitle": "需要我們把這些覈查做掉嗎？",
+    "ctaLead": "我們的驗證服務會覈實工商登記、廠房、產能、質量與合規，並在你付款前出具書面報告。",
+    "ctaPrimary": "供應商驗證服務",
+    "ctaSecondary": "申請工廠審覈",
+    "metaTitle": "免費供應商與工廠審覈工具",
+    "metaDesc": "免費工具，用於篩選供應商、覈對文件、生成審覈清單與分析審覈報告。無需註冊。"
+  },
+  "toolCards": {
+    "riskCalculator": {
+      "title": "Supplier Risk Calculator",
+      "desc": "按六個加權維度，爲任意供應商打出 0 到 100 的分數。"
+    },
+    "verificationChecklist": {
+      "title": "Supplier Verification Checklist",
+      "desc": "六個階段共 29 項覈查，下單前逐條過一遍。"
+    },
+    "riskAssessment": {
+      "title": "Supplier Risk Assessment",
+      "desc": "填入供應商信息，得到初步風險分與證據狀態。"
+    },
+    "auditChecklist": {
+      "title": "Factory Audit Checklist Generator",
+      "desc": "按行業與審覈類型生成對應的審覈清單。"
+    },
+    "supplierScorecard": {
+      "title": "Supplier Evaluation Scorecard",
+      "desc": "自己設定權重，再據此給供應商打分。"
+    },
+    "auditReportAnalyzer": {
+      "title": "Audit Report Analyzer",
+      "desc": "檢查審覈報告中的缺項、矛盾之處與風險信號。"
+    },
+    "documentChecker": {
+      "title": "Supplier Document Checker",
+      "desc": "交叉覈對供應商文件與證書是否一致。"
+    },
+    "containerCalculator": {
+      "title": "集裝箱裝櫃計算器",
+      "desc": "算出 20GP、40HQ 等櫃型每櫃能裝多少箱，以及需要幾個櫃。"
+    },
+    "rfqGenerator": {
+      "title": "詢價單生成器",
+      "desc": "用一句話需求生成一份專業的詢價單。"
+    },
+    "personalizedService": {
+      "title": "個性化服務",
+      "desc": "提出您的具體需求，我們爲您定製審覈或驗證方案。"
+    }
+  },
+  "risk": {
+    "ui": {
+      "stepOf": "第 {n} 步，共 6 步",
+      "back": "上一步",
+      "next": "下一步",
+      "calculate": "計算風險分",
+      "answerAll": "答完所有題目後才能看到分數",
+      "scoreSuffix": "風險分",
+      "breakdownTitle": "風險來自哪裏",
+      "weightNote": "佔總分的 {weight}%",
+      "factorsTitle": "哪些回答拉高了分數",
+      "actionsTitle": "接下來該做什麼",
+      "editAnswers": "修改答案",
+      "startOver": "重新開始",
+      "downloadReport": "下載完整報告",
+      "print": "打印",
+      "notAnswered": "未作答",
+      "reportTitle": "供應商風險報告",
+      "level": {
+        "LOW": "低風險",
+        "MODERATE": "中等風險",
+        "ELEVATED": "偏高風險",
+        "HIGH": "高風險",
+        "CRITICAL": "極高風險"
+      },
+      "form": {
+        "title": "留下郵箱，獲取完整報告",
+        "firstName": "姓名",
+        "company": "公司",
+        "email": "工作郵箱",
+        "country": "國家 / 地區",
+        "sourcing": "採購品類",
+        "supplierName": "供應商名稱",
+        "supplierWebsite": "供應商網址",
+        "submit": "發送報告給我",
+        "sending": "發送中",
+        "done": "已收到。報告已在下方生成，同時會發送到你的郵箱。",
+        "error": "出錯了，請重試。"
+      },
+      "disclaimer": "本評分依據你所填寫的答案得出，僅作初步篩查，不構成法律或財務建議，也不代表我們已獨立覈實供應商的任何陳述。",
+      "answeredInStep": "本節已答 {done}/{total}"
+    },
+    "page": {
+      "badge": "免費工具",
+      "h1": "供應商風險計算器",
+      "lead": "回答 22 個關於供應商的問題，得到 0 到 100 的分數，並看清構成這個分數的六個維度。",
+      "card1Title": "分數怎麼來的，你看得見",
+      "card1Body": "六個維度各有權重並單獨展示，哪一項拉高了分數一目瞭然。",
+      "card2Title": "大約三分鐘",
+      "card2Body": "無需註冊，看分數也不用留郵箱。",
+      "card3Title": "會告訴你要查什麼",
+      "card3Body": "結果會列出拉高你分數的那些答案，以及對應的處理建議。",
+      "relatedTitle": "相關工具",
+      "faqTitle": "常見問題",
+      "metaTitle": "供應商風險計算器",
+      "metaDesc": "從公司、質量、合規、生產、供應鏈與文件六個維度，爲供應商打出 0 到 100 的風險分。免費，無需註冊。"
+    },
+    "dimensions": {
+      "company": {
+        "label": "Company risk",
+        "short": "公司",
+        "description": "經營年限、註冊地址是否就是生產地址、股權結構能否追溯。"
+      },
+      "quality": {
+        "label": "Quality risk",
+        "short": "質量",
+        "description": "質量控制是否有文件支撐、近期是否有外部審覈、檢驗記錄是否留存。"
+      },
+      "compliance": {
+        "label": "Compliance risk",
+        "short": "合規",
+        "description": "社會責任、環境、產品合規記錄。我們只問你手上有什麼，不強制要求某張證書。"
+      },
+      "production": {
+        "label": "Production risk",
+        "short": "生產",
+        "description": "產能是否匹配你的訂單量、是否外發加工、是否做過同類產品。"
+      },
+      "supplychain": {
+        "label": "Supply chain risk",
+        "short": "供應鏈",
+        "description": "原材料來源、單一來源依賴程度，以及所報交期是否靠得住。"
+      },
+      "documentation": {
+        "label": "Documentation risk",
+        "short": "文件",
+        "description": "營業執照、廠房地址、證書、審覈報告與測試報告能否真正拿得出來。"
+      }
+    },
+    "questions": {
+      "company_years": "這家公司經營多久了？",
+      "company_address": "廠房地址是否已覈實？",
+      "company_type": "它屬於哪類企業？",
+      "company_ownership": "股權信息能否確認？",
+      "quality_qms": "是否有成文的質量管理體系（如 ISO 9001）？",
+      "quality_audit": "是否接受過第三方審覈？",
+      "quality_incoming": "是否對來料進行檢驗？",
+      "quality_records": "是否留存質量記錄？",
+      "comp_social": "是否有社會責任合規體系（如 BSCI、SMETA、SA8000）？",
+      "comp_env": "是否有環保合規記錄？",
+      "comp_product": "產品是否符合你所在市場的准入要求（如 CE、UL）？",
+      "comp_ethics": "是否有成文的商業道德或反腐敗政策？",
+      "prod_capacity": "產能是否滿足你的訂單量？",
+      "prod_subcontract": "是否存在外發加工？",
+      "prod_experience": "是否生產過同類產品？",
+      "sc_material": "原材料供應是否穩定？",
+      "sc_single": "對單一材料來源的依賴程度如何？",
+      "sc_leadtime": "所報交期是否可靠？",
+      "doc_registration": "是否提供了營業執照？",
+      "doc_address": "廠房地址是否有文件佐證？",
+      "doc_certificates": "證書與審覈報告能否提供？",
+      "doc_test": "產品測試報告能否提供？"
+    },
+    "options": {
+      "company_years": {
+        "10plus": "10 年以上",
+        "5to10": "5 至 10 年",
+        "3to5": "3 至 5 年",
+        "1to2": "1 至 2 年",
+        "unknown": "不清楚"
+      },
+      "company_address": {
+        "yes": "是",
+        "partial": "部分覈實",
+        "no": "否",
+        "unknown": "不清楚"
+      },
+      "company_type": {
+        "manufacturer": "生產廠家",
+        "both": "生產兼貿易",
+        "trading": "貿易公司",
+        "unknown": "不清楚"
+      },
+      "company_ownership": {
+        "yes": "能",
+        "no": "不能",
+        "unknown": "不清楚"
+      },
+      "quality_qms": {
+        "yes": "有",
+        "partial": "部分有",
+        "no": "沒有",
+        "unknown": "不清楚"
+      },
+      "quality_audit": {
+        "within12": "12 個月內",
+        "within3y": "3 年內",
+        "older": "超過 3 年",
+        "never": "從未做過",
+        "unknown": "不清楚"
+      },
+      "quality_incoming": {
+        "yes": "有",
+        "partial": "部分有",
+        "no": "沒有",
+        "unknown": "不清楚"
+      },
+      "quality_records": {
+        "yes": "有",
+        "partial": "部分有",
+        "no": "沒有",
+        "unknown": "不清楚"
+      },
+      "comp_social": {
+        "comprehensive": "體系完整",
+        "partial": "部分建立",
+        "none": "沒有",
+        "unknown": "不清楚"
+      },
+      "comp_env": {
+        "comprehensive": "體系完整",
+        "partial": "部分建立",
+        "none": "沒有",
+        "unknown": "不清楚"
+      },
+      "comp_product": {
+        "inplace": "齊備",
+        "partial": "部分齊備",
+        "missing": "缺失",
+        "unknown": "不清楚"
+      },
+      "comp_ethics": {
+        "documented": "有文件",
+        "partial": "部分有",
+        "none": "沒有",
+        "unknown": "不清楚"
+      },
+      "prod_capacity": {
+        "yes": "滿足",
+        "partial": "部分滿足",
+        "no": "不滿足",
+        "unknown": "不清楚"
+      },
+      "prod_subcontract": {
+        "no": "沒有",
+        "partial": "有，且已告知",
+        "yes": "有，且未告知",
+        "unknown": "不清楚"
+      },
+      "prod_experience": {
+        "strong": "豐富",
+        "moderate": "一般",
+        "limited": "有限",
+        "none": "沒有"
+      },
+      "sc_material": {
+        "stable": "穩定",
+        "partial": "基本穩定",
+        "unstable": "不穩定",
+        "unknown": "不清楚"
+      },
+      "sc_single": {
+        "low": "低",
+        "moderate": "中",
+        "high": "高"
+      },
+      "sc_leadtime": {
+        "low": "低",
+        "moderate": "中",
+        "high": "高"
+      },
+      "doc_registration": {
+        "yes": "有",
+        "partial": "部分有",
+        "no": "沒有",
+        "unknown": "不清楚"
+      },
+      "doc_address": {
+        "yes": "有",
+        "partial": "部分有",
+        "no": "沒有",
+        "unknown": "不清楚"
+      },
+      "doc_certificates": {
+        "yes": "有",
+        "partial": "部分有",
+        "no": "沒有",
+        "unknown": "不清楚"
+      },
+      "doc_test": {
+        "yes": "有",
+        "partial": "部分有",
+        "no": "沒有",
+        "unknown": "不清楚"
+      }
+    },
+    "factors": {
+      "company_address": "廠房地址尚未覈實。",
+      "company_ownership": "股權信息無法確認。",
+      "quality_qms": "沒有成文的質量管理體系。",
+      "quality_audit": "近三年沒有第三方審覈。",
+      "comp_social": "沒有社會責任合規記錄。",
+      "prod_capacity": "產能未經覈實。",
+      "prod_subcontract": "存在未告知的外發加工。",
+      "doc_registration": "營業執照無法覈實。",
+      "doc_address": "沒有廠房地址文件。"
+    },
+    "recommendations": {
+      "LOW": [
+        "把已收集的文件歸檔，每年更新一次。",
+        "若訂單量大幅上升，重新做一次評估。"
+      ],
+      "MODERATE": [
+        "下單前索取營業執照，並確認廠房地址。",
+        "要求對方提供最近一次審覈報告與質量記錄。",
+        "先下一筆試單，金額控制在虧損可承受的範圍內。"
+      ],
+      "ELEVATED": [
+        "通過獨立渠道覈實註冊信息與廠房地址，不要只看供應商自己給的文件。",
+        "要求提供近期的第三方審覈報告與產品測試報告。",
+        "在下達大額訂單前，先安排一次工廠審覈。"
+      ],
+      "HIGH": [
+        "優先覈實註冊信息與廠房地址，其餘先放一放。",
+        "索取審覈報告與質量文件，並覈對其出具日期。",
+        "支付定金前先安排工廠審覈。",
+        "如仍要繼續，先小批量下單，驗貨合格後再放大。"
+      ],
+      "CRITICAL": [
+        "暫不付款。先覈實企業身份，再談其他。",
+        "確認法律主體、廠房地址與工商登記。",
+        "委託做一次工廠審覈，並對該企業做背景調查。",
+        "在疑問澄清之前，不要支付預付款。"
+      ]
+    },
+    "ctas": {
+      "LOW": {
+        "headline": "按你填寫的答案，這家供應商風險較低。",
+        "primary": "獲取完整報告"
+      },
+      "MODERATE": {
+        "headline": "下單前有幾點值得再覈實一下。",
+        "primary": "獲取完整報告",
+        "secondary": "逐條過一遍驗證清單"
+      },
+      "ELEVATED": {
+        "headline": "下單前，建議先對這家供應商做一次覈查。",
+        "primary": "申請供應商驗證",
+        "secondary": "獲取完整報告"
+      },
+      "HIGH": {
+        "headline": "下單前請先覈實這家供應商。",
+        "primary": "申請供應商驗證",
+        "secondary": "獲取完整報告"
+      },
+      "CRITICAL": {
+        "headline": "在完成獨立覈查之前，不要向這家供應商付款。",
+        "primary": "先做驗證再付款",
+        "secondary": "獲取完整報告"
+      }
+    },
+    "faq": [
+      {
+        "q": "這個計算器測算的是什麼？",
+        "a": "它從公司、質量、合規、生產、供應鏈與文件六個維度，爲供應商打出 0 到 100 的分數。分數越高，風險越大。"
+      },
+      {
+        "q": "這個分數等於最終驗證結論嗎？",
+        "a": "不是。分數是基於你所填信息的初步篩查，不能替代獨立驗證、工廠審覈或法律意見。"
+      },
+      {
+        "q": "權重是怎麼定的？",
+        "a": "公司 15%、質量 20%、合規 20%、生產 15%、供應鏈 15%、文件 15%。權重固定，並會在結果頁上列明。"
+      },
+      {
+        "q": "使用需要付費嗎？",
+        "a": "不需要。分數免費。如需書面報告，留下郵箱即可，我們免費發送。驗證與審覈是付費服務，但可選。"
+      },
+      {
+        "q": "能同時比較多家供應商嗎？",
+        "a": "暫時不能。目前請對每家供應商分別運行並保存報告，橫向對比功能正在開發中。"
+      }
+    ]
+  },
+  "checklist": {
+    "ui": {
+      "progressTitle": "覈查進度",
+      "complete": "已完成 {done} / {total}",
+      "criticalOpen": "還有 {n} 項關鍵項未完成",
+      "criticalOpenPlural": "還有 {n} 項關鍵項未完成",
+      "criticalCleared": "關鍵項已全部完成",
+      "print": "打印或另存爲 PDF",
+      "reset": "重置",
+      "criticalTag": "關鍵項",
+      "verdictOpenTitle": "仍有 {n} 項關鍵項待完成",
+      "verdictOpenTitlePlural": "仍有 {n} 項關鍵項待完成",
+      "verdictOpenBody": "請在下單或付款前補齊這些項。貿易公司冒充工廠，往往就是在這些檢查上露餡。",
+      "verdictAllTitle": "全部覈查完成",
+      "verdictAllBody": "你已完成全部條目。請將記錄歸入供應商檔案，並隨採購量增長定期複覈。",
+      "verdictCriticalDoneTitle": "關鍵項已全部完成",
+      "verdictCriticalDoneBody": "風險最高的檢查已過關。補完其餘條目即可形成完整檔案。",
+      "ctaOutsource": "把這些覈查交給我們做",
+      "disclaimer": "本清單僅供自查，不構成對任何供應商的獨立覈實。如需獨立覈實，請使用第三方驗證服務。",
+      "submitReport": "生成評估報告",
+      "reportTitle": "評估報告",
+      "reportIntro": "根據六個階段共 29 項檢查，本報告彙整已確認項、仍缺失的關鍵項，以及在你付定金或尾款前的建議。",
+      "completionLine": "完成度：{done} / {total}（{pct}%）",
+      "criticalStatus": "關鍵項仍有 {open} / {total} 項未完成",
+      "criticalStatusAllDone": "全部關鍵項均已確認。",
+      "missingItemsTitle": "以下關鍵項仍需確認",
+      "recommendationTitle": "建議",
+      "recPass": "可繼續推進 — 全部關鍵檢查均已確認。建議加 1 天工廠稽核或出貨前檢驗作為最後一道關。",
+      "recConditional": "謹慎推進 — 上述關鍵項必須在付定金前補齊。同時在付款條款上加保護，並加一次出貨前檢驗。",
+      "recFail": "暫緩 — 關鍵項未確認過多，與此訂單規模不匹配。建議要麼委託完整供應商核查 + 工廠稽核，要麼換備選供應商。",
+      "ctaOutsourceTitle": "需要我們代為完成這些核查？",
+      "ctaOutsourceBody": "把供應商資訊發給我們，我們將在 2 個工作日內返回書面供應商核查報告，含證據與風險摘要。"
+    },
+    "page": {
+      "badge": "免費工具",
+      "h1": "供應商驗證清單",
+      "lead": "六個階段共 29 項覈查。下單或付款前逐條過一遍，完成後可打印歸檔。",
+      "card1Title": "六個階段",
+      "card1Body": "企業身份、廠房、質量、合規、商務條款與歷史記錄。",
+      "card2Title": "標出關鍵項",
+      "card2Body": "貿易公司冒充工廠，往往就是在這些檢查上露餡。",
+      "card3Title": "可直接打印",
+      "card3Body": "完成後另存爲 PDF，歸入供應商檔案。",
+      "relatedTitle": "相關工具",
+      "faqTitle": "常見問題",
+      "metaTitle": "供應商驗證清單",
+      "metaDesc": "免費的逐步覈查清單，覆蓋企業身份、廠房能力、質量、合規、商務條款與歷史記錄。可勾選、記錄進度並打印歸檔。"
+    },
+    "criticalItems": [
+      "id_legal",
+      "id_regno",
+      "id_registry",
+      "fa_address",
+      "fa_visit",
+      "fa_type",
+      "qm_system",
+      "qm_test",
+      "cp_product",
+      "cm_contract",
+      "cm_spec"
+    ],
+    "stages": [
+      {
+        "key": "identity",
+        "title": "1. 企業身份與工商登記",
+        "desc": "先確認報價背後的法律主體是誰。",
+        "items": {
+          "id_legal": "公司法定名稱與營業執照一致",
+          "id_regno": "已獲取營業執照註冊號",
+          "id_licence": "已收到清晰的營業執照副本",
+          "id_registry": "登記信息已與官方或第三方數據源交叉覈對",
+          "id_owner": "已確認法定代表人與股權結構"
+        }
+      },
+      {
+        "key": "factory",
+        "title": "2. 廠房與生產能力",
+        "desc": "確認廠房真實存在，且確實做得了你的產品。",
+        "items": {
+          "fa_address": "廠房地址已確認，且與營業執照一致",
+          "fa_visit": "已取得現場照片、視頻或實時視頻走訪",
+          "fa_type": "已確認是生產廠家還是貿易公司",
+          "fa_equipment": "已收到主要設備清單",
+          "fa_capacity": "月產能已說明，且與訂單量相符",
+          "fa_subcontract": "外發加工情況已告知，或已確認不存在"
+        }
+      },
+      {
+        "key": "quality",
+        "title": "3. 質量管理",
+        "desc": "確認質量是一套體系，而不只是一句承諾。",
+        "items": {
+          "qm_system": "有成文的質量管理體系（如 ISO 9001）",
+          "qm_incoming": "有來料檢驗流程",
+          "qm_inprocess": "有過程檢驗與成品檢驗記錄",
+          "qm_test": "有具備資質實驗室出具的產品測試報告",
+          "qm_nc": "有不合格品處理與糾正措施流程"
+        }
+      },
+      {
+        "key": "compliance",
+        "title": "4. 合規與社會責任",
+        "desc": "降低扣貨、召回與買方審覈不通過的風險。",
+        "items": {
+          "cp_social": "社會責任合規審覈或管理體系（如 BSCI、SMETA）",
+          "cp_env": "環保合規文件",
+          "cp_product": "目標市場的產品准入要求（如 CE、UL）",
+          "cp_ethics": "商業道德或反腐敗政策"
+        }
+      },
+      {
+        "key": "commercial",
+        "title": "5. 商務條款與合同",
+        "desc": "把出問題時的責任劃分先寫清楚。",
+        "items": {
+          "cm_contract": "已簽署書面合同或形式發票",
+          "cm_spec": "產品規格、公差與包裝要求已書面確認",
+          "cm_payment": "付款條件已約定，避免大額預付",
+          "cm_leadtime": "交期、最小起訂量與貿易術語（如 Incoterms）已確認",
+          "cm_penalty": "已約定質量缺陷與延期交付的違約條款"
+        }
+      },
+      {
+        "key": "track",
+        "title": "6. 歷史記錄與口碑",
+        "desc": "過往表現比任何文件都更能預測未來。",
+        "items": {
+          "tr_export": "有向目標市場的出口記錄",
+          "tr_refs": "至少兩家可覈實的客戶推薦",
+          "tr_samples": "量產前已確認產前樣",
+          "tr_disputes": "已查詢糾紛、黑名單或不良記錄"
+        }
+      }
+    ],
+    "faq": [
+      {
+        "q": "什麼是供應商驗證清單？",
+        "a": "下單前需要完成的一組文件與覈查事項。它能證明這家公司是真實的法律主體、廠房確實存在且具備生產能力，並且質量、合規與商務條款均已書面確認。"
+      },
+      {
+        "q": "哪些檢查最重要？",
+        "a": "關鍵項：營業執照與登記信息交叉覈對、確認廠房地址、現場照片或實時視頻等場地真實存在的證據、區分生產廠家與貿易公司、產品測試報告、目標市場準入合規，以及附產品規格的已籤合同。"
+      },
+      {
+        "q": "全部勾選就等於這家供應商安全嗎？",
+        "a": "不等於。這只是基於供應商所提供信息的自查，文件也可能造假。只有獨立第三方驗證或工廠審覈，才能到現場覈實這些說法。"
+      },
+      {
+        "q": "進度會保存嗎？",
+        "a": "會。勾選狀態保存在你的瀏覽器中，關掉頁面後可繼續。需要留檔可打印或另存爲 PDF。"
+      }
+    ]
+  },
+  "serviceVerification": {
+    "badge": "服務",
+    "h1": "供應商驗證",
+    "lead": "在把錢打給一家素未謀面的工廠之前，先確認公司真實存在、廠房確有其地、產能說法站得住腳。",
+    "ctaPrimary": "申請驗證",
+    "ctaSecondary": "先免費給這家供應商打個分",
+    "checksTitle": "我們覈查什麼",
+    "checksLead": "六個方面，每一項都附有可歸檔的證據。",
+    "checks": {
+      "legal": {
+        "title": "法律主體與工商登記",
+        "body": "營業執照、註冊號與法定代表人，與官方及第三方登記數據源逐一覈對。"
+      },
+      "site": {
+        "title": "廠房真實性與地址",
+        "body": "確認該地址確實存在廠房，並附照片、視頻與定位證據，而不只是一張文件掃描件。"
+      },
+      "type": {
+        "title": "生產廠家還是貿易公司",
+        "body": "確認對方是實際生產還是轉手銷售，以及是否存在外發加工。"
+      },
+      "capability": {
+        "title": "生產能力",
+        "body": "對照你的產品與訂單量，評估設備、人數、產能與出口經驗。"
+      },
+      "quality": {
+        "title": "質量與合規體系",
+        "body": "質量管理文件、產品測試報告、目標市場準入合規與社會責任合規記錄。"
+      },
+      "track": {
+        "title": "歷史記錄與風險信號",
+        "body": "出口記錄、客戶推薦，以及糾紛、黑名單等不良記錄查詢。"
+      }
+    },
+    "stepsTitle": "流程怎麼走",
+    "stepsLead": "從初次接觸到做出決定，共四步。",
+    "steps": [
+      {
+        "title": "把供應商信息發給我們",
+        "body": "公司名稱、地址、網址與你的產品。無需籤合同，也沒有繁瑣的開戶流程。"
+      },
+      {
+        "title": "我們執行覈查",
+        "body": "文件審閱，再配合實地或遠程走訪，視你選擇的方案而定。"
+      },
+      {
+        "title": "你拿到書面報告",
+        "body": "結論附證據與風險摘要，可歸檔也可在內部傳閱。"
+      },
+      {
+        "title": "你據此做決定",
+        "body": "重新談條件、要求整改、追加一次完整審覈，或者就此收手。"
+      }
+    ],
+    "deliverablesTitle": "你會收到什麼",
+    "deliverables": [
+      "企業身份與登記覈查結論",
+      "廠房地址與現場證據",
+      "生產廠家 / 貿易公司判定",
+      "生產能力評估",
+      "質量與合規文件審閱",
+      "風險摘要與後續建議"
+    ],
+    "faqTitle": "常見問題",
+    "faq": [
+      {
+        "q": "這和工廠審覈有什麼區別？",
+        "a": "驗證解決的是「這家供應商是誰、基本說法是否成立」，包括登記、場地、能力與文件。審覈則是更深入的現場評估，覆蓋流程、質量控制與是否符合 BSCI、SMETA 等標準。驗證更快也更便宜，審覈則查得更深。"
+      },
+      {
+        "q": "需要多長時間？",
+        "a": "文件類覈查通常在幾個工作日內完成。含實地走訪的方案會更久，取決於所在地與排期。"
+      },
+      {
+        "q": "如果查出來是高風險怎麼辦？",
+        "a": "你會拿到證據與風險摘要，可以據此重新談判、要求整改、追加完整審覈，或在付款前及時止損。"
+      },
+      {
+        "q": "是否必須同時使用你們的其他服務？",
+        "a": "不用。驗證是獨立服務。驗貨、採購與貨運都是可選的後續步驟，不存在捆綁。"
+      }
+    ],
+    "bottomTitle": "先快速摸個底再決定？",
+    "bottomLead": "用免費計算器先得到一個即時分數，再針對最關鍵的環節申請驗證。",
+    "bottomPrimary": "打開免費計算器",
+    "bottomSecondary": "申請驗證",
+    "metaTitle": "供應商驗證服務",
+    "metaDesc": "獨立的供應商驗證服務，覆蓋工商登記、廠房真實性、生產能力、質量體系、合規與出口記錄。在下單或付款前拿到書面報告。"
+  },
+  "customServices": {
+    "badge": "服務",
+    "h1": "個性化審覈與驗證服務",
+    "lead": "告訴我們您的具體需求，我們爲您定製審覈、驗貨或驗證方案，並提供清晰的報價與時間線。",
+    "metaTitle": "個性化審覈與驗證服務",
+    "metaDesc": "提交您的定製工廠審覈、供應商驗證或驗貨需求，我們的團隊會在一個工作日內回覆方案與下一步。",
+    "form": {
+      "labels": {
+        "firstName": "您的稱呼",
+        "company": "公司名稱",
+        "email": "工作郵箱",
+        "country": "國家或地區",
+        "message": "您需要什麼？",
+        "messageHint": "請描述產品、目標市場、供應商所在地、希望遵循的審覈標準以及任何特殊要求……",
+        "submit": "提交需求",
+        "submitting": "提交中…"
+      },
+      "success": "我們已收到您的需求，團隊會在一個工作日內回覆。",
+      "error": "提交失敗，請重試或直接發郵件聯繫我們。"
+    },
+    "features": [
+      {
+        "title": "量身定做的範圍",
+        "body": "根據您的產品、市場和風險關注點設計審覈方案，而不是把您塞進固定套餐。"
+      },
+      {
+        "title": "單一聯繫人",
+        "body": "由一位專屬經理負責範圍確認、排期、審覈團隊和報告，避免跨部門信息丟失。"
+      },
+      {
+        "title": "書面跟進",
+        "body": "在工作開始前，您會收到包含範圍、時間、交付物與費用的書面提案。"
+      }
+    ],
+    "bottomTitle": "不確定自己需要什麼？",
+    "bottomLead": "先用供應商風險計算器快速打分，再帶着結果回來定製驗證或審覈方案。"
+  },
+  "suppliers": {
+    "h1": "供應商",
+    "badge": "供應商名錄",
+    "ctaTitle": "您是供應商？",
+    "ctaLead": "加入名錄，發佈工廠檔案，通過平臺審覈，讓從中國及亞洲採購的買家找到您。",
+    "ctaSteps": [
+      "註冊",
+      "發佈信息",
+      "平臺審覈",
+      "上架展示"
+    ],
+    "ctaPrimary": "申請進駐",
+    "metaTitle": "中國及亞洲已驗證供應商",
+    "metaDesc": "瀏覽中國、越南、泰國、印度及亞洲其他地區的已驗證製造商與貿易公司。每份檔案包含驗證狀態、風險評分與出口經驗。",
+    "lead": "Explore suppliers with available company, capability and verification information.",
+    "featuredTag": "Featured",
+    "exampleNote": "These are featured suppliers, not a complete marketplace. Coverage is still small, so if the supplier you need is not here, post an RFQ and we will source and verify it.",
+    "filterCountry": "Country",
+    "filterIndustry": "Industry",
+    "filterProduct": "Product",
+    "filterLevel": "Verification level",
+    "filterAudit": "Audit status",
+    "filterAll": "All",
+    "filterSubmit": "Apply filters",
+    "filterReset": "Clear",
+    "countLabel": "{n} suppliers listed",
+    "empty": "No supplier matches these filters. Post an RFQ and we will look outside the directory.",
+    "riskLabel": "Risk",
+    "businessTypeLabel": "Type",
+    "notListedTitle": "Looking for a supplier that isn't listed?",
+    "notListedLead": "Post an RFQ. We source it, verify the company and the site before you pay, and quote the whole thing.",
+    "notListedCta": "Post an RFQ",
+    "claimTitle": "Are you a supplier?",
+    "claimLead": "Join the directory, publish your factory profile, pass our verification and get discovered by buyers sourcing from China and Southeast Asia.",
+    "claimPrimary": "Join as a supplier"
+  },
+  "common": {
+    "relatedTools": "相關工具",
+    "faq": "常見問題",
+    "freeTool": "免費工具",
+    "disclaimer": "本內容僅供一般參考，不構成對任何供應商的獨立覈實，也不構成法律、財務或專業審計建議。",
+    "whatsappChat": "WhatsApp 諮詢",
+    "heroSearch": {
+      "tabSupplier": "Supplier",
+      "tabProduct": "Product",
+      "tabAudit": "Audit",
+      "tabInspector": "Inspector",
+      "placeholderSupplier": "e.g. China electronics supplier",
+      "placeholderProduct": "e.g. Stainless steel water bottle",
+      "placeholderAudit": "e.g. Factory audit China",
+      "placeholderInspector": "e.g. Inspector Shenzhen",
+      "search": "Search",
+      "combinedHint": "Combined SEO pages + live database results",
+      "noMatch": "No exact match for \"{q}\". This searches the indexed supplier database."
+    }
+  },
+  "container": {
+    "page": {
+      "badge": "免費工具",
+      "h1": "集裝箱裝櫃計算器",
+      "lead": "算出你的紙箱能裝多少個 20GP、40GP、40HQ 或冷藏櫃，以及這批貨需要幾個櫃。",
+      "quickAnswerTitle": "快速回答",
+      "quickAnswer": "輸入紙箱尺寸、單件重量和總件數。計算器會把紙箱的六種擺放朝向逐一與集裝箱內部長寬高比對，取裝得最多的那種擺法，再加上載重限制。結果給出每櫃裝量、所需櫃數，以及容積和載重的利用率。",
+      "howTitle": "計算是怎麼做的",
+      "how1": "把紙箱六種朝向逐一與集裝箱內部的長、寬、高比對。",
+      "how2": "減去你設定的箱間間隙後，取裝得最多的那種擺法。",
+      "how3": "加入載重限制：每櫃裝量不能超過「最大載重 ÷ 單件重量」。",
+      "how4": "所需櫃數 = 總件數 ÷ 每櫃裝量，向上取整。",
+      "specsTitle": "本工具採用的集裝箱規格",
+      "specsLead": "ISO 通用典型值。實際數據因船公司、箱東與製造年份而異。",
+      "methodTitle": "算法與侷限",
+      "methodBody": "結果是矩形堆疊模型下的理論最大值，假設紙箱爲規則硬箱、可堆疊、可旋轉，且貨物均勻分佈。實際裝櫃還受託盤、填充物料、紙箱變形、堆碼強度、公路軸重限制與配載順序影響。請把結果當作配載估算，最終方案仍須與貨代或現場監裝人員確認。",
+      "faqTitle": "常見問題",
+      "metaTitle": "集裝箱裝櫃計算器",
+      "metaDesc": "免費裝櫃計算工具，支持 20GP、40GP、40HQ、45HQ 與冷藏櫃。算出每櫃裝量、所需櫃數、容積與載重利用率。"
+    },
+    "ui": {
+      "cargoTitle": "紙箱尺寸",
+      "length": "長",
+      "width": "寬",
+      "height": "高",
+      "weight": "單箱重量",
+      "quantity": "總件數",
+      "optionsTitle": "裝載選項",
+      "clearance": "箱間間隙",
+      "clearanceHelp": "建議留 2–5 cm，用於填充、打包帶與紙箱鼓脹。",
+      "allowRotate": "允許旋轉紙箱",
+      "allowRotateHelp": "自動測試六種朝向並取最優。",
+      "calcBtn": "計算",
+      "resetBtn": "重置",
+      "resultsTitle": "配載方案",
+      "bestFit": "推薦櫃型",
+      "perContainer": "每櫃裝量",
+      "containersNeeded": "所需櫃數",
+      "arrangement": "擺放方式",
+      "along": "沿長度",
+      "across": "沿寬度",
+      "layers": "層數",
+      "volumeUsed": "容積利用率",
+      "payloadUsed": "載重利用率",
+      "totalVolume": "貨物總體積",
+      "totalWeight": "貨物總重量",
+      "comparisonTitle": "全櫃型對比",
+      "containerCol": "櫃型",
+      "fitsCol": "每櫃裝量",
+      "neededCol": "所需櫃數",
+      "topView": "單層俯視圖",
+      "warnOverweight": "貨物在裝滿之前就已達到載重上限，此時的限制是重量而不是空間。",
+      "warnTooLarge": "該紙箱尺寸過大，列表中沒有能裝下的櫃型，請覈對尺寸。",
+      "warnDoor": "按當前朝向，紙箱可能無法通過箱門開口，請與現場裝櫃人員確認。",
+      "empty": "請輸入紙箱尺寸與數量，查看配載方案。",
+      "disclaimer": "結果僅爲估算。集裝箱數據爲 ISO 典型值，各船公司存在差異，最終配載方案請務必與貨代確認。"
+    },
+    "specs": {
+      "internal": "內部尺寸 (cm)",
+      "door": "箱門開口",
+      "capacity": "容積",
+      "payload": "最大載重"
+    },
+    "types": {
+      "generalPurpose": "普通幹箱",
+      "highCube": "高櫃",
+      "reefer": "冷藏箱",
+      "openTop": "開頂箱"
+    },
+    "faq": [
+      {
+        "q": "40GP 和 40HQ 有什麼區別？",
+        "a": "長和寬一樣，40HQ 內部高約 30 釐米（269 對 239），多出約 9 立方米容積。兩者載重上限幾乎相同，所以只有在「空間先用完、重量還沒用完」的情況下，高櫃纔有意義。"
+      },
+      {
+        "q": "爲什麼算出來跟貨代給的不一樣？",
+        "a": "常見於三個原因：一是不同船公司、不同製造年份的集裝箱內部尺寸有細微差異；二是本模型假設紙箱是規則硬箱且完全可堆疊，而實際裝櫃要留托盤、填充物料和公差；三是重量分佈與公路軸重限制，可能讓實際裝量低於集裝箱的最大載重。"
+      },
+      {
+        "q": "箱間間隙要不要留？",
+        "a": "建議留。人工裝櫃或紙箱可能鼓脹時，設置 2 到 5 釐米；只有當紙箱非常規整、裝櫃管控嚴格時才設 0。"
+      },
+      {
+        "q": "支持托盤貨嗎？",
+        "a": "當前版本不直接支持。若要近似計算托盤貨，把托盤底面積與含托盤底的高度作爲一個整體單位輸入，數量填托盤數即可。"
+      },
+      {
+        "q": "這些集裝箱規格準確嗎？",
+        "a": "這是行業內常用的典型值，用於配載估算。實際尺寸與載重上限因箱東、製造商、製造年份而異，各船公司也會公佈自己的限值，訂艙前請與承運人確認。"
+      },
+      {
+        "q": "紙箱不能堆疊怎麼辦？",
+        "a": "把你允許的總堆高當作單件高度輸入，或自行減少每層數量。當前版本默認每個紙箱都能承受上層的重量。"
+      }
+    ]
+  },
+  "auditRequest": {
+    "badge": "服務申請",
+    "h1": "申請工廠驗廠審覈",
+    "lead": "告訴我們供應商信息和您的需求。我們爲您匹配合格的審覈公司，並回復包含範圍與報價的提案。",
+    "form": {
+      "labels": {
+        "firstName": "您的稱呼",
+        "company": "公司",
+        "email": "工作郵箱",
+        "supplierName": "供應商名稱",
+        "country": "工廠所在地",
+        "industry": "行業",
+        "auditType": "審覈類型",
+        "standard": "所需標準",
+        "message": "需求與備註",
+        "messageHint": "產品、數量、合規關注點、期望日期……",
+        "submit": "提交審覈申請",
+        "submitting": "提交中…"
+      },
+      "success": "我們已收到您的審覈申請，團隊會在一個工作日內回覆。",
+      "error": "提交失敗，請重試或直接發郵件聯繫我們。",
+      "rateLimited": "您近期提交過於頻繁，請約一小時後重試，或直接電郵聯絡我們。"
+    },
+    "metaTitle": "申請工廠驗廠審覈",
+    "metaDesc": "提交工廠審覈申請，選擇審覈類型、標準與所在地，我們爲您匹配合格的審覈公司。"
+  },
+  "rfq": {
+    "badge": "採購需求",
+    "h1": "發佈詢價單",
+    "lead": "告訴我們您要採購什麼。我們會分享給已驗證供應商，並連同能力與風險背景一併回覆報價。",
+    "form": {
+      "labels": {
+        "firstName": "您的稱呼",
+        "company": "公司",
+        "email": "工作郵箱",
+        "product": "產品",
+        "quantity": "數量",
+        "country": "目標國家",
+        "message": "規格說明",
+        "messageHint": "材料、尺寸、認證、目標價格……",
+        "submit": "發佈詢價單",
+        "submitting": "發佈中…"
+      },
+      "success": "詢價單已收到，將邀請已驗證供應商報價。",
+      "error": "提交失敗，請重試或直接發郵件聯繫我們。"
+    },
+    "metaTitle": "發佈詢價單 (RFQ)",
+    "metaDesc": "發佈面向中國及亞洲的採購需求，已驗證供應商將回復報價、能力與合規背景。"
+  },
+  "resourcesPage": {
+    "badge": "資源中心",
+    "h1": "資源與指南",
+    "lead": "評估、驗證與審覈中國及亞洲供應商的實用指南、免費工具與服務。",
+    "guidesTitle": "按國家與標準查看驗廠指南",
+    "guidesLead": "買家最常要求的審覈類型的分步指南。",
+    "knowledgeTitle": "供應商培訓",
+    "knowledgeLead": "我們先審覈並驗證供應商，再爲他們的團隊提供質量與 QC 培訓。",
+    "toolsTitle": "免費工具",
+    "toolsLead": "無需註冊。",
+    "servicesTitle": "服務",
+    "servicesLead": "讓我們替您完成核查。",
+    "serviceVerification": "供應商驗證服務",
+    "serviceVerificationDesc": "我們覈實工商登記、廠房真實性、生產能力、質量與合規，並出具書面報告。",
+    "auditRequest": "申請工廠驗廠審覈",
+    "auditRequestDesc": "告知供應商與需求，我們爲您匹配合格的審覈公司。",
+    "customServices": "個性化服務",
+    "customServicesDesc": "提出您的具體需求，我們爲您定製審覈或驗證方案。",
+    "rfq": "發佈詢價單",
+    "rfqDesc": "將您的採購需求分享給已驗證供應商。",
+    "logistics": "集裝箱裝櫃計算器",
+    "logisticsDesc": "計算每櫃可裝箱數以及所需櫃數。",
+    "metaTitle": "資源與指南 - 供應商驗證與工廠驗廠",
+    "metaDesc": "評估、驗證與審覈中國及亞洲供應商的實用指南、免費工具與服務。"
+  },
+  "trainingPage": {
+    "badge": "供應商培訓",
+    "h1": "我們不僅審覈工廠，更代表你培訓工廠",
+    "lead": "審覈告訴你哪裏出了問題，培訓才能解決問題。我們先審覈中國及亞洲的供應商，幫你規避風險；再走到車間，代表你培訓工廠團隊，讓同樣的缺陷不再反覆出現。",
+    "pillarAuditTitle": "第一步：審覈，把風險擺上檯面",
+    "pillarAuditDesc": "在培訓之前，我們先做供應商驗證、工廠驗廠與驗貨，並出具書面報告，列明可能危及你訂單的薄弱環節。",
+    "pillarTrainTitle": "第二步：代表你培訓工廠",
+    "pillarTrainDesc": "我們深入車間，按你若在現場的標準培訓供應商員工。你無需飛過去，也能牢牢把控質量。",
+    "offeringsTitle": "我們提供哪些培訓",
+    "offeringsLead": "圍繞審覈中發現的具體缺陷與風險，定製可落地的現場培訓方案。",
+    "offerings": [
+      {
+        "title": "質量體系培訓",
+        "desc": "建立從源頭控制缺陷的質量管理習慣，而不是隻靠終檢兜底。"
+      },
+      {
+        "title": "QC 培訓",
+        "desc": "培訓過程檢驗與終檢人員，精準識別真正讓你虧錢的關鍵缺陷。"
+      },
+      {
+        "title": "生產工藝培訓",
+        "desc": "優化工藝流程與工位標準，從源頭降低你的不良率。"
+      },
+      {
+        "title": "合規與安全培訓",
+        "desc": "幫助工廠達到買家要求的勞工、安全與環保標準。"
+      }
+    ],
+    "ctaTitle": "與其只被檢查，不如讓工廠真正被培訓？",
+    "ctaDesc": "告訴我們供應商信息和你反覆遇到的問題，我們結合審覈結果爲你定製培訓方案。",
+    "ctaButton": "聯繫我們的團隊",
+    "metaTitle": "供應商培訓 - 我們既審覈也培訓你的工廠",
+    "metaDesc": "我們先審覈中國及亞洲供應商以規避風險，再爲工廠團隊提供質量與 QC 培訓，讓缺陷不再反覆出現。"
+  },
+  "legal": {
+    "privacyTitle": "隱私政策",
+    "privacyUpdated": "最後更新：2026-08-30",
+    "privacyIntro": "FactoryAuditB2B（「我們」）尊重您的隱私。本政策說明您使用本網站及服務時我們收集哪些數據，以及我們如何使用這些數據。",
+    "privacySections": [
+      {
+        "h": "我們收集的信息",
+        "b": "當您申請驗廠、發佈詢價、使用工具或聯繫我們時，我們會收集您直接提供的信息（姓名、郵箱、公司、採購需求、留言）。我們也會收集 IP 地址、訪問頁面等基本技術數據。"
+      },
+      {
+        "h": "我們如何使用信息",
+        "b": "我們使用您的信息來回應請求、爲您匹配合適的供應商或審覈機構、發送服務通知，並改進網站。我們不會出售您的個人數據。"
+      },
+      {
+        "h": "線索與服務交付",
+        "b": "您提交需求後，我們會將相關信息分享給完成服務所需的供應商或審覈機構。提交即表示您同意這一有限度的信息共享。"
+      },
+      {
+        "h": "Cookie 與分析",
+        "b": "我們使用 Cookie 及類似技術來運行網站並瞭解使用情況。您可以在瀏覽器中關閉 Cookie。"
+      },
+      {
+        "h": "數據保留",
+        "b": "我們在提供服務和履行法律義務所需的期限內保留您的信息，之後予以刪除或匿名化處理。"
+      },
+      {
+        "h": "您的權利",
+        "b": "您可通過 privacy@factoryauditb2b.com 聯繫我們，申請訪問、更正或刪除您的個人數據。"
+      },
+      {
+        "h": "聯繫方式",
+        "b": "對本政策有疑問？請發郵件至 privacy@factoryauditb2b.com。"
+      }
+    ],
+    "termsTitle": "服務條款",
+    "termsUpdated": "最後更新：2026-08-30",
+    "termsIntro": "使用 FactoryAuditB2B 即表示您同意本條款。我們的服務幫助買家驗證和審覈供應商，但我們是平臺，而非供應商履約的擔保方。",
+    "termsSections": [
+      {
+        "h": "服務使用",
+        "b": "您可以使用本網站搜索供應商、使用工具、申請驗廠和發佈詢價。您承諾提供真實信息，不濫用本服務。"
+      },
+      {
+        "h": "不對供應商作擔保",
+        "b": "我們提供驗證與審覈信息以輔助您的決策。我們不保證供應商的質量、交付或合規。您的採購決策風險由您自行承擔。"
+      },
+      {
+        "h": "第三方服務",
+        "b": "驗廠與驗貨由獨立第三方執行。相關服務合同由您與服務提供方之間訂立。"
+      },
+      {
+        "h": "知識產權",
+        "b": "本網站所有內容、商標與工具歸 FactoryAuditB2B 或其許可方所有。未經許可不得擅用。"
+      },
+      {
+        "h": "責任限制",
+        "b": "在法律允許的最大範圍內，FactoryAuditB2B 不對因使用本網站產生的間接或後果性損失承擔責任。"
+      },
+      {
+        "h": "條款變更",
+        "b": "我們可能更新本條款。變更後繼續使用即視爲接受。"
+      },
+      {
+        "h": "聯繫方式",
+        "b": "有疑問？請發郵件至 legal@factoryauditb2b.com。"
+      }
+    ],
+    "privacyNav": "隱私政策",
+    "termsNav": "服務條款"
+  },
+  "industryPage": {
+    "pageTitle": "供應商驗證與培訓",
+    "metaDesc": "尋找已驗證的 {industry} 供應商與合適的審覈類型。我們驗廠並培訓您團隊的質量與 QC 能力。",
+    "verifiedSuppliers": "已驗證的 {industry} 供應商",
+    "relatedAudit": "相關審覈類型與標準",
+    "whyTitle": "爲什麼 {industry} 供應商需要驗證",
+    "whyLead": "缺陷與合規漏洞代價高昂。我們在您下單前完成驗證，並培訓工廠團隊，避免同類問題再次發生。",
+    "ctaTitle": "培訓您的 {industry} 供應商",
+    "ctaDesc": "將供應商驗證與爲您的行業定製的付費培訓方案結合。",
+    "ctaButton": "查看付費培訓方案",
+    "breadcrumb": "行業",
+    "empty": "暫無已驗證的 {industry} 供應商。發佈 RFQ 以開始匹配。",
+    "riskLabel": "風險"
+  },
+  "countryPage": {
+    "pageTitle": "供應商驗證與培訓",
+    "metaDesc": "在 {country} 驗廠並培訓供應商團隊。爲從 {country} 進口的買家提供審覈、驗貨與認證供應商。",
+    "auditTypesIn": "{country} 可提供的審覈類型",
+    "verifiedSuppliers": "已驗證的 {country} 供應商",
+    "ctaTitle": "培訓您的 {country} 供應商",
+    "ctaDesc": "將驗證與爲 {country} 定製的付費培訓方案結合。",
+    "ctaButton": "查看付費培訓方案",
+    "breadcrumb": "國家",
+    "empty": "暫無已驗證的 {country} 供應商。發佈 RFQ 以開始匹配。"
+  },
+  "trainingPlans": {
+    "pageTitle": "供應商培訓方案",
+    "metaDesc": "供應商培訓方案：爲您的工廠團隊提供質量體系、QC、生產工藝與合規培訓。",
+    "h1": "供應商培訓方案",
+    "lead": "我們審覈您的工廠並培訓團隊的質量與 QC 能力，讓缺陷不再反覆出現。選擇適合您供應基礎的方案。",
+    "plansTitle": "選擇培訓方案",
+    "faqTitle": "培訓常見問題",
+    "ctaTitle": "不確定選哪個方案？",
+    "ctaDesc": "告訴我們您的行業，我們將爲您規劃培訓項目。",
+    "ctaButton": "聯繫我們"
+  },
+  "pricing": {
+    "metaTitle": "定價 — 供應商驗證與審覈方案",
+    "metaDesc": "買家 SaaS 方案 $19/月起，供應商會員 $29/月起，審覈、驗貨與運費服務按項目報價。所有價格以美元計。",
+    "h1": "Services & Plans",
+    "lead": "買家 SaaS $19–299/月 · 供應商會員 $29–199/月 · 審覈、驗貨與運費按項目報價。",
+    "currencyNote": "所有價格以美元計。早期試行價格，可能調整。",
+    "forBuyers": "買家方案",
+    "forSuppliers": "供應商會員",
+    "perMonth": "/月",
+    "commissionTitle": "審覈、驗貨與運費",
+    "commissionCta": "獲取報價",
+    "buyerCtas": [
+      "免費開始",
+      "選擇 Starter",
+      "選擇 Pro",
+      "選擇 Business",
+      "聯繫我們"
+    ],
+    "supplierCta": "申請",
+    "buyerFeatures": [
+      [
+        "基礎供應商搜索",
+        "基礎風險評估",
+        "基礎覈查清單",
+        "每月 1 條 RFQ"
+      ],
+      [
+        "完整供應商搜索",
+        "無限風險評估",
+        "完整 29 項覈查清單",
+        "每月 5 條 RFQ",
+        "郵件支持"
+      ],
+      [
+        "包含 Starter 全部功能",
+        "PDF 報告",
+        "文檔分析",
+        "供應商工作臺",
+        "高級評分卡",
+        "優先支持"
+      ],
+      [
+        "包含 Professional 全部功能",
+        "5 個團隊成員",
+        "供應商數據庫",
+        "風險監控",
+        "審覈管理",
+        "CAPA 與高級報告"
+      ],
+      [
+        "API 接口",
+        "單點登錄 (SSO)",
+        "定製工作流",
+        "定製供應商數據庫",
+        "專屬支持"
+      ]
+    ],
+    "supplierFeatures": [
+      [
+        "公司檔案展示",
+        "基礎驗證徽章",
+        "接收 RFQ",
+        "標準排序"
+      ],
+      [
+        "已驗證供應商徽章",
+        "檔案展示審覈文件",
+        "搜索優先排序",
+        "RFQ 無限回覆",
+        "能力標籤"
+      ],
+      [
+        "搜索置頂",
+        "行業頁推薦位",
+        "買家引薦",
+        "專屬客戶支持",
+        "每季度檔案更新"
+      ]
+    ],
+    "commissionItems": [
+      "工廠審覈與驗貨：按項目報價，依據人天與地區",
+      "運費與採購：按訂單金額收取 3–5% 佣金",
+      "首單免平臺費"
+    ],
+    "plansTitle": "What you can use today",
+    "plansLead": "Three of the four are live. Buyer Pro is not.",
+    "plans": [
+      {
+        "name": "Herramientas gratuitas",
+        "price": "$0",
+        "note": "No se necesita cuenta bancaria.",
+        "available": true,
+        "features": [
+          "Evaluación de riesgos del proveedor con desglose en seis dimensiones",
+          "Lista de Verificación de Proveedores",
+          "Lista de verificación y cuadro de mando de auditoría de fábrica",
+          "Puntuación de riesgo y próximos pasos recomendados"
+        ],
+        "cta": "Las Herramientas",
+        "href": "Herramientas"
+      },
+      {
+        "name": "Verificación de proveedores",
+        "price": "Solicitar presupuesto",
+        "note": "Cotizado por proveedor",
+        "available": true,
+        "features": [
+          "Registro de empresas y verificación de personas jurídicas",
+          "Dirección de la fábrica y evidencia del sitio",
+          "Determinación del fabricante o de la empresa comercial",
+          "Revisión de documentos de calidad y cumplimiento",
+          "Informe escrito con un resumen de riesgos"
+        ],
+        "cta": "Solicitar presupuesto",
+        "href": "/services/supplier-verification"
+      },
+      {
+        "name": "Auditoria de fábrica",
+        "price": "Solicitar presupuesto",
+        "note": "Presupuesto por hombre-día más viaje",
+        "available": true,
+        "features": [
+          "Evaluación in situ según el estándar requerido",
+          "Calidad, cumplimiento y revisión de expedientes laborales",
+          "Hallazgos clasificados por gravedad con fotografías",
+          "Plan de acción correctiva con propietarios y fechas",
+          "Reaudición opcional después del periodo correctivo"
+        ],
+        "cta": "Solicitar una auditoría",
+        "href": "/factory-audit/request"
+      },
+      {
+        "name": "Buyer Pro",
+        "price": "En breve",
+        "note": "Aún no está abierto",
+        "available": false,
+        "features": [
+          "Archivos de proveedores guardados e historial de informes",
+          "Comparación de proveedores lado a lado",
+          "Informes PDF prémium",
+          "Monitoreo de proveedores y volver a verificar las alertas"
+        ],
+        "cta": "Díganos que necesita",
+        "href": "- servicio a medida,"
+      }
+    ],
+    "comingSoonNote": "We are not selling a subscription until the features behind it are built and actually used. The Buyer Pro items above are the plan, not a promise you can buy today.",
+    "alsoTitle": "Also available",
+    "alsoItems": [
+      "Inspección: controles en línea y previos al envío, cotizados por hombre-día",
+      "Abastecimiento: 3–5% de comisión sobre el valor del pedido, cotizado antes de que se realice el pedido",
+      "Mejora de proveedores: capacitación y acción correctiva después de una auditoría, cotizada por fábrica"
+    ],
+    "alsoCta": "Request a quote",
+    "reportsTitle": "Reports and verification: indicative ranges",
+    "reportsLead": "Every figure below is indicative and quoted per project. We publish ranges so you can tell whether the check is worth ordering before you ask.",
+    "reports": [
+      {
+        "name": "Informe de diligencia debida del proveedor",
+        "range": "USD 29 – 99",
+        "note": "Revisión documental e informe escrito. Sin visita al sitio."
+      },
+      {
+        "name": "Verificación profesional",
+        "range": "USD 199 – 499+",
+        "note": "Verificación manual, incluida la evidencia del sitio cuando sea necesario."
+      },
+      {
+        "name": "Auditoría de fábrica in situ",
+        "range": "USD 300 – 1500+",
+        "note": "Cotizado por día-hombre más viaje, según el país, el tamaño del sitio y el estándar."
+      }
+    ],
+    "reportsNote": "Online payment is not open yet. Every item above is quoted and invoiced by our team, so nothing here is a subscription and nothing renews.",
+    "faqTitle": "Pricing FAQ",
+    "faq": [
+      {
+        "q": "¿Tengo que pagar para usar las herramientas?",
+        "a": "No. La calculadora de riesgos, las listas de verificación y las tarjetas de puntuación son gratuitas y no necesitan una cuenta. Solo pagas cuando nos pides que verifiquemos o auditemos a un proveedor."
+      },
+      {
+        "q": "¿Cuánto cuesta la verificación de un proveedor?",
+        "a": "Se cotiza por proveedor. El precio depende del país, si el paquete incluye una visita al sitio y cuántos documentos deben revisarse. Envíenos el nombre de la empresa y lo cotizaremos."
+      },
+      {
+        "q": "¿Cuánto cuesta una auditoría de fábrica?",
+        "a": "It is quoted per man-day plus travel. A single-site quality audit starts at one man-day. A full social compliance audit such as SMETA usually takes two or more, depending on headcount."
+      },
+      {
+        "q": "When will Buyer Pro be available?",
+        "a": "Not yet. We open it once the features behind it are live and being used. Until then, the free tools cover the same ground without an account."
+      }
+    ],
+    "recommendedTag": "推薦"
+  },
+  "aiChat": {
+    "title": "AI 智能客服",
+    "subtitle": "審覈、定價、覆蓋範圍",
+    "greeting": "你好！關於工廠審覈、供應商驗證、價格或我們覆蓋的國家，都可以問我。",
+    "placeholder": "輸入你的問題…",
+    "send": "發送",
+    "quickQuestions": [
+      "你們提供哪些審覈類型？",
+      "一次工廠審覈多少錢？",
+      "你們覆蓋哪些國家？",
+      "你們提供工廠培訓嗎？"
+    ],
+    "thinking": "思考中…",
+    "error": "抱歉，我沒能回答。請換個說法，或直接聯繫我們的團隊。",
+    "ctaText": "需要報價或人工服務？",
+    "ctaButton": "聯繫我們的團隊",
+    "fallbackAnswers": {
+      "pricing": "買家 SaaS 爲 $0–299/月，供應商會員 $29–199/月。工廠審覈與驗貨按項目報價（依據人天與地區）；運費與採購收取 3–5% 佣金。全部以美元計價。告訴我你的產品和國家，我幫你匹配合適的方案。",
+      "audit": "我們提供供應商驗證、工廠審覈與出貨前驗貨，覆蓋 SMETA、BSCI、ISO 9001、ISO 14001、SA8000、WRAP、Sedex 等項目。我們不出售證書，只做驗證與培訓。告訴我你的產品與目標市場，我們爲你評估。",
+      "coverage": "我們覆蓋中國（含中國香港 / 中國臺灣 / 中國澳門）、越南、印度、泰國、馬來西亞、印度尼西亞、柬埔寨和墨西哥。告訴我你從哪個國家採購。",
+      "training": "提供。我們先審覈工廠，再培訓團隊的質量體系、QC 與生產工藝。方案爲 Starter $280/廠、Pro $950/廠，另有 Enterprise 定製。每個方案都從差距審覈開始。",
+      "default": "我可以解答審覈、供應商驗證、覆蓋範圍、定價與培訓相關問題。如需具體方案，留下聯繫方式，我們的團隊會在一個工作日內回覆。"
+    }
+  },
+  "about": {
+    "metaTitle": "關於我們 — 工廠審覈與供應商培訓",
+    "metaDesc": "我們在亞洲驗廠，並培訓工廠內部的團隊，讓發現的問題不再復發。以證據爲先，不出售證書。",
+    "h1": "關於 FactoryAuditB2B",
+    "lead": "我們在亞洲驗廠，並培訓工廠內部的團隊，讓發現的問題不再復發。",
+    "storyTitle": "我們是誰",
+    "storyBody": "FactoryAuditB2B 由在中國及亞洲工廠裏待過多年的審覈員與 QC 工程師創建。我們反覆看到同一個循環：買家下單，出現缺陷，委託審覈，報告躺在抽屜裏，下一單又重蹈覆轍。所以我們做了這個平臺來閉合循環：先驗證供應商，再培訓真正做產品的人。",
+    "valuesTitle": "我們怎麼做",
+    "values": [
+      {
+        "title": "我們做驗證，不出售證書",
+        "desc": "證書可以買到，驗證買不到。我們覈查註冊信息、現場、產能、質量與合規，並把每一條結論背後的證據給你看。"
+      },
+      {
+        "title": "證據優先於主觀判斷",
+        "desc": "每一個風險分數都對應你可以查閱的文件與現場記錄。證據缺失時我們如實說明，而不是靠猜測填補。"
+      },
+      {
+        "title": "培訓緊跟審覈之後",
+        "desc": "止步於一份 PDF 的審覈改變不了任何事。我們培訓工廠團隊的質量體系與 QC，讓問題真正被解決並保持住。"
+      },
+      {
+        "title": "一個工作日內給出清楚答覆",
+        "desc": "你會收到一份範圍明確的方案，寫清我們要查什麼、收多少費用。不推銷，不含糊。"
+      }
+    ],
+    "statsTitle": "數據一覽",
+    "stats": [
+      {
+        "value": "9",
+        "label": "覆蓋國家"
+      },
+      {
+        "value": "12",
+        "label": "覆蓋行業"
+      },
+      {
+        "value": "20+",
+        "label": "審覈與合規項目"
+      },
+      {
+        "value": "< 1 天",
+        "label": "通常響應時間"
+      }
+    ],
+    "ctaTitle": "想看看我們會怎麼處理你的供應商？",
+    "ctaDesc": "告訴我們你的產品和國家，我們會說清要查哪些、花多少錢。",
+    "ctaButton": "獲取報價"
+  },
+  "brand": {
+    "name": "FactoryAuditB2B",
+    "tagline": "Supplier Intelligence & Verification for Global Buyers",
+    "eva": "Evaluate. Verify. Audit.",
+    "scope": "Supplier verification and factory audit services across China and Southeast Asia.",
+    "positioning": "We help global buyers evaluate suppliers, verify factories and reduce sourcing risk before an order is placed."
+  },
+  "coverage": {
+    "badge": "Coverage",
+    "h1": "Where We Verify Suppliers",
+    "lead": "On-the-ground supplier verification and factory audit support across China and Southeast Asia. Phase 1 covers three countries. More are added as we have verified auditor capacity in them.",
+    "phase1": "Phase 1",
+    "phaseNext": "Planned next",
+    "countryCta": "Coverage in {country}",
+    "anotherCountryTitle": "Need verification in another country?",
+    "anotherCountryLead": "Tell us where you are sourcing. If we do not have confirmed auditor capacity there yet, we will say so instead of guessing.",
+    "anotherCountryCta": "Request Verification",
+    "metaTitle": "Where We Verify Suppliers",
+    "metaDesc": "Supplier verification and factory audit coverage across China, Vietnam and Thailand, with country-specific sourcing risks, verification notes and audit considerations."
+  },
+  "countryHub": {
+    "profileTitle": "Manufacturing profile",
+    "risksTitle": "Typical sourcing risks",
+    "verificationTitle": "Supplier verification considerations",
+    "auditTitle": "Factory audit considerations",
+    "industriesTitle": "Relevant industries",
+    "logisticsTitle": "Local logistics considerations",
+    "standardsTitle": "Relevant standards",
+    "hubsTitle": "Main production hubs",
+    "registryTitle": "Where we check company records",
+    "servicesTitle": "Available services",
+    "toolsTitle": "Relevant tools",
+    "faqTitle": "Frequently asked questions",
+    "breadcrumb": "Countries",
+    "ctaTitle": "Need a supplier in {country} checked?",
+    "ctaLead": "Send us the company name and address. We confirm the registration, the site and the documents before you pay anything.",
+    "ctaPrimary": "Verify a supplier in {country}",
+    "ctaSecondary": "Request a {country} factory audit",
+    "suppliersTitle": "Suppliers listed for {country}",
+    "suppliersEmpty": "No supplier in {country} is listed yet. That does not mean we cannot check one. Send us the name and we will run the verification.",
+    "metaDesc": "Supplier verification and factory audit in {country}: manufacturing profile, typical sourcing risks, verification and audit considerations, industries, logistics and FAQs."
+  },
+  "serviceCountry": {
+    "quickAnswerTitle": "Quick answer",
+    "scopeTitle": "What is included",
+    "deliverablesTitle": "What you receive",
+    "processTitle": "How it works",
+    "pricingTitle": "How pricing works",
+    "contextTitle": "{service} in {country}: what is different here",
+    "ctaTitle": "Request {service} in {country}",
+    "ctaLead": "Tell us the supplier and your requirements. We reply with a scoped proposal, a timeline and a price.",
+    "ctaPrimary": "Request a quote",
+    "ctaSecondary": "Score this supplier free first",
+    "relatedTitle": "Related pages",
+    "breadcrumb": "Services",
+    "metaDesc": "{service} in {country}. Scope, deliverables, process and pricing basis, plus the country-specific checks that matter in {country}.",
+    "scopedQ": "What do you actually check for a {country} supplier?",
+    "scopedA": "We confirm registration, the registered address, the production site, and the country-specific checks for {country} suppliers. Exact scope depends on the standard and the order, which we confirm in the scoped quote.",
+    "timelineQ": "How long does this take in {country}?",
+    "timelineA": "Documentary checks are usually finished within two business days. A package that includes a site visit in {country} is normally scheduled within a week, longer outside the main production hubs."
+  },
+  "servicesIndex": {
+    "badge": "Services",
+    "h1": "Supplier verification, audit and inspection services",
+    "lead": "Free tools tell you what to check. These services get it checked. Everything below is scoped and quoted per project, and none of it is a bundle you have to buy into.",
+    "servicesTitle": "What we do",
+    "servicesLead": "Pick the stage you are at.",
+    "items": {
+      "verification": {
+        "title": "Supplier Verification",
+        "desc": "Confirm the company, the site and the documents before you release a deposit.",
+        "href": "/services/supplier-verification"
+      },
+      "factoryAudit": {
+        "title": "Factory Audit",
+        "desc": "An auditor on site against the standard your buyer requires, with findings graded and corrective actions listed.",
+        "href": "/factory-audit/request"
+      },
+      "inspection": {
+        "title": "Inspection",
+        "desc": "In-line and pre-shipment checks on your production, quoted per man-day.",
+        "href": "/custom-services"
+      },
+      "sourcing": {
+        "title": "Sourcing",
+        "desc": "Post an RFQ, get matched with suppliers we can verify, and pay commission only on orders you place.",
+        "href": "/rfq"
+      },
+      "improvement": {
+        "title": "Supplier Improvement",
+        "desc": "Audit findings turned into corrective action, training and a re-audit. Not a standalone training business.",
+        "href": "/services/supplier-improvement"
+      }
+    },
+    "coverageTitle": "Coverage by country",
+    "coverageLead": "Country-specific verification and audit pages with the local checks that matter.",
+    "notSureTitle": "Not sure which one you need?",
+    "notSureLead": "Run the free risk calculator first. It takes about three minutes and tells you what is missing.",
+    "notSureCta": "Assess supplier risk",
+    "metaTitle": "Supplier Verification, Factory Audit and Inspection Services",
+    "metaDesc": "Independent supplier verification, factory audit, inspection and sourcing support across China, Vietnam and Thailand. Scoped and quoted per project."
+  },
+  "resourcesIndex": {
+    "badge": "Resources",
+    "h1": "Supplier Intelligence Resources",
+    "lead": "Practical guides and tools for evaluating suppliers, checking documents, preparing audits and reducing sourcing risk. Written by the people who run the checks.",
+    "categoriesTitle": "Browse by topic",
+    "categoriesLead": "Each topic lists the guides, tools and services that belong to it.",
+    "toolsTitle": "Tools",
+    "toolsLead": "Free, no account needed.",
+    "cat": {
+      "verification": {
+        "title": "Supplier Verification",
+        "desc": "How to confirm a company is real, the site is real, and the documents hold up."
+      },
+      "audit": {
+        "title": "Factory Audit",
+        "desc": "Standards, checklists, what auditors look at and how to read a report."
+      },
+      "risk": {
+        "title": "Supplier Risk",
+        "desc": "Scoring frameworks, weighting and how to act on a risk score."
+      },
+      "china": {
+        "title": "China Sourcing",
+        "desc": "Country-specific checks, registries and logistics for Chinese suppliers."
+      },
+      "sea": {
+        "title": "Southeast Asia Sourcing",
+        "desc": "Vietnam and Thailand sourcing context, risks and audit considerations."
+      },
+      "compliance": {
+        "title": "Compliance",
+        "desc": "Social compliance, product compliance and what each standard actually covers."
+      },
+      "tools": {
+        "title": "Tools",
+        "desc": "The free calculators, checklists and scorecards."
+      }
+    },
+    "metaTitle": "Supplier Intelligence Resources",
+    "metaDesc": "Guides and tools on supplier verification, factory audit, supplier risk, China and Southeast Asia sourcing, and compliance."
+  },
+  "verification": {
+    "levelLabel": "Verification level",
+    "levels": [
+      "Nivel 0: No verificado",
+      "Nivel 1: Información comercial verificada",
+      "Nivel 2: Documentos revisados",
+      "Nivel 3: Verificado en fábrica",
+      "Nivel 4: Fábrica auditada"
+    ],
+    "levelsShort": [
+      "Sin verificar",
+      "Negocio verificado",
+      "DOCUMENTOS EXAMINADOS",
+      "Fábrica verificada",
+      "Fábrica auditada"
+    ],
+    "lastVerified": "Last verified",
+    "verifiedBy": "Verified by",
+    "scope": "Verification scope",
+    "whatVerified": "What was verified",
+    "whatNotVerified": "What was not verified",
+    "evidence": "Evidence reviewed",
+    "expiry": "Expires",
+    "noRecord": "No verification record yet.",
+    "notIndependentlyVerified": "Not independently verified",
+    "noRecentAudit": "No recent third-party audit found"
+  },
+  "evidence": {
+    "title": "Certifications & Evidence",
+    "lead": "We separate what the supplier handed over from what we have actually checked. A document the factory provided is not the same thing as evidence we reviewed.",
+    "reviewed": "Evidence reviewed",
+    "provided": "Document provided",
+    "notProvided": "Not provided",
+    "verified": "Verified",
+    "partiallyVerified": "Partially verified",
+    "unverified": "Unverified",
+    "expired": "Expired",
+    "missing": "Missing",
+    "restricted": "Original document: restricted",
+    "validAtReview": "Valid at time of review",
+    "statusNote": "\"Document provided\" means the supplier gave it to us. \"Evidence reviewed\" means we checked it against its source."
+  },
+  "supplierProfile": {
+    "trustSummary": "Trust summary",
+    "verificationLevel": "Verification level",
+    "lastVerified": "Last verified",
+    "riskScore": "Risk",
+    "verificationStatus": "Verification status",
+    "evidenceSummary": "Evidence summary",
+    "auditHistory": "Audit history",
+    "notCoveredTitle": "Not covered",
+    "notCoveredLead": "Checks outside the current verification scope. We list them so you know what has not been looked at.",
+    "whatVerifiedTitle": "What we verified",
+    "whatVerifiedLead": "Each line reflects a recorded verification event. Where we have no record, we say so.",
+    "viewProfile": "View profile",
+    "claimTitle": "Is this your company?",
+    "claimLead": "Claim the profile, keep the record accurate and let buyers see your verification status.",
+    "claimCta": "Claim this profile",
+    "notSatisfiedTitle": "Not satisfied with this supplier?",
+    "notSatisfiedLead": "Post an RFQ and we will look for alternatives we can verify before you commit.",
+    "notSatisfiedCta": "Post an RFQ",
+    "reverifyCta": "Request independent re-verification",
+    "manufacturer": "Manufacturer",
+    "tradingCompany": "Trading company",
+    "established": "Established {year}",
+    "employees": "Employees",
+    "exportMarkets": "Export markets",
+    "mainProducts": "Main products",
+    "inspections": "{n} inspections",
+    "noAudit": "No audit on record.",
+    "featuredNote": "Featured supplier. This is not a marketplace listing and we are not a party to any transaction.",
+    "backToDirectory": "All suppliers",
+    "overviewTitle": "Company overview",
+    "capabilitiesTitle": "Capabilities",
+    "capabilitiesLead": "Tags are marked as evidence reviewed only where we have checked the underlying document. Unchecked tags reflect what the supplier told us.",
+    "capabilitiesEmpty": "No capability tags recorded for this supplier yet.",
+    "productsTitle": "Main products",
+    "evidenceAvailableTitle": "Evidence on record",
+    "evidenceEmpty": "No evidence record yet. Request a verification and we will build one.",
+    "noCertifications": "No certifications on record.",
+    "employeesLabel": "Employees",
+    "exportMarketsLabel": "Export markets",
+    "inspectionHistoryLabel": "Inspection history",
+    "requestAudit": "Request a factory audit",
+    "requestQuote": "Request a quote",
+    "scopeTitle": "Verification scope",
+    "lastUpdated": "Last updated",
+    "selfReported": "Self-reported",
+    "auditStatusLabel": "Audit status",
+    "businessTypeLabel": "Business type",
+    "verifiedByTitle": "Verification by FactoryAuditB2B",
+    "verifiedByLead": "This is what our team checked. It is separate from what the supplier told us, and both are labelled.",
+    "provenanceLead": "Each line is labelled by who stands behind it: what the supplier provided, what we reviewed, what we independently verified, and what was confirmed on site.",
+    "provProvided": "Supplier provided",
+    "provReviewed": "Document reviewed",
+    "provIndependent": "Independently verified",
+    "provOnsite": "On-site verified",
+    "provNote": "\"Supplier provided\" means the supplier gave it to us and we have not checked it. \"Independently verified\" means we checked it against its source.",
+    "neverClaimedTitle": "What we never claim",
+    "neverClaimed": "We do not describe a supplier as verified unless a matching verification event and evidence exist. We do not certify suppliers ourselves."
+  },
+  "reportPreview": {
+    "badge": "Free preview",
+    "title": "Supplier Due Diligence Report",
+    "lead": "A structured review of supplier information, available evidence, risk factors and verification status.",
+    "execTitle": "Executive summary",
+    "verificationTitle": "Verification",
+    "keyRisksTitle": "Key risks",
+    "recommendationTitle": "Recommendation",
+    "riskLevel": "Risk level",
+    "score": "Score",
+    "unlockTitle": "Get the full due diligence report",
+    "unlockLead": "The full report covers company records, evidence review, risk analysis and the recommended next step. Original third-party documents stay restricted.",
+    "unlockCta": "View report options",
+    "methodologyLink": "View methodology",
+    "methodologyTitle": "How We Assess Suppliers",
+    "methodologyLead": "Risk scores come from a fixed rules engine with published weights. The report shows which inputs moved the number.",
+    "options": {
+      "basic": {
+        "name": "Basic report",
+        "price": "$29",
+        "items": [
+          "Descripción general del proveedor",
+          "Puntuación de riesgo con desglose por dimensiones",
+          "Estado de verificación",
+          "Resumen de evidencia",
+          "Principales factores de riesgo",
+          "Acciones recomendadas",
+          "PDF"
+        ]
+      },
+      "professional": {
+        "name": "Professional due diligence",
+        "price": "$79–$149",
+        "items": [
+          "Todo en el informe básico",
+          "Revisión detallada de la evidencia",
+          "Verificaciones de documentos adicionales",
+          "Análisis de riesgos con prioridades específicas del comprador",
+          "Notas de verificación",
+          "PDF"
+        ]
+      },
+      "independent": {
+        "name": "Independent verification",
+        "price": "Custom quote",
+        "items": [
+          "Verificación de identidad comercial",
+          "Verificación de dirección de fábrica",
+          "Verificación de documentos",
+          "Verificación in situ cuando sea necesario"
+        ]
+      }
+    },
+    "auditUpsellTitle": "Need the factory checked on site?",
+    "auditUpsellLead": "The report tells you what is missing. Our team can run an independent verification or a full factory audit.",
+    "auditUpsellCta": "Request an audit"
+  },
+  "claim": {
+    "h1": "Get Verified. Get Discovered. Get More Buyer Opportunities.",
+    "lead": "Buyers shortlist suppliers they can check. A claimed profile with verified evidence gets looked at first.",
+    "whyTitle": "Why claim your profile?",
+    "whyLead": "Help buyers understand your capabilities and verification status before they ask for a quote.",
+    "benefits": [
+      "Mantenga la información de su empresa precisa",
+      "Añadir productos, certificaciones y detalles de capacidad",
+      "Muestra tu nivel de verificación públicamente",
+      "Recibir consultas de compradores y oportunidades de RFQ"
+    ],
+    "tiersTitle": "What you can do",
+    "free": {
+      "name": "Free",
+      "cta": "Claim your profile",
+      "items": [
+        "Actualiza la información de la empresa",
+        "Añadir productos",
+        "Añadir certificaciones",
+        "Agregar detalles de contacto"
+      ]
+    },
+    "verified": {
+      "name": "Verified",
+      "cta": "Apply for verification",
+      "items": [
+        "Nivel de verificación en el perfil",
+        "Estado de auditoría y certificaciones mostradas a los compradores",
+        "﻿Consultas de comprador",
+        "Etiquetas de capacidad"
+      ]
+    },
+    "premium": {
+      "name": "Premium",
+      "cta": "Talk to us",
+      "items": [
+        "Colocación prioritaria en la búsqueda",
+        "Destacado en páginas relevantes de la industria",
+        "Presentaciones del comprador",
+        "Visibilidad del producto"
+      ]
+    }
+  },
+  "consent": {
+    "title": "How your information is used",
+    "body": "Information submitted by suppliers is used to create and maintain their FactoryAuditB2B supplier profile and support buyer due diligence.",
+    "privacy": "We do not publicly disclose confidential documents without authorization.",
+    "authorize": "I authorize FactoryAuditB2B to use the information and documents I provide for supplier verification and buyer due diligence, subject to the platform's privacy and document-sharing rules.",
+    "prefsTitle": "Information sharing preferences",
+    "public": {
+      "title": "Public",
+      "lead": "Visible to everyone.",
+      "items": [
+        "Nombre de la empresa",
+        "Ubicación",
+        "Productos",
+        "Estado de verificación"
+      ]
+    },
+    "buyerView": {
+      "title": "Buyer view",
+      "lead": "Visible to verified buyers.",
+      "items": [
+        "Evidencia seleccionada",
+        "Detalles del certificado",
+        "Programa de Auditoria"
+      ]
+    },
+    "restricted": {
+      "title": "Restricted",
+      "lead": "Only with your explicit authorization.",
+      "items": [
+        "Informes de auditoría originales",
+        "Documentos confidenciales",
+        "Fotos internas del PFDC."
+      ]
+    },
+    "private": {
+      "title": "Private",
+      "lead": "Used internally to maintain your verification record.",
+      "items": [
+        "Documentos fuente no compartidos",
+        "Notas de trabajo de verificación"
+      ]
+    },
+    "thirdPartyNote": "Third-party audit reports from SGS, Intertek, Bureau Veritas, TÜV and similar bodies may carry licence or confidentiality restrictions. We show them as reviewed, and we do not redistribute the original document without the appropriate rights."
+  },
+  "methodology": {
+    "badge": "Methodology",
+    "h1": "How Our Supplier Risk Assessment Works",
+    "lead": "Risk scores are calculated by a deterministic rules engine with published weights. The same inputs always produce the same score. Language models are used only to explain a result in plain language, and they cannot change the number.",
+    "quickAnswer": "We score a supplier across six weighted dimensions: company, quality, compliance, production, supply chain and documentation. Each answer you give maps to one dimension, contributes a weighted risk value, and rolls up into an overall figure out of 100, where higher means more risk. Missing evidence raises the score rather than being treated as neutral. The weights shown below are read directly from the scoring model, not typed by hand.",
+    "frameworkTitle": "Scoring framework",
+    "frameworkBody": "Each question belongs to one dimension. Within a dimension, answers carry a risk value between 0 and 100. The dimension score is the weighted mean of its answered questions, and the overall score is the weighted mean of the dimensions below.",
+    "weightsTitle": "Risk dimensions and weights",
+    "weightsLead": "Weights are configurable in our admin and shown here so you can see what actually moves the number.",
+    "weightsFallback": "Dimension weights are read from the risk model in our database and shown here when available.",
+    "dimensionTitle": "Dimension",
+    "weightTitle": "Weight",
+    "evidenceTitle": "Evidence",
+    "evidenceBody": "The score is only as good as the evidence behind it. Where you tell us you do not know something, we treat it as an open gap and score it accordingly. A supplier can lower its score by producing documents, not by arguing with the model.",
+    "limitationsTitle": "Limitations",
+    "limitationsLead": "What this score does not tell you.",
+    "limitations": [
+      "It is not a financial credit assessment. We do not review financial statements unless you ask us to.",
+      "It does not confirm that equipment exists or that a quality system runs day to day. That needs a site visit or an audit.",
+      "It is a point-in-time assessment. A score is valid as of the date it was produced.",
+      "It cannot detect a supplier that deliberately provides false documents, although document cross-checks reduce the gap.",
+      "Weights are our judgement, not an industry standard. We publish them so you can disagree with us in specific terms."
+    ],
+    "updateTitle": "Update policy",
+    "updateBody": "We review weights when we make a material change to the model, and we record the version in use when a score is produced. Methodology changes are listed here with their date.",
+    "changelogTitle": "Changelog",
+    "versionTitle": "Current version",
+    "aiTitle": "Where AI is used, and where it is not",
+    "aiBody": "Scores come from the rules engine alone. A language model may summarize or explain a result in plain language, and it may draft the recommended actions. It does not decide the score, and it cannot see the weights as a variable it can adjust.",
+    "ctaTitle": "Want the checks done rather than scored?",
+    "ctaLead": "Our verification service confirms registration, site, capability, quality and compliance, and gives you a written report before you pay anything.",
+    "ctaPrimary": "Supplier verification service",
+    "ctaSecondary": "Score a supplier free",
+    "metaTitle": "How Our Supplier Risk Assessment Works",
+    "metaDesc": "The scoring framework, risk dimensions, weights, evidence rules, limitations and update policy behind our supplier risk scores. Calculated by a deterministic rules engine, not by AI.",
+    "scoredInputsLabel": "Inputs",
+    "scoredTableNote": "{n} scored inputs · {d} dimensions · total weight {w}.",
+    "weightsSumLine": "— six dimensions, {n} inputs, weights summing to {w}."
+  },
+  "trust": {
+    "badge": "Trust Center",
+    "h1": "Trust Center",
+    "lead": "Who we are, what we verify, what we do not, and how we handle evidence. Published so you can check us before you ask us to check anyone else.",
+    "metaTitle": "Trust Center — Who Operates FactoryAuditB2B and What We Verify",
+    "metaDesc": "Business registration, operating entity, verification methodology, verification levels, evidence policy and data protection for FactoryAuditB2B.",
+    "regTitle": "Business Registration",
+    "regLead": "Public verification, not full disclosure. We publish the registration facts a buyer needs and keep personal and sensitive identifiers partially masked.",
+    "legalEntityLabel": "Legal entity name",
+    "brandLabel": "Brand",
+    "brandValue": "FactoryAuditB2B",
+    "countryLabel": "Registered country / region",
+    "cityLabel": "City",
+    "registrationYearLabel": "Business registration year",
+    "statusLabel": "Registration status",
+    "authorityLabel": "Business registration authority",
+    "verificationDateLabel": "Verification date",
+    "legalRepLabel": "Legal representative",
+    "registrationNumberLabel": "Registration number",
+    "addressLabel": "Registered address",
+    "maskedNote": "Partially masked. The full value is not published on the open internet and is available on request under a signed enquiry.",
+    "viewDocument": "View business registration",
+    "notConfigured": "Business registration details are not published yet.",
+    "notConfiguredLead": "We publish our registration record once the administrator has added it. Until then, ask us directly and we will send it to you.",
+    "operatesTitle": "Who Operates FactoryAuditB2B?",
+    "operatesBody": "FactoryAuditB2B is a platform and brand operated by {entity}. The brand name is not the legal entity name, and we do not present them as the same thing.",
+    "operatesLead": "FactoryAuditB2B is operated by a registered company in China and provides supplier verification, factory audit and sourcing support for global buyers.",
+    "operatesNotConfigured": "FactoryAuditB2B is operated by a registered company. We publish the legal entity name as soon as it is configured in the Trust Center.",
+    "scopeTitle": "Scope of business",
+    "scopeBody": "Supplier verification, factory audit, inspection and sourcing support for buyers importing from China and Southeast Asia. Phase 1 coverage is China, Vietnam and Thailand.",
+    "verifyTitle": "What We Verify",
+    "verifyLead": "These are the checks our verification service covers.",
+    "verify": [
+      "Company identity",
+      "Factory location",
+      "Documents",
+      "Certifications",
+      "Production capability",
+      "Audit evidence"
+    ],
+    "notVerifyTitle": "What We Do Not Verify",
+    "notVerifyLead": "Stating the boundary is part of the service. A verification report is only useful if it says what was not checked.",
+    "notVerify": [
+      "We do not certify suppliers ourselves unless explicitly stated.",
+      "We do not review financial statements unless you ask us to.",
+      "We do not verify subcontractors that were not disclosed to us.",
+      "We do not guarantee product performance in use.",
+      "We cannot detect deliberately falsified documents with certainty, although cross-checks reduce the gap."
+    ],
+    "methodTitle": "Verification Methodology",
+    "methodLead": "Risk scores come from a fixed rules engine with published weights. The same inputs always produce the same score.",
+    "methodLink": "Read the full methodology",
+    "levelsTitle": "Verification Levels",
+    "levelsLead": "A supplier is only shown as verified where a matching verification event and evidence exist.",
+    "levelDescs": [
+      "No verification record.",
+      "Registration and business identity records reviewed.",
+      "Certificates, licences and audit documents reviewed.",
+      "Site confirmed with location evidence and photographs.",
+      "On-site audit completed with findings and a written report."
+    ],
+    "evidenceTitle": "Supplier Evidence Policy",
+    "evidenceLead": "How we handle the documents suppliers and buyers give us.",
+    "evidence": [
+      "Every item is stored with its source, date and verification status.",
+      "Original third-party audit reports are marked as reviewed. We do not redistribute them.",
+      "Suppliers choose what is public, buyer-visible, restricted or private.",
+      "We do not publish confidential documents without authorization."
+    ],
+    "privacyTitle": "Privacy & Data Protection",
+    "privacyLead": "What happens to the information you send us.",
+    "privacy": [
+      "Buyer enquiries are used to respond and to prepare a quote. We do not sell contact data.",
+      "Supplier documents are used to maintain the supplier profile and support buyer due diligence.",
+      "No divulgamos públicamente documentos confidenciales sin autorización.",
+      "To request access, correction or deletion of your data, contact us using the details below."
+    ],
+    "contactTitle": "Contact",
+    "contactLead": "Reachable channels. If a page promises something we cannot deliver, tell us and we will correct it.",
+    "contactEmailLabel": "Email",
+    "whyTitle": "Why trust us",
+    "whyLead": "Four things we can evidence, and nothing we cannot.",
+    "why1Title": "Registered business",
+    "why1Body": "Operated by a registered company. We publish the entity name instead of hiding behind a brand.",
+    "why2Title": "Transparent methodology",
+    "why2Body": "Risk scores are based on a documented assessment framework with published weights.",
+    "why3Title": "Evidence-based verification",
+    "why3Body": "Verification status is tied to available evidence. No evidence, no verified label.",
+    "why4Title": "Human review",
+    "why4Body": "AI assists the process. People make the verification decisions, and on-site work is done by people.",
+    "aiNote": "AI assists the process. People make the verification decisions."
+  },
+  "inspection": {
+    "badge": "Product Inspection",
+    "h1": "Product Inspection",
+    "lead": "Order-specific quality checks at the production stage that matters, carried out by an independent inspector and reported in writing. Every request is reviewed individually and quoted per inspection.",
+    "metaTitle": "Product Inspection — PPI, DUPRO, PSI and Container Loading",
+    "metaDesc": "Pre-production, during-production, pre-shipment and container loading inspection for buyers sourcing from China, Vietnam, Thailand, Malaysia and the Philippines. Quoted per inspection.",
+    "quickAnswerTitle": "Quick answer",
+    "quickAnswer": "A product inspection checks a specific order at a specific stage: before production starts, while it is running, before shipment, or during container loading. The inspector works to your requirements or an AQL sampling plan, reports findings with photos, and gives a clear recommendation. It is quoted per inspection and priced by type, scope, location and duration.",
+    "honestNote": "Inspection requests are reviewed individually. We respond with a scoped quote based on inspection type, location, duration and qualified inspector availability.",
+    "howTitle": "How it works",
+    "howLead": "From request to report, without a platform to learn.",
+    "how": [
+      {
+        "title": "Send the request",
+        "body": "Tell us the factory location, product, order quantity, preferred date and what to check."
+      },
+      {
+        "title": "We quote",
+        "body": "A scoped quote based on inspection type, scope, location, duration and inspector availability. No payment until you confirm."
+      },
+      {
+        "title": "An inspector goes on site",
+        "body": "The inspector is independent and matched to the location and product category. You can watch live if you want."
+      },
+      {
+        "title": "You get the report",
+        "body": "Findings with photos, defect summary, AQL result and a clear recommendation, usually within 24 hours of the visit."
+      }
+    ],
+    "nodesTitle": "Inspection stages",
+    "nodesLead": "Each order is different. Pick the stage that fits your production calendar.",
+    "when": "When",
+    "what": "What is checked",
+    "why": "Why it is worth it",
+    "nodes": [
+      {
+        "key": "PPI",
+        "name": "Pre-Production Inspection",
+        "when": "Before production starts, on raw materials and the first sample.",
+        "what": "Raw materials, equipment readiness, production plan, BOM, packaging materials, colours, dimensions, labels, samples, process requirements.",
+        "why": "Catches the wrong thing before it is mass-produced. The cheapest defect is the one that never gets made."
+      },
+      {
+        "key": "DUPRO",
+        "name": "During Production Inspection",
+        "when": "While production is running, typically at 20–80% completion.",
+        "what": "Product quality, dimensions, appearance, workmanship, function, quantity, defect rate, production progress, packaging, labels.",
+        "why": "Problems found mid-run can still be fixed in time. Waiting for final inspection risks a whole batch you cannot repair."
+      },
+      {
+        "key": "PSI",
+        "name": "Pre-Shipment Inspection",
+        "when": "After production, before the goods leave the factory.",
+        "what": "Quantity, appearance, dimensions, function, packaging, labels, barcodes, carton contents, specification, AQL sampling, defect classification, photos.",
+        "why": "The final quality gate before balance payment. Most buyers start with PSI because it is the moment money is about to move."
+      },
+      {
+        "key": "CLS",
+        "name": "Container Loading Supervision",
+        "when": "During container loading at the factory or warehouse.",
+        "what": "Container condition, container number, seal, product quantity, carton count, SKU, packaging, labels, loading process, mixed or wrong goods, short loading, photos, video.",
+        "why": "Confirms that what you inspected is what actually gets loaded. Guards against substitution, short loading and mixed shipments."
+      }
+    ],
+    "reportTitle": "What you receive",
+    "reportLead": "A written report you can act on, not a phone call.",
+    "report": [
+      "Findings with photographs",
+      "Defect summary by severity (critical / major / minor)",
+      "AQL sampling result where applicable",
+      "Quantity and packaging check",
+      "Clear recommendation: PASS, FAIL or REWORK"
+    ],
+    "pricingTitle": "Pricing",
+    "pricingLead": "Quoted per inspection. Cost depends on inspection type, scope, location, duration and inspector availability.",
+    "pricingNote": "We do not publish fixed packages yet. Once real orders give us honest cost data per region, product category and stage, we will offer standard options.",
+    "pricingCta": "Request an inspection quote",
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "q": "What is the difference between DUPRO and PSI?",
+        "a": "DUPRO (during production) is done while the goods are being made, usually at 20–80% completion, so problems can be fixed before the batch finishes. PSI (pre-shipment) is done after production, before the goods leave the factory, and is the final quality gate before balance payment. Many buyers do DUPRO for first orders and PSI for repeat orders; some do both."
+      },
+      {
+        "q": "Do you have inspectors in every city?",
+        "a": "We do not publish a map of hundreds of inspectors because that would be a claim we cannot back. We match each order to a qualified independent inspector for the specific location and product category, and we confirm availability before quoting. If we cannot find the right person, we tell you instead of sending someone unsuitable."
+      },
+      {
+        "q": "How much does an inspection cost?",
+        "a": "It depends on inspection type, scope, location, duration and the product. A standard single-site PSI in a major manufacturing hub is typically in the range of USD 200–350 per man-day, plus travel outside hub cities. Send us the factory location and we will quote it precisely."
+      },
+      {
+        "q": "Can you inspect against my own checklist?",
+        "a": "Yes. If you have a buyer checklist or a spec sheet, send it with the request and the inspector will work to it. If you do not, we use a standard AQL-based inspection plan and tell you what we covered."
+      },
+      {
+        "q": "How soon can an inspection be scheduled?",
+        "a": "In major hubs (Shenzhen, Dongguan, Guangzhou, Ningbo, Ho Chi Minh, Bangkok, Penang) we can usually schedule within 2–3 business days. Other locations need more lead time because the right inspector has to travel."
+      }
+    ],
+    "ctaTitle": "Need an inspection scheduled?",
+    "ctaLead": "Send us the factory location, product, order quantity and preferred date. We reply with a scoped quote within one business day.",
+    "ctaPrimary": "Request an inspection quote",
+    "ctaSecondary": "Assess the supplier risk first",
+    "form": {
+      "stageLabel": "Inspection stage",
+      "stageHint": "Pick the stage that matches your production calendar. Not sure? Choose \"Not sure yet\" and we will advise.",
+      "stages": [
+        "Pre-Production (PPI)",
+        "During Production (DUPRO)",
+        "Pre-Shipment (PSI)",
+        "Container Loading (CLS)",
+        "Not sure yet"
+      ],
+      "factoryLocation": "Factory location",
+      "factoryLocationHint": "City and country, e.g. Shenzhen, China",
+      "product": "Product",
+      "quantity": "Order quantity",
+      "inspectionDate": "Preferred inspection date",
+      "requirements": "Inspection requirements",
+      "requirementsHint": "Your checklist, spec sheet, or what the inspector should pay attention to",
+      "submit": "Submit inspection request",
+      "submitting": "Submitting...",
+      "success": "Request received. We will reply with a scoped quote within one business day.",
+      "error": "Something went wrong. Please try again, or email us directly.",
+      "firstName": "你的姓名",
+      "company": "公司",
+      "email": "公司電子郵件"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "登入",
+      "lead": "登入後可查看你的詢價、報告與已儲存的供應商評估。",
+      "email": "電子郵件",
+      "password": "密碼",
+      "submit": "登入",
+      "submitting": "登入中...",
+      "google": "使用 Google 繼續",
+      "backHome": "返回首頁",
+      "noAccount": "還沒有帳號？",
+      "registerLink": "註冊一個",
+      "errorInvalid": "電子郵件或密碼錯誤。",
+      "errorAdminOnly": "此頁面僅限管理員存取。",
+      "errorSignedOut": "你已登出。",
+      "demoHint": "示範帳號：admin@ / buyer@ / supplier@ factoryauditb2b.com"
+    },
+    "register": {
+      "title": "建立帳號",
+      "lead": "免費註冊，無需信用卡。用於追蹤詢價、儲存評估與申請報價。",
+      "name": "你的姓名",
+      "email": "公司電子郵件",
+      "password": "密碼",
+      "passwordHint": "至少 8 個字元。",
+      "confirm": "確認密碼",
+      "company": "公司名稱",
+      "companyHint": "請填寫與商業登記一致的正式公司名。",
+      "country": "國家",
+      "roleLabel": "我的身份",
+      "roleBuyer": "買方",
+      "roleBuyerHint": "我向工廠採購，需要供應商查核、驗廠或驗貨服務。",
+      "roleSupplier": "供應商",
+      "roleSupplierHint": "我是製造商，希望被收錄並通過查核。",
+      "submit": "建立帳號",
+      "submitting": "建立中...",
+      "success": "帳號建立成功，正在登入...",
+      "hasAccount": "已有帳號？",
+      "loginLink": "登入",
+      "termsNote": "建立帳號即表示你同意我們的服務條款與隱私權政策。"
+    },
+    "errors": {
+      "invalid_email": "請輸入有效的電子郵件地址。",
+      "weak_password": "密碼至少需要 8 個字元。",
+      "invalid_role": "請選擇買方或供應商。",
+      "email_taken": "此電子郵件已註冊，請直接登入。",
+      "password_mismatch": "兩次輸入的密碼不一致。",
+      "server_error": "發生錯誤，請重試。",
+      "network": "網路錯誤，請檢查連線後重試。",
+      "rate_limited": "操作過於頻繁，請一小時後再試。"
+    },
+    "nav": {
+      "signIn": "登入",
+      "admin": "管理後台",
+      "signOut": "登出"
+    }
+  },
+  "auditGuide": {
+    "breadcrumb": "驗廠指南",
+    "metaTitle": "{country}{type} 驗廠",
+    "metaDesc": "查找 {country} 的 {type} 驗廠、檢驗與合格供應商。FactoryAuditB2B 提供已查核工廠目錄、RFQ 發布與驗廠申請。",
+    "h1": "{country}{type} 驗廠",
+    "ownerLabel": "發證/管理主體：",
+    "standardsTitle": "相關認證與標準",
+    "noStandards": "暫未記錄相關標準。",
+    "suppliersTitle": "持有 {type} 的{country}供應商（{n}）",
+    "emptySuppliers": "暫無已查核供應商持有該資質。仍可發布 RFQ，我們會為你尋找候選工廠。",
+    "riskLabel": "風險",
+    "ctaTitle": "需要做 {type} 驗廠？",
+    "ctaDesc": "發布 RFQ，我們會為你匹配具備該資質的稽核員與供應商。",
+    "ctaButton": "發布 RFQ",
+    "verificationCta": "先做供應商查核"
+  }
+}

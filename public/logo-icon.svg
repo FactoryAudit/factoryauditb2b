@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="FactoryAuditB2B">
+  <defs>
+    <linearGradient id="iconShield" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0B2D5B"/>
+      <stop offset="100%" stop-color="#1E6FEB"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 盾牌 -->
+  <path d="M 14 0 L 186 0 L 186 78 Q 186 178 100 200 Q 14 178 14 78 Z"
+        fill="url(#iconShield)" stroke="#1E6FEB" stroke-width="3"/>
+
+  <!-- 工厂（白色描深蓝） -->
+  <g fill="#FFFFFF" stroke="#0B2D5B" stroke-width="4" stroke-linejoin="round">
+    <rect x="50" y="80" width="44" height="62"/>
+    <rect x="94" y="56" width="26" height="86"/>
+    <rect x="120" y="98" width="36" height="44"/>
+    <rect x="140" y="40" width="12" height="28"/>
+  </g>
+  <!-- 窗户 -->
+  <g fill="#0EA5FF">
+    <rect x="58" y="90" width="8" height="8"/>
+    <rect x="78" y="90" width="8" height="8"/>
+    <rect x="58" y="110" width="8" height="8"/>
+    <rect x="78" y="110" width="8" height="8"/>
+    <rect x="100" y="68" width="6" height="6"/>
+    <rect x="100" y="82" width="6" height="6"/>
+    <rect x="100" y="96" width="6" height="6"/>
+    <rect x="128" y="108" width="6" height="6"/>
+    <rect x="128" y="122" width="6" height="6"/>
+  </g>
+
+  <!-- 放大镜（右下，覆盖工厂） -->
+  <g transform="translate(95 100)">
+    <circle cx="0" cy="0" r="36" fill="#FFFFFF" fill-opacity="0.97"
+            stroke="#1E6FEB" stroke-width="7"/>
+    <path d="M -14 2 L -4 12 L 14 -8" fill="none"
+          stroke="#22C55E" stroke-width="7"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="25" y1="25" x2="52" y2="52"
+          stroke="#1E6FEB" stroke-width="9" stroke-linecap="round"/>
+  </g>
+</svg>

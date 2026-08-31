@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 140" role="img" aria-label="FactoryAuditB2B — Evaluate. Verify. Audit.">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0B2D5B"/>
+      <stop offset="100%" stop-color="#1E6FEB"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 盾牌 + 工厂 + 放大镜 + 对勾（左侧） -->
+  <g transform="translate(10 10)">
+    <!-- 盾牌外轮廓（深蓝渐变） -->
+    <path d="M 0 0 L 100 0 L 100 50 Q 100 110 50 120 Q 0 110 0 50 Z"
+          fill="url(#shieldGrad)" stroke="#1E6FEB" stroke-width="2"/>
+
+    <!-- 工厂剪影（白色实心，描深蓝） -->
+    <g fill="#FFFFFF" stroke="#0B2D5B" stroke-width="2" stroke-linejoin="round">
+      <!-- 主楼 -->
+      <rect x="22" y="46" width="26" height="36"/>
+      <!-- 高楼 -->
+      <rect x="48" y="32" width="14" height="50"/>
+      <!-- 屋顶/小楼 -->
+      <rect x="62" y="58" width="20" height="24"/>
+      <!-- 烟囱 -->
+      <rect x="72" y="22" width="6" height="14"/>
+    </g>
+    <!-- 工厂窗户（亮蓝） -->
+    <g fill="#0EA5FF">
+      <rect x="26" y="52" width="4" height="4"/>
+      <rect x="36" y="52" width="4" height="4"/>
+      <rect x="26" y="62" width="4" height="4"/>
+      <rect x="36" y="62" width="4" height="4"/>
+      <rect x="52" y="38" width="3" height="3"/>
+      <rect x="52" y="46" width="3" height="3"/>
+      <rect x="66" y="64" width="3" height="3"/>
+    </g>
+
+    <!-- 放大镜（右下，覆盖工厂） -->
+    <g transform="translate(40 50)">
+      <circle cx="0" cy="0" r="20" fill="#FFFFFF" fill-opacity="0.96"
+              stroke="#1E6FEB" stroke-width="4"/>
+      <!-- 放大镜内的对勾（绿） -->
+      <path d="M -8 1 L -2 7 L 8 -5" fill="none"
+            stroke="#22C55E" stroke-width="4"
+            stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- 放大镜手柄 -->
+      <line x1="14" y1="14" x2="30" y2="30"
+            stroke="#1E6FEB" stroke-width="5" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- 文字：FactoryAudit（深蓝）+ B2B（亮蓝） -->
+  <g font-family="Poppins, Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+     font-weight="700"
+     text-anchor="start">
+    <text x="140" y="74" font-size="40" letter-spacing="-1">
+      <tspan fill="#0B2D5B">FactoryAudit</tspan><tspan fill="#0EA5FF">B2B</tspan>
+    </text>
+  </g>
+
+  <!-- 副标题：字距加大、灰 -->
+  <text x="141" y="100"
+        font-family="Poppins, Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+        font-size="13" font-weight="500" fill="#6B7280" letter-spacing="6">
+    Evaluate. Verify. Audit.
+  </text>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="FactoryAuditB2B">
+  <defs>
+    <linearGradient id="favShield" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0B2D5B"/>
+      <stop offset="100%" stop-color="#1E6FEB"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 圆角方形底（favicon 通常是正方，避免盾牌被裁切） -->
+  <rect width="64" height="64" rx="12" fill="url(#favShield)"/>
+
+  <!-- 简化工厂（白色） -->
+  <g fill="#FFFFFF">
+    <rect x="14" y="28" width="14" height="20" rx="1"/>
+    <rect x="28" y="22" width="9"  height="26" rx="1"/>
+    <rect x="37" y="32" width="13" height="16" rx="1"/>
+  </g>
+
+  <!-- 放大镜 + 对勾（绿） -->
+  <g transform="translate(34 38)">
+    <circle cx="0" cy="0" r="13" fill="#FFFFFF"/>
+    <circle cx="0" cy="0" r="13" fill="none" stroke="#1E6FEB" stroke-width="2.5"/>
+    <path d="M -5 1 L -1 5 L 5 -3" fill="none" stroke="#22C55E" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="9" y1="9" x2="20" y2="20" stroke="#1E6FEB" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

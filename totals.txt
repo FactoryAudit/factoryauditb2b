@@ -1,0 +1,5 @@
+C:\Users\35726\AppData\Local => 2026-07-22  13:39             3,131 bytes_io_wrapper.py
+C:\Users\35726\AppData\Roaming => 2026-05-24  08:30             5,906 test_bytes_type.py
+C:\Users\35726\.npm => 
+C:\Users\35726\AppData\Local\npm-cache => 
+C:\Users\35726\AppData\Local\codebuddy => 

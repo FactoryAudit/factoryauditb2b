@@ -1,0 +1,2162 @@
+{
+  "nav": {
+    "tools": "Ferramentas",
+    "suppliers": "Fornecedores",
+    "rfq": "RFQ",
+    "audits": "Auditorias",
+    "inspections": "Inspeções",
+    "logistics": "Logística",
+    "resources": "Recursos",
+    "pricing": "Preços",
+    "postRfq": "Publicar um RFQ",
+    "requestAudit": "Solicitar auditoria",
+    "language": "Idioma",
+    "trainingPlans": "Planos de formação",
+    "about": "Sobre nós",
+    "services": "Serviços",
+    "menu": {
+      "title": "Serviços",
+      "verification": "Verificação de fornecedores",
+      "verificationDesc": "Confirm the company, the site and the documents before you pay.",
+      "factoryAudit": "Auditoria de fábrica",
+      "factoryAuditDesc": "On-site assessment against the standard your buyer requires.",
+      "inspection": "Inspeção",
+      "inspectionDesc": "In-line and pre-shipment checks on your production.",
+      "sourcing": "Sourcing",
+      "sourcingDesc": "Post an RFQ and reach suppliers we can verify.",
+      "improvement": "Melhoria de fornecedores",
+      "improvementDesc": "Turn audit findings into corrective action and training."
+    }
+  },
+  "footer": {
+    "platform": "Plataforma",
+    "resources": "Recursos",
+    "coverage": "Cobertura",
+    "logistics": "Logística",
+    "allTools": "All free tools",
+    "riskCalculator": "Risk calculator",
+    "verificationChecklist": "Verification checklist",
+    "supplierVerification": "Supplier verification",
+    "factoryAudit": "Factory audit",
+    "knowledgeBase": "Treinamento de fornecedores",
+    "pricing": "Preços",
+    "admin": "Administração",
+    "tagline": "Nós verificamos fábricas na China e em toda a Ásia e mostramos os documentos para você.",
+    "copyright": "© 2026 FactoryAuditB2B.com. Não vendemos certificados. Hong Kong, China / Taiwan, China / Macau, China são partes da China.",
+    "privacy": "Política de Privacidade",
+    "terms": "Termos de Serviço",
+    "trainingPlans": "Planos de treinamento",
+    "about": "Sobre nós",
+    "coverageOnly": "Phase 1 coverage. More countries as we add verified auditor capacity.",
+    "verificationService": "Supplier verification",
+    "inspectionService": "Inspection",
+    "sourcingService": "Sourcing",
+    "improvementService": "Supplier Improvement",
+    "allServices": "All services",
+    "containerCalculator": "Container load calculator",
+    "trustCenter": "Trust Center",
+    "operatedBy": "FactoryAuditB2B is a platform and brand operated by {entity}.",
+    "registeredBusiness": "China Registered Business"
+  },
+  "home": {
+    "badge": "Verificar. Comprar. Inspecionar. Enviar.",
+    "h1": "Confira a fábrica antes de enviar o dinheiro",
+    "lead": "Consultamos o registro empresarial, percorremos a linha de produção e lemos a documentação de auditoria de fábricas na China e em toda a Ásia. Você recebe os documentos, as fotos e os achados, e então decide se faz o pedido.",
+    "ctaScore": "Avaliar um fornecedor grátis",
+    "ctaRfq": "Publicar cotação",
+    "ctaAudit": "Solicitar auditoria",
+    "services": "Fazemos verificação de fornecedores, auditorias de fábrica, inspeções e transporte.",
+    "toolsTitle": "Free tools for evaluating suppliers",
+    "toolsLead": "Oito ferramentas para conferir fornecedores, preparar auditorias e planejar embarques. Sem cadastro e sem exigir e-mail para o resultado básico.",
+    "value1Title": "O que «verificado» quer dizer de fato",
+    "value1Body": "Um fornecedor só é marcado como verificado depois de conferirmos o registro empresarial, confirmarmos que o local existe e examinarmos os documentos de auditoria.",
+    "value2Title": "Quem decide são pessoas",
+    "value2Body": "O software aponta os problemas óbvios. Nossos verificadores decidem o resultado da verificação e da auditoria, e assinam o relatório.",
+    "value3Title": "Cada verificação fica registrada",
+    "value3Body": "Cada verificação e auditoria fica na pasta do fornecedor. Uma empresa não consegue apagar o próprio histórico aqui sem deixar rastro.",
+    "sub": "Use free tools to assess supplier risk, check verification readiness and prepare for a factory audit. When you need someone on the ground, request an independent verification or factory audit.",
+    "ctaPrimary": "Assess Supplier Risk",
+    "ctaSecondary": "Verify a Supplier",
+    "ctaHighIntent": "Request a Factory Audit",
+    "evaTitle": "Evaluate. Verify. Audit.",
+    "evaLead": "Three steps between a supplier you found online and a supplier you can pay.",
+    "evaluateTitle": "Evaluate",
+    "evaluateBody": "Assess supplier risk before you place an order.",
+    "evaluateCta": "Evaluate a Supplier",
+    "verifyTitle": "Verify",
+    "verifyBody": "Check company information, documents, factory details and available evidence.",
+    "verifyCta": "Verify a Supplier",
+    "auditTitle": "Audit",
+    "auditBody": "Get an independent on-site factory audit with findings, evidence and a written report.",
+    "auditCta": "Request an Audit",
+    "howTitle": "How it works",
+    "howLead": "From a company name to a decision you can defend internally.",
+    "howSteps": [
+      {
+        "title": "Evaluate",
+        "body": "Run the risk calculator or the checklist on the supplier. You get a score and a list of what is missing."
+      },
+      {
+        "title": "Verify",
+        "body": "Send us the company name and address. We confirm the registration, the site and the documents."
+      },
+      {
+        "title": "Audit",
+        "body": "Where the order justifies it, we put an auditor on site against the standard your buyer requires."
+      },
+      {
+        "title": "Decide",
+        "body": "You get findings, evidence and a written report. Then you order, renegotiate, or walk away."
+      }
+    ],
+    "coverageTitle": "Where We Verify Suppliers",
+    "coverageLead": "On-the-ground supplier verification and factory audit support across China and Southeast Asia.",
+    "coveragePhase": "Phase 1 coverage",
+    "coverageService1": "Supplier Verification",
+    "coverageService2": "Factory Audit",
+    "coverageService3": "Inspection",
+    "coverageCta": "See coverage",
+    "whyTitle": "Why buyers use FactoryAuditB2B",
+    "whyLead": "Four things we do differently from a directory or a spreadsheet.",
+    "why1Title": "Real evidence",
+    "why1Body": "Every finding is tied to a document, a photo or a dated observation. Where evidence is missing, the report says so.",
+    "why2Title": "Transparent methodology",
+    "why2Body": "Risk scores come from a fixed rules engine with published weights. You can see which answer moved the number.",
+    "why3Title": "Independent verification",
+    "why3Body": "We do not sell certificates and we are not paid by the factory. Our job is to describe what we found.",
+    "why4Title": "Practical reports",
+    "why4Body": "You get a written report you can forward internally, with a risk summary and the next step we would take.",
+    "guidesTitle": "Guides buyers read before they order",
+    "guidesLead": "Practical walkthroughs from people who run these checks.",
+    "casesTitle": "What the checks turn up",
+    "casesLead": "Supplier names removed. Findings and outcomes come from real engagements.",
+    "bottomTitle": "Have a supplier already?",
+    "bottomLead": "Send us the company name and address. We will tell you what we can confirm, what we cannot, and what it costs.",
+    "bottomCta": "Verify This Supplier",
+    "otherRegionTitle": "Other Regions",
+    "otherRegionBody": "Don't see your country? We accept enquiries for any region and review each one based on scope, location and inspector availability.",
+    "otherRegionCta": "Tell us where you source"
+  },
+  "toolsIndex": {
+    "badge": "Free tools",
+    "h1": "Free Supplier & Factory Audit Tools",
+    "lead": "Sete utilitários para filtrar fornecedores, conferir documentos e preparar auditorias. Sem cadastro.",
+    "flagship": "Principal",
+    "ctaTitle": "Quer que a gente faça essas verificações?",
+    "ctaLead": "Nosso serviço confirma registro, local, capacidade de produção, qualidade e conformidade, e entrega um relatório por escrito antes de você pagar.",
+    "ctaPrimary": "Serviço de verificação",
+    "ctaSecondary": "Solicitar auditoria de fábrica",
+    "metaTitle": "Ferramentas grátis para fornecedores e auditorias",
+    "metaDesc": "Ferramentas grátis para filtrar fornecedores, conferir documentos, montar listas de auditoria e analisar relatórios. Sem cadastro."
+  },
+  "toolCards": {
+    "riskCalculator": {
+      "title": "Supplier Risk Calculator",
+      "desc": "Pontua qualquer fornecedor de 0 a 100 em seis dimensões com pesos."
+    },
+    "verificationChecklist": {
+      "title": "Supplier Verification Checklist",
+      "desc": "29 verificações em seis etapas antes de fazer o pedido."
+    },
+    "riskAssessment": {
+      "title": "Supplier Risk Assessment",
+      "desc": "Informe os dados e receba uma pontuação inicial com a situação das evidências."
+    },
+    "auditChecklist": {
+      "title": "Factory Audit Checklist Generator",
+      "desc": "Monta uma lista de auditoria para o seu setor e tipo de auditoria."
+    },
+    "supplierScorecard": {
+      "title": "Supplier Evaluation Scorecard",
+      "desc": "Defina você os pesos e pontue os fornecedores com eles."
+    },
+    "auditReportAnalyzer": {
+      "title": "Audit Report Analyzer",
+      "desc": "Aponta lacunas, contradições e sinais de risco em um relatório."
+    },
+    "documentChecker": {
+      "title": "Supplier Document Checker",
+      "desc": "Compara documentos e certificados do fornecedor entre si."
+    },
+    "containerCalculator": {
+      "title": "Calculadora de carregamento de contêiner",
+      "desc": "Calcule quantas caixas cabem em um 20GP ou 40HQ e quantos contêineres você precisa."
+    },
+    "rfqGenerator": {
+      "title": "Gerador de cotação",
+      "desc": "Transforma uma frase de requisitos em uma cotação profissional."
+    },
+    "personalizedService": {
+      "title": "Serviço personalizado",
+      "desc": "Conte-nos sua necessidade específica e montaremos um plano de auditoria ou verificação sob medida."
+    }
+  },
+  "risk": {
+    "ui": {
+      "stepOf": "Etapa {n} de 6",
+      "back": "Voltar",
+      "next": "Avançar",
+      "calculate": "Calcular pontuação de risco",
+      "answerAll": "Responda todas as perguntas para ver a pontuação",
+      "scoreSuffix": "pontuação de risco",
+      "breakdownTitle": "De onde vem o risco",
+      "weightNote": "{weight}% do total",
+      "factorsTitle": "O que elevou a pontuação",
+      "actionsTitle": "O que fazer agora",
+      "editAnswers": "Editar respostas",
+      "startOver": "Recomeçar",
+      "downloadReport": "Baixar relatório completo",
+      "print": "Imprimir",
+      "notAnswered": "Sem resposta",
+      "reportTitle": "Relatório de risco do fornecedor",
+      "level": {
+        "LOW": "Risco baixo",
+        "MODERATE": "Risco moderado",
+        "ELEVATED": "Risco elevado",
+        "HIGH": "Risco alto",
+        "CRITICAL": "Risco crítico"
+      },
+      "form": {
+        "title": "Receber o relatório completo por e-mail",
+        "firstName": "Nome",
+        "company": "Empresa",
+        "email": "E-mail corporativo",
+        "country": "País",
+        "sourcing": "O que você está comprando",
+        "supplierName": "Nome do fornecedor",
+        "supplierWebsite": "Site do fornecedor",
+        "submit": "Me enviar o relatório",
+        "sending": "Enviando",
+        "done": "Recebido. O relatório está disponível abaixo e a caminho da sua caixa de entrada.",
+        "error": "Algo deu errado. Tente novamente."
+      },
+      "disclaimer": "Esta pontuação vem das respostas que você deu. É uma triagem inicial, não é aconselhamento jurídico nem financeiro, e não verifica por conta própria nada do que o fornecedor lhe disse.",
+      "answeredInStep": "{done} de {total} respondidas nesta secção"
+    },
+    "page": {
+      "badge": "Ferramenta grátis",
+      "h1": "Calculadora de risco do fornecedor",
+      "lead": "Responda 22 perguntas sobre um fornecedor e receba uma pontuação de 0 a 100, com as seis dimensões por trás dela detalhadas.",
+      "card1Title": "Você vê como a pontuação é formada",
+      "card1Body": "Seis dimensões, cada uma com peso e mostrada separadamente, para você saber quais respostas mexeram no número.",
+      "card2Title": "Cerca de três minutos",
+      "card2Body": "Sem cadastro e sem e-mail para ver a pontuação.",
+      "card3Title": "Diz o que conferir",
+      "card3Body": "O resultado lista as respostas que elevaram sua pontuação e o que fazer com cada uma.",
+      "relatedTitle": "Ferramentas relacionadas",
+      "faqTitle": "Perguntas frequentes",
+      "metaTitle": "Calculadora de risco do fornecedor",
+      "metaDesc": "Pontue qualquer fornecedor de 0 a 100 em empresa, qualidade, conformidade, produção, cadeia de suprimentos e documentação. Grátis, sem cadastro."
+    },
+    "dimensions": {
+      "company": {
+        "label": "Company risk",
+        "short": "Empresa",
+        "description": "Há quanto tempo atuam, se o endereço registrado é o da fábrica e se a titularidade é rastreável."
+      },
+      "quality": {
+        "label": "Quality risk",
+        "short": "Qualidade",
+        "description": "Se o controle de qualidade é documentado, se um auditor externo passou por lá recentemente e se existem registros de inspeção."
+      },
+      "compliance": {
+        "label": "Compliance risk",
+        "short": "Conformidade",
+        "description": "Registros de conformidade social, ambiental e de produto. Perguntamos o que você tem, não exigimos um certificado específico."
+      },
+      "production": {
+        "label": "Production risk",
+        "short": "Produção",
+        "description": "Capacidade frente ao seu volume, se há subcontratação e se já fabricaram seu tipo de produto."
+      },
+      "supplychain": {
+        "label": "Supply chain risk",
+        "short": "Suprimentos",
+        "description": "De onde vêm as matérias-primas, sua exposição a uma única fonte e se o prazo informado é realista."
+      },
+      "documentation": {
+        "label": "Documentation risk",
+        "short": "Documentação",
+        "description": "Se o registro empresarial, o endereço da fábrica, os certificados, os relatórios de auditoria e os laudos de ensaio podem realmente ser apresentados."
+      }
+    },
+    "questions": {
+      "company_years": "Há quanto tempo a empresa atua?",
+      "company_address": "O endereço da fábrica foi verificado?",
+      "company_type": "Que tipo de empresa é?",
+      "company_ownership": "A titularidade pode ser confirmada?",
+      "quality_qms": "Existe um sistema de gestão da qualidade documentado, como ISO 9001?",
+      "quality_audit": "O fornecedor passou por auditoria de terceiros?",
+      "quality_incoming": "O fornecedor inspeciona os materiais recebidos?",
+      "quality_records": "O fornecedor mantém registros de qualidade?",
+      "comp_social": "Existe um sistema de conformidade social, como BSCI, SMETA ou SA8000?",
+      "comp_env": "O fornecedor tem registros de conformidade ambiental?",
+      "comp_product": "O produto atende aos requisitos do seu mercado, como CE ou UL?",
+      "comp_ethics": "Existe uma política documentada de ética empresarial ou anticorrupção?",
+      "prod_capacity": "A capacidade de produção é suficiente para o seu volume?",
+      "prod_subcontract": "O fornecedor subcontrata a produção?",
+      "prod_experience": "O fornecedor já fabricou este tipo de produto?",
+      "sc_material": "Qual é a estabilidade do fornecimento de matéria-prima?",
+      "sc_single": "Qual é a dependência de uma única fonte de material?",
+      "sc_leadtime": "O prazo informado é confiável?",
+      "doc_registration": "O registro empresarial foi apresentado?",
+      "doc_address": "O endereço da fábrica está documentado?",
+      "doc_certificates": "Os certificados e relatórios de auditoria estão disponíveis?",
+      "doc_test": "Os laudos de ensaio do produto estão disponíveis?"
+    },
+    "options": {
+      "company_years": {
+        "10plus": "Mais de 10 anos",
+        "5to10": "De 5 a 10 anos",
+        "3to5": "De 3 a 5 anos",
+        "1to2": "De 1 a 2 anos",
+        "unknown": "Não sei"
+      },
+      "company_address": {
+        "yes": "Sim",
+        "partial": "Parcialmente",
+        "no": "Não",
+        "unknown": "Não sei"
+      },
+      "company_type": {
+        "manufacturer": "Fabricante",
+        "both": "Fabricante e comercial",
+        "trading": "Empresa comercial",
+        "unknown": "Não sei"
+      },
+      "company_ownership": {
+        "yes": "Sim",
+        "no": "Não",
+        "unknown": "Não sei"
+      },
+      "quality_qms": {
+        "yes": "Sim",
+        "partial": "Parcialmente",
+        "no": "Não",
+        "unknown": "Não sei"
+      },
+      "quality_audit": {
+        "within12": "Nos últimos 12 meses",
+        "within3y": "Nos últimos 3 anos",
+        "older": "Há mais de 3 anos",
+        "never": "Nunca",
+        "unknown": "Não sei"
+      },
+      "quality_incoming": {
+        "yes": "Sim",
+        "partial": "Parcialmente",
+        "no": "Não",
+        "unknown": "Não sei"
+      },
+      "quality_records": {
+        "yes": "Sim",
+        "partial": "Parcialmente",
+        "no": "Não",
+        "unknown": "Não sei"
+      },
+      "comp_social": {
+        "comprehensive": "Completo",
+        "partial": "Parcial",
+        "none": "Nenhum",
+        "unknown": "Não sei"
+      },
+      "comp_env": {
+        "comprehensive": "Completo",
+        "partial": "Parcial",
+        "none": "Nenhum",
+        "unknown": "Não sei"
+      },
+      "comp_product": {
+        "inplace": "Em dia",
+        "partial": "Parcial",
+        "missing": "Faltando",
+        "unknown": "Não sei"
+      },
+      "comp_ethics": {
+        "documented": "Documentada",
+        "partial": "Parcial",
+        "none": "Nenhuma",
+        "unknown": "Não sei"
+      },
+      "prod_capacity": {
+        "yes": "Sim",
+        "partial": "Parcialmente",
+        "no": "Não",
+        "unknown": "Não sei"
+      },
+      "prod_subcontract": {
+        "no": "Não",
+        "partial": "Parcialmente, e informado",
+        "yes": "Sim, e não informado",
+        "unknown": "Não sei"
+      },
+      "prod_experience": {
+        "strong": "Ampla",
+        "moderate": "Média",
+        "limited": "Limitada",
+        "none": "Nenhuma"
+      },
+      "sc_material": {
+        "stable": "Estável",
+        "partial": "Mais ou menos estável",
+        "unstable": "Instável",
+        "unknown": "Não sei"
+      },
+      "sc_single": {
+        "low": "Baixa",
+        "moderate": "Média",
+        "high": "Alta"
+      },
+      "sc_leadtime": {
+        "low": "Baixa",
+        "moderate": "Média",
+        "high": "Alta"
+      },
+      "doc_registration": {
+        "yes": "Sim",
+        "partial": "Parcialmente",
+        "no": "Não",
+        "unknown": "Não sei"
+      },
+      "doc_address": {
+        "yes": "Sim",
+        "partial": "Parcialmente",
+        "no": "Não",
+        "unknown": "Não sei"
+      },
+      "doc_certificates": {
+        "yes": "Sim",
+        "partial": "Parcialmente",
+        "no": "Não",
+        "unknown": "Não sei"
+      },
+      "doc_test": {
+        "yes": "Sim",
+        "partial": "Parcialmente",
+        "no": "Não",
+        "unknown": "Não sei"
+      }
+    },
+    "factors": {
+      "company_address": "O endereço da fábrica não foi verificado.",
+      "company_ownership": "Não foi possível confirmar a titularidade.",
+      "quality_qms": "Não há sistema de gestão da qualidade documentado.",
+      "quality_audit": "Nenhuma auditoria de terceiros nos últimos três anos.",
+      "comp_social": "Sem registros de conformidade social.",
+      "prod_capacity": "A capacidade de produção não está verificada.",
+      "prod_subcontract": "Há subcontratação sem informar.",
+      "doc_registration": "Não foi possível verificar o registro empresarial.",
+      "doc_address": "Não há endereço de fábrica documentado."
+    },
+    "recommendations": {
+      "LOW": [
+        "Arquive os documentos que você já tem e atualize-os uma vez por ano.",
+        "Refaça esta verificação se o volume do pedido crescer muito."
+      ],
+      "MODERATE": [
+        "Peça o registro empresarial e confirme o endereço da fábrica antes de encomendar.",
+        "Solicite o relatório de auditoria mais recente e os registros de qualidade.",
+        "Comece com um pedido-teste pequeno o bastante para que uma falha seja arcável."
+      ],
+      "ELEVATED": [
+        "Confirme registro e endereço por uma fonte independente, não apenas com os papéis do fornecedor.",
+        "Peça um relatório de auditoria de terceiros recente e os laudos de ensaio do produto.",
+        "Mande auditar a fábrica antes de assumir um pedido grande."
+      ],
+      "HIGH": [
+        "Verifique primeiro o registro e o endereço da fábrica; o resto vem depois.",
+        "Peça os relatórios de auditoria e a documentação de qualidade, e confira as datas.",
+        "Mande auditar a fábrica antes de pagar qualquer entrada.",
+        "Se ainda quiser seguir, faça um pedido pequeno, inspecione e só depois amplie."
+      ],
+      "CRITICAL": [
+        "Não envie dinheiro ainda. Verifique a empresa antes de qualquer pagamento.",
+        "Confirme a identidade legal, o endereço da fábrica e o registro empresarial.",
+        "Encomende uma auditoria de fábrica e uma verificação de antecedentes da empresa.",
+        "Retenha pagamentos antecipados até que as dúvidas em aberto sejam respondidas."
+      ]
+    },
+    "ctas": {
+      "LOW": {
+        "headline": "Pelas suas respostas, este fornecedor apresenta risco baixo.",
+        "primary": "Obter o relatório completo"
+      },
+      "MODERATE": {
+        "headline": "Alguns pontos merecem conferência antes de você encomendar.",
+        "primary": "Obter o relatório completo",
+        "secondary": "Percorrer a lista de verificação"
+      },
+      "ELEVATED": {
+        "headline": "Mande verificar este fornecedor antes de fazer o pedido.",
+        "primary": "Solicitar verificação",
+        "secondary": "Obter o relatório completo"
+      },
+      "HIGH": {
+        "headline": "Verifique este fornecedor antes de fazer o pedido.",
+        "primary": "Solicitar verificação",
+        "secondary": "Obter o relatório completo"
+      },
+      "CRITICAL": {
+        "headline": "Não pague este fornecedor antes de uma verificação independente.",
+        "primary": "Verificar antes de pagar",
+        "secondary": "Obter o relatório completo"
+      }
+    },
+    "faq": [
+      {
+        "q": "O que a calculadora mede?",
+        "a": "Ela pontua um fornecedor de 0 a 100 em seis áreas: empresa, qualidade, conformidade, produção, cadeia de suprimentos e documentação. Quanto maior, mais risco."
+      },
+      {
+        "q": "A pontuação é uma verificação definitiva?",
+        "a": "Não. É uma triagem inicial baseada no que você informou. Não substitui uma verificação independente, uma auditoria de fábrica nem aconselhamento jurídico."
+      },
+      {
+        "q": "Como os pesos são definidos?",
+        "a": "Empresa 15%, qualidade 20%, conformidade 20%, produção 15%, cadeia de suprimentos 15%, documentação 15%. Os pesos são fixos e aparecem na página de resultados."
+      },
+      {
+        "q": "É preciso pagar para usar?",
+        "a": "Não. A pontuação é grátis. Se quiser o relatório escrito, deixe seu e-mail e enviamos sem custo. Verificação e auditorias são pagas, mas opcionais."
+      },
+      {
+        "q": "Consigo comparar vários fornecedores?",
+        "a": "Ainda não. Rode a ferramenta uma vez por fornecedor e guarde os relatórios; a comparação lado a lado está a caminho."
+      }
+    ]
+  },
+  "checklist": {
+    "ui": {
+      "progressTitle": "Progresso da verificação",
+      "complete": "{done} de {total} feitos",
+      "criticalOpen": "Falta {n} item crítico",
+      "criticalOpenPlural": "Faltam {n} itens críticos",
+      "criticalCleared": "Itens críticos resolvidos",
+      "print": "Imprimir ou salvar em PDF",
+      "reset": "Reiniciar",
+      "criticalTag": "crítico",
+      "verdictOpenTitle": "Falta {n} item crítico",
+      "verdictOpenTitlePlural": "Faltam {n} itens críticos",
+      "verdictOpenBody": "Feche estes itens antes de encomendar ou liberar pagamento. É aqui que mais se descobre uma empresa comercial se passando por fábrica.",
+      "verdictAllTitle": "Todas as verificações concluídas",
+      "verdictAllBody": "Você passou por todos os itens. Guarde o registro na pasta do fornecedor e reverifique conforme os volumes crescerem.",
+      "verdictCriticalDoneTitle": "Todos os itens críticos fechados",
+      "verdictCriticalDoneBody": "As verificações de maior risco estão feitas. Termine o restante para completar a pasta.",
+      "ctaOutsource": "Fazer essas verificações para mim",
+      "disclaimer": "Esta lista serve de autoavaliação. Ela não verifica nenhum fornecedor de forma independente. Para isso, use um serviço de verificação terceirizado.",
+      "submitReport": "Gerar relatório de avaliação",
+      "reportTitle": "Relatório de avaliação",
+      "reportIntro": "Com base nas 29 verificações em seis etapas, este relatório resume o que está confirmado, o que ainda falta e o que recomendamos antes de pagar um sinal ou o saldo.",
+      "completionLine": "Conclusão: {done} de {total} verificações ({pct}%).",
+      "criticalStatus": "Itens críticos ainda em aberto: {open} de {total}.",
+      "criticalStatusAllDone": "Todos os itens críticos confirmados.",
+      "missingItemsTitle": "Itens críticos ainda a confirmar",
+      "recommendationTitle": "Recomendação",
+      "recPass": "Siga em frente — cada verificação crítica está confirmada. Faça uma auditoria de fábrica de um dia ou uma inspeção pré-embarque como portão final.",
+      "recConditional": "Siga com cautela — os itens críticos acima devem ser fechados antes de qualquer sinal. Cota uma inspeção pré-embarque além de condições de pagamento que protejam você.",
+      "recFail": "Pare — há itens críticos demais não confirmados para o tamanho deste pedido. Ou encomende verificação completa do fornecedor + auditoria de fábrica, ou troque para um segundo candidato.",
+      "ctaOutsourceTitle": "Quer que façamos isso por você?",
+      "ctaOutsourceBody": "Envie-nos os dados do fornecedor e devolveremos um Relatório de Verificação por escrito com evidências e resumo de risco em dois dias úteis."
+    },
+    "page": {
+      "badge": "Ferramenta grátis",
+      "h1": "Lista de verificação do fornecedor",
+      "lead": "29 verificações em seis etapas. Passe por elas antes de encomendar ou liberar pagamento, e imprima o resultado para sua pasta.",
+      "card1Title": "Seis etapas",
+      "card1Body": "Identidade, fábrica, qualidade, conformidade, condições comerciais e histórico.",
+      "card2Title": "Itens críticos marcados",
+      "card2Body": "É aqui que mais se descobre uma empresa comercial se passando por fábrica.",
+      "card3Title": "Pronta para imprimir",
+      "card3Body": "Salve a lista preenchida em PDF para seus arquivos.",
+      "relatedTitle": "Ferramentas relacionadas",
+      "faqTitle": "Perguntas frequentes",
+      "metaTitle": "Lista de verificação do fornecedor",
+      "metaDesc": "Uma lista gratuita passo a passo sobre identidade da empresa, capacidade da fábrica, qualidade, conformidade, condições comerciais e histórico. Marque, acompanhe e imprima."
+    },
+    "criticalItems": [
+      "id_legal",
+      "id_regno",
+      "id_registry",
+      "fa_address",
+      "fa_visit",
+      "fa_type",
+      "qm_system",
+      "qm_test",
+      "cp_product",
+      "cm_contract",
+      "cm_spec"
+    ],
+    "stages": [
+      {
+        "key": "identity",
+        "title": "1. Identidade da empresa e registro",
+        "desc": "Primeiro descubra quem é a entidade legal por trás da cotação.",
+        "items": {
+          "id_legal": "O nome empresarial coincide com o registro empresarial",
+          "id_regno": "O número do registro foi obtido",
+          "id_licence": "Foi recebida uma cópia legível do registro empresarial",
+          "id_registry": "O registro foi confrontado com uma fonte oficial ou terceirizada",
+          "id_owner": "O representante legal e a titularidade foram identificados"
+        }
+      },
+      {
+        "key": "factory",
+        "title": "2. Fábrica e capacidade de produção",
+        "desc": "Confira se o local existe de verdade e consegue fabricar seu produto.",
+        "items": {
+          "fa_address": "O endereço da fábrica foi confirmado e coincide com o registro",
+          "fa_visit": "Foram obtidas fotos, vídeo ou uma visita ao vivo",
+          "fa_type": "Foi definido se é fabricante ou empresa comercial",
+          "fa_equipment": "A lista dos principais equipamentos foi recebida",
+          "fa_capacity": "A capacidade mensal foi informada e é coerente com o volume",
+          "fa_subcontract": "A subcontratação foi declarada, ou sua ausência confirmada"
+        }
+      },
+      {
+        "key": "quality",
+        "title": "3. Gestão da qualidade",
+        "desc": "Confira se qualidade é um sistema, não uma promessa.",
+        "items": {
+          "qm_system": "Sistema de gestão da qualidade documentado, como ISO 9001",
+          "qm_incoming": "Existe processo de inspeção de material recebido",
+          "qm_inprocess": "Há registros de inspeção em processo e final",
+          "qm_test": "Laudos de ensaio de um laboratório reconhecido",
+          "qm_nc": "Existe processo para não conformidades e ações corretivas"
+        }
+      },
+      {
+        "key": "compliance",
+        "title": "4. Conformidade e responsabilidade social",
+        "desc": "Reduza o risco de retenção aduaneira, recall e auditorias de cliente reprovadas.",
+        "items": {
+          "cp_social": "Auditoria ou sistema de conformidade social, como BSCI ou SMETA",
+          "cp_env": "Documentação de conformidade ambiental",
+          "cp_product": "Conformidade do produto para seu mercado, como CE ou UL",
+          "cp_ethics": "Política de ética empresarial ou anticorrupção"
+        }
+      },
+      {
+        "key": "commercial",
+        "title": "5. Condições comerciais e contratos",
+        "desc": "Deixe definido de antemão quem arca com o quê quando algo dá errado.",
+        "items": {
+          "cm_contract": "Contrato ou fatura pro forma assinados",
+          "cm_spec": "Especificação, tolerâncias e embalagem acordados por escrito",
+          "cm_payment": "Condições de pagamento acordadas, sem entrada alta",
+          "cm_leadtime": "Prazo, quantidade mínima e Incoterms confirmados",
+          "cm_penalty": "Incluídas cláusulas de penalidade por defeito e atraso"
+        }
+      },
+      {
+        "key": "track",
+        "title": "6. Histórico e referências",
+        "desc": "O comportamento passado prevê o futuro melhor que qualquer documento.",
+        "items": {
+          "tr_export": "Histórico de exportação para o seu mercado",
+          "tr_refs": "Ao menos duas referências de clientes verificáveis",
+          "tr_samples": "Amostras de produção aprovadas antes da série",
+          "tr_disputes": "Verificados disputas, listas negras ou registros negativos"
+        }
+      }
+    ],
+    "faq": [
+      {
+        "q": "O que é uma lista de verificação de fornecedores?",
+        "a": "Um conjunto de documentos e verificações que você cumpre antes de encomendar. Ela mostra que a empresa é uma pessoa jurídica real, que a fábrica existe e consegue fabricar seu produto, e que qualidade, conformidade e condições comerciais estão fixadas por escrito."
+      },
+      {
+        "q": "Quais verificações mais importam?",
+        "a": "As críticas: confrontar registro empresarial, confirmar o endereço da fábrica, provas de que o local existe como fotos ou vídeo ao vivo, distinguir fabricante de empresa comercial, laudos de ensaio, conformidade do produto para seu mercado e contrato assinado com especificações."
+      },
+      {
+        "q": "Marcar todos os itens significa que o fornecedor é seguro?",
+        "a": "Não. É uma autoavaliação com base no que o fornecedor entrega, e documentos podem ser falsificados. Só uma verificação independente ou uma auditoria de fábrica confirma as alegações no local."
+      },
+      {
+        "q": "Meu progresso fica salvo?",
+        "a": "Sim. Suas marcações ficam no navegador, então você pode fechar a página e voltar. Use imprimir ou salvar em PDF para guardar uma cópia."
+      }
+    ]
+  },
+  "serviceVerification": {
+    "badge": "Serviço",
+    "h1": "Verificação de fornecedores",
+    "lead": "Antes de mandar dinheiro para uma fábrica que você nunca viu, confirme que a empresa existe, que o local é real e que as alegações de capacidade se sustentam.",
+    "ctaPrimary": "Solicitar verificação",
+    "ctaSecondary": "Pontuar este fornecedor grátis primeiro",
+    "checksTitle": "O que verificamos",
+    "checksLead": "Seis áreas, cada uma documentada com provas que você pode arquivar.",
+    "checks": {
+      "legal": {
+        "title": "Entidade legal e registro",
+        "body": "Registro empresarial, número de inscrição e representante legal confrontados com fontes oficiais e terceirizadas."
+      },
+      "site": {
+        "title": "Existência e endereço da fábrica",
+        "body": "Confirmação de que o local existe no endereço informado, com fotos, vídeo e prova de localização, não só um documento digitalizado."
+      },
+      "type": {
+        "title": "Fabricante ou empresa comercial",
+        "body": "Se a contraparte fabrica de fato ou revende, e se há subcontratação envolvida."
+      },
+      "capability": {
+        "title": "Capacidade de produção",
+        "body": "Equipamentos, equipe, capacidade e experiência em exportação avaliados frente ao seu produto e volume."
+      },
+      "quality": {
+        "title": "Sistema de qualidade e conformidade",
+        "body": "Documentação de gestão da qualidade, laudos de ensaio, conformidade do produto para seu mercado e registros de conformidade social."
+      },
+      "track": {
+        "title": "Histórico e sinais de risco",
+        "body": "Histórico de exportação, referências de clientes e busca por disputas, listas negras ou outros registros negativos."
+      }
+    },
+    "stepsTitle": "Como funciona",
+    "stepsLead": "Quatro passos do primeiro contato até a decisão.",
+    "steps": [
+      {
+        "title": "Envie-nos os dados do fornecedor",
+        "body": "Nome, endereço, site e seu produto. Sem contrato nem cadastro demorado."
+      },
+      {
+        "title": "Nós fazemos as verificações",
+        "body": "Análise documental mais visita presencial ou remota, conforme o pacote escolhido."
+      },
+      {
+        "title": "Você recebe um relatório escrito",
+        "body": "Achados com provas e um resumo de risco para arquivar e compartilhar."
+      },
+      {
+        "title": "Você decide com base nisso",
+        "body": "Renegocie, exija ações corretivas, encomende uma auditoria completa ou desista."
+      }
+    ],
+    "deliverablesTitle": "O que você recebe",
+    "deliverables": [
+      "Conclusões sobre identidade e registro",
+      "Endereço da fábrica e provas do local",
+      "Definição de fabricante ou empresa comercial",
+      "Avaliação da capacidade de produção",
+      "Análise da documentação de qualidade e conformidade",
+      "Resumo de risco com próximos passos"
+    ],
+    "faqTitle": "Perguntas frequentes",
+    "faq": [
+      {
+        "q": "Qual é a diferença para uma auditoria de fábrica?",
+        "a": "A verificação estabelece quem é o fornecedor e se as alegações básicas se sustentam: registro, local, capacidade e documentos. Uma auditoria é uma avaliação presencial mais profunda de processos, controle de qualidade e conformidade frente a um padrão como BSCI ou SMETA. A verificação é mais rápida e barata; a auditoria vai mais fundo."
+      },
+      {
+        "q": "Quanto tempo leva?",
+        "a": "A verificação documental costuma ficar pronta em poucos dias úteis. Pacotes com visita presencial levam mais, conforme a localização e a agenda."
+      },
+      {
+        "q": "E se o fornecedor for de alto risco?",
+        "a": "Você recebe as provas e um resumo de risco para renegociar, exigir ações corretivas, encomendar uma auditoria completa ou parar antes de liberar qualquer pagamento."
+      },
+      {
+        "q": "Preciso contratar outros serviços?",
+        "a": "Não. A verificação é um serviço independente. Inspeção, compras e transporte são etapas opcionais, não um pacote ao qual você fica preso."
+      }
+    ],
+    "bottomTitle": "Quer uma leitura rápida antes de decidir?",
+    "bottomLead": "Use a calculadora grátis para uma pontuação imediata e depois peça a verificação do que mais importa.",
+    "bottomPrimary": "Abrir a calculadora grátis",
+    "bottomSecondary": "Solicitar verificação",
+    "metaTitle": "Serviço de verificação de fornecedores",
+    "metaDesc": "Verificação independente de registro, existência da fábrica, capacidade de produção, sistema de qualidade, conformidade e histórico de exportação. Um relatório documentado antes de encomendar ou pagar."
+  },
+  "customServices": {
+    "badge": "Serviço",
+    "h1": "Serviços personalizados de auditoria e verificação",
+    "lead": "Conte-nos o que você precisa. Montamos um plano de auditoria, inspeção ou verificação sob medida e enviamos um orçamento e cronograma claros.",
+    "metaTitle": "Serviços personalizados de auditoria e verificação",
+    "metaDesc": "Solicite uma auditoria de fábrica, verificação de fornecedor ou plano de inspeção personalizado. Nossa equipe responde com uma proposta concreta e os próximos passos.",
+    "form": {
+      "labels": {
+        "firstName": "Nome",
+        "company": "Empresa",
+        "email": "E-mail de trabalho",
+        "country": "País ou região",
+        "message": "O que você precisa?",
+        "messageHint": "Descreva seu produto, mercado-alvo, localização do fornecedor, padrão de auditoria desejado e qualquer requisito especial…",
+        "submit": "Enviar solicitação",
+        "submitting": "Enviando…"
+      },
+      "success": "Recebemos sua solicitação. Nossa equipe responderá em um dia útil.",
+      "error": "Algo deu errado. Tente novamente ou entre em contato diretamente."
+    },
+    "features": [
+      {
+        "title": "Escopo sob medida",
+        "body": "Desenhamos a auditoria em torno do seu produto, mercado e preocupações de risco, em vez de encaixá-lo em um pacote pronto."
+      },
+      {
+        "title": "Um único contato",
+        "body": "Um único gestor cuida do escopo, agendamento, equipe de auditoria e relatório para que nada se perca entre departamentos."
+      },
+      {
+        "title": "Acompanhamento documentado",
+        "body": "Você recebe uma proposta escrita com escopo, prazos, entregáveis e custos antes de qualquer trabalho começar."
+      }
+    ],
+    "bottomTitle": "Não tem certeza do que precisa?",
+    "bottomLead": "Use a calculadora de risco do fornecedor para uma pontuação rápida e volte aqui com os resultados para personalizar seu plano de verificação ou auditoria."
+  },
+  "suppliers": {
+    "h1": "Fornecedores verificados",
+    "badge": "Diretório de fornecedores",
+    "ctaTitle": "Você é fornecedor?",
+    "ctaLead": "Junte-se ao diretório, publique o perfil da sua fábrica, passe pela nossa verificação e seja encontrado por compradores que compram da China e da Ásia.",
+    "ctaSteps": [
+      "Cadastrar",
+      "Publicar perfil",
+      "Auditoria da plataforma",
+      "Publicação"
+    ],
+    "ctaPrimary": "Entrar como fornecedor",
+    "metaTitle": "Fornecedores verificados na China e Ásia",
+    "metaDesc": "Navegue por fabricantes e empresas comerciais verificadas na China, Vietnã, Tailândia, Índia e resto da Ásia. Cada perfil inclui status de verificação, pontuação de risco e experiência de exportação.",
+    "lead": "Explore suppliers with available company, capability and verification information.",
+    "featuredTag": "Featured",
+    "exampleNote": "These are featured suppliers, not a complete marketplace. Coverage is still small, so if the supplier you need is not here, post an RFQ and we will source and verify it.",
+    "filterCountry": "Country",
+    "filterIndustry": "Industry",
+    "filterProduct": "Product",
+    "filterLevel": "Verification level",
+    "filterAudit": "Audit status",
+    "filterAll": "All",
+    "filterSubmit": "Apply filters",
+    "filterReset": "Clear",
+    "countLabel": "{n} suppliers listed",
+    "empty": "No supplier matches these filters. Post an RFQ and we will look outside the directory.",
+    "riskLabel": "Risk",
+    "businessTypeLabel": "Type",
+    "notListedTitle": "Looking for a supplier that isn't listed?",
+    "notListedLead": "Post an RFQ. We source it, verify the company and the site before you pay, and quote the whole thing.",
+    "notListedCta": "Post an RFQ",
+    "claimTitle": "Are you a supplier?",
+    "claimLead": "Join the directory, publish your factory profile, pass our verification and get discovered by buyers sourcing from China and Southeast Asia.",
+    "claimPrimary": "Join as a supplier"
+  },
+  "common": {
+    "relatedTools": "Ferramentas relacionadas",
+    "faq": "Perguntas frequentes",
+    "freeTool": "Ferramenta grátis",
+    "disclaimer": "Conteúdo de orientação geral. Não verifica nenhum fornecedor de forma independente e não constitui aconselhamento jurídico, financeiro ou de auditoria profissional.",
+    "whatsappChat": "Conversar no WhatsApp",
+    "heroSearch": {
+      "tabSupplier": "Supplier",
+      "tabProduct": "Product",
+      "tabAudit": "Audit",
+      "tabInspector": "Inspector",
+      "placeholderSupplier": "e.g. China electronics supplier",
+      "placeholderProduct": "e.g. Stainless steel water bottle",
+      "placeholderAudit": "e.g. Factory audit China",
+      "placeholderInspector": "e.g. Inspector Shenzhen",
+      "search": "Search",
+      "combinedHint": "Combined SEO pages + live database results",
+      "noMatch": "No exact match for \"{q}\". This searches the indexed supplier database."
+    }
+  },
+  "container": {
+    "page": {
+      "badge": "Ferramenta grátis",
+      "h1": "Calculadora de carregamento de contêiner",
+      "lead": "Calcule quantas caixas cabem em um contêiner 20GP, 40GP, 40HQ ou refrigerado e quantos contêineres sua carga precisa.",
+      "quickAnswerTitle": "Resposta rápida",
+      "quickAnswer": "Informe as dimensões da caixa, o peso unitário e a quantidade total. A calculadora testa as seis orientações possíveis contra as dimensões internas de cada contêiner, escolhe a disposição que acomoda mais caixas e depois aplica o limite de carga útil. Ela devolve caixas por contêiner, contêineres necessários e o aproveitamento de volume e carga.",
+      "howTitle": "Como o cálculo é feito",
+      "how1": "As seis orientações da caixa são testadas contra o comprimento, a largura e a altura internos do contêiner.",
+      "how2": "Vence a disposição com o maior número de caixas, já descontado o vão definido entre elas.",
+      "how3": "O limite de carga é aplicado: caixas por contêiner não podem passar da carga máxima dividida pelo peso unitário.",
+      "how4": "Contêineres necessários = quantidade total dividida por caixas por contêiner, arredondando para cima.",
+      "specsTitle": "Especificações de contêiner usadas",
+      "specsLead": "Valores ISO típicos. Os números reais variam conforme o armador, o proprietário e o ano de fabricação.",
+      "methodTitle": "Metodologia e limites",
+      "methodBody": "O resultado é um máximo teórico de um modelo retangular de empilhamento. Ele assume caixas rígidas, empilháveis e giráveis, com carga distribuída de forma uniforme. O carregamento real depende de paletes, material de preenchimento, deformação das caixas, resistência ao empilhamento, limites de peso por eixo e ordem de estivagem. Trate o resultado como estimativa e confirme o plano final com seu despachante.",
+      "faqTitle": "Perguntas frequentes",
+      "metaTitle": "Calculadora de carregamento de contêiner",
+      "metaDesc": "Calculadora grátis de carregamento para contêineres 20GP, 40GP, 40HQ, 45HQ e refrigerados. Calcule caixas por contêiner, contêineres necessários e o aproveitamento de volume e carga."
+    },
+    "ui": {
+      "cargoTitle": "Dimensões da caixa",
+      "length": "Comprimento",
+      "width": "Largura",
+      "height": "Altura",
+      "weight": "Peso por caixa",
+      "quantity": "Quantidade total",
+      "optionsTitle": "Opções de carregamento",
+      "clearance": "Vão entre caixas",
+      "clearanceHelp": "Deixe de 2 a 5 cm para preenchimento, cintas e abaulamento da caixa.",
+      "allowRotate": "Permitir girar as caixas",
+      "allowRotateHelp": "Testa as seis orientações e escolhe a melhor.",
+      "calcBtn": "Calcular",
+      "resetBtn": "Reiniciar",
+      "resultsTitle": "Plano de carregamento",
+      "bestFit": "Melhor opção",
+      "perContainer": "Caixas por contêiner",
+      "containersNeeded": "Contêineres necessários",
+      "arrangement": "Disposição",
+      "along": "no comprimento",
+      "across": "na largura",
+      "layers": "camadas de altura",
+      "volumeUsed": "Volume usado",
+      "payloadUsed": "Carga usada",
+      "totalVolume": "Volume total",
+      "totalWeight": "Peso total",
+      "comparisonTitle": "Comparativo de todos os tipos",
+      "containerCol": "Contêiner",
+      "fitsCol": "Cabem",
+      "neededCol": "Necessários",
+      "topView": "Vista superior de uma camada",
+      "warnOverweight": "A carga atinge o limite de peso antes de o contêiner ficar cheio. O fator limitante é o peso, não o espaço.",
+      "warnTooLarge": "Essas caixas são grandes demais para qualquer contêiner da lista. Confira as dimensões.",
+      "warnDoor": "Nesta orientação, a caixa pode não passar pela abertura da porta. Confirme com a equipe de carregamento.",
+      "empty": "Informe as dimensões e a quantidade para ver o plano de carregamento.",
+      "disclaimer": "Apenas estimativas. Os números são especificações ISO típicas e variam conforme o armador. Confirme sempre o plano final com seu despachante."
+    },
+    "specs": {
+      "internal": "Interno (cm)",
+      "door": "Abertura da porta",
+      "capacity": "Capacidade",
+      "payload": "Carga máx."
+    },
+    "types": {
+      "generalPurpose": "Uso geral",
+      "highCube": "High cube",
+      "reefer": "Refrigerado",
+      "openTop": "Teto aberto"
+    },
+    "faq": [
+      {
+        "q": "Qual é a diferença entre um 40GP e um 40HQ?",
+        "a": "Comprimento e largura são iguais. O 40HQ é cerca de 30 cm mais alto por dentro (269 cm contra 239 cm), o que dá aproximadamente 9 m³ a mais de capacidade. O limite de carga é praticamente o mesmo, então o high cube só ajuda quando falta espaço antes de faltar peso."
+      },
+      {
+        "q": "Por que o resultado é diferente do cálculo do meu despachante?",
+        "a": "Três motivos comuns. Primeiro, as dimensões internas variam um pouco conforme o armador e o ano de fabricação. Segundo, este modelo assume caixas rígidas e totalmente empilháveis, enquanto o carregamento real precisa de paletes, preenchimento e tolerâncias. Terceiro, a distribuição de peso e os limites por eixo podem deixar a carga abaixo do máximo do contêiner."
+      },
+      {
+        "q": "Devo prever um vão entre as caixas?",
+        "a": "Sim, para planejar. Use de 2 a 5 cm se o carregamento for manual ou se as caixas puderem abaulas. Use 0 apenas com caixas rígidas e uniformes em um carregamento muito controlado."
+      },
+      {
+        "q": "Os paletes são considerados?",
+        "a": "Não diretamente nesta versão. Para aproximar uma carga paletizada, informe a área do palete e a altura incluindo a base como uma única unidade, e coloque a quantidade igual ao número de paletes."
+      },
+      {
+        "q": "Essas especificações são exatas?",
+        "a": "Não. São valores típicos muito usados para planejamento. Dimensões e limites de carga variam conforme o proprietário, o fabricante e o ano, e cada armador publica os seus. Confirme com a transportadora antes de reservar."
+      },
+      {
+        "q": "E se minhas caixas não puderem ser empilhadas?",
+        "a": "Informe como altura da caixa a altura total de empilhamento que você aceita, ou reduza manualmente a quantidade por camada. Esta versão assume que cada caixa suporta a carga acima dela."
+      }
+    ]
+  },
+  "auditRequest": {
+    "badge": "Solicitação de serviço",
+    "h1": "Solicitar uma auditoria de fábrica",
+    "lead": "Conte-nos sobre o fornecedor e seus requisitos. Encontramos empresas de auditoria qualificadas e respondemos com uma proposta concreta.",
+    "form": {
+      "labels": {
+        "firstName": "Nome",
+        "company": "Empresa",
+        "email": "E-mail de trabalho",
+        "supplierName": "Nome do fornecedor",
+        "country": "Localização da fábrica",
+        "industry": "Setor",
+        "auditType": "Tipo de auditoria",
+        "standard": "Padrão exigido",
+        "message": "Requisitos e observações",
+        "messageHint": "Produto, quantidades, preocupações de conformidade, datas desejadas…",
+        "submit": "Enviar solicitação de auditoria",
+        "submitting": "Enviando…"
+      },
+      "success": "Recebemos sua solicitação de auditoria. Responderemos em um dia útil.",
+      "error": "Algo deu errado. Tente novamente ou entre em contato diretamente.",
+      "rateLimited": "Você enviou várias solicitações recentemente. Aguarde cerca de uma hora ou escreva-nos diretamente."
+    },
+    "metaTitle": "Solicitar uma Auditoria de Fábrica",
+    "metaDesc": "Solicite uma auditoria de fábrica com proposta concreta: escolha o tipo, o padrão e a localização."
+  },
+  "rfq": {
+    "badge": "Solicitação de compra",
+    "h1": "Publicar uma solicitação de cotação",
+    "lead": "Conte-nos o que você está comprando. Compartilhamos com fornecedores verificados e devolvemos cotações com contexto de capacidade e risco.",
+    "form": {
+      "labels": {
+        "firstName": "Nome",
+        "company": "Empresa",
+        "email": "E-mail de trabalho",
+        "product": "Produto",
+        "quantity": "Quantidade",
+        "country": "País-alvo",
+        "message": "Especificações",
+        "messageHint": "Materiais, dimensões, certificações, preço-alvo…",
+        "submit": "Publicar RFQ",
+        "submitting": "Publicando…"
+      },
+      "success": "Sua RFQ foi recebida. Fornecedores verificados serão convidados a cotar.",
+      "error": "Algo deu errado. Tente novamente ou entre em contato diretamente."
+    },
+    "metaTitle": "Publicar uma Solicitação de Cotação (RFQ)",
+    "metaDesc": "Publique uma solicitação de compra para produtos da China e da Ásia. Fornecedores verificados respondem com cotações."
+  },
+  "resourcesPage": {
+    "badge": "Recursos",
+    "h1": "Recursos e guias",
+    "lead": "Guias praticos, ferramentas gratuitas e servicos para avaliar, verificar e auditar fornecedores na China e na Asia.",
+    "guidesTitle": "Guias de auditoria por pais e padrao",
+    "guidesLead": "Orientacoes passo a passo para os tipos de auditoria mais solicitados.",
+    "knowledgeTitle": "Treinamento de fornecedores",
+    "knowledgeLead": "Auditamos e verificamos seus fornecedores e então treinamos suas equipes em qualidade e QC.",
+    "toolsTitle": "Ferramentas gratuitas",
+    "toolsLead": "Sem necessidade de conta.",
+    "servicesTitle": "Servicos",
+    "servicesLead": "Deixe que facamos as verificacoes para voce.",
+    "serviceVerification": "Verificacao de fornecedores",
+    "serviceVerificationDesc": "Confirmamos registro, local, capacidade, qualidade e conformidade e entregamos um relatorio escrito.",
+    "auditRequest": "Solicitar uma auditoria de fabrica",
+    "auditRequestDesc": "Conte-nos sobre o fornecedor e requisitos. Encontramos empresas qualificadas.",
+    "customServices": "Servico personalizado",
+    "customServicesDesc": "Conte-nos sua necessidade e montamos um plano sob medida.",
+    "rfq": "Publicar uma solicitacao de cotacao",
+    "rfqDesc": "Compartilhe sua solicitacao de compra com fornecedores verificados.",
+    "logistics": "Calculadora de carregamento de conteneir",
+    "logisticsDesc": "Calcule caixas por conteneir e quantos conteneires voce precisa.",
+    "metaTitle": "Recursos e Guias - Verificacao de Fornecedores e Auditoria de Fabrica",
+    "metaDesc": "Guias praticos, ferramentas gratuitas e servicos para avaliar, verificar e auditar fornecedores na China e na Asia."
+  },
+  "trainingPage": {
+    "badge": "Treinamento de fornecedores",
+    "h1": "Nós auditamos sua fábrica e então a treinamos",
+    "lead": "A auditoria mostra o que está errado. O treinamento resolve. Verificamos fornecedores na China e na Ásia para evitar problemas, e treinamos as equipes da sua fábrica para que os mesmos defeitos não voltem a aparecer.",
+    "pillarAuditTitle": "Primeiro, auditamos e revelamos o risco",
+    "pillarAuditDesc": "Antes de qualquer treinamento, fazemos verificação de fornecedor, auditorias de fábrica e inspeções. Você recebe um relatório escrito com as lacunas que colocam seus pedidos em risco.",
+    "pillarTrainTitle": "Depois, treinamos sua fábrica em seu nome",
+    "pillarTrainDesc": "Vamos para o chão de fábrica e treinamos o pessoal do seu fornecedor como você faria se estivesse lá. Você mantém o controle sem precisar viajar.",
+    "offeringsTitle": "O que treinamos",
+    "offeringsLead": "Programas práticos in loco, construídos em torno dos defeitos e riscos encontrados nas suas auditorias.",
+    "offerings": [
+      {
+        "title": "Treinamento em sistema de qualidade",
+        "desc": "Cria hábitos de gestão da qualidade que eliminam defeitos na origem, não só na inspeção final."
+      },
+      {
+        "title": "Treinamento QC",
+        "desc": "Treina inspetores em linha e finais para identificar os defeitos que realmente custam dinheiro."
+      },
+      {
+        "title": "Treinamento de processo de produção",
+        "desc": "Melhora os fluxos de trabalho e os padrões de posto que definem sua taxa de defeitos."
+      },
+      {
+        "title": "Treinamento de conformidade e segurança",
+        "desc": "Alinha a fábrica com as normas trabalhistas, de segurança e ambientais que seus compradores exigem."
+      }
+    ],
+    "ctaTitle": "Quer que sua fábrica seja treinada, não só inspecionada?",
+    "ctaDesc": "Diga-nos o fornecedor e os problemas que se repetem. Criamos um plano de treinamento com base nas suas auditorias.",
+    "ctaButton": "Fale com nossa equipe",
+    "metaTitle": "Treinamento de fornecedores - Auditamos e treinamos sua fábrica",
+    "metaDesc": "Verificamos fornecedores na China e na Ásia para evitar riscos e então treinamos suas equipes em qualidade e QC para que os defeitos não voltem."
+  },
+  "legal": {
+    "privacyTitle": "Política de Privacidade",
+    "privacyUpdated": "Última atualização: 2026-08-30",
+    "privacyIntro": "A FactoryAuditB2B respeita sua privacidade. Esta política explica quais dados coletamos quando você usa nosso site e serviços, e como os usamos.",
+    "privacySections": [
+      {
+        "h": "Informações que coletamos",
+        "b": "Coletamos as informações que você fornece diretamente (nome, e-mail, empresa, necessidades de suprimento, mensagens) ao solicitar uma auditoria, publicar uma RFQ, usar nossas ferramentas ou entrar em contato. Também coletamos dados técnicos básicos como endereço IP e páginas visitadas."
+      },
+      {
+        "h": "Como usamos as informações",
+        "b": "Usamos suas informações para responder solicitações, conectá-lo a fornecedores ou auditores, enviar notificações e melhorar o site. Não vendemos seus dados pessoais."
+      },
+      {
+        "h": "Leads e prestação do serviço",
+        "b": "Ao enviar uma solicitação, compartilhamos os detalhes relevantes com os fornecedores ou firmas de auditoria necessários. Ao enviar, você consente esse compartilhamento limitado."
+      },
+      {
+        "h": "Cookies e analítica",
+        "b": "Usamos cookies e tecnologias similares para operar o site e entender o uso. Você pode desativar os cookies no navegador."
+      },
+      {
+        "h": "Retenção de dados",
+        "b": "Mantemos suas informações pelo tempo necessário para nossos serviços e obrigações legais, depois as excluímos ou anonimizamos."
+      },
+      {
+        "h": "Seus direitos",
+        "b": "Você pode solicitar acesso, correção ou exclusão de seus dados em privacy@factoryauditb2b.com."
+      },
+      {
+        "h": "Contato",
+        "b": "Dúvidas sobre esta política? Escreva para privacy@factoryauditb2b.com."
+      }
+    ],
+    "termsTitle": "Termos de Serviço",
+    "termsUpdated": "Última atualização: 2026-08-30",
+    "termsIntro": "Ao usar a FactoryAuditB2B, você aceita estes termos. Nosso serviço ajuda compradores a verificar e auditar fornecedores, mas somos uma plataforma, não uma garantidora do desempenho do fornecedor.",
+    "termsSections": [
+      {
+        "h": "Uso do serviço",
+        "b": "Você pode usar o site para buscar fornecedores, usar ferramentas, solicitar auditorias e publicar RFQs. Deve fornecer informações exatas e não fazer mau uso do serviço."
+      },
+      {
+        "h": "Sem garantia sobre fornecedores",
+        "b": "Fornecemos informações de verificação e auditoria para ajudar sua decisão. Não garantimos qualidade, entrega ou conformidade do fornecedor. Você responde por suas decisões de suprimento."
+      },
+      {
+        "h": "Serviços de terceiros",
+        "b": "Auditoria e inspeção são realizadas por terceiros independentes. Os contratos desses serviços são entre você e o prestador."
+      },
+      {
+        "h": "Propriedade intelectual",
+        "b": "Todo o conteúdo, marcas e ferramentas do site pertencem à FactoryAuditB2B ou seus licenciadores. Não pode reutilizá-los sem permissão."
+      },
+      {
+        "h": "Limitação de responsabilidade",
+        "b": "Na máxima extensão permitida por lei, a FactoryAuditB2B não se responsabiliza por perdas indiretas ou consequentes do uso do site."
+      },
+      {
+        "h": "Alterações",
+        "b": "Podemos atualizar estes termos. O uso continuado após alterações constitui aceitação."
+      },
+      {
+        "h": "Contato",
+        "b": "Dúvidas? Escreva para legal@factoryauditb2b.com."
+      }
+    ],
+    "privacyNav": "Privacidade",
+    "termsNav": "Termos"
+  },
+  "industryPage": {
+    "pageTitle": "Verificação e treinamento de fornecedores",
+    "metaDesc": "Encontre fornecedores verificados de {industry} e os tipos de auditoria certos. Verificamos fábricas e treinamos suas equipes em qualidade e QC.",
+    "verifiedSuppliers": "Fornecedores verificados em {industry}",
+    "relatedAudit": "Tipos de auditoria e normas relacionados",
+    "whyTitle": "Por que os fornecedores de {industry} precisam de verificação",
+    "whyLead": "Defeitos e lacunas de conformidade são caros. Verificamos antes de pedir e treinamos as equipes da fábrica para que os mesmos problemas não voltem a ocorrer.",
+    "ctaTitle": "Treine seus fornecedores de {industry}",
+    "ctaDesc": "Combine a verificação de fornecedores com planos de treinamento pagos feitos para o seu setor.",
+    "ctaButton": "Ver planos de treinamento pagos",
+    "breadcrumb": "Setores",
+    "empty": "Ainda não há fornecedores verificados de {industry} listados. Publique uma RFQ para começar a coletar correspondências.",
+    "riskLabel": "Risco"
+  },
+  "countryPage": {
+    "pageTitle": "Verificação e treinamento de fornecedores",
+    "metaDesc": "Verifique fábricas e treine equipes de fornecedores em {country}. Auditorias, inspeções e fornecedores certificados para compradores que importam de {country}.",
+    "auditTypesIn": "Tipos de auditoria disponíveis em {country}",
+    "verifiedSuppliers": "Fornecedores verificados em {country}",
+    "ctaTitle": "Treine seus fornecedores de {country}",
+    "ctaDesc": "Combine a verificação com planos de treinamento pagos feitos para {country}.",
+    "ctaButton": "Ver planos de treinamento pagos",
+    "breadcrumb": "Países",
+    "empty": "Ainda não há fornecedores verificados em {country} listados. Publique uma RFQ para começar a coletar correspondências."
+  },
+  "trainingPlans": {
+    "pageTitle": "Planos de treinamento para fornecedores",
+    "metaDesc": "Planos de treinamento para fornecedores: sistemas de qualidade, QC, processos de produção e treinamento em conformidade para suas equipes de fábrica.",
+    "h1": "Planos de treinamento para fornecedores",
+    "lead": "Auditamos sua fábrica e treinamos suas equipes em qualidade e QC para que os defeitos não voltem. Escolha o plano que se adapte à sua base de fornecedores.",
+    "plansTitle": "Escolha um plano de treinamento",
+    "faqTitle": "Perguntas frequentes sobre treinamento",
+    "ctaTitle": "Não sabe qual plano escolher?",
+    "ctaDesc": "Conte-nos seu setor e criaremos um programa de treinamento.",
+    "ctaButton": "Fale conosco"
+  },
+  "pricing": {
+    "metaTitle": "Preços — Planos de verificação e auditoria de fornecedores",
+    "metaDesc": "Planos SaaS para compradores a partir de US$ 19/mês, associação de fornecedores a partir de US$ 29/mês, além de auditoria, inspeção e frete cotados por projeto. Todos os preços em USD.",
+    "h1": "Services & Plans",
+    "lead": "SaaS para compradores US$ 19–299/mês · Associação de fornecedores US$ 29–199/mês · Auditoria, inspeção e frete cotados por projeto.",
+    "currencyNote": "Todos os preços em USD. Preços de lançamento, sujeitos a ajustes.",
+    "forBuyers": "Para compradores",
+    "forSuppliers": "Para fornecedores",
+    "perMonth": "/mês",
+    "commissionTitle": "Auditoria, inspeção e frete",
+    "commissionCta": "Solicitar orçamento",
+    "buyerCtas": [
+      "Começar grátis",
+      "Escolher Starter",
+      "Escolher Pro",
+      "Escolher Business",
+      "Fale conosco"
+    ],
+    "supplierCta": "Candidatar-se",
+    "buyerFeatures": [
+      [
+        "Busca básica de fornecedores",
+        "Avaliação de risco básica",
+        "Checklist básico",
+        "1 RFQ por mês"
+      ],
+      [
+        "Busca completa de fornecedores",
+        "Avaliação de risco ilimitada",
+        "Checklist completo de 29 pontos",
+        "5 RFQ por mês",
+        "Suporte por e-mail"
+      ],
+      [
+        "Tudo do Starter",
+        "Relatórios em PDF",
+        "Analisador de documentos",
+        "Espaço de trabalho de fornecedores",
+        "Scorecard avançado",
+        "Suporte prioritário"
+      ],
+      [
+        "Tudo do Professional",
+        "5 membros de equipe",
+        "Banco de dados de fornecedores",
+        "Monitoramento de riscos",
+        "Gestão de auditorias",
+        "CAPA e relatórios avançados"
+      ],
+      [
+        "Acesso à API",
+        "Login único (SSO)",
+        "Fluxo de trabalho personalizado",
+        "Banco de dados de fornecedores personalizado",
+        "Suporte dedicado"
+      ]
+    ],
+    "supplierFeatures": [
+      [
+        "Listagem do perfil da empresa",
+        "Selo básico de verificação",
+        "Receber RFQs",
+        "Posicionamento padrão"
+      ],
+      [
+        "Selo de fornecedor verificado",
+        "Documentos de auditoria no perfil",
+        "Posicionamento prioritário na busca",
+        "Respostas ilimitadas a RFQs",
+        "Etiquetas de capacidade"
+      ],
+      [
+        "Melhor posição na busca",
+        "Destaque nas páginas de setor",
+        "Apresentações a compradores",
+        "Suporte de conta dedicado",
+        "Atualização trimestral do perfil"
+      ]
+    ],
+    "commissionItems": [
+      "Auditoria e inspeção de fábrica: cotadas por projeto, com base em dias-homem e localização",
+      "Frete e suprimentos: comissão de 3–5% sobre o valor do pedido",
+      "Sem taxa de plataforma no seu primeiro pedido"
+    ],
+    "plansTitle": "What you can use today",
+    "plansLead": "Three of the four are live. Buyer Pro is not.",
+    "plans": [
+      {
+        "name": "Herramientas gratuitas",
+        "price": "$0",
+        "note": "No se necesita cuenta bancaria.",
+        "available": true,
+        "features": [
+          "Evaluación de riesgos del proveedor con desglose en seis dimensiones",
+          "Lista de Verificación de Proveedores",
+          "Lista de verificación y cuadro de mando de auditoría de fábrica",
+          "Puntuación de riesgo y próximos pasos recomendados"
+        ],
+        "cta": "Las Herramientas",
+        "href": "Herramientas"
+      },
+      {
+        "name": "Verificación de proveedores",
+        "price": "Solicitar presupuesto",
+        "note": "Cotizado por proveedor",
+        "available": true,
+        "features": [
+          "Registro de empresas y verificación de personas jurídicas",
+          "Dirección de la fábrica y evidencia del sitio",
+          "Determinación del fabricante o de la empresa comercial",
+          "Revisión de documentos de calidad y cumplimiento",
+          "Informe escrito con un resumen de riesgos"
+        ],
+        "cta": "Solicitar presupuesto",
+        "href": "/services/supplier-verification"
+      },
+      {
+        "name": "Auditoria de fábrica",
+        "price": "Solicitar presupuesto",
+        "note": "Presupuesto por hombre-día más viaje",
+        "available": true,
+        "features": [
+          "Evaluación in situ según el estándar requerido",
+          "Calidad, cumplimiento y revisión de expedientes laborales",
+          "Hallazgos clasificados por gravedad con fotografías",
+          "Plan de acción correctiva con propietarios y fechas",
+          "Reaudición opcional después del periodo correctivo"
+        ],
+        "cta": "Solicitar una auditoría",
+        "href": "/factory-audit/request"
+      },
+      {
+        "name": "Buyer Pro",
+        "price": "En breve",
+        "note": "Aún no está abierto",
+        "available": false,
+        "features": [
+          "Archivos de proveedores guardados e historial de informes",
+          "Comparación de proveedores lado a lado",
+          "Informes PDF prémium",
+          "Monitoreo de proveedores y volver a verificar las alertas"
+        ],
+        "cta": "Díganos que necesita",
+        "href": "- servicio a medida,"
+      }
+    ],
+    "comingSoonNote": "We are not selling a subscription until the features behind it are built and actually used. The Buyer Pro items above are the plan, not a promise you can buy today.",
+    "alsoTitle": "Also available",
+    "alsoItems": [
+      "Inspección: controles en línea y previos al envío, cotizados por hombre-día",
+      "Abastecimiento: 3–5% de comisión sobre el valor del pedido, cotizado antes de que se realice el pedido",
+      "Mejora de proveedores: capacitación y acción correctiva después de una auditoría, cotizada por fábrica"
+    ],
+    "alsoCta": "Request a quote",
+    "reportsTitle": "Reports and verification: indicative ranges",
+    "reportsLead": "Every figure below is indicative and quoted per project. We publish ranges so you can tell whether the check is worth ordering before you ask.",
+    "reports": [
+      {
+        "name": "Informe de diligencia debida del proveedor",
+        "range": "USD 29 – 99",
+        "note": "Revisión documental e informe escrito. Sin visita al sitio."
+      },
+      {
+        "name": "Verificación profesional",
+        "range": "USD 199 – 499+",
+        "note": "Verificación manual, incluida la evidencia del sitio cuando sea necesario."
+      },
+      {
+        "name": "Auditoría de fábrica in situ",
+        "range": "USD 300 – 1500+",
+        "note": "Cotizado por día-hombre más viaje, según el país, el tamaño del sitio y el estándar."
+      }
+    ],
+    "reportsNote": "Online payment is not open yet. Every item above is quoted and invoiced by our team, so nothing here is a subscription and nothing renews.",
+    "faqTitle": "Pricing FAQ",
+    "faq": [
+      {
+        "q": "¿Tengo que pagar para usar las herramientas?",
+        "a": "No. La calculadora de riesgos, las listas de verificación y las tarjetas de puntuación son gratuitas y no necesitan una cuenta. Solo pagas cuando nos pides que verifiquemos o auditemos a un proveedor."
+      },
+      {
+        "q": "¿Cuánto cuesta la verificación de un proveedor?",
+        "a": "Se cotiza por proveedor. El precio depende del país, si el paquete incluye una visita al sitio y cuántos documentos deben revisarse. Envíenos el nombre de la empresa y lo cotizaremos."
+      },
+      {
+        "q": "¿Cuánto cuesta una auditoría de fábrica?",
+        "a": "It is quoted per man-day plus travel. A single-site quality audit starts at one man-day. A full social compliance audit such as SMETA usually takes two or more, depending on headcount."
+      },
+      {
+        "q": "When will Buyer Pro be available?",
+        "a": "Not yet. We open it once the features behind it are live and being used. Until then, the free tools cover the same ground without an account."
+      }
+    ],
+    "recommendedTag": "Recomendado"
+  },
+  "aiChat": {
+    "title": "Assistente de IA",
+    "subtitle": "Auditorias, preços, cobertura",
+    "greeting": "Olá! Pergunte-me sobre auditorias de fábrica, verificação de fornecedores, preços ou os países que cobrimos.",
+    "placeholder": "Digite sua pergunta…",
+    "send": "Enviar",
+    "quickQuestions": [
+      "Quais tipos de auditoria vocês cobrem?",
+      "Quanto custa uma auditoria de fábrica?",
+      "Em quais países vocês atuam?",
+      "Vocês treinam equipes de fábrica?"
+    ],
+    "thinking": "Pensando…",
+    "error": "Desculpe, não consegui responder. Tente novamente ou fale com nossa equipe.",
+    "ctaText": "Precisa de um orçamento ou falar com alguém?",
+    "ctaButton": "Fale com nossa equipe",
+    "fallbackAnswers": {
+      "pricing": "O SaaS para compradores vai de US$ 0 a US$ 299/mês e a associação de fornecedores de US$ 29 a US$ 199/mês. Auditorias e inspeções de fábrica são cotadas por projeto (dias-homem e localização); frete e suprimentos têm comissão de 3–5%. Todos os preços em USD. Diga seu produto e país e eu indicarei o plano certo.",
+      "audit": "Cobrimos verificação de fornecedores, auditorias de fábrica e inspeções pré-embarque em programas como SMETA, BSCI, ISO 9001, ISO 14001, SA8000, WRAP e Sedex. Não vendemos certificados; verificamos e depois treinamos. Compartilhe seu produto e mercado-alvo e definiremos o escopo.",
+      "coverage": "Atuamos na China (incluindo Hong Kong, China / Taiwan, China / Macao, China), Vietnã, Índia, Tailândia, Malásia, Indonésia, Camboja e México. Diga de qual país você compra.",
+      "training": "Sim. Auditamos sua fábrica e depois treinamos as equipes em sistemas de qualidade, controle de qualidade e processos de produção. Os planos são Starter US$ 280/fábrica e Pro US$ 950/fábrica, com opção Enterprise personalizada. Todo plano começa com uma auditoria de lacunas.",
+      "default": "Posso ajudar com auditorias, verificação de fornecedores, cobertura, preços e treinamento. Para algo específico, deixe seus dados e nossa equipe responderá em um dia útil."
+    }
+  },
+  "about": {
+    "metaTitle": "Sobre nós — Auditoria de fábrica e treinamento de fornecedores",
+    "metaDesc": "Verificamos fábricas na Ásia e treinamos suas equipes, para que os problemas que encontramos não voltem. Evidência primeiro, sem certificados à venda.",
+    "h1": "Sobre a FactoryAuditB2B",
+    "lead": "Verificamos fábricas na Ásia e treinamos suas equipes, para que os problemas que encontramos não voltem.",
+    "storyTitle": "Quem somos",
+    "storyBody": "A FactoryAuditB2B foi criada por auditores e engenheiros de controle de qualidade que passaram anos dentro de fábricas na China e na Ásia. Víamos o mesmo ciclo se repetir: um comprador faz um pedido, aparecem defeitos, uma auditoria é encomendada, o relatório vai para uma gaveta e o pedido seguinte repete a falha. Por isso construímos uma plataforma que fecha o ciclo: verificar o fornecedor e depois treinar as pessoas que realmente fabricam o produto.",
+    "valuesTitle": "Como trabalhamos",
+    "values": [
+      {
+        "title": "Verificamos, não vendemos certificados",
+        "desc": "Um certificado pode ser comprado. Uma verificação, não. Conferimos registro, local, capacidade, qualidade e conformidade, e mostramos a evidência por trás de cada constatação."
+      },
+      {
+        "title": "Evidência antes de opinião",
+        "desc": "Cada pontuação de risco está vinculada a documentos e observações que você pode revisar. Onde falta evidência, dizemos, em vez de preencher com um palpite."
+      },
+      {
+        "title": "Treinamento que segue a auditoria",
+        "desc": "Uma auditoria que termina em PDF não muda nada. Treinamos as equipes de fábrica em sistemas de qualidade e controle de qualidade para que os achados sejam corrigidos e se mantenham."
+      },
+      {
+        "title": "Respostas claras em um dia útil",
+        "desc": "Você recebe uma proposta com escopo claro: o que verificaremos e quanto custa. Sem venda agressiva, sem entregáveis vagos."
+      }
+    ],
+    "statsTitle": "Em números",
+    "stats": [
+      {
+        "value": "9",
+        "label": "Países cobertos"
+      },
+      {
+        "value": "12",
+        "label": "Setores industriais"
+      },
+      {
+        "value": "20+",
+        "label": "Programas de auditoria e conformidade"
+      },
+      {
+        "value": "< 1 dia",
+        "label": "Tempo de resposta habitual"
+      }
+    ],
+    "ctaTitle": "Quer ver como cuidaríamos dos seus fornecedores?",
+    "ctaDesc": "Diga seu produto e país, e diremos exatamente o que verificaríamos e quanto custa.",
+    "ctaButton": "Solicitar orçamento"
+  },
+  "brand": {
+    "name": "FactoryAuditB2B",
+    "tagline": "Supplier Intelligence & Verification for Global Buyers",
+    "eva": "Evaluate. Verify. Audit.",
+    "scope": "Supplier verification and factory audit services across China and Southeast Asia.",
+    "positioning": "We help global buyers evaluate suppliers, verify factories and reduce sourcing risk before an order is placed."
+  },
+  "coverage": {
+    "badge": "Coverage",
+    "h1": "Where We Verify Suppliers",
+    "lead": "On-the-ground supplier verification and factory audit support across China and Southeast Asia. Phase 1 covers three countries. More are added as we have verified auditor capacity in them.",
+    "phase1": "Phase 1",
+    "phaseNext": "Planned next",
+    "countryCta": "Coverage in {country}",
+    "anotherCountryTitle": "Need verification in another country?",
+    "anotherCountryLead": "Tell us where you are sourcing. If we do not have confirmed auditor capacity there yet, we will say so instead of guessing.",
+    "anotherCountryCta": "Request Verification",
+    "metaTitle": "Where We Verify Suppliers",
+    "metaDesc": "Supplier verification and factory audit coverage across China, Vietnam and Thailand, with country-specific sourcing risks, verification notes and audit considerations."
+  },
+  "countryHub": {
+    "profileTitle": "Manufacturing profile",
+    "risksTitle": "Typical sourcing risks",
+    "verificationTitle": "Supplier verification considerations",
+    "auditTitle": "Factory audit considerations",
+    "industriesTitle": "Relevant industries",
+    "logisticsTitle": "Local logistics considerations",
+    "standardsTitle": "Relevant standards",
+    "hubsTitle": "Main production hubs",
+    "registryTitle": "Where we check company records",
+    "servicesTitle": "Available services",
+    "toolsTitle": "Relevant tools",
+    "faqTitle": "Frequently asked questions",
+    "breadcrumb": "Countries",
+    "ctaTitle": "Need a supplier in {country} checked?",
+    "ctaLead": "Send us the company name and address. We confirm the registration, the site and the documents before you pay anything.",
+    "ctaPrimary": "Verify a supplier in {country}",
+    "ctaSecondary": "Request a {country} factory audit",
+    "suppliersTitle": "Suppliers listed for {country}",
+    "suppliersEmpty": "No supplier in {country} is listed yet. That does not mean we cannot check one. Send us the name and we will run the verification.",
+    "metaDesc": "Supplier verification and factory audit in {country}: manufacturing profile, typical sourcing risks, verification and audit considerations, industries, logistics and FAQs."
+  },
+  "serviceCountry": {
+    "quickAnswerTitle": "Quick answer",
+    "scopeTitle": "What is included",
+    "deliverablesTitle": "What you receive",
+    "processTitle": "How it works",
+    "pricingTitle": "How pricing works",
+    "contextTitle": "{service} in {country}: what is different here",
+    "ctaTitle": "Request {service} in {country}",
+    "ctaLead": "Tell us the supplier and your requirements. We reply with a scoped proposal, a timeline and a price.",
+    "ctaPrimary": "Request a quote",
+    "ctaSecondary": "Score this supplier free first",
+    "relatedTitle": "Related pages",
+    "breadcrumb": "Services",
+    "metaDesc": "{service} in {country}. Scope, deliverables, process and pricing basis, plus the country-specific checks that matter in {country}.",
+    "scopedQ": "What do you actually check for a {country} supplier?",
+    "scopedA": "We confirm registration, the registered address, the production site, and the country-specific checks for {country} suppliers. Exact scope depends on the standard and the order, which we confirm in the scoped quote.",
+    "timelineQ": "How long does this take in {country}?",
+    "timelineA": "Documentary checks are usually finished within two business days. A package that includes a site visit in {country} is normally scheduled within a week, longer outside the main production hubs."
+  },
+  "servicesIndex": {
+    "badge": "Services",
+    "h1": "Supplier verification, audit and inspection services",
+    "lead": "Free tools tell you what to check. These services get it checked. Everything below is scoped and quoted per project, and none of it is a bundle you have to buy into.",
+    "servicesTitle": "What we do",
+    "servicesLead": "Pick the stage you are at.",
+    "items": {
+      "verification": {
+        "title": "Supplier Verification",
+        "desc": "Confirm the company, the site and the documents before you release a deposit.",
+        "href": "/services/supplier-verification"
+      },
+      "factoryAudit": {
+        "title": "Factory Audit",
+        "desc": "An auditor on site against the standard your buyer requires, with findings graded and corrective actions listed.",
+        "href": "/factory-audit/request"
+      },
+      "inspection": {
+        "title": "Inspection",
+        "desc": "In-line and pre-shipment checks on your production, quoted per man-day.",
+        "href": "/custom-services"
+      },
+      "sourcing": {
+        "title": "Sourcing",
+        "desc": "Post an RFQ, get matched with suppliers we can verify, and pay commission only on orders you place.",
+        "href": "/rfq"
+      },
+      "improvement": {
+        "title": "Supplier Improvement",
+        "desc": "Audit findings turned into corrective action, training and a re-audit. Not a standalone training business.",
+        "href": "/services/supplier-improvement"
+      }
+    },
+    "coverageTitle": "Coverage by country",
+    "coverageLead": "Country-specific verification and audit pages with the local checks that matter.",
+    "notSureTitle": "Not sure which one you need?",
+    "notSureLead": "Run the free risk calculator first. It takes about three minutes and tells you what is missing.",
+    "notSureCta": "Assess supplier risk",
+    "metaTitle": "Supplier Verification, Factory Audit and Inspection Services",
+    "metaDesc": "Independent supplier verification, factory audit, inspection and sourcing support across China, Vietnam and Thailand. Scoped and quoted per project."
+  },
+  "resourcesIndex": {
+    "badge": "Resources",
+    "h1": "Supplier Intelligence Resources",
+    "lead": "Practical guides and tools for evaluating suppliers, checking documents, preparing audits and reducing sourcing risk. Written by the people who run the checks.",
+    "categoriesTitle": "Browse by topic",
+    "categoriesLead": "Each topic lists the guides, tools and services that belong to it.",
+    "toolsTitle": "Tools",
+    "toolsLead": "Free, no account needed.",
+    "cat": {
+      "verification": {
+        "title": "Supplier Verification",
+        "desc": "How to confirm a company is real, the site is real, and the documents hold up."
+      },
+      "audit": {
+        "title": "Factory Audit",
+        "desc": "Standards, checklists, what auditors look at and how to read a report."
+      },
+      "risk": {
+        "title": "Supplier Risk",
+        "desc": "Scoring frameworks, weighting and how to act on a risk score."
+      },
+      "china": {
+        "title": "China Sourcing",
+        "desc": "Country-specific checks, registries and logistics for Chinese suppliers."
+      },
+      "sea": {
+        "title": "Southeast Asia Sourcing",
+        "desc": "Vietnam and Thailand sourcing context, risks and audit considerations."
+      },
+      "compliance": {
+        "title": "Compliance",
+        "desc": "Social compliance, product compliance and what each standard actually covers."
+      },
+      "tools": {
+        "title": "Tools",
+        "desc": "The free calculators, checklists and scorecards."
+      }
+    },
+    "metaTitle": "Supplier Intelligence Resources",
+    "metaDesc": "Guides and tools on supplier verification, factory audit, supplier risk, China and Southeast Asia sourcing, and compliance."
+  },
+  "verification": {
+    "levelLabel": "Verification level",
+    "levels": [
+      "Nivel 0: No verificado",
+      "Nivel 1: Información comercial verificada",
+      "Nivel 2: Documentos revisados",
+      "Nivel 3: Verificado en fábrica",
+      "Nivel 4: Fábrica auditada"
+    ],
+    "levelsShort": [
+      "Sin verificar",
+      "Negocio verificado",
+      "DOCUMENTOS EXAMINADOS",
+      "Fábrica verificada",
+      "Fábrica auditada"
+    ],
+    "lastVerified": "Last verified",
+    "verifiedBy": "Verified by",
+    "scope": "Verification scope",
+    "whatVerified": "What was verified",
+    "whatNotVerified": "What was not verified",
+    "evidence": "Evidence reviewed",
+    "expiry": "Expires",
+    "noRecord": "No verification record yet.",
+    "notIndependentlyVerified": "Not independently verified",
+    "noRecentAudit": "No recent third-party audit found"
+  },
+  "evidence": {
+    "title": "Certifications & Evidence",
+    "lead": "We separate what the supplier handed over from what we have actually checked. A document the factory provided is not the same thing as evidence we reviewed.",
+    "reviewed": "Evidence reviewed",
+    "provided": "Document provided",
+    "notProvided": "Not provided",
+    "verified": "Verified",
+    "partiallyVerified": "Partially verified",
+    "unverified": "Unverified",
+    "expired": "Expired",
+    "missing": "Missing",
+    "restricted": "Original document: restricted",
+    "validAtReview": "Valid at time of review",
+    "statusNote": "\"Document provided\" means the supplier gave it to us. \"Evidence reviewed\" means we checked it against its source."
+  },
+  "supplierProfile": {
+    "trustSummary": "Trust summary",
+    "verificationLevel": "Verification level",
+    "lastVerified": "Last verified",
+    "riskScore": "Risk",
+    "verificationStatus": "Verification status",
+    "evidenceSummary": "Evidence summary",
+    "auditHistory": "Audit history",
+    "notCoveredTitle": "Not covered",
+    "notCoveredLead": "Checks outside the current verification scope. We list them so you know what has not been looked at.",
+    "whatVerifiedTitle": "What we verified",
+    "whatVerifiedLead": "Each line reflects a recorded verification event. Where we have no record, we say so.",
+    "viewProfile": "View profile",
+    "claimTitle": "Is this your company?",
+    "claimLead": "Claim the profile, keep the record accurate and let buyers see your verification status.",
+    "claimCta": "Claim this profile",
+    "notSatisfiedTitle": "Not satisfied with this supplier?",
+    "notSatisfiedLead": "Post an RFQ and we will look for alternatives we can verify before you commit.",
+    "notSatisfiedCta": "Post an RFQ",
+    "reverifyCta": "Request independent re-verification",
+    "manufacturer": "Manufacturer",
+    "tradingCompany": "Trading company",
+    "established": "Established {year}",
+    "employees": "Employees",
+    "exportMarkets": "Export markets",
+    "mainProducts": "Main products",
+    "inspections": "{n} inspections",
+    "noAudit": "No audit on record.",
+    "featuredNote": "Featured supplier. This is not a marketplace listing and we are not a party to any transaction.",
+    "backToDirectory": "All suppliers",
+    "overviewTitle": "Company overview",
+    "capabilitiesTitle": "Capabilities",
+    "capabilitiesLead": "Tags are marked as evidence reviewed only where we have checked the underlying document. Unchecked tags reflect what the supplier told us.",
+    "capabilitiesEmpty": "No capability tags recorded for this supplier yet.",
+    "productsTitle": "Main products",
+    "evidenceAvailableTitle": "Evidence on record",
+    "evidenceEmpty": "No evidence record yet. Request a verification and we will build one.",
+    "noCertifications": "No certifications on record.",
+    "employeesLabel": "Employees",
+    "exportMarketsLabel": "Export markets",
+    "inspectionHistoryLabel": "Inspection history",
+    "requestAudit": "Request a factory audit",
+    "requestQuote": "Request a quote",
+    "scopeTitle": "Verification scope",
+    "lastUpdated": "Last updated",
+    "selfReported": "Self-reported",
+    "auditStatusLabel": "Audit status",
+    "businessTypeLabel": "Business type",
+    "verifiedByTitle": "Verification by FactoryAuditB2B",
+    "verifiedByLead": "This is what our team checked. It is separate from what the supplier told us, and both are labelled.",
+    "provenanceLead": "Each line is labelled by who stands behind it: what the supplier provided, what we reviewed, what we independently verified, and what was confirmed on site.",
+    "provProvided": "Supplier provided",
+    "provReviewed": "Document reviewed",
+    "provIndependent": "Independently verified",
+    "provOnsite": "On-site verified",
+    "provNote": "\"Supplier provided\" means the supplier gave it to us and we have not checked it. \"Independently verified\" means we checked it against its source.",
+    "neverClaimedTitle": "What we never claim",
+    "neverClaimed": "We do not describe a supplier as verified unless a matching verification event and evidence exist. We do not certify suppliers ourselves."
+  },
+  "reportPreview": {
+    "badge": "Free preview",
+    "title": "Supplier Due Diligence Report",
+    "lead": "A structured review of supplier information, available evidence, risk factors and verification status.",
+    "execTitle": "Executive summary",
+    "verificationTitle": "Verification",
+    "keyRisksTitle": "Key risks",
+    "recommendationTitle": "Recommendation",
+    "riskLevel": "Risk level",
+    "score": "Score",
+    "unlockTitle": "Get the full due diligence report",
+    "unlockLead": "The full report covers company records, evidence review, risk analysis and the recommended next step. Original third-party documents stay restricted.",
+    "unlockCta": "View report options",
+    "methodologyLink": "View methodology",
+    "methodologyTitle": "How We Assess Suppliers",
+    "methodologyLead": "Risk scores come from a fixed rules engine with published weights. The report shows which inputs moved the number.",
+    "options": {
+      "basic": {
+        "name": "Basic report",
+        "price": "$29",
+        "items": [
+          "Descripción general del proveedor",
+          "Puntuación de riesgo con desglose por dimensiones",
+          "Estado de verificación",
+          "Resumen de evidencia",
+          "Principales factores de riesgo",
+          "Acciones recomendadas",
+          "PDF"
+        ]
+      },
+      "professional": {
+        "name": "Professional due diligence",
+        "price": "$79–$149",
+        "items": [
+          "Todo en el informe básico",
+          "Revisión detallada de la evidencia",
+          "Verificaciones de documentos adicionales",
+          "Análisis de riesgos con prioridades específicas del comprador",
+          "Notas de verificación",
+          "PDF"
+        ]
+      },
+      "independent": {
+        "name": "Independent verification",
+        "price": "Custom quote",
+        "items": [
+          "Verificación de identidad comercial",
+          "Verificación de dirección de fábrica",
+          "Verificación de documentos",
+          "Verificación in situ cuando sea necesario"
+        ]
+      }
+    },
+    "auditUpsellTitle": "Need the factory checked on site?",
+    "auditUpsellLead": "The report tells you what is missing. Our team can run an independent verification or a full factory audit.",
+    "auditUpsellCta": "Request an audit"
+  },
+  "claim": {
+    "h1": "Get Verified. Get Discovered. Get More Buyer Opportunities.",
+    "lead": "Buyers shortlist suppliers they can check. A claimed profile with verified evidence gets looked at first.",
+    "whyTitle": "Why claim your profile?",
+    "whyLead": "Help buyers understand your capabilities and verification status before they ask for a quote.",
+    "benefits": [
+      "Mantenga la información de su empresa precisa",
+      "Añadir productos, certificaciones y detalles de capacidad",
+      "Muestra tu nivel de verificación públicamente",
+      "Recibir consultas de compradores y oportunidades de RFQ"
+    ],
+    "tiersTitle": "What you can do",
+    "free": {
+      "name": "Free",
+      "cta": "Claim your profile",
+      "items": [
+        "Actualiza la información de la empresa",
+        "Añadir productos",
+        "Añadir certificaciones",
+        "Agregar detalles de contacto"
+      ]
+    },
+    "verified": {
+      "name": "Verified",
+      "cta": "Apply for verification",
+      "items": [
+        "Nivel de verificación en el perfil",
+        "Estado de auditoría y certificaciones mostradas a los compradores",
+        "﻿Consultas de comprador",
+        "Etiquetas de capacidad"
+      ]
+    },
+    "premium": {
+      "name": "Premium",
+      "cta": "Talk to us",
+      "items": [
+        "Colocación prioritaria en la búsqueda",
+        "Destacado en páginas relevantes de la industria",
+        "Presentaciones del comprador",
+        "Visibilidad del producto"
+      ]
+    }
+  },
+  "consent": {
+    "title": "How your information is used",
+    "body": "Information submitted by suppliers is used to create and maintain their FactoryAuditB2B supplier profile and support buyer due diligence.",
+    "privacy": "We do not publicly disclose confidential documents without authorization.",
+    "authorize": "I authorize FactoryAuditB2B to use the information and documents I provide for supplier verification and buyer due diligence, subject to the platform's privacy and document-sharing rules.",
+    "prefsTitle": "Information sharing preferences",
+    "public": {
+      "title": "Public",
+      "lead": "Visible to everyone.",
+      "items": [
+        "Nombre de la empresa",
+        "Ubicación",
+        "Productos",
+        "Estado de verificación"
+      ]
+    },
+    "buyerView": {
+      "title": "Buyer view",
+      "lead": "Visible to verified buyers.",
+      "items": [
+        "Evidencia seleccionada",
+        "Detalles del certificado",
+        "Programa de Auditoria"
+      ]
+    },
+    "restricted": {
+      "title": "Restricted",
+      "lead": "Only with your explicit authorization.",
+      "items": [
+        "Informes de auditoría originales",
+        "Documentos confidenciales",
+        "Fotos internas del PFDC."
+      ]
+    },
+    "private": {
+      "title": "Private",
+      "lead": "Used internally to maintain your verification record.",
+      "items": [
+        "Documentos fuente no compartidos",
+        "Notas de trabajo de verificación"
+      ]
+    },
+    "thirdPartyNote": "Third-party audit reports from SGS, Intertek, Bureau Veritas, TÜV and similar bodies may carry licence or confidentiality restrictions. We show them as reviewed, and we do not redistribute the original document without the appropriate rights."
+  },
+  "methodology": {
+    "badge": "Methodology",
+    "h1": "How Our Supplier Risk Assessment Works",
+    "lead": "Risk scores are calculated by a deterministic rules engine with published weights. The same inputs always produce the same score. Language models are used only to explain a result in plain language, and they cannot change the number.",
+    "quickAnswer": "We score a supplier across six weighted dimensions: company, quality, compliance, production, supply chain and documentation. Each answer you give maps to one dimension, contributes a weighted risk value, and rolls up into an overall figure out of 100, where higher means more risk. Missing evidence raises the score rather than being treated as neutral. The weights shown below are read directly from the scoring model, not typed by hand.",
+    "frameworkTitle": "Scoring framework",
+    "frameworkBody": "Each question belongs to one dimension. Within a dimension, answers carry a risk value between 0 and 100. The dimension score is the weighted mean of its answered questions, and the overall score is the weighted mean of the dimensions below.",
+    "weightsTitle": "Risk dimensions and weights",
+    "weightsLead": "Weights are configurable in our admin and shown here so you can see what actually moves the number.",
+    "weightsFallback": "Dimension weights are read from the risk model in our database and shown here when available.",
+    "dimensionTitle": "Dimension",
+    "weightTitle": "Weight",
+    "evidenceTitle": "Evidence",
+    "evidenceBody": "The score is only as good as the evidence behind it. Where you tell us you do not know something, we treat it as an open gap and score it accordingly. A supplier can lower its score by producing documents, not by arguing with the model.",
+    "limitationsTitle": "Limitations",
+    "limitationsLead": "What this score does not tell you.",
+    "limitations": [
+      "It is not a financial credit assessment. We do not review financial statements unless you ask us to.",
+      "It does not confirm that equipment exists or that a quality system runs day to day. That needs a site visit or an audit.",
+      "It is a point-in-time assessment. A score is valid as of the date it was produced.",
+      "It cannot detect a supplier that deliberately provides false documents, although document cross-checks reduce the gap.",
+      "Weights are our judgement, not an industry standard. We publish them so you can disagree with us in specific terms."
+    ],
+    "updateTitle": "Update policy",
+    "updateBody": "We review weights when we make a material change to the model, and we record the version in use when a score is produced. Methodology changes are listed here with their date.",
+    "changelogTitle": "Changelog",
+    "versionTitle": "Current version",
+    "aiTitle": "Where AI is used, and where it is not",
+    "aiBody": "Scores come from the rules engine alone. A language model may summarize or explain a result in plain language, and it may draft the recommended actions. It does not decide the score, and it cannot see the weights as a variable it can adjust.",
+    "ctaTitle": "Want the checks done rather than scored?",
+    "ctaLead": "Our verification service confirms registration, site, capability, quality and compliance, and gives you a written report before you pay anything.",
+    "ctaPrimary": "Supplier verification service",
+    "ctaSecondary": "Score a supplier free",
+    "metaTitle": "How Our Supplier Risk Assessment Works",
+    "metaDesc": "The scoring framework, risk dimensions, weights, evidence rules, limitations and update policy behind our supplier risk scores. Calculated by a deterministic rules engine, not by AI.",
+    "scoredInputsLabel": "Inputs",
+    "scoredTableNote": "{n} scored inputs · {d} dimensions · total weight {w}.",
+    "weightsSumLine": "— six dimensions, {n} inputs, weights summing to {w}."
+  },
+  "trust": {
+    "badge": "Trust Center",
+    "h1": "Trust Center",
+    "lead": "Who we are, what we verify, what we do not, and how we handle evidence. Published so you can check us before you ask us to check anyone else.",
+    "metaTitle": "Trust Center — Who Operates FactoryAuditB2B and What We Verify",
+    "metaDesc": "Business registration, operating entity, verification methodology, verification levels, evidence policy and data protection for FactoryAuditB2B.",
+    "regTitle": "Business Registration",
+    "regLead": "Public verification, not full disclosure. We publish the registration facts a buyer needs and keep personal and sensitive identifiers partially masked.",
+    "legalEntityLabel": "Legal entity name",
+    "brandLabel": "Brand",
+    "brandValue": "FactoryAuditB2B",
+    "countryLabel": "Registered country / region",
+    "cityLabel": "City",
+    "registrationYearLabel": "Business registration year",
+    "statusLabel": "Registration status",
+    "authorityLabel": "Business registration authority",
+    "verificationDateLabel": "Verification date",
+    "legalRepLabel": "Legal representative",
+    "registrationNumberLabel": "Registration number",
+    "addressLabel": "Registered address",
+    "maskedNote": "Partially masked. The full value is not published on the open internet and is available on request under a signed enquiry.",
+    "viewDocument": "View business registration",
+    "notConfigured": "Business registration details are not published yet.",
+    "notConfiguredLead": "We publish our registration record once the administrator has added it. Until then, ask us directly and we will send it to you.",
+    "operatesTitle": "Who Operates FactoryAuditB2B?",
+    "operatesBody": "FactoryAuditB2B is a platform and brand operated by {entity}. The brand name is not the legal entity name, and we do not present them as the same thing.",
+    "operatesLead": "FactoryAuditB2B is operated by a registered company in China and provides supplier verification, factory audit and sourcing support for global buyers.",
+    "operatesNotConfigured": "FactoryAuditB2B is operated by a registered company. We publish the legal entity name as soon as it is configured in the Trust Center.",
+    "scopeTitle": "Scope of business",
+    "scopeBody": "Supplier verification, factory audit, inspection and sourcing support for buyers importing from China and Southeast Asia. Phase 1 coverage is China, Vietnam and Thailand.",
+    "verifyTitle": "What We Verify",
+    "verifyLead": "These are the checks our verification service covers.",
+    "verify": [
+      "Company identity",
+      "Factory location",
+      "Documents",
+      "Certifications",
+      "Production capability",
+      "Audit evidence"
+    ],
+    "notVerifyTitle": "What We Do Not Verify",
+    "notVerifyLead": "Stating the boundary is part of the service. A verification report is only useful if it says what was not checked.",
+    "notVerify": [
+      "We do not certify suppliers ourselves unless explicitly stated.",
+      "We do not review financial statements unless you ask us to.",
+      "We do not verify subcontractors that were not disclosed to us.",
+      "We do not guarantee product performance in use.",
+      "We cannot detect deliberately falsified documents with certainty, although cross-checks reduce the gap."
+    ],
+    "methodTitle": "Verification Methodology",
+    "methodLead": "Risk scores come from a fixed rules engine with published weights. The same inputs always produce the same score.",
+    "methodLink": "Read the full methodology",
+    "levelsTitle": "Verification Levels",
+    "levelsLead": "A supplier is only shown as verified where a matching verification event and evidence exist.",
+    "levelDescs": [
+      "No verification record.",
+      "Registration and business identity records reviewed.",
+      "Certificates, licences and audit documents reviewed.",
+      "Site confirmed with location evidence and photographs.",
+      "On-site audit completed with findings and a written report."
+    ],
+    "evidenceTitle": "Supplier Evidence Policy",
+    "evidenceLead": "How we handle the documents suppliers and buyers give us.",
+    "evidence": [
+      "Every item is stored with its source, date and verification status.",
+      "Original third-party audit reports are marked as reviewed. We do not redistribute them.",
+      "Suppliers choose what is public, buyer-visible, restricted or private.",
+      "We do not publish confidential documents without authorization."
+    ],
+    "privacyTitle": "Privacy & Data Protection",
+    "privacyLead": "What happens to the information you send us.",
+    "privacy": [
+      "Buyer enquiries are used to respond and to prepare a quote. We do not sell contact data.",
+      "Supplier documents are used to maintain the supplier profile and support buyer due diligence.",
+      "No divulgamos públicamente documentos confidenciales sin autorización.",
+      "To request access, correction or deletion of your data, contact us using the details below."
+    ],
+    "contactTitle": "Contact",
+    "contactLead": "Reachable channels. If a page promises something we cannot deliver, tell us and we will correct it.",
+    "contactEmailLabel": "Email",
+    "whyTitle": "Why trust us",
+    "whyLead": "Four things we can evidence, and nothing we cannot.",
+    "why1Title": "Registered business",
+    "why1Body": "Operated by a registered company. We publish the entity name instead of hiding behind a brand.",
+    "why2Title": "Transparent methodology",
+    "why2Body": "Risk scores are based on a documented assessment framework with published weights.",
+    "why3Title": "Evidence-based verification",
+    "why3Body": "Verification status is tied to available evidence. No evidence, no verified label.",
+    "why4Title": "Human review",
+    "why4Body": "AI assists the process. People make the verification decisions, and on-site work is done by people.",
+    "aiNote": "AI assists the process. People make the verification decisions."
+  },
+  "inspection": {
+    "badge": "Product Inspection",
+    "h1": "Product Inspection",
+    "lead": "Order-specific quality checks at the production stage that matters, carried out by an independent inspector and reported in writing. Every request is reviewed individually and quoted per inspection.",
+    "metaTitle": "Product Inspection — PPI, DUPRO, PSI and Container Loading",
+    "metaDesc": "Pre-production, during-production, pre-shipment and container loading inspection for buyers sourcing from China, Vietnam, Thailand, Malaysia and the Philippines. Quoted per inspection.",
+    "quickAnswerTitle": "Quick answer",
+    "quickAnswer": "A product inspection checks a specific order at a specific stage: before production starts, while it is running, before shipment, or during container loading. The inspector works to your requirements or an AQL sampling plan, reports findings with photos, and gives a clear recommendation. It is quoted per inspection and priced by type, scope, location and duration.",
+    "honestNote": "Inspection requests are reviewed individually. We respond with a scoped quote based on inspection type, location, duration and qualified inspector availability.",
+    "howTitle": "How it works",
+    "howLead": "From request to report, without a platform to learn.",
+    "how": [
+      {
+        "title": "Send the request",
+        "body": "Tell us the factory location, product, order quantity, preferred date and what to check."
+      },
+      {
+        "title": "We quote",
+        "body": "A scoped quote based on inspection type, scope, location, duration and inspector availability. No payment until you confirm."
+      },
+      {
+        "title": "An inspector goes on site",
+        "body": "The inspector is independent and matched to the location and product category. You can watch live if you want."
+      },
+      {
+        "title": "You get the report",
+        "body": "Findings with photos, defect summary, AQL result and a clear recommendation, usually within 24 hours of the visit."
+      }
+    ],
+    "nodesTitle": "Inspection stages",
+    "nodesLead": "Each order is different. Pick the stage that fits your production calendar.",
+    "when": "When",
+    "what": "What is checked",
+    "why": "Why it is worth it",
+    "nodes": [
+      {
+        "key": "PPI",
+        "name": "Pre-Production Inspection",
+        "when": "Before production starts, on raw materials and the first sample.",
+        "what": "Raw materials, equipment readiness, production plan, BOM, packaging materials, colours, dimensions, labels, samples, process requirements.",
+        "why": "Catches the wrong thing before it is mass-produced. The cheapest defect is the one that never gets made."
+      },
+      {
+        "key": "DUPRO",
+        "name": "During Production Inspection",
+        "when": "While production is running, typically at 20–80% completion.",
+        "what": "Product quality, dimensions, appearance, workmanship, function, quantity, defect rate, production progress, packaging, labels.",
+        "why": "Problems found mid-run can still be fixed in time. Waiting for final inspection risks a whole batch you cannot repair."
+      },
+      {
+        "key": "PSI",
+        "name": "Pre-Shipment Inspection",
+        "when": "After production, before the goods leave the factory.",
+        "what": "Quantity, appearance, dimensions, function, packaging, labels, barcodes, carton contents, specification, AQL sampling, defect classification, photos.",
+        "why": "The final quality gate before balance payment. Most buyers start with PSI because it is the moment money is about to move."
+      },
+      {
+        "key": "CLS",
+        "name": "Container Loading Supervision",
+        "when": "During container loading at the factory or warehouse.",
+        "what": "Container condition, container number, seal, product quantity, carton count, SKU, packaging, labels, loading process, mixed or wrong goods, short loading, photos, video.",
+        "why": "Confirms that what you inspected is what actually gets loaded. Guards against substitution, short loading and mixed shipments."
+      }
+    ],
+    "reportTitle": "What you receive",
+    "reportLead": "A written report you can act on, not a phone call.",
+    "report": [
+      "Findings with photographs",
+      "Defect summary by severity (critical / major / minor)",
+      "AQL sampling result where applicable",
+      "Quantity and packaging check",
+      "Clear recommendation: PASS, FAIL or REWORK"
+    ],
+    "pricingTitle": "Pricing",
+    "pricingLead": "Quoted per inspection. Cost depends on inspection type, scope, location, duration and inspector availability.",
+    "pricingNote": "We do not publish fixed packages yet. Once real orders give us honest cost data per region, product category and stage, we will offer standard options.",
+    "pricingCta": "Request an inspection quote",
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "q": "What is the difference between DUPRO and PSI?",
+        "a": "DUPRO (during production) is done while the goods are being made, usually at 20–80% completion, so problems can be fixed before the batch finishes. PSI (pre-shipment) is done after production, before the goods leave the factory, and is the final quality gate before balance payment. Many buyers do DUPRO for first orders and PSI for repeat orders; some do both."
+      },
+      {
+        "q": "Do you have inspectors in every city?",
+        "a": "We do not publish a map of hundreds of inspectors because that would be a claim we cannot back. We match each order to a qualified independent inspector for the specific location and product category, and we confirm availability before quoting. If we cannot find the right person, we tell you instead of sending someone unsuitable."
+      },
+      {
+        "q": "How much does an inspection cost?",
+        "a": "It depends on inspection type, scope, location, duration and the product. A standard single-site PSI in a major manufacturing hub is typically in the range of USD 200–350 per man-day, plus travel outside hub cities. Send us the factory location and we will quote it precisely."
+      },
+      {
+        "q": "Can you inspect against my own checklist?",
+        "a": "Yes. If you have a buyer checklist or a spec sheet, send it with the request and the inspector will work to it. If you do not, we use a standard AQL-based inspection plan and tell you what we covered."
+      },
+      {
+        "q": "How soon can an inspection be scheduled?",
+        "a": "In major hubs (Shenzhen, Dongguan, Guangzhou, Ningbo, Ho Chi Minh, Bangkok, Penang) we can usually schedule within 2–3 business days. Other locations need more lead time because the right inspector has to travel."
+      }
+    ],
+    "ctaTitle": "Need an inspection scheduled?",
+    "ctaLead": "Send us the factory location, product, order quantity and preferred date. We reply with a scoped quote within one business day.",
+    "ctaPrimary": "Request an inspection quote",
+    "ctaSecondary": "Assess the supplier risk first",
+    "form": {
+      "stageLabel": "Inspection stage",
+      "stageHint": "Pick the stage that matches your production calendar. Not sure? Choose \"Not sure yet\" and we will advise.",
+      "stages": [
+        "Pre-Production (PPI)",
+        "During Production (DUPRO)",
+        "Pre-Shipment (PSI)",
+        "Container Loading (CLS)",
+        "Not sure yet"
+      ],
+      "factoryLocation": "Factory location",
+      "factoryLocationHint": "City and country, e.g. Shenzhen, China",
+      "product": "Product",
+      "quantity": "Order quantity",
+      "inspectionDate": "Preferred inspection date",
+      "requirements": "Inspection requirements",
+      "requirementsHint": "Your checklist, spec sheet, or what the inspector should pay attention to",
+      "submit": "Submit inspection request",
+      "submitting": "Submitting...",
+      "success": "Request received. We will reply with a scoped quote within one business day.",
+      "error": "Something went wrong. Please try again, or email us directly.",
+      "firstName": "O seu nome",
+      "company": "Empresa",
+      "email": "E-mail de trabalho"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Entrar",
+      "lead": "Aceda às suas consultas, relatórios e avaliações de fornecedores guardadas.",
+      "email": "E-mail",
+      "password": "Palavra-passe",
+      "submit": "Entrar",
+      "submitting": "A entrar...",
+      "google": "Continuar com o Google",
+      "backHome": "Voltar ao início",
+      "noAccount": "Ainda não tem conta?",
+      "registerLink": "Criar uma",
+      "errorInvalid": "E-mail ou palavra-passe incorretos.",
+      "errorAdminOnly": "Esta página é apenas para administradores.",
+      "errorSignedOut": "Sessão terminada.",
+      "demoHint": "Contas demo: admin@ / buyer@ / supplier@ factoryauditb2b.com."
+    },
+    "register": {
+      "title": "Criar a sua conta",
+      "lead": "Gratuito. Sem cartão. Siga consultas e guarde avaliações.",
+      "name": "O seu nome",
+      "email": "E-mail de trabalho",
+      "password": "Palavra-passe",
+      "passwordHint": "Mínimo 8 caracteres.",
+      "confirm": "Confirmar palavra-passe",
+      "company": "Empresa",
+      "companyHint": "Nome registado, como consta no seu registo comercial.",
+      "country": "País",
+      "roleLabel": "Sou",
+      "roleBuyer": "Comprador",
+      "roleBuyerHint": "Compro de fábricas e preciso de verificação, auditoria ou inspeção.",
+      "roleSupplier": "Fornecedor",
+      "roleSupplierHint": "Fabrico e quero ser listado e verificado.",
+      "submit": "Criar conta",
+      "submitting": "A criar conta...",
+      "success": "Conta criada. A entrar...",
+      "hasAccount": "Já tem conta?",
+      "loginLink": "Entrar",
+      "termsNote": "Ao criar a conta aceita os nossos Termos e Política de Privacidade."
+    },
+    "errors": {
+      "invalid_email": "Introduza um e-mail válido.",
+      "weak_password": "A palavra-passe deve ter pelo menos 8 caracteres.",
+      "invalid_role": "Escolha Comprador ou Fornecedor.",
+      "email_taken": "Já existe uma conta com este e-mail.",
+      "password_mismatch": "As palavras-passe não coincidem.",
+      "server_error": "Algo correu mal. Tente novamente.",
+      "network": "Erro de rede. Verifique a sua ligação.",
+      "rate_limited": "Muitas tentativas. Aguarda uma hora e tenta novamente."
+    },
+    "nav": {
+      "signIn": "Entrar",
+      "admin": "Admin",
+      "signOut": "Sair"
+    }
+  },
+  "auditGuide": {
+    "breadcrumb": "Guias de auditoria",
+    "metaTitle": "Auditoria {type} em {country}",
+    "metaDesc": "Encontre auditoria {type}, inspeção e fornecedores qualificados em {country}. Diretório verificado, RFQ e pedido de auditoria.",
+    "h1": "Auditoria {type} em {country}",
+    "ownerLabel": "Organismo emissor:",
+    "standardsTitle": "Normas e certificações relacionadas",
+    "noStandards": "Ainda sem normas registadas.",
+    "suppliersTitle": "Fornecedores em {country} com {type} ({n})",
+    "emptySuppliers": "Nenhum fornecedor verificado tem ainda esta credencial. Publique um RFQ e procuraremos candidatos.",
+    "riskLabel": "Risco",
+    "ctaTitle": "Precisa de uma auditoria {type}?",
+    "ctaDesc": "Publique um RFQ e ligamo-lo a auditores e fornecedores qualificados para esta norma.",
+    "ctaButton": "Publicar RFQ",
+    "verificationCta": "Verificar primeiro o fornecedor"
+  }
+}

@@ -1,0 +1,78 @@
+
+Name                                                                 MB
+----                                                                 --
+codebuddy-safe-delete                                                  
+SoftwareUpdate_Temp                                                    
+wb-ls-migration-4NZPdV                                                 
+WinGet                                                                 
+workbuddy-host-cli                                                     
+workbuddy-prompt-vars                                                  
+workbuddy-update-x64                                                   
+0f10c6c6-2735-4a99-a823-aa021c301a1b.tmp                               
+0f90ab3f-b357-46d1-a65d-25625deed76e.tmp                               
+1.ini                                                                  
+1a21eb4d-ec8a-4aa6-99c9-c6bd5840d85f.tmp                               
+1da7ffea-9a0a-4749-9b58-2a75df12fdb2.tmp                               
+1_{31891c3e-1b8d-4bda-b571-fd059353614d}.doc                           
+2e8621dd-ec84-4410-a956-8dcb01e4575d.tmp                               
+38440ebf-1e61-4316-8f2c-dfe32373de6f.tmp                               
+52193e83-f020-4ecf-bff8-2c2a2b6682fc.tmp                               
+622e62db-192d-4738-8886-b7d7939a8916.tmp                               
+6_{4d9749e8-9a28-4d6f-8d37-b7ecb6723597}.xls                           
+74d242fa-39ce-40d3-97e3-510ccc8f9b82.tmp                               
+812ce1e6-47c5-4ca8-8c82-5a8b7b92ae6c.tmp                               
+82616f77-22ca-4102-9f3d-20b714232fd9.tmp                               
+8961d5a2-6529-4755-b5c3-80d0327a514c.tmp                               
+a613ff49-d1ae-4718-bf56-60c6e4f51ee7.tmp                               
+a6d975ed-a69e-44c7-a8df-cd8396ba6621.tmp                               
+ai_reflow_pre_1782889853305.pdf                                        
+ai_reflow_pre_1782899879788.pdf                                        
+ai_reflow_pre_1783064858391.pdf                                        
+ai_reflow_pre_1783293313417.pdf                                        
+ai_reflow_pre_1783318449999.pdf                                        
+ai_reflow_pre_1783324093491.pdf                                        
+App Explorer-2026-08-28.log                                            
+APPX.alkggzq33kolvjt73_vtkej8b.tmp                                     
+APPX.pc1bxaegsyhwu4p6kjt6ckatg.tmp                                     
+bcc87780-ed98-4040-9e6f-d2988c931112.tmp                               
+be6bcc12-b61e-4650-b384-262a9308fcfa.tmp                               
+d56cdc7a-b7b2-4ee9-8993-c2539e9c2afe.tmp                               
+eebbbb33-5227-4100-a07b-aaf40bfee0f1.tmp                               
+fab2_dev.log                                                           
+fbf380ff-7421-45a6-857a-43910e42ab47.tmp                               
+pack_912017.zip                                                        
+QR-049质量目标达成情况统计表_{9d216017-569e-4900-ba84-0b85cc9aa7e3}.xlsx          
+ScreenShot_2026-08-28_090602_682.png                                   
+sendMyDeviceReport                                                     
+xml_file (10).xml                                                      
+xml_file (11).xml                                                      
+xml_file (12).xml                                                      
+xml_file (2).xml                                                       
+xml_file (3).xml                                                       
+xml_file (4).xml                                                       
+xml_file (5).xml                                                       
+xml_file (6).xml                                                       
+xml_file (7).xml                                                       
+xml_file (8).xml                                                       
+xml_file (9).xml                                                       
+xml_file.xml                                                           
+{AB38A20E-B9FA-4733-8288-E3C605C56517} - OProcSessId.dat               
+~DF19FD799C5C8E9AEC.TMP                                                
+~DF27B28B2634CA4EB2.TMP                                                
+~DF5191D3A3BBE79252.TMP                                                
+~DF578877315298CB35.TMP                                                
+~DF674E0F3CF05D0992.TMP                                                
+~DF7CD88E8C41D639C6.TMP                                                
+~DF9FC7BB7637A9A4C7.TMP                                                
+~DFC936C2588B91685B.TMP                                                
+~DFEF639481FF3D9F25.TMP                                                
+~DFFB5C128F1AD9826D.TMP                                                
+化学品演练  签名表   里面有三张表_{f9ea3ef4-37a9-4e09-a352-cba55f7d17c5}.xlsx        
+在职员工工资表2604_{6deae663-49de-4358-9b23-5fa2d86c0fe8}.xls                 
+培训记录2 - CAP_{a0099861-1396-45d1-9e5d-a58abb44f2f7}.doc                 
+培训记录表（百利模板）_{9d6690c4-7f08-4c7c-ae1f-60ec2c86d6f3}.docx                
+花名册样版（新增人员，20260827导入系统用）_{adbe728a-4b59-4afa-9690-5a78264d9b48}.xls   
+花名册样版（新增人员，20260827导入系统用）_{d86eddd3-354e-4597-be93-4dfd1efc4028}.xls   
+
+
+

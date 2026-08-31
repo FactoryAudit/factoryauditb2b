@@ -1,0 +1,91 @@
+# GitHub Actions：自动构建并部署到 Cloudflare Workers（OpenNext）
+# 触发：push 到 main / 手动触发
+# 需要仓库 Secrets：
+#   CLOUDFLARE_API_TOKEN       Cloudflare API Token（权限：Workers Scripts Edit + Account Settings Read）
+#   CLOUDFLARE_ACCOUNT_ID      Cloudflare 账户 ID（dash.cloudflare.com 右下角）
+#   DATABASE_URL               Neon Pooled 连接串（应用运行时用）
+#   DATABASE_URL_UNPOOLED     Neon Direct 连接串（db push / seed 用）
+#   AUTH_SECRET                会话签名密钥
+#   NEXTAUTH_URL               https://factoryauditb2b.com
+#   NEXT_PUBLIC_WHATSAPP_NUMBER（可选）
+#   GOOGLE_SITE_VERIFICATION / BING_SITE_VERIFICATION（可选）
+#   DEEPSEEK_API_KEY（可选，缺省 AI 降级本地规则引擎）
+#   GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET（可选，登录）
+#   MAIL_PROVIDER / MAIL_HTTP_KEY / MAIL_HTTP_URL / NOTIFY_ADMIN_EMAIL / FROM_EMAIL（可选，邮件）
+name: Deploy to Cloudflare Workers
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: cloudflare-deploy
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Switch schema to PostgreSQL (Neon)
+        run: node scripts/switch-db.cjs postgres
+
+      - name: Push schema + seed (idempotent)
+        run: |
+          npx prisma db push
+          npx prisma generate
+          npm run db:seed
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DATABASE_URL_UNPOOLED: ${{ secrets.DATABASE_URL_UNPOOLED }}
+
+      - name: Build with OpenNext
+        run: npx @opennextjs/cloudflare@1.20.4 build
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+          NEXT_PUBLIC_WHATSAPP_NUMBER: ${{ secrets.NEXT_PUBLIC_WHATSAPP_NUMBER }}
+          GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
+          BING_SITE_VERIFICATION: ${{ secrets.BING_SITE_VERIFICATION }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+
+      - name: Set runtime secrets (idempotent)
+        run: |
+          echo "${{ secrets.DATABASE_URL }}" | npx wrangler secret put DATABASE_URL
+          echo "${{ secrets.AUTH_SECRET }}" | npx wrangler secret put AUTH_SECRET
+          echo "${{ secrets.NEXTAUTH_URL }}" | npx wrangler secret put NEXTAUTH_URL
+          echo "${{ secrets.DEEPSEEK_API_KEY }}" | npx wrangler secret put DEEPSEEK_API_KEY
+          echo "${{ secrets.GOOGLE_CLIENT_ID }}" | npx wrangler secret put GOOGLE_CLIENT_ID
+          echo "${{ secrets.GOOGLE_CLIENT_SECRET }}" | npx wrangler secret put GOOGLE_CLIENT_SECRET
+          echo "${{ secrets.GOOGLE_SITE_VERIFICATION }}" | npx wrangler secret put GOOGLE_SITE_VERIFICATION
+          echo "${{ secrets.BING_SITE_VERIFICATION }}" | npx wrangler secret put BING_SITE_VERIFICATION
+          echo "${{ secrets.MAIL_PROVIDER }}" | npx wrangler secret put MAIL_PROVIDER
+          echo "${{ secrets.MAIL_HTTP_KEY }}" | npx wrangler secret put MAIL_HTTP_KEY
+          echo "${{ secrets.MAIL_HTTP_URL }}" | npx wrangler secret put MAIL_HTTP_URL
+          echo "${{ secrets.NOTIFY_ADMIN_EMAIL }}" | npx wrangler secret put NOTIFY_ADMIN_EMAIL
+          echo "${{ secrets.FROM_EMAIL }}" | npx wrangler secret put FROM_EMAIL
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Deploy to Cloudflare Workers
+        run: npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" role="img" aria-label="FactoryAuditB2B">
+  <defs>
+    <linearGradient id="lightShield" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#DBEAFE"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 图标：浅色底 + 深蓝线条，适配深色背景 -->
+  <g transform="translate(2 4) scale(0.28)">
+    <path d="M 14 0 L 186 0 L 186 78 Q 186 178 100 200 Q 14 178 14 78 Z"
+          fill="url(#lightShield)" stroke="#60A5FA" stroke-width="3"/>
+    <g fill="#0B2D5B" stroke="#0B2D5B" stroke-width="4" stroke-linejoin="round">
+      <rect x="50" y="80" width="44" height="62"/>
+      <rect x="94" y="56" width="26" height="86"/>
+      <rect x="120" y="98" width="36" height="44"/>
+      <rect x="140" y="40" width="12" height="28"/>
+    </g>
+    <g fill="#38BDF8">
+      <rect x="58" y="90" width="8" height="8"/>
+      <rect x="78" y="90" width="8" height="8"/>
+      <rect x="58" y="110" width="8" height="8"/>
+      <rect x="78" y="110" width="8" height="8"/>
+      <rect x="100" y="68" width="6" height="6"/>
+      <rect x="100" y="82" width="6" height="6"/>
+      <rect x="100" y="96" width="6" height="6"/>
+      <rect x="128" y="108" width="6" height="6"/>
+      <rect x="128" y="122" width="6" height="6"/>
+    </g>
+    <g transform="translate(95 100)">
+      <circle cx="0" cy="0" r="36" fill="#0F172A"
+              stroke="#60A5FA" stroke-width="7"/>
+      <path d="M -14 2 L -4 12 L 14 -8" fill="none"
+            stroke="#4ADE80" stroke-width="7"
+            stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="25" y1="25" x2="52" y2="52"
+            stroke="#60A5FA" stroke-width="9" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- 文字：整体白色，B2B 用亮蓝区分 -->
+  <text x="72" y="43"
+        font-family="Poppins, Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+        font-size="30" font-weight="700" letter-spacing="-0.8">
+    <tspan fill="#FFFFFF">FactoryAudit</tspan><tspan fill="#60A5FA">B2B</tspan>
+  </text>
+</svg>

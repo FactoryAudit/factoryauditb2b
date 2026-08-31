@@ -1,0 +1,2162 @@
+{
+  "brand": {
+    "name": "FactoryAuditB2B",
+    "tagline": "面向全球采购商的供应商情报与核验平台",
+    "eva": "评估。核验。验厂。",
+    "scope": "覆盖中国及东南亚的供应商核验与工厂验厂服务。",
+    "positioning": "我们帮助全球采购商在下订单之前评估供应商、核验工厂并降低采购风险。"
+  },
+  "nav": {
+    "tools": "工具",
+    "suppliers": "供应商",
+    "rfq": "询价",
+    "audits": "验厂",
+    "inspections": "资源",
+    "logistics": "物流",
+    "resources": "资源",
+    "pricing": "价格",
+    "postRfq": "发布询价",
+    "requestAudit": "申请验厂",
+    "language": "语言",
+    "trainingPlans": "培训方案",
+    "about": "关于我们",
+    "services": "服务",
+    "menu": {
+      "title": "服务",
+      "verification": "供应商核查",
+      "verificationDesc": "在你付款之前确认公司、厂区和文件。",
+      "factoryAudit": "工厂验厂",
+      "factoryAuditDesc": "按你的买家要求的标准到现场评估。",
+      "inspection": "验货",
+      "inspectionDesc": "生产中期与出货前的检验。",
+      "sourcing": "采购",
+      "sourcingDesc": "发布 RFQ，接触我们可以核验的供应商。",
+      "improvement": "供应商改进",
+      "improvementDesc": "把验厂发现项转化为整改与培训。"
+    }
+  },
+  "footer": {
+    "platform": "平台",
+    "resources": "资源",
+    "coverage": "覆盖地区",
+    "logistics": "物流",
+    "allTools": "全部免费工具",
+    "riskCalculator": "风险计算器",
+    "verificationChecklist": "验证清单",
+    "supplierVerification": "供应商验证",
+    "factoryAudit": "工厂审核",
+    "knowledgeBase": "资源中心",
+    "pricing": "价格",
+    "admin": "管理后台",
+    "tagline": "面向全球采购商的供应商情报与核验平台。评估。核验。验厂。",
+    "copyright": "© 2026 FactoryAuditB2B.com。我们不出售证书。香港、台湾、澳门均为中国的一部分。",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "trainingPlans": "培训方案",
+    "about": "关于我们",
+    "coverageOnly": "第一阶段覆盖范围。更多国家将随审核员资源落实后增加。",
+    "verificationService": "供应商核查",
+    "inspectionService": "验货",
+    "sourcingService": "采购",
+    "improvementService": "供应商改进",
+    "allServices": "全部服务",
+    "containerCalculator": "装柜量计算器",
+    "trustCenter": "信任中心",
+    "operatedBy": "FactoryAuditB2B 是由 {entity} 运营的平台与品牌。",
+    "registeredBusiness": "中国注册经营主体"
+  },
+  "home": {
+    "badge": "面向全球采购商的供应商情报",
+    "h1": "在打款之前，先查清你的供应商",
+    "lead": "评估供应商、核验工厂，降低中国及东南亚采购风险。",
+    "ctaScore": "免费评估供应商",
+    "ctaRfq": "发布询价",
+    "ctaAudit": "申请验厂",
+    "services": "我们提供供应商验证、工厂审核、验货与货运服务。",
+    "toolsTitle": "评估供应商的免费工具",
+    "toolsLead": "无需注册，分数本身也不设邮箱门槛。",
+    "value1Title": "「已验证」到底意味着什么",
+    "value1Body": "只有在核对工商登记、确认厂房真实存在、并审阅审核文件之后，供应商才会被标记为已验证。",
+    "value2Title": "结论由人来做",
+    "value2Body": "软件负责筛出明显问题，验证与审核的最终结论由我们的审核员出具，报告上会署名。",
+    "value3Title": "每一次核查都会留档",
+    "value3Body": "每次验证与审核都会留在该供应商的档案里。企业无法在我们这里悄悄清空历史记录。",
+    "sub": "用免费工具评估供应商风险、检查核验完备度、为验厂做准备。需要有人到现场时，申请独立的供应商核查或工厂验厂。",
+    "ctaPrimary": "评估供应商风险",
+    "ctaSecondary": "核验供应商",
+    "ctaHighIntent": "申请工厂验厂",
+    "evaTitle": "评估。核验。验厂。",
+    "evaLead": "从网上找到的一家供应商，到一家你可以放心付款的供应商，中间三步。",
+    "evaluateTitle": "评估",
+    "evaluateBody": "在下订单之前评估供应商风险。",
+    "evaluateCta": "评估供应商",
+    "verifyTitle": "核验",
+    "verifyBody": "核查公司信息、文件、工厂详情与现有证据。",
+    "verifyCta": "核验供应商",
+    "auditTitle": "验厂",
+    "auditBody": "获得独立的现场工厂验厂，含发现项、证据与书面报告。",
+    "auditCta": "申请验厂",
+    "howTitle": "流程怎么走",
+    "howLead": "从一个公司名，到一个内部能讲得通的结论。",
+    "howSteps": [
+      {
+        "title": "评估",
+        "body": "用风险计算器或核查清单跑一遍这家供应商。你会得到一个分数，以及缺什么的清单。"
+      },
+      {
+        "title": "核验",
+        "body": "把公司名称和地址发给我们。我们确认登记信息、厂区和文件。"
+      },
+      {
+        "title": "验厂",
+        "body": "订单值得的情况下，我们按你买家要求的标准把审核员派到现场。"
+      },
+      {
+        "title": "决策",
+        "body": "你会拿到发现项、证据和书面报告。然后下单、重谈，或者放弃。"
+      }
+    ],
+    "coverageTitle": "我们在哪些地方核验供应商",
+    "coverageLead": "覆盖中国及东南亚的现场供应商核查与工厂验厂支持。",
+    "coveragePhase": "第一阶段覆盖",
+    "coverageService1": "供应商核查",
+    "coverageService2": "工厂验厂",
+    "coverageService3": "验货",
+    "coverageCta": "查看覆盖范围",
+    "whyTitle": "采购商为什么用 FactoryAuditB2B",
+    "whyLead": "相比一个目录或一张表格，我们做的四件事不一样。",
+    "why1Title": "真实证据",
+    "why1Body": "每一项发现都对应一份文件、一张照片或一条带日期的记录。证据缺失时，报告会写明。",
+    "why2Title": "透明方法",
+    "why2Body": "风险分数来自权重公开的规则引擎。你可以看到是哪个答案把分数推上去的。",
+    "why3Title": "独立核验",
+    "why3Body": "我们不卖证书，也不向工厂收费。我们的职责是如实描述我们看到的情况。",
+    "why4Title": "实用报告",
+    "why4Body": "你拿到的是可以内部转发的书面报告，含风险摘要和我们建议的下一步。",
+    "guidesTitle": "采购商下单前会读的指南",
+    "guidesLead": "由实际执行这些核查的人写的操作指南。",
+    "casesTitle": "核查实际会查出什么",
+    "casesLead": "供应商名称已隐去。发现项与结论均来自真实项目。",
+    "bottomTitle": "已经有供应商了？",
+    "bottomLead": "把公司名称和地址发给我们。我们会告诉你能确认什么、不能确认什么，以及费用多少。",
+    "bottomCta": "核验这家供应商",
+    "otherRegionTitle": "其他地区",
+    "otherRegionBody": "没看到你的国家？我们接受任何地区的询价，并按范围、地点与合适的验货资源逐单评估。",
+    "otherRegionCta": "告诉我们你在哪里采购"
+  },
+  "coverage": {
+    "badge": "覆盖范围",
+    "h1": "我们在哪些地方核验供应商",
+    "lead": "覆盖中国及东南亚的现场供应商核查与工厂验厂支持。第一阶段覆盖三个国家，其余国家在审核员资源确认后逐步加入。",
+    "phase1": "第一阶段",
+    "phaseNext": "后续计划",
+    "countryCta": "{country}覆盖范围",
+    "anotherCountryTitle": "需要在其他国家核验？",
+    "anotherCountryLead": "告诉我们你在哪里采购。如果当地还没有确认的审核员资源，我们会直说，而不是猜。",
+    "anotherCountryCta": "申请核验",
+    "metaTitle": "我们在哪些地方核验供应商",
+    "metaDesc": "覆盖中国、越南、泰国的供应商核查与工厂验厂，包含各国采购风险、核查要点与验厂注意事项。"
+  },
+  "countryHub": {
+    "profileTitle": "制造业概况",
+    "risksTitle": "典型采购风险",
+    "verificationTitle": "供应商核查要点",
+    "auditTitle": "工厂验厂要点",
+    "industriesTitle": "相关行业",
+    "logisticsTitle": "本地物流注意事项",
+    "standardsTitle": "相关标准",
+    "hubsTitle": "主要产业带",
+    "registryTitle": "企业登记信息查询渠道",
+    "servicesTitle": "可提供的服务",
+    "toolsTitle": "相关工具",
+    "faqTitle": "常见问题",
+    "breadcrumb": "国家",
+    "ctaTitle": "需要核查{country}的供应商？",
+    "ctaLead": "把公司名称和地址发给我们。在你付任何款项之前，我们会确认登记信息、厂区和文件。",
+    "ctaPrimary": "核验{country}供应商",
+    "ctaSecondary": "申请{country}工厂验厂",
+    "suppliersTitle": "已收录的{country}供应商",
+    "suppliersEmpty": "{country}暂时没有收录供应商。这不代表我们不能核查。把公司名称发给我们，我们直接跑核查。",
+    "metaDesc": "{country}供应商核查与工厂验厂：制造业概况、典型采购风险、核查与验厂要点、行业、物流与常见问题。"
+  },
+  "serviceCountry": {
+    "quickAnswerTitle": "快速回答",
+    "scopeTitle": "服务内容",
+    "deliverablesTitle": "交付物",
+    "processTitle": "流程",
+    "pricingTitle": "定价方式",
+    "contextTitle": "{country}的{service}：这里有什么不一样",
+    "ctaTitle": "申请{country}{service}",
+    "ctaLead": "告诉我们供应商和你的要求。我们会回复范围、时间和报价。",
+    "ctaPrimary": "申请报价",
+    "ctaSecondary": "先免费给这家供应商打分",
+    "relatedTitle": "相关页面",
+    "breadcrumb": "服务",
+    "metaDesc": "{country}{service}。范围、交付物、流程与定价方式，以及{country}本地必须做的核查动作。",
+    "scopedQ": "在{country}具体核查什么？",
+    "scopedA": "我们确认登记、注册地址、生产地点，以及{country}特有的检查项。具体范围取决于订单类型与适用标准，我们在报价时确认。",
+    "timelineQ": "{country}需要多久？",
+    "timelineA": "文件核查通常两个工作日内完成。含现场走访的方案在{country}主要制造枢纽通常一周内可排期，枢纽城市之外需要更长前置时间。"
+  },
+  "servicesIndex": {
+    "badge": "服务",
+    "h1": "供应商核查、验厂与验货服务",
+    "lead": "免费工具告诉你该查什么，这些服务负责把它查完。以下全部按项目报价，没有任何需要整体购买的捆绑套餐。",
+    "servicesTitle": "我们做什么",
+    "servicesLead": "按你当前所处的阶段选择。",
+    "items": {
+      "verification": {
+        "title": "供应商核查",
+        "desc": "在你付定金之前确认公司、厂区和文件。",
+        "href": "/services/supplier-verification"
+      },
+      "factoryAudit": {
+        "title": "工厂验厂",
+        "desc": "审核员到现场，按你的买家要求的标准审核，发现项分级、整改项列明。",
+        "href": "/factory-audit/request"
+      },
+      "inspection": {
+        "title": "验货",
+        "desc": "生产中期与出货前检验，按人天报价。",
+        "href": "/custom-services"
+      },
+      "sourcing": {
+        "title": "采购",
+        "desc": "发布 RFQ，匹配我们可以核验的供应商，只在成交订单上收佣金。",
+        "href": "/rfq"
+      },
+      "improvement": {
+        "title": "供应商改进",
+        "desc": "把验厂发现项转化为整改、培训和复审。不是独立的培训业务。",
+        "href": "/services/supplier-improvement"
+      }
+    },
+    "coverageTitle": "按国家查看",
+    "coverageLead": "各国专属的核查与验厂页面，写明当地真正重要的检查项。",
+    "notSureTitle": "不确定需要哪一个？",
+    "notSureLead": "先跑一遍免费的风险计算器。大约三分钟，它会告诉你缺什么。",
+    "notSureCta": "评估供应商风险",
+    "metaTitle": "供应商核查、工厂验厂与验货服务",
+    "metaDesc": "覆盖中国、越南、泰国的独立供应商核查、工厂验厂、验货与采购支持。按项目报价。"
+  },
+  "resourcesIndex": {
+    "badge": "资源",
+    "h1": "供应商情报资源中心",
+    "lead": "用于评估供应商、核查文件、准备验厂和降低采购风险的实用指南与工具。由实际执行这些核查的人撰写。",
+    "categoriesTitle": "按主题浏览",
+    "categoriesLead": "每个主题下列出属于它的指南、工具和服务。",
+    "toolsTitle": "工具",
+    "toolsLead": "免费，无需注册。",
+    "cat": {
+      "verification": {
+        "title": "供应商核查",
+        "desc": "如何确认公司真实、厂区真实、文件站得住。"
+      },
+      "audit": {
+        "title": "工厂验厂",
+        "desc": "标准、检查表、审核员看什么、怎么读报告。"
+      },
+      "risk": {
+        "title": "供应商风险",
+        "desc": "评分框架、权重设定，以及拿到风险分数之后怎么行动。"
+      },
+      "china": {
+        "title": "中国采购",
+        "desc": "中国供应商的国别检查项、登记查询渠道与物流。"
+      },
+      "sea": {
+        "title": "东南亚采购",
+        "desc": "越南与泰国的采购背景、风险与验厂注意事项。"
+      },
+      "compliance": {
+        "title": "合规",
+        "desc": "社会责任合规、产品合规，以及每个标准实际覆盖什么。"
+      },
+      "tools": {
+        "title": "工具",
+        "desc": "免费的计算器、检查表和评分卡。"
+      }
+    },
+    "metaTitle": "供应商情报资源中心",
+    "metaDesc": "关于供应商核查、工厂验厂、供应商风险、中国与东南亚采购及合规的指南与工具。"
+  },
+  "toolsIndex": {
+    "badge": "免费工具",
+    "h1": "免费的供应商与验厂工具",
+    "lead": "用于评估供应商、核查文件、准备验厂和降低采购风险的实用工具。无需注册，分数本身也不设邮箱门槛。",
+    "flagship": "旗舰工具",
+    "ctaTitle": "希望这些检查由我们来做？",
+    "ctaLead": "我们的核查服务会确认登记信息、厂区、产能、质量与合规，并在你付款之前给出书面报告。",
+    "ctaPrimary": "供应商核查服务",
+    "ctaSecondary": "申请工厂验厂",
+    "metaTitle": "免费的供应商与验厂工具",
+    "metaDesc": "免费工具：评估供应商风险、检查核验完备度、生成验厂检查表、分析验厂报告。无需注册。"
+  },
+  "toolCards": {
+    "riskCalculator": {
+      "title": "供应商风险计算器",
+      "desc": "按六个加权维度，为任意供应商打出 0 到 100 的分数。"
+    },
+    "verificationChecklist": {
+      "title": "供应商验证清单",
+      "desc": "六个阶段共 29 项核查，下单前逐条过一遍。"
+    },
+    "riskAssessment": {
+      "title": "供应商风险评估",
+      "desc": "填入供应商信息，得到初步风险分与证据状态。"
+    },
+    "auditChecklist": {
+      "title": "工厂审核清单生成器",
+      "desc": "按行业与审核类型生成对应的审核清单。"
+    },
+    "supplierScorecard": {
+      "title": "供应商评估计分卡",
+      "desc": "自己设定权重，再据此给供应商打分。"
+    },
+    "auditReportAnalyzer": {
+      "title": "审核报告分析器",
+      "desc": "检查审核报告中的缺项、矛盾之处与风险信号。"
+    },
+    "documentChecker": {
+      "title": "供应商文件核对器",
+      "desc": "交叉核对供应商文件与证书是否一致。"
+    },
+    "containerCalculator": {
+      "title": "集装箱装柜计算器",
+      "desc": "算出 20GP、40HQ 等柜型每柜能装多少箱，以及需要几个柜。"
+    },
+    "rfqGenerator": {
+      "title": "询价单生成器",
+      "desc": "用一句话需求生成一份专业的询价单。"
+    },
+    "personalizedService": {
+      "title": "个性化服务",
+      "desc": "提出您的具体需求，我们为您定制审核或验证方案。"
+    }
+  },
+  "risk": {
+    "ui": {
+      "stepOf": "第 {n} 步，共 6 步",
+      "back": "上一步",
+      "next": "下一步",
+      "calculate": "计算风险分",
+      "answerAll": "答完所有题目后才能看到分数",
+      "scoreSuffix": "风险分",
+      "breakdownTitle": "风险来自哪里",
+      "weightNote": "占总分的 {weight}%",
+      "factorsTitle": "哪些回答拉高了分数",
+      "actionsTitle": "接下来该做什么",
+      "editAnswers": "修改答案",
+      "startOver": "重新开始",
+      "downloadReport": "下载完整报告",
+      "print": "打印",
+      "notAnswered": "未作答",
+      "reportTitle": "供应商风险报告",
+      "level": {
+        "LOW": "低风险",
+        "MODERATE": "中等风险",
+        "ELEVATED": "偏高风险",
+        "HIGH": "高风险",
+        "CRITICAL": "极高风险"
+      },
+      "form": {
+        "title": "留下邮箱，获取完整报告",
+        "firstName": "姓名",
+        "company": "公司",
+        "email": "工作邮箱",
+        "country": "国家 / 地区",
+        "sourcing": "采购品类",
+        "supplierName": "供应商名称",
+        "supplierWebsite": "供应商网址",
+        "submit": "发送报告给我",
+        "sending": "发送中",
+        "done": "已收到。报告已在下方生成，同时会发送到你的邮箱。",
+        "error": "出错了，请重试。"
+      },
+      "disclaimer": "本评分依据你所填写的答案得出，仅作初步筛查，不构成法律或财务建议，也不代表我们已独立核实供应商的任何陈述。",
+      "answeredInStep": "本节已答 {done}/{total}"
+    },
+    "page": {
+      "badge": "免费工具",
+      "h1": "供应商风险计算器",
+      "lead": "回答 22 个关于供应商的问题，得到 0 到 100 的分数，并看清构成这个分数的六个维度。",
+      "card1Title": "分数怎么来的，你看得见",
+      "card1Body": "六个维度各有权重并单独展示，哪一项拉高了分数一目了然。",
+      "card2Title": "大约三分钟",
+      "card2Body": "无需注册，看分数也不用留邮箱。",
+      "card3Title": "会告诉你要查什么",
+      "card3Body": "结果会列出拉高你分数的那些答案，以及对应的处理建议。",
+      "relatedTitle": "相关工具",
+      "faqTitle": "常见问题",
+      "metaTitle": "供应商风险计算器",
+      "metaDesc": "从公司、质量、合规、生产、供应链与文件六个维度，为供应商打出 0 到 100 的风险分。免费，无需注册。"
+    },
+    "dimensions": {
+      "company": {
+        "label": "公司风险",
+        "short": "公司",
+        "description": "经营年限、注册地址是否就是生产地址、股权结构能否追溯。"
+      },
+      "quality": {
+        "label": "质量风险",
+        "short": "质量",
+        "description": "质量控制是否有文件支撑、近期是否有外部审核、检验记录是否留存。"
+      },
+      "compliance": {
+        "label": "合规风险",
+        "short": "合规",
+        "description": "社会责任、环境、产品合规记录。我们只问你手上有什么，不强制要求某张证书。"
+      },
+      "production": {
+        "label": "生产风险",
+        "short": "生产",
+        "description": "产能是否匹配你的订单量、是否外发加工、是否做过同类产品。"
+      },
+      "supplychain": {
+        "label": "供应链风险",
+        "short": "供应链",
+        "description": "原材料来源、单一来源依赖程度，以及所报交期是否靠得住。"
+      },
+      "documentation": {
+        "label": "文件风险",
+        "short": "文件",
+        "description": "营业执照、厂房地址、证书、审核报告与测试报告能否真正拿得出来。"
+      }
+    },
+    "questions": {
+      "company_years": "这家公司经营多久了？",
+      "company_address": "厂房地址是否已核实？",
+      "company_type": "它属于哪类企业？",
+      "company_ownership": "股权信息能否确认？",
+      "quality_qms": "是否有成文的质量管理体系（如 ISO 9001）？",
+      "quality_audit": "是否接受过第三方审核？",
+      "quality_incoming": "是否对来料进行检验？",
+      "quality_records": "是否留存质量记录？",
+      "comp_social": "是否有社会责任合规体系（如 BSCI、SMETA、SA8000）？",
+      "comp_env": "是否有环保合规记录？",
+      "comp_product": "产品是否符合你所在市场的准入要求（如 CE、UL）？",
+      "comp_ethics": "是否有成文的商业道德或反腐败政策？",
+      "prod_capacity": "产能是否满足你的订单量？",
+      "prod_subcontract": "是否存在外发加工？",
+      "prod_experience": "是否生产过同类产品？",
+      "sc_material": "原材料供应是否稳定？",
+      "sc_single": "对单一材料来源的依赖程度如何？",
+      "sc_leadtime": "所报交期是否可靠？",
+      "doc_registration": "是否提供了营业执照？",
+      "doc_address": "厂房地址是否有文件佐证？",
+      "doc_certificates": "证书与审核报告能否提供？",
+      "doc_test": "产品测试报告能否提供？"
+    },
+    "options": {
+      "company_years": {
+        "10plus": "10 年以上",
+        "5to10": "5 至 10 年",
+        "3to5": "3 至 5 年",
+        "1to2": "1 至 2 年",
+        "unknown": "不清楚"
+      },
+      "company_address": {
+        "yes": "是",
+        "partial": "部分核实",
+        "no": "否",
+        "unknown": "不清楚"
+      },
+      "company_type": {
+        "manufacturer": "生产厂家",
+        "both": "生产兼贸易",
+        "trading": "贸易公司",
+        "unknown": "不清楚"
+      },
+      "company_ownership": {
+        "yes": "能",
+        "no": "不能",
+        "unknown": "不清楚"
+      },
+      "quality_qms": {
+        "yes": "有",
+        "partial": "部分有",
+        "no": "没有",
+        "unknown": "不清楚"
+      },
+      "quality_audit": {
+        "within12": "12 个月内",
+        "within3y": "3 年内",
+        "older": "超过 3 年",
+        "never": "从未做过",
+        "unknown": "不清楚"
+      },
+      "quality_incoming": {
+        "yes": "有",
+        "partial": "部分有",
+        "no": "没有",
+        "unknown": "不清楚"
+      },
+      "quality_records": {
+        "yes": "有",
+        "partial": "部分有",
+        "no": "没有",
+        "unknown": "不清楚"
+      },
+      "comp_social": {
+        "comprehensive": "体系完整",
+        "partial": "部分建立",
+        "none": "没有",
+        "unknown": "不清楚"
+      },
+      "comp_env": {
+        "comprehensive": "体系完整",
+        "partial": "部分建立",
+        "none": "没有",
+        "unknown": "不清楚"
+      },
+      "comp_product": {
+        "inplace": "齐备",
+        "partial": "部分齐备",
+        "missing": "缺失",
+        "unknown": "不清楚"
+      },
+      "comp_ethics": {
+        "documented": "有文件",
+        "partial": "部分有",
+        "none": "没有",
+        "unknown": "不清楚"
+      },
+      "prod_capacity": {
+        "yes": "满足",
+        "partial": "部分满足",
+        "no": "不满足",
+        "unknown": "不清楚"
+      },
+      "prod_subcontract": {
+        "no": "没有",
+        "partial": "有，且已告知",
+        "yes": "有，且未告知",
+        "unknown": "不清楚"
+      },
+      "prod_experience": {
+        "strong": "丰富",
+        "moderate": "一般",
+        "limited": "有限",
+        "none": "没有"
+      },
+      "sc_material": {
+        "stable": "稳定",
+        "partial": "基本稳定",
+        "unstable": "不稳定",
+        "unknown": "不清楚"
+      },
+      "sc_single": {
+        "low": "低",
+        "moderate": "中",
+        "high": "高"
+      },
+      "sc_leadtime": {
+        "low": "低",
+        "moderate": "中",
+        "high": "高"
+      },
+      "doc_registration": {
+        "yes": "有",
+        "partial": "部分有",
+        "no": "没有",
+        "unknown": "不清楚"
+      },
+      "doc_address": {
+        "yes": "有",
+        "partial": "部分有",
+        "no": "没有",
+        "unknown": "不清楚"
+      },
+      "doc_certificates": {
+        "yes": "有",
+        "partial": "部分有",
+        "no": "没有",
+        "unknown": "不清楚"
+      },
+      "doc_test": {
+        "yes": "有",
+        "partial": "部分有",
+        "no": "没有",
+        "unknown": "不清楚"
+      }
+    },
+    "factors": {
+      "company_address": "厂房地址尚未核实。",
+      "company_ownership": "股权信息无法确认。",
+      "quality_qms": "没有成文的质量管理体系。",
+      "quality_audit": "近三年没有第三方审核。",
+      "comp_social": "没有社会责任合规记录。",
+      "prod_capacity": "产能未经核实。",
+      "prod_subcontract": "存在未告知的外发加工。",
+      "doc_registration": "营业执照无法核实。",
+      "doc_address": "没有厂房地址文件。"
+    },
+    "recommendations": {
+      "LOW": [
+        "把已收集的文件归档，每年更新一次。",
+        "若订单量大幅上升，重新做一次评估。"
+      ],
+      "MODERATE": [
+        "下单前索取营业执照，并确认厂房地址。",
+        "要求对方提供最近一次审核报告与质量记录。",
+        "先下一笔试单，金额控制在亏损可承受的范围内。"
+      ],
+      "ELEVATED": [
+        "通过独立渠道核实注册信息与厂房地址，不要只看供应商自己给的文件。",
+        "要求提供近期的第三方审核报告与产品测试报告。",
+        "在下达大额订单前，先安排一次工厂审核。"
+      ],
+      "HIGH": [
+        "优先核实注册信息与厂房地址，其余先放一放。",
+        "索取审核报告与质量文件，并核对其出具日期。",
+        "支付定金前先安排工厂审核。",
+        "如仍要继续，先小批量下单，验货合格后再放大。"
+      ],
+      "CRITICAL": [
+        "暂不付款。先核实企业身份，再谈其他。",
+        "确认法律主体、厂房地址与工商登记。",
+        "委托做一次工厂审核，并对该企业做背景调查。",
+        "在疑问澄清之前，不要支付预付款。"
+      ]
+    },
+    "ctas": {
+      "LOW": {
+        "headline": "按你填写的答案，这家供应商风险较低。",
+        "primary": "获取完整报告"
+      },
+      "MODERATE": {
+        "headline": "下单前有几点值得再核实一下。",
+        "primary": "获取完整报告",
+        "secondary": "逐条过一遍验证清单"
+      },
+      "ELEVATED": {
+        "headline": "下单前，建议先对这家供应商做一次核查。",
+        "primary": "申请供应商验证",
+        "secondary": "获取完整报告"
+      },
+      "HIGH": {
+        "headline": "下单前请先核实这家供应商。",
+        "primary": "申请供应商验证",
+        "secondary": "获取完整报告"
+      },
+      "CRITICAL": {
+        "headline": "在完成独立核查之前，不要向这家供应商付款。",
+        "primary": "先做验证再付款",
+        "secondary": "获取完整报告"
+      }
+    },
+    "faq": [
+      {
+        "q": "这个计算器测算的是什么？",
+        "a": "它从公司、质量、合规、生产、供应链与文件六个维度，为供应商打出 0 到 100 的分数。分数越高，风险越大。"
+      },
+      {
+        "q": "这个分数等于最终验证结论吗？",
+        "a": "不是。分数是基于你所填信息的初步筛查，不能替代独立验证、工厂审核或法律意见。"
+      },
+      {
+        "q": "权重是怎么定的？",
+        "a": "公司 15%、质量 20%、合规 20%、生产 15%、供应链 15%、文件 15%。权重固定，并会在结果页上列明。"
+      },
+      {
+        "q": "使用需要付费吗？",
+        "a": "不需要。分数免费。如需书面报告，留下邮箱即可，我们免费发送。验证与审核是付费服务，但可选。"
+      },
+      {
+        "q": "能同时比较多家供应商吗？",
+        "a": "暂时不能。目前请对每家供应商分别运行并保存报告，横向对比功能正在开发中。"
+      }
+    ]
+  },
+  "checklist": {
+    "ui": {
+      "progressTitle": "核查进度",
+      "complete": "已完成 {done} / {total}",
+      "criticalOpen": "还有 {n} 项关键项未完成",
+      "criticalOpenPlural": "还有 {n} 项关键项未完成",
+      "criticalCleared": "关键项已全部完成",
+      "print": "打印或另存为 PDF",
+      "reset": "重置",
+      "criticalTag": "关键项",
+      "verdictOpenTitle": "仍有 {n} 项关键项待完成",
+      "verdictOpenTitlePlural": "仍有 {n} 项关键项待完成",
+      "verdictOpenBody": "请在下单或付款前补齐这些项。贸易公司冒充工厂，往往就是在这些检查上露馅。",
+      "verdictAllTitle": "全部核查完成",
+      "verdictAllBody": "你已完成全部条目。请将记录归入供应商档案，并随采购量增长定期复核。",
+      "verdictCriticalDoneTitle": "关键项已全部完成",
+      "verdictCriticalDoneBody": "风险最高的检查已过关。补完其余条目即可形成完整档案。",
+      "ctaOutsource": "把这些核查交给我们做",
+      "disclaimer": "本清单仅供自查，不构成对任何供应商的独立核实。如需独立核实，请使用第三方验证服务。",
+      "submitReport": "生成评估报告",
+      "reportTitle": "评估报告",
+      "reportIntro": "根据六个阶段共 29 项检查，本报告汇总已确认项、仍缺失的关键项，以及在你付定金或尾款前的建议。",
+      "completionLine": "完成度：{done} / {total}（{pct}%）",
+      "criticalStatus": "关键项仍有 {open} / {total} 项未完成",
+      "criticalStatusAllDone": "全部关键项均已确认。",
+      "missingItemsTitle": "以下关键项仍需确认",
+      "recommendationTitle": "建议",
+      "recPass": "可继续推进 — 全部关键检查均已确认。建议加 1 天工厂验厂或出货前验货作为最后一道关。",
+      "recConditional": "谨慎推进 — 上述关键项必须在付定金前补齐。同时在付款条款上加保护，并加一次出货前验货。",
+      "recFail": "暂缓 — 关键项未确认过多，与此订单规模不匹配。建议要么委托完整供应商核查 + 工厂验厂，要么换备选供应商。",
+      "ctaOutsourceTitle": "需要我们代为完成这些核查？",
+      "ctaOutsourceBody": "把供应商信息发给我们，我们将在 2 个工作日内返回书面供应商核查报告，含证据与风险摘要。"
+    },
+    "page": {
+      "badge": "免费工具",
+      "h1": "供应商验证清单",
+      "lead": "六个阶段共 29 项核查。下单或付款前逐条过一遍，完成后可打印归档。",
+      "card1Title": "六个阶段",
+      "card1Body": "企业身份、厂房、质量、合规、商务条款与历史记录。",
+      "card2Title": "标出关键项",
+      "card2Body": "贸易公司冒充工厂，往往就是在这些检查上露馅。",
+      "card3Title": "可直接打印",
+      "card3Body": "完成后另存为 PDF，归入供应商档案。",
+      "relatedTitle": "相关工具",
+      "faqTitle": "常见问题",
+      "metaTitle": "供应商验证清单",
+      "metaDesc": "免费的逐步核查清单，覆盖企业身份、厂房能力、质量、合规、商务条款与历史记录。可勾选、记录进度并打印归档。"
+    },
+    "criticalItems": [
+      "id_legal",
+      "id_regno",
+      "id_registry",
+      "fa_address",
+      "fa_visit",
+      "fa_type",
+      "qm_system",
+      "qm_test",
+      "cp_product",
+      "cm_contract",
+      "cm_spec"
+    ],
+    "stages": [
+      {
+        "key": "identity",
+        "title": "1. 企业身份与工商登记",
+        "desc": "先确认报价背后的法律主体是谁。",
+        "items": {
+          "id_legal": "公司法定名称与营业执照一致",
+          "id_regno": "已获取营业执照注册号",
+          "id_licence": "已收到清晰的营业执照副本",
+          "id_registry": "登记信息已与官方或第三方数据源交叉核对",
+          "id_owner": "已确认法定代表人与股权结构"
+        }
+      },
+      {
+        "key": "factory",
+        "title": "2. 厂房与生产能力",
+        "desc": "确认厂房真实存在，且确实做得了你的产品。",
+        "items": {
+          "fa_address": "厂房地址已确认，且与营业执照一致",
+          "fa_visit": "已取得现场照片、视频或实时视频走访",
+          "fa_type": "已确认是生产厂家还是贸易公司",
+          "fa_equipment": "已收到主要设备清单",
+          "fa_capacity": "月产能已说明，且与订单量相符",
+          "fa_subcontract": "外发加工情况已告知，或已确认不存在"
+        }
+      },
+      {
+        "key": "quality",
+        "title": "3. 质量管理",
+        "desc": "确认质量是一套体系，而不只是一句承诺。",
+        "items": {
+          "qm_system": "有成文的质量管理体系（如 ISO 9001）",
+          "qm_incoming": "有来料检验流程",
+          "qm_inprocess": "有过程检验与成品检验记录",
+          "qm_test": "有具备资质实验室出具的产品测试报告",
+          "qm_nc": "有不合格品处理与纠正措施流程"
+        }
+      },
+      {
+        "key": "compliance",
+        "title": "4. 合规与社会责任",
+        "desc": "降低扣货、召回与买方审核不通过的风险。",
+        "items": {
+          "cp_social": "社会责任合规审核或管理体系（如 BSCI、SMETA）",
+          "cp_env": "环保合规文件",
+          "cp_product": "目标市场的产品准入要求（如 CE、UL）",
+          "cp_ethics": "商业道德或反腐败政策"
+        }
+      },
+      {
+        "key": "commercial",
+        "title": "5. 商务条款与合同",
+        "desc": "把出问题时的责任划分先写清楚。",
+        "items": {
+          "cm_contract": "已签署书面合同或形式发票",
+          "cm_spec": "产品规格、公差与包装要求已书面确认",
+          "cm_payment": "付款条件已约定，避免大额预付",
+          "cm_leadtime": "交期、最小起订量与贸易术语（如 Incoterms）已确认",
+          "cm_penalty": "已约定质量缺陷与延期交付的违约条款"
+        }
+      },
+      {
+        "key": "track",
+        "title": "6. 历史记录与口碑",
+        "desc": "过往表现比任何文件都更能预测未来。",
+        "items": {
+          "tr_export": "有向目标市场的出口记录",
+          "tr_refs": "至少两家可核实的客户推荐",
+          "tr_samples": "量产前已确认产前样",
+          "tr_disputes": "已查询纠纷、黑名单或不良记录"
+        }
+      }
+    ],
+    "faq": [
+      {
+        "q": "什么是供应商验证清单？",
+        "a": "下单前需要完成的一组文件与核查事项。它能证明这家公司是真实的法律主体、厂房确实存在且具备生产能力，并且质量、合规与商务条款均已书面确认。"
+      },
+      {
+        "q": "哪些检查最重要？",
+        "a": "关键项：营业执照与登记信息交叉核对、确认厂房地址、现场照片或实时视频等场地真实存在的证据、区分生产厂家与贸易公司、产品测试报告、目标市场准入合规，以及附产品规格的已签合同。"
+      },
+      {
+        "q": "全部勾选就等于这家供应商安全吗？",
+        "a": "不等于。这只是基于供应商所提供信息的自查，文件也可能造假。只有独立第三方验证或工厂审核，才能到现场核实这些说法。"
+      },
+      {
+        "q": "进度会保存吗？",
+        "a": "会。勾选状态保存在你的浏览器中，关掉页面后可继续。需要留档可打印或另存为 PDF。"
+      }
+    ]
+  },
+  "serviceVerification": {
+    "badge": "服务",
+    "h1": "供应商验证",
+    "lead": "在把钱打给一家素未谋面的工厂之前，先确认公司真实存在、厂房确有其地、产能说法站得住脚。",
+    "ctaPrimary": "申请验证",
+    "ctaSecondary": "先免费给这家供应商打个分",
+    "checksTitle": "我们核查什么",
+    "checksLead": "六个方面，每一项都附有可归档的证据。",
+    "checks": {
+      "legal": {
+        "title": "法律主体与工商登记",
+        "body": "营业执照、注册号与法定代表人，与官方及第三方登记数据源逐一核对。"
+      },
+      "site": {
+        "title": "厂房真实性与地址",
+        "body": "确认该地址确实存在厂房，并附照片、视频与定位证据，而不只是一张文件扫描件。"
+      },
+      "type": {
+        "title": "生产厂家还是贸易公司",
+        "body": "确认对方是实际生产还是转手销售，以及是否存在外发加工。"
+      },
+      "capability": {
+        "title": "生产能力",
+        "body": "对照你的产品与订单量，评估设备、人数、产能与出口经验。"
+      },
+      "quality": {
+        "title": "质量与合规体系",
+        "body": "质量管理文件、产品测试报告、目标市场准入合规与社会责任合规记录。"
+      },
+      "track": {
+        "title": "历史记录与风险信号",
+        "body": "出口记录、客户推荐，以及纠纷、黑名单等不良记录查询。"
+      }
+    },
+    "stepsTitle": "流程怎么走",
+    "stepsLead": "从初次接触到做出决定，共四步。",
+    "steps": [
+      {
+        "title": "把供应商信息发给我们",
+        "body": "公司名称、地址、网址与你的产品。无需签合同，也没有繁琐的开户流程。"
+      },
+      {
+        "title": "我们执行核查",
+        "body": "文件审阅，再配合实地或远程走访，视你选择的方案而定。"
+      },
+      {
+        "title": "你拿到书面报告",
+        "body": "结论附证据与风险摘要，可归档也可在内部传阅。"
+      },
+      {
+        "title": "你据此做决定",
+        "body": "重新谈条件、要求整改、追加一次完整审核，或者就此收手。"
+      }
+    ],
+    "deliverablesTitle": "你会收到什么",
+    "deliverables": [
+      "企业身份与登记核查结论",
+      "厂房地址与现场证据",
+      "生产厂家 / 贸易公司判定",
+      "生产能力评估",
+      "质量与合规文件审阅",
+      "风险摘要与后续建议"
+    ],
+    "faqTitle": "常见问题",
+    "faq": [
+      {
+        "q": "这和工厂审核有什么区别？",
+        "a": "验证解决的是「这家供应商是谁、基本说法是否成立」，包括登记、场地、能力与文件。审核则是更深入的现场评估，覆盖流程、质量控制与是否符合 BSCI、SMETA 等标准。验证更快也更便宜，审核则查得更深。"
+      },
+      {
+        "q": "需要多长时间？",
+        "a": "文件类核查通常在几个工作日内完成。含实地走访的方案会更久，取决于所在地与排期。"
+      },
+      {
+        "q": "如果查出来是高风险怎么办？",
+        "a": "你会拿到证据与风险摘要，可以据此重新谈判、要求整改、追加完整审核，或在付款前及时止损。"
+      },
+      {
+        "q": "是否必须同时使用你们的其他服务？",
+        "a": "不用。验证是独立服务。验货、采购与货运都是可选的后续步骤，不存在捆绑。"
+      }
+    ],
+    "bottomTitle": "先快速摸个底再决定？",
+    "bottomLead": "用免费计算器先得到一个即时分数，再针对最关键的环节申请验证。",
+    "bottomPrimary": "打开免费计算器",
+    "bottomSecondary": "申请验证",
+    "metaTitle": "供应商验证服务",
+    "metaDesc": "独立的供应商验证服务，覆盖工商登记、厂房真实性、生产能力、质量体系、合规与出口记录。在下单或付款前拿到书面报告。"
+  },
+  "customServices": {
+    "badge": "服务",
+    "h1": "个性化审核与验证服务",
+    "lead": "告诉我们您的具体需求，我们为您定制审核、验货或验证方案，并提供清晰的报价与时间线。",
+    "metaTitle": "个性化审核与验证服务",
+    "metaDesc": "提交您的定制工厂审核、供应商验证或验货需求，我们的团队会在一个工作日内回复方案与下一步。",
+    "form": {
+      "labels": {
+        "firstName": "您的称呼",
+        "company": "公司名称",
+        "email": "工作邮箱",
+        "country": "国家或地区",
+        "message": "您需要什么？",
+        "messageHint": "请描述产品、目标市场、供应商所在地、希望遵循的审核标准以及任何特殊要求……",
+        "submit": "提交需求",
+        "submitting": "提交中…"
+      },
+      "success": "我们已收到您的需求，团队会在一个工作日内回复。",
+      "error": "提交失败，请重试或直接发邮件联系我们。"
+    },
+    "features": [
+      {
+        "title": "量身定做的范围",
+        "body": "根据您的产品、市场和风险关注点设计审核方案，而不是把您塞进固定套餐。"
+      },
+      {
+        "title": "单一联系人",
+        "body": "由一位专属经理负责范围确认、排期、审核团队和报告，避免跨部门信息丢失。"
+      },
+      {
+        "title": "书面跟进",
+        "body": "在工作开始前，您会收到包含范围、时间、交付物与费用的书面提案。"
+      }
+    ],
+    "bottomTitle": "不确定自己需要什么？",
+    "bottomLead": "先用供应商风险计算器快速打分，再带着结果回来定制验证或审核方案。"
+  },
+  "suppliers": {
+    "h1": "供应商目录",
+    "badge": "供应商目录",
+    "ctaTitle": "您是供应商？",
+    "ctaLead": "加入名录，发布工厂档案，通过平台审核，让从中国及亚洲采购的买家找到您。",
+    "ctaSteps": [
+      "注册",
+      "发布信息",
+      "平台审核",
+      "上架展示"
+    ],
+    "ctaPrimary": "申请进驻",
+    "metaTitle": "供应商目录 — 中国及东南亚已核验供应商",
+    "metaDesc": "浏览已有公司信息、产能与核验信息的供应商。收录量有限：如果你要找的供应商不在其中，请发布 RFQ。",
+    "lead": "浏览已有公司信息、产能与核验信息的供应商。",
+    "featuredTag": "精选",
+    "exampleNote": "以下是精选供应商，不是一个完整的交易市场。目前收录量还很小，如果你要找的供应商不在其中，发布 RFQ，我们负责寻源并核验。",
+    "filterCountry": "国家",
+    "filterIndustry": "行业",
+    "filterProduct": "产品",
+    "filterLevel": "核验等级",
+    "filterAudit": "验厂状态",
+    "filterAll": "全部",
+    "filterSubmit": "应用筛选",
+    "filterReset": "清除",
+    "countLabel": "已收录 {n} 家供应商",
+    "empty": "没有符合这些筛选条件的供应商。发布 RFQ，我们到目录之外去找。",
+    "riskLabel": "风险",
+    "businessTypeLabel": "类型",
+    "notListedTitle": "没找到你要的供应商？",
+    "notListedLead": "发布 RFQ。我们负责寻源，并在你付款之前核验公司与厂区，整体报价。",
+    "notListedCta": "发布 RFQ",
+    "claimTitle": "你是供应商吗？",
+    "claimLead": "加入目录、发布你的工厂档案、通过我们的核验，让从中国及东南亚采购的买家找到你。",
+    "claimPrimary": "以供应商身份加入"
+  },
+  "verification": {
+    "levelLabel": "核验等级",
+    "levels": [
+      "等级 0：未核验",
+      "等级 1：商业信息已核对",
+      "等级 2：文件已审阅",
+      "等级 3：工厂已核验",
+      "等级 4：工厂已验厂"
+    ],
+    "levelsShort": [
+      "未核验",
+      "商业信息已核对",
+      "文件已审阅",
+      "工厂已核验",
+      "工厂已验厂"
+    ],
+    "lastVerified": "最近核验",
+    "verifiedBy": "核验方",
+    "scope": "核验范围",
+    "whatVerified": "已核验内容",
+    "whatNotVerified": "未核验内容",
+    "evidence": "已审阅证据",
+    "expiry": "有效期至",
+    "noRecord": "暂无核验记录。",
+    "notIndependentlyVerified": "未经独立核验",
+    "noRecentAudit": "未找到近期第三方审核记录"
+  },
+  "evidence": {
+    "title": "认证与证据",
+    "lead": "我们把供应商交来的材料与我们实际核查过的证据分开。工厂提供了一份文件，不等于我们审阅并确认了它。",
+    "reviewed": "证据已审阅",
+    "provided": "文件已提供",
+    "notProvided": "未提供",
+    "verified": "已核验",
+    "partiallyVerified": "部分核验",
+    "unverified": "未核验",
+    "expired": "已过期",
+    "missing": "缺失",
+    "restricted": "原始文件：受限",
+    "validAtReview": "审阅时有效",
+    "statusNote": "「文件已提供」表示供应商把材料交给了我们；「证据已审阅」表示我们对着来源核对过。"
+  },
+  "supplierProfile": {
+    "trustSummary": "可信度摘要",
+    "verificationLevel": "核验等级",
+    "lastVerified": "最近核验",
+    "riskScore": "风险",
+    "verificationStatus": "核验状态",
+    "evidenceSummary": "证据摘要",
+    "auditHistory": "验厂记录",
+    "notCoveredTitle": "未覆盖范围",
+    "notCoveredLead": "当前核验范围之外的检查项。列出来，让你知道哪些还没看过。",
+    "whatVerifiedTitle": "我们核验了什么",
+    "whatVerifiedLead": "每一行都对应一条记录在案的核验事件。没有记录的，我们就说没有。",
+    "viewProfile": "查看档案",
+    "claimTitle": "这家公司是你的吗？",
+    "claimLead": "认领档案、保持记录准确，让买家看到你的核验状态。",
+    "claimCta": "认领这家企业档案",
+    "notSatisfiedTitle": "对这家供应商不满意？",
+    "notSatisfiedLead": "发布 RFQ，我们去找可以核验的替代供应商，你再决定。",
+    "notSatisfiedCta": "发布 RFQ",
+    "reverifyCta": "申请独立复核",
+    "manufacturer": "生产型工厂",
+    "tradingCompany": "贸易公司",
+    "established": "{year} 年成立",
+    "employees": "员工人数",
+    "exportMarkets": "出口市场",
+    "mainProducts": "主要产品",
+    "inspections": "{n} 次验货",
+    "noAudit": "暂无验厂记录。",
+    "featuredNote": "精选供应商。这不是交易市场挂牌，我们也不是任何交易的当事方。",
+    "backToDirectory": "返回供应商目录",
+    "overviewTitle": "公司概况",
+    "capabilitiesTitle": "能力标签",
+    "capabilitiesLead": "只有在我们核对过底层文件之后，标签才会标注为「证据已审阅」。未核对的标签反映的是供应商自述。",
+    "capabilitiesEmpty": "该供应商暂无能力标签记录。",
+    "productsTitle": "主要产品",
+    "evidenceAvailableTitle": "在档证据",
+    "evidenceEmpty": "暂无证据记录。申请核验后我们会建立记录。",
+    "noCertifications": "暂无认证记录。",
+    "employeesLabel": "员工人数",
+    "exportMarketsLabel": "出口市场",
+    "inspectionHistoryLabel": "验货记录",
+    "requestAudit": "申请工厂验厂",
+    "requestQuote": "申请报价",
+    "scopeTitle": "核验范围",
+    "lastUpdated": "最后更新",
+    "selfReported": "供应商自述",
+    "auditStatusLabel": "验厂状态",
+    "businessTypeLabel": "企业类型",
+    "verifiedByTitle": "由 FactoryAuditB2B 核验",
+    "verifiedByLead": "以下是我们团队实际核查过的内容。它与供应商自述分开列出，两者都有标注。",
+    "provenanceLead": "每一行都标注了它由谁负责：供应商提供的、我们审阅过的、我们独立核验过的，以及现场确认过的。",
+    "provProvided": "供应商提供",
+    "provReviewed": "文件已审阅",
+    "provIndependent": "已独立核验",
+    "provOnsite": "现场已核验",
+    "provNote": "「供应商提供」表示对方把材料交给了我们，我们尚未核对。「已独立核验」表示我们对着来源核对过。",
+    "neverClaimedTitle": "我们绝不声称的内容",
+    "neverClaimed": "没有对应的核验事件与证据，我们不会把供应商标为已核验。我们也不自行向供应商发证。"
+  },
+  "reportPreview": {
+    "badge": "免费预览",
+    "title": "供应商尽职调查报告",
+    "lead": "对供应商信息、现有证据、风险因素与核验状态的结构化审阅。",
+    "execTitle": "摘要",
+    "verificationTitle": "核验情况",
+    "keyRisksTitle": "关键风险",
+    "recommendationTitle": "建议",
+    "riskLevel": "风险等级",
+    "score": "分数",
+    "unlockTitle": "获取完整尽职调查报告",
+    "unlockLead": "完整报告覆盖企业记录、证据审阅、风险分析与建议的下一步。第三方原始文件保持受限。",
+    "unlockCta": "查看报告方案",
+    "methodologyLink": "查看方法说明",
+    "methodologyTitle": "我们如何评估供应商",
+    "methodologyLead": "风险分数来自权重公开的规则引擎。报告会显示是哪些输入项改变了分数。",
+    "options": {
+      "basic": {
+        "name": "基础报告",
+        "price": "29 美元",
+        "items": [
+          "供应商概况",
+          "含维度拆解的风险分数",
+          "核验状态",
+          "证据摘要",
+          "关键风险因素",
+          "建议行动",
+          "PDF"
+        ]
+      },
+      "professional": {
+        "name": "专业尽职调查",
+        "price": "79–149 美元",
+        "items": [
+          "基础报告全部内容",
+          "详细证据审阅",
+          "补充文件核查",
+          "按买家优先级定制的风险分析",
+          "核验记录",
+          "PDF"
+        ]
+      },
+      "independent": {
+        "name": "独立核验",
+        "price": "按项目报价",
+        "items": [
+          "企业身份核验",
+          "工厂地址核验",
+          "文件核验",
+          "必要时安排现场核验"
+        ]
+      }
+    },
+    "auditUpsellTitle": "需要到现场核查这家工厂？",
+    "auditUpsellLead": "报告告诉你缺什么。我们的团队可以做独立核验或完整验厂。",
+    "auditUpsellCta": "申请验厂"
+  },
+  "claim": {
+    "h1": "通过核验。被看见。拿到更多买家机会。",
+    "lead": "买家只会把能核查的供应商放进短名单。带已核验证据的认领档案会被优先看到。",
+    "whyTitle": "为什么要认领档案？",
+    "whyLead": "让买家在询价之前就了解你的产能与核验状态。",
+    "benefits": [
+      "保持公司信息准确",
+      "添加产品、认证与产能信息",
+      "公开展示你的核验等级",
+      "接收买家询价与 RFQ 机会"
+    ],
+    "tiersTitle": "你可以做什么",
+    "free": {
+      "name": "免费",
+      "cta": "认领你的档案",
+      "items": [
+        "更新公司信息",
+        "添加产品",
+        "添加认证",
+        "添加联系方式"
+      ]
+    },
+    "verified": {
+      "name": "已核验",
+      "cta": "申请核验",
+      "items": [
+        "档案展示核验等级",
+        "向买家展示验厂状态与认证",
+        "接收买家询价",
+        "产能标签"
+      ]
+    },
+    "premium": {
+      "name": "优选",
+      "cta": "联系我们",
+      "items": [
+        "搜索优先展示",
+        "在相关行业页面推荐",
+        "买家引荐",
+        "更多产品曝光"
+      ]
+    }
+  },
+  "consent": {
+    "title": "你的信息会被如何使用",
+    "body": "供应商提交的信息用于创建和维护其 FactoryAuditB2B 供应商档案，并支持买家尽职调查。",
+    "privacy": "未经授权，我们不会公开披露保密文件。",
+    "authorize": "我授权 FactoryAuditB2B 将我所提供的信息和文件用于供应商核验与买家尽职调查，并受本平台的隐私与文件共享规则约束。",
+    "prefsTitle": "信息共享偏好",
+    "public": {
+      "title": "公开",
+      "lead": "所有人可见。",
+      "items": [
+        "公司名称",
+        "所在地",
+        "产品",
+        "核验状态"
+      ]
+    },
+    "buyerView": {
+      "title": "买家可见",
+      "lead": "已验证买家可见。",
+      "items": [
+        "选定证据",
+        "证书详情",
+        "验厂摘要"
+      ]
+    },
+    "restricted": {
+      "title": "受限",
+      "lead": "仅在你的明确授权下可见。",
+      "items": [
+        "原始验厂报告",
+        "敏感文件",
+        "内部照片"
+      ]
+    },
+    "private": {
+      "title": "私密",
+      "lead": "仅内部用于维护你的核验记录。",
+      "items": [
+        "不对外共享的来源文件",
+        "核验工作记录"
+      ]
+    },
+    "thirdPartyNote": "SGS、Intertek、必维、TÜV 等机构出具的第三方报告可能存在许可或保密限制。我们将其标注为「已审阅」，在未取得相应权利前不会转发原始文件。"
+  },
+  "auditRequest": {
+    "badge": "服务申请",
+    "h1": "申请工厂验厂审核",
+    "lead": "告诉我们供应商信息和您的需求。我们为您匹配合格的审核公司，并回复包含范围与报价的提案。",
+    "form": {
+      "labels": {
+        "firstName": "您的称呼",
+        "company": "公司",
+        "email": "工作邮箱",
+        "supplierName": "供应商名称",
+        "country": "工厂所在地",
+        "industry": "行业",
+        "auditType": "审核类型",
+        "standard": "所需标准",
+        "message": "需求与备注",
+        "messageHint": "产品、数量、合规关注点、期望日期……",
+        "submit": "提交审核申请",
+        "submitting": "提交中…"
+      },
+      "success": "我们已收到您的审核申请，团队会在一个工作日内回复。",
+      "error": "提交失败，请重试或直接发邮件联系我们。",
+      "rateLimited": "您提交过于频繁，请约一小时后重试，或直接发邮件联系我们。"
+    },
+    "metaTitle": "申请工厂验厂审核",
+    "metaDesc": "提交工厂审核申请，选择审核类型、标准与所在地，我们为您匹配合格的审核公司。"
+  },
+  "rfq": {
+    "badge": "采购需求",
+    "h1": "发布询价单",
+    "lead": "告诉我们您要采购什么。我们会分享给已验证供应商，并连同能力与风险背景一并回复报价。",
+    "form": {
+      "labels": {
+        "firstName": "您的称呼",
+        "company": "公司",
+        "email": "工作邮箱",
+        "product": "产品",
+        "quantity": "数量",
+        "country": "目标国家",
+        "message": "规格说明",
+        "messageHint": "材料、尺寸、认证、目标价格……",
+        "submit": "发布询价单",
+        "submitting": "发布中…"
+      },
+      "success": "询价单已收到，将邀请已验证供应商报价。",
+      "error": "提交失败，请重试或直接发邮件联系我们。"
+    },
+    "metaTitle": "发布询价单 (RFQ)",
+    "metaDesc": "发布面向中国及亚洲的采购需求，已验证供应商将回复报价、能力与合规背景。"
+  },
+  "common": {
+    "relatedTools": "相关工具",
+    "faq": "常见问题",
+    "freeTool": "免费工具",
+    "disclaimer": "本内容仅供一般参考，不构成对任何供应商的独立核实，也不构成法律、财务或专业审计建议。",
+    "whatsappChat": "WhatsApp 咨询",
+    "heroSearch": {
+      "tabSupplier": "供应商",
+      "tabProduct": "产品",
+      "tabAudit": "验厂",
+      "tabInspector": "验货",
+      "placeholderSupplier": "例：中国电子供应商",
+      "placeholderProduct": "例：不锈钢水瓶",
+      "placeholderAudit": "例：工厂验厂 中国",
+      "placeholderInspector": "例：验货 深圳",
+      "search": "搜索",
+      "combinedHint": "SEO 页面 + 实时数据库结果",
+      "noMatch": "未找到与\"{q}\"精确匹配的记录。本页检索的是已索引的供应商数据库。"
+    }
+  },
+  "container": {
+    "page": {
+      "badge": "免费工具",
+      "h1": "集装箱装柜计算器",
+      "lead": "算出你的纸箱能装多少个 20GP、40GP、40HQ 或冷藏柜，以及这批货需要几个柜。",
+      "quickAnswerTitle": "快速回答",
+      "quickAnswer": "输入纸箱尺寸、单件重量和总件数。计算器会把纸箱的六种摆放朝向逐一与集装箱内部长宽高比对，取装得最多的那种摆法，再加上载重限制。结果给出每柜装量、所需柜数，以及容积和载重的利用率。",
+      "howTitle": "计算是怎么做的",
+      "how1": "把纸箱六种朝向逐一与集装箱内部的长、宽、高比对。",
+      "how2": "减去你设定的箱间间隙后，取装得最多的那种摆法。",
+      "how3": "加入载重限制：每柜装量不能超过「最大载重 ÷ 单件重量」。",
+      "how4": "所需柜数 = 总件数 ÷ 每柜装量，向上取整。",
+      "specsTitle": "本工具采用的集装箱规格",
+      "specsLead": "ISO 通用典型值。实际数据因船公司、箱东与制造年份而异。",
+      "methodTitle": "算法与局限",
+      "methodBody": "结果是矩形堆叠模型下的理论最大值，假设纸箱为规则硬箱、可堆叠、可旋转，且货物均匀分布。实际装柜还受托盘、填充物料、纸箱变形、堆码强度、公路轴重限制与配载顺序影响。请把结果当作配载估算，最终方案仍须与货代或现场监装人员确认。",
+      "faqTitle": "常见问题",
+      "metaTitle": "集装箱装柜计算器",
+      "metaDesc": "免费装柜计算工具，支持 20GP、40GP、40HQ、45HQ 与冷藏柜。算出每柜装量、所需柜数、容积与载重利用率。"
+    },
+    "ui": {
+      "cargoTitle": "纸箱尺寸",
+      "length": "长",
+      "width": "宽",
+      "height": "高",
+      "weight": "单箱重量",
+      "quantity": "总件数",
+      "optionsTitle": "装载选项",
+      "clearance": "箱间间隙",
+      "clearanceHelp": "建议留 2–5 cm，用于填充、打包带与纸箱鼓胀。",
+      "allowRotate": "允许旋转纸箱",
+      "allowRotateHelp": "自动测试六种朝向并取最优。",
+      "calcBtn": "计算",
+      "resetBtn": "重置",
+      "resultsTitle": "配载方案",
+      "bestFit": "推荐柜型",
+      "perContainer": "每柜装量",
+      "containersNeeded": "所需柜数",
+      "arrangement": "摆放方式",
+      "along": "沿长度",
+      "across": "沿宽度",
+      "layers": "层数",
+      "volumeUsed": "容积利用率",
+      "payloadUsed": "载重利用率",
+      "totalVolume": "货物总体积",
+      "totalWeight": "货物总重量",
+      "comparisonTitle": "全柜型对比",
+      "containerCol": "柜型",
+      "fitsCol": "每柜装量",
+      "neededCol": "所需柜数",
+      "topView": "单层俯视图",
+      "warnOverweight": "货物在装满之前就已达到载重上限，此时的限制是重量而不是空间。",
+      "warnTooLarge": "该纸箱尺寸过大，列表中没有能装下的柜型，请核对尺寸。",
+      "warnDoor": "按当前朝向，纸箱可能无法通过箱门开口，请与现场装柜人员确认。",
+      "empty": "请输入纸箱尺寸与数量，查看配载方案。",
+      "disclaimer": "结果仅为估算。集装箱数据为 ISO 典型值，各船公司存在差异，最终配载方案请务必与货代确认。"
+    },
+    "specs": {
+      "internal": "内部尺寸 (cm)",
+      "door": "箱门开口",
+      "capacity": "容积",
+      "payload": "最大载重"
+    },
+    "types": {
+      "generalPurpose": "普通干箱",
+      "highCube": "高柜",
+      "reefer": "冷藏箱",
+      "openTop": "开顶箱"
+    },
+    "faq": [
+      {
+        "q": "40GP 和 40HQ 有什么区别？",
+        "a": "长和宽一样，40HQ 内部高约 30 厘米（269 对 239），多出约 9 立方米容积。两者载重上限几乎相同，所以只有在「空间先用完、重量还没用完」的情况下，高柜才有意义。"
+      },
+      {
+        "q": "为什么算出来跟货代给的不一样？",
+        "a": "常见于三个原因：一是不同船公司、不同制造年份的集装箱内部尺寸有细微差异；二是本模型假设纸箱是规则硬箱且完全可堆叠，而实际装柜要留托盘、填充物料和公差；三是重量分布与公路轴重限制，可能让实际装量低于集装箱的最大载重。"
+      },
+      {
+        "q": "箱间间隙要不要留？",
+        "a": "建议留。人工装柜或纸箱可能鼓胀时，设置 2 到 5 厘米；只有当纸箱非常规整、装柜管控严格时才设 0。"
+      },
+      {
+        "q": "支持托盘货吗？",
+        "a": "当前版本不直接支持。若要近似计算托盘货，把托盘底面积与含托盘底的高度作为一个整体单位输入，数量填托盘数即可。"
+      },
+      {
+        "q": "这些集装箱规格准确吗？",
+        "a": "这是行业内常用的典型值，用于配载估算。实际尺寸与载重上限因箱东、制造商、制造年份而异，各船公司也会公布自己的限值，订舱前请与承运人确认。"
+      },
+      {
+        "q": "纸箱不能堆叠怎么办？",
+        "a": "把你允许的总堆高当作单件高度输入，或自行减少每层数量。当前版本默认每个纸箱都能承受上层的重量。"
+      }
+    ]
+  },
+  "resourcesPage": {
+    "badge": "资源中心",
+    "h1": "资源与指南",
+    "lead": "评估、验证与审核中国及亚洲供应商的实用指南、免费工具与服务。",
+    "guidesTitle": "按国家与标准查看验厂指南",
+    "guidesLead": "买家最常要求的审核类型的分步指南。",
+    "knowledgeTitle": "供应商培训",
+    "knowledgeLead": "我们先审核并验证供应商，再为他们的团队提供质量与 QC 培训。",
+    "toolsTitle": "免费工具",
+    "toolsLead": "无需注册。",
+    "servicesTitle": "服务",
+    "servicesLead": "让我们替您完成核查。",
+    "serviceVerification": "供应商验证服务",
+    "serviceVerificationDesc": "我们核实工商登记、厂房真实性、生产能力、质量与合规，并出具书面报告。",
+    "auditRequest": "申请工厂验厂审核",
+    "auditRequestDesc": "告知供应商与需求，我们为您匹配合格的审核公司。",
+    "customServices": "个性化服务",
+    "customServicesDesc": "提出您的具体需求，我们为您定制审核或验证方案。",
+    "rfq": "发布询价单",
+    "rfqDesc": "将您的采购需求分享给已验证供应商。",
+    "logistics": "集装箱装柜计算器",
+    "logisticsDesc": "计算每柜可装箱数以及所需柜数。",
+    "metaTitle": "资源与指南 - 供应商验证与工厂验厂",
+    "metaDesc": "评估、验证与审核中国及亚洲供应商的实用指南、免费工具与服务。"
+  },
+  "trainingPage": {
+    "badge": "供应商培训",
+    "h1": "我们不仅审核工厂，更代表你培训工厂",
+    "lead": "审核告诉你哪里出了问题，培训才能解决问题。我们先审核中国及亚洲的供应商，帮你规避风险；再走到车间，代表你培训工厂团队，让同样的缺陷不再反复出现。",
+    "pillarAuditTitle": "第一步：审核，把风险摆上台面",
+    "pillarAuditDesc": "在培训之前，我们先做供应商验证、工厂验厂与验货，并出具书面报告，列明可能危及你订单的薄弱环节。",
+    "pillarTrainTitle": "第二步：代表你培训工厂",
+    "pillarTrainDesc": "我们深入车间，按你若在现场的标准培训供应商员工。你无需飞过去，也能牢牢把控质量。",
+    "offeringsTitle": "我们提供哪些培训",
+    "offeringsLead": "围绕审核中发现的具体缺陷与风险，定制可落地的现场培训方案。",
+    "offerings": [
+      {
+        "title": "质量体系培训",
+        "desc": "建立从源头控制缺陷的质量管理习惯，而不是只靠终检兜底。"
+      },
+      {
+        "title": "QC 培训",
+        "desc": "培训过程检验与终检人员，精准识别真正让你亏钱的关键缺陷。"
+      },
+      {
+        "title": "生产工艺培训",
+        "desc": "优化工艺流程与工位标准，从源头降低你的不良率。"
+      },
+      {
+        "title": "合规与安全培训",
+        "desc": "帮助工厂达到买家要求的劳工、安全与环保标准。"
+      }
+    ],
+    "ctaTitle": "与其只被检查，不如让工厂真正被培训？",
+    "ctaDesc": "告诉我们供应商信息和你反复遇到的问题，我们结合审核结果为你定制培训方案。",
+    "ctaButton": "联系我们的团队",
+    "metaTitle": "供应商培训 - 我们既审核也培训你的工厂",
+    "metaDesc": "我们先审核中国及亚洲供应商以规避风险，再为工厂团队提供质量与 QC 培训，让缺陷不再反复出现。"
+  },
+  "legal": {
+    "privacyTitle": "隐私政策",
+    "privacyUpdated": "最后更新：2026-08-30",
+    "privacyIntro": "FactoryAuditB2B（「我们」）尊重您的隐私。本政策说明您使用本网站及服务时我们收集哪些数据，以及我们如何使用这些数据。",
+    "privacySections": [
+      {
+        "h": "我们收集的信息",
+        "b": "当您申请验厂、发布询价、使用工具或联系我们时，我们会收集您直接提供的信息（姓名、邮箱、公司、采购需求、留言）。我们也会收集 IP 地址、访问页面等基本技术数据。"
+      },
+      {
+        "h": "我们如何使用信息",
+        "b": "我们使用您的信息来回应请求、为您匹配合适的供应商或审核机构、发送服务通知，并改进网站。我们不会出售您的个人数据。"
+      },
+      {
+        "h": "线索与服务交付",
+        "b": "您提交需求后，我们会将相关信息分享给完成服务所需的供应商或审核机构。提交即表示您同意这一有限度的信息共享。"
+      },
+      {
+        "h": "Cookie 与分析",
+        "b": "我们使用 Cookie 及类似技术来运行网站并了解使用情况。您可以在浏览器中关闭 Cookie。"
+      },
+      {
+        "h": "数据保留",
+        "b": "我们在提供服务和履行法律义务所需的期限内保留您的信息，之后予以删除或匿名化处理。"
+      },
+      {
+        "h": "您的权利",
+        "b": "您可通过 privacy@factoryauditb2b.com 联系我们，申请访问、更正或删除您的个人数据。"
+      },
+      {
+        "h": "联系方式",
+        "b": "对本政策有疑问？请发邮件至 privacy@factoryauditb2b.com。"
+      }
+    ],
+    "termsTitle": "服务条款",
+    "termsUpdated": "最后更新：2026-08-30",
+    "termsIntro": "使用 FactoryAuditB2B 即表示您同意本条款。我们的服务帮助买家验证和审核供应商，但我们是平台，而非供应商履约的担保方。",
+    "termsSections": [
+      {
+        "h": "服务使用",
+        "b": "您可以使用本网站搜索供应商、使用工具、申请验厂和发布询价。您承诺提供真实信息，不滥用本服务。"
+      },
+      {
+        "h": "不对供应商作担保",
+        "b": "我们提供验证与审核信息以辅助您的决策。我们不保证供应商的质量、交付或合规。您的采购决策风险由您自行承担。"
+      },
+      {
+        "h": "第三方服务",
+        "b": "验厂与验货由独立第三方执行。相关服务合同由您与服务提供方之间订立。"
+      },
+      {
+        "h": "知识产权",
+        "b": "本网站所有内容、商标与工具归 FactoryAuditB2B 或其许可方所有。未经许可不得擅用。"
+      },
+      {
+        "h": "责任限制",
+        "b": "在法律允许的最大范围内，FactoryAuditB2B 不对因使用本网站产生的间接或后果性损失承担责任。"
+      },
+      {
+        "h": "条款变更",
+        "b": "我们可能更新本条款。变更后继续使用即视为接受。"
+      },
+      {
+        "h": "联系方式",
+        "b": "有疑问？请发邮件至 legal@factoryauditb2b.com。"
+      }
+    ],
+    "privacyNav": "隐私政策",
+    "termsNav": "服务条款"
+  },
+  "industryPage": {
+    "pageTitle": "供应商验证与培训",
+    "metaDesc": "寻找已验证的 {industry} 供应商与合适的审核类型。我们验厂并培训您团队的质量与 QC 能力。",
+    "verifiedSuppliers": "已验证的 {industry} 供应商",
+    "relatedAudit": "相关审核类型与标准",
+    "whyTitle": "为什么 {industry} 供应商需要验证",
+    "whyLead": "缺陷与合规漏洞代价高昂。我们在您下单前完成验证，并培训工厂团队，避免同类问题再次发生。",
+    "ctaTitle": "培训您的 {industry} 供应商",
+    "ctaDesc": "将供应商验证与为您的行业定制的付费培训方案结合。",
+    "ctaButton": "查看付费培训方案",
+    "breadcrumb": "行业",
+    "empty": "暂无已验证的 {industry} 供应商。发布 RFQ 以开始匹配。",
+    "riskLabel": "风险"
+  },
+  "countryPage": {
+    "pageTitle": "供应商验证与培训",
+    "metaDesc": "在 {country} 验厂并培训供应商团队。为从 {country} 进口的买家提供审核、验货与认证供应商。",
+    "auditTypesIn": "{country} 可提供的审核类型",
+    "verifiedSuppliers": "已验证的 {country} 供应商",
+    "ctaTitle": "培训您的 {country} 供应商",
+    "ctaDesc": "将验证与为 {country} 定制的付费培训方案结合。",
+    "ctaButton": "查看付费培训方案",
+    "breadcrumb": "国家",
+    "empty": "暂无已验证的 {country} 供应商。发布 RFQ 以开始匹配。"
+  },
+  "trainingPlans": {
+    "pageTitle": "供应商培训方案",
+    "metaDesc": "供应商培训方案：为您的工厂团队提供质量体系、QC、生产工艺与合规培训。",
+    "h1": "供应商培训方案",
+    "lead": "我们审核您的工厂并培训团队的质量与 QC 能力，让缺陷不再反复出现。选择适合您供应基础的方案。",
+    "plansTitle": "选择培训方案",
+    "faqTitle": "培训常见问题",
+    "ctaTitle": "不确定选哪个方案？",
+    "ctaDesc": "告诉我们您的行业，我们将为您规划培训项目。",
+    "ctaButton": "联系我们"
+  },
+  "pricing": {
+    "metaTitle": "服务与方案 — 免费工具、核查与验厂",
+    "metaDesc": "免费的供应商评估工具，按项目报价的供应商核查与工厂验厂，以及尚未开放的 Buyer Pro 方案。全部价格以美元计。",
+    "h1": "服务与方案",
+    "lead": "工具免费使用。只有当你需要有人到现场核查供应商时才付费。",
+    "currencyNote": "全部价格以美元计。核查与验厂按项目报价。",
+    "forBuyers": "买家方案",
+    "forSuppliers": "供应商会员",
+    "perMonth": "/月",
+    "commissionTitle": "审核、验货与运费",
+    "commissionCta": "获取报价",
+    "buyerCtas": [
+      "免费开始",
+      "选择 Starter",
+      "选择 Pro",
+      "选择 Business",
+      "联系我们"
+    ],
+    "supplierCta": "申请",
+    "buyerFeatures": [
+      [
+        "基础供应商搜索",
+        "基础风险评估",
+        "基础核查清单",
+        "每月 1 条 RFQ"
+      ],
+      [
+        "完整供应商搜索",
+        "无限风险评估",
+        "完整 29 项核查清单",
+        "每月 5 条 RFQ",
+        "邮件支持"
+      ],
+      [
+        "包含 Starter 全部功能",
+        "PDF 报告",
+        "文档分析",
+        "供应商工作台",
+        "高级评分卡",
+        "优先支持"
+      ],
+      [
+        "包含 Professional 全部功能",
+        "5 个团队成员",
+        "供应商数据库",
+        "风险监控",
+        "审核管理",
+        "CAPA 与高级报告"
+      ],
+      [
+        "API 接口",
+        "单点登录 (SSO)",
+        "定制工作流",
+        "定制供应商数据库",
+        "专属支持"
+      ]
+    ],
+    "supplierFeatures": [
+      [
+        "公司档案展示",
+        "基础验证徽章",
+        "接收 RFQ",
+        "标准排序"
+      ],
+      [
+        "已验证供应商徽章",
+        "档案展示审核文件",
+        "搜索优先排序",
+        "RFQ 无限回复",
+        "能力标签"
+      ],
+      [
+        "搜索置顶",
+        "行业页推荐位",
+        "买家引荐",
+        "专属客户支持",
+        "每季度档案更新"
+      ]
+    ],
+    "commissionItems": [
+      "工厂审核与验货：按项目报价，依据人天与地区",
+      "运费与采购：按订单金额收取 3–5% 佣金",
+      "首单免平台费"
+    ],
+    "plansTitle": "现在可以使用的",
+    "plansLead": "四项中三项已开通。Buyer Pro 未开通。",
+    "plans": [
+      {
+        "name": "免费工具",
+        "price": "0 美元",
+        "note": "无需注册",
+        "features": [
+          "含六维度拆解的供应商风险评估",
+          "供应商核查清单",
+          "验厂检查表与评分卡",
+          "风险分数与建议的下一步"
+        ],
+        "cta": "打开工具",
+        "href": "/tools",
+        "available": true
+      },
+      {
+        "name": "供应商核查",
+        "price": "申请报价",
+        "note": "按供应商报价",
+        "features": [
+          "工商登记与法律实体核验",
+          "工厂地址与现场证据",
+          "判定生产型工厂或贸易公司",
+          "质量与合规文件审阅",
+          "含风险摘要的书面报告"
+        ],
+        "cta": "申请报价",
+        "href": "/services/supplier-verification",
+        "available": true
+      },
+      {
+        "name": "工厂验厂",
+        "price": "申请报价",
+        "note": "按人天加差旅报价",
+        "features": [
+          "按你要求的标准进行现场评估",
+          "质量、合规与劳工记录审阅",
+          "含照片、按严重度分级的发现项",
+          "含责任人与期限的整改计划",
+          "整改期满后可选复审"
+        ],
+        "cta": "申请验厂",
+        "href": "/factory-audit/request",
+        "available": true
+      },
+      {
+        "name": "Buyer Pro",
+        "price": "即将推出",
+        "note": "尚未开放",
+        "features": [
+          "保存供应商档案与报告历史",
+          "供应商横向对比",
+          "PDF 高级报告",
+          "供应商监控与复核提醒"
+        ],
+        "cta": "告诉我们你的需求",
+        "href": "/custom-services",
+        "available": false
+      }
+    ],
+    "comingSoonNote": "在背后的功能真正建好并被用起来之前，我们不会出售订阅。上面的 Buyer Pro 内容是计划，不是你今天能买到的承诺。",
+    "alsoTitle": "其他服务",
+    "alsoItems": [
+      "验货：生产中期与出货前检验，按人天报价",
+      "采购：按订单金额收取 3–5% 佣金，下单前报价",
+      "供应商改进：验厂后的培训与整改支持，按工厂报价"
+    ],
+    "alsoCta": "申请报价",
+    "reportsTitle": "报告与核验：参考价格区间",
+    "reportsLead": "以下金额均为参考值，实际按项目报价。公开区间是为了让你在询价之前就能判断这项检查值不值得做。",
+    "reports": [
+      {
+        "name": "供应商尽职调查报告",
+        "range": "29 – 99 美元",
+        "note": "文件审阅加书面报告，不含现场走访。"
+      },
+      {
+        "name": "专业核验",
+        "range": "199 – 499 美元起",
+        "note": "人工核验，必要时包含现场证据。"
+      },
+      {
+        "name": "现场工厂验厂",
+        "range": "300 – 1,500 美元起",
+        "note": "按人天加差旅报价，取决于国家、厂区规模与标准。"
+      }
+    ],
+    "reportsNote": "在线支付尚未开通。以上项目全部由团队报价并开票，没有订阅，也不会自动续费。",
+    "faqTitle": "定价常见问题",
+    "faq": [
+      {
+        "q": "使用工具需要付费吗？",
+        "a": "不需要。风险计算器、检查表和评分卡全部免费，也不需要注册。只有在你要求我们核查或验厂某家供应商时才需要付费。"
+      },
+      {
+        "q": "供应商核查多少钱？",
+        "a": "按供应商报价。价格取决于国家、方案是否包含现场走访，以及需要审阅的文件量。把公司名称发给我们，我们直接报价。"
+      },
+      {
+        "q": "工厂验厂多少钱？",
+        "a": "按人天加差旅报价。单厂区质量审核从一个人天起。SMETA 这类完整社会责任审核通常需要两天以上，取决于工厂人数。"
+      },
+      {
+        "q": "Buyer Pro 什么时候开放？",
+        "a": "暂未开放。等背后的功能上线并被真正使用之后我们才会开放。在那之前，免费工具无需注册就能覆盖同样的需求。"
+      }
+    ],
+    "recommendedTag": "推荐"
+  },
+  "aiChat": {
+    "title": "AI 智能客服",
+    "subtitle": "审核、定价、覆盖范围",
+    "greeting": "你好！关于工厂审核、供应商验证、价格或我们覆盖的国家，都可以问我。",
+    "placeholder": "输入你的问题…",
+    "send": "发送",
+    "quickQuestions": [
+      "你们提供哪些审核类型？",
+      "一次工厂审核多少钱？",
+      "你们覆盖哪些国家？",
+      "你们提供工厂培训吗？"
+    ],
+    "thinking": "思考中…",
+    "error": "抱歉，我没能回答。请换个说法，或直接联系我们的团队。",
+    "ctaText": "需要报价或人工服务？",
+    "ctaButton": "联系我们的团队",
+    "fallbackAnswers": {
+      "pricing": "买家 SaaS 为 $0–299/月，供应商会员 $29–199/月。工厂审核与验货按项目报价（依据人天与地区）；运费与采购收取 3–5% 佣金。全部以美元计价。告诉我你的产品和国家，我帮你匹配合适的方案。",
+      "audit": "我们提供供应商验证、工厂审核与出货前验货，覆盖 SMETA、BSCI、ISO 9001、ISO 14001、SA8000、WRAP、Sedex 等项目。我们不出售证书，只做验证与培训。告诉我你的产品与目标市场，我们为你评估。",
+      "coverage": "我们覆盖中国（含中国香港 / 中国台湾 / 中国澳门）、越南、印度、泰国、马来西亚、印度尼西亚、柬埔寨和墨西哥。告诉我你从哪个国家采购。",
+      "training": "提供。我们先审核工厂，再培训团队的质量体系、QC 与生产工艺。方案为 Starter $280/厂、Pro $950/厂，另有 Enterprise 定制。每个方案都从差距审核开始。",
+      "default": "我可以解答审核、供应商验证、覆盖范围、定价与培训相关问题。如需具体方案，留下联系方式，我们的团队会在一个工作日内回复。"
+    }
+  },
+  "about": {
+    "metaTitle": "关于我们 — 工厂审核与供应商培训",
+    "metaDesc": "我们在亚洲验厂，并培训工厂内部的团队，让发现的问题不再复发。以证据为先，不出售证书。",
+    "h1": "关于 FactoryAuditB2B",
+    "lead": "我们在亚洲验厂，并培训工厂内部的团队，让发现的问题不再复发。",
+    "storyTitle": "我们是谁",
+    "storyBody": "FactoryAuditB2B 由在中国及亚洲工厂里待过多年的审核员与 QC 工程师创建。我们反复看到同一个循环：买家下单，出现缺陷，委托审核，报告躺在抽屉里，下一单又重蹈覆辙。所以我们做了这个平台来闭合循环：先验证供应商，再培训真正做产品的人。",
+    "valuesTitle": "我们怎么做",
+    "values": [
+      {
+        "title": "我们做验证，不出售证书",
+        "desc": "证书可以买到，验证买不到。我们核查注册信息、现场、产能、质量与合规，并把每一条结论背后的证据给你看。"
+      },
+      {
+        "title": "证据优先于主观判断",
+        "desc": "每一个风险分数都对应你可以查阅的文件与现场记录。证据缺失时我们如实说明，而不是靠猜测填补。"
+      },
+      {
+        "title": "培训紧跟审核之后",
+        "desc": "止步于一份 PDF 的审核改变不了任何事。我们培训工厂团队的质量体系与 QC，让问题真正被解决并保持住。"
+      },
+      {
+        "title": "一个工作日内给出清楚答复",
+        "desc": "你会收到一份范围明确的方案，写清我们要查什么、收多少费用。不推销，不含糊。"
+      }
+    ],
+    "statsTitle": "数据一览",
+    "stats": [
+      {
+        "value": "9",
+        "label": "覆盖国家"
+      },
+      {
+        "value": "12",
+        "label": "覆盖行业"
+      },
+      {
+        "value": "20+",
+        "label": "审核与合规项目"
+      },
+      {
+        "value": "< 1 天",
+        "label": "通常响应时间"
+      }
+    ],
+    "ctaTitle": "想看看我们会怎么处理你的供应商？",
+    "ctaDesc": "告诉我们你的产品和国家，我们会说清要查哪些、花多少钱。",
+    "ctaButton": "获取报价"
+  },
+  "methodology": {
+    "badge": "方法说明",
+    "h1": "我们的供应商风险评估如何运作",
+    "lead": "风险分数由权重公开的规则引擎计算。相同输入永远得到相同分数。语言模型只负责把结果解释成人话，它无法改变数字。",
+    "quickAnswer": "我们从六个加权维度给供应商打分：公司、质量、合规、生产、供应链、文件。你的每个答案归入其中一个维度，按权重计分，再汇总成 100 分制的总分，分数越高代表风险越大。证据缺失会把分数推高，而不是按中性处理。下面显示的权重直接读取自评分模型，不是手工录入的。",
+    "frameworkTitle": "评分框架",
+    "frameworkBody": "每个问题归属一个维度。维度内每个答案的风险取值在 0 到 100 之间。维度得分是已作答问题的加权均值，总分是下面各维度的加权均值。",
+    "weightsTitle": "风险维度与权重",
+    "weightsLead": "权重在后台可配置，并在此公开，让你看清楚到底是什么在影响数字。",
+    "weightsFallback": "维度权重从我们数据库中的风险模型读取，有数据时在此显示。",
+    "dimensionTitle": "维度",
+    "weightTitle": "权重",
+    "evidenceTitle": "证据",
+    "evidenceBody": "分数只和它背后的证据一样可靠。当你表示某项不知道时，我们把它记为待补缺口并据此计分。供应商可以用提交文件的方式降低分数，而不是靠争辩。",
+    "limitationsTitle": "局限性",
+    "limitationsLead": "这个分数不能告诉你什么。",
+    "limitations": [
+      "它不是财务信用评估。除非你另行要求，我们不会审阅财务报表。",
+      "它不能确认设备是否存在、质量体系是否日常运转。这需要现场走访或验厂。",
+      "它是一个时点评估。分数仅在产生当日有效。",
+      "对于蓄意提供虚假文件的供应商，它无法识别，尽管文件交叉核对可以缩小差距。",
+      "权重是我们的判断，不是行业标准。公开它是为了让你能具体地提出不同意见。"
+    ],
+    "updateTitle": "更新规则",
+    "updateBody": "当模型发生实质性变更时我们会复核权重，并在产生分数时记录所用版本。方法变更会在此连同日期列出。",
+    "changelogTitle": "变更记录",
+    "versionTitle": "当前版本",
+    "aiTitle": "AI 用在哪里，不用在哪里",
+    "aiBody": "分数完全由规则引擎决定。语言模型可以对结果做通俗概括或解释，也可以草拟建议动作。它不决定分数，也无法把权重当作可调变量。",
+    "ctaTitle": "想要的是核查结果而不只是一个分数？",
+    "ctaLead": "我们的核查服务会确认登记信息、厂区、产能、质量与合规，并在你付款之前给出书面报告。",
+    "ctaPrimary": "供应商核查服务",
+    "ctaSecondary": "免费给供应商打分",
+    "metaTitle": "我们的供应商风险评估如何运作",
+    "metaDesc": "供应商风险分数背后的评分框架、风险维度、权重、证据规则、局限性与更新规则。由确定性规则引擎计算，而非 AI。",
+    "scoredInputsLabel": "已作答项",
+    "scoredTableNote": "{n} 项已作答 · {d} 个维度 · 总权重 {w}。",
+    "weightsSumLine": "— 六个维度，{n} 项输入，权重和 {w}。"
+  },
+  "trust": {
+    "badge": "信任中心",
+    "h1": "信任中心",
+    "lead": "我们是谁、我们核验什么、我们不核验什么，以及我们如何处置证据。公开这些信息，是为了让你在委托我们核查别人之前，先核查我们。",
+    "metaTitle": "信任中心 — 谁在运营 FactoryAuditB2B，我们核验什么",
+    "metaDesc": "FactoryAuditB2B 的工商登记、运营主体、核验方法、核验等级、证据政策与数据保护说明。",
+    "regTitle": "工商登记",
+    "regLead": "公开验证，但不公开全部隐私。我们公开采购商需要的登记事实，并对个人与敏感标识做部分遮挡。",
+    "legalEntityLabel": "法律实体名称",
+    "brandLabel": "品牌",
+    "brandValue": "FactoryAuditB2B",
+    "countryLabel": "注册国家 / 地区",
+    "cityLabel": "所在城市",
+    "registrationYearLabel": "注册年份",
+    "statusLabel": "登记状态",
+    "authorityLabel": "登记机关",
+    "verificationDateLabel": "核验日期",
+    "legalRepLabel": "法定代表人",
+    "registrationNumberLabel": "注册号",
+    "addressLabel": "注册地址",
+    "maskedNote": "已部分遮挡。完整信息不在公网公开，签署正式询价后可按申请提供。",
+    "viewDocument": "查看营业执照",
+    "notConfigured": "工商登记信息尚未公开。",
+    "notConfiguredLead": "管理员录入后我们会公开登记记录。在那之前，直接联系我们，我们会发给你。",
+    "operatesTitle": "谁在运营 FactoryAuditB2B？",
+    "operatesBody": "FactoryAuditB2B 是由 {entity} 运营的平台与品牌。品牌名不是法律实体名，我们不会把两者混为一谈。",
+    "operatesLead": "FactoryAuditB2B 由一家在中国注册的公司运营，为全球采购商提供供应商核查、工厂验厂与采购支持。",
+    "operatesNotConfigured": "FactoryAuditB2B 由一家注册公司运营。法律实体名称配置完成后我们会立即公开。",
+    "scopeTitle": "业务范围",
+    "scopeBody": "为从中国及东南亚采购的买家提供供应商核查、工厂验厂、验货与采购支持。第一阶段覆盖中国、越南、泰国。",
+    "verifyTitle": "我们核验什么",
+    "verifyLead": "以下是核查服务覆盖的检查项。",
+    "verify": [
+      "公司身份",
+      "工厂地址",
+      "文件",
+      "认证",
+      "生产能力",
+      "审核证据"
+    ],
+    "notVerifyTitle": "我们不核验什么",
+    "notVerifyLead": "说清边界本身就是服务的一部分。一份核查报告只有在写明「什么没查」时才有价值。",
+    "notVerify": [
+      "除非明确说明，我们不自行向供应商发证。",
+      "除非你另行要求，我们不审阅财务报表。",
+      "对于未向我们披露的外发厂，我们不做核验。",
+      "我们不保证产品在实际使用中的性能表现。",
+      "对于蓄意伪造的文件，我们无法保证百分之百识别，尽管交叉核对可以缩小差距。"
+    ],
+    "methodTitle": "核验方法",
+    "methodLead": "风险分数由权重公开的规则引擎计算。相同输入永远得到相同分数。",
+    "methodLink": "阅读完整方法说明",
+    "levelsTitle": "核验等级",
+    "levelsLead": "只有存在对应核验事件与证据时，供应商才会被显示为已核验。",
+    "levelDescs": [
+      "暂无核验记录。",
+      "已审阅登记与商业身份记录。",
+      "已审阅证书、证照与审核文件。",
+      "已通过定位证据与照片确认厂区。",
+      "已完成现场验厂，含发现项与书面报告。"
+    ],
+    "evidenceTitle": "供应商证据政策",
+    "evidenceLead": "我们如何处理供应商与买家交给我们的文件。",
+    "evidence": [
+      "每一项都记录来源、日期与核验状态。",
+      "第三方原始审核报告标注为已审阅，我们不转发原件。",
+      "供应商自行决定哪些内容公开、买家可见、受限或私密。",
+      "未经授权，我们不公开披露保密文件。"
+    ],
+    "privacyTitle": "隐私与数据保护",
+    "privacyLead": "你发给我们的信息会如何处理。",
+    "privacy": [
+      "买家询价仅用于回复与制作报价。我们不售卖联系方式数据。",
+      "供应商文件用于维护供应商档案并支持买家尽职调查。",
+      "未经授权，我们不公开披露保密文件。",
+      "如需查询、更正或删除你的数据，请使用下方联系方式联系我们。"
+    ],
+    "contactTitle": "联系方式",
+    "contactLead": "可实际触达的渠道。如果某个页面承诺了我们做不到的事，请告诉我们，我们会更正。",
+    "contactEmailLabel": "邮箱",
+    "whyTitle": "为什么相信我们",
+    "whyLead": "四件我们拿得出证据的事，以及没有证据的事我们一件都不说。",
+    "why1Title": "注册经营主体",
+    "why1Body": "由一家注册公司运营。我们公开主体名称，而不是躲在品牌后面。",
+    "why2Title": "透明方法",
+    "why2Body": "风险分数基于权重公开的成文评估框架。",
+    "why3Title": "以证据为准的核验",
+    "why3Body": "核验状态与现有证据绑定。没有证据，就没有已核验标签。",
+    "why4Title": "人工复核",
+    "why4Body": "AI 只是辅助流程。核验结论由人做出，现场工作也由人完成。",
+    "aiNote": "AI 辅助流程，核验决策由人做出。"
+  },
+  "inspection": {
+    "badge": "产品验货",
+    "h1": "产品验货",
+    "lead": "在生产的关键节点对具体订单做质量检验，由独立验货员执行并出具书面报告。每一单都单独评估、按单报价。",
+    "metaTitle": "产品验货 — 生产前 / 生产中 / 出货前 / 装柜监装",
+    "metaDesc": "为中国、越南、泰国、马来西亚、菲律宾采购买家提供的生产前、生产中、出货前与装柜监装验货服务。按单报价。",
+    "quickAnswerTitle": "快速回答",
+    "quickAnswer": "产品验货在特定节点检查具体订单：生产开始前、生产进行中、出货前，或装柜期间。验货员按你的要求或 AQL 抽样计划执行，附照片报告发现，并给出明确结论。按单报价，价格取决于类型、范围、地点与时长。",
+    "honestNote": "验货请求逐单评估。我们会根据验货类型、范围、地点与合适的验货员资源给出报价。",
+    "howTitle": "流程",
+    "howLead": "从请求到报告，无需学习任何平台。",
+    "how": [
+      {
+        "title": "提交请求",
+        "body": "告诉我们工厂位置、产品、订单数量、期望日期与检查要求。"
+      },
+      {
+        "title": "我们报价",
+        "body": "按验货类型、范围、地点、时长与验货员资源给出报价。确认前不收费。"
+      },
+      {
+        "title": "验货员到现场",
+        "body": "验货员保持独立，按地点与产品品类匹配合适人选。需要时可实时参与。"
+      },
+      {
+        "title": "收到报告",
+        "body": "发现项附照片、缺陷摘要、AQL 结果与明确结论，通常在走访后 24 小时内交付。"
+      }
+    ],
+    "nodesTitle": "验货节点",
+    "nodesLead": "每张订单不同。选择与生产排期匹配的节点。",
+    "when": "什么时候做",
+    "what": "检查什么",
+    "why": "为什么值得做",
+    "nodes": [
+      {
+        "key": "PPI",
+        "name": "生产前验货",
+        "when": "生产开始前，针对原材料与首件样品。",
+        "what": "原材料、设备就绪、生产计划、BOM、包装材料、颜色、尺寸、标签、样品、工艺要求。",
+        "why": "在批量生产之前拦截错误。最便宜的缺陷是从未生产出来的那一个。"
+      },
+      {
+        "key": "DUPRO",
+        "name": "生产中验货",
+        "when": "生产进行中，通常在完成 20%–80% 时介入。",
+        "what": "产品质量、尺寸、外观、工艺、功能、数量、不良率、生产进度、包装、标签。",
+        "why": "中途发现的问题还来得及补救。等到终检才发现，一整批可能都无法返工。"
+      },
+      {
+        "key": "PSI",
+        "name": "出货前验货",
+        "when": "生产完成后、货物离开工厂前。",
+        "what": "数量、外观、尺寸、功能、包装、标签、条码、装箱内容、规格、AQL 抽检、缺陷分级、照片。",
+        "why": "尾款支付前的最后一道质量关。多数买家从 PSI 开始，因为这是钱即将转移的时刻。"
+      },
+      {
+        "key": "CLS",
+        "name": "装柜监装",
+        "when": "在工厂或仓库装柜期间。",
+        "what": "集装箱状况、箱号、封条、产品数量、纸箱数量、SKU、包装、标签、装柜过程、混货或错装、短装、照片、视频。",
+        "why": "确认验过的货确实被装进集装箱。防止调包、短装与混装。"
+      }
+    ],
+    "reportTitle": "你会收到什么",
+    "reportLead": "一份可以据此行动的书面报告，而不是一通电话。",
+    "report": [
+      "发现项附照片",
+      "按严重度分级的缺陷摘要（严重 / 主要 / 次要）",
+      "适用的 AQL 抽样结果",
+      "数量与包装核查",
+      "明确结论：PASS / FAIL / REWORK"
+    ],
+    "pricingTitle": "定价",
+    "pricingLead": "按单报价。价格取决于验货类型、范围、地点、时长与验货员资源。",
+    "pricingNote": "在真实订单积累出各地区、各品类、各节点的诚实成本数据之前，我们不发布固定套餐。",
+    "pricingCta": "申请验货报价",
+    "faqTitle": "常见问题",
+    "faq": [
+      {
+        "q": "DUPRO 和 PSI 有什么区别？",
+        "a": "DUPRO（生产中）在货物生产期间进行，通常在完成 20%–80% 时，问题可以在整批完成前修复。PSI（出货前）在生产完成后、货物离厂前进行，是尾款支付前的最后质量关。很多买家首单做 DUPRO、返单做 PSI，也有两者都做的。"
+      },
+      {
+        "q": "每个城市都有验货员吗？",
+        "a": "我们不发布「几百个验货员」的城市地图，因为那是我们无法兑现的承诺。每一单我们都为具体地点与产品品类匹配合适的独立验货员，并在报价前确认可用性。找不到合适人选时我们会直说，而不是派不合适的人。"
+      },
+      {
+        "q": "验货多少钱？",
+        "a": "取决于类型、范围、地点、时长与产品。主要制造枢纽的单厂区标准 PSI 通常在每人天 200–350 美元区间，枢纽城市之外加差旅。把工厂位置发给我们，我们报精确价。"
+      },
+      {
+        "q": "能按我自己的检查表验吗？",
+        "a": "可以。有买家检查表或规格书就随请求发给我们，验货员按它执行。没有就用标准的 AQL 检查计划，并说明覆盖了哪些内容。"
+      },
+      {
+        "q": "多久能排期？",
+        "a": "主要枢纽（深圳、东莞、广州、宁波、胡志明、曼谷、槟城）通常 2–3 个工作日内可排期。其他地点需要更长前置时间，因为合适的验货员需要差旅。"
+      }
+    ],
+    "ctaTitle": "需要安排验货？",
+    "ctaLead": "把工厂位置、产品、订单数量与期望日期发给我们。一个工作日内回复报价。",
+    "ctaPrimary": "申请验货报价",
+    "ctaSecondary": "先评估供应商风险",
+    "form": {
+      "stageLabel": "验货节点",
+      "stageHint": "选择与生产排期匹配的节点。不确定？选「暂不确定」，我们给建议。",
+      "stages": [
+        "生产前（PPI）",
+        "生产中（DUPRO）",
+        "出货前（PSI）",
+        "装柜监装（CLS）",
+        "暂不确定"
+      ],
+      "factoryLocation": "工厂位置",
+      "factoryLocationHint": "城市与国家，例如：深圳，中国",
+      "product": "产品",
+      "quantity": "订单数量",
+      "inspectionDate": "期望验货日期",
+      "requirements": "验货要求",
+      "requirementsHint": "你的检查表、规格书，或需要验货员重点关注的项",
+      "submit": "提交验货请求",
+      "submitting": "提交中...",
+      "success": "请求已收到。我们会在一个工作日内回复报价。",
+      "error": "出错了，请重试，或直接发邮件给我们。",
+      "firstName": "你的姓名",
+      "company": "公司",
+      "email": "工作邮箱"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "登录",
+      "lead": "登录后查看你的询价、报告与已保存的供应商评估。",
+      "email": "邮箱",
+      "password": "密码",
+      "submit": "登录",
+      "submitting": "登录中...",
+      "google": "使用 Google 继续",
+      "backHome": "返回首页",
+      "noAccount": "还没有账号？",
+      "registerLink": "注册一个",
+      "errorInvalid": "邮箱或密码错误。",
+      "errorAdminOnly": "该页面仅管理员可访问，请使用管理员账号登录。",
+      "errorSignedOut": "你已退出登录。",
+      "demoHint": "演示账号：admin@ / buyer@ / supplier@ factoryauditb2b.com。配置 OAuth 凭据后 Google 登录自动启用。"
+    },
+    "register": {
+      "title": "创建账号",
+      "lead": "免费注册，无需信用卡。用于跟踪询价、保存评估报告与申请报价。",
+      "name": "你的姓名",
+      "email": "工作邮箱",
+      "password": "密码",
+      "passwordHint": "至少 8 位字符。",
+      "confirm": "确认密码",
+      "company": "公司名称",
+      "companyHint": "请填写与营业执照一致的注册公司名。",
+      "country": "国家",
+      "roleLabel": "我的身份",
+      "roleBuyer": "买家",
+      "roleBuyerHint": "我从工厂采购，需要供应商核查、验厂或验货服务。",
+      "roleSupplier": "供应商",
+      "roleSupplierHint": "我是生产厂家，希望被收录并通过核验。",
+      "submit": "创建账号",
+      "submitting": "创建中...",
+      "success": "账号创建成功，正在登录...",
+      "hasAccount": "已有账号？",
+      "loginLink": "登录",
+      "termsNote": "创建账号即表示你同意我们的服务条款与隐私政策。"
+    },
+    "errors": {
+      "invalid_email": "请输入有效的邮箱地址。",
+      "weak_password": "密码至少需要 8 位字符。",
+      "invalid_role": "请选择买家或供应商。",
+      "email_taken": "该邮箱已注册，请直接登录。",
+      "password_mismatch": "两次输入的密码不一致。",
+      "server_error": "出错了，请重试。",
+      "network": "网络错误，请检查连接后重试。",
+      "rate_limited": "操作过于频繁，请一小时后再试。"
+    },
+    "nav": {
+      "signIn": "登录",
+      "admin": "管理后台",
+      "signOut": "退出"
+    }
+  },
+  "auditGuide": {
+    "breadcrumb": "验厂指南",
+    "metaTitle": "{country}{type} 验厂",
+    "metaDesc": "查找 {country} 的 {type} 验厂、检验与合格供应商。FactoryAuditB2B 提供已核验工厂目录、RFQ 发布与验厂申请。",
+    "h1": "{country}{type} 验厂",
+    "ownerLabel": "发证/管理主体：",
+    "standardsTitle": "相关认证与标准",
+    "noStandards": "暂未记录相关标准。",
+    "suppliersTitle": "持有 {type} 的{country}供应商（{n}）",
+    "emptySuppliers": "暂无已核验供应商持有该资质。仍可发布 RFQ，我们会为你寻找候选工厂。",
+    "riskLabel": "风险",
+    "ctaTitle": "需要做 {type} 验厂？",
+    "ctaDesc": "发布 RFQ，我们会为你匹配具备该资质的审核员与供应商。",
+    "ctaButton": "发布 RFQ",
+    "verificationCta": "先做供应商核查"
+  }
+}

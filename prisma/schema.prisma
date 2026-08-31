@@ -1,0 +1,406 @@
+// FactoryAuditB2B — Prisma schema
+// 《Audit & Compliance Taxonomy 核心模块开发规范》Developer Spec v1.0
+//
+// 设计纪律（§91）：所有业务模块（SEO / Suppliers / RFQ / Audit / Auditor / AI 风险 / Checklist / Report）
+// 必须从中央 taxonomy engine 消费数据，taxonomy_nodes 是单一事实来源（Single Source of Truth）。
+//
+// 本地开发用 SQLite（零依赖、立刻能跑）。上线 PostgreSQL / Supabase 时：
+//   1) datasource 的 provider 改为 "postgresql"
+//   2) .env 的 DATABASE_URL 改为 Postgres 连接串（含 ?schema=public）
+//   3) 执行 npx prisma migrate deploy
+// 本 schema 刻意不依赖 SQLite-only 特性（无 enum、无原生数组、Json 用 String），可平滑切换。
+
+generator client {
+  provider = "prisma-client-js"
+  // 输出到 node_modules 之外，规避 sandbox 对 node_modules/.prisma 的重命名/删除锁定
+  output   = "../generated/prisma-client"
+  // library engine（纯 JS/WASM，无 query_engine dll）：
+  // 1) Windows 下 prisma generate 不再触发 query_engine-windows.dll rename EPERM（DLL 被锁）
+  // 2) driver adapter（PrismaNeon）+ Cloudflare Workers 场景官方推荐，无原生二进制
+  engineType = "library"
+}
+
+datasource db {
+  // 上线时改为 "postgresql"
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================
+// 1. TAXONOMY CORE —— 统一分类树（§65 taxonomy_nodes）
+// ============================================================
+
+model TaxonomyNode {
+  id            String   @id @default(cuid())
+  code          String   @unique // 稳定 code，如 AUDIT_SOCIAL / CERT_ISO9001
+  parentCode    String? // 自引用（树），指向 code
+  category      String // 15 个一级类目之一（§81）
+  level         Int      @default(0) // 0=一级
+  labelEn       String
+  labelZh       String?
+  description   String?
+  isLeaf        Boolean  @default(false)
+  sortOrder     Int      @default(0)
+  countryScope  String? // 逗号分隔国家 code；空=全球
+  industryScope String? // 逗号分隔行业 code；空=全部
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  parent     TaxonomyNode?       @relation("TaxoTree", fields: [parentCode], references: [code])
+  children   TaxonomyNode[]      @relation("TaxoTree")
+  relSources TaxonomyRelation[]  @relation("TaxoRelSource")
+  relTargets TaxonomyRelation[]  @relation("TaxoRelTarget")
+
+  @@index([category])
+  @@index([parentCode])
+}
+
+// 分类节点之间的关系（§66 taxonomy_relations）
+model TaxonomyRelation {
+  id         String  @id @default(cuid())
+  sourceCode String
+  targetCode String
+  relation   String // RELATED_AUDIT | REQUIRES_STANDARD | PREREQUISITE | ALTERNATIVE | SUBSUMES
+  weight     Float   @default(1)
+  note       String?
+  source     TaxonomyNode @relation("TaxoRelSource", fields: [sourceCode], references: [code], onDelete: Cascade)
+  target     TaxonomyNode @relation("TaxoRelTarget", fields: [targetCode], references: [code], onDelete: Cascade)
+
+  @@unique([sourceCode, targetCode, relation])
+  @@index([sourceCode])
+  @@index([targetCode])
+}
+
+// ============================================================
+// 2. SPECIALIZED CATALOGS —— 审核类型 / 标准（§45 / §46）
+// ============================================================
+
+// 审核/验厂类型。serviceType 严格区分 Audit ≠ Assessment ≠ Inspection ≠ Certification（§44）
+model AuditType {
+  code            String  @id // SMETA / BSCI / ISO9001 ...
+  nameEn          String
+  nameZh          String?
+  serviceType     String // AUDIT|ASSESSMENT|INSPECTION|CERTIFICATION_SUPPORT|DOCUMENT_REVIEW|VERIFICATION|TESTING|CONSULTING|TRAINING
+  isAudit         Boolean @default(false)
+  isAssessment    Boolean @default(false)
+  isCertification Boolean @default(false)
+  isInspection    Boolean @default(false)
+  owner           String? // 发证/管理主体，如 Sedex、amfori、ISO
+  description     String?
+  countryScope    String?
+  industryScope   String?
+  durationDays    Int?
+  feeRange        String?
+  riskWeight      Float   @default(1) // 计入 AI 风险模型（§58）
+  taxonomyCode    String? // 关联 TaxonomyNode.code（一级类目）
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// 认证/标准。与 AuditType 平行，但聚焦认证（certification）。note 用于免责，如 SMETA 由 Sedex 认可机构执行（§46）
+model Standard {
+  code            String  @id
+  nameEn          String
+  nameZh          String?
+  owner           String?
+  serviceType     String
+  isCertification Boolean @default(false)
+  isAudit         Boolean @default(false)
+  isAssessment    Boolean @default(false)
+  isInspection    Boolean @default(false)
+  note            String?
+  category        String?
+  countryScope    String?
+  industryScope   String?
+  riskWeight      Float   @default(1)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// ============================================================
+// 3. RISK MODEL —— 可配置权重 + 风险事件（§58 / §59 / §60）
+// ============================================================
+
+// 可配置风险权重规则（管理者可在后台调整，AI 风险引擎消费）
+model RiskWeightRule {
+  id          String   @id @default(cuid())
+  dimension   String   @unique // taxonomy category code 或 "overall"
+  weight      Float
+  enabled     Boolean  @default(true)
+  description String?
+  updatedAt   DateTime @updatedAt
+}
+
+// 风险事件（历史负面事件，计入供应商风险分）
+model RiskEvent {
+  id          String   @id @default(cuid())
+  supplierId  String
+  taxonomyCode String? // 关联维度（TaxonomyNode.code）
+  eventType   String // ACCIDENT|FINE|LABOR_DISPUTE|RECALL|SANCTION|LITIGATION
+  severity    Int // 1-5
+  description String?
+  source      String?
+  occurredAt  DateTime
+  createdAt   DateTime @default(now())
+  supplier    Supplier @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+}
+
+// ============================================================
+// 4. USERS + AUTH（NextAuth v5）
+// ============================================================
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  passwordHash  String? // credentials 登录；OAuth 可为空
+  role          String    @default("BUYER") // BUYER|SUPPLIER|AUDITOR|ADMIN
+  createdAt     DateTime  @default(now())
+
+  accounts  Account[]
+  sessions  Session[]
+  rfqs      Rfq[]
+  audits    AuditRequest[]
+  auditor   Auditor?
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ============================================================
+// 5. AUDITOR（审核员档案 + 能力标签）（§49）
+// ============================================================
+
+model Auditor {
+  id           String   @id @default(cuid())
+  userId       String?  @unique
+  name         String   @unique
+  company      String?
+  user         User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  countryCode  String?
+  city         String?
+  bio          String?
+  languages    String? // 逗号分隔
+  hourlyRate   Float?
+  rating       Float?
+  completedJobs Int     @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  capabilities AuditorCapability[]
+}
+
+// 审核员能力标签（M2M 到 taxonomy / audit_type / standard）
+model AuditorCapability {
+  id        String  @id @default(cuid())
+  auditorId String
+  refType   String // TAXONOMY | AUDIT_TYPE | STANDARD
+  refCode   String
+  level     String? // LEAD | SENIOR | JUNIOR
+  verified  Boolean @default(false)
+  createdAt DateTime @default(now())
+  auditor   Auditor @relation(fields: [auditorId], references: [id], onDelete: Cascade)
+
+  @@unique([auditorId, refType, refCode])
+}
+
+// ============================================================
+// 6. SUPPLIER + EVIDENCE + CAPABILITY TAGS（§48）
+// ============================================================
+
+model Supplier {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  legalName     String
+  countryCode   String
+  city          String
+  industryCode  String? // 主行业（SEO 用），关联 Industry
+  businessType  String // Manufacturer | Trading Company
+  established   Int?
+  employees     String? // "201-500"
+  mainProducts  String? // 逗号分隔
+  exportMarkets String? // 逗号分隔
+  // 验证状态枚举（§59）：UNVERIFIED|IDENTITY_VERIFIED|DOCUMENT_VERIFIED|FACTORY_VERIFIED
+  verificationStatus String?
+  riskScore     Int?
+  riskLevel     String? // CRITICAL|HIGH|MEDIUM|LOW|VERY_LOW
+  certifications String? // 逗号分隔（冗余展示，权威来源为 SupplierCapability）
+  auditStatus   String?
+  inspectionHistory Int @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  country     Country             @relation(fields: [countryCode], references: [code])
+  industry    Industry?           @relation(fields: [industryCode], references: [code])
+  evidence    SupplierEvidence[]
+  capabilities SupplierCapability[]
+  riskEvents  RiskEvent[]
+}
+
+// 供应商能力/合规标签（M2M 到 taxonomy / audit_type / standard）—— 所有标签的唯一入口
+model SupplierCapability {
+  id          String   @id @default(cuid())
+  supplierId  String
+  refType     String // TAXONOMY | AUDIT_TYPE | STANDARD
+  refCode     String
+  verified    Boolean  @default(false)
+  verifiedAt  DateTime?
+  source      String   @default("SELF") // SELF | THIRD_PARTY | PLATFORM
+  evidenceUrl String?
+  createdAt   DateTime @default(now())
+  supplier    Supplier @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+
+  @@unique([supplierId, refType, refCode])
+}
+
+model SupplierEvidence {
+  id         String   @id @default(cuid())
+  supplierId String
+  type       String // 营业执照 | 验厂报告 | 产品认证 | 工厂照片 ...
+  // 证据状态枚举（§60）：UNVERIFIED|PENDING|VERIFIED|REJECTED|EXPIRED
+  status     String
+  source     String? // 来源/链接
+  date       String?
+  note       String?
+  supplier   Supplier @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+}
+
+// ============================================================
+// 7. DICTIONARIES（SEO + 筛选）
+// ============================================================
+
+model Country {
+  code        String   @id // "china"
+  name        String
+  cn          String?  // 中文名
+  description String?  // SEO 落地页描述（落地页生成用）
+  suppliers   Supplier[]
+}
+
+model Industry {
+  code        String   @id // "electronics"
+  name        String
+  description String?  // SEO 落地页描述（落地页生成用）
+  suppliers   Supplier[]
+}
+
+// ============================================================
+// 8. BUSINESS DATA —— RFQ / Audit orders（消费 taxonomy）
+// ============================================================
+
+model Rfq {
+  id             String   @id @default(cuid())
+  userId         String?
+  name           String
+  email          String
+  productCategory String
+  country        String?
+  quantity       String?
+  targetPrice    String?
+  message        String?
+  // 需求侧 taxonomy 引用（§48 RFQ 需求结构化）
+  auditTypeCodes String? // 逗号分隔 AuditType.code
+  standardCodes  String? // 逗号分隔 Standard.code
+  taxonomyCodes  String? // 逗号分隔 TaxonomyNode.code
+  status         String   @default("OPEN") // OPEN|QUOTED|CLOSED
+  createdAt      DateTime @default(now())
+  user           User?    @relation(fields: [userId], references: [id])
+}
+
+model AuditRequest {
+  id           String   @id @default(cuid())
+  userId       String?
+  supplierName String
+  country      String?
+  industry     String?
+  auditTypeCode String? // 关联 AuditType.code
+  standardCodes String? // 逗号分隔 Standard.code
+  taxonomyCode String? // 关联 TaxonomyNode.code
+  message      String?
+  status       String   @default("PENDING") // PENDING|ASSIGNED|IN_PROGRESS|DONE|CANCELLED
+  createdAt    DateTime @default(now())
+  user         User?    @relation(fields: [userId], references: [id])
+}
+
+// ============================================================
+// 9. ADMIN AUDIT LOG
+// ============================================================
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actor     String? // 操作人（邮箱/系统）
+  action    String // CREATE|UPDATE|LOGIN|DELETE|SEED ...
+  target    String?
+  detail    String?
+  createdAt DateTime @default(now())
+}
+
+// ============================================================
+// 10. LEAD FUNNEL —— 工具使用 → Lead → 验厂/审核转化（§21 / §49）
+// ============================================================
+
+// 每次工具使用（风险测评）记录
+model Assessment {
+  id          String   @id @default(cuid())
+  tool        String   @default("supplier-risk-calculator")
+  overall     Int
+  level       String // LOW|MODERATE|ELEVATED|HIGH|CRITICAL
+  dimensions  String   // JSON: 各维度分
+  keyFactors  String   // JSON: 关键风险因子
+  leadId      String?
+  lead        Lead?    @relation(fields: [leadId], references: [id], onDelete: SetNull)
+  createdAt   DateTime @default(now())
+}
+
+// 线索（邮箱捕获后生成）
+model Lead {
+  id        String   @id @default(cuid())
+  firstName String?
+  company   String?
+  email     String
+  country   String?
+  sourcing  String? // what are you sourcing
+  supplierName     String?
+  supplierWebsite  String?
+  tool      String?
+  riskLevel String?
+  score     Int?
+  message   String? // free-text request for custom/personalized services
+  status    String   @default("NEW") // NEW|CONTACTED|QUALIFIED|QUOTE_SENT|WON|LOST
+  createdAt DateTime @default(now())
+  assessments Assessment[]
+}

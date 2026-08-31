@@ -1,0 +1,69 @@
+# 依赖
+node_modules/
+.pnp
+.pnp.js
+
+# 构建产物
+.next/
+out/
+build/
+dist/
+.opennext/
+.open-next/
+.wrangler/
+
+# 环境变量（含密钥，切勿提交）
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Prisma 生成的 client 与本地数据库
+generated/
+prisma/dev.db
+prisma/dev.db-journal
+prisma/*.db
+prisma/*.db-journal
+
+# 日志
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# 部署平台
+.vercel
+.netlify
+
+# 编辑器 / 系统
+.DS_Store
+Thumbs.db
+*.tsbuildinfo
+next-env.d.ts
+
+# 临时脚本输出
+_tr_cache.json
+_gen*.log
+
+# 构建备份 / 临时目录
+.next_bak*/
+.prisma-cache/
+.prisma-tmp*/
+.tmp/
+
+# Python 辅助脚本与缓存
+__pycache__/
+*.pyc
+gen_i18n_v2.py
+gen_manual_tr.py
+
+# 临时分析文件
+_check.cjs
+_seed_desc.py
+_uniq_en.txt
+disk*.txt
+appdata_sizes.txt
+
+# WorkBuddy 本地项目数据（记忆/技能，不进仓库）
+.workbuddy/
