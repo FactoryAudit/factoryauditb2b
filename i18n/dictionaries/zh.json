@@ -67,7 +67,9 @@
     "registeredBusiness": "中国注册经营主体",
     "supplierNetwork": "供应商网络",
     "sampleReport": "样例报告",
-    "monitoring": "供应商监控"
+    "monitoring": "供应商监控",
+    "fieldReports": "现场记录",
+    "caseStudies": "案例研究"
   },
   "home": {
     "badge": "面向全球采购商的供应商情报",
@@ -286,7 +288,9 @@
       }
     },
     "metaTitle": "供应商情报资源中心",
-    "metaDesc": "关于供应商核查、工厂验厂、供应商风险、中国与东南亚采购及合规的指南与工具。"
+    "metaDesc": "关于供应商核查、工厂验厂、供应商风险、中国与东南亚采购及合规的指南与工具。",
+    "storiesTitle": "案例与现场记录",
+    "storiesLead": "用脱敏示例说明各项检查在实际场景中如何开展。"
   },
   "toolsIndex": {
     "badge": "免费工具",
@@ -1496,8 +1500,6 @@
     "lead": "评估、验证与审核中国及亚洲供应商的实用指南、免费工具与服务。",
     "guidesTitle": "按国家与标准查看验厂指南",
     "guidesLead": "买家最常要求的审核类型的分步指南。",
-    "knowledgeTitle": "供应商培训",
-    "knowledgeLead": "我们先审核并验证供应商，再为他们的团队提供质量与 QC 培训。",
     "toolsTitle": "免费工具",
     "toolsLead": "无需注册。",
     "servicesTitle": "服务",
@@ -1513,7 +1515,9 @@
     "logistics": "集装箱装柜计算器",
     "logisticsDesc": "计算每柜可装箱数以及所需柜数。",
     "metaTitle": "资源与指南 - 供应商验证与工厂验厂",
-    "metaDesc": "评估、验证与审核中国及亚洲供应商的实用指南、免费工具与服务。"
+    "metaDesc": "评估、验证与审核中国及亚洲供应商的实用指南、免费工具与服务。",
+    "knowledgeTitle": "供应商培训",
+    "knowledgeLead": "我们先审核并验证供应商，再为他们的团队提供质量与 QC 培训。"
   },
   "trainingPage": {
     "badge": "供应商培训",
@@ -2568,5 +2572,26 @@
     "ctaLead": "告诉我们要覆盖哪些供应商、多久复核一次。我们会确认可复核项并报价。",
     "ctaPrimary": "申请监控",
     "ctaSecondary": "查看定价"
+  },
+  "fieldReports": {
+    "metaTitle": "现场记录 —— 来自验货、验厂与核验现场的笔记",
+    "h1": "现场记录",
+    "badge": "现场笔记",
+    "lead": "来自验货、验厂与核验现场的短篇记录：现场查了什么、发现了什么、发现项如何记录。",
+    "updatedLabel": "更新于",
+    "readMore": "阅读现场记录",
+    "serviceLabels": {
+      "inspection": "验货",
+      "audit": "验厂",
+      "verification": "供应商核验"
+    },
+    "ctaTitle": "想让自己的订单也有这种颗粒度？",
+    "ctaLead": "告诉我们产品、市场和你担心的地方。我们来界定验货、验厂或核验的范围。",
+    "ctaPrimary": "发布 RFQ",
+    "ctaSecondary": "定制服务"
+  },
+  "caseStudies": {
+    "h1": "案例研究",
+    "lead": "供应商核验、验厂、验货与寻源的方法演示。"
   }
 }

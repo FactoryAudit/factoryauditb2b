@@ -60,7 +60,9 @@
     "registeredBusiness": "China Registered Business",
     "supplierNetwork": "Réseau Fournisseurs",
     "sampleReport": "Sample report",
-    "monitoring": "Supplier Monitoring"
+    "monitoring": "Supplier Monitoring",
+    "fieldReports": "Field Reports",
+    "caseStudies": "Case Studies"
   },
   "home": {
     "badge": "Vérifier. Sourcer. Inspecter. Expédier.",
@@ -1099,8 +1101,6 @@
     "lead": "Guides pratiques, outils gratuits et services pour evaluer, verifier et auditer les fournisseurs en Chine et en Asie.",
     "guidesTitle": "Guides d'audit par pays et referentiel",
     "guidesLead": "Orientations pas a pas pour les types d'audit les plus demandes.",
-    "knowledgeTitle": "Formation fournisseurs",
-    "knowledgeLead": "Nous auditons et vérifions vos fournisseurs, puis formons leurs équipes en qualité et QC.",
     "toolsTitle": "Outils gratuits",
     "toolsLead": "Aucun compte requis.",
     "servicesTitle": "Services",
@@ -1116,7 +1116,9 @@
     "logistics": "Calculateur de chargement de conteneur",
     "logisticsDesc": "Calculez les cartons par conteneur et le nombre de conteneurs necessaires.",
     "metaTitle": "Ressources et Guides - Verification de Fournisseurs et Audit d'Usine",
-    "metaDesc": "Guides pratiques, outils gratuits et services pour evaluer, verifier et auditer les fournisseurs en Chine et en Asie."
+    "metaDesc": "Guides pratiques, outils gratuits et services pour evaluer, verifier et auditer les fournisseurs en Chine et en Asie.",
+    "knowledgeTitle": "Formation fournisseurs",
+    "knowledgeLead": "Nous auditons et vérifions vos fournisseurs, puis formons leurs équipes en qualité et QC."
   },
   "trainingPage": {
     "badge": "Formation fournisseurs",
@@ -1671,7 +1673,9 @@
       }
     },
     "metaTitle": "Supplier Intelligence Resources",
-    "metaDesc": "Guides and tools on supplier verification, factory audit, supplier risk, China and Southeast Asia sourcing, and compliance."
+    "metaDesc": "Guides and tools on supplier verification, factory audit, supplier risk, China and Southeast Asia sourcing, and compliance.",
+    "storiesTitle": "Case studies and field notes",
+    "storiesLead": "How the checks work in practice, shown with de-identified examples."
   },
   "verification": {
     "levelLabel": "Verification level",
@@ -2574,5 +2578,26 @@
     "ctaLead": "Tell us which suppliers you want covered and how often. We will confirm what can be re-checked and quote.",
     "ctaPrimary": "Request monitoring",
     "ctaSecondary": "See pricing"
+  },
+  "fieldReports": {
+    "metaTitle": "Field Reports — On-Site Notes from Inspection, Audit and Verification",
+    "h1": "Field Reports",
+    "badge": "Field notes",
+    "lead": "Short notes from inspection, audit and verification work: what was checked on site, what was found, and how the finding was recorded.",
+    "updatedLabel": "Updated",
+    "readMore": "Read the field note",
+    "serviceLabels": {
+      "inspection": "Inspection",
+      "audit": "Factory audit",
+      "verification": "Supplier verification"
+    },
+    "ctaTitle": "Want this level of detail on your own order?",
+    "ctaLead": "Tell us the product, the market and what worries you. We will scope the inspection, audit or verification.",
+    "ctaPrimary": "Post an RFQ",
+    "ctaSecondary": "Custom services"
+  },
+  "caseStudies": {
+    "h1": "Case Studies",
+    "lead": "Method walk-throughs for supplier verification, factory audit, inspection and sourcing."
   }
 }

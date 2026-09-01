@@ -11,6 +11,7 @@ import { hreflangFor } from "@/i18n/hreflang";
 import { COVERAGE_COUNTRIES, COVERAGE_SERVICE_SLUGS } from "@/lib/coverage";
 import { GUIDES } from "@/lib/guides";
 import { CASE_STUDIES } from "@/lib/caseStudies";
+import { FIELD_REPORTS } from "@/lib/fieldReports";
 
 const BASE = "https://factoryauditb2b.com";
 
@@ -44,6 +45,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/resources",
     "/guides",
     "/case-studies",
+    "/field-reports",
     "/methodology",
     "/trust",
     "/training-plans",
@@ -59,6 +61,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...COVERAGE_SERVICE_SLUGS.map((x) => `/services/${x.slug}`),
     ...GUIDES.map((g) => `/guides/${g.slug}`),
     ...CASE_STUDIES.map((c) => `/case-studies/${c.slug}`),
+    ...FIELD_REPORTS.map((r) => `/field-reports/${r.slug}`),
   ];
 
   // 已 308 到新地址的旧路径，不进站点地图

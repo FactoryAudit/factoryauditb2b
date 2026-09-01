@@ -36,6 +36,8 @@ paths=(
   "/sample-report"
   "/case-studies"
   "/case-studies/trading-company-posing-as-factory"
+  "/field-reports"
+  "/field-reports/carton-count-mismatch-at-loading"
   "/join-supplier-network"
   "/training-plans"
   "/rfq"

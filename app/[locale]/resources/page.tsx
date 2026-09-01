@@ -107,6 +107,21 @@ export default async function ResourcesPage({ params }: Props) {
         </div>
       </section>
 
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold text-[#0f172a]">{r.storiesTitle}</h2>
+        <p className="text-[#64748b] mt-1 mb-5">{r.storiesLead}</p>
+        <div className="grid md:grid-cols-2 gap-5">
+          <Link href={p("/case-studies")} className="card p-6 hover:border-[#0f4c81]">
+            <div className="font-semibold text-[#0f4c81]">{t.caseStudies.h1}</div>
+            <p className="text-sm text-[#475569] mt-1">{t.caseStudies.lead}</p>
+          </Link>
+          <Link href={p("/field-reports")} className="card p-6 hover:border-[#0f4c81]">
+            <div className="font-semibold text-[#0f4c81]">{t.fieldReports.h1}</div>
+            <p className="text-sm text-[#475569] mt-1">{t.fieldReports.lead}</p>
+          </Link>
+        </div>
+      </section>
+
       <section className="grid md:grid-cols-2 gap-5">
         <Link href={p("/methodology")} className="card p-6 hover:border-[#0f4c81]">
           <div className="font-semibold text-[#0f4c81]">{t.methodology.h1}</div>

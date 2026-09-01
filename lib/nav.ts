@@ -68,3 +68,16 @@ export const TOOL_ORDER: ToolEntry[] = [
   { cardKey: "documentChecker", href: "/tools/supplier-document-checker" },
   { cardKey: "auditReportAnalyzer", href: "/tools/audit-report-analyzer" },
 ];
+
+/**
+ * 按 href 反查工具卡键 / 服务菜单键。
+ * 用途：内容库（如 fieldReports）里只存 href，页面渲染时再换成字典里的本地化标题，
+ * 避免同一份文案在数据和字典里各存一份。
+ */
+export function toolCardKeyByHref(href: string): ToolEntry["cardKey"] | undefined {
+  return TOOL_ORDER.find((x) => x.href === href)?.cardKey;
+}
+
+export function serviceKeyByHref(href: string): ServiceMenuItem["key"] | undefined {
+  return SERVICE_MENU.find((x) => x.href === href)?.key;
+}

@@ -60,7 +60,9 @@
     "registeredBusiness": "China Registered Business",
     "supplierNetwork": "供應商網絡",
     "sampleReport": "範例報告",
-    "monitoring": "Supplier Monitoring"
+    "monitoring": "Supplier Monitoring",
+    "fieldReports": "Field Reports",
+    "caseStudies": "Case Studies"
   },
   "home": {
     "badge": "覈查 · 採購 · 驗貨 · 發運",
@@ -1099,8 +1101,6 @@
     "lead": "評估、驗證與審覈中國及亞洲供應商的實用指南、免費工具與服務。",
     "guidesTitle": "按國家與標準查看驗廠指南",
     "guidesLead": "買家最常要求的審覈類型的分步指南。",
-    "knowledgeTitle": "供應商培訓",
-    "knowledgeLead": "我們先審覈並驗證供應商，再爲他們的團隊提供質量與 QC 培訓。",
     "toolsTitle": "免費工具",
     "toolsLead": "無需註冊。",
     "servicesTitle": "服務",
@@ -1116,7 +1116,9 @@
     "logistics": "集裝箱裝櫃計算器",
     "logisticsDesc": "計算每櫃可裝箱數以及所需櫃數。",
     "metaTitle": "資源與指南 - 供應商驗證與工廠驗廠",
-    "metaDesc": "評估、驗證與審覈中國及亞洲供應商的實用指南、免費工具與服務。"
+    "metaDesc": "評估、驗證與審覈中國及亞洲供應商的實用指南、免費工具與服務。",
+    "knowledgeTitle": "供應商培訓",
+    "knowledgeLead": "我們先審覈並驗證供應商，再爲他們的團隊提供質量與 QC 培訓。"
   },
   "trainingPage": {
     "badge": "供應商培訓",
@@ -1671,7 +1673,9 @@
       }
     },
     "metaTitle": "Supplier Intelligence Resources",
-    "metaDesc": "Guides and tools on supplier verification, factory audit, supplier risk, China and Southeast Asia sourcing, and compliance."
+    "metaDesc": "Guides and tools on supplier verification, factory audit, supplier risk, China and Southeast Asia sourcing, and compliance.",
+    "storiesTitle": "Case studies and field notes",
+    "storiesLead": "How the checks work in practice, shown with de-identified examples."
   },
   "verification": {
     "levelLabel": "Verification level",
@@ -2574,5 +2578,26 @@
     "ctaLead": "Tell us which suppliers you want covered and how often. We will confirm what can be re-checked and quote.",
     "ctaPrimary": "Request monitoring",
     "ctaSecondary": "See pricing"
+  },
+  "fieldReports": {
+    "metaTitle": "Field Reports — On-Site Notes from Inspection, Audit and Verification",
+    "h1": "Field Reports",
+    "badge": "Field notes",
+    "lead": "Short notes from inspection, audit and verification work: what was checked on site, what was found, and how the finding was recorded.",
+    "updatedLabel": "Updated",
+    "readMore": "Read the field note",
+    "serviceLabels": {
+      "inspection": "Inspection",
+      "audit": "Factory audit",
+      "verification": "Supplier verification"
+    },
+    "ctaTitle": "Want this level of detail on your own order?",
+    "ctaLead": "Tell us the product, the market and what worries you. We will scope the inspection, audit or verification.",
+    "ctaPrimary": "Post an RFQ",
+    "ctaSecondary": "Custom services"
+  },
+  "caseStudies": {
+    "h1": "Case Studies",
+    "lead": "Method walk-throughs for supplier verification, factory audit, inspection and sourcing."
   }
 }

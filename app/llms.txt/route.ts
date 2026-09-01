@@ -3,6 +3,7 @@ import { LOCALES, LOCALE_META, localePath } from "@/i18n/config";
 import { COVERAGE_COUNTRIES, COVERAGE_SERVICE_SLUGS } from "@/lib/coverage";
 import { GUIDES } from "@/lib/guides";
 import { CASE_STUDIES } from "@/lib/caseStudies";
+import { FIELD_REPORTS } from "@/lib/fieldReports";
 
 // /llms.txt —— 面向 AI 抓取工具（ChatGPT / Perplexity / Bing Copilot 等）的站点说明文件。
 // 完全由中央 taxonomy 引擎驱动，确保与数据库一致（§91 单一事实来源）。
@@ -55,6 +56,7 @@ export async function GET() {
   lines.push(`- [Coverage](${BASE}/countries): Country-specific sourcing risks, verification and audit considerations for China, Vietnam and Thailand.`);
   lines.push(`- [Resources](${BASE}/resources): Supplier intelligence guides and tools.`);
   lines.push(`- [Case Studies](${BASE}/case-studies): Anonymised illustrative walk-throughs of verification, audit, inspection and sourcing. Not client testimonials.`);
+  lines.push(`- [Field Reports](${BASE}/field-reports): Short anonymised notes from inspection, audit and verification work, showing what is checked on site and how findings are recorded.`);
   lines.push(`- [Methodology](${BASE}/methodology): How supplier risk scores are calculated, including dimension weights and limitations.`);
   lines.push(`- [Pricing](${BASE}/pricing): Services and plans, with indicative ranges for reports, verification and audits.`);
   lines.push(`- [Sample Report](${BASE}/sample-report): A worked example of a Supplier Due Diligence Report with fictional data, showing the structure and detail you receive.`);
@@ -86,6 +88,12 @@ export async function GET() {
   lines.push("## Case studies (illustrative)");
   for (const c of CASE_STUDIES) {
     lines.push(`- [${c.titleEn}](${BASE}/case-studies/${c.slug}): ${c.en.summary}`);
+  }
+  lines.push("");
+
+  lines.push("## Field reports (illustrative)");
+  for (const r of FIELD_REPORTS) {
+    lines.push(`- [${r.titleEn}](${BASE}/field-reports/${r.slug}): ${r.en.takeaway}`);
   }
   lines.push("");
 
