@@ -920,7 +920,18 @@
     "notListedCta": "Post an RFQ",
     "claimTitle": "Are you a supplier?",
     "claimLead": "Join the directory, publish your factory profile, pass our verification and get discovered by buyers sourcing from China and Southeast Asia.",
-    "claimPrimary": "Join as a supplier"
+    "claimPrimary": "Join as a supplier",
+    "heroBadge": "サプライヤー情報",
+    "featuredTitle": "注目のサプライヤー",
+    "featuredLead": "検証情報が確認できる実在企業です。すべてのプロフィールで同じリスクスコアを公開しており、隠しません。",
+    "searchPlaceholder": "企業名・製品・都市で検索",
+    "searchButton": "検索",
+    "searchClear": "クリア",
+    "unlockTitle": "サプライヤーデータベース全体を解放",
+    "unlockLead": "Founding Buyer 会員は、掲載全サプライヤーの証拠記録・リスク明細・工場詳細を閲覧できます。",
+    "unlockNote": "無料アカウントでは毎月 {n} 件のプロフィールを閲覧できます。",
+    "freeCta": "無料アカウント作成",
+    "memberCta": "会員プランを見る"
   },
   "auditRequest": {
     "badge": "サービスリクエスト",
@@ -1873,7 +1884,19 @@
     "lastChecked": "Last checked",
     "noCheckRecord": "No check on record",
     "recVerified": "Evidence on record covers the items listed above. Re-check the scope against your order before releasing a deposit, and refresh the record if the last check is more than 12 months old.",
-    "recUnverified": "Verify the factory address and request recent quality and audit records before placing a large order or releasing a deposit."
+    "recUnverified": "Verify the factory address and request recent quality and audit records before placing a large order or releasing a deposit.",
+    "metaTitle": "サプライヤープロフィール",
+    "metaDesc": "リスクスコア・検証ステータス・製品・能力情報を公開するサプライヤープロフィール。",
+    "directoryBreadcrumb": "サプライヤーディレクトリ",
+    "industryLabel": "業界",
+    "certificationsLabel": "認証",
+    "freeLockTitle": "無料アカウントで会社情報をさらに表示",
+    "freeLockLead": "無料アカウントを作成すると、設立年・従業員数・輸出市場・認証一覧を確認できます。",
+    "freeLockCta": "無料アカウント作成",
+    "paidLockTitle": "会員は証拠とリスク明細を閲覧",
+    "paidLockLead": "Founding Buyer 会員（年間 $49）は証拠記録・リスク明細・監査履歴・検査データを閲覧できます。",
+    "paidLockCta": "会員プランを見る",
+    "paidLockNote": "リスクスコアは公開です。証拠と検証の詳細は会員向けコンテンツです。"
   },
   "reportPreview": {
     "badge": "Free preview",
@@ -1973,6 +1996,41 @@
         "Buyer introductions",
         "Visibilidad del producto"
       ]
+    },
+    "badge": "プロフィール認証",
+    "metaTitle": "サプライヤープロフィールの認証",
+    "metaDesc": "会社メールでサプライヤープロフィールを認証します。",
+    "publicDataTitle": "認証対象のプロフィール",
+    "publicDataLead": "以下はプロフィールに現在公開されている検証情報です。",
+    "companyNameLabel": "会社名",
+    "backToProfile": "プロフィールに戻る",
+    "rulesTitle": "認証のルール",
+    "rules": [
+      "プロフィールを認証しても、リスクスコアや検証ステータスは変わりません。",
+      "検証結果を販売することはありません。支払いで肯定的な結果を保証するものではありません。",
+      "会社ドメインのメールを使用し、権限があることを申告してください。",
+      "手動審査のうえ、1営業日以内に返信します。"
+    ],
+    "formTitle": "認証申請を送信",
+    "form": {
+      "emailLabel": "会社メール",
+      "emailHint": "会社ドメインのメールを使用してください（例 name@yourcompany.com）。",
+      "nameLabel": "担当者名",
+      "companyLabel": "会社名",
+      "authorizationLabel": "権限の申告",
+      "authorizationYes": "会社を代表してこの申請を提出する権限があることを申告します",
+      "authorizationNo": "まだ権限なし（関心の登録のみ）",
+      "supportLabel": "補足情報",
+      "supportHint": "営業許可証・委任状・名刺など、検証に役立つもの",
+      "submit": "認証申請を送信",
+      "submitting": "送信中…",
+      "privacyNote": "ご提供いただいた情報は本人確認にのみ使用し、連絡先を公開することはありません。",
+      "successTitle": "認証申請を受け付けました",
+      "successLead": "手動審査のうえ、1営業日以内に会社メールへ返信します。",
+      "errorGeneric": "エラーが発生しました。時間をおいて再度お試しいただくか、直接メールでお問い合わせください。",
+      "errorRateLimited": "送信が多すぎます。しばらくしてから再度お試しください。",
+      "errorInvalidEmail": "有効な会社メールを入力してください。",
+      "errorAuthorization": "権限の申告を選択してください。"
     }
   },
   "consent": {
@@ -2753,5 +2811,81 @@
     "noteModules": "確認モジュール",
     "ruleBadge": "ルールエンジン",
     "aiBadge": "AI要約"
+  },
+  "register": {
+    "badge": "無料アカウント",
+    "metaTitle": "無料アカウントを作成",
+    "metaDesc": "無料アカウントを作成すると、毎月 5 件のサプライヤープロフィールを閲覧でき、評価中のサプライヤーを保存・比較できます。",
+    "h1": "無料アカウントを作成",
+    "lead": "クレジットカードは不要です。毎月 5 件のプロフィールを閲覧し、評価中のサプライヤーを保存できます。",
+    "benefitsTitle": "含まれる機能",
+    "benefits": [
+      "毎月 {n} 件のサプライヤープロフィールを閲覧",
+      "評価中のサプライヤーを保存",
+      "最大 3 社を並べて比較",
+      "検証ステータス更新の通知",
+      "いつでも Founding Buyer にアップグレード"
+    ],
+    "nextTitle": "次のステップ",
+    "nextLead": "送信後、1営業日以内に手動でアカウントを作成し、ログイン情報をメールでお送りします。",
+    "noCard": "クレジットカードは不要です。",
+    "membershipLink": "Founding Buyer 会員について（年間 $49）",
+    "formTitle": "登録",
+    "form": {
+      "emailLabel": "メール",
+      "emailPlaceholder": "you@company.com",
+      "nameLabel": "氏名",
+      "namePlaceholder": "お名前",
+      "companyLabel": "会社（任意）",
+      "companyPlaceholder": "会社名",
+      "submit": "無料アカウントを作成",
+      "submitting": "送信中…",
+      "privacyNote": "お客様の情報を第三者に販売することはありません。",
+      "successTitle": "登録を受け付けました",
+      "successLead": "1営業日以内にログイン情報をメールでお送りします。",
+      "errorGeneric": "エラーが発生しました。時間をおいて再度お試しいただくか、直接メールでお問い合わせください。",
+      "errorRateLimited": "このアドレスからの登録が多すぎます。しばらくしてから再度お試しください。",
+      "errorInvalidEmail": "有効なメールアドレスを入力してください。"
+    }
+  },
+  "membership": {
+    "badge": "バイヤー会員",
+    "metaTitle": "Founding Buyer 会員 — 年間 $49",
+    "metaDesc": "Founding Buyer 会員：全サプライヤープロフィール・リスク明細・証拠サマリー・工場情報を閲覧。年間 $49。",
+    "h1": "Founding Buyer 会員",
+    "lead": "サプライヤーを深く評価する必要がある調達チーム向け。一度の契約で、サプライヤー情報機能を1年間利用できます。",
+    "planName": "Founding Buyer",
+    "pricePeriod": "年",
+    "priceNote": "先行割引価格。今後値上げ予定",
+    "cta": "お問い合わせ",
+    "paymentNote": "オンライン決済はまだ未開放です。お問い合わせください。",
+    "benefitsTitle": "会員特典",
+    "benefitsLead": "有料会員は以下を閲覧できます",
+    "benefits": [
+      "月間制限なしで全サプライヤープロフィールを閲覧",
+      "リスク明細：各項目のスコアと根拠",
+      "証拠サマリー：検証済み記録と出典",
+      "工場詳細：規模・生産能力・輸出市場",
+      "高度な絞り込みとエクスポート",
+      "優先対応の検証サポート"
+    ],
+    "freeTitle": "まずは無料で",
+    "freeLead": "無料アカウントでは毎月 {n} 件のプロフィールを閲覧できます。",
+    "freeCta": "無料アカウント作成",
+    "faqTitle": "よくある質問",
+    "faq": [
+      {
+        "q": "会員料金は？",
+        "a": "Founding Buyer は年間 $49（USD）です。先行割引価格のため、今後値上げされる場合があります。"
+      },
+      {
+        "q": "支払い方法は？",
+        "a": "オンライン決済は未開放です。「お問い合わせ」からご連絡ください。チームがメールで支払い方法を確認します。"
+      },
+      {
+        "q": "会員なら検証結果は保証されますか？",
+        "a": "保証されません。会員は閲覧権限のみを提供し、サプライヤーのリスクスコアや検証ステータスを変更することはありません。検証結果を販売することもありません。"
+      }
+    ]
   }
 }

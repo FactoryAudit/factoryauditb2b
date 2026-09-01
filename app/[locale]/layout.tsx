@@ -5,6 +5,7 @@ import "../globals.css";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import AiChatWidget from "@/components/AiChatWidget";
+import AnalyticsTracker from "@/components/AnalyticsTracker";
 import JsonLd from "@/components/JsonLd";
 import { LOCALES, isLocale, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
@@ -157,6 +158,7 @@ export default async function RootLayout({
       </head>
       <body>
         <JsonLd data={siteGraph} />
+        <AnalyticsTracker />
         <SiteHeader locale={locale} dict={t.nav} />
         <main>{children}</main>
         <SiteFooter locale={locale} dict={t.footer} menu={t.nav.menu} whatsappLabel={t.common.whatsappChat} />

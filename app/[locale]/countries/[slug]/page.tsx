@@ -40,7 +40,7 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale,
     path: `/countries/${slug}`,
-    title: `${name} Supplier Verification & Factory Audit`,
+    title: t.countryHub.h1Template.replaceAll("{country}", name),
     description: t.countryHub.metaDesc.replaceAll("{country}", name),
   });
 }
@@ -74,7 +74,7 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: `${BASE}${p("/")}` },
+        { "@type": "ListItem", position: 1, name: h.breadcrumbHome, item: `${BASE}${p("/")}` },
         {
           "@type": "ListItem",
           position: 2,
@@ -105,14 +105,14 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
       <JsonLd data={jsonLd} />
 
       <nav className="mb-4 text-sm text-[#64748b]">
-        <Link href={p("/")} className="hover:underline">Home</Link>
+        <Link href={p("/")} className="hover:underline">{h.breadcrumbHome}</Link>
         {" / "}
         <Link href={p("/countries")} className="hover:underline">{h.breadcrumb}</Link>
         {" / "}{name}
       </nav>
 
       <h1 className="text-4xl font-extrabold text-[#0f172a]">
-        {name} Supplier Verification &amp; Factory Audit
+        {h.h1Template.replaceAll("{country}", name)}
       </h1>
       <p className="mt-3 text-lg text-[#475569]">{copy.hook}</p>
 
@@ -226,7 +226,7 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
             {suppliers.map((s) => (
               <li key={s.slug} className="flex items-center justify-between p-3">
                 <Link
-                  href={p(`/supplier/${s.countryCode}/${s.slug}`)}
+                  href={p(`/suppliers/${s.slug}`)}
                   className="font-medium text-[#0f4c81] hover:underline"
                 >
                   {s.legalName}

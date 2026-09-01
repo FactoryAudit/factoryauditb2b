@@ -157,7 +157,7 @@ export default async function AuditGuidePage({ params }: { params: Promise<Param
             {suppliers.map((s) => (
               <li key={s.slug} className="flex items-center justify-between p-3">
                 <Link
-                  href={lp(`/supplier/${s.countryCode}/${s.slug}`)}
+                  href={lp(`/suppliers/${s.slug}`)}
                   className="font-medium hover:underline"
                 >
                   {s.legalName}

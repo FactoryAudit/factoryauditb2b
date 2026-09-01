@@ -35,6 +35,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/factory-audit/request",
     "/join-supplier-network",
     "/suppliers",
+    "/register",
+    "/membership",
     "/pricing",
     "/sample-report",
     "/services",
@@ -105,10 +107,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .forEach((c) => pages.push(...emit(`/audit-guide/${c.code}/${a.code}`)));
   });
 
-  // 供应商详情页
-  supplierSlugs.forEach(({ country, slug }) =>
-    pages.push(...emit(`/supplier/${country}/${slug}`))
-  );
+  // 供应商详情页（Supplier Directory V2 独立 SEO URL；旧 /supplier/{country}/{slug} 已 308 到此处，不再单独提交）
+  supplierSlugs.forEach(({ slug }) => pages.push(...emit(`/suppliers/${slug}`)));
 
   // 行业 SEO 落地页
   industries.forEach((i) => pages.push(...emit(`/industry/${i.code}`)));

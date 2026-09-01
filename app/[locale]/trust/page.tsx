@@ -111,7 +111,7 @@ export default async function TrustPage({ params }: Props) {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: `${BASE}${p("/")}` },
+              { "@type": "ListItem", position: 1, name: t.countryHub.breadcrumbHome, item: `${BASE}${p("/")}` },
               { "@type": "ListItem", position: 2, name: tr.h1, item: `${BASE}${p(PATH)}` },
             ],
           },
@@ -152,7 +152,7 @@ export default async function TrustPage({ params }: Props) {
                 <div className="mt-4">
                   <WatermarkedDocument
                     src={cfg.licenseImage}
-                    alt={`${cfg.legalEntity} business registration`}
+                    alt={`${cfg.legalEntity} — ${tr.viewDocument}`}
                     watermark={wm}
                   />
                 </div>
@@ -224,7 +224,7 @@ export default async function TrustPage({ params }: Props) {
           {v.levels.map((label, i) => (
             <li key={label} className="card p-4">
               <div className="font-semibold text-[#0f172a]">
-                Level {i} — {v.levelsShort[i]}
+                {v.levelLabel} {i} — {v.levelsShort[i]}
               </div>
               <p className="text-sm text-[#475569] mt-1">{tr.levelDescs[i]}</p>
             </li>

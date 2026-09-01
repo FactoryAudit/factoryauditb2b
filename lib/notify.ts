@@ -258,3 +258,118 @@ export async function notifySupplierReceived(data: {
     ].join("\n"),
   });
 }
+
+// ---------- Supplier Directory V2：Free Account 注册 ----------
+
+// 管理员：新买家注册通知
+export async function notifyAdminBuyerRegister(data: {
+  id: string;
+  fields: Record<string, string>;
+}): Promise<boolean> {
+  const adminEmail = process.env.NOTIFY_ADMIN_EMAIL;
+  if (!adminEmail) {
+    console.log("[notify] NOTIFY_ADMIN_EMAIL 未配置，跳过买家注册通知");
+    return false;
+  }
+  const f = data.fields;
+  return sendMail({
+    to: adminEmail,
+    subject: `[FactoryAuditB2B] New Free Account Sign-up ${data.id}`,
+    text: [
+      `Account ID: ${data.id}`,
+      "",
+      "— Free Account Registration —",
+      `Email: ${f.email ?? ""}`,
+      `Name: ${f.name ?? ""}`,
+      `Company: ${f.company ?? ""}`,
+      "",
+      "Next steps: create the account in the admin system, confirm the email domain, then reply to the buyer with sign-in instructions.",
+    ].join("\n"),
+  });
+}
+
+// 买家回执：Reference ID + 建号周期 + 免费额度说明
+export async function notifyBuyerRegisterReceived(data: {
+  email: string;
+  name?: string | null;
+  id: string;
+}): Promise<boolean> {
+  if (!data.email) return false;
+  return sendMail({
+    to: data.email,
+    subject: "Your free account is being created — FactoryAuditB2B",
+    text: [
+      `Hi${data.name ? ` ${data.name}` : ""},`,
+      "",
+      "We received your free account request for the Supplier Intelligence Directory.",
+      `Reference ID: ${data.id}`,
+      "",
+      "Our team creates accounts manually and will email you your sign-in details within one business day.",
+      "Your free plan includes 5 supplier profiles per month, saved suppliers and basic comparison.",
+      "No credit card required. You can upgrade to Founding Buyer membership ($49/year) at any time.",
+      "",
+      "FactoryAuditB2B",
+    ].join("\n"),
+  });
+}
+
+// ---------- Supplier Directory V2：Supplier Claim Profile ----------
+
+// 管理员：新认领提交
+export async function notifyAdminSupplierClaim(data: {
+  id: string;
+  slug: string;
+  supplierName: string;
+  fields: Record<string, string>;
+}): Promise<boolean> {
+  const adminEmail = process.env.NOTIFY_ADMIN_EMAIL;
+  if (!adminEmail) {
+    console.log("[notify] NOTIFY_ADMIN_EMAIL 未配置，跳过供应商认领通知");
+    return false;
+  }
+  const f = data.fields;
+  return sendMail({
+    to: adminEmail,
+    subject: `[FactoryAuditB2B] Supplier Claim ${data.slug} (${data.id})`,
+    text: [
+      `Claim ID: ${data.id}`,
+      `Supplier: ${data.supplierName} (${data.slug})`,
+      "",
+      "— Claimant —",
+      `Company Email: ${f.companyEmail ?? ""}`,
+      `Contact Name: ${f.contactName ?? ""}`,
+      `Company Name: ${f.companyName ?? ""}`,
+      `Authorized: ${f.authorization === "yes" ? "Yes" : "No"}`,
+      "",
+      "— Supporting Information —",
+      `Note: ${f.supportNote ?? ""}`,
+      "",
+      "Next steps: verify the company email domain matches the supplier, check authorization, then either grant the claim or reply to the claimant. Verification results are never sold; payment does not guarantee a positive outcome.",
+    ].join("\n"),
+  });
+}
+
+// 认领回执：Reference ID + 审核周期 + 不承诺保证
+export async function notifyClaimReceived(data: {
+  email: string;
+  companyName?: string | null;
+  id: string;
+  slug: string;
+}): Promise<boolean> {
+  if (!data.email) return false;
+  return sendMail({
+    to: data.email,
+    subject: "We received your profile claim — FactoryAuditB2B",
+    text: [
+      `Hi${data.companyName ? ` ${data.companyName}` : ""},`,
+      "",
+      `We received your claim request for ${data.slug}.`,
+      `Reference ID: ${data.id}`,
+      "",
+      "Our team verifies every claim manually and will reply within one business day.",
+      "Please note: claiming a profile does not change its risk score or verification status, and payment does not guarantee a positive verification result.",
+      "",
+      "FactoryAuditB2B",
+    ].join("\n"),
+  });
+}

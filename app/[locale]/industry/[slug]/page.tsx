@@ -134,7 +134,7 @@ export default async function IndustryPage({ params }: { params: Promise<Params>
           <ul className="mt-3 divide-y rounded-lg border">
             {capsBySupplier.map(({ s, caps }) => (
               <li key={s.slug} className="p-3">
-                <a href={lp(`/supplier/${s.countryCode}/${s.slug}`)} className="font-medium hover:underline">
+                <a href={lp(`/suppliers/${s.slug}`)} className="font-medium hover:underline">
                   {s.legalName}
                 </a>
                 <span className="ml-2 text-sm text-gray-500">

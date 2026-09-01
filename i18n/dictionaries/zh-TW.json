@@ -920,7 +920,18 @@
     "notListedCta": "Post an RFQ",
     "claimTitle": "Are you a supplier?",
     "claimLead": "Join the directory, publish your factory profile, pass our verification and get discovered by buyers sourcing from China and Southeast Asia.",
-    "claimPrimary": "Join as a supplier"
+    "claimPrimary": "Join as a supplier",
+    "heroBadge": "供應商情報",
+    "featuredTitle": "精選供應商",
+    "featuredLead": "真實企業，含可查證的核驗資訊。每家供應商的風險評分全部公開，不隱藏。",
+    "searchPlaceholder": "依公司、產品或城市搜尋",
+    "searchButton": "搜尋",
+    "searchClear": "清除",
+    "unlockTitle": "解鎖完整供應商資料庫",
+    "unlockLead": "Founding Buyer 會員可查看每家收錄供應商的證據記錄、風險明細與工廠詳細資訊。",
+    "unlockNote": "免費帳號每月可查看 {n} 個供應商檔案。",
+    "freeCta": "建立免費帳號",
+    "memberCta": "查看會員方案"
   },
   "common": {
     "relatedTools": "相關工具",
@@ -1873,7 +1884,19 @@
     "lastChecked": "Last checked",
     "noCheckRecord": "No check on record",
     "recVerified": "Evidence on record covers the items listed above. Re-check the scope against your order before releasing a deposit, and refresh the record if the last check is more than 12 months old.",
-    "recUnverified": "Verify the factory address and request recent quality and audit records before placing a large order or releasing a deposit."
+    "recUnverified": "Verify the factory address and request recent quality and audit records before placing a large order or releasing a deposit.",
+    "metaTitle": "供應商檔案",
+    "metaDesc": "供應商公開檔案：風險評分、核驗狀態、產品與能力資訊。",
+    "directoryBreadcrumb": "供應商目錄",
+    "industryLabel": "產業",
+    "certificationsLabel": "認證",
+    "freeLockTitle": "免費帳號解鎖更多公司資訊",
+    "freeLockLead": "註冊免費帳號，查看成立年份、員工人數、出口市場與認證清單。",
+    "freeLockCta": "建立免費帳號",
+    "paidLockTitle": "會員查看證據與風險明細",
+    "paidLockLead": "Founding Buyer 會員（$49/年）可查看證據記錄、風險明細、稽核歷史與驗貨資料。",
+    "paidLockCta": "查看會員方案",
+    "paidLockNote": "風險評分公開可見；證據與核驗明細為會員內容。"
   },
   "reportPreview": {
     "badge": "Free preview",
@@ -1973,6 +1996,41 @@
         "Buyer introductions",
         "Visibilidad del producto"
       ]
+    },
+    "badge": "認領檔案",
+    "metaTitle": "認領供應商檔案",
+    "metaDesc": "使用公司信箱認領您的供應商檔案。",
+    "publicDataTitle": "您正在認領的檔案",
+    "publicDataLead": "以下為該檔案目前公開顯示的核驗資訊。",
+    "companyNameLabel": "公司名稱",
+    "backToProfile": "返回檔案",
+    "rulesTitle": "認領規則",
+    "rules": [
+      "認領檔案不會改變風險評分或核驗狀態。",
+      "核驗結論不出售，付費不保證獲得正面結果。",
+      "請使用公司網域信箱，並聲明已獲授權。",
+      "人工審核，1 個工作日內回覆。"
+    ],
+    "formTitle": "提交認領申請",
+    "form": {
+      "emailLabel": "公司信箱",
+      "emailHint": "請使用公司網域信箱（如 name@yourcompany.com）。",
+      "nameLabel": "聯絡人姓名",
+      "companyLabel": "公司名稱",
+      "authorizationLabel": "授權聲明",
+      "authorizationYes": "我聲明已獲該公司授權提交本申請",
+      "authorizationNo": "尚未取得授權（僅登記意願）",
+      "supportLabel": "佐證資料說明",
+      "supportHint": "營業執照、授權書、名片等，簡要說明即可",
+      "submit": "提交認領申請",
+      "submitting": "提交中…",
+      "privacyNote": "我們僅使用您提供的資訊進行身分核驗，不會公開您的聯絡方式。",
+      "successTitle": "認領申請已收到",
+      "successLead": "我們會人工審核，並在 1 個工作日內回覆您的公司信箱。",
+      "errorGeneric": "提交失敗，請稍後重試或直接以電子郵件聯絡我們。",
+      "errorRateLimited": "提交過於頻繁，請稍後再試。",
+      "errorInvalidEmail": "請輸入有效的公司信箱。",
+      "errorAuthorization": "請選擇授權選項。"
     }
   },
   "consent": {
@@ -2753,5 +2811,81 @@
     "noteModules": "核查模組",
     "ruleBadge": "規則引擎",
     "aiBadge": "AI 摘要"
+  },
+  "register": {
+    "badge": "免費帳號",
+    "metaTitle": "建立免費帳號",
+    "metaDesc": "建立免費帳號，每月查看 5 個供應商檔案，儲存並比較您正在評估的供應商。",
+    "h1": "建立免費帳號",
+    "lead": "無需信用卡。每月查看 5 個供應商檔案，儲存您正在評估的供應商。",
+    "benefitsTitle": "免費帳號包含",
+    "benefits": [
+      "每月查看 {n} 個供應商檔案",
+      "儲存您正在評估的供應商",
+      "並排比較最多 3 家供應商",
+      "核驗狀態更新提醒",
+      "隨時升級到 Founding Buyer 會員"
+    ],
+    "nextTitle": "下一步",
+    "nextLead": "提交後，我們的團隊會在 1 個工作日內人工建立帳號，並透過電子郵件寄送登入資訊。",
+    "noCard": "無需信用卡。",
+    "membershipLink": "瞭解 Founding Buyer 會員（$49/年）",
+    "formTitle": "註冊",
+    "form": {
+      "emailLabel": "電子信箱",
+      "emailPlaceholder": "you@company.com",
+      "nameLabel": "姓名",
+      "namePlaceholder": "您的姓名",
+      "companyLabel": "公司（選填）",
+      "companyPlaceholder": "公司名稱",
+      "submit": "建立免費帳號",
+      "submitting": "提交中…",
+      "privacyNote": "我們不會向第三方出售您的資訊。",
+      "successTitle": "註冊請求已收到",
+      "successLead": "我們會在 1 個工作日內透過電子郵件寄送您的登入資訊。",
+      "errorGeneric": "提交失敗，請稍後重試或直接以電子郵件聯絡我們。",
+      "errorRateLimited": "提交過於頻繁，請稍後再試。",
+      "errorInvalidEmail": "請輸入有效的電子信箱。"
+    }
+  },
+  "membership": {
+    "badge": "買家會員",
+    "metaTitle": "Founding Buyer 會員 — $49/年",
+    "metaDesc": "Founding Buyer 會員：查看全部供應商檔案、風險明細、證據摘要與工廠資訊。$49/年。",
+    "h1": "Founding Buyer 會員",
+    "lead": "為需要深度評估供應商的採購團隊設計。一次訂閱，全年使用全部供應商情報功能。",
+    "planName": "Founding Buyer",
+    "pricePeriod": "年",
+    "priceNote": "創始價，日後會上調",
+    "cta": "諮詢開通",
+    "paymentNote": "線上支付尚未開放，請諮詢開通。",
+    "benefitsTitle": "會員權益",
+    "benefitsLead": "付費會員可查看",
+    "benefits": [
+      "全部供應商檔案，不受每月額度限制",
+      "風險明細：各維度得分與依據",
+      "證據摘要：已核驗記錄與來源",
+      "工廠詳細資訊：規模、產能、出口市場",
+      "進階篩選與匯出",
+      "優先回應的核驗服務"
+    ],
+    "freeTitle": "先免費試用",
+    "freeLead": "免費帳號每月可查看 {n} 個供應商檔案。",
+    "freeCta": "建立免費帳號",
+    "faqTitle": "常見問題",
+    "faq": [
+      {
+        "q": "會員價格是多少？",
+        "a": "Founding Buyer 會員 $49/年（USD），一次訂閱全年有效。創始價，日後可能上調。"
+      },
+      {
+        "q": "如何付款？",
+        "a": "線上支付尚未開放。點擊「諮詢開通」，我們的團隊會透過電子郵件與您確認付款方式。"
+      },
+      {
+        "q": "會員是否保證核驗結果？",
+        "a": "不保證。會員只提供檢視權限，不會改變任何供應商的風險評分或核驗狀態。核驗結論不出售。"
+      }
+    ]
   }
 }

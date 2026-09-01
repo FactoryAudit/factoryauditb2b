@@ -10,7 +10,10 @@ paths=(
   "/tools/compare"
   "/tools/supplier-verification-checklist"
   "/suppliers"
-  "/supplier/china/shenzhen-precision-electronics"
+  "/suppliers/shenzhen-precision-electronics"
+  "/suppliers/shenzhen-precision-electronics/claim"
+  "/register"
+  "/membership"
   "/services"
   "/services/supplier-verification"
   "/services/supplier-improvement"
@@ -63,7 +66,7 @@ for p in "${paths[@]}"; do
 done
 
 echo "--- redirects (expect 200 after following, target path should differ) ---"
-for p in "/knowledge" "/inspectors" "/country/china"; do
+for p in "/knowledge" "/inspectors" "/country/china" "/supplier/china/shenzhen-precision-electronics"; do
   code=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 20 "$BASE$p")
   target=$(curl -s -o /dev/null -w "%{url_effective}" -L --max-time 20 "$BASE$p")
   printf "  %-6s %-16s -> %s\n" "$code" "$p" "$target"

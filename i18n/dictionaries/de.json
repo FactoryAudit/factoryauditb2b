@@ -920,7 +920,18 @@
     "notListedCta": "Post an RFQ",
     "claimTitle": "Are you a supplier?",
     "claimLead": "Join the directory, publish your factory profile, pass our verification and get discovered by buyers sourcing from China and Southeast Asia.",
-    "claimPrimary": "Join as a supplier"
+    "claimPrimary": "Join as a supplier",
+    "heroBadge": "Lieferanten-Intelligenz",
+    "featuredTitle": "Ausgewählte Lieferanten",
+    "featuredLead": "Echte Unternehmen mit verfügbaren Verifizierungsinformationen. Jedes Profil zeigt denselben öffentlichen Risiko-Score — nichts wird versteckt.",
+    "searchPlaceholder": "Nach Unternehmen, Produkt oder Stadt suchen",
+    "searchButton": "Suchen",
+    "searchClear": "Zurücksetzen",
+    "unlockTitle": "Die komplette Lieferantendatenbank freischalten",
+    "unlockLead": "Mit der Founding-Buyer-Mitgliedschaft erhalten Sie Nachweisaufzeichnungen, Risikoaufschlüsselungen und Werksdetails für jeden gelisteten Lieferanten.",
+    "unlockNote": "Kostenlose Konten erhalten {n} Lieferantenprofile pro Monat.",
+    "freeCta": "Kostenloses Konto erstellen",
+    "memberCta": "Mitgliedschaft ansehen"
   },
   "common": {
     "relatedTools": "Ähnliche Werkzeuge",
@@ -1873,7 +1884,19 @@
     "lastChecked": "Last checked",
     "noCheckRecord": "No check on record",
     "recVerified": "Evidence on record covers the items listed above. Re-check the scope against your order before releasing a deposit, and refresh the record if the last check is more than 12 months old.",
-    "recUnverified": "Verify the factory address and request recent quality and audit records before placing a large order or releasing a deposit."
+    "recUnverified": "Verify the factory address and request recent quality and audit records before placing a large order or releasing a deposit.",
+    "metaTitle": "Lieferantenprofil",
+    "metaDesc": "Öffentliches Lieferantenprofil mit Risiko-Score, Verifizierungsstatus, Produkt- und Fähigkeitsinformationen.",
+    "directoryBreadcrumb": "Lieferantenverzeichnis",
+    "industryLabel": "Branche",
+    "certificationsLabel": "Zertifizierungen",
+    "freeLockTitle": "Kostenloses Konto zeigt weitere Unternehmensdetails",
+    "freeLockLead": "Erstellen Sie ein kostenloses Konto, um Gründungsjahr, Mitarbeiterzahl, Exportmärkte und Zertifizierungen zu sehen.",
+    "freeLockCta": "Kostenloses Konto erstellen",
+    "paidLockTitle": "Mitglieder sehen Nachweise und Risikodetails",
+    "paidLockLead": "Founding-Buyer-Mitglieder (49 $/Jahr) sehen Nachweisaufzeichnungen, Risikoaufschlüsselungen, Audit-Historie und Inspektionsdaten.",
+    "paidLockCta": "Mitgliedschaft ansehen",
+    "paidLockNote": "Der Risiko-Score ist öffentlich. Nachweise und Verifizierungsdetails sind Mitglieder-Inhalte."
   },
   "reportPreview": {
     "badge": "Free preview",
@@ -1973,6 +1996,41 @@
         "Buyer introductions",
         "Visibilidad del producto"
       ]
+    },
+    "badge": "Profil beanspruchen",
+    "metaTitle": "Lieferantenprofil beanspruchen",
+    "metaDesc": "Beanspruchen Sie Ihr Lieferantenprofil mit einer Firmen-E-Mail.",
+    "publicDataTitle": "Profil, das Sie beanspruchen",
+    "publicDataLead": "Dies sind die Verifizierungsinformationen, die derzeit öffentlich auf dem Profil angezeigt werden.",
+    "companyNameLabel": "Firmenname",
+    "backToProfile": "Zurück zum Profil",
+    "rulesTitle": "Regeln für die Beanspruchung",
+    "rules": [
+      "Die Beanspruchung eines Profils ändert weder Risiko-Score noch Verifizierungsstatus.",
+      "Verifizierungsergebnisse werden nie verkauft. Zahlung garantiert kein positives Ergebnis.",
+      "Verwenden Sie eine E-Mail mit Firmendomain und erklären Sie, dass Sie autorisiert sind.",
+      "Beanspruchungen werden manuell geprüft; wir antworten innerhalb eines Werktags."
+    ],
+    "formTitle": "Beanspruchungsantrag senden",
+    "form": {
+      "emailLabel": "Firmen-E-Mail",
+      "emailHint": "Verwenden Sie eine E-Mail mit Firmendomain (z. B. name@yourcompany.com).",
+      "nameLabel": "Kontaktname",
+      "companyLabel": "Firmenname",
+      "authorizationLabel": "Berechtigung",
+      "authorizationYes": "Ich erkläre, dass ich berechtigt bin, diesen Antrag im Namen des Unternehmens einzureichen",
+      "authorizationNo": "Noch nicht berechtigt (nur Interesse anmelden)",
+      "supportLabel": "Nachweise",
+      "supportHint": "Handelsregisterauszug, Vollmacht, Visitenkarte oder alles, was die Prüfung erleichtert",
+      "submit": "Antrag senden",
+      "submitting": "Wird gesendet…",
+      "privacyNote": "Wir verwenden Ihre Daten nur zur Identitätsprüfung und veröffentlichen Ihre Kontaktdaten nie.",
+      "successTitle": "Antrag eingegangen",
+      "successLead": "Wir prüfen Anträge manuell und antworten innerhalb eines Werktags auf Ihre Firmen-E-Mail.",
+      "errorGeneric": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.",
+      "errorRateLimited": "Zu viele Anfragen. Bitte versuchen Sie es später erneut.",
+      "errorInvalidEmail": "Bitte geben Sie eine gültige Firmen-E-Mail ein.",
+      "errorAuthorization": "Bitte wählen Sie eine Berechtigungsoption."
     }
   },
   "consent": {
@@ -2753,5 +2811,81 @@
     "noteModules": "Module",
     "ruleBadge": "Regelwerk",
     "aiBadge": "KI-Zusammenfassung"
+  },
+  "register": {
+    "badge": "Kostenloses Konto",
+    "metaTitle": "Kostenloses Konto erstellen",
+    "metaDesc": "Erstellen Sie ein kostenloses Konto, um 5 Lieferantenprofile pro Monat zu sehen und Lieferanten zu speichern und zu vergleichen.",
+    "h1": "Kostenloses Konto erstellen",
+    "lead": "Keine Kreditkarte erforderlich. Sehen Sie 5 Lieferantenprofile pro Monat und speichern Sie Lieferanten, die Sie prüfen.",
+    "benefitsTitle": "Enthalten",
+    "benefits": [
+      "{n} Lieferantenprofile pro Monat ansehen",
+      "Lieferanten speichern, die Sie prüfen",
+      "Bis zu 3 Lieferanten nebeneinander vergleichen",
+      "Benachrichtigungen bei Verifizierungsstatus-Änderungen",
+      "Jederzeit auf Founding Buyer upgraden"
+    ],
+    "nextTitle": "Nächste Schritte",
+    "nextLead": "Nach dem Absenden erstellt unser Team Ihr Konto manuell und sendet die Anmeldedaten innerhalb eines Werktags per E-Mail.",
+    "noCard": "Keine Kreditkarte erforderlich.",
+    "membershipLink": "Mehr zur Founding-Buyer-Mitgliedschaft (49 $/Jahr)",
+    "formTitle": "Registrieren",
+    "form": {
+      "emailLabel": "E-Mail",
+      "emailPlaceholder": "you@company.com",
+      "nameLabel": "Name",
+      "namePlaceholder": "Ihr Name",
+      "companyLabel": "Unternehmen (optional)",
+      "companyPlaceholder": "Firmenname",
+      "submit": "Kostenloses Konto erstellen",
+      "submitting": "Wird gesendet…",
+      "privacyNote": "Wir verkaufen Ihre Daten nie an Dritte.",
+      "successTitle": "Registrierung eingegangen",
+      "successLead": "Wir senden Ihre Anmeldedaten innerhalb eines Werktags per E-Mail.",
+      "errorGeneric": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.",
+      "errorRateLimited": "Zu viele Registrierungen von dieser Adresse. Bitte versuchen Sie es später erneut.",
+      "errorInvalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein."
+    }
+  },
+  "membership": {
+    "badge": "Käufer-Mitgliedschaft",
+    "metaTitle": "Founding-Buyer-Mitgliedschaft — 49 $/Jahr",
+    "metaDesc": "Founding-Buyer-Mitgliedschaft: komplette Lieferantendatenbank, Risikoaufschlüsselungen, Nachweis-Zusammenfassungen und Werksdetails. 49 $/Jahr.",
+    "h1": "Founding-Buyer-Mitgliedschaft",
+    "lead": "Für Einkaufsteams, die Lieferanten gründlich bewerten müssen. Eine Abonnement, alle Lieferanten-Intelligenz-Funktionen für ein Jahr.",
+    "planName": "Founding Buyer",
+    "pricePeriod": "Jahr",
+    "priceNote": "Gründerpreis — wird später steigen",
+    "cta": "Kontakt aufnehmen",
+    "paymentNote": "Online-Zahlung ist noch nicht verfügbar. Kontaktieren Sie uns für den Zugang.",
+    "benefitsTitle": "Mitgliedschaftsvorteile",
+    "benefitsLead": "Zahlende Mitglieder können sehen",
+    "benefits": [
+      "Alle Lieferantenprofile ohne monatliche Begrenzung",
+      "Risikoaufschlüsselung: Dimensionswerte und Begründung",
+      "Nachweis-Zusammenfassungen: verifizierte Aufzeichnungen und Quellen",
+      "Werksdetails: Größe, Kapazität, Exportmärkte",
+      "Erweiterte Filter und Export",
+      "Priorisierter Verifizierungssupport"
+    ],
+    "freeTitle": "Erst kostenlos starten",
+    "freeLead": "Kostenlose Konten erhalten {n} Lieferantenprofile pro Monat.",
+    "freeCta": "Kostenloses Konto erstellen",
+    "faqTitle": "Häufige Fragen",
+    "faq": [
+      {
+        "q": "Was kostet die Mitgliedschaft?",
+        "a": "Founding Buyer kostet 49 $/Jahr (USD). Gründerpreis, kann später steigen."
+      },
+      {
+        "q": "Wie bezahle ich?",
+        "a": "Online-Zahlung ist noch nicht verfügbar. Klicken Sie auf „Kontakt aufnehmen“, unser Team bestätigt die Zahlungsmethode per E-Mail."
+      },
+      {
+        "q": "Garantiert die Mitgliedschaft Verifizierungsergebnisse?",
+        "a": "Nein. Die Mitgliedschaft gewährt nur Ansichtsrechte und ändert nie den Risiko-Score oder Verifizierungsstatus eines Lieferanten. Verifizierungsergebnisse werden nie verkauft."
+      }
+    ]
   }
 }

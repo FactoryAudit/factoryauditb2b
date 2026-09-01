@@ -1065,7 +1065,18 @@
     "notListedCta": "发布 RFQ",
     "claimTitle": "你是供应商吗？",
     "claimLead": "加入目录、发布你的工厂档案、通过我们的核验，让从中国及东南亚采购的买家找到你。",
-    "claimPrimary": "以供应商身份加入"
+    "claimPrimary": "以供应商身份加入",
+    "heroBadge": "供应商情报",
+    "featuredTitle": "精选供应商",
+    "featuredLead": "真实企业，含可查证的核验信息。每家供应商的风险评分全部公开，不隐藏。",
+    "searchPlaceholder": "按公司、产品或城市搜索",
+    "searchButton": "搜索",
+    "searchClear": "清除",
+    "unlockTitle": "解锁完整供应商数据库",
+    "unlockLead": "Founding Buyer 会员可查看每家收录供应商的证据记录、风险明细与工厂详细信息。",
+    "unlockNote": "免费账号每月可查看 {n} 个供应商档案。",
+    "freeCta": "创建免费账号",
+    "memberCta": "查看会员方案"
   },
   "verification": {
     "levelLabel": "核验等级",
@@ -1177,7 +1188,19 @@
     "lastChecked": "最近核验",
     "noCheckRecord": "暂无核验记录",
     "recVerified": "上述条目已有记录可查。付定金前请对照订单复核核验范围；若最近一次核验已超过 12 个月，建议重新核验。",
-    "recUnverified": "下大单或付定金前，先核验工厂地址，并索取近期的质量与审核记录。"
+    "recUnverified": "下大单或付定金前，先核验工厂地址，并索取近期的质量与审核记录。",
+    "metaTitle": "供应商档案",
+    "metaDesc": "供应商公开档案：风险评分、核验状态、产品与能力信息。",
+    "directoryBreadcrumb": "供应商目录",
+    "industryLabel": "行业",
+    "certificationsLabel": "认证",
+    "freeLockTitle": "免费账号解锁更多公司信息",
+    "freeLockLead": "注册免费账号，查看成立年份、员工规模、出口市场与认证列表。",
+    "freeLockCta": "创建免费账号",
+    "paidLockTitle": "会员查看证据与风险明细",
+    "paidLockLead": "Founding Buyer 会员（$49/年）可查看证据记录、风险明细、审核历史与验货数据。",
+    "paidLockCta": "查看会员方案",
+    "paidLockNote": "风险评分公开可见；证据与核验明细为会员内容。"
   },
   "reportPreview": {
     "badge": "免费预览",
@@ -1277,6 +1300,41 @@
         "买家引荐",
         "更多产品曝光"
       ]
+    },
+    "badge": "认领档案",
+    "metaTitle": "认领供应商档案",
+    "metaDesc": "使用公司邮箱认领您的供应商档案。",
+    "publicDataTitle": "您正在认领的档案",
+    "publicDataLead": "以下为该档案当前公开显示的核验信息。",
+    "companyNameLabel": "公司名称",
+    "backToProfile": "返回档案",
+    "rulesTitle": "认领规则",
+    "rules": [
+      "认领档案不会改变风险评分或核验状态。",
+      "核验结论不出售，付费不保证获得正面结果。",
+      "请使用公司域名邮箱，并声明已获授权。",
+      "人工审核，1 个工作日内回复。"
+    ],
+    "formTitle": "提交认领申请",
+    "form": {
+      "emailLabel": "公司邮箱",
+      "emailHint": "请使用公司域名邮箱（如 name@yourcompany.com）。",
+      "nameLabel": "联系人姓名",
+      "companyLabel": "公司名称",
+      "authorizationLabel": "授权声明",
+      "authorizationYes": "我声明已获该公司授权提交本申请",
+      "authorizationNo": "暂未获得授权（仅登记意向）",
+      "supportLabel": "支持材料说明",
+      "supportHint": "营业执照、授权书、名片等，简要说明即可",
+      "submit": "提交认领申请",
+      "submitting": "提交中…",
+      "privacyNote": "我们仅使用您提供的信息进行身份核验，不会公开您的联系方式。",
+      "successTitle": "认领申请已收到",
+      "successLead": "我们会人工审核，并在 1 个工作日内回复您的公司邮箱。",
+      "errorGeneric": "提交失败，请稍后重试或直接邮件联系我们。",
+      "errorRateLimited": "提交过于频繁，请稍后再试。",
+      "errorInvalidEmail": "请输入有效的公司邮箱。",
+      "errorAuthorization": "请选择授权选项。"
     }
   },
   "consent": {
@@ -2747,5 +2805,81 @@
     "noteModules": "核查模块",
     "ruleBadge": "规则引擎",
     "aiBadge": "AI 摘要"
+  },
+  "register": {
+    "badge": "免费账号",
+    "metaTitle": "创建免费账号",
+    "metaDesc": "创建免费账号，每月查看 5 个供应商档案，保存并对比您正在评估的供应商。",
+    "h1": "创建免费账号",
+    "lead": "无需信用卡。每月查看 5 个供应商档案，保存您正在评估的供应商。",
+    "benefitsTitle": "免费账号包含",
+    "benefits": [
+      "每月查看 {n} 个供应商档案",
+      "保存您正在评估的供应商",
+      "并排对比最多 3 家供应商",
+      "核验状态更新提醒",
+      "随时升级到 Founding Buyer 会员"
+    ],
+    "nextTitle": "下一步",
+    "nextLead": "提交后，我们的团队会在 1 个工作日内人工创建账号，并通过邮件发送登录信息。",
+    "noCard": "无需信用卡。",
+    "membershipLink": "了解 Founding Buyer 会员（$49/年）",
+    "formTitle": "注册",
+    "form": {
+      "emailLabel": "邮箱",
+      "emailPlaceholder": "you@company.com",
+      "nameLabel": "姓名",
+      "namePlaceholder": "您的姓名",
+      "companyLabel": "公司（选填）",
+      "companyPlaceholder": "公司名称",
+      "submit": "创建免费账号",
+      "submitting": "提交中…",
+      "privacyNote": "我们不会向第三方出售您的信息。",
+      "successTitle": "注册请求已收到",
+      "successLead": "我们会在 1 个工作日内通过邮件发送您的登录信息。",
+      "errorGeneric": "提交失败，请稍后重试或直接邮件联系我们。",
+      "errorRateLimited": "提交过于频繁，请稍后再试。",
+      "errorInvalidEmail": "请输入有效的邮箱地址。"
+    }
+  },
+  "membership": {
+    "badge": "买家会员",
+    "metaTitle": "Founding Buyer 会员 — $49/年",
+    "metaDesc": "Founding Buyer 会员：查看全部供应商档案、风险明细、证据摘要与工厂信息。$49/年。",
+    "h1": "Founding Buyer 会员",
+    "lead": "为需要深度评估供应商的采购团队设计。一次订阅，全年使用全部供应商情报功能。",
+    "planName": "Founding Buyer",
+    "pricePeriod": "年",
+    "priceNote": "创始价，后续会上调",
+    "cta": "咨询开通",
+    "paymentNote": "在线支付尚未开放，请咨询开通。",
+    "benefitsTitle": "会员权益",
+    "benefitsLead": "付费会员可查看",
+    "benefits": [
+      "全部供应商档案，不受月度额度限制",
+      "风险明细：各维度得分与依据",
+      "证据摘要：已核验记录与来源",
+      "工厂详细信息：规模、产能、出口市场",
+      "高级过滤与导出",
+      "优先响应的核验服务"
+    ],
+    "freeTitle": "先免费试用",
+    "freeLead": "免费账号每月可查看 {n} 个供应商档案。",
+    "freeCta": "创建免费账号",
+    "faqTitle": "常见问题",
+    "faq": [
+      {
+        "q": "会员价格是多少？",
+        "a": "Founding Buyer 会员 $49/年（USD），一次订阅全年有效。创始价，后续可能上调。"
+      },
+      {
+        "q": "如何支付？",
+        "a": "在线支付尚未开放。点击「咨询开通」，我们的团队会通过邮件与您确认付款方式。"
+      },
+      {
+        "q": "会员是否保证核验结果？",
+        "a": "不保证。会员只提供查看权限，不会改变任何供应商的风险评分或核验状态。核验结论不出售。"
+      }
+    ]
   }
 }

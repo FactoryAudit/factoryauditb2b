@@ -920,7 +920,18 @@
     "notListedCta": "Post an RFQ",
     "claimTitle": "Are you a supplier?",
     "claimLead": "Join the directory, publish your factory profile, pass our verification and get discovered by buyers sourcing from China and Southeast Asia.",
-    "claimPrimary": "Join as a supplier"
+    "claimPrimary": "Join as a supplier",
+    "heroBadge": "ذكاء الموردين",
+    "featuredTitle": "موردون مميزون",
+    "featuredLead": "شركات حقيقية مع معلومات تحقق متاحة. كل ملف يعرض نفس درجة المخاطر العامة — لا شيء مخفي.",
+    "searchPlaceholder": "ابحث بالشركة أو المنتج أو المدينة",
+    "searchButton": "بحث",
+    "searchClear": "مسح",
+    "unlockTitle": "افتح قاعدة بيانات الموردين الكاملة",
+    "unlockLead": "عضوية Founding Buyer تضيف سجلات الأدلة وتفاصيل المخاطر ومعلومات المصنع لكل مورد مدرج.",
+    "unlockNote": "الحسابات المجانية تحصل على {n} ملفات مورد شهرياً.",
+    "freeCta": "إنشاء حساب مجاني",
+    "memberCta": "عرض العضوية"
   },
   "auditRequest": {
     "badge": "Service request",
@@ -1873,7 +1884,19 @@
     "lastChecked": "Last checked",
     "noCheckRecord": "No check on record",
     "recVerified": "Evidence on record covers the items listed above. Re-check the scope against your order before releasing a deposit, and refresh the record if the last check is more than 12 months old.",
-    "recUnverified": "Verify the factory address and request recent quality and audit records before placing a large order or releasing a deposit."
+    "recUnverified": "Verify the factory address and request recent quality and audit records before placing a large order or releasing a deposit.",
+    "metaTitle": "ملف المورد",
+    "metaDesc": "ملف مورد عام يتضمن درجة المخاطر وحالة التحقق والمنتجات والمهارات.",
+    "directoryBreadcrumb": "دليل الموردين",
+    "industryLabel": "القطاع",
+    "certificationsLabel": "الشهادات",
+    "freeLockTitle": "الحساب المجاني يفتح مزيداً من تفاصيل الشركة",
+    "freeLockLead": "أنشئ حساباً مجانياً لعرض سنة التأسيس وعدد الموظفين وأسواق التصدير والشهادات.",
+    "freeLockCta": "إنشاء حساب مجاني",
+    "paidLockTitle": "الأعضاء يشاهدون الأدلة وتفاصيل المخاطر",
+    "paidLockLead": "أعضاء Founding Buyer (49$ سنوياً) يشاهدون سجلات الأدلة وتفاصيل المخاطر وتاريخ التدقيق وبيانات الفحص.",
+    "paidLockCta": "عرض العضوية",
+    "paidLockNote": "درجة المخاطر عامة. الأدلة وتفاصيل التحقق محتوى خاص بالأعضاء."
   },
   "reportPreview": {
     "badge": "Free preview",
@@ -1973,6 +1996,41 @@
         "Buyer introductions",
         "Visibilidad del producto"
       ]
+    },
+    "badge": "المطالبة بالملف",
+    "metaTitle": "المطالبة بملف المورد",
+    "metaDesc": "طالب بملف المورد الخاص بك باستخدام بريد الشركة.",
+    "publicDataTitle": "الملف الذي تطالب به",
+    "publicDataLead": "هذه هي معلومات التحقق المعروضة حالياً علناً على الملف.",
+    "companyNameLabel": "اسم الشركة",
+    "backToProfile": "العودة إلى الملف",
+    "rulesTitle": "قواعد المطالبة",
+    "rules": [
+      "المطالبة بملف لا تغيّر درجة المخاطر أو حالة التحقق.",
+      "نتائج التحقق لا تُباع أبداً. الدفع لا يضمن نتيجة إيجابية.",
+      "استخدم بريداً على نطاق الشركة وصرّح بأنك مخوّل.",
+      "تُراجع المطالبات يدوياً؛ نرد خلال يوم عمل واحد."
+    ],
+    "formTitle": "إرسال طلب المطالبة",
+    "form": {
+      "emailLabel": "بريد الشركة",
+      "emailHint": "استخدم بريداً على نطاق الشركة (مثال: name@yourcompany.com).",
+      "nameLabel": "اسم جهة الاتصال",
+      "companyLabel": "اسم الشركة",
+      "authorizationLabel": "التفويض",
+      "authorizationYes": "أصرّح بأنني مخوّل لإرسال هذا الطلب باسم الشركة",
+      "authorizationNo": "غير مخوّل بعد (تسجيل اهتمام فقط)",
+      "supportLabel": "معلومات داعمة",
+      "supportHint": "رخصة تجارية أو خطاب تفويض أو بطاقة عمل أو أي شيء يساعد على التحقق",
+      "submit": "إرسال طلب المطالبة",
+      "submitting": "جارٍ الإرسال…",
+      "privacyNote": "نستخدم معلوماتك للتحقق من الهوية فقط ولا ننشر بيانات الاتصال الخاصة بك أبداً.",
+      "successTitle": "تم استلام الطلب",
+      "successLead": "نراجع المطالبات يدوياً ونرد على بريد شركتك خلال يوم عمل واحد.",
+      "errorGeneric": "حدث خطأ ما. حاول مرة أخرى أو راسلنا مباشرة.",
+      "errorRateLimited": "طلبات كثيرة جداً. حاول لاحقاً.",
+      "errorInvalidEmail": "أدخل بريد شركة صحيحاً.",
+      "errorAuthorization": "اختر خيار التفويض."
     }
   },
   "consent": {
@@ -2753,5 +2811,81 @@
     "noteModules": "الوحدات",
     "ruleBadge": "محرك القواعد",
     "aiBadge": "ملخص الذكاء الاصطناعي"
+  },
+  "register": {
+    "badge": "حساب مجاني",
+    "metaTitle": "إنشاء حساب مجاني",
+    "metaDesc": "أنشئ حساباً مجانياً لعرض 5 ملفات مورد شهرياً وحفظ ومقارنة الموردين.",
+    "h1": "إنشاء حساب مجاني",
+    "lead": "لا حاجة لبطاقة ائتمان. شاهد 5 ملفات مورد شهرياً واحفظ الموردين الذين تقيّمهم.",
+    "benefitsTitle": "ما الذي تشمله",
+    "benefits": [
+      "عرض {n} ملفات مورد شهرياً",
+      "حفظ الموردين الذين تقيّمهم",
+      "مقارنة حتى 3 موردين جنباً إلى جنب",
+      "تنبيهات تحديث حالة التحقق",
+      "الترقية إلى Founding Buyer في أي وقت"
+    ],
+    "nextTitle": "الخطوات التالية",
+    "nextLead": "بعد الإرسال، ينشئ فريقنا حسابك يدوياً ويرسل تفاصيل تسجيل الدخول خلال يوم عمل واحد.",
+    "noCard": "لا حاجة لبطاقة ائتمان.",
+    "membershipLink": "تعرّف على عضوية Founding Buyer (49$ سنوياً)",
+    "formTitle": "التسجيل",
+    "form": {
+      "emailLabel": "البريد الإلكتروني",
+      "emailPlaceholder": "you@company.com",
+      "nameLabel": "الاسم",
+      "namePlaceholder": "اسمك",
+      "companyLabel": "الشركة (اختياري)",
+      "companyPlaceholder": "اسم الشركة",
+      "submit": "إنشاء حساب مجاني",
+      "submitting": "جارٍ الإرسال…",
+      "privacyNote": "لا نبيع معلوماتك لأطراف ثالثة أبداً.",
+      "successTitle": "تم استلام التسجيل",
+      "successLead": "سنرسل تفاصيل تسجيل الدخول خلال يوم عمل واحد.",
+      "errorGeneric": "حدث خطأ ما. حاول مرة أخرى أو راسلنا مباشرة.",
+      "errorRateLimited": "تسجيلات كثيرة من هذا العنوان. حاول لاحقاً.",
+      "errorInvalidEmail": "أدخل بريداً إلكترونياً صحيحاً."
+    }
+  },
+  "membership": {
+    "badge": "عضوية المشتري",
+    "metaTitle": "عضوية Founding Buyer — 49$ سنوياً",
+    "metaDesc": "عضوية Founding Buyer: قاعدة بيانات الموردين الكاملة وتفاصيل المخاطر وملخصات الأدلة ومعلومات المصنع. 49$ سنوياً.",
+    "h1": "عضوية Founding Buyer",
+    "lead": "لفرق التوريد التي تحتاج تقييماً معمقاً للموردين. اشتراك واحد، جميع ميزات ذكاء الموردين لمدة عام.",
+    "planName": "Founding Buyer",
+    "pricePeriod": "سنة",
+    "priceNote": "سعر التأسيس — سيرتفع لاحقاً",
+    "cta": "تواصل معنا",
+    "paymentNote": "الدفع الإلكتروني غير متاح بعد. تواصل معنا لإعداد الوصول.",
+    "benefitsTitle": "مزايا العضوية",
+    "benefitsLead": "يمكن للأعضاء المدفوعين مشاهدة",
+    "benefits": [
+      "جميع ملفات الموردين بدون حد شهري",
+      "تفصيل المخاطر: درجات كل بُعد والأسباب",
+      "ملخصات الأدلة: السجلات الموثقة والمصادر",
+      "تفاصيل المصنع: الحجم والطاقة وأسواق التصدير",
+      "فلاتر متقدمة وتصدير",
+      "دعم تحقق ذو أولوية"
+    ],
+    "freeTitle": "ابدأ مجاناً أولاً",
+    "freeLead": "الحسابات المجانية تحصل على {n} ملفات شهرياً.",
+    "freeCta": "إنشاء حساب مجاني",
+    "faqTitle": "الأسئلة الشائعة",
+    "faq": [
+      {
+        "q": "كم تكلفة العضوية؟",
+        "a": "عضوية Founding Buyer 49$ سنوياً (دولار أمريكي). سعر التأسيس، وقد يرتفع لاحقاً."
+      },
+      {
+        "q": "كيف أدفع؟",
+        "a": "الدفع الإلكتروني غير متاح بعد. اضغط «تواصل معنا» وسيؤكد فريقنا طريقة الدفع عبر البريد."
+      },
+      {
+        "q": "هل تضمن العضوية نتائج التحقق؟",
+        "a": "لا. العضوية تمنح حق الوصول للعرض فقط. لا تغيّر درجة مخاطر المورد أو حالة التحقق أبداً. نتائج التحقق لا تُباع."
+      }
+    ]
   }
 }

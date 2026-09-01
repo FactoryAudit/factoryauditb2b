@@ -1156,7 +1156,18 @@
     "claimLead": "Join the directory, publish your factory profile, pass our verification and get discovered by buyers sourcing from China and Southeast Asia.",
     "claimPrimary": "Join as a supplier",
     "metaTitle": "Supplier Directory - Verified Suppliers in China and Southeast Asia",
-    "metaDesc": "Browse suppliers with company, capability and verification information. Coverage is limited: post an RFQ if the supplier you need is not listed."
+    "metaDesc": "Browse suppliers with company, capability and verification information. Coverage is limited: post an RFQ if the supplier you need is not listed.",
+    "heroBadge": "Supplier Intelligence",
+    "featuredTitle": "Featured suppliers",
+    "featuredLead": "Real companies with available verification information. Every profile shows the same public risk score — nothing is hidden.",
+    "searchPlaceholder": "Search by company, product or city",
+    "searchButton": "Search",
+    "searchClear": "Clear",
+    "unlockTitle": "Unlock the full supplier database",
+    "unlockLead": "Founding Buyer membership adds evidence records, risk breakdowns and factory details for every listed supplier.",
+    "unlockNote": "Free accounts get {n} supplier profiles per month.",
+    "freeCta": "Create free account",
+    "memberCta": "View membership"
   },
   "verification": {
     "levelLabel": "Verification level",
@@ -1213,7 +1224,7 @@
     "riskScore": "Risk score",
     "verificationStatus": "Verification status",
     "evidenceSummary": "Evidence summary",
-    "auditHistory": "Audit history",
+    "auditHistory": "Audit and inspection records",
     "notCoveredTitle": "Not covered",
     "notCoveredLead": "Checks outside the current verification scope. We list them so you know what has not been looked at.",
     "whatVerifiedTitle": "What we verified",
@@ -1268,7 +1279,19 @@
     "lastChecked": "Last checked",
     "noCheckRecord": "No check on record",
     "recVerified": "Evidence on record covers the items listed above. Re-check the scope against your order before releasing a deposit, and refresh the record if the last check is more than 12 months old.",
-    "recUnverified": "Verify the factory address and request recent quality and audit records before placing a large order or releasing a deposit."
+    "recUnverified": "Verify the factory address and request recent quality and audit records before placing a large order or releasing a deposit.",
+    "metaTitle": "Supplier Profile",
+    "metaDesc": "Public supplier profile with risk score, verification status, products and capability information.",
+    "directoryBreadcrumb": "Supplier Directory",
+    "industryLabel": "Industry",
+    "certificationsLabel": "Certifications",
+    "freeLockTitle": "Free account unlocks more company details",
+    "freeLockLead": "Create a free account to view the year established, employee count, export markets and certifications.",
+    "freeLockCta": "Create free account",
+    "paidLockTitle": "Members see evidence and risk details",
+    "paidLockLead": "Founding Buyer members ($49/year) see evidence records, risk breakdowns, audit history and inspection data.",
+    "paidLockCta": "View membership",
+    "paidLockNote": "The risk score is public. Evidence and verification details are member content."
   },
   "methodology": {
     "badge": "Methodology",
@@ -1435,6 +1458,41 @@
         "Buyer introductions",
         "More product visibility"
       ]
+    },
+    "badge": "Claim profile",
+    "metaTitle": "Claim Supplier Profile",
+    "metaDesc": "Claim your supplier profile with a company email.",
+    "publicDataTitle": "Profile you are claiming",
+    "publicDataLead": "This is the verification information currently shown publicly on the profile.",
+    "companyNameLabel": "Company name",
+    "backToProfile": "Back to profile",
+    "rulesTitle": "Claim rules",
+    "rules": [
+      "Claiming a profile does not change its risk score or verification status.",
+      "Verification results are never sold. Payment does not guarantee a positive outcome.",
+      "Use a company-domain email and declare that you are authorized.",
+      "Claims are reviewed manually; we reply within one business day."
+    ],
+    "formTitle": "Submit a claim request",
+    "form": {
+      "emailLabel": "Company email",
+      "emailHint": "Use an email on the company domain (e.g. name@yourcompany.com).",
+      "nameLabel": "Contact name",
+      "companyLabel": "Company name",
+      "authorizationLabel": "Authorization",
+      "authorizationYes": "I declare I am authorized to submit this claim on behalf of the company",
+      "authorizationNo": "Not authorized yet (registering interest only)",
+      "supportLabel": "Supporting information",
+      "supportHint": "Business licence, authorization letter, business card, or anything that helps us verify",
+      "submit": "Submit claim request",
+      "submitting": "Submitting…",
+      "privacyNote": "We use your information only for identity verification and never publish your contact details.",
+      "successTitle": "Claim request received",
+      "successLead": "We review claims manually and will reply to your company email within one business day.",
+      "errorGeneric": "Something went wrong. Please try again or email us directly.",
+      "errorRateLimited": "Too many submissions. Please try again later.",
+      "errorInvalidEmail": "Please enter a valid company email.",
+      "errorAuthorization": "Please choose an authorization option."
     }
   },
   "consent": {
@@ -2650,5 +2708,81 @@
     "noteModules": "Modules",
     "ruleBadge": "Rule engine",
     "aiBadge": "AI summary"
+  },
+  "register": {
+    "badge": "Free account",
+    "metaTitle": "Create a Free Account",
+    "metaDesc": "Create a free account to view 5 supplier profiles per month, save and compare the suppliers you are evaluating.",
+    "h1": "Create a free account",
+    "lead": "No credit card required. View 5 supplier profiles per month and save the suppliers you are evaluating.",
+    "benefitsTitle": "What's included",
+    "benefits": [
+      "View {n} supplier profiles per month",
+      "Save suppliers you are evaluating",
+      "Compare up to 3 suppliers side by side",
+      "Verification status update alerts",
+      "Upgrade to Founding Buyer anytime"
+    ],
+    "nextTitle": "What happens next",
+    "nextLead": "After you submit, our team creates your account manually and emails your sign-in details within one business day.",
+    "noCard": "No credit card required.",
+    "membershipLink": "Learn about Founding Buyer membership ($49/year)",
+    "formTitle": "Sign up",
+    "form": {
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@company.com",
+      "nameLabel": "Name",
+      "namePlaceholder": "Your name",
+      "companyLabel": "Company (optional)",
+      "companyPlaceholder": "Company name",
+      "submit": "Create free account",
+      "submitting": "Submitting…",
+      "privacyNote": "We never sell your information to third parties.",
+      "successTitle": "Sign-up received",
+      "successLead": "We will email your sign-in details within one business day.",
+      "errorGeneric": "Something went wrong. Please try again or email us directly.",
+      "errorRateLimited": "Too many sign-ups from this address. Please try again later.",
+      "errorInvalidEmail": "Please enter a valid email address."
+    }
+  },
+  "membership": {
+    "badge": "Buyer membership",
+    "metaTitle": "Founding Buyer Membership — $49/year",
+    "metaDesc": "Founding Buyer membership: full supplier database, risk breakdowns, evidence summaries and factory details. $49/year.",
+    "h1": "Founding Buyer membership",
+    "lead": "For sourcing teams that need to evaluate suppliers in depth. One subscription, all supplier intelligence features for a year.",
+    "planName": "Founding Buyer",
+    "pricePeriod": "year",
+    "priceNote": "Founding price — will increase later",
+    "cta": "Talk to us",
+    "paymentNote": "Online payment is not open yet. Contact us to set up access.",
+    "benefitsTitle": "Membership benefits",
+    "benefitsLead": "Paid members can view",
+    "benefits": [
+      "All supplier profiles with no monthly limit",
+      "Risk breakdown: dimension scores and reasoning",
+      "Evidence summaries: verified records and sources",
+      "Factory details: size, capacity, export markets",
+      "Advanced filters and export",
+      "Priority verification support"
+    ],
+    "freeTitle": "Start free first",
+    "freeLead": "Free accounts get {n} supplier profiles per month.",
+    "freeCta": "Create free account",
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "q": "How much does membership cost?",
+        "a": "Founding Buyer is $49/year (USD). One subscription covers a full year. The founding price may increase later."
+      },
+      {
+        "q": "How do I pay?",
+        "a": "Online payment is not open yet. Click \"Talk to us\" and our team will confirm the payment method by email."
+      },
+      {
+        "q": "Does membership guarantee verification results?",
+        "a": "No. Membership grants viewing access only. It never changes a supplier's risk score or verification status. Verification outcomes are never sold."
+      }
+    ]
   }
 }
