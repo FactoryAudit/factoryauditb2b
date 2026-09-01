@@ -42,6 +42,9 @@ export default function SupplierRiskPage() {
 
   return (
     <div className="container py-12">
+      <span className="inline-block px-3 py-1 rounded-full bg-[#e6eef6] text-[#0f4c81] text-sm font-semibold mb-4">
+        FactoryAuditB2B RiskScore™
+      </span>
       <h1 className="text-3xl font-bold text-[#0f172a]">Supplier Risk Assessment</h1>
       <p className="text-[#64748b] mt-2 mb-6">Enter supplier details to generate an initial risk score. Evidence status is shown per dimension — we never present estimates as facts.</p>
 

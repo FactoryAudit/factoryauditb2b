@@ -60,7 +60,7 @@
   },
   "home": {
     "badge": "Verify. Source. Inspect. Ship.",
-    "h1": "Check the factory before you send the money",
+    "h1": "اعرف موردك قبل أن تخاطر بأموالك.",
     "lead": "التحقق من المورّدين ميدانياً ودعم تدقيق المصانع في الصين وجنوب شرق آسيا. التغطية النشطة: الصين وفيتنام وتايلاند وماليزيا والفلبين.",
     "ctaScore": "Check a supplier free",
     "ctaRfq": "Post an RFQ",
@@ -75,9 +75,9 @@
     "value3Title": "Every check stays on the record",
     "value3Body": "Each verification and audit stays in the supplier's file. A company cannot quietly reset its history with us.",
     "sub": "Use free tools to assess supplier risk, check verification readiness and prepare for a factory audit. When you need someone on the ground, request an independent verification or factory audit.",
-    "ctaPrimary": "Assess Supplier Risk",
-    "ctaSecondary": "Verify a Supplier",
-    "ctaHighIntent": "Request a Factory Audit",
+    "ctaPrimary": "تحقق من موردي",
+    "ctaSecondary": "فحص مخاطر مجاني",
+    "ctaHighIntent": "طلب تدقيق المصنع",
     "evaTitle": "Evaluate. Verify. Audit.",
     "evaLead": "Three steps between a supplier you found online and a supplier you can pay.",
     "evaluateTitle": "Evaluate",
@@ -240,7 +240,7 @@
       "answeredInStep": "تمت الإجابة على {done} من {total} في هذا القسم"
     },
     "page": {
-      "badge": "Free tool",
+      "badge": "FactoryAuditB2B RiskScore™",
       "h1": "Supplier Risk Calculator",
       "lead": "Answer 22 questions about a supplier and get a score from 0 to 100, with the six dimensions behind it laid out.",
       "card1Title": "You can see how the score is built",
@@ -623,7 +623,7 @@
       "ctaOutsourceBody": "أرسل لنا بيانات المورّد وسنردّ بتقرير تحقق مكتوب مع أدلة وملخص مخاطر خلال يومَي عمل."
     },
     "page": {
-      "badge": "Free tool",
+      "badge": "FactoryAuditB2B RiskScore™",
       "h1": "Supplier Verification Checklist",
       "lead": "Twenty-nine checks across six stages. Work through them before you place an order or release a payment, then print the result for your supplier file.",
       "card1Title": "Six stages",
@@ -970,7 +970,17 @@
       "placeholderInspector": "e.g. Inspector Shenzhen",
       "search": "Search",
       "combinedHint": "Combined SEO pages + live database results",
-      "noMatch": "No exact match for \"{q}\". This searches the indexed supplier database."
+      "noMatch": "No exact match for \"{q}\". This searches the indexed supplier database.",
+      "urlDetected": "Looks like a company name or website. Not in the indexed database yet.",
+      "submitAssess": "Submit for preliminary assessment",
+      "assessHint": "We check registration records and the online footprint, then reply with a preliminary risk view.",
+      "formName": "Your name",
+      "formEmail": "Your email *",
+      "formCompany": "Your company",
+      "assessSubmit": "Request assessment",
+      "assessSubmitting": "Submitting…",
+      "assessSuccess": "Thank you. Our team will reply within one business day.",
+      "assessError": "Something went wrong. Please try again."
     }
   },
   "container": {

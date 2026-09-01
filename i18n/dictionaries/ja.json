@@ -60,7 +60,7 @@
   },
   "home": {
     "badge": "検証。ソース。検査。発送。",
-    "h1": "送金する前に工場を確認してください",
+    "h1": "お金をリスクにさらす前に、サプライヤーをよく知ろう。",
     "lead": "中国と東南アジアにおける現地サプライヤー検証と工場監査サポート。稼働中の対象：中国、ベトナム、タイ、マレーシア、フィリピン。",
     "ctaScore": "サプライヤーを無料で確認する",
     "ctaRfq": "RFQを投稿する",
@@ -75,9 +75,9 @@
     "value3Title": "すべての小切手は記録に残されます",
     "value3Body": "各検証と監査は、サプライヤーのファイルに残ります。会社は私たちとの歴史を静かにリセットすることはできません。",
     "sub": "Use free tools to assess supplier risk, check verification readiness and prepare for a factory audit. When you need someone on the ground, request an independent verification or factory audit.",
-    "ctaPrimary": "Assess Supplier Risk",
-    "ctaSecondary": "Verify a Supplier",
-    "ctaHighIntent": "Request a Factory Audit",
+    "ctaPrimary": "サプライヤーを確認する",
+    "ctaSecondary": "無料リスクチェック",
+    "ctaHighIntent": "工場監査を依頼する",
     "evaTitle": "Evaluate. Verify. Audit.",
     "evaLead": "Three steps between a supplier you found online and a supplier you can pay.",
     "evaluateTitle": "Evaluate",
@@ -240,7 +240,7 @@
       "answeredInStep": "このセクション {done}/{total} 回答済み"
     },
     "page": {
-      "badge": "無料ツール",
+      "badge": "FactoryAuditB2B RiskScore™",
       "h1": "サプライヤー・リスク・計算ツール",
       "lead": "サプライヤーについて 22 問に答えると、6 つの次元で 0–100 のスコアと、加重された内訳、改善への推奨が得られます。",
       "card1Title": "スコアの内訳が見える",
@@ -623,7 +623,7 @@
       "ctaOutsourceBody": "サプライヤー情報をお送りください。2 営業日以内に、証拠とリスク要約を添えた書面サプライヤー検証レポートをお返しします。"
     },
     "page": {
-      "badge": "Free tool",
+      "badge": "FactoryAuditB2B RiskScore™",
       "h1": "Supplier Verification Checklist",
       "lead": "Twenty-nine checks across six stages. Work through them before you place an order or release a payment, then print the result for your supplier file.",
       "card1Title": "Six stages",
@@ -970,7 +970,17 @@
       "placeholderInspector": "e.g. Inspector Shenzhen",
       "search": "Search",
       "combinedHint": "Combined SEO pages + live database results",
-      "noMatch": "No exact match for \"{q}\". This searches the indexed supplier database."
+      "noMatch": "No exact match for \"{q}\". This searches the indexed supplier database.",
+      "urlDetected": "Looks like a company name or website. Not in the indexed database yet.",
+      "submitAssess": "Submit for preliminary assessment",
+      "assessHint": "We check registration records and the online footprint, then reply with a preliminary risk view.",
+      "formName": "Your name",
+      "formEmail": "Your email *",
+      "formCompany": "Your company",
+      "assessSubmit": "Request assessment",
+      "assessSubmitting": "Submitting…",
+      "assessSuccess": "Thank you. Our team will reply within one business day.",
+      "assessError": "Something went wrong. Please try again."
     }
   },
   "container": {

@@ -67,7 +67,7 @@
   },
   "home": {
     "badge": "面向全球采购商的供应商情报",
-    "h1": "在打款之前，先查清你的供应商",
+    "h1": "付款之前，先弄清你的供应商。",
     "lead": "评估供应商、核验工厂，降低中国及东南亚采购风险。",
     "ctaScore": "免费评估供应商",
     "ctaRfq": "发布询价",
@@ -82,8 +82,8 @@
     "value3Title": "每一次核查都会留档",
     "value3Body": "每次验证与审核都会留在该供应商的档案里。企业无法在我们这里悄悄清空历史记录。",
     "sub": "用免费工具评估供应商风险、检查核验完备度、为验厂做准备。需要有人到现场时，申请独立的供应商核查或工厂验厂。",
-    "ctaPrimary": "评估供应商风险",
-    "ctaSecondary": "核验供应商",
+    "ctaPrimary": "查我的供应商",
+    "ctaSecondary": "免费风险核查",
     "ctaHighIntent": "申请工厂验厂",
     "evaTitle": "评估。核验。验厂。",
     "evaLead": "从网上找到的一家供应商，到一家你可以放心付款的供应商，中间三步。",
@@ -377,7 +377,7 @@
       "answeredInStep": "本节已答 {done}/{total}"
     },
     "page": {
-      "badge": "免费工具",
+      "badge": "FactoryAuditB2B RiskScore™",
       "h1": "供应商风险计算器",
       "lead": "回答 22 个关于供应商的问题，得到 0 到 100 的分数，并看清构成这个分数的六个维度。",
       "card1Title": "分数怎么来的，你看得见",
@@ -421,8 +421,7 @@
         "label": "文件风险",
         "short": "文件",
         "description": "营业执照、厂房地址、证书、审核报告与测试报告能否真正拿得出来。"
-      }
-,
+      },
       "certification": {
         "label": "认证风险",
         "short": "认证",
@@ -632,7 +631,6 @@
         "under2": "不足 2 年",
         "none": "查不到可追溯记录"
       }
-
     },
     "factors": {
       "company_address": "厂房地址尚未核实。",
@@ -762,7 +760,7 @@
       "ctaOutsourceBody": "把供应商信息发给我们，我们将在 2 个工作日内返回书面供应商核查报告，含证据与风险摘要。"
     },
     "page": {
-      "badge": "免费工具",
+      "badge": "FactoryAuditB2B RiskScore™",
       "h1": "供应商验证清单",
       "lead": "六个阶段共 29 项核查。下单或付款前逐条过一遍，完成后可打印归档。",
       "card1Title": "六个阶段",
@@ -1354,7 +1352,17 @@
       "placeholderInspector": "例：验货 深圳",
       "search": "搜索",
       "combinedHint": "SEO 页面 + 实时数据库结果",
-      "noMatch": "未找到与\"{q}\"精确匹配的记录。本页检索的是已索引的供应商数据库。"
+      "noMatch": "未找到与\"{q}\"精确匹配的记录。本页检索的是已索引的供应商数据库。",
+      "urlDetected": "看起来像公司名或网站，暂不在已收录数据库中。",
+      "submitAssess": "提交初步评估",
+      "assessHint": "我们会核查注册记录与线上足迹，然后回复初步风险结论。",
+      "formName": "您的姓名",
+      "formEmail": "您的邮箱 *",
+      "formCompany": "您的公司",
+      "assessSubmit": "申请评估",
+      "assessSubmitting": "提交中…",
+      "assessSuccess": "谢谢。我们的团队会在一个工作日内回复。",
+      "assessError": "出错了，请重试。"
     }
   },
   "container": {

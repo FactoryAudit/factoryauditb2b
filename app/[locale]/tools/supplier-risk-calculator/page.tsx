@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: raw } = await params;
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
-  const title = `${t.risk.page.metaTitle} | FactoryAuditB2B`;
+  const title = `${t.risk.page.metaTitle} | FactoryAuditB2B RiskScore™`;
   return {
     title,
     description: t.risk.page.metaDesc,

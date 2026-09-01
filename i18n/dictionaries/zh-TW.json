@@ -60,7 +60,7 @@
   },
   "home": {
     "badge": "覈查 · 採購 · 驗貨 · 發運",
-    "h1": "付錢之前，先把工廠查清楚",
+    "h1": "付款之前，先弄清你的供應商。",
     "lead": "於中國及東南亞的現場供應商核查與工廠稽核支援。已啟用範圍：中國、越南、泰國、馬來西亞、菲律賓。",
     "ctaScore": "免費評估供應商",
     "ctaRfq": "發佈詢價",
@@ -75,9 +75,9 @@
     "value3Title": "每一次覈查都會留檔",
     "value3Body": "每次驗證與審覈都會留在該供應商的檔案裏。企業無法在我們這裏悄悄清空歷史記錄。",
     "sub": "Use free tools to assess supplier risk, check verification readiness and prepare for a factory audit. When you need someone on the ground, request an independent verification or factory audit.",
-    "ctaPrimary": "Assess Supplier Risk",
-    "ctaSecondary": "Verify a Supplier",
-    "ctaHighIntent": "Request a Factory Audit",
+    "ctaPrimary": "查我的供應商",
+    "ctaSecondary": "免費風險核查",
+    "ctaHighIntent": "申請工廠驗廠",
     "evaTitle": "Evaluate. Verify. Audit.",
     "evaLead": "Three steps between a supplier you found online and a supplier you can pay.",
     "evaluateTitle": "Evaluate",
@@ -240,7 +240,7 @@
       "answeredInStep": "本節已答 {done}/{total}"
     },
     "page": {
-      "badge": "免費工具",
+      "badge": "FactoryAuditB2B RiskScore™",
       "h1": "供應商風險計算器",
       "lead": "回答 22 個關於供應商的問題，得到 0 到 100 的分數，並看清構成這個分數的六個維度。",
       "card1Title": "分數怎麼來的，你看得見",
@@ -284,8 +284,7 @@
         "label": "Documentation risk",
         "short": "文件",
         "description": "營業執照、廠房地址、證書、審覈報告與測試報告能否真正拿得出來。"
-      }
-,
+      },
       "certification": {
         "label": "認證風險",
         "short": "認證",
@@ -495,7 +494,6 @@
         "under2": "不足 2 年",
         "none": "查不到可追溯記錄"
       }
-
     },
     "factors": {
       "company_address": "廠房地址尚未覈實。",
@@ -625,7 +623,7 @@
       "ctaOutsourceBody": "把供應商資訊發給我們，我們將在 2 個工作日內返回書面供應商核查報告，含證據與風險摘要。"
     },
     "page": {
-      "badge": "免費工具",
+      "badge": "FactoryAuditB2B RiskScore™",
       "h1": "供應商驗證清單",
       "lead": "六個階段共 29 項覈查。下單或付款前逐條過一遍，完成後可打印歸檔。",
       "card1Title": "六個階段",
@@ -923,7 +921,17 @@
       "placeholderInspector": "e.g. Inspector Shenzhen",
       "search": "Search",
       "combinedHint": "Combined SEO pages + live database results",
-      "noMatch": "No exact match for \"{q}\". This searches the indexed supplier database."
+      "noMatch": "No exact match for \"{q}\". This searches the indexed supplier database.",
+      "urlDetected": "看起來像公司名或網站，暫不在已收錄資料庫中。",
+      "submitAssess": "提交初步評估",
+      "assessHint": "我們會核查註冊記錄與線上足跡，然後回覆初步風險結論。",
+      "formName": "您的姓名",
+      "formEmail": "您的信箱 *",
+      "formCompany": "您的公司",
+      "assessSubmit": "申請評估",
+      "assessSubmitting": "提交中…",
+      "assessSuccess": "謝謝。我們的團隊會在工作日內回覆。",
+      "assessError": "出錯了，請重試。"
     }
   },
   "container": {

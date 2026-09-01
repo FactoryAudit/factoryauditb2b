@@ -60,7 +60,7 @@
   },
   "home": {
     "badge": "Supplier intelligence for global buyers",
-    "h1": "Check Your Supplier Before You Send the Money",
+    "h1": "Conoce a tu proveedor antes de arriesgar tu dinero.",
     "lead": "Verificación de proveedores sobre el terreno y soporte de auditoría de fábrica en China y el sudeste asiático. Cobertura activa: China, Vietnam, Tailandia, Malasia y Filipinas.",
     "ctaScore": "Evaluar un proveedor gratis",
     "ctaRfq": "Publicar cotización",
@@ -75,9 +75,9 @@
     "value3Title": "Cada revisión queda registrada",
     "value3Body": "Cada verificación y auditoría queda en el expediente del proveedor. Una empresa no puede borrar su historial sin más.",
     "sub": "Use free tools to assess supplier risk, check verification readiness and prepare for a factory audit. When you need someone on the ground, request an independent verification or factory audit.",
-    "ctaPrimary": "Assess Supplier Risk",
-    "ctaSecondary": "Verify a Supplier",
-    "ctaHighIntent": "Request a Factory Audit",
+    "ctaPrimary": "Comprobar mi proveedor",
+    "ctaSecondary": "Chequeo de riesgo gratuito",
+    "ctaHighIntent": "Solicitar auditoría de fábrica",
     "evaTitle": "Evaluate. Verify. Audit.",
     "evaLead": "Three steps between a supplier you found online and a supplier you can pay.",
     "evaluateTitle": "Evaluate",
@@ -240,7 +240,7 @@
       "answeredInStep": "Respondidas {done} de {total} en esta sección"
     },
     "page": {
-      "badge": "Free tool",
+      "badge": "FactoryAuditB2B RiskScore™",
       "h1": "Supplier Risk Calculator",
       "lead": "Answer 22 questions about a supplier and get a score from 0 to 100, with the six dimensions behind it laid out.",
       "card1Title": "You can see how the score is built",
@@ -623,7 +623,7 @@
       "ctaOutsourceBody": "Envíenos los datos del proveedor y le devolveremos un Informe de Verificación escrito con pruebas y resumen de riesgo en dos días hábiles."
     },
     "page": {
-      "badge": "Free tool",
+      "badge": "FactoryAuditB2B RiskScore™",
       "h1": "Supplier Verification Checklist",
       "lead": "Twenty-nine checks across six stages. Work through them before you place an order or release a payment, then print the result for your supplier file.",
       "card1Title": "Six stages",
@@ -921,7 +921,17 @@
       "placeholderInspector": "e.g. Inspector Shenzhen",
       "search": "Search",
       "combinedHint": "Combined SEO pages + live database results",
-      "noMatch": "No exact match for \"{q}\". This searches the indexed supplier database."
+      "noMatch": "No exact match for \"{q}\". This searches the indexed supplier database.",
+      "urlDetected": "Looks like a company name or website. Not in the indexed database yet.",
+      "submitAssess": "Submit for preliminary assessment",
+      "assessHint": "We check registration records and the online footprint, then reply with a preliminary risk view.",
+      "formName": "Your name",
+      "formEmail": "Your email *",
+      "formCompany": "Your company",
+      "assessSubmit": "Request assessment",
+      "assessSubmitting": "Submitting…",
+      "assessSuccess": "Thank you. Our team will reply within one business day.",
+      "assessError": "Something went wrong. Please try again."
     }
   },
   "container": {

@@ -60,7 +60,7 @@
   },
   "home": {
     "badge": "Verificar. Comprar. Inspecionar. Enviar.",
-    "h1": "Confira a fábrica antes de enviar o dinheiro",
+    "h1": "Conheça seu fornecedor antes de arriscar seu dinheiro.",
     "lead": "Consultamos o registro empresarial, percorremos a linha de produção e lemos a documentação de auditoria de fábricas na China e em toda a Ásia. Você recebe os documentos, as fotos e os achados, e então decide se faz o pedido.",
     "ctaScore": "Avaliar um fornecedor grátis",
     "ctaRfq": "Publicar cotação",
@@ -75,9 +75,9 @@
     "value3Title": "Cada verificação fica registrada",
     "value3Body": "Cada verificação e auditoria fica na pasta do fornecedor. Uma empresa não consegue apagar o próprio histórico aqui sem deixar rastro.",
     "sub": "Use free tools to assess supplier risk, check verification readiness and prepare for a factory audit. When you need someone on the ground, request an independent verification or factory audit.",
-    "ctaPrimary": "Assess Supplier Risk",
-    "ctaSecondary": "Verify a Supplier",
-    "ctaHighIntent": "Request a Factory Audit",
+    "ctaPrimary": "Verificar meu fornecedor",
+    "ctaSecondary": "Verificação de risco gratuita",
+    "ctaHighIntent": "Solicitar auditoria de fábrica",
     "evaTitle": "Evaluate. Verify. Audit.",
     "evaLead": "Three steps between a supplier you found online and a supplier you can pay.",
     "evaluateTitle": "Evaluate",
@@ -234,7 +234,7 @@
       "answeredInStep": "{done} de {total} respondidas nesta secção"
     },
     "page": {
-      "badge": "Ferramenta grátis",
+      "badge": "FactoryAuditB2B RiskScore™",
       "h1": "Calculadora de risco do fornecedor",
       "lead": "Responda 22 perguntas sobre um fornecedor e receba uma pontuação de 0 a 100, com as seis dimensões por trás dela detalhadas.",
       "card1Title": "Você vê como a pontuação é formada",
@@ -617,7 +617,7 @@
       "ctaOutsourceBody": "Envie-nos os dados do fornecedor e devolveremos um Relatório de Verificação por escrito com evidências e resumo de risco em dois dias úteis."
     },
     "page": {
-      "badge": "Ferramenta grátis",
+      "badge": "FactoryAuditB2B RiskScore™",
       "h1": "Lista de verificação do fornecedor",
       "lead": "29 verificações em seis etapas. Passe por elas antes de encomendar ou liberar pagamento, e imprima o resultado para sua pasta.",
       "card1Title": "Seis etapas",
@@ -915,7 +915,17 @@
       "placeholderInspector": "e.g. Inspector Shenzhen",
       "search": "Search",
       "combinedHint": "Combined SEO pages + live database results",
-      "noMatch": "No exact match for \"{q}\". This searches the indexed supplier database."
+      "noMatch": "No exact match for \"{q}\". This searches the indexed supplier database.",
+      "urlDetected": "Looks like a company name or website. Not in the indexed database yet.",
+      "submitAssess": "Submit for preliminary assessment",
+      "assessHint": "We check registration records and the online footprint, then reply with a preliminary risk view.",
+      "formName": "Your name",
+      "formEmail": "Your email *",
+      "formCompany": "Your company",
+      "assessSubmit": "Request assessment",
+      "assessSubmitting": "Submitting…",
+      "assessSuccess": "Thank you. Our team will reply within one business day.",
+      "assessError": "Something went wrong. Please try again."
     }
   },
   "container": {

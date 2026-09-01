@@ -24,6 +24,9 @@ export default function ScorecardPage() {
 
   return (
     <div className="container py-12">
+      <span className="inline-block px-3 py-1 rounded-full bg-[#e6eef6] text-[#0f4c81] text-sm font-semibold mb-4">
+        FactoryAuditB2B RiskScore™
+      </span>
       <h1 className="text-3xl font-bold text-[#0f172a]">Supplier Evaluation Scorecard</h1>
       <p className="text-[#64748b] mt-2 mb-6">Set weights and scores to compute an overall supplier score. Weights are fully customizable.</p>
       <div className="card p-6 max-w-3xl">
