@@ -2660,7 +2660,14 @@
     "ctaSecondary": "Custom services"
   },
   "caseStudies": {
-    "h1": "Case Studies",
-    "lead": "Method walk-throughs for supplier verification, factory audit, inspection and sourcing."
+    "h1": "Estudos de caso",
+    "lead": "Demonstrações de métodos de verificação de fornecedores, auditoria de fábrica, inspeção e sourcing.",
+    "metaTitle": "Estudos de caso: verificação de fornecedores, auditoria e inspeção",
+    "breadcrumbHome": "Início",
+    "breadcrumbCurrent": "Estudos de caso",
+    "ctaTitle": "Tem uma situação parecida?",
+    "ctaDesc": "Envie sua necessidade e vamos definir a verificação, auditoria ou inspeção para o seu produto e mercado.",
+    "ctaRfq": "Publicar um RFQ",
+    "ctaCustom": "Serviços personalizados"
   }
 }

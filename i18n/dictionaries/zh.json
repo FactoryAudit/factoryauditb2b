@@ -2661,6 +2661,13 @@
   },
   "caseStudies": {
     "h1": "案例研究",
-    "lead": "供应商核验、验厂、验货与寻源的方法演示。"
+    "lead": "供应商核验、验厂、验货与寻源的方法演示。",
+    "metaTitle": "供应商核查、验厂与验货案例",
+    "breadcrumbHome": "首页",
+    "breadcrumbCurrent": "案例研究",
+    "ctaTitle": "遇到类似情况？",
+    "ctaDesc": "把你的需求发给我们，我们会为你的产品和市场规划核查、验厂或验货方案。",
+    "ctaRfq": "发布询价",
+    "ctaCustom": "定制服务"
   }
 }

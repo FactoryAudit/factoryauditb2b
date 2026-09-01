@@ -2666,7 +2666,14 @@
     "ctaSecondary": "Custom services"
   },
   "caseStudies": {
-    "h1": "Case Studies",
-    "lead": "Method walk-throughs for supplier verification, factory audit, inspection and sourcing."
+    "h1": "دراسات الحالة",
+    "lead": "عروض توضيحية لطرق التحقق من الموردين وتدقيق المصنع والفحص والتوريد.",
+    "metaTitle": "دراسات حالة: التحقق من الموردين والتدقيق والفحص",
+    "breadcrumbHome": "الرئيسية",
+    "breadcrumbCurrent": "دراسات الحالة",
+    "ctaTitle": "لديك موقف مشابه؟",
+    "ctaDesc": "أرسل لنا متطلباتك وسنحدد نطاق التحقق أو التدقيق أو الفحص لمنتجك وسوقك.",
+    "ctaRfq": "انشر طلب عرض أسعار",
+    "ctaCustom": "خدمات مخصصة"
   }
 }

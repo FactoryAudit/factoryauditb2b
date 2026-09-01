@@ -2666,7 +2666,14 @@
     "ctaSecondary": "Custom services"
   },
   "caseStudies": {
-    "h1": "Case Studies",
-    "lead": "Method walk-throughs for supplier verification, factory audit, inspection and sourcing."
+    "h1": "事例紹介",
+    "lead": "サプライヤー検証・工場監査・検査・調達の進め方のデモンストレーション。",
+    "metaTitle": "サプライヤー検証・工場監査・製品検査の事例",
+    "breadcrumbHome": "ホーム",
+    "breadcrumbCurrent": "事例紹介",
+    "ctaTitle": "同じような状況ですか？",
+    "ctaDesc": "ご要件をお送りいただければ、製品と市場に合わせて検証・監査・検査の範囲を設計します。",
+    "ctaRfq": "RFQを投稿",
+    "ctaCustom": "カスタムサービス"
   }
 }

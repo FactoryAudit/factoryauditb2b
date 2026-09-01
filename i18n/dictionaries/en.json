@@ -2564,6 +2564,13 @@
   },
   "caseStudies": {
     "h1": "Case Studies",
-    "lead": "Method walk-throughs for supplier verification, factory audit, inspection and sourcing."
+    "lead": "Method walk-throughs for supplier verification, factory audit, inspection and sourcing.",
+    "metaTitle": "Supplier Verification, Audit & Inspection Case Studies",
+    "breadcrumbHome": "Home",
+    "breadcrumbCurrent": "Case studies",
+    "ctaTitle": "Have a similar situation?",
+    "ctaDesc": "Send us your requirement and we will scope the verification, audit or inspection for your product and market.",
+    "ctaRfq": "Post an RFQ",
+    "ctaCustom": "Custom services"
   }
 }

@@ -2666,7 +2666,14 @@
     "ctaSecondary": "Custom services"
   },
   "caseStudies": {
-    "h1": "Case Studies",
-    "lead": "Method walk-throughs for supplier verification, factory audit, inspection and sourcing."
+    "h1": "Études de cas",
+    "lead": "Démonstrations de méthodes pour la vérification fournisseur, l'audit d'usine, l'inspection et le sourcing.",
+    "metaTitle": "Études de cas : vérification fournisseur, audit & inspection",
+    "breadcrumbHome": "Accueil",
+    "breadcrumbCurrent": "Études de cas",
+    "ctaTitle": "Une situation similaire ?",
+    "ctaDesc": "Envoyez-nous votre besoin et nous définirons la vérification, l'audit ou l'inspection adaptés à votre produit et à votre marché.",
+    "ctaRfq": "Publier un RFQ",
+    "ctaCustom": "Services sur mesure"
   }
 }

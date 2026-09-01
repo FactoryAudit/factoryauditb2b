@@ -2666,7 +2666,14 @@
     "ctaSecondary": "Custom services"
   },
   "caseStudies": {
-    "h1": "Case Studies",
-    "lead": "Method walk-throughs for supplier verification, factory audit, inspection and sourcing."
+    "h1": "案例研究",
+    "lead": "供應商核實、驗廠、驗貨與尋源的方法演示。",
+    "metaTitle": "供應商核實、驗廠與驗貨案例",
+    "breadcrumbHome": "首頁",
+    "breadcrumbCurrent": "案例研究",
+    "ctaTitle": "遇到類似情況？",
+    "ctaDesc": "把你的需求發給我們，我們會為你的產品和市場規劃核實、驗廠或驗貨方案。",
+    "ctaRfq": "發布詢價",
+    "ctaCustom": "客製服務"
   }
 }

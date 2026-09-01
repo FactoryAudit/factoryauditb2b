@@ -4,6 +4,7 @@ import JsonLd from "@/components/JsonLd";
 import { CASE_STUDIES, CASE_SERVICE_ORDER, CASE_DISCLOSURE, CASE_LIST_META, CASE_SECTIONS } from "@/lib/caseStudies";
 import { overallLevel } from "@/lib/riskEngine";
 import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 
 const BASE = "https://factoryauditb2b.com";
@@ -16,10 +17,11 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: raw } = await params;
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
+  const t = await getDictionary(locale);
   return buildPageMetadata({
     locale,
     path: "/case-studies",
-    title: "Supplier Verification, Audit & Inspection Case Studies",
+    title: t.caseStudies.metaTitle,
     description: locale === "zh" ? CASE_LIST_META.zh : CASE_LIST_META.en,
   });
 }
@@ -27,6 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CaseStudiesPage({ params }: Props) {
   const { locale: raw } = await params;
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
+  const t = await getDictionary(locale);
   const p = (href: string) => localePath(locale, href);
   const zh = locale === "zh";
   const disclosure = zh ? CASE_DISCLOSURE.zh : CASE_DISCLOSURE.en;
@@ -48,11 +51,11 @@ export default async function CaseStudiesPage({ params }: Props) {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: `${BASE}${p("/")}` },
+        { "@type": "ListItem", position: 1, name: t.caseStudies.breadcrumbHome, item: `${BASE}${p("/")}` },
         {
           "@type": "ListItem",
           position: 2,
-          name: "Case studies",
+          name: t.caseStudies.breadcrumbCurrent,
           item: `${BASE}${p("/case-studies")}`,
         },
       ],
@@ -64,10 +67,10 @@ export default async function CaseStudiesPage({ params }: Props) {
       <JsonLd data={jsonLd} />
 
       <nav className="mb-4 text-sm text-gray-500">
-        <Link href={p("/")} className="hover:underline">Home</Link> / Case studies
+        <Link href={p("/")} className="hover:underline">{t.caseStudies.breadcrumbHome}</Link> / {t.caseStudies.breadcrumbCurrent}
       </nav>
 
-      <h1 className="text-3xl font-bold">Case studies</h1>
+      <h1 className="text-3xl font-bold">{t.caseStudies.h1}</h1>
       <p className="mt-2 max-w-3xl text-gray-600">
         Supplier verification, factory audit, inspection and sourcing walk-throughs.
       </p>
@@ -115,17 +118,16 @@ export default async function CaseStudiesPage({ params }: Props) {
       </div>
 
       <section className="mt-10 card p-6 bg-[#0f4c81]">
-        <h2 className="text-lg font-semibold text-white">Have a similar situation?</h2>
+        <h2 className="text-lg font-semibold text-white">{t.caseStudies.ctaTitle}</h2>
         <p className="mt-1 text-sm text-white/80">
-          Send us your requirement and we will scope the verification, audit or inspection for your
-          product and market.
+          {t.caseStudies.ctaDesc}
         </p>
         <div className="mt-3 flex flex-wrap gap-3">
           <Link href={p("/rfq")} className="btn btn-accent">
-            Post an RFQ
+            {t.caseStudies.ctaRfq}
           </Link>
           <Link href={p("/custom-services")} className="btn btn-outline border-white text-white">
-            Custom services
+            {t.caseStudies.ctaCustom}
           </Link>
         </div>
       </section>
