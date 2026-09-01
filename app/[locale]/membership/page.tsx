@@ -62,69 +62,106 @@ export default async function MembershipPage({
     >
       <JsonLd data={jsonLd} />
 
-      <section className="mb-8 text-center">
-        <span className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">
+      {/* Hero */}
+      <section className="relative mb-12 text-center overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-x-0 -top-16 -z-10 mx-auto h-72 w-[36rem] max-w-full rounded-full bg-[#e6eef6] opacity-70 blur-3xl"
+        />
+        <span className="inline-flex items-center rounded-full bg-[#e6eef6] px-4 py-1.5 text-sm font-semibold text-[#0f4c81]">
           {m.badge}
         </span>
-        <h1 className="text-3xl font-bold text-[#0f172a] mt-2">{m.h1}</h1>
-        <p className="text-[#64748b] mt-2 max-w-2xl mx-auto">{m.lead}</p>
+        <h1 className="mt-4 text-3xl font-bold tracking-tight text-[#0f172a] md:text-5xl">
+          {m.h1}
+        </h1>
+        <p className="mx-auto mt-3 max-w-2xl text-base text-[#64748b] md:text-lg">
+          {m.lead}
+        </p>
       </section>
 
-      {/* 价格卡 */}
-      <section className="max-w-lg mx-auto mb-10">
-        <div className="card p-8 text-center bg-gradient-to-br from-[#0f4c81] to-[#163a5f] text-white">
-          <div className="text-sm uppercase tracking-wide text-[#b9cfe6]">{m.planName}</div>
-          <div className="mt-3 flex items-baseline justify-center gap-1">
+      {/* 价格对比：免费 vs 会员 */}
+      <section className="mb-12 grid gap-6 md:grid-cols-2 md:items-stretch">
+        {/* 会员卡（主推，移动端置顶） */}
+        <div className="relative order-1 flex flex-col overflow-hidden rounded-2xl bg-gradient-to-br from-[#0f4c81] to-[#163a5f] p-8 text-white shadow-lg md:order-2">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -right-14 -top-14 h-44 w-44 rounded-full bg-white/10"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -bottom-16 -left-10 h-36 w-36 rounded-full bg-white/5"
+          />
+          <span className="self-center rounded-full bg-white/15 px-4 py-1 text-xs font-semibold uppercase tracking-wider backdrop-blur-sm">
+            {m.planName}
+          </span>
+          <div className="mt-5 flex items-baseline justify-center gap-1.5">
             <span className="text-5xl font-extrabold">${MEMBERSHIP_PRICE_USD}</span>
-            <span className="text-[#b9cfe6]">/{m.pricePeriod}</span>
+            <span className="text-lg text-[#b9cfe6]">/ {m.pricePeriod}</span>
           </div>
-          <p className="mt-2 text-sm text-[#b9cfe6]">{m.priceNote}</p>
+          <p className="mt-2 text-center text-sm text-[#b9cfe6]">{m.priceNote}</p>
           <Link
             href={p("/custom-services")}
-            className="mt-6 block w-full bg-white text-[#0f4c81] font-semibold rounded-lg py-3 hover:bg-[#e6eef6] transition"
+            className="mt-6 block w-full rounded-lg bg-white py-3 text-center font-semibold text-[#0f4c81] transition hover:bg-[#e6eef6]"
             data-track={ANALYTICS_EVENTS.membershipCta}
           >
             {m.cta}
           </Link>
-          <p className="mt-3 text-xs text-[#b9cfe6]">{m.paymentNote}</p>
+          <p className="mt-3 text-center text-xs text-[#b9cfe6]">{m.paymentNote}</p>
+        </div>
+
+        {/* 免费卡 */}
+        <div className="order-2 flex flex-col rounded-2xl border border-[#e2e8f0] bg-white p-8 md:order-1">
+          <h2 className="text-xl font-bold text-[#0f172a]">{m.freeTitle}</h2>
+          <div className="mt-4 flex items-baseline gap-1.5">
+            <span className="text-5xl font-extrabold text-[#0f172a]">$0</span>
+            <span className="text-lg text-[#64748b]">/ {m.pricePeriod}</span>
+          </div>
+          <p className="mt-3 text-sm leading-relaxed text-[#475569]">
+            {m.freeLead.replace("{n}", String(FREE_PROFILE_LIMIT))}
+          </p>
+          <div className="flex-1" />
+          <Link
+            href={p("/register")}
+            className="btn btn-outline mt-6 w-full"
+            data-track={ANALYTICS_EVENTS.registerCta}
+          >
+            {m.freeCta}
+          </Link>
         </div>
       </section>
 
       {/* 权益 */}
-      <section className="mb-10">
-        <h2 className="text-2xl font-bold text-[#0f172a] mb-3">{m.benefitsTitle}</h2>
-        <p className="text-sm text-[#64748b] mb-4">{m.benefitsLead}</p>
-        <div className="grid md:grid-cols-2 gap-4">
-          {m.benefits.map((b: string) => (
-            <div key={b} className="card p-4 flex gap-3">
-              <span className="shrink-0 w-5 h-5 rounded-full bg-[#e6eef6] text-[#0f4c81] text-xs flex items-center justify-center font-bold">
-                ✓
+      <section className="mb-12">
+        <h2 className="text-2xl font-bold text-[#0f172a]">{m.benefitsTitle}</h2>
+        <p className="mt-1 text-sm text-[#64748b]">{m.benefitsLead}</p>
+        <div className="mt-5 grid gap-4 md:grid-cols-2">
+          {m.benefits.map((b: string, i: number) => (
+            <div
+              key={b}
+              className="card flex gap-3 p-4 transition hover:-translate-y-0.5 hover:shadow-md"
+            >
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-[#0f4c81] to-[#163a5f] text-xs font-bold text-white">
+                {String(i + 1).padStart(2, "0")}
               </span>
-              <span className="text-sm text-[#475569]">{b}</span>
+              <span className="pt-1.5 text-sm leading-relaxed text-[#475569]">{b}</span>
             </div>
           ))}
         </div>
       </section>
 
-      {/* 免费路径提示 */}
-      <section className="card p-6 mb-10 bg-[#f7f9fc]">
-        <h2 className="font-semibold text-[#0f172a]">{m.freeTitle}</h2>
-        <p className="text-sm text-[#475569] mt-1">
-          {m.freeLead.replace("{n}", String(FREE_PROFILE_LIMIT))}
-        </p>
-        <Link href={p("/register")} className="btn btn-outline mt-4 inline-block">
-          {m.freeCta}
-        </Link>
-      </section>
-
       {/* FAQ */}
       <section>
-        <h2 className="text-2xl font-bold text-[#0f172a] mb-3">{m.faqTitle}</h2>
-        <div className="space-y-3">
+        <h2 className="text-2xl font-bold text-[#0f172a]">{m.faqTitle}</h2>
+        <div className="mt-5 space-y-3">
           {m.faq.map((f: { q: string; a: string }) => (
-            <details key={f.q} className="card p-4">
-              <summary className="font-semibold text-[#0f172a] cursor-pointer">{f.q}</summary>
-              <p className="text-sm text-[#475569] mt-2">{f.a}</p>
+            <details key={f.q} className="card group p-4">
+              <summary className="flex list-none cursor-pointer items-center justify-between gap-3 font-semibold text-[#0f172a] [&::-webkit-details-marker]:hidden">
+                <span>{f.q}</span>
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#e6eef6] text-sm font-bold text-[#0f4c81] transition-transform duration-200 group-open:rotate-45">
+                  +
+                </span>
+              </summary>
+              <p className="mt-2 text-sm leading-relaxed text-[#475569]">{f.a}</p>
             </details>
           ))}
         </div>

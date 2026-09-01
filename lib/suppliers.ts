@@ -66,6 +66,7 @@ export const ANALYTICS_EVENTS = {
   claimView: "supplier_claim_view",
   claimSubmit: "supplier_claim_submit",
   registerView: "register_view",
+  registerCta: "register_cta",
   registerSubmit: "register_submit",
   membershipView: "membership_view",
   membershipCta: "membership_cta",
