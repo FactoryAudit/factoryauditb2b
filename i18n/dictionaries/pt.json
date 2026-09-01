@@ -1061,7 +1061,21 @@
       },
       "success": "Recebemos sua solicitação de auditoria. Responderemos em um dia útil.",
       "error": "Algo deu errado. Tente novamente ou entre em contato diretamente.",
-      "rateLimited": "Você enviou várias solicitações recentemente. Aguarde cerca de uma hora ou escreva-nos diretamente."
+      "rateLimited": "Você enviou várias solicitações recentemente. Aguarde cerca de uma hora ou escreva-nos diretamente.",
+      "industries": [
+        "Eletrônicos",
+        "Têxtil e confecções",
+        "Móveis",
+        "Brinquedos",
+        "Automotivo",
+        "Máquinas",
+        "Plásticos",
+        "Alimentos",
+        "Embalagens",
+        "Química",
+        "Outro"
+      ],
+      "noneCustom": "Nenhum / Personalizado"
     },
     "metaTitle": "Solicitar uma Auditoria de Fábrica",
     "metaDesc": "Solicite uma auditoria de fábrica com proposta concreta: escolha o tipo, o padrão e a localização."
@@ -1252,7 +1266,62 @@
     "faqTitle": "Perguntas frequentes sobre treinamento",
     "ctaTitle": "Não sabe qual plano escolher?",
     "ctaDesc": "Conte-nos seu setor e criaremos um programa de treinamento.",
-    "ctaButton": "Fale conosco"
+    "ctaButton": "Fale conosco",
+    "priceNote": "Todos os preços em USD, por fábrica.",
+    "plans": [
+      {
+        "name": "Formação Starter",
+        "price": "$280",
+        "period": "/ por fábrica",
+        "features": [
+          "Fundamentos de qualidade de 1 dia no local",
+          "Checklist de controle de qualidade e modelo SOP",
+          "Auditoria de lacunas antes do treinamento",
+          "Certificado de conclusão"
+        ],
+        "cta": "Começar"
+      },
+      {
+        "name": "Formação Pro",
+        "price": "$950",
+        "period": "/ por fábrica",
+        "features": [
+          "Sistema de qualidade e controle de qualidade de 3 dias",
+          "Treinamento do processo de produção",
+          "Workshop de revisão gerencial",
+          "Auditoria e relatório pós-treinamento",
+          "Reciclagem trimestral"
+        ],
+        "cta": "Escolher Pro"
+      },
+      {
+        "name": "Formação Enterprise",
+        "price": "Personalizado",
+        "period": "",
+        "features": [
+          "Implantação em várias unidades",
+          "Módulos de conformidade e segurança",
+          "Programa de treinamento de instrutores",
+          "Gerente de conta dedicado",
+          "API e relatórios"
+        ],
+        "cta": "Fale conosco"
+      }
+    ],
+    "faq": [
+      {
+        "q": "Quem ministra o treinamento?",
+        "a": "Nossos auditores e engenheiros de controle de qualidade ministram presencialmente ou on-line, no idioma de trabalho da fábrica quando possível."
+      },
+      {
+        "q": "O treinamento inclui auditoria?",
+        "a": "Cada plano começa com uma auditoria de lacunas para que o treinamento foque nas fraquezas reais da fábrica, não em slides genéricos."
+      },
+      {
+        "q": "Posso personalizar o treinamento para o meu setor?",
+        "a": "Sim. Ajustamos os módulos (qualidade, controle de qualidade, processo de produção, conformidade) ao seu produto e mercado-alvo."
+      }
+    ]
   },
   "pricing": {
     "metaTitle": "Serviços e planos — ferramentas gratuitas, verificação, auditoria, monitoramento",

@@ -7,66 +7,8 @@ import WhatsAppLink from "@/components/WhatsAppLink";
 
 const PATH = "/training-plans";
 
-// 付费培训方案（落地页 CTA 的统一目标）
-// 套餐明细为产品文案，暂以英文呈现（v1），后续可按语言本地化。
-const PLANS = [
-  {
-    name: "Starter Training",
-    price: "$280",
-    period: "/ factory",
-    features: [
-      "1-day on-site quality basics",
-      "QC checklist & SOP template",
-      "Pre-training gap audit",
-      "Certificate of completion",
-    ],
-    cta: "Start",
-    hl: false,
-  },
-  {
-    name: "Pro Training",
-    price: "$950",
-    period: "/ factory",
-    features: [
-      "3-day quality system + QC",
-      "Production process training",
-      "Management review workshop",
-      "Post-training audit & report",
-      "Quarterly refresher",
-    ],
-    cta: "Choose Pro",
-    hl: true,
-  },
-  {
-    name: "Enterprise Training",
-    price: "Custom",
-    period: "",
-    features: [
-      "Multi-site rollout",
-      "Compliance & safety modules",
-      "Train-the-trainer program",
-      "Dedicated account manager",
-      "API & reporting",
-    ],
-    cta: "Contact us",
-    hl: false,
-  },
-];
-
-const FAQ = [
-  {
-    q: "Who delivers the training?",
-    a: "Our auditors and QC engineers deliver training on-site or online, in the factory's working language where possible.",
-  },
-  {
-    q: "Does training include an audit?",
-    a: "Every plan starts with a gap audit so the training targets the factory's real weaknesses, not generic slides.",
-  },
-  {
-    q: "Can training be tailored to my industry?",
-    a: "Yes. We scope the modules (quality, QC, production process, compliance) to your product and target market.",
-  },
-];
+// 套餐高亮标记为 UI 状态，不随语言翻译；按索引与字典 plans 数组对应
+const HL = [false, true, false];
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale: raw } = await params;
@@ -85,6 +27,8 @@ export default async function TrainingPlansPage({ params }: { params: Promise<{ 
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
   const lp = (href: string) => localePath(locale, href);
+  const PLANS = t.trainingPlans.plans;
+  const FAQ = t.trainingPlans.faq;
 
   return (
     <div className="container py-12">
@@ -124,10 +68,10 @@ export default async function TrainingPlansPage({ params }: { params: Promise<{ 
       </header>
 
       <h2 className="text-xl font-semibold text-center mt-10 mb-1">{t.trainingPlans.plansTitle}</h2>
-      <p className="text-center text-sm text-[#64748b] mb-4">All prices in USD, per factory.</p>
+      <p className="text-center text-sm text-[#64748b] mb-4">{t.trainingPlans.priceNote}</p>
       <div className="grid md:grid-cols-3 gap-4">
-        {PLANS.map((p) => (
-          <div key={p.name} className={`card p-6 ${p.hl ? "border-[#0f4c81] ring-2 ring-[#0f4c81]" : ""}`}>
+        {PLANS.map((p, i) => (
+          <div key={p.name} className={`card p-6 ${HL[i] ? "border-[#0f4c81] ring-2 ring-[#0f4c81]" : ""}`}>
             <div className="font-bold text-lg">{p.name}</div>
             <div className="text-2xl font-extrabold text-[#0f4c81] my-2">
               {p.price}
@@ -138,7 +82,7 @@ export default async function TrainingPlansPage({ params }: { params: Promise<{ 
                 <li key={f}>✓ {f}</li>
               ))}
             </ul>
-            <a href={lp("/custom-services")} className={`btn ${p.hl ? "btn-primary" : "btn-outline"} w-full`}>
+            <a href={lp("/custom-services")} className={`btn ${HL[i] ? "btn-primary" : "btn-outline"} w-full`}>
               {p.cta}
             </a>
           </div>

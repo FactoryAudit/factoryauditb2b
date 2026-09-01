@@ -1067,7 +1067,21 @@
       },
       "success": "We received your audit request. Our team will reply within one business day.",
       "error": "Something went wrong. Please try again or email us directly.",
-      "rateLimited": "Ha enviado varias solicitudes recientemente. Espere alrededor de una hora o escríbanos directamente."
+      "rateLimited": "Ha enviado varias solicitudes recientemente. Espere alrededor de una hora o escríbanos directamente.",
+      "industries": [
+        "Electrónica",
+        "Textil y confección",
+        "Muebles",
+        "Juguetes",
+        "Automoción",
+        "Maquinaria",
+        "Plásticos",
+        "Alimentos",
+        "Envases",
+        "Química",
+        "Otro"
+      ],
+      "noneCustom": "Ninguno / Personalizado"
     },
     "metaTitle": "Request a Factory Audit",
     "metaDesc": "Request a factory audit with a scoped proposal: choose the audit type, standard and location. Our team matches you with qualified audit companies."
@@ -1258,7 +1272,62 @@
     "faqTitle": "Training FAQ",
     "ctaTitle": "Not sure which plan?",
     "ctaDesc": "Tell us your industry and we will scope a training program.",
-    "ctaButton": "Contact us"
+    "ctaButton": "Contact us",
+    "priceNote": "Todos los precios en USD, por fábrica.",
+    "plans": [
+      {
+        "name": "Formación Starter",
+        "price": "$280",
+        "period": "/ por fábrica",
+        "features": [
+          "Fundamentos de calidad de 1 día en el sitio",
+          "Checklist de control de calidad y plantilla SOP",
+          "Auditoría de brechas antes de la formación",
+          "Certificado de finalización"
+        ],
+        "cta": "Empezar"
+      },
+      {
+        "name": "Formación Pro",
+        "price": "$950",
+        "period": "/ por fábrica",
+        "features": [
+          "Sistema de calidad y control de calidad de 3 días",
+          "Formación en proceso de producción",
+          "Taller de revisión de gerencia",
+          "Auditoría e informe posteriores a la formación",
+          "Refresco trimestral"
+        ],
+        "cta": "Elegir Pro"
+      },
+      {
+        "name": "Formación Enterprise",
+        "price": "Personalizado",
+        "period": "",
+        "features": [
+          "Despliegue en múltiples plantas",
+          "Módulos de cumplimiento y seguridad",
+          "Programa de formación de formadores",
+          "Gerente de cuenta dedicado",
+          "API e informes"
+        ],
+        "cta": "Contáctanos"
+      }
+    ],
+    "faq": [
+      {
+        "q": "¿Quién imparte la formación?",
+        "a": "Nuestros auditores e ingenieros de control de calidad la imparten en el sitio o en línea, en el idioma de trabajo de la fábrica cuando es posible."
+      },
+      {
+        "q": "¿La formación incluye una auditoría?",
+        "a": "Cada plan comienza con una auditoría de brechas para que la formación aborde las debilidades reales de la fábrica, no diapositivas genéricas."
+      },
+      {
+        "q": "¿Puedo adaptar la formación a mi sector?",
+        "a": "Sí. Ajustamos los módulos (calidad, control de calidad, proceso de producción, cumplimiento) a tu producto y mercado objetivo."
+      }
+    ]
   },
   "pricing": {
     "metaTitle": "Servicios y planes — herramientas gratuitas, verificación, auditoría, monitoreo",

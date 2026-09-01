@@ -1498,7 +1498,21 @@
       },
       "success": "We received your audit request. Our team will reply within one business day.",
       "error": "Something went wrong. Please try again or email us directly.",
-      "rateLimited": "You have submitted several requests recently. Please wait about an hour or email us directly."
+      "rateLimited": "You have submitted several requests recently. Please wait about an hour or email us directly.",
+      "industries": [
+        "Electronics",
+        "Textiles & Garments",
+        "Furniture",
+        "Toys",
+        "Automotive",
+        "Machinery",
+        "Plastics",
+        "Food",
+        "Packaging",
+        "Chemicals",
+        "Other"
+      ],
+      "noneCustom": "None / Custom"
     },
     "metaTitle": "Request a Factory Audit",
     "metaDesc": "Request a factory audit with a scoped proposal: choose the audit type, standard and location. Our team matches you with qualified audit companies."
@@ -1815,7 +1829,62 @@
     "faqTitle": "Training FAQ",
     "ctaTitle": "Not sure which plan?",
     "ctaDesc": "Tell us your industry and we will scope a training program.",
-    "ctaButton": "Contact us"
+    "ctaButton": "Contact us",
+    "priceNote": "All prices in USD, per factory.",
+    "plans": [
+      {
+        "name": "Starter Training",
+        "price": "$280",
+        "period": "/ factory",
+        "features": [
+          "1-day on-site quality basics",
+          "QC checklist & SOP template",
+          "Pre-training gap audit",
+          "Certificate of completion"
+        ],
+        "cta": "Start"
+      },
+      {
+        "name": "Pro Training",
+        "price": "$950",
+        "period": "/ factory",
+        "features": [
+          "3-day quality system + QC",
+          "Production process training",
+          "Management review workshop",
+          "Post-training audit & report",
+          "Quarterly refresher"
+        ],
+        "cta": "Choose Pro"
+      },
+      {
+        "name": "Enterprise Training",
+        "price": "Custom",
+        "period": "",
+        "features": [
+          "Multi-site rollout",
+          "Compliance & safety modules",
+          "Train-the-trainer program",
+          "Dedicated account manager",
+          "API & reporting"
+        ],
+        "cta": "Contact us"
+      }
+    ],
+    "faq": [
+      {
+        "q": "Who delivers the training?",
+        "a": "Our auditors and QC engineers deliver training on-site or online, in the factory's working language where possible."
+      },
+      {
+        "q": "Does training include an audit?",
+        "a": "Every plan starts with a gap audit so the training targets the factory's real weaknesses, not generic slides."
+      },
+      {
+        "q": "Can training be tailored to my industry?",
+        "a": "Yes. We scope the modules (quality, QC, production process, compliance) to your product and target market."
+      }
+    ]
   },
   "pricing": {
     "metaTitle": "Services & Plans — Free Tools, Verification, Audit, Monitoring",

@@ -1067,7 +1067,21 @@
       },
       "success": "Wir haben Ihre Auditanfrage erhalten und antworten innerhalb eines Werktags.",
       "error": "Etwas ist schiefgegangen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.",
-      "rateLimited": "Sie haben in letzter Zeit mehrere Anfragen gesendet. Bitte warten Sie etwa eine Stunde oder schreiben Sie uns direkt."
+      "rateLimited": "Sie haben in letzter Zeit mehrere Anfragen gesendet. Bitte warten Sie etwa eine Stunde oder schreiben Sie uns direkt.",
+      "industries": [
+        "Elektronik",
+        "Textil & Bekleidung",
+        "Möbel",
+        "Spielzeug",
+        "Automobil",
+        "Maschinenbau",
+        "Kunststoffe",
+        "Lebensmittel",
+        "Verpackung",
+        "Chemie",
+        "Sonstige"
+      ],
+      "noneCustom": "Keine / Individuell"
     },
     "metaTitle": "Werksaudit anfragen",
     "metaDesc": "Fragen Sie ein Werksaudit mit konkretem Vorschlag an: Auditart, Standard und Standort wählen. Wir vermitteln qualifizierte Unternehmen."
@@ -1258,7 +1272,62 @@
     "faqTitle": "Häufige Fragen zur Schulung",
     "ctaTitle": "Nicht sicher, welcher Plan?",
     "ctaDesc": "Nennen Sie uns Ihre Branche, und wir erstellen ein Schulungsprogramm.",
-    "ctaButton": "Kontaktieren Sie uns"
+    "ctaButton": "Kontaktieren Sie uns",
+    "priceNote": "Alle Preise in USD, pro Fabrik.",
+    "plans": [
+      {
+        "name": "Starter-Training",
+        "price": "$280",
+        "period": "/ pro Fabrik",
+        "features": [
+          "1-tägige Qualitätsgrundlagen vor Ort",
+          "QC-Checkliste und SOP-Vorlage",
+          "Gap-Audit vor dem Training",
+          "Abschlusszertifikat"
+        ],
+        "cta": "Starten"
+      },
+      {
+        "name": "Pro-Training",
+        "price": "$950",
+        "period": "/ pro Fabrik",
+        "features": [
+          "3-tägiges Qualitätssystem und QC",
+          "Produktionsprozess-Training",
+          "Management-Review-Workshop",
+          "Audit und Bericht nach dem Training",
+          "Vierteljährliche Auffrischung"
+        ],
+        "cta": "Pro wählen"
+      },
+      {
+        "name": "Enterprise-Training",
+        "price": "Individuell",
+        "period": "",
+        "features": [
+          "Rollout an mehreren Standorten",
+          "Compliance- und Sicherheitsmodule",
+          "Train-the-Trainer-Programm",
+          "Fester Ansprechpartner",
+          "API und Reporting"
+        ],
+        "cta": "Kontaktieren Sie uns"
+      }
+    ],
+    "faq": [
+      {
+        "q": "Wer führt das Training durch?",
+        "a": "Unsere Auditoren und QC-Ingenieure führen das Training vor Ort oder online durch, möglichst in der Arbeitssprache der Fabrik."
+      },
+      {
+        "q": "Ist ein Audit im Training enthalten?",
+        "a": "Jedes Paket beginnt mit einem Gap-Audit, damit das Training auf die tatsächlichen Schwächen der Fabrik eingeht statt auf allgemeine Folien."
+      },
+      {
+        "q": "Kann das Training auf meine Branche zugeschnitten werden?",
+        "a": "Ja. Wir passen die Module (Qualität, QC, Produktionsprozess, Compliance) an Ihr Produkt und Ihren Zielmarkt an."
+      }
+    ]
   },
   "pricing": {
     "metaTitle": "Leistungen & Pläne — Kostenlose Tools, Verifizierung, Audit, Monitoring",

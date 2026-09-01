@@ -1067,7 +1067,21 @@
       },
       "success": "Nous avons bien reçu votre demande d'audit. Réponse sous un jour ouvré.",
       "error": "Une erreur s'est produite. Veuillez réessayer ou nous contacter directement.",
-      "rateLimited": "Vous avez envoyé plusieurs demandes récemment. Veuillez patienter environ une heure ou nous écrire directement."
+      "rateLimited": "Vous avez envoyé plusieurs demandes récemment. Veuillez patienter environ une heure ou nous écrire directement.",
+      "industries": [
+        "Électronique",
+        "Textile & habillement",
+        "Ameublement",
+        "Jouets",
+        "Automobile",
+        "Machines",
+        "Plastiques",
+        "Alimentation",
+        "Emballage",
+        "Chimie",
+        "Autre"
+      ],
+      "noneCustom": "Aucun / Sur mesure"
     },
     "metaTitle": "Demander un Audit d'Usine",
     "metaDesc": "Demandez un audit d'usine avec proposition concrète : choisissez le type, le référentiel et la localisation."
@@ -1258,7 +1272,62 @@
     "faqTitle": "FAQ formation",
     "ctaTitle": "Vous ne savez pas quel plan choisir ?",
     "ctaDesc": "Indiquez-nous votre secteur et nous concevrons un programme de formation.",
-    "ctaButton": "Contactez-nous"
+    "ctaButton": "Contactez-nous",
+    "priceNote": "Tous les prix en USD, par usine.",
+    "plans": [
+      {
+        "name": "Formation Starter",
+        "price": "$280",
+        "period": "/ par usine",
+        "features": [
+          "Bases qualité d'une journée sur site",
+          "Checklist QC et modèle SOP",
+          "Audit d'écart avant la formation",
+          "Certificat de fin de formation"
+        ],
+        "cta": "Commencer"
+      },
+      {
+        "name": "Formation Pro",
+        "price": "$950",
+        "period": "/ par usine",
+        "features": [
+          "Système qualité et QC sur 3 jours",
+          "Formation au processus de production",
+          "Atelier de revue de direction",
+          "Audit et rapport après la formation",
+          "Révision trimestrielle"
+        ],
+        "cta": "Choisir Pro"
+      },
+      {
+        "name": "Formation Entreprise",
+        "price": "Sur mesure",
+        "period": "",
+        "features": [
+          "Déploiement multi-sites",
+          "Modules conformité et sécurité",
+          "Programme de formation de formateurs",
+          "Gestionnaire de compte dédié",
+          "API et reporting"
+        ],
+        "cta": "Nous contacter"
+      }
+    ],
+    "faq": [
+      {
+        "q": "Qui dispense la formation ?",
+        "a": "Nos auditeurs et ingénieurs QC dispensent la formation sur site ou en ligne, dans la langue de travail de l'usine lorsque c'est possible."
+      },
+      {
+        "q": "La formation inclut-elle un audit ?",
+        "a": "Chaque formule commence par un audit d'écart afin que la formation cible les faiblesses réelles de l'usine, pas des présentations génériques."
+      },
+      {
+        "q": "La formation peut-elle être adaptée à mon secteur ?",
+        "a": "Oui. Nous calibrons les modules (qualité, QC, processus de production, conformité) selon votre produit et votre marché cible."
+      }
+    ]
   },
   "pricing": {
     "metaTitle": "Services et formules — outils gratuits, vérification, audit, monitoring",

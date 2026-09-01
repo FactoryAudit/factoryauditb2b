@@ -245,6 +245,46 @@ ${report}`
   }
 }
 
+// ---------- 5) 审核范围叙述（P1-13） ----------
+/**
+ * 把规则引擎已经算好的审核范围复述成一段人话。
+ *
+ * 边界很重要：**AI 不参与决策**。范围由 lib/auditScope.ts 的纯规则算出，
+ * 这里只做翻译与组织。没有 DEEPSEEK_API_KEY 时直接返回空串，
+ * 页面照常展示规则结果（source="local"），功能不降级，只是少一段话。
+ */
+export async function aiScopeNarrative(input: {
+  locale: string;
+  band: string;
+  auditType: string;
+  manDays: number;
+  modules: string[];
+  reasons: string[];
+}): Promise<{ text: string; source: AiSource }> {
+  if (!process.env.DEEPSEEK_API_KEY) return { text: "", source: "local" };
+  try {
+    const { text } = await generateText({
+      model: deepseek("deepseek-chat"),
+      system: `You help a B2B buyer read an audit scope suggestion. Write in the SAME LANGUAGE as the locale code provided (en, zh, es, de, fr, pt, ja, zh-TW, ar).
+STRICT RULES:
+- Only restate the scope you are given. Never add modules, standards, prices or guarantees.
+- Never say a supplier is safe, unsafe or certified.
+- 2-4 short sentences, plain language, no marketing words, no em-dashes, no emoji.`,
+      prompt: `Locale: ${input.locale}
+Risk band: ${input.band}
+Audit type: ${input.auditType}
+Man-days on site: ${input.manDays}
+Modules: ${input.modules.join(", ")}
+Reasons: ${input.reasons.join(", ")}`,
+      temperature: 0.3,
+      maxOutputTokens: 220,
+    });
+    return { text: (text || "").trim(), source: "ai" };
+  } catch {
+    return { text: "", source: "local" };
+  }
+}
+
 // ---------- 4) AI 智能客服 ----------
 export type ChatMessage = { role: "user" | "assistant"; content: string };
 
