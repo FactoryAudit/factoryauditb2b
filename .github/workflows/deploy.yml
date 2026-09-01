@@ -35,12 +35,30 @@ jobs:
         run: npm ci
 
       - name: Build with OpenNext
-        run: npx @opennextjs/cloudflare@1.20.5 build
+        id: build
+        run: |
+          set -o pipefail
+          npx @opennextjs/cloudflare@1.20.5 build 2>&1 | tee opennext-build.log
+        continue-on-error: true
         env:
           NEXT_PUBLIC_WHATSAPP_NUMBER: ${{ secrets.NEXT_PUBLIC_WHATSAPP_NUMBER }}
           GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
           BING_SITE_VERIFICATION: ${{ secrets.BING_SITE_VERIFICATION }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+      - name: Fail if build failed
+        if: steps.build.outcome == 'failure'
+        run: |
+          echo "::error::OpenNext build failed — see opennext-build-log artifact"
+          exit 1
+
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: opennext-build-log
+          path: opennext-build.log
+          if-no-files-found: ignore
 
       - name: Set runtime secrets (skip empty)
         shell: bash
