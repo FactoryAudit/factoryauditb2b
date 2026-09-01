@@ -1,14 +1,18 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "factoryauditb2b",
-  "main": ".opennext/worker.js",
+  "main": ".open-next/worker.js",
   "compatibility_date": "2026-08-31",
   "compatibility_flags": ["nodejs_compat"],
   "assets": {
-    "directory": ".opennext/assets",
+    "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
   "observability": {
     "enabled": true
-  }
+  },
+  "routes": [
+    { "pattern": "factoryauditb2b.com", "custom_domain": true },
+    { "pattern": "www.factoryauditb2b.com", "custom_domain": true }
+  ]
 }

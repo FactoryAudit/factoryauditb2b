@@ -18,15 +18,12 @@ generator client {
   // 1) Windows 下 prisma generate 不再触发 query_engine-windows.dll rename EPERM（DLL 被锁）
   // 2) driver adapter（PrismaNeon）+ Cloudflare Workers 场景官方推荐，无原生二进制
   engineType = "library"
-  // 启用 driver adapter（PrismaNeon）：允许 PrismaClient 构造函数接收 adapter 参数
-  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
   // 上线时改为 "postgresql"
-  provider = "postgresql"
-  url = env("DATABASE_URL")
-  directUrl = env("DATABASE_URL_UNPOOLED")
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
 }
 
 // ============================================================

@@ -27,7 +27,7 @@
     "@ai-sdk/openai-compatible": "^3.0.39",
     "@auth/prisma-adapter": "^2.11.3",
     "@neondatabase/serverless": "^1.1.0",
-    "@prisma/adapter-neon": "^6.19.3",
+    "@prisma/adapter-neon": "6.5.0",
     "@prisma/client": "^6.5.0",
     "@types/bcryptjs": "^2.4.6",
     "ai": "^7.0.83",
