@@ -5,7 +5,6 @@ import "../globals.css";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import AiChatWidget from "@/components/AiChatWidget";
-import { Providers } from "./providers";
 import JsonLd from "@/components/JsonLd";
 import { LOCALES, isLocale, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
@@ -50,7 +49,6 @@ export async function generateMetadata({
   if (!basePath.startsWith("/")) basePath = `/${basePath}`;
 
   const toolKey = TOOL_TITLE_KEY[basePath];
-  const noIndex = basePath === "/login" || basePath === "/admin" || basePath.startsWith("/admin/");
   const title = toolKey
     ? `${t.toolCards[toolKey].title} | FactoryAuditB2B`
     : "Factory Audit & Supplier Verification | FactoryAuditB2B";
@@ -86,7 +84,7 @@ export async function generateMetadata({
       description,
       images: [OG_IMAGE],
     },
-    robots: noIndex ? { index: false, follow: false } : { index: true, follow: true },
+    robots: { index: true, follow: true },
     // GSC / Bing Webmaster 验证：仅在环境变量提供时注入，缺省不影响构建
     ...(process.env.GOOGLE_SITE_VERIFICATION || process.env.BING_SITE_VERIFICATION
       ? {
@@ -159,12 +157,10 @@ export default async function RootLayout({
       </head>
       <body>
         <JsonLd data={siteGraph} />
-        <Providers>
-          <SiteHeader locale={locale} dict={{ ...t.nav, authNav: t.auth.nav }} />
-          <main>{children}</main>
-          <SiteFooter locale={locale} dict={t.footer} menu={t.nav.menu} whatsappLabel={t.common.whatsappChat} />
-          <AiChatWidget locale={locale} dict={t.aiChat} whatsappLabel={t.common.whatsappChat} />
-        </Providers>
+        <SiteHeader locale={locale} dict={t.nav} />
+        <main>{children}</main>
+        <SiteFooter locale={locale} dict={t.footer} menu={t.nav.menu} whatsappLabel={t.common.whatsappChat} />
+        <AiChatWidget locale={locale} dict={t.aiChat} whatsappLabel={t.common.whatsappChat} />
       </body>
     </html>
   );

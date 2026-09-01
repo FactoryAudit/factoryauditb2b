@@ -6,7 +6,6 @@ import {
   listStandards,
 } from "@/lib/taxonomy";
 import { listSupplierSlugs } from "@/lib/queries";
-import { prisma } from "@/lib/db";
 import { LOCALES, localePath } from "@/i18n/config";
 import { hreflangFor } from "@/i18n/hreflang";
 import { COVERAGE_COUNTRIES, COVERAGE_SERVICE_SLUGS } from "@/lib/coverage";
@@ -105,8 +104,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   );
 
   // 行业 SEO 落地页
-  const industryRows = await prisma.industry.findMany();
-  industryRows.forEach((i) => pages.push(...emit(`/industry/${i.code}`)));
+  industries.forEach((i) => pages.push(...emit(`/industry/${i.code}`)));
   // 注意：/country/{code} 已 308 到 /countries/{code}，不再作为独立条目提交。
   // 只有 Phase 1 三个国家有差异化内容页，已在上面的 coverage 中提交（PRD §8）。
 

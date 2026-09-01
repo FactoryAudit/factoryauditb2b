@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { prisma } from "@/lib/db";
 import { getSeoMatrix, getSupplierCapabilitiesResolved, listIndustries } from "@/lib/taxonomy";
+import { listSuppliersByIndustry } from "@/lib/queries";
 import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
@@ -19,9 +19,10 @@ export async function generateStaticParams() {
 }
 
 async function resolve(slug: string) {
-  const industry = await prisma.industry.findUnique({ where: { code: slug } });
+  const industries = await listIndustries();
+  const industry = industries.find((i) => i.code === slug);
   if (!industry) notFound();
-  return industry;
+  return { code: industry.code, name: industry.name, description: null };
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
@@ -42,15 +43,11 @@ export default async function IndustryPage({ params }: { params: Promise<Params>
   const industry = await resolve(slug);
   const p = t.industryPage;
 
-  const suppliers = await prisma.supplier.findMany({
-    where: { industryCode: slug },
-    orderBy: { riskScore: "asc" },
-    take: 20,
-  });
+  const suppliers = await listSuppliersByIndustry(slug);
   const capsBySupplier = await Promise.all(
     suppliers.map(async (s) => ({
       s,
-      caps: await getSupplierCapabilitiesResolved(s.id),
+      caps: await getSupplierCapabilitiesResolved(s.slug),
     }))
   );
 
@@ -135,7 +132,7 @@ export default async function IndustryPage({ params }: { params: Promise<Params>
         ) : (
           <ul className="mt-3 divide-y rounded-lg border">
             {capsBySupplier.map(({ s, caps }) => (
-              <li key={s.id} className="p-3">
+              <li key={s.slug} className="p-3">
                 <a href={lp(`/supplier/${s.countryCode}/${s.slug}`)} className="font-medium hover:underline">
                   {s.legalName}
                 </a>

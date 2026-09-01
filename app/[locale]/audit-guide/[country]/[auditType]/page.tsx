@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { prisma } from "@/lib/db";
-import { getSeoMatrix } from "@/lib/taxonomy";
+import { getSeoMatrix, listStandards } from "@/lib/taxonomy";
+import { listSuppliersByAuditType } from "@/lib/queries";
 import { COVERAGE_COUNTRIES } from "@/lib/coverage";
 import JsonLd from "@/components/JsonLd";
 import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i18n/config";
@@ -57,19 +57,12 @@ export default async function AuditGuidePage({ params }: { params: Promise<Param
   const lp = (href: string) => localePath(locale, href);
   const g = t.auditGuide;
 
-  const suppliers = await prisma.supplier.findMany({
-    where: {
-      countryCode: c.code,
-      capabilities: { some: { refType: "AUDIT_TYPE", refCode: a.code } },
-    },
-    orderBy: { riskScore: "asc" },
-    take: 20,
-  });
+  const suppliers = await listSuppliersByAuditType(c.code, a.code);
 
-  const relatedStandards = await prisma.standard.findMany({
-    where: { category: a.taxonomyCode ?? undefined },
-    take: 8,
-  });
+  const standards = await listStandards();
+  const relatedStandards = standards
+    .filter((s) => s.category === (a.taxonomyCode ?? undefined))
+    .slice(0, 8);
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
@@ -161,7 +154,7 @@ export default async function AuditGuidePage({ params }: { params: Promise<Param
         ) : (
           <ul className="mt-3 divide-y rounded-lg border">
             {suppliers.map((s) => (
-              <li key={s.id} className="flex items-center justify-between p-3">
+              <li key={s.slug} className="flex items-center justify-between p-3">
                 <Link
                   href={lp(`/supplier/${s.countryCode}/${s.slug}`)}
                   className="font-medium hover:underline"

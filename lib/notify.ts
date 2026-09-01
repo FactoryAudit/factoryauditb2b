@@ -135,7 +135,7 @@ export async function notifyAdminNewLead(lead: {
       `国家: ${lead.country || "—"}`,
       `意向分: ${lead.score ?? "—"}/100`,
       lead.message ? `需求:\n${lead.message}` : "",
-      `后台查看: https://factoryauditb2b.com/admin/leads`,
+      `线索ID: ${lead.id}`,
     ]
       .filter(Boolean)
       .join("\n"),

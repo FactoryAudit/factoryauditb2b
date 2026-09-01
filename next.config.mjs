@@ -12,10 +12,8 @@ const nextConfig = {
       }
     ];
   },
-  // Cloudflare Workers 部署（OpenNext）：这些包有 workerd 特定入口，
-  // 必须外部化，让运行时加载 workerd 版本而非 Node 版本。
-  // @prisma/client：Prisma runtime 的 workerd 条件导出
-  // pg：pg 驱动的 workerd 入口（预留，当前用 PrismaNeon 则不需要，但保留无害）
-  serverExternalPackages: ["@prisma/client", ".prisma/client", "pg", "postgres"]
+  // Cloudflare Workers 部署（OpenNext）
+  // 已去除数据库（V2.0 轻量化）：不再需要外部化 Prisma / pg / postgres。
+  serverExternalPackages: []
 };
 export default nextConfig;

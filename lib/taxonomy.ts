@@ -1,13 +1,20 @@
 // lib/taxonomy.ts — 中央 Taxonomy Engine 访问层（§91 单一事实来源）
 //
-// 所有业务模块（SEO / Suppliers / RFQ / Audit / Auditor / AI 风险 / Checklist / Report）
-// 必须通过本文件消费 taxonomy，不允许在模块内硬编码分类/标准/审核类型。
-// 本文件为 server-only，仅在 Server Component / API Route / 脚本中调用。
+// V2.0 轻量化：第一阶段数据源改为静态常量 lib/staticData.ts（替代 Prisma/Neon）。
+// 所有业务模块仍通过本文件消费分类/标准/审核类型，函数签名保持不变，
+// 消费方（页面/API/sitemap）零改动。未来切回数据库时只改本文件实现即可。
 //
-// 共享类型与类目常量统一来自 lib/types（避免重复定义，保持 Single Source of Truth）。
+// 本文件为 server-only，仅在 Server Component / API Route / 脚本中调用。
 
 import 'server-only';
-import { prisma } from './db';
+import {
+  STATIC_COUNTRIES,
+  STATIC_INDUSTRIES,
+  STATIC_PROGRAMS,
+  STATIC_TOP_CATEGORIES,
+  STATIC_RISK_WEIGHTS,
+  STATIC_SUPPLIERS,
+} from './staticData';
 import type {
   ServiceType,
   VerificationStatus,
@@ -75,37 +82,51 @@ export interface RiskRule {
 
 // ---------- 2. 中央读取函数（所有模块统一入口） ----------
 
-// 完整分类树（一级 + 二级叶子）
 export async function getTaxonomyTree(): Promise<TaxonomyTreeNode[]> {
-  const nodes = await prisma.taxonomyNode.findMany({ orderBy: [{ level: 'asc' }, { sortOrder: 'asc' }] });
-  const top = nodes.filter((n) => n.level === 0);
-  const childMap = new Map<string, TaxonomyTreeNode[]>();
-  for (const n of nodes.filter((x) => x.level === 1)) {
-    const arr = childMap.get(n.parentCode ?? '') ?? [];
-    arr.push(mapNode(n));
-    childMap.set(n.parentCode ?? '', arr);
-  }
-  return top.map((t) => ({ ...mapNode(t), children: childMap.get(t.code) ?? [] }));
-}
-
-function mapNode(n: {
-  code: string; parentCode: string | null; category: string; level: number;
-  labelEn: string; labelZh: string | null; isLeaf: boolean; sortOrder: number;
-}): TaxonomyTreeNode {
-  return {
-    code: n.code, parentCode: n.parentCode, category: n.category, level: n.level,
-    labelEn: n.labelEn, labelZh: n.labelZh, isLeaf: n.isLeaf, sortOrder: n.sortOrder,
-  };
+  const top = STATIC_TOP_CATEGORIES.map((cat, i) => ({
+    code: cat.code,
+    parentCode: null as string | null,
+    category: cat.code,
+    level: 0,
+    labelEn: cat.labelEn,
+    labelZh: cat.labelZh,
+    isLeaf: false,
+    sortOrder: i,
+    children: cat.children.map((childCode, j) => {
+      const p = STATIC_PROGRAMS.find((x) => x.code === childCode);
+      return {
+        code: `NODE_${childCode}`,
+        parentCode: cat.code,
+        category: cat.code,
+        level: 1,
+        labelEn: p ? p.nameEn : childCode,
+        labelZh: p ? p.nameZh : null,
+        isLeaf: true,
+        sortOrder: j,
+      };
+    }),
+  }));
+  return top;
 }
 
 export async function listAuditTypes(serviceType?: ServiceType): Promise<AuditTypeView[]> {
-  const where = serviceType ? { serviceType } : {};
-  const rows = await prisma.auditType.findMany({ where, orderBy: { code: 'asc' } });
-  return rows.map((r) => ({
-    code: r.code, nameEn: r.nameEn, nameZh: r.nameZh, serviceType: r.serviceType as ServiceType,
-    isAudit: r.isAudit, isAssessment: r.isAssessment, isCertification: r.isCertification,
-    isInspection: r.isInspection, owner: r.owner, taxonomyCode: r.taxonomyCode,
-  }));
+  const rows = serviceType
+    ? STATIC_PROGRAMS.filter((p) => p.serviceType === serviceType)
+    : STATIC_PROGRAMS;
+  return rows
+    .map((p) => ({
+      code: p.code,
+      nameEn: p.nameEn,
+      nameZh: p.nameZh,
+      serviceType: p.serviceType as ServiceType,
+      isAudit: p.isAudit ?? false,
+      isAssessment: false,
+      isCertification: p.isCertification ?? false,
+      isInspection: p.isInspection ?? false,
+      owner: p.owner ?? null,
+      taxonomyCode: p.category,
+    }))
+    .sort((a, b) => a.code.localeCompare(b.code));
 }
 
 export async function listStandards(): Promise<StandardView[]> {
@@ -113,81 +134,62 @@ export async function listStandards(): Promise<StandardView[]> {
 }
 
 export async function getStandards(): Promise<StandardView[]> {
-  const rows = await prisma.standard.findMany({ orderBy: { code: 'asc' } });
-  return rows.map((r) => ({
-    code: r.code, nameEn: r.nameEn, nameZh: r.nameZh, owner: r.owner,
-    isCertification: r.isCertification, category: r.category, note: r.note,
-  }));
+  return STATIC_PROGRAMS.filter((p) => p.isCertification)
+    .map((p) => ({
+      code: p.code,
+      nameEn: p.nameEn,
+      nameZh: p.nameZh,
+      owner: p.owner ?? null,
+      isCertification: true,
+      category: p.category,
+      note: p.note ?? null,
+    }))
+    .sort((a, b) => a.code.localeCompare(b.code));
 }
 
-// 字典：国家 / 行业（供 SEO 路由、筛选器统一消费，§91 单一事实来源）
+// 字典：国家 / 行业（供 SEO 路由、筛选器统一消费）
 export async function listCountries() {
-  return prisma.country.findMany({ orderBy: { name: 'asc' } });
+  return STATIC_COUNTRIES;
 }
 
 export async function listIndustries() {
-  return prisma.industry.findMany({ orderBy: { code: 'asc' } });
+  return STATIC_INDUSTRIES;
 }
 
-// 风险权重模型（§58 可配置）—— 返回 UI/AI 引擎消费的数组形态
+// 风险权重模型（§58 可配置）
 export async function getRiskModel(): Promise<RiskRule[]> {
-  const rows = await prisma.riskWeightRule.findMany({ orderBy: { dimension: 'asc' } });
-  return rows.map((r) => ({ dimension: r.dimension, weight: r.weight, enabled: r.enabled, description: r.description }));
+  return STATIC_RISK_WEIGHTS.map((r) => ({
+    dimension: r.dimension,
+    weight: r.weight,
+    enabled: r.enabled,
+    description: r.description,
+  }));
 }
 
 // 风险权重（供 AI 风险引擎以 map 形态消费）
 export async function getRiskWeights(): Promise<Record<string, number>> {
-  const rows = await prisma.riskWeightRule.findMany({ where: { enabled: true } });
   const map: Record<string, number> = { overall: 1 };
-  for (const r of rows) map[r.dimension] = r.weight;
+  for (const r of STATIC_RISK_WEIGHTS) if (r.enabled) map[r.dimension] = r.weight;
   return map;
 }
 
-// ---------- 3. 写入函数（Admin taxonomy manager） ----------
+// ---------- 3. 写入函数（Admin taxonomy manager，第一阶段停用，保留签名返回 stub） ----------
 
-export async function upsertTaxonomyNode(input: TaxonomyNodeInput) {
-  const level = input.parentCode ? 1 : 0;
-  const data = {
-    code: input.code,
-    parentCode: input.parentCode ?? null,
-    category: input.category,
-    labelEn: input.labelEn,
-    labelZh: input.labelZh ?? null,
-    isLeaf: input.isLeaf ?? false,
-    level,
-    description: input.description ?? null,
-  };
-  return prisma.taxonomyNode.upsert({
-    where: { code: input.code },
-    update: data,
-    create: data,
-  });
+export async function upsertTaxonomyNode(_input: TaxonomyNodeInput) {
+  // 第一阶段静态数据，写入功能停用。保留签名以避免消费方类型报错。
+  return null;
 }
 
-export async function deleteTaxonomyNode(code: string) {
-  // 先删子节点（自引用无级联，需手动递归），再删自身
-  const children = await prisma.taxonomyNode.findMany({ where: { parentCode: code } });
-  for (const c of children) await deleteTaxonomyNode(c.code);
-  await prisma.taxonomyRelation.deleteMany({ where: { OR: [{ sourceCode: code }, { targetCode: code }] } });
-  return prisma.taxonomyNode.delete({ where: { code } });
+export async function deleteTaxonomyNode(_code: string) {
+  return null;
 }
 
-export async function upsertRiskWeight(dimension: string, weight: number, description?: string | null) {
-  return prisma.riskWeightRule.upsert({
-    where: { dimension },
-    update: { weight, description: description ?? undefined, updatedAt: new Date() },
-    create: { dimension, weight, description: description ?? null },
-  });
+export async function upsertRiskWeight(_dimension: string, _weight: number, _description?: string | null) {
+  return null;
 }
 
 // ---------- 4. 业务消费函数（供应商 / 审核员 / RFQ / 风险） ----------
 
-// 供应商能力标签（原始）
-export async function getSupplierCapabilities(supplierId: string) {
-  return prisma.supplierCapability.findMany({ where: { supplierId } });
-}
-
-// 供应商能力标签（解析为可读名称）—— lib/queries.ts 消费此函数
 export interface SupplierCapabilityView {
   refType: string;
   refCode: string;
@@ -196,70 +198,59 @@ export interface SupplierCapabilityView {
   source: string;
 }
 
+// 供应商能力标签（解析为可读名称）—— lib/queries.ts 消费此函数。
+// V2.0：供应商以 slug 标识（静态数据无 DB id）。
 export async function getSupplierCapabilitiesResolved(
-  supplierId: string,
+  slug: string,
   locale: 'en' | 'zh' | 'zh-TW' = 'en',
 ): Promise<SupplierCapabilityView[]> {
-  const caps = await prisma.supplierCapability.findMany({ where: { supplierId } });
+  const supplier = STATIC_SUPPLIERS.find((s) => s.slug === slug);
+  if (!supplier) return [];
   const useZh = locale === 'zh' || locale === 'zh-TW';
-  const auditCodes = caps.filter((c) => c.refType === 'AUDIT_TYPE').map((c) => c.refCode);
-  const stdCodes = caps.filter((c) => c.refType === 'STANDARD').map((c) => c.refCode);
-  const taxoCodes = caps.filter((c) => c.refType === 'TAXONOMY').map((c) => c.refCode);
-  const [auditTypes, standards, nodes] = await Promise.all([
-    auditCodes.length ? prisma.auditType.findMany({ where: { code: { in: auditCodes } } }) : Promise.resolve([]),
-    stdCodes.length ? prisma.standard.findMany({ where: { code: { in: stdCodes } } }) : Promise.resolve([]),
-    taxoCodes.length ? prisma.taxonomyNode.findMany({ where: { code: { in: taxoCodes } } }) : Promise.resolve([]),
-  ]);
-  // 按 locale 取字段名：此前固定 nameZh || nameEn，导致英文页出现中文能力标签
-  const auditMap = new Map(auditTypes.map((a) => [a.code, useZh ? a.nameZh || a.nameEn : a.nameEn]));
-  const stdMap = new Map(standards.map((s) => [s.code, s.nameEn]));
-  const nodeMap = new Map(nodes.map((n) => [n.code, useZh ? n.labelZh || n.labelEn : n.labelEn]));
-  return caps.map((c) => ({
-    refType: c.refType,
-    refCode: c.refCode,
-    label:
-      c.refType === 'AUDIT_TYPE'
-        ? auditMap.get(c.refCode) || c.refCode
-        : c.refType === 'STANDARD'
-          ? stdMap.get(c.refCode) || c.refCode
-          : nodeMap.get(c.refCode) || c.refCode,
-    verified: c.verified,
-    source: c.source,
-  }));
-}
-
-// 审核员能力标签 + 匹配（§49 审核员匹配）
-export async function matchAuditors(opts: { auditTypeCode?: string; standardCode?: string; countryCode?: string }) {
-  const caps = await prisma.auditorCapability.findMany({
-    where: opts.auditTypeCode
-      ? { refType: 'AUDIT_TYPE', refCode: opts.auditTypeCode }
-      : opts.standardCode
-        ? { refType: 'STANDARD', refCode: opts.standardCode }
-        : {},
-    include: { auditor: { include: { capabilities: true } } },
+  return supplier.capabilities.map((c) => {
+    const prog = STATIC_PROGRAMS.find((p) => p.code === c.refCode);
+    const label = c.refType === 'TAXONOMY'
+      ? null
+      : prog
+        ? (useZh ? prog.nameZh : prog.nameEn)
+        : c.refCode;
+    return {
+      refType: c.refType,
+      refCode: c.refCode,
+      label: label || c.refCode,
+      verified: c.verified,
+      source: c.source,
+    };
   });
-  let auditors = caps.map((c) => c.auditor);
-  if (opts.countryCode) auditors = auditors.filter((a) => a.countryCode === opts.countryCode || !a.countryCode);
-  const seen = new Set<string>();
-  return auditors.filter((a) => (seen.has(a.id) ? false : (seen.add(a.id), true)));
 }
 
-// 供应商风险画像（综合 taxonomy 维度 + 风险事件）
-export async function getSupplierRiskProfile(supplierId: string) {
-  const [caps, events, supplier] = await Promise.all([
-    prisma.supplierCapability.findMany({ where: { supplierId, verified: true } }),
-    prisma.riskEvent.findMany({ where: { supplierId } }),
-    prisma.supplier.findUnique({ where: { id: supplierId } }),
-  ]);
-  return { supplier, capabilities: caps, events };
+// 审核员匹配（§49）—— 第一阶段审核员网络用 Google Sheets 维护，此函数返回空列表。
+export async function matchAuditors(_opts: { auditTypeCode?: string; standardCode?: string; countryCode?: string }) {
+  return [];
 }
 
-// SEO 矩阵预览（STEP 10：Country × Industry × AuditType × Standard）
+// 供应商风险画像
+export async function getSupplierRiskProfile(slug: string) {
+  const supplier = STATIC_SUPPLIERS.find((s) => s.slug === slug);
+  if (!supplier) return { supplier: null, capabilities: [], events: [] };
+  return {
+    supplier,
+    capabilities: supplier.capabilities.filter((c) => c.verified),
+    events: [],
+  };
+}
+
+// SEO 矩阵预览（Country × Industry × AuditType）
+// auditTypes 字段对齐 AuditTypeView（含 owner / taxonomyCode / description），
+// 供 /audit-guide/[country]/[auditType] 页面与 sitemap 消费（description 第一阶段为空）。
 export async function getSeoMatrix() {
-  const [countries, industries, auditTypes] = await Promise.all([
-    prisma.country.findMany(),
-    prisma.industry.findMany(),
-    prisma.auditType.findMany({ where: { isAudit: true } }),
-  ]);
-  return { countries, industries, auditTypes };
+  const auditTypes = STATIC_PROGRAMS.filter((p) => p.isAudit).map((p) => ({
+    code: p.code,
+    nameEn: p.nameEn,
+    nameZh: p.nameZh,
+    owner: p.owner ?? null,
+    taxonomyCode: p.category,
+    description: null as string | null,
+  }));
+  return { countries: STATIC_COUNTRIES, industries: STATIC_INDUSTRIES, auditTypes };
 }

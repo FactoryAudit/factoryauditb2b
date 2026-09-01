@@ -17,7 +17,6 @@ export type FooterDict = {
   factoryAudit: string;
   knowledgeBase: string;
   pricing: string;
-  admin: string;
   privacy: string;
   terms: string;
   tagline: string;
@@ -164,11 +163,6 @@ export default function SiteFooter({
                 <li>
                   <Link href={p("/terms")} className="hover:text-white">
                     {dict.terms}
-                  </Link>
-                </li>
-                <li>
-                  <Link href={p("/admin")} rel="nofollow" className="hover:text-white">
-                    {dict.admin}
                   </Link>
                 </li>
               </ul>

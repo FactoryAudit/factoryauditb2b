@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
 import { COVERAGE_COUNTRIES, COVERAGE_SERVICES, findCoverageCountry } from "@/lib/coverage";
-import { prisma } from "@/lib/db";
+import { listSuppliersByCountry } from "@/lib/queries";
 import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
@@ -56,11 +56,7 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
   const name = locale === "zh" ? country.nameZh : country.name;
   const copy = locale === "zh" ? country.zh : country.en;
 
-  const suppliers = await prisma.supplier.findMany({
-    where: { countryCode: country.code },
-    orderBy: { riskScore: "asc" },
-    take: 12,
-  });
+  const suppliers = (await listSuppliersByCountry(country.code)).slice(0, 12);
 
   const jsonLd = [
     {
@@ -227,7 +223,7 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
         ) : (
           <ul className="mt-3 divide-y rounded-lg border border-[#e2e8f0]">
             {suppliers.map((s) => (
-              <li key={s.id} className="flex items-center justify-between p-3">
+              <li key={s.slug} className="flex items-center justify-between p-3">
                 <Link
                   href={p(`/supplier/${s.countryCode}/${s.slug}`)}
                   className="font-medium text-[#0f4c81] hover:underline"

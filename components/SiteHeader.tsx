@@ -1,5 +1,4 @@
 import Link from "next/link";
-import AuthMenu from "@/components/AuthMenu";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
 import { localePath, type Locale } from "@/i18n/config";
 import { SERVICE_MENU, type ServiceMenuDict } from "@/lib/nav";
@@ -20,7 +19,6 @@ export type NavDict = {
   postRfq: string;
   requestAudit: string;
   menu: ServiceMenuDict;
-  authNav: { signIn: string; admin: string; signOut: string };
 };
 
 export default function SiteHeader({
@@ -99,7 +97,6 @@ export default function SiteHeader({
 
         <div className="flex items-center gap-2">
           <LocaleSwitcher current={locale} />
-          <AuthMenu locale={locale} labels={dict.authNav} />
           <Link href={p("/rfq")} className="btn btn-primary whitespace-nowrap">
             {dict.postRfq}
           </Link>
