@@ -207,7 +207,7 @@
       "scoreSuffix": "score de risque",
       "breakdownTitle": "D'où vient le risque",
       "weightNote": "{weight}% du total",
-      "factorsTitle": "Ce qui a fait monter le score",
+      "factorsTitle": "Signaux d'alarme",
       "actionsTitle": "Que faire maintenant",
       "editAnswers": "Modifier les réponses",
       "startOver": "Recommencer",
@@ -237,7 +237,13 @@
         "error": "Une erreur est survenue. Veuillez réessayer."
       },
       "disclaimer": "Ce score découle de vos réponses. C'est un premier tri, ni un conseil juridique ni un conseil financier, et il ne vérifie pas de lui-même ce que le fournisseur vous a déclaré.",
-      "answeredInStep": "{done} sur {total} répondues dans cette section"
+      "answeredInStep": "{done} sur {total} répondues dans cette section",
+      "scoreScaleTitle": "Comment le score se traduit en risque",
+      "selfReported": "Réponses autodéclarées. Non vérifiées de manière indépendante.",
+      "findingsTitle": "Constats clés",
+      "strengthsTitle": "Ce qui semble solide",
+      "gapsTitle": "Réponses inconnues",
+      "gapsNote": "Inconnu ne signifie pas risque élevé. Cela signifie que nous avons évalué ce point avec moins d'informations. Des documents vérifiés lèvent l'incertitude."
     },
     "page": {
       "badge": "FactoryAuditB2B RiskScore™",

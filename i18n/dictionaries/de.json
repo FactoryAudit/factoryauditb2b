@@ -207,7 +207,7 @@
       "scoreSuffix": "Risikowert",
       "breakdownTitle": "Woher das Risiko kommt",
       "weightNote": "{weight}% des Gesamtwerts",
-      "factorsTitle": "Was den Wert erhöht hat",
+      "factorsTitle": "Warnsignale",
       "actionsTitle": "Was jetzt zu tun ist",
       "editAnswers": "Antworten ändern",
       "startOver": "Neu beginnen",
@@ -237,7 +237,13 @@
         "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
       },
       "disclaimer": "Dieser Wert ergibt sich aus Ihren Angaben. Er ist eine erste Einschätzung, keine Rechts- oder Finanzberatung, und prüft von sich aus nichts, was der Lieferant Ihnen gesagt hat.",
-      "answeredInStep": "{done} von {total} in diesem Abschnitt beantwortet"
+      "answeredInStep": "{done} von {total} in diesem Abschnitt beantwortet",
+      "scoreScaleTitle": "So ordnet sich der Score dem Risiko zu",
+      "selfReported": "Selbstauskünfte. Nicht unabhängig verifiziert.",
+      "findingsTitle": "Wichtigste Erkenntnisse",
+      "strengthsTitle": "Was solide aussieht",
+      "gapsTitle": "Unbekannte Antworten",
+      "gapsNote": "Unbekannt bedeutet nicht hohes Risiko. Es bedeutet nur, dass wir diesen Punkt mit weniger Informationen bewertet haben. Verifizierte Dokumente beseitigen die Unsicherheit."
     },
     "page": {
       "badge": "FactoryAuditB2B RiskScore™",

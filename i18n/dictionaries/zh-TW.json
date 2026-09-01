@@ -207,7 +207,7 @@
       "scoreSuffix": "風險分",
       "breakdownTitle": "風險來自哪裏",
       "weightNote": "佔總分的 {weight}%",
-      "factorsTitle": "哪些回答拉高了分數",
+      "factorsTitle": "風險訊號",
       "actionsTitle": "接下來該做什麼",
       "editAnswers": "修改答案",
       "startOver": "重新開始",
@@ -237,7 +237,13 @@
         "error": "出錯了，請重試。"
       },
       "disclaimer": "本評分依據你所填寫的答案得出，僅作初步篩查，不構成法律或財務建議，也不代表我們已獨立覈實供應商的任何陳述。",
-      "answeredInStep": "本節已答 {done}/{total}"
+      "answeredInStep": "本節已答 {done}/{total}",
+      "scoreScaleTitle": "分數如何對應風險等級",
+      "selfReported": "基於供應商自述。未經獨立核驗。",
+      "findingsTitle": "關鍵發現",
+      "strengthsTitle": "表現穩健的方面",
+      "gapsTitle": "答案未知的題目",
+      "gapsNote": "未知不等於高風險。它只表示該點是在資訊更少的情況下評分。經核驗的文件可以消除這種不確定性。"
     },
     "page": {
       "badge": "FactoryAuditB2B RiskScore™",

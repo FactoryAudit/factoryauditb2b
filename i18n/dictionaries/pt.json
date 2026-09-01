@@ -201,7 +201,7 @@
       "scoreSuffix": "pontuação de risco",
       "breakdownTitle": "De onde vem o risco",
       "weightNote": "{weight}% do total",
-      "factorsTitle": "O que elevou a pontuação",
+      "factorsTitle": "Sinais de alerta",
       "actionsTitle": "O que fazer agora",
       "editAnswers": "Editar respostas",
       "startOver": "Recomeçar",
@@ -231,7 +231,13 @@
         "error": "Algo deu errado. Tente novamente."
       },
       "disclaimer": "Esta pontuação vem das respostas que você deu. É uma triagem inicial, não é aconselhamento jurídico nem financeiro, e não verifica por conta própria nada do que o fornecedor lhe disse.",
-      "answeredInStep": "{done} de {total} respondidas nesta secção"
+      "answeredInStep": "{done} de {total} respondidas nesta secção",
+      "scoreScaleTitle": "Como a pontuação se traduz em risco",
+      "selfReported": "Respostas autodeclaradas. Não verificadas de forma independente.",
+      "findingsTitle": "Principais constatações",
+      "strengthsTitle": "O que parece sólido",
+      "gapsTitle": "Respostas desconhecidas",
+      "gapsNote": "Desconhecido não significa risco alto. Significa que pontuamos esse ponto com menos informação. Documentos verificados eliminam a incerteza."
     },
     "page": {
       "badge": "FactoryAuditB2B RiskScore™",

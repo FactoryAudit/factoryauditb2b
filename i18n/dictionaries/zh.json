@@ -344,7 +344,7 @@
       "scoreSuffix": "风险分",
       "breakdownTitle": "风险来自哪里",
       "weightNote": "占总分的 {weight}%",
-      "factorsTitle": "哪些回答拉高了分数",
+      "factorsTitle": "风险信号",
       "actionsTitle": "接下来该做什么",
       "editAnswers": "修改答案",
       "startOver": "重新开始",
@@ -374,7 +374,13 @@
         "error": "出错了，请重试。"
       },
       "disclaimer": "本评分依据你所填写的答案得出，仅作初步筛查，不构成法律或财务建议，也不代表我们已独立核实供应商的任何陈述。",
-      "answeredInStep": "本节已答 {done}/{total}"
+      "answeredInStep": "本节已答 {done}/{total}",
+      "scoreScaleTitle": "分数如何对应风险等级",
+      "selfReported": "基于供应商自述。未经独立核验。",
+      "findingsTitle": "关键发现",
+      "strengthsTitle": "表现稳健的方面",
+      "gapsTitle": "答案未知的题目",
+      "gapsNote": "未知不等于高风险。它只表示该点是在信息更少的情况下评分。经核验的文件可以消除这种不确定性。"
     },
     "page": {
       "badge": "FactoryAuditB2B RiskScore™",

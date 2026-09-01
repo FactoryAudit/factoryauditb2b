@@ -207,7 +207,7 @@
       "scoreSuffix": "リスクスコア",
       "breakdownTitle": "リスクの内訳",
       "weightNote": "全体の {weight}%",
-      "factorsTitle": "スコアを上げた項目",
+      "factorsTitle": "警告サイン",
       "actionsTitle": "次にすべきこと",
       "editAnswers": "回答を修正",
       "startOver": "最初からやり直す",
@@ -237,7 +237,13 @@
         "error": "エラーが発生しました。もう一度お試しください。"
       },
       "disclaimer": "このスコアはお客様の回答に基づく一次評価であり、法務または財務の助言ではありません。詳細は個別レポートをダウンロードしてご確認ください。",
-      "answeredInStep": "このセクション {done}/{total} 回答済み"
+      "answeredInStep": "このセクション {done}/{total} 回答済み",
+      "scoreScaleTitle": "スコアとリスクレベルの対応",
+      "selfReported": "自己申告による回答。独立検証は未実施。",
+      "findingsTitle": "主な発見",
+      "strengthsTitle": "しっかりしている点",
+      "gapsTitle": "不明な回答",
+      "gapsNote": "不明は高リスクを意味しません。情報が少ない状態で評価したというだけです。検証済みの書類があれば不確実性は解消されます。"
     },
     "page": {
       "badge": "FactoryAuditB2B RiskScore™",

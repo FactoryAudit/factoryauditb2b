@@ -30,6 +30,15 @@ export function overallLevel(score: number): RiskLevel {
   return "CRITICAL";
 }
 
+// 等级分桶（展示用）：与 overallLevel 同源，供刻度条渲染
+export const LEVEL_BANDS: { level: RiskLevel; min: number }[] = [
+  { level: "LOW", min: 85 },
+  { level: "MODERATE", min: 70 },
+  { level: "ELEVATED", min: 55 },
+  { level: "HIGH", min: 40 },
+  { level: "CRITICAL", min: 0 },
+];
+
 /** 结构层：只有题目与选项的风险等级，没有任何展示文案 */
 export interface StructOption {
   value: string;
@@ -399,7 +408,7 @@ export interface DimensionResult {
   score: number;
   level: RiskLevel;
   levelLabel: string;
-  answers: { questionId: string; text: string; optionLabel: string; risk: RiskLevel }[];
+  answers: { questionId: string; value: string; text: string; optionLabel: string; risk: RiskLevel }[];
 }
 
 export interface RiskEngineResult {
@@ -408,6 +417,8 @@ export interface RiskEngineResult {
   levelLabel: string;
   dimensions: DimensionResult[];
   keyRiskFactors: string[];
+  dataGaps: string[]; // 选了 unknown 的题目（无数据 ≠ 高风险，仅提示不确定性）
+  strengths: string[]; // 选了 LOW 选项的题目（可信亮点）
   recommendations: string[];
   cta: { headline: string; primary: string; secondary?: string };
 }
@@ -445,6 +456,7 @@ export function computeRisk(
       const opt = q.options.find((o) => o.value === chosen);
       return {
         questionId: q.id,
+        value: chosen ?? "",
         text: q.text,
         optionLabel: opt?.label ?? "—",
         risk: opt?.risk ?? ("ELEVATED" as RiskLevel),
@@ -473,12 +485,22 @@ export function computeRisk(
 
   // 关键风险因子：选中的选项为 HIGH/CRITICAL，且该题在字典里配了 factor 文案
   const keyRiskFactors: string[] = [];
+  // 数据缺口：选了 unknown 的题目（铁律：无数据 ≠ 高风险，只提示不确定性）
+  const dataGaps: string[] = [];
+  // 可信亮点：选了 LOW 选项的题目
+  const strengths: string[] = [];
   for (const q of ALL_QUESTIONS) {
     const chosen = answers[q.id];
     if (!chosen) continue;
     const opt = q.options.find((o) => o.value === chosen);
-    if (opt && (opt.risk === "HIGH" || opt.risk === "CRITICAL") && content.factors[q.id]) {
-      keyRiskFactors.push(content.factors[q.id]);
+    if (!opt) continue;
+    const qText = content.questions[q.id] ?? q.id;
+    if (opt.risk === "HIGH" || opt.risk === "CRITICAL") {
+      if (content.factors[q.id]) keyRiskFactors.push(content.factors[q.id]);
+    } else if (chosen === "unknown") {
+      dataGaps.push(qText);
+    } else if (opt.risk === "LOW") {
+      strengths.push(`${qText}: ${content.options[q.id]?.[chosen] ?? chosen}`);
     }
   }
 
@@ -488,6 +510,8 @@ export function computeRisk(
     levelLabel: content.levelLabels[level],
     dimensions,
     keyRiskFactors,
+    dataGaps,
+    strengths,
     recommendations: content.recommendations[level] ?? [],
     cta: content.ctas[level],
   };

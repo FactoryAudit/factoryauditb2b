@@ -426,7 +426,7 @@
       "scoreSuffix": "risk score",
       "breakdownTitle": "Where the risk sits",
       "weightNote": "{weight}% of the total",
-      "factorsTitle": "What raised the score",
+      "factorsTitle": "Red flags",
       "actionsTitle": "What to do next",
       "editAnswers": "Edit answers",
       "startOver": "Start over",
@@ -456,7 +456,13 @@
         "error": "Something went wrong. Please try again."
       },
       "disclaimer": "This score comes from the answers you gave. It is a first pass, not legal or financial advice, and it does not independently verify anything the supplier told you.",
-      "answeredInStep": "Answered {done} of {total} in this section"
+      "answeredInStep": "Answered {done} of {total} in this section",
+      "scoreScaleTitle": "How the score maps to risk",
+      "selfReported": "Self-reported answers. Not independently verified.",
+      "findingsTitle": "Key findings",
+      "strengthsTitle": "What looks solid",
+      "gapsTitle": "Unknown answers",
+      "gapsNote": "Unknown does not mean high risk. It means we scored that point with less information. Verified documents remove the uncertainty."
     },
     "page": {
       "badge": "FactoryAuditB2B RiskScore™",
