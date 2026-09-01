@@ -49,7 +49,8 @@ jobs:
       - name: Fail if build failed
         if: steps.build.outcome == 'failure'
         run: |
-          echo "::error::OpenNext build failed — see opennext-build-log artifact"
+          echo "::error::OpenNext build failed. Log tail:"
+          tail -c 6000 opennext-build.log | sed 's/%/%25/g; s/\r//g; s/\n/%0A/g' | sed 's/^/::error::/'
           exit 1
 
       - name: Upload build log
