@@ -955,7 +955,17 @@
         "化学",
         "その他"
       ],
-      "noneCustom": "なし / カスタム"
+      "noneCustom": "なし / カスタム",
+      "auditTypes": [
+        "工場確認",
+        "工場監査",
+        "サプライヤー品質監査",
+        "生産能力監査",
+        "社会的コンプライアンス監査",
+        "環境監査",
+        "技術監査",
+        "バイヤーカスタム監査"
+      ]
     },
     "metaTitle": "工場監査を依頼する",
     "metaDesc": "スコープの付いた提案を使用して工場監査を要求する：監査の種類、基準、および場所を選択します。当社のチームは、適格な監査会社とお客様をマッチングします。"
@@ -2675,5 +2685,66 @@
     "ctaDesc": "ご要件をお送りいただければ、製品と市場に合わせて検証・監査・検査の範囲を設計します。",
     "ctaRfq": "RFQを投稿",
     "ctaCustom": "カスタムサービス"
+  },
+  "auditScope": {
+    "title": "監査範囲の提案",
+    "lead": "5つの質問に答えると、推奨される監査範囲（監査タイプ、現地日数、確認モジュール）が表示されます。",
+    "scoreLabel": "リスクスコア",
+    "scoreHint": "リスク計算ツールの結果を使うか、おおよその値を入力してください。スコアが高いほどリスクは低いことを意味します。",
+    "scoreCta": "リスク計算ツールを使う",
+    "relationshipLabel": "サプライヤーとの関係",
+    "relationshipFirst": "初回取引",
+    "relationshipRepeat": "既存取引",
+    "orderValueLabel": "注文金額",
+    "orderValues": [
+      "10,000ドル未満",
+      "10,000〜50,000ドル",
+      "50,000〜200,000ドル",
+      "200,000ドル超"
+    ],
+    "productRiskLabel": "製品リスク",
+    "productRiskLow": "低",
+    "productRiskMedium": "中",
+    "productRiskHigh": "高",
+    "weakLabel": "証拠が少ない分野",
+    "weakHint": "サプライヤーの証拠が最も少ない分野を選択してください。不明な場合は空欄で構いません。",
+    "resultTitle": "推奨監査範囲",
+    "auditTypeLabel": "監査タイプ",
+    "manDaysLabel": "現地日数",
+    "manDaysUnit": "人日",
+    "modulesLabel": "確認モジュール",
+    "reasonsLabel": "理由",
+    "reasons": {
+      "band": "リスク区分に基づく",
+      "firstOrder": "初回取引：工場の実在を確認",
+      "repeatOrder": "既存取引：前回からの変更を確認",
+      "orderValue": "大口注文：梱包・積み込みを確認",
+      "productRisk": "製品リスク：コンプライアンス確認を強化",
+      "weakDimension": "この分野の証拠が不足"
+    },
+    "modules": {
+      "legalEntity": "法人実体の確認",
+      "siteExistence": "工場の所在地と所有権",
+      "documentConsistency": "書類の整合性",
+      "capacity": "生産能力",
+      "qualitySystem": "品質システム",
+      "processControl": "工程管理",
+      "incomingInspection": "受入検査",
+      "subcontracting": "外注",
+      "packingLoading": "梱包と積み込み",
+      "productCompliance": "製品コンプライアンス",
+      "certificateCheck": "証明書の確認",
+      "changeReview": "変更点の確認"
+    },
+    "apply": "下のフォームに反映",
+    "applied": "反映済み",
+    "disclaimer": "これは計画の出発点です。最終的な範囲は、監査開始前に監査会社と合意します。",
+    "noteIntro": "推奨監査範囲（監査範囲アドバイザーによる生成）：",
+    "noteBand": "リスク区分",
+    "noteType": "監査タイプ",
+    "noteDays": "現地日数",
+    "noteModules": "確認モジュール",
+    "ruleBadge": "ルールエンジン",
+    "aiBadge": "AI要約"
   }
 }

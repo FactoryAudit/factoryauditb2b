@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
-import AuditRequestForm from "@/components/AuditRequestForm";
+import AuditRequestPanel from "@/components/AuditRequestPanel";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { hreflangFor, canonicalFor } from "@/i18n/hreflang";
@@ -27,6 +27,22 @@ export default async function Page({ params }: Props) {
   const t = await getDictionary(locale);
   const s = t.auditRequest;
   const p = (href: string) => localePath(locale, href);
+
+  // 八维 key 必须与 lib/riskEngine 的维度一致，顺序即 chips 展示顺序
+  const DIM_KEYS = [
+    "company",
+    "quality",
+    "compliance",
+    "production",
+    "supplychain",
+    "documentation",
+    "certification",
+    "digitalFootprint",
+  ] as const;
+  const dimensionOptions = DIM_KEYS.map((k) => ({
+    key: k,
+    label: t.risk.dimensions[k].short,
+  }));
 
   const jsonLd = [
     {
@@ -59,7 +75,15 @@ export default async function Page({ params }: Props) {
         <p className="text-[#64748b] mt-3 text-lg">{s.lead}</p>
       </section>
       <section className="max-w-3xl mx-auto">
-        <AuditRequestForm t={s.form} />
+        <AuditRequestPanel
+          auditScopeT={t.auditScope}
+          formT={s.form}
+          locale={locale}
+          calculatorHref={p("/risk-calculator")}
+          levelLabels={t.risk.ui.level}
+          dimensionOptions={dimensionOptions}
+          auditTypeLabels={s.form.auditTypes}
+        />
       </section>
     </main>
   );

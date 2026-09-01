@@ -28,6 +28,8 @@ export type AuditRequestFormDict = {
   industries: string[];
   /** 认证下拉「None / Custom」显示文案 */
   noneCustom: string;
+  /** 审核类型下拉显示文案，顺序与 lib/auditScope.AUDIT_TYPES 一致（8 项） */
+  auditTypes: string[];
 };
 
 // 已迁至 lib/auditScope（AUDIT_TYPES），此处不再本地声明。

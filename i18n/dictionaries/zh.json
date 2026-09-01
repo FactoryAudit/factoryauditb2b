@@ -1354,7 +1354,17 @@
         "化工",
         "其他"
       ],
-      "noneCustom": "无 / 定制"
+      "noneCustom": "无 / 定制",
+      "auditTypes": [
+        "工厂核实",
+        "工厂验厂审核",
+        "供应商质量审核",
+        "产能审核",
+        "社会责任审核",
+        "环境审核",
+        "技术审核",
+        "买家定制审核"
+      ]
     },
     "metaTitle": "申请工厂验厂审核",
     "metaDesc": "提交工厂审核申请，选择审核类型、标准与所在地，我们为您匹配合格的审核公司。"
@@ -2669,5 +2679,66 @@
     "ctaDesc": "把你的需求发给我们，我们会为你的产品和市场规划核查、验厂或验货方案。",
     "ctaRfq": "发布询价",
     "ctaCustom": "定制服务"
+  },
+  "auditScope": {
+    "title": "审核范围推荐",
+    "lead": "回答五个问题，即可获得建议的审核范围：审核类型、驻场天数与核查模块。",
+    "scoreLabel": "风险评分",
+    "scoreHint": "可使用风险计算器的结果，或自行估算。分数越高代表风险越低。",
+    "scoreCta": "使用风险计算器",
+    "relationshipLabel": "与供应商的关系",
+    "relationshipFirst": "首次合作",
+    "relationshipRepeat": "老供应商",
+    "orderValueLabel": "订单金额",
+    "orderValues": [
+      "10,000 美元以下",
+      "10,000 – 50,000 美元",
+      "50,000 – 200,000 美元",
+      "200,000 美元以上"
+    ],
+    "productRiskLabel": "产品风险",
+    "productRiskLow": "低",
+    "productRiskMedium": "中",
+    "productRiskHigh": "高",
+    "weakLabel": "证据薄弱的维度",
+    "weakHint": "勾选供应商证据最少的领域。不确定可留空。",
+    "resultTitle": "建议的审核范围",
+    "auditTypeLabel": "审核类型",
+    "manDaysLabel": "驻场天数",
+    "manDaysUnit": "人天",
+    "modulesLabel": "建议核查模块",
+    "reasonsLabel": "原因",
+    "reasons": {
+      "band": "风险档位要求",
+      "firstOrder": "首次合作：确认工厂真实存在",
+      "repeatOrder": "老供应商：核查上次之后的变化",
+      "orderValue": "大额订单：关注装柜与装运",
+      "productRisk": "产品风险：加深合规核查",
+      "weakDimension": "该维度证据不足"
+    },
+    "modules": {
+      "legalEntity": "法人实体核查",
+      "siteExistence": "厂址与产权核查",
+      "documentConsistency": "文件一致性",
+      "capacity": "生产能力",
+      "qualitySystem": "质量体系",
+      "processControl": "过程控制",
+      "incomingInspection": "来料检验",
+      "subcontracting": "外发分包",
+      "packingLoading": "包装与装柜",
+      "productCompliance": "产品合规",
+      "certificateCheck": "证书核查",
+      "changeReview": "变更核查"
+    },
+    "apply": "应用到下方表单",
+    "applied": "已应用",
+    "disclaimer": "这是规划起点，最终范围由您与审核公司在进场前确认。",
+    "noteIntro": "建议审核范围（由范围推荐器生成）：",
+    "noteBand": "风险档位",
+    "noteType": "审核类型",
+    "noteDays": "驻场天数",
+    "noteModules": "核查模块",
+    "ruleBadge": "规则引擎",
+    "aiBadge": "AI 摘要"
   }
 }

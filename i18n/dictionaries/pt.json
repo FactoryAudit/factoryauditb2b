@@ -1075,7 +1075,17 @@
         "Química",
         "Outro"
       ],
-      "noneCustom": "Nenhum / Personalizado"
+      "noneCustom": "Nenhum / Personalizado",
+      "auditTypes": [
+        "Verificação de fábrica",
+        "Auditoria de fábrica",
+        "Auditoria de qualidade do fornecedor",
+        "Auditoria de capacidade de produção",
+        "Auditoria de conformidade social",
+        "Auditoria ambiental",
+        "Auditoria técnica",
+        "Auditoria personalizada do comprador"
+      ]
     },
     "metaTitle": "Solicitar uma Auditoria de Fábrica",
     "metaDesc": "Solicite uma auditoria de fábrica com proposta concreta: escolha o tipo, o padrão e a localização."
@@ -2669,5 +2679,66 @@
     "ctaDesc": "Envie sua necessidade e vamos definir a verificação, auditoria ou inspeção para o seu produto e mercado.",
     "ctaRfq": "Publicar um RFQ",
     "ctaCustom": "Serviços personalizados"
+  },
+  "auditScope": {
+    "title": "Consultor de escopo de auditoria",
+    "lead": "Responda a cinco perguntas e receba um escopo de auditoria sugerido: tipo de auditoria, dias no local e módulos a verificar.",
+    "scoreLabel": "Pontuação de risco",
+    "scoreHint": "Use o resultado da calculadora de risco ou estime. Pontuação mais alta significa risco menor.",
+    "scoreCta": "Abrir a calculadora de risco",
+    "relationshipLabel": "Relacionamento com o fornecedor",
+    "relationshipFirst": "Primeiro pedido",
+    "relationshipRepeat": "Fornecedor atual",
+    "orderValueLabel": "Valor do pedido",
+    "orderValues": [
+      "Abaixo de US$ 10.000",
+      "US$ 10.000 – 50.000",
+      "US$ 50.000 – 200.000",
+      "Acima de US$ 200.000"
+    ],
+    "productRiskLabel": "Risco do produto",
+    "productRiskLow": "Baixo",
+    "productRiskMedium": "Médio",
+    "productRiskHigh": "Alto",
+    "weakLabel": "Dimensões fracas",
+    "weakHint": "Selecione as áreas em que o fornecedor mostrou menos evidências. Deixe vazio se não tiver certeza.",
+    "resultTitle": "Escopo sugerido",
+    "auditTypeLabel": "Tipo de auditoria",
+    "manDaysLabel": "Dias no local",
+    "manDaysUnit": "dias-homem",
+    "modulesLabel": "Módulos a incluir",
+    "reasonsLabel": "Por quê",
+    "reasons": {
+      "band": "Exigido pela faixa de risco",
+      "firstOrder": "Primeiro pedido: confirmar que a fábrica existe",
+      "repeatOrder": "Fornecedor atual: verificar o que mudou",
+      "orderValue": "Pedido grande: verificar embalagem e carregamento",
+      "productRisk": "Risco do produto: verificações de conformidade mais profundas",
+      "weakDimension": "Evidências fracas nesta dimensão"
+    },
+    "modules": {
+      "legalEntity": "Verificação da entidade legal",
+      "siteExistence": "Existência e propriedade do local",
+      "documentConsistency": "Consistência de documentos",
+      "capacity": "Capacidade de produção",
+      "qualitySystem": "Sistema de qualidade",
+      "processControl": "Controle de processos",
+      "incomingInspection": "Inspeção de recebimento",
+      "subcontracting": "Subcontratação",
+      "packingLoading": "Embalagem e carregamento",
+      "productCompliance": "Conformidade do produto",
+      "certificateCheck": "Verificação de certificados",
+      "changeReview": "Revisão de mudanças"
+    },
+    "apply": "Aplicar ao formulário abaixo",
+    "applied": "Aplicado",
+    "disclaimer": "Este é um ponto de partida para o planejamento. O escopo final é acordado com a empresa de auditoria antes do início.",
+    "noteIntro": "Escopo de auditoria sugerido (gerado pelo consultor de escopo):",
+    "noteBand": "Faixa de risco",
+    "noteType": "Tipo de auditoria",
+    "noteDays": "Dias no local",
+    "noteModules": "Módulos",
+    "ruleBadge": "Motor de regras",
+    "aiBadge": "Resumo IA"
   }
 }

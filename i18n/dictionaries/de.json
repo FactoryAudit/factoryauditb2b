@@ -1081,7 +1081,17 @@
         "Chemie",
         "Sonstige"
       ],
-      "noneCustom": "Keine / Individuell"
+      "noneCustom": "Keine / Individuell",
+      "auditTypes": [
+        "Fabrik-Verifizierung",
+        "Fabrik-Audit",
+        "Lieferanten-Qualitätsaudit",
+        "Produktionskapazitäts-Audit",
+        "Sozialaudit",
+        "Umweltaudit",
+        "Technisches Audit",
+        "Kundenspezifisches Audit"
+      ]
     },
     "metaTitle": "Werksaudit anfragen",
     "metaDesc": "Fragen Sie ein Werksaudit mit konkretem Vorschlag an: Auditart, Standard und Standort wählen. Wir vermitteln qualifizierte Unternehmen."
@@ -2675,5 +2685,66 @@
     "ctaDesc": "Senden Sie uns Ihre Anforderung und wir planen Verifizierung, Audit oder Inspektion für Ihr Produkt und Ihren Markt.",
     "ctaRfq": "RFQ einstellen",
     "ctaCustom": "Individuelle Leistungen"
+  },
+  "auditScope": {
+    "title": "Prüfungsumfang-Empfehlung",
+    "lead": "Beantworten Sie fünf Fragen und Sie erhalten einen empfohlenen Prüfungsumfang: Prüfungsart, Tage vor Ort und zu prüfende Module.",
+    "scoreLabel": "Risikowert",
+    "scoreHint": "Nutzen Sie das Ergebnis des Risikorechners oder schätzen Sie. Ein höherer Wert bedeutet geringeres Risiko.",
+    "scoreCta": "Risikorechner öffnen",
+    "relationshipLabel": "Beziehung zum Lieferanten",
+    "relationshipFirst": "Erste Bestellung",
+    "relationshipRepeat": "Bestehender Lieferant",
+    "orderValueLabel": "Bestellwert",
+    "orderValues": [
+      "Unter 10.000 $",
+      "10.000 – 50.000 $",
+      "50.000 – 200.000 $",
+      "Über 200.000 $"
+    ],
+    "productRiskLabel": "Produktrisiko",
+    "productRiskLow": "Niedrig",
+    "productRiskMedium": "Mittel",
+    "productRiskHigh": "Hoch",
+    "weakLabel": "Schwache Bereiche",
+    "weakHint": "Wählen Sie die Bereiche, in denen der Lieferant am wenigsten Nachweise gezeigt hat. Bei Unsicherheit leer lassen.",
+    "resultTitle": "Empfohlener Umfang",
+    "auditTypeLabel": "Prüfungsart",
+    "manDaysLabel": "Tage vor Ort",
+    "manDaysUnit": "Personentage",
+    "modulesLabel": "Zu prüfende Module",
+    "reasonsLabel": "Grund",
+    "reasons": {
+      "band": "Aufgrund der Risikostufe",
+      "firstOrder": "Erste Bestellung: Existenz der Fabrik bestätigen",
+      "repeatOrder": "Bestehender Lieferant: Änderungen prüfen",
+      "orderValue": "Großauftrag: Verpackung und Verladung absichern",
+      "productRisk": "Produktrisiko: tiefere Compliance-Prüfung",
+      "weakDimension": "Wenig Nachweise in diesem Bereich"
+    },
+    "modules": {
+      "legalEntity": "Prüfung der Rechtsperson",
+      "siteExistence": "Standort und Eigentum",
+      "documentConsistency": "Dokumentenkonsistenz",
+      "capacity": "Produktionskapazität",
+      "qualitySystem": "Qualitätssystem",
+      "processControl": "Prozesskontrolle",
+      "incomingInspection": "Eingangskontrolle",
+      "subcontracting": "Untervergabe",
+      "packingLoading": "Verpackung und Verladung",
+      "productCompliance": "Produktkonformität",
+      "certificateCheck": "Zertifikatsprüfung",
+      "changeReview": "Änderungsprüfung"
+    },
+    "apply": "Auf das Formular unten anwenden",
+    "applied": "Angewendet",
+    "disclaimer": "Dies ist ein Ausgangspunkt für die Planung. Der endgültige Umfang wird vor Beginn mit der Prüfgesellschaft vereinbart.",
+    "noteIntro": "Empfohlener Prüfungsumfang (vom Umfangsberater erstellt):",
+    "noteBand": "Risikostufe",
+    "noteType": "Prüfungsart",
+    "noteDays": "Tage vor Ort",
+    "noteModules": "Module",
+    "ruleBadge": "Regelwerk",
+    "aiBadge": "KI-Zusammenfassung"
   }
 }

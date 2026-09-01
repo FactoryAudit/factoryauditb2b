@@ -1081,7 +1081,17 @@
         "Química",
         "Otro"
       ],
-      "noneCustom": "Ninguno / Personalizado"
+      "noneCustom": "Ninguno / Personalizado",
+      "auditTypes": [
+        "Verificación de fábrica",
+        "Auditoría de fábrica",
+        "Auditoría de calidad del proveedor",
+        "Auditoría de capacidad de producción",
+        "Auditoría de cumplimiento social",
+        "Auditoría ambiental",
+        "Auditoría técnica",
+        "Auditoría personalizada del comprador"
+      ]
     },
     "metaTitle": "Request a Factory Audit",
     "metaDesc": "Request a factory audit with a scoped proposal: choose the audit type, standard and location. Our team matches you with qualified audit companies."
@@ -2675,5 +2685,66 @@
     "ctaDesc": "Envíanos tu necesidad y definiremos la verificación, auditoría o inspección para tu producto y mercado.",
     "ctaRfq": "Publicar un RFQ",
     "ctaCustom": "Servicios personalizados"
+  },
+  "auditScope": {
+    "title": "Asesor de alcance de auditoría",
+    "lead": "Responda cinco preguntas y obtenga un alcance de auditoría sugerido: tipo de auditoría, días en sitio y módulos a revisar.",
+    "scoreLabel": "Puntuación de riesgo",
+    "scoreHint": "Use el resultado de la calculadora de riesgo o estime. Una puntuación más alta significa menor riesgo.",
+    "scoreCta": "Abrir la calculadora de riesgo",
+    "relationshipLabel": "Relación con el proveedor",
+    "relationshipFirst": "Primer pedido",
+    "relationshipRepeat": "Proveedor habitual",
+    "orderValueLabel": "Valor del pedido",
+    "orderValues": [
+      "Menos de 10 000 $",
+      "10 000 – 50 000 $",
+      "50 000 – 200 000 $",
+      "Más de 200 000 $"
+    ],
+    "productRiskLabel": "Riesgo del producto",
+    "productRiskLow": "Bajo",
+    "productRiskMedium": "Medio",
+    "productRiskHigh": "Alto",
+    "weakLabel": "Dimensiones débiles",
+    "weakHint": "Elija las áreas donde el proveedor ha mostrado menos evidencia. Déjelo vacío si no está seguro.",
+    "resultTitle": "Alcance sugerido",
+    "auditTypeLabel": "Tipo de auditoría",
+    "manDaysLabel": "Días en sitio",
+    "manDaysUnit": "días-hombre",
+    "modulesLabel": "Módulos a incluir",
+    "reasonsLabel": "Por qué",
+    "reasons": {
+      "band": "Requerido por el nivel de riesgo",
+      "firstOrder": "Primer pedido: confirmar que la fábrica existe",
+      "repeatOrder": "Proveedor habitual: revisar qué cambió",
+      "orderValue": "Pedido grande: vigilar empaque y carga",
+      "productRisk": "Riesgo del producto: controles de cumplimiento más profundos",
+      "weakDimension": "Evidencia débil en esta dimensión"
+    },
+    "modules": {
+      "legalEntity": "Verificación de la entidad legal",
+      "siteExistence": "Existencia y propiedad del sitio",
+      "documentConsistency": "Coherencia de documentos",
+      "capacity": "Capacidad de producción",
+      "qualitySystem": "Sistema de calidad",
+      "processControl": "Control de procesos",
+      "incomingInspection": "Inspección de entrada",
+      "subcontracting": "Subcontratación",
+      "packingLoading": "Empaque y carga",
+      "productCompliance": "Cumplimiento del producto",
+      "certificateCheck": "Verificación de certificados",
+      "changeReview": "Revisión de cambios"
+    },
+    "apply": "Aplicar al formulario inferior",
+    "applied": "Aplicado",
+    "disclaimer": "Este es un punto de partida para la planificación. El alcance final se acuerda con la empresa de auditoría antes de comenzar.",
+    "noteIntro": "Alcance de auditoría sugerido (generado por el asesor de alcance):",
+    "noteBand": "Nivel de riesgo",
+    "noteType": "Tipo de auditoría",
+    "noteDays": "Días en sitio",
+    "noteModules": "Módulos",
+    "ruleBadge": "Motor de reglas",
+    "aiBadge": "Resumen IA"
   }
 }

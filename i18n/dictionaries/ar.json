@@ -955,7 +955,17 @@
         "الكيماويات",
         "أخرى"
       ],
-      "noneCustom": "لا يوجد / حسب الطلب"
+      "noneCustom": "لا يوجد / حسب الطلب",
+      "auditTypes": [
+        "التحقق من المصنع",
+        "تدقيق المصنع",
+        "تدقيق جودة المورد",
+        "تدقيق الطاقة الإنتاجية",
+        "تدقيق الامتثال الاجتماعي",
+        "التدقيق البيئي",
+        "التدقيق الفني",
+        "تدقيق مخصص للمشتري"
+      ]
     },
     "metaTitle": "Request a Factory Audit",
     "metaDesc": "Request a factory audit with a scoped proposal: choose the audit type, standard and location. Our team matches you with qualified audit companies."
@@ -2675,5 +2685,66 @@
     "ctaDesc": "أرسل لنا متطلباتك وسنحدد نطاق التحقق أو التدقيق أو الفحص لمنتجك وسوقك.",
     "ctaRfq": "انشر طلب عرض أسعار",
     "ctaCustom": "خدمات مخصصة"
+  },
+  "auditScope": {
+    "title": "مستشار نطاق التدقيق",
+    "lead": "أجب عن خمسة أسئلة لتحصل على نطاق تدقيق مقترح: نوع التدقيق وأيام الموقع والوحدات التي يجب فحصها.",
+    "scoreLabel": "درجة المخاطر",
+    "scoreHint": "استخدم نتيجة حاسبة المخاطر أو قدّر. الدرجة الأعلى تعني مخاطر أقل.",
+    "scoreCta": "فتح حاسبة المخاطر",
+    "relationshipLabel": "العلاقة مع المورد",
+    "relationshipFirst": "طلب أول",
+    "relationshipRepeat": "مورد قائم",
+    "orderValueLabel": "قيمة الطلب",
+    "orderValues": [
+      "أقل من 10,000 دولار",
+      "10,000 – 50,000 دولار",
+      "50,000 – 200,000 دولار",
+      "أكثر من 200,000 دولار"
+    ],
+    "productRiskLabel": "مخاطر المنتج",
+    "productRiskLow": "منخفضة",
+    "productRiskMedium": "متوسطة",
+    "productRiskHigh": "مرتفعة",
+    "weakLabel": "الأبعاد الضعيفة",
+    "weakHint": "اختر المجالات التي أظهر فيها المورد أقل قدر من الأدلة. اتركه فارغًا إذا لم تكن متأكدًا.",
+    "resultTitle": "النطاق المقترح",
+    "auditTypeLabel": "نوع التدقيق",
+    "manDaysLabel": "أيام الموقع",
+    "manDaysUnit": "يوم عمل",
+    "modulesLabel": "الوحدات المطلوب تضمينها",
+    "reasonsLabel": "السبب",
+    "reasons": {
+      "band": "مطلوب حسب مستوى المخاطر",
+      "firstOrder": "طلب أول: تأكيد وجود المصنع",
+      "repeatOrder": "مورد قائم: فحص ما تغير",
+      "orderValue": "طلب كبير: مراقبة التعبئة والتحميل",
+      "productRisk": "مخاطر المنتج: فحوصات امتثال أعمق",
+      "weakDimension": "أدلة ضعيفة في هذا البعد"
+    },
+    "modules": {
+      "legalEntity": "فحص الكيان القانوني",
+      "siteExistence": "وجود الموقع والملكية",
+      "documentConsistency": "اتساق المستندات",
+      "capacity": "الطاقة الإنتاجية",
+      "qualitySystem": "نظام الجودة",
+      "processControl": "مراقبة العمليات",
+      "incomingInspection": "فحص المدخلات",
+      "subcontracting": "المقاولة من الباطن",
+      "packingLoading": "التعبئة والتحميل",
+      "productCompliance": "امتثال المنتج",
+      "certificateCheck": "فحص الشهادات",
+      "changeReview": "مراجعة التغييرات"
+    },
+    "apply": "تطبيق على النموذج أدناه",
+    "applied": "تم التطبيق",
+    "disclaimer": "هذه نقطة بداية للتخطيط. يتم الاتفاق على النطاق النهائي مع شركة التدقيق قبل بدء التدقيق.",
+    "noteIntro": "نطاق التدقيق المقترح (تم إنشاؤه بواسطة مستشار النطاق):",
+    "noteBand": "مستوى المخاطر",
+    "noteType": "نوع التدقيق",
+    "noteDays": "أيام الموقع",
+    "noteModules": "الوحدات",
+    "ruleBadge": "محرك القواعد",
+    "aiBadge": "ملخص الذكاء الاصطناعي"
   }
 }

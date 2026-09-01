@@ -1081,7 +1081,17 @@
         "化工",
         "其他"
       ],
-      "noneCustom": "無 / 客製"
+      "noneCustom": "無 / 客製",
+      "auditTypes": [
+        "工廠核實",
+        "工廠驗廠稽核",
+        "供應商品質稽核",
+        "產能稽核",
+        "社會責任稽核",
+        "環境稽核",
+        "技術稽核",
+        "買家客製稽核"
+      ]
     },
     "metaTitle": "申請工廠驗廠審覈",
     "metaDesc": "提交工廠審覈申請，選擇審覈類型、標準與所在地，我們爲您匹配合格的審覈公司。"
@@ -2675,5 +2685,66 @@
     "ctaDesc": "把你的需求發給我們，我們會為你的產品和市場規劃核實、驗廠或驗貨方案。",
     "ctaRfq": "發布詢價",
     "ctaCustom": "客製服務"
+  },
+  "auditScope": {
+    "title": "稽核範圍推薦",
+    "lead": "回答五個問題，即可獲得建議的稽核範圍：稽核類型、駐場天數與核查模組。",
+    "scoreLabel": "風險評分",
+    "scoreHint": "可使用風險計算器的結果，或自行估算。分數越高代表風險越低。",
+    "scoreCta": "使用風險計算器",
+    "relationshipLabel": "與供應商的關係",
+    "relationshipFirst": "首次合作",
+    "relationshipRepeat": "既有供應商",
+    "orderValueLabel": "訂單金額",
+    "orderValues": [
+      "10,000 美元以下",
+      "10,000 – 50,000 美元",
+      "50,000 – 200,000 美元",
+      "200,000 美元以上"
+    ],
+    "productRiskLabel": "產品風險",
+    "productRiskLow": "低",
+    "productRiskMedium": "中",
+    "productRiskHigh": "高",
+    "weakLabel": "證據薄弱的面向",
+    "weakHint": "勾選供應商證據最少的領域。不確定可留空。",
+    "resultTitle": "建議的稽核範圍",
+    "auditTypeLabel": "稽核類型",
+    "manDaysLabel": "駐場天數",
+    "manDaysUnit": "人天",
+    "modulesLabel": "建議核查模組",
+    "reasonsLabel": "原因",
+    "reasons": {
+      "band": "風險等級要求",
+      "firstOrder": "首次合作：確認工廠真實存在",
+      "repeatOrder": "既有供應商：核查上次之後的變化",
+      "orderValue": "大額訂單：關注裝櫃與裝運",
+      "productRisk": "產品風險：加深合規核查",
+      "weakDimension": "該面向證據不足"
+    },
+    "modules": {
+      "legalEntity": "法人實體核查",
+      "siteExistence": "廠址與產權核查",
+      "documentConsistency": "文件一致性",
+      "capacity": "生產能力",
+      "qualitySystem": "品質體系",
+      "processControl": "過程控制",
+      "incomingInspection": "進料檢驗",
+      "subcontracting": "外包分包",
+      "packingLoading": "包裝與裝櫃",
+      "productCompliance": "產品合規",
+      "certificateCheck": "證書核查",
+      "changeReview": "變更核查"
+    },
+    "apply": "套用到下方表單",
+    "applied": "已套用",
+    "disclaimer": "這是規劃起點，最終範圍由您與稽核公司在進場前確認。",
+    "noteIntro": "建議稽核範圍（由範圍推薦器產生）：",
+    "noteBand": "風險等級",
+    "noteType": "稽核類型",
+    "noteDays": "駐場天數",
+    "noteModules": "核查模組",
+    "ruleBadge": "規則引擎",
+    "aiBadge": "AI 摘要"
   }
 }

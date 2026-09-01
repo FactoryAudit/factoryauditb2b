@@ -1081,7 +1081,17 @@
         "Chimie",
         "Autre"
       ],
-      "noneCustom": "Aucun / Sur mesure"
+      "noneCustom": "Aucun / Sur mesure",
+      "auditTypes": [
+        "Vérification d'usine",
+        "Audit d'usine",
+        "Audit qualité fournisseur",
+        "Audit de capacité de production",
+        "Audit de conformité sociale",
+        "Audit environnemental",
+        "Audit technique",
+        "Audit personnalisé acheteur"
+      ]
     },
     "metaTitle": "Demander un Audit d'Usine",
     "metaDesc": "Demandez un audit d'usine avec proposition concrète : choisissez le type, le référentiel et la localisation."
@@ -2675,5 +2685,66 @@
     "ctaDesc": "Envoyez-nous votre besoin et nous définirons la vérification, l'audit ou l'inspection adaptés à votre produit et à votre marché.",
     "ctaRfq": "Publier un RFQ",
     "ctaCustom": "Services sur mesure"
+  },
+  "auditScope": {
+    "title": "Conseiller de périmètre d'audit",
+    "lead": "Répondez à cinq questions pour obtenir un périmètre d'audit suggéré : type d'audit, jours sur site et modules à vérifier.",
+    "scoreLabel": "Score de risque",
+    "scoreHint": "Utilisez le résultat du calculateur de risque ou estimez. Un score plus élevé signifie un risque plus faible.",
+    "scoreCta": "Ouvrir le calculateur de risque",
+    "relationshipLabel": "Relation avec le fournisseur",
+    "relationshipFirst": "Première commande",
+    "relationshipRepeat": "Fournisseur existant",
+    "orderValueLabel": "Valeur de commande",
+    "orderValues": [
+      "Moins de 10 000 $",
+      "10 000 – 50 000 $",
+      "50 000 – 200 000 $",
+      "Plus de 200 000 $"
+    ],
+    "productRiskLabel": "Risque produit",
+    "productRiskLow": "Faible",
+    "productRiskMedium": "Moyen",
+    "productRiskHigh": "Élevé",
+    "weakLabel": "Dimensions faibles",
+    "weakHint": "Sélectionnez les domaines où le fournisseur a montré le moins de preuves. Laissez vide si vous n'êtes pas sûr.",
+    "resultTitle": "Périmètre suggéré",
+    "auditTypeLabel": "Type d'audit",
+    "manDaysLabel": "Jours sur site",
+    "manDaysUnit": "jours-homme",
+    "modulesLabel": "Modules à inclure",
+    "reasonsLabel": "Pourquoi",
+    "reasons": {
+      "band": "Requis par le niveau de risque",
+      "firstOrder": "Première commande : confirmer l'existence de l'usine",
+      "repeatOrder": "Fournisseur existant : vérifier ce qui a changé",
+      "orderValue": "Commande importante : sécuriser emballage et chargement",
+      "productRisk": "Risque produit : contrôles de conformité approfondis",
+      "weakDimension": "Preuves faibles dans cette dimension"
+    },
+    "modules": {
+      "legalEntity": "Contrôle de l'entité légale",
+      "siteExistence": "Existence du site et propriété",
+      "documentConsistency": "Cohérence des documents",
+      "capacity": "Capacité de production",
+      "qualitySystem": "Système qualité",
+      "processControl": "Contrôle des processus",
+      "incomingInspection": "Contrôle à réception",
+      "subcontracting": "Sous-traitance",
+      "packingLoading": "Emballage et chargement",
+      "productCompliance": "Conformité produit",
+      "certificateCheck": "Vérification des certificats",
+      "changeReview": "Revue des changements"
+    },
+    "apply": "Appliquer au formulaire ci-dessous",
+    "applied": "Appliqué",
+    "disclaimer": "Ceci est un point de départ pour la planification. Le périmètre final est convenu avec la société d'audit avant le début de l'audit.",
+    "noteIntro": "Périmètre d'audit suggéré (généré par le conseiller de périmètre) :",
+    "noteBand": "Niveau de risque",
+    "noteType": "Type d'audit",
+    "noteDays": "Jours sur site",
+    "noteModules": "Modules",
+    "ruleBadge": "Moteur de règles",
+    "aiBadge": "Résumé IA"
   }
 }
