@@ -162,3 +162,99 @@ export async function notifyCustomerLeadReceived(lead: {
     ].join("\n"),
   });
 }
+
+// —— Supplier Network V1.0：供应商入驻双邮件 ——
+
+// 管理员通知：结构化文本，可直接粘贴进 Google Sheets（Supplier Master Sheet）
+export async function notifyAdminSupplierRegistration(data: {
+  id: string;
+  fields: Record<string, string>;
+}): Promise<boolean> {
+  const adminEmail = process.env.NOTIFY_ADMIN_EMAIL;
+  if (!adminEmail) {
+    console.log("[notify] NOTIFY_ADMIN_EMAIL 未配置，跳过供应商入驻通知");
+    return false;
+  }
+  const f = data.fields;
+  const line = (label: string, val?: string) =>
+    val ? `${label}: ${val}` : null;
+  const body = [
+    `Supplier ID: ${data.id}`,
+    "",
+    "— Company Information —",
+    line("Company Name", f.companyName),
+    line("English Name", f.englishName),
+    line("Company Type", f.companyType),
+    line("Registration Number", f.registrationNumber),
+    line("Established", f.establishedYear),
+    line("Website", f.website),
+    "",
+    "— Factory Information —",
+    line("Country", f.factoryCountry),
+    line("City", f.factoryCity),
+    line("Address", f.factoryAddress),
+    line("Employees", f.employees),
+    line("Factory Size", f.factorySize),
+    "",
+    "— Products & Capability —",
+    line("Main Products", f.mainProducts),
+    line("Production Capacity", f.productionCapacity),
+    line("Monthly Output", f.monthlyOutput),
+    "",
+    "— Export —",
+    line("Export Markets", f.exportMarkets),
+    line("Exporting Since", f.exportSince),
+    "",
+    "— Certificates —",
+    line("Certificates", f.certificates),
+    "",
+    "— Contact —",
+    line("Contact Person", f.contactName),
+    line("Email", f.contactEmail),
+    line("Phone", f.contactPhone),
+    line("WhatsApp", f.contactWhatsapp),
+    "",
+    "— Availability —",
+    line("Audit Availability", f.auditAvailability),
+    line("Inspection Availability", f.inspectionAvailability),
+    "",
+    "— Authorization —",
+    line("Authorize Company Profile", f.authorizeCompanyProfile),
+    line("Contact Visibility", f.contactVisibility),
+    line("Message", f.message),
+    "",
+    "Next steps: 1) completeness check  2) document consistency  3) evidence level  4) risk score  5) status decision. Record in Supplier Master Sheet.",
+    "Reminder: risk score is informational only, not certification. Evidence below 'Independently Verified' must not be shown as verified.",
+  ]
+    .filter(Boolean)
+    .join("\n");
+  return sendMail({
+    to: adminEmail,
+    subject: `[FactoryAuditB2B] New Supplier Registration ${data.id}`,
+    text: body,
+  });
+}
+
+// 供应商回执：Reference ID + 审核周期 + 不承诺保证
+export async function notifySupplierReceived(data: {
+  email: string;
+  companyName?: string | null;
+  id: string;
+}): Promise<boolean> {
+  if (!data.email) return false;
+  return sendMail({
+    to: data.email,
+    subject: "We received your supplier application — FactoryAuditB2B",
+    text: [
+      `Hi${data.companyName ? ` ${data.companyName}` : ""},`,
+      "",
+      "We received your application to join the FactoryAuditB2B Supplier Network.",
+      `Reference ID: ${data.id}`,
+      "",
+      "Our team reviews every application manually. We will reply within one business day.",
+      "Joining the network is free. Being listed does not imply certification or guarantee of orders.",
+      "",
+      "FactoryAuditB2B",
+    ].join("\n"),
+  });
+}

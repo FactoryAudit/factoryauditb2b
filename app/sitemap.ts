@@ -31,6 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/tools/supplier-document-checker",
     "/rfq",
     "/factory-audit/request",
+    "/join-supplier-network",
     "/suppliers",
     "/pricing",
     "/services",

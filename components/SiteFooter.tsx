@@ -32,6 +32,7 @@ export type FooterDict = {
   improvementService: string;
   allServices: string;
   containerCalculator: string;
+  supplierNetwork: string;
 };
 
 export default function SiteFooter({
@@ -103,6 +104,11 @@ export default function SiteFooter({
             <li>
               <Link href={p("/rfq")} className="hover:text-white">
                 RFQ
+              </Link>
+            </li>
+            <li>
+              <Link href={p("/join-supplier-network")} className="hover:text-white">
+                {dict.supplierNetwork}
               </Link>
             </li>
             <li>
