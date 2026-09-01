@@ -64,7 +64,9 @@
     "sampleReport": "Beispielbericht",
     "monitoring": "Lieferanten-Monitoring",
     "fieldReports": "Feldberichte",
-    "caseStudies": "Fallstudien"
+    "caseStudies": "Fallstudien",
+    "suppliers": "Lieferantenverzeichnis",
+    "membership": "Mitgliedschaft"
   },
   "home": {
     "badge": "Prüfen. Beschaffen. Inspizieren. Versenden.",

@@ -64,7 +64,9 @@
     "sampleReport": "نموذج تقرير",
     "monitoring": "مراقبة الموردين",
     "fieldReports": "تقارير ميدانية",
-    "caseStudies": "دراسات حالة"
+    "caseStudies": "دراسات حالة",
+    "suppliers": "دليل الموردين",
+    "membership": "العضوية"
   },
   "home": {
     "badge": "Verify. Source. Inspect. Ship.",

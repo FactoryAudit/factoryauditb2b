@@ -71,7 +71,9 @@
     "sampleReport": "样例报告",
     "monitoring": "供应商监控",
     "fieldReports": "现场记录",
-    "caseStudies": "案例研究"
+    "caseStudies": "案例研究",
+    "suppliers": "供应商目录",
+    "membership": "会员"
   },
   "home": {
     "badge": "面向全球采购商的供应商情报",

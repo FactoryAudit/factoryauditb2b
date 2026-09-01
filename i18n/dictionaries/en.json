@@ -181,7 +181,9 @@
     "sampleReport": "Sample report",
     "monitoring": "Supplier Monitoring",
     "fieldReports": "Field Reports",
-    "caseStudies": "Case Studies"
+    "caseStudies": "Case Studies",
+    "suppliers": "Supplier Directory",
+    "membership": "Membership"
   },
   "home": {
     "badge": "Supplier intelligence for global buyers",

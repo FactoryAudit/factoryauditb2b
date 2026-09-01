@@ -64,7 +64,9 @@
     "sampleReport": "Informe de muestra",
     "monitoring": "Monitoreo de proveedores",
     "fieldReports": "Informes de campo",
-    "caseStudies": "Casos de estudio"
+    "caseStudies": "Casos de estudio",
+    "suppliers": "Directorio de proveedores",
+    "membership": "Membresía"
   },
   "home": {
     "badge": "Supplier intelligence for global buyers",

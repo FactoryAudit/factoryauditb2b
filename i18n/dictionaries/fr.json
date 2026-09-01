@@ -64,7 +64,9 @@
     "sampleReport": "Exemple de rapport",
     "monitoring": "Suivi des fournisseurs",
     "fieldReports": "Rapports de terrain",
-    "caseStudies": "Études de cas"
+    "caseStudies": "Études de cas",
+    "suppliers": "Annuaire de fournisseurs",
+    "membership": "Adhésion"
   },
   "home": {
     "badge": "Vérifier. Sourcer. Inspecter. Expédier.",

@@ -64,7 +64,9 @@
     "sampleReport": "Relatório de exemplo",
     "monitoring": "Monitoramento de fornecedores",
     "fieldReports": "Relatórios de campo",
-    "caseStudies": "Estudos de caso"
+    "caseStudies": "Estudos de caso",
+    "suppliers": "Diretório de fornecedores",
+    "membership": "Assinatura"
   },
   "home": {
     "badge": "Verificar. Comprar. Inspecionar. Enviar.",

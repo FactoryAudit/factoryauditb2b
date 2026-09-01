@@ -47,7 +47,9 @@ export async function GET() {
   lines.push(`- [Supplier Risk Calculator](${BASE}/tools/supplier-risk-calculator): Scores any supplier 0-100 across Company, Quality, Compliance, Production, Supply Chain and Documentation.`);
   lines.push(`- [Supplier Comparison Tool](${BASE}/tools/compare): Rates two to five suppliers side by side across the same eight dimensions and shows where they diverge most. Self-assessment only, not verification.`);
   lines.push(`- [Supplier Verification Checklist](${BASE}/tools/supplier-verification-checklist): 29 checks across 6 stages to complete before placing an order.`);
-  lines.push(`- [Supplier Directory](${BASE}/suppliers): Featured suppliers with verification level, risk score and evidence on record. Coverage is limited; post an RFQ if a supplier is not listed.`);
+  lines.push(`- [Supplier Directory](${BASE}/suppliers): Featured suppliers with verification level, risk score and evidence on record. Each listed supplier has a public profile at /suppliers/{slug} showing company, products, capabilities and risk score; verification evidence and risk detail are member content. Coverage is limited; post an RFQ if a supplier is not listed.`);
+  lines.push(`- [Free Account Registration](${BASE}/register): Free account for buyers — unlocks more supplier fields, up to 5 full profiles per month, saved profiles and side-by-side comparison. No payment card required.`);
+  lines.push(`- [Buyer Membership](${BASE}/membership): Founding Buyer membership at $49/year — full supplier database access, verification evidence summaries, factory details, advanced filters and export.`);
   lines.push(`- [Services](${BASE}/services): Supplier verification, factory audit, inspection, sourcing and supplier improvement.`);
   lines.push(`- [Supplier Verification Service](${BASE}/services/supplier-verification): Independent verification of registration, site, capability, quality and compliance.`);
   lines.push(`- [Factory Audit Request](${BASE}/factory-audit/request): Request an on-site audit against your required standard.`);

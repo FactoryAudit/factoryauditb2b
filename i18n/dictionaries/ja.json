@@ -64,7 +64,9 @@
     "sampleReport": "サンプルレポート",
     "monitoring": "サプライヤーモニタリング",
     "fieldReports": "現場レポート",
-    "caseStudies": "ケーススタディ"
+    "caseStudies": "ケーススタディ",
+    "suppliers": "サプライヤーディレクトリ",
+    "membership": "メンバーシップ"
   },
   "home": {
     "badge": "検証。ソース。検査。発送。",
