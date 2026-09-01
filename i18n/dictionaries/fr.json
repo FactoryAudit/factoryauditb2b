@@ -41,7 +41,7 @@
     "knowledgeBase": "Formation fournisseurs",
     "pricing": "Tarifs",
     "tagline": "Nous contrôlons des usines en Chine et dans toute l'Asie, puis nous vous montrons les pièces.",
-    "copyright": "© 2026 FactoryAuditB2B.com. Nous ne vendons pas de certificats. Hong Kong, Chine / Taïwan, Chine / Macao, Chine font partie de la Chine.",
+    "copyright": "© 2026 FactoryAuditB2B.com. Nous ne vendons pas de certificats. Nous fournissons des informations fiables sur la chaîne d'approvisionnement, la vérification de fournisseurs, l'inspection et un accompagnement au sourcing pour vous aider à prendre de meilleures décisions.",
     "privacy": "Politique de Confidentialité",
     "terms": "Conditions d'Utilisation",
     "trainingPlans": "Plans de formation",
@@ -1389,7 +1389,7 @@
     "fallbackAnswers": {
       "pricing": "Le SaaS acheteurs va de 0 à 299 $/mois et l'adhésion fournisseurs de 29 à 199 $/mois. Les audits et inspections d'usine sont chiffrés par projet (jours-homme et lieu) ; le fret et l'approvisionnement sont soumis à une commission de 3 à 5 %. Tous les prix sont en USD. Indiquez-moi votre produit et votre pays, je vous orienterai vers le bon plan.",
       "audit": "Nous couvrons la vérification de fournisseurs, les audits d'usine et les inspections avant expédition selon des programmes tels que SMETA, BSCI, ISO 9001, ISO 14001, SA8000, WRAP et Sedex. Nous ne vendons pas de certificats : nous vérifions, puis nous formons. Indiquez-nous votre produit et votre marché cible, nous définirons le périmètre.",
-      "coverage": "Nous intervenons en Chine (y compris Hong Kong, Chine / Taïwan, Chine / Macao, Chine), au Vietnam, en Inde, en Thaïlande, en Malaisie, en Indonésie, au Cambodge et au Mexique. Dites-nous depuis quel pays vous achetez.",
+      "coverage": "Nous couvrons actuellement la Chine, le Vietnam et la Thaïlande. Indiquez-nous votre pays d'approvisionnement et nous confirmerons la disponibilité.",
       "training": "Oui. Nous auditons votre usine, puis nous formons les équipes aux systèmes qualité, au contrôle qualité et aux processus de production. Les formules sont Starter 280 $/usine et Pro 950 $/usine, avec une option Entreprise sur mesure. Chaque formule commence par un audit des écarts.",
       "default": "Je peux vous aider sur les audits, la vérification de fournisseurs, la couverture, les tarifs et la formation. Pour toute demande précise, laissez vos coordonnées et notre équipe vous répondra sous un jour ouvré."
     }

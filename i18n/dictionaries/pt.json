@@ -41,7 +41,7 @@
     "knowledgeBase": "Treinamento de fornecedores",
     "pricing": "Preços",
     "tagline": "Nós verificamos fábricas na China e em toda a Ásia e mostramos os documentos para você.",
-    "copyright": "© 2026 FactoryAuditB2B.com. Não vendemos certificados. Hong Kong, China / Taiwan, China / Macau, China são partes da China.",
+    "copyright": "© 2026 FactoryAuditB2B.com. Não vendemos certificados. Fornecemos informações confiáveis sobre a cadeia de suprimentos, verificação de fornecedores, inspeção e apoio em sourcing para ajudá-lo a tomar decisões melhores.",
     "privacy": "Política de Privacidade",
     "terms": "Termos de Serviço",
     "trainingPlans": "Planos de treinamento",
@@ -1383,7 +1383,7 @@
     "fallbackAnswers": {
       "pricing": "O SaaS para compradores vai de US$ 0 a US$ 299/mês e a associação de fornecedores de US$ 29 a US$ 199/mês. Auditorias e inspeções de fábrica são cotadas por projeto (dias-homem e localização); frete e suprimentos têm comissão de 3–5%. Todos os preços em USD. Diga seu produto e país e eu indicarei o plano certo.",
       "audit": "Cobrimos verificação de fornecedores, auditorias de fábrica e inspeções pré-embarque em programas como SMETA, BSCI, ISO 9001, ISO 14001, SA8000, WRAP e Sedex. Não vendemos certificados; verificamos e depois treinamos. Compartilhe seu produto e mercado-alvo e definiremos o escopo.",
-      "coverage": "Atuamos na China (incluindo Hong Kong, China / Taiwan, China / Macao, China), Vietnã, Índia, Tailândia, Malásia, Indonésia, Camboja e México. Diga de qual país você compra.",
+      "coverage": "Atualmente cobrimos China, Vietnã e Tailândia. Diga de qual país você compra e confirmaremos a disponibilidade.",
       "training": "Sim. Auditamos sua fábrica e depois treinamos as equipes em sistemas de qualidade, controle de qualidade e processos de produção. Os planos são Starter US$ 280/fábrica e Pro US$ 950/fábrica, com opção Enterprise personalizada. Todo plano começa com uma auditoria de lacunas.",
       "default": "Posso ajudar com auditorias, verificação de fornecedores, cobertura, preços e treinamento. Para algo específico, deixe seus dados e nossa equipe responderá em um dia útil."
     }

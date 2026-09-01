@@ -43,7 +43,7 @@ const TOPIC_KEYWORDS: Record<string, string[]> = {
   ],
   coverage: [
     "country", "countries", "china", "vietnam", "india", "thailand", "malaysia", "indonesia", "cambodia",
-    "mexico", "taiwan", "region", "coverage", "cover",
+    "mexico", "region", "coverage", "cover",
     "国家", "國家", "覆盖", "覆蓋", "地区", "地區", "哪些国家", "哪些國家",
     "対応国", "対応", "地域", "国",
     "país", "pais", "países", "cobertura", "región",

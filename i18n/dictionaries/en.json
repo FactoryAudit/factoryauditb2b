@@ -143,7 +143,7 @@
     "knowledgeBase": "Resources",
     "pricing": "Pricing",
     "tagline": "Supplier Intelligence & Verification for Global Buyers. Evaluate. Verify. Audit.",
-    "copyright": "© 2026 FactoryAuditB2B.com. We do not sell certificates. Hong Kong, China / Taiwan, China / Macao, China are parts of China.",
+    "copyright": "© 2026 FactoryAuditB2B.com. We do not sell certificates. We provide trusted supply chain information, supplier verification, inspection, and sourcing support to help you make better decisions.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
     "trainingPlans": "Training Plans",
@@ -1805,7 +1805,7 @@
     "fallbackAnswers": {
       "pricing": "Buyer SaaS runs $0–299/month and supplier membership $29–199/month. Factory audits and inspections are quoted per project (man-days and location); freight and sourcing carry a 3–5% commission. All prices in USD. Tell me your product and country and I will point you to the right plan.",
       "audit": "We cover supplier verification, factory audits and pre-shipment inspections against programs such as SMETA, BSCI, ISO 9001, ISO 14001, SA8000, WRAP and Sedex. We do not sell certificates; we verify and then train. Share your product and target market and we will scope it.",
-      "coverage": "We operate across China (including Hong Kong, China / Taiwan, China / Macao, China), Vietnam, India, Thailand, Malaysia, Indonesia, Cambodia and Mexico. Tell me which country you are sourcing from.",
+      "coverage": "We currently cover China, Vietnam and Thailand. Tell me which country you are sourcing from and I will confirm availability.",
       "training": "Yes. We audit your factory and then train the teams in quality systems, QC and production process. Plans are Starter $280/factory and Pro $950/factory, with a custom Enterprise option. Every plan starts with a gap audit.",
       "default": "I can help with audits, supplier verification, coverage, pricing and training. For anything specific, leave your details and our team will reply within one business day."
     }

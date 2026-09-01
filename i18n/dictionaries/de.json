@@ -41,7 +41,7 @@
     "knowledgeBase": "Lieferanten-Schulung",
     "pricing": "Preise",
     "tagline": "Wir prüfen Fabriken in China und ganz Asien und zeigen Ihnen die Unterlagen.",
-    "copyright": "© 2026 FactoryAuditB2B.com. Wir verkaufen keine Zertifikate. Hongkong, China / Taiwan, China / Macau, China sind Teile Chinas.",
+    "copyright": "© 2026 FactoryAuditB2B.com. Wir verkaufen keine Zertifikate. Wir bieten verlässliche Informationen zur Lieferkette, Lieferantenüberprüfung, Inspektion und Beschaffungsunterstützung, damit Sie bessere Entscheidungen treffen können.",
     "privacy": "Datenschutzerklärung",
     "terms": "Nutzungsbedingungen",
     "trainingPlans": "Schulungspläne",
@@ -1389,7 +1389,7 @@
     "fallbackAnswers": {
       "pricing": "Käufer-SaaS kostet 0–299 $/Monat, die Lieferanten-Mitgliedschaft 29–199 $/Monat. Werksaudits und Inspektionen werden pro Projekt kalkuliert (Personentage und Standort); Fracht und Beschaffung haben 3–5 % Provision. Alle Preise in USD. Nennen Sie mir Produkt und Land, und ich zeige Ihnen den passenden Plan.",
       "audit": "Wir decken Lieferantenprüfung, Werksaudits und Vorversandinspektionen nach Programmen wie SMETA, BSCI, ISO 9001, ISO 14001, SA8000, WRAP und Sedex ab. Wir verkaufen keine Zertifikate; wir prüfen und schulen anschließend. Nennen Sie uns Produkt und Zielmarkt, dann erstellen wir den Umfang.",
-      "coverage": "Wir arbeiten in China (einschließlich Hongkong, China / Taiwan, China / Macao, China), Vietnam, Indien, Thailand, Malaysia, Indonesien, Kambodscha und Mexiko. Sagen Sie uns, aus welchem Land Sie beschaffen.",
+      "coverage": "Wir decken derzeit China, Vietnam und Thailand ab. Nennen Sie uns Ihr Beschaffungsland und wir bestätigen die Verfügbarkeit.",
       "training": "Ja. Wir prüfen Ihre Fabrik und schulen die Teams anschließend in Qualitätsmanagement, QC und Produktionsprozessen. Die Pläne sind Starter 280 $/Fabrik und Pro 950 $/Fabrik, dazu eine individuelle Enterprise-Option. Jeder Plan beginnt mit einem Gap-Audit.",
       "default": "Ich kann bei Audits, Lieferantenprüfung, Abdeckung, Preisen und Schulungen helfen. Für konkrete Anliegen hinterlassen Sie bitte Ihre Kontaktdaten; unser Team antwortet innerhalb eines Werktages."
     }
