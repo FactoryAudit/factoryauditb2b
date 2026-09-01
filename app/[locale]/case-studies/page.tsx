@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import { CASE_STUDIES, CASE_SERVICE_ORDER, CASE_DISCLOSURE, CASE_LIST_META } from "@/lib/caseStudies";
+import { CASE_STUDIES, CASE_SERVICE_ORDER, CASE_DISCLOSURE, CASE_LIST_META, CASE_SECTIONS } from "@/lib/caseStudies";
+import { overallLevel } from "@/lib/riskEngine";
 import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i18n/config";
 import { buildPageMetadata } from "@/lib/pageMeta";
 
@@ -29,6 +30,7 @@ export default async function CaseStudiesPage({ params }: Props) {
   const p = (href: string) => localePath(locale, href);
   const zh = locale === "zh";
   const disclosure = zh ? CASE_DISCLOSURE.zh : CASE_DISCLOSURE.en;
+  const sec = zh ? CASE_SECTIONS.zh : CASE_SECTIONS.en;
 
   const jsonLd = [
     {
@@ -100,6 +102,10 @@ export default async function CaseStudiesPage({ params }: Props) {
                       {zh ? c.titleZh : c.titleEn}
                     </Link>
                     <p className="mt-1 text-sm text-gray-600">{zh ? c.zh.summary : c.en.summary}</p>
+                    <p className="mt-3 text-xs text-gray-500">
+                      {sec.riskScore}: {c.riskScore}
+                      {sec.scoreUnit} · {overallLevel(c.riskScore)}
+                    </p>
                   </li>
                 ))}
               </ul>

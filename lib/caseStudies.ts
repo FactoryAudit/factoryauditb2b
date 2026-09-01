@@ -24,17 +24,24 @@ export interface CaseStudy {
   services: { href: string }[];
   /** 相关指南 slug（必须真实存在） */
   related: string[];
+  /** 案例供应商的示例风险分（0-100，高分=低风险，与 riskEngine 同语义）。
+   *  是演示数值，不是真实核验结果；等级由 overallLevel() 计算，不在此重复定义阈值。 */
+  riskScore: number;
   en: {
     summary: string;
     scenario: string;
     approach: string[];
     result: string;
+    findings: string[];
+    recommendation: string;
   };
   zh: {
     summary: string;
     scenario: string;
     approach: string[];
     result: string;
+    findings: string[];
+    recommendation: string;
   };
 }
 
@@ -42,6 +49,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: "trading-company-posing-as-factory",
     service: "verification",
+    riskScore: 38,
     titleEn: "Trading company posing as a factory",
     titleZh: "贸易公司冒充工厂的核验",
     metaDescEn:
@@ -72,6 +80,14 @@ export const CASE_STUDIES: CaseStudy[] = [
       ],
       result:
         "The buyer re-contracted with the licensed manufacturer entity, moved the deposit behind a document verification and a follow-up audit, and avoided paying a trading margin on top of factory-direct pricing.",
+      findings: [
+        "Registered business scope covered import and export only, with no manufacturing licence.",
+        "Registered address was an office floor, not a production site.",
+        "A separate licensed manufacturer at another address was the likely production source.",
+        "No document evidence linked the quoting entity to any production line.",
+      ],
+      recommendation:
+        "Re-contract with the licensed manufacturer, keep the deposit behind a document verification, and add an on-site audit before the first shipment.",
     },
     zh: {
       summary:
@@ -86,12 +102,21 @@ export const CASE_STUDIES: CaseStudy[] = [
       ],
       result:
         "买家改与持证制造商签约，把定金放到文件核验与后续验厂之后，并避免了在工厂直供价之上再付一层贸易加成。",
+      findings: [
+        "登记的经营范围仅含进出口，无生产许可。",
+        "注册地址为写字楼，不是生产场地。",
+        "另一地址存在独立持证制造商，才是可能的生产来源。",
+        "无任何文件证据把报价主体与生产线关联起来。",
+      ],
+      recommendation:
+        "改与持证制造商签约，定金放在文件核验之后，并在首个货柜发运前增加一次现场验厂。",
     },
   },
 
   {
     slug: "legal-entity-mismatch-before-deposit",
     service: "audit",
+    riskScore: 45,
     titleEn: "Legal entity mismatch found before a deposit",
     titleZh: "定金前发现法律主体错配",
     metaDescEn:
@@ -122,6 +147,14 @@ export const CASE_STUDIES: CaseStudy[] = [
       ],
       result:
         "The contract was re-issued to the certified parent entity, the deposit was released against documentary evidence, and the audit finding was closed with no delay to the production schedule.",
+      findings: [
+        "Contracting entity differed from the entity holding the ISO and product certificates.",
+        "Production site belonged to the parent factory.",
+        "Certificate scope did not cover the contracting entity.",
+        "No contractual link existed between the certified entity and the buyer's order.",
+      ],
+      recommendation:
+        "Re-issue the contract to the certified entity, and release the deposit only against documentary evidence.",
     },
     zh: {
       summary:
@@ -136,12 +169,20 @@ export const CASE_STUDIES: CaseStudy[] = [
       ],
       result:
         "合同改由持证母公司签署，定金凭书面证据放款，验厂发现项在未延误排产的情况下关闭。",
+      findings: [
+        "签约主体与持有 ISO 及产品证书的主体不一致。",
+        "生产场地归属母公司工厂。",
+        "证书范围未覆盖签约主体。",
+        "持证主体与买家订单之间不存在合同关联。",
+      ],
+      recommendation: "合同改由持证主体签署，定金仅在取得书面证据后放款。",
     },
   },
 
   {
     slug: "label-defect-stopped-before-loading",
     service: "inspection",
+    riskScore: 62,
     titleEn: "Label defect stopped before container loading",
     titleZh: "装柜前拦截标签缺陷",
     metaDescEn:
@@ -172,6 +213,13 @@ export const CASE_STUDIES: CaseStudy[] = [
       ],
       result:
         "The batch was reworked before container loading, re-inspected and passed, and the shipment sailed on schedule instead of being rejected at customs.",
+      findings: [
+        "Country-of-origin mark was incorrect on more units than the AQL accept number allowed.",
+        "Quantity and function tests passed on the sampled units.",
+        "The defect was a labelling error rather than a product failure, and could be reworked.",
+      ],
+      recommendation:
+        "Rework the labelling, re-inspect before loading, and add an artwork approval step to the next order.",
     },
     zh: {
       summary:
@@ -186,12 +234,19 @@ export const CASE_STUDIES: CaseStudy[] = [
       ],
       result:
         "整批在装柜前完成返工并复验通过，货按期上船，而非在海关被拒收。",
+      findings: [
+        "原产地标识错误数量超过 AQL 接收数允许的上限。",
+        "抽样单位的数量与功能测试通过。",
+        "缺陷属标签错误而非产品失效，可以返工修正。",
+      ],
+      recommendation: "返工标签并在装柜前复验，下一单增加包装稿件的确认环节。",
     },
   },
 
   {
     slug: "qualifying-replacement-supplier-vietnam",
     service: "sourcing",
+    riskScore: 78,
     titleEn: "Qualifying a replacement supplier in Vietnam",
     titleZh: "越南替代供应商的寻源与准入",
     metaDescEn:
@@ -223,6 +278,13 @@ export const CASE_STUDIES: CaseStudy[] = [
       ],
       result:
         "One supplier was qualified with verified registration and a clean audit report. The buyer placed an initial order with staged inspections and kept the China source for the rest of the volume.",
+      findings: [
+        "Registration confirmed for all three candidates; two had capacity below the requirement.",
+        "The leading candidate's production site and quality system matched the quote.",
+        "The audit report came back with no critical findings.",
+      ],
+      recommendation:
+        "Qualify the audited supplier for an initial order with staged inspections, and keep the existing source for the remaining volume.",
     },
     zh: {
       summary:
@@ -237,6 +299,13 @@ export const CASE_STUDIES: CaseStudy[] = [
       ],
       result:
         "一家登记信息核实无误且验厂报告干净的供应商获得准入。买家下首单并分阶段验货，其余量仍由中国货源承接。",
+      findings: [
+        "三家候选的登记信息均已确认，其中两家产能低于需求。",
+        "首选候选的生产场地与质量体系与报价一致。",
+        "验厂报告无致命发现项。",
+      ],
+      recommendation:
+        "准入该已验厂供应商并下首单、分阶段验货，其余量继续由原有货源承接。",
     },
   },
 ];
@@ -258,3 +327,30 @@ export const CASE_LIST_META = {
   en: "Supplier verification, factory audit, inspection and sourcing walk-throughs: anonymised illustrative examples that show how we work, not client testimonials.",
   zh: "供应商核验、验厂、验货与寻源的方法示例：脱敏演示我们的工作方式，并非客户证言。",
 };
+
+/**
+ * 详情页分段标题（Problem → Investigation → Findings → Risk Score → Recommendation）。
+ * 与 CASE_DISCLOSURE / CASE_LIST_META 同模式：en/zh 手写，其余语言回退英文。
+ */
+export const CASE_SECTIONS = {
+  en: {
+    problem: "Problem",
+    investigation: "Investigation",
+    findings: "Findings",
+    riskScore: "Risk score",
+    recommendation: "Recommendation",
+    scoreUnit: "/ 100",
+    scoreNote:
+      "Indicative score before the work described above. Higher score means lower risk. This is an illustrative figure for the example, not a real verification result.",
+  },
+  zh: {
+    problem: "问题",
+    investigation: "核查过程",
+    findings: "发现",
+    riskScore: "风险分数",
+    recommendation: "建议",
+    scoreUnit: "/ 100",
+    scoreNote:
+      "上述工作开始前的示意分数。分数越高代表风险越低。这是示例的演示数值，不是真实核验结论。",
+  },
+} as const;

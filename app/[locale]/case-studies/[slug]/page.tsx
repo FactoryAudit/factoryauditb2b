@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
-import { CASE_STUDIES, findCaseStudy, CASE_DISCLOSURE } from "@/lib/caseStudies";
+import { CASE_STUDIES, findCaseStudy, CASE_DISCLOSURE, CASE_SECTIONS } from "@/lib/caseStudies";
+import { overallLevel } from "@/lib/riskEngine";
 import { findGuide } from "@/lib/guides";
 import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i18n/config";
 import { buildPageMetadata } from "@/lib/pageMeta";
@@ -46,6 +47,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
   const x = zh ? c.zh : c.en;
   const title = zh ? c.titleZh : c.titleEn;
   const disclosure = zh ? CASE_DISCLOSURE.zh : CASE_DISCLOSURE.en;
+  // 分段标题与分数说明：en/zh 手写，其余语言回退英文（与 CASE_DISCLOSURE 同模式）
+  const sec = zh ? CASE_SECTIONS.zh : CASE_SECTIONS.en;
   const serviceLabel =
     c.service === "verification"
       ? "Supplier verification"
@@ -108,12 +111,12 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
       <p className="mt-6 text-lg text-gray-700">{x.summary}</p>
 
       <section className="mt-8">
-        <h2 className="text-xl font-semibold">Scenario</h2>
+        <h2 className="text-xl font-semibold">{sec.problem}</h2>
         <p className="mt-2 text-gray-700">{x.scenario}</p>
       </section>
 
       <section className="mt-8">
-        <h2 className="text-xl font-semibold">What we did</h2>
+        <h2 className="text-xl font-semibold">{sec.investigation}</h2>
         <ol className="mt-3 space-y-3">
           {x.approach.map((step, i) => (
             <li key={i} className="card p-4">
@@ -125,8 +128,41 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
       </section>
 
       <section className="mt-8 rounded-lg bg-[#f1f5f9] p-6">
-        <h2 className="font-semibold text-[#0f172a]">Result</h2>
+        <h2 className="font-semibold text-[#0f172a]">{sec.findings}</h2>
         <p className="mt-2 text-gray-700">{x.result}</p>
+        <ul className="mt-3 space-y-2">
+          {x.findings.map((f) => (
+            <li key={f} className="flex gap-2 text-sm text-gray-700">
+              <span className="text-[#0f4c81]">·</span>
+              <span>{f}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* 风险分：等级由 riskEngine 的 overallLevel 计算，不在此重复定义阈值 */}
+      <section className="mt-8">
+        <h2 className="text-xl font-semibold">{sec.riskScore}</h2>
+        <div className="mt-3 rounded-lg border border-[#e2e8f0] p-5">
+          <div className="flex items-baseline gap-2">
+            <span className="text-3xl font-extrabold text-[#0f4c81]">{c.riskScore}</span>
+            <span className="text-sm text-gray-500">
+              {sec.scoreUnit} · {overallLevel(c.riskScore)}
+            </span>
+          </div>
+          <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#e2e8f0]">
+            <div
+              className="h-full rounded-full bg-[#0f4c81]"
+              style={{ width: `${c.riskScore}%` }}
+            />
+          </div>
+          <p className="mt-3 text-xs text-gray-500">{sec.scoreNote}</p>
+        </div>
+      </section>
+
+      <section className="mt-8">
+        <h2 className="text-xl font-semibold">{sec.recommendation}</h2>
+        <p className="mt-2 text-gray-700">{x.recommendation}</p>
       </section>
 
       {/* 内链：工具 / 服务 / 相关指南（与指南页同模式，禁止死链） */}
