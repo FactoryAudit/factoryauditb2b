@@ -28,7 +28,9 @@
       "improvementDesc": "Turn audit findings into corrective action and training.",
       "monitoring": "Supplier Monitoring",
       "monitoringDesc": "Scheduled re-checks and change alerts"
-    }
+    },
+    "homeLabel": "FactoryAuditB2B início",
+    "mainNav": "Navegação principal"
   },
   "footer": {
     "platform": "Plataforma",
@@ -999,7 +1001,9 @@
       "warnTooLarge": "Essas caixas são grandes demais para qualquer contêiner da lista. Confira as dimensões.",
       "warnDoor": "Nesta orientação, a caixa pode não passar pela abertura da porta. Confirme com a equipe de carregamento.",
       "empty": "Informe as dimensões e a quantidade para ver o plano de carregamento.",
-      "disclaimer": "Apenas estimativas. Os números são especificações ISO típicas e variam conforme o armador. Confirme sempre o plano final com seu despachante."
+      "disclaimer": "Apenas estimativas. Os números são especificações ISO típicas e variam conforme o armador. Confirme sempre o plano final com seu despachante.",
+      "unit": "Unidade",
+      "massUnit": "Unidade de massa"
     },
     "specs": {
       "internal": "Interno (cm)",
@@ -1550,7 +1554,8 @@
       "coverage": "Atualmente cobrimos China, Vietnã e Tailândia. Diga de qual país você compra e confirmaremos a disponibilidade.",
       "training": "Sim. Auditamos sua fábrica e depois treinamos as equipes em sistemas de qualidade, controle de qualidade e processos de produção. Os planos são Starter US$ 280/fábrica e Pro US$ 950/fábrica, com opção Enterprise personalizada. Todo plano começa com uma auditoria de lacunas.",
       "default": "Posso ajudar com auditorias, verificação de fornecedores, cobertura, preços e treinamento. Para algo específico, deixe seus dados e nossa equipe responderá em um dia útil."
-    }
+    },
+    "close": "Fechar"
   },
   "about": {
     "metaTitle": "Sobre nós — Auditoria de fábrica e treinamento de fornecedores",

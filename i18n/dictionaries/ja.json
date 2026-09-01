@@ -28,7 +28,9 @@
       "improvementDesc": "Turn audit findings into corrective action and training.",
       "monitoring": "Supplier Monitoring",
       "monitoringDesc": "Scheduled re-checks and change alerts"
-    }
+    },
+    "homeLabel": "FactoryAuditB2B ホーム",
+    "mainNav": "メインナビゲーション"
   },
   "footer": {
     "platform": "プラットフォーム",
@@ -1078,7 +1080,9 @@
       "warnTooLarge": "These cartons are too large to fit any container in this list. Check the dimensions.",
       "warnDoor": "The carton may not pass through the door opening in this orientation. Check with your loading team.",
       "empty": "Enter carton dimensions and quantity to see the loading plan.",
-      "disclaimer": "Estimates only. Container figures are typical ISO specifications and vary by carrier. Always confirm the final loading plan with your forwarder."
+      "disclaimer": "Estimates only. Container figures are typical ISO specifications and vary by carrier. Always confirm the final loading plan with your forwarder.",
+      "unit": "単位",
+      "massUnit": "質量の単位"
     },
     "specs": {
       "internal": "Internal (cm)",
@@ -1556,7 +1560,8 @@
       "coverage": "現在の対応国は中国、ベトナム、タイです。調達先の国を教えていただければ、対応可否を確認します。",
       "training": "はい。工場を監査した上で、品質マネジメント、QC、生産プロセスについてチームを研修します。Starter $280/工場、Pro $950/工場、および Enterprise のカスタム対応があります。どのプランもギャップ監査から始まります。",
       "default": "監査、サプライヤー検証、対応地域、料金、研修についてお答えできます。個別のご相談は、連絡先をお知らせいただければ 1 営業日以内に担当者よりご連絡します。"
-    }
+    },
+    "close": "閉じる"
   },
   "about": {
     "metaTitle": "私たちについて — 工場監査とサプライヤー研修",

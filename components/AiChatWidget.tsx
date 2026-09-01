@@ -16,6 +16,8 @@ export type AiChatDict = {
   error: string;
   ctaText: string;
   ctaButton: string;
+  /** aria-label：关闭按钮 */
+  close: string;
 };
 
 type Msg = { role: "user" | "assistant"; content: string };
@@ -83,7 +85,7 @@ export default function AiChatWidget({
               <div className="text-sm font-medium">{dict.title}</div>
               <div className="text-[11px] text-white/80">{dict.subtitle}</div>
             </div>
-            <button type="button" onClick={() => setOpen(false)} aria-label="Close" className="text-white/90 hover:text-white">
+            <button type="button" onClick={() => setOpen(false)} aria-label={dict.close} className="text-white/90 hover:text-white">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                 <path d="M18 6 6 18M6 6l12 12" />
               </svg>

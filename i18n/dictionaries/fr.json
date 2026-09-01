@@ -28,7 +28,9 @@
       "improvementDesc": "Turn audit findings into corrective action and training.",
       "monitoring": "Supplier Monitoring",
       "monitoringDesc": "Scheduled re-checks and change alerts"
-    }
+    },
+    "homeLabel": "FactoryAuditB2B accueil",
+    "mainNav": "Navigation principale"
   },
   "footer": {
     "platform": "Plateforme",
@@ -1005,7 +1007,9 @@
       "warnTooLarge": "Ces cartons sont trop grands pour tous les conteneurs de la liste. Vérifiez les dimensions.",
       "warnDoor": "Dans cette orientation, le carton pourrait ne pas passer l'ouverture de la porte. Vérifiez avec l'équipe de chargement.",
       "empty": "Saisissez les dimensions et la quantité pour voir le plan de chargement.",
-      "disclaimer": "Estimations uniquement. Les chiffres sont des spécifications ISO types et varient selon la compagnie maritime. Validez toujours le plan final avec votre transitaire."
+      "disclaimer": "Estimations uniquement. Les chiffres sont des spécifications ISO types et varient selon la compagnie maritime. Validez toujours le plan final avec votre transitaire.",
+      "unit": "Unité",
+      "massUnit": "Unité de masse"
     },
     "specs": {
       "internal": "Intérieur (cm)",
@@ -1556,7 +1560,8 @@
       "coverage": "Nous couvrons actuellement la Chine, le Vietnam et la Thaïlande. Indiquez-nous votre pays d'approvisionnement et nous confirmerons la disponibilité.",
       "training": "Oui. Nous auditons votre usine, puis nous formons les équipes aux systèmes qualité, au contrôle qualité et aux processus de production. Les formules sont Starter 280 $/usine et Pro 950 $/usine, avec une option Entreprise sur mesure. Chaque formule commence par un audit des écarts.",
       "default": "Je peux vous aider sur les audits, la vérification de fournisseurs, la couverture, les tarifs et la formation. Pour toute demande précise, laissez vos coordonnées et notre équipe vous répondra sous un jour ouvré."
-    }
+    },
+    "close": "Fermer"
   },
   "about": {
     "metaTitle": "À propos — Audit d'usine et formation des fournisseurs",

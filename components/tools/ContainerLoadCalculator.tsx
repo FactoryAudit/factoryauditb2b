@@ -38,6 +38,10 @@ export type ContainerUiDict = {
   warnDoor: string;
   empty: string;
   disclaimer: string;
+  /** aria-label：尺寸单位切换组 */
+  unit: string;
+  /** aria-label：重量单位切换组 */
+  massUnit: string;
 };
 
 /** 柜型名（General purpose / High cube / Reefer / Open top）—— 与 ui 平级，单独传入 */
@@ -221,7 +225,7 @@ export default function ContainerLoadCalculator({
         <div>
           <div className="flex items-center justify-between mb-3">
             <h2 className="font-semibold text-[#0f172a]">{t.cargoTitle}</h2>
-            <div className="flex gap-1" role="group" aria-label="Unit">
+            <div className="flex gap-1" role="group" aria-label={t.unit}>
               {(["cm", "in"] as Unit[]).map((u) => (
                 <button
                   key={u}
@@ -251,7 +255,7 @@ export default function ContainerLoadCalculator({
             <label className="font-semibold text-[#0f172a]" htmlFor="cargoWeight">
               {t.weight}
             </label>
-            <div className="flex gap-1" role="group" aria-label="Mass unit">
+            <div className="flex gap-1" role="group" aria-label={t.massUnit}>
               {(["kg", "lb"] as MassUnit[]).map((u) => (
                 <button
                   key={u}

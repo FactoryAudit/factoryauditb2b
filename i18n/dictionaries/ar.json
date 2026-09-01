@@ -28,7 +28,9 @@
       "improvementDesc": "Turn audit findings into corrective action and training.",
       "monitoring": "Supplier Monitoring",
       "monitoringDesc": "Scheduled re-checks and change alerts"
-    }
+    },
+    "homeLabel": "FactoryAuditB2B الرئيسية",
+    "mainNav": "التنقل الرئيسي"
   },
   "footer": {
     "platform": "Platform",
@@ -1078,7 +1080,9 @@
       "warnTooLarge": "These cartons are too large to fit any container in this list. Check the dimensions.",
       "warnDoor": "The carton may not pass through the door opening in this orientation. Check with your loading team.",
       "empty": "Enter carton dimensions and quantity to see the loading plan.",
-      "disclaimer": "Estimates only. Container figures are typical ISO specifications and vary by carrier. Always confirm the final loading plan with your forwarder."
+      "disclaimer": "Estimates only. Container figures are typical ISO specifications and vary by carrier. Always confirm the final loading plan with your forwarder.",
+      "unit": "الوحدة",
+      "massUnit": "وحدة الكتلة"
     },
     "specs": {
       "internal": "Internal (cm)",
@@ -1556,7 +1560,8 @@
       "coverage": "نغطي حالياً الصين وفيتنام وتايلاند. أخبرنا من أي بلد تشتري وسنؤكد إمكانية الخدمة.",
       "training": "نعم. نتدقق مصنعك ثم ندرّب الفرق على أنظمة الجودة وضبط الجودة وعمليات الإنتاج. الخطط هي Starter بـ 280 دولاراً للمصنع وPro بـ 950 دولاراً للمصنع، مع خيار Enterprise مخصص. تبدأ كل خطة بتدقيق للفجوات.",
       "default": "يمكنني المساعدة في التدقيق، والتحقق من الموردين، والتغطية، والأسعار، والتدريب. لأي استفسار محدد، اترك بياناتك وسيرد فريقنا خلال يوم عمل واحد."
-    }
+    },
+    "close": "إغلاق"
   },
   "about": {
     "metaTitle": "من نحن — تدقيق المصانع وتدريب الموردين",

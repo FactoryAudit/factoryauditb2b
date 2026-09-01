@@ -18,6 +18,10 @@ export type NavDict = {
   about: string;
   postRfq: string;
   requestAudit: string;
+  /** aria-label：LOGO 链接（品牌名 + 首页） */
+  homeLabel: string;
+  /** aria-label：主导航 landmark */
+  mainNav: string;
   menu: ServiceMenuDict;
 };
 
@@ -36,7 +40,7 @@ export default function SiteHeader({
         <Link
           href={p("/")}
           className="flex items-center shrink-0"
-          aria-label="FactoryAuditB2B — home"
+          aria-label={dict.homeLabel}
         >
           {/* 品牌 LOGO：盾牌 + 工厂 + 放大镜（核验方） */}
           {/* 用原生 img 而不是 next/image，避免 SVG 需要 dangerouslyAllowSVG 配置 */}
@@ -52,7 +56,7 @@ export default function SiteHeader({
 
         {/* 第一阶段导航只保留转化主线：Tools / Suppliers / Services / Resources / Pricing。
             Logistics 是占位页，已从主导航移除；培训降级进 Services 下拉。 */}
-        <nav aria-label="Main" className="hidden lg:flex items-center gap-5 text-sm text-[#0f172a]">
+        <nav aria-label={dict.mainNav} className="hidden lg:flex items-center gap-5 text-sm text-[#0f172a]">
           <Link href={p("/tools")} className="hover:text-[#0f4c81] font-medium">
             {dict.tools}
           </Link>
@@ -96,7 +100,7 @@ export default function SiteHeader({
         </nav>
 
         <div className="flex items-center gap-2">
-          <LocaleSwitcher current={locale} />
+          <LocaleSwitcher current={locale} languageLabel={dict.language} />
           <Link href={p("/rfq")} className="btn btn-primary whitespace-nowrap">
             {dict.postRfq}
           </Link>

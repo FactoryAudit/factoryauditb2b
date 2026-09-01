@@ -28,7 +28,9 @@
       "improvementDesc": "Turn audit findings into corrective action and training.",
       "monitoring": "Supplier Monitoring",
       "monitoringDesc": "Scheduled re-checks and change alerts"
-    }
+    },
+    "homeLabel": "FactoryAuditB2B Startseite",
+    "mainNav": "Hauptnavigation"
   },
   "footer": {
     "platform": "Plattform",
@@ -1005,7 +1007,9 @@
       "warnTooLarge": "Diese Kartons passen in keinen Container der Liste. Bitte Maße prüfen.",
       "warnDoor": "In dieser Ausrichtung passt der Karton womöglich nicht durch die Türöffnung. Klären Sie das mit dem Ladeteam.",
       "empty": "Bitte Kartonmaße und Menge eingeben, um den Ladeplan zu sehen.",
-      "disclaimer": "Nur Schätzwerte. Die Containerdaten sind typische ISO-Werte und variieren je Reederei. Stimmen Sie den endgültigen Ladeplan immer mit Ihrem Spediteur ab."
+      "disclaimer": "Nur Schätzwerte. Die Containerdaten sind typische ISO-Werte und variieren je Reederei. Stimmen Sie den endgültigen Ladeplan immer mit Ihrem Spediteur ab.",
+      "unit": "Einheit",
+      "massUnit": "Gewichtseinheit"
     },
     "specs": {
       "internal": "Innen (cm)",
@@ -1556,7 +1560,8 @@
       "coverage": "Wir decken derzeit China, Vietnam und Thailand ab. Nennen Sie uns Ihr Beschaffungsland und wir bestätigen die Verfügbarkeit.",
       "training": "Ja. Wir prüfen Ihre Fabrik und schulen die Teams anschließend in Qualitätsmanagement, QC und Produktionsprozessen. Die Pläne sind Starter 280 $/Fabrik und Pro 950 $/Fabrik, dazu eine individuelle Enterprise-Option. Jeder Plan beginnt mit einem Gap-Audit.",
       "default": "Ich kann bei Audits, Lieferantenprüfung, Abdeckung, Preisen und Schulungen helfen. Für konkrete Anliegen hinterlassen Sie bitte Ihre Kontaktdaten; unser Team antwortet innerhalb eines Werktages."
-    }
+    },
+    "close": "Schließen"
   },
   "about": {
     "metaTitle": "Über uns — Werksaudit und Lieferantenschulung",

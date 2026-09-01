@@ -28,7 +28,9 @@
       "improvementDesc": "Turn audit findings into corrective action and training.",
       "monitoring": "Supplier Monitoring",
       "monitoringDesc": "Scheduled re-checks and change alerts"
-    }
+    },
+    "homeLabel": "FactoryAuditB2B 首頁",
+    "mainNav": "主導覽"
   },
   "footer": {
     "platform": "平臺",
@@ -1005,7 +1007,9 @@
       "warnTooLarge": "該紙箱尺寸過大，列表中沒有能裝下的櫃型，請覈對尺寸。",
       "warnDoor": "按當前朝向，紙箱可能無法通過箱門開口，請與現場裝櫃人員確認。",
       "empty": "請輸入紙箱尺寸與數量，查看配載方案。",
-      "disclaimer": "結果僅爲估算。集裝箱數據爲 ISO 典型值，各船公司存在差異，最終配載方案請務必與貨代確認。"
+      "disclaimer": "結果僅爲估算。集裝箱數據爲 ISO 典型值，各船公司存在差異，最終配載方案請務必與貨代確認。",
+      "unit": "單位",
+      "massUnit": "重量單位"
     },
     "specs": {
       "internal": "內部尺寸 (cm)",
@@ -1556,7 +1560,8 @@
       "coverage": "我們目前覆蓋中國、越南和泰國。告訴我你從哪個國家採購，我會確認是否可以服務。",
       "training": "提供。我們先審覈工廠，再培訓團隊的質量體系、QC 與生產工藝。方案爲 Starter $280/廠、Pro $950/廠，另有 Enterprise 定製。每個方案都從差距審覈開始。",
       "default": "我可以解答審覈、供應商驗證、覆蓋範圍、定價與培訓相關問題。如需具體方案，留下聯繫方式，我們的團隊會在一個工作日內回覆。"
-    }
+    },
+    "close": "關閉"
   },
   "about": {
     "metaTitle": "關於我們 — 工廠審覈與供應商培訓",

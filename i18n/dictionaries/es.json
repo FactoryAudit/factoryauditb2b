@@ -28,7 +28,9 @@
       "improvementDesc": "Turn audit findings into corrective action and training.",
       "monitoring": "Supplier Monitoring",
       "monitoringDesc": "Scheduled re-checks and change alerts"
-    }
+    },
+    "homeLabel": "FactoryAuditB2B inicio",
+    "mainNav": "Navegación principal"
   },
   "footer": {
     "platform": "Platform",
@@ -1005,7 +1007,9 @@
       "warnTooLarge": "These cartons are too large to fit any container in this list. Check the dimensions.",
       "warnDoor": "The carton may not pass through the door opening in this orientation. Check with your loading team.",
       "empty": "Enter carton dimensions and quantity to see the loading plan.",
-      "disclaimer": "Estimates only. Container figures are typical ISO specifications and vary by carrier. Always confirm the final loading plan with your forwarder."
+      "disclaimer": "Estimates only. Container figures are typical ISO specifications and vary by carrier. Always confirm the final loading plan with your forwarder.",
+      "unit": "Unidad",
+      "massUnit": "Unidad de masa"
     },
     "specs": {
       "internal": "Internal (cm)",
@@ -1556,7 +1560,8 @@
       "coverage": "Actualmente cubrimos China, Vietnam y Tailandia. Dime desde qué país compras y confirmaré la disponibilidad.",
       "training": "Yes. We audit your factory and then train the teams in quality systems, QC and production process. Plans are Starter $280/factory and Pro $950/factory, with a custom Enterprise option. Every plan starts with a gap audit.",
       "default": "I can help with audits, supplier verification, coverage, pricing and training. For anything specific, leave your details and our team will reply within one business day."
-    }
+    },
+    "close": "Cerrar"
   },
   "about": {
     "metaTitle": "About Us — Factory Audit & Supplier Training",
