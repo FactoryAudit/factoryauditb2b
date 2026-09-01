@@ -35,11 +35,11 @@
     "resources": "Resources",
     "coverage": "Coverage",
     "logistics": "Logistics",
-    "allTools": "All free tools",
-    "riskCalculator": "Risk calculator",
-    "verificationChecklist": "Verification checklist",
-    "supplierVerification": "Supplier verification",
-    "factoryAudit": "Factory audit",
+    "allTools": "Todas las herramientas gratuitas",
+    "riskCalculator": "Calculadora de riesgo",
+    "verificationChecklist": "Checklist de verificación",
+    "supplierVerification": "Verificación de proveedores",
+    "factoryAudit": "Auditoría de fábrica",
     "knowledgeBase": "Resources",
     "pricing": "Pricing",
     "tagline": "Supplier Intelligence & Verification for Global Buyers. Evaluate. Verify. Audit.",
@@ -52,10 +52,10 @@
     "verificationService": "Supplier verification",
     "inspectionService": "Inspection",
     "sourcingService": "Sourcing",
-    "improvementService": "Supplier Improvement",
-    "allServices": "All services",
-    "containerCalculator": "Container load calculator",
-    "trustCenter": "Trust Center",
+    "improvementService": "Mejora de proveedores",
+    "allServices": "Todos los servicios",
+    "containerCalculator": "Calculadora de carga de contenedor",
+    "trustCenter": "Centro de confianza",
     "operatedBy": "FactoryAuditB2B is a platform and brand operated by {entity}.",
     "registeredBusiness": "China Registered Business",
     "supplierNetwork": "Red de Proveedores",
@@ -72,7 +72,7 @@
     "ctaRfq": "Publicar cotización",
     "ctaAudit": "Solicitar auditoría",
     "services": "Hacemos verificación de proveedores, auditorías de fábrica, inspecciones y transporte.",
-    "toolsTitle": "Free tools for evaluating suppliers",
+    "toolsTitle": "Herramientas gratuitas para evaluar proveedores",
     "toolsLead": "No account needed, and no email wall on the score itself.",
     "value1Title": "Qué significa realmente «verificado»",
     "value1Body": "Un proveedor solo se marca como verificado después de revisar su registro mercantil, confirmar que la planta existe y examinar los documentos de auditoría.",
@@ -115,13 +115,13 @@
         "body": "Recibe hallazgos, pruebas y un informe escrito. Luego hace un pedido, renegocia o se va."
       }
     ],
-    "coverageTitle": "Where We Verify Suppliers",
+    "coverageTitle": "Dónde verificamos proveedores",
     "coverageLead": "On-the-ground supplier verification and factory audit support across China and Southeast Asia.",
-    "coveragePhase": "Phase 1 coverage",
-    "coverageService1": "Supplier Verification",
-    "coverageService2": "Factory Audit",
-    "coverageService3": "Inspection",
-    "coverageCta": "See coverage",
+    "coveragePhase": "Cobertura fase 1",
+    "coverageService1": "Verificación de proveedores",
+    "coverageService2": "Auditoría de fábrica",
+    "coverageService3": "Inspección",
+    "coverageCta": "Ver cobertura",
     "whyTitle": "Por qué los compradores usan FactoryAuditB2B",
     "whyLead": "Cuatro cosas que hacemos diferente a un directorio o a una hoja de cálculo.",
     "why1Title": "Evidencia real",
@@ -139,9 +139,9 @@
     "bottomTitle": "Have a supplier already?",
     "bottomLead": "Send us the company name and address. We will tell you what we can confirm, what we cannot, and what it costs.",
     "bottomCta": "Verify This Supplier",
-    "otherRegionTitle": "Other Regions",
+    "otherRegionTitle": "Otras regiones",
     "otherRegionBody": "Don't see your country? We accept enquiries for any region and review each one based on scope, location and inspector availability.",
-    "otherRegionCta": "Tell us where you source",
+    "otherRegionCta": "Dinos dónde compras",
     "primary": "Evaluar riesgo del proveedor",
     "secondary": "Verificar un proveedor",
     "highIntent": "Solicitar una auditoría de fábrica",
@@ -150,8 +150,8 @@
     "guide3Title": "Evaluación de riesgo de proveedor"
   },
   "toolsIndex": {
-    "badge": "Free tools",
-    "h1": "Free Supplier & Factory Audit Tools",
+    "badge": "Herramientas gratuitas",
+    "h1": "Herramientas gratuitas de proveedores y auditoría de fábrica",
     "lead": "Practical tools for evaluating suppliers, checking documents, preparing factory audits and reducing sourcing risk. No account required, and no email wall on the score itself.",
     "flagship": "Flagship",
     "ctaTitle": "Want the checks done for you?",
@@ -163,31 +163,31 @@
   },
   "toolCards": {
     "riskCalculator": {
-      "title": "Supplier Risk Calculator",
+      "title": "Calculadora de riesgo de proveedores",
       "desc": "Score any supplier from 0 to 100 across six weighted risk dimensions."
     },
     "verificationChecklist": {
-      "title": "Supplier Verification Checklist",
+      "title": "Checklist de verificación de proveedores",
       "desc": "29 checks across six stages to finish before you place an order."
     },
     "riskAssessment": {
-      "title": "Supplier Risk Assessment",
+      "title": "Evaluación de riesgo de proveedores",
       "desc": "Enter supplier details and get an initial risk score with evidence status."
     },
     "auditChecklist": {
-      "title": "Factory Audit Checklist Generator",
+      "title": "Generador de checklist de auditoría de fábrica",
       "desc": "Build an audit checklist for your industry and audit type."
     },
     "supplierScorecard": {
-      "title": "Supplier Evaluation Scorecard",
+      "title": "Scorecard de evaluación de proveedores",
       "desc": "Weight the criteria yourself and score suppliers against them."
     },
     "auditReportAnalyzer": {
-      "title": "Audit Report Analyzer",
+      "title": "Analizador de informes de auditoría",
       "desc": "Check an audit report for gaps, inconsistencies and risk signals."
     },
     "documentChecker": {
-      "title": "Supplier Document Checker",
+      "title": "Verificador de documentos de proveedores",
       "desc": "Validate supplier documents and certificates against each other."
     },
     "containerCalculator": {
@@ -272,32 +272,32 @@
     },
     "dimensions": {
       "company": {
-        "label": "Company risk",
+        "label": "Riesgo de empresa",
         "short": "Company",
         "description": "How long they have been trading, whether the registered address is the factory address, and whether ownership is traceable."
       },
       "quality": {
-        "label": "Quality risk",
+        "label": "Riesgo de calidad",
         "short": "Quality",
         "description": "Whether quality control is documented, whether an outside auditor has been through recently, and whether inspection records exist."
       },
       "compliance": {
-        "label": "Compliance risk",
+        "label": "Riesgo de cumplimiento",
         "short": "Compliance",
         "description": "Social, environmental and product compliance records. We ask what you have, not for a specific certificate."
       },
       "production": {
-        "label": "Production risk",
+        "label": "Riesgo de producción",
         "short": "Production",
         "description": "Capacity against your order size, whether work is subcontracted, and whether they have made your product before."
       },
       "supplychain": {
-        "label": "Supply chain risk",
+        "label": "Riesgo de cadena de suministro",
         "short": "Supply chain",
         "description": "Where raw materials come from, how exposed you are to a single source, and how realistic the lead time is."
       },
       "documentation": {
-        "label": "Documentation risk",
+        "label": "Riesgo documental",
         "short": "Documentation",
         "description": "Whether the business licence, factory address, certificates, audit reports and test reports can actually be produced."
       },
@@ -1261,11 +1261,11 @@
     "ctaButton": "Contact us"
   },
   "pricing": {
-    "metaTitle": "Services & Plans — Free Tools, Verification, Audit, Monitoring",
-    "metaDesc": "Free supplier evaluation tools, supplier verification from USD 99, factory audits from USD 399, product inspection from USD 99 and supplier monitoring by subscription. All prices in USD.",
-    "h1": "Services & Plans",
-    "lead": "Use the tools free. Pay only when you need someone to check a supplier on the ground.",
-    "currencyNote": "All prices in USD. Verification and audit are quoted per project.",
+    "metaTitle": "Servicios y planes — herramientas gratuitas, verificación, auditoría, monitoreo",
+    "metaDesc": "Herramientas gratuitas de evaluación de proveedores, verificación de proveedores desde 99 USD, auditorías de fábrica desde 399 USD, inspección de producto desde 99 USD y monitoreo de proveedores por suscripción. Todos los precios en USD.",
+    "h1": "Servicios y planes",
+    "lead": "Las herramientas son gratuitas. Solo pagas cuando necesitas que alguien verifique al proveedor sobre el terreno.",
+    "currencyNote": "Todos los precios en USD. La verificación y la auditoría se presupuestan por proyecto.",
     "forBuyers": "Para compradores",
     "forSuppliers": "Para proveedores",
     "perMonth": "/mes",
@@ -1344,113 +1344,113 @@
       "Flete y abastecimiento: comisión del 3–5% sobre el valor del pedido",
       "Sin comisión de plataforma en tu primer pedido"
     ],
-    "plansTitle": "What you can use today",
-    "plansLead": "All four are available now. Verification, audit and inspection are quoted per project; monitoring is a yearly subscription.",
+    "plansTitle": "Lo que puedes usar hoy",
+    "plansLead": "Los cuatro están disponibles. Verificación, auditoría e inspección se presupuestan por proyecto; el monitoreo es una suscripción anual.",
     "plans": [
       {
-        "name": "Free Tools",
+        "name": "Herramientas gratuitas",
         "price": "$0",
-        "note": "No account needed",
+        "note": "Sin cuenta",
         "available": true,
         "features": [
           "Supplier risk assessment with six-dimension breakdown",
-          "Supplier verification checklist",
-          "Factory audit checklist and scorecard",
-          "Risk score and recommended next steps"
+          "Checklist de verificación de proveedores",
+          "Checklist y scorecard de auditoría de fábrica",
+          "Puntuación de riesgo y próximos pasos recomendados"
         ],
-        "cta": "Open the tools",
+        "cta": "Abrir herramientas",
         "href": "/tools"
       },
       {
-        "name": "Supplier Verification",
+        "name": "Verificación de proveedores",
         "price": "$99 – $129",
-        "note": "Per supplier, quoted per project",
+        "note": "Por proveedor, presupuesto por proyecto",
         "available": true,
         "features": [
-          "Business registration and legal entity check",
-          "Factory address and site evidence",
-          "Manufacturer or trading company determination",
-          "Quality and compliance document review",
-          "Written report with a risk summary"
+          "Comprobación de registro mercantil y entidad legal",
+          "Dirección de fábrica y evidencia del sitio",
+          "Determinación de fabricante o trading company",
+          "Revisión de documentos de calidad y cumplimiento",
+          "Informe escrito con resumen de riesgo"
         ],
-        "cta": "Request verification",
+        "cta": "Pedir verificación",
         "href": "/services/supplier-verification"
       },
       {
-        "name": "Factory Audit",
-        "price": "From $399",
-        "note": "Per man-day plus travel",
+        "name": "Auditoría de fábrica",
+        "price": "Desde 399 USD",
+        "note": "Por día-hombre más viaje",
         "available": true,
         "features": [
-          "On-site assessment against your required standard",
-          "Quality, compliance and labour record review",
-          "Findings graded by severity with photographs",
-          "Corrective action plan with owners and dates",
-          "Optional re-audit after the corrective period"
+          "Evaluación in situ según el estándar requerido",
+          "Revisión de registros de calidad, cumplimiento y laborales",
+          "Hallazgos clasificados por severidad con fotografías",
+          "Plan de acciones correctivas con responsables y fechas",
+          "Reauditoría opcional tras el plazo correctivo"
         ],
-        "cta": "Request an audit",
+        "cta": "Pedir auditoría",
         "href": "/factory-audit/request"
       },
       {
-        "name": "Supplier Monitoring",
-        "price": "Subscription",
-        "note": "Quoted per supplier per year",
+        "name": "Monitoreo de proveedores",
+        "price": "Suscripción",
+        "note": "Presupuesto por proveedor y año",
         "available": true,
         "features": [
-          "Scheduled re-checks of verified facts",
-          "Risk change alerts on your suppliers",
-          "Updated report when facts change",
-          "Same evidence policy as one-off checks"
+          "Recomprobaciones programadas de los hechos verificados",
+          "Alertas de cambio de riesgo sobre tus proveedores",
+          "Informe actualizado cuando cambian los hechos",
+          "Misma política de evidencia que en las comprobaciones puntuales"
         ],
-        "cta": "Ask for a quote",
+        "cta": "Pedir presupuesto",
         "href": "/monitoring"
       }
     ],
-    "comingSoonNote": "Supplier Monitoring is a subscription and is quoted per supplier per year. Everything else on this page is pay-per-project: no subscription, nothing renews automatically.",
-    "alsoTitle": "Also available",
+    "comingSoonNote": "El monitoreo de proveedores es una suscripción y se presupuesta por proveedor y año. Todo lo demás en esta página se cobra por proyecto: sin suscripción, sin renovación automática.",
+    "alsoTitle": "También disponible",
     "alsoItems": [
-      "Inspection: in-line and pre-shipment checks, quoted per man-day",
-      "Sourcing: 3–5% commission on order value, quoted before the order is placed",
-      "Supplier Improvement: training and corrective action after an audit, quoted per factory"
+      "Inspección: controles en línea y previos al envío, presupuesto por día-hombre",
+      "Sourcing: comisión del 3–5 % sobre el valor del pedido, presupuesto antes de realizar el pedido",
+      "Mejora de proveedores: formación y acciones correctivas tras una auditoría, presupuesto por fábrica"
     ],
-    "alsoCta": "Request a quote",
-    "reportsTitle": "Reports and verification: indicative ranges",
-    "reportsLead": "Every figure below is indicative and quoted per project. We publish ranges so you can tell whether the check is worth ordering before you ask.",
+    "alsoCta": "Pedir presupuesto",
+    "reportsTitle": "Informes y verificación: rangos orientativos",
+    "reportsLead": "Cada cifra es orientativa y se presupuesta por proyecto. Publicamos rangos para que puedas valorar si la comprobación vale la pena antes de pedir presupuesto.",
     "reports": [
       {
-        "name": "Supplier due diligence report",
+        "name": "Informe de diligencia debida del proveedor",
         "range": "USD 99 – 129",
-        "note": "Documentary review and written report. No site visit."
+        "note": "Revisión documental e informe escrito. Sin visita al sitio."
       },
       {
-        "name": "Product inspection",
+        "name": "Inspección de producto",
         "range": "USD 99+",
-        "note": "Quoted per man-day plus travel, based on country and scope."
+        "note": "Presupuesto por día-hombre más viaje, según país y alcance."
       },
       {
-        "name": "On-site factory audit",
+        "name": "Auditoría de fábrica in situ",
         "range": "USD 399+",
-        "note": "Quoted per man-day plus travel, based on country, site size and standard."
+        "note": "Presupuesto por día-hombre más viaje, según país, tamaño de la planta y estándar."
       }
     ],
-    "reportsNote": "Online payment is not open yet. Every item above is quoted and invoiced by our team, so nothing here is a subscription and nothing renews.",
-    "faqTitle": "Pricing FAQ",
+    "reportsNote": "El pago en línea aún no está abierto. Cada concepto anterior lo presupuesta y factura nuestro equipo: nada aquí es una suscripción y nada se renueva automáticamente.",
+    "faqTitle": "Preguntas sobre precios",
     "faq": [
       {
-        "q": "Do I need to pay to use the tools?",
-        "a": "No. The risk calculator, checklists and scorecards are free and do not need an account. You only pay when you ask us to verify or audit a supplier."
+        "q": "¿Tengo que pagar por usar las herramientas?",
+        "a": "No. La calculadora de riesgo, los checklists y los scorecards son gratuitos y no requieren cuenta. Solo pagas cuando nos pides verificar o auditar a un proveedor."
       },
       {
-        "q": "How much does a supplier verification cost?",
-        "a": "It is quoted per supplier. The price depends on the country, whether the package includes a site visit, and how many documents need review. Send us the company name and we will quote it."
+        "q": "¿Cuánto cuesta una verificación de proveedores?",
+        "a": "Se presupuesta por proveedor. El precio depende del país, de si incluye visita al sitio y de cuántos documentos hay que revisar. Envíanos el nombre de la empresa y te pasamos presupuesto."
       },
       {
-        "q": "How much does a factory audit cost?",
-        "a": "It is quoted per man-day plus travel. A single-site quality audit starts at one man-day. A full social compliance audit such as SMETA usually takes two or more, depending on headcount."
+        "q": "¿Cuánto cuesta una auditoría de fábrica?",
+        "a": "Se presupuesta por día-hombre más viaje. Una auditoría de calidad en una sola planta empieza en un día-hombre. Una auditoría social completa como SMETA suele requerir dos o más, según la plantilla."
       },
       {
-        "q": "How does supplier monitoring work?",
-        "a": "Monitoring is a subscription, quoted per supplier per year. We re-check the verified facts on a schedule you choose and send you a short update when something changes. You can start with a one-off verification and add monitoring later."
+        "q": "¿Cómo funciona el monitoreo de proveedores?",
+        "a": "Es una suscripción presupuestada por proveedor y año. Recomprobamos los hechos verificados con la frecuencia que elijas y te enviamos un breve aviso cuando algo cambia. Puedes empezar con una verificación puntual y añadir el monitoreo después."
       }
     ],
     "recommendedTag": "Recomendado"
@@ -1590,24 +1590,24 @@
     "timelineA": "Documentary checks are usually finished within two business days. A package that includes a site visit in {country} is normally scheduled within a week, longer outside the main production hubs."
   },
   "servicesIndex": {
-    "badge": "Services",
+    "badge": "Servicios",
     "h1": "Supplier verification, audit and inspection services",
     "lead": "Free tools tell you what to check. These services get it checked. Everything below is scoped and quoted per project, and none of it is a bundle you have to buy into.",
-    "servicesTitle": "What we do",
+    "servicesTitle": "Qué hacemos",
     "servicesLead": "Pick the stage you are at.",
     "items": {
       "verification": {
-        "title": "Supplier Verification",
+        "title": "Verificación de proveedores",
         "desc": "Confirm the company, the site and the documents before you release a deposit.",
         "href": "/services/supplier-verification"
       },
       "factoryAudit": {
-        "title": "Factory Audit",
+        "title": "Auditoría de fábrica",
         "desc": "An auditor on site against the standard your buyer requires, with findings graded and corrective actions listed.",
         "href": "/factory-audit/request"
       },
       "inspection": {
-        "title": "Inspection",
+        "title": "Inspección",
         "desc": "In-line and pre-shipment checks on your production, quoted per man-day.",
         "href": "/custom-services"
       },
@@ -1617,7 +1617,7 @@
         "href": "/rfq"
       },
       "improvement": {
-        "title": "Supplier Improvement",
+        "title": "Mejora de proveedores",
         "desc": "Audit findings turned into corrective action, training and a re-audit. Not a standalone training business.",
         "href": "/services/supplier-improvement"
       },
@@ -1626,11 +1626,11 @@
         "desc": "Keep verified supplier facts current. Scheduled re-checks of registration, address, certificates and public records, with an alert when something changes."
       }
     },
-    "coverageTitle": "Coverage by country",
+    "coverageTitle": "Cobertura por país",
     "coverageLead": "Country-specific verification and audit pages with the local checks that matter.",
     "notSureTitle": "Not sure which one you need?",
     "notSureLead": "Run the free risk calculator first. It takes about three minutes and tells you what is missing.",
-    "notSureCta": "Assess supplier risk",
+    "notSureCta": "Evaluar el riesgo del proveedor",
     "metaTitle": "Supplier Verification, Factory Audit and Inspection Services",
     "metaDesc": "Independent supplier verification, factory audit, inspection and sourcing support across China, Vietnam and Thailand. Scoped and quoted per project."
   },
@@ -1678,7 +1678,7 @@
     "storiesLead": "How the checks work in practice, shown with de-identified examples."
   },
   "verification": {
-    "levelLabel": "Verification level",
+    "levelLabel": "Nivel de verificación",
     "levels": [
       "Level 0: Unverified",
       "Level 1: Business information checked",
@@ -2001,8 +2001,8 @@
     ]
   },
   "trust": {
-    "badge": "Trust Center",
-    "h1": "Trust Center",
+    "badge": "Centro de confianza",
+    "h1": "Centro de confianza",
     "lead": "Who we are, what we verify, what we do not, and how we handle evidence. Published so you can check us before you ask us to check anyone else.",
     "metaTitle": "Trust Center — Who Operates FactoryAuditB2B and What We Verify",
     "metaDesc": "Business registration, operating entity, verification methodology, verification levels, evidence policy and data protection for FactoryAuditB2B.",
@@ -2111,8 +2111,8 @@
     ]
   },
   "inspection": {
-    "badge": "Product Inspection",
-    "h1": "Product Inspection",
+    "badge": "Inspección de producto",
+    "h1": "Inspección de producto",
     "lead": "Order-specific quality checks at the production stage that matters, carried out by an independent inspector and reported in writing. Every request is reviewed individually and quoted per inspection.",
     "metaTitle": "Product Inspection — PPI, DUPRO, PSI and Container Loading",
     "metaDesc": "Pre-production, during-production, pre-shipment and container loading inspection for buyers sourcing from China, Vietnam, Thailand, Malaysia and the Philippines. Quoted per inspection.",
@@ -2243,7 +2243,7 @@
   "auditGuide": {
     "breadcrumb": "Guías de auditoría",
     "metaTitle": "Auditoría {type} en {country}",
-    "metaDesc": "Encuentra auditoría {type}, inspección y proveedores cualificados en {country}. Directorio verificado, RFQ y solicitud de auditoría.",
+    "metaDesc": "Find {type} audit, inspection and qualified suppliers in {country}. Verified factory directory, RFQ and audit request by FactoryAuditB2B.",
     "h1": "Auditoría {type} en {country}",
     "ownerLabel": "Organismo emisor:",
     "standardsTitle": "Normas y certificaciones relacionadas",

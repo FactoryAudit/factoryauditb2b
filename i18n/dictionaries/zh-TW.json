@@ -35,11 +35,11 @@
     "resources": "資源",
     "coverage": "覆蓋地區",
     "logistics": "物流",
-    "allTools": "All free tools",
-    "riskCalculator": "Risk calculator",
-    "verificationChecklist": "Verification checklist",
-    "supplierVerification": "Supplier verification",
-    "factoryAudit": "Factory audit",
+    "allTools": "全部免費工具",
+    "riskCalculator": "風險計算器",
+    "verificationChecklist": "核實清單",
+    "supplierVerification": "供應商核實",
+    "factoryAudit": "工廠驗廠",
     "knowledgeBase": "供應商培訓",
     "pricing": "價格",
     "tagline": "我們覈查中國及亞洲的工廠，並把原始資料交給你。",
@@ -51,11 +51,11 @@
     "coverageOnly": "Phase 1 coverage. More countries as we add verified auditor capacity.",
     "verificationService": "Supplier verification",
     "inspectionService": "Inspection",
-    "sourcingService": "Sourcing",
-    "improvementService": "Supplier Improvement",
-    "allServices": "All services",
-    "containerCalculator": "Container load calculator",
-    "trustCenter": "Trust Center",
+    "sourcingService": "採購尋源",
+    "improvementService": "供應商改善",
+    "allServices": "全部服務",
+    "containerCalculator": "貨櫃裝載計算器",
+    "trustCenter": "信任中心",
     "operatedBy": "FactoryAuditB2B is a platform and brand operated by {entity}.",
     "registeredBusiness": "China Registered Business",
     "supplierNetwork": "供應商網絡",
@@ -72,7 +72,7 @@
     "ctaRfq": "發佈詢價",
     "ctaAudit": "申請驗廠",
     "services": "我們提供供應商驗證、工廠審覈、驗貨與貨運服務。",
-    "toolsTitle": "Free tools for evaluating suppliers",
+    "toolsTitle": "免費的供應商評估工具",
     "toolsLead": "八款工具，用於覈查供應商、準備審覈與規劃發運。無需註冊，基礎結果也不設郵箱門檻。",
     "value1Title": "「已驗證」到底意味着什麼",
     "value1Body": "只有在覈對工商登記、確認廠房真實存在、並審閱審覈文件之後，供應商纔會被標記爲已驗證。",
@@ -115,13 +115,13 @@
         "body": "你會拿到所見、佐證與書面報告，再決定下單、議價或放棄。"
       }
     ],
-    "coverageTitle": "Where We Verify Suppliers",
+    "coverageTitle": "我們核實供應商的國家",
     "coverageLead": "On-the-ground supplier verification and factory audit support across China and Southeast Asia.",
-    "coveragePhase": "Phase 1 coverage",
-    "coverageService1": "Supplier Verification",
-    "coverageService2": "Factory Audit",
-    "coverageService3": "Inspection",
-    "coverageCta": "See coverage",
+    "coveragePhase": "第一階段涵蓋國家",
+    "coverageService1": "供應商核實",
+    "coverageService2": "工廠驗廠",
+    "coverageService3": "驗貨",
+    "coverageCta": "查看涵蓋國家",
     "whyTitle": "為什麼買家用 FactoryAuditB2B",
     "whyLead": "我們做對四件事，跟目錄或試算表不一樣。",
     "why1Title": "真實證據",
@@ -139,9 +139,9 @@
     "bottomTitle": "Have a supplier already?",
     "bottomLead": "Send us the company name and address. We will tell you what we can confirm, what we cannot, and what it costs.",
     "bottomCta": "Verify This Supplier",
-    "otherRegionTitle": "Other Regions",
+    "otherRegionTitle": "其他地區",
     "otherRegionBody": "Don't see your country? We accept enquiries for any region and review each one based on scope, location and inspector availability.",
-    "otherRegionCta": "Tell us where you source",
+    "otherRegionCta": "告訴我們你的採購地區",
     "primary": "評估供應商風險",
     "secondary": "驗證供應商",
     "highIntent": "申請工廠稽核",
@@ -150,8 +150,8 @@
     "guide3Title": "供應商風險評估"
   },
   "toolsIndex": {
-    "badge": "Free tools",
-    "h1": "Free Supplier & Factory Audit Tools",
+    "badge": "免費工具",
+    "h1": "免費的供應商與工廠驗廠工具",
     "lead": "七款工具用於篩選供應商、覈對文件與準備審覈。無需註冊。",
     "flagship": "主推",
     "ctaTitle": "需要我們把這些覈查做掉嗎？",
@@ -163,31 +163,31 @@
   },
   "toolCards": {
     "riskCalculator": {
-      "title": "Supplier Risk Calculator",
+      "title": "供應商風險計算器",
       "desc": "按六個加權維度，爲任意供應商打出 0 到 100 的分數。"
     },
     "verificationChecklist": {
-      "title": "Supplier Verification Checklist",
+      "title": "供應商核實清單",
       "desc": "六個階段共 29 項覈查，下單前逐條過一遍。"
     },
     "riskAssessment": {
-      "title": "Supplier Risk Assessment",
+      "title": "供應商風險評估",
       "desc": "填入供應商信息，得到初步風險分與證據狀態。"
     },
     "auditChecklist": {
-      "title": "Factory Audit Checklist Generator",
+      "title": "驗廠清單生成器",
       "desc": "按行業與審覈類型生成對應的審覈清單。"
     },
     "supplierScorecard": {
-      "title": "Supplier Evaluation Scorecard",
+      "title": "供應商評估評分卡",
       "desc": "自己設定權重，再據此給供應商打分。"
     },
     "auditReportAnalyzer": {
-      "title": "Audit Report Analyzer",
+      "title": "驗廠報告分析器",
       "desc": "檢查審覈報告中的缺項、矛盾之處與風險信號。"
     },
     "documentChecker": {
-      "title": "Supplier Document Checker",
+      "title": "供應商文件核實器",
       "desc": "交叉覈對供應商文件與證書是否一致。"
     },
     "containerCalculator": {
@@ -272,32 +272,32 @@
     },
     "dimensions": {
       "company": {
-        "label": "Company risk",
+        "label": "公司風險",
         "short": "公司",
         "description": "經營年限、註冊地址是否就是生產地址、股權結構能否追溯。"
       },
       "quality": {
-        "label": "Quality risk",
+        "label": "品質風險",
         "short": "質量",
         "description": "質量控制是否有文件支撐、近期是否有外部審覈、檢驗記錄是否留存。"
       },
       "compliance": {
-        "label": "Compliance risk",
+        "label": "合規風險",
         "short": "合規",
         "description": "社會責任、環境、產品合規記錄。我們只問你手上有什麼，不強制要求某張證書。"
       },
       "production": {
-        "label": "Production risk",
+        "label": "生產風險",
         "short": "生產",
         "description": "產能是否匹配你的訂單量、是否外發加工、是否做過同類產品。"
       },
       "supplychain": {
-        "label": "Supply chain risk",
+        "label": "供應鏈風險",
         "short": "供應鏈",
         "description": "原材料來源、單一來源依賴程度，以及所報交期是否靠得住。"
       },
       "documentation": {
-        "label": "Documentation risk",
+        "label": "文件風險",
         "short": "文件",
         "description": "營業執照、廠房地址、證書、審覈報告與測試報告能否真正拿得出來。"
       },
@@ -368,7 +368,7 @@
         "unknown": "不清楚"
       },
       "quality_qms": {
-        "yes": "有",
+        "yes": "Yes",
         "partial": "部分有",
         "no": "沒有",
         "unknown": "不清楚"
@@ -399,7 +399,7 @@
         "unknown": "不清楚"
       },
       "comp_env": {
-        "comprehensive": "體系完整",
+        "comprehensive": "Comprehensive",
         "partial": "部分建立",
         "none": "沒有",
         "unknown": "不清楚"
@@ -1261,11 +1261,11 @@
     "ctaButton": "聯繫我們"
   },
   "pricing": {
-    "metaTitle": "Services & Plans — Free Tools, Verification, Audit, Monitoring",
-    "metaDesc": "Free supplier evaluation tools, supplier verification from USD 99, factory audits from USD 399, product inspection from USD 99 and supplier monitoring by subscription. All prices in USD.",
-    "h1": "Services & Plans",
+    "metaTitle": "服務與方案 — 免費工具、供應商核實、驗廠、監控",
+    "metaDesc": "免費的供應商評估工具、99 美元起的供應商核實、399 美元起的工廠驗廠、99 美元起的驗貨，以及訂閱制供應商監控。全部價格以美元計。",
+    "h1": "服務與方案",
     "lead": "買家 SaaS $19–299/月 · 供應商會員 $29–199/月 · 審覈、驗貨與運費按項目報價。",
-    "currencyNote": "所有價格以美元計。早期試行價格，可能調整。",
+    "currencyNote": "所有價格以美元計。查核與驗廠按專案報價。",
     "forBuyers": "買家方案",
     "forSuppliers": "供應商會員",
     "perMonth": "/月",
@@ -1344,113 +1344,113 @@
       "運費與採購：按訂單金額收取 3–5% 佣金",
       "首單免平臺費"
     ],
-    "plansTitle": "What you can use today",
-    "plansLead": "All four are available now. Verification, audit and inspection are quoted per project; monitoring is a yearly subscription.",
+    "plansTitle": "現在就能使用的服務",
+    "plansLead": "四項現已開放。查核、驗廠與驗貨按專案報價；監控為年度訂閱。",
     "plans": [
       {
-        "name": "Herramientas gratuitas",
+        "name": "免費工具",
         "price": "$0",
-        "note": "No se necesita cuenta bancaria.",
+        "note": "無需註冊帳號",
         "available": true,
         "features": [
-          "Evaluación de riesgos del proveedor con desglose en seis dimensiones",
-          "Lista de Verificación de Proveedores",
-          "Lista de verificación y cuadro de mando de auditoría de fábrica",
-          "Puntuación de riesgo y próximos pasos recomendados"
+          "供應商風險評估（含八個維度拆解）",
+          "供應商查核清單",
+          "工廠驗廠清單與評分卡",
+          "風險評分與建議的下一步"
         ],
-        "cta": "Las Herramientas",
-        "href": "Herramientas"
+        "cta": "開啟工具",
+        "href": "/tools"
       },
       {
-        "name": "Supplier Verification",
+        "name": "供應商查核",
         "price": "$99 – $129",
-        "note": "Per supplier, quoted per project",
+        "note": "按供應商報價，一案一報",
         "available": true,
         "features": [
-          "Business registration and legal entity check",
-          "Factory address and site evidence",
-          "Manufacturer or trading company determination",
-          "Quality and compliance document review",
-          "Written report with a risk summary"
+          "工商登記與法律主體查核",
+          "工廠地址與現場證據",
+          "判斷是生產廠還是貿易公司",
+          "品質與合規文件審閱",
+          "書面報告附風險摘要"
         ],
-        "cta": "Request verification",
+        "cta": "申請查核",
         "href": "/services/supplier-verification"
       },
       {
-        "name": "Factory Audit",
-        "price": "From $399",
-        "note": "Per man-day plus travel",
+        "name": "工廠驗廠",
+        "price": "399 美元起",
+        "note": "按人天計費，另加差旅",
         "available": true,
         "features": [
-          "On-site assessment against your required standard",
-          "Quality, compliance and labour record review",
-          "Findings graded by severity with photographs",
-          "Corrective action plan with owners and dates",
-          "Optional re-audit after the corrective period"
+          "依你要求的標準進行現場評估",
+          "品質、合規與用工記錄審閱",
+          "發現項目按嚴重程度分級並附照片",
+          "矯正計畫含責任人與完成日期",
+          "矯正期結束後可選擇複評"
         ],
-        "cta": "Request an audit",
+        "cta": "申請驗廠",
         "href": "/factory-audit/request"
       },
       {
-        "name": "Supplier Monitoring",
-        "price": "Subscription",
-        "note": "Quoted per supplier per year",
+        "name": "供應商監控",
+        "price": "訂閱制",
+        "note": "按供應商按年報價",
         "available": true,
         "features": [
-          "Scheduled re-checks of verified facts",
-          "Risk change alerts on your suppliers",
-          "Updated report when facts change",
-          "Same evidence policy as one-off checks"
+          "定期複核已查證的事實",
+          "供應商風險變化提醒",
+          "事實變更時更新報告",
+          "與單次查核相同的證據政策"
         ],
-        "cta": "Ask for a quote",
+        "cta": "索取報價",
         "href": "/monitoring"
       }
     ],
-    "comingSoonNote": "Supplier Monitoring is a subscription and is quoted per supplier per year. Everything else on this page is pay-per-project: no subscription, nothing renews automatically.",
-    "alsoTitle": "Also available",
+    "comingSoonNote": "供應商監控為訂閱制，按供應商按年報價。本頁其餘項目均為按專案付費：沒有訂閱，也不會自動續約。",
+    "alsoTitle": "其他服務",
     "alsoItems": [
-      "Inspección: controles en línea y previos al envío, cotizados por hombre-día",
-      "Abastecimiento: 3–5% de comisión sobre el valor del pedido, cotizado antes de que se realice el pedido",
-      "Mejora de proveedores: capacitación y acción correctiva después de una auditoría, cotizada por fábrica"
+      "驗貨：生產中期與出貨前檢驗，按人天報價",
+      "採購尋源：按訂單金額收取 3–5% 佣金，下單前報價",
+      "供應商改善：驗廠後的培訓與矯正支持，按工廠報價"
     ],
-    "alsoCta": "Request a quote",
-    "reportsTitle": "Reports and verification: indicative ranges",
-    "reportsLead": "Every figure below is indicative and quoted per project. We publish ranges so you can tell whether the check is worth ordering before you ask.",
+    "alsoCta": "索取報價",
+    "reportsTitle": "報告與查核：參考價格區間",
+    "reportsLead": "以下每個數字都是參考區間，按專案報價。公開區間是為了讓你在詢價前先判斷這項查核值不值得做。",
     "reports": [
       {
-        "name": "Supplier due diligence report",
+        "name": "供應商盡職調查報告",
         "range": "USD 99 – 129",
-        "note": "Documentary review and written report. No site visit."
+        "note": "文件審閱與書面報告，不含現場走訪。"
       },
       {
-        "name": "Product inspection",
+        "name": "產品驗貨",
         "range": "USD 99+",
-        "note": "Quoted per man-day plus travel, based on country and scope."
+        "note": "按人天計費，另加差旅，視國家與範圍而定。"
       },
       {
-        "name": "On-site factory audit",
+        "name": "現場工廠驗廠",
         "range": "USD 399+",
-        "note": "Quoted per man-day plus travel, based on country, site size and standard."
+        "note": "按人天計費，另加差旅，視國家、廠區規模與標準而定。"
       }
     ],
-    "reportsNote": "Online payment is not open yet. Every item above is quoted and invoiced by our team, so nothing here is a subscription and nothing renews.",
-    "faqTitle": "Pricing FAQ",
+    "reportsNote": "線上支付尚未開放。以上各項均由我們的團隊報價並開立發票，因此沒有訂閱，也不會自動續約。",
+    "faqTitle": "價格常見問題",
     "faq": [
       {
-        "q": "¿Tengo que pagar para usar las herramientas?",
-        "a": "No. La calculadora de riesgos, las listas de verificación y las tarjetas de puntuación son gratuitas y no necesitan una cuenta. Solo pagas cuando nos pides que verifiquemos o auditemos a un proveedor."
+        "q": "使用工具需要付費嗎？",
+        "a": "不需要。風險計算機、查核清單與評分卡全部免費，無需註冊帳號。只有當你需要我們查核或驗廠某家供應商時才收費。"
       },
       {
-        "q": "¿Cuánto cuesta la verificación de un proveedor?",
+        "q": "一次供應商查核多少錢？",
         "a": "Se cotiza por proveedor. El precio depende del país, si el paquete incluye una visita al sitio y cuántos documentos deben revisarse. Envíenos el nombre de la empresa y lo cotizaremos."
       },
       {
-        "q": "¿Cuánto cuesta una auditoría de fábrica?",
-        "a": "It is quoted per man-day plus travel. A single-site quality audit starts at one man-day. A full social compliance audit such as SMETA usually takes two or more, depending on headcount."
+        "q": "一次工廠驗廠多少錢？",
+        "a": "按人天計費，另加差旅。單廠區品質驗廠從一個人天起。SMETA 這類完整社會責任驗廠通常需要兩個或更多人天，視員工人數而定。"
       },
       {
-        "q": "How does supplier monitoring work?",
-        "a": "Monitoring is a subscription, quoted per supplier per year. We re-check the verified facts on a schedule you choose and send you a short update when something changes. You can start with a one-off verification and add monitoring later."
+        "q": "供應商監控如何運作？",
+        "a": "監控是訂閱制，按供應商按年報價。我們按你選擇的週期複核已查證的事實，發生變化時給你發一份簡短更新。你可以先做一次單次查核，之後再增加監控。"
       }
     ],
     "recommendedTag": "推薦"
@@ -1472,7 +1472,7 @@
     "ctaText": "需要報價或人工服務？",
     "ctaButton": "聯繫我們的團隊",
     "fallbackAnswers": {
-      "pricing": "買家 SaaS 爲 $0–299/月，供應商會員 $29–199/月。工廠審覈與驗貨按項目報價（依據人天與地區）；運費與採購收取 3–5% 佣金。全部以美元計價。告訴我你的產品和國家，我幫你匹配合適的方案。",
+      "pricing": "Buyer SaaS runs $0–299/month and supplier membership $29–199/month. Factory audits and inspections are quoted per project (man-days and location); freight and sourcing carry a 3–5% commission. All prices in USD. Tell me your product and country and I will point you to the right plan.",
       "audit": "我們提供供應商驗證、工廠審覈與出貨前驗貨，覆蓋 SMETA、BSCI、ISO 9001、ISO 14001、SA8000、WRAP、Sedex 等項目。我們不出售證書，只做驗證與培訓。告訴我你的產品與目標市場，我們爲你評估。",
       "coverage": "我們目前覆蓋中國、越南和泰國。告訴我你從哪個國家採購，我會確認是否可以服務。",
       "training": "提供。我們先審覈工廠，再培訓團隊的質量體系、QC 與生產工藝。方案爲 Starter $280/廠、Pro $950/廠，另有 Enterprise 定製。每個方案都從差距審覈開始。",
@@ -1590,34 +1590,34 @@
     "timelineA": "Documentary checks are usually finished within two business days. A package that includes a site visit in {country} is normally scheduled within a week, longer outside the main production hubs."
   },
   "servicesIndex": {
-    "badge": "Services",
+    "badge": "服務",
     "h1": "Supplier verification, audit and inspection services",
     "lead": "Free tools tell you what to check. These services get it checked. Everything below is scoped and quoted per project, and none of it is a bundle you have to buy into.",
-    "servicesTitle": "What we do",
+    "servicesTitle": "我們做什麼",
     "servicesLead": "Pick the stage you are at.",
     "items": {
       "verification": {
-        "title": "Supplier Verification",
+        "title": "供應商核實",
         "desc": "Confirm the company, the site and the documents before you release a deposit.",
         "href": "/services/supplier-verification"
       },
       "factoryAudit": {
-        "title": "Factory Audit",
+        "title": "工廠驗廠",
         "desc": "An auditor on site against the standard your buyer requires, with findings graded and corrective actions listed.",
         "href": "/factory-audit/request"
       },
       "inspection": {
-        "title": "Inspection",
+        "title": "驗貨",
         "desc": "In-line and pre-shipment checks on your production, quoted per man-day.",
         "href": "/custom-services"
       },
       "sourcing": {
-        "title": "Sourcing",
+        "title": "採購尋源",
         "desc": "Post an RFQ, get matched with suppliers we can verify, and pay commission only on orders you place.",
         "href": "/rfq"
       },
       "improvement": {
-        "title": "Supplier Improvement",
+        "title": "供應商改善",
         "desc": "Audit findings turned into corrective action, training and a re-audit. Not a standalone training business.",
         "href": "/services/supplier-improvement"
       },
@@ -1626,11 +1626,11 @@
         "desc": "Keep verified supplier facts current. Scheduled re-checks of registration, address, certificates and public records, with an alert when something changes."
       }
     },
-    "coverageTitle": "Coverage by country",
+    "coverageTitle": "涵蓋國家",
     "coverageLead": "Country-specific verification and audit pages with the local checks that matter.",
     "notSureTitle": "Not sure which one you need?",
     "notSureLead": "Run the free risk calculator first. It takes about three minutes and tells you what is missing.",
-    "notSureCta": "Assess supplier risk",
+    "notSureCta": "評估供應商風險",
     "metaTitle": "Supplier Verification, Factory Audit and Inspection Services",
     "metaDesc": "Independent supplier verification, factory audit, inspection and sourcing support across China, Vietnam and Thailand. Scoped and quoted per project."
   },
@@ -1678,20 +1678,20 @@
     "storiesLead": "How the checks work in practice, shown with de-identified examples."
   },
   "verification": {
-    "levelLabel": "Verification level",
+    "levelLabel": "核實等級",
     "levels": [
       "Nivel 0: No verificado",
-      "Nivel 1: Información comercial verificada",
+      "Level 1: Business information checked",
       "Nivel 2: Documentos revisados",
-      "Nivel 3: Verificado en fábrica",
-      "Nivel 4: Fábrica auditada"
+      "Level 3: Factory verified",
+      "Level 4: Factory audited"
     ],
     "levelsShort": [
       "Sin verificar",
       "Negocio verificado",
       "DOCUMENTOS EXAMINADOS",
-      "Fábrica verificada",
-      "Fábrica auditada"
+      "Factory verified",
+      "Factory audited"
     ],
     "lastVerified": "Last verified",
     "verifiedBy": "Verified by",
@@ -1810,12 +1810,12 @@
         "name": "Basic report",
         "price": "$99",
         "items": [
-          "Descripción general del proveedor",
-          "Puntuación de riesgo con desglose por dimensiones",
-          "Estado de verificación",
+          "Supplier overview",
+          "Risk score with dimension breakdown",
+          "Verification status",
           "Resumen de evidencia",
           "Principales factores de riesgo",
-          "Acciones recomendadas",
+          "Recommended actions",
           "PDF"
         ]
       },
@@ -1825,9 +1825,9 @@
         "items": [
           "Todo en el informe básico",
           "Revisión detallada de la evidencia",
-          "Verificaciones de documentos adicionales",
+          "Additional document checks",
           "Análisis de riesgos con prioridades específicas del comprador",
-          "Notas de verificación",
+          "Verification notes",
           "PDF"
         ]
       },
@@ -1835,10 +1835,10 @@
         "name": "Independent verification",
         "price": "Custom quote",
         "items": [
-          "Verificación de identidad comercial",
-          "Verificación de dirección de fábrica",
-          "Verificación de documentos",
-          "Verificación in situ cuando sea necesario"
+          "Business identity verification",
+          "Factory address verification",
+          "Document verification",
+          "On-site verification where required"
         ]
       }
     },
@@ -1852,9 +1852,9 @@
     "whyTitle": "Why claim your profile?",
     "whyLead": "Help buyers understand your capabilities and verification status before they ask for a quote.",
     "benefits": [
-      "Mantenga la información de su empresa precisa",
-      "Añadir productos, certificaciones y detalles de capacidad",
-      "Muestra tu nivel de verificación públicamente",
+      "Keep your company information accurate",
+      "Add products, certifications and capability details",
+      "Show your verification level publicly",
       "Recibir consultas de compradores y oportunidades de RFQ"
     ],
     "tiersTitle": "What you can do",
@@ -1862,9 +1862,9 @@
       "name": "Free",
       "cta": "Claim your profile",
       "items": [
-        "Actualiza la información de la empresa",
+        "Update company information",
         "Añadir productos",
-        "Añadir certificaciones",
+        "Add certifications",
         "Agregar detalles de contacto"
       ]
     },
@@ -1872,8 +1872,8 @@
       "name": "Verified",
       "cta": "Apply for verification",
       "items": [
-        "Nivel de verificación en el perfil",
-        "Estado de auditoría y certificaciones mostradas a los compradores",
+        "Verification level on profile",
+        "Audit status and certifications shown to buyers",
         "﻿Consultas de comprador",
         "Etiquetas de capacidad"
       ]
@@ -1882,9 +1882,9 @@
       "name": "Premium",
       "cta": "Talk to us",
       "items": [
-        "Colocación prioritaria en la búsqueda",
-        "Destacado en páginas relevantes de la industria",
-        "Presentaciones del comprador",
+        "Priority placement in search",
+        "Featured on relevant industry pages",
+        "Buyer introductions",
         "Visibilidad del producto"
       ]
     }
@@ -1900,9 +1900,9 @@
       "lead": "Visible to everyone.",
       "items": [
         "Nombre de la empresa",
-        "Ubicación",
+        "Location",
         "Productos",
-        "Estado de verificación"
+        "Verification status"
       ]
     },
     "buyerView": {
@@ -1918,7 +1918,7 @@
       "title": "Restricted",
       "lead": "Only with your explicit authorization.",
       "items": [
-        "Informes de auditoría originales",
+        "Original audit reports",
         "Documentos confidenciales",
         "Fotos internas del PFDC."
       ]
@@ -1928,7 +1928,7 @@
       "lead": "Used internally to maintain your verification record.",
       "items": [
         "Documentos fuente no compartidos",
-        "Notas de trabajo de verificación"
+        "Verification working notes"
       ]
     },
     "thirdPartyNote": "Third-party audit reports from SGS, Intertek, Bureau Veritas, TÜV and similar bodies may carry licence or confidentiality restrictions. We show them as reviewed, and we do not redistribute the original document without the appropriate rights."
@@ -2001,8 +2001,8 @@
     ]
   },
   "trust": {
-    "badge": "Trust Center",
-    "h1": "Trust Center",
+    "badge": "信任中心",
+    "h1": "信任中心",
     "lead": "Who we are, what we verify, what we do not, and how we handle evidence. Published so you can check us before you ask us to check anyone else.",
     "metaTitle": "Trust Center — Who Operates FactoryAuditB2B and What We Verify",
     "metaDesc": "Business registration, operating entity, verification methodology, verification levels, evidence policy and data protection for FactoryAuditB2B.",
@@ -2074,7 +2074,7 @@
     "privacy": [
       "Buyer enquiries are used to respond and to prepare a quote. We do not sell contact data.",
       "Supplier documents are used to maintain the supplier profile and support buyer due diligence.",
-      "No divulgamos públicamente documentos confidenciales sin autorización.",
+      "We do not publicly disclose confidential documents without authorization.",
       "To request access, correction or deletion of your data, contact us using the details below."
     ],
     "contactTitle": "Contact",
@@ -2111,8 +2111,8 @@
     ]
   },
   "inspection": {
-    "badge": "Product Inspection",
-    "h1": "Product Inspection",
+    "badge": "產品驗貨",
+    "h1": "產品驗貨",
     "lead": "Order-specific quality checks at the production stage that matters, carried out by an independent inspector and reported in writing. Every request is reviewed individually and quoted per inspection.",
     "metaTitle": "Product Inspection — PPI, DUPRO, PSI and Container Loading",
     "metaDesc": "Pre-production, during-production, pre-shipment and container loading inspection for buyers sourcing from China, Vietnam, Thailand, Malaysia and the Philippines. Quoted per inspection.",
@@ -2243,7 +2243,7 @@
   "auditGuide": {
     "breadcrumb": "驗廠指南",
     "metaTitle": "{country}{type} 驗廠",
-    "metaDesc": "查找 {country} 的 {type} 驗廠、檢驗與合格供應商。FactoryAuditB2B 提供已查核工廠目錄、RFQ 發布與驗廠申請。",
+    "metaDesc": "Find {type} audit, inspection and qualified suppliers in {country}. Verified factory directory, RFQ and audit request by FactoryAuditB2B.",
     "h1": "{country}{type} 驗廠",
     "ownerLabel": "發證/管理主體：",
     "standardsTitle": "相關認證與標準",
@@ -2450,7 +2450,7 @@
       "出口紀錄 — Restricted（第三方文件不轉發）"
     ],
     "recommendSection": "6. 建議",
-    "recommendBody": "綜合得分 76/100，低風險。建議首單前做一次文件核驗，複購金額超過 5 萬美元前安排一次現場驗廠。",
+    "recommendBody": "Score 76/100, low risk. We recommend a document verification before the first order, and an on-site audit before a repeat order above USD 50,000.",
     "ctaTitle": "訂購真實核驗",
     "ctaLead": "為你的真實供應商獲取同等詳細程度的報告。核驗按供應商計價，起價 99 美元，按專案報價。",
     "ctaPrimary": "申請核驗",

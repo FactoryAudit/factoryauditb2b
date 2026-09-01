@@ -28,41 +28,15 @@ const path = require("path");
 const D = path.join(process.cwd(), "i18n", "dictionaries");
 const CACHE = path.join(process.cwd(), ".workbuddy", "dict-cache.json");
 
-/** 品牌词 / 档位词：永远用 en，不翻译。
+/** 品牌词 / 缩写词：永远用 en，不翻译。
  * 与 scripts/lock-brand-terms.cjs 同步。
- * 任何不翻译的字段，必须同时加进两个文件。 */
+ * 任何不翻译的字段，必须同时加进两个文件。
+ * v3：只保留品牌/缩写。UI 页面标题一律可翻译，由手写脚本与
+ * translate-deepseek.cjs 负责；此前把可见标题锁成英文是英文残留根源之一。 */
 const KEEP_EN_PREFIXES = [
   // 行业缩写：翻译了反而没人认得
   "nav.rfq",
-  // 注意：nav 其余项**不锁**，它们是 UI 导航词不是品牌名，必须跟随语言。
-  // 上一版全锁成英文属过度修正，已改为手写翻译（见各字典 nav 段）。
   "brand.name","brand.eva","brand.tagline",
-  "footer.allTools","footer.riskCalculator","footer.verificationChecklist",
-  "footer.supplierVerification","footer.factoryAudit","footer.sourcingService",
-  "footer.improvementService","footer.allServices","footer.containerCalculator",
-  "footer.trustCenter",
-  "home.coverageTitle","home.coveragePhase",
-  "home.coverageService1","home.coverageService2","home.coverageService3",
-  "home.coverageCta","home.otherRegionTitle","home.otherRegionCta",
-  "home.toolsTitle",
-  "toolsIndex.badge","toolsIndex.h1",
-  "toolCards.riskCalculator.title","toolCards.verificationChecklist.title",
-  "toolCards.riskAssessment.title","toolCards.auditChecklist.title",
-  "toolCards.supplierScorecard.title","toolCards.auditReportAnalyzer.title",
-  "toolCards.documentChecker.title",
-  "servicesIndex.badge","servicesIndex.servicesTitle",
-  "servicesIndex.items.verification.title","servicesIndex.items.factoryAudit.title",
-  "servicesIndex.items.inspection.title","servicesIndex.items.sourcing.title",
-  "servicesIndex.items.improvement.title","servicesIndex.coverageTitle",
-  "servicesIndex.notSureCta","servicesIndex.breadcrumb",
-  "pricing.h1","pricing.plansTitle",
-  "risk.dimensions.company.label","risk.dimensions.quality.label",
-  "risk.dimensions.compliance.label","risk.dimensions.production.label",
-  "risk.dimensions.supplychain.label","risk.dimensions.documentation.label",
-  "risk.levels.LOW","risk.levels.MODERATE","risk.levels.ELEVATED","risk.levels.HIGH","risk.levels.CRITICAL",
-  "verification.levelLabel",
-  "inspection.badge","inspection.h1",
-  "trust.badge","trust.h1",
 ];
 function isBrandKey(dotted) {
   return KEEP_EN_PREFIXES.includes(dotted);

@@ -511,7 +511,7 @@
         "unknown": "不清楚"
       },
       "quality_qms": {
-        "yes": "有",
+        "yes": "Yes",
         "partial": "部分有",
         "no": "没有",
         "unknown": "不清楚"
@@ -542,7 +542,7 @@
         "unknown": "不清楚"
       },
       "comp_env": {
-        "comprehensive": "体系完整",
+        "comprehensive": "Comprehensive",
         "partial": "部分建立",
         "none": "没有",
         "unknown": "不清楚"
@@ -1660,8 +1660,8 @@
     "ctaButton": "联系我们"
   },
   "pricing": {
-    "metaTitle": "Services & Plans — Free Tools, Verification, Audit, Monitoring",
-    "metaDesc": "Free supplier evaluation tools, supplier verification from USD 99, factory audits from USD 399, product inspection from USD 99 and supplier monitoring by subscription. All prices in USD.",
+    "metaTitle": "服务与方案 — 免费工具、供应商核查、验厂、监控",
+    "metaDesc": "免费的供应商评估工具、99 美元起的供应商核查、399 美元起的工厂验厂、99 美元起的验货，以及订阅制供应商监控。全部价格以美元计。",
     "h1": "服务与方案",
     "lead": "工具免费使用。只有当你需要有人到现场核查供应商时才付费。",
     "currencyNote": "全部价格以美元计。核查与验厂按项目报价。",
@@ -1744,7 +1744,7 @@
       "首单免平台费"
     ],
     "plansTitle": "现在可以使用的",
-    "plansLead": "All four are available now. Verification, audit and inspection are quoted per project; monitoring is a yearly subscription.",
+    "plansLead": "四项现已开放。核查、验厂与验货按项目报价；监控为年度订阅。",
     "plans": [
       {
         "name": "免费工具",
@@ -1761,51 +1761,51 @@
         "available": true
       },
       {
-        "name": "Supplier Verification",
+        "name": "供应商核查",
         "price": "$99 – $129",
-        "note": "Per supplier, quoted per project",
+        "note": "按供应商报价，一项目一报",
         "available": true,
         "features": [
-          "Business registration and legal entity check",
-          "Factory address and site evidence",
-          "Manufacturer or trading company determination",
-          "Quality and compliance document review",
-          "Written report with a risk summary"
+          "工商注册与法律主体核查",
+          "工厂地址与现场证据",
+          "判断是生产厂还是贸易公司",
+          "质量与合规文件审阅",
+          "书面报告附风险摘要"
         ],
-        "cta": "Request verification",
+        "cta": "申请核查",
         "href": "/services/supplier-verification"
       },
       {
-        "name": "Factory Audit",
-        "price": "From $399",
-        "note": "Per man-day plus travel",
+        "name": "工厂验厂",
+        "price": "399 美元起",
+        "note": "按人天计费，另加差旅",
         "available": true,
         "features": [
-          "On-site assessment against your required standard",
-          "Quality, compliance and labour record review",
-          "Findings graded by severity with photographs",
-          "Corrective action plan with owners and dates",
-          "Optional re-audit after the corrective period"
+          "按你要求的标准做现场评估",
+          "质量、合规与用工记录审阅",
+          "发现项按严重程度分级并附照片",
+          "整改计划含责任人与完成日期",
+          "整改期结束后可选择复审"
         ],
-        "cta": "Request an audit",
+        "cta": "申请验厂",
         "href": "/factory-audit/request"
       },
       {
-        "name": "Supplier Monitoring",
-        "price": "Subscription",
-        "note": "Quoted per supplier per year",
+        "name": "供应商监控",
+        "price": "订阅制",
+        "note": "按供应商按年报价",
         "available": true,
         "features": [
-          "Scheduled re-checks of verified facts",
-          "Risk change alerts on your suppliers",
-          "Updated report when facts change",
-          "Same evidence policy as one-off checks"
+          "定期复核已核实的事实",
+          "供应商风险变化提醒",
+          "事实变更时更新报告",
+          "与单次核查相同的证据政策"
         ],
-        "cta": "Ask for a quote",
+        "cta": "获取报价",
         "href": "/monitoring"
       }
     ],
-    "comingSoonNote": "Supplier Monitoring is a subscription and is quoted per supplier per year. Everything else on this page is pay-per-project: no subscription, nothing renews automatically.",
+    "comingSoonNote": "供应商监控为订阅制，按供应商按年报价。本页其余项均为按项目付费：没有订阅，不会自动续费。",
     "alsoTitle": "其他服务",
     "alsoItems": [
       "验货：生产中期与出货前检验，按人天报价",
@@ -1817,19 +1817,19 @@
     "reportsLead": "以下金额均为参考值，实际按项目报价。公开区间是为了让你在询价之前就能判断这项检查值不值得做。",
     "reports": [
       {
-        "name": "Supplier due diligence report",
+        "name": "供应商尽职调查报告",
         "range": "USD 99 – 129",
-        "note": "Documentary review and written report. No site visit."
+        "note": "文件审阅与书面报告，不含现场走访。"
       },
       {
-        "name": "Product inspection",
+        "name": "产品验货",
         "range": "USD 99+",
-        "note": "Quoted per man-day plus travel, based on country and scope."
+        "note": "按人天计费，另加差旅，视国家与范围而定。"
       },
       {
-        "name": "On-site factory audit",
+        "name": "现场工厂验厂",
         "range": "USD 399+",
-        "note": "Quoted per man-day plus travel, based on country, site size and standard."
+        "note": "按人天计费，另加差旅，视国家、厂区规模与标准而定。"
       }
     ],
     "reportsNote": "在线支付尚未开通。以上项目全部由团队报价并开票，没有订阅，也不会自动续费。",
@@ -1848,8 +1848,8 @@
         "a": "按人天加差旅报价。单厂区质量审核从一个人天起。SMETA 这类完整社会责任审核通常需要两天以上，取决于工厂人数。"
       },
       {
-        "q": "How does supplier monitoring work?",
-        "a": "Monitoring is a subscription, quoted per supplier per year. We re-check the verified facts on a schedule you choose and send you a short update when something changes. You can start with a one-off verification and add monitoring later."
+        "q": "供应商监控如何运作？",
+        "a": "监控是订阅制，按供应商按年报价。我们按你选择的周期复核已核实的事实，发生变化时给你发一份简短更新。你可以先做一次单次核查，之后再增加监控。"
       }
     ],
     "recommendedTag": "推荐"
@@ -1871,7 +1871,7 @@
     "ctaText": "需要报价或人工服务？",
     "ctaButton": "联系我们的团队",
     "fallbackAnswers": {
-      "pricing": "买家 SaaS 为 $0–299/月，供应商会员 $29–199/月。工厂审核与验货按项目报价（依据人天与地区）；运费与采购收取 3–5% 佣金。全部以美元计价。告诉我你的产品和国家，我帮你匹配合适的方案。",
+      "pricing": "Buyer SaaS runs $0–299/month and supplier membership $29–199/month. Factory audits and inspections are quoted per project (man-days and location); freight and sourcing carry a 3–5% commission. All prices in USD. Tell me your product and country and I will point you to the right plan.",
       "audit": "我们提供供应商验证、工厂审核与出货前验货，覆盖 SMETA、BSCI、ISO 9001、ISO 14001、SA8000、WRAP、Sedex 等项目。我们不出售证书，只做验证与培训。告诉我你的产品与目标市场，我们为你评估。",
       "coverage": "我们目前覆盖中国、越南和泰国。告诉我你从哪个国家采购，我会确认是否可以服务。",
       "training": "提供。我们先审核工厂，再培训团队的质量体系、QC 与生产工艺。方案为 Starter $280/厂、Pro $950/厂，另有 Enterprise 定制。每个方案都从差距审核开始。",
@@ -2193,7 +2193,7 @@
       },
       {
         "q": "验货多少钱？",
-        "a": "取决于类型、范围、地点、时长与产品。主要制造枢纽的单厂区标准 PSI 通常在每人天 200–350 美元区间，枢纽城市之外加差旅。把工厂位置发给我们，我们报精确价。"
+        "a": "It depends on inspection type, scope, location, duration and the product. A standard single-site PSI in a major manufacturing hub is typically in the range of USD 200–350 per man-day, plus travel outside hub cities. Send us the factory location and we will quote it precisely."
       },
       {
         "q": "能按我自己的检查表验吗？",
@@ -2237,7 +2237,7 @@
   "auditGuide": {
     "breadcrumb": "验厂指南",
     "metaTitle": "{country}{type} 验厂",
-    "metaDesc": "查找 {country} 的 {type} 验厂、检验与合格供应商。FactoryAuditB2B 提供已核验工厂目录、RFQ 发布与验厂申请。",
+    "metaDesc": "Find {type} audit, inspection and qualified suppliers in {country}. Verified factory directory, RFQ and audit request by FactoryAuditB2B.",
     "h1": "{country}{type} 验厂",
     "ownerLabel": "发证/管理主体：",
     "standardsTitle": "相关认证与标准",
@@ -2444,7 +2444,7 @@
       "出口记录 — Restricted（第三方文件不转发）"
     ],
     "recommendSection": "6. 建议",
-    "recommendBody": "综合得分 76/100，低风险。建议首单前做一次文件核验，复购金额超过 5 万美元前安排一次现场验厂。",
+    "recommendBody": "Score 76/100, low risk. We recommend a document verification before the first order, and an on-site audit before a repeat order above USD 50,000.",
     "ctaTitle": "订购真实核验",
     "ctaLead": "为你的真实供应商获取同等详细程度的报告。核验按供应商计价，起价 99 美元，按项目报价。",
     "ctaPrimary": "申请核验",
