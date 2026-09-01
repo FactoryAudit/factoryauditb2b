@@ -1098,7 +1098,7 @@
     "trustSummary": "可信度摘要",
     "verificationLevel": "核验等级",
     "lastVerified": "最近核验",
-    "riskScore": "风险",
+    "riskScore": "风险分数",
     "verificationStatus": "核验状态",
     "evidenceSummary": "证据摘要",
     "auditHistory": "验厂记录",
@@ -1151,7 +1151,12 @@
     "provOnsite": "现场已核验",
     "provNote": "「供应商提供」表示对方把材料交给了我们，我们尚未核对。「已独立核验」表示我们对着来源核对过。",
     "neverClaimedTitle": "我们绝不声称的内容",
-    "neverClaimed": "没有对应的核验事件与证据，我们不会把供应商标为已核验。我们也不自行向供应商发证。"
+    "neverClaimed": "没有对应的核验事件与证据，我们不会把供应商标为已核验。我们也不自行向供应商发证。",
+    "scoreDirection": "分数越高，风险越低。",
+    "lastChecked": "最近核验",
+    "noCheckRecord": "暂无核验记录",
+    "recVerified": "上述条目已有记录可查。付定金前请对照订单复核核验范围；若最近一次核验已超过 12 个月，建议重新核验。",
+    "recUnverified": "下大单或付定金前，先核验工厂地址，并索取近期的质量与审核记录。"
   },
   "reportPreview": {
     "badge": "免费预览",

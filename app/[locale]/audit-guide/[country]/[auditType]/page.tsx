@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getSeoMatrix, listStandards } from "@/lib/taxonomy";
 import { listSuppliersByAuditType } from "@/lib/queries";
+import { overallLevel } from "@/lib/riskEngine";
 import { COVERAGE_COUNTRIES } from "@/lib/coverage";
 import JsonLd from "@/components/JsonLd";
 import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i18n/config";
@@ -162,7 +163,8 @@ export default async function AuditGuidePage({ params }: { params: Promise<Param
                   {s.legalName}
                 </Link>
                 <span className="text-sm text-gray-500">
-                  {s.city} · {g.riskLabel} {s.riskLevel || "—"}
+                  {s.city} · {g.riskLabel} {s.riskScore} / 100 ·{" "}
+                  {t.risk.ui.level[overallLevel(s.riskScore)]}
                 </span>
               </li>
             ))}

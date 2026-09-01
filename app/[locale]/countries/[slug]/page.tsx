@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
 import { COVERAGE_COUNTRIES, COVERAGE_SERVICES, findCoverageCountry } from "@/lib/coverage";
 import { listSuppliersByCountry } from "@/lib/queries";
+import { overallLevel } from "@/lib/riskEngine";
 import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
@@ -232,7 +233,9 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
                 </Link>
                 <span className="text-sm text-[#64748b]">
                   {s.city} · {t.supplierProfile.riskScore}{" "}
-                  {typeof s.riskScore === "number" ? `${s.riskScore} / 100` : "—"}
+                  {typeof s.riskScore === "number"
+                    ? `${s.riskScore} / 100 · ${t.risk.ui.level[overallLevel(s.riskScore)]}`
+                    : "—"}
                 </span>
               </li>
             ))}

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getSeoMatrix, getSupplierCapabilitiesResolved, listIndustries } from "@/lib/taxonomy";
 import { listSuppliersByIndustry } from "@/lib/queries";
+import { overallLevel } from "@/lib/riskEngine";
 import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
@@ -137,7 +138,8 @@ export default async function IndustryPage({ params }: { params: Promise<Params>
                   {s.legalName}
                 </a>
                 <span className="ml-2 text-sm text-gray-500">
-                  {s.city} · {s.countryCode} · {p.riskLabel} {s.riskLevel || "—"}
+                  {s.city} · {s.countryCode} · {p.riskLabel} {s.riskScore} / 100 ·{" "}
+                  {t.risk.ui.level[overallLevel(s.riskScore)]}
                 </span>
                 <div className="mt-1 flex flex-wrap gap-1">
                   {caps

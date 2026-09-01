@@ -1712,7 +1712,7 @@
     "trustSummary": "Trust summary",
     "verificationLevel": "Verification level",
     "lastVerified": "Last verified",
-    "riskScore": "Risk",
+    "riskScore": "Risk score",
     "verificationStatus": "Verification status",
     "evidenceSummary": "Evidence summary",
     "auditHistory": "Audit history",
@@ -1765,7 +1765,12 @@
     "provOnsite": "On-site verified",
     "provNote": "\"Supplier provided\" means the supplier gave it to us and we have not checked it. \"Independently verified\" means we checked it against its source.",
     "neverClaimedTitle": "What we never claim",
-    "neverClaimed": "We do not describe a supplier as verified unless a matching verification event and evidence exist. We do not certify suppliers ourselves."
+    "neverClaimed": "We do not describe a supplier as verified unless a matching verification event and evidence exist. We do not certify suppliers ourselves.",
+    "scoreDirection": "Higher score means lower risk.",
+    "lastChecked": "Last checked",
+    "noCheckRecord": "No check on record",
+    "recVerified": "Evidence on record covers the items listed above. Re-check the scope against your order before releasing a deposit, and refresh the record if the last check is more than 12 months old.",
+    "recUnverified": "Verify the factory address and request recent quality and audit records before placing a large order or releasing a deposit."
   },
   "reportPreview": {
     "badge": "Free preview",

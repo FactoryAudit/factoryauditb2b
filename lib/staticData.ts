@@ -146,8 +146,8 @@ export type StaticSupplier = {
   mainProducts: string[];
   exportMarkets: string[];
   verificationStatus: string;
+  /** V1.1 语义：分数越高 = 风险越低。等级不在此存储，一律由 overallLevel(score) 推导。 */
   riskScore: number;
-  riskLevel: string;
   certifications: string[];
   auditStatus: string;
   inspectionHistory: number;
@@ -168,8 +168,8 @@ export const STATIC_SUPPLIERS: StaticSupplier[] = [
     mainProducts: ["Consumer Electronics", "PCB Assembly", "Smart Home Devices"],
     exportMarkets: ["USA", "Germany", "Japan"],
     verificationStatus: "Factory Verified",
-    riskScore: 22,
-    riskLevel: "Low",
+    // Factory Verified，两条第三方核验记录，2026-06 已完成审核
+    riskScore: 88,
     certifications: ["ISO 9001", "SMETA", "CE"],
     auditStatus: "Audited 2026-06",
     inspectionHistory: 42,
@@ -195,8 +195,8 @@ export const STATIC_SUPPLIERS: StaticSupplier[] = [
     mainProducts: ["Garments", "Fabrics", "Apparel"],
     exportMarkets: ["USA", "UK", "Australia"],
     verificationStatus: "Document Verified",
-    riskScore: 41,
-    riskLevel: "Medium",
+    // Document Verified，一条第三方核验记录，2026-03 已完成审核
+    riskScore: 72,
     certifications: ["BSCI", "WRAP", "OEKO-TEX"],
     auditStatus: "Audited 2026-03",
     inspectionHistory: 28,
@@ -220,8 +220,9 @@ export const STATIC_SUPPLIERS: StaticSupplier[] = [
     mainProducts: ["Injection Molding", "Plastic Components"],
     exportMarkets: ["USA", "Vietnam"],
     verificationStatus: "Identity Verified",
-    riskScore: 65,
-    riskLevel: "Medium",
+    // Identity Verified，无证据记录，尚未审核。
+    // 分数压在 ELEVATED 档（>=55）：没有数据不等于高风险，参照对比工具把 unknown 映射到 ELEVATED 的做法。
+    riskScore: 56,
     certifications: ["ISO 9001"],
     auditStatus: "Not yet audited",
     inspectionHistory: 9,
@@ -242,8 +243,8 @@ export const STATIC_SUPPLIERS: StaticSupplier[] = [
     mainProducts: ["Garments", "Uniforms"],
     exportMarkets: ["USA", "EU"],
     verificationStatus: "Identity Verified",
-    riskScore: 35,
-    riskLevel: "Medium",
+    // Identity Verified，无证据记录，审核待排期。同样不低于 ELEVATED 档（无数据 ≠ 高风险）。
+    riskScore: 59,
     certifications: ["SMETA"],
     auditStatus: "Pending",
     inspectionHistory: 5,

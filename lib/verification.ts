@@ -18,7 +18,11 @@ const STATUS_TO_LEVEL: Record<string, VerificationLevel> = {
 };
 
 export function levelFromStatus(status?: string | null): VerificationLevel {
-  return STATUS_TO_LEVEL[(status ?? "").toUpperCase()] ?? 0;
+  // 归一化：数据源里同时存在 "Factory Verified"（空格）和 "FACTORY_VERIFIED"（下划线）
+  // 两种写法。此前只做 toUpperCase()，空格写法查不到映射，所有供应商都被判成 LEVEL 0，
+  // 页面显示成「暂无核验记录」。这里把空白与连字符统一成下划线再查表。
+  const key = (status ?? "").trim().toUpperCase().replace(/[\s-]+/g, "_");
+  return STATUS_TO_LEVEL[key] ?? 0;
 }
 
 /** 该等级实际覆盖的核验范围（页面显示「核验范围」用） */

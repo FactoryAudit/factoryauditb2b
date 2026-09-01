@@ -3,6 +3,7 @@ import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { listSupplierDirectory, type SupplierView } from "@/lib/queries";
 import { levelFromStatus } from "@/lib/verification";
+import { overallLevel, LEVEL_COLOR, type RiskLevel } from "@/lib/riskEngine";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
@@ -27,9 +28,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-function riskLabel(score?: number, level?: string) {
-  if (typeof score !== "number") return "—";
-  return `${score} / 100 · ${(level ?? "").replaceAll("_", " ")}`;
+/** 分数 + 等级：等级由 overallLevel 推导，文案取字典，不出现 LOW/MODERATE 原始 token */
+function riskLabel(score?: number, labels?: Record<RiskLevel, string>) {
+  if (typeof score !== "number" || !labels) return "—";
+  return `${score} / 100 · ${labels[overallLevel(score)]}`;
 }
 
 export default async function SuppliersPage({ params, searchParams }: Props) {
@@ -39,6 +41,7 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
   const t = await getDictionary(locale);
   const s = t.suppliers;
   const v = t.verification;
+  const sp = t.supplierProfile;
   const p = (href: string) => localePath(locale, href);
 
   const all = await listSupplierDirectory();
@@ -172,8 +175,14 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
                   </div>
                   <div className="flex justify-between gap-2">
                     <dt className="text-[#64748b]">{s.riskLabel}</dt>
-                    <dd className="font-medium text-[#0f4c81] text-right">
-                      {riskLabel(x.riskScore, x.riskLevel)}
+                    <dd className="font-medium text-right" style={{ color: LEVEL_COLOR[overallLevel(x.riskScore ?? 0)] }}>
+                      {riskLabel(x.riskScore, t.risk.ui.level)}
+                    </dd>
+                  </div>
+                  <div className="flex justify-between gap-2">
+                    <dt className="text-[#64748b]">{v.lastVerified}</dt>
+                    <dd className="font-medium text-[#0f172a] text-right">
+                      {x.lastChecked ?? sp.noCheckRecord}
                     </dd>
                   </div>
                   <div className="flex justify-between gap-2">

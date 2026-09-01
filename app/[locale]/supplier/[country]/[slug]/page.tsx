@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
-import { getSupplierDetail, listSupplierSlugs } from "@/lib/queries";
+import { getSupplierDetail, listSupplierSlugs, lastCheckedOf } from "@/lib/queries";
 import {
   levelFromStatus,
   LEVEL_SCOPE,
@@ -12,6 +12,7 @@ import {
   evidenceProvenance,
   type EvidenceProvenance,
 } from "@/lib/verification";
+import { overallLevel, LEVEL_COLOR } from "@/lib/riskEngine";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
@@ -68,6 +69,8 @@ export default async function SupplierProfile({
   const uiLocale = locale === "zh" || locale === "zh-TW" ? "zh" : "en";
   const level = levelFromStatus(s.verificationStatus);
   const scope = LEVEL_SCOPE[level];
+  // 风险等级由引擎推导，不在页面重复判定阈值
+  const riskBand = overallLevel(s.riskScore ?? 0);
 
   // 证据状态：只展示「已核验 / 部分核验 / 未核验 / 已过期 / 缺失」，
   // 不提供原始文件下载（PRD §20 + 第三方报告分发限制）。
@@ -104,10 +107,9 @@ export default async function SupplierProfile({
     independent: "border-[#0f4c81] text-[#0f4c81] bg-[#e6eef6]",
     onsite: "border-[#0f4c81] text-white bg-[#0f4c81]",
   };
-  /* 最近一次核验日期：取自证据记录，没有记录就显示 —，不编造日期 */
-  const lastVerifiedDate = s.evidence.find((e) => e.date)?.date ?? null;
-
-  const updated = new Date().toISOString().slice(0, 10);
+  /* 最近一次核验日期：取自证据记录，没有记录就显示「暂无核验记录」。
+     绝不用 new Date() 顶替 —— 那会把「今天」伪装成核验日期。 */
+  const lastVerifiedDate = lastCheckedOf(s.evidence);
 
   return (
     <main className="container py-10">
@@ -143,15 +145,31 @@ export default async function SupplierProfile({
           <div className="mt-4 text-xs uppercase tracking-wide text-[#64748b]">
             {sp.riskScore}
           </div>
-          <div className="text-2xl font-extrabold text-[#0f172a]">
-            {typeof s.riskScore === "number" ? `${s.riskScore} / 100` : "—"}
-          </div>
-          <div className="text-sm text-[#475569]">
-            {(s.riskLevel ?? "").replaceAll("_", " ")}
-          </div>
+          {typeof s.riskScore === "number" ? (
+            <>
+              <div className="text-2xl font-extrabold" style={{ color: LEVEL_COLOR[riskBand] }}>
+                {s.riskScore} / 100
+              </div>
+              <div className="text-sm font-medium" style={{ color: LEVEL_COLOR[riskBand] }}>
+                {t.risk.ui.level[riskBand]}
+              </div>
+              <div className="mt-2 h-2 overflow-hidden rounded-full bg-[#e2e8f0]">
+                <div
+                  className="h-full rounded-full"
+                  style={{ width: `${s.riskScore}%`, background: LEVEL_COLOR[riskBand] }}
+                />
+              </div>
+            </>
+          ) : (
+            <div className="text-2xl font-extrabold text-[#64748b]">—</div>
+          )}
+          <p className="mt-1 text-xs text-[#64748b]">{sp.scoreDirection}</p>
 
-          <div className="mt-4 text-xs text-[#64748b]">
-            {sp.lastUpdated}: {updated}
+          <div className="mt-4 text-xs uppercase tracking-wide text-[#64748b]">
+            {sp.lastChecked}
+          </div>
+          <div className="text-sm font-medium text-[#0f172a]">
+            {lastVerifiedDate ?? sp.noCheckRecord}
           </div>
         </div>
       </section>
@@ -168,8 +186,8 @@ export default async function SupplierProfile({
           )}
         </ul>
         <div className="mt-4 text-sm text-[#0f172a]">
-          <span className="text-[#64748b]">{v.lastVerified}: </span>
-          <span className="font-medium">{lastVerifiedDate ?? "—"}</span>
+          <span className="text-[#64748b]">{sp.lastChecked}: </span>
+          <span className="font-medium">{lastVerifiedDate ?? sp.noCheckRecord}</span>
         </div>
         <div className="mt-4 border-t border-[#e2e8f0] pt-3">
           <h3 className="font-semibold text-[#0f172a] text-sm">{sp.neverClaimedTitle}</h3>
@@ -346,7 +364,7 @@ export default async function SupplierProfile({
           <div>
             <h3 className="font-semibold text-[#0f172a]">{rp.execTitle}</h3>
             <p className="text-sm text-[#475569] mt-1">
-              {rp.riskLevel}: {(s.riskLevel ?? "—").replaceAll("_", " ")}
+              {rp.riskLevel}: {t.risk.ui.level[riskBand]}
             </p>
             <p className="text-sm text-[#475569]">
               {rp.score}: {typeof s.riskScore === "number" ? `${s.riskScore} / 100` : "—"}
@@ -381,9 +399,7 @@ export default async function SupplierProfile({
 
             <h3 className="font-semibold text-[#0f172a] mt-4">{rp.recommendationTitle}</h3>
             <p className="text-sm text-[#475569] mt-1">
-              {level <= 2
-                ? "Verify the factory address and request recent quality and audit records before placing a large order."
-                : "Request an independent on-site factory audit before releasing a significant deposit."}
+              {level >= 3 ? sp.recVerified : sp.recUnverified}
             </p>
           </div>
         </div>
