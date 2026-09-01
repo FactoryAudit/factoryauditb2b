@@ -284,6 +284,16 @@
         "label": "Documentation risk",
         "short": "Documentation",
         "description": "Whether the business licence, factory address, certificates, audit reports and test reports can actually be produced."
+      },
+      "certification": {
+        "label": "مخاطر التصديق",
+        "short": "التصديق",
+        "description": "سواء كانت الشهادات التي تعرضها تغطي بالفعل منتجك، أو صادرة عن هيئة يمكنك البحث عنها، ولا تزال صالحة."
+      },
+      "digitalFootprint": {
+        "label": "البصمة الرقمية",
+        "short": "البصمة الرقمية",
+        "description": "ما إذا كان لديهم وجود يمكن تتبعه عبر الإنترنت، وما إذا كان اسم الشركة وعنوانها يتطابقان عبر كل إعلان مسكن تجده."
       }
     },
     "questions": {
@@ -308,7 +318,13 @@
       "doc_registration": "Has the business registration been provided?",
       "doc_address": "Is the factory address documented?",
       "doc_certificates": "Are certificates and audit reports available?",
-      "doc_test": "Are product test reports available?"
+      "doc_test": "Are product test reports available?",
+      "cert_scope": "هل تغطي الشهادات المنتج الذي تشتريه ؟",
+      "cert_body": "هل يمكن العثور على الشهادة في السجل الخاص بالجهة المصدرة ؟",
+      "cert_validity": "هل لا تزال الشهادات صالحة ؟",
+      "digital_website": "هل لدى المورد موقعه الإلكتروني الخاص ؟",
+      "digital_consistency": "هل يتطابق اسم الشركة وعنوانها في كل إعلان ؟",
+      "digital_history": "إلى أي مدى يمكن تتبع تاريخ تداولهم عبر الإنترنت ؟"
     },
     "options": {
       "company_years": {
@@ -441,6 +457,42 @@
         "partial": "Partially",
         "no": "No",
         "unknown": "Unknown"
+      },
+      "cert_scope": {
+        "covers": "نعم، بالكامل",
+        "partial": "Partially",
+        "notcovered": "لا، النطاق يستثني منتجنا",
+        "unknown": "Unknown"
+      },
+      "cert_body": {
+        "accredited": "نعم، على سجل معتمد",
+        "unverified": "لا، لا يمكن العثور عليه",
+        "none": "لا يوجد شهادة",
+        "unknown": "Unknown"
+      },
+      "cert_validity": {
+        "valid": "ساري:",
+        "expiring": "تنتهي صلاحيته في غضون 3 أشهر",
+        "expired": "Expired",
+        "unknown": "Unknown"
+      },
+      "digital_website": {
+        "owned": "نعم، نطاق مستقل",
+        "socialonly": "سوق أو صفحة اجتماعية فقط",
+        "none": "لا شيء وجد.",
+        "unknown": "Unknown"
+      },
+      "digital_consistency": {
+        "consistent": "متسقة في كل مكان",
+        "minor": "مع اختلافات طفيفة",
+        "mismatch": "عدم تطابق المواد بين المساكن",
+        "unknown": "Unknown"
+      },
+      "digital_history": {
+        "5plus": "ما يزيد عن 5 أعوام",
+        "2to5": "من 2 إلى 5 سنوات",
+        "under2": "أقل من سنتين",
+        "none": "لا يوجد تاريخ يمكن تتبعه"
       }
     },
     "factors": {
@@ -452,7 +504,13 @@
       "prod_capacity": "Production capacity is unverified.",
       "prod_subcontract": "Work is subcontracted without disclosure.",
       "doc_registration": "The business registration could not be verified.",
-      "doc_address": "There is no documented factory address."
+      "doc_address": "There is no documented factory address.",
+      "cert_scope": "لا تغطي الشهادات المنتج الذي تشتريه.",
+      "cert_body": "لا يمكن العثور على الشهادة في السجل الخاص بالجهة المصدرة.",
+      "cert_validity": "الشهادة منتهيةSSL error",
+      "digital_website": "لا يوجد وجود على شبكة الإنترنت يمكن تتبعه خارج الأسواق.",
+      "digital_consistency": "يختلف اسم الشركة أو عنوانها بين المساكن.",
+      "digital_history": "سجل تداول ضئيل أو معدوم عبر الإنترنت."
     },
     "recommendations": {
       "LOW": [

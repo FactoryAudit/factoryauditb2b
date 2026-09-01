@@ -1,25 +1,32 @@
-// 供应商风险引擎（PRD §9–19）
-// 六维 0–100 风险模型，权重可配置、可解释、可追踪。
+// 供应商风险引擎（V1.1）
+// 八维模型，权重可配置、可解释、可追踪。
+//
+// ⚠️ V1.1 评分方向：**分数越高 = 风险越低**（安全分 / Trust Score）。
+//    与 V1.0 完全相反（V1.0 是 100 = 最危险）。锚点：72/100 = MEDIUM RISK。
+//    内部选项的 `risk` 字段仍是「风险等级」语义（HIGH = 高风险），
+//    LEVEL_SCORE 只负责把风险等级映射成安全分，两者不要搞混。
 //
 // 本文件只保留「结构与评分逻辑」，所有展示文案由字典提供（i18n/dictionaries/*.json）。
 // 这是项目的单一事实来源约定：文案改一处（字典）即全站生效，多语言只需换字典。
 
 export type RiskLevel = "LOW" | "MODERATE" | "ELEVATED" | "HIGH" | "CRITICAL";
 
+// 风险等级 → 安全分（取各分桶区间的代表值，仅用于加权平均，不用于展示）
+// 分数越高越安全：LOW（最安全）→ CRITICAL（最危险）
 export const LEVEL_SCORE: Record<RiskLevel, number> = {
-  LOW: 0,
-  MODERATE: 25,
-  ELEVATED: 50,
-  HIGH: 75,
-  CRITICAL: 100,
+  LOW: 92, // 区间 85–100
+  MODERATE: 77, // 区间 70–84（V1.1 锚点：72 = MEDIUM RISK）
+  ELEVATED: 62, // 区间 55–69
+  HIGH: 47, // 区间 40–54
+  CRITICAL: 20, // 区间 0–39
 };
 
-// 总体分桶（§10）
+// 总体分桶（V1.1）：输入安全分，输出风险等级
 export function overallLevel(score: number): RiskLevel {
-  if (score <= 20) return "LOW";
-  if (score <= 40) return "MODERATE";
-  if (score <= 60) return "ELEVATED";
-  if (score <= 80) return "HIGH";
+  if (score >= 85) return "LOW";
+  if (score >= 70) return "MODERATE";
+  if (score >= 55) return "ELEVATED";
+  if (score >= 40) return "HIGH";
   return "CRITICAL";
 }
 
@@ -43,7 +50,7 @@ export interface StructDimension {
 export const DIMENSION_STRUCTURE: StructDimension[] = [
   {
     key: "company",
-    weight: 15,
+    weight: 12,
     questions: [
       {
         id: "company_years",
@@ -85,7 +92,7 @@ export const DIMENSION_STRUCTURE: StructDimension[] = [
   },
   {
     key: "quality",
-    weight: 20,
+    weight: 16,
     questions: [
       {
         id: "quality_qms",
@@ -128,7 +135,7 @@ export const DIMENSION_STRUCTURE: StructDimension[] = [
   },
   {
     key: "compliance",
-    weight: 20,
+    weight: 16,
     questions: [
       {
         id: "comp_social",
@@ -170,7 +177,7 @@ export const DIMENSION_STRUCTURE: StructDimension[] = [
   },
   {
     key: "production",
-    weight: 15,
+    weight: 12,
     questions: [
       {
         id: "prod_capacity",
@@ -203,7 +210,7 @@ export const DIMENSION_STRUCTURE: StructDimension[] = [
   },
   {
     key: "supplychain",
-    weight: 15,
+    weight: 12,
     questions: [
       {
         id: "sc_material",
@@ -234,7 +241,7 @@ export const DIMENSION_STRUCTURE: StructDimension[] = [
   },
   {
     key: "documentation",
-    weight: 15,
+    weight: 12,
     questions: [
       {
         id: "doc_registration",
@@ -274,9 +281,77 @@ export const DIMENSION_STRUCTURE: StructDimension[] = [
       },
     ],
   },
+  {
+    // V1.1 新增：证书真伪与有效性。铁律：有证书 ≠ 合规，能在发证机构查到的才算数。
+    key: "certification",
+    weight: 10,
+    questions: [
+      {
+        id: "cert_scope",
+        options: [
+          { value: "covers", risk: "LOW" },
+          { value: "partial", risk: "MODERATE" },
+          { value: "notcovered", risk: "HIGH" },
+          { value: "unknown", risk: "ELEVATED" },
+        ],
+      },
+      {
+        id: "cert_body",
+        options: [
+          { value: "accredited", risk: "LOW" },
+          { value: "unverified", risk: "CRITICAL" },
+          { value: "none", risk: "HIGH" },
+          { value: "unknown", risk: "ELEVATED" },
+        ],
+      },
+      {
+        id: "cert_validity",
+        options: [
+          { value: "valid", risk: "LOW" },
+          { value: "expiring", risk: "MODERATE" },
+          { value: "expired", risk: "HIGH" },
+          { value: "unknown", risk: "ELEVATED" },
+        ],
+      },
+    ],
+  },
+  {
+    // V1.1 新增：线上可查痕迹。冒名工厂与贸易商伪装成工厂，通常最先在这里露馅。
+    key: "digitalFootprint",
+    weight: 10,
+    questions: [
+      {
+        id: "digital_website",
+        options: [
+          { value: "owned", risk: "LOW" },
+          { value: "socialonly", risk: "MODERATE" },
+          { value: "none", risk: "HIGH" },
+          { value: "unknown", risk: "ELEVATED" },
+        ],
+      },
+      {
+        id: "digital_consistency",
+        options: [
+          { value: "consistent", risk: "LOW" },
+          { value: "minor", risk: "MODERATE" },
+          { value: "mismatch", risk: "CRITICAL" },
+          { value: "unknown", risk: "ELEVATED" },
+        ],
+      },
+      {
+        id: "digital_history",
+        options: [
+          { value: "5plus", risk: "LOW" },
+          { value: "2to5", risk: "MODERATE" },
+          { value: "under2", risk: "ELEVATED" },
+          { value: "none", risk: "HIGH" },
+        ],
+      },
+    ],
+  },
 ];
 
-export const TOTAL_WEIGHT = DIMENSION_STRUCTURE.reduce((a, d) => a + d.weight, 0); // 100
+export const TOTAL_WEIGHT = DIMENSION_STRUCTURE.reduce((a, d) => a + d.weight, 0); // 100（八维）
 
 export const ALL_QUESTIONS = DIMENSION_STRUCTURE.flatMap((d) => d.questions);
 export const TOTAL_QUESTIONS = ALL_QUESTIONS.length;

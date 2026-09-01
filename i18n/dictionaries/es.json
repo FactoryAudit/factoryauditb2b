@@ -284,6 +284,16 @@
         "label": "Documentation risk",
         "short": "Documentation",
         "description": "Whether the business licence, factory address, certificates, audit reports and test reports can actually be produced."
+      },
+      "certification": {
+        "label": "Riesgo de certificación",
+        "short": "Certificación",
+        "description": "Si los certificados que muestran realmente cubren su producto, son emitidos por un organismo que puede consultar y siguen siendo válidos."
+      },
+      "digitalFootprint": {
+        "label": "Huella digital",
+        "short": "Huella digital",
+        "description": "Si tienen una presencia en línea rastreable y si el nombre y la dirección de la empresa coinciden con todos los anuncios que encuentres."
       }
     },
     "questions": {
@@ -308,7 +318,13 @@
       "doc_registration": "Has the business registration been provided?",
       "doc_address": "Is the factory address documented?",
       "doc_certificates": "Are certificates and audit reports available?",
-      "doc_test": "Are product test reports available?"
+      "doc_test": "Are product test reports available?",
+      "cert_scope": "¿Los certificados cubren el producto que está comprando?",
+      "cert_body": "¿Se puede encontrar el certificado en el propio registro del organismo emisor?",
+      "cert_validity": "¿Los certificados siguen siendo válidos?",
+      "digital_website": "¿El proveedor tiene su propia página web?",
+      "digital_consistency": "¿El nombre y la dirección de la empresa coinciden en todos los anuncios?",
+      "digital_history": "¿Cuánto tiempo atrás se puede rastrear su historial de trading en línea?"
     },
     "options": {
       "company_years": {
@@ -441,6 +457,42 @@
         "partial": "Partially",
         "no": "No",
         "unknown": "Unknown"
+      },
+      "cert_scope": {
+        "covers": "Sí, en su totalidad",
+        "partial": "Partially",
+        "notcovered": "No, el alcance excluye nuestro producto",
+        "unknown": "Unknown"
+      },
+      "cert_body": {
+        "accredited": "Sí, en un registro acreditado",
+        "unverified": "No se puede encontrar.",
+        "none": "No hay certificado",
+        "unknown": "Unknown"
+      },
+      "cert_validity": {
+        "valid": "Válido",
+        "expiring": "Caduca en un plazo de 3 meses",
+        "expired": "Expired",
+        "unknown": "Unknown"
+      },
+      "digital_website": {
+        "owned": "Sí, un dominio independiente",
+        "socialonly": "Solo una plataforma o una página social",
+        "none": "No se ha encontrado ninguno",
+        "unknown": "Unknown"
+      },
+      "digital_consistency": {
+        "consistent": "Consistente en todas partes",
+        "minor": "Diferencias menores",
+        "mismatch": "El material no coincide entre los anuncios",
+        "unknown": "Unknown"
+      },
+      "digital_history": {
+        "5plus": "Más de 5 años",
+        "2to5": "2 a 5 años",
+        "under2": "Menos de 2 años",
+        "none": "Sin historial rastreable"
       }
     },
     "factors": {
@@ -452,7 +504,13 @@
       "prod_capacity": "Production capacity is unverified.",
       "prod_subcontract": "Work is subcontracted without disclosure.",
       "doc_registration": "The business registration could not be verified.",
-      "doc_address": "There is no documented factory address."
+      "doc_address": "There is no documented factory address.",
+      "cert_scope": "Los certificados no cubren el producto que está comprando.",
+      "cert_body": "El certificado no se encuentra en el propio registro del organismo emisor.",
+      "cert_validity": "El certificado ha expirado.",
+      "digital_website": "No hay presencia web rastreable fuera de los mercados.",
+      "digital_consistency": "El nombre o la dirección de la empresa difiere de un alojamiento a otro.",
+      "digital_history": "Poco o ningún historial de trading rastreable en línea."
     },
     "recommendations": {
       "LOW": [

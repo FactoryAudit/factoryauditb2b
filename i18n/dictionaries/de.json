@@ -284,6 +284,16 @@
         "label": "Documentation risk",
         "short": "Dokumentation",
         "description": "Ob Gewerbeschein, Produktionsadresse, Zertifikate, Auditberichte und Prüfberichte tatsächlich vorgelegt werden können."
+      },
+      "certification": {
+        "label": "Zertifizierungsrisiko",
+        "short": "Zertifizierung",
+        "description": "Ob die Zertifikate, die sie zeigen, tatsächlich Ihr Produkt abdecken, von einer Stelle ausgestellt werden, die Sie nachschlagen können, und immer noch gültig sind."
+      },
+      "digitalFootprint": {
+        "label": "Risiko digitaler Fußabdrücke",
+        "short": "Digitaler Fußabdruck",
+        "description": "Ob sie eine nachvollziehbare Online-Präsenz haben und ob der Firmenname und die Adresse in jedem Inserat, das du findest, übereinstimmen."
       }
     },
     "questions": {
@@ -308,7 +318,13 @@
       "doc_registration": "Wurde der Handelsregistereintrag vorgelegt?",
       "doc_address": "Ist die Produktionsadresse dokumentiert?",
       "doc_certificates": "Sind Zertifikate und Auditberichte verfügbar?",
-      "doc_test": "Sind Produktprüfberichte verfügbar?"
+      "doc_test": "Sind Produktprüfberichte verfügbar?",
+      "cert_scope": "Decken die Zertifikate das Produkt ab, das Sie kaufen?",
+      "cert_body": "Kann die Bescheinigung im eigenen Register der ausstellenden Stelle gefunden werden?",
+      "cert_validity": "Sind die Zertifikate noch gültig?",
+      "digital_website": "Verfügt der Lieferant über eine eigene Website?",
+      "digital_consistency": "Stimmen der Firmenname und die Adresse in jedem Inserat überein?",
+      "digital_history": "Wie weit kann ihre Handelsgeschichte online zurückverfolgt werden?"
     },
     "options": {
       "company_years": {
@@ -441,6 +457,42 @@
         "partial": "Teilweise",
         "no": "Nein",
         "unknown": "Unbekannt"
+      },
+      "cert_scope": {
+        "covers": "Ja, vollständig",
+        "partial": "Zum Teil",
+        "notcovered": "Nein, der Geltungsbereich schließt unser Produkt aus",
+        "unknown": "Unbekannt"
+      },
+      "cert_body": {
+        "accredited": "Ja, in einem akkreditierten Register",
+        "unverified": "Nein, es kann nicht gefunden werden",
+        "none": "Dann gibt es kein Zertifikat.",
+        "unknown": "Unbekannt"
+      },
+      "cert_validity": {
+        "valid": "Gültig",
+        "expiring": "Läuft innerhalb von 3 Monaten ab",
+        "expired": "Expired",
+        "unknown": "Unbekannt"
+      },
+      "digital_website": {
+        "owned": "Ja, eine unabhängige Domain",
+        "socialonly": "Nur ein Marktplatz oder eine soziale Seite",
+        "none": "Keine gefunden",
+        "unknown": "Unbekannt"
+      },
+      "digital_consistency": {
+        "consistent": "Überall konsistent",
+        "minor": "Geringfügige Unterschiede",
+        "mismatch": "Materialinkongruenz zwischen Inseraten",
+        "unknown": "Unbekannt"
+      },
+      "digital_history": {
+        "5plus": "Mehr als 5&#160;Jahre",
+        "2to5": "2 bis 5 Jahre",
+        "under2": "Weniger als 2 Jahre",
+        "none": "Keine nachvollziehbare Historie"
       }
     },
     "factors": {
@@ -452,7 +504,13 @@
       "prod_capacity": "Die Produktionskapazität ist nicht belegt.",
       "prod_subcontract": "Es wird ohne Offenlegung an Dritte vergeben.",
       "doc_registration": "Der Handelsregistereintrag konnte nicht geprüft werden.",
-      "doc_address": "Es gibt keine dokumentierte Produktionsadresse."
+      "doc_address": "Es gibt keine dokumentierte Produktionsadresse.",
+      "cert_scope": "Die Zertifikate decken nicht das Produkt ab, das Sie kaufen.",
+      "cert_body": "Die Bescheinigung ist im eigenen Register der ausstellenden Stelle nicht zu finden.",
+      "cert_validity": "Das Zertifikat ist abgelaufen.",
+      "digital_website": "Keine nachvollziehbare Webpräsenz außerhalb von Marktplätzen.",
+      "digital_consistency": "Der Firmenname oder die Adresse unterscheidet sich zwischen den Inseraten.",
+      "digital_history": "Wenig oder keine nachvollziehbare Handelshistorie online."
     },
     "recommendations": {
       "LOW": [

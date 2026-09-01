@@ -22,7 +22,7 @@
       "factoryAuditDesc": "On-site assessment against the standard your buyer requires.",
       "inspection": "Inspeção",
       "inspectionDesc": "In-line and pre-shipment checks on your production.",
-      "sourcing": "Sourcing",
+      "sourcing": "Fontes",
       "sourcingDesc": "Post an RFQ and reach suppliers we can verify.",
       "improvement": "Melhoria de fornecedores",
       "improvementDesc": "Turn audit findings into corrective action and training."
@@ -278,6 +278,16 @@
         "label": "Documentation risk",
         "short": "Documentação",
         "description": "Se o registro empresarial, o endereço da fábrica, os certificados, os relatórios de auditoria e os laudos de ensaio podem realmente ser apresentados."
+      },
+      "certification": {
+        "label": "Risco de certificação",
+        "short": "Certificação",
+        "description": "Se os certificados que eles mostram realmente cobrem seu produto, são emitidos por um órgão que você pode consultar e ainda são válidos."
+      },
+      "digitalFootprint": {
+        "label": "Risco de pegada digital",
+        "short": "Pegada digital",
+        "description": "Se eles têm uma presença online rastreável e se o nome e o endereço da empresa correspondem em todos os anúncios que você encontrar."
       }
     },
     "questions": {
@@ -302,7 +312,13 @@
       "doc_registration": "O registro empresarial foi apresentado?",
       "doc_address": "O endereço da fábrica está documentado?",
       "doc_certificates": "Os certificados e relatórios de auditoria estão disponíveis?",
-      "doc_test": "Os laudos de ensaio do produto estão disponíveis?"
+      "doc_test": "Os laudos de ensaio do produto estão disponíveis?",
+      "cert_scope": "Os certificados cobrem o produto que você está comprando?",
+      "cert_body": "O certificado pode ser encontrado no próprio registro do órgão emissor?",
+      "cert_validity": "Os certificados ainda são válidos?",
+      "digital_website": "O fornecedor possui site próprio?",
+      "digital_consistency": "O nome e o endereço da empresa correspondem em todos os anúncios?",
+      "digital_history": "Até onde o histórico de negociação deles pode ser rastreado online?"
     },
     "options": {
       "company_years": {
@@ -435,6 +451,42 @@
         "partial": "Parcialmente",
         "no": "Não",
         "unknown": "Não sei"
+      },
+      "cert_scope": {
+        "covers": "Sim, na íntegra",
+        "partial": "Em parte",
+        "notcovered": "Não, o escopo exclui nosso produto",
+        "unknown": "Desconhecida"
+      },
+      "cert_body": {
+        "accredited": "Sim, em um registro credenciado",
+        "unverified": "Não, não pode ser encontrado",
+        "none": "Não há certificado",
+        "unknown": "Desconhecida"
+      },
+      "cert_validity": {
+        "valid": "Val.",
+        "expiring": "Expira dentro de 3 meses",
+        "expired": "Expired",
+        "unknown": "Desconhecida"
+      },
+      "digital_website": {
+        "owned": "Sim, um domínio independente",
+        "socialonly": "Apenas um marketplace ou página social",
+        "none": "Nada encontrado",
+        "unknown": "Desconhecida"
+      },
+      "digital_consistency": {
+        "consistent": "Consistente em todos os lugares",
+        "minor": "Pequenas diferenças",
+        "mismatch": "Incompatibilidade material entre anúncios",
+        "unknown": "Desconhecida"
+      },
+      "digital_history": {
+        "5plus": "Mais de 5 anos",
+        "2to5": "2 a 5 anos ",
+        "under2": "Menos de 2 anos",
+        "none": "Sem histórico rastreável"
       }
     },
     "factors": {
@@ -446,7 +498,13 @@
       "prod_capacity": "A capacidade de produção não está verificada.",
       "prod_subcontract": "Há subcontratação sem informar.",
       "doc_registration": "Não foi possível verificar o registro empresarial.",
-      "doc_address": "Não há endereço de fábrica documentado."
+      "doc_address": "Não há endereço de fábrica documentado.",
+      "cert_scope": "Os certificados não cobrem o produto que você está comprando.",
+      "cert_body": "O certificado não pode ser encontrado no próprio registro do órgão emissor.",
+      "cert_validity": "O certificado venceu",
+      "digital_website": "Nenhuma presença na web rastreável fora dos mercados.",
+      "digital_consistency": "O nome ou endereço da empresa difere entre os anúncios.",
+      "digital_history": "Pouco ou nenhum histórico de negociação rastreável online."
     },
     "recommendations": {
       "LOW": [

@@ -155,7 +155,7 @@
     "anotherCountryLead": "告诉我们你在哪里采购。如果当地还没有确认的审核员资源，我们会直说，而不是猜。",
     "anotherCountryCta": "申请核验",
     "metaTitle": "我们在哪些地方核验供应商",
-    "metaDesc": "覆盖中国、越南、泰国的供应商核查与工厂验厂，包含各国采购风险、核查要点与验厂注意事项。"
+    "metaDesc": "从公司、质量、合规、生产、供应链、文件、认证、数字足迹八个维度给供应商打 0–100 分。分数越高代表风险越低。免费，无需注册。"
   },
   "countryHub": {
     "profileTitle": "制造业概况",
@@ -422,6 +422,17 @@
         "short": "文件",
         "description": "营业执照、厂房地址、证书、审核报告与测试报告能否真正拿得出来。"
       }
+,
+      "certification": {
+        "label": "认证风险",
+        "short": "认证",
+        "description": "对方出示的证书是否真正覆盖你的产品、发证机构能否查到、证书是否仍在有效期内。"
+      },
+      "digitalFootprint": {
+        "label": "数字足迹风险",
+        "short": "数字足迹",
+        "description": "是否有可追溯的线上痕迹，公司名与地址在各平台信息是否一致。"
+      }
     },
     "questions": {
       "company_years": "这家公司经营多久了？",
@@ -445,7 +456,13 @@
       "doc_registration": "是否提供了营业执照？",
       "doc_address": "厂房地址是否有文件佐证？",
       "doc_certificates": "证书与审核报告能否提供？",
-      "doc_test": "产品测试报告能否提供？"
+      "doc_test": "产品测试报告能否提供？",
+      "cert_scope": "证书是否覆盖你要采购的产品？",
+      "cert_body": "证书能否在发证机构官网查到？",
+      "cert_validity": "证书是否仍在有效期内？",
+      "digital_website": "供应商是否有自己的独立官网？",
+      "digital_consistency": "公司名与地址在各平台是否一致？",
+      "digital_history": "线上可追溯的经营记录有多久？"
     },
     "options": {
       "company_years": {
@@ -578,7 +595,44 @@
         "partial": "部分有",
         "no": "没有",
         "unknown": "不清楚"
+      },
+      "cert_scope": {
+        "covers": "是，完全覆盖",
+        "partial": "部分覆盖",
+        "notcovered": "否，范围不含我们的产品",
+        "unknown": "不清楚"
+      },
+      "cert_body": {
+        "accredited": "可以，在认可机构名录中",
+        "unverified": "查不到",
+        "none": "没有证书",
+        "unknown": "不清楚"
+      },
+      "cert_validity": {
+        "valid": "有效",
+        "expiring": "3 个月内到期",
+        "expired": "已过期",
+        "unknown": "不清楚"
+      },
+      "digital_website": {
+        "owned": "有独立域名官网",
+        "socialonly": "只有平台店铺或社交账号",
+        "none": "查不到",
+        "unknown": "不清楚"
+      },
+      "digital_consistency": {
+        "consistent": "各处一致",
+        "minor": "有细微差异",
+        "mismatch": "各平台信息明显对不上",
+        "unknown": "不清楚"
+      },
+      "digital_history": {
+        "5plus": "5 年以上",
+        "2to5": "2 至 5 年",
+        "under2": "不足 2 年",
+        "none": "查不到可追溯记录"
       }
+
     },
     "factors": {
       "company_address": "厂房地址尚未核实。",
@@ -589,7 +643,13 @@
       "prod_capacity": "产能未经核实。",
       "prod_subcontract": "存在未告知的外发加工。",
       "doc_registration": "营业执照无法核实。",
-      "doc_address": "没有厂房地址文件。"
+      "doc_address": "没有厂房地址文件。",
+      "cert_scope": "证书未覆盖你要采购的产品。",
+      "cert_body": "证书在发证机构名录中查不到。",
+      "cert_validity": "证书已过有效期。",
+      "digital_website": "除平台店铺外查不到任何线上痕迹。",
+      "digital_consistency": "各平台的公司名或地址不一致。",
+      "digital_history": "线上几乎没有可追溯的经营记录。"
     },
     "recommendations": {
       "LOW": [

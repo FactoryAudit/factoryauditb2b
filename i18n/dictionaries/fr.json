@@ -284,6 +284,16 @@
         "label": "Documentation risk",
         "short": "Documentation",
         "description": "Si la licence commerciale, l'adresse de l'usine, les certificats, les rapports d'audit et les rapports d'essai peuvent vraiment être fournis."
+      },
+      "certification": {
+        "label": "Risque de certification",
+        "short": "Certification",
+        "description": "Si les certificats qu'ils montrent couvrent réellement votre produit, sont émis par un organisme que vous pouvez consulter et sont toujours valides."
+      },
+      "digitalFootprint": {
+        "label": "Empreinte numérique",
+        "short": "Empreinte numérique",
+        "description": "S'ils ont une présence en ligne traçable et si le nom et l'adresse de l'entreprise correspondent à chaque annonce que vous trouvez."
       }
     },
     "questions": {
@@ -308,7 +318,13 @@
       "doc_registration": "Le registre du commerce a-t-il été fourni ?",
       "doc_address": "L'adresse de l'usine est-elle documentée ?",
       "doc_certificates": "Les certificats et rapports d'audit sont-ils disponibles ?",
-      "doc_test": "Les rapports d'essai produit sont-ils disponibles ?"
+      "doc_test": "Les rapports d'essai produit sont-ils disponibles ?",
+      "cert_scope": "Les certificats couvrent-ils le produit que vous achetez ?",
+      "cert_body": "Le certificat peut-il être trouvé sur le propre registre de l'organisme émetteur ?",
+      "cert_validity": "Les certificats sont-ils toujours valides ?",
+      "digital_website": "Le fournisseur a-t-il son propre site web ?",
+      "digital_consistency": "Le nom et l'adresse de l'entreprise correspondent-ils à chaque annonce ?",
+      "digital_history": "Jusqu'où leur historique de trading peut-il être retracé en ligne ?"
     },
     "options": {
       "company_years": {
@@ -441,6 +457,42 @@
         "partial": "Partiellement",
         "no": "Non",
         "unknown": "Inconnu"
+      },
+      "cert_scope": {
+        "covers": "Oui, en entier",
+        "partial": "Partiellement",
+        "notcovered": "Non, le périmètre exclut notre produit",
+        "unknown": "Inconnu"
+      },
+      "cert_body": {
+        "accredited": "Oui, sur un registre accrédité",
+        "unverified": "Non, il est introuvable",
+        "none": "Il n'y a pas de certificat",
+        "unknown": "Inconnu"
+      },
+      "cert_validity": {
+        "valid": "Valide",
+        "expiring": "Expiration dans les 3 mois",
+        "expired": "Expired",
+        "unknown": "Inconnu"
+      },
+      "digital_website": {
+        "owned": "Oui, un domaine indépendant",
+        "socialonly": "Uniquement une place de marché ou une page sociale",
+        "none": "Non trouvé",
+        "unknown": "Inconnu"
+      },
+      "digital_consistency": {
+        "consistent": "Cohérent partout",
+        "minor": "Différences mineures",
+        "mismatch": "Divergence matérielle entre les annonces",
+        "unknown": "Inconnu"
+      },
+      "digital_history": {
+        "5plus": "Plus de 5 ans",
+        "2to5": "2 à 5 ans",
+        "under2": "Less than 2 years",
+        "none": "Pas d'historique traçable"
       }
     },
     "factors": {
@@ -452,7 +504,13 @@
       "prod_capacity": "La capacité de production n'est pas vérifiée.",
       "prod_subcontract": "La sous-traitance n'est pas déclarée.",
       "doc_registration": "Le registre du commerce n'a pas pu être vérifié.",
-      "doc_address": "Aucune adresse d'usine documentée."
+      "doc_address": "Aucune adresse d'usine documentée.",
+      "cert_scope": "Les certificats ne couvrent pas le produit que vous achetez.",
+      "cert_body": "Le certificat est introuvable sur le registre de l'organisme émetteur.",
+      "cert_validity": "Le certificat a expiré.",
+      "digital_website": "Pas de présence web traçable en dehors des places de marché.",
+      "digital_consistency": "Le nom ou l'adresse de l'entreprise diffère d'une annonce à l'autre.",
+      "digital_history": "Peu ou pas d'historique de trading traçable en ligne."
     },
     "recommendations": {
       "LOW": [

@@ -153,7 +153,7 @@
     "ctaPrimary": "供應商驗證服務",
     "ctaSecondary": "申請工廠審覈",
     "metaTitle": "免費供應商與工廠審覈工具",
-    "metaDesc": "免費工具，用於篩選供應商、覈對文件、生成審覈清單與分析審覈報告。無需註冊。"
+    "metaDesc": "從公司、品質、合規、生產、供應鏈、文件、認證、數位足跡八個維度為供應商打 0–100 分。分數越高代表風險越低。免費，無需註冊。"
   },
   "toolCards": {
     "riskCalculator": {
@@ -285,6 +285,17 @@
         "short": "文件",
         "description": "營業執照、廠房地址、證書、審覈報告與測試報告能否真正拿得出來。"
       }
+,
+      "certification": {
+        "label": "認證風險",
+        "short": "認證",
+        "description": "對方出示的證書是否真正覆蓋你的產品、發證機構能否查到、證書是否仍在有效期內。"
+      },
+      "digitalFootprint": {
+        "label": "數位足跡風險",
+        "short": "數位足跡",
+        "description": "是否有可追溯的線上痕跡，公司名與地址在各平台資訊是否一致。"
+      }
     },
     "questions": {
       "company_years": "這家公司經營多久了？",
@@ -308,7 +319,13 @@
       "doc_registration": "是否提供了營業執照？",
       "doc_address": "廠房地址是否有文件佐證？",
       "doc_certificates": "證書與審覈報告能否提供？",
-      "doc_test": "產品測試報告能否提供？"
+      "doc_test": "產品測試報告能否提供？",
+      "cert_scope": "證書是否覆蓋你要採購的產品？",
+      "cert_body": "證書能否在發證機構官網查到？",
+      "cert_validity": "證書是否仍在有效期內？",
+      "digital_website": "供應商是否有自己的獨立官網？",
+      "digital_consistency": "公司名與地址在各平台是否一致？",
+      "digital_history": "線上可追溯的經營記錄有多久？"
     },
     "options": {
       "company_years": {
@@ -441,7 +458,44 @@
         "partial": "部分有",
         "no": "沒有",
         "unknown": "不清楚"
+      },
+      "cert_scope": {
+        "covers": "是，完全覆蓋",
+        "partial": "部分覆蓋",
+        "notcovered": "否，範圍不含我們的產品",
+        "unknown": "不清楚"
+      },
+      "cert_body": {
+        "accredited": "可以，在認可機構名錄中",
+        "unverified": "查不到",
+        "none": "沒有證書",
+        "unknown": "不清楚"
+      },
+      "cert_validity": {
+        "valid": "有效",
+        "expiring": "3 個月內到期",
+        "expired": "已過期",
+        "unknown": "不清楚"
+      },
+      "digital_website": {
+        "owned": "有獨立域名官網",
+        "socialonly": "只有平台店鋪或社群帳號",
+        "none": "查不到",
+        "unknown": "不清楚"
+      },
+      "digital_consistency": {
+        "consistent": "各處一致",
+        "minor": "有細微差異",
+        "mismatch": "各平台資訊明顯對不上",
+        "unknown": "不清楚"
+      },
+      "digital_history": {
+        "5plus": "5 年以上",
+        "2to5": "2 至 5 年",
+        "under2": "不足 2 年",
+        "none": "查不到可追溯記錄"
       }
+
     },
     "factors": {
       "company_address": "廠房地址尚未覈實。",
@@ -452,7 +506,13 @@
       "prod_capacity": "產能未經覈實。",
       "prod_subcontract": "存在未告知的外發加工。",
       "doc_registration": "營業執照無法覈實。",
-      "doc_address": "沒有廠房地址文件。"
+      "doc_address": "沒有廠房地址文件。",
+      "cert_scope": "證書未覆蓋你要採購的產品。",
+      "cert_body": "證書在發證機構名錄中查不到。",
+      "cert_validity": "證書已過有效期。",
+      "digital_website": "除平台店鋪外查不到任何線上痕跡。",
+      "digital_consistency": "各平台的公司名或地址不一致。",
+      "digital_history": "線上幾乎沒有可追溯的經營記錄。"
     },
     "recommendations": {
       "LOW": [

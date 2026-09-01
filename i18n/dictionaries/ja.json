@@ -284,6 +284,16 @@
         "label": "ドキュメント・リスク",
         "short": "書類",
         "description": "営業許可証、工場住所、認証、監査レポート、テストレポートの有無。"
+      },
+      "certification": {
+        "label": "認証リスク",
+        "short": "認証",
+        "description": "彼らが示す証明書が実際にあなたの製品をカバーしているか、あなたが調べることができる団体によって発行されているか、そしてまだ有効であるかどうか。"
+      },
+      "digitalFootprint": {
+        "label": "デジタルフットプリントリスク",
+        "short": "デジタルフットプリントの扱い",
+        "description": "追跡可能なオンラインプレゼンスがあるかどうか、検索したすべてのリスティングで会社名と住所が一致しているかどうか。"
       }
     },
     "questions": {
@@ -308,7 +318,13 @@
       "doc_registration": "営業登記証は提出されていますか？",
       "doc_address": "工場住所は文書化されていますか？",
       "doc_certificates": "認証書や監査レポートは入手可能ですか？",
-      "doc_test": "製品のテストレポートはありますか？"
+      "doc_test": "製品のテストレポートはありますか？",
+      "cert_scope": "証明書は購入する製品をカバーしていますか？",
+      "cert_body": "証明書は発行機関の登録簿に記載されていますか？",
+      "cert_validity": "証明書はまだ有効ですか？",
+      "digital_website": "サプライヤーは独自のウェブサイトを持っていますか？",
+      "digital_consistency": "すべてのリスティングで会社名と住所が一致していますか？",
+      "digital_history": "取引履歴はオンラインでどのくらい遡って追跡できますか？"
     },
     "options": {
       "company_years": {
@@ -441,6 +457,42 @@
         "partial": "部分的",
         "no": "なし",
         "unknown": "不明"
+      },
+      "cert_scope": {
+        "covers": "はい、全額です",
+        "partial": "Partially",
+        "notcovered": "いいえ、スコープは当社の製品を除外しています",
+        "unknown": "Unknown"
+      },
+      "cert_body": {
+        "accredited": "はい、認定された登録簿に記載されています",
+        "unverified": "いいえ、見つかりません",
+        "none": "証明書がありません",
+        "unknown": "Unknown"
+      },
+      "cert_validity": {
+        "valid": "有効",
+        "expiring": "3か月以内に期限切れ",
+        "expired": "Expired",
+        "unknown": "Unknown"
+      },
+      "digital_website": {
+        "owned": "はい、独立したドメインです",
+        "socialonly": "マーケットプレイスまたはソーシャルページのみ",
+        "none": "何も見つかりません",
+        "unknown": "Unknown"
+      },
+      "digital_consistency": {
+        "consistent": "どこでも一貫している",
+        "minor": "わずかな違い",
+        "mismatch": "リスティング間のマテリアルの不一致",
+        "unknown": "Unknown"
+      },
+      "digital_history": {
+        "5plus": "5年以上後",
+        "2to5": "2 ～ 5年",
+        "under2": "2年未満",
+        "none": "追跡可能な履歴はありません"
       }
     },
     "factors": {
@@ -452,7 +504,13 @@
       "prod_capacity": "生産能力が未確認です。",
       "prod_subcontract": "外注の有無が開示されていません。",
       "doc_registration": "営業登記を確認できません。",
-      "doc_address": "文書化された工場住所がありません。"
+      "doc_address": "文書化された工場住所がありません。",
+      "cert_scope": "証明書は、購入している製品をカバーしていません。",
+      "cert_body": "発行機関の登録簿に証明書が見つかりません。",
+      "cert_validity": "証明書の有効期限が切れています",
+      "digital_website": "マーケットプレイス外に追跡可能なWebプレゼンスはありません。",
+      "digital_consistency": "会社名または所在地はリスティングによって異なります。",
+      "digital_history": "追跡可能なオンライン取引履歴はほとんどまたはまったくありません。"
     },
     "recommendations": {
       "LOW": [

@@ -471,7 +471,7 @@
       "relatedTitle": "Related tools",
       "faqTitle": "Frequently asked questions",
       "metaTitle": "Supplier Risk Calculator",
-      "metaDesc": "Score any supplier from 0 to 100 across company, quality, compliance, production, supply chain and documentation. Free, no account needed."
+      "metaDesc": "Score any supplier from 0 to 100 across eight areas: company, quality, compliance, production, supply chain, documentation, certification and digital footprint. A higher score means lower risk. Free, no account needed."
     },
     "dimensions": {
       "company": {
@@ -503,6 +503,16 @@
         "label": "Documentation risk",
         "short": "Documentation",
         "description": "Whether the business licence, factory address, certificates, audit reports and test reports can actually be produced."
+      },
+      "certification": {
+        "label": "Certification risk",
+        "short": "Certification",
+        "description": "Whether the certificates they show actually cover your product, are issued by a body you can look up, and are still valid."
+      },
+      "digitalFootprint": {
+        "label": "Digital footprint risk",
+        "short": "Digital footprint",
+        "description": "Whether they have a traceable online presence, and whether the company name and address match across every listing you find."
       }
     },
     "questions": {
@@ -527,7 +537,13 @@
       "doc_registration": "Has the business registration been provided?",
       "doc_address": "Is the factory address documented?",
       "doc_certificates": "Are certificates and audit reports available?",
-      "doc_test": "Are product test reports available?"
+      "doc_test": "Are product test reports available?",
+      "cert_scope": "Do the certificates cover the product you are buying?",
+      "cert_body": "Can the certificate be found on the issuing body's own register?",
+      "cert_validity": "Are the certificates still valid?",
+      "digital_website": "Does the supplier have its own website?",
+      "digital_consistency": "Do the company name and address match across every listing?",
+      "digital_history": "How far back can their trading history be traced online?"
     },
     "options": {
       "company_years": {
@@ -660,6 +676,42 @@
         "partial": "Partially",
         "no": "No",
         "unknown": "Unknown"
+      },
+      "cert_scope": {
+        "covers": "Yes, in full",
+        "partial": "Partially",
+        "notcovered": "No, the scope excludes our product",
+        "unknown": "Unknown"
+      },
+      "cert_body": {
+        "accredited": "Yes, on an accredited register",
+        "unverified": "No, it cannot be found",
+        "none": "There is no certificate",
+        "unknown": "Unknown"
+      },
+      "cert_validity": {
+        "valid": "Valid",
+        "expiring": "Expiring within 3 months",
+        "expired": "Expired",
+        "unknown": "Unknown"
+      },
+      "digital_website": {
+        "owned": "Yes, an independent domain",
+        "socialonly": "Only a marketplace or social page",
+        "none": "None found",
+        "unknown": "Unknown"
+      },
+      "digital_consistency": {
+        "consistent": "Consistent everywhere",
+        "minor": "Minor differences",
+        "mismatch": "Material mismatch between listings",
+        "unknown": "Unknown"
+      },
+      "digital_history": {
+        "5plus": "More than 5 years",
+        "2to5": "2 to 5 years",
+        "under2": "Less than 2 years",
+        "none": "No traceable history"
       }
     },
     "factors": {
@@ -671,7 +723,13 @@
       "prod_capacity": "Production capacity is unverified.",
       "prod_subcontract": "Work is subcontracted without disclosure.",
       "doc_registration": "The business registration could not be verified.",
-      "doc_address": "There is no documented factory address."
+      "doc_address": "There is no documented factory address.",
+      "cert_scope": "The certificates do not cover the product you are buying.",
+      "cert_body": "The certificate cannot be found on the issuing body's own register.",
+      "cert_validity": "The certificate has expired.",
+      "digital_website": "No traceable web presence outside marketplaces.",
+      "digital_consistency": "The company name or address differs between listings.",
+      "digital_history": "Little or no traceable trading history online."
     },
     "recommendations": {
       "LOW": [
