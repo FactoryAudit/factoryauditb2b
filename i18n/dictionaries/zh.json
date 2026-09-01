@@ -333,6 +333,10 @@
     "personalizedService": {
       "title": "个性化服务",
       "desc": "提出您的具体需求，我们为您定制审核或验证方案。"
+    },
+    "supplierComparison": {
+      "title": "供应商对比",
+      "desc": "用同一套八维标准给 2 到 5 家供应商打分并排比较。"
     }
   },
   "risk": {
@@ -2424,5 +2428,38 @@
     "ctaPrimary": "申请核验",
     "ctaSecondary": "返回定价页",
     "disclaimer": "本样例使用虚构数据，仅供演示。它不是对任何真实公司的核验。第三方原始文件绝不转发给买家。"
+  },
+  "compare": {
+    "metaTitle": "供应商对比工具 — 2 到 5 家并排比较",
+    "metaDesc": "用同一套八维标准给 2 到 5 家供应商打分并排比较。数据由你填写，仅作决策参考。",
+    "badge": "免费工具",
+    "h1": "供应商对比",
+    "lead": "用同一套八维标准给 2 到 5 家供应商打分并排查看。答案由你填写，因此这是决策参考，不是核验结论。",
+    "addSupplier": "添加供应商",
+    "supplierLabel": "供应商",
+    "namePlaceholder": "供应商 A",
+    "remove": "移除",
+    "maxNote": "一次最多比较 5 家。",
+    "minNote": "至少添加 2 家才能看到对比结果。",
+    "dimensionCol": "维度",
+    "strong": "强",
+    "strongHint": "有文件且可核实",
+    "adequate": "中等",
+    "adequateHint": "部分有文件",
+    "weak": "弱",
+    "weakHint": "缺失或不足",
+    "unknown": "未核实",
+    "unknownHint": "尚未核查",
+    "scoreCol": "得分",
+    "summaryTitle": "对比汇总",
+    "bestNote": "在你填写的数据中得分最高。",
+    "biggestGapTitle": "差异最大的维度",
+    "biggestGapNote": "最高分与最低分差距最大的那个维度。",
+    "noGapNote": "暂时没有明显差异。继续填写更多维度即可看到差距。",
+    "disclaimer": "本对比使用你填写的数据，仅作决策参考，不是核验结论。高分不代表我们已经核查过该供应商。",
+    "ctaTitle": "想让这些答案被核实？",
+    "ctaLead": "核验按供应商计价，起价 99 美元，把自报答案变成经过审阅的证据。",
+    "ctaPrimary": "申请核验",
+    "reset": "重置"
   }
 }

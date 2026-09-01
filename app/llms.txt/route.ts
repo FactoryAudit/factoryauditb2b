@@ -42,8 +42,9 @@ export async function GET() {
 
   lines.push("## Core Sections");
   lines.push(`- [Home](${BASE}/): Platform overview.`);
-  lines.push(`- [Free Tools](${BASE}/tools): Seven free supplier and audit utilities. No account required.`);
+  lines.push(`- [Free Tools](${BASE}/tools): Eight free supplier and audit utilities. No account required.`);
   lines.push(`- [Supplier Risk Calculator](${BASE}/tools/supplier-risk-calculator): Scores any supplier 0-100 across Company, Quality, Compliance, Production, Supply Chain and Documentation.`);
+  lines.push(`- [Supplier Comparison Tool](${BASE}/tools/compare): Rates two to five suppliers side by side across the same eight dimensions and shows where they diverge most. Self-assessment only, not verification.`);
   lines.push(`- [Supplier Verification Checklist](${BASE}/tools/supplier-verification-checklist): 29 checks across 6 stages to complete before placing an order.`);
   lines.push(`- [Supplier Directory](${BASE}/suppliers): Featured suppliers with verification level, risk score and evidence on record. Coverage is limited; post an RFQ if a supplier is not listed.`);
   lines.push(`- [Services](${BASE}/services): Supplier verification, factory audit, inspection, sourcing and supplier improvement.`);

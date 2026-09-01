@@ -196,6 +196,10 @@
     "personalizedService": {
       "title": "カスタムサービス",
       "desc": "具体的なニーズをお聞かせください。カスタマイズされた監査または検証計画をまとめます。"
+    },
+    "supplierComparison": {
+      "title": "Supplier Comparison",
+      "desc": "Score two to five suppliers on the same eight dimensions and compare them side by side."
     }
   },
   "risk": {
@@ -2430,5 +2434,38 @@
     "ctaPrimary": "Request verification",
     "ctaSecondary": "Back to pricing",
     "disclaimer": "This sample uses fictional data and is for demonstration only. It is not a verification of any real company. Original third-party documents are never forwarded to buyers."
+  },
+  "compare": {
+    "metaTitle": "Supplier Comparison Tool — Compare 2 to 5 Suppliers Side by Side",
+    "metaDesc": "Score two to five suppliers on the same eight dimensions and compare them side by side. Self-reported inputs, decision support only.",
+    "badge": "Free tool",
+    "h1": "Supplier Comparison",
+    "lead": "Score two to five suppliers against the same eight dimensions and see them side by side. You enter the answers, so this is decision support, not a verification.",
+    "addSupplier": "Add a supplier",
+    "supplierLabel": "Supplier",
+    "namePlaceholder": "Supplier A",
+    "remove": "Remove",
+    "maxNote": "Up to five suppliers at a time.",
+    "minNote": "Add at least two suppliers to see a comparison.",
+    "dimensionCol": "Dimension",
+    "strong": "Strong",
+    "strongHint": "Documented and verifiable",
+    "adequate": "Adequate",
+    "adequateHint": "Partly documented",
+    "weak": "Weak",
+    "weakHint": "Missing or inadequate",
+    "unknown": "Unknown",
+    "unknownHint": "Not checked yet",
+    "scoreCol": "Score",
+    "summaryTitle": "Comparison summary",
+    "bestNote": "Highest score on the inputs you entered.",
+    "biggestGapTitle": "Where they differ most",
+    "biggestGapNote": "The dimension with the widest spread between the highest and lowest score.",
+    "noGapNote": "No meaningful gap yet. Fill in more dimensions to see where they differ.",
+    "disclaimer": "This comparison uses the numbers you enter. It is decision support, not a verification. A high score does not mean we have checked the supplier.",
+    "ctaTitle": "Want these answers checked?",
+    "ctaLead": "Verification starts at $99 per supplier and turns self-reported answers into reviewed evidence.",
+    "ctaPrimary": "Request verification",
+    "reset": "Reset"
   }
 }

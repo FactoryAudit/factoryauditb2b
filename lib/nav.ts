@@ -43,6 +43,7 @@ export type ServiceMenuDict = {
 export interface ToolEntry {
   cardKey:
     | "riskCalculator"
+    | "supplierComparison"
     | "verificationChecklist"
     | "riskAssessment"
     | "supplierScorecard"
@@ -54,6 +55,7 @@ export interface ToolEntry {
 
 export const TOOL_ORDER: ToolEntry[] = [
   { cardKey: "riskCalculator", href: "/tools/supplier-risk-calculator" },
+  { cardKey: "supplierComparison", href: "/tools/compare" },
   { cardKey: "verificationChecklist", href: "/tools/supplier-verification-checklist" },
   { cardKey: "riskAssessment", href: "/tools/supplier-risk-assessment" },
   { cardKey: "supplierScorecard", href: "/tools/supplier-scorecard" },
