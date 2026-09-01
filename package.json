@@ -22,14 +22,15 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.20.4",
     "@tailwindcss/postcss": "4.1.4",
     "@types/node": "22.5.4",
     "@types/nodemailer": "^8.0.1",
     "@types/react": "19.0.0",
     "@types/react-dom": "19.0.0",
+    "esbuild": "0.28.1",
     "tailwindcss": "4.1.4",
     "typescript": "5.5.4",
-    "@opennextjs/cloudflare": "^1.20.4",
     "wrangler": "^4.127.1"
   }
 }
