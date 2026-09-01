@@ -185,7 +185,9 @@
     "ctaSecondary": "申请{country}工厂验厂",
     "suppliersTitle": "已收录的{country}供应商",
     "suppliersEmpty": "{country}暂时没有收录供应商。这不代表我们不能核查。把公司名称发给我们，我们直接跑核查。",
-    "metaDesc": "{country}供应商核查与工厂验厂：制造业概况、典型采购风险、核查与验厂要点、行业、物流与常见问题。"
+    "metaDesc": "{country}供应商核查与工厂验厂：制造业概况、典型采购风险、核查与验厂要点、行业、物流与常见问题。",
+    "breadcrumbHome": "首页",
+    "h1Template": "{country}供应商核查与工厂验厂审核"
   },
   "serviceCountry": {
     "quickAnswerTitle": "快速回答",

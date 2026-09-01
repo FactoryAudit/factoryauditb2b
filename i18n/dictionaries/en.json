@@ -285,7 +285,9 @@
     "ctaSecondary": "Request a {country} factory audit",
     "suppliersTitle": "Suppliers listed for {country}",
     "suppliersEmpty": "No supplier in {country} is listed yet. That does not mean we cannot check one. Send us the name and we will run the verification.",
-    "metaDesc": "Supplier verification and factory audit in {country}: manufacturing profile, typical sourcing risks, verification and audit considerations, industries, logistics and FAQs."
+    "metaDesc": "Supplier verification and factory audit in {country}: manufacturing profile, typical sourcing risks, verification and audit considerations, industries, logistics and FAQs.",
+    "breadcrumbHome": "Home",
+    "h1Template": "{country} Supplier Verification & Factory Audit"
   },
   "serviceCountry": {
     "quickAnswerTitle": "Quick answer",
