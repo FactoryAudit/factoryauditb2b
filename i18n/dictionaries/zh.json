@@ -63,7 +63,8 @@
     "trustCenter": "信任中心",
     "operatedBy": "FactoryAuditB2B 是由 {entity} 运营的平台与品牌。",
     "registeredBusiness": "中国注册经营主体",
-    "supplierNetwork": "供应商网络"
+    "supplierNetwork": "供应商网络",
+    "sampleReport": "样例报告"
   },
   "home": {
     "badge": "面向全球采购商的供应商情报",
@@ -1167,7 +1168,7 @@
     "options": {
       "basic": {
         "name": "基础报告",
-        "price": "29 美元",
+        "price": "$99",
         "items": [
           "供应商概况",
           "含维度拆解的风险分数",
@@ -1180,7 +1181,7 @@
       },
       "professional": {
         "name": "专业尽职调查",
-        "price": "79–149 美元",
+        "price": "$129",
         "items": [
           "基础报告全部内容",
           "详细证据审阅",
@@ -1192,7 +1193,7 @@
       },
       "independent": {
         "name": "独立核验",
-        "price": "按项目报价",
+        "price": "Custom quote",
         "items": [
           "企业身份核验",
           "工厂地址核验",
@@ -1633,8 +1634,8 @@
     "ctaButton": "联系我们"
   },
   "pricing": {
-    "metaTitle": "服务与方案 — 免费工具、核查与验厂",
-    "metaDesc": "免费的供应商评估工具，按项目报价的供应商核查与工厂验厂，以及尚未开放的 Buyer Pro 方案。全部价格以美元计。",
+    "metaTitle": "Services & Plans — Free Tools, Verification, Audit, Monitoring",
+    "metaDesc": "Free supplier evaluation tools, supplier verification from USD 99, factory audits from USD 399, product inspection from USD 99 and supplier monitoring by subscription. All prices in USD.",
     "h1": "服务与方案",
     "lead": "工具免费使用。只有当你需要有人到现场核查供应商时才付费。",
     "currencyNote": "全部价格以美元计。核查与验厂按项目报价。",
@@ -1717,7 +1718,7 @@
       "首单免平台费"
     ],
     "plansTitle": "现在可以使用的",
-    "plansLead": "四项中三项已开通。Buyer Pro 未开通。",
+    "plansLead": "All four are available now. Verification, audit and inspection are quoted per project; monitoring is a yearly subscription.",
     "plans": [
       {
         "name": "免费工具",
@@ -1734,51 +1735,51 @@
         "available": true
       },
       {
-        "name": "供应商核查",
-        "price": "申请报价",
-        "note": "按供应商报价",
+        "name": "Supplier Verification",
+        "price": "$99 – $129",
+        "note": "Per supplier, quoted per project",
+        "available": true,
         "features": [
-          "工商登记与法律实体核验",
-          "工厂地址与现场证据",
-          "判定生产型工厂或贸易公司",
-          "质量与合规文件审阅",
-          "含风险摘要的书面报告"
+          "Business registration and legal entity check",
+          "Factory address and site evidence",
+          "Manufacturer or trading company determination",
+          "Quality and compliance document review",
+          "Written report with a risk summary"
         ],
-        "cta": "申请报价",
-        "href": "/services/supplier-verification",
-        "available": true
+        "cta": "Request verification",
+        "href": "/services/supplier-verification"
       },
       {
-        "name": "工厂验厂",
-        "price": "申请报价",
-        "note": "按人天加差旅报价",
+        "name": "Factory Audit",
+        "price": "From $399",
+        "note": "Per man-day plus travel",
+        "available": true,
         "features": [
-          "按你要求的标准进行现场评估",
-          "质量、合规与劳工记录审阅",
-          "含照片、按严重度分级的发现项",
-          "含责任人与期限的整改计划",
-          "整改期满后可选复审"
+          "On-site assessment against your required standard",
+          "Quality, compliance and labour record review",
+          "Findings graded by severity with photographs",
+          "Corrective action plan with owners and dates",
+          "Optional re-audit after the corrective period"
         ],
-        "cta": "申请验厂",
-        "href": "/factory-audit/request",
-        "available": true
+        "cta": "Request an audit",
+        "href": "/factory-audit/request"
       },
       {
-        "name": "Buyer Pro",
-        "price": "即将推出",
-        "note": "尚未开放",
+        "name": "Supplier Monitoring",
+        "price": "Subscription",
+        "note": "Quoted per supplier per year",
+        "available": true,
         "features": [
-          "保存供应商档案与报告历史",
-          "供应商横向对比",
-          "PDF 高级报告",
-          "供应商监控与复核提醒"
+          "Scheduled re-checks of verified facts",
+          "Risk change alerts on your suppliers",
+          "Updated report when facts change",
+          "Same evidence policy as one-off checks"
         ],
-        "cta": "告诉我们你的需求",
-        "href": "/custom-services",
-        "available": false
+        "cta": "Ask for a quote",
+        "href": "/custom-services"
       }
     ],
-    "comingSoonNote": "在背后的功能真正建好并被用起来之前，我们不会出售订阅。上面的 Buyer Pro 内容是计划，不是你今天能买到的承诺。",
+    "comingSoonNote": "Supplier Monitoring is a subscription and is quoted per supplier per year. Everything else on this page is pay-per-project: no subscription, nothing renews automatically.",
     "alsoTitle": "其他服务",
     "alsoItems": [
       "验货：生产中期与出货前检验，按人天报价",
@@ -1790,19 +1791,19 @@
     "reportsLead": "以下金额均为参考值，实际按项目报价。公开区间是为了让你在询价之前就能判断这项检查值不值得做。",
     "reports": [
       {
-        "name": "供应商尽职调查报告",
-        "range": "29 – 99 美元",
-        "note": "文件审阅加书面报告，不含现场走访。"
+        "name": "Supplier due diligence report",
+        "range": "USD 99 – 129",
+        "note": "Documentary review and written report. No site visit."
       },
       {
-        "name": "专业核验",
-        "range": "199 – 499 美元起",
-        "note": "人工核验，必要时包含现场证据。"
+        "name": "Product inspection",
+        "range": "USD 99+",
+        "note": "Quoted per man-day plus travel, based on country and scope."
       },
       {
-        "name": "现场工厂验厂",
-        "range": "300 – 1,500 美元起",
-        "note": "按人天加差旅报价，取决于国家、厂区规模与标准。"
+        "name": "On-site factory audit",
+        "range": "USD 399+",
+        "note": "Quoted per man-day plus travel, based on country, site size and standard."
       }
     ],
     "reportsNote": "在线支付尚未开通。以上项目全部由团队报价并开票，没有订阅，也不会自动续费。",
@@ -1821,8 +1822,8 @@
         "a": "按人天加差旅报价。单厂区质量审核从一个人天起。SMETA 这类完整社会责任审核通常需要两天以上，取决于工厂人数。"
       },
       {
-        "q": "Buyer Pro 什么时候开放？",
-        "a": "暂未开放。等背后的功能上线并被真正使用之后我们才会开放。在那之前，免费工具无需注册就能覆盖同样的需求。"
+        "q": "How does supplier monitoring work?",
+        "a": "Monitoring is a subscription, quoted per supplier per year. We re-check the verified facts on a schedule you choose and send you a short update when something changes. You can start with a one-off verification and add monitoring later."
       }
     ],
     "recommendedTag": "推荐"
@@ -1937,7 +1938,35 @@
     "metaDesc": "供应商风险分数背后的评分框架、风险维度、权重、证据规则、局限性与更新规则。由确定性规则引擎计算，而非 AI。",
     "scoredInputsLabel": "已作答项",
     "scoredTableNote": "{n} 项已作答 · {d} 个维度 · 总权重 {w}。",
-    "weightsSumLine": "— 六个维度，{n} 项输入，权重和 {w}。"
+    "weightsSumLine": "— 六个维度，{n} 项输入，权重和 {w}。",
+    "howWeVerifyTitle": "我们如何核验：六个步骤",
+    "howWeVerifyLead": "核验不是截图或摘要，而是一套有记录的流程，每一步都有书面产出。",
+    "howWeVerifySteps": [
+      {
+        "title": "筛查",
+        "body": "我们把公司信息与公开登记、贸易记录和提交的文件逐一比对。"
+      },
+      {
+        "title": "索取证据",
+        "body": "我们列出需要的每份文件，并标注所有缺口。"
+      },
+      {
+        "title": "审阅",
+        "body": "每份文件由人工检查有效性、一致性和背景。"
+      },
+      {
+        "title": "评分",
+        "body": "规则引擎把已审阅的输入转化为八维风险分数。"
+      },
+      {
+        "title": "出报告",
+        "body": "结论、证据状态和建议都标注来源与日期。"
+      },
+      {
+        "title": "复核",
+        "body": "已核验的事实带有核验日期，可按你选择的周期再次复核。"
+      }
+    ]
   },
   "trust": {
     "badge": "信任中心",
@@ -2029,7 +2058,25 @@
     "why3Body": "核验状态与现有证据绑定。没有证据，就没有已核验标签。",
     "why4Title": "人工复核",
     "why4Body": "AI 只是辅助流程。核验结论由人做出，现场工作也由人完成。",
-    "aiNote": "AI 辅助流程，核验决策由人做出。"
+    "aiNote": "AI 辅助流程，核验决策由人做出。",
+    "humanAiTitle": "人与 AI 如何分工",
+    "humanAiLead": "AI 帮我们阅读、整理和起草。任何内容在发布或发给买家之前，都会经过人工复核。",
+    "humanAiItems": [
+      "AI 扫描公开记录，提取日期和数字，起草第一版结论。",
+      "人工核实信息来源、核对上下文，决定报告怎么写。",
+      "AI 标出证据缺口，人工判断这个缺口是否影响结论。",
+      "AI 不下核验等级、不给风险评级。只有审核员可以。"
+    ],
+    "principlesTitle": "六条绝不打破的原则",
+    "principlesLead": "从初稿到终稿，每一次核验都遵守这些规则。",
+    "principles": [
+      "绝不隐藏不确定性。无法确认的事实，报告会直接说明。",
+      "没有数据不等于好消息。证据缺失会降低分数，绝不当作已确认。",
+      "我们不卖证书。我们做核验和培训。",
+      "第三方报告只做审阅，不重新出具，也不转发原件。",
+      "付费不改变结论。付费核验同样可能发现问题。",
+      "样例和案例研究一律标注为演示用途。"
+    ]
   },
   "inspection": {
     "badge": "产品验货",
@@ -2321,5 +2368,61 @@
     "contactTitle": "需要帮助？",
     "contactLead": "关于入驻、核验、验厂或验货的问题？给我们留言，我们会在一个工作日内回复。",
     "contactCta": "联系我们的团队"
+  },
+  "sampleReport": {
+    "metaTitle": "供应商尽调报告样例 — 先看交付物",
+    "metaDesc": "我们《供应商尽调报告》的完整示例。供应商为虚构，结构真实：风险分数、八维明细、关键发现、证据状态与建议。",
+    "badge": "样例报告",
+    "h1": "供应商尽调报告",
+    "lead": "本页是演示内容。下方的公司是虚构的，报告是样例。它展示了你订购核验后收到的报告结构和详细程度。",
+    "sampleBanner": "样例 / 演示 — 虚构数据。这不是真实的供应商，也不是真实的核验。",
+    "reportTitle": "供应商尽调报告",
+    "reportRef": "报告编号：SDD-2026-0001（样例）",
+    "reportDate": "报告日期：2026 年 8 月 12 日",
+    "preparedFor": "出具给：Sample Buyer Ltd.（示意）",
+    "companySection": "1. 公司概览",
+    "companyNameLabel": "公司名称",
+    "companyName": "深圳市北极星电子有限公司",
+    "countryLabel": "国家",
+    "companyCountry": "中国",
+    "registeredLabel": "注册状态",
+    "companyRegistered": "已注册 — 已与公开登记信息核对",
+    "yearLabel": "成立年份",
+    "companyYear": "2015",
+    "employeeLabel": "员工人数",
+    "companyEmployees": "180（企业自报）",
+    "productsLabel": "主营产品",
+    "companyProducts": "消费电子配件、USB-C 数据线",
+    "scoreSection": "2. 风险分数",
+    "scoreLabel": "综合得分",
+    "scoreValue": "76 / 100",
+    "scoreLevel": "低风险",
+    "scoreNote": "分数越高代表风险越低。76 分属于低风险区间，但存在下列需注意的事项。",
+    "dimensionSection": "3. 八维明细",
+    "dimensionNote": "每个维度按已记录的证据评分。证据缺失会降低分数，绝不视为已确认。",
+    "findingsSection": "4. 关键发现",
+    "findings": [
+      "营业执照信息与采购订单及工厂招牌上的名称一致。",
+      "ISO 9001:2015 证书有效期至 2028 年 5 月，由认可机构签发。",
+      "社会责任审核（BSCI）在有效期内，4 项轻微发现已关闭。",
+      "出口许可证和增值税登记已与公开记录核对确认。",
+      "数字足迹：官网自 2018 年持续运营，两个阿里巴巴店铺；本次核查窗口期未发现负面信息。"
+    ],
+    "evidenceSection": "5. 证据状态",
+    "evidenceIntro": "证据状态反映团队实际审阅过什么。只有实际看到并检查过副本的文件才会标注为已审阅。",
+    "evidenceItems": [
+      "营业执照 — Evidence Reviewed",
+      "ISO 9001:2015 证书 — Evidence Reviewed",
+      "BSCI 审核报告 — Document Provided（我们未重新审核）",
+      "工厂照片 — Document Provided",
+      "出口记录 — Restricted（第三方文件不转发）"
+    ],
+    "recommendSection": "6. 建议",
+    "recommendBody": "综合得分 76/100，低风险。建议首单前做一次文件核验，复购金额超过 5 万美元前安排一次现场验厂。",
+    "ctaTitle": "订购真实核验",
+    "ctaLead": "为你的真实供应商获取同等详细程度的报告。核验按供应商计价，起价 99 美元，按项目报价。",
+    "ctaPrimary": "申请核验",
+    "ctaSecondary": "返回定价页",
+    "disclaimer": "本样例使用虚构数据，仅供演示。它不是对任何真实公司的核验。第三方原始文件绝不转发给买家。"
   }
 }

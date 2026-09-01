@@ -280,6 +280,28 @@ export default async function TrustPage({ params }: Props) {
         </div>
       </Section>
 
+      {/* 10 — Human + AI */}
+      <Section num="10" title={tr.humanAiTitle} lead={tr.humanAiLead}>
+        <ul className="space-y-2">
+          {tr.humanAiItems.map((x) => (
+            <li key={x} className="card p-4 text-[#475569]">
+              · {x}
+            </li>
+          ))}
+        </ul>
+      </Section>
+
+      {/* 11 — Six principles */}
+      <Section num="11" title={tr.principlesTitle} lead={tr.principlesLead}>
+        <ol className="space-y-2">
+          {tr.principles.map((x, i) => (
+            <li key={x} className="card p-4 text-[#475569]">
+              <span className="font-semibold text-[#0f4c81]">{i + 1}.</span> {x}
+            </li>
+          ))}
+        </ol>
+      </Section>
+
       {/* Why trust us */}
       <section className="mt-14">
         <h2 className="text-2xl font-bold text-[#0f172a]">{tr.whyTitle}</h2>

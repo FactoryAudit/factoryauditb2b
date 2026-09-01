@@ -56,7 +56,8 @@
     "trustCenter": "Trust Center",
     "operatedBy": "FactoryAuditB2B is a platform and brand operated by {entity}.",
     "registeredBusiness": "China Registered Business",
-    "supplierNetwork": "Réseau Fournisseurs"
+    "supplierNetwork": "Réseau Fournisseurs",
+    "sampleReport": "Sample report"
   },
   "home": {
     "badge": "Vérifier. Sourcer. Inspecter. Expédier.",
@@ -1251,8 +1252,8 @@
     "ctaButton": "Contactez-nous"
   },
   "pricing": {
-    "metaTitle": "Tarifs — Plans de vérification et d'audit des fournisseurs",
-    "metaDesc": "Plans SaaS pour acheteurs à partir de 19 $/mois, adhésion fournisseurs à partir de 29 $/mois, plus audit, inspection et fret chiffrés par projet. Tous les prix en USD.",
+    "metaTitle": "Services & Plans — Free Tools, Verification, Audit, Monitoring",
+    "metaDesc": "Free supplier evaluation tools, supplier verification from USD 99, factory audits from USD 399, product inspection from USD 99 and supplier monitoring by subscription. All prices in USD.",
     "h1": "Services & Plans",
     "lead": "SaaS acheteurs 19–299 $/mois · Adhésion fournisseurs 29–199 $/mois · Audit, inspection et fret chiffrés par projet.",
     "currencyNote": "Tous les prix en USD. Tarifs de lancement, susceptibles d'être ajustés.",
@@ -1335,7 +1336,7 @@
       "Aucuns frais de plateforme sur votre première commande"
     ],
     "plansTitle": "What you can use today",
-    "plansLead": "Three of the four are live. Buyer Pro is not.",
+    "plansLead": "All four are available now. Verification, audit and inspection are quoted per project; monitoring is a yearly subscription.",
     "plans": [
       {
         "name": "Herramientas gratuitas",
@@ -1352,51 +1353,51 @@
         "href": "Herramientas"
       },
       {
-        "name": "Verificación de proveedores",
-        "price": "Solicitar presupuesto",
-        "note": "Cotizado por proveedor",
+        "name": "Supplier Verification",
+        "price": "$99 – $129",
+        "note": "Per supplier, quoted per project",
         "available": true,
         "features": [
-          "Registro de empresas y verificación de personas jurídicas",
-          "Dirección de la fábrica y evidencia del sitio",
-          "Determinación del fabricante o de la empresa comercial",
-          "Revisión de documentos de calidad y cumplimiento",
-          "Informe escrito con un resumen de riesgos"
+          "Business registration and legal entity check",
+          "Factory address and site evidence",
+          "Manufacturer or trading company determination",
+          "Quality and compliance document review",
+          "Written report with a risk summary"
         ],
-        "cta": "Solicitar presupuesto",
+        "cta": "Request verification",
         "href": "/services/supplier-verification"
       },
       {
-        "name": "Auditoria de fábrica",
-        "price": "Solicitar presupuesto",
-        "note": "Presupuesto por hombre-día más viaje",
+        "name": "Factory Audit",
+        "price": "From $399",
+        "note": "Per man-day plus travel",
         "available": true,
         "features": [
-          "Evaluación in situ según el estándar requerido",
-          "Calidad, cumplimiento y revisión de expedientes laborales",
-          "Hallazgos clasificados por gravedad con fotografías",
-          "Plan de acción correctiva con propietarios y fechas",
-          "Reaudición opcional después del periodo correctivo"
+          "On-site assessment against your required standard",
+          "Quality, compliance and labour record review",
+          "Findings graded by severity with photographs",
+          "Corrective action plan with owners and dates",
+          "Optional re-audit after the corrective period"
         ],
-        "cta": "Solicitar una auditoría",
+        "cta": "Request an audit",
         "href": "/factory-audit/request"
       },
       {
-        "name": "Buyer Pro",
-        "price": "En breve",
-        "note": "Aún no está abierto",
-        "available": false,
+        "name": "Supplier Monitoring",
+        "price": "Subscription",
+        "note": "Quoted per supplier per year",
+        "available": true,
         "features": [
-          "Archivos de proveedores guardados e historial de informes",
-          "Comparación de proveedores lado a lado",
-          "Informes PDF prémium",
-          "Monitoreo de proveedores y volver a verificar las alertas"
+          "Scheduled re-checks of verified facts",
+          "Risk change alerts on your suppliers",
+          "Updated report when facts change",
+          "Same evidence policy as one-off checks"
         ],
-        "cta": "Díganos que necesita",
-        "href": "- servicio a medida,"
+        "cta": "Ask for a quote",
+        "href": "/custom-services"
       }
     ],
-    "comingSoonNote": "We are not selling a subscription until the features behind it are built and actually used. The Buyer Pro items above are the plan, not a promise you can buy today.",
+    "comingSoonNote": "Supplier Monitoring is a subscription and is quoted per supplier per year. Everything else on this page is pay-per-project: no subscription, nothing renews automatically.",
     "alsoTitle": "Also available",
     "alsoItems": [
       "Inspección: controles en línea y previos al envío, cotizados por hombre-día",
@@ -1408,19 +1409,19 @@
     "reportsLead": "Every figure below is indicative and quoted per project. We publish ranges so you can tell whether the check is worth ordering before you ask.",
     "reports": [
       {
-        "name": "Informe de diligencia debida del proveedor",
-        "range": "USD 29 – 99",
-        "note": "Revisión documental e informe escrito. Sin visita al sitio."
+        "name": "Supplier due diligence report",
+        "range": "USD 99 – 129",
+        "note": "Documentary review and written report. No site visit."
       },
       {
-        "name": "Verificación profesional",
-        "range": "USD 199 – 499+",
-        "note": "Verificación manual, incluida la evidencia del sitio cuando sea necesario."
+        "name": "Product inspection",
+        "range": "USD 99+",
+        "note": "Quoted per man-day plus travel, based on country and scope."
       },
       {
-        "name": "Auditoría de fábrica in situ",
-        "range": "USD 300 – 1500+",
-        "note": "Cotizado por día-hombre más viaje, según el país, el tamaño del sitio y el estándar."
+        "name": "On-site factory audit",
+        "range": "USD 399+",
+        "note": "Quoted per man-day plus travel, based on country, site size and standard."
       }
     ],
     "reportsNote": "Online payment is not open yet. Every item above is quoted and invoiced by our team, so nothing here is a subscription and nothing renews.",
@@ -1439,8 +1440,8 @@
         "a": "It is quoted per man-day plus travel. A single-site quality audit starts at one man-day. A full social compliance audit such as SMETA usually takes two or more, depending on headcount."
       },
       {
-        "q": "When will Buyer Pro be available?",
-        "a": "Not yet. We open it once the features behind it are live and being used. Until then, the free tools cover the same ground without an account."
+        "q": "How does supplier monitoring work?",
+        "a": "Monitoring is a subscription, quoted per supplier per year. We re-check the verified facts on a schedule you choose and send you a short update when something changes. You can start with a one-off verification and add monitoring later."
       }
     ],
     "recommendedTag": "Recommandé"
@@ -1781,7 +1782,7 @@
     "options": {
       "basic": {
         "name": "Basic report",
-        "price": "$29",
+        "price": "$99",
         "items": [
           "Descripción general del proveedor",
           "Puntuación de riesgo con desglose por dimensiones",
@@ -1794,7 +1795,7 @@
       },
       "professional": {
         "name": "Professional due diligence",
-        "price": "$79–$149",
+        "price": "$129",
         "items": [
           "Todo en el informe básico",
           "Revisión detallada de la evidencia",
@@ -1943,7 +1944,35 @@
     "metaDesc": "The scoring framework, risk dimensions, weights, evidence rules, limitations and update policy behind our supplier risk scores. Calculated by a deterministic rules engine, not by AI.",
     "scoredInputsLabel": "Inputs",
     "scoredTableNote": "{n} scored inputs · {d} dimensions · total weight {w}.",
-    "weightsSumLine": "— six dimensions, {n} inputs, weights summing to {w}."
+    "weightsSumLine": "— six dimensions, {n} inputs, weights summing to {w}.",
+    "howWeVerifyTitle": "How we verify: six steps",
+    "howWeVerifyLead": "A verification is not a screenshot or a summary. It is a documented sequence, and each step has a written output.",
+    "howWeVerifySteps": [
+      {
+        "title": "Screen",
+        "body": "We check the company against public registries, trade records and the supplied documents."
+      },
+      {
+        "title": "Request evidence",
+        "body": "We list exactly which documents we need, and mark every gap."
+      },
+      {
+        "title": "Review",
+        "body": "Each document is checked for validity, consistency and context by a person."
+      },
+      {
+        "title": "Score",
+        "body": "The rules engine turns the reviewed inputs into the eight-dimension risk score."
+      },
+      {
+        "title": "Report",
+        "body": "Findings, evidence status and recommendation are written with sources and dates."
+      },
+      {
+        "title": "Re-check",
+        "body": "Verified facts carry a checked date and can be re-checked on a schedule you choose."
+      }
+    ]
   },
   "trust": {
     "badge": "Trust Center",
@@ -2035,7 +2064,25 @@
     "why3Body": "Verification status is tied to available evidence. No evidence, no verified label.",
     "why4Title": "Human review",
     "why4Body": "AI assists the process. People make the verification decisions, and on-site work is done by people.",
-    "aiNote": "AI assists the process. People make the verification decisions."
+    "aiNote": "AI assists the process. People make the verification decisions.",
+    "humanAiTitle": "How humans and AI work together",
+    "humanAiLead": "AI helps us read, organise and draft. A person reviews every output before anything is published or sent to a buyer.",
+    "humanAiItems": [
+      "AI scans public records, extracts dates and numbers, and drafts the first version of a finding.",
+      "A human verifies the source, checks the context, and decides what the report says.",
+      "AI flags gaps in the evidence. A human decides whether a gap is material.",
+      "AI never issues a verification level or a risk grade. Only a reviewer does."
+    ],
+    "principlesTitle": "Six principles we never break",
+    "principlesLead": "From the first draft to the final report, every verification follows these rules.",
+    "principles": [
+      "Never hide uncertainty. If we could not confirm a fact, the report says so.",
+      "No data is not good news. Missing evidence lowers the score; it is never treated as confirmation.",
+      "We do not sell certificates. We verify and we train.",
+      "Third-party reports are reviewed, never re-issued or forwarded.",
+      "Payment does not change the outcome. A paid verification can still come back with problems.",
+      "Samples and case studies are always labelled as demonstrations."
+    ]
   },
   "inspection": {
     "badge": "Product Inspection",
@@ -2327,5 +2374,61 @@
     "contactTitle": "Need help?",
     "contactLead": "Questions about joining, verification, audits or inspections? Leave a message and our team will reply within one business day.",
     "contactCta": "Talk to our team"
+  },
+  "sampleReport": {
+    "metaTitle": "Sample Supplier Due Diligence Report — See What You Get",
+    "metaDesc": "A fully worked example of our Supplier Due Diligence Report. Fictional supplier, real structure: risk score, dimension breakdown, findings, evidence status and recommendation.",
+    "badge": "Sample report",
+    "h1": "Supplier Due Diligence Report",
+    "lead": "This page is a demonstration. The company below is fictional and the report is a sample. It shows the structure and the level of detail you receive when you order a verification.",
+    "sampleBanner": "SAMPLE / DEMONSTRATION — Fictional data. This is not a real supplier and not a real verification.",
+    "reportTitle": "Supplier Due Diligence Report",
+    "reportRef": "Report reference: SDD-2026-0001 (sample)",
+    "reportDate": "Report date: 12 August 2026",
+    "preparedFor": "Prepared for: Sample Buyer Ltd. (illustrative)",
+    "companySection": "1. Company snapshot",
+    "companyNameLabel": "Company name",
+    "companyName": "Shenzhen Northstar Electronics Co., Ltd.",
+    "countryLabel": "Country",
+    "companyCountry": "China",
+    "registeredLabel": "Registered",
+    "companyRegistered": "Yes — registration verified against public registry",
+    "yearLabel": "Year established",
+    "companyYear": "2015",
+    "employeeLabel": "Employees",
+    "companyEmployees": "180 (self-reported)",
+    "productsLabel": "Main products",
+    "companyProducts": "Consumer electronics accessories, USB-C cables",
+    "scoreSection": "2. Risk score",
+    "scoreLabel": "Overall score",
+    "scoreValue": "76 / 100",
+    "scoreLevel": "Low risk",
+    "scoreNote": "Higher score means lower risk. 76 puts this supplier in the low-risk band, with the caveats listed below.",
+    "dimensionSection": "3. Dimension breakdown",
+    "dimensionNote": "Each dimension is scored from the evidence on record. Missing evidence lowers the score; it is never treated as confirmation.",
+    "findingsSection": "4. Key findings",
+    "findings": [
+      "Business registration matches the name on the purchase order and the factory signboard.",
+      "ISO 9001:2015 certificate is valid until May 2028, issued by a recognised body.",
+      "Social compliance audit (BSCI) is current, with 4 minor findings closed out.",
+      "Export licence and VAT registration confirmed against public records.",
+      "Digital footprint: active website since 2018, two Alibaba storefronts; no adverse news found in this review window."
+    ],
+    "evidenceSection": "5. Evidence status",
+    "evidenceIntro": "Evidence status reflects what our team actually reviewed. A document is marked as reviewed only when a copy was seen and checked.",
+    "evidenceItems": [
+      "Business licence — Evidence Reviewed",
+      "ISO 9001:2015 certificate — Evidence Reviewed",
+      "BSCI audit report — Document Provided (not re-audited by us)",
+      "Factory photos — Document Provided",
+      "Export records — Restricted (third-party documents not forwarded)"
+    ],
+    "recommendSection": "6. Recommendation",
+    "recommendBody": "Score 76/100, low risk. We recommend a document verification before the first order, and an on-site audit before a repeat order above USD 50,000.",
+    "ctaTitle": "Order a real verification",
+    "ctaLead": "Get this level of detail for your actual supplier. Verification starts at $99 per supplier, quoted per project.",
+    "ctaPrimary": "Request verification",
+    "ctaSecondary": "Back to pricing",
+    "disclaimer": "This sample uses fictional data and is for demonstration only. It is not a verification of any real company. Original third-party documents are never forwarded to buyers."
   }
 }

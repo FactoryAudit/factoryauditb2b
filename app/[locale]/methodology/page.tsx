@@ -109,6 +109,21 @@ export default async function MethodologyPage({ params }: Props) {
       </section>
 
       <section className="mt-8">
+        <h2 className="text-2xl font-bold text-[#0f172a]">{m.howWeVerifyTitle}</h2>
+        <p className="text-[#64748b] mt-1 mb-4">{m.howWeVerifyLead}</p>
+        <ol className="space-y-3">
+          {m.howWeVerifySteps.map((s, i) => (
+            <li key={s.title} className="card p-4">
+              <div className="font-semibold text-[#0f172a]">
+                <span className="text-[#0f4c81]">{i + 1}.</span> {s.title}
+              </div>
+              <p className="text-sm text-[#475569] mt-1">{s.body}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section className="mt-8">
         <h2 className="text-2xl font-bold text-[#0f172a]">{m.evidenceTitle}</h2>
         <p className="text-[#475569] mt-2">{m.evidenceBody}</p>
       </section>
