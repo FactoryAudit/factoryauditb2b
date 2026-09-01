@@ -1492,7 +1492,8 @@
       "errorGeneric": "Something went wrong. Please try again or email us directly.",
       "errorRateLimited": "Too many submissions. Please try again later.",
       "errorInvalidEmail": "Please enter a valid company email.",
-      "errorAuthorization": "Please choose an authorization option."
+      "errorAuthorization": "Please choose an authorization option.",
+      "emailPlaceholder": "name@yourcompany.com"
     }
   },
   "consent": {
@@ -2278,7 +2279,8 @@
       "error": "Something went wrong. Please try again, or email us directly.",
       "firstName": "Your name",
       "company": "Company",
-      "email": "Work email"
+      "email": "Work email",
+      "emailPlaceholder": "you@company.com"
     }
   },
   "auditGuide": {

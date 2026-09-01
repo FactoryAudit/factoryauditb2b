@@ -150,7 +150,7 @@ export default async function SupplierProfilePage({
       <JsonLd data={jsonLd} />
 
       {/* 面包屑（可见 + JSON-LD 一致） */}
-      <nav aria-label="Breadcrumb" className="text-sm text-[#64748b]">
+      <nav aria-label={t.supplierProfile.directoryBreadcrumb} className="text-sm text-[#64748b]">
         <Link href={p("/")} className="hover:text-[#0f4c81]">
           {t.countryHub.breadcrumbHome}
         </Link>

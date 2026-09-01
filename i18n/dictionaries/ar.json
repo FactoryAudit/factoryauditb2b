@@ -201,11 +201,11 @@
       "desc": "Turn one line of requirements into a professional RFQ."
     },
     "personalizedService": {
-      "title": "Custom Service",
+      "title": "خدمة مخصصة",
       "desc": "Tell us your specific needs and we will put together a tailored audit or verification plan."
     },
     "supplierComparison": {
-      "title": "Supplier Comparison",
+      "title": "مقارنة الموردين",
       "desc": "Score two to five suppliers on the same eight dimensions and compare them side by side."
     }
   },
@@ -2030,7 +2030,8 @@
       "errorGeneric": "حدث خطأ ما. حاول مرة أخرى أو راسلنا مباشرة.",
       "errorRateLimited": "طلبات كثيرة جداً. حاول لاحقاً.",
       "errorInvalidEmail": "أدخل بريد شركة صحيحاً.",
-      "errorAuthorization": "اختر خيار التفويض."
+      "errorAuthorization": "اختر خيار التفويض.",
+      "emailPlaceholder": "name@yourcompany.com"
     }
   },
   "consent": {
@@ -2381,7 +2382,8 @@
       "error": "حدث خطأ ما. يرجى المحاولة مرة أخرى، أو راسلنا مباشرة عبر البريد الإلكتروني.",
       "firstName": "اسمك",
       "company": "الشركة",
-      "email": "بريد العمل"
+      "email": "بريد العمل",
+      "emailPlaceholder": "you@company.com"
     }
   },
   "auditGuide": {

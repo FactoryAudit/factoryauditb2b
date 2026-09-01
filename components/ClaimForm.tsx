@@ -7,6 +7,7 @@ import { ANALYTICS_EVENTS } from "@/lib/suppliers";
 export type ClaimFormDict = {
   emailLabel: string;
   emailHint: string;
+  emailPlaceholder: string;
   nameLabel: string;
   companyLabel: string;
   authorizationLabel: string;
@@ -77,8 +78,13 @@ export default function ClaimForm({ t, slug, legalName }: Props) {
         return;
       }
       setStatus("error");
+      // 只显示本地化文案：rate_limited / invalid_email 映射到字典，其余统一 generic（API 的英文 message 不作为用户可见文本）
       setErrMsg(
-        data?.error === "rate_limited" ? t.errorRateLimited : data?.message || t.errorGeneric
+        data?.error === "rate_limited"
+          ? t.errorRateLimited
+          : data?.error === "invalid_email"
+            ? t.errorInvalidEmail
+            : t.errorGeneric
       );
     } catch {
       setStatus("error");
@@ -109,7 +115,7 @@ export default function ClaimForm({ t, slug, legalName }: Props) {
           name="companyEmail"
           type="email"
           required
-          placeholder="name@yourcompany.com"
+          placeholder={t.emailPlaceholder}
           className="input"
         />
         <p className="text-xs text-[#64748b] mt-1">{t.emailHint}</p>

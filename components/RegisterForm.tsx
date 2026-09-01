@@ -64,8 +64,13 @@ export default function RegisterForm({ t }: Props) {
         return;
       }
       setStatus("error");
+      // 只显示本地化文案（API 的英文 message 不作为用户可见文本）
       setErrMsg(
-        data?.error === "rate_limited" ? t.errorRateLimited : data?.message || t.errorGeneric
+        data?.error === "rate_limited"
+          ? t.errorRateLimited
+          : data?.error === "invalid_email"
+            ? t.errorInvalidEmail
+            : t.errorGeneric
       );
     } catch {
       setStatus("error");

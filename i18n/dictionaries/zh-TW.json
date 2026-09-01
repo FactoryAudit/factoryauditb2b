@@ -2030,7 +2030,8 @@
       "errorGeneric": "提交失敗，請稍後重試或直接以電子郵件聯絡我們。",
       "errorRateLimited": "提交過於頻繁，請稍後再試。",
       "errorInvalidEmail": "請輸入有效的公司信箱。",
-      "errorAuthorization": "請選擇授權選項。"
+      "errorAuthorization": "請選擇授權選項。",
+      "emailPlaceholder": "name@yourcompany.com"
     }
   },
   "consent": {
@@ -2381,7 +2382,8 @@
       "error": "Something went wrong. Please try again, or email us directly.",
       "firstName": "你的姓名",
       "company": "公司",
-      "email": "公司電子郵件"
+      "email": "公司電子郵件",
+      "emailPlaceholder": "you@company.com"
     }
   },
   "auditGuide": {

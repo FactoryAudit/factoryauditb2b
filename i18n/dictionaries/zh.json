@@ -1334,7 +1334,8 @@
       "errorGeneric": "提交失败，请稍后重试或直接邮件联系我们。",
       "errorRateLimited": "提交过于频繁，请稍后再试。",
       "errorInvalidEmail": "请输入有效的公司邮箱。",
-      "errorAuthorization": "请选择授权选项。"
+      "errorAuthorization": "请选择授权选项。",
+      "emailPlaceholder": "name@yourcompany.com"
     }
   },
   "consent": {
@@ -2375,7 +2376,8 @@
       "error": "出错了，请重试，或直接发邮件给我们。",
       "firstName": "你的姓名",
       "company": "公司",
-      "email": "工作邮箱"
+      "email": "工作邮箱",
+      "emailPlaceholder": "you@company.com"
     }
   },
   "auditGuide": {

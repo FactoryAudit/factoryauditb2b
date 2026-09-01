@@ -205,7 +205,7 @@
       "desc": "Décrivez votre besoin spécifique et nous concevrons un plan d'audit ou de vérification sur mesure."
     },
     "supplierComparison": {
-      "title": "Supplier Comparison",
+      "title": "Comparaison de fournisseurs",
       "desc": "Score two to five suppliers on the same eight dimensions and compare them side by side."
     }
   },
@@ -2030,7 +2030,8 @@
       "errorGeneric": "Une erreur est survenue. Réessayez ou écrivez-nous directement.",
       "errorRateLimited": "Trop de demandes. Réessayez plus tard.",
       "errorInvalidEmail": "Veuillez saisir un e-mail d'entreprise valide.",
-      "errorAuthorization": "Veuillez choisir une option d'autorisation."
+      "errorAuthorization": "Veuillez choisir une option d'autorisation.",
+      "emailPlaceholder": "name@yourcompany.com"
     }
   },
   "consent": {
@@ -2381,7 +2382,8 @@
       "error": "Something went wrong. Please try again, or email us directly.",
       "firstName": "Votre nom",
       "company": "Entreprise",
-      "email": "E-mail professionnel"
+      "email": "E-mail professionnel",
+      "emailPlaceholder": "you@company.com"
     }
   },
   "auditGuide": {

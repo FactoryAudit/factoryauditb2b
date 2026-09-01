@@ -75,7 +75,7 @@ export default async function SupplierClaimPage({
     >
       <JsonLd data={jsonLd} />
 
-      <nav aria-label="Breadcrumb" className="text-sm text-[#64748b]">
+      <nav aria-label={sp.directoryBreadcrumb} className="text-sm text-[#64748b]">
         <Link href={p("/")} className="hover:text-[#0f4c81]">
           {t.countryHub.breadcrumbHome}
         </Link>

@@ -82,13 +82,8 @@ export default function SupplierRegistrationForm({ t, success, error }: Props) {
         return;
       }
       setStatus("error");
-      if (data?.error === "rate_limited") {
-        setErrMsg(error);
-      } else if (typeof data?.message === "string" && data.message) {
-        setErrMsg(data.message);
-      } else {
-        setErrMsg(error);
-      }
+      // 只显示本地化文案（API 英文 message 不作为用户可见文本）
+      setErrMsg(error);
     } catch {
       setStatus("error");
       setErrMsg(error);

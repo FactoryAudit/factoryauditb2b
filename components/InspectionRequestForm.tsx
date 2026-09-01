@@ -6,6 +6,7 @@ export type InspectionFormDict = {
   firstName: string;
   company: string;
   email: string;
+  emailPlaceholder: string;
   stageLabel: string;
   stageHint: string;
   stages: string[];
@@ -133,7 +134,7 @@ export default function InspectionRequestForm({ t }: { t: InspectionFormDict }) 
             className="input"
             value={form.email}
             onChange={(e) => set("email", e.target.value)}
-            placeholder="you@company.com"
+            placeholder={t.emailPlaceholder}
             autoComplete="email"
           />
         </div>

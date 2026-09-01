@@ -201,11 +201,11 @@
       "desc": "Turn one line of requirements into a professional RFQ."
     },
     "personalizedService": {
-      "title": "Custom Service",
+      "title": "Servicio personalizado",
       "desc": "Tell us your specific needs and we will put together a tailored audit or verification plan."
     },
     "supplierComparison": {
-      "title": "Supplier Comparison",
+      "title": "Comparación de proveedores",
       "desc": "Score two to five suppliers on the same eight dimensions and compare them side by side."
     }
   },
@@ -2030,7 +2030,8 @@
       "errorGeneric": "Algo salió mal. Inténtalo de nuevo o escríbenos directamente.",
       "errorRateLimited": "Demasiados envíos. Inténtalo más tarde.",
       "errorInvalidEmail": "Introduce un correo de empresa válido.",
-      "errorAuthorization": "Elige una opción de autorización."
+      "errorAuthorization": "Elige una opción de autorización.",
+      "emailPlaceholder": "name@yourcompany.com"
     }
   },
   "consent": {
@@ -2381,7 +2382,8 @@
       "error": "Something went wrong. Please try again, or email us directly.",
       "firstName": "Tu nombre",
       "company": "Empresa",
-      "email": "Correo de trabajo"
+      "email": "Correo de trabajo",
+      "emailPlaceholder": "you@company.com"
     }
   },
   "auditGuide": {

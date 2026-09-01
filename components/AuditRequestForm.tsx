@@ -132,12 +132,10 @@ export default function AuditRequestForm({
         setAuditType(0);
         return;
       }
-      // 区分失败原因：限流给出专门提示，其余展示服务端消息（有则用）
+      // 区分失败原因：限流给出专门提示，其余统一本地化文案（API 英文 message 不作为用户可见文本）
       setStatus("error");
       if (data?.error === "rate_limited") {
         setErrMsg(t.rateLimited);
-      } else if (typeof data?.message === "string" && data.message) {
-        setErrMsg(data.message);
       } else {
         setErrMsg(t.error);
       }
