@@ -14,6 +14,7 @@ paths=(
   "/services"
   "/services/supplier-verification"
   "/services/supplier-improvement"
+  "/monitoring"
   "/services/china-supplier-verification"
   "/services/china-factory-audit"
   "/services/vietnam-supplier-verification"

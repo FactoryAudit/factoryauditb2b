@@ -51,6 +51,7 @@ export async function GET() {
   lines.push(`- [Supplier Verification Service](${BASE}/services/supplier-verification): Independent verification of registration, site, capability, quality and compliance.`);
   lines.push(`- [Factory Audit Request](${BASE}/factory-audit/request): Request an on-site audit against your required standard.`);
   lines.push(`- [Product Inspection](${BASE}/services/inspection): Pre-production, during-production, pre-shipment and container loading inspection, quoted per inspection and fulfilled by an independent inspector.`);
+  lines.push(`- [Supplier Monitoring](${BASE}/monitoring): Scheduled re-checks of verified facts with alerts when registration status, legal name, address or certificate validity changes. Subscription, quoted per supplier per year.`);
   lines.push(`- [Coverage](${BASE}/countries): Country-specific sourcing risks, verification and audit considerations for China, Vietnam and Thailand.`);
   lines.push(`- [Resources](${BASE}/resources): Supplier intelligence guides and tools.`);
   lines.push(`- [Case Studies](${BASE}/case-studies): Anonymised illustrative walk-throughs of verification, audit, inspection and sourcing. Not client testimonials.`);

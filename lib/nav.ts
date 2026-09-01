@@ -7,6 +7,7 @@ export interface ServiceMenuItem {
     | "factoryAudit"
     | "inspection"
     | "sourcing"
+    | "monitoring"
     | "improvement";
   href: string;
   descKey:
@@ -14,6 +15,7 @@ export interface ServiceMenuItem {
     | "factoryAuditDesc"
     | "inspectionDesc"
     | "sourcingDesc"
+    | "monitoringDesc"
     | "improvementDesc";
 }
 
@@ -22,6 +24,7 @@ export const SERVICE_MENU: ServiceMenuItem[] = [
   { key: "factoryAudit", href: "/factory-audit/request", descKey: "factoryAuditDesc" },
   { key: "inspection", href: "/services/inspection", descKey: "inspectionDesc" },
   { key: "sourcing", href: "/rfq", descKey: "sourcingDesc" },
+  { key: "monitoring", href: "/monitoring", descKey: "monitoringDesc" },
   { key: "improvement", href: "/services/supplier-improvement", descKey: "improvementDesc" },
 ];
 
@@ -34,6 +37,8 @@ export type ServiceMenuDict = {
   inspectionDesc: string;
   sourcing: string;
   sourcingDesc: string;
+  monitoring: string;
+  monitoringDesc: string;
   improvement: string;
   improvementDesc: string;
 };

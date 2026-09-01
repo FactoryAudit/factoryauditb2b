@@ -50,13 +50,10 @@ export const LEVEL_SCOPE: Record<VerificationLevel, string[]> = {
   ],
 };
 
-/** 任何等级都不覆盖的检查项（页面显示「未覆盖范围」用，避免买家误解） */
-export const NOT_COVERED = [
-  "Financial statements",
-  "Product performance in use",
-  "Current production utilisation",
-  "Subcontractors that were not disclosed to us",
-];
+// 「任何等级都不覆盖的检查项」的文案已于 2026-09-01 迁到字典：
+// i18n/dictionaries/*.json 的 verification.notCovered。
+// 原先这里的 NOT_COVERED 是硬编码英文，8 个非英文站点上会露出英文，已删除。
+// 页面统一读 t.verification.notCovered，避免同一份清单在代码和字典里各存一份。
 
 export type EvidenceStatus =
   | "VERIFIED"

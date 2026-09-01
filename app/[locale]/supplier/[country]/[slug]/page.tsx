@@ -6,7 +6,6 @@ import { getSupplierDetail, listSupplierSlugs, lastCheckedOf } from "@/lib/queri
 import {
   levelFromStatus,
   LEVEL_SCOPE,
-  NOT_COVERED,
   normalizeEvidenceStatus,
   evidenceLabel,
   evidenceProvenance,
@@ -307,7 +306,7 @@ export default async function SupplierProfile({
           <h3 className="mt-6 font-semibold text-[#0f172a]">{sp.notCoveredTitle}</h3>
           <p className="text-xs text-[#64748b] mt-1 mb-2">{sp.notCoveredLead}</p>
           <ul className="space-y-1 text-sm text-[#475569]">
-            {NOT_COVERED.map((x) => (
+            {v.notCovered.map((x) => (
               <li key={x}>✕ {x}</li>
             ))}
           </ul>

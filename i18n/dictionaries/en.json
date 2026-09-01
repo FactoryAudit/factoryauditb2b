@@ -32,7 +32,9 @@
       "sourcing": "Sourcing",
       "sourcingDesc": "Post an RFQ and reach suppliers we can verify.",
       "improvement": "Supplier Improvement",
-      "improvementDesc": "Turn audit findings into corrective action and training."
+      "improvementDesc": "Turn audit findings into corrective action and training.",
+      "monitoring": "Supplier Monitoring",
+      "monitoringDesc": "Scheduled re-checks and change alerts"
     }
   },
   "trust": {
@@ -174,7 +176,8 @@
     "allServices": "All services",
     "containerCalculator": "Container load calculator",
     "supplierNetwork": "Supplier Network",
-    "sampleReport": "Sample report"
+    "sampleReport": "Sample report",
+    "monitoring": "Supplier Monitoring"
   },
   "home": {
     "badge": "Supplier intelligence for global buyers",
@@ -330,6 +333,10 @@
         "title": "Supplier Improvement",
         "desc": "Audit findings turned into corrective action, training and a re-audit. Not a standalone training business.",
         "href": "/services/supplier-improvement"
+      },
+      "monitoring": {
+        "title": "Supplier Monitoring",
+        "desc": "Keep verified supplier facts current. Scheduled re-checks of registration, address, certificates and public records, with an alert when something changes."
       }
     },
     "coverageTitle": "Coverage by country",
@@ -1168,7 +1175,13 @@
     "expiry": "Expires",
     "noRecord": "No verification record yet.",
     "notIndependentlyVerified": "Not independently verified",
-    "noRecentAudit": "No recent third-party audit found"
+    "noRecentAudit": "No recent third-party audit found",
+    "notCovered": [
+      "Financial statements",
+      "Product performance in use",
+      "Current production utilisation",
+      "Subcontractors that were not disclosed to us"
+    ]
   },
   "evidence": {
     "title": "Certifications & Evidence",
@@ -1865,7 +1878,7 @@
           "Same evidence policy as one-off checks"
         ],
         "cta": "Ask for a quote",
-        "href": "/custom-services"
+        "href": "/monitoring"
       }
     ],
     "comingSoonNote": "Supplier Monitoring is a subscription and is quoted per supplier per year. Everything else on this page is pay-per-project: no subscription, nothing renews automatically.",
@@ -2369,5 +2382,94 @@
     "ctaLead": "Verification starts at $99 per supplier and turns self-reported answers into reviewed evidence.",
     "ctaPrimary": "Request verification",
     "reset": "Reset"
+  },
+  "monitoring": {
+    "metaTitle": "Supplier Monitoring — Scheduled Re-Checks and Risk Change Alerts",
+    "metaDesc": "Keep verified supplier facts current. Scheduled re-checks of registration, site, certificates and public records, with an alert when something changes. Subscription, quoted per supplier per year.",
+    "badge": "Service",
+    "h1": "Supplier Monitoring",
+    "lead": "A verification is a snapshot. Monitoring re-runs the checks on a schedule and tells you when a fact you relied on has changed.",
+    "quickAnswerTitle": "What it is, in one paragraph",
+    "quickAnswer": "We re-check the facts we verified for you, on a cadence you choose, against public registers, scheme databases and the documents on file. When a fact changes or a certificate expires, you get an alert stating what changed, which source confirmed it, and what it means for your order. The evidence policy is the same as a one-off verification: we state what we could confirm and flag what we could not.",
+    "honestNote": "Monitoring lowers the chance of being surprised by a change that public records already show. It does not predict how a supplier will perform, and it cannot see a change that has not been recorded anywhere.",
+    "recheckTitle": "What we re-check",
+    "recheckLead": "Only items that leave a public or documentary trace. We do not re-check anything we cannot source.",
+    "recheckItems": [
+      "Business registration status: active, revoked, relocated or renamed",
+      "Legal entity name and registered address",
+      "Certificate and audit report validity against the issuing scheme's database",
+      "Expiry dates on the documents we hold",
+      "Public records and adverse reports we can source and cite",
+      "The supplier's own declarations, compared against what we hold"
+    ],
+    "cadenceTitle": "How often",
+    "cadenceLead": "You set the cadence when we scope the engagement. Three common starting points:",
+    "cadenceItems": [
+      {
+        "name": "Quarterly",
+        "when": "Four re-checks a year.",
+        "note": "For suppliers carrying your largest volume or your tightest compliance requirement."
+      },
+      {
+        "name": "Twice a year",
+        "when": "Two re-checks a year.",
+        "note": "The usual starting point for an active supplier."
+      },
+      {
+        "name": "Once a year",
+        "when": "One re-check a year.",
+        "note": "For suppliers you buy from occasionally, or to keep a dormant record current."
+      }
+    ],
+    "alertTitle": "What triggers an alert",
+    "alertLead": "An alert goes out when a re-check returns something different from what we hold:",
+    "alertItems": [
+      "Registration status changes",
+      "Legal name or registered address changes",
+      "A certificate or audit report on file expires or is withdrawn",
+      "A new public record or adverse report we can cite",
+      "A scheduled re-check finds no change, and you still get a dated confirmation"
+    ],
+    "deliverTitle": "What you receive",
+    "deliverLead": "Every re-check produces a dated record, whether or not anything changed.",
+    "deliverItems": [
+      "A dated re-check record for each supplier",
+      "An alert naming the fact that changed and the source that confirmed it",
+      "An updated report reflecting the current state of the record",
+      "The same evidence labels as a one-off check: reviewed, provided, restricted"
+    ],
+    "notCoveredTitle": "What monitoring does not cover",
+    "notCoveredLead": "Monitoring inherits the limits of a verification. It does not extend them.",
+    "pricingTitle": "Pricing",
+    "pricingLead": "Priced as a subscription, quoted per supplier per year, based on cadence and how many suppliers you want covered.",
+    "pricingNote": "No online checkout. Tell us the suppliers and the cadence, and we will quote.",
+    "pricingCta": "Ask for a quote",
+    "faqTitle": "Questions buyers ask",
+    "faq": [
+      {
+        "q": "Is monitoring the same as a factory audit?",
+        "a": "No. An audit is an on-site assessment against a standard. Monitoring re-checks facts that leave a documentary or public trace. They answer different questions, and most buyers want both at different points."
+      },
+      {
+        "q": "What if a supplier changes something between re-checks?",
+        "a": "Then the next re-check catches it, and the alert is dated to the day we confirmed it. A scheduled check cannot be continuous, and we do not claim it is."
+      },
+      {
+        "q": "Can I add suppliers later?",
+        "a": "Yes. The subscription is quoted per supplier, so adding one means adjusting the quote rather than starting over."
+      },
+      {
+        "q": "Do you visit the factory as part of monitoring?",
+        "a": "Not by default. Standard monitoring is a desk re-check of registers and documents. An on-site visit can be added at the cadence you choose and is quoted separately."
+      },
+      {
+        "q": "Can a supplier pay to be monitored?",
+        "a": "No. Monitoring is bought by the buyer. A supplier cannot pay to change what a re-check reports."
+      }
+    ],
+    "ctaTitle": "Set up monitoring",
+    "ctaLead": "Tell us which suppliers you want covered and how often. We will confirm what can be re-checked and quote.",
+    "ctaPrimary": "Request monitoring",
+    "ctaSecondary": "See pricing"
   }
 }
