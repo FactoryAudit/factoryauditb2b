@@ -40,7 +40,6 @@
     "factoryAudit": "Factory audit",
     "knowledgeBase": "サプライヤートレーニング",
     "pricing": "価格設定",
-    "admin": "管理者",
     "tagline": "中国とアジア全域の工場をチェックし、書類をお見せします。",
     "copyright": "© 2026 FactoryAuditB2B.com.証明書は販売していません。香港、中国/台湾、中国/マカオ、中国は中国の一部です。",
     "privacy": "プライバシーポリシー",
@@ -2091,62 +2090,6 @@
       "firstName": "お名前",
       "company": "会社名",
       "email": "業務用メール"
-    }
-  },
-  "auth": {
-    "login": {
-      "title": "ログイン",
-      "lead": "お問い合わせ、レポート、保存したサプライヤー評価にアクセスできます。",
-      "email": "メールアドレス",
-      "password": "パスワード",
-      "submit": "ログイン",
-      "submitting": "ログイン中...",
-      "google": "Google で続行",
-      "backHome": "ホームへ戻る",
-      "noAccount": "アカウントをお持ちでない方",
-      "registerLink": "新規登録",
-      "errorInvalid": "メールアドレスまたはパスワードが正しくありません。",
-      "errorAdminOnly": "このページは管理者専用です。",
-      "errorSignedOut": "ログアウトしました。",
-      "demoHint": "デモアカウント: admin@ / buyer@ / supplier@ factoryauditb2b.com"
-    },
-    "register": {
-      "title": "アカウント作成",
-      "lead": "無料・カード不要。お問い合わせの管理と評価の保存に使えます。",
-      "name": "お名前",
-      "email": "会社メールアドレス",
-      "password": "パスワード",
-      "passwordHint": "8 文字以上で入力してください。",
-      "confirm": "パスワード（確認）",
-      "company": "会社名",
-      "companyHint": "登記簿に記載されている正式な会社名。",
-      "country": "国",
-      "roleLabel": "私は",
-      "roleBuyer": "バイヤー",
-      "roleBuyerHint": "工場から調達しており、検証・監査・検品が必要です。",
-      "roleSupplier": "サプライヤー",
-      "roleSupplierHint": "製造業者として掲載・検証されたい方。",
-      "submit": "アカウント作成",
-      "submitting": "作成中...",
-      "success": "アカウントを作成しました。ログイン中...",
-      "hasAccount": "既にアカウントをお持ちですか？",
-      "loginLink": "ログイン",
-      "termsNote": "アカウントを作成すると、利用規約とプライバシーポリシーに同意したものとみなされます。"
-    },
-    "errors": {
-      "invalid_email": "有効なメールアドレスを入力してください。",
-      "weak_password": "パスワードは 8 文字以上で入力してください。",
-      "invalid_role": "バイヤーまたはサプライヤーを選択してください。",
-      "email_taken": "このメールアドレスは既に登録されています。",
-      "password_mismatch": "パスワードが一致しません。",
-      "server_error": "エラーが発生しました。もう一度お試しください。",
-      "network": "ネットワークエラー。接続を確認してください。",
-      "rate_limited": "試行回数が多すぎます。1 時間待ってから再度お試しください。"
-    },
-    "nav": {
-      "signIn": "ログイン",
-      "admin": "管理画面",
-      "signOut": "ログアウト"
     }
   },
   "auditGuide": {

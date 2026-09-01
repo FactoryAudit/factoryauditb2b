@@ -40,7 +40,6 @@
     "factoryAudit": "Factory audit",
     "knowledgeBase": "供應商培訓",
     "pricing": "價格",
-    "admin": "管理後臺",
     "tagline": "我們覈查中國及亞洲的工廠，並把原始資料交給你。",
     "copyright": "© 2026 FactoryAuditB2B.com。我們不出售證書。香港、臺灣、澳門均爲中國的一部分。",
     "privacy": "隱私政策",
@@ -2091,62 +2090,6 @@
       "firstName": "你的姓名",
       "company": "公司",
       "email": "公司電子郵件"
-    }
-  },
-  "auth": {
-    "login": {
-      "title": "登入",
-      "lead": "登入後可查看你的詢價、報告與已儲存的供應商評估。",
-      "email": "電子郵件",
-      "password": "密碼",
-      "submit": "登入",
-      "submitting": "登入中...",
-      "google": "使用 Google 繼續",
-      "backHome": "返回首頁",
-      "noAccount": "還沒有帳號？",
-      "registerLink": "註冊一個",
-      "errorInvalid": "電子郵件或密碼錯誤。",
-      "errorAdminOnly": "此頁面僅限管理員存取。",
-      "errorSignedOut": "你已登出。",
-      "demoHint": "示範帳號：admin@ / buyer@ / supplier@ factoryauditb2b.com"
-    },
-    "register": {
-      "title": "建立帳號",
-      "lead": "免費註冊，無需信用卡。用於追蹤詢價、儲存評估與申請報價。",
-      "name": "你的姓名",
-      "email": "公司電子郵件",
-      "password": "密碼",
-      "passwordHint": "至少 8 個字元。",
-      "confirm": "確認密碼",
-      "company": "公司名稱",
-      "companyHint": "請填寫與商業登記一致的正式公司名。",
-      "country": "國家",
-      "roleLabel": "我的身份",
-      "roleBuyer": "買方",
-      "roleBuyerHint": "我向工廠採購，需要供應商查核、驗廠或驗貨服務。",
-      "roleSupplier": "供應商",
-      "roleSupplierHint": "我是製造商，希望被收錄並通過查核。",
-      "submit": "建立帳號",
-      "submitting": "建立中...",
-      "success": "帳號建立成功，正在登入...",
-      "hasAccount": "已有帳號？",
-      "loginLink": "登入",
-      "termsNote": "建立帳號即表示你同意我們的服務條款與隱私權政策。"
-    },
-    "errors": {
-      "invalid_email": "請輸入有效的電子郵件地址。",
-      "weak_password": "密碼至少需要 8 個字元。",
-      "invalid_role": "請選擇買方或供應商。",
-      "email_taken": "此電子郵件已註冊，請直接登入。",
-      "password_mismatch": "兩次輸入的密碼不一致。",
-      "server_error": "發生錯誤，請重試。",
-      "network": "網路錯誤，請檢查連線後重試。",
-      "rate_limited": "操作過於頻繁，請一小時後再試。"
-    },
-    "nav": {
-      "signIn": "登入",
-      "admin": "管理後台",
-      "signOut": "登出"
     }
   },
   "auditGuide": {

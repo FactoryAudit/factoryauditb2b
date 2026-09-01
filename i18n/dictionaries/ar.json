@@ -40,7 +40,6 @@
     "factoryAudit": "Factory audit",
     "knowledgeBase": "Supplier Training",
     "pricing": "Pricing",
-    "admin": "Admin",
     "tagline": "We check factories in China and across Asia, then show you the paperwork.",
     "copyright": "© 2026 FactoryAuditB2B.com. We do not sell certificates. Hong Kong, China / Taiwan, China / Macao, China are parts of China.",
     "privacy": "Privacy Policy",
@@ -2091,62 +2090,6 @@
       "firstName": "اسمك",
       "company": "الشركة",
       "email": "بريد العمل"
-    }
-  },
-  "auth": {
-    "login": {
-      "title": "تسجيل الدخول",
-      "lead": "الوصول إلى استفساراتك وتقاريرك وتقييمات الموردين المحفوظة.",
-      "email": "البريد الإلكتروني",
-      "password": "كلمة المرور",
-      "submit": "تسجيل الدخول",
-      "submitting": "جارٍ تسجيل الدخول...",
-      "google": "المتابعة عبر Google",
-      "backHome": "العودة للرئيسية",
-      "noAccount": "ليس لديك حساب؟",
-      "registerLink": "أنشئ حساباً",
-      "errorInvalid": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
-      "errorAdminOnly": "هذه الصفحة للمسؤولين فقط.",
-      "errorSignedOut": "تم تسجيل خروجك.",
-      "demoHint": "حسابات تجريبية: admin@ / buyer@ / supplier@ factoryauditb2b.com"
-    },
-    "register": {
-      "title": "إنشاء حساب",
-      "lead": "مجاني وبدون بطاقة. لتتبع الاستفسارات وحفظ التقييمات وطلب عروض الأسعار.",
-      "name": "اسمك",
-      "email": "بريد العمل",
-      "password": "كلمة المرور",
-      "passwordHint": "٨ أحرف على الأقل.",
-      "confirm": "تأكيد كلمة المرور",
-      "company": "الشركة",
-      "companyHint": "الاسم المسجل كما يظهر في السجل التجاري.",
-      "country": "الدولة",
-      "roleLabel": "أنا",
-      "roleBuyer": "مشتري",
-      "roleBuyerHint": "أشتري من المصانع وأحتاج تحققاً أو تدقيقاً أو فحصاً.",
-      "roleSupplier": "مورّد",
-      "roleSupplierHint": "أصنع وأرغب في الإدراج والتحقق.",
-      "submit": "إنشاء الحساب",
-      "submitting": "جارٍ الإنشاء...",
-      "success": "تم إنشاء الحساب. جارٍ تسجيل الدخول...",
-      "hasAccount": "لديك حساب بالفعل؟",
-      "loginLink": "تسجيل الدخول",
-      "termsNote": "بإنشاء حسابك فإنك توافق على شروط الخدمة وسياسة الخصوصية."
-    },
-    "errors": {
-      "invalid_email": "أدخل بريداً إلكترونياً صحيحاً.",
-      "weak_password": "يجب أن تكون كلمة المرور ٨ أحرف على الأقل.",
-      "invalid_role": "اختر مشترياً أو مورّداً.",
-      "email_taken": "يوجد حساب مسجل بهذا البريد.",
-      "password_mismatch": "كلمتا المرور غير متطابقتين.",
-      "server_error": "حدث خطأ. يرجى المحاولة مرة أخرى.",
-      "network": "خطأ في الشبكة. تحقق من اتصالك.",
-      "rate_limited": "محاولات كثيرة جداً. يرجى الانتظار ساعة ثم المحاولة مرة أخرى."
-    },
-    "nav": {
-      "signIn": "تسجيل الدخول",
-      "admin": "الإدارة",
-      "signOut": "تسجيل الخروج"
     }
   },
   "auditGuide": {

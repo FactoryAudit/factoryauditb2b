@@ -47,7 +47,6 @@
     "factoryAudit": "工厂审核",
     "knowledgeBase": "资源中心",
     "pricing": "价格",
-    "admin": "管理后台",
     "tagline": "面向全球采购商的供应商情报与核验平台。评估。核验。验厂。",
     "copyright": "© 2026 FactoryAuditB2B.com。我们不出售证书。香港、台湾、澳门均为中国的一部分。",
     "privacy": "隐私政策",
@@ -2085,62 +2084,6 @@
       "firstName": "你的姓名",
       "company": "公司",
       "email": "工作邮箱"
-    }
-  },
-  "auth": {
-    "login": {
-      "title": "登录",
-      "lead": "登录后查看你的询价、报告与已保存的供应商评估。",
-      "email": "邮箱",
-      "password": "密码",
-      "submit": "登录",
-      "submitting": "登录中...",
-      "google": "使用 Google 继续",
-      "backHome": "返回首页",
-      "noAccount": "还没有账号？",
-      "registerLink": "注册一个",
-      "errorInvalid": "邮箱或密码错误。",
-      "errorAdminOnly": "该页面仅管理员可访问，请使用管理员账号登录。",
-      "errorSignedOut": "你已退出登录。",
-      "demoHint": "演示账号：admin@ / buyer@ / supplier@ factoryauditb2b.com。配置 OAuth 凭据后 Google 登录自动启用。"
-    },
-    "register": {
-      "title": "创建账号",
-      "lead": "免费注册，无需信用卡。用于跟踪询价、保存评估报告与申请报价。",
-      "name": "你的姓名",
-      "email": "工作邮箱",
-      "password": "密码",
-      "passwordHint": "至少 8 位字符。",
-      "confirm": "确认密码",
-      "company": "公司名称",
-      "companyHint": "请填写与营业执照一致的注册公司名。",
-      "country": "国家",
-      "roleLabel": "我的身份",
-      "roleBuyer": "买家",
-      "roleBuyerHint": "我从工厂采购，需要供应商核查、验厂或验货服务。",
-      "roleSupplier": "供应商",
-      "roleSupplierHint": "我是生产厂家，希望被收录并通过核验。",
-      "submit": "创建账号",
-      "submitting": "创建中...",
-      "success": "账号创建成功，正在登录...",
-      "hasAccount": "已有账号？",
-      "loginLink": "登录",
-      "termsNote": "创建账号即表示你同意我们的服务条款与隐私政策。"
-    },
-    "errors": {
-      "invalid_email": "请输入有效的邮箱地址。",
-      "weak_password": "密码至少需要 8 位字符。",
-      "invalid_role": "请选择买家或供应商。",
-      "email_taken": "该邮箱已注册，请直接登录。",
-      "password_mismatch": "两次输入的密码不一致。",
-      "server_error": "出错了，请重试。",
-      "network": "网络错误，请检查连接后重试。",
-      "rate_limited": "操作过于频繁，请一小时后再试。"
-    },
-    "nav": {
-      "signIn": "登录",
-      "admin": "管理后台",
-      "signOut": "退出"
     }
   },
   "auditGuide": {

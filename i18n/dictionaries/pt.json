@@ -40,7 +40,6 @@
     "factoryAudit": "Factory audit",
     "knowledgeBase": "Treinamento de fornecedores",
     "pricing": "Preços",
-    "admin": "Administração",
     "tagline": "Nós verificamos fábricas na China e em toda a Ásia e mostramos os documentos para você.",
     "copyright": "© 2026 FactoryAuditB2B.com. Não vendemos certificados. Hong Kong, China / Taiwan, China / Macau, China são partes da China.",
     "privacy": "Política de Privacidade",
@@ -2085,62 +2084,6 @@
       "firstName": "O seu nome",
       "company": "Empresa",
       "email": "E-mail de trabalho"
-    }
-  },
-  "auth": {
-    "login": {
-      "title": "Entrar",
-      "lead": "Aceda às suas consultas, relatórios e avaliações de fornecedores guardadas.",
-      "email": "E-mail",
-      "password": "Palavra-passe",
-      "submit": "Entrar",
-      "submitting": "A entrar...",
-      "google": "Continuar com o Google",
-      "backHome": "Voltar ao início",
-      "noAccount": "Ainda não tem conta?",
-      "registerLink": "Criar uma",
-      "errorInvalid": "E-mail ou palavra-passe incorretos.",
-      "errorAdminOnly": "Esta página é apenas para administradores.",
-      "errorSignedOut": "Sessão terminada.",
-      "demoHint": "Contas demo: admin@ / buyer@ / supplier@ factoryauditb2b.com."
-    },
-    "register": {
-      "title": "Criar a sua conta",
-      "lead": "Gratuito. Sem cartão. Siga consultas e guarde avaliações.",
-      "name": "O seu nome",
-      "email": "E-mail de trabalho",
-      "password": "Palavra-passe",
-      "passwordHint": "Mínimo 8 caracteres.",
-      "confirm": "Confirmar palavra-passe",
-      "company": "Empresa",
-      "companyHint": "Nome registado, como consta no seu registo comercial.",
-      "country": "País",
-      "roleLabel": "Sou",
-      "roleBuyer": "Comprador",
-      "roleBuyerHint": "Compro de fábricas e preciso de verificação, auditoria ou inspeção.",
-      "roleSupplier": "Fornecedor",
-      "roleSupplierHint": "Fabrico e quero ser listado e verificado.",
-      "submit": "Criar conta",
-      "submitting": "A criar conta...",
-      "success": "Conta criada. A entrar...",
-      "hasAccount": "Já tem conta?",
-      "loginLink": "Entrar",
-      "termsNote": "Ao criar a conta aceita os nossos Termos e Política de Privacidade."
-    },
-    "errors": {
-      "invalid_email": "Introduza um e-mail válido.",
-      "weak_password": "A palavra-passe deve ter pelo menos 8 caracteres.",
-      "invalid_role": "Escolha Comprador ou Fornecedor.",
-      "email_taken": "Já existe uma conta com este e-mail.",
-      "password_mismatch": "As palavras-passe não coincidem.",
-      "server_error": "Algo correu mal. Tente novamente.",
-      "network": "Erro de rede. Verifique a sua ligação.",
-      "rate_limited": "Muitas tentativas. Aguarda uma hora e tenta novamente."
-    },
-    "nav": {
-      "signIn": "Entrar",
-      "admin": "Admin",
-      "signOut": "Sair"
     }
   },
   "auditGuide": {

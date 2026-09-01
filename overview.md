@@ -1,102 +1,50 @@
-# FactoryAuditB2B — 六语言 i18n 落地 + 全站去 AI 味（2026-08-29）
+# V2.0 去数据库重构 + 重新部署 — 完成报告
 
-## 一、多语言架构（6 种语言，零新增依赖）
+**日期**：2026-09-01　**站点**：https://factoryauditb2b.com　**状态**：已上线，全站 200，零 500
 
-| 语言 | URL 形式 |
+## 做了什么
+
+按 V2.0「去数据库、立刻上线」决策，把整个站点从「Prisma + Neon Postgres + 登录/注册/后台」重构为**纯静态数据源**，彻底根治 Cloudflare Workers 上 Prisma native 引擎导致的首页 500。
+
+### 删除的文件（auth / 注册 / admin / 数据库全停用）
+- `lib/db.ts`、`lib/auth.ts`、`types/next-auth.d.ts`
+- `app/api/register/route.ts`、`app/api/admin/leads|taxonomy/route.ts`、`app/api/auth/[...nextauth]/route.ts`
+- `app/[locale]/admin|login|register/**`、`app/[locale]/providers.tsx`
+- `components/AuthMenu|LoginForm|RegisterForm|TaxonomyManager|admin/LeadStatusSelect.tsx`
+
+### 修改的文件
+| 文件 | 改动 |
 |---|---|
-| English（默认） | `/tools`（**无前缀**）|
-| 简体中文 | `/zh/tools` |
-| Español | `/es/tools` |
-| Deutsch | `/de/tools` |
-| Français | `/fr/tools` |
-| Português | `/pt/tools` |
+| `lib/staticData.ts` | 静态数据源（9 国 / 12 行业 / 22 审核认证 / 15 类目 / 4 供应商） |
+| `lib/taxonomy.ts` `lib/queries.ts` `lib/seo.ts` | 函数签名不变，内部改读静态常量 |
+| `app/sitemap.ts` 及落地页 | 去 `prisma` import |
+| `app/api/lead/route.ts` | `prisma.lead.create` → `crypto.randomUUID()` + 邮件通知 |
+| `components/SiteHeader|SiteFooter.tsx` | 去 AuthMenu / authNav / /admin 链接 |
+| `app/[locale]/layout.tsx` | 去 SessionProvider |
+| `lib/notify.ts` | 去 /admin 链接，改 leadId |
+| `app/robots.ts` `next.config.mjs` | 去 /admin /login；serverExternalPackages 清空 |
 
-英文保持无前缀 → 现有 URL 完全不变，**SEO 零损失**；新增语言只需加一份字典 JSON。
+## 验证结果
+- `next build`：`✓ Compiled successfully`，EXIT_CODE=0，无 type error / warning
+- 本地冒烟：首页、工具、供应商、服务、定价、国家、行业、审核指南、多语言等**全部 200**；`/login /register /admin /api/register` **全部 404**
+- 生产 `factoryauditb2b.com`：`/` `/tools` `/suppliers` `/pricing` `/countries/china` `/llms.txt` `/sitemap.xml` 全部 200；被删路由 404；**Prisma 500 根治**
 
-### 新增文件
-| 文件 | 作用 |
-|---|---|
-| `i18n/config.ts` | 语言定义、`localePath`、`switchLocalePath` |
-| `i18n/getDictionary.ts` | 字典加载器（类型以 `en.json` 为准，缺 key 会类型报错）|
-| `i18n/hreflang.ts` | hreflang 映射与 canonical |
-| `middleware.ts` | 无前缀 URL 内部 rewrite 到 `/en`（地址栏不变）；`/en/*` 301 到无前缀 |
-| `components/LocaleSwitcher.tsx` | 语言切换器，保留当前页面 |
-| `i18n/dictionaries/*.json` | 6 份字典 |
+## 部署信息
+- Worker `factoryauditb2b` 最新版 `cb9908e4-86fd-4fd3-b609-55357092291e`（收尾后重新部署）
+- 上传 8148 KB（gzip 1635 KB），137 资产（1 新 + 72 已传），Worker 启动 39ms
+- 自定义域：factoryauditb2b.com + www.factoryauditb2b.com
 
-### 路由改造
-所有页面移入 `app/[locale]/`，`app/` 根只保留 `api`、`globals.css`、`llms.txt`、`robots.ts`、`sitemap.ts`。
+## 收尾进度（09-01 完成）
 
-### riskEngine 重构：文案与结构分离
-`lib/riskEngine.ts` 只保留 `DIMENSION_STRUCTURE`（题目 + 选项风险等级，**零展示文案**），全部文案迁到字典。符合项目「单一事实来源」约定，也是多语言的前提。
+| # | 事项 | 状态 |
+|---|---|---|
+| 1 | 依赖清理：package.json + package-lock + node_modules 移除 prisma/next-auth/bcrypt | ✅ 完成，`next build` EXIT_CODE=0 |
+| 2 | 删残留文件：prisma/、generated/prisma-client、scripts/switch-db.cjs、cleanup-test-leads.cjs | ✅ 已删 |
+| 3 | 字典清理：`auth` 块 + `footer.admin` 键（9 语言） | ✅ 已删，9 份各 -57 行共 -513 行 |
+| 4 | 类型修复：`SiteFooter` FooterDict 移除 `admin` 字段 | ✅ 已修（build 曾因此失败） |
+| 5 | 重新部署生产（含字典/类型/依赖变更） | ✅ 新版 `cb9908e4`，全站 200 / 被删路由 404 |
+| 6 | 运行时凭据（**待用户提供**） | ⏳ MAIL_HTTP_KEY（Resend）、DEEPSEEK_API_KEY、NEXT_PUBLIC_WHATSAPP_NUMBER |
 
-## 二、去 AI 味
-
-主因是**破折号滥用 57 处**，其次是否定式排比与三段式堆砌。
-
-| 原文（AI 味） | 重写后 |
-|---|---|
-| "A smarter way to source from China and Asia. … — all in one platform." | "We look up the registration, walk the floor and read the audit paperwork for factories in China and across Asia. You get the documents, photos and findings, then decide whether to place the order." |
-| "Every tool is a real utility — not a blog post." | "Seven tools for checking suppliers and preparing audits. No account needed, and no email wall on the basic result." |
-| "More data → better matching, sharper risk scores, richer SEO — a compounding moat." | "Each verification and audit stays in the supplier's file. A company cannot quietly reset its history with us." |
-| "It is decision-support, not a substitute for official third-party verification…" | "It is not a substitute for an independent verification, a factory audit or legal advice." |
-
-首页三条价值主张从抽象口号（Evidence First / Human + AI / Supplier Intelligence）改为具体行为描述：
-**What verified actually means** / **People make the call** / **Every check stays on the record**
-
-原则写进 `MEMORY.md`：禁破折号修辞、禁 "not X but Y"、禁营销术语，用具象细节替代抽象概括。
-
-## 三、多语言 SEO
-- 每页 `alternates.languages` 输出 9 个变体（6 语言 + en-US / zh-Hans / pt-BR / x-default）
-- `sitemap.ts`：每条路径生成 6 条语言 URL，各带完整 hreflang → **1218 条 URL / 10962 个 hreflang 变体**
-- `llms.txt` 新增 `## Languages` 段
-
-## 四、验证结果
-
-- `next build` **EXIT_CODE=0**，**365 个静态页**
-- **42 条路由巡检全部 200，0 失败**（6 语言 × 7 路径）
-- 6 语言标题实测渲染正确：
-
-| 语言 | 标题 |
-|---|---|
-| English | Supplier Risk Calculator |
-| 中文 | 供应商风险计算器 |
-| Español | Calculadora de riesgo del proveedor |
-| Deutsch | Lieferanten-Risikorechner |
-| Français | Calculateur de risque fournisseur |
-| Português | Calculadora de risco do fornecedor |
-
-- `html lang` 正确（en / zh-CN / es / de / fr / pt-BR）
-- 6 份字典 JSON 全部合法，key 与 en 完全一致（0 缺失 / 0 多余）
-
-## 五、复现命令
-
-```bash
-cd /f/AI-验厂SEO网站
-
-# 构建（必须先重定向 home 环境变量，否则 EPERM）
-export NODE_OPTIONS=""
-export HOMEDRIVE=F: HOMEPATH='\wb_home' USERPROFILE='F:\wb_home'
-export APPDATA='F:\wb_home\AppData\Roaming' LOCALAPPDATA='F:\wb_home\AppData\Local' HOME='F:\wb_home'
-export TEMP='F:\wb_home\temp' TMP='F:\wb_home\temp' TMPDIR='F:\wb_home\temp'
-export npm_config_cache='F:\wb_home\npm-cache'
-mkdir -p "$USERPROFILE/AppData/Roaming" "$USERPROFILE/AppData/Local" "$TEMP" "$npm_config_cache"
-npm run build >> build.log 2>&1      # 日志落盘，别直接 tail
-
-# 启服
-NODE_OPTIONS="" nohup npx next start -p 3000 > .next_start_3000.log 2>&1 &
-
-# 六语言巡检（注意别拼出尾斜杠，/zh/ 会 308 到 /zh）
-for l in "" "/zh" "/es" "/de" "/fr" "/pt"; do
-  for p in "" "/tools" "/tools/supplier-risk-calculator" "/services/supplier-verification"; do
-    printf "%-6s %-40s %s\n" "${l:-/en}" "$p" "$(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000$l$p)"
-  done
-done
-```
-
-## 六、待办
-
-- **剩余 15 个页面未接入字典**（各语言下仍显示英文，任务 #45）：
-  rfq、pricing、knowledge、logistics、inspectors（含中文硬编码）、login、suppliers、supplier 详情页、audit-guide、factory-audit/request、audit-checklist、supplier-scorecard、audit-report-analyzer、supplier-document-checker、supplier-risk-assessment
-- PRD 剩余：China Supplier Risk Calculator、Factory Audit Cost Calculator
-- RFQ / 验厂申请表单未持久化到 Rfq / AuditRequest 表
-- 上线：SQLite→PostgreSQL 迁移、真实 DeepSeek key、支付与会员门控
+## 关键坑（本轮新增）
+- **npm install 会覆盖 `node_modules/@opennextjs/*` 的 Windows 补丁**（fs.cpSync→copyDirContentsSync 等 4 个文件）。重装依赖后必须先恢复 `.workbuddy/patches-backup/` 里的补丁再跑 OpenNext build，否则 build 报 `ENOENT .open-next\.build\open-next.config.edge.mjs`（fs.cpSync 静默失败导致 tempBuildDir 产物未复制）。
+- 本机 `http_proxy=127.0.0.1:12321` 会让 npm/curl 走无效代理卡死：npm install 需 `unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY` + `no_proxy='*'` + `--registry=https://registry.npmmirror.com`；本地 curl 巡检需 `--noproxy '*'`。

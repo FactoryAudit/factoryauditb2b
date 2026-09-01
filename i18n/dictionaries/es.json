@@ -40,7 +40,6 @@
     "factoryAudit": "Factory audit",
     "knowledgeBase": "Resources",
     "pricing": "Pricing",
-    "admin": "Admin",
     "tagline": "Supplier Intelligence & Verification for Global Buyers. Evaluate. Verify. Audit.",
     "copyright": "© 2026 FactoryAuditB2B.com. We do not sell certificates. Hong Kong, China / Taiwan, China / Macao, China are parts of China.",
     "privacy": "Privacy Policy",
@@ -2091,62 +2090,6 @@
       "firstName": "Tu nombre",
       "company": "Empresa",
       "email": "Correo de trabajo"
-    }
-  },
-  "auth": {
-    "login": {
-      "title": "Iniciar sesión",
-      "lead": "Accede a tus consultas, informes y evaluaciones de proveedores guardadas.",
-      "email": "Correo electrónico",
-      "password": "Contraseña",
-      "submit": "Iniciar sesión",
-      "submitting": "Iniciando...",
-      "google": "Continuar con Google",
-      "backHome": "Volver al inicio",
-      "noAccount": "¿No tienes cuenta?",
-      "registerLink": "Crear una",
-      "errorInvalid": "El correo o la contraseña son incorrectos.",
-      "errorAdminOnly": "Esa página es solo para administradores.",
-      "errorSignedOut": "Has cerrado sesión.",
-      "demoHint": "Cuentas demo: admin@ / buyer@ / supplier@ factoryauditb2b.com."
-    },
-    "register": {
-      "title": "Crear tu cuenta",
-      "lead": "Gratis. Sin tarjeta. Úsala para seguir consultas y guardar evaluaciones.",
-      "name": "Tu nombre",
-      "email": "Correo de trabajo",
-      "password": "Contraseña",
-      "passwordHint": "Mínimo 8 caracteres.",
-      "confirm": "Confirmar contraseña",
-      "company": "Empresa",
-      "companyHint": "Nombre registrado, como aparece en tu licencia comercial.",
-      "country": "País",
-      "roleLabel": "Soy",
-      "roleBuyer": "Comprador",
-      "roleBuyerHint": "Compro a fábricas y necesito verificación, auditorías o inspecciones.",
-      "roleSupplier": "Proveedor",
-      "roleSupplierHint": "Fabrico y quiero aparecer listado y verificado.",
-      "submit": "Crear cuenta",
-      "submitting": "Creando cuenta...",
-      "success": "Cuenta creada. Iniciando sesión...",
-      "hasAccount": "¿Ya tienes cuenta?",
-      "loginLink": "Iniciar sesión",
-      "termsNote": "Al crear la cuenta aceptas nuestros Términos y Política de Privacidad."
-    },
-    "errors": {
-      "invalid_email": "Introduce un correo válido.",
-      "weak_password": "La contraseña debe tener al menos 8 caracteres.",
-      "invalid_role": "Elige Comprador o Proveedor.",
-      "email_taken": "Ya existe una cuenta con este correo.",
-      "password_mismatch": "Las contraseñas no coinciden.",
-      "server_error": "Algo salió mal. Inténtalo de nuevo.",
-      "network": "Error de red. Comprueba tu conexión.",
-      "rate_limited": "Demasiados intentos. Espera una hora y vuelve a intentarlo."
-    },
-    "nav": {
-      "signIn": "Entrar",
-      "admin": "Admin",
-      "signOut": "Salir"
     }
   },
   "auditGuide": {

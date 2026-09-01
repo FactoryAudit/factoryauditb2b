@@ -72,3 +72,6 @@ appdata_sizes.txt
 
 # WorkBuddy 本地项目数据（记忆/技能，不进仓库）
 .workbuddy/
+
+# Wrangler 本地开发变量
+.dev.vars

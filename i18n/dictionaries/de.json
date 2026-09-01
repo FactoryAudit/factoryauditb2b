@@ -40,7 +40,6 @@
     "factoryAudit": "Factory audit",
     "knowledgeBase": "Lieferanten-Schulung",
     "pricing": "Preise",
-    "admin": "Verwaltung",
     "tagline": "Wir prüfen Fabriken in China und ganz Asien und zeigen Ihnen die Unterlagen.",
     "copyright": "© 2026 FactoryAuditB2B.com. Wir verkaufen keine Zertifikate. Hongkong, China / Taiwan, China / Macau, China sind Teile Chinas.",
     "privacy": "Datenschutzerklärung",
@@ -2091,62 +2090,6 @@
       "firstName": "Dein Name",
       "company": "Unternehmen",
       "email": "Geschäfts-E-Mail"
-    }
-  },
-  "auth": {
-    "login": {
-      "title": "Anmelden",
-      "lead": "Zugriff auf deine Anfragen, Berichte und gespeicherten Lieferantenbewertungen.",
-      "email": "E-Mail",
-      "password": "Passwort",
-      "submit": "Anmelden",
-      "submitting": "Anmeldung läuft...",
-      "google": "Mit Google fortfahren",
-      "backHome": "Zur Startseite",
-      "noAccount": "Noch kein Konto?",
-      "registerLink": "Konto erstellen",
-      "errorInvalid": "E-Mail oder Passwort ist falsch.",
-      "errorAdminOnly": "Diese Seite ist nur für Administratoren.",
-      "errorSignedOut": "Du wurdest abgemeldet.",
-      "demoHint": "Demo-Konten: admin@ / buyer@ / supplier@ factoryauditb2b.com."
-    },
-    "register": {
-      "title": "Konto erstellen",
-      "lead": "Kostenlos. Keine Karte nötig. Für Anfragen, Berichte und Angebote.",
-      "name": "Dein Name",
-      "email": "Geschäfts-E-Mail",
-      "password": "Passwort",
-      "passwordHint": "Mindestens 8 Zeichen.",
-      "confirm": "Passwort bestätigen",
-      "company": "Unternehmen",
-      "companyHint": "Eingetragener Firmenname wie in der Gewerbeanmeldung.",
-      "country": "Land",
-      "roleLabel": "Ich bin",
-      "roleBuyer": "Einkäufer",
-      "roleBuyerHint": "Ich beziehe von Fabriken und brauche Verifizierung, Audit oder Inspektion.",
-      "roleSupplier": "Lieferant",
-      "roleSupplierHint": "Ich fertige und möchte gelistet und verifiziert werden.",
-      "submit": "Konto erstellen",
-      "submitting": "Konto wird erstellt...",
-      "success": "Konto erstellt. Anmeldung läuft...",
-      "hasAccount": "Schon ein Konto?",
-      "loginLink": "Anmelden",
-      "termsNote": "Mit der Registrierung akzeptierst du unsere AGB und Datenschutzerklärung."
-    },
-    "errors": {
-      "invalid_email": "Bitte eine gültige E-Mail eingeben.",
-      "weak_password": "Passwort muss mindestens 8 Zeichen haben.",
-      "invalid_role": "Bitte Einkäufer oder Lieferant wählen.",
-      "email_taken": "Zu dieser E-Mail existiert bereits ein Konto.",
-      "password_mismatch": "Die Passwörter stimmen nicht überein.",
-      "server_error": "Etwas ging schief. Bitte erneut versuchen.",
-      "network": "Netzwerkfehler. Verbindung prüfen.",
-      "rate_limited": "Zu viele Versuche. Bitte warte eine Stunde und versuche es erneut."
-    },
-    "nav": {
-      "signIn": "Anmelden",
-      "admin": "Admin",
-      "signOut": "Abmelden"
     }
   },
   "auditGuide": {

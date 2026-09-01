@@ -142,7 +142,6 @@
     "factoryAudit": "Factory audit",
     "knowledgeBase": "Resources",
     "pricing": "Pricing",
-    "admin": "Admin",
     "tagline": "Supplier Intelligence & Verification for Global Buyers. Evaluate. Verify. Audit.",
     "copyright": "© 2026 FactoryAuditB2B.com. We do not sell certificates. Hong Kong, China / Taiwan, China / Macao, China are parts of China.",
     "privacy": "Privacy Policy",
@@ -1988,62 +1987,6 @@
       "firstName": "Your name",
       "company": "Company",
       "email": "Work email"
-    }
-  },
-  "auth": {
-    "login": {
-      "title": "Sign in",
-      "lead": "Access your enquiries, reports and saved supplier assessments.",
-      "email": "Email",
-      "password": "Password",
-      "submit": "Sign In",
-      "submitting": "Signing in...",
-      "google": "Continue with Google",
-      "backHome": "Back home",
-      "noAccount": "No account yet?",
-      "registerLink": "Create one",
-      "errorInvalid": "Email or password is incorrect.",
-      "errorAdminOnly": "That page is for administrators. Sign in with an admin account.",
-      "errorSignedOut": "You have been signed out.",
-      "demoHint": "Demo accounts: admin@ / buyer@ / supplier@ factoryauditb2b.com. Google sign-in activates once OAuth credentials are configured."
-    },
-    "register": {
-      "title": "Create your account",
-      "lead": "Free. No card required. Use it to track enquiries, save assessments and request quotes.",
-      "name": "Your name",
-      "email": "Work email",
-      "password": "Password",
-      "passwordHint": "At least 8 characters.",
-      "confirm": "Confirm password",
-      "company": "Company",
-      "companyHint": "Registered company name, as it appears on your business licence.",
-      "country": "Country",
-      "roleLabel": "I am a",
-      "roleBuyer": "Buyer",
-      "roleBuyerHint": "I source from factories and need verification, audits or inspections.",
-      "roleSupplier": "Supplier",
-      "roleSupplierHint": "I manufacture and want to be listed and verified.",
-      "submit": "Create account",
-      "submitting": "Creating account...",
-      "success": "Account created. Signing you in...",
-      "hasAccount": "Already have an account?",
-      "loginLink": "Sign in",
-      "termsNote": "By creating an account you agree to our Terms of Service and Privacy Policy."
-    },
-    "errors": {
-      "invalid_email": "Enter a valid email address.",
-      "weak_password": "Password must be at least 8 characters.",
-      "invalid_role": "Please choose Buyer or Supplier.",
-      "email_taken": "An account with this email already exists. Try signing in.",
-      "password_mismatch": "The two passwords do not match.",
-      "server_error": "Something went wrong. Please try again.",
-      "network": "Network error. Check your connection and try again.",
-      "rate_limited": "Too many attempts. Please wait an hour and try again."
-    },
-    "nav": {
-      "signIn": "Sign In",
-      "admin": "Admin",
-      "signOut": "Sign Out"
     }
   },
   "auditGuide": {
