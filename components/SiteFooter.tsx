@@ -58,7 +58,7 @@ export default function SiteFooter({
   const operator = operatorLine();
 
   return (
-    <footer className="bg-[#0f172a] text-[#cbd5e1] mt-16">
+    <footer className="bg-[#0f172a] text-[#cbd5e1]">
       <div className="container py-12 grid md:grid-cols-4 gap-8 text-sm">
         <div>
           {/* 页脚是深色底（#0f172a），用浅色版 LOGO */}
