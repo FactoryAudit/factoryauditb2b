@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { ANALYTICS_EVENTS, trackEvent } from "@/lib/analytics";
 
 // 字段结构（与 lib/supplierNetwork.ts 的 REGISTRATION_FIELDS 对应）：
 // 每个区块渲染一组字段，label 文案来自字典 form.labels。
@@ -42,6 +43,13 @@ export default function SupplierRegistrationForm({ t, success, error }: Props) {
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
   const [errMsg, setErrMsg] = useState<string | null>(null);
   const [referenceId, setReferenceId] = useState<string | null>(null);
+  // 埋点：首次聚焦 = 开始填写入驻表（每个会话只发一次）
+  const startedRef = useRef(false);
+  const handleFirstTouch = () => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    trackEvent(ANALYTICS_EVENTS.supplierNetworkStart);
+  };
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -76,6 +84,8 @@ export default function SupplierRegistrationForm({ t, success, error }: Props) {
       });
       const data = await res.json();
       if (data.ok) {
+        // 供应商入驻转化：提交成功（不携带任何表单内容，referenceId 属敏感追踪号也不发）
+        trackEvent(ANALYTICS_EVENTS.supplierNetworkSubmit);
         setStatus("ok");
         setReferenceId(String(data.supplierId || ""));
         formEl.reset();
@@ -122,7 +132,7 @@ export default function SupplierRegistrationForm({ t, success, error }: Props) {
   );
 
   return (
-    <form onSubmit={handleSubmit} className="card p-6 max-w-3xl space-y-8">
+    <form onSubmit={handleSubmit} onFocus={handleFirstTouch} className="card p-6 max-w-3xl space-y-8">
       {Object.keys(t.sections).map((section) => {
         const keys = SECTION_FIELDS[section];
         return (

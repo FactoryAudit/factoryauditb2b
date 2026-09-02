@@ -51,7 +51,7 @@ export default async function Page({ params }: Props) {
   ];
 
   return (
-    <main className="container py-10">
+    <main className="container py-10" data-track-page="supplier_network">
       <JsonLd data={jsonLd} />
 
       {/* Hero */}

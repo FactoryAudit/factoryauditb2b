@@ -1,50 +1,40 @@
-"use client";
-import { useState } from "react";
+import type { Metadata } from "next";
+import SupplierDocumentCheckerTool from "@/components/tools/SupplierDocumentCheckerTool";
+import type { DocumentCheckerUi } from "@/lib/toolUiTypes";
+import { isLocale, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/getDictionary";
+import { buildPageMetadata } from "@/lib/pageMeta";
 
-interface Field { name: string; status: string; note?: string; }
-export default function DocumentCheckerPage() {
-  const [text, setText] = useState("");
-  const [checks, setChecks] = useState<Field[] | null>(null);
+const PATH = "/tools/supplier-document-checker";
+type Props = { params: Promise<{ locale: string }> };
 
-  function check() {
-    const t = text.toLowerCase();
-    const ids: Field[] = [
-      { name: "Company Name", status: t.includes("company") || t.includes("co.,") || t.includes("ltd") ? "FOUND" : "MISSING" },
-      { name: "Address", status: t.includes("address") ? "FOUND" : "MISSING" },
-      { name: "Legal Entity", status: t.includes("legal") || t.includes("registered") ? "FOUND" : "MISSING" },
-      { name: "Certificate No.", status: t.includes("certificate no") || t.includes("cert no") ? "FOUND" : "MISSING" },
-      { name: "Issue Date", status: /\d{4}/.test(t) ? "FOUND" : "MISSING" },
-      { name: "Expiry Date", status: t.includes("expiry") || t.includes("valid") || t.includes("expire") ? "FOUND" : "MISSING" },
-      { name: "Scope", status: t.includes("scope") ? "FOUND" : "NEED REVIEW" }
-    ];
-    const found = ids.filter((i) => i.status === "FOUND").length;
-    const score = Math.round((found / ids.length) * 100);
-    setChecks([{ name: `Consistency Score: ${score}/100`, status: "", note: "" }, ...ids]);
-  }
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale: raw } = await params;
+  const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
+  const t = await getDictionary(locale);
+  return buildPageMetadata({
+    locale,
+    path: PATH,
+    title: t.toolsUi.documentChecker.metaTitle,
+    description: t.toolsUi.documentChecker.metaDesc,
+  });
+}
+
+export default async function Page({ params }: Props) {
+  const { locale: raw } = await params;
+  const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
+  const t = await getDictionary(locale);
+  const ui = t.toolsUi.documentChecker;
 
   return (
-    <div className="container py-12">
-      <h1 className="text-3xl font-bold text-[#0f172a]">Supplier Document Checker</h1>
-      <p className="text-[#64748b] mt-2 mb-6">Checks document information consistency and validity fields. It verifies internal consistency only — it does NOT confirm certification by any official body.</p>
-      <div className="grid md:grid-cols-2 gap-8">
-        <div className="card p-6 space-y-3">
-          <label className="text-sm font-medium">Paste ISO certificate + Business License text</label>
-          <textarea className="textarea h-64" value={text} onChange={(e) => setText(e.target.value)} />
-          <button className="btn btn-primary w-full" onClick={check}>Check Consistency</button>
-        </div>
-        <div className="card p-6">
-          {!checks ? <div className="text-[#94a3b8] text-sm">Paste documents and run the check.</div> : (
-            <div className="space-y-2">
-              {checks.map((c, i) => (
-                <div key={i} className="flex justify-between border-b border-[#e2e8f0] py-2 text-sm">
-                  <span className="font-medium">{c.name}</span>
-                  <span className={c.status === "MISSING" ? "text-[#c0392b]" : c.status === "NEED REVIEW" ? "text-[#a86a13]" : "text-[#1f7a36]"}>{c.status || c.note}</span>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
+    <main className="container py-12" data-track-page="tool_document_checker">
+      <span className="inline-block px-3 py-1 rounded-full bg-[#e6eef6] text-[#0f4c81] text-sm font-semibold mb-4">
+        {t.common.freeTool}
+      </span>
+      <h1 className="text-3xl font-bold text-[#0f172a]">{ui.h1}</h1>
+      <p className="text-[#64748b] mt-2 mb-6 max-w-3xl">{ui.lead}</p>
+      <SupplierDocumentCheckerTool ui={ui as unknown as DocumentCheckerUi} />
+      <p className="text-xs text-[#94a3b8] mt-10 max-w-3xl text-center">{t.common.disclaimer}</p>
+    </main>
   );
 }

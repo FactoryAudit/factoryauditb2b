@@ -3,6 +3,7 @@
 import type { Metadata } from "next";
 import type { Locale } from "@/i18n/config";
 import { hreflangFor, canonicalFor } from "@/i18n/hreflang";
+import { COVERAGE_COUNTRY_SENTENCE } from "@/lib/coverage";
 
 // 全局品牌分享图（1200x630，供 Open Graph / Twitter Card 使用）。
 // 此前 openGraph 没有 images，社交分享与富媒体展示缺失。
@@ -10,7 +11,7 @@ export const OG_IMAGE = {
   url: "/og-image.png",
   width: 1200,
   height: 630,
-  alt: "FactoryAuditB2B — Supplier verification and factory audit for China, Vietnam and Thailand",
+  alt: `FactoryAuditB2B: supplier verification and factory audit in ${COVERAGE_COUNTRY_SENTENCE}`,
 };
 
 type MetaInput = {

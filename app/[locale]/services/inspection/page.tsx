@@ -70,7 +70,7 @@ export default async function InspectionPage({ params }: Props) {
       <JsonLd data={jsonLd} />
 
       <nav className="mb-4 text-sm text-[#64748b]">
-        <Link href={p("/")} className="hover:underline">Home</Link>
+        <Link href={p("/")} className="hover:underline">{t.common.ui.home}</Link>
         {" / "}
         <Link href={p("/services")} className="hover:underline">{t.servicesIndex.badge}</Link>
         {" / "}{i.h1}

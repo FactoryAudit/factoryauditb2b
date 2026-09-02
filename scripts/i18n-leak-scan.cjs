@@ -43,6 +43,12 @@ const ROUTES = [
   "/tools/supplier-risk-calculator",
   "/tools/supplier-verification-checklist",
   "/tools/compare",
+  // 5 个客户端工具页：选项文案曾未走字典，必须纳入扫描
+  "/tools/supplier-scorecard",
+  "/tools/audit-checklist",
+  "/tools/audit-report-analyzer",
+  "/tools/supplier-document-checker",
+  "/tools/supplier-risk-assessment",
   "/services",
   "/services/supplier-verification",
   "/services/factory-audit",

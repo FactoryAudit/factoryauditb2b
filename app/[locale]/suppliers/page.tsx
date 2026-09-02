@@ -126,7 +126,10 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
           action={p(PATH)}
           method="get"
           className="flex flex-wrap items-center gap-2 mb-4"
-          data-track={ANALYTICS_EVENTS.directorySearch}
+          // 提交时上报（而非点击）：带搜索词，用于分析「哪些产品关键词带来流量」。
+          // 原 data-track 会在点击表单任意空白处误触发，故改用 data-track-submit。
+          data-track-submit={ANALYTICS_EVENTS.directorySearch}
+          data-track-field="q"
         >
           <input
             type="search"

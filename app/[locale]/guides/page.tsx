@@ -5,6 +5,7 @@ import { GUIDES } from "@/lib/guides";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import { pickZhPair } from "@/lib/tw";
 
 const PATH = "/guides";
 const BASE = "https://factoryauditb2b.com";
@@ -28,7 +29,6 @@ export default async function GuidesIndex({ params }: Props) {
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
   const p = (href: string) => localePath(locale, href);
-  const zh = locale === "zh";
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -39,7 +39,7 @@ export default async function GuidesIndex({ params }: Props) {
     itemListElement: GUIDES.map((g, i) => ({
       "@type": "ListItem",
       position: i + 1,
-      name: zh ? g.titleZh : g.titleEn,
+      name: pickZhPair(locale, g.titleEn, g.titleZh),
       url: `${BASE}${p(`/guides/${g.slug}`)}`,
     })),
   };
@@ -47,7 +47,7 @@ export default async function GuidesIndex({ params }: Props) {
   return (
     <main className="container py-12">
       <JsonLd data={jsonLd} />
-      <h1 className="text-4xl font-extrabold text-[#0f172a]">Supplier Intelligence Guides</h1>
+      <h1 className="text-4xl font-extrabold text-[#0f172a]">{t.common.ui.guidesPageTitle}</h1>
       <p className="text-[#64748b] mt-3 text-lg max-w-3xl">
         {t.resourcesIndex.lead}
       </p>
@@ -55,9 +55,9 @@ export default async function GuidesIndex({ params }: Props) {
       <div className="grid md:grid-cols-2 gap-5 mt-10">
         {GUIDES.map((g) => (
           <Link key={g.slug} href={p(`/guides/${g.slug}`)} className="card p-6 hover:border-[#0f4c81]">
-            <h2 className="text-xl font-bold text-[#0f4c81]">{zh ? g.titleZh : g.titleEn}</h2>
+            <h2 className="text-xl font-bold text-[#0f4c81]">{pickZhPair(locale, g.titleEn, g.titleZh)}</h2>
             <p className="text-sm text-[#475569] mt-2">
-              {zh ? g.metaDescZh : g.metaDescEn}
+              {pickZhPair(locale, g.metaDescEn, g.metaDescZh)}
             </p>
             <div className="text-xs text-[#94a3b8] mt-3">{g.updated}</div>
           </Link>

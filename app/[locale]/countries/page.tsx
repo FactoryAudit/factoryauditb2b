@@ -5,6 +5,7 @@ import { COVERAGE_COUNTRIES } from "@/lib/coverage";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import { pickZhCopy, pickZhPair } from "@/lib/tw";
 
 const PATH = "/countries";
 const BASE = "https://factoryauditb2b.com";
@@ -57,14 +58,14 @@ export default async function CountriesPage({ params }: Props) {
 
       <section className="grid md:grid-cols-3 gap-5 mb-12">
         {COVERAGE_COUNTRIES.map((x) => {
-          const copy = locale === "zh" ? x.zh : x.en;
+          const copy = pickZhCopy(locale, x);
           return (
             <div key={x.code} className="card p-6 flex flex-col">
               <div className="text-xs font-semibold uppercase tracking-wide text-[#a86a13]">
                 {c.phase1}
               </div>
               <h2 className="text-2xl font-bold text-[#0f172a] mt-1">
-                {locale === "zh" ? x.nameZh : x.name}
+                {pickZhPair(locale, x.name, x.nameZh)}
               </h2>
               <p className="text-sm text-[#475569] mt-2 flex-1">{copy.hook}</p>
 
@@ -93,7 +94,7 @@ export default async function CountriesPage({ params }: Props) {
               </div>
 
               <Link href={p(`/countries/${x.slug}`)} className="btn btn-outline mt-5 self-start">
-                {c.countryCta.replace("{country}", locale === "zh" ? x.nameZh : x.name)}
+                {c.countryCta.replace("{country}", pickZhPair(locale, x.name, x.nameZh))}
               </Link>
             </div>
           );

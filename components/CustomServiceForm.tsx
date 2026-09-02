@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { ANALYTICS_EVENTS, trackEvent } from "@/lib/analytics";
 
 export type CustomServiceFormDict = {
   labels: {
@@ -26,6 +27,13 @@ export default function CustomServiceForm({ t }: { t: CustomServiceFormDict }) {
     message: "",
   });
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
+  // 埋点：首次聚焦 = 产生咨询意图（每个会话只发一次）
+  const startedRef = useRef(false);
+  const handleFirstTouch = () => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    trackEvent(ANALYTICS_EVENTS.customServiceStart);
+  };
 
   const handleChange = (field: keyof typeof form, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -48,7 +56,11 @@ export default function CustomServiceForm({ t }: { t: CustomServiceFormDict }) {
       });
       const data = await res.json();
       setStatus(data.ok ? "ok" : "error");
-      if (data.ok) setForm({ firstName: "", company: "", email: "", country: "", message: "" });
+      if (data.ok) {
+        // 核心转化：付费咨询表单提交成功（不携带任何表单内容）
+        trackEvent(ANALYTICS_EVENTS.customServiceSubmit);
+        setForm({ firstName: "", company: "", email: "", country: "", message: "" });
+      }
     } catch {
       setStatus("error");
     }
@@ -64,7 +76,7 @@ export default function CustomServiceForm({ t }: { t: CustomServiceFormDict }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="card p-6 max-w-2xl space-y-4">
+    <form onSubmit={handleSubmit} onFocus={handleFirstTouch} className="card p-6 max-w-2xl space-y-4">
       <div className="grid md:grid-cols-2 gap-4">
         <div>
           <label className="text-sm font-medium">{t.labels.firstName}</label>

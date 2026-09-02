@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { SERVICE_MENU } from "@/lib/nav";
+import { SERVICE_EVENT_BY_KEY } from "@/lib/analytics";
 import { COVERAGE_COUNTRIES, COVERAGE_SERVICES } from "@/lib/coverage";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import { pickZhPair } from "@/lib/tw";
 
 const PATH = "/services";
 const BASE = "https://factoryauditb2b.com";
@@ -80,7 +82,11 @@ export default async function ServicesPage({ params }: Props) {
             <div key={x.key} className="card p-6 flex flex-col">
               <h3 className="text-xl font-bold text-[#0f4c81]">{x.title}</h3>
               <p className="text-sm text-[#475569] mt-2 flex-1">{x.desc}</p>
-              <Link href={p(x.href)} className="btn btn-outline mt-5 self-start">
+              <Link
+                href={p(x.href)}
+                className="btn btn-outline mt-5 self-start"
+                data-track={SERVICE_EVENT_BY_KEY[x.key]}
+              >
                 {x.title}
               </Link>
             </div>
@@ -95,7 +101,7 @@ export default async function ServicesPage({ params }: Props) {
           {COVERAGE_COUNTRIES.map((c) => (
             <div key={c.code} className="card p-6">
               <h3 className="text-lg font-bold text-[#0f172a]">
-                {locale === "zh" ? c.nameZh : c.name}
+                {pickZhPair(locale, c.name, c.nameZh)}
               </h3>
               <ul className="mt-3 space-y-2 text-sm">
                 {COVERAGE_SERVICES.map((svc) => (
@@ -104,7 +110,7 @@ export default async function ServicesPage({ params }: Props) {
                       href={p(`/services/${c.slug}-${svc.slugSuffix}`)}
                       className="text-[#0f4c81] hover:underline"
                     >
-                      {locale === "zh" ? svc.nameZh : svc.nameEn}
+                      {pickZhPair(locale, svc.nameEn, svc.nameZh)}
                     </Link>
                   </li>
                 ))}

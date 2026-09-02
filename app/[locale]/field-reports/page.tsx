@@ -10,6 +10,7 @@ import {
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import { pickZhCopy, pickZhPair } from "@/lib/tw";
 
 const PATH = "/field-reports";
 const BASE = "https://factoryauditb2b.com";
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     locale,
     path: PATH,
     title: t.fieldReports.metaTitle,
-    description: locale === "zh" ? FIELD_REPORT_LIST_META.zh : FIELD_REPORT_LIST_META.en,
+    description: pickZhCopy(locale, FIELD_REPORT_LIST_META),
   });
 }
 
@@ -36,8 +37,7 @@ export default async function FieldReportsPage({ params }: Props) {
   const t = await getDictionary(locale);
   const f = t.fieldReports;
   const p = (href: string) => localePath(locale, href);
-  const zh = locale === "zh";
-  const disclosure = zh ? FIELD_REPORT_DISCLOSURE.zh : FIELD_REPORT_DISCLOSURE.en;
+  const disclosure = pickZhCopy(locale, FIELD_REPORT_DISCLOSURE);
 
   const jsonLd = [
     {
@@ -48,14 +48,14 @@ export default async function FieldReportsPage({ params }: Props) {
         "@type": "ListItem",
         position: i + 1,
         url: `${BASE}${p(`/field-reports/${r.slug}`)}`,
-        name: zh ? r.titleZh : r.titleEn,
+        name: pickZhPair(locale, r.titleEn, r.titleZh),
       })),
     },
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: `${BASE}${p("/")}` },
+        { "@type": "ListItem", position: 1, name: t.common.ui.home, item: `${BASE}${p("/")}` },
         {
           "@type": "ListItem",
           position: 2,
@@ -73,7 +73,7 @@ export default async function FieldReportsPage({ params }: Props) {
 
       <nav className="mb-4 text-sm text-gray-500">
         <Link href={p("/")} className="hover:underline">
-          Home
+          {t.common.ui.home}
         </Link>
         {" / "}
         <Link href={p("/resources")} className="hover:underline">
@@ -108,10 +108,10 @@ export default async function FieldReportsPage({ params }: Props) {
                       href={p(`/field-reports/${r.slug}`)}
                       className="font-semibold text-[#0f4c81] hover:underline"
                     >
-                      {zh ? r.titleZh : r.titleEn}
+                      {pickZhPair(locale, r.titleEn, r.titleZh)}
                     </Link>
                     <p className="mt-2 text-sm text-gray-600">
-                      {zh ? r.zh.takeaway : r.en.takeaway}
+                      {pickZhCopy(locale, r).takeaway}
                     </p>
                     <p className="mt-3 text-xs text-gray-500">
                       {f.updatedLabel} {r.updated} ·{" "}

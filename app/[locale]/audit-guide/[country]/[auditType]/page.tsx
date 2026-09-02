@@ -9,6 +9,7 @@ import JsonLd from "@/components/JsonLd";
 import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import { twText } from "@/lib/tw";
 
 export const dynamic = "force-static";
 
@@ -57,6 +58,8 @@ export default async function AuditGuidePage({ params }: { params: Promise<Param
   const t = await getDictionary(locale);
   const lp = (href: string) => localePath(locale, href);
   const g = t.auditGuide;
+  const isZhTW = locale === "zh-TW";
+  const zhName = (v: string | null) => (v ? (isZhTW ? twText(v) : v) : null);
 
   const suppliers = await listSuppliersByAuditType(c.code, a.code);
 
@@ -84,7 +87,7 @@ export default async function AuditGuidePage({ params }: { params: Promise<Param
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: `${BASE}/` },
+              { "@type": "ListItem", position: 1, name: t.common.ui.home, item: `${BASE}/` },
               // /audit-guide 与 /audit-guide/{country} 都没有索引页，
               // 面包屑只保留真实存在的层级，避免结构化数据里出现死链
               {
@@ -106,7 +109,7 @@ export default async function AuditGuidePage({ params }: { params: Promise<Param
 
       <nav className="mb-4 text-sm text-gray-500">
         <Link href={lp("/")} className="hover:underline">
-          Home
+          {t.common.ui.home}
         </Link>{" "}
         /{" "}
         <Link href={lp(`/countries/${c.code}`)} className="hover:underline">
@@ -119,7 +122,7 @@ export default async function AuditGuidePage({ params }: { params: Promise<Param
         {g.h1.replaceAll("{type}", a.nameEn).replaceAll("{country}", c.name)}
       </h1>
       <p className="mt-2 max-w-3xl text-gray-600">
-        {a.nameZh && <span className="block">{a.nameZh}</span>}
+        {a.nameZh && <span className="block">{zhName(a.nameZh)}</span>}
         {a.owner && (
           <span className="block text-sm">
             {g.ownerLabel} {a.owner}
@@ -136,7 +139,7 @@ export default async function AuditGuidePage({ params }: { params: Promise<Param
           ) : (
             relatedStandards.map((s) => (
               <span key={s.code} className="rounded-full bg-gray-100 px-3 py-1 text-sm">
-                {s.nameZh || s.nameEn}
+                {zhName(s.nameZh) || s.nameEn}
               </span>
             ))
           )}

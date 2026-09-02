@@ -79,18 +79,8 @@
     "badge": "面向全球采购商的供应商情报",
     "h1": "付款之前，先弄清你的供应商。",
     "lead": "评估供应商、核验工厂，降低中国及东南亚采购风险。",
-    "ctaScore": "免费评估供应商",
-    "ctaRfq": "发布询价",
-    "ctaAudit": "申请验厂",
-    "services": "我们提供供应商验证、工厂审核、验货与货运服务。",
     "toolsTitle": "评估供应商的免费工具",
-    "toolsLead": "无需注册，分数本身也不设邮箱门槛。",
-    "value1Title": "「已验证」到底意味着什么",
-    "value1Body": "只有在核对工商登记、确认厂房真实存在、并审阅审核文件之后，供应商才会被标记为已验证。",
-    "value2Title": "结论由人来做",
-    "value2Body": "软件负责筛出明显问题，验证与审核的最终结论由我们的审核员出具，报告上会署名。",
-    "value3Title": "每一次核查都会留档",
-    "value3Body": "每次验证与审核都会留在该供应商的档案里。企业无法在我们这里悄悄清空历史记录。",
+    "toolsLead": "八款工具，用于核查供应商、准备验厂与规划发运。无需注册，基础结果也不设邮箱门槛。",
     "sub": "用免费工具评估供应商风险、检查核验完备度、为验厂做准备。需要有人到现场时，申请独立的供应商核查或工厂验厂。",
     "ctaPrimary": "查我的供应商",
     "ctaSecondary": "免费风险核查",
@@ -157,7 +147,7 @@
   "coverage": {
     "badge": "覆盖范围",
     "h1": "我们在哪些地方核验供应商",
-    "lead": "覆盖中国及东南亚的现场供应商核查与工厂验厂支持。第一阶段覆盖三个国家，其余国家在审核员资源确认后逐步加入。",
+    "lead": "覆盖中国及东南亚的现场供应商核查与工厂验厂支持。第一阶段覆盖五个国家：中国、越南、泰国、马来西亚、菲律宾。其余国家在审核员资源确认后逐步加入。",
     "phase1": "第一阶段",
     "phaseNext": "后续计划",
     "countryCta": "{country}覆盖范围",
@@ -165,7 +155,7 @@
     "anotherCountryLead": "告诉我们你在哪里采购。如果当地还没有确认的审核员资源，我们会直说，而不是猜。",
     "anotherCountryCta": "申请核验",
     "metaTitle": "我们在哪些地方核验供应商",
-    "metaDesc": "从公司、质量、合规、生产、供应链、文件、认证、数字足迹八个维度给供应商打 0–100 分。分数越高代表风险越低。免费，无需注册。"
+    "metaDesc": "覆盖中国、越南、泰国、马来西亚、菲律宾的供应商核查与工厂验厂服务。含各国采购风险、核查要点与验厂注意事项。"
   },
   "countryHub": {
     "profileTitle": "制造业概况",
@@ -253,7 +243,7 @@
     "notSureLead": "先跑一遍免费的风险计算器。大约三分钟，它会告诉你缺什么。",
     "notSureCta": "评估供应商风险",
     "metaTitle": "供应商核查、工厂验厂与验货服务",
-    "metaDesc": "覆盖中国、越南、泰国的独立供应商核查、工厂验厂、验货与采购支持。按项目报价。"
+    "metaDesc": "覆盖中国、越南、泰国、马来西亚、菲律宾的独立供应商核查、工厂验厂、验货与采购支持。按项目确定范围并报价。"
   },
   "resourcesIndex": {
     "badge": "资源",
@@ -282,7 +272,7 @@
       },
       "sea": {
         "title": "东南亚采购",
-        "desc": "越南与泰国的采购背景、风险与验厂注意事项。"
+        "desc": "越南的采购背景、风险与验厂注意事项。"
       },
       "compliance": {
         "title": "合规",
@@ -313,7 +303,7 @@
   "toolCards": {
     "riskCalculator": {
       "title": "供应商风险计算器",
-      "desc": "按六个加权维度，为任意供应商打出 0 到 100 的分数。"
+      "desc": "按八个加权维度，为任意供应商打出 0 到 100 的分数。"
     },
     "verificationChecklist": {
       "title": "供应商验证清单",
@@ -358,7 +348,7 @@
   },
   "risk": {
     "ui": {
-      "stepOf": "第 {n} 步，共 6 步",
+      "stepOf": "第 {n} 步，共 8 步",
       "back": "上一步",
       "next": "下一步",
       "calculate": "计算风险分",
@@ -392,7 +382,7 @@
         "supplierWebsite": "供应商网址",
         "submit": "发送报告给我",
         "sending": "发送中",
-        "done": "已收到。报告已在下方生成，同时会发送到你的邮箱。",
+        "done": "已收到。报告已在下方生成。我们会在一个工作日内通过邮件与你跟进。",
         "error": "出错了，请重试。"
       },
       "disclaimer": "本评分依据你所填写的答案得出，仅作初步筛查，不构成法律或财务建议，也不代表我们已独立核实供应商的任何陈述。",
@@ -407,9 +397,9 @@
     "page": {
       "badge": "FactoryAuditB2B RiskScore™",
       "h1": "供应商风险计算器",
-      "lead": "回答 22 个关于供应商的问题，得到 0 到 100 的分数，并看清构成这个分数的六个维度。",
+      "lead": "回答 28 个关于供应商的问题，得到 0 到 100 的分数，并看清构成这个分数的八个维度。分数越高，风险越低。",
       "card1Title": "分数怎么来的，你看得见",
-      "card1Body": "六个维度各有权重并单独展示，哪一项拉高了分数一目了然。",
+      "card1Body": "八个维度各有权重并单独展示，哪一项拉动了分数一目了然。",
       "card2Title": "大约三分钟",
       "card2Body": "无需注册，看分数也不用留邮箱。",
       "card3Title": "会告诉你要查什么",
@@ -417,7 +407,7 @@
       "relatedTitle": "相关工具",
       "faqTitle": "常见问题",
       "metaTitle": "供应商风险计算器",
-      "metaDesc": "从公司、质量、合规、生产、供应链与文件六个维度，为供应商打出 0 到 100 的风险分。免费，无需注册。"
+      "metaDesc": "从公司、质量、合规、生产、供应链、文件、认证与数字足迹八个维度，为供应商打出 0 到 100 的风险分。分数越高，风险越低。免费，无需注册。"
     },
     "dimensions": {
       "company": {
@@ -517,7 +507,7 @@
         "unknown": "不清楚"
       },
       "quality_qms": {
-        "yes": "Yes",
+        "yes": "是",
         "partial": "部分有",
         "no": "没有",
         "unknown": "不清楚"
@@ -548,7 +538,7 @@
         "unknown": "不清楚"
       },
       "comp_env": {
-        "comprehensive": "Comprehensive",
+        "comprehensive": "完整",
         "partial": "部分建立",
         "none": "没有",
         "unknown": "不清楚"
@@ -734,7 +724,7 @@
     "faq": [
       {
         "q": "这个计算器测算的是什么？",
-        "a": "它从公司、质量、合规、生产、供应链与文件六个维度，为供应商打出 0 到 100 的分数。分数越高，风险越大。"
+        "a": "它从公司、质量、合规、生产、供应链、文件、认证与数字足迹八个维度，为供应商打出 0 到 100 的分数。分数越高，风险越低。"
       },
       {
         "q": "这个分数等于最终验证结论吗？",
@@ -742,7 +732,7 @@
       },
       {
         "q": "权重是怎么定的？",
-        "a": "公司 15%、质量 20%、合规 20%、生产 15%、供应链 15%、文件 15%。权重固定，并会在结果页上列明。"
+        "a": "公司 12%、质量 16%、合规 16%、生产 12%、供应链 12%、文件 12%、认证 10%、数字足迹 10%。权重固定，并会在结果页上列明。"
       },
       {
         "q": "使用需要付费吗？",
@@ -750,7 +740,7 @@
       },
       {
         "q": "能同时比较多家供应商吗？",
-        "a": "暂时不能。目前请对每家供应商分别运行并保存报告，横向对比功能正在开发中。"
+        "a": "可以。对每家供应商分别运行计算器，然后用对比工具把它们放在同一组八个维度上横向比较，一次最多五家。"
       }
     ]
   },
@@ -1036,15 +1026,6 @@
   "suppliers": {
     "h1": "供应商目录",
     "badge": "供应商目录",
-    "ctaTitle": "您是供应商？",
-    "ctaLead": "加入名录，发布工厂档案，通过平台审核，让从中国及亚洲采购的买家找到您。",
-    "ctaSteps": [
-      "注册",
-      "发布信息",
-      "平台审核",
-      "上架展示"
-    ],
-    "ctaPrimary": "申请进驻",
     "metaTitle": "供应商目录 — 中国及东南亚已核验供应商",
     "metaDesc": "浏览已有公司信息、产能与核验信息的供应商。收录量有限：如果你要找的供应商不在其中，请发布 RFQ。",
     "lead": "浏览已有公司信息、产能与核验信息的供应商。",
@@ -1200,7 +1181,7 @@
     "freeLockLead": "注册免费账号，查看成立年份、员工规模、出口市场与认证列表。",
     "freeLockCta": "创建免费账号",
     "paidLockTitle": "会员查看证据与风险明细",
-    "paidLockLead": "Founding Buyer 会员（$49/年）可查看证据记录、风险明细、审核历史与验货数据。",
+    "paidLockLead": "Founding Buyer 会员（$99/年）可查看证据记录、风险明细、审核历史与验货数据。",
     "paidLockCta": "查看会员方案",
     "paidLockNote": "风险评分公开可见；证据与核验明细为会员内容。"
   },
@@ -1248,7 +1229,7 @@
       },
       "independent": {
         "name": "独立核验",
-        "price": "Custom quote",
+        "price": "按项目报价",
         "items": [
           "企业身份核验",
           "工厂地址核验",
@@ -1485,6 +1466,19 @@
       "assessSubmitting": "提交中…",
       "assessSuccess": "谢谢。我们的团队会在一个工作日内回复。",
       "assessError": "出错了，请重试。"
+    },
+    "ui": {
+      "home": "首页",
+      "relatedGuides": "相关指南",
+      "quickAnswer": "快速结论",
+      "definition": "定义",
+      "keyPoints": "核心要点",
+      "stepByStep": "分步说明",
+      "examples": "示例",
+      "checklist": "检查清单",
+      "sources": "资料来源",
+      "guidesPageTitle": "供应商情报指南",
+      "caseStudiesLead": "供应商核验、工厂验厂、验货与采购流程的实操复盘。"
     }
   },
   "container": {
@@ -1811,84 +1805,6 @@
     "h1": "服务与方案",
     "lead": "工具免费使用。只有当你需要有人到现场核查供应商时才付费。",
     "currencyNote": "全部价格以美元计。核查与验厂按项目报价。",
-    "forBuyers": "买家方案",
-    "forSuppliers": "供应商会员",
-    "perMonth": "/月",
-    "commissionTitle": "审核、验货与运费",
-    "commissionCta": "获取报价",
-    "buyerCtas": [
-      "免费开始",
-      "选择 Starter",
-      "选择 Pro",
-      "选择 Business",
-      "联系我们"
-    ],
-    "supplierCta": "申请",
-    "buyerFeatures": [
-      [
-        "基础供应商搜索",
-        "基础风险评估",
-        "基础核查清单",
-        "每月 1 条 RFQ"
-      ],
-      [
-        "完整供应商搜索",
-        "无限风险评估",
-        "完整 29 项核查清单",
-        "每月 5 条 RFQ",
-        "邮件支持"
-      ],
-      [
-        "包含 Starter 全部功能",
-        "PDF 报告",
-        "文档分析",
-        "供应商工作台",
-        "高级评分卡",
-        "优先支持"
-      ],
-      [
-        "包含 Professional 全部功能",
-        "5 个团队成员",
-        "供应商数据库",
-        "风险监控",
-        "审核管理",
-        "CAPA 与高级报告"
-      ],
-      [
-        "API 接口",
-        "单点登录 (SSO)",
-        "定制工作流",
-        "定制供应商数据库",
-        "专属支持"
-      ]
-    ],
-    "supplierFeatures": [
-      [
-        "公司档案展示",
-        "基础验证徽章",
-        "接收 RFQ",
-        "标准排序"
-      ],
-      [
-        "已验证供应商徽章",
-        "档案展示审核文件",
-        "搜索优先排序",
-        "RFQ 无限回复",
-        "能力标签"
-      ],
-      [
-        "搜索置顶",
-        "行业页推荐位",
-        "买家引荐",
-        "专属客户支持",
-        "每季度档案更新"
-      ]
-    ],
-    "commissionItems": [
-      "工厂审核与验货：按项目报价，依据人天与地区",
-      "运费与采购：按订单金额收取 3–5% 佣金",
-      "首单免平台费"
-    ],
     "plansTitle": "现在可以使用的",
     "plansLead": "四项现已开放。核查、验厂与验货按项目报价；监控为年度订阅。",
     "plans": [
@@ -1897,7 +1813,7 @@
         "price": "0 美元",
         "note": "无需注册",
         "features": [
-          "含六维度拆解的供应商风险评估",
+          "含八维度拆解的供应商风险评估",
           "供应商核查清单",
           "验厂检查表与评分卡",
           "风险分数与建议的下一步"
@@ -2017,9 +1933,9 @@
     "ctaText": "需要报价或人工服务？",
     "ctaButton": "联系我们的团队",
     "fallbackAnswers": {
-      "pricing": "Buyer SaaS runs $0–299/month and supplier membership $29–199/month. Factory audits and inspections are quoted per project (man-days and location); freight and sourcing carry a 3–5% commission. All prices in USD. Tell me your product and country and I will point you to the right plan.",
+      "pricing": "免费工具为 $0。供应商核查每个供应商 $99 – $129，工厂验厂 399 美元起（按人天，另加差旅），供应商监控按每个供应商每年报价。Founding Buyer 会员 $99/年，可查看完整供应商数据库。采购寻源按订单金额收取 3–5% 佣金，下单前报价。所有价格以美元计。告诉我你的产品和国家。",
       "audit": "我们提供供应商验证、工厂审核与出货前验货，覆盖 SMETA、BSCI、ISO 9001、ISO 14001、SA8000、WRAP、Sedex 等项目。我们不出售证书，只做验证与培训。告诉我你的产品与目标市场，我们为你评估。",
-      "coverage": "我们目前覆盖中国、越南和泰国。告诉我你从哪个国家采购，我会确认是否可以服务。",
+      "coverage": "我们目前覆盖中国、越南、泰国、马来西亚和菲律宾。告诉我你从哪个国家采购，我会确认在当地可以做哪些核查。",
       "training": "提供。我们先审核工厂，再培训团队的质量体系、QC 与生产工艺。方案为 Starter $280/厂、Pro $950/厂，另有 Enterprise 定制。每个方案都从差距审核开始。",
       "default": "我可以解答审核、供应商验证、覆盖范围、定价与培训相关问题。如需具体方案，留下联系方式，我们的团队会在一个工作日内回复。"
     },
@@ -2054,7 +1970,7 @@
     "statsTitle": "数据一览",
     "stats": [
       {
-        "value": "9",
+        "value": "5",
         "label": "覆盖国家"
       },
       {
@@ -2078,7 +1994,7 @@
     "badge": "方法说明",
     "h1": "我们的供应商风险评估如何运作",
     "lead": "风险分数由权重公开的规则引擎计算。相同输入永远得到相同分数。语言模型只负责把结果解释成人话，它无法改变数字。",
-    "quickAnswer": "我们从六个加权维度给供应商打分：公司、质量、合规、生产、供应链、文件。你的每个答案归入其中一个维度，按权重计分，再汇总成 100 分制的总分，分数越高代表风险越大。证据缺失会把分数推高，而不是按中性处理。下面显示的权重直接读取自评分模型，不是手工录入的。",
+    "quickAnswer": "我们从八个加权维度给供应商打分：公司、质量、合规、生产、供应链、文件、认证、数字足迹。你的每个答案归入其中一个维度，按权重计分，再汇总成 100 分制的总分，分数越高代表风险越低。证据缺失会拉低分数，而不是按中性处理。下面显示的权重直接读取自评分模型，不是手工录入的。",
     "frameworkTitle": "评分框架",
     "frameworkBody": "每个问题归属一个维度。维度内每个答案的风险取值在 0 到 100 之间。维度得分是已作答问题的加权均值，总分是下面各维度的加权均值。",
     "weightsTitle": "风险维度与权重",
@@ -2111,7 +2027,7 @@
     "metaDesc": "供应商风险分数背后的评分框架、风险维度、权重、证据规则、局限性与更新规则。由确定性规则引擎计算，而非 AI。",
     "scoredInputsLabel": "已作答项",
     "scoredTableNote": "{n} 项已作答 · {d} 个维度 · 总权重 {w}。",
-    "weightsSumLine": "— 六个维度，{n} 项输入，权重和 {w}。",
+    "weightsSumLine": "— 八个维度，{n} 项输入，权重和 {w}。",
     "howWeVerifyTitle": "我们如何核验：六个步骤",
     "howWeVerifyLead": "核验不是截图或摘要，而是一套有记录的流程，每一步都有书面产出。",
     "howWeVerifySteps": [
@@ -2170,7 +2086,7 @@
     "operatesLead": "FactoryAuditB2B 由一家在中国注册的公司运营，为全球采购商提供供应商核查、工厂验厂与采购支持。",
     "operatesNotConfigured": "FactoryAuditB2B 由一家注册公司运营。法律实体名称配置完成后我们会立即公开。",
     "scopeTitle": "业务范围",
-    "scopeBody": "为从中国及东南亚采购的买家提供供应商核查、工厂验厂、验货与采购支持。第一阶段覆盖中国、越南、泰国。",
+    "scopeBody": "为从中国及东南亚采购的买家提供供应商核查、工厂验厂、验货与采购支持。第一阶段覆盖中国、越南、泰国、马来西亚、菲律宾。",
     "verifyTitle": "我们核验什么",
     "verifyLead": "以下是核查服务覆盖的检查项。",
     "verify": [
@@ -2340,7 +2256,7 @@
       },
       {
         "q": "验货多少钱？",
-        "a": "It depends on inspection type, scope, location, duration and the product. A standard single-site PSI in a major manufacturing hub is typically in the range of USD 200–350 per man-day, plus travel outside hub cities. Send us the factory location and we will quote it precisely."
+        "a": "费用取决于检验类型、范围、地点、工期和产品。在主要制造中心做一次标准单站点装运前检验（PSI），通常为每人每天 200–350 美元，中心城市的差旅另计。把工厂地点发给我们，我们会给出准确报价。"
       },
       {
         "q": "能按我自己的检查表验吗？",
@@ -2556,7 +2472,7 @@
     "preparedFor": "出具给：Sample Buyer Ltd.（示意）",
     "companySection": "1. 公司概览",
     "companyNameLabel": "公司名称",
-    "companyName": "深圳市北极星电子有限公司",
+    "companyName": "深圳市XX电子有限公司",
     "countryLabel": "国家",
     "companyCountry": "中国",
     "registeredLabel": "注册状态",
@@ -2592,7 +2508,7 @@
       "出口记录 — Restricted（第三方文件不转发）"
     ],
     "recommendSection": "6. 建议",
-    "recommendBody": "Score 76/100, low risk. We recommend a document verification before the first order, and an on-site audit before a repeat order above USD 50,000.",
+    "recommendBody": "评分 76/100，低风险。我们建议在首单前做一次文件核验，在超过 5 万美元的返单前做一次现场验厂。",
     "ctaTitle": "订购真实核验",
     "ctaLead": "为你的真实供应商获取同等详细程度的报告。核验按供应商计价，起价 99 美元，按项目报价。",
     "ctaPrimary": "申请核验",
@@ -2602,7 +2518,7 @@
     "execLead": "综合得分 76/100 由下方八个维度的得分汇总而成。每个维度都对照公开记录与现场证据核查。",
     "strengthsTitle": "优势",
     "strengths": [
-      "注册地址与宝安区一栋 6200㎡ 工业厂房一致，视频核验已确认",
+      "注册地址与深圳市一栋 6200㎡ 工业厂房一致，视频核验已确认",
       "出口资质自 2016 年持续有效，无海关处罚记录",
       "连续三年税务信用评级 B 级",
       "2019 年以来股权结构稳定，无股权质押记录"
@@ -2693,13 +2609,13 @@
       "在发货前取得续期后的 ISO 9001 证书。"
     ],
     "formTitle": "获取完整样例报告",
-    "formLead": "留下您的邮箱，我们会把完整样例报告（PDF）和一页阅读指南发送给您。",
+    "formLead": "留下您的邮箱，我们会在一个工作日内把完整样例报告和一页阅读指南发送给您。",
     "formEmailPlaceholder": "您的企业邮箱",
-    "formCta": "发送报告给我",
-    "formPrivacyNote": "我们仅用您的邮箱发送样例报告。不发送垃圾邮件，可随时退订。",
+    "formCta": "申请完整报告",
+    "formPrivacyNote": "我们用您的邮箱发送报告并与您跟进。不发送垃圾邮件，可随时退订。",
     "socialTitle": "关注我们，获取采购洞察",
     "socialNote": "验厂案例研究与供应商风险解读。",
-    "formSuccess": "请查收邮件——样例报告即将送达。",
+    "formSuccess": "已收到您的请求。我们会在一个工作日内把完整样例报告发送到您的邮箱。",
     "formError": "出错了，请重试，或直接给我们发邮件。",
     "companyTypeLabel": "公司类型"
   },
@@ -2851,7 +2767,9 @@
     "ctaTitle": "遇到类似情况？",
     "ctaDesc": "把你的需求发给我们，我们会为你的产品和市场规划核查、验厂或验货方案。",
     "ctaRfq": "发布询价",
-    "ctaCustom": "定制服务"
+    "ctaCustom": "定制服务",
+    "detailCtaTitle": "你的供应商也需要这样做吗？",
+    "detailCtaDesc": "把你的需求发给我们，我们会针对你的产品和市场，评估核验、验厂或验货的具体范围。"
   },
   "auditScope": {
     "title": "审核范围推荐",
@@ -2931,7 +2849,7 @@
     "nextTitle": "下一步",
     "nextLead": "提交后，我们的团队会在 1 个工作日内人工创建账号，并通过邮件发送登录信息。",
     "noCard": "无需信用卡。",
-    "membershipLink": "了解 Founding Buyer 会员（$49/年）",
+    "membershipLink": "了解 Founding Buyer 会员（$99/年）",
     "formTitle": "注册",
     "form": {
       "emailLabel": "邮箱",
@@ -2952,11 +2870,11 @@
   },
   "membership": {
     "badge": "买家会员",
-    "metaTitle": "Founding Buyer 会员 — $49/年",
-    "metaDesc": "Founding Buyer 会员：查看全部供应商档案、风险明细、证据摘要与工厂信息。$49/年。",
+    "metaTitle": "Founding Buyer 会员 — $99/年",
+    "metaDesc": "Founding Buyer 会员：查看全部供应商档案、风险明细、证据摘要与工厂信息。$99/年。",
     "h1": "Founding Buyer 会员",
     "lead": "为需要深度评估供应商的采购团队设计。一次订阅，全年使用全部供应商情报功能。",
-    "planName": "Founding Buyer",
+    "planName": "创始买家",
     "pricePeriod": "年",
     "priceNote": "创始价，后续会上调",
     "cta": "咨询开通",
@@ -2978,7 +2896,7 @@
     "faq": [
       {
         "q": "会员价格是多少？",
-        "a": "Founding Buyer 会员 $49/年（USD），一次订阅全年有效。创始价，后续可能上调。"
+        "a": "Founding Buyer 会员 $99/年（USD），一次订阅全年有效。创始价，后续可能上调。"
       },
       {
         "q": "如何支付？",
@@ -2988,6 +2906,261 @@
         "q": "会员是否保证核验结果？",
         "a": "不保证。会员只提供查看权限，不会改变任何供应商的风险评分或核验状态。核验结论不出售。"
       }
+    ]
+  },
+  "toolsUi": {
+    "auditChecklist": {
+      "metaTitle": "工厂验厂检查表生成器",
+      "metaDesc": "按行业与验厂类型生成工厂验厂检查表。免费准备工具，不是官方认证。",
+      "h1": "工厂验厂检查表生成器",
+      "lead": "按行业和验厂类型生成一份结构化的检查表。这是准备与自评工具，不是官方认证。",
+      "industryLabel": "行业",
+      "auditTypeLabel": "验厂类型",
+      "cta": "生成检查表",
+      "summary": "共 {n} 项",
+      "categoryLabel": "类别",
+      "evidenceLabel": "所需证据",
+      "riskSuffix": "风险",
+      "riskLow": "低",
+      "riskMedium": "中",
+      "riskHigh": "高",
+      "questions": {
+        "q_biz_license": {
+          "q": "营业执照有效且与注册地址一致？",
+          "cat": "法律",
+          "ev": "营业执照"
+        },
+        "q_ownership": {
+          "q": "所有权与法定代表人已核验？",
+          "cat": "法律",
+          "ev": "法人文件"
+        },
+        "q_qm_org": {
+          "q": "质量手册与组织架构图可提供？",
+          "cat": "管理",
+          "ev": "组织架构图"
+        },
+        "q_capacity_output": {
+          "q": "产能与实际产量匹配？",
+          "cat": "生产",
+          "ev": "产能记录"
+        },
+        "q_incoming_qc": {
+          "q": "来料检验流程是否已定义？",
+          "cat": "品控",
+          "ev": "品控记录"
+        },
+        "q_final_qc": {
+          "q": "终检与不良率是否跟踪？",
+          "cat": "品控",
+          "ev": "检验报告"
+        },
+        "q_esd": {
+          "q": "防静电保护与焊接工艺受控？",
+          "cat": "技术",
+          "ev": "工艺文件"
+        },
+        "q_rohs": {
+          "q": "出口产品 RoHS / REACH 文件齐备？",
+          "cat": "合规",
+          "ev": "检测报告"
+        },
+        "q_oekotex": {
+          "q": "OEKO-TEX / 受限物质合规？",
+          "cat": "合规",
+          "ev": "检测报告"
+        },
+        "q_labor_hr": {
+          "q": "工时与工资记录是否复核？",
+          "cat": "劳工",
+          "ev": "人事记录"
+        },
+        "q_msds": {
+          "q": "MSDS 与化学品操作程序齐备？",
+          "cat": "环境",
+          "ev": "MSDS"
+        },
+        "q_ppe": {
+          "q": "应急响应与 PPE 合规？",
+          "cat": "安全",
+          "ev": "安全记录"
+        },
+        "q_waste": {
+          "q": "废弃物与排放控制是否成文？",
+          "cat": "环境",
+          "ev": "环保许可"
+        },
+        "q_haccp": {
+          "q": "HACCP / ISO 22000 已实施？",
+          "cat": "食品安全",
+          "ev": "证书"
+        },
+        "q_child_labor": {
+          "q": "无童工/强迫劳动迹象？",
+          "cat": "劳工",
+          "ev": "员工访谈"
+        },
+        "q_ohs": {
+          "q": "职业健康与安全措施到位？",
+          "cat": "健康",
+          "ev": "现场观察"
+        },
+        "q_wastewater": {
+          "q": "废水与废气排放是否监测？",
+          "cat": "环境",
+          "ev": "许可证"
+        },
+        "q_equip_util": {
+          "q": "设备清单与利用率情况？",
+          "cat": "产能",
+          "ev": "设备台账"
+        }
+      }
+    },
+    "reportAnalyzer": {
+      "metaTitle": "验厂报告分析器",
+      "metaDesc": "粘贴验厂报告，检查其结构完整性、缺失项与风险信号。免费评估工具。",
+      "h1": "验厂报告分析器",
+      "lead": "粘贴一份验厂报告，检查其结构、缺失项与风险点。这是评估与决策辅助工具，不能确认官方认证状态。",
+      "inputLabel": "粘贴验厂报告正文",
+      "inputPlaceholder": "在此粘贴验厂报告内容……",
+      "cta": "分析报告",
+      "ctaLoading": "分析中……",
+      "empty": "粘贴报告后运行分析器。",
+      "qualityLabel": "报告质量",
+      "scoreSuffix": "/100",
+      "sourceAi": "AI 生成评估（DeepSeek）·仅作决策辅助",
+      "sourceLocal": "本地规则推断 ·仅作决策辅助",
+      "issuesTitle": "缺失或不一致的项",
+      "issuesNone": "未发现明显的缺失项。"
+    },
+    "documentChecker": {
+      "metaTitle": "供应商文件核对器",
+      "metaDesc": "核对供应商证书与营业执照之间的内部一致性。免费工具，不构成官方核验。",
+      "h1": "供应商文件核对器",
+      "lead": "核对文件信息的一致性与有效期字段。仅检查内部一致性，不能确认任何官方机构的认证状态。",
+      "inputLabel": "粘贴 ISO 证书 + 营业执照文本",
+      "cta": "核对一致性",
+      "empty": "粘贴文件后运行核对。",
+      "scoreRow": "一致性评分：{score}/100",
+      "companyName": "公司名称",
+      "address": "地址",
+      "legalEntity": "法人主体",
+      "certificateNo": "证书编号",
+      "issueDate": "签发日期",
+      "expiryDate": "到期日期",
+      "scope": "认证范围",
+      "statusFound": "已找到",
+      "statusMissing": "缺失",
+      "statusReview": "需复核"
+    },
+    "scorecard": {
+      "metaTitle": "供应商评估记分卡",
+      "metaDesc": "自行设定权重，对供应商逐项打分。免费评估工具。",
+      "h1": "供应商评估记分卡",
+      "lead": "设定各项权重与得分，计算供应商综合评分。权重可完全自定义。",
+      "overallLabel": "综合得分",
+      "totalWeightLabel": "总权重",
+      "weightLabel": "权重",
+      "scoreLabel": "得分",
+      "criteria": {
+        "quality": "质量",
+        "price": "价格",
+        "capacity": "产能",
+        "delivery": "交期",
+        "compliance": "合规",
+        "financial": "财务稳定性",
+        "certification": "认证",
+        "communication": "沟通",
+        "risk": "风险"
+      }
+    },
+    "riskAssessment": {
+      "metaTitle": "供应商风险评估",
+      "metaDesc": "填写供应商信息，得到初步风险评分，并逐维度标注证据状态。",
+      "h1": "供应商风险评估",
+      "lead": "填写供应商信息，生成初步风险评分。每个维度都会标注证据状态——我们不会把推算结果当作事实呈现。",
+      "supplierName": "供应商名称",
+      "website": "网站",
+      "country": "国家",
+      "city": "城市",
+      "productCategory": "产品类别",
+      "businessType": "企业类型",
+      "businessTypeFactory": "工厂",
+      "businessTypeTrading": "贸易公司",
+      "yearsInBusiness": "经营年限",
+      "employeeRange": "员工规模",
+      "exportMarkets": "出口市场（逗号分隔）",
+      "selectOption": "请选择",
+      "businessLicense": "营业执照",
+      "isoCertificate": "ISO 证书",
+      "auditReport": "验厂报告",
+      "catalog": "产品目录",
+      "productCertificates": "产品证书",
+      "cta": "生成风险评分",
+      "ctaLoading": "分析中……",
+      "empty": "填写表单后点击生成，即可查看风险明细。",
+      "levelSuffix": "风险",
+      "sourceAi": "AI 生成（DeepSeek）·仅作决策辅助",
+      "sourceLocal": "规则推算——不构成官方核验",
+      "levels": {
+        "Critical": "极高",
+        "High": "高",
+        "Medium": "中",
+        "Low": "低",
+        "Very Low": "极低"
+      },
+      "status": {
+        "Verified": "已核验",
+        "Self-Reported": "供应商自述",
+        "Estimated": "推算",
+        "Not Verified": "未核验"
+      },
+      "dimensions": {
+        "company": "公司主体核验",
+        "capability": "工厂能力",
+        "quality": "质量体系",
+        "certification": "认证",
+        "capacity": "生产能力",
+        "compliance": "合规性",
+        "transparency": "信息透明度",
+        "supplychain": "供应链风险"
+      },
+      "countryNames": {
+        "china": "中国",
+        "vietnam": "越南",
+        "thailand": "泰国",
+        "india": "印度",
+        "indonesia": "印度尼西亚",
+        "bangladesh": "孟加拉国",
+        "malaysia": "马来西亚",
+        "turkey": "土耳其",
+        "mexico": "墨西哥"
+      }
+    },
+    "industryNames": [
+      "电子",
+      "纺织",
+      "服装",
+      "家具",
+      "化工",
+      "塑料",
+      "汽车",
+      "机械",
+      "医疗器械",
+      "食品",
+      "包装",
+      "珠宝"
+    ],
+    "auditTypeNames": [
+      "工厂核验",
+      "工厂验厂",
+      "供应商质量审核",
+      "产能审核",
+      "社会责任合规审核",
+      "环境审核",
+      "技术审核",
+      "买家定制审核"
     ]
   }
 }

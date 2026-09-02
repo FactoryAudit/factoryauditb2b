@@ -1,55 +1,40 @@
-"use client";
-import { useState } from "react";
+import type { Metadata } from "next";
+import SupplierScorecardTool from "@/components/tools/SupplierScorecardTool";
+import type { ScorecardUi } from "@/lib/toolUiTypes";
+import { isLocale, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/getDictionary";
+import { buildPageMetadata } from "@/lib/pageMeta";
 
-const CRITERIA = [
-  { key: "quality", label: "Quality", def: 20 },
-  { key: "price", label: "Price", def: 15 },
-  { key: "capacity", label: "Capacity", def: 15 },
-  { key: "delivery", label: "Delivery", def: 15 },
-  { key: "compliance", label: "Compliance", def: 10 },
-  { key: "financial", label: "Financial Stability", def: 10 },
-  { key: "certification", label: "Certification", def: 5 },
-  { key: "communication", label: "Communication", def: 5 },
-  { key: "risk", label: "Risk", def: 5 }
-];
+const PATH = "/tools/supplier-scorecard";
+type Props = { params: Promise<{ locale: string }> };
 
-export default function ScorecardPage() {
-  const [weights, setWeights] = useState<Record<string, number>>(Object.fromEntries(CRITERIA.map((c) => [c.key, c.def])));
-  const [scores, setScores] = useState<Record<string, number>>(Object.fromEntries(CRITERIA.map((c) => [c.key, 70])));
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale: raw } = await params;
+  const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
+  const t = await getDictionary(locale);
+  return buildPageMetadata({
+    locale,
+    path: PATH,
+    title: t.toolsUi.scorecard.metaTitle,
+    description: t.toolsUi.scorecard.metaDesc,
+  });
+}
 
-  const totalWeight = Object.values(weights).reduce((a, b) => a + b, 0);
-  const overall = totalWeight === 0 ? 0 : Math.round(
-    CRITERIA.reduce((a, c) => a + (scores[c.key] * weights[c.key]), 0) / totalWeight
-  );
+export default async function Page({ params }: Props) {
+  const { locale: raw } = await params;
+  const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
+  const t = await getDictionary(locale);
+  const ui = t.toolsUi.scorecard;
 
   return (
-    <div className="container py-12">
+    <main className="container py-12" data-track-page="tool_scorecard">
       <span className="inline-block px-3 py-1 rounded-full bg-[#e6eef6] text-[#0f4c81] text-sm font-semibold mb-4">
         FactoryAuditB2B RiskScore™
       </span>
-      <h1 className="text-3xl font-bold text-[#0f172a]">Supplier Evaluation Scorecard</h1>
-      <p className="text-[#64748b] mt-2 mb-6">Set weights and scores to compute an overall supplier score. Weights are fully customizable.</p>
-      <div className="card p-6 max-w-3xl">
-        <div className="flex items-center justify-between mb-4">
-          <span className="text-3xl font-extrabold text-[#0f4c81]">Overall: {overall}</span>
-          <span className="text-xs text-[#64748b]">Total weight: {totalWeight}%</span>
-        </div>
-        <div className="space-y-3">
-          {CRITERIA.map((c) => (
-            <div key={c.key} className="grid grid-cols-3 gap-3 items-center">
-              <label className="text-sm font-medium">{c.label}</label>
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-[#64748b] w-12">Weight</span>
-                <input className="input" type="number" value={weights[c.key]} onChange={(e) => setWeights((w) => ({ ...w, [c.key]: Number(e.target.value) || 0 }))} />
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-[#64748b] w-10">Score</span>
-                <input className="input" type="number" value={scores[c.key]} onChange={(e) => setScores((s) => ({ ...s, [c.key]: Number(e.target.value) || 0 }))} />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+      <h1 className="text-3xl font-bold text-[#0f172a]">{ui.h1}</h1>
+      <p className="text-[#64748b] mt-2 mb-6 max-w-3xl">{ui.lead}</p>
+      <SupplierScorecardTool ui={ui as unknown as ScorecardUi} />
+      <p className="text-xs text-[#94a3b8] mt-10 max-w-3xl text-center">{t.common.disclaimer}</p>
+    </main>
   );
 }

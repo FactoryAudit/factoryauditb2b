@@ -69,7 +69,7 @@ export default async function ComparePage({ params }: Props) {
   ];
 
   return (
-    <main className="container py-12">
+    <main className="container py-12" data-track-page="tool_compare">
       <JsonLd data={jsonLd} />
 
       <span className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">

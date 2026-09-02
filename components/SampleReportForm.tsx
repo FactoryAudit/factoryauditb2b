@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ANALYTICS_EVENTS } from "@/lib/suppliers";
+import { ANALYTICS_EVENTS, trackEvent } from "@/lib/analytics";
 
 type Props = {
   emailPlaceholder: string;
@@ -38,6 +38,8 @@ export default function SampleReportForm({
         body: JSON.stringify({ lead: { tool: "sample-report", email: value } }),
       });
       if (res.ok) {
+        // 留资转化：样例报告请求提交成功（不携带邮箱）
+        trackEvent(ANALYTICS_EVENTS.sampleReportSubmit);
         setStatus("success");
       } else {
         setStatus("error");
@@ -72,7 +74,7 @@ export default function SampleReportForm({
           type="submit"
           disabled={status === "loading"}
           className="btn btn-primary shrink-0 disabled:opacity-60"
-          data-track={ANALYTICS_EVENTS.registerCta}
+          data-track={ANALYTICS_EVENTS.sampleReportCta}
         >
           {status === "loading" ? "…" : cta}
         </button>

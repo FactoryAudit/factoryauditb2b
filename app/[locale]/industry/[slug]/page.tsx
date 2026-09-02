@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getSeoMatrix, getSupplierCapabilitiesResolved, listIndustries } from "@/lib/taxonomy";
+import { getSeoMatrix, getSupplierCapabilitiesResolved, industryDisplayName, listIndustries } from "@/lib/taxonomy";
 import { listSuppliersByIndustry } from "@/lib/queries";
 import { overallLevel } from "@/lib/riskEngine";
 import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i18n/config";
@@ -19,17 +19,18 @@ export async function generateStaticParams() {
   return LOCALES.flatMap((locale) => industries.map((i) => ({ locale, slug: i.code })));
 }
 
-async function resolve(slug: string) {
+async function resolve(slug: string, locale: string) {
   const industries = await listIndustries();
   const industry = industries.find((i) => i.code === slug);
   if (!industry) notFound();
-  return { code: industry.code, name: industry.name, description: null };
+  // name 在 zh-TW 下就地繁化（「Electronics / 电子」→「Electronics / 電子」）
+  return { code: industry.code, name: industryDisplayName(locale, industry.name), description: null };
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { locale: raw, slug } = await params;
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
-  const industry = await resolve(slug);
+  const industry = await resolve(slug, locale);
   const t = await getDictionary(locale);
   const title = `${industry.name} ${t.industryPage.pageTitle}`;
   const description = t.industryPage.metaDesc.replaceAll("{industry}", industry.name);
@@ -41,14 +42,17 @@ export default async function IndustryPage({ params }: { params: Promise<Params>
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
   const lp = (href: string) => localePath(locale, href);
-  const industry = await resolve(slug);
+  const industry = await resolve(slug, locale);
   const p = t.industryPage;
 
   const suppliers = await listSuppliersByIndustry(slug);
+  // 内容层只有 en/zh 两版：zh-TW 走 zh 文案并在函数内繁化，其余语言一律 en。
+  const contentLocale: "en" | "zh" | "zh-TW" =
+    locale === "zh-TW" ? "zh-TW" : locale === "zh" ? "zh" : "en";
   const capsBySupplier = await Promise.all(
     suppliers.map(async (s) => ({
       s,
-      caps: await getSupplierCapabilitiesResolved(s.slug),
+      caps: await getSupplierCapabilitiesResolved(s.slug, contentLocale),
     }))
   );
 
@@ -105,7 +109,7 @@ export default async function IndustryPage({ params }: { params: Promise<Params>
       />
 
       <nav className="mb-4 text-sm text-gray-500">
-        <a href={lp("/")} className="hover:underline">Home</a> / {p.breadcrumb} / {industry.name}
+        <a href={lp("/")} className="hover:underline">{t.common.ui.home}</a> / {p.breadcrumb} / {industry.name}
       </nav>
 
       <h1 className="text-3xl font-bold">{industry.name} {p.pageTitle}</h1>

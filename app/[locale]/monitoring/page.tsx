@@ -43,7 +43,7 @@ export default async function MonitoringPage({ params }: Props) {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: `${BASE}${p("/")}` },
+        { "@type": "ListItem", position: 1, name: t.common.ui.home, item: `${BASE}${p("/")}` },
         {
           "@type": "ListItem",
           position: 2,
@@ -70,7 +70,7 @@ export default async function MonitoringPage({ params }: Props) {
 
       <nav className="mb-4 text-sm text-[#64748b]">
         <Link href={p("/")} className="hover:underline">
-          Home
+          {t.common.ui.home}
         </Link>
         {" / "}
         <Link href={p("/services")} className="hover:underline">

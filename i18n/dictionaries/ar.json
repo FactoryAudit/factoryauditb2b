@@ -72,35 +72,25 @@
     "badge": "Verify. Source. Inspect. Ship.",
     "h1": "اعرف موردك قبل أن تخاطر بأموالك.",
     "lead": "التحقق من المورّدين ميدانياً ودعم تدقيق المصانع في الصين وجنوب شرق آسيا. التغطية النشطة: الصين وفيتنام وتايلاند وماليزيا والفلبين.",
-    "ctaScore": "Check a supplier free",
-    "ctaRfq": "Post an RFQ",
-    "ctaAudit": "Request an audit",
-    "services": "We run supplier verification, factory audits, inspections and freight.",
     "toolsTitle": "أدوات مجانية لتقييم الموردين",
-    "toolsLead": "Eight tools for checking suppliers, preparing audits and planning shipments. No account needed, and no email wall on the basic result.",
-    "value1Title": "What verified actually means",
-    "value1Body": "A supplier is only marked verified after we check its registration records, confirm the site exists, and review audit documents.",
-    "value2Title": "People make the call",
-    "value2Body": "Software catches the obvious problems. Our reviewers decide the outcome on verification and audits, and their names go on the report.",
-    "value3Title": "Every check stays on the record",
-    "value3Body": "Each verification and audit stays in the supplier's file. A company cannot quietly reset its history with us.",
-    "sub": "Use free tools to assess supplier risk, check verification readiness and prepare for a factory audit. When you need someone on the ground, request an independent verification or factory audit.",
+    "toolsLead": "ثمانية أدوات لفحص الموردين، والتحضير للتدقيق وتخطيط الشحنات. لا تحتاج إلى حساب، ولا حاجز بريد إلكتروني للحصول على النتيجة الأساسية.",
+    "sub": "استخدام أدوات مجانية لتقييم المخاطر التي يتعرض لها الموردون والتحقق من استعدادهم للتحقق والإعداد لمراجعة حسابات المصنع. عندما تحتاج إلى شخص ما على الأرض، تطلب التحقق المستقل أو مراجعة حسابات المصنع.",
     "ctaPrimary": "تحقق من موردي",
     "ctaSecondary": "فحص مخاطر مجاني",
     "ctaHighIntent": "طلب تدقيق المصنع",
-    "evaTitle": "Evaluate. Verify. Audit.",
-    "evaLead": "Three steps between a supplier you found online and a supplier you can pay.",
-    "evaluateTitle": "Evaluate",
-    "evaluateBody": "Assess supplier risk before you place an order.",
-    "evaluateCta": "Evaluate a Supplier",
-    "verifyTitle": "Verify",
-    "verifyBody": "Check company information, documents, factory details and available evidence.",
-    "verifyCta": "Verify a Supplier",
-    "auditTitle": "Audit",
-    "auditBody": "Get an independent on-site factory audit with findings, evidence and a written report.",
-    "auditCta": "Request an Audit",
-    "howTitle": "How it works",
-    "howLead": "From a company name to a decision you can defend internally.",
+    "evaTitle": "تقييم. التحقق. مراجعة الحسابات.",
+    "evaLead": "ثلاث خطوات بين مورد وجدته على الانترنت ومورد يمكنك دفعه.",
+    "evaluateTitle": "التقييم",
+    "evaluateBody": "قم بتقييم مخاطر المورد قبل أن تأمر.",
+    "evaluateCta": "تقييم مورد",
+    "verifyTitle": "التصديق",
+    "verifyBody": "تحقق من معلومات الشركة ووثائقها وتفاصيل المصنع والأدلة المتاحة.",
+    "verifyCta": "التحقق من مورد",
+    "auditTitle": "مراجعة الحسابات",
+    "auditBody": "الحصول على مراجعة مستقلة للمصانع في الموقع مع النتائج والأدلة وتقرير خطي.",
+    "auditCta": "طلب مراجعة",
+    "howTitle": "كيف يعمل",
+    "howLead": "من اسم الشركة إلى قرار يمكنك الدفاع عنه داخلياً.",
     "howSteps": [
       {
         "title": "تقييم",
@@ -120,7 +110,7 @@
       }
     ],
     "coverageTitle": "أين نتحقق من الموردين",
-    "coverageLead": "On-the-ground supplier verification and factory audit support across China and Southeast Asia.",
+    "coverageLead": "التحقق من الموردين في الميدان ودعم مراجعة حسابات المصنع في جميع أنحاء الصين وجنوب شرق آسيا.",
     "coveragePhase": "التغطية في المرحلة الأولى",
     "coverageService1": "التحقق من المورد",
     "coverageService2": "تدقيق المصنع",
@@ -138,119 +128,113 @@
     "why4Body": "تستلم تقريراً مكتوباً يمكنك تعميمه داخلياً، مع ملخص المخاطر والخطوة التالية التي نقترحها.",
     "guidesTitle": "أدلة يقرأها المشترون قبل الطلب",
     "guidesLead": "أدلة عملية كتبها من يقومون بهذه التحققات.",
-    "casesTitle": "What the checks turn up",
-    "casesLead": "Supplier names removed. Findings and outcomes come from real engagements.",
-    "bottomTitle": "Have a supplier already?",
+    "casesTitle": "الذي الشيكات ظهر",
+    "casesLead": "أزيلت أسماء الموردين وتأتي النتائج والنتائج من التزامات حقيقية.",
+    "bottomTitle": "هل لديك مورد بالفعل؟?",
     "bottomLead": "أرسل لنا اسم الشركة وعنوانها. سنخبرك بما يمكننا تأكيده، وما لا يمكننا تأكيده، والتكلفة.",
     "bottomCta": "تحقق من هذا المورد",
     "otherRegionTitle": "مناطق أخرى",
-    "otherRegionBody": "Don't see your country? We accept enquiries for any region and review each one based on scope, location and inspector availability.",
-    "otherRegionCta": "أخبرنا من أين تشتري",
-    "primary": "قيّم مخاطر المورّد",
-    "secondary": "تحقّق من مورّد",
-    "highIntent": "اطلب تدقيق المصنع",
-    "guide1Title": "كيف تتحقق من مورّد صيني",
-    "guide2Title": "قائمة تدقيق المصنع",
-    "guide3Title": "تقييم مخاطر المورّد"
+    "otherRegionBody": "ألا ترى بلدك؟ ونقبل الاستفسارات عن أي منطقة ونستعرض كل منها على أساس النطاق والموقع وتوافر المفتشين.",
+    "otherRegionCta": "أخبرنا من أين تشتري"
   },
   "toolsIndex": {
     "badge": "أدوات مجانية",
     "h1": "أدوات مجانية للموردين وتدقيق المصانع",
     "lead": "Seven utilities for screening suppliers, checking documents and preparing audits. No account required.",
-    "flagship": "Flagship",
-    "ctaTitle": "Want the checks done for you?",
-    "ctaLead": "Our verification service confirms registration, site, production capability, quality and compliance, and gives you a written report before you pay.",
-    "ctaPrimary": "Supplier verification service",
-    "ctaSecondary": "Request a factory audit",
+    "flagship": "العلم",
+    "ctaTitle": "هل تريد الشيكات؟?",
+    "ctaLead": "ودائرة التحقق لدينا تؤكد التسجيل، والموقع، والقدرة الإنتاجية، والجودة والامتثال، وتعطيك تقريرا خطيا قبل أن تدفع.",
+    "ctaPrimary": "خدمات التحقق من الموردين",
+    "ctaSecondary": "طلب مراجعة حسابات المصنع",
     "metaTitle": "Free Supplier and Factory Audit Tools",
     "metaDesc": "Free tools to screen suppliers, check documents, build audit checklists and analyse audit reports. No account required."
   },
   "toolCards": {
     "riskCalculator": {
       "title": "حاسبة مخاطر المورد",
-      "desc": "Score any supplier from 0 to 100 across six weighted risk dimensions."
+      "desc": "يسجل أي مورد من صفر إلى 100 عبر ثمانية أبعاد مرجحة للمخاطر."
     },
     "verificationChecklist": {
       "title": "قائمة التحقق من المورد",
-      "desc": "29 checks across six stages to finish before you place an order."
+      "desc": "29 شيكات عبر ست مراحل للانتهاء قبل أن تضعي أمر."
     },
     "riskAssessment": {
       "title": "تقييم مخاطر المورد",
-      "desc": "Enter supplier details and get an initial risk score with evidence status."
+      "desc": "أدخل تفاصيل المورد وحصل على نتيجة أولية للمخاطر مع حالة الأدلة."
     },
     "auditChecklist": {
       "title": "مولد قائمة تدقيق المصنع",
-      "desc": "Build an audit checklist for your industry and audit type."
+      "desc": "بناء قائمة مرجعية لمراجعة الحسابات لصناعةكم و نوع مراجعة الحسابات."
     },
     "supplierScorecard": {
       "title": "بطاقة تقييم المورد",
-      "desc": "Weight the criteria yourself and score suppliers against them."
+      "desc": "ضعي المعايير بنفسك وسجلي الموردين ضدهم."
     },
     "auditReportAnalyzer": {
       "title": "محلل تقارير التدقيق",
-      "desc": "Check an audit report for gaps, inconsistencies and risk signals."
+      "desc": "تحقق من تقرير مراجعة الحسابات فيما يتعلق بالثغرات والتناقضات وإشارات المخاطر."
     },
     "documentChecker": {
       "title": "مدقق مستندات المورد",
-      "desc": "Validate supplier documents and certificates against each other."
+      "desc": "التحقق من وثائق وشهادات الموردين ضد بعضهم البعض."
     },
     "containerCalculator": {
-      "title": "Container Load Calculator",
-      "desc": "Work out how many cartons fit in a 20GP or 40HQ, and how many containers you need."
+      "title": "الحاويات",
+      "desc": "اعملوا كم عدد الكرتونات في 20 جي بي أو 40 كيلو متر مربع وكم عدد الحاويات التي تحتاجونها."
     },
     "rfqGenerator": {
-      "title": "RFQ Generator",
-      "desc": "Turn one line of requirements into a professional RFQ."
+      "title": "مولدات الترددات الترددية",
+      "desc": "تحويل خط واحد من الاحتياجات إلى قاعدة بيانات مهنية."
     },
     "personalizedService": {
       "title": "خدمة مخصصة",
-      "desc": "Tell us your specific needs and we will put together a tailored audit or verification plan."
+      "desc": "قل لنا احتياجاتك المحددة وسنضع معا خطة مصممة خصيصا لمراجعة الحسابات أو التحقق."
     },
     "supplierComparison": {
       "title": "مقارنة الموردين",
-      "desc": "Score two to five suppliers on the same eight dimensions and compare them side by side."
+      "desc": "يسجلون اثنين إلى خمسة موردين على نفس الأبعاد الثمانية ويقارنونهم جنبا إلى جنب."
     }
   },
   "risk": {
     "ui": {
-      "stepOf": "Step {n} of 6",
-      "back": "Back",
-      "next": "Next",
-      "calculate": "Calculate risk score",
-      "answerAll": "Answer every question to see the score",
-      "scoreSuffix": "risk score",
-      "breakdownTitle": "Where the risk sits",
-      "weightNote": "{weight}% of the total",
+      "stepOf": "الخطوة {n} من 8",
+      "back": "العودة",
+      "next": "التالي",
+      "calculate": "قياس المخاطر",
+      "answerAll": "أجيب على كل سؤال لرؤية النتيجة",
+      "scoreSuffix": "النتيجة",
+      "breakdownTitle": "حيث يجلس الخطر",
+      "weightNote": "{weight}% من المجموع",
       "factorsTitle": "إشارات تحذيرية",
-      "actionsTitle": "What to do next",
-      "editAnswers": "Edit answers",
-      "startOver": "Start over",
-      "downloadReport": "Download full report",
-      "print": "Print",
-      "notAnswered": "Not answered",
-      "reportTitle": "Supplier Risk Report",
+      "actionsTitle": "ماذا ستفعل بعد ذلك",
+      "editAnswers": "إجابات",
+      "startOver": "ابدأ",
+      "downloadReport": "تحميل التقرير الكامل",
+      "print": "الطباعة",
+      "notAnswered": "غير مجيب",
+      "reportTitle": "تقرير مخاطر الموردين",
       "level": {
-        "LOW": "Low risk",
-        "MODERATE": "Moderate risk",
-        "ELEVATED": "Elevated risk",
-        "HIGH": "High risk",
-        "CRITICAL": "Critical risk"
+        "LOW": "المخاطر المنخفضة",
+        "MODERATE": "المخاطر الحديثة",
+        "ELEVATED": "ارتفاع المخاطر",
+        "HIGH": "المخاطر العالية",
+        "CRITICAL": "المخاطر الحرجة"
       },
       "form": {
-        "title": "Get the full report by email",
-        "firstName": "First name",
-        "company": "Company",
+        "title": "الحصول على التقرير الكامل عن طريق البريد الإلكتروني",
+        "firstName": "الاسم الأول",
+        "company": "الشركة",
         "email": "Work email",
-        "country": "Country",
-        "sourcing": "What you are sourcing",
-        "supplierName": "Supplier name",
-        "supplierWebsite": "Supplier website",
-        "submit": "Send me the report",
-        "sending": "Sending",
-        "done": "Thanks. Your report is ready below and on its way to your inbox.",
-        "error": "Something went wrong. Please try again."
+        "country": "البلد",
+        "sourcing": "ما أنت تَخْبرُ",
+        "supplierName": "اسم مورد",
+        "supplierWebsite": "الموقع الشبكي للموردين",
+        "submit": "أرسل لي التقرير",
+        "sending": "إرسال",
+        "done": "شكراً. تقريرك جاهز في الأسفل. استلمنا طلبك وسنتواصل معك عبر البريد خلال يوم عمل واحد.",
+        "error": "حدث شيء خاطئ أرجوك حاول مرة أخرى."
       },
-      "disclaimer": "This score comes from the answers you gave. It is a first pass, not legal or financial advice, and it does not independently verify anything the supplier told you.",
+      "disclaimer": "هذه النتيجة تأتي من الأجوبة التي أعطيتها إنّها مرّة أولى، وليس نصيحة قانونية أو مالية، ولا تحقّق بشكل مستقل من أيّ شيء أخبرك به المورد.",
       "answeredInStep": "تمت الإجابة على {done} من {total} في هذا القسم",
       "scoreScaleTitle": "كيف تترجم النتيجة إلى مخاطر",
       "selfReported": "إجابات مُبلغة ذاتياً. لم يتم التحقق منها بشكل مستقل.",
@@ -261,49 +245,49 @@
     },
     "page": {
       "badge": "FactoryAuditB2B RiskScore™",
-      "h1": "Supplier Risk Calculator",
-      "lead": "Answer 22 questions about a supplier and get a score from 0 to 100, with the six dimensions behind it laid out.",
-      "card1Title": "You can see how the score is built",
-      "card1Body": "Six dimensions, each weighted and shown separately, so you can tell which answers moved the number.",
-      "card2Title": "About three minutes",
-      "card2Body": "No account and no email needed for the score itself.",
-      "card3Title": "Tells you what to check",
-      "card3Body": "The result lists the answers that raised your score and what to do about each of them.",
-      "relatedTitle": "Related tools",
-      "faqTitle": "Frequently asked questions",
-      "metaTitle": "Supplier Risk Calculator",
+      "h1": "حاسبة مخاطر الموردين",
+      "lead": "أجب عن 28 سؤالاً عن مورد واحصل على نتيجة من صفر إلى 100، مع الأبعاد الثمانية التي تقف خلفها. الدرجة الأعلى تعني مخاطر أقل.",
+      "card1Title": "يمكنك أن ترى كيف تم بناء النتيجة",
+      "card1Body": "ثمانية أبعاد، مرجّحة ومعروضة بشكل منفصل، حتى تعرف أي الإجابات حرّكت الرقم.",
+      "card2Title": "حوالي ثلاث دقائق",
+      "card2Body": "لا يوجد حساب ولا ايميل مطلوب للنتيجة نفسها.",
+      "card3Title": "يخبرك بما تحقق",
+      "card3Body": "النتيجة تُدرج الإجابات التي رفعت نتيجتك و ما عليك فعله بشأن كل منهم.",
+      "relatedTitle": "الأدوات ذات الصلة",
+      "faqTitle": "الأسئلة المتكررة",
+      "metaTitle": "حاسبة مخاطر الموردين",
       "metaDesc": "قيّم أي مورد من 0 إلى 100 عبر ثمانية مجالات: الشركة، الجودة، الامتثال، الإنتاج، سلسلة التوريد، الوثائق، الشهادات والبصمة الرقمية. الدرجة الأعلى تعني مخاطر أقل. مجاني، بدون حساب."
     },
     "dimensions": {
       "company": {
         "label": "مخاطر الشركة",
-        "short": "Company",
-        "description": "How long they have been trading, whether the registered address is the factory address, and whether ownership is traceable."
+        "short": "الشركة",
+        "description": "إلى متى كانوا يتاجرون، وما إذا كان العنوان المسجل هو عنوان المصنع، وما إذا كانت الملكية قابلة للتعقب."
       },
       "quality": {
         "label": "مخاطر الجودة",
-        "short": "Quality",
-        "description": "Whether quality control is documented, whether an outside auditor has been through recently, and whether inspection records exist."
+        "short": "النوعية",
+        "description": ":: ما إذا كانت مراقبة الجودة موثقة، وما إذا كان مراجع حسابات خارجي قد اجتاز مؤخرا، وما إذا كانت سجلات التفتيش موجودة."
       },
       "compliance": {
         "label": "مخاطر الامتثال",
-        "short": "Compliance",
-        "description": "Social, environmental and product compliance records. We ask what you have, not for a specific certificate."
+        "short": "الامتثال",
+        "description": "Social, environmental and product compliance records. نسأل ما لديك، وليس للحصول على شهادة محددة."
       },
       "production": {
         "label": "مخاطر الإنتاج",
-        "short": "Production",
-        "description": "Capacity against your order size, whether work is subcontracted, and whether they have made your product before."
+        "short": "الإنتاج",
+        "description": "القدرة مقابل حجم طلبك، سواء كان العمل متعاقداً من الباطن، وما إذا كانوا قد صنعوا منتجك من قبل."
       },
       "supplychain": {
         "label": "مخاطر سلسلة التوريد",
-        "short": "Supply chain",
-        "description": "Where raw materials come from, how exposed you are to a single source, and how realistic the lead time is."
+        "short": "سلسلة الإمداد",
+        "description": "من أين تأتي المواد الخام، كم أنت مكشوف إلى مصدر واحد، وكم هو واقعي وقت القيادة."
       },
       "documentation": {
         "label": "مخاطر المستندات",
-        "short": "Documentation",
-        "description": "Whether the business licence, factory address, certificates, audit reports and test reports can actually be produced."
+        "short": "الوثائق",
+        "description": ":: ما إذا كان من الممكن فعلا إصدار ترخيص الأعمال التجارية، وعنوان المصانع، والشهادات، وتقارير مراجعة الحسابات، وتقارير الاختبار."
       },
       "certification": {
         "label": "مخاطر التصديق",
@@ -317,28 +301,28 @@
       }
     },
     "questions": {
-      "company_years": "How long has the company been operating?",
-      "company_address": "Has the factory address been verified?",
-      "company_type": "What type of business is it?",
-      "company_ownership": "Can the ownership be confirmed?",
-      "quality_qms": "Is there a documented quality management system, such as ISO 9001?",
-      "quality_audit": "Has the supplier been audited by a third party?",
-      "quality_incoming": "Does the supplier inspect incoming materials?",
-      "quality_records": "Does the supplier keep quality records?",
-      "comp_social": "Is there a social compliance system, such as BSCI, SMETA or SA8000?",
-      "comp_env": "Does the supplier have environmental compliance records?",
-      "comp_product": "Does the product meet the compliance requirements of your market, such as CE or UL?",
-      "comp_ethics": "Is there a documented business ethics or anti-corruption policy?",
-      "prod_capacity": "Is the production capacity enough for your order volume?",
-      "prod_subcontract": "Does the supplier subcontract production?",
-      "prod_experience": "Has the supplier made this type of product before?",
-      "sc_material": "How stable is the supply of raw materials?",
-      "sc_single": "How dependent is the supplier on a single source of material?",
-      "sc_leadtime": "How reliable is the quoted lead time?",
-      "doc_registration": "Has the business registration been provided?",
-      "doc_address": "Is the factory address documented?",
-      "doc_certificates": "Are certificates and audit reports available?",
-      "doc_test": "Are product test reports available?",
+      "company_years": "منذ متى تعمل الشركة؟?",
+      "company_address": "هل تم التحقق من عنوان المصنع؟?",
+      "company_type": "أي نوع من الأعمال هو؟?",
+      "company_ownership": "هل يمكن تأكيد الملكية؟?",
+      "quality_qms": "هل هناك نظام موثق لإدارة الجودة، مثل ISO 9001؟?",
+      "quality_audit": "هل قام طرف ثالث بمراجعة المورد؟?",
+      "quality_incoming": "هل يقوم المورد بتفتيش المواد الواردة؟?",
+      "quality_records": "هل يحتفظ المورد بسجلات الجودة؟?",
+      "comp_social": "هل هناك نظام للامتثال الاجتماعي، مثل BSCI، أو SMETA أو SA8000؟?",
+      "comp_env": "هل لدى المورد سجلات امتثال بيئية؟?",
+      "comp_product": "هل يفي المنتج بمتطلبات الامتثال لسوقك، مثل CE أو UL؟?",
+      "comp_ethics": "هل هناك أخلاق تجارية موثقة أو سياسة لمكافحة الفساد؟?",
+      "prod_capacity": "هل القدرة الإنتاجية كافية لحجم طلبك؟?",
+      "prod_subcontract": "هل يقوم المورد بالإنتاج من الباطن؟?",
+      "prod_experience": "هل قام المورد بهذا النوع من المنتجات من قبل؟?",
+      "sc_material": "ما مدى استقرار إمدادات المواد الخام؟?",
+      "sc_single": "كيف يعتمد المورّد على مصدر واحد من المواد؟?",
+      "sc_leadtime": "ما مدى موثوقية الوقت المقتبس؟?",
+      "doc_registration": "هل تم تسجيل الأعمال؟?",
+      "doc_address": "هل عنوان المصنع موثق؟?",
+      "doc_certificates": "هل تتوافر شهادات وتقارير مراجعة الحسابات؟?",
+      "doc_test": "هل تقارير اختبار المنتجات متاحة؟?",
       "cert_scope": "هل تغطي الشهادات المنتج الذي تشتريه ؟",
       "cert_body": "هل يمكن العثور على الشهادة في السجل الخاص بالجهة المصدرة ؟",
       "cert_validity": "هل لا تزال الشهادات صالحة ؟",
@@ -348,165 +332,165 @@
     },
     "options": {
       "company_years": {
-        "10plus": "More than 10 years",
-        "5to10": "5 to 10 years",
-        "3to5": "3 to 5 years",
-        "1to2": "1 to 2 years",
-        "unknown": "Unknown"
+        "10plus": "أكثر من 10 سنوات",
+        "5to10": "5 إلى 10 سنوات",
+        "3to5": "3 إلى 5 سنوات",
+        "1to2": "سنة واحدة إلى سنتين",
+        "unknown": "غير معروف"
       },
       "company_address": {
-        "yes": "Yes",
-        "partial": "Partially",
+        "yes": "نعم",
+        "partial": "جزئيا",
         "no": "No",
-        "unknown": "Unknown"
+        "unknown": "غير معروف"
       },
       "company_type": {
-        "manufacturer": "Manufacturer",
-        "both": "Both manufacturer and trader",
-        "trading": "Trading company",
-        "unknown": "Unknown"
+        "manufacturer": "المصانع",
+        "both": "كل من الصانع والتجار",
+        "trading": "شركة تجارية",
+        "unknown": "غير معروف"
       },
       "company_ownership": {
-        "yes": "Yes",
+        "yes": "نعم",
         "no": "No",
-        "unknown": "Unknown"
+        "unknown": "غير معروف"
       },
       "quality_qms": {
-        "yes": "Yes",
-        "partial": "Partially",
+        "yes": "نعم",
+        "partial": "جزئيا",
         "no": "No",
-        "unknown": "Unknown"
+        "unknown": "غير معروف"
       },
       "quality_audit": {
-        "within12": "Within the last 12 months",
-        "within3y": "Within the last 3 years",
-        "older": "More than 3 years ago",
-        "never": "Never",
-        "unknown": "Unknown"
+        "within12": "خلال الـ 12 شهرا الماضية",
+        "within3y": "خلال السنوات الثلاث الماضية",
+        "older": "منذ أكثر من 3 سنوات",
+        "never": "أبداً",
+        "unknown": "غير معروف"
       },
       "quality_incoming": {
-        "yes": "Yes",
-        "partial": "Partially",
+        "yes": "نعم",
+        "partial": "جزئيا",
         "no": "No",
-        "unknown": "Unknown"
+        "unknown": "غير معروف"
       },
       "quality_records": {
-        "yes": "Yes",
-        "partial": "Partially",
+        "yes": "نعم",
+        "partial": "جزئيا",
         "no": "No",
-        "unknown": "Unknown"
+        "unknown": "غير معروف"
       },
       "comp_social": {
-        "comprehensive": "Comprehensive",
-        "partial": "Partial",
-        "none": "None",
-        "unknown": "Unknown"
+        "comprehensive": "شامل",
+        "partial": "جزئي",
+        "none": "لا",
+        "unknown": "غير معروف"
       },
       "comp_env": {
-        "comprehensive": "Comprehensive",
-        "partial": "Partial",
-        "none": "None",
-        "unknown": "Unknown"
+        "comprehensive": "شامل",
+        "partial": "جزئي",
+        "none": "لا",
+        "unknown": "غير معروف"
       },
       "comp_product": {
-        "inplace": "In place",
-        "partial": "Partial",
-        "missing": "Missing",
-        "unknown": "Unknown"
+        "inplace": "في المكان",
+        "partial": "جزئي",
+        "missing": "مفقودة",
+        "unknown": "غير معروف"
       },
       "comp_ethics": {
-        "documented": "Documented",
-        "partial": "Partial",
-        "none": "None",
-        "unknown": "Unknown"
+        "documented": "الوثائق",
+        "partial": "جزئي",
+        "none": "لا",
+        "unknown": "غير معروف"
       },
       "prod_capacity": {
-        "yes": "Yes",
-        "partial": "Partially",
+        "yes": "نعم",
+        "partial": "جزئيا",
         "no": "No",
-        "unknown": "Unknown"
+        "unknown": "غير معروف"
       },
       "prod_subcontract": {
         "no": "No",
-        "partial": "Partially, and disclosed",
-        "yes": "Yes, and not disclosed",
-        "unknown": "Unknown"
+        "partial": "جزئيا، وكشف",
+        "yes": "نعم، ولا يكشف",
+        "unknown": "غير معروف"
       },
       "prod_experience": {
-        "strong": "Strong",
-        "moderate": "Moderate",
-        "limited": "Limited",
-        "none": "None"
+        "strong": "قوي",
+        "moderate": "تحديث",
+        "limited": "محدود",
+        "none": "لا"
       },
       "sc_material": {
-        "stable": "Stable",
-        "partial": "Partially stable",
-        "unstable": "Unstable",
-        "unknown": "Unknown"
+        "stable": "مستقر",
+        "partial": "مستقرة جزئيا",
+        "unstable": "غير مستقر",
+        "unknown": "غير معروف"
       },
       "sc_single": {
-        "low": "Low",
-        "moderate": "Moderate",
-        "high": "High"
+        "low": "منخفض",
+        "moderate": "تحديث",
+        "high": "عالية"
       },
       "sc_leadtime": {
-        "low": "Low",
-        "moderate": "Moderate",
-        "high": "High"
+        "low": "منخفض",
+        "moderate": "تحديث",
+        "high": "عالية"
       },
       "doc_registration": {
-        "yes": "Yes",
-        "partial": "Partially",
+        "yes": "نعم",
+        "partial": "جزئيا",
         "no": "No",
-        "unknown": "Unknown"
+        "unknown": "غير معروف"
       },
       "doc_address": {
-        "yes": "Yes",
-        "partial": "Partially",
+        "yes": "نعم",
+        "partial": "جزئيا",
         "no": "No",
-        "unknown": "Unknown"
+        "unknown": "غير معروف"
       },
       "doc_certificates": {
-        "yes": "Yes",
-        "partial": "Partially",
+        "yes": "نعم",
+        "partial": "جزئيا",
         "no": "No",
-        "unknown": "Unknown"
+        "unknown": "غير معروف"
       },
       "doc_test": {
-        "yes": "Yes",
-        "partial": "Partially",
+        "yes": "نعم",
+        "partial": "جزئيا",
         "no": "No",
-        "unknown": "Unknown"
+        "unknown": "غير معروف"
       },
       "cert_scope": {
         "covers": "نعم، بالكامل",
-        "partial": "Partially",
+        "partial": "جزئيا",
         "notcovered": "لا، النطاق يستثني منتجنا",
-        "unknown": "Unknown"
+        "unknown": "غير معروف"
       },
       "cert_body": {
         "accredited": "نعم، على سجل معتمد",
         "unverified": "لا، لا يمكن العثور عليه",
         "none": "لا يوجد شهادة",
-        "unknown": "Unknown"
+        "unknown": "غير معروف"
       },
       "cert_validity": {
         "valid": "ساري:",
         "expiring": "تنتهي صلاحيته في غضون 3 أشهر",
-        "expired": "Expired",
-        "unknown": "Unknown"
+        "expired": "انتهت",
+        "unknown": "غير معروف"
       },
       "digital_website": {
         "owned": "نعم، نطاق مستقل",
         "socialonly": "سوق أو صفحة اجتماعية فقط",
         "none": "لا شيء وجد.",
-        "unknown": "Unknown"
+        "unknown": "غير معروف"
       },
       "digital_consistency": {
         "consistent": "متسقة في كل مكان",
         "minor": "مع اختلافات طفيفة",
         "mismatch": "عدم تطابق المواد بين المساكن",
-        "unknown": "Unknown"
+        "unknown": "غير معروف"
       },
       "digital_history": {
         "5plus": "ما يزيد عن 5 أعوام",
@@ -516,15 +500,15 @@
       }
     },
     "factors": {
-      "company_address": "The factory address has not been verified.",
-      "company_ownership": "Ownership could not be confirmed.",
-      "quality_qms": "There is no documented quality management system.",
-      "quality_audit": "No third-party audit within the last three years.",
-      "comp_social": "No social compliance records.",
-      "prod_capacity": "Production capacity is unverified.",
-      "prod_subcontract": "Work is subcontracted without disclosure.",
-      "doc_registration": "The business registration could not be verified.",
-      "doc_address": "There is no documented factory address.",
+      "company_address": "ولم يتم التحقق من عنوان المصنع.",
+      "company_ownership": "ولا يمكن تأكيد الملكية.",
+      "quality_qms": "ولا يوجد نظام موثق لإدارة الجودة.",
+      "quality_audit": "لا مراجعة حسابات طرف ثالث خلال السنوات الثلاث الماضية.",
+      "comp_social": "لا سجلات الامتثال الاجتماعي.",
+      "prod_capacity": "القدرة الإنتاجية غير متحققة.",
+      "prod_subcontract": "ويجري التعاقد من الباطن على العمل دون الكشف عنه.",
+      "doc_registration": "تعذر التحقق من السجل التجاري.",
+      "doc_address": "لا يوجد عنوان مصنع موثق.",
       "cert_scope": "لا تغطي الشهادات المنتج الذي تشتريه.",
       "cert_body": "لا يمكن العثور على الشهادة في السجل الخاص بالجهة المصدرة.",
       "cert_validity": "الشهادة منتهيةSSL error",
@@ -534,100 +518,100 @@
     },
     "recommendations": {
       "LOW": [
-        "Keep the documents you have on file and refresh them once a year.",
-        "Re-run this check if the order size grows sharply."
+        "احتفظ بالوثائق التي لديك في الملف ونظفها مرة في السنة.",
+        "إعادة تشغيل هذا الشيك إذا كان حجم الطلب ينمو بشكل حاد."
       ],
       "MODERATE": [
-        "Ask for the business licence and confirm the factory address before ordering.",
-        "Request the most recent audit report and quality records.",
-        "Start with a trial order small enough that a failure is affordable."
+        "إسأل عن رخصة العمل وتأكد من عنوان المصنع قبل الطلب.",
+        "طلب أحدث تقرير لمراجعة الحسابات وسجلات الجودة.",
+        "ابدأوا بأمر محاكمة صغير بما فيه الكفاية بحيث يكون الفشل في المتناول."
       ],
       "ELEVATED": [
-        "Confirm the registration and factory address through an independent check, not the supplier's own paperwork.",
-        "Ask for a recent third-party audit report and product test reports.",
-        "Have the factory audited before you commit to a large order."
+        "تأكد من عنوان التسجيل والمصنع من خلال شيك مستقل وليس أوراق المورد.",
+        "(ب) طلب تقرير عن مراجعة حسابات الأطراف الثالثة وتقارير عن اختبار المنتجات.",
+        "راجع المصنع قبل أن تلتزم بطلب كبير."
       ],
       "HIGH": [
-        "Verify the registration and the factory address before anything else.",
-        "Request audit reports and quality documentation, and check the dates on them.",
-        "Have the factory audited before you pay a deposit.",
-        "If you still want to proceed, place a small order and inspect it before scaling up."
+        "تحقق من التسجيل وعنوان المصنع قبل أي شيء آخر.",
+        "طلب تقارير مراجعة الحسابات ووثائق الجودة، والتحقق من تواريخها.",
+        "قم بتدقيق المصنع قبل أن تدفع ودائع.",
+        "إذا كنت لا تزال تريد المضي قدما، وضع نظام صغير وفحصه قبل رفع."
       ],
       "CRITICAL": [
-        "Do not send money yet. Verify the company before any payment.",
-        "Confirm the legal identity, the factory address and the business registration.",
-        "Commission a factory audit and a background check on the company.",
-        "Hold back prepayments until the open questions are answered."
+        "لا ترسل المال بعد التحقق من الشركة قبل أي دفع.",
+        "تأكيد الهوية القانونية، وعنوان المصنع، وتسجيل الأعمال التجارية.",
+        "لجنة مراجعة حسابات مصنع وفحص خلفي للشركة.",
+        "توقف عن الدفعات قبل الإجابة على الأسئلة المفتوحة."
       ]
     },
     "ctas": {
       "LOW": {
-        "headline": "On the answers you gave, this supplier looks low risk.",
-        "primary": "Get the full report"
+        "headline": "على الإجابات التي أعطيتها، هذا المورد يبدو منخفض المخاطرة.",
+        "primary": "الحصول على التقرير الكامل"
       },
       "MODERATE": {
-        "headline": "A few things are worth checking before you place the order.",
-        "primary": "Get the full report",
-        "secondary": "Work through the verification checklist"
+        "headline": "بعض الأشياء تستحق التحقق قبل أن تضع الأمر.",
+        "primary": "الحصول على التقرير الكامل",
+        "secondary": "العمل من خلال قائمة التحقق المرجعية"
       },
       "ELEVATED": {
-        "headline": "Have this supplier checked before you place the order.",
-        "primary": "Request supplier verification",
-        "secondary": "Get the full report"
+        "headline": "هل فحص هذا المورد قبل وضع الطلب.",
+        "primary": "طلب التحقق من الموردين",
+        "secondary": "الحصول على التقرير الكامل"
       },
       "HIGH": {
-        "headline": "Verify this supplier before you place the order.",
-        "primary": "Request supplier verification",
-        "secondary": "Get the full report"
+        "headline": "تحقق من هذا المورد قبل أن تضع الأمر.",
+        "primary": "طلب التحقق من الموردين",
+        "secondary": "الحصول على التقرير الكامل"
       },
       "CRITICAL": {
-        "headline": "Do not pay this supplier until an independent check is done.",
-        "primary": "Request verification before paying",
-        "secondary": "Get the full report"
+        "headline": "لا تدفعوا هذا المورد حتى يتم فحص مستقل.",
+        "primary": "طلب التحقق قبل الدفع",
+        "secondary": "الحصول على التقرير الكامل"
       }
     },
     "faq": [
       {
-        "q": "What does the calculator measure?",
-        "a": "It scores a supplier from 0 to 100 across six areas: company, quality, compliance, production, supply chain and documentation. Higher means riskier."
+        "q": "ماذا يقيس جهاز الحساب؟",
+        "a": "يُقيّم المورد من 0 إلى 100 عبر ثمانية مجالات: الشركة، الجودة، الامتثال، الإنتاج، سلسلة التوريد، الوثائق، التصديق والبصمة الرقمية. الدرجة الأعلى تعني مخاطر أقل."
       },
       {
-        "q": "Is the score a final verification?",
-        "a": "No. The score is a first pass based on what you told us. It is not a substitute for an independent verification, a factory audit or legal advice."
+        "q": "هل النتيجة تحقق نهائي؟",
+        "a": "لا النتيجة هي أول تمريرة بناء على ما أخبرتنا به وهي ليست بديلا عن التحقق المستقل أو مراجعة حسابات المصنع أو المشورة القانونية."
       },
       {
-        "q": "How are the weights decided?",
-        "a": "Company 15%, quality 20%, compliance 20%, production 15%, supply chain 15%, documentation 15%. The weights are fixed and shown on the result page."
+        "q": "كيف يتم تحديد الأوزان؟",
+        "a": "الشركة 12٪، الجودة 16٪، الامتثال 16٪، الإنتاج 12٪، سلسلة التوريد 12٪، الوثائق 12٪، التصديق 10٪، البصمة الرقمية 10٪. الأوزان ثابتة وتُعرض على صفحة النتيجة."
       },
       {
-        "q": "Do I have to pay to use it?",
-        "a": "No. The score is free. If you want the written report, leave an email and we send it at no cost. Verification and audits are paid services, but they are optional."
+        "q": "هل يجب أن أدفع لأستخدمه؟",
+        "a": "لا النتيجة مجانية إذا كنت تريد التقرير الكتابي، ترك رسالة إلكترونية ونحن نرسلها دون تكلفة. فالتحقق ومراجعة الحسابات خدمات مدفوعة الأجر، ولكنها اختيارية."
       },
       {
-        "q": "Can I compare several suppliers?",
-        "a": "Not yet. Run the tool once per supplier and keep the reports; a side-by-side comparison is on the way."
+        "q": "هل يمكنني مقارنة عدة موردين؟",
+        "a": "نعم. مرّر كل مورد عبر الحاسبة، ثم استخدم أداة المقارنة لوضع ما يصل إلى خمسة منها جنباً إلى جنب على الأبعاد الثمانية نفسها."
       }
     ]
   },
   "checklist": {
     "ui": {
-      "progressTitle": "Verification progress",
-      "complete": "{done} of {total} done",
-      "criticalOpen": "{n} critical item open",
-      "criticalOpenPlural": "{n} critical items open",
-      "criticalCleared": "Critical items cleared",
-      "print": "Print or save as PDF",
-      "reset": "Reset",
-      "criticalTag": "critical",
-      "verdictOpenTitle": "Still open: {n} critical item",
-      "verdictOpenTitlePlural": "Still open: {n} critical items",
-      "verdictOpenBody": "Close these before you place an order or release any payment. They are the checks that most often expose a trading company posing as a factory.",
-      "verdictAllTitle": "All checks complete",
-      "verdictAllBody": "You have been through every item. Keep the record with your supplier file and re-verify as volumes grow.",
-      "verdictCriticalDoneTitle": "All critical items closed",
-      "verdictCriticalDoneBody": "The highest-risk checks are done. Finish the rest to complete your supplier file.",
-      "ctaOutsource": "Get these checks done for you",
-      "disclaimer": "This is a self-assessment aid. It does not independently verify any supplier. For that, use a third-party verification service.",
+      "progressTitle": "التقدم المحرز في مجال التحقق",
+      "complete": "تم إنجاز {done} من {total}",
+      "criticalOpen": "{n}البند الحرج مفتوح",
+      "criticalOpenPlural": "{n} بنود حرجة مفتوحة",
+      "criticalCleared": "تطهير المواد الحرجة",
+      "print": "طباعة أو حفظ كما PDF",
+      "reset": "إعادة التوطين",
+      "criticalTag": "حاسمة",
+      "verdictOpenTitle": "ما زال مفتوحا: {n} بند حرج",
+      "verdictOpenTitlePlural": "لا يزال مفتوحًا: {n} عنصرًا حرجًا",
+      "verdictOpenBody": "أغلقي هذه قبل أن تضعي أمراً أو تطلقي أي دفع إنها الشيكات التي غالباً ما تكشف شركة تجارية تتظاهر بأنها مصنع.",
+      "verdictAllTitle": "جميع الشيكات مكتملة",
+      "verdictAllBody": "لقد مررت بكل شيء احتفظي بالسجل مع ملفك المزود وأعيدي التحقق مع نمو المجلدات.",
+      "verdictCriticalDoneTitle": "جميع البنود الحاسمة المغلقة",
+      "verdictCriticalDoneBody": "تم إجراء أعلى فحص للمخاطر أنهي الباقي لإكمال ملفك.",
+      "ctaOutsource": "أنجز هذه الشيكات من أجلك",
+      "disclaimer": "هذه معونة للتقييم الذاتي. وهي لا تحقق بصورة مستقلة من أي مورد. ولهذا الغرض، استخدام خدمة التحقق من طرف ثالث.",
       "submitReport": "إنشاء تقرير التقييم",
       "reportTitle": "تقرير التقييم",
       "reportIntro": "استناداً إلى 29 فحصاً عبر ست مراحل، يلخص هذا التقرير ما هو مؤكد، وما هو مفقود، وما نوصي به قبل دفع عربون أو رصيد.",
@@ -644,18 +628,18 @@
     },
     "page": {
       "badge": "FactoryAuditB2B RiskScore™",
-      "h1": "Supplier Verification Checklist",
-      "lead": "Twenty-nine checks across six stages. Work through them before you place an order or release a payment, then print the result for your supplier file.",
-      "card1Title": "Six stages",
-      "card1Body": "Identity, factory, quality, compliance, commercial terms and track record.",
-      "card2Title": "Critical items flagged",
-      "card2Body": "The checks that most often expose a trading company posing as a factory.",
-      "card3Title": "Print-ready",
-      "card3Body": "Save the completed checklist as a PDF for your records.",
-      "relatedTitle": "Related tools",
-      "faqTitle": "Frequently asked questions",
-      "metaTitle": "Supplier Verification Checklist",
-      "metaDesc": "A free step-by-step checklist covering company identity, factory capability, quality, compliance, commercial terms and track record. Tick items, track progress and print your supplier file."
+      "h1": "قائمة مرجعية للتحقق من الموردين",
+      "lead": "تسعة وعشرون شيكات عبر ست مراحل اعملوا من خلالهم قبل أن تضعوا أمرًا أو تفرجوا عن دفعة ثم اطبعوا نتيجة ملفكم.",
+      "card1Title": "ست مراحل",
+      "card1Body": "الهوية، والمصنع، والجودة، والامتثال، والشروط التجارية، وسجل الأداء.",
+      "card2Title": "بنود حرجة",
+      "card2Body": "الشيكات التي غالباً ما تكشف شركة تجارية تتظاهر بأنها مصنع.",
+      "card3Title": "الطباعة",
+      "card3Body": "احتفظ بالقائمة المرجعية المكتملة كـ (بي دي) لسجلاتك.",
+      "relatedTitle": "الأدوات ذات الصلة",
+      "faqTitle": "الأسئلة المتكررة",
+      "metaTitle": "قائمة مرجعية للتحقق من الموردين",
+      "metaDesc": "A free step-by-step checklist covering company identity, factory capability, quality, compliance, commercial terms and track record. لصق الأشياء، تتبع التقدم وطبع ملف موردك."
     },
     "criticalItems": [
       "id_legal",
@@ -673,256 +657,247 @@
     "stages": [
       {
         "key": "identity",
-        "title": "1. Company identity and registration",
-        "desc": "Confirm the legal entity behind the quote before anything else.",
+        "title": "1 هوية الشركة وتسجيلها",
+        "desc": "تأكد من الكيان القانوني وراء الاقتباس قبل أي شيء آخر.",
         "items": {
-          "id_legal": "Legal company name matches the business licence",
-          "id_regno": "Business registration or licence number obtained",
-          "id_licence": "Readable copy of the business licence received",
-          "id_registry": "Registration cross-checked against an official or third-party registry",
-          "id_owner": "Legal representative and ownership identified"
+          "id_legal": "اسم الشركة القانونية يطابق رخصة العمل",
+          "id_regno": "تسجيل الأعمال التجارية أو رقم الترخيص",
+          "id_licence": "نسخة قابلة للقراءة من رخصة العمل الواردة",
+          "id_registry": "التسجيل المراقَب من سجل رسمي أو طرف ثالث",
+          "id_owner": "تحديد الممثل القانوني والملكية القانونية"
         }
       },
       {
         "key": "factory",
-        "title": "2. Factory and production capability",
-        "desc": "Check the site is real and can actually make your product.",
+        "title": "2. القدرة على التصنيع والإنتاج",
+        "desc": "تحقق من الموقع حقيقي ويمكن أن تصنع منتجك.",
         "items": {
-          "fa_address": "Factory address confirmed and matches the licence",
-          "fa_visit": "Site photos, video or a live video walkthrough obtained",
-          "fa_type": "Confirmed whether manufacturer or trading company",
-          "fa_equipment": "Key equipment list received",
-          "fa_capacity": "Monthly capacity stated and consistent with your order volume",
-          "fa_subcontract": "Subcontracting disclosed, or confirmed not used"
+          "fa_address": "تم تأكيد عنوان المصانع ومطابقة الترخيص",
+          "fa_visit": "صور موقعية أو فيديو أو مقطع فيديو حي تم الحصول عليه",
+          "fa_type": "تأكد ما إذا كانت شركة صانعة أو تجارية",
+          "fa_equipment": "قائمة المعدات الرئيسية الواردة",
+          "fa_capacity": "القدرة الشهرية المعلنة والمتسقة مع حجم أوامرك",
+          "fa_subcontract": "التعاقد من الباطن المفصح عنه أو المثبت عدم استخدامه"
         }
       },
       {
         "key": "quality",
-        "title": "3. Quality management",
-        "desc": "Check that quality is a system, not a promise.",
+        "title": "3 إدارة الجودة",
+        "desc": "تحقق من أن الجودة هي نظام وليس وعد.",
         "items": {
-          "qm_system": "Documented quality management system, such as ISO 9001",
-          "qm_incoming": "Incoming material inspection process in place",
-          "qm_inprocess": "In-process and final inspection records available",
-          "qm_test": "Product test reports from a recognised laboratory",
-          "qm_nc": "Non-conformance and corrective action process exists"
+          "qm_system": "نظام موثق لإدارة الجودة، مثل ISO 9001",
+          "qm_incoming": "عملية التفتيش المادي الواردة",
+          "qm_inprocess": "توافر سجلات التفتيش الداخلي والأخير",
+          "qm_test": "تقارير اختبار المنتجات من مختبر معترف به",
+          "qm_nc": "وجود عملية غير مطابقة وإجراءات تصحيحية"
         }
       },
       {
         "key": "compliance",
-        "title": "4. Compliance and social responsibility",
-        "desc": "Reduce the risk of shipment holds, recalls and failed buyer audits.",
+        "title": "4 الامتثال والمسؤولية الاجتماعية",
+        "desc": ":: الحد من مخاطر الشحنات، والتذكير بعمليات مراجعة حسابات المشترين وفشلها.",
         "items": {
-          "cp_social": "Social compliance audit or management system, such as BSCI or SMETA",
-          "cp_env": "Environmental compliance documentation",
-          "cp_product": "Product compliance for your target market, such as CE or UL",
-          "cp_ethics": "Business ethics or anti-corruption policy"
+          "cp_social": "نظام مراجعة الحسابات أو الإدارة المتعلقة بالامتثال الاجتماعي، مثل BSCI أو SMETA",
+          "cp_env": "وثائق الامتثال البيئي",
+          "cp_product": "الامتثال للمنتجات لسوقك المستهدفة، مثل CE أو UL",
+          "cp_ethics": "سياسة أخلاقيات الأعمال التجارية أو مكافحة الفساد"
         }
       },
       {
         "key": "commercial",
-        "title": "5. Commercial terms and contracts",
-        "desc": "Lock down what happens when things go wrong.",
+        "title": "5 الشروط والعقود التجارية",
+        "desc": "اغلق ما يحدث عندما تسوء الأمور.",
         "items": {
-          "cm_contract": "Written contract or pro-forma invoice signed",
-          "cm_spec": "Specification, tolerances and packaging agreed in writing",
-          "cm_payment": "Payment terms agreed, avoiding a large upfront prepayment",
-          "cm_leadtime": "Lead time, MOQ and delivery terms such as Incoterms confirmed",
-          "cm_penalty": "Defect and late-delivery penalty clauses included"
+          "cm_contract": "عقد خطي أو فاتورة مؤيدة لشكل موقع",
+          "cm_spec": "المواصفات والتسامح والتغليف المتفق عليها كتابة",
+          "cm_payment": "شروط الدفع المتفق عليها، مع تجنب الدفع مقدما كبيرا",
+          "cm_leadtime": "تم تأكيد وقت القيادة ومعدلات الاستهلاك والتوصيل مثل Incoterms",
+          "cm_penalty": "بنود عقوبة الإعدام والتأخر في التسليم"
         }
       },
       {
         "key": "track",
-        "title": "6. Track record and references",
-        "desc": "Past behaviour predicts future performance better than any document.",
+        "title": "6. سجل المسارات والمراجع",
+        "desc": "إن السلوك السابق يتنبأ بالأداء في المستقبل أفضل من أي وثيقة.",
         "items": {
-          "tr_export": "Export history to your target market",
-          "tr_refs": "At least two verifiable customer references",
-          "tr_samples": "Production samples approved before mass production",
-          "tr_disputes": "Checked for disputes, blacklists or adverse records"
+          "tr_export": "تاريخ التصدير إلى السوق المستهدفة",
+          "tr_refs": "على الأقل إشارتان يمكن التحقق منهما",
+          "tr_samples": "عينات الإنتاج الموافق عليها قبل الإنتاج الجماعي",
+          "tr_disputes": "تم التحقق من المنازعات أو القوائم السوداء أو السجلات السلبية"
         }
       }
     ],
     "faq": [
       {
-        "q": "What is a supplier verification checklist?",
-        "a": "A set of documents and checks you complete before ordering. It shows the company is a real legal entity, the factory exists and can make your product, and the quality, compliance and commercial terms are agreed in writing."
+        "q": "ما هي قائمة مرجعية للتحقق من الموردين؟?",
+        "a": "مجموعة من الوثائق و الشيكات تكتمل قبل أن تطلب وهو يبين أن الشركة كيان قانوني حقيقي، والمصنع موجود ويمكنه أن يصنع منتجك، كما أن الجودة والامتثال والمصطلحات التجارية متفق عليها كتابة."
       },
       {
-        "q": "Which checks matter most?",
-        "a": "The critical ones: business licence and registration cross-check, confirmed factory address, evidence the site is real such as photos or live video, confirmation of manufacturer versus trading company, product test reports, product compliance for your market, and a signed contract with agreed specifications."
+        "q": "أي شيك يهم؟?",
+        "a": "الناقد منها: التحقق من ترخيص الأعمال التجارية وتسجيلها، وعنوان المصانع المؤكد، والأدلة على أن الموقع حقيقي مثل الصور أو الفيديو الحي، وتأكيد الصانع مقابل الشركة التجارية، وتقارير اختبار المنتجات، والامتثال لمنتجات سوقكم، وعقد موقع مع المواصفات المتفق عليها."
       },
       {
-        "q": "Does ticking every box mean the supplier is safe?",
-        "a": "No. This is a self-assessment built on what the supplier gives you, and documents can be forged. Only an independent verification or factory audit confirms the claims on the ground."
+        "q": "هل تدغدغ كل صندوق يعني أن المورد آمن؟?",
+        "a": "لا هذا تقييم ذاتي مبني على ما يعطيه لك المورد، ويمكن تزوير الوثائق. ولا تؤكد المطالبات على أرض الواقع إلا عملية تحقق مستقلة أو مراجعة حسابات للمصانع."
       },
       {
-        "q": "Is my progress saved?",
-        "a": "Yes. Your ticks are stored in your browser, so you can close the page and come back. Use print or save as PDF to keep a copy for your supplier file."
+        "q": "هل تم إنقاذ تقدمي؟?",
+        "a": "نعم دغتك مُخزّنة في منظفك، لذا يمكنك إغلاق الصفحة والعودة. إستعملْ طباعةَ أَو يُوفّرُ كما PDF لإبْقاء a نسخة لملفِ مُوردِكَ."
       }
     ]
   },
   "serviceVerification": {
-    "badge": "Service",
-    "h1": "Supplier verification",
-    "lead": "Before you send money to a factory you have never met, confirm the company is real, the site exists, and the capability claims hold up.",
-    "ctaPrimary": "Request verification",
-    "ctaSecondary": "Score this supplier free first",
-    "checksTitle": "What we verify",
-    "checksLead": "Six areas, each documented with evidence you can keep on file.",
+    "badge": "الخدمات",
+    "h1": "التحقق من الموردين",
+    "lead": "قبل أن ترسل المال إلى مصنع لم تلتقي به أبداً، تأكد أن الشركة حقيقية، الموقع موجود، ومطالبات القدرة تصمد.",
+    "ctaPrimary": "التحقق من الطلب",
+    "ctaSecondary": "اعرض هذا المورد مجانا أولا",
+    "checksTitle": "ما نتحقق منه",
+    "checksLead": "ستّة مناطق، كلّ مُوثقة بأدلة يمكنك الاحتفاظ بها في الملف.",
     "checks": {
       "legal": {
-        "title": "Legal entity and registration",
-        "body": "Business licence, registration number and legal representative checked against official and third-party registry sources."
+        "title": "الكيان القانوني والتسجيل",
+        "body": "وتحققت تراخيص الأعمال التجارية، ورقم التسجيل، والممثل القانوني من مصادر التسجيل الرسمية وأطراف ثالثة."
       },
       "site": {
-        "title": "Factory existence and address",
-        "body": "Confirmation the site exists at the stated address, with photos, video and location evidence rather than a document scan."
+        "title": "الوجود والعنوان",
+        "body": "وتأكيد الموقع موجود في العنوان المذكور، مع صور وشرائط فيديو وأدلة موقعية بدلا من مسح الوثائق."
       },
       "type": {
-        "title": "Manufacturer or trading company",
-        "body": "Whether the counterparty actually makes the product or resells it, and whether subcontracting is involved."
+        "title": "الشركة المصنعة أو الشركة التجارية",
+        "body": "وسواء كان الطرف المقابل يصنع المنتج فعلاً أو يعيد بيعه، وما إذا كان التعاقد من الباطن ينطوي على ذلك."
       },
       "capability": {
-        "title": "Production capability",
-        "body": "Equipment, headcount, capacity and export experience assessed against your product and order volume."
+        "title": "القدرة على الإنتاج",
+        "body": "المعدات، والحساب الرأسي، والقدرة، والخبرة التصديرية المقيّمة على ناتجك وحجم الطلب."
       },
       "quality": {
-        "title": "Quality and compliance system",
-        "body": "Quality management documentation, product test reports, product compliance for your market and social compliance records."
+        "title": "نظام الجودة والامتثال",
+        "body": "وثائق إدارة الجودة، تقارير اختبار المنتجات، امتثال المنتجات لسجلات السوق والامتثال الاجتماعي."
       },
       "track": {
-        "title": "Track record and risk signals",
-        "body": "Export history, customer references, and a check for disputes, blacklists or other adverse records."
+        "title": "سجل المسار وإشارات الخطر",
+        "body": "تاريخ التصدير، ومراجع العملاء، والتحقق من المنازعات، والقوائم السوداء أو السجلات السلبية الأخرى."
       }
     },
-    "stepsTitle": "How it works",
-    "stepsLead": "Four steps from first contact to a decision.",
+    "stepsTitle": "كيف يعمل",
+    "stepsLead": "أربع خطوات من أول اتصال إلى قرار.",
     "steps": [
       {
-        "title": "Send us the supplier details",
-        "body": "Company name, address, website and your product. No contract or long onboarding."
+        "title": "أرسل لنا تفاصيل المورد",
+        "body": "اسم الشركة، العنوان، الموقع الشبكي ومنتجك لا عقد أو اقتحام طويل."
       },
       {
-        "title": "We run the checks",
-        "body": "Documentary review plus an on-site or remote visit, depending on the package you choose."
+        "title": "ندير الشيكات",
+        "body": "استعراض وثائقي بالإضافة إلى زيارة موقعية أو عن بعد، اعتمادا على الطرد الذي تختاره."
       },
       {
-        "title": "You get a written report",
-        "body": "Findings with evidence and a risk summary you can file and share internally."
+        "title": "تحصل على تقرير مكتوب",
+        "body": "العثور على أدلة وملخص مخاطر يمكنك أن تقدمه وتتشاركه داخلياً."
       },
       {
-        "title": "You decide with confidence",
-        "body": "Renegotiate, require corrective action, order a full audit, or walk away."
+        "title": "أنت تقرر بالثقة",
+        "body": "أعد التفاوض، أو اطلب إجراءً تصحيحياً، أو اطلب تدقيقاً كاملاً، أو انسحب."
       }
     ],
-    "deliverablesTitle": "What you receive",
+    "deliverablesTitle": "ما تحصل عليه",
     "deliverables": [
-      "Company identity and registration findings",
-      "Factory address and site evidence",
-      "Manufacturer or trading company determination",
-      "Production capability assessment",
-      "Quality and compliance documentation review",
-      "Risk summary with recommended next steps"
+      "بيانات هوية الشركة والتسجيل",
+      "عنوان المصانع والأدلة على الموقع",
+      "تحديد الشركات المصنعة أو التجارية",
+      "تقييم القدرة الإنتاجية",
+      "استعراض وثائق الجودة والامتثال",
+      "موجز المخاطر مع الخطوات التالية الموصى بها"
     ],
-    "faqTitle": "Frequently asked questions",
+    "faqTitle": "الأسئلة المتكررة",
     "faq": [
       {
-        "q": "How is this different from a factory audit?",
-        "a": "Verification confirms who the supplier is and whether the basic claims hold up: registration, site, capability and documentation. An audit is a deeper on-site assessment of processes, quality control and compliance against a standard such as BSCI or SMETA. Verification is faster and cheaper. An audit goes further."
+        "q": "كيف يختلف هذا عن مراجعة حسابات المصنع؟?",
+        "a": "ويؤكّد التحقق من هوية المورّد وما إذا كانت المطالبات الأساسية معلقة: التسجيل والموقع والقدرة والتوثيق. وتمثل مراجعة الحسابات تقييماً موقعياً أعمق للعمليات، ومراقبة الجودة والامتثال لمعيار من قبيل BSCI أو SMETA. التحقق أسرع وأرخص. مراجعة الحسابات تذهب أبعد من ذلك."
       },
       {
-        "q": "How long does it take?",
-        "a": "Documentary verification usually completes within a few business days. Packages that include an on-site visit take longer, depending on location and scheduling."
+        "q": "كم من الوقت يستغرق؟?",
+        "a": "ويكتمل التحقق الوثائقي عادة في غضون بضعة أيام عمل. وتستغرق الحزم التي تشمل زيارة موقعية وقتاً أطول، تبعاً للموقع والجدول الزمني."
       },
       {
-        "q": "What if the supplier turns out to be high risk?",
-        "a": "You get the evidence and a risk summary, so you can renegotiate terms, require corrective action, commission a full audit, or stop before any payment is released."
+        "q": "ماذا لو تبين أن المورد خطير؟?",
+        "a": "تحصلين على الأدلة و ملخص المخاطر لذا يمكنكِ إعادة التفاوض على الشروط وتحتاجين إلى عمل تصحيحي أو إجراء مراجعة كاملة أو التوقف قبل أن يتم الدفع."
       },
       {
-        "q": "Do I have to use your other services?",
-        "a": "No. Verification stands alone. Inspection, sourcing and freight are optional next steps, not a bundle you are locked into."
+        "q": "هل يجب أن أستخدم خدماتك الأخرى؟?",
+        "a": "لا التحقق يقف وحده. التفتيش والاستعانة والشحن هي خطوات اختيارية قادمة، وليس الحزمة التي تم حبسك فيها."
       }
     ],
-    "bottomTitle": "Want a quick read before committing?",
-    "bottomLead": "Run the free calculator for an instant score, then request verification for the areas that matter most.",
-    "bottomPrimary": "Open the free calculator",
-    "bottomSecondary": "Request verification",
-    "metaTitle": "Supplier Verification Service",
-    "metaDesc": "Independent supplier verification covering registration, factory existence, production capability, quality system, compliance and export history. A documented report before you place an order or release payment."
+    "bottomTitle": "هل تريد قراءة سريعة قبل الالتزام؟?",
+    "bottomLead": "تشغيل الحاسبة الحرة لنتيجة فورية، ثم طلب التحقق للمناطق الأكثر أهمية.",
+    "bottomPrimary": "أفتح الحاسب المجاني",
+    "bottomSecondary": "التحقق من الطلب",
+    "metaTitle": "دائرة التحقق من الموردين",
+    "metaDesc": "التحقق المستقل للموردين الذي يشمل التسجيل، ووجود المصنع، والقدرة الإنتاجية، ونظام الجودة، والامتثال، وتاريخ التصدير. تقرير موثق قبل أن تضعي أمر أو دفعة."
   },
   "customServices": {
-    "badge": "Service",
-    "h1": "Custom audit and verification services",
-    "lead": "Tell us what you need. We design a tailored audit, inspection or verification plan and follow up with a clear quote and timeline.",
-    "metaTitle": "Custom Audit and Verification Services",
-    "metaDesc": "Request a tailored factory audit, supplier verification or inspection plan. Our team replies with a scoped proposal and next steps.",
+    "badge": "الخدمات",
+    "h1": "خدمات مراجعة الحسابات والتحقق على الصعيد العرفي",
+    "lead": "أخبرنا بما تحتاج ونصمم خطة مصممة خصيصا لمراجعة الحسابات أو التفتيش أو التحقق، ونتابع باقتباس واضح وخط زمني واضح.",
+    "metaTitle": "خدمات مراجعة الحسابات والتحقق على الصعيد العرفي",
+    "metaDesc": "طلب خطة مصممة خصيصا لمراجعة حسابات المصانع والتحقق من الموردين أو التفتيش. ويجيب فريقنا على اقتراح واسع النطاق وعلى الخطوات التالية.",
     "form": {
       "labels": {
-        "firstName": "Your name",
-        "company": "Company name",
+        "firstName": "اسمك",
+        "company": "اسم الشركة",
         "email": "Work email",
-        "country": "Country or region",
-        "message": "What do you need?",
-        "messageHint": "Describe your product, target market, supplier location, audit standard and any special requirements…",
-        "submit": "Send request",
-        "submitting": "Sending…"
+        "country": "البلد أو المنطقة",
+        "message": "ماذا تحتاج؟?",
+        "messageHint": "صف منتجك، السوق المستهدفة، مكان المورد، معايير مراجعة الحسابات وأي متطلبات خاصة",
+        "submit": "طلب إرسال",
+        "submitting": "إرسال..."
       },
-      "success": "We received your request. Our team will reply within one business day.",
-      "error": "Something went wrong. Please try again or email us directly."
+      "success": "لقد تلقينا طلبك فريقنا سيجيب في يوم عمل واحد.",
+      "error": "حدث شيء خاطئ من فضلك حاول مرة أخرى أو ترسل لنا مباشرة."
     },
     "features": [
       {
-        "title": "Tailored scope",
-        "body": "We design the audit around your product, market and risk concerns rather than fitting you into a fixed package."
+        "title": "النطاق المطابق",
+        "body": "نحن نصمم مراجعة الحسابات حول منتجك، السوق وشواغل المخاطرة بدلا من وضعك في مجموعة ثابتة."
       },
       {
-        "title": "One point of contact",
-        "body": "A single manager handles scoping, scheduling, the audit team and the report, so nothing gets lost between departments."
+        "title": "نقطة اتصال واحدة",
+        "body": "مدير واحد يتعامل مع تحديد النطاق، والجدول الزمني، وفريق مراجعة الحسابات، والتقرير، لذلك لا شيء يضيع بين الإدارات."
       },
       {
-        "title": "Documented follow-up",
-        "body": "You receive a written proposal with scope, timeline, deliverables and cost before any work begins."
+        "title": "المتابعة الموثَّقة",
+        "body": "وتتلقىون اقتراحا خطيا يتضمن النطاق والإطار الزمني والنواتج والتكاليف قبل بدء أي عمل."
       }
     ],
-    "bottomTitle": "Not sure what you need?",
-    "bottomLead": "Run the supplier risk calculator for a quick score, then come back here with the results for a scoped verification or audit plan."
+    "bottomTitle": "لست متأكداً ماذا تحتاج؟?",
+    "bottomLead": "تشغيل حاسبة المخاطر للموردين لنتيجة سريعة، ثم العودة إلى هنا مع نتائج خطة واسعة النطاق للتحقق أو مراجعة الحسابات."
   },
   "suppliers": {
     "h1": "Verified suppliers",
-    "badge": "Supplier directory",
-    "ctaTitle": "Are you a supplier?",
-    "ctaLead": "Join the directory, publish your factory profile, pass our verification and get discovered by buyers sourcing from China and Asia.",
-    "ctaSteps": [
-      "Register",
-      "Publish profile",
-      "Platform audit",
-      "Go live"
-    ],
-    "ctaPrimary": "Join as a supplier",
+    "badge": "دليل الموردين",
     "metaTitle": "Verified Suppliers in China and Asia",
-    "metaDesc": "Browse verified manufacturers and trading companies in China, Vietnam, Thailand, India and across Asia. Each profile includes verification status, risk score and export experience.",
-    "lead": "Explore suppliers with available company, capability and verification information.",
-    "featuredTag": "Featured",
-    "exampleNote": "These are featured suppliers, not a complete marketplace. Coverage is still small, so if the supplier you need is not here, post an RFQ and we will source and verify it.",
-    "filterCountry": "Country",
-    "filterIndustry": "Industry",
-    "filterProduct": "Product",
-    "filterLevel": "Verification level",
-    "filterAudit": "Audit status",
-    "filterAll": "All",
-    "filterSubmit": "Apply filters",
-    "filterReset": "Clear",
-    "countLabel": "{n} suppliers listed",
-    "empty": "No supplier matches these filters. Post an RFQ and we will look outside the directory.",
-    "riskLabel": "Risk",
-    "businessTypeLabel": "Type",
-    "notListedTitle": "Looking for a supplier that isn't listed?",
-    "notListedLead": "Post an RFQ. We source it, verify the company and the site before you pay, and quote the whole thing.",
-    "notListedCta": "Post an RFQ",
-    "claimTitle": "Are you a supplier?",
-    "claimLead": "Join the directory, publish your factory profile, pass our verification and get discovered by buyers sourcing from China and Southeast Asia.",
-    "claimPrimary": "Join as a supplier",
+    "metaDesc": "تصفّح الموردين مع معلومات عن الشركة والقدرات والتحقق. التغطية محدودة: أرسل طلب عرض أسعار (RFQ) إذا لم يكن المورد الذي تحتاجه مدرجاً.",
+    "lead": "Explore suppliers with available company, capacity and verification information.",
+    "featuredTag": "المرشح",
+    "exampleNote": "هذه هي الموردين المميزين، وليس السوق الكامل. التغطية لا تزال صغيرة، لذلك إذا كان المورّد الذي تحتاجه ليس هنا، وضع قاعدة بيانات، وسوف نصدرها ونتحقق منها.",
+    "filterCountry": "البلد",
+    "filterIndustry": "الصناعة",
+    "filterProduct": "المنتجات",
+    "filterLevel": "مستوى التحقق",
+    "filterAudit": "حالة مراجعة الحسابات",
+    "filterAll": "كل شيء",
+    "filterSubmit": "مرشحات التطبيق",
+    "filterReset": "آمن",
+    "countLabel": "عدد الموردين المدرجين: {n}",
+    "empty": "لا يوجد مورد يطابق هذه المرشّحات ضعي جهاز كهرباء و سننظر خارج الدليل.",
+    "riskLabel": "المخاطر",
+    "businessTypeLabel": "النوع",
+    "notListedTitle": "تبحث عن مورد غير مدرج؟?",
+    "notListedLead": "ضعي جهازاً للتصوير نصدره، ونتحقق من الشركة والموقع قبل أن تدفع، ونقتبس من كل شيء.",
+    "notListedCta": "(أ)",
+    "claimTitle": "هل أنت مورد؟?",
+    "claimLead": "انضموا إلى الدليل، و نشروا ملفكم الخاص بالمصنع، ونجتاز تحققنا ونكتشف من قبل المشترين مصادر من الصين وجنوب شرق آسيا.",
+    "claimPrimary": "انضم إلى المورد",
     "heroBadge": "ذكاء الموردين",
     "featuredTitle": "موردون مميزون",
     "featuredLead": "شركات حقيقية مع معلومات تحقق متاحة. كل ملف يعرض نفس درجة المخاطر العامة — لا شيء مخفي.",
@@ -936,26 +911,26 @@
     "memberCta": "عرض العضوية"
   },
   "auditRequest": {
-    "badge": "Service request",
-    "h1": "Request a factory audit",
-    "lead": "Tell us about the supplier and your requirements. We match you with qualified audit companies and reply with a scoped proposal.",
+    "badge": "طلب الخدمات",
+    "h1": "طلب مراجعة حسابات المصنع",
+    "lead": "أخبرنا عن المورد ومتطلباتك نحن نطابقك مع شركات مراجعة حسابات مؤهلة ونرد على اقتراح واسع النطاق.",
     "form": {
       "labels": {
-        "firstName": "Your name",
-        "company": "Company",
+        "firstName": "اسمك",
+        "company": "الشركة",
         "email": "Work email",
-        "supplierName": "Supplier name",
-        "country": "Factory location",
-        "industry": "Industry",
-        "auditType": "Audit type",
-        "standard": "Required standard",
-        "message": "Requirements and notes",
-        "messageHint": "Product, quantities, compliance concerns, preferred dates…",
-        "submit": "Submit audit request",
-        "submitting": "Submitting…"
+        "supplierName": "اسم مورد",
+        "country": "موقع المصنع",
+        "industry": "الصناعة",
+        "auditType": "نوع مراجعة الحسابات",
+        "standard": "المعيار المطلوب",
+        "message": "الاحتياجات والمذكرات",
+        "messageHint": "المنتجات والكميات وشواغل الامتثال والتواريخ المفضلة",
+        "submit": "طلب مراجعة الحسابات المقدم",
+        "submitting": "...."
       },
-      "success": "We received your audit request. Our team will reply within one business day.",
-      "error": "Something went wrong. Please try again or email us directly.",
+      "success": "لقد تلقينا طلب مراجعة الحسابات فريقنا سيجيب في يوم عمل واحد.",
+      "error": "حدث شيء خاطئ من فضلك حاول مرة أخرى أو ترسل لنا مباشرة.",
       "rateLimited": "لقد أرسلت عدة طلبات مؤخرًا. يرجى الانتظار لمدة ساعة تقريبًا أو مراسلتنا مباشرة.",
       "industries": [
         "الإلكترونيات",
@@ -982,157 +957,170 @@
         "تدقيق مخصص للمشتري"
       ]
     },
-    "metaTitle": "Request a Factory Audit",
-    "metaDesc": "Request a factory audit with a scoped proposal: choose the audit type, standard and location. Our team matches you with qualified audit companies."
+    "metaTitle": "طلب مراجعة حسابية",
+    "metaDesc": "طلب مراجعة حسابات مصنعية بمقترح واسع النطاق: اختيار نوع مراجعة الحسابات، والمعايير، والموقع. فريقنا يطابقك مع شركات مراجعة حسابات مؤهلة."
   },
   "rfq": {
-    "badge": "Buyer request",
-    "h1": "Post a sourcing request",
-    "lead": "Tell us what you are sourcing. We share it with verified suppliers and return quotes with capability and risk context.",
+    "badge": "طلب شراء",
+    "h1": "طلب الاستعانة بمصادر",
+    "lead": "أخبرنا ما الذي تستعين به ونحن نشاركه مع الموردين المتحققين ونقتبسات العودة بالقدرات والأخطار.",
     "form": {
       "labels": {
-        "firstName": "Your name",
-        "company": "Company",
+        "firstName": "اسمك",
+        "company": "الشركة",
         "email": "Work email",
-        "product": "Product",
-        "quantity": "Quantity",
-        "country": "Target country",
-        "message": "Specifications",
-        "messageHint": "Materials, dimensions, certifications, target price…",
-        "submit": "Post RFQ",
-        "submitting": "Posting…"
+        "product": "المنتجات",
+        "quantity": "الكمية",
+        "country": "البلد المستهدف",
+        "message": "المواصفات",
+        "messageHint": "المواد، الأبعاد، الشهادات، السعر المستهدف...",
+        "submit": "مقر الإدارة",
+        "submitting": "نشر..."
       },
-      "success": "Your RFQ was received. Verified suppliers will be invited to quote.",
-      "error": "Something went wrong. Please try again or email us directly."
+      "success": "تم إستلام تقريرك وسيدعى الموردون المصدقون إلى الاقتباس.",
+      "error": "حدث شيء خاطئ من فضلك حاول مرة أخرى أو ترسل لنا مباشرة."
     },
-    "metaTitle": "Post a Request for Quotation (RFQ)",
-    "metaDesc": "Post a sourcing request for products from China and Asia. Verified suppliers respond with quotes, capabilities and compliance context."
+    "metaTitle": "(أ) طلب تخصيص الموارد",
+    "metaDesc": "(أ) طلب مصادر لمنتجات من الصين وآسيا. ويستجيب الموردون المصدقون بالاقتباسات والقدرات وسياق الامتثال."
   },
   "common": {
-    "relatedTools": "Related tools",
-    "faq": "Frequently asked questions",
-    "freeTool": "Free tool",
-    "disclaimer": "Provided for general guidance. It does not independently verify any supplier and is not legal, financial or professional audit advice.",
+    "relatedTools": "الأدوات ذات الصلة",
+    "faq": "الأسئلة المتكررة",
+    "freeTool": "أداة مجانية",
+    "disclaimer": "تم توفير التوجيه العام. وهي لا تحقق بصورة مستقلة من أي مورِّد وليست مشورة قانونية أو مالية أو مهنية في مجال مراجعة الحسابات.",
     "whatsappChat": "تواصل عبر واتساب",
     "heroSearch": {
-      "tabSupplier": "Supplier",
-      "tabProduct": "Product",
-      "tabAudit": "Audit",
-      "tabInspector": "Inspector",
-      "placeholderSupplier": "e.g. China electronics supplier",
-      "placeholderProduct": "e.g. Stainless steel water bottle",
-      "placeholderAudit": "e.g. Factory audit China",
-      "placeholderInspector": "e.g. Inspector Shenzhen",
-      "search": "Search",
-      "combinedHint": "Combined SEO pages + live database results",
-      "noMatch": "No exact match for \"{q}\". This searches the indexed supplier database.",
-      "urlDetected": "Looks like a company name or website. Not in the indexed database yet.",
-      "submitAssess": "Submit for preliminary assessment",
-      "assessHint": "We check registration records and the online footprint, then reply with a preliminary risk view.",
-      "formName": "Your name",
-      "formEmail": "Your email *",
-      "formCompany": "Your company",
-      "assessSubmit": "Request assessment",
-      "assessSubmitting": "Submitting…",
-      "assessSuccess": "Thank you. Our team will reply within one business day.",
-      "assessError": "Something went wrong. Please try again."
+      "tabSupplier": "مورد",
+      "tabProduct": "المنتجات",
+      "tabAudit": "مراجعة الحسابات",
+      "tabInspector": "مفتش",
+      "placeholderSupplier": "على سبيل المثال المورد الإلكتروني للصين",
+      "placeholderProduct": "على سبيل المثال قنينة ماء من الفولاذ",
+      "placeholderAudit": "على سبيل المثال مراجعة حسابات العوامل في الصين",
+      "placeholderInspector": "على سبيل المثال المفتش شين",
+      "search": "البحث",
+      "combinedHint": "مجموعة من صفحات النظام الإداري الموحد + نتائج قاعدة البيانات الحية",
+      "noMatch": "لا يوجد تطابق تام مع \"{q}\". هذا البحث يغطي قاعدة بيانات الموردين المفهرسة.",
+      "urlDetected": "يبدو وكأنه اسم شركة أو موقع شبكي. ليس في قاعدة البيانات بعد.",
+      "submitAssess": "إرسال لتقييم أولي",
+      "assessHint": "نتحقق من سجلات التسجيل و البصمة على الإنترنت ثم نرد على وجهة نظر المخاطر الأولية.",
+      "formName": "اسمك",
+      "formEmail": "بريدك الإلكتروني",
+      "formCompany": "شركتك",
+      "assessSubmit": "تقييم الطلب",
+      "assessSubmitting": "....",
+      "assessSuccess": "شكراً لك فريقنا سيجيب في يوم عمل واحد.",
+      "assessError": "حدث شيء خاطئ أرجوك حاول مرة أخرى."
+    },
+    "ui": {
+      "home": "البيت",
+      "relatedGuides": "الأدلة ذات الصلة",
+      "quickAnswer": "إجابة سريعة",
+      "definition": "التعريف",
+      "keyPoints": "النقاط الرئيسية",
+      "stepByStep": "خطوة خطوة",
+      "examples": "أمثلة",
+      "checklist": "القائمة المرجعية",
+      "sources": "المصادر",
+      "guidesPageTitle": "أدلة ذكاء الموردين",
+      "caseStudiesLead": "التحقق من الموردين، ومراجعة حسابات المصنع، والتفتيش، والاستعانة بمصادر خارجية."
     }
   },
   "container": {
     "page": {
-      "badge": "Free tool",
-      "h1": "Container Load Calculator",
-      "lead": "Work out how many cartons fit in a 20GP, 40GP, 40HQ or reefer container, and how many containers you need for the shipment.",
-      "quickAnswerTitle": "Quick answer",
-      "quickAnswer": "Enter carton dimensions, unit weight and total quantity. The calculator tests all six box orientations against each container's internal dimensions, keeps the arrangement that fits the most cartons, then applies the payload limit. It returns units per container, containers needed, plus volume and payload utilisation.",
-      "howTitle": "How the calculation works",
-      "how1": "All six carton orientations are tested against the container's internal length, width and height.",
-      "how2": "The arrangement with the highest count wins, after subtracting the gap you set between cartons.",
-      "how3": "The payload limit is applied: units per container cannot exceed max payload divided by unit weight.",
-      "how4": "Containers needed is total quantity divided by units per container, rounded up.",
-      "specsTitle": "Container specifications used",
-      "specsLead": "Typical ISO specifications. Actual figures vary by carrier, container owner and build year.",
-      "methodTitle": "Methodology and limits",
-      "methodBody": "The result is a theoretical maximum from a rectangular packing model. It assumes cartons are rigid, stackable and can be rotated, and that the load is evenly distributed. Real loading is affected by pallets, dunnage, carton deformation, stacking strength, axle weight rules and stowage order. Treat the output as a planning estimate and confirm the final plan with your forwarder or loading supervisor.",
-      "faqTitle": "Frequently asked questions",
-      "metaTitle": "Container Load Calculator",
-      "metaDesc": "Free container loading calculator for 20GP, 40GP, 40HQ, 45HQ and reefer containers. Work out cartons per container, containers needed, volume and payload utilisation."
+      "badge": "أداة مجانية",
+      "h1": "الحاويات",
+      "lead": "عمل كم عدد الكرتونات في 20GP، 40GP، 40HQ أو حاوية الشعاب، وكم عدد الحاويات التي تحتاجها للشحنة.",
+      "quickAnswerTitle": "إجابة سريعة",
+      "quickAnswer": "إدخال أبعاد الكرتون ووزن الوحدة وكميتها الإجمالية. الحاسبة تختبر كل التوجهات الصندوقية الستة ضد الأبعاد الداخلية لكل حاوية، وتحتفظ بالترتيب الذي يناسب أكثر الكارتونات، ثم تطبق حد الحمولة. وهو يعيد الوحدات لكل حاوية، والحاويات اللازمة، بالإضافة إلى استخدام الحجم والتحميل.",
+      "howTitle": "كيف يعمل الحساب",
+      "how1": "كل توجهات الكارتون الستة تم اختبارها ضد طول الحاوية الداخلي و الطول.",
+      "how2": "الترتيب مع أكبر عدد يفوز بعد تضييق الفجوة بين الكارتون.",
+      "how3": "ويطبق الحد الأقصى للحمولة: لا يمكن أن تتجاوز الوحدات لكل حاوية الحمولة القصوى المقسمة حسب وزن الوحدة.",
+      "how4": "والحاويات اللازمة هي الكمية الإجمالية المقسمة حسب الوحدات لكل حاوية، متجمعة.",
+      "specsTitle": "مواصفات الحاويات المستخدمة",
+      "specsLead": "مواصفات نموذجية للمنظمة الدولية للتوحيد القياسي. وتختلف الأرقام الفعلية حسب الناقل ومالك الحاويات وسنة البناء.",
+      "methodTitle": "المنهجية والحدود",
+      "methodBody": "والنتيجة هي الحد الأقصى نظريا من نموذج التعبئة الترفيهية. ويفترض أن الكارتون صلبة ومكبلة ويمكن تناوبها، وأن الحمولة توزع بالتساوي. ويتأثر التحميل الحقيقي بالشحوم، والدونج، وتشوه الكارتون، وقوام التعبئة، وقواعد وزن الأكسدة، وطلبات الصمامات. معالجة الناتج كتقدير تخطيطي وتأكيد الخطة النهائية مع مشرف الشحن أو مشرفك.",
+      "faqTitle": "الأسئلة المتكررة",
+      "metaTitle": "الحاويات",
+      "metaDesc": "حاسبة حاويات مجانية لـ 20GP و 40GP و 40HQ و 45HQ وحاويات الشعاب. العمل على الكارتونات لكل حاوية، والحاويات اللازمة، والحجم، واستخدام الحمولة."
     },
     "ui": {
-      "cargoTitle": "Carton dimensions",
-      "length": "Length",
-      "width": "Width",
-      "height": "Height",
-      "weight": "Weight per carton",
-      "quantity": "Total quantity",
-      "optionsTitle": "Loading options",
-      "clearance": "Gap between cartons",
-      "clearanceHelp": "Leave 2–5 cm for dunnage, strapping and carton bulge.",
-      "allowRotate": "Allow rotating cartons",
-      "allowRotateHelp": "Tests all six orientations and keeps the best fit.",
-      "calcBtn": "Calculate",
-      "resetBtn": "Reset",
-      "resultsTitle": "Loading plan",
-      "bestFit": "Best fit",
-      "perContainer": "Cartons per container",
-      "containersNeeded": "Containers needed",
-      "arrangement": "Arrangement",
-      "along": "along length",
-      "across": "across width",
-      "layers": "layers high",
-      "volumeUsed": "Volume used",
-      "payloadUsed": "Payload used",
-      "totalVolume": "Total cargo volume",
-      "totalWeight": "Total cargo weight",
-      "comparisonTitle": "All container types compared",
-      "containerCol": "Container",
-      "fitsCol": "Fits",
-      "neededCol": "Needed",
-      "topView": "Top view of one layer",
-      "warnOverweight": "The load reaches the payload limit before the container is full. Weight, not space, is the binding constraint.",
-      "warnTooLarge": "These cartons are too large to fit any container in this list. Check the dimensions.",
-      "warnDoor": "The carton may not pass through the door opening in this orientation. Check with your loading team.",
-      "empty": "Enter carton dimensions and quantity to see the loading plan.",
-      "disclaimer": "Estimates only. Container figures are typical ISO specifications and vary by carrier. Always confirm the final loading plan with your forwarder.",
+      "cargoTitle": "أبعاد كارتون",
+      "length": "الطول",
+      "width": "العرض",
+      "height": "مرتفع",
+      "weight": "الوزن للسيارة",
+      "quantity": "مجموع الكمية",
+      "optionsTitle": "خيارات تحديد الموقع",
+      "clearance": "الفجوة بين الكارتون",
+      "clearanceHelp": "إترك 2-5 سنتيمتر للدونج، الإجهاد و الكارتون.",
+      "allowRotate": "السماح بالعربات الدوارة",
+      "allowRotateHelp": "يختبر كل التوجهات الستة ويحافظ على الأفضل.",
+      "calcBtn": "الحساب",
+      "resetBtn": "إعادة التوطين",
+      "resultsTitle": "خطة تحديد الموقع",
+      "bestFit": "أفضل",
+      "perContainer": "الكراتين لكل حاوية",
+      "containersNeeded": "الحاويات اللازمة",
+      "arrangement": "الترتيب",
+      "along": "طول المدة",
+      "across": "عبر المستعارة",
+      "layers": "طبقات عالية",
+      "volumeUsed": "الحجم المستخدم",
+      "payloadUsed": "الحمولة المستخدمة",
+      "totalVolume": "مجموع حجم البضائع",
+      "totalWeight": "مجموع وزن الشحنات",
+      "comparisonTitle": "جميع أنواع الحاويات مقارنة",
+      "containerCol": "الحاويات",
+      "fitsCol": "يتسع",
+      "neededCol": "مطلوبة",
+      "topView": "نظرة علي طبقة واحدة",
+      "warnOverweight": "ويصل الحمولة إلى حد الحمولة قبل أن تكون الحاوية كاملة. الوزن، وليس الفضاء، هو القيد الملزم.",
+      "warnTooLarge": "هذه الكرتونات كبيرة جداً لتلائم أي حاوية في هذه القائمة تحقق من الأبعاد.",
+      "warnDoor": "قد لا تمر الكارتون من خلال فتح الباب في هذا الاتجاه. تحقق من فريق التحميل.",
+      "empty": "أدخل أبعاد الكارتون وكميتها لرؤية خطة التحميل.",
+      "disclaimer": "التقديرات فقط وأرقام الحاويات هي مواصفات نموذجية للمنظمة الدولية لتوحيد المقاييس وتختلف حسب الناقل. دائما تأكيد خطة التحميل النهائية مع مرشدك.",
       "unit": "الوحدة",
       "massUnit": "وحدة الكتلة"
     },
     "specs": {
-      "internal": "Internal (cm)",
-      "door": "Door opening",
-      "capacity": "Capacity",
-      "payload": "Max payload"
+      "internal": "داخلي (م)",
+      "door": "فتح الباب",
+      "capacity": "القدرات",
+      "payload": "حمولة ماكس"
     },
     "types": {
-      "generalPurpose": "General purpose",
-      "highCube": "High cube",
-      "reefer": "Refrigerated",
-      "openTop": "Open top"
+      "generalPurpose": "الغرض العام",
+      "highCube": "مكعب عالي",
+      "reefer": "التبريد",
+      "openTop": "مفتوحة"
     },
     "faq": [
       {
-        "q": "What is the difference between a 40GP and a 40HQ?",
-        "a": "Both are the same length and width. A 40HQ is about 30 cm taller inside (269 cm versus 239 cm), which adds roughly 9 m³ of capacity. The payload limit is nearly identical, so the high cube only helps when you run out of space before you run out of weight."
+        "q": "ما الفرق بين 40GP و40HQ؟?",
+        "a": "كلاهما نفس الطول والإستعراض A 40HQ is about 30 cm longer inside (269 cm against 239 cm), which adds roughly 9 m3 of capacity. حدود الحمولة متطابقة تقريباً، لذا فإن المكعب العالي يساعد فقط عندما تهرب من الفضاء قبل أن تهرب من الوزن."
       },
       {
-        "q": "Why is your number different from my forwarder's?",
-        "a": "Three common reasons. First, container internal dimensions vary slightly by carrier and build year. Second, this model assumes cartons are rigid and fully stackable, while real loading needs pallets, dunnage and tolerances. Third, weight distribution and road axle limits can cap the load below the container's maximum payload."
+        "q": "لماذا رقمك مختلف عن رقم مرشدي؟?",
+        "a": "ثلاثة أسباب مشتركة. أولا، تختلف الأبعاد الداخلية للحاويات اختلافا طفيفا حسب الناقل وسنة البناء. ثانياً، يفترض هذا النموذج أن الكرتونات صلبة ومكبلة تماماً، في حين أن التحميل الحقيقي يحتاج إلى شحوم وحمولة وتسامح. ثالثاً، توزيع الأوزان والحدود القصوى للطرق يمكن أن تخفض الحمولة تحت حمولة الحاوية القصوى."
       },
       {
-        "q": "Should I set a gap between cartons?",
-        "a": "Yes, for planning. Set 2 to 5 cm if cartons are packed by hand or may bulge. Set 0 only for rigid, uniform cartons on a tightly controlled load."
+        "q": "هل يجب أن أضع فجوة بين الكارتون؟?",
+        "a": "نعم، للتخطيط. جهز 2 إلى 5 سم إذا حزمت الكارتون باليد أو قد تنفجر ضعوا صفر فقط للعربات الجامدة والزي الرسمي على حمولة مشددة."
       },
       {
-        "q": "Does this handle pallets?",
-        "a": "Not directly in this version. To approximate a palletised load, enter the pallet footprint and height including the pallet base as one unit, and set the quantity to your pallet count."
+        "q": "هل هذا يتعامل مع النوافذ؟?",
+        "a": "ليس مباشرة في هذه النسخة. لتقريبي حمولة مخففة، الدخول إلى البصمة والطول، بما في ذلك قاعدة النسر كوحدة واحدة،."
       },
       {
-        "q": "Are these container specifications exact?",
-        "a": "No. They are widely used typical figures for planning. Dimensions and payload limits differ by container owner, manufacturer and build year, and shipping lines publish their own limits. Confirm with your carrier before booking."
+        "q": "هل هذه مواصفات الحاويات دقيقة؟?",
+        "a": "لا وهي تستخدم على نطاق واسع أرقاما نموذجية للتخطيط. وتختلف الأبعاد والحدود المفروضة على الحمولة بمالك الحاويات ومصنعها وسنة بنائها، وتنشر خطوط الشحن حدودها الخاصة. تأكد من ناقلك قبل الحجز."
       },
       {
-        "q": "What if my cartons cannot be stacked?",
-        "a": "Enter the carton height as the full stack height you are willing to allow, or reduce the quantity per layer manually. This version assumes every carton carries the load above it."
+        "q": "ماذا لو أن عربتي لا يمكن أن تُضرب؟?",
+        "a": "أدخلي طول الكارتون كطول الحزمة الكاملة التي ترغبين في السماح بها أو خفض الكمية يدوياً لكل طبقة هذه النسخةِ تَفترضُ كُلّ carton يَحْملُ الحملَ فوقه."
       }
     ]
   },
@@ -1196,74 +1184,74 @@
     "metaDesc": "نتحقق من الموردين في الصين وآسيا لتجنّب المخاطر، ثم ندرّب فرق مصنعك على الجودة وضبط الجودة حتى لا تعود العيوب."
   },
   "legal": {
-    "privacyTitle": "Privacy Policy",
-    "privacyUpdated": "Last updated: 2026-08-30",
+    "privacyTitle": "سياسة الخصوصية",
+    "privacyUpdated": "آخر تحديث: 2026-08-30",
     "privacyIntro": "FactoryAuditB2B (\"we\", \"us\") respects your privacy. This policy explains what data we collect when you use our website and services, and how we use it.",
     "privacySections": [
       {
-        "h": "Information we collect",
-        "b": "We collect information you provide directly (name, email, company, sourcing needs, messages) when you request an audit, post an RFQ, use our tools, or contact us. We also collect basic technical data such as IP address and pages visited."
+        "h": "المعلومات التي نجمعها",
+        "b": "نجمع المعلومات التي توفرها مباشرة (الاسم، البريد الإلكتروني، الشركة، الاحتياجات من الموارد، الرسائل) عندما تطلب مراجعة الحسابات، أو نشر قاعدة بيانات، أو استخدام أدواتنا، أو الاتصال بنا. كما نجمع البيانات التقنية الأساسية مثل عنوان IP والصفحات التي تمت زيارتها."
       },
       {
-        "h": "How we use information",
-        "b": "We use your information to respond to requests, match you with suppliers or audit partners, send service notifications, and improve our site. We do not sell your personal data."
+        "h": "كيف نستخدم المعلومات",
+        "b": "نستخدم معلوماتكم للرد على الطلبات، ونطابقكم مع الموردين أو شركاء مراجعة الحسابات، ونرسل إخطارات الخدمة، ونحسن موقعنا. نحن لا نبيع بياناتك الشخصية."
       },
       {
-        "h": "Leads and service delivery",
-        "b": "When you submit a request, we share relevant details with the suppliers or audit firms needed to fulfill it. By submitting, you consent to this limited sharing."
+        "h": "الرصاص وتقديم الخدمات",
+        "b": "وعندما تقدمون طلبا، نتقاسم التفاصيل ذات الصلة مع الموردين أو شركات مراجعة الحسابات اللازمة للوفاء به. عن طريق تقديم، كنت الموافقة على هذا التقاسم المحدود."
       },
       {
-        "h": "Cookies and analytics",
-        "b": "We use cookies and similar technologies to operate the site and understand usage. You can disable cookies in your browser."
+        "h": "المواد الكيميائية والمحللة",
+        "b": "نستخدم الكوكيز والتكنولوجيات المماثلة لتشغيل الموقع وفهم الاستخدام. يمكنك أن تزيل البسكويت في مغسلتك."
       },
       {
-        "h": "Data retention",
-        "b": "We retain your information as long as needed to provide our services and meet legal obligations, then delete or anonymize it."
+        "h": "الاحتفاظ بالبيانات",
+        "b": "ونحن نحتفظ بمعلوماتكم ما دامت هناك حاجة لتقديم خدماتنا والوفاء بالالتزامات القانونية، ثم نحذفها أو نغفلها."
       },
       {
-        "h": "Your rights",
-        "b": "You may request access to, correction of, or deletion of your personal data by contacting us at privacy@factoryauditb2b.com."
+        "h": "حقوقك",
+        "b": "يمكنك طلب الدخول أو تصحيح أو حذف بياناتك الشخصية عن طريق الاتصال بنا في الخصوصية."
       },
       {
-        "h": "Contact",
-        "b": "Questions about this policy? Email privacy@factoryauditb2b.com."
+        "h": "الاتصال",
+        "b": "أسئلة حول هذه السياسة؟ Email privacy@factoryauditb2b.com."
       }
     ],
-    "termsTitle": "Terms of Service",
-    "termsUpdated": "Last updated: 2026-08-30",
+    "termsTitle": "مدة الخدمة",
+    "termsUpdated": "آخر تحديث: 2026-08-30",
     "termsIntro": "By using FactoryAuditB2B, you agree to these terms. Our service helps buyers verify and audit suppliers, but we are a platform, not a guarantor of supplier performance.",
     "termsSections": [
       {
-        "h": "Use of the service",
-        "b": "You may use the site to search suppliers, use tools, request audits and post RFQs. You agree to provide accurate information and not misuse the service."
+        "h": "استخدام الخدمة",
+        "b": "يمكنك استخدام الموقع لتفتيش المورّدين، واستخدام الأدوات، وطلب مراجعة الحسابات، والبريد توافق على تقديم معلومات دقيقة وعدم إساءة استخدام الخدمة."
       },
       {
-        "h": "No warranty on suppliers",
-        "b": "We provide verification and audit information to help your decisions. We do not guarantee supplier quality, delivery, or compliance. You remain responsible for your sourcing decisions."
+        "h": "لا ضمان بشأن الموردين",
+        "b": "ونحن نقدم معلومات عن التحقق ومراجعة الحسابات لمساعدة قراراتكم. ونحن لا نضمن جودة الموردين أو التسليم أو الامتثال. ما زلت مسئولاً عن قراراتك."
       },
       {
-        "h": "Third-party services",
-        "b": "Audit and inspection are performed by independent third parties. Contracts for those services are between you and the provider."
+        "h": "خدمات الأطراف الثالثة",
+        "b": "وتقوم أطراف ثالثة مستقلة بمراجعة الحسابات والتفتيش. عقود تلك الخدمات بينك وبين مقدم الخدمات."
       },
       {
-        "h": "Intellectual property",
+        "h": "الملكية الفكرية",
         "b": "All site content, trademarks and tools are owned by FactoryAuditB2B or its licensors. You may not reuse them without permission."
       },
       {
-        "h": "Limitation of liability",
+        "h": "الحد من المسؤولية",
         "b": "To the maximum extent permitted by law, FactoryAuditB2B is not liable for indirect or consequential losses arising from use of the site."
       },
       {
-        "h": "Changes",
-        "b": "We may update these terms. Continued use after changes constitutes acceptance."
+        "h": "التغييرات",
+        "b": "يمكننا تحديث هذه الشروط ويشكل استمرار الاستخدام بعد إجراء التغييرات قبولا."
       },
       {
-        "h": "Contact",
-        "b": "Questions? Email legal@factoryauditb2b.com."
+        "h": "الاتصال",
+        "b": "أسئلة؟ Email legal@factoryauditb2b.com."
       }
     ],
-    "privacyNav": "Privacy",
-    "termsNav": "Terms"
+    "privacyNav": "الخصوصية",
+    "termsNav": "المصطلحات"
   },
   "industryPage": {
     "pageTitle": "التحقق من الموردين والتدريب",
@@ -1360,86 +1348,8 @@
     "metaTitle": "الخدمات والخطط — أدوات مجانية، تحقق، تدقيق، مراقبة",
     "metaDesc": "أدوات مجانية لتقييم الموردين، وتحقق من الموردين من 99 دولاراً، وتدقيق مصانع من 399 دولاراً، وفحص منتجات من 99 دولاراً، ومراقبة موردين بالاشتراك. جميع الأسعار بالدولار الأمريكي.",
     "h1": "الخدمات والخطط",
-    "lead": "SaaS للمشترين 19–299 دولاراً شهرياً · عضوية الموردين 29–199 دولاراً شهرياً · التدقيق والفحص والشحن مسعّرة لكل مشروع.",
+    "lead": "الأدوات مجانية. تدفع فقط عندما تحتاج إلى شخص يتحقق من المورد على الأرض.",
     "currencyNote": "جميع الأسعار بالدولار الأمريكي. يُسعَّر التحقق والتدقيق لكل مشروع.",
-    "forBuyers": "للمشترين",
-    "forSuppliers": "للموردين",
-    "perMonth": "/شهرياً",
-    "commissionTitle": "التدقيق والفحص والشحن",
-    "commissionCta": "اطلب عرض سعر",
-    "buyerCtas": [
-      "ابدأ مجاناً",
-      "اختر Starter",
-      "اختر Pro",
-      "اختر Business",
-      "تواصل معنا"
-    ],
-    "supplierCta": "تقدّم بطلب",
-    "buyerFeatures": [
-      [
-        "بحث أساسي عن الموردين",
-        "تقييم أساسي للمخاطر",
-        "قائمة تحقق أساسية",
-        "طلب عرض أسعار واحد شهرياً"
-      ],
-      [
-        "بحث كامل عن الموردين",
-        "تقييم غير محدود للمخاطر",
-        "قائمة تحقق كاملة من 29 بنداً",
-        "5 طلبات عرض أسعار شهرياً",
-        "دعم بالبريد الإلكتروني"
-      ],
-      [
-        "كل ما في Starter",
-        "تقارير PDF",
-        "محلل المستندات",
-        "مساحة عمل الموردين",
-        "بطاقة تقييم متقدمة",
-        "دعم ذو أولوية"
-      ],
-      [
-        "كل ما في Professional",
-        "5 أعضاء فريق",
-        "قاعدة بيانات الموردين",
-        "مراقبة المخاطر",
-        "إدارة التدقيق",
-        "إجراءات تصحيحية وتقارير متقدمة"
-      ],
-      [
-        "الوصول إلى API",
-        "تسجيل دخول موحد (SSO)",
-        "سير عمل مخصص",
-        "قاعدة بيانات موردين مخصصة",
-        "دعم مخصص"
-      ]
-    ],
-    "supplierFeatures": [
-      [
-        "إدراج ملف الشركة",
-        "شارة تحقق أساسية",
-        "استلام طلبات عروض الأسعار",
-        "ترتيب قياسي"
-      ],
-      [
-        "شارة مورد موثّق",
-        "مستندات التدقيق في الملف",
-        "ترتيب أولوية في البحث",
-        "ردود غير محدودة على طلبات الأسعار",
-        "وسوم القدرات"
-      ],
-      [
-        "الترتيب الأعلى في البحث",
-        "موضع مميز في صفحات القطاعات",
-        "تقديم للمشترين",
-        "دعم حساب مخصص",
-        "تحديث الملف كل ربع سنة"
-      ]
-    ],
-    "commissionItems": [
-      "تدقيق وفحص المصانع: يُسعّر لكل مشروع بناءً على أيام العمل والموقع",
-      "الشحن والتوريد: عمولة 3–5% على قيمة الطلب",
-      "لا توجد رسوم منصة على طلبك الأول"
-    ],
     "plansTitle": "ما يمكنك استخدامه اليوم",
     "plansLead": "الخطط الأربع متاحة الآن. يُسعَّر التحقق والتدقيق والفحص لكل مشروع؛ أما المراقبة فاشتراك سنوي.",
     "plans": [
@@ -1568,9 +1478,9 @@
     "ctaText": "تحتاج عرض سعر أو التحدث مع شخص؟",
     "ctaButton": "تحدث مع فريقنا",
     "fallbackAnswers": {
-      "pricing": "Buyer SaaS runs $0–299/month and supplier membership $29–199/month. Factory audits and inspections are quoted per project (man-days and location); freight and sourcing carry a 3–5% commission. All prices in USD. Tell me your product and country and I will point you to the right plan.",
+      "pricing": "الأدوات المجانية بـ $0. التحقق من المورد يكلّف $99 – $129 لكل مورد، وتدقيق المصنع يبدأ من 399 دولاراً أمريكياً لكل يوم عمل إضافة إلى السفر، ومراقبة الموردين تُسعَّر لكل مورد سنوياً. عضوية Founding Buyer بـ 99$ سنوياً وتتيح الوصول إلى قاعدة الموردين كاملة. التوريد بعمولة 3–5% على قيمة الطلب، وتُسعَّر قبل تقديم الطلب. جميع الأسعار بالدولار الأمريكي. أخبرنا بمنتجك وبلدك.",
       "audit": "نغطي التحقق من الموردين، وتدقيق المصانع، والفحص قبل الشحن وفق برامج مثل SMETA وBSCI وISO 9001 وISO 14001 وSA8000 وWRAP وSedex. نحن لا نبيع شهادات؛ نتحقق ثم ندرّب. شاركنا منتجك والسوق المستهدف وسنحدد النطاق المناسب.",
-      "coverage": "نغطي حالياً الصين وفيتنام وتايلاند. أخبرنا من أي بلد تشتري وسنؤكد إمكانية الخدمة.",
+      "coverage": "نغطي حالياً الصين وفيتنام وتايلاند وماليزيا والفلبين. أخبرنا من أي بلد تشتري وسنؤكد ما يمكننا التحقق منه هناك.",
       "training": "نعم. نتدقق مصنعك ثم ندرّب الفرق على أنظمة الجودة وضبط الجودة وعمليات الإنتاج. الخطط هي Starter بـ 280 دولاراً للمصنع وPro بـ 950 دولاراً للمصنع، مع خيار Enterprise مخصص. تبدأ كل خطة بتدقيق للفجوات.",
       "default": "يمكنني المساعدة في التدقيق، والتحقق من الموردين، والتغطية، والأسعار، والتدريب. لأي استفسار محدد، اترك بياناتك وسيرد فريقنا خلال يوم عمل واحد."
     },
@@ -1605,7 +1515,7 @@
     "statsTitle": "بالأرقام",
     "stats": [
       {
-        "value": "9",
+        "value": "5",
         "label": "بلدان مغطاة"
       },
       {
@@ -1627,154 +1537,154 @@
   },
   "brand": {
     "name": "FactoryAuditB2B",
-    "tagline": "Supplier Intelligence & Verification for Global Buyers",
-    "eva": "Evaluate. Verify. Audit.",
-    "scope": "Supplier verification and factory audit services across China and Southeast Asia.",
-    "positioning": "We help global buyers evaluate suppliers, verify factories and reduce sourcing risk before an order is placed."
+    "tagline": "Supplier Intelligence &apos; Verification for Global Buyers",
+    "eva": "تقييم. التحقق. مراجعة الحسابات.",
+    "scope": "خدمات التحقق من الموردين ومراجعة حسابات المصنع في جميع أنحاء الصين وجنوب شرق آسيا.",
+    "positioning": "ونساعد المشترين العالميين على تقييم الموردين والتحقق من المصانع والحد من مخاطر الاستعانة بمصادر خارجية قبل إصدار أمر."
   },
   "coverage": {
-    "badge": "Coverage",
-    "h1": "Where We Verify Suppliers",
-    "lead": "On-the-ground supplier verification and factory audit support across China and Southeast Asia. Phase 1 covers three countries. More are added as we have verified auditor capacity in them.",
-    "phase1": "Phase 1",
-    "phaseNext": "Planned next",
-    "countryCta": "Coverage in {country}",
-    "anotherCountryTitle": "Need verification in another country?",
-    "anotherCountryLead": "Tell us where you are sourcing. If we do not have confirmed auditor capacity there yet, we will say so instead of guessing.",
-    "anotherCountryCta": "Request Verification",
-    "metaTitle": "Where We Verify Suppliers",
-    "metaDesc": "Supplier verification and factory audit coverage across China, Vietnam and Thailand, with country-specific sourcing risks, verification notes and audit considerations."
+    "badge": "التغطية",
+    "h1": "حيث نتحقق من الموردين",
+    "lead": "التحقق من الموردين ميدانياً ودعم تدقيق المصانع في الصين وجنوب شرق آسيا. تغطي المرحلة الأولى خمسة بلدان: الصين وفيتنام وتايلاند وماليزيا والفلبين. ونضيف المزيد مع التحقق من قدرة المدققين فيها.",
+    "phase1": "المرحلة الأولى",
+    "phaseNext": "المخططة التالية",
+    "countryCta": "التغطية في {country}",
+    "anotherCountryTitle": "هل تحتاج للتحقق في بلد آخر؟?",
+    "anotherCountryLead": "أخبرنا عن مصدرك إذا لم نتأكد من قدرة مراجع الحسابات هناك بعد، سنقول ذلك بدلا من التخمين.",
+    "anotherCountryCta": "طلب التحقق",
+    "metaTitle": "حيث نتحقق من الموردين",
+    "metaDesc": "التحقق من الموردين وتدقيق المصانع في الصين وفيتنام وتايلاند وماليزيا والفلبين. مخاطر التوريد وملاحظات التحقق واعتبارات التدقيق لكل بلد."
   },
   "countryHub": {
-    "profileTitle": "Manufacturing profile",
-    "risksTitle": "Typical sourcing risks",
-    "verificationTitle": "Supplier verification considerations",
-    "auditTitle": "Factory audit considerations",
-    "industriesTitle": "Relevant industries",
-    "logisticsTitle": "Local logistics considerations",
-    "standardsTitle": "Relevant standards",
-    "hubsTitle": "Main production hubs",
-    "registryTitle": "Where we check company records",
-    "servicesTitle": "Available services",
-    "toolsTitle": "Relevant tools",
-    "faqTitle": "Frequently asked questions",
-    "breadcrumb": "Countries",
-    "ctaTitle": "Need a supplier in {country} checked?",
-    "ctaLead": "Send us the company name and address. We confirm the registration, the site and the documents before you pay anything.",
-    "ctaPrimary": "Verify a supplier in {country}",
-    "ctaSecondary": "Request a {country} factory audit",
-    "suppliersTitle": "Suppliers listed for {country}",
-    "suppliersEmpty": "No supplier in {country} is listed yet. That does not mean we cannot check one. Send us the name and we will run the verification.",
-    "metaDesc": "Supplier verification and factory audit in {country}: manufacturing profile, typical sourcing risks, verification and audit considerations, industries, logistics and FAQs.",
+    "profileTitle": "موجز التصنيع",
+    "risksTitle": "مخاطر الاستعانة بمصادر نموذجية",
+    "verificationTitle": "اعتبارات التحقق من الموردين",
+    "auditTitle": "الاعتبارات المتعلقة بمراجعة الوقائع",
+    "industriesTitle": "الصناعات ذات الصلة",
+    "logisticsTitle": "الاعتبارات اللوجستية المحلية",
+    "standardsTitle": "المعايير ذات الصلة",
+    "hubsTitle": "مراكز الإنتاج الرئيسية",
+    "registryTitle": "حيث نتفقد سجلات الشركة",
+    "servicesTitle": "الخدمات المتاحة",
+    "toolsTitle": "الأدوات ذات الصلة",
+    "faqTitle": "الأسئلة المتكررة",
+    "breadcrumb": "البلدان",
+    "ctaTitle": "هل تحتاج إلى فحص مورد في {country}؟",
+    "ctaLead": "أرسل لنا اسم الشركة وعنوانها نؤكّد التسجيل والموقع والوثائق قبل أن تدفع أيّ شيء.",
+    "ctaPrimary": "التحقق من المورد في {country}",
+    "ctaSecondary": "طلب مراجعة حسابات مصنع {country}",
+    "suppliersTitle": "الموردون المدرجون في {country}",
+    "suppliersEmpty": "No suppliers in {country} is listed yet. وهذا لا يعني أننا لا يمكن التحقق من واحد. أرسل لنا الاسم وسنقوم بالتحقق.",
+    "metaDesc": "Supplier verification and factory audit in {country}: manufacturing profile, typical sourcing risks, verification and audit considerations, industries, logistical and FAQs.",
     "breadcrumbHome": "الرئيسية",
     "h1Template": "{country}: التحقق من الموردين وتدقيق المصنع"
   },
   "serviceCountry": {
-    "quickAnswerTitle": "Quick answer",
-    "scopeTitle": "What is included",
-    "deliverablesTitle": "What you receive",
-    "processTitle": "How it works",
-    "pricingTitle": "How pricing works",
-    "contextTitle": "{service} in {country}: what is different here",
-    "ctaTitle": "Request {service} in {country}",
-    "ctaLead": "Tell us the supplier and your requirements. We reply with a scoped proposal, a timeline and a price.",
-    "ctaPrimary": "Request a quote",
-    "ctaSecondary": "Score this supplier free first",
-    "relatedTitle": "Related pages",
-    "breadcrumb": "Services",
-    "metaDesc": "{service} in {country}. Scope, deliverables, process and pricing basis, plus the country-specific checks that matter in {country}.",
-    "scopedQ": "What do you actually check for a {country} supplier?",
-    "scopedA": "We confirm registration, the registered address, the production site, and the country-specific checks for {country} suppliers. Exact scope depends on the standard and the order, which we confirm in the scoped quote.",
-    "timelineQ": "How long does this take in {country}?",
-    "timelineA": "Documentary checks are usually finished within two business days. A package that includes a site visit in {country} is normally scheduled within a week, longer outside the main production hubs."
+    "quickAnswerTitle": "إجابة سريعة",
+    "scopeTitle": "ما هو مدرج",
+    "deliverablesTitle": "ما تحصل عليه",
+    "processTitle": "كيف يعمل",
+    "pricingTitle": "كيف يعمل التسعير",
+    "contextTitle": "{service} in {country}: What is different here",
+    "ctaTitle": "الطلب {service} في {country}",
+    "ctaLead": "أخبرنا المورد ومتطلباتك ونرد على اقتراح واسع النطاق وجدول زمني وسعر.",
+    "ctaPrimary": "طلب إقتباس",
+    "ctaSecondary": "اعرض هذا المورد مجانا أولا",
+    "relatedTitle": "الصفحات ذات الصلة",
+    "breadcrumb": "الخدمات",
+    "metaDesc": "{service} in {country}. النطاق، والنواتج، والعملية، والتسعير، بالإضافة إلى عمليات التحقق الخاصة بكل بلد على حدة، التي تُجرى في {country}.",
+    "scopedQ": "ما الذي نتحقق منه فعليًا بالنسبة لمورد في {country}؟",
+    "scopedA": "ونؤكد التسجيل، والعنوان المسجل، وموقع الإنتاج، والشيكات الخاصة بكل بلد لموردي شركة {country}. ويتوقف النطاق الصحيح على المعيار والنظام، اللذين نؤكدهما في اقتباس النطاق.",
+    "timelineQ": "كم من الوقت يستغرق هذا في {country}؟?",
+    "timelineA": "وعادة ما تنتهي عمليات التفتيش الوثائقية في غضون يومين من العمل. A package that includes a site visit in {country} is normally scheduled within a week, longer outside the main production hubs."
   },
   "servicesIndex": {
     "badge": "الخدمات",
-    "h1": "Supplier verification, audit and inspection services",
-    "lead": "Free tools tell you what to check. These services get it checked. Everything below is scoped and quoted per project, and none of it is a bundle you have to buy into.",
+    "h1": "خدمات التحقق ومراجعة الحسابات والتفتيش",
+    "lead": "الأدوات المجانية تخبرك ما يجب أن تحقق هذه الخدمات تفحصها كلّ شيءٍ تحته مُنتشرٌ ومقتبسٌ من كلّ مشروع، و لا شيءٍ من هذا هو سرير يجب أن تشتريه.",
     "servicesTitle": "ماذا نقدم",
-    "servicesLead": "Pick the stage you are at.",
+    "servicesLead": "اختر المسرح الذي أنت فيه.",
     "items": {
       "verification": {
         "title": "التحقق من المورد",
-        "desc": "Confirm the company, the site and the documents before you release a deposit.",
+        "desc": "تأكدي من الشركة والموقع و الوثائق قبل أن تطلقي وديعة.",
         "href": "/services/supplier-verification"
       },
       "factoryAudit": {
         "title": "تدقيق المصنع",
-        "desc": "An auditor on site against the standard your buyer requires, with findings graded and corrective actions listed.",
+        "desc": "مراجع حسابات في الموقع ضد المعيار الذي يتطلبه مشتريك، مع النتائج التي تم تصنيفها وإجراءات تصحيحية.",
         "href": "/factory-audit/request"
       },
       "inspection": {
         "title": "الفحص",
-        "desc": "In-line and pre-shipment checks on your production, quoted per man-day.",
+        "desc": "في الخط و فحص ما قبل الشحن على إنتاجك، اقتبس كل يوم من أيام العمل.",
         "href": "/custom-services"
       },
       "sourcing": {
         "title": "التوريد",
-        "desc": "Post an RFQ, get matched with suppliers we can verify, and pay commission only on orders you place.",
+        "desc": "ضعي جهازاً للإستخبارات و تطابقي مع الموردين الذين يمكننا التحقق منهم و ندفع المبلغ فقط بناءً على أوامرك.",
         "href": "/rfq"
       },
       "improvement": {
         "title": "تحسين الموردين",
-        "desc": "Audit findings turned into corrective action, training and a re-audit. Not a standalone training business.",
+        "desc": "وتحولت نتائج مراجعة الحسابات إلى إجراءات تصحيحية وتدريب وإعادة النظر. ليس عمل تدريبي مستقل.",
         "href": "/services/supplier-improvement"
       },
       "monitoring": {
-        "title": "Supplier Monitoring",
-        "desc": "Keep verified supplier facts current. Scheduled re-checks of registration, address, certificates and public records, with an alert when something changes."
+        "title": "رصد الموردين",
+        "desc": "حافظ على حقائق المورد التي تم التحقق منها اعادة فحص التسجيل والعنوان والشهادات والسجلات العامة، مع تنبيه عندما يتغير شيء ما."
       }
     },
     "coverageTitle": "التغطية حسب البلد",
-    "coverageLead": "Country-specific verification and audit pages with the local checks that matter.",
-    "notSureTitle": "Not sure which one you need?",
-    "notSureLead": "Run the free risk calculator first. It takes about three minutes and tells you what is missing.",
+    "coverageLead": "أما صفحات التحقق والمراجعة الخاصة ببلدان محددة، مع عمليات التحقق المحلية من هذه المسألة.",
+    "notSureTitle": "لست متأكدا من أي واحد تحتاج؟?",
+    "notSureLead": "أديري حاسب المخاطرة المجاني أولاً يستغرق حوالي ثلاث دقائق ويخبرك ما هو مفقود.",
     "notSureCta": "قيّم مخاطر المورد",
-    "metaTitle": "Supplier Verification, Factory Audit and Inspection Services",
-    "metaDesc": "Independent supplier verification, factory audit, inspection and sourcing support across China, Vietnam and Thailand. Scoped and quoted per project."
+    "metaTitle": "خدمات التحقق من الموردين وتدقيق المصانع وعمليات التفتيش",
+    "metaDesc": "تحقق مستقل من الموردين وتدقيق للمصانع وفحص ودعم للتوريد في الصين وفيتنام وتايلاند وماليزيا والفلبين. يُحدد النطاق ويُسعَّر لكل مشروع."
   },
   "resourcesIndex": {
-    "badge": "Resources",
-    "h1": "Supplier Intelligence Resources",
-    "lead": "Practical guides and tools for evaluating suppliers, checking documents, preparing audits and reducing sourcing risk. Written by the people who run the checks.",
-    "categoriesTitle": "Browse by topic",
-    "categoriesLead": "Each topic lists the guides, tools and services that belong to it.",
-    "toolsTitle": "Tools",
-    "toolsLead": "Free, no account needed.",
+    "badge": "الموارد",
+    "h1": "موارد ذكاء الموردين",
+    "lead": "أدلة وأدوات عملية لتقييم الموردين، والتحقق من الوثائق، وإعداد عمليات مراجعة الحسابات، والحد من مخاطر الاستعانة بمصادر خارجية. كتبها الناس الذين يديرون الشيكات.",
+    "categoriesTitle": "الحشد حسب الموضوع",
+    "categoriesLead": "ويورد كل موضوع الأدلة والأدوات والخدمات التي تخصه.",
+    "toolsTitle": "الأدوات",
+    "toolsLead": "حر، لا حاجة إلى حساب.",
     "cat": {
       "verification": {
-        "title": "Supplier Verification",
-        "desc": "How to confirm a company is real, the site is real, and the documents hold up."
+        "title": "التحقق من الموردين",
+        "desc": "كيف تُؤكّد الشركة حقيقيّة، الموقع حقيقيّ، والوثائق تصمد."
       },
       "audit": {
-        "title": "Factory Audit",
-        "desc": "Standards, checklists, what auditors look at and how to read a report."
+        "title": "مراجعة حسابات العوامل",
+        "desc": "المعايير والقوائم المرجعية وما ينظر إليه مراجعو الحسابات وكيفية قراءة التقرير."
       },
       "risk": {
-        "title": "Supplier Risk",
-        "desc": "Scoring frameworks, weighting and how to act on a risk score."
+        "title": "مخاطر الموردين",
+        "desc": "أُطر الترجيح، الترجيح، وكيفية العمل على تحقيق هدف المخاطر."
       },
       "china": {
-        "title": "China Sourcing",
-        "desc": "Country-specific checks, registries and logistics for Chinese suppliers."
+        "title": "الصين",
+        "desc": "إجراء عمليات تفتيش وسجلات ولوجستيات خاصة ببلدان محددة للموردين الصينيين."
       },
       "sea": {
-        "title": "Southeast Asia Sourcing",
-        "desc": "Vietnam and Thailand sourcing context, risks and audit considerations."
+        "title": "جنوب شرق آسيا",
+        "desc": "السياق المتعلق بالاستعانة بالموارد في فييت نام، والمخاطر، واعتبارات مراجعة الحسابات."
       },
       "compliance": {
-        "title": "Compliance",
-        "desc": "Social compliance, product compliance and what each standard actually covers."
+        "title": "الامتثال",
+        "desc": "الامتثال الاجتماعي، والامتثال للمنتجات، وما يغطيه كل معيار فعلا."
       },
       "tools": {
-        "title": "Tools",
-        "desc": "The free calculators, checklists and scorecards."
+        "title": "الأدوات",
+        "desc": "الحاسبات الحرة والقوائم المرجعية وسجلات الأداء."
       }
     },
-    "metaTitle": "Supplier Intelligence Resources",
-    "metaDesc": "Guides and tools on supplier verification, factory audit, supplier risk, China and Southeast Asia sourcing, and compliance.",
-    "storiesTitle": "Case studies and field notes",
-    "storiesLead": "How the checks work in practice, shown with de-identified examples."
+    "metaTitle": "موارد ذكاء الموردين",
+    "metaDesc": "أدلة وأدوات بشأن التحقق من الموردين، ومراجعة حسابات المصنع، ومخاطر الموردين، ومصادرة الصين وجنوب شرق آسيا، والامتثال.",
+    "storiesTitle": "دراسات حالة ومذكرات ميدانية",
+    "storiesLead": "كيف تعمل عمليات التحقق عمليًا، مع أمثلة أُزيلت منها بيانات التعريف."
   },
   "verification": {
     "levelLabel": "مستوى التحقق",
@@ -1792,21 +1702,21 @@
       "تم التحقق من المصنع",
       "تمت مراجعة المصنع"
     ],
-    "lastVerified": "Last verified",
-    "verifiedBy": "Verified by",
-    "scope": "Verification scope",
-    "whatVerified": "What was verified",
-    "whatNotVerified": "What was not verified",
-    "evidence": "Evidence reviewed",
-    "expiry": "Expires",
-    "noRecord": "No verification record yet.",
-    "notIndependentlyVerified": "Not independently verified",
-    "noRecentAudit": "No recent third-party audit found",
+    "lastVerified": "آخر تحقق",
+    "verifiedBy": "تم التصديق عليها",
+    "scope": "نطاق التحقق",
+    "whatVerified": "ما الذي تم التحقق منه",
+    "whatNotVerified": "ما لم يتم التحقق منه",
+    "evidence": "الأدلة المستعرضة",
+    "expiry": "النفقات",
+    "noRecord": "لا سجل تحقق بعد.",
+    "notIndependentlyVerified": "غير متحقق منها بصورة مستقلة",
+    "noRecentAudit": "لم يعثر على أي مراجعة حديثة لحسابات الأطراف الثالثة",
     "notCovered": [
-      "Financial statements",
-      "Product performance in use",
-      "Current production utilisation",
-      "Subcontractors that were not disclosed to us"
+      "البيانات المالية",
+      "أداء المنتجات في الاستخدام",
+      "استخدام الإنتاج الحالي",
+      "المتعاقدون من الباطن الذين لم يكشفوا لنا"
     ]
   },
   "evidence": {
@@ -1825,68 +1735,68 @@
     "statusNote": "«مستند مقدم» يعني أن المورد أعطاه لنا. «دليل قيد المراجعة» يعني أننا تحققنا منه مقابل مصدره."
   },
   "supplierProfile": {
-    "trustSummary": "Trust summary",
-    "verificationLevel": "Verification level",
-    "lastVerified": "Last verified",
-    "riskScore": "Risk score",
-    "verificationStatus": "Verification status",
-    "evidenceSummary": "Evidence summary",
+    "trustSummary": "موجز استئماني",
+    "verificationLevel": "مستوى التحقق",
+    "lastVerified": "آخر تحقق",
+    "riskScore": "درجة المخاطر",
+    "verificationStatus": "حالة التحقق",
+    "evidenceSummary": "موجز الأدلة",
     "auditHistory": "Audit history",
-    "notCoveredTitle": "Not covered",
-    "notCoveredLead": "Checks outside the current verification scope. We list them so you know what has not been looked at.",
-    "whatVerifiedTitle": "What we verified",
-    "whatVerifiedLead": "Each line reflects a recorded verification event. Where we have no record, we say so.",
-    "viewProfile": "View profile",
-    "claimTitle": "Is this your company?",
-    "claimLead": "Claim the profile, keep the record accurate and let buyers see your verification status.",
-    "claimCta": "Claim this profile",
-    "notSatisfiedTitle": "Not satisfied with this supplier?",
-    "notSatisfiedLead": "Post an RFQ and we will look for alternatives we can verify before you commit.",
-    "notSatisfiedCta": "Post an RFQ",
-    "reverifyCta": "Request independent re-verification",
-    "manufacturer": "Manufacturer",
-    "tradingCompany": "Trading company",
-    "established": "Established {year}",
-    "employees": "Employees",
-    "exportMarkets": "Export markets",
-    "mainProducts": "Main products",
-    "inspections": "{n} inspections",
-    "noAudit": "No audit on record.",
-    "featuredNote": "Featured supplier. This is not a marketplace listing and we are not a party to any transaction.",
-    "backToDirectory": "All suppliers",
-    "overviewTitle": "Company overview",
-    "capabilitiesTitle": "Capabilities",
-    "capabilitiesLead": "Tags are marked as evidence reviewed only where we have checked the underlying document. Unchecked tags reflect what the supplier told us.",
-    "capabilitiesEmpty": "No capability tags recorded for this supplier yet.",
-    "productsTitle": "Main products",
-    "evidenceAvailableTitle": "Evidence on record",
-    "evidenceEmpty": "No evidence record yet. Request a verification and we will build one.",
-    "noCertifications": "No certifications on record.",
-    "employeesLabel": "Employees",
-    "exportMarketsLabel": "Export markets",
-    "inspectionHistoryLabel": "Inspection history",
-    "requestAudit": "Request a factory audit",
-    "requestQuote": "Request a quote",
-    "scopeTitle": "Verification scope",
-    "lastUpdated": "Last updated",
-    "selfReported": "Self-reported",
-    "auditStatusLabel": "Audit status",
-    "businessTypeLabel": "Business type",
+    "notCoveredTitle": "غير مشمولة",
+    "notCoveredLead": "تحقق خارج نطاق التحقق الحالي. نحن نُسجّلُهم لذا تَعْرفُ ما لم يُنظر إليه.",
+    "whatVerifiedTitle": "ما تحققناه",
+    "whatVerifiedLead": "ويعكس كل خط حدث تحقق مسجل. حيث ليس لدينا سجل، نقول ذلك.",
+    "viewProfile": "ملف الرؤية",
+    "claimTitle": "هل هذه شركتك؟?",
+    "claimLead": "اطالب بالمواصفات واحتفظ بالسجل بدقة ودع المشترين يرون حالة التحقق.",
+    "claimCta": "المطالبة بهذا الملف",
+    "notSatisfiedTitle": "غير راض عن هذا المورد؟?",
+    "notSatisfiedLead": "ضعي جهاز RFQ وسنبحث عن بدائل يمكننا التحقق منها قبل أن ترتكبي.",
+    "notSatisfiedCta": "(أ)",
+    "reverifyCta": "طلب إعادة التحقق المستقلة",
+    "manufacturer": "المصانع",
+    "tradingCompany": "شركة تجارية",
+    "established": "تأسست في {year}",
+    "employees": "الموظفون",
+    "exportMarkets": "أسواق التصدير",
+    "mainProducts": "المنتجات الرئيسية",
+    "inspections": "{n} عملية تفتيش",
+    "noAudit": "لا مراجعة حسابات مسجلة.",
+    "featuredNote": "المورد المميز هذه ليست قائمة بالسوق ونحن لسنا طرفاً في أي صفقة.",
+    "backToDirectory": "جميع الموردين",
+    "overviewTitle": "لمحة عامة عن الشركة",
+    "capabilitiesTitle": "القدرات",
+    "capabilitiesLead": "تم تحديد التاغز كأدلة تم استعراضها فقط حيث تحققنا من الوثيقة الأساسية علامات غير مدققة تعكس ما قاله لنا المورد.",
+    "capabilitiesEmpty": "لا توجد بطاقات قدرة مسجلة لهذا المورد بعد.",
+    "productsTitle": "المنتجات الرئيسية",
+    "evidenceAvailableTitle": "الأدلة المسجلة",
+    "evidenceEmpty": "لا يوجد سجل للأدلة بعد نطلب التحقق وسنبني واحداً.",
+    "noCertifications": "لا شهادات مسجلة.",
+    "employeesLabel": "الموظفون",
+    "exportMarketsLabel": "أسواق التصدير",
+    "inspectionHistoryLabel": "تاريخ التفتيش",
+    "requestAudit": "طلب مراجعة حسابات المصنع",
+    "requestQuote": "طلب إقتباس",
+    "scopeTitle": "نطاق التحقق",
+    "lastUpdated": "آخر تحديث",
+    "selfReported": "التقارير الذاتية",
+    "auditStatusLabel": "حالة مراجعة الحسابات",
+    "businessTypeLabel": "نوع الأعمال",
     "verifiedByTitle": "Verification by FactoryAuditB2B",
-    "verifiedByLead": "This is what our team checked. It is separate from what the supplier told us, and both are labelled.",
-    "provenanceLead": "Each line is labelled by who stands behind it: what the supplier provided, what we reviewed, what we independently verified, and what was confirmed on site.",
-    "provProvided": "Supplier provided",
-    "provReviewed": "Document reviewed",
-    "provIndependent": "Independently verified",
-    "provOnsite": "On-site verified",
-    "provNote": "\"Supplier provided\" means the supplier gave it to us and we have not checked it. \"Independently verified\" means we checked it against its source.",
-    "neverClaimedTitle": "What we never claim",
-    "neverClaimed": "We do not describe a supplier as verified unless a matching verification event and evidence exist. We do not certify suppliers ourselves.",
-    "scoreDirection": "Higher score means lower risk.",
-    "lastChecked": "Last checked",
-    "noCheckRecord": "No check on record",
-    "recVerified": "Evidence on record covers the items listed above. Re-check the scope against your order before releasing a deposit, and refresh the record if the last check is more than 12 months old.",
-    "recUnverified": "Verify the factory address and request recent quality and audit records before placing a large order or releasing a deposit.",
+    "verifiedByLead": "هذا ما فحصه فريقنا وهو منفصل عن ما قاله لنا المورد، وكلتاهما ملصقتان.",
+    "provenanceLead": "وكل خط يسميه من يقف وراءه: ما قدمه المورد، وما استعرضناه، وما تحققنا منه بصورة مستقلة، وما تأكد في الموقع.",
+    "provProvided": "مورد مقدم",
+    "provReviewed": "الوثائق المستعرضة",
+    "provIndependent": "التحقق المستقل",
+    "provOnsite": "التحقق الموقعي",
+    "provNote": "\"المورد\" يعني أن المورد أعطاه لنا ولم نفحصه \"تحققت بشكل مستقل\" يعني أننا فحصناها ضد مصدرها.",
+    "neverClaimedTitle": "ما لم نطالب به",
+    "neverClaimed": "ونحن لا نصف موردا على أنه متحقق ما لم يكن هناك حدث تحقق مطابق وأدلة. نحن لا نصدق على الموردين بأنفسنا.",
+    "scoreDirection": "النتيجة العليا تعني مخاطرة أقل.",
+    "lastChecked": "آخر فحص",
+    "noCheckRecord": "لا يوجد شيك في السجل",
+    "recVerified": "وتشمل الأدلة المسجلة الأصناف المذكورة أعلاه. اعيدوا التحقق من نطاق طلبكم قبل أن تفرجوا عن ودائعكم، وتعيدوا السجل إذا كان الشيك الأخير قد تجاوز 12 شهرا.",
+    "recUnverified": "التحقق من عنوان المصنع وطلب سجلات حديثة للجودة ومراجعة الحسابات قبل إصدار أمر كبير أو الإفراج عن ودائع.",
     "metaTitle": "ملف المورد",
     "metaDesc": "ملف مورد عام يتضمن درجة المخاطر وحالة التحقق والمنتجات والمهارات.",
     "directoryBreadcrumb": "دليل الموردين",
@@ -1896,82 +1806,82 @@
     "freeLockLead": "أنشئ حساباً مجانياً لعرض سنة التأسيس وعدد الموظفين وأسواق التصدير والشهادات.",
     "freeLockCta": "إنشاء حساب مجاني",
     "paidLockTitle": "الأعضاء يشاهدون الأدلة وتفاصيل المخاطر",
-    "paidLockLead": "أعضاء Founding Buyer (49$ سنوياً) يشاهدون سجلات الأدلة وتفاصيل المخاطر وتاريخ التدقيق وبيانات الفحص.",
+    "paidLockLead": "أعضاء Founding Buyer (99$ سنوياً) يشاهدون سجلات الأدلة وتفاصيل المخاطر وتاريخ التدقيق وبيانات الفحص.",
     "paidLockCta": "عرض العضوية",
     "paidLockNote": "درجة المخاطر عامة. الأدلة وتفاصيل التحقق محتوى خاص بالأعضاء."
   },
   "reportPreview": {
-    "badge": "Free preview",
-    "title": "Supplier Due Diligence Report",
-    "lead": "A structured review of supplier information, available evidence, risk factors and verification status.",
-    "execTitle": "Executive summary",
-    "verificationTitle": "Verification",
-    "keyRisksTitle": "Key risks",
-    "recommendationTitle": "Recommendation",
-    "riskLevel": "Risk level",
-    "score": "Score",
-    "unlockTitle": "Get the full due diligence report",
-    "unlockLead": "The full report covers company records, evidence review, risk analysis and the recommended next step. Original third-party documents stay restricted.",
-    "unlockCta": "View report options",
-    "methodologyLink": "View methodology",
-    "methodologyTitle": "How We Assess Suppliers",
-    "methodologyLead": "Risk scores come from a fixed rules engine with published weights. The report shows which inputs moved the number.",
+    "badge": "عرض مجاني",
+    "title": "تقرير العناية الواجبة للمورد",
+    "lead": "استعراض منظم للمعلومات المتعلقة بالموردين، والأدلة المتاحة، وعوامل الخطر وحالة التحقق.",
+    "execTitle": "موجز",
+    "verificationTitle": "التحقق",
+    "keyRisksTitle": "المخاطر الرئيسية",
+    "recommendationTitle": "التوصية",
+    "riskLevel": "مستوى المخاطر",
+    "score": "سكوير",
+    "unlockTitle": "الحصول على كامل تقرير العناية الواجبة",
+    "unlockLead": "ويشمل التقرير الكامل سجلات الشركات، واستعراض الأدلة، وتحليل المخاطر، والخطوة التالية الموصى بها. وثائق الأطراف الثالثة الأصلية تبقى مقيدة.",
+    "unlockCta": "خيارات الإبلاغ",
+    "methodologyLink": "منهجية الرؤية",
+    "methodologyTitle": "كيف نقيم الموردين",
+    "methodologyLead": "نتائج المخاطر تأتي من محرك قواعد ثابتة مع الأوزان المنشورة. ويبين التقرير المدخلات التي نقلت الرقم.",
     "options": {
       "basic": {
-        "name": "Basic report",
+        "name": "التقرير الأساسي",
         "price": "$99",
         "items": [
-          "Supplier overview",
-          "Risk score with dimension breakdown",
-          "Verification status",
+          "استعراض الموردين",
+          "تقييم المخاطر مع تفصيل البعد",
+          "حالة التحقق",
           "Resumen de evidencia",
           "Principales factores de riesgo",
-          "Recommended actions",
+          "الإجراءات الموصى بها",
           "PDF"
         ]
       },
       "professional": {
-        "name": "Professional due diligence",
+        "name": "العناية الواجبة المهنية",
         "price": "$129",
         "items": [
           "Todo en el informe básico",
           "Revisión detallada de la evidencia",
-          "Additional document checks",
+          "عمليات التحقق الإضافية من الوثائق",
           "تحليل مخاطر حسب أولويات المشتري",
-          "Verification notes",
+          "مذكرات التحقق",
           "PDF"
         ]
       },
       "independent": {
-        "name": "Independent verification",
-        "price": "Custom quote",
+        "name": "التحقق المستقل",
+        "price": "الاقتباس العرفي",
         "items": [
-          "Business identity verification",
-          "Factory address verification",
-          "Document verification",
-          "On-site verification where required"
+          "التحقق من الهوية التجارية",
+          "بيان الوقائع",
+          "التحقق من الوثائق",
+          "التحقق الموقعي حسب الاقتضاء"
         ]
       }
     },
-    "auditUpsellTitle": "Need the factory checked on site?",
-    "auditUpsellLead": "The report tells you what is missing. Our team can run an independent verification or a full factory audit.",
-    "auditUpsellCta": "Request an audit"
+    "auditUpsellTitle": "هل تريد فحص المصنع في الموقع؟?",
+    "auditUpsellLead": "التقرير يخبرك بما هو مفقود ويمكن لفريقنا أن يدير عملية تحقق مستقلة أو مراجعة كاملة للمصانع.",
+    "auditUpsellCta": "طلب مراجعة"
   },
   "claim": {
-    "h1": "Get Verified. Get Discovered. Get More Buyer Opportunities.",
-    "lead": "Buyers shortlist suppliers they can check. A claimed profile with verified evidence gets looked at first.",
-    "whyTitle": "Why claim your profile?",
-    "whyLead": "Help buyers understand your capabilities and verification status before they ask for a quote.",
+    "h1": "الحصول على شهادة. تم كشفها الحصول على مزيد من فرص الشراء.",
+    "lead": "يشترون موردين مختصرين يمكنهم التحقق منهم ملف مُدعى به مع أدلة مُتأكدة يتم النظر إليه أولاً.",
+    "whyTitle": "لماذا تدعي ملفك؟?",
+    "whyLead": "مساعدة المشترين على فهم قدراتك وحالة التحقق قبل أن يطلبوا إقتباساً.",
     "benefits": [
-      "Keep your company information accurate",
-      "Add products, certifications and capability details",
-      "Show your verification level publicly",
+      "أبقي معلومات شركتك دقيقة",
+      "إضافة المنتجات والتصديقات وتفاصيل القدرات",
+      "أظهر مستوى تحققك على الملأ",
       "استقبال استفسارات المشترين وفرص طلبات الأسعار RFQ"
     ],
-    "tiersTitle": "What you can do",
+    "tiersTitle": "ما يمكنك فعله",
     "free": {
-      "name": "Free",
-      "cta": "Claim your profile",
+      "name": "مجانا",
+      "cta": "إدعي ملفك",
       "items": [
         "تحديث معلومات الشركة",
         "إضافة منتجات",
@@ -1980,22 +1890,22 @@
       ]
     },
     "verified": {
-      "name": "Verified",
-      "cta": "Apply for verification",
+      "name": "مصدق عليه",
+      "cta": "تطبيق التحقق",
       "items": [
-        "Verification level on profile",
-        "Audit status and certifications shown to buyers",
+        "مستوى التحقق",
+        "حالة مراجعة الحسابات والتصديقات المبيَّنة للمشترين",
         "استفسارات المشترين",
         "علامات القدرات"
       ]
     },
     "premium": {
-      "name": "Premium",
-      "cta": "Talk to us",
+      "name": "مميز",
+      "cta": "تحدث إلينا",
       "items": [
-        "Priority placement in search",
-        "Featured on relevant industry pages",
-        "Buyer introductions",
+        "أولوية التنسيب والبحث",
+        "مسمّاة في صفحات الصناعة ذات الصلة",
+        "مقدمة للمشتريات",
         "Visibilidad del producto"
       ]
     },
@@ -2037,24 +1947,24 @@
     }
   },
   "consent": {
-    "title": "How your information is used",
+    "title": "كيف تستخدم معلوماتك",
     "body": "Information submitted by suppliers is used to create and maintain their FactoryAuditB2B supplier profile and support buyer due diligence.",
-    "privacy": "We do not publicly disclose confidential documents without authorization.",
+    "privacy": "نحن لا نكشف عن وثائق سرية بدون إذن.",
     "authorize": "I authorize FactoryAuditB2B to use the information and documents I provide for supplier verification and buyer due diligence, subject to the platform's privacy and document-sharing rules.",
-    "prefsTitle": "Information sharing preferences",
+    "prefsTitle": "أفضليات تقاسم المعلومات",
     "public": {
-      "title": "Public",
-      "lead": "Visible to everyone.",
+      "title": "الجمهور",
+      "lead": "مريعة للجميع.",
       "items": [
         "اسم الشركة",
-        "Location",
+        "الموقع",
         "Productos",
-        "Verification status"
+        "حالة التحقق"
       ]
     },
     "buyerView": {
-      "title": "Buyer view",
-      "lead": "Visible to verified buyers.",
+      "title": "رأي المشتري",
+      "lead": "مرئية للمشترين المتحققين.",
       "items": [
         "Evidencia seleccionada",
         "Detalles del certificado",
@@ -2062,88 +1972,88 @@
       ]
     },
     "restricted": {
-      "title": "Restricted",
-      "lead": "Only with your explicit authorization.",
+      "title": "المقيدة",
+      "lead": "فقط بإذنك الصريح.",
       "items": [
-        "Original audit reports",
+        "تقارير مراجعة الحسابات الأصلية",
         "Documentos confidenciales",
         "Fotos internas del PFDC."
       ]
     },
     "private": {
-      "title": "Private",
-      "lead": "Used internally to maintain your verification record.",
+      "title": "خاص",
+      "lead": "استخدمت داخلياً للحفاظ على سجل التحقق الخاص بك.",
       "items": [
         "Documentos fuente no compartidos",
-        "Verification working notes"
+        "مذكرات عمل للتحقق"
       ]
     },
-    "thirdPartyNote": "Third-party audit reports from SGS, Intertek, Bureau Veritas, TÜV and similar bodies may carry licence or confidentiality restrictions. We show them as reviewed, and we do not redistribute the original document without the appropriate rights."
+    "thirdPartyNote": "ويمكن لتقارير مراجعة الحسابات المقدمة من الأطراف الثالثة من مجموعة SGS و Intertek و Bureau Veritas و TÜV والهيئات المماثلة أن تفرض قيودا على الترخيص أو السرية. ونحن نعرضها على النحو المستعرض، ونحن لا نعيد توزيع الوثيقة الأصلية بدون الحقوق المناسبة."
   },
   "methodology": {
-    "badge": "Methodology",
-    "h1": "How Our Supplier Risk Assessment Works",
-    "lead": "Risk scores are calculated by a deterministic rules engine with published weights. The same inputs always produce the same score. Language models are used only to explain a result in plain language, and they cannot change the number.",
-    "quickAnswer": "We score a supplier across six weighted dimensions: company, quality, compliance, production, supply chain and documentation. Each answer you give maps to one dimension, contributes a weighted risk value, and rolls up into an overall figure out of 100, where higher means more risk. Missing evidence raises the score rather than being treated as neutral. The weights shown below are read directly from the scoring model, not typed by hand.",
-    "frameworkTitle": "Scoring framework",
-    "frameworkBody": "Each question belongs to one dimension. Within a dimension, answers carry a risk value between 0 and 100. The dimension score is the weighted mean of its answered questions, and the overall score is the weighted mean of the dimensions below.",
-    "weightsTitle": "Risk dimensions and weights",
-    "weightsLead": "Weights are configurable in our admin and shown here so you can see what actually moves the number.",
-    "weightsFallback": "Dimension weights are read from the risk model in our database and shown here when available.",
-    "dimensionTitle": "Dimension",
-    "weightTitle": "Weight",
-    "evidenceTitle": "Evidence",
-    "evidenceBody": "The score is only as good as the evidence behind it. Where you tell us you do not know something, we treat it as an open gap and score it accordingly. A supplier can lower its score by producing documents, not by arguing with the model.",
-    "limitationsTitle": "Limitations",
-    "limitationsLead": "What this score does not tell you.",
+    "badge": "المنهجية",
+    "h1": "كيف يعمل تقييم المخاطر لدينا",
+    "lead": "وتُحسب درجات المخاطر بواسطة محرك قواعد تحديدية له أوزان منشورة. نفس المدخلات دائماً تنتج نفس النتيجة ولا تستخدم نماذج اللغات إلا لشرح النتيجة بلغة عادية، ولا يمكنها تغيير الرقم.",
+    "quickAnswer": "نُقيّم المورد عبر ثمانية أبعاد مرجّحة: الشركة، الجودة، الامتثال، الإنتاج، سلسلة التوريد، الوثائق، التصديق والبصمة الرقمية. كل إجابة تقدّمها تنتمي إلى بُعد واحد، وتساهم بقيمة مخاطر مرجّحة، وتُجمع في نتيجة إجمالية من 100، حيث تعني الدرجة الأعلى مخاطر أقل. غياب الأدلة يخفض الدرجة بدلاً من معاملته كأمر محايد. الأوزان المعروضة أدناه تُقرأ مباشرة من نموذج التقييم، ولا تُدخل يدوياً.",
+    "frameworkTitle": "إطار البحث",
+    "frameworkBody": "كل سؤال له بعد واحد وفي بُعد ما، تنطوي الأجوبة على قيمة مخاطر تتراوح بين صفر و 100. The dimension score is the weighted mean of its answered questions, and the overall score is the weighted mean of the dimensions below.",
+    "weightsTitle": "أبعاد المخاطر والوزن",
+    "weightsLead": "الوزن قابل للتشكيل في مكاننا وتظهر هنا لترى ما يحرك الرقم.",
+    "weightsFallback": "وتُقرأ أوزان البعد من نموذج المخاطر في قاعدة بياناتنا وتُعرض هنا عند توافرها.",
+    "dimensionTitle": "البعد",
+    "weightTitle": "الوزن",
+    "evidenceTitle": "الأدلة",
+    "evidenceBody": "النتيجة جيدة مثل الدليل خلفها حيث تُخبرُنا بأنّك لا تَعْرفُ شيءَ، نُعالجُه كa فجوة مفتوحة ويَحْسبُه بناء على ذلك. ويمكن للمورد أن يقلل من حصته عن طريق إصدار وثائق، لا عن طريق الجدل مع النموذج.",
+    "limitationsTitle": "القيود",
+    "limitationsLead": "ما لا تقوله هذه النتيجة.",
     "limitations": [
-      "It is not a financial credit assessment. We do not review financial statements unless you ask us to.",
-      "It does not confirm that equipment exists or that a quality system runs day to day. That needs a site visit or an audit.",
-      "It is a point-in-time assessment. A score is valid as of the date it was produced.",
-      "It cannot detect a supplier that deliberately provides false documents, although document cross-checks reduce the gap.",
-      "Weights are our judgement, not an industry standard. We publish them so you can disagree with us in specific terms."
+      "وهو ليس تقييماً مالياً. نحن لا نستعرض البيانات المالية إلا إذا طلبت منا ذلك.",
+      "وهي لا تؤكد وجود المعدات أو أن نظام الجودة يعمل يوميا. وهذا يحتاج إلى زيارة موقعية أو مراجعة حسابات.",
+      "إنه تقييم زمني ويصبح الأثر سارياً اعتباراً من تاريخ إنتاجه.",
+      "ولا يمكنها أن تكتشف موردا يقدم عمدا وثائق مزورة، على الرغم من أن فحص الوثائق يخفض الفجوة.",
+      "الوزن هو حكمنا وليس معيار الصناعة ننشرها حتى لا نتفق معنا بعبارات محددة."
     ],
-    "updateTitle": "Update policy",
-    "updateBody": "We review weights when we make a material change to the model, and we record the version in use when a score is produced. Methodology changes are listed here with their date.",
-    "changelogTitle": "Changelog",
-    "versionTitle": "Current version",
-    "aiTitle": "Where AI is used, and where it is not",
-    "aiBody": "Scores come from the rules engine alone. A language model may summarize or explain a result in plain language, and it may draft the recommended actions. It does not decide the score, and it cannot see the weights as a variable it can adjust.",
-    "ctaTitle": "Want the checks done rather than scored?",
-    "ctaLead": "Our verification service confirms registration, site, capability, quality and compliance, and gives you a written report before you pay anything.",
-    "ctaPrimary": "Supplier verification service",
-    "ctaSecondary": "Score a supplier free",
-    "metaTitle": "How Our Supplier Risk Assessment Works",
-    "metaDesc": "The scoring framework, risk dimensions, weights, evidence rules, limitations and update policy behind our supplier risk scores. Calculated by a deterministic rules engine, not by AI.",
-    "scoredInputsLabel": "Inputs",
-    "scoredTableNote": "{n} scored inputs · {d} dimensions · total weight {w}.",
-    "weightsSumLine": "— six dimensions, {n} inputs, weights summing to {w}.",
-    "howWeVerifyTitle": "How we verify: six steps",
-    "howWeVerifyLead": "A verification is not a screenshot or a summary. It is a documented sequence, and each step has a written output.",
+    "updateTitle": "آخر السياسات",
+    "updateBody": "نستعرض الأوزان عندما ندخل تغييراً جوهرياً في النموذج، ونسجل النسخة المستخدمة عندما يتم إنتاج النتيجة. وترد هنا التغييرات المنهجية في تاريخها.",
+    "changelogTitle": "التغيير",
+    "versionTitle": "الصيغة الحالية",
+    "aiTitle": "حيث يُستَخدَمُ AI، وحيثما لا",
+    "aiBody": "الكشافة تأتي من محرك القواعد وحدها. ويمكن لنموذج اللغة أن يوجز أو يشرح النتيجة بلغة بسيطة، ويجوز له أن يصوغ الإجراءات الموصى بها. إنه لا يُقرّر النتيجة، ولا يمكنه أن يرى الأوزان كتغيير يمكن أن تتكيف معه.",
+    "ctaTitle": "هل تريد أن تنتهي الشيكات بدلاً من أن تُسجل؟?",
+    "ctaLead": "وخدمتنا للتحقق تؤكد التسجيل، والموقع، والقدرة، والجودة والامتثال، وتعطيك تقريرا خطيا قبل أن تدفع أي شيء.",
+    "ctaPrimary": "خدمات التحقق من الموردين",
+    "ctaSecondary": "افسحوا المجال للمورد",
+    "metaTitle": "كيف يعمل تقييم المخاطر لدينا",
+    "metaDesc": "The scoring framework, risk dimensions, weights, evidence rules, limitations and update policy behind our suppliers risk scores. محسوبة بمحرك قواعد محدد، وليس من قبل منظمة العفو الدولية.",
+    "scoredInputsLabel": "المدخلات",
+    "scoredTableNote": "{n} مدخلات مُسجلة .1 أبعاد {d} الوزن الكلي {w}.",
+    "weightsSumLine": "- ثمانية أبعاد، {n} مدخلات، أوزان تلخ إلى {w}.",
+    "howWeVerifyTitle": "كيفية التحقق: ست خطوات",
+    "howWeVerifyLead": "التحقق ليس تصوّرا أو موجزا. وهو تسلسل موثق، ولكل خطوة ناتج خطي.",
     "howWeVerifySteps": [
       {
-        "title": "Screen",
-        "body": "We check the company against public registries, trade records and the supplied documents."
+        "title": "فحص مبدئي",
+        "body": "نتحقق من الشركة ضد السجلات العامة، والسجلات التجارية، والوثائق المقدمة."
       },
       {
-        "title": "Request evidence",
-        "body": "We list exactly which documents we need, and mark every gap."
+        "title": "الأدلة",
+        "body": "نسجل بالضبط أي الوثائق التي نحتاجها، ونسجل كل فجوة."
       },
       {
-        "title": "Review",
-        "body": "Each document is checked for validity, consistency and context by a person."
+        "title": "الاستعراض",
+        "body": "ويتم فحص كل وثيقة للتأكد من صحتها واتساقها وسياقها من قبل شخص ما."
       },
       {
-        "title": "Score",
-        "body": "The rules engine turns the reviewed inputs into the eight-dimension risk score."
+        "title": "سكوير",
+        "body": "ويحوّل محرك القواعد المدخلات المستعرضة إلى درجة مخاطر الـثمانية الأبعاد."
       },
       {
-        "title": "Report",
-        "body": "Findings, evidence status and recommendation are written with sources and dates."
+        "title": "التقرير",
+        "body": "وتُكتب النتائج وحالة الأدلة والتوصية بالمصادر والتواريخ."
       },
       {
-        "title": "Re-check",
-        "body": "Verified facts carry a checked date and can be re-checked on a schedule you choose."
+        "title": "إعادة التدقيق",
+        "body": "الحقائق المصدق عليها تحمل تاريخاً مدققاً ويمكن إعادة فحصها على جدول تختاره."
       }
     ]
   },
@@ -2176,7 +2086,7 @@
     "operatesLead": "تُدار FactoryAuditB2B من قبل شركة مسجلة في الصين وتقدم التحقق من الموردين ومراجعة المصانع ودعم التوريد للمشترين حول العالم.",
     "operatesNotConfigured": "تُدار FactoryAuditB2B من قبل شركة مسجلة. ننشر اسم الكيان القانوني بمجرد تكوينه في مركز الثقة.",
     "scopeTitle": "نطاق الأعمال",
-    "scopeBody": "التحقق من الموردين ومراجعة المصانع والفحص ودعم التوريد للمشترين المستوردين من الصين وجنوب شرق آسيا. تغطي المرحلة الأولى الصين وفيتنام وتايلاند.",
+    "scopeBody": "التحقق من الموردين وتدقيق المصانع والفحص ودعم التوريد للمشترين المستوردين من الصين وجنوب شرق آسيا. تغطي المرحلة الأولى الصين وفيتنام وتايلاند وماليزيا والفلبين.",
     "verifyTitle": "ما الذي نتحقق منه",
     "verifyLead": "هذه هي الفحوصات التي تغطيها خدمة التحقق لدينا.",
     "verify": [
@@ -2346,7 +2256,7 @@
       },
       {
         "q": "كم تكلفة الفحص؟",
-        "a": "It depends on inspection type, scope, location, duration and the product. A standard single-site PSI in a major manufacturing hub is typically in the range of USD 200–350 per man-day, plus travel outside hub cities. Send us the factory location and we will quote it precisely."
+        "a": "وهو يعتمد على نوع التفتيش، والنطاق، والموقع، والمدة، والمنتج. A standard single-site PSI in a major manufacturing hub is typically in the range of USD 200–350 per man-day, plus travel outside hub cities. أرسل لنا موقع المصنع وسنقتبس منه بدقة."
       },
       {
         "q": "هل يمكنكم الفحص وفق قائمة المراجعة الخاصة بي؟",
@@ -2385,7 +2295,7 @@
       "firstName": "اسمك",
       "company": "الشركة",
       "email": "بريد العمل",
-      "emailPlaceholder": "you@company.com"
+      "emailPlaceholder": "You@company.com"
     }
   },
   "auditGuide": {
@@ -2405,205 +2315,205 @@
     "verificationCta": "تحقّق من المورد أولاً"
   },
   "supplierNetwork": {
-    "metaTitle": "Join the Supplier Network | Free Supplier Profile",
+    "metaTitle": "انضم إلى شبكة الموردين",
     "metaDesc": "Join the FactoryAuditB2B Supplier Network for free. Get an international buyer-facing profile, supplier verification support, factory audit and inspection services.",
-    "badge": "Supplier Network",
+    "badge": "شبكة الموردين",
     "h1": "Join the FactoryAuditB2B Supplier Network",
-    "lead": "A free profile that international buyers can find, with verification support behind it. No guaranteed orders, no guaranteed certificates, no audit pass promised.",
-    "benefitsTitle": "What you get",
+    "lead": "A free profile that international buyers can find, with verification support behind it. لا أوامر مضمونة، لا شهادات مضمونة، لا تصريح مراجعة.",
+    "benefitsTitle": "ما تحصل عليه",
     "benefits": [
-      "Free supplier profile listed for international buyers",
-      "Buyer inquiry opportunities",
-      "Supplier verification support",
-      "Factory audit services",
-      "Pre-shipment inspection services",
-      "Compliance consulting"
+      "قائمة بالموردين الحرين للمشترين الدوليين",
+      "فرص التحقيق",
+      "دعم التحقق من الموردين",
+      "خدمات مراجعة حسابات العوامل",
+      "خدمات التفتيش قبل الشحن",
+      "التشاور بشأن الامتثال"
     ],
-    "noGuaranteeTitle": "What we do not promise",
-    "noGuarantee": "We do not promise guaranteed orders, guaranteed certification, or guaranteed audit pass. Verification reports describe what we actually found.",
+    "noGuaranteeTitle": "ما لا نعد به",
+    "noGuarantee": "ونحن لا نعد بأوامر مضمونة، أو ضمان التصديق، أو ضمان تصريح مراجعة الحسابات. تقارير التحقق تصف ما وجدناه.",
     "certStatement": "FactoryAuditB2B does not sell or issue certificates.",
-    "howTitle": "How joining works",
+    "howTitle": "كَمْ الإنضمام يعمل",
     "howSteps": [
-      "Submit the application below (free)",
-      "Our team reviews documents and information manually",
-      "We assign an evidence level and a risk score",
-      "Approved profiles are listed on the supplier directory"
+      "يرجى تقديم الطلب أدناه (خالي)",
+      "فريقنا يستعرض الوثائق والمعلومات يدويا",
+      "نحن نحدد مستوى الأدلة وسجل الخطر",
+      "وترد في دليل الموردين قائمة بالموجزات المعتمدة"
     ],
-    "statusTitle": "Supplier status",
-    "statusLead": "Every application moves through a review pipeline. Status is decided by a human reviewer, not by payment.",
+    "statusTitle": "مركز الموردين",
+    "statusLead": "كل طلب يمر عبر خط أنابيب للاستعراض ويقرّر مراجع حقوق الإنسان الوضع، لا بالدفع.",
     "statuses": [
-      "Pending",
-      "Submitted",
-      "Under Review",
-      "Approved",
-      "Approved with Conditions",
-      "Verified Supplier",
-      "Suspended",
-      "Rejected"
+      "تنتهي",
+      "مقدمة",
+      "قيد الاستعراض",
+      "الوظائف المعتمدة",
+      "الوظائف المعتمدة",
+      "مورد مصدق",
+      "الوظائف المعلقة",
+      "مرفوض"
     ],
-    "evidenceTitle": "Evidence level",
-    "evidenceLead": "We show how each piece of information was confirmed. A listing without evidence is marked as self-declared, never as verified.",
+    "evidenceTitle": "مستوى الأدلة",
+    "evidenceLead": "نظهر كيف تم تأكيد كل قطعة من المعلومات وتُعتبر القائمة بدون أدلة مُعلنة ذاتياً، ولم يتم التحقق منها.",
     "evidenceLevels": [
-      "Self-Declared",
-      "Document Submitted",
-      "Document Reviewed",
-      "Independently Verified",
-      "Factory Audited"
+      "إعلان ذاتي",
+      "الوثيقة",
+      "الوثائق المستعرضة",
+      "التصديق المستقل",
+      "العوامل التي تم مراجعتها"
     ],
-    "formTitle": "Supplier registration",
-    "formLead": "All fields are used to build your profile and to prepare verification. Required fields are marked.",
+    "formTitle": "تسجيل الموردين",
+    "formLead": "كل الحقول تستخدم لبناء ملفك وإعداد التحقق. الحقول المطلوبة معلومة.",
     "form": {
       "sections": {
-        "company": "Company Information",
-        "factory": "Factory Information",
-        "products": "Products & Production Capability",
-        "export": "Export Markets",
-        "certificates": "Certificates",
-        "contact": "Contact Information",
-        "availability": "Audit & Inspection Availability",
-        "authorization": "Authorization & Privacy",
-        "message": "Message"
+        "company": "سرية المعلومات",
+        "factory": "معلومات عن العوامل",
+        "products": "الإنتاجية",
+        "export": "أسواق التصدير",
+        "certificates": "الشهادات",
+        "contact": "الاتصال",
+        "availability": "مراجعة الحسابات",
+        "authorization": "الإذن بالخصوصية",
+        "message": "الرسالة"
       },
       "labels": {
-        "companyName": "Company name *",
-        "englishName": "English name",
-        "companyType": "Company type (manufacturer, trading, agent)",
-        "registrationNumber": "Business registration number",
-        "establishedYear": "Year established",
-        "website": "Website",
-        "factoryCountry": "Factory country *",
-        "factoryCity": "Factory city",
-        "factoryAddress": "Factory address",
-        "employees": "Number of employees",
-        "factorySize": "Factory size (sqm)",
-        "mainProducts": "Main products *",
-        "productionCapacity": "Production capacity",
-        "monthlyOutput": "Monthly output (pieces)",
-        "exportMarkets": "Export markets",
-        "exportSince": "Exporting since",
-        "certificates": "Certificates (ISO, BSCI, SMETA, etc.)",
-        "contactName": "Contact person",
-        "contactEmail": "Contact email *",
-        "contactPhone": "Phone",
+        "companyName": "اسم الشركة",
+        "englishName": "الاسم الانكليزي",
+        "companyType": "نوع الشركة (مصنع، تجارة، وكيل)",
+        "registrationNumber": "رقم تسجيل الأعمال",
+        "establishedYear": "السنة المنشأة",
+        "website": "الموقع الشبكي",
+        "factoryCountry": "بلد المصانع",
+        "factoryCity": "مدينة المصنع",
+        "factoryAddress": "عنوان المصانع",
+        "employees": "عدد الموظفين",
+        "factorySize": "حجم المصانع",
+        "mainProducts": "المنتجات الرئيسية*",
+        "productionCapacity": "القدرة الإنتاجية",
+        "monthlyOutput": "الناتج الشهري (قطع الغيار)",
+        "exportMarkets": "أسواق التصدير",
+        "exportSince": "الصادرات منذ ذلك الحين",
+        "certificates": "شهادات (منظمة الطيران المدني الدولي، BSCI، SMETA، إلخ)",
+        "contactName": "شخص الاتصال",
+        "contactEmail": "بالبريد الإلكتروني",
+        "contactPhone": "الهاتف",
         "contactWhatsapp": "WhatsApp",
-        "auditAvailability": "Available for factory audit",
-        "inspectionAvailability": "Available for pre-shipment inspection",
+        "auditAvailability": "متاحة لمراجعة حسابات المصنع",
+        "inspectionAvailability": "متاح للتفتيش قبل الشحن",
         "authorizeCompanyProfile": "I authorize FactoryAuditB2B to display my company profile to international buyers *",
-        "authorizeCompanyProfileYes": "Yes, display company profile",
-        "authorizeCompanyProfileNo": "No, keep it private",
-        "contactVisibility": "Contact details visibility",
-        "contactVisibilityPublic": "Public on profile",
-        "contactVisibilityPlatform": "Shared only with interested buyers",
+        "authorizeCompanyProfileYes": "نعم، عرض ملف الشركة",
+        "authorizeCompanyProfileNo": "لا، أبقيه سراً",
+        "contactVisibility": "تفاصيل الاتصال",
+        "contactVisibilityPublic": "ظاهر في الملف العام",
+        "contactVisibilityPlatform": "تبادل فقط مع المشترين المهتمين",
         "contactVisibilityPrivate": "Private (contact via FactoryAuditB2B only)",
-        "message": "Tell us about your factory (optional)"
+        "message": "أخبرنا عن مصنعك"
       },
-      "submit": "Submit application",
-      "submitting": "Submitting…",
-      "privacyNote": "Personal contact details are stored separately from company profile data. Your contact visibility choice above is respected."
+      "submit": "الطلب المقدم",
+      "submitting": "....",
+      "privacyNote": "وتُخزَّن تفاصيل الاتصال الشخصي بشكل منفصل عن بيانات البيانات المتعلقة بالشركات. إختيارك للرؤية فوق محترم."
     },
-    "success": "Thank you. Your application was received. Our team will reply within one business day.",
-    "error": "Something went wrong. Please check the form and try again.",
-    "processTitle": "How we review",
+    "success": "شكراً لك تم تلقي طلبك فريقنا سيجيب في يوم عمل واحد.",
+    "error": "حدث شيء خاطئ من فضلك تحقق من النموذج وحاول مرة أخرى.",
+    "processTitle": "كيف نراجع",
     "processSteps": [
-      "Completeness check of submitted information",
-      "Document consistency check (AI-assisted)",
-      "Evidence level assignment",
-      "Risk score (100-point, 10-dimension model)",
-      "Human review decision on supplier status"
+      "التحقق من اكتمال المعلومات المقدمة",
+      "التحقق من اتساق الوثائق (مساعدة من منظمة العفو الدولية)",
+      "تعيين على مستوى الأدلة",
+      "معدل المخاطر (100 نقطة، نموذج 10 أبعاد)",
+      "قرار استعراض حالة الموردين"
     ],
-    "riskTitle": "Supplier risk score",
-    "riskLead": "We score each supplier on a 100-point model across ten dimensions: company identity, business information, factory information, document consistency, certificate evidence, production capability, export experience, contact verification, audit evidence, and other risk indicators.",
+    "riskTitle": "تقييم مخاطر الموردين",
+    "riskLead": "ونسجل كل مورد على نموذج 100 نقطة عبر عشرة أبعاد: هوية الشركة، والمعلومات التجارية، والمعلومات المتعلقة بالمصانع، واتساق الوثائق، والأدلة على صحة الشهادات، والقدرة الإنتاجية، وخبرة التصدير، والتحقق من الاتصال، وأدلة مراجعة الحسابات، ومؤشرات المخاطر الأخرى.",
     "riskBands": [
-      "80–100: Low risk / strong profile",
-      "60–79: Moderate risk",
-      "40–59: Needs further verification",
-      "Below 40: High risk / insufficient evidence"
+      "80-100: منخفض المخاطر/ملامح قوية",
+      "٦٠-٧٩: المخاطر الحديثة",
+      "٤٠-٥٩: الحاجة إلى مزيد من التحقق",
+      "Below 40: High risk/ insufficient evidence"
     ],
-    "riskDisclaimer": "Risk Score is an informational assessment and does not constitute certification, accreditation or a guarantee of supplier performance.",
-    "docsTitle": "Documents we use",
-    "docsLead": "Standard templates used in registration, verification, audits and inspections.",
-    "docsNote": "Templates are provided as Google Docs. Contact us to request a copy for your verification or audit project.",
+    "riskDisclaimer": "ويعد تقييم المخاطر تقييماً إعلامياً ولا يشكل التصديق أو الاعتماد أو ضماناً لأداء الموردين.",
+    "docsTitle": "الوثائق التي نستخدمها",
+    "docsLead": "النماذج الموحدة المستخدمة في التسجيل والتحقق ومراجعة الحسابات والتفتيش.",
+    "docsNote": "وتُقدَّم النماذج على أنها وثيقة غوغل. اتصل بنا لطلب نسخة من مشروعك للتحقق أو مراجعة الحسابات.",
     "docs": [
-      "Supplier Information Authorization",
-      "Supplier Information & Document Authenticity Declaration",
-      "Supplier Code of Conduct",
-      "Supplier Anti-Bribery & Integrity Commitment",
-      "Conflict of Interest Declaration",
-      "Auditor Integrity & Confidentiality Commitment",
-      "Supplier Verification Checklist",
-      "Certificate Verification Checklist",
-      "Supplier Risk Assessment",
-      "Supplier Verification Record",
-      "Factory Audit Preparation Checklist",
-      "Corrective Action Plan",
-      "Buyer-Supplier Matching Record",
-      "Supplier Quotation Form",
-      "Factory Audit Service Agreement",
-      "Factory Inspection Service Agreement",
-      "Compliance Consulting Agreement",
-      "Complaint & Whistleblowing Form",
-      "Non-Circumvention Agreement",
-      "Supplier Suspension/Removal Notice"
+      "الإذن بتقديم المعلومات",
+      "Supplier Information &quot; Document Authenticity Declaration",
+      "مدونة قواعد السلوك للموردين",
+      "الالتزام بمكافحة نزاهة الموردين",
+      "إعلان تضارب المصالح",
+      "الالتزام بالسرية",
+      "قائمة مرجعية للتحقق من الموردين",
+      "قائمة التحقق من شهادات التحقق",
+      "تقييم مخاطر الموردين",
+      "سجل التحقق للموردين",
+      "قائمة مرجعية للتجهيز",
+      "خطة العمل الإصلاحية",
+      "سجلات الشراء - الموردين",
+      "الاستمارة",
+      "اتفاق دائرة مراجعة الحسابات",
+      "اتفاق دائرة التفتيش على الوقائع",
+      "اتفاق التشاور بشأن الامتثال",
+      "Complaint &quot; Whistleblowing Form",
+      "اتفاق عدم التدخل",
+      "إشعار تعليق المورد أو إزالته"
     ],
-    "contactTitle": "Need help?",
-    "contactLead": "Questions about joining, verification, audits or inspections? Leave a message and our team will reply within one business day.",
-    "contactCta": "Talk to our team"
+    "contactTitle": "هل تحتاج مساعدة؟?",
+    "contactLead": "أسئلة عن الانضمام أو التحقق أو مراجعة الحسابات أو التفتيش؟ اترك رسالة وسيرد فريقنا خلال يوم عمل واحد.",
+    "contactCta": "تحدث إلى فريقنا"
   },
   "sampleReport": {
-    "metaTitle": "Sample Supplier Due Diligence Report — See What You Get",
-    "metaDesc": "A fully worked example of our Supplier Due Diligence Report. Fictional supplier, real structure: risk score, dimension breakdown, findings, evidence status and recommendation.",
-    "badge": "Sample report",
-    "h1": "Supplier Due Diligence Report",
-    "lead": "This page is a demonstration. The company below is fictional and the report is a sample. It shows the structure and the level of detail you receive when you order a verification.",
-    "sampleBanner": "SAMPLE / DEMONSTRATION — Fictional data. This is not a real supplier and not a real verification.",
-    "reportTitle": "Supplier Due Diligence Report",
-    "reportRef": "Report reference: SDD-2026-0001 (sample)",
-    "reportDate": "Report date: 12 August 2026",
-    "preparedFor": "Prepared for: Sample Buyer Ltd. (illustrative)",
-    "companySection": "1. Company snapshot",
-    "companyNameLabel": "Company name",
-    "companyName": "Shenzhen Northstar Electronics Co., Ltd.",
-    "countryLabel": "Country",
-    "companyCountry": "China",
-    "registeredLabel": "Registered",
-    "companyRegistered": "Yes — registration verified against public registry",
-    "yearLabel": "Year established",
+    "metaTitle": "تقرير عن الإهمال",
+    "metaDesc": "مثال عمل تماماً لتقريرنا عن التفاني الواجب مورد وهمي، وهيكل حقيقي: درجة المخاطر، وانهيار البعد، والنتائج، وحالة الأدلة، والتوصية.",
+    "badge": "تقرير موجز",
+    "h1": "تقرير العناية الواجبة للمورد",
+    "lead": "هذه الصفحة هي مظاهرة الشركة الواردة أدناه خيالية والتقرير عينة يُظهر الهيكل ومستوى التفاصيل التي تتلقاها عندما تطلب التحقق.",
+    "sampleBanner": "SAMPLE / DEMONSTRATION - Fictional data. وهذا ليس موردا حقيقيا وليس التحقق الحقيقي.",
+    "reportTitle": "تقرير العناية الواجبة للمورد",
+    "reportRef": "الرقم المرجعي للتقرير: SDD-2026-0001 (نموذج)",
+    "reportDate": "تاريخ التقرير: 12 آب/أغسطس 2026",
+    "preparedFor": "Prepared for: Sample Buyer Ltd. (ملوث)",
+    "companySection": "1 طلقات نارية",
+    "companyNameLabel": "اسم الشركة",
+    "companyName": "Shenzhen XX Electronics Co., Ltd.",
+    "countryLabel": "البلد",
+    "companyCountry": "الصين",
+    "registeredLabel": "المسجلة",
+    "companyRegistered": "نعم - تم التحقق من التسجيل في السجل العام",
+    "yearLabel": "السنة المنشأة",
     "companyYear": "2015",
-    "employeeLabel": "Employees",
-    "companyEmployees": "180 (self-reported)",
-    "productsLabel": "Main products",
-    "companyProducts": "Consumer electronics accessories, USB-C cables",
-    "scoreSection": "2. Risk score",
-    "scoreLabel": "Overall score",
+    "employeeLabel": "الموظفون",
+    "companyEmployees": "180 (تقرير ذاتي)",
+    "productsLabel": "المنتجات الرئيسية",
+    "companyProducts": "وصلات إلكترونية للمستهلكين، وكابلات من طراز USB-C",
+    "scoreSection": "2. درجة المخاطر",
+    "scoreLabel": "النتيجة الإجمالية",
     "scoreValue": "76 / 100",
-    "scoreLevel": "Low risk",
-    "scoreNote": "Higher score means lower risk. 76 puts this supplier in the low-risk band, with the caveats listed below.",
-    "dimensionSection": "3. Dimension breakdown",
-    "dimensionNote": "Each dimension is scored from the evidence on record. Missing evidence lowers the score; it is never treated as confirmation.",
-    "findingsSection": "4. Key findings",
+    "scoreLevel": "المخاطر المنخفضة",
+    "scoreNote": "النتيجة العليا تعني مخاطرة أقل (76) يضع هذا المورد في الفرقة ذات المخاطر المنخفضة، مع الكهوف الواردة أدناه.",
+    "dimensionSection": "3 انهيار البعد",
+    "dimensionNote": "ويسجل كل بعد من الأدلة المسجلة. - تخفض الأدلة المفقودة النتيجة؛ لا يُعامل أبداً كتأكيد.",
+    "findingsSection": "4 النتائج الرئيسية",
     "findings": [
-      "Business registration matches the name on the purchase order and the factory signboard.",
-      "ISO 9001:2015 certificate is valid until May 2028, issued by a recognised body.",
-      "Social compliance audit (BSCI) is current, with 4 minor findings closed out.",
-      "Export licence and VAT registration confirmed against public records.",
-      "Digital footprint: active website since 2018, two Alibaba storefronts; no adverse news found in this review window."
+      "ويطابق تسجيل الأعمال التجارية الاسم على طلب الشراء وعلى لوحة إشارة المصنع.",
+      "شهادة ISO 9001:2015 سارية حتى مايو 2028، صادرة عن جهة معتمدة.",
+      "وتجري مراجعة حسابات الامتثال الاجتماعي، حيث أُغلقت 4 نتائج طفيفة.",
+      "تم تأكيد رخصة التصدير والتسجيل في ضريبة القيمة المضافة بالرجوع إلى السجلات العامة.",
+      "بصمة رقمية: موقع نشط على شبكة الإنترنت منذ عام 2018، وهما واجهتان لمخزن &quot; العليبة &quot; ؛ لا توجد أخبار سيئة في نافذة الاستعراض هذه."
     ],
-    "evidenceSection": "5. Evidence status",
-    "evidenceIntro": "Evidence status reflects what our team actually reviewed. A document is marked as reviewed only when a copy was seen and checked.",
+    "evidenceSection": "5 حالة الأدلة",
+    "evidenceIntro": "حالة الأدلة تعكس ما استعرضه فريقنا بالفعل وتوضع علامة على الوثيقة على أنها لا تُستعرض إلا عندما تُشاهد وتُدقق نسخة منها.",
     "evidenceItems": [
-      "Business licence — Evidence Reviewed",
-      "ISO 9001:2015 certificate — Evidence Reviewed",
-      "BSCI audit report — Document Provided (not re-audited by us)",
-      "Factory photos — Document Provided",
-      "Export records — Restricted (third-party documents not forwarded)"
+      "رخصة الأعمال - الأدلة المستعرضة",
+      "ISO 9001:2015 certificate - Evidence Reviewed",
+      "تقرير مراجعة حسابات شركة BSCI - الوثيقة المقدمة )لم نعيد النظر فيها(",
+      "صور المصانع - الوثيقة المقدمة",
+      "سجلات التصدير - المقيدة )وثائق الأطراف الثالثة غير المرسلة("
     ],
-    "recommendSection": "6. Recommendation",
-    "recommendBody": "Score 76/100, low risk. We recommend a document verification before the first order, and an on-site audit before a repeat order above USD 50,000.",
-    "ctaTitle": "Order a real verification",
-    "ctaLead": "Get this level of detail for your actual supplier. Verification starts at $99 per supplier, quoted per project.",
-    "ctaPrimary": "Request verification",
-    "ctaSecondary": "Back to pricing",
-    "disclaimer": "This sample uses fictional data and is for demonstration only. It is not a verification of any real company. Original third-party documents are never forwarded to buyers.",
+    "recommendSection": "6. التوصية",
+    "recommendBody": "رقم 76/100، خطر منخفض. ونوصي بالتحقق من الوثائق قبل الترتيب الأول، وبالمراجعة الموقعية قبل صدور أمر إعادة يتجاوز 000 50 دولار.",
+    "ctaTitle": "ترتيب تحقق حقيقي",
+    "ctaLead": "الحصول على هذا المستوى من التفاصيل لموردك الفعلي. ويبدأ التحقق بمبلغ 99 دولارا للمورد الواحد، على أساس كل مشروع.",
+    "ctaPrimary": "التحقق من الطلب",
+    "ctaSecondary": "العودة إلى التسعير",
+    "disclaimer": "وتستخدم هذه العينة بيانات خيالية وهي للعرض فقط. انها ليست التحقق من أي شركة حقيقية. ولا تحال الوثائق الأصلية للأطراف الثالثة أبدا إلى المشترين.",
     "execSection": "01 · الملخص التنفيذي",
     "execLead": "تتكون النتيجة الإجمالية 76/100 من درجات الأبعاد الثمانية أدناه. يتم التحقق من كل بُعد مقابل السجلات العامة والأدلة الميدانية.",
     "strengthsTitle": "نقاط القوة",
@@ -2699,154 +2609,154 @@
       "طلب شهادة ISO 9001 المجددة قبل الإفراج عن الشحنة."
     ],
     "formTitle": "احصل على تقرير العينة الكامل",
-    "formLead": "اترك بريدك الإلكتروني وسنرسل لك تقرير العينة الكامل بصيغة PDF مع دليل قراءة من صفحة واحدة.",
+    "formLead": "اترك بريدك الإلكتروني وسنرسل لك تقرير العينة الكامل مع دليل قراءة من صفحة واحدة خلال يوم عمل واحد.",
     "formEmailPlaceholder": "بريدك الإلكتروني للعمل",
-    "formCta": "أرسل لي التقرير",
-    "formPrivacyNote": "نستخدم بريدك فقط لإرسال العينة. لا رسائل مزعجة، يمكنك إلغاء الاشتراك في أي وقت.",
+    "formCta": "اطلب التقرير الكامل",
+    "formPrivacyNote": "نستخدم بريدك لإرسال التقرير والمتابعة معك. لا رسائل مزعجة، يمكنك إلغاء الاشتراك في أي وقت.",
     "socialTitle": "تابعنا للحصول على رؤى التوريد",
     "socialNote": "دراسات حالات التحقق من المصانع وشرح مخاطر الموردين.",
-    "formSuccess": "تحقق من بريدك الوارد — تقرير العينة في الطريق.",
+    "formSuccess": "شكرًا لك. استلمنا طلبك وسنرسل تقرير العينة الكامل خلال يوم عمل واحد.",
     "formError": "حدث خطأ ما. حاول مرة أخرى أو راسلنا مباشرة.",
     "companyTypeLabel": "نوع الشركة"
   },
   "compare": {
-    "metaTitle": "Supplier Comparison Tool — Compare 2 to 5 Suppliers Side by Side",
-    "metaDesc": "Score two to five suppliers on the same eight dimensions and compare them side by side. Self-reported inputs, decision support only.",
-    "badge": "Free tool",
-    "h1": "Supplier Comparison",
-    "lead": "Score two to five suppliers against the same eight dimensions and see them side by side. You enter the answers, so this is decision support, not a verification.",
-    "addSupplier": "Add a supplier",
-    "supplierLabel": "Supplier",
-    "namePlaceholder": "Supplier A",
-    "remove": "Remove",
-    "maxNote": "Up to five suppliers at a time.",
-    "minNote": "Add at least two suppliers to see a comparison.",
-    "dimensionCol": "Dimension",
-    "strong": "Strong",
-    "strongHint": "Documented and verifiable",
-    "adequate": "Adequate",
-    "adequateHint": "Partly documented",
-    "weak": "Weak",
-    "weakHint": "Missing or inadequate",
-    "unknown": "Unknown",
-    "unknownHint": "Not checked yet",
-    "scoreCol": "Score",
-    "summaryTitle": "Comparison summary",
-    "bestNote": "Highest score on the inputs you entered.",
-    "biggestGapTitle": "Where they differ most",
-    "biggestGapNote": "The dimension with the widest spread between the highest and lowest score.",
-    "noGapNote": "No meaningful gap yet. Fill in more dimensions to see where they differ.",
-    "disclaimer": "This comparison uses the numbers you enter. It is decision support, not a verification. A high score does not mean we have checked the supplier.",
-    "ctaTitle": "Want these answers checked?",
-    "ctaLead": "Verification starts at $99 per supplier and turns self-reported answers into reviewed evidence.",
-    "ctaPrimary": "Request verification",
-    "reset": "Reset"
+    "metaTitle": "Supplier Comparison Tool - Compare 2 to 5 Suppliers Side",
+    "metaDesc": "يسجلون اثنين إلى خمسة موردين على نفس الأبعاد الثمانية ويقارنونهم جنبا إلى جنب. المدخلات المبلغ عنها ذاتيا، دعم القرار فقط.",
+    "badge": "أداة مجانية",
+    "h1": "مقارنة الموردين",
+    "lead": "وينطوي الموردون من اثنين إلى خمسة على نفس الأبعاد الثمانية ويرونهم جنبا إلى جنب. أنت تدخل الإجابات، لذا هذا هو دعم القرار، وليس التحقق.",
+    "addSupplier": "يضاف مورد",
+    "supplierLabel": "مورد",
+    "namePlaceholder": "المورد ألف",
+    "remove": "إزالة الألغام",
+    "maxNote": "حتى خمسة موردين في كل مرة.",
+    "minNote": "يضاف ما لا يقل عن موردين لرؤية المقارنة.",
+    "dimensionCol": "البعد",
+    "strong": "قوي",
+    "strongHint": "الوثائق والتحقق منها",
+    "adequate": "كاف",
+    "adequateHint": "موثق جزئيا",
+    "weak": "ضعيف",
+    "weakHint": "مفقودة أو غير كافية",
+    "unknown": "غير معروف",
+    "unknownHint": "لم يتم فحصها بعد",
+    "scoreCol": "سكوير",
+    "summaryTitle": "موجز المقارنة",
+    "bestNote": "أعلى درجة على المدخلات التي أدخلتها.",
+    "biggestGapTitle": "حيث تختلف",
+    "biggestGapNote": "البعد الذي ينتشر على أوسع نطاق بين أعلى وأدنى درجة.",
+    "noGapNote": "لا ثغرة مجدية بعد ملئ بأبعاد أكثر لمعرفة أين تختلف.",
+    "disclaimer": "هذه المقارنة تستخدم الأرقام التي تدخلها وهو دعم للقرار، وليس التحقق. النتيجة العالية لا تعني أننا فحصنا المورد.",
+    "ctaTitle": "هل تريد فحص هذه الأجوبة؟?",
+    "ctaLead": "ويبدأ التحقق بمبلغ 99 دولارا لكل مورّد، ويحوّل الإجابات المبلغ عنها ذاتيا إلى أدلة مستعرضة.",
+    "ctaPrimary": "التحقق من الطلب",
+    "reset": "إعادة التوطين"
   },
   "monitoring": {
-    "metaTitle": "Supplier Monitoring — Scheduled Re-Checks and Risk Change Alerts",
-    "metaDesc": "Keep verified supplier facts current. Scheduled re-checks of registration, site, certificates and public records, with an alert when something changes. Subscription, quoted per supplier per year.",
-    "badge": "Service",
-    "h1": "Supplier Monitoring",
-    "lead": "A verification is a snapshot. Monitoring re-runs the checks on a schedule and tells you when a fact you relied on has changed.",
-    "quickAnswerTitle": "What it is, in one paragraph",
-    "quickAnswer": "We re-check the facts we verified for you, on a cadence you choose, against public registers, scheme databases and the documents on file. When a fact changes or a certificate expires, you get an alert stating what changed, which source confirmed it, and what it means for your order. The evidence policy is the same as a one-off verification: we state what we could confirm and flag what we could not.",
-    "honestNote": "Monitoring lowers the chance of being surprised by a change that public records already show. It does not predict how a supplier will perform, and it cannot see a change that has not been recorded anywhere.",
-    "recheckTitle": "What we re-check",
-    "recheckLead": "Only items that leave a public or documentary trace. We do not re-check anything we cannot source.",
+    "metaTitle": "Supplier Monitoring - Scheduled Re-Checks and Risk Change Alerts",
+    "metaDesc": "حافظ على حقائق المورد التي تم التحقق منها إعادة فحص التسجيل والموقع والشهادات والسجلات العامة، مع تنبيه عندما يتغير شيء ما. الاشتراك مقتبس من كل مورد في السنة.",
+    "badge": "الخدمات",
+    "h1": "رصد الموردين",
+    "lead": "التحقق طلق ناري رصد إعادة تشغيل الشيكات على جدول زمني ويخبرك عندما حقيقة إعتمدت عليها تغيرت.",
+    "quickAnswerTitle": "ما هو، في فقرة واحدة",
+    "quickAnswer": "نعيد التحقق من الحقائق التي تحققنا منها بالنسبة لك، على كوادر تختارها، ضد السجلات العامة، وقواعد البيانات المخططة والوثائق في الملف. عندما تتغيّر الحقيقة أو تنتهي الشهادة، تُصبحُ إنذاراً يُشيرُ إلى الذي تغيّرَ، الذي المصدر أكّدَه، وما الذي يَعْني لطلبكَ. وسياسة الأدلة هي نفس سياسة التحقق غير المنجز: نعلن ما يمكننا تأكيده ونعلّم ما لا نستطيع.",
+    "honestNote": "فالرصد يقلل من فرصة الدهشة بسبب تغيير السجلات العامة. وهي لا تنبأ بكيفية أداء المورد، ولا يمكنها أن ترى تغييرا لم يسجل في أي مكان.",
+    "recheckTitle": "ما نعيد التحقق منه",
+    "recheckLead": "فقط الأشياء التي تترك أثراً عاماً أو وثائقياً نحن لا نراجع أي شيء لا يمكن أن نصدره.",
     "recheckItems": [
-      "Business registration status: active, revoked, relocated or renamed",
-      "Legal entity name and registered address",
-      "Certificate and audit report validity against the issuing scheme's database",
-      "Expiry dates on the documents we hold",
-      "Public records and adverse reports we can source and cite",
-      "The supplier's own declarations, compared against what we hold"
+      "حالة تسجيل الأعمال التجارية: نشطة أو ملغية أو نقلت أو أعيدت تسميتها",
+      "اسم الكيان القانوني والعنوان المسجل",
+      "صحة تقرير الشهادة ومراجعة الحسابات ضد قاعدة بيانات نظام إصدار",
+      "تواريخ نهاية على الوثائق التي نحملها",
+      "السجلات العامة والتقارير السلبية التي يمكن أن نصدرها ونستشهد بها",
+      "إعلانات المورد الخاصة مقابل ما نحمله"
     ],
-    "cadenceTitle": "How often",
-    "cadenceLead": "You set the cadence when we scope the engagement. Three common starting points:",
+    "cadenceTitle": "كم مرة",
+    "cadenceLead": "لقد وضعت الكوادر عندما نحدد الخطوبة ثلاث نقاط انطلاق مشتركة:",
     "cadenceItems": [
       {
-        "name": "Quarterly",
-        "when": "Four re-checks a year.",
-        "note": "For suppliers carrying your largest volume or your tightest compliance requirement."
+        "name": "فصلية",
+        "when": "أربعة إعادة فحص في السنة.",
+        "note": "بالنسبة للموردين الذين يحملون أكبر حجم أو أكثر متطلبات الامتثال."
       },
       {
-        "name": "Twice a year",
-        "when": "Two re-checks a year.",
-        "note": "The usual starting point for an active supplier."
+        "name": "مرتين في السنة",
+        "when": "إعادة فحص مرتين في السنة.",
+        "note": "نقطة البداية المعتادة لمورد نشط."
       },
       {
-        "name": "Once a year",
-        "when": "One re-check a year.",
-        "note": "For suppliers you buy from occasionally, or to keep a dormant record current."
+        "name": "مرة في السنة",
+        "when": "إعادة فحص سنة واحدة.",
+        "note": "للموردين الذين تشترونهم من حين لآخر، أو للحفاظ على رقم قياسي."
       }
     ],
-    "alertTitle": "What triggers an alert",
-    "alertLead": "An alert goes out when a re-check returns something different from what we hold:",
+    "alertTitle": "الذي يُسبّبُ إنذاراً",
+    "alertLead": "تنبيه يخرج عندما يعود ثانية شيء مختلف عن ما نحمل:",
     "alertItems": [
-      "Registration status changes",
-      "Legal name or registered address changes",
-      "A certificate or audit report on file expires or is withdrawn",
-      "A new public record or adverse report we can cite",
-      "A scheduled re-check finds no change, and you still get a dated confirmation"
+      "التغييرات في حالة التسجيل",
+      "الاسم القانوني أو تغيير العنوان المسجل",
+      "تنتهي صلاحية الشهادة أو تقرير مراجعة الحسابات في الملف أو يتم سحبه",
+      "سجل عام جديد أو تقرير سلبي يمكننا الاستشهاد به",
+      "إعادة فحص مُقرّرة لن تُغيّر، ولا يزال لديك تأكيد مُؤتمر."
     ],
-    "deliverTitle": "What you receive",
-    "deliverLead": "Every re-check produces a dated record, whether or not anything changed.",
+    "deliverTitle": "ما تحصل عليه",
+    "deliverLead": "كل إعادة فحص تنتج سجلاً تاريخياً سواء تغير أو لم يتغير أي شيء.",
     "deliverItems": [
-      "A dated re-check record for each supplier",
-      "An alert naming the fact that changed and the source that confirmed it",
-      "An updated report reflecting the current state of the record",
-      "The same evidence labels as a one-off check: reviewed, provided, restricted"
+      "سجل مراجعة تاريخي لكل مورد",
+      "تنبيه يسمّي الحقيقة التي تغيّرت والمصدر الذي أكده",
+      "تقرير مستكمل يعكس الحالة الراهنة للسجل",
+      "نفس تصنيفات الأدلة المستخدمة في الفحص لمرة واحدة: تمت المراجعة، مقدَّم، مقيد"
     ],
-    "notCoveredTitle": "What monitoring does not cover",
-    "notCoveredLead": "Monitoring inherits the limits of a verification. It does not extend them.",
-    "pricingTitle": "Pricing",
-    "pricingLead": "Priced as a subscription, quoted per supplier per year, based on cadence and how many suppliers you want covered.",
-    "pricingNote": "No online checkout. Tell us the suppliers and the cadence, and we will quote.",
-    "pricingCta": "Ask for a quote",
-    "faqTitle": "Questions buyers ask",
+    "notCoveredTitle": "ما لا يغطيه الرصد",
+    "notCoveredLead": "ويرث الرصد حدود التحقق. إنها لا تمددهم.",
+    "pricingTitle": "الطباعة",
+    "pricingLead": "سعرها كاشتراك، مقتبس من كل مورّد في السنة، على أساس الكتف وكم عدد المورّدين الذين تريد تغطيتهم.",
+    "pricingNote": "لا يوجد فحص على الانترنت أخبرنا بالموردين والكاهنة وسنقتبس.",
+    "pricingCta": "إسأل عن إقتباس",
+    "faqTitle": "أسئلة يطلبها المشترون",
     "faq": [
       {
-        "q": "Is monitoring the same as a factory audit?",
-        "a": "No. An audit is an on-site assessment against a standard. Monitoring re-checks facts that leave a documentary or public trace. They answer different questions, and most buyers want both at different points."
+        "q": "هل تراقب نفس مراجعة المصانع؟?",
+        "a": "لا وتعد مراجعة الحسابات تقييما في الموقع مقابل معيار. ويعيد رصد الوقائع التي تترك أثرا وثائقيا أو عاما. يجيبون على أسئلة مختلفة، ومعظم المشترين يريدون كلا في نقاط مختلفة."
       },
       {
-        "q": "What if a supplier changes something between re-checks?",
-        "a": "Then the next re-check catches it, and the alert is dated to the day we confirmed it. A scheduled check cannot be continuous, and we do not claim it is."
+        "q": "ماذا لو غيّر المورد شيئاً بين إعادة التدقيق؟?",
+        "a": "ثمّ يَمْسكُ إعادةُ التدقيق التاليةُه، والتنبيهَ مُؤرّدُ إلى اليومِ نحن أكّدناه. لا يمكن أن يكون التحقق المقرر مستمرا، ونحن لا ندّعي ذلك."
       },
       {
-        "q": "Can I add suppliers later?",
-        "a": "Yes. The subscription is quoted per supplier, so adding one means adjusting the quote rather than starting over."
+        "q": "هل يمكنني إضافة الموردين لاحقاً؟?",
+        "a": "نعم ويقتبس من الاشتراك كل مورّد على حدة، مما يضيف وسيلة لتعديل الاقتباس بدلا من البدء فيه."
       },
       {
-        "q": "Do you visit the factory as part of monitoring?",
-        "a": "Not by default. Standard monitoring is a desk re-check of registers and documents. An on-site visit can be added at the cadence you choose and is quoted separately."
+        "q": "هل تزور المصنع كجزء من المراقبة؟?",
+        "a": "ليس بالخطأ الرصد الموحد هو إعادة فحص مكتبي للسجلات والوثائق. زيارة موقعية يمكن إضافتها في الكوادر التي تختارها وتقتبس بشكل منفصل."
       },
       {
-        "q": "Can a supplier pay to be monitored?",
-        "a": "No. Monitoring is bought by the buyer. A supplier cannot pay to change what a re-check reports."
+        "q": "أيمكن للمورد أن يدفع ليتم رصده؟?",
+        "a": "لا ويشتري المشتري الرصد. لا يمكن للمورد أن يدفع ليغير تقارير إعادة التدقيق."
       }
     ],
-    "ctaTitle": "Set up monitoring",
-    "ctaLead": "Tell us which suppliers you want covered and how often. We will confirm what can be re-checked and quote.",
-    "ctaPrimary": "Request monitoring",
-    "ctaSecondary": "See pricing"
+    "ctaTitle": "وضع نظام للرصد",
+    "ctaLead": "أخبرنا أي مورد تريد تغطيته وكم مرة سنؤكد ما يمكن إعادة فحصه ونقتبس منه.",
+    "ctaPrimary": "رصد الطلب",
+    "ctaSecondary": "انظر التسعير"
   },
   "fieldReports": {
-    "metaTitle": "Field Reports — On-Site Notes from Inspection, Audit and Verification",
-    "h1": "Field Reports",
-    "badge": "Field notes",
-    "lead": "Short notes from inspection, audit and verification work: what was checked on site, what was found, and how the finding was recorded.",
-    "updatedLabel": "Updated",
-    "readMore": "Read the field note",
+    "metaTitle": "التقارير الميدانية - مذكرات موقعية من التفتيش ومراجعة الحسابات والتحقق",
+    "h1": "التقارير الميدانية",
+    "badge": "المذكرات الميدانية",
+    "lead": "مذكرات قصيرة من أعمال التفتيش ومراجعة الحسابات والتحقق: ما جرى التحقق منه في الموقع، وما تم العثور عليه، وكيف تم تسجيل النتيجة.",
+    "updatedLabel": "آخر تحديث",
+    "readMore": "اقرأ المذكرة الميدانية",
     "serviceLabels": {
-      "inspection": "Inspection",
-      "audit": "Factory audit",
-      "verification": "Supplier verification"
+      "inspection": "التفتيش",
+      "audit": "مراجعة حسابات العوامل",
+      "verification": "التحقق من الموردين"
     },
-    "ctaTitle": "Want this level of detail on your own order?",
-    "ctaLead": "Tell us the product, the market and what worries you. We will scope the inspection, audit or verification.",
-    "ctaPrimary": "Post an RFQ",
-    "ctaSecondary": "Custom services"
+    "ctaTitle": "هل تريد هذا المستوى من التفاصيل بناء على طلبك؟?",
+    "ctaLead": "أخبرنا بالمنتج والسوق وما يقلقك وسنوسع نطاق التفتيش أو المراجعة أو التحقق.",
+    "ctaPrimary": "(أ)",
+    "ctaSecondary": "الخدمات العرفية"
   },
   "caseStudies": {
     "h1": "دراسات الحالة",
@@ -2857,7 +2767,9 @@
     "ctaTitle": "لديك موقف مشابه؟",
     "ctaDesc": "أرسل لنا متطلباتك وسنحدد نطاق التحقق أو التدقيق أو الفحص لمنتجك وسوقك.",
     "ctaRfq": "انشر طلب عرض أسعار",
-    "ctaCustom": "خدمات مخصصة"
+    "ctaCustom": "خدمات مخصصة",
+    "detailCtaTitle": "أتحتاجين أن ينتهي هذا لموردك؟?",
+    "detailCtaDesc": "أرسلي مطلبك وسنوسع نطاق التحقق أو المراجعة أو التفتيش لمنتجك وسوقك."
   },
   "auditScope": {
     "title": "مستشار نطاق التدقيق",
@@ -2937,11 +2849,11 @@
     "nextTitle": "الخطوات التالية",
     "nextLead": "بعد الإرسال، ينشئ فريقنا حسابك يدوياً ويرسل تفاصيل تسجيل الدخول خلال يوم عمل واحد.",
     "noCard": "لا حاجة لبطاقة ائتمان.",
-    "membershipLink": "تعرّف على عضوية Founding Buyer (49$ سنوياً)",
+    "membershipLink": "تعرّف على عضوية Founding Buyer (99$ سنوياً)",
     "formTitle": "التسجيل",
     "form": {
       "emailLabel": "البريد الإلكتروني",
-      "emailPlaceholder": "you@company.com",
+      "emailPlaceholder": "You@company.com",
       "nameLabel": "الاسم",
       "namePlaceholder": "اسمك",
       "companyLabel": "الشركة (اختياري)",
@@ -2958,11 +2870,11 @@
   },
   "membership": {
     "badge": "عضوية المشتري",
-    "metaTitle": "عضوية Founding Buyer — 49$ سنوياً",
-    "metaDesc": "عضوية Founding Buyer: قاعدة بيانات الموردين الكاملة وتفاصيل المخاطر وملخصات الأدلة ومعلومات المصنع. 49$ سنوياً.",
+    "metaTitle": "عضوية Founding Buyer — 99$ سنوياً",
+    "metaDesc": "عضوية Founding Buyer: قاعدة بيانات الموردين الكاملة وتفاصيل المخاطر وملخصات الأدلة ومعلومات المصنع. 99$ سنوياً.",
     "h1": "عضوية Founding Buyer",
     "lead": "لفرق التوريد التي تحتاج تقييماً معمقاً للموردين. اشتراك واحد، جميع ميزات ذكاء الموردين لمدة عام.",
-    "planName": "Founding Buyer",
+    "planName": "المشتري التأسيسي",
     "pricePeriod": "سنة",
     "priceNote": "سعر التأسيس — سيرتفع لاحقاً",
     "cta": "تواصل معنا",
@@ -2984,7 +2896,7 @@
     "faq": [
       {
         "q": "كم تكلفة العضوية؟",
-        "a": "عضوية Founding Buyer 49$ سنوياً (دولار أمريكي). سعر التأسيس، وقد يرتفع لاحقاً."
+        "a": "عضوية Founding Buyer 99$ سنوياً (دولار أمريكي). سعر التأسيس، وقد يرتفع لاحقاً."
       },
       {
         "q": "كيف أدفع؟",
@@ -2994,6 +2906,261 @@
         "q": "هل تضمن العضوية نتائج التحقق؟",
         "a": "لا. العضوية تمنح حق الوصول للعرض فقط. لا تغيّر درجة مخاطر المورد أو حالة التحقق أبداً. نتائج التحقق لا تُباع."
       }
+    ]
+  },
+  "toolsUi": {
+    "auditChecklist": {
+      "metaTitle": "القائمة المرجعية لمراجعة الحسابات",
+      "metaDesc": "بناء قائمة مرجعية لمراجعة حسابات المصانع حسب نوع الصناعة والمراجعة. أداة للتحضير الحر، وليس شهادة رسمية.",
+      "h1": "القائمة المرجعية لمراجعة الحسابات",
+      "lead": "إعداد قائمة مرجعية منظمة حسب الصناعة ونوع مراجعة الحسابات. وهذه أداة للتحضير والتقييم، وليست شهادة رسمية.",
+      "industryLabel": "الصناعة",
+      "auditTypeLabel": "نوع مراجعة الحسابات",
+      "cta": "قائمة جرد الوراثة",
+      "summary": "بنود {n}",
+      "categoryLabel": "الفئة",
+      "evidenceLabel": "الأدلة",
+      "riskSuffix": "المخاطر",
+      "riskLow": "منخفض",
+      "riskMedium": "متوسطة",
+      "riskHigh": "عالية",
+      "questions": {
+        "q_biz_license": {
+          "q": "هل رخصة العمل سارية ومطابقة للعنوان المسجل؟",
+          "cat": "قانوني",
+          "ev": "السجل التجاري"
+        },
+        "q_ownership": {
+          "q": "هل تم التحقق من الملكية والممثل القانوني؟",
+          "cat": "قانوني",
+          "ev": "وثائق الكيان القانوني"
+        },
+        "q_qm_org": {
+          "q": "هل دليل الجودة والهيكل التنظيمي متوفران؟",
+          "cat": "الإدارة",
+          "ev": "الهيكل التنظيمي"
+        },
+        "q_capacity_output": {
+          "q": "هل الطاقة الإنتاجية مطابقة للإنتاج المعلن؟",
+          "cat": "الإنتاج",
+          "ev": "سجلات الطاقة الإنتاجية"
+        },
+        "q_incoming_qc": {
+          "q": "هل تم تحديد عملية فحص المواد الواردة؟",
+          "cat": "مراقبة الجودة",
+          "ev": "سجلات مراقبة الجودة"
+        },
+        "q_final_qc": {
+          "q": "هل يتم تتبع الفحص النهائي ومعدل العيوب؟",
+          "cat": "مراقبة الجودة",
+          "ev": "تقارير الفحص"
+        },
+        "q_esd": {
+          "q": "هل الحماية من الكهرباء الساكنة (ESD) ومراقبة عملية اللحام مطبقتان؟",
+          "cat": "تقني",
+          "ev": "وثائق العملية"
+        },
+        "q_rohs": {
+          "q": "هل وثائق RoHS / REACH متوفرة للتصدير؟",
+          "cat": "الامتثال",
+          "ev": "تقارير الفحص المخبري"
+        },
+        "q_oekotex": {
+          "q": "هل هناك امتثال لمعيار OEKO-TEX / المواد المقيدة؟",
+          "cat": "الامتثال",
+          "ev": "تقارير الفحص المخبري"
+        },
+        "q_labor_hr": {
+          "q": "هل تمت مراجعة سجلات ساعات العمل والأجور؟",
+          "cat": "عمالي",
+          "ev": "سجلات الموارد البشرية"
+        },
+        "q_msds": {
+          "q": "هل صحائف بيانات السلامة (MSDS) وإجراءات التعامل مع المواد الكيميائية متوفرة؟",
+          "cat": "بيئي",
+          "ev": "صحيفة بيانات السلامة (MSDS)"
+        },
+        "q_ppe": {
+          "q": "هل الاستجابة للطوارئ والامتثال لمعدات الوقاية الشخصية مطبقان؟",
+          "cat": "السلامة",
+          "ev": "سجلات السلامة"
+        },
+        "q_waste": {
+          "q": "هل التحكم في النفايات والانبعاثات موثق؟",
+          "cat": "بيئي",
+          "ev": "تصريح بيئي"
+        },
+        "q_haccp": {
+          "q": "هل تم تطبيق HACCP / ISO 22000؟",
+          "cat": "سلامة الغذاء",
+          "ev": "الشهادات"
+        },
+        "q_child_labor": {
+          "q": "هل توجد مؤشرات على عمل الأطفال أو العمل القسري؟",
+          "cat": "عمالي",
+          "ev": "مقابلات مع العمال"
+        },
+        "q_ohs": {
+          "q": "هل توجد تدابير للصحة والسلامة المهنية؟",
+          "cat": "الصحة",
+          "ev": "ملاحظة ميدانية"
+        },
+        "q_wastewater": {
+          "q": "هل تتم مراقبة مياه الصرف والانبعاثات؟",
+          "cat": "بيئي",
+          "ev": "التصاريح"
+        },
+        "q_equip_util": {
+          "q": "هل قائمة المعدات ومعدل الاستخدام متوفرة؟",
+          "cat": "الطاقة الإنتاجية",
+          "ev": "سجل المعدات"
+        }
+      }
+    },
+    "reportAnalyzer": {
+      "metaTitle": "محلل تقرير مراجعة الحسابات",
+      "metaDesc": "تقديم تقرير مراجعة الحسابات للتحقق من هيكلها، والبنود المفقودة، وإشارات المخاطر. أداة التقييم المجاني.",
+      "h1": "محلل تقرير مراجعة الحسابات",
+      "lead": "تقديم تقرير مراجعة الحسابات للتحقق من الهيكل والأصناف المفقودة والمخاطر. وهذه أداة للتقييم ودعم القرار. وهي لا تؤكد التصديق الرسمي.",
+      "inputLabel": "نص تقرير مراجعة حسابات المراعي",
+      "inputPlaceholder": "إحتفظ بمحتوى تقرير مراجعة الحسابات هنا",
+      "cta": "تقرير تحليل",
+      "ctaLoading": "تحليل...",
+      "empty": "اقدم تقريرا وادير المحلل.",
+      "qualityLabel": "التقرير",
+      "scoreSuffix": "/100",
+      "sourceAi": "تقييم مولّد بالذكاء الاصطناعي (DeepSeek) · للمساعدة في اتخاذ القرار",
+      "sourceLocal": "دعم القرارات",
+      "issuesTitle": "البنود المفقودة/غير المتناسقة",
+      "issuesNone": "لم يتم اكتشاف أي أصناف مفقودة."
+    },
+    "documentChecker": {
+      "metaTitle": "Supplier Document checker",
+      "metaDesc": "التحقق من شهادات المورد وتراخيص الأعمال من أجل الاتساق الداخلي. أداة مجانية، وليس التحقق الرسمي.",
+      "h1": "Supplier Document checker",
+      "lead": "يدقق في صحة المعلومات ومجالات الصحة. ويتحقق من الاتساق الداخلي فقط. وهي لا تؤكد شهادة أي هيئة رسمية.",
+      "inputLabel": "شهادة الاستغاثة الدولية + نص ترخيص الأعمال",
+      "cta": "التحقق من الاتساق",
+      "empty": "مستندات العجينة وإدارة الشيك.",
+      "scoreRow": "الرقم المرجعي: {score}/100",
+      "companyName": "الاسم",
+      "address": "العنوان",
+      "legalEntity": "الكيان القانوني",
+      "certificateNo": "الشهادة رقم.",
+      "issueDate": "المسألة التاريخ",
+      "expiryDate": "تاريخ انتهاء الخدمة",
+      "scope": "النطاق",
+      "statusFound": "تم العثور عليه",
+      "statusMissing": "مفقود",
+      "statusReview": "الاستعراض المطلوب"
+    },
+    "scorecard": {
+      "metaTitle": "سجل تقييم الموردين",
+      "metaDesc": "ضعوا معاييركم الخاصة وسجلوا المورد ضدهم أداة تقييم مجانية.",
+      "h1": "سجل تقييم الموردين",
+      "lead": "وضع الأوزان وسجلات لحصر النتيجة العامة للموردين الوزن قابل للتعديل تماماً.",
+      "overallLabel": "المجموع",
+      "totalWeightLabel": "مجموع الوزن",
+      "weightLabel": "الوزن",
+      "scoreLabel": "سكوير",
+      "criteria": {
+        "quality": "النوعية",
+        "price": "السعر",
+        "capacity": "القدرات",
+        "delivery": "التسليم",
+        "compliance": "الامتثال",
+        "financial": "الاستقرار المالي",
+        "certification": "التصديق",
+        "communication": "الاتصال",
+        "risk": "المخاطر"
+      }
+    },
+    "riskAssessment": {
+      "metaTitle": "تقييم مخاطر الموردين",
+      "metaDesc": "إدخال تفاصيل المورد والحصول على درجة أولية من المخاطر مع وضع الأدلة لكل بعد.",
+      "h1": "تقييم مخاطر الموردين",
+      "lead": "إدخال تفاصيل المورد لتوليد نتيجة أولية للمخاطر. ويبين كل بعد حالة الأدلة. نحن لا نقدم أبدا تقديرات كوقائع.",
+      "supplierName": "اسم مورد",
+      "website": "الموقع الشبكي",
+      "country": "البلد",
+      "city": "المدينة",
+      "productCategory": "الفئة",
+      "businessType": "نوع الأعمال",
+      "businessTypeFactory": "العوامل",
+      "businessTypeTrading": "شركة تجارية",
+      "yearsInBusiness": "السنوات في الأعمال التجارية",
+      "employeeRange": "العامل رانج",
+      "exportMarkets": "أسواق التصدير (الفصل بين الشركات)",
+      "selectOption": "مختارة",
+      "businessLicense": "License",
+      "isoCertificate": "شهادة المنظمة الدولية للتوحيد القياسي",
+      "auditReport": "تقرير مراجعة الحسابات",
+      "catalog": "الكتالوج",
+      "productCertificates": "شهادات المنتجات",
+      "cta": "مخاطر توليد الطاقة",
+      "ctaLoading": "تحليل...",
+      "empty": "املأ النموذج ونقرة لترى انهيار المخاطر.",
+      "levelSuffix": "RISK",
+      "sourceAi": "مولّد بالذكاء الاصطناعي (DeepSeek) · للمساعدة في اتخاذ القرار",
+      "sourceLocal": "التقدير القائم على القواعد - ليس التحقق الرسمي",
+      "levels": {
+        "Critical": "حرجية",
+        "High": "عالية",
+        "Medium": "متوسطة",
+        "Low": "منخفض",
+        "Very Low": "منخفض جدا"
+      },
+      "status": {
+        "Verified": "مصدق عليه",
+        "Self-Reported": "التقارير الذاتية",
+        "Estimated": "التقديرات",
+        "Not Verified": "غير مصدق عليه"
+      },
+      "dimensions": {
+        "company": "الشركة",
+        "capability": "القدرة على العمل",
+        "quality": "نظام الجودة",
+        "certification": "التصديق",
+        "capacity": "القدرة الإنتاجية",
+        "compliance": "الامتثال",
+        "transparency": "الشفافية",
+        "supplychain": "مخاطر سلسلة الإمداد"
+      },
+      "countryNames": {
+        "china": "الصين",
+        "vietnam": "فيتنام",
+        "thailand": "تايلاند",
+        "india": "الهند",
+        "indonesia": "إندونيسيا",
+        "bangladesh": "بنغلاديش",
+        "malaysia": "ماليزيا",
+        "turkey": "تركيا",
+        "mexico": "المكسيك"
+      }
+    },
+    "industryNames": [
+      "إلكترونيات",
+      "منسوجات",
+      "ملابس جاهزة",
+      "أثاث",
+      "مواد كيميائية",
+      "بلاستيك",
+      "سيارات",
+      "آلات ومعدات",
+      "أجهزة طبية",
+      "أغذية",
+      "تغليف",
+      "مجوهرات"
+    ],
+    "auditTypeNames": [
+      "التحقق من المصنع",
+      "تدقيق المصنع",
+      "تدقيق جودة المورد",
+      "تدقيق الطاقة الإنتاجية",
+      "تدقيق الامتثال الاجتماعي",
+      "التدقيق البيئي",
+      "التدقيق الفني",
+      "تدقيق حسب طلب المشتري"
     ]
   }
 }

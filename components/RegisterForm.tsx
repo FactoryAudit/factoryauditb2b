@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
 import { ANALYTICS_EVENTS } from "@/lib/suppliers";
 
@@ -30,6 +30,13 @@ type Props = {
 export default function RegisterForm({ t }: Props) {
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
   const [errMsg, setErrMsg] = useState<string | null>(null);
+  // signup_start 只发一次：用户首次与表单交互即视为产生注册意图
+  const startedRef = useRef(false);
+  const handleFirstTouch = () => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    trackEvent(ANALYTICS_EVENTS.signupStart);
+  };
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -50,6 +57,9 @@ export default function RegisterForm({ t }: Props) {
       return;
     }
 
+    // 表单通过校验、真实发起提交（register 系列：view → cta → submit → signup_complete）
+    trackEvent(ANALYTICS_EVENTS.registerSubmit);
+
     try {
       const res = await fetch("/api/register", {
         method: "POST",
@@ -58,7 +68,10 @@ export default function RegisterForm({ t }: Props) {
       });
       const data = await res.json();
       if (data.ok) {
-        trackEvent(ANALYTICS_EVENTS.registerSubmit, { email: fields.email });
+        // 核心转化：注册提交成功。
+        // 注意：旧实现把 email 当事件参数发出，违反「不向 Analytics 发送个人敏感信息」，
+        // 这里已移除（且 lib/analytics 的 PII 清洗层会二次拦截）。
+        trackEvent(ANALYTICS_EVENTS.signupComplete);
         setStatus("ok");
         formEl.reset();
         return;
@@ -80,7 +93,7 @@ export default function RegisterForm({ t }: Props) {
 
   if (status === "ok") {
     return (
-      <div className="card p-6 text-center bg-[#f0fdf4]" data-track={ANALYTICS_EVENTS.registerSubmit}>
+      <div className="card p-6 text-center bg-[#f0fdf4]">
         <div className="text-2xl mb-2">✓</div>
         <p className="font-semibold text-[#1f7a36]">{t.successTitle}</p>
         <p className="text-sm text-[#64748b] mt-2">{t.successLead}</p>
@@ -89,7 +102,11 @@ export default function RegisterForm({ t }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="card p-6 max-w-xl space-y-4">
+    <form
+      onSubmit={handleSubmit}
+      onFocus={handleFirstTouch}
+      className="card p-6 max-w-xl space-y-4"
+    >
       <div>
         <label htmlFor="reg-email" className="text-sm font-medium">
           {t.emailLabel} <span className="text-[#d4232a]">*</span>

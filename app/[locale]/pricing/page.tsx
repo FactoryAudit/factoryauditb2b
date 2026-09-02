@@ -4,10 +4,11 @@ import JsonLd from "@/components/JsonLd";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import { ANALYTICS_EVENTS } from "@/lib/analytics";
 
 const PATH = "/pricing";
 
-// 推荐套餐在 plans 数组中的位置（0=Free Tools, 1=Supplier Verification, 2=Factory Audit, 3=Buyer Pro）。
+// 推荐套餐在 plans 数组中的位置（0=Free Tools, 1=Supplier Verification, 2=Factory Audit, 3=Supplier Monitoring）。
 // 用索引而不是套餐名做判断：套餐名在 9 种语言下不同，字符串比较会失效。
 const RECOMMENDED_PLAN_INDEX = 1;
 
@@ -98,6 +99,10 @@ export default async function PricingPage({
               <Link
                 href={lp(plan.href)}
                 className={`btn ${recommended ? "btn-primary" : "btn-outline"} w-full`}
+                // 推荐档（索引 1）= 付费核查套餐，点击即视为核查转化流程的起点
+                {...(i === RECOMMENDED_PLAN_INDEX
+                  ? { "data-track": ANALYTICS_EVENTS.verificationCheckoutStart }
+                  : {})}
               >
                 {plan.cta}
               </Link>

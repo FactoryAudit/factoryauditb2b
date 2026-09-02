@@ -72,35 +72,25 @@
     "badge": "検証。ソース。検査。発送。",
     "h1": "お金をリスクにさらす前に、サプライヤーをよく知ろう。",
     "lead": "中国と東南アジアにおける現地サプライヤー検証と工場監査サポート。稼働中の対象：中国、ベトナム、タイ、マレーシア、フィリピン。",
-    "ctaScore": "サプライヤーを無料で確認する",
-    "ctaRfq": "RFQを投稿する",
-    "ctaAudit": "今の査定を要求します。",
-    "services": "サプライヤーの検証、工場監査、検査、貨物輸送を実施しています。",
     "toolsTitle": "サプライヤー評価の無料ツール",
     "toolsLead": "サプライヤーを確認し、監査を準備し、出荷を計画するための8つのツール。アカウントは不要で、基本的な結果にメールの壁はありません。",
-    "value1Title": "認証済みの実際の意味",
-    "value1Body": "サプライヤーは、登録記録を確認し、サイトが存在することを確認し、監査文書を確認した後にのみ検証済みとマークされます。",
-    "value2Title": "人々が電話をかける",
-    "value2Body": "ソフトウェアは明らかな問題をキャッチします。レビュー担当者が検証と監査の結果を決定し、その名前がレポートに記載されます。",
-    "value3Title": "すべての小切手は記録に残されます",
-    "value3Body": "各検証と監査は、サプライヤーのファイルに残ります。会社は私たちとの歴史を静かにリセットすることはできません。",
-    "sub": "Use free tools to assess supplier risk, check verification readiness and prepare for a factory audit. When you need someone on the ground, request an independent verification or factory audit.",
+    "sub": "サプライヤーリスクを評価するための無料のツールを使用して、検証の信頼性を確認し、工場監査の準備を行います。 地面の要求、独立した確認または工場の監査が必要な場合。",
     "ctaPrimary": "サプライヤーを確認する",
     "ctaSecondary": "無料リスクチェック",
     "ctaHighIntent": "工場監査を依頼する",
-    "evaTitle": "Evaluate. Verify. Audit.",
-    "evaLead": "Three steps between a supplier you found online and a supplier you can pay.",
-    "evaluateTitle": "Evaluate",
-    "evaluateBody": "Assess supplier risk before you place an order.",
-    "evaluateCta": "Evaluate a Supplier",
-    "verifyTitle": "Verify",
-    "verifyBody": "Check company information, documents, factory details and available evidence.",
-    "verifyCta": "Verify a Supplier",
-    "auditTitle": "Audit",
-    "auditBody": "Get an independent on-site factory audit with findings, evidence and a written report.",
-    "auditCta": "Request an Audit",
-    "howTitle": "How it works",
-    "howLead": "From a company name to a decision you can defend internally.",
+    "evaTitle": "評価。 確認します。 監査。",
+    "evaLead": "あなたがオンラインで見つけたサプライヤーとあなたが支払うことができるサプライヤー間の3つのステップ。",
+    "evaluateTitle": "評価評価",
+    "evaluateBody": "注文する前にサプライヤーのリスクを評価します。",
+    "evaluateCta": "サプライヤーの評価",
+    "verifyTitle": "検証",
+    "verifyBody": "会社の情報、文書、工場の詳細、利用可能な証拠を確認してください。",
+    "verifyCta": "サプライヤーの確認",
+    "auditTitle": "監査",
+    "auditBody": "所見、証拠、および書面によるレポートを使用して独立した現場の工場監査を入手してください。",
+    "auditCta": "監査請求",
+    "howTitle": "作品紹介",
+    "howLead": "会社名から社内を守ることができる決定まで。",
     "howSteps": [
       {
         "title": "評価する",
@@ -120,7 +110,7 @@
       }
     ],
     "coverageTitle": "サプライヤー検証の対象地域",
-    "coverageLead": "On-the-ground supplier verification and factory audit support across China and Southeast Asia.",
+    "coverageLead": "中国および東南アジアを渡る地上の製造者の確認および工場監査サポート。",
     "coveragePhase": "フェーズ1の対象範囲",
     "coverageService1": "サプライヤー検証",
     "coverageService2": "工場監査",
@@ -138,20 +128,14 @@
     "why4Body": "社内で転送できる書面レポートをお渡しします。リスク要約と、次に取るべきアクションが含まれます。",
     "guidesTitle": "注文前にバイヤーが読むガイド",
     "guidesLead": "実際に検証を行う人が書いた実用ガイド。",
-    "casesTitle": "What the checks turn up",
-    "casesLead": "Supplier names removed. Findings and outcomes come from real engagements.",
-    "bottomTitle": "Have a supplier already?",
+    "casesTitle": "チェックが立ち上がるもの",
+    "casesLead": "サプライヤー名を削除。 発見と結果は、実際のエンゲージメントから来ています。",
+    "bottomTitle": "サプライヤーは既にありますか。",
     "bottomLead": "会社名と住所をお送りください。確認できること、確認できないこと、費用をお知らせします。",
     "bottomCta": "このサプライヤーを検証する",
     "otherRegionTitle": "その他の地域",
-    "otherRegionBody": "Don't see your country? We accept enquiries for any region and review each one based on scope, location and inspector availability.",
-    "otherRegionCta": "調達先の地域をお知らせください",
-    "primary": "サプライヤーリスクを評価",
-    "secondary": "サプライヤーを検証",
-    "highIntent": "工場監査を依頼",
-    "guide1Title": "中国サプライヤーの検証方法",
-    "guide2Title": "工場監査チェックリスト",
-    "guide3Title": "サプライヤーリスク評価"
+    "otherRegionBody": "あなたの国を見ない? 範囲、場所、検査員の空き状況に基づいて、あらゆる地域へのお問い合わせや各地域のレビューを承っております。",
+    "otherRegionCta": "調達先の地域をお知らせください"
   },
   "toolsIndex": {
     "badge": "無料ツール",
@@ -168,7 +152,7 @@
   "toolCards": {
     "riskCalculator": {
       "title": "サプライヤーリスク計算ツール",
-      "desc": "6つの加重リスク次元で0から100までの任意のサプライヤーをスコアリングします。"
+      "desc": "8 つの加重リスク次元で、任意のサプライヤーを 0 から 100 まで採点します。"
     },
     "verificationChecklist": {
       "title": "サプライヤー検証チェックリスト",
@@ -208,12 +192,12 @@
     },
     "supplierComparison": {
       "title": "サプライヤー比較",
-      "desc": "Score two to five suppliers on the same eight dimensions and compare them side by side."
+      "desc": "同じ8次元の2つから5つの製造者をスコアし、側面によってそれらを比較して下さい。"
     }
   },
   "risk": {
     "ui": {
-      "stepOf": "ステップ {n} / 6",
+      "stepOf": "ステップ {n} / 8",
       "back": "戻る",
       "next": "次へ",
       "calculate": "リスクスコアを計算",
@@ -247,7 +231,7 @@
         "supplierWebsite": "サプライヤーの Web サイト",
         "submit": "レポートを受け取る",
         "sending": "送信中",
-        "done": "ありがとうございます。下のレポートをご確認ください。メールでもお届けします。",
+        "done": "ありがとうございます。レポートは下に表示されています。リクエストを受け付けましたので、1営業日以内にメールでご連絡します。",
         "error": "エラーが発生しました。もう一度お試しください。"
       },
       "disclaimer": "このスコアはお客様の回答に基づく一次評価であり、法務または財務の助言ではありません。詳細は個別レポートをダウンロードしてご確認ください。",
@@ -262,9 +246,9 @@
     "page": {
       "badge": "FactoryAuditB2B RiskScore™",
       "h1": "サプライヤー・リスク・計算ツール",
-      "lead": "サプライヤーについて 22 問に答えると、6 つの次元で 0–100 のスコアと、加重された内訳、改善への推奨が得られます。",
+      "lead": "サプライヤーについて 28 問に答えると、8 つの次元で 0–100 のスコアと、加重された内訳が得られます。スコアが高いほどリスクは低くなります。",
       "card1Title": "スコアの内訳が見える",
-      "card1Body": "6 つの次元をそれぞれ重み付けして表示するため、どの回答がスコアを動かしたか分かります。",
+      "card1Body": "8 つの次元をそれぞれ重み付けして表示するため、どの回答がスコアを動かしたか分かります。",
       "card2Title": "所要時間 約 3 分",
       "card2Body": "スコア表示自体にはアカウント・メール不要。",
       "card3Title": "次に確認すべきことを提示",
@@ -272,7 +256,7 @@
       "relatedTitle": "関連ツール",
       "faqTitle": "よくある質問",
       "metaTitle": "サプライヤー・リスク・計算ツール",
-      "metaDesc": "サプライヤーを企業・品質・コンプライアンス・生産・サプライチェーン・ドキュメントの 6 次元で 0–100 点評価。"
+      "metaDesc": "サプライヤーを企業・品質・コンプライアンス・生産・サプライチェーン・ドキュメント・認証・デジタルフットプリントの 8 領域で 0–100 点評価。スコアが高いほどリスクは低くなります。無料、登録不要。"
     },
     "dimensions": {
       "company": {
@@ -372,7 +356,7 @@
         "unknown": "不明"
       },
       "quality_qms": {
-        "yes": "Yes",
+        "yes": "お問い合わせ",
         "partial": "部分的",
         "no": "いいえ",
         "unknown": "不明"
@@ -403,7 +387,7 @@
         "unknown": "不明"
       },
       "comp_env": {
-        "comprehensive": "Comprehensive",
+        "comprehensive": "ソリューション",
         "partial": "部分的",
         "none": "なし",
         "unknown": "不明"
@@ -480,33 +464,33 @@
       },
       "cert_scope": {
         "covers": "はい、全額です",
-        "partial": "Partially",
+        "partial": "パートリー",
         "notcovered": "いいえ、スコープは当社の製品を除外しています",
-        "unknown": "Unknown"
+        "unknown": "未知の"
       },
       "cert_body": {
         "accredited": "はい、認定された登録簿に記載されています",
         "unverified": "いいえ、見つかりません",
         "none": "証明書がありません",
-        "unknown": "Unknown"
+        "unknown": "未知の"
       },
       "cert_validity": {
         "valid": "有効",
         "expiring": "3か月以内に期限切れ",
-        "expired": "Expired",
-        "unknown": "Unknown"
+        "expired": "有効期限",
+        "unknown": "未知の"
       },
       "digital_website": {
         "owned": "はい、独立したドメインです",
         "socialonly": "マーケットプレイスまたはソーシャルページのみ",
         "none": "何も見つかりません",
-        "unknown": "Unknown"
+        "unknown": "未知の"
       },
       "digital_consistency": {
         "consistent": "どこでも一貫している",
         "minor": "わずかな違い",
         "mismatch": "リスティング間のマテリアルの不一致",
-        "unknown": "Unknown"
+        "unknown": "未知の"
       },
       "digital_history": {
         "5plus": "5年以上後",
@@ -589,45 +573,45 @@
     "faq": [
       {
         "q": "このツールは何を測定しますか？",
-        "a": "企業・品質・コンプライアンス・生産・サプライチェーン・ドキュメントの 6 つの領域で 0–100 のスコアを出します。高いほどリスクが高いことを示します。"
+        "a": "企業・品質・コンプライアンス・生産・サプライチェーン・ドキュメント・認証・デジタルフットプリントの 8 領域で 0–100 のスコアを出します。スコアが高いほどリスクは低いことを示します。"
       },
       {
-        "q": "スコアは最終的な查核結果ですか？",
-        "a": "いいえ。スコアはお客様がお答えになった内容に基づく一次評価です。確定的な查核結果は、レポートをダウンロードの上、サプライヤー查核サービスをご検討ください。"
+        "q": "スコアは最終的な検証結果ですか？",
+        "a": "いいえ。スコアはご入力内容に基づく一次評価です。独立した検証、工場監査、法的助言の代わりにはなりません。"
       },
       {
-        "q": "サプライヤーは私の回答内容を見ますか？",
-        "a": "いいえ。回答内容を保存するか第三者が見ることはありません。スコアはブラウザ内で完結します。"
+        "q": "重み付けはどのように決めていますか？",
+        "a": "企業 12%、品質 16%、コンプライアンス 16%、生産 12%、サプライチェーン 12%、ドキュメント 12%、認証 10%、デジタルフットプリント 10%。重みは固定で、結果ページに表示されます。"
       },
       {
-        "q": "サプライヤーの名前や住所が分からなくても使えますか？",
-        "a": "はい。スコアは一般的なリスク要因に基づくため、名前が分からなくても意味のある結果が得られます。"
+        "q": "利用に料金はかかりますか？",
+        "a": "いいえ。スコアは無料です。書面レポートが欲しい場合はメールアドレスを残していただければ無料でお送りします。検証や監査は有料サービスですが、任意です。"
       },
       {
-        "q": "もっと厳密な查核が必要と判断された場合は？",
-        "a": "レポート画面から正式なサプライヤー查核を申し込むか、工場監査を予約できます。"
+        "q": "複数のサプライヤーを比較できますか？",
+        "a": "はい。各サプライヤーを計算機にかけたうえで、比較ツールを使えば最大 5 社を同じ 8 次元で並べて確認できます。"
       }
     ]
   },
   "checklist": {
     "ui": {
-      "progressTitle": "Verification progress",
-      "complete": "{done} of {total} done",
-      "criticalOpen": "{n} critical item open",
-      "criticalOpenPlural": "{n} critical items open",
-      "criticalCleared": "Critical items cleared",
-      "print": "Print or save as PDF",
-      "reset": "Reset",
-      "criticalTag": "critical",
-      "verdictOpenTitle": "Still open: {n} critical item",
-      "verdictOpenTitlePlural": "Still open: {n} critical items",
-      "verdictOpenBody": "Close these before you place an order or release any payment. They are the checks that most often expose a trading company posing as a factory.",
-      "verdictAllTitle": "All checks complete",
-      "verdictAllBody": "You have been through every item. Keep the record with your supplier file and re-verify as volumes grow.",
-      "verdictCriticalDoneTitle": "All critical items closed",
-      "verdictCriticalDoneBody": "The highest-risk checks are done. Finish the rest to complete your supplier file.",
-      "ctaOutsource": "Get these checks done for you",
-      "disclaimer": "This is a self-assessment aid. It does not independently verify any supplier. For that, use a third-party verification service.",
+      "progressTitle": "検証の進捗",
+      "complete": "{total} の {done} を実行しました",
+      "criticalOpen": "{n} 重要な項目が開きます",
+      "criticalOpenPlural": "{n} 重要な項目が開きます",
+      "criticalCleared": "重要な項目はクリア",
+      "print": "PDFとして印刷または保存",
+      "reset": "リセット",
+      "criticalTag": "重要なポイント",
+      "verdictOpenTitle": "未開封: {n} 重要な項目",
+      "verdictOpenTitlePlural": "未開封: {n} 重要な項目",
+      "verdictOpenBody": "注文をしたり、支払いを解放する前に、これらを閉じます。 工場としての取引会社を明らかにすることが多いチェックです。",
+      "verdictAllTitle": "すべてのチェックが完了",
+      "verdictAllBody": "あらゆるアイテムを通し続けています。 サプライヤーファイルでレコードを保持し、ボリュームとして再検証します。",
+      "verdictCriticalDoneTitle": "すべての重要な項目は閉じました",
+      "verdictCriticalDoneBody": "リスクチェックは最高です。 あなたの製造者ファイルを完了するために残りを終えて下さい。",
+      "ctaOutsource": "これらのチェックをあなたのために完了させる",
+      "disclaimer": "これは自己評価援助です。 それは独立してあらゆる製造者を確かめません。 そのためには、第三者認証サービスを使用します。",
       "submitReport": "評価レポートを生成",
       "reportTitle": "評価レポート",
       "reportIntro": "6 段階 29 項目のチェックに基づき、本レポートでは確認済み項目、未確認項目、および前金・残金支払い前のおすすめをまとめます。",
@@ -644,18 +628,18 @@
     },
     "page": {
       "badge": "FactoryAuditB2B RiskScore™",
-      "h1": "Supplier Verification Checklist",
-      "lead": "Twenty-nine checks across six stages. Work through them before you place an order or release a payment, then print the result for your supplier file.",
-      "card1Title": "Six stages",
-      "card1Body": "Identity, factory, quality, compliance, commercial terms and track record.",
-      "card2Title": "Critical items flagged",
-      "card2Body": "The checks that most often expose a trading company posing as a factory.",
-      "card3Title": "Print-ready",
-      "card3Body": "Save the completed checklist as a PDF for your records.",
-      "relatedTitle": "Related tools",
-      "faqTitle": "Frequently asked questions",
-      "metaTitle": "Supplier Verification Checklist",
-      "metaDesc": "A free step-by-step checklist covering company identity, factory capability, quality, compliance, commercial terms and track record. Tick items, track progress and print your supplier file."
+      "h1": "サプライヤー検証チェックリスト",
+      "lead": "6つのステージを横断した20個のナインチェック。 注文を置くか、または支払を解放する前にそれらを通して働かせて下さい、そしてあなたの製造者ファイルのための結果を印刷して下さい。",
+      "card1Title": "6ステージ",
+      "card1Body": "アイデンティティ、工場、品質、コンプライアンス、商業条件およびトラック記録。",
+      "card2Title": "重要な項目はフラグを付けられた",
+      "card2Body": "工場としての取引会社を明らかにすることが多いチェック。",
+      "card3Title": "プリントレディ",
+      "card3Body": "完了したチェックリストをPDFに保存します。",
+      "relatedTitle": "関連ツール",
+      "faqTitle": "よくある質問",
+      "metaTitle": "サプライヤー検証チェックリスト",
+      "metaDesc": "会社のアイデンティティ、工場機能、品質、コンプライアンス、商業条件およびトラック記録をカバーする無料のステップバイステップのチェックリスト。 ティックアイテム、進捗状況を追跡し、サプライヤーファイルを印刷します。"
     },
     "criticalItems": [
       "id_legal",
@@ -673,92 +657,92 @@
     "stages": [
       {
         "key": "identity",
-        "title": "1. Company identity and registration",
-        "desc": "Confirm the legal entity behind the quote before anything else.",
+        "title": "1。 会社のアイデンティティと登録",
+        "desc": "引用符の背後にある法的な団体を他のものの前に確認して下さい。",
         "items": {
-          "id_legal": "Legal company name matches the business licence",
-          "id_regno": "Business registration or licence number obtained",
-          "id_licence": "Readable copy of the business licence received",
-          "id_registry": "Registration cross-checked against an official or third-party registry",
-          "id_owner": "Legal representative and ownership identified"
+          "id_legal": "法務会社名がビジネスライセンスにマッチ",
+          "id_regno": "業務登録・ライセンス番号取得",
+          "id_licence": "受領したビジネスライセンスの読み取り可能なコピー",
+          "id_registry": "正式または第三者のレジストリに対する登録クロスチェック",
+          "id_owner": "法定代理人および特定所有権"
         }
       },
       {
         "key": "factory",
-        "title": "2. Factory and production capability",
-        "desc": "Check the site is real and can actually make your product.",
+        "title": "2。 工場および生産の機能",
+        "desc": "サイトが本物であることを確認し、実際に製品を作ることができます。",
         "items": {
-          "fa_address": "Factory address confirmed and matches the licence",
-          "fa_visit": "Site photos, video or a live video walkthrough obtained",
-          "fa_type": "Confirmed whether manufacturer or trading company",
-          "fa_equipment": "Key equipment list received",
-          "fa_capacity": "Monthly capacity stated and consistent with your order volume",
-          "fa_subcontract": "Subcontracting disclosed, or confirmed not used"
+          "fa_address": "工場の住所は確認し、免許証に一致します",
+          "fa_visit": "サイトの写真、ビデオまたはライブビデオウォークスルー得られた",
+          "fa_type": "製造業者か商社か確認",
+          "fa_equipment": "受取される主要な装置のリスト",
+          "fa_capacity": "毎月の容量が記載され、注文数量と一致",
+          "fa_subcontract": "開示・訂正・利用停止等"
         }
       },
       {
         "key": "quality",
-        "title": "3. Quality management",
-        "desc": "Check that quality is a system, not a promise.",
+        "title": "3。 品質管理",
+        "desc": "約束ではなく、品質がシステムであることを確認してください。",
         "items": {
-          "qm_system": "Documented quality management system, such as ISO 9001",
-          "qm_incoming": "Incoming material inspection process in place",
-          "qm_inprocess": "In-process and final inspection records available",
-          "qm_test": "Product test reports from a recognised laboratory",
-          "qm_nc": "Non-conformance and corrective action process exists"
+          "qm_system": "ISO9001等の品質マネジメントシステムの文書化",
+          "qm_incoming": "場所で材料の点検プロセスを入って来る",
+          "qm_inprocess": "加工および最終検査の記録が使用可能",
+          "qm_test": "認識された実験室からのプロダクト テスト レポート",
+          "qm_nc": "非適合性および是正作用プロセスが存在します"
         }
       },
       {
         "key": "compliance",
-        "title": "4. Compliance and social responsibility",
-        "desc": "Reduce the risk of shipment holds, recalls and failed buyer audits.",
+        "title": "4。 コンプライアンス・社会的責任",
+        "desc": "貨物の保有、リコールおよび失敗したバイヤーの監査の危険性を減らして下さい。",
         "items": {
-          "cp_social": "Social compliance audit or management system, such as BSCI or SMETA",
-          "cp_env": "Environmental compliance documentation",
-          "cp_product": "Product compliance for your target market, such as CE or UL",
-          "cp_ethics": "Business ethics or anti-corruption policy"
+          "cp_social": "BSCIやSMETAなどの社会的コンプライアンス監査や管理システム",
+          "cp_env": "環境コンプライアンス文書",
+          "cp_product": "CEやULなどのターゲット市場向けの製品コンプライアンス",
+          "cp_ethics": "事業倫理・腐敗防止方針"
         }
       },
       {
         "key": "commercial",
-        "title": "5. Commercial terms and contracts",
-        "desc": "Lock down what happens when things go wrong.",
+        "title": "5。 商業条件および契約",
+        "desc": "物事が間違って行くときに何が起こるかをロックダウン.",
         "items": {
-          "cm_contract": "Written contract or pro-forma invoice signed",
-          "cm_spec": "Specification, tolerances and packaging agreed in writing",
-          "cm_payment": "Payment terms agreed, avoiding a large upfront prepayment",
-          "cm_leadtime": "Lead time, MOQ and delivery terms such as Incoterms confirmed",
-          "cm_penalty": "Defect and late-delivery penalty clauses included"
+          "cm_contract": "契約書またはプロフォームの請求書の署名",
+          "cm_spec": "仕様、許容および包装は書面で合意しました",
+          "cm_payment": "支払条件は大きい前払いを避け、同意しました",
+          "cm_leadtime": "調達期間、確認されるIncotermsのようなMOQおよび配達言葉",
+          "cm_penalty": "欠陥および遅れ配達ペナルティの節は含んでいます"
         }
       },
       {
         "key": "track",
-        "title": "6. Track record and references",
-        "desc": "Past behaviour predicts future performance better than any document.",
+        "title": "6。 レコードと参照を追跡する",
+        "desc": "過去の行動は、将来のパフォーマンスをどの文書よりも優れているかを予測します。",
         "items": {
-          "tr_export": "Export history to your target market",
-          "tr_refs": "At least two verifiable customer references",
-          "tr_samples": "Production samples approved before mass production",
-          "tr_disputes": "Checked for disputes, blacklists or adverse records"
+          "tr_export": "ターゲット市場への輸出履歴",
+          "tr_refs": "少なくとも2つの検証可能な顧客の参照",
+          "tr_samples": "大量生産の前に承認される生産のサンプル",
+          "tr_disputes": "紛争、ブラックリスト、または有害記録のチェック"
         }
       }
     ],
     "faq": [
       {
-        "q": "What is a supplier verification checklist?",
-        "a": "A set of documents and checks you complete before ordering. It shows the company is a real legal entity, the factory exists and can make your product, and the quality, compliance and commercial terms are agreed in writing."
+        "q": "サプライヤー検証チェックリストとは何ですか?",
+        "a": "注文前に完了した書類とチェックのセット。 会社は実質の法的企業であり、工場は存在し、あなたのプロダクトを作ることができ、質、承諾および商業条件は執筆で合意されます示します。"
       },
       {
-        "q": "Which checks matter most?",
-        "a": "The critical ones: business licence and registration cross-check, confirmed factory address, evidence the site is real such as photos or live video, confirmation of manufacturer versus trading company, product test reports, product compliance for your market, and a signed contract with agreed specifications."
+        "q": "ほとんどのチェックは?",
+        "a": "重要なもの:ビジネスライセンスと登録クロスチェック、工場住所の確認、サイトが写真やライブビデオなどの実際の証拠、メーカー対取引会社の確認、製品テストレポート、市場への製品のコンプライアンス、合意された仕様の署名契約などです。"
       },
       {
-        "q": "Does ticking every box mean the supplier is safe?",
-        "a": "No. This is a self-assessment built on what the supplier gives you, and documents can be forged. Only an independent verification or factory audit confirms the claims on the ground."
+        "q": "すべての箱を刻むことは製造者が安全であることを意味しますか。",
+        "a": "いいえ。 これは、サプライヤーがあなたに与えるものに基づいて構築された自己評価であり、文書は鍛造することができます。 独立した検証または工場監査のみが、地面のクレームを確認します。"
       },
       {
-        "q": "Is my progress saved?",
-        "a": "Yes. Your ticks are stored in your browser, so you can close the page and come back. Use print or save as PDF to keep a copy for your supplier file."
+        "q": "進捗は保存されますか?",
+        "a": "はい。 お使いのティックはブラウザに保存されますので、ページを閉じて戻ってきます。 印刷物を使用して下さいまたはあなたの製造者ファイルのためのコピーを保つためにPDFとして保存して下さい。"
       }
     ]
   },
@@ -891,38 +875,29 @@
   "suppliers": {
     "h1": "検証済みサプライヤー",
     "badge": "サプライヤーディレクトリ",
-    "ctaTitle": "あなたはサプライヤーですか？",
-    "ctaLead": "ディレクトリに参加し、工場プロフィールを公開し、当社の検証に合格し、中国とアジアから調達しているバイヤーによって発見されます。",
-    "ctaSteps": [
-      "登録する",
-      "プロフィールを公開",
-      "プラットフォーム監査",
-      "生放送を配信"
-    ],
-    "ctaPrimary": "サプライヤーとして参加する",
     "metaTitle": "中国とアジアの検証済みサプライヤー",
-    "metaDesc": "中国、ベトナム、タイ、インド、アジア各地の認定メーカーや商社を閲覧できます。各プロファイルには、検証ステータス、リスクスコア、エクスポートエクスペリエンスが含まれます。",
-    "lead": "Explore suppliers with available company, capability and verification information.",
-    "featuredTag": "Featured",
-    "exampleNote": "These are featured suppliers, not a complete marketplace. Coverage is still small, so if the supplier you need is not here, post an RFQ and we will source and verify it.",
-    "filterCountry": "Country",
-    "filterIndustry": "Industry",
-    "filterProduct": "Product",
-    "filterLevel": "Verification level",
-    "filterAudit": "Audit status",
-    "filterAll": "All",
-    "filterSubmit": "Apply filters",
-    "filterReset": "Clear",
-    "countLabel": "{n} suppliers listed",
-    "empty": "No supplier matches these filters. Post an RFQ and we will look outside the directory.",
-    "riskLabel": "Risk",
-    "businessTypeLabel": "Type",
-    "notListedTitle": "Looking for a supplier that isn't listed?",
-    "notListedLead": "Post an RFQ. We source it, verify the company and the site before you pay, and quote the whole thing.",
-    "notListedCta": "Post an RFQ",
-    "claimTitle": "Are you a supplier?",
-    "claimLead": "Join the directory, publish your factory profile, pass our verification and get discovered by buyers sourcing from China and Southeast Asia.",
-    "claimPrimary": "Join as a supplier",
+    "metaDesc": "会社情報、生産能力、検証情報を掲載したサプライヤーを検索できます。掲載数は限られています。お探しのサプライヤーが見つからない場合は RFQ を投稿してください。",
+    "lead": "利用できる会社、機能および確認情報が付いている製造者を探検して下さい。",
+    "featuredTag": "おすすめ記事",
+    "exampleNote": "これらは、完全な市場ではなく、サプライヤーを特色としています。 適用範囲はまだ小さいです、従ってあなたが必要とする製造者がここにいなければ、RFQを掲示し、私達はそれを元通り、確認します。",
+    "filterCountry": "カントリー",
+    "filterIndustry": "業界ニュース",
+    "filterProduct": "プロダクト",
+    "filterLevel": "検証レベル",
+    "filterAudit": "監査状況",
+    "filterAll": "すべて",
+    "filterSubmit": "フィルターを適用する",
+    "filterReset": "クリア",
+    "countLabel": "{n}サプライヤーリスト",
+    "empty": "サプライヤーはこれらのフィルターに一致しません。 RFQ を投稿し、ディレクトリの外を見ていきます。",
+    "riskLabel": "リスク",
+    "businessTypeLabel": "タイプ:",
+    "notListedTitle": "リストされていないサプライヤーをお探しですか?",
+    "notListedLead": "RFQ を投稿します。 当社は、支払い前に会社とサイトを認証し、全体を引用します。",
+    "notListedCta": "RFQを投稿する",
+    "claimTitle": "サプライヤーはありますか?",
+    "claimLead": "ディレクトリに参加し、工場のプロファイルを公開し、検証を通過し、中国と東南アジアのバイヤーの調達によって発見される。",
+    "claimPrimary": "サプライヤーとして参加",
     "heroBadge": "サプライヤー情報",
     "featuredTitle": "注目のサプライヤー",
     "featuredLead": "検証情報が確認できる実在企業です。すべてのプロフィールで同じリスクスコアを公開しており、隠しません。",
@@ -1015,27 +990,40 @@
     "disclaimer": "一般的なガイダンスのために提供されます。これは、サプライヤーを独立して検証するものではなく、法的、財務的、または専門的な監査アドバイスではありません。",
     "whatsappChat": "WhatsApp で相談",
     "heroSearch": {
-      "tabSupplier": "Supplier",
-      "tabProduct": "Product",
-      "tabAudit": "Audit",
-      "tabInspector": "Inspector",
-      "placeholderSupplier": "e.g. China electronics supplier",
-      "placeholderProduct": "e.g. Stainless steel water bottle",
-      "placeholderAudit": "e.g. Factory audit China",
-      "placeholderInspector": "e.g. Inspector Shenzhen",
-      "search": "Search",
-      "combinedHint": "Combined SEO pages + live database results",
-      "noMatch": "No exact match for \"{q}\". This searches the indexed supplier database.",
-      "urlDetected": "Looks like a company name or website. Not in the indexed database yet.",
-      "submitAssess": "Submit for preliminary assessment",
-      "assessHint": "We check registration records and the online footprint, then reply with a preliminary risk view.",
-      "formName": "Your name",
-      "formEmail": "Your email *",
-      "formCompany": "Your company",
-      "assessSubmit": "Request assessment",
-      "assessSubmitting": "Submitting…",
-      "assessSuccess": "Thank you. Our team will reply within one business day.",
-      "assessError": "Something went wrong. Please try again."
+      "tabSupplier": "サプライヤー",
+      "tabProduct": "プロダクト",
+      "tabAudit": "監査",
+      "tabInspector": "インスペクター",
+      "placeholderSupplier": "例) 中国 エレクトロニクス サプライヤー",
+      "placeholderProduct": "例) ステンレス鋼の水差し",
+      "placeholderAudit": "例) 工場監査中国",
+      "placeholderInspector": "例) Inspector シンセン",
+      "search": "インフォメーション",
+      "combinedHint": "SEOページ+ライブデータベース結果の結合",
+      "noMatch": "\"{q}\" にマッチしない これはインデックスされたサプライヤーデータベースを検索します。",
+      "urlDetected": "会社名やウェブサイトのように見えます。 インデックス化されたデータベースにはまだありません。",
+      "submitAssess": "予備審査の提出",
+      "assessHint": "登録記録とオンラインフットプリントを確認し、予備リスクビューに返信します。",
+      "formName": "あなたの名前",
+      "formEmail": "メールアドレス *",
+      "formCompany": "会社案内",
+      "assessSubmit": "リクエスト評価",
+      "assessSubmitting": "提出する...",
+      "assessSuccess": "ありがとうございます。 1営業日以内にお返事いたします。",
+      "assessError": "何かが間違っていた。 お問い合わせ."
+    },
+    "ui": {
+      "home": "ホーム >",
+      "relatedGuides": "関連ガイド",
+      "quickAnswer": "迅速な回答",
+      "definition": "定義定義",
+      "keyPoints": "キーポイント",
+      "stepByStep": "ステップバイステップ",
+      "examples": "事例紹介",
+      "checklist": "チェックリスト",
+      "sources": "ソース",
+      "guidesPageTitle": "サプライヤーインテリジェンスガイド",
+      "caseStudiesLead": "サプライヤー検証、工場監査、検査、調達ウォークスルー。"
     }
   },
   "container": {
@@ -1046,93 +1034,93 @@
       "quickAnswerTitle": "クイック回答",
       "quickAnswer": "カートンの寸法、単位重量、合計数量を入力します。電卓は、各容器の内部寸法に対して6つの箱の向きをすべてテストし、最も多くのカートンに合った配置を維持してから、ペイロード制限を適用します。コンテナごとの単位、必要なコンテナ、およびボリュームとペイロードの使用率を返します。",
       "howTitle": "計算の仕組み",
-      "how1": "All six carton orientations are tested against the container's internal length, width and height.",
-      "how2": "The arrangement with the highest count wins, after subtracting the gap you set between cartons.",
-      "how3": "The payload limit is applied: units per container cannot exceed max payload divided by unit weight.",
-      "how4": "Containers needed is total quantity divided by units per container, rounded up.",
-      "specsTitle": "Container specifications used",
-      "specsLead": "Typical ISO specifications. Actual figures vary by carrier, container owner and build year.",
-      "methodTitle": "Methodology and limits",
-      "methodBody": "The result is a theoretical maximum from a rectangular packing model. It assumes cartons are rigid, stackable and can be rotated, and that the load is evenly distributed. Real loading is affected by pallets, dunnage, carton deformation, stacking strength, axle weight rules and stowage order. Treat the output as a planning estimate and confirm the final plan with your forwarder or loading supervisor.",
-      "faqTitle": "Frequently asked questions",
-      "metaTitle": "Container Load Calculator",
-      "metaDesc": "Free container loading calculator for 20GP, 40GP, 40HQ, 45HQ and reefer containers. Work out cartons per container, containers needed, volume and payload utilisation."
+      "how1": "6つのカートンのオリエンテーションは容器の内部長さ、幅および高さに対してテストされます。",
+      "how2": "カートン間で設定したギャップを差し引いた後、最高カウントの配列は勝ちます。",
+      "how3": "ペイロードの限界は加えられます:容器ごとの単位は単位の重量によって分けられる最高のペイロードを超過できません。",
+      "how4": "必要な容器は容器ごとの単位によって分かれ、円形にされる総量です。",
+      "specsTitle": "使用される容器の指定",
+      "specsLead": "典型的なISOの指定。 キャリア、コンテナオーナー、ビルド年ごとに実際の数字が異なります。",
+      "methodTitle": "方法論と限界",
+      "methodBody": "その結果は、長方形の梱包モデルから理論最大です。 カートンは硬く、積み重ね可能であり、回転でき、負荷が均等に分配されると仮定します。 実質のローディングはパレット、砂利、カートンの変形、積み重ねの強さ、車軸の重量の規則および固定の順序によって影響されます。 出力を計画見積りとして扱い、フォワーダーまたはロードバイザーで最終計画を確認します。",
+      "faqTitle": "よくある質問",
+      "metaTitle": "コンテナ負荷計算機",
+      "metaDesc": "20GP、40GP、40HQ、45HQおよびreefer容器のための自由な容器のローディングの計算機。 容器、必要な容器、容積およびペイロードのutilizationごとのカートンを働かせて下さい。"
     },
     "ui": {
-      "cargoTitle": "Carton dimensions",
-      "length": "Length",
-      "width": "Width",
-      "height": "Height",
-      "weight": "Weight per carton",
-      "quantity": "Total quantity",
-      "optionsTitle": "Loading options",
-      "clearance": "Gap between cartons",
-      "clearanceHelp": "Leave 2–5 cm for dunnage, strapping and carton bulge.",
-      "allowRotate": "Allow rotating cartons",
-      "allowRotateHelp": "Tests all six orientations and keeps the best fit.",
-      "calcBtn": "Calculate",
-      "resetBtn": "Reset",
-      "resultsTitle": "Loading plan",
-      "bestFit": "Best fit",
-      "perContainer": "Cartons per container",
-      "containersNeeded": "Containers needed",
-      "arrangement": "Arrangement",
-      "along": "along length",
-      "across": "across width",
-      "layers": "layers high",
-      "volumeUsed": "Volume used",
-      "payloadUsed": "Payload used",
-      "totalVolume": "Total cargo volume",
-      "totalWeight": "Total cargo weight",
-      "comparisonTitle": "All container types compared",
-      "containerCol": "Container",
-      "fitsCol": "Fits",
-      "neededCol": "Needed",
-      "topView": "Top view of one layer",
-      "warnOverweight": "The load reaches the payload limit before the container is full. Weight, not space, is the binding constraint.",
-      "warnTooLarge": "These cartons are too large to fit any container in this list. Check the dimensions.",
-      "warnDoor": "The carton may not pass through the door opening in this orientation. Check with your loading team.",
-      "empty": "Enter carton dimensions and quantity to see the loading plan.",
-      "disclaimer": "Estimates only. Container figures are typical ISO specifications and vary by carrier. Always confirm the final loading plan with your forwarder.",
+      "cargoTitle": "カートン次元",
+      "length": "長さ",
+      "width": "フリガナ",
+      "height": "高さ",
+      "weight": "カートンごとの重量",
+      "quantity": "総数量",
+      "optionsTitle": "読み込みオプション",
+      "clearance": "カートン間のギャップ",
+      "clearanceHelp": "ダンネージ、ストラップ、カートンの膨らみのために2〜5センチメートルを残します。",
+      "allowRotate": "回転カートンを許可して下さい",
+      "allowRotateHelp": "6つのオリエンテーションをすべてテストし、最高のフィット感を維持します。",
+      "calcBtn": "計算する",
+      "resetBtn": "リセット",
+      "resultsTitle": "ローディングプラン",
+      "bestFit": "ベストフィット",
+      "perContainer": "容器ごとのカートン",
+      "containersNeeded": "必要な容器",
+      "arrangement": "アレンジ",
+      "along": "長さに沿って",
+      "across": "の幅を渡る",
+      "layers": "層の高い",
+      "volumeUsed": "使用される容積",
+      "payloadUsed": "使用されるペイロード",
+      "totalVolume": "総貨物量",
+      "totalWeight": "総貨物重量",
+      "comparisonTitle": "すべてのコンテナタイプを比較",
+      "containerCol": "コンテナ",
+      "fitsCol": "フィット",
+      "neededCol": "お問い合わせ",
+      "topView": "1層のトップビュー",
+      "warnOverweight": "コンテナがいっぱいになる前に負荷がペイロード限界に達します。 重量は、スペースではなく、結合の制約です。",
+      "warnTooLarge": "これらのカートンは、このリスト内の任意の容器に合うために大きすぎるです。 寸法を確認してください。",
+      "warnDoor": "カートンはこの方向のドアの入り口を通さないかもしれません。 あなたのローディングのチームと点検して下さい。",
+      "empty": "ローディングの計画を見るためにカートン次元および量を書き入れて下さい。",
+      "disclaimer": "見積もりのみ。 コンテナ図は、典型的なISO規格であり、キャリアによって異なる。 必ず最終積み込みプランをご確認下さい。",
       "unit": "単位",
       "massUnit": "質量の単位"
     },
     "specs": {
-      "internal": "Internal (cm)",
-      "door": "Door opening",
-      "capacity": "Capacity",
-      "payload": "Max payload"
+      "internal": "内部(cm)",
+      "door": "ドアの入り口",
+      "capacity": "定員",
+      "payload": "最高のペイロード"
     },
     "types": {
-      "generalPurpose": "General purpose",
-      "highCube": "High cube",
-      "reefer": "Refrigerated",
-      "openTop": "Open top"
+      "generalPurpose": "一般目的",
+      "highCube": "ハイキューブ",
+      "reefer": "冷やされていた",
+      "openTop": "オープントップ"
     },
     "faq": [
       {
-        "q": "What is the difference between a 40GP and a 40HQ?",
-        "a": "Both are the same length and width. A 40HQ is about 30 cm taller inside (269 cm versus 239 cm), which adds roughly 9 m³ of capacity. The payload limit is nearly identical, so the high cube only helps when you run out of space before you run out of weight."
+        "q": "40GPと40HQの違いは何ですか?",
+        "a": "どちらも同じ長さと幅です。 40HQは、容量の約9 m3を追加し、内部で約30センチメートルの高さ(269センチメートル対239センチメートル)です。 ペイロードの上限はほぼ同じなので、体重の切れる前にスペースから抜け出すときだけ高いキューブが役立ちます。"
       },
       {
-        "q": "Why is your number different from my forwarder's?",
-        "a": "Three common reasons. First, container internal dimensions vary slightly by carrier and build year. Second, this model assumes cartons are rigid and fully stackable, while real loading needs pallets, dunnage and tolerances. Third, weight distribution and road axle limits can cap the load below the container's maximum payload."
+        "q": "転送者の番号が違うのはなぜですか?",
+        "a": "3つの一般的な理由。 まず、コンテナの内部寸法はキャリアとビルド年によって若干異なります。 2番目に、このモデルはカートンを堅く、十分に積み重ね可能と仮定します、実質のローディングはパレット、砂利および許容を必要とします。 3番目に、重量配分および道の車軸の限界は容器の最高のペイロードの下の負荷を容量できます。"
       },
       {
-        "q": "Should I set a gap between cartons?",
-        "a": "Yes, for planning. Set 2 to 5 cm if cartons are packed by hand or may bulge. Set 0 only for rigid, uniform cartons on a tightly controlled load."
+        "q": "カートン間の隙間を設定したら?",
+        "a": "はい、計画のため。 カートンが手で詰まっているか、または膨らむかもしれない場合2から5 cmを置いて下さい。 堅く制御された負荷の堅い、均一カートンのためにだけ0を置いて下さい。"
       },
       {
-        "q": "Does this handle pallets?",
-        "a": "Not directly in this version. To approximate a palletised load, enter the pallet footprint and height including the pallet base as one unit, and set the quantity to your pallet count."
+        "q": "このハンドルパレットは?",
+        "a": "このバージョンでは直接ではありません。 パレット積み荷を近づけるために、パレットの足跡および高さを1単位としてパレット基盤を含んで入れ、あなたのパレット計算に量を置いて下さい。"
       },
       {
-        "q": "Are these container specifications exact?",
-        "a": "No. They are widely used typical figures for planning. Dimensions and payload limits differ by container owner, manufacturer and build year, and shipping lines publish their own limits. Confirm with your carrier before booking."
+        "q": "これらのコンテナ仕様は正確ですか?",
+        "a": "いいえ。 これらは、計画のために広く使用されている典型的な数字です。 コンテナ所有者、メーカー、ビルド年によって異なる寸法とペイロード制限、および配送ラインは、独自の限界を公開します。 ご予約前に、ご確認下さい。"
       },
       {
-        "q": "What if my cartons cannot be stacked?",
-        "a": "Enter the carton height as the full stack height you are willing to allow, or reduce the quantity per layer manually. This version assumes every carton carries the load above it."
+        "q": "カートンがスタックできない場合はどうすればよいですか?",
+        "a": "許可するか、または層ごとの量を手動で減らすために喜んでいる完全な積み重ね高さとしてカートンの高さを書き入れて下さい。 このバージョンは、すべてのカートンがそれを超える負荷を運ぶと仮定します。"
       }
     ]
   },
@@ -1196,74 +1184,74 @@
     "metaDesc": "リスクを回避するために中国とアジアのサプライヤーを検証し、品質とQCについて工場のチームをトレーニングして、欠陥が再発しないようにします。"
   },
   "legal": {
-    "privacyTitle": "Privacy Policy",
-    "privacyUpdated": "Last updated: 2026-08-30",
+    "privacyTitle": "プライバシーポリシー",
+    "privacyUpdated": "最終更新日:2026-08-30",
     "privacyIntro": "FactoryAuditB2B (\"we\", \"us\") respects your privacy. This policy explains what data we collect when you use our website and services, and how we use it.",
     "privacySections": [
       {
-        "h": "Information we collect",
-        "b": "We collect information you provide directly (name, email, company, sourcing needs, messages) when you request an audit, post an RFQ, use our tools, or contact us. We also collect basic technical data such as IP address and pages visited."
+        "h": "収集する情報",
+        "b": "監査依頼、RFQ投稿、当社のツールの使用、または当社にお問い合わせください。 また、IPアドレスやページなどの基本的な技術データを収集しています。"
       },
       {
-        "h": "How we use information",
-        "b": "We use your information to respond to requests, match you with suppliers or audit partners, send service notifications, and improve our site. We do not sell your personal data."
+        "h": "情報の利用方法",
+        "b": "お客様からのご要望にお応えし、サプライヤーや監査パートナーとマッチングし、サービス通知の送信、サイトの改善に役立てます。 当社は、お客様の個人情報を販売しておりません。"
       },
       {
-        "h": "Leads and service delivery",
-        "b": "When you submit a request, we share relevant details with the suppliers or audit firms needed to fulfill it. By submitting, you consent to this limited sharing."
+        "h": "鉛およびサービス配達",
+        "b": "リクエストを提出する際には、サプライヤーまたは監査会社と関連した詳細を共有し、それを満たす必要があります。 提出することにより、お客様はこの限りの共有に同意するものとします。"
       },
       {
-        "h": "Cookies and analytics",
-        "b": "We use cookies and similar technologies to operate the site and understand usage. You can disable cookies in your browser."
+        "h": "クッキーと分析",
+        "b": "本サイトを運営し、利用状況を把握するためにクッキーや類似技術を使用しています。 ブラウザでクッキーを無効にすることができます。"
       },
       {
-        "h": "Data retention",
-        "b": "We retain your information as long as needed to provide our services and meet legal obligations, then delete or anonymize it."
+        "h": "データ保持",
+        "b": "当社は、サービス提供および法的義務を満たし、削除または匿名化するために必要な限り、お客様の情報を保持します。"
       },
       {
-        "h": "Your rights",
-        "b": "You may request access to, correction of, or deletion of your personal data by contacting us at privacy@factoryauditb2b.com."
+        "h": "あなたの権利",
+        "b": "お客様は、privacy@factoryauditb2b.comで当社に連絡することにより、お客様の個人データの要求、訂正、または削除にアクセスすることができます。"
       },
       {
-        "h": "Contact",
-        "b": "Questions about this policy? Email privacy@factoryauditb2b.com."
+        "h": "お問い合わせ",
+        "b": "本方針に関するお問い合わせ Eメール:privacy@factoryauditb2b.com."
       }
     ],
-    "termsTitle": "Terms of Service",
-    "termsUpdated": "Last updated: 2026-08-30",
+    "termsTitle": "サービス利用規約",
+    "termsUpdated": "最終更新日:2026-08-30",
     "termsIntro": "By using FactoryAuditB2B, you agree to these terms. Our service helps buyers verify and audit suppliers, but we are a platform, not a guarantor of supplier performance.",
     "termsSections": [
       {
-        "h": "Use of the service",
-        "b": "You may use the site to search suppliers, use tools, request audits and post RFQs. You agree to provide accurate information and not misuse the service."
+        "h": "サービスの利用",
+        "b": "お客様は、サイトを使用してサプライヤーを検索したり、ツールを使用して、監査を要求したり、RFQを投稿したりすることができます。 お客様は、正確な情報を提供し、サービスを誤用しないことに同意します。"
       },
       {
-        "h": "No warranty on suppliers",
-        "b": "We provide verification and audit information to help your decisions. We do not guarantee supplier quality, delivery, or compliance. You remain responsible for your sourcing decisions."
+        "h": "サプライヤーの保証無し",
+        "b": "審査・監査情報を提供し、意思決定を支援します。 私達は製造者の質、配達、または承諾を保証しません。 あなたの調達の決定に責任を負います。"
       },
       {
-        "h": "Third-party services",
-        "b": "Audit and inspection are performed by independent third parties. Contracts for those services are between you and the provider."
+        "h": "サードパーティサービス",
+        "b": "独立した第三者による監査および検査を行います。 本サービスの契約は、お客様と提供者の間で行われます。"
       },
       {
-        "h": "Intellectual property",
+        "h": "知的財産権",
         "b": "All site content, trademarks and tools are owned by FactoryAuditB2B or its licensors. You may not reuse them without permission."
       },
       {
-        "h": "Limitation of liability",
+        "h": "責任の制限",
         "b": "To the maximum extent permitted by law, FactoryAuditB2B is not liable for indirect or consequential losses arising from use of the site."
       },
       {
-        "h": "Changes",
-        "b": "We may update these terms. Continued use after changes constitutes acceptance."
+        "h": "変更点",
+        "b": "本規約を更新することがあります。 変更後の継続使用は受諾を構成する。"
       },
       {
-        "h": "Contact",
-        "b": "Questions? Email legal@factoryauditb2b.com."
+        "h": "お問い合わせ",
+        "b": "お問い合わせ 電子メール 法的@factoryauditb2b.com."
       }
     ],
-    "privacyNav": "Privacy",
-    "termsNav": "Terms"
+    "privacyNav": "プロフィール",
+    "termsNav": "用語集"
   },
   "industryPage": {
     "pageTitle": "サプライヤー検証とトレーニング",
@@ -1360,86 +1348,8 @@
     "metaTitle": "サービスとプラン — 無料ツール、ベンダー検証、監査、モニタリング",
     "metaDesc": "無料のサプライヤー評価ツール、99米ドルからのサプライヤー検証、399米ドルからの工場監査、99米ドルからの製品検査、サブスクリプション型のサプライヤーモニタリング。すべての価格は米ドル表示です。",
     "h1": "サービスと料金プラン",
-    "lead": "バイヤー SaaS $19〜299/月 · サプライヤー会員 $29〜199/月 · 監査・検品・輸送は案件ごとにお見積もり",
+    "lead": "ツールは無料です。現地でサプライヤーを確認する必要があるときだけお支払いください。",
     "currencyNote": "すべて米ドル建てです。核查と監査は案件ごとに見積もります。",
-    "forBuyers": "バイヤー向け",
-    "forSuppliers": "サプライヤー向け",
-    "perMonth": "/月",
-    "commissionTitle": "監査・検品・輸送",
-    "commissionCta": "見積もりを依頼",
-    "buyerCtas": [
-      "無料で始める",
-      "Starter を選ぶ",
-      "Pro を選ぶ",
-      "Business を選ぶ",
-      "お問い合わせ"
-    ],
-    "supplierCta": "申し込む",
-    "buyerFeatures": [
-      [
-        "基本的なサプライヤー検索",
-        "基本的なリスク評価",
-        "基本チェックリスト",
-        "RFQ 月1件"
-      ],
-      [
-        "全サプライヤー検索",
-        "無制限のリスク評価",
-        "29項目のフルチェックリスト",
-        "RFQ 月5件",
-        "メールサポート"
-      ],
-      [
-        "Starter の全機能",
-        "PDF レポート",
-        "ドキュメント分析",
-        "サプライヤーワークスペース",
-        "高度なスコアカード",
-        "優先サポート"
-      ],
-      [
-        "Professional の全機能",
-        "チームメンバー5名",
-        "サプライヤーデータベース",
-        "リスク監視",
-        "監査管理",
-        "CAPA と高度なレポート"
-      ],
-      [
-        "API アクセス",
-        "シングルサインオン (SSO)",
-        "カスタムワークフロー",
-        "カスタムサプライヤーDB",
-        "専任サポート"
-      ]
-    ],
-    "supplierFeatures": [
-      [
-        "会社プロフィール掲載",
-        "基本認証バッジ",
-        "RFQ の受信",
-        "標準表示"
-      ],
-      [
-        "認証済みサプライヤーバッジ",
-        "プロフィールに監査書類を掲載",
-        "検索での優先表示",
-        "RFQ への無制限返信",
-        "対応能力タグ"
-      ],
-      [
-        "検索での最上位表示",
-        "業界ページでの注目掲載",
-        "バイヤーの紹介",
-        "専任担当サポート",
-        "四半期ごとのプロフィール更新"
-      ]
-    ],
-    "commissionItems": [
-      "工場監査・検品：人日と地域に基づく案件ごとのお見積もり",
-      "輸送・調達：受注金額の 3〜5% の手数料",
-      "初回注文のプラットフォーム手数料は無料"
-    ],
     "plansTitle": "今すぐ利用できるサービス",
     "plansLead": "4 つすべて利用可能です。核查・監査・検品は案件ごとの見積もり、モニタリングは年額のサブスクリプションです。",
     "plans": [
@@ -1568,9 +1478,9 @@
     "ctaText": "お見積もりや担当者が必要ですか？",
     "ctaButton": "チームに相談する",
     "fallbackAnswers": {
-      "pricing": "Buyer SaaS runs $0–299/month and supplier membership $29–199/month. Factory audits and inspections are quoted per project (man-days and location); freight and sourcing carry a 3–5% commission. All prices in USD. Tell me your product and country and I will point you to the right plan.",
+      "pricing": "無料ツールは $0 です。サプライヤー核查は 1 社あたり $99 – $129、工場監査は 399 米ドルから（人日単位、別途出張費）、サプライヤーモニタリングは 1 社あたり年額で見積もります。Founding Buyer 会員は年間 $99 で、全サプライヤーデータベースを閲覧できます。調達支援は発注金額の 3〜5% の手数料で、発注前に見積もります。価格はすべて米ドルです。製品と国を教えていただければ、適したプランをご案内します。",
       "audit": "サプライヤー検証、工場監査、出荷前検品に対応しています。SMETA、BSCI、ISO 9001、ISO 14001、SA8000、WRAP、Sedex などに対応します。当社は証明書を販売しません。検証と研修を行います。製品と対象市場をお知らせください。",
-      "coverage": "現在の対応国は中国、ベトナム、タイです。調達先の国を教えていただければ、対応可否を確認します。",
+      "coverage": "現在の対応国は中国、ベトナム、タイ、マレーシア、フィリピンです。調達先の国を教えていただければ、現地で何を確認できるかご案内します。",
       "training": "はい。工場を監査した上で、品質マネジメント、QC、生産プロセスについてチームを研修します。Starter $280/工場、Pro $950/工場、および Enterprise のカスタム対応があります。どのプランもギャップ監査から始まります。",
       "default": "監査、サプライヤー検証、対応地域、料金、研修についてお答えできます。個別のご相談は、連絡先をお知らせいただければ 1 営業日以内に担当者よりご連絡します。"
     },
@@ -1605,7 +1515,7 @@
     "statsTitle": "数字で見る",
     "stats": [
       {
-        "value": "9",
+        "value": "5",
         "label": "対応国"
       },
       {
@@ -1627,154 +1537,154 @@
   },
   "brand": {
     "name": "FactoryAuditB2B",
-    "tagline": "Supplier Intelligence & Verification for Global Buyers",
-    "eva": "Evaluate. Verify. Audit.",
-    "scope": "Supplier verification and factory audit services across China and Southeast Asia.",
-    "positioning": "We help global buyers evaluate suppliers, verify factories and reduce sourcing risk before an order is placed."
+    "tagline": "サプライヤーインテリジェンスとグローバルバイヤーの検証",
+    "eva": "評価。 確認します。 監査。",
+    "scope": "中国・東南アジアにおけるサプライヤー検証・工場監査サービス.",
+    "positioning": "グローバルなバイヤーがサプライヤーを評価し、工場を検証し、注文前に調達リスクを削減するのに役立ちます。"
   },
   "coverage": {
-    "badge": "Coverage",
-    "h1": "Where We Verify Suppliers",
-    "lead": "On-the-ground supplier verification and factory audit support across China and Southeast Asia. Phase 1 covers three countries. More are added as we have verified auditor capacity in them.",
-    "phase1": "Phase 1",
-    "phaseNext": "Planned next",
-    "countryCta": "Coverage in {country}",
-    "anotherCountryTitle": "Need verification in another country?",
-    "anotherCountryLead": "Tell us where you are sourcing. If we do not have confirmed auditor capacity there yet, we will say so instead of guessing.",
-    "anotherCountryCta": "Request Verification",
-    "metaTitle": "Where We Verify Suppliers",
-    "metaDesc": "Supplier verification and factory audit coverage across China, Vietnam and Thailand, with country-specific sourcing risks, verification notes and audit considerations."
+    "badge": "カバレッジ",
+    "h1": "サプライヤーの確認",
+    "lead": "中国および東南アジアでのサプライヤー核查と工場監査の現地支援。第1フェーズの対象は中国、ベトナム、タイ、マレーシア、フィリピンの5か国です。監査員の体制が確認できた国から順次追加します。",
+    "phase1": "フェーズ1",
+    "phaseNext": "次回予定",
+    "countryCta": "{country}のカバレッジ",
+    "anotherCountryTitle": "別の国の検証が必要ですか?",
+    "anotherCountryLead": "あなたが調達している場所を教えてください。 まだ監査員の能力が確認されていない場合は、その代わりに推測すると言う。",
+    "anotherCountryCta": "リクエスト検証",
+    "metaTitle": "サプライヤーの確認",
+    "metaDesc": "中国、ベトナム、タイ、マレーシア、フィリピンでのサプライヤー核查と工場監査。国ごとの調達リスク、核查のポイント、監査の注意点をまとめています。"
   },
   "countryHub": {
-    "profileTitle": "Manufacturing profile",
-    "risksTitle": "Typical sourcing risks",
-    "verificationTitle": "Supplier verification considerations",
-    "auditTitle": "Factory audit considerations",
-    "industriesTitle": "Relevant industries",
-    "logisticsTitle": "Local logistics considerations",
-    "standardsTitle": "Relevant standards",
-    "hubsTitle": "Main production hubs",
-    "registryTitle": "Where we check company records",
-    "servicesTitle": "Available services",
-    "toolsTitle": "Relevant tools",
-    "faqTitle": "Frequently asked questions",
-    "breadcrumb": "Countries",
-    "ctaTitle": "Need a supplier in {country} checked?",
-    "ctaLead": "Send us the company name and address. We confirm the registration, the site and the documents before you pay anything.",
-    "ctaPrimary": "Verify a supplier in {country}",
-    "ctaSecondary": "Request a {country} factory audit",
-    "suppliersTitle": "Suppliers listed for {country}",
-    "suppliersEmpty": "No supplier in {country} is listed yet. That does not mean we cannot check one. Send us the name and we will run the verification.",
-    "metaDesc": "Supplier verification and factory audit in {country}: manufacturing profile, typical sourcing risks, verification and audit considerations, industries, logistics and FAQs.",
+    "profileTitle": "製造プロファイル",
+    "risksTitle": "典型的な調達リスク",
+    "verificationTitle": "サプライヤー検証検討",
+    "auditTitle": "工場監査検討",
+    "industriesTitle": "関連する産業",
+    "logisticsTitle": "ローカル物流の検討",
+    "standardsTitle": "関連する規格",
+    "hubsTitle": "主要な生産ハブ",
+    "registryTitle": "会社の記録を確認する場所",
+    "servicesTitle": "利用可能なサービス",
+    "toolsTitle": "関連するツール",
+    "faqTitle": "よくある質問",
+    "breadcrumb": "国土交通",
+    "ctaTitle": "点検される {country} の製造者を必要としますか。",
+    "ctaLead": "会社名と住所をお送りください。 お支払い前に、登録、サイト、文書の確認を行います。",
+    "ctaPrimary": "製造者を{country}で確認して下さい",
+    "ctaSecondary": "{country}工場監査をリクエストする",
+    "suppliersTitle": "{country} にリストされているサプライヤー",
+    "suppliersEmpty": "{country}のサプライヤーはまだリストされていません。 つまり、誰もチェックできないという意味ではありません。 お名前をご記入の上、確認をさせていただきます。",
+    "metaDesc": "{country}のサプライヤー検証と工場監査:製造プロファイル、典型的な調達リスク、検証および監査検討、業界、物流およびFAQ。",
     "breadcrumbHome": "ホーム",
     "h1Template": "{country}のサプライヤー確認と工場監査"
   },
   "serviceCountry": {
-    "quickAnswerTitle": "Quick answer",
-    "scopeTitle": "What is included",
-    "deliverablesTitle": "What you receive",
-    "processTitle": "How it works",
-    "pricingTitle": "How pricing works",
-    "contextTitle": "{service} in {country}: what is different here",
-    "ctaTitle": "Request {service} in {country}",
-    "ctaLead": "Tell us the supplier and your requirements. We reply with a scoped proposal, a timeline and a price.",
-    "ctaPrimary": "Request a quote",
-    "ctaSecondary": "Score this supplier free first",
-    "relatedTitle": "Related pages",
-    "breadcrumb": "Services",
-    "metaDesc": "{service} in {country}. Scope, deliverables, process and pricing basis, plus the country-specific checks that matter in {country}.",
-    "scopedQ": "What do you actually check for a {country} supplier?",
-    "scopedA": "We confirm registration, the registered address, the production site, and the country-specific checks for {country} suppliers. Exact scope depends on the standard and the order, which we confirm in the scoped quote.",
-    "timelineQ": "How long does this take in {country}?",
-    "timelineA": "Documentary checks are usually finished within two business days. A package that includes a site visit in {country} is normally scheduled within a week, longer outside the main production hubs."
+    "quickAnswerTitle": "迅速な回答",
+    "scopeTitle": "含まれるもの",
+    "deliverablesTitle": "あなたが受け取るもの",
+    "processTitle": "作品紹介",
+    "pricingTitle": "料金の仕組み",
+    "contextTitle": "{country} の {service}: ここで何が違うのか",
+    "ctaTitle": "{country} で {service} をリクエストする",
+    "ctaLead": "私達に製造者およびあなたの条件を知らせて下さい。 スコープ付きご提案、タイムライン、価格にお応えします。",
+    "ctaPrimary": "見積依頼",
+    "ctaSecondary": "スコア この製造者は最初に放します",
+    "relatedTitle": "関連ページ",
+    "breadcrumb": "サービス",
+    "metaDesc": "{country}の{service}。 スコープ、成果物、プロセス、価格設定、および {country} の国固有のチェック。",
+    "scopedQ": "実際に {country} の製造者のために点検するか。",
+    "scopedA": "登録、登録住所、生産拠点、および{country}サプライヤーの国固有のチェックを確認します。 正確なスコープは、標準と注文に依存しており、スコープ付きクォートで確認します。",
+    "timelineQ": "これは{country}でどのくらいの時間がかかりますか?",
+    "timelineA": "書類のチェックは通常2営業日以内に終了します。 {country}でサイト訪問を含むパッケージは、通常、メインプロダクションハブの外側に1週間以内にスケジュールされます。"
   },
   "servicesIndex": {
     "badge": "サービス",
-    "h1": "Supplier verification, audit and inspection services",
-    "lead": "Free tools tell you what to check. These services get it checked. Everything below is scoped and quoted per project, and none of it is a bundle you have to buy into.",
+    "h1": "サプライヤー検証・監査・検査サービス",
+    "lead": "無料ツールは、チェックするものを教えてくれます。 これらのサービスはチェックされます。 以下はすべてスコープ付けされ、プロジェクトごとに引用され、どれも購入しなければならないバンドルです。",
     "servicesTitle": "私たちのサービス",
-    "servicesLead": "Pick the stage you are at.",
+    "servicesLead": "舞台を選ぶ.",
     "items": {
       "verification": {
         "title": "サプライヤー検証",
-        "desc": "Confirm the company, the site and the documents before you release a deposit.",
+        "desc": "入金を解除する前に、会社、サイト、文書を確認します。",
         "href": "/services/supplier-verification"
       },
       "factoryAudit": {
         "title": "工場監査",
-        "desc": "An auditor on site against the standard your buyer requires, with findings graded and corrective actions listed.",
+        "desc": "買い手が要求する標準的なあなたのバイヤーに対するサイト上の監査人, ランク付けと是正措置を見つけます.",
         "href": "/factory-audit/request"
       },
       "inspection": {
         "title": "製品検査",
-        "desc": "In-line and pre-shipment checks on your production, quoted per man-day.",
+        "desc": "生産ラインと出荷前チェックは、マンデイごとに引用されます。",
         "href": "/custom-services"
       },
       "sourcing": {
         "title": "調達",
-        "desc": "Post an RFQ, get matched with suppliers we can verify, and pay commission only on orders you place.",
+        "desc": "RFQ を投稿し、サプライヤーと一致して確認し、注文時にのみ手数料を支払うことができます。",
         "href": "/rfq"
       },
       "improvement": {
         "title": "サプライヤー改善",
-        "desc": "Audit findings turned into corrective action, training and a re-audit. Not a standalone training business.",
+        "desc": "監査結果は、是正措置、訓練および再監査に変わりました。 スタンドアローントレーニング事業ではありません。",
         "href": "/services/supplier-improvement"
       },
       "monitoring": {
-        "title": "Supplier Monitoring",
-        "desc": "Keep verified supplier facts current. Scheduled re-checks of registration, address, certificates and public records, with an alert when something changes."
+        "title": "サプライヤーモニタリング",
+        "desc": "確認された製造者の事実を現在の保ちます。 登録、住所、証明書、および公開レコードの再チェックを予定しており、何かが変更されたときにアラートが表示されます。"
       }
     },
     "coverageTitle": "対象国",
-    "coverageLead": "Country-specific verification and audit pages with the local checks that matter.",
-    "notSureTitle": "Not sure which one you need?",
-    "notSureLead": "Run the free risk calculator first. It takes about three minutes and tells you what is missing.",
+    "coverageLead": "ローカルチェックで国固有の検証と監査ページ。",
+    "notSureTitle": "必要な場所がわからない?",
+    "notSureLead": "無料リスク計算機を最初に実行します。 約3分かかりますし、欠けているものを教えてくれます。",
     "notSureCta": "サプライヤーリスクを評価する",
-    "metaTitle": "Supplier Verification, Factory Audit and Inspection Services",
-    "metaDesc": "Independent supplier verification, factory audit, inspection and sourcing support across China, Vietnam and Thailand. Scoped and quoted per project."
+    "metaTitle": "サプライヤー検証、工場監査、検査サービス",
+    "metaDesc": "中国、ベトナム、タイ、マレーシア、フィリピンでの独立したサプライヤー核查、工場監査、検品、調達支援。案件ごとに範囲を決めて見積もります。"
   },
   "resourcesIndex": {
-    "badge": "Resources",
-    "h1": "Supplier Intelligence Resources",
-    "lead": "Practical guides and tools for evaluating suppliers, checking documents, preparing audits and reducing sourcing risk. Written by the people who run the checks.",
-    "categoriesTitle": "Browse by topic",
-    "categoriesLead": "Each topic lists the guides, tools and services that belong to it.",
-    "toolsTitle": "Tools",
-    "toolsLead": "Free, no account needed.",
+    "badge": "リソース",
+    "h1": "サプライヤーインテリジェンスリソース",
+    "lead": "サプライヤーを評価するための実用的なガイドとツール, 文書をチェック, 監査の準備と調達リスクを軽減. チェックを実行する人によって書かれています。",
+    "categoriesTitle": "トピックによってブラウズ",
+    "categoriesLead": "各トピックは、その所属するガイド、ツール、サービスのリストです。",
+    "toolsTitle": "ツール",
+    "toolsLead": "無料、アカウントは必要ありません。",
     "cat": {
       "verification": {
-        "title": "Supplier Verification",
-        "desc": "How to confirm a company is real, the site is real, and the documents hold up."
+        "title": "サプライヤー検証",
+        "desc": "会社が本物であることを確認する方法、サイトは本物であり、文書が立ち上がります。"
       },
       "audit": {
-        "title": "Factory Audit",
-        "desc": "Standards, checklists, what auditors look at and how to read a report."
+        "title": "工場監査",
+        "desc": "基準、チェックリスト、監査人がどのように見えるか、レポートを読む方法。"
       },
       "risk": {
-        "title": "Supplier Risk",
-        "desc": "Scoring frameworks, weighting and how to act on a risk score."
+        "title": "サプライヤーリスク",
+        "desc": "リスクスコアの枠組み、重み、行動方法のスキャリング。"
       },
       "china": {
-        "title": "China Sourcing",
-        "desc": "Country-specific checks, registries and logistics for Chinese suppliers."
+        "title": "中国調達",
+        "desc": "中国サプライヤーの国固有のチェック、規制、物流。"
       },
       "sea": {
-        "title": "Southeast Asia Sourcing",
-        "desc": "Vietnam and Thailand sourcing context, risks and audit considerations."
+        "title": "東南アジア調達",
+        "desc": "ベトナムの調達環境、リスク、監査上の注意点。"
       },
       "compliance": {
-        "title": "Compliance",
-        "desc": "Social compliance, product compliance and what each standard actually covers."
+        "title": "コンプライアンス",
+        "desc": "社会的コンプライアンス、製品コンプライアンス、各規格が実際にカバーしているもの。"
       },
       "tools": {
-        "title": "Tools",
-        "desc": "The free calculators, checklists and scorecards."
+        "title": "ツール",
+        "desc": "無料計算機、チェックリスト、スコアカード。"
       }
     },
-    "metaTitle": "Supplier Intelligence Resources",
-    "metaDesc": "Guides and tools on supplier verification, factory audit, supplier risk, China and Southeast Asia sourcing, and compliance.",
-    "storiesTitle": "Case studies and field notes",
-    "storiesLead": "How the checks work in practice, shown with de-identified examples."
+    "metaTitle": "サプライヤーインテリジェンスリソース",
+    "metaDesc": "サプライヤーの確認、工場監査、サプライヤーリスク、中国および東南アジアの調達、およびコンプライアンスに関するガイドとツール。",
+    "storiesTitle": "ケーススタディとフィールドノート",
+    "storiesLead": "チェックが練習でどのように機能するか、識別されていない例で示します。"
   },
   "verification": {
     "levelLabel": "検証レベル",
@@ -1792,21 +1702,21 @@
       "工場検証済み",
       "工場監査済み"
     ],
-    "lastVerified": "Last verified",
-    "verifiedBy": "Verified by",
-    "scope": "Verification scope",
-    "whatVerified": "What was verified",
-    "whatNotVerified": "What was not verified",
-    "evidence": "Evidence reviewed",
-    "expiry": "Expires",
-    "noRecord": "No verification record yet.",
-    "notIndependentlyVerified": "Not independently verified",
-    "noRecentAudit": "No recent third-party audit found",
+    "lastVerified": "最終検証",
+    "verifiedBy": "プロフィール",
+    "scope": "検証スコープ",
+    "whatVerified": "検証されたもの",
+    "whatNotVerified": "検証されていないもの",
+    "evidence": "証拠レビュー",
+    "expiry": "プロモーション",
+    "noRecord": "検証記録はまだありません。",
+    "notIndependentlyVerified": "独自に検証されていない",
+    "noRecentAudit": "最近の第三者監査が見つかりません",
     "notCovered": [
-      "Financial statements",
-      "Product performance in use",
-      "Current production utilisation",
-      "Subcontractors that were not disclosed to us"
+      "財務諸表",
+      "使用中の製品性能",
+      "現在の生産ユーティリティ",
+      "当社に開示されていない委託先"
     ]
   },
   "evidence": {
@@ -1825,68 +1735,68 @@
     "statusNote": "「書類提供済み」はサプライヤーから受け取ったことを意味します。「証拠レビュー済み」は出典と照合したことを意味します。"
   },
   "supplierProfile": {
-    "trustSummary": "Trust summary",
-    "verificationLevel": "Verification level",
-    "lastVerified": "Last verified",
-    "riskScore": "Risk score",
-    "verificationStatus": "Verification status",
-    "evidenceSummary": "Evidence summary",
+    "trustSummary": "トラスト・サマリー",
+    "verificationLevel": "検証レベル",
+    "lastVerified": "最終検証",
+    "riskScore": "リスクスコア",
+    "verificationStatus": "検証ステータス",
+    "evidenceSummary": "証拠の要約",
     "auditHistory": "Audit history",
-    "notCoveredTitle": "Not covered",
-    "notCoveredLead": "Checks outside the current verification scope. We list them so you know what has not been looked at.",
-    "whatVerifiedTitle": "What we verified",
-    "whatVerifiedLead": "Each line reflects a recorded verification event. Where we have no record, we say so.",
-    "viewProfile": "View profile",
-    "claimTitle": "Is this your company?",
-    "claimLead": "Claim the profile, keep the record accurate and let buyers see your verification status.",
-    "claimCta": "Claim this profile",
-    "notSatisfiedTitle": "Not satisfied with this supplier?",
-    "notSatisfiedLead": "Post an RFQ and we will look for alternatives we can verify before you commit.",
-    "notSatisfiedCta": "Post an RFQ",
-    "reverifyCta": "Request independent re-verification",
-    "manufacturer": "Manufacturer",
-    "tradingCompany": "Trading company",
-    "established": "Established {year}",
-    "employees": "Employees",
-    "exportMarkets": "Export markets",
-    "mainProducts": "Main products",
-    "inspections": "{n} inspections",
-    "noAudit": "No audit on record.",
-    "featuredNote": "Featured supplier. This is not a marketplace listing and we are not a party to any transaction.",
-    "backToDirectory": "All suppliers",
-    "overviewTitle": "Company overview",
-    "capabilitiesTitle": "Capabilities",
-    "capabilitiesLead": "Tags are marked as evidence reviewed only where we have checked the underlying document. Unchecked tags reflect what the supplier told us.",
-    "capabilitiesEmpty": "No capability tags recorded for this supplier yet.",
-    "productsTitle": "Main products",
-    "evidenceAvailableTitle": "Evidence on record",
-    "evidenceEmpty": "No evidence record yet. Request a verification and we will build one.",
-    "noCertifications": "No certifications on record.",
-    "employeesLabel": "Employees",
-    "exportMarketsLabel": "Export markets",
-    "inspectionHistoryLabel": "Inspection history",
-    "requestAudit": "Request a factory audit",
-    "requestQuote": "Request a quote",
-    "scopeTitle": "Verification scope",
-    "lastUpdated": "Last updated",
-    "selfReported": "Self-reported",
-    "auditStatusLabel": "Audit status",
-    "businessTypeLabel": "Business type",
+    "notCoveredTitle": "カバーされていない",
+    "notCoveredLead": "現在の検証範囲外のチェックを行います。 見ていないことを知っているので、それらをリストします。",
+    "whatVerifiedTitle": "検証した内容",
+    "whatVerifiedLead": "各行は記録された検証イベントを反映しています。 レコードがないところ、そう言っています。",
+    "viewProfile": "プロフィールを表示",
+    "claimTitle": "あなたの会社ですか?",
+    "claimLead": "プロフィールを主張して下さい、記録を正確保ち、バイヤーはあなたの確認の状態を見させます。",
+    "claimCta": "このプロフィールを主張する",
+    "notSatisfiedTitle": "この製造者に満足しませんか。",
+    "notSatisfiedLead": "RFQ を投稿し、コミットする前に検証できる代替品を探します。",
+    "notSatisfiedCta": "RFQを投稿する",
+    "reverifyCta": "独立した再検証を要求して下さい",
+    "manufacturer": "メーカー",
+    "tradingCompany": "取引会社",
+    "established": "{year}設立",
+    "employees": "従業員数",
+    "exportMarkets": "輸出市場",
+    "mainProducts": "主な製品",
+    "inspections": "{n} 検査",
+    "noAudit": "記録の監査はありません。",
+    "featuredNote": "注目のサプライヤー。 これはマーケットプレースリストではなく、いかなる取引にもパーティーではありません。",
+    "backToDirectory": "すべてのサプライヤー",
+    "overviewTitle": "会社概要",
+    "capabilitiesTitle": "能力・能力",
+    "capabilitiesLead": "タグは、文書を審査したところのみの証拠としてマークされます。 チェックされていないタグは、サプライヤーが私たちに語ったものを反映しています。",
+    "capabilitiesEmpty": "まだこの製造者のために記録される機能札無し。",
+    "productsTitle": "主な製品",
+    "evidenceAvailableTitle": "レコードの証拠",
+    "evidenceEmpty": "証拠はまだ記録しません。 検証をリクエストし、一つをビルドします。",
+    "noCertifications": "記録の証明無し。",
+    "employeesLabel": "従業員数",
+    "exportMarketsLabel": "輸出市場",
+    "inspectionHistoryLabel": "検査履歴",
+    "requestAudit": "工場監査依頼",
+    "requestQuote": "見積依頼",
+    "scopeTitle": "検証スコープ",
+    "lastUpdated": "更新履歴",
+    "selfReported": "自己報告される",
+    "auditStatusLabel": "監査状況",
+    "businessTypeLabel": "ビジネスタイプ",
     "verifiedByTitle": "Verification by FactoryAuditB2B",
-    "verifiedByLead": "This is what our team checked. It is separate from what the supplier told us, and both are labelled.",
-    "provenanceLead": "Each line is labelled by who stands behind it: what the supplier provided, what we reviewed, what we independently verified, and what was confirmed on site.",
-    "provProvided": "Supplier provided",
-    "provReviewed": "Document reviewed",
-    "provIndependent": "Independently verified",
-    "provOnsite": "On-site verified",
-    "provNote": "\"Supplier provided\" means the supplier gave it to us and we have not checked it. \"Independently verified\" means we checked it against its source.",
-    "neverClaimedTitle": "What we never claim",
-    "neverClaimed": "We do not describe a supplier as verified unless a matching verification event and evidence exist. We do not certify suppliers ourselves.",
-    "scoreDirection": "Higher score means lower risk.",
-    "lastChecked": "Last checked",
-    "noCheckRecord": "No check on record",
-    "recVerified": "Evidence on record covers the items listed above. Re-check the scope against your order before releasing a deposit, and refresh the record if the last check is more than 12 months old.",
-    "recUnverified": "Verify the factory address and request recent quality and audit records before placing a large order or releasing a deposit.",
+    "verifiedByLead": "私たちのチームがチェックした内容です。 サプライヤーが私たちに語ったものと分離され、両方がラベリングされます。",
+    "provenanceLead": "各行は、その背後にある人によってラベル付けされます。サプライヤーは、私たちがレビューしたもの、私たちは独立して検証するもの、そしてサイト上で確認されたもの。",
+    "provProvided": "サプライヤー提供",
+    "provReviewed": "ドキュメントレビュー",
+    "provIndependent": "独立した検証",
+    "provOnsite": "オンサイト検証",
+    "provNote": "「サプライヤー提供」とは、サプライヤーが当社に提供し、それをチェックしていないことを意味します。 「独立した検証」とは、そのソースに対してそれをチェックすることを意味します。",
+    "neverClaimedTitle": "決して主張しないもの",
+    "neverClaimed": "マッチング検証イベントや証拠が存在しなければ、サプライヤーを検証するものではありません。 サプライヤーを自分で認証しません。",
+    "scoreDirection": "高いスコアはリスクを下げることを意味します。",
+    "lastChecked": "チェックイン",
+    "noCheckRecord": "記録のチェック無し",
+    "recVerified": "レコード上の証拠は、上記の項目をカバーしています。 デポジットを解放する前に、注文に対するスコープを再確認し、最後のチェックが12か月以上ある場合はレコードをリフレッシュしてください。",
+    "recUnverified": "工場の住所および要求を大きい順序を置くか、または沈殿物を解放する前に最も最近の質および監査の記録確認して下さい。",
     "metaTitle": "サプライヤープロフィール",
     "metaDesc": "リスクスコア・検証ステータス・製品・能力情報を公開するサプライヤープロフィール。",
     "directoryBreadcrumb": "サプライヤーディレクトリ",
@@ -1896,82 +1806,82 @@
     "freeLockLead": "無料アカウントを作成すると、設立年・従業員数・輸出市場・認証一覧を確認できます。",
     "freeLockCta": "無料アカウント作成",
     "paidLockTitle": "会員は証拠とリスク明細を閲覧",
-    "paidLockLead": "Founding Buyer 会員（年間 $49）は証拠記録・リスク明細・監査履歴・検査データを閲覧できます。",
+    "paidLockLead": "Founding Buyer 会員（年間 $99）は証拠記録・リスク明細・監査履歴・検査データを閲覧できます。",
     "paidLockCta": "会員プランを見る",
     "paidLockNote": "リスクスコアは公開です。証拠と検証の詳細は会員向けコンテンツです。"
   },
   "reportPreview": {
-    "badge": "Free preview",
-    "title": "Supplier Due Diligence Report",
-    "lead": "A structured review of supplier information, available evidence, risk factors and verification status.",
-    "execTitle": "Executive summary",
-    "verificationTitle": "Verification",
-    "keyRisksTitle": "Key risks",
-    "recommendationTitle": "Recommendation",
-    "riskLevel": "Risk level",
-    "score": "Score",
-    "unlockTitle": "Get the full due diligence report",
-    "unlockLead": "The full report covers company records, evidence review, risk analysis and the recommended next step. Original third-party documents stay restricted.",
-    "unlockCta": "View report options",
-    "methodologyLink": "View methodology",
-    "methodologyTitle": "How We Assess Suppliers",
-    "methodologyLead": "Risk scores come from a fixed rules engine with published weights. The report shows which inputs moved the number.",
+    "badge": "無料プレビュー",
+    "title": "サプライヤーデューデリジェンスレポート",
+    "lead": "サプライヤー情報、利用可能なエビデンス、リスク要因、検証状況の構成されたレビュー。",
+    "execTitle": "執行役員",
+    "verificationTitle": "検証",
+    "keyRisksTitle": "主なリスク",
+    "recommendationTitle": "推奨事項",
+    "riskLevel": "リスクレベル",
+    "score": "スコア",
+    "unlockTitle": "完全なデューデリジェンスレポートを入手",
+    "unlockLead": "完全なレポートは、会社の記録、証拠レビュー、リスク分析、および推奨される次のステップをカバーします。 元の第三者の文書は制限されています。",
+    "unlockCta": "レポートオプションの表示",
+    "methodologyLink": "方法論を見る",
+    "methodologyTitle": "サプライヤーを評価する方法",
+    "methodologyLead": "リスクスコアは、公開された体重の固定ルールエンジンから来ています。 入力したレポートは、番号を移動したものです。",
     "options": {
       "basic": {
-        "name": "Basic report",
+        "name": "基本レポート",
         "price": "$99",
         "items": [
-          "Supplier overview",
-          "Risk score with dimension breakdown",
-          "Verification status",
+          "サプライヤーの概要",
+          "次元の故障によるリスクスコア",
+          "検証ステータス",
           "Resumen de evidencia",
           "Principales factores de riesgo",
-          "Recommended actions",
+          "推奨アクション",
           "PDF"
         ]
       },
       "professional": {
-        "name": "Professional due diligence",
+        "name": "専門のデューデリジェンス",
         "price": "$129",
         "items": [
           "Todo en el informe básico",
           "Revisión detallada de la evidencia",
-          "Additional document checks",
+          "追加文書チェック",
           "買い手の優先事項に合わせたリスク分析",
-          "Verification notes",
+          "検証ノート",
           "PDF"
         ]
       },
       "independent": {
-        "name": "Independent verification",
-        "price": "Custom quote",
+        "name": "独立した検証",
+        "price": "カスタム見積り",
         "items": [
-          "Business identity verification",
-          "Factory address verification",
-          "Document verification",
-          "On-site verification where required"
+          "業務認証",
+          "工場の住所の証明",
+          "ドキュメント検証",
+          "必要なオンサイト検証"
         ]
       }
     },
-    "auditUpsellTitle": "Need the factory checked on site?",
-    "auditUpsellLead": "The report tells you what is missing. Our team can run an independent verification or a full factory audit.",
-    "auditUpsellCta": "Request an audit"
+    "auditUpsellTitle": "現場でチェックした工場が必要ですか?",
+    "auditUpsellLead": "レポートは、何が欠落しているかを教えてくれます。 当社のチームは、独立した検証または完全な工場監査を実行できます。",
+    "auditUpsellCta": "監査依頼"
   },
   "claim": {
-    "h1": "Get Verified. Get Discovered. Get More Buyer Opportunities.",
-    "lead": "Buyers shortlist suppliers they can check. A claimed profile with verified evidence gets looked at first.",
-    "whyTitle": "Why claim your profile?",
-    "whyLead": "Help buyers understand your capabilities and verification status before they ask for a quote.",
+    "h1": "確認します。 発見する。 より多くのバイヤーの機会を得る。",
+    "lead": "バイヤーのショートリストサプライヤーは、彼らがチェックすることができます。 検証された証拠を持つ主張されたプロファイルが最初に見つかります。",
+    "whyTitle": "なぜあなたのプロフィールを要求しますか。",
+    "whyLead": "買い手は、見積依頼の前に、能力と検証のステータスを把握するのに役立ちます。",
     "benefits": [
-      "Keep your company information accurate",
-      "Add products, certifications and capability details",
-      "Show your verification level publicly",
+      "会社の情報を正確に保つ",
+      "製品、認証、機能の詳細を追加",
+      "認証レベルを一般に公開",
       "買い手の問い合わせとRFQの機会を受け取る"
     ],
-    "tiersTitle": "What you can do",
+    "tiersTitle": "できること",
     "free": {
-      "name": "Free",
-      "cta": "Claim your profile",
+      "name": "無料",
+      "cta": "あなたのプロフィールを主張して下さい",
       "items": [
         "会社情報を更新",
         "製品を追加",
@@ -1980,22 +1890,22 @@
       ]
     },
     "verified": {
-      "name": "Verified",
-      "cta": "Apply for verification",
+      "name": "プロフィール",
+      "cta": "検証申請",
       "items": [
-        "Verification level on profile",
-        "Audit status and certifications shown to buyers",
+        "プロフィールの検証レベル",
+        "買い手に示す監査状況と認証",
         "買い手の問い合わせ",
         "能力タグ"
       ]
     },
     "premium": {
-      "name": "Premium",
-      "cta": "Talk to us",
+      "name": "プレミアム",
+      "cta": "お問い合わせ",
       "items": [
-        "Priority placement in search",
-        "Featured on relevant industry pages",
-        "Buyer introductions",
+        "検索における優先順位の配置",
+        "関連する業界ページ",
+        "バイヤー紹介",
         "Visibilidad del producto"
       ]
     },
@@ -2033,28 +1943,28 @@
       "errorRateLimited": "送信が多すぎます。しばらくしてから再度お試しください。",
       "errorInvalidEmail": "有効な会社メールを入力してください。",
       "errorAuthorization": "権限の申告を選択してください。",
-      "emailPlaceholder": "name@yourcompany.com"
+      "emailPlaceholder": "電子メール: info@yourcompany.com"
     }
   },
   "consent": {
-    "title": "How your information is used",
+    "title": "情報の使用方法",
     "body": "Information submitted by suppliers is used to create and maintain their FactoryAuditB2B supplier profile and support buyer due diligence.",
-    "privacy": "We do not publicly disclose confidential documents without authorization.",
+    "privacy": "機密文書を無断で公開することはいたしません。",
     "authorize": "I authorize FactoryAuditB2B to use the information and documents I provide for supplier verification and buyer due diligence, subject to the platform's privacy and document-sharing rules.",
-    "prefsTitle": "Information sharing preferences",
+    "prefsTitle": "情報共有の好み",
     "public": {
-      "title": "Public",
-      "lead": "Visible to everyone.",
+      "title": "パブリック",
+      "lead": "全員に可視。",
       "items": [
         "会社名",
-        "Location",
+        "アクセス",
         "Productos",
-        "Verification status"
+        "検証ステータス"
       ]
     },
     "buyerView": {
-      "title": "Buyer view",
-      "lead": "Visible to verified buyers.",
+      "title": "バイヤービュー",
+      "lead": "バイヤーを検証する可視性。",
       "items": [
         "Evidencia seleccionada",
         "Detalles del certificado",
@@ -2062,88 +1972,88 @@
       ]
     },
     "restricted": {
-      "title": "Restricted",
-      "lead": "Only with your explicit authorization.",
+      "title": "制限事項",
+      "lead": "明示的な承認のみ。",
       "items": [
-        "Original audit reports",
+        "元の監査レポート",
         "Documentos confidenciales",
         "Fotos internas del PFDC."
       ]
     },
     "private": {
-      "title": "Private",
-      "lead": "Used internally to maintain your verification record.",
+      "title": "プライベート",
+      "lead": "検証記録を維持するために内部で使用.",
       "items": [
         "Documentos fuente no compartidos",
-        "Verification working notes"
+        "検証作業ノート"
       ]
     },
-    "thirdPartyNote": "Third-party audit reports from SGS, Intertek, Bureau Veritas, TÜV and similar bodies may carry licence or confidentiality restrictions. We show them as reviewed, and we do not redistribute the original document without the appropriate rights."
+    "thirdPartyNote": "SGS、Intertek、局Veritas、TÜV、および類似体からのサードパーティの監査レポートは、ライセンスまたは機密性制限を運ぶ場合があります。 見直しを行い、適切な権利なしに元の文書を再配布しません。"
   },
   "methodology": {
-    "badge": "Methodology",
-    "h1": "How Our Supplier Risk Assessment Works",
-    "lead": "Risk scores are calculated by a deterministic rules engine with published weights. The same inputs always produce the same score. Language models are used only to explain a result in plain language, and they cannot change the number.",
-    "quickAnswer": "We score a supplier across six weighted dimensions: company, quality, compliance, production, supply chain and documentation. Each answer you give maps to one dimension, contributes a weighted risk value, and rolls up into an overall figure out of 100, where higher means more risk. Missing evidence raises the score rather than being treated as neutral. The weights shown below are read directly from the scoring model, not typed by hand.",
-    "frameworkTitle": "Scoring framework",
-    "frameworkBody": "Each question belongs to one dimension. Within a dimension, answers carry a risk value between 0 and 100. The dimension score is the weighted mean of its answered questions, and the overall score is the weighted mean of the dimensions below.",
-    "weightsTitle": "Risk dimensions and weights",
-    "weightsLead": "Weights are configurable in our admin and shown here so you can see what actually moves the number.",
-    "weightsFallback": "Dimension weights are read from the risk model in our database and shown here when available.",
-    "dimensionTitle": "Dimension",
-    "weightTitle": "Weight",
-    "evidenceTitle": "Evidence",
-    "evidenceBody": "The score is only as good as the evidence behind it. Where you tell us you do not know something, we treat it as an open gap and score it accordingly. A supplier can lower its score by producing documents, not by arguing with the model.",
-    "limitationsTitle": "Limitations",
-    "limitationsLead": "What this score does not tell you.",
+    "badge": "方法論",
+    "h1": "サプライヤーのリスク評価の仕組み",
+    "lead": "リスクスコアは、公開された体重の決定的なルールエンジンによって計算されます。 同じ入力は同じスコアを常に作り出します。 言語モデルは、プレーン言語で結果を説明するためにのみ使用され、数値を変更することはできません。",
+    "quickAnswer": "サプライヤーは企業・品質・コンプライアンス・生産・サプライチェーン・ドキュメント・認証・デジタルフットプリントの 8 つの加重次元で評価します。各回答はいずれかの次元に属し、加重されたリスク値として 100 点満点の総合スコアに集約されます。スコアが高いほどリスクは低くなります。証拠が欠けている場合は中立として扱わず、スコアを下げます。以下に示す重みは評価モデルから直接読み込んでおり、手入力ではありません。",
+    "frameworkTitle": "スコープフレームワーク",
+    "frameworkBody": "各質問は1つの次元に属します。 寸法内では、0～100の範囲でリスクを負います。 寸法スコアは、その答えた質問の重みのある平均であり、全体的なスコアは、以下の寸法の重みのある平均です。",
+    "weightsTitle": "リスク寸法と重量",
+    "weightsLead": "体重は管理者で設定可能で、ここで示されているので、実際に数字を動かすものを見ることができます。",
+    "weightsFallback": "寸法重量は、データベースのリスクモデルから読み込まれ、利用可能なときにここに示されます。",
+    "dimensionTitle": "ディメンション:",
+    "weightTitle": "カートン",
+    "evidenceTitle": "エビデンス",
+    "evidenceBody": "スコアは、その背後にある証拠と同じくらい良いです。 何かを知らなかったことを私達に言うところ、私達はそれを開いたギャップとして扱い、それに応じて得ます。 製造者はモデルと論じることによって文書を、作り出すことによってスコアを下げることができます。",
+    "limitationsTitle": "制限事項",
+    "limitationsLead": "このスコアがあなたを教えてくれないもの。",
     "limitations": [
-      "It is not a financial credit assessment. We do not review financial statements unless you ask us to.",
-      "It does not confirm that equipment exists or that a quality system runs day to day. That needs a site visit or an audit.",
-      "It is a point-in-time assessment. A score is valid as of the date it was produced.",
-      "It cannot detect a supplier that deliberately provides false documents, although document cross-checks reduce the gap.",
-      "Weights are our judgement, not an industry standard. We publish them so you can disagree with us in specific terms."
+      "金融信用評価ではありません。 弊社に依頼しない限り、財務諸表は確認しておりません。",
+      "機器が存在しているか、品質システムが日々稼働していることは確認できません。 サイトの訪問や監査が必要です。",
+      "ポイントインタイム評価です。 スコアは、生成された日付として有効です。",
+      "文書のクロスチェックがギャップを減らすが、意図的に虚偽の文書を提供するサプライヤーは検出できません。",
+      "重量は業界標準ではなく、当社の判断です。 私たちは、特定の条件で私たちを嫌うことができるので、それらを公開します。"
     ],
-    "updateTitle": "Update policy",
-    "updateBody": "We review weights when we make a material change to the model, and we record the version in use when a score is produced. Methodology changes are listed here with their date.",
-    "changelogTitle": "Changelog",
-    "versionTitle": "Current version",
-    "aiTitle": "Where AI is used, and where it is not",
-    "aiBody": "Scores come from the rules engine alone. A language model may summarize or explain a result in plain language, and it may draft the recommended actions. It does not decide the score, and it cannot see the weights as a variable it can adjust.",
-    "ctaTitle": "Want the checks done rather than scored?",
-    "ctaLead": "Our verification service confirms registration, site, capability, quality and compliance, and gives you a written report before you pay anything.",
-    "ctaPrimary": "Supplier verification service",
-    "ctaSecondary": "Score a supplier free",
-    "metaTitle": "How Our Supplier Risk Assessment Works",
-    "metaDesc": "The scoring framework, risk dimensions, weights, evidence rules, limitations and update policy behind our supplier risk scores. Calculated by a deterministic rules engine, not by AI.",
-    "scoredInputsLabel": "Inputs",
-    "scoredTableNote": "{n} scored inputs · {d} dimensions · total weight {w}.",
-    "weightsSumLine": "— six dimensions, {n} inputs, weights summing to {w}.",
-    "howWeVerifyTitle": "How we verify: six steps",
-    "howWeVerifyLead": "A verification is not a screenshot or a summary. It is a documented sequence, and each step has a written output.",
+    "updateTitle": "更新ポリシー",
+    "updateBody": "素材がモデルに変化する時、重みを見直し、スコアが生成されたときに使用中のバージョンを記録します。 方法論の変更は、日付とともに表示されます。",
+    "changelogTitle": "変更履歴",
+    "versionTitle": "現在のバージョン",
+    "aiTitle": "AIが使われる場所、AIが使えないところ",
+    "aiBody": "ルールエンジンだけで得たスコアです。 言語モデルは、プレーン言語の結果をまとめたり説明したりすることができます。そして、推奨されるアクションを記述することができます。 スコアを決めず、調整できる変数として重量は見えない。",
+    "ctaTitle": "スコアではなくチェックをしたいですか?",
+    "ctaLead": "当社の検証サービスは、登録、サイト、機能、品質、コンプライアンスを確認し、支払い前に書面による報告を提供します。",
+    "ctaPrimary": "サプライヤー検証サービス",
+    "ctaSecondary": "サプライヤーを自由に得て下さい",
+    "metaTitle": "サプライヤーのリスク評価の仕組み",
+    "metaDesc": "当社のサプライヤーリスクスコアの背後にあるスコアリングフレームワーク、リスク寸法、重量、証拠規則、制限および更新ポリシー。 AIではなく、決定的なルールエンジンによって計算される。",
+    "scoredInputsLabel": "入力",
+    "scoredTableNote": "{n} は入力・{d} 寸法・総重量 {w} をスコアしました。",
+    "weightsSumLine": "— 8 つの次元、{n} 件の入力、重みの合計は {w}。",
+    "howWeVerifyTitle": "確認方法: 6つのステップ",
+    "howWeVerifyLead": "検証はスクリーンショットや要約ではありません。 文書化されたシーケンスであり、各ステップに書かれている出力があります。",
     "howWeVerifySteps": [
       {
-        "title": "Screen",
-        "body": "We check the company against public registries, trade records and the supplied documents."
+        "title": "スクリーン",
+        "body": "当社は、公序良俗に反する会社、取引記録、および所定の書類を点検します。"
       },
       {
-        "title": "Request evidence",
-        "body": "We list exactly which documents we need, and mark every gap."
+        "title": "証拠の要求",
+        "body": "必要な文書を正確にリストし、すべてのギャップをマークします。"
       },
       {
-        "title": "Review",
-        "body": "Each document is checked for validity, consistency and context by a person."
+        "title": "レビュー",
+        "body": "各ドキュメントは、有効性、一貫性、コンテキストを人によってチェックします。"
       },
       {
-        "title": "Score",
-        "body": "The rules engine turns the reviewed inputs into the eight-dimension risk score."
+        "title": "スコア",
+        "body": "規則エンジンは、レビューされた入力を8次元のリスクスコアに変えます。"
       },
       {
-        "title": "Report",
-        "body": "Findings, evidence status and recommendation are written with sources and dates."
+        "title": "レポート",
+        "body": "発見、証拠のステータスと推奨事項は、ソースと日付で書かれています。"
       },
       {
-        "title": "Re-check",
-        "body": "Verified facts carry a checked date and can be re-checked on a schedule you choose."
+        "title": "再確認",
+        "body": "検証済みの事実は、チェックされた日付を持ち、選択したスケジュールで再確認することができます。"
       }
     ]
   },
@@ -2176,7 +2086,7 @@
     "operatesLead": "FactoryAuditB2B は中国に登記された企業が運営し、世界中の買い手にサプライヤー検証、工場監査、調達支援を提供しています。",
     "operatesNotConfigured": "FactoryAuditB2B は登記済みの企業が運営しています。法人名はトラストセンターに設定され次第、公開します。",
     "scopeTitle": "事業範囲",
-    "scopeBody": "中国および東南アジアから輸入する買い手向けのサプライヤー検証、工場監査、検査、調達支援。第1フェーズの対象は中国、ベトナム、タイです。",
+    "scopeBody": "中国および東南アジアから輸入するバイヤー向けのサプライヤー核查、工場監査、検品、調達支援。第1フェーズの対象は中国、ベトナム、タイ、マレーシア、フィリピンです。",
     "verifyTitle": "検証する内容",
     "verifyLead": "検証サービスでカバーするチェック項目は以下の通りです。",
     "verify": [
@@ -2260,110 +2170,110 @@
   "inspection": {
     "badge": "製品検査",
     "h1": "製品検査",
-    "lead": "Order-specific quality checks at the production stage that matters, carried out by an independent inspector and reported in writing. Every request is reviewed individually and quoted per inspection.",
-    "metaTitle": "Product Inspection — PPI, DUPRO, PSI and Container Loading",
-    "metaDesc": "Pre-production, during-production, pre-shipment and container loading inspection for buyers sourcing from China, Vietnam, Thailand, Malaysia and the Philippines. Quoted per inspection.",
-    "quickAnswerTitle": "Quick answer",
-    "quickAnswer": "A product inspection checks a specific order at a specific stage: before production starts, while it is running, before shipment, or during container loading. The inspector works to your requirements or an AQL sampling plan, reports findings with photos, and gives a clear recommendation. It is quoted per inspection and priced by type, scope, location and duration.",
-    "honestNote": "Inspection requests are reviewed individually. We respond with a scoped quote based on inspection type, location, duration and qualified inspector availability.",
-    "howTitle": "How it works",
-    "howLead": "From request to report, without a platform to learn.",
+    "lead": "注文固有の品質チェックは、重要な生産段階で、独立した検査官によって実行され、書面で報告されます。 個別に審査を行い、検査ごとに見積りを行います。",
+    "metaTitle": "プロダクト点検 — PPI、DUPRO、PSIおよび容器のローディング",
+    "metaDesc": "中国、ベトナム、タイ、マレーシア、フィリピンからのバイヤーの調達のための前生産、生産、前郵送物および容器のローディングの点検。 点検ごとの引用。",
+    "quickAnswerTitle": "迅速な回答",
+    "quickAnswer": "製品検査では、生産開始前、出荷前、またはコンテナの積み込み中など、特定の段階で特定の注文を確認します。 検査官は、要件やAQLサンプリング計画、写真で発見したレポート、明確な勧告を提供します。 型、規模、場所および持続期間によって点検そして価格によって引用されます。",
+    "honestNote": "検査依頼は個別に審査されます。 検査の種類、場所、期間、資格のある検査員の可用性に基づいて、スコープ付き見積もりに対応します。",
+    "howTitle": "作品紹介",
+    "howLead": "プラットフォームを学習することなく、リクエストをレポートします。",
     "how": [
       {
-        "title": "Send the request",
-        "body": "Tell us the factory location, product, order quantity, preferred date and what to check."
+        "title": "リクエストを送信",
+        "body": "工場の場所、プロダクト、順序の量、好まれた日付および点検するものを私達に知らせて下さい。"
       },
       {
-        "title": "We quote",
-        "body": "A scoped quote based on inspection type, scope, location, duration and inspector availability. No payment until you confirm."
+        "title": "見積り",
+        "body": "検査の種類、スコープ、場所、期間、検査員の可用性に基づいてスコープ付き見積もり。 ご入金確認までお振込みください。"
       },
       {
-        "title": "An inspector goes on site",
-        "body": "The inspector is independent and matched to the location and product category. You can watch live if you want."
+        "title": "検査員が現場で行く",
+        "body": "検査官は独立し、位置および製品カテゴリに一致します。 必要に応じてライブを見ることができます。"
       },
       {
-        "title": "You get the report",
-        "body": "Findings with photos, defect summary, AQL result and a clear recommendation, usually within 24 hours of the visit."
+        "title": "レポートを入手",
+        "body": "写真、欠陥の要約、AQLの結果および明確な勧告の発見は、通常訪問の24時間以内にあります。"
       }
     ],
-    "nodesTitle": "Inspection stages",
-    "nodesLead": "Each order is different. Pick the stage that fits your production calendar.",
-    "when": "When",
-    "what": "What is checked",
-    "why": "Why it is worth it",
+    "nodesTitle": "検査段階",
+    "nodesLead": "各注文は異なります。 生産カレンダーに合ったステージを選びます。",
+    "when": "いつか",
+    "what": "チェック内容",
+    "why": "なぜ価値があるのか",
     "nodes": [
       {
         "key": "PPI",
-        "name": "Pre-Production Inspection",
-        "when": "Before production starts, on raw materials and the first sample.",
-        "what": "Raw materials, equipment readiness, production plan, BOM, packaging materials, colours, dimensions, labels, samples, process requirements.",
-        "why": "Catches the wrong thing before it is mass-produced. The cheapest defect is the one that never gets made."
+        "name": "プレプロダクション検査",
+        "when": "生産が始まる前に、原料および最初のサンプル。",
+        "what": "原料、装置の信頼性、生産計画、BOM、包装材料、色、次元、ラベル、サンプル、プロセス条件。",
+        "why": "それは大量生産される前に間違った事をキャッチします。 最も安い欠陥は決して作らないものです。"
       },
       {
         "key": "DUPRO",
-        "name": "During Production Inspection",
-        "when": "While production is running, typically at 20–80% completion.",
-        "what": "Product quality, dimensions, appearance, workmanship, function, quantity, defect rate, production progress, packaging, labels.",
-        "why": "Problems found mid-run can still be fixed in time. Waiting for final inspection risks a whole batch you cannot repair."
+        "name": "生産点検中",
+        "when": "生産が実行中、通常は20～80%完了です。",
+        "what": "プロダクト質、次元、出現、技量、機能、量、欠陥率、生産の進歩、包装、ラベル。",
+        "why": "ミッドランの問題は、まだ時間内に固定することができます。 最終検査のリスクを修復できないバッチ全体で待ちます。"
       },
       {
         "key": "PSI",
-        "name": "Pre-Shipment Inspection",
-        "when": "After production, before the goods leave the factory.",
-        "what": "Quantity, appearance, dimensions, function, packaging, labels, barcodes, carton contents, specification, AQL sampling, defect classification, photos.",
-        "why": "The final quality gate before balance payment. Most buyers start with PSI because it is the moment money is about to move."
+        "name": "出荷前検査",
+        "when": "生産の後で、商品が工場を去る前に、。",
+        "what": "量、出現、次元、機能、包装、ラベル、バーコード、カートンの内容、指定、AQLサンプリング、欠陥の分類、写真。",
+        "why": "残高決済前の最終品質ゲート。 ほとんどの買い手はPSIで始まります。それはお金が移動しようとしている瞬間だからです。"
       },
       {
         "key": "CLS",
-        "name": "Container Loading Supervision",
-        "when": "During container loading at the factory or warehouse.",
-        "what": "Container condition, container number, seal, product quantity, carton count, SKU, packaging, labels, loading process, mixed or wrong goods, short loading, photos, video.",
-        "why": "Confirms that what you inspected is what actually gets loaded. Guards against substitution, short loading and mixed shipments."
+        "name": "容器のローディングの監督",
+        "when": "工場や倉庫でのコンテナ積み込み中。",
+        "what": "容器の状態、容器数、シール、プロダクト量、カートンの計算、SKU、包装、ラベル、ローディング プロセス、混合されたか間違った商品、不足分ローディング、写真、ビデオ。",
+        "why": "検査した内容が実際に読み込まれるものであることを確認します。 置換、ショートローディング、混合出荷の監視。"
       }
     ],
-    "reportTitle": "What you receive",
-    "reportLead": "A written report you can act on, not a phone call.",
+    "reportTitle": "あなたが受け取るもの",
+    "reportLead": "電話ではなく、行動できる書面による報告。",
     "report": [
-      "Findings with photographs",
-      "Defect summary by severity (critical / major / minor)",
-      "AQL sampling result where applicable",
-      "Quantity and packaging check",
-      "Clear recommendation: PASS, FAIL or REWORK"
+      "写真で探す",
+      "重症による欠陥要約(クリティカル/メジャー/マイナー)",
+      "該当するAQLサンプリング結果",
+      "量および包装の点検",
+      "明確な勧告: PASS、FAILまたはREWORK"
     ],
-    "pricingTitle": "Pricing",
-    "pricingLead": "Quoted per inspection. Cost depends on inspection type, scope, location, duration and inspector availability.",
-    "pricingNote": "We do not publish fixed packages yet. Once real orders give us honest cost data per region, product category and stage, we will offer standard options.",
-    "pricingCta": "Request an inspection quote",
-    "faqTitle": "Frequently asked questions",
+    "pricingTitle": "コンテンツ",
+    "pricingLead": "点検ごとの引用。 費用は点検タイプ、規模、位置、持続期間および検査官の可用性によって決まります。",
+    "pricingNote": "固定パッケージは公開していません。 実際の注文が地域、製品カテゴリ、ステージごとの正直なコストデータを与えると、標準オプションを提供します。",
+    "pricingCta": "点検引用を要求して下さい",
+    "faqTitle": "よくある質問",
     "faq": [
       {
-        "q": "What is the difference between DUPRO and PSI?",
-        "a": "DUPRO (during production) is done while the goods are being made, usually at 20–80% completion, so problems can be fixed before the batch finishes. PSI (pre-shipment) is done after production, before the goods leave the factory, and is the final quality gate before balance payment. Many buyers do DUPRO for first orders and PSI for repeat orders; some do both."
+        "q": "DUPROとPSIの違いは何ですか?",
+        "a": "DUPRO(生産の確保)は商品が作られている間、通常20〜80%の完了で行われるので、バッチが終了する前に問題が修正できます。 PSI (前郵送物)は生産の後で、商品が工場を去る前に行われ、バランスの支払の前に最終的な質のゲートです。 多くのバイヤーは繰り返す順序のための最初の発注そしてPSIのためにDUPROをします; いくつかは両方します。"
       },
       {
-        "q": "Do you have inspectors in every city?",
-        "a": "We do not publish a map of hundreds of inspectors because that would be a claim we cannot back. We match each order to a qualified independent inspector for the specific location and product category, and we confirm availability before quoting. If we cannot find the right person, we tell you instead of sending someone unsuitable."
+        "q": "各都市の検査員はありますか?",
+        "a": "数百人の検査員の地図は、返さない請求なので公開しません。 特定の場所および製品カテゴリの認定独立した検査官に各注文に合わせ、引用する前に可用性を確認します。 正しい人が見つからない場合は、誰かに不適切な人を送る代わりにお伝えします。"
       },
       {
-        "q": "How much does an inspection cost?",
-        "a": "It depends on inspection type, scope, location, duration and the product. A standard single-site PSI in a major manufacturing hub is typically in the range of USD 200–350 per man-day, plus travel outside hub cities. Send us the factory location and we will quote it precisely."
+        "q": "検査費用はいくらかかりますか?",
+        "a": "検査の種類、スコープ、場所、期間、製品によって異なります。 主要な製造ハブの標準的な単一サイトPSIは、通常、1日あたりUSD 200〜350の範囲で、ハブ都市の外での旅行です。 工場所在地をお知らせください。"
       },
       {
-        "q": "Can you inspect against my own checklist?",
-        "a": "Yes. If you have a buyer checklist or a spec sheet, send it with the request and the inspector will work to it. If you do not, we use a standard AQL-based inspection plan and tell you what we covered."
+        "q": "自分のチェックリストから検査できますか?",
+        "a": "はい。 買い手チェックリストやスペックシートをお持ちの場合は、リクエストで送信し、検査員が対応します。 そうでない場合は、標準の AQL ベースの検査プランを使用し、カバーした内容を教えてください。"
       },
       {
-        "q": "How soon can an inspection be scheduled?",
-        "a": "In major hubs (Shenzhen, Dongguan, Guangzhou, Ningbo, Ho Chi Minh, Bangkok, Penang) we can usually schedule within 2–3 business days. Other locations need more lead time because the right inspector has to travel."
+        "q": "検査の予定は?",
+        "a": "主要なハブ(シンセン、トンコワン、広州、ニンポー、ホーチミン、バンコク、ペナン)では、通常2〜3営業日以内にスケジュールすることができます。 その他の場所は、適切な検査官が旅行しなければならないため、より多くのリードタイムが必要です。"
       }
     ],
-    "ctaTitle": "Need an inspection scheduled?",
-    "ctaLead": "Send us the factory location, product, order quantity and preferred date. We reply with a scoped quote within one business day.",
-    "ctaPrimary": "Request an inspection quote",
-    "ctaSecondary": "Assess the supplier risk first",
+    "ctaTitle": "検査のスケジュールが必要ですか?",
+    "ctaLead": "工場の場所、プロダクト、順序の量および好まれる日付を送って下さい。 1営業日以内にお見積もりをお願いしております。",
+    "ctaPrimary": "点検引用を要求して下さい",
+    "ctaSecondary": "サプライヤーリスクを最初に評価",
     "form": {
-      "stageLabel": "Inspection stage",
-      "stageHint": "Pick the stage that matches your production calendar. Not sure? Choose \"Not sure yet\" and we will advise.",
+      "stageLabel": "検査段階",
+      "stageHint": "生産カレンダーにマッチするステージを選択します。 お問い合わせ 「まだわからない」を選択し、お勧めします。",
       "stages": [
         "製造前検査 (PPI)",
         "生産中検査 (DUPRO)",
@@ -2371,21 +2281,21 @@
         "コンテナ積み込み (CLS)",
         "まだ決めていない"
       ],
-      "factoryLocation": "Factory location",
-      "factoryLocationHint": "City and country, e.g. Shenzhen, China",
-      "product": "Product",
-      "quantity": "Order quantity",
-      "inspectionDate": "Preferred inspection date",
-      "requirements": "Inspection requirements",
-      "requirementsHint": "Your checklist, spec sheet, or what the inspector should pay attention to",
-      "submit": "Submit inspection request",
-      "submitting": "Submitting...",
-      "success": "Request received. We will reply with a scoped quote within one business day.",
-      "error": "Something went wrong. Please try again, or email us directly.",
+      "factoryLocation": "工場所在地",
+      "factoryLocationHint": "市や国など シンセン、中国",
+      "product": "プロダクト",
+      "quantity": "注文数量",
+      "inspectionDate": "ご希望の検査日",
+      "requirements": "点検条件",
+      "requirementsHint": "あなたのチェックリスト、スペックシート、または検査官が注意を払うべきであるもの",
+      "submit": "検査依頼書の提出",
+      "submitting": "提出する...",
+      "success": "お申込み 1営業日以内にお見積もりを頂きます。",
+      "error": "何かが間違っていた。 まずは、直接お問い合わせください。",
       "firstName": "お名前",
       "company": "会社名",
       "email": "業務用メール",
-      "emailPlaceholder": "you@company.com"
+      "emailPlaceholder": "お問い合わせ"
     }
   },
   "auditGuide": {
@@ -2405,210 +2315,210 @@
     "verificationCta": "まずサプライヤーを検証"
   },
   "supplierNetwork": {
-    "metaTitle": "Join the Supplier Network | Free Supplier Profile",
+    "metaTitle": "サプライヤネットワークに参加|無料サプライヤープロフィール",
     "metaDesc": "Join the FactoryAuditB2B Supplier Network for free. Get an international buyer-facing profile, supplier verification support, factory audit and inspection services.",
-    "badge": "Supplier Network",
+    "badge": "サプライヤーネットワーク",
     "h1": "Join the FactoryAuditB2B Supplier Network",
-    "lead": "A free profile that international buyers can find, with verification support behind it. No guaranteed orders, no guaranteed certificates, no audit pass promised.",
-    "benefitsTitle": "What you get",
+    "lead": "国際的なバイヤーがそれの後ろの証明サポートと見つけることができる自由なプロフィール。 保証された順序、保証された証明書無し、約束される監査のパス無し。",
+    "benefitsTitle": "あなたが得るもの",
     "benefits": [
-      "Free supplier profile listed for international buyers",
-      "Buyer inquiry opportunities",
-      "Supplier verification support",
-      "Factory audit services",
-      "Pre-shipment inspection services",
-      "Compliance consulting"
+      "国際的なバイヤーのためにリストされている自由な製造者のプロフィール",
+      "バイヤーの問い合わせ機会",
+      "サプライヤー検証サポート",
+      "工場監査サービス",
+      "受託検査サービス",
+      "コンプライアンスコンサルティング"
     ],
-    "noGuaranteeTitle": "What we do not promise",
-    "noGuarantee": "We do not promise guaranteed orders, guaranteed certification, or guaranteed audit pass. Verification reports describe what we actually found.",
+    "noGuaranteeTitle": "約束しないもの",
+    "noGuarantee": "保証された注文、保証された証明、または保証された監査パスを約束しません。 検証レポートは実際に見つけたものを記述します。",
     "certStatement": "FactoryAuditB2B does not sell or issue certificates.",
-    "howTitle": "How joining works",
+    "howTitle": "参加作品",
     "howSteps": [
-      "Submit the application below (free)",
-      "Our team reviews documents and information manually",
-      "We assign an evidence level and a risk score",
-      "Approved profiles are listed on the supplier directory"
+      "下記の申請書を提出(無料)",
+      "私たちのチームは、文書や情報を手動でレビューします",
+      "証拠レベルとリスクスコアを割り当てる",
+      "承認されたプロフィールは製造者のディレクトリにリストされています"
     ],
-    "statusTitle": "Supplier status",
-    "statusLead": "Every application moves through a review pipeline. Status is decided by a human reviewer, not by payment.",
+    "statusTitle": "サプライヤーのステータス",
+    "statusLead": "すべてのアプリケーションは、レビューパイプラインを介して移動します。 ステータスは、支払いではなく、人間の査読者によって決定されます。",
     "statuses": [
-      "Pending",
-      "Submitted",
-      "Under Review",
-      "Approved",
-      "Approved with Conditions",
-      "Verified Supplier",
-      "Suspended",
-      "Rejected"
+      "ペンディング",
+      "投稿済み",
+      "レビュー",
+      "承認済み",
+      "条件によって承認される",
+      "検証サプライヤー",
+      "中断された",
+      "注入される"
     ],
-    "evidenceTitle": "Evidence level",
-    "evidenceLead": "We show how each piece of information was confirmed. A listing without evidence is marked as self-declared, never as verified.",
+    "evidenceTitle": "証拠レベル",
+    "evidenceLead": "それぞれの情報が確認されたかを説明します。 証拠のないリストは、検証されていない自己宣言としてマークされています。",
     "evidenceLevels": [
-      "Self-Declared",
-      "Document Submitted",
-      "Document Reviewed",
-      "Independently Verified",
-      "Factory Audited"
+      "自己宣言",
+      "書類提出",
+      "ドキュメントレビュー",
+      "独立した検証",
+      "工場監査"
     ],
-    "formTitle": "Supplier registration",
-    "formLead": "All fields are used to build your profile and to prepare verification. Required fields are marked.",
+    "formTitle": "サプライヤー登録",
+    "formLead": "すべてのフィールドは、プロファイルを構築し、検証の準備に使用されます。 必須項目は必須項目です。",
     "form": {
       "sections": {
-        "company": "Company Information",
-        "factory": "Factory Information",
-        "products": "Products & Production Capability",
-        "export": "Export Markets",
-        "certificates": "Certificates",
-        "contact": "Contact Information",
-        "availability": "Audit & Inspection Availability",
-        "authorization": "Authorization & Privacy",
-        "message": "Message"
+        "company": "会社案内",
+        "factory": "工場情報",
+        "products": "プロダクト及び生産の機能",
+        "export": "輸出市場",
+        "certificates": "証明書",
+        "contact": "お問い合わせ",
+        "availability": "監査と検査の可用性",
+        "authorization": "認可とプライバシー",
+        "message": "メッセージ"
       },
       "labels": {
-        "companyName": "Company name *",
-        "englishName": "English name",
-        "companyType": "Company type (manufacturer, trading, agent)",
-        "registrationNumber": "Business registration number",
-        "establishedYear": "Year established",
-        "website": "Website",
-        "factoryCountry": "Factory country *",
-        "factoryCity": "Factory city",
-        "factoryAddress": "Factory address",
-        "employees": "Number of employees",
-        "factorySize": "Factory size (sqm)",
-        "mainProducts": "Main products *",
-        "productionCapacity": "Production capacity",
-        "monthlyOutput": "Monthly output (pieces)",
-        "exportMarkets": "Export markets",
-        "exportSince": "Exporting since",
-        "certificates": "Certificates (ISO, BSCI, SMETA, etc.)",
-        "contactName": "Contact person",
-        "contactEmail": "Contact email *",
-        "contactPhone": "Phone",
+        "companyName": "会社名 *",
+        "englishName": "英語名",
+        "companyType": "会社の種類(メーカー、取引、代理店)",
+        "registrationNumber": "営業登録番号",
+        "establishedYear": "設立年月日",
+        "website": "サイトマップ",
+        "factoryCountry": "工場国 *",
+        "factoryCity": "工場都市",
+        "factoryAddress": "工場住所",
+        "employees": "従業員数",
+        "factorySize": "工場サイズ(平方メートル)",
+        "mainProducts": "主要なプロダクト*",
+        "productionCapacity": "生産能力",
+        "monthlyOutput": "月間出力(ピース)",
+        "exportMarkets": "輸出市場",
+        "exportSince": "輸出以来",
+        "certificates": "証明書(ISO、BSCI、SMETA等)",
+        "contactName": "連絡窓口",
+        "contactEmail": "メールアドレス *",
+        "contactPhone": "電話番号",
         "contactWhatsapp": "WhatsApp",
-        "auditAvailability": "Available for factory audit",
-        "inspectionAvailability": "Available for pre-shipment inspection",
+        "auditAvailability": "工場監査のために利用できる",
+        "inspectionAvailability": "出荷前の点検のために利用できる",
         "authorizeCompanyProfile": "I authorize FactoryAuditB2B to display my company profile to international buyers *",
-        "authorizeCompanyProfileYes": "Yes, display company profile",
-        "authorizeCompanyProfileNo": "No, keep it private",
-        "contactVisibility": "Contact details visibility",
-        "contactVisibilityPublic": "Public on profile",
-        "contactVisibilityPlatform": "Shared only with interested buyers",
+        "authorizeCompanyProfileYes": "はい、表示会社のプロフィール",
+        "authorizeCompanyProfileNo": "いいえ、それをプライベートに保ちます",
+        "contactVisibility": "連絡先の詳細 可視性",
+        "contactVisibilityPublic": "プロフィール公開",
+        "contactVisibilityPlatform": "関心のあるバイヤーとだけ共有",
         "contactVisibilityPrivate": "Private (contact via FactoryAuditB2B only)",
-        "message": "Tell us about your factory (optional)"
+        "message": "あなたの工場について教えて下さい(任意)"
       },
-      "submit": "Submit application",
-      "submitting": "Submitting…",
-      "privacyNote": "Personal contact details are stored separately from company profile data. Your contact visibility choice above is respected."
+      "submit": "申請書提出",
+      "submitting": "提出する...",
+      "privacyNote": "個人情報は、会社案内データから別途保存されます。 上記の連絡先の可視性の選択は尊重されます。"
     },
-    "success": "Thank you. Your application was received. Our team will reply within one business day.",
-    "error": "Something went wrong. Please check the form and try again.",
-    "processTitle": "How we review",
+    "success": "ありがとうございます。 申請書が届きました。 1営業日以内にお返事いたします。",
+    "error": "何かが間違っていた。 フォームに必要事項をご記入の上、再度お試しください。",
+    "processTitle": "レビュー",
     "processSteps": [
-      "Completeness check of submitted information",
-      "Document consistency check (AI-assisted)",
-      "Evidence level assignment",
-      "Risk score (100-point, 10-dimension model)",
-      "Human review decision on supplier status"
+      "提出された情報の完全な確認",
+      "文書の一貫性チェック(AI-assisted)",
+      "証拠レベルの割り当て",
+      "リスクスコア(100点、10次元モデル)",
+      "サプライヤーの状態の人間の検討の決定"
     ],
-    "riskTitle": "Supplier risk score",
-    "riskLead": "We score each supplier on a 100-point model across ten dimensions: company identity, business information, factory information, document consistency, certificate evidence, production capability, export experience, contact verification, audit evidence, and other risk indicators.",
+    "riskTitle": "サプライヤーリスクスコア",
+    "riskLead": "会社のアイデンティティ、ビジネス情報、工場情報、文書の一貫性、証明書の証拠、生産能力、輸出経験、連絡先の検証、監査証拠、およびその他のリスクインジケーターの100ポイントモデルの各サプライヤーをスコアします。",
     "riskBands": [
-      "80–100: Low risk / strong profile",
-      "60–79: Moderate risk",
-      "40–59: Needs further verification",
-      "Below 40: High risk / insufficient evidence"
+      "80–100: 低い危険/強いプロフィール",
+      "60～79: 適度リスク",
+      "40～59:さらなる検証が必要",
+      "40以下:高いリスク/不十分な証拠"
     ],
-    "riskDisclaimer": "Risk Score is an informational assessment and does not constitute certification, accreditation or a guarantee of supplier performance.",
-    "docsTitle": "Documents we use",
-    "docsLead": "Standard templates used in registration, verification, audits and inspections.",
-    "docsNote": "Templates are provided as Google Docs. Contact us to request a copy for your verification or audit project.",
+    "riskDisclaimer": "リスクスコアは情報評価であり、認定、またはサプライヤーのパフォーマンスの保証を構成するものではありません。",
+    "docsTitle": "利用する書類",
+    "docsLead": "登録、検証、監査、検査で使用される標準テンプレート。",
+    "docsNote": "テンプレートはGoogle Docs として提供されています。 確認や監査のプロジェクトをリクエストするには、お問い合わせください。",
     "docs": [
-      "Supplier Information Authorization",
-      "Supplier Information & Document Authenticity Declaration",
-      "Supplier Code of Conduct",
-      "Supplier Anti-Bribery & Integrity Commitment",
-      "Conflict of Interest Declaration",
-      "Auditor Integrity & Confidentiality Commitment",
-      "Supplier Verification Checklist",
-      "Certificate Verification Checklist",
-      "Supplier Risk Assessment",
-      "Supplier Verification Record",
-      "Factory Audit Preparation Checklist",
-      "Corrective Action Plan",
-      "Buyer-Supplier Matching Record",
-      "Supplier Quotation Form",
-      "Factory Audit Service Agreement",
-      "Factory Inspection Service Agreement",
-      "Compliance Consulting Agreement",
-      "Complaint & Whistleblowing Form",
-      "Non-Circumvention Agreement",
-      "Supplier Suspension/Removal Notice"
+      "サプライヤー情報 認証",
+      "サプライヤー情報・文書認証宣言",
+      "サプライヤー行動規範",
+      "サプライヤーの反弾力学及び整合性Commitment",
+      "利益宣言の紛争",
+      "監査役の完全性と機密性コミットメント",
+      "サプライヤー検証チェックリスト",
+      "証明書検証チェックリスト",
+      "サプライヤーリスク評価",
+      "サプライヤー検証レコード",
+      "工場監査準備チェックリスト",
+      "是正行動計画",
+      "バイヤーサプライヤーマッチングレコード",
+      "サプライヤー見積フォーム",
+      "工場監査サービス契約",
+      "工場点検サービス契約",
+      "コンプライアンスコンサルティング",
+      "苦情・相談窓口",
+      "非循環型契約",
+      "サプライヤーの懸濁液/Removalの通知"
     ],
-    "contactTitle": "Need help?",
-    "contactLead": "Questions about joining, verification, audits or inspections? Leave a message and our team will reply within one business day.",
-    "contactCta": "Talk to our team"
+    "contactTitle": "助けが必要ですか?",
+    "contactLead": "参加、検証、監査、検査に関する質問 メールでのお問い合わせは、お電話にて承っております。",
+    "contactCta": "チームにご相談ください"
   },
   "sampleReport": {
-    "metaTitle": "Sample Supplier Due Diligence Report — See What You Get",
-    "metaDesc": "A fully worked example of our Supplier Due Diligence Report. Fictional supplier, real structure: risk score, dimension breakdown, findings, evidence status and recommendation.",
-    "badge": "Sample report",
-    "h1": "Supplier Due Diligence Report",
-    "lead": "This page is a demonstration. The company below is fictional and the report is a sample. It shows the structure and the level of detail you receive when you order a verification.",
-    "sampleBanner": "SAMPLE / DEMONSTRATION — Fictional data. This is not a real supplier and not a real verification.",
-    "reportTitle": "Supplier Due Diligence Report",
-    "reportRef": "Report reference: SDD-2026-0001 (sample)",
-    "reportDate": "Report date: 12 August 2026",
-    "preparedFor": "Prepared for: Sample Buyer Ltd. (illustrative)",
-    "companySection": "1. Company snapshot",
-    "companyNameLabel": "Company name",
-    "companyName": "Shenzhen Northstar Electronics Co., Ltd.",
-    "countryLabel": "Country",
-    "companyCountry": "China",
-    "registeredLabel": "Registered",
-    "companyRegistered": "Yes — registration verified against public registry",
-    "yearLabel": "Year established",
+    "metaTitle": "サンプルサプライヤーデューデリジェンスレポート — 入手するものを見る",
+    "metaDesc": "サプライヤーデューデリジェンスレポートのフル作業例。 僅かな製造者、実質の構造:危険のスコア、次元の故障、発見、証拠の状態および推薦。",
+    "badge": "サンプルレポート",
+    "h1": "サプライヤーデューデリジェンスレポート",
+    "lead": "このページはデモです。 以下はフィクションであり、報告書はサンプルです。 確認を注文する際に受け取る構造と詳細のレベルを示します。",
+    "sampleBanner": "SAMPLE / DEMONSTRATION — よくある質問 これは実際のサプライヤーではなく、実際の検証ではありません。",
+    "reportTitle": "サプライヤーデューデリジェンスレポート",
+    "reportRef": "報告書参照:SDD-2026-0001 (サンプル)",
+    "reportDate": "報告日: 2026年8月12日",
+    "preparedFor": "準備完了:サンプルバイヤー株式会社 (イラスト)",
+    "companySection": "1。 会社のスナップショット",
+    "companyNameLabel": "会社名",
+    "companyName": "シンセンXXエレクトロニクス株式会社",
+    "countryLabel": "カントリー",
+    "companyCountry": "中国・中国",
+    "registeredLabel": "会員登録",
+    "companyRegistered": "はい — 公開レジストリから検証された登録",
+    "yearLabel": "設立年月日",
     "companyYear": "2015",
-    "employeeLabel": "Employees",
-    "companyEmployees": "180 (self-reported)",
-    "productsLabel": "Main products",
-    "companyProducts": "Consumer electronics accessories, USB-C cables",
-    "scoreSection": "2. Risk score",
-    "scoreLabel": "Overall score",
+    "employeeLabel": "従業員数",
+    "companyEmployees": "180(自己報告)",
+    "productsLabel": "主な製品",
+    "companyProducts": "消費者の電子工学の付属品、USB-Cケーブル",
+    "scoreSection": "2。 リスクスコア",
+    "scoreLabel": "総合スコア",
     "scoreValue": "76 / 100",
-    "scoreLevel": "Low risk",
-    "scoreNote": "Higher score means lower risk. 76 puts this supplier in the low-risk band, with the caveats listed below.",
-    "dimensionSection": "3. Dimension breakdown",
-    "dimensionNote": "Each dimension is scored from the evidence on record. Missing evidence lowers the score; it is never treated as confirmation.",
-    "findingsSection": "4. Key findings",
+    "scoreLevel": "低リスク",
+    "scoreNote": "高いスコアはリスクを下げることを意味します。 76は下のリストされた洞窟が付いている低リスク バンドのこの製造者を、置きます。",
+    "dimensionSection": "3。 次元の故障",
+    "dimensionNote": "各次元はレコードの証拠から得られます。 証拠を見逃すことはスコアを下げます; 確認として扱われません。",
+    "findingsSection": "4。 主な調査結果",
     "findings": [
-      "Business registration matches the name on the purchase order and the factory signboard.",
-      "ISO 9001:2015 certificate is valid until May 2028, issued by a recognised body.",
-      "Social compliance audit (BSCI) is current, with 4 minor findings closed out.",
-      "Export licence and VAT registration confirmed against public records.",
-      "Digital footprint: active website since 2018, two Alibaba storefronts; no adverse news found in this review window."
+      "営業登録は、購入注文と工場看板の名前にマッチします。",
+      "ISO 9001:2015認証は、認定機関が発行する5月2028日まで有効です。",
+      "ソーシャル・コンプライアンス・監査(BSCI)は現在、4つのマイナーな調査結果が閉鎖されています。",
+      "パブリックレコードから確認されたライセンスとVAT登録をエクスポートします。",
+      "デジタル足跡: 2018 年以来の活動的なウェブサイト、2 つの Alibaba の店先; このレビューウィンドウに悪意のあるニュースが見つかりません。"
     ],
-    "evidenceSection": "5. Evidence status",
-    "evidenceIntro": "Evidence status reflects what our team actually reviewed. A document is marked as reviewed only when a copy was seen and checked.",
+    "evidenceSection": "5。 証拠状態",
+    "evidenceIntro": "証拠状況は、実際にレビューしたチームを反映しています。 コピーが確認されたときのみ、ドキュメントが確認されています。",
     "evidenceItems": [
-      "Business licence — Evidence Reviewed",
-      "ISO 9001:2015 certificate — Evidence Reviewed",
-      "BSCI audit report — Document Provided (not re-audited by us)",
-      "Factory photos — Document Provided",
-      "Export records — Restricted (third-party documents not forwarded)"
+      "ビジネスライセンス — 証拠レビュー",
+      "ISO 9001:2015 認証取得 — 証拠審査",
+      "BSCI 監査報告 — 文書提供 (弊社では再監査しません)",
+      "工場の写真 — 文書提供",
+      "エクスポートレコード — 制限(第三者の文書は転送されません)"
     ],
-    "recommendSection": "6. Recommendation",
-    "recommendBody": "Score 76/100, low risk. We recommend a document verification before the first order, and an on-site audit before a repeat order above USD 50,000.",
-    "ctaTitle": "Order a real verification",
-    "ctaLead": "Get this level of detail for your actual supplier. Verification starts at $99 per supplier, quoted per project.",
-    "ctaPrimary": "Request verification",
-    "ctaSecondary": "Back to pricing",
-    "disclaimer": "This sample uses fictional data and is for demonstration only. It is not a verification of any real company. Original third-party documents are never forwarded to buyers.",
+    "recommendSection": "6。 推奨事項",
+    "recommendBody": "スコア 76/100の低い危険。 初回注文前の書類の検証や、5万米ドルを超える注文を繰り返す前に現地監査をおすすめします。",
+    "ctaTitle": "実際の検証を注文する",
+    "ctaLead": "あなたの実際の製造者のための細部のこのレベルを得て下さい。 検証は、プロジェクトごとに引用したサプライヤーあたり$ 99から始まります。",
+    "ctaPrimary": "リクエスト検証",
+    "ctaSecondary": "価格に戻る",
+    "disclaimer": "このサンプルは、フィクションデータを使用しており、デモのみです。 実際の会社の検証ではありません。 元の第三者の文書はバイヤーに決して転送されません。",
     "execSection": "01 · エグゼクティブサマリー",
     "execLead": "総合スコア76/100は、以下の8つのディメンションのスコアから構成されます。各ディメンションは公開記録と現地調査の証拠に照らして確認されます。",
     "strengthsTitle": "強み",
     "strengths": [
-      "登録住所が宝安区の6,200㎡の工業ビルと一致（ビデオウォークスルーで確認）",
+      "登録住所が深圳市の6,200㎡の工業ビルと一致（ビデオウォークスルーで確認）",
       "2016年以降輸出許可が有効、税関処罰なし",
       "3年連続で納税信用格付B",
       "2019年以降株主構成に変更なし、株式質入れの記録なし"
@@ -2699,154 +2609,154 @@
       "出荷前に更新済みのISO 9001認証を入手する。"
     ],
     "formTitle": "完全なサンプルレポートを受け取る",
-    "formLead": "メールアドレスを残していただければ、完全なサンプルレポート（PDF）と1ページの読み方ガイドをお送りします。",
+    "formLead": "メールアドレスを残していただければ、完全なサンプルレポートと1ページの読み方ガイドを1営業日以内にお送りします。",
     "formEmailPlaceholder": "勤務先メールアドレス",
-    "formCta": "レポートを送る",
-    "formPrivacyNote": "メールはサンプル送付にのみ使用します。迷惑メールは送信せず、いつでも購読解除できます。",
+    "formCta": "完全レポートを請求する",
+    "formPrivacyNote": "メールはレポートの送付とフォローアップに使用します。迷惑メールは送信せず、いつでも購読解除できます。",
     "socialTitle": "調達のヒントをフォロー",
     "socialNote": "工場検証のケーススタディとサプライヤーリスク解説。",
-    "formSuccess": "メールボックスを確認してください。サンプルレポートをお送りしました。",
+    "formSuccess": "リクエストを受け付けました。完全なサンプルレポートを1営業日以内にお送りします。",
     "formError": "エラーが発生しました。もう一度お試しいただくか、直接メールでお問い合わせください。",
     "companyTypeLabel": "会社種別"
   },
   "compare": {
-    "metaTitle": "Supplier Comparison Tool — Compare 2 to 5 Suppliers Side by Side",
-    "metaDesc": "Score two to five suppliers on the same eight dimensions and compare them side by side. Self-reported inputs, decision support only.",
-    "badge": "Free tool",
-    "h1": "Supplier Comparison",
-    "lead": "Score two to five suppliers against the same eight dimensions and see them side by side. You enter the answers, so this is decision support, not a verification.",
-    "addSupplier": "Add a supplier",
-    "supplierLabel": "Supplier",
-    "namePlaceholder": "Supplier A",
-    "remove": "Remove",
-    "maxNote": "Up to five suppliers at a time.",
-    "minNote": "Add at least two suppliers to see a comparison.",
-    "dimensionCol": "Dimension",
-    "strong": "Strong",
-    "strongHint": "Documented and verifiable",
-    "adequate": "Adequate",
-    "adequateHint": "Partly documented",
-    "weak": "Weak",
-    "weakHint": "Missing or inadequate",
-    "unknown": "Unknown",
-    "unknownHint": "Not checked yet",
-    "scoreCol": "Score",
-    "summaryTitle": "Comparison summary",
-    "bestNote": "Highest score on the inputs you entered.",
-    "biggestGapTitle": "Where they differ most",
-    "biggestGapNote": "The dimension with the widest spread between the highest and lowest score.",
-    "noGapNote": "No meaningful gap yet. Fill in more dimensions to see where they differ.",
-    "disclaimer": "This comparison uses the numbers you enter. It is decision support, not a verification. A high score does not mean we have checked the supplier.",
-    "ctaTitle": "Want these answers checked?",
-    "ctaLead": "Verification starts at $99 per supplier and turns self-reported answers into reviewed evidence.",
-    "ctaPrimary": "Request verification",
-    "reset": "Reset"
+    "metaTitle": "サプライヤーの比較ツール — 比較 2 宛先 5 サイドバイサイド",
+    "metaDesc": "同じ8次元の2つから5つの製造者をスコアし、側面によってそれらを比較して下さい。 自己報告された入力、決定サポートだけ。",
+    "badge": "無料ツール",
+    "h1": "サプライヤーの比較",
+    "lead": "同じ8次元に対して2つから5つの製造者をスコアし、それらを側面で見て下さい。 回答を入力すると、これは決定サポートではなく、検証です。",
+    "addSupplier": "サプライヤーを追加",
+    "supplierLabel": "サプライヤー",
+    "namePlaceholder": "サプライヤー A",
+    "remove": "削除",
+    "maxNote": "一度に5つのサプライヤーまで。",
+    "minNote": "比較を見るために少なくとも2つのサプライヤーを追加します。",
+    "dimensionCol": "ディメンション:",
+    "strong": "強力な",
+    "strongHint": "文書化と検証",
+    "adequate": "よくある質問",
+    "adequateHint": "部分的に文書化",
+    "weak": "ウェッジ",
+    "weakHint": "ミスや不十分な",
+    "unknown": "未知の",
+    "unknownHint": "未確認",
+    "scoreCol": "スコア",
+    "summaryTitle": "比較まとめ",
+    "bestNote": "入力した入力に最も高いスコア。",
+    "biggestGapTitle": "彼らが最も異なる場所",
+    "biggestGapNote": "最も高いスコアと最も低いスコア間の最も広い広がりの次元。",
+    "noGapNote": "意味のあるギャップはまだありません。 異なる場所を見るためにより多くの寸法を記入します。",
+    "disclaimer": "この比較では、入力した数字を使用します。 審査ではなく、決定サポートです。 高いスコアは私達が製造者を点検したという意味ではないです。",
+    "ctaTitle": "これらの回答をチェックしたいですか?",
+    "ctaLead": "検証は、サプライヤーあたり$ 99で始まり、自己報告された回答を見直した証拠に変えます。",
+    "ctaPrimary": "リクエスト検証",
+    "reset": "リセット"
   },
   "monitoring": {
-    "metaTitle": "Supplier Monitoring — Scheduled Re-Checks and Risk Change Alerts",
-    "metaDesc": "Keep verified supplier facts current. Scheduled re-checks of registration, site, certificates and public records, with an alert when something changes. Subscription, quoted per supplier per year.",
-    "badge": "Service",
-    "h1": "Supplier Monitoring",
-    "lead": "A verification is a snapshot. Monitoring re-runs the checks on a schedule and tells you when a fact you relied on has changed.",
-    "quickAnswerTitle": "What it is, in one paragraph",
-    "quickAnswer": "We re-check the facts we verified for you, on a cadence you choose, against public registers, scheme databases and the documents on file. When a fact changes or a certificate expires, you get an alert stating what changed, which source confirmed it, and what it means for your order. The evidence policy is the same as a one-off verification: we state what we could confirm and flag what we could not.",
-    "honestNote": "Monitoring lowers the chance of being surprised by a change that public records already show. It does not predict how a supplier will perform, and it cannot see a change that has not been recorded anywhere.",
-    "recheckTitle": "What we re-check",
-    "recheckLead": "Only items that leave a public or documentary trace. We do not re-check anything we cannot source.",
+    "metaTitle": "サプライヤーモニタリング — 再チェックとリスク変更アラートのスケジュール",
+    "metaDesc": "確認された製造者の事実を現在の保ちます。 登録、サイト、証明書、および公開レコードの再チェックをスケジュールし、何かが変更したときにアラートをオンにします。 サブスクリプション、年ごとの引用語句。",
+    "badge": "サービス",
+    "h1": "サプライヤーモニタリング",
+    "lead": "検証はスナップショットです。 スケジュールのチェックを再実行し、依存した事実が変更されたときに通知を監視します。",
+    "quickAnswerTitle": "それが何であるか、1つの段落で",
+    "quickAnswer": "公開レジスタ、スキームデータベース、ファイルに関する文書から、選択した10年間、私たちはあなたのために検証した事実を再確認します。 実際の変更や証明書の有効期限が切れると、変更したアラートが表示され、そのソースが確認され、注文が何を意味するかが表示されます。 証拠ポリシーは、ワンオフの検証と同じです。私たちは、私たちが確認し、私たちができないものをフラグできるかを述べています。",
+    "honestNote": "監視は、パブリックレコードが既に表示されている変更によって驚かれる可能性を低下させます。 サプライヤーがどのように実行されるのかを予測せず、どこにも記録されていない変更が見えない。",
+    "recheckTitle": "再確認する",
+    "recheckLead": "パブリックトレースやドキュメンタリートレースを残すアイテムのみ。 ソースできないものは再確認してください。",
     "recheckItems": [
-      "Business registration status: active, revoked, relocated or renamed",
-      "Legal entity name and registered address",
-      "Certificate and audit report validity against the issuing scheme's database",
-      "Expiry dates on the documents we hold",
-      "Public records and adverse reports we can source and cite",
-      "The supplier's own declarations, compared against what we hold"
+      "業務登録状況:アクティブ、再発、リロケーション、リネーム",
+      "法人名および登録住所",
+      "発行スキームのデータベースに対する証明書と監査報告書の有効性",
+      "保有する書類の有効期限",
+      "パブリックレコードと悪意のあるレポートは、ソースとクタイト",
+      "サプライヤー自身の宣言は、私たちが保持するものと比較して、"
     ],
-    "cadenceTitle": "How often",
-    "cadenceLead": "You set the cadence when we scope the engagement. Three common starting points:",
+    "cadenceTitle": "頻度",
+    "cadenceLead": "エンゲージメントをスコープにすると、アカデミーを設定できます。 3つの共通の出発点:",
     "cadenceItems": [
       {
-        "name": "Quarterly",
-        "when": "Four re-checks a year.",
-        "note": "For suppliers carrying your largest volume or your tightest compliance requirement."
+        "name": "クォーターリー",
+        "when": "年4回再確認.",
+        "note": "最大のボリュームまたは最も厳しいコンプライアンス要件を運ぶサプライヤーのため。"
       },
       {
-        "name": "Twice a year",
-        "when": "Two re-checks a year.",
-        "note": "The usual starting point for an active supplier."
+        "name": "年2回",
+        "when": "年2回再確認.",
+        "note": "活動的な製造者のための通常の出発点。"
       },
       {
-        "name": "Once a year",
-        "when": "One re-check a year.",
-        "note": "For suppliers you buy from occasionally, or to keep a dormant record current."
+        "name": "年1回",
+        "when": "1年1回再確認.",
+        "note": "時々購入するサプライヤー、または休眠状態の記録を保ちます。"
       }
     ],
-    "alertTitle": "What triggers an alert",
-    "alertLead": "An alert goes out when a re-check returns something different from what we hold:",
+    "alertTitle": "アラートをトリガーする",
+    "alertLead": "再チェックが保持しているものと異なる何かを返すときにアラートが出てきます。",
     "alertItems": [
-      "Registration status changes",
-      "Legal name or registered address changes",
-      "A certificate or audit report on file expires or is withdrawn",
-      "A new public record or adverse report we can cite",
-      "A scheduled re-check finds no change, and you still get a dated confirmation"
+      "登録状況変更",
+      "法的名または登録された住所の変更",
+      "ファイルの有効期限が切れたり、撤退したりする証明書または監査レポート",
+      "新しく公開されたレコードや悪意のある報告書を引用することができます",
+      "スケジュールされた再チェックは変更が見つかりません、そしてあなたはまだ日付された確認を得ます"
     ],
-    "deliverTitle": "What you receive",
-    "deliverLead": "Every re-check produces a dated record, whether or not anything changed.",
+    "deliverTitle": "あなたが受け取るもの",
+    "deliverLead": "更新されたレコードを再チェックすると、変更されたかどうかが生成されます。",
     "deliverItems": [
-      "A dated re-check record for each supplier",
-      "An alert naming the fact that changed and the source that confirmed it",
-      "An updated report reflecting the current state of the record",
-      "The same evidence labels as a one-off check: reviewed, provided, restricted"
+      "各製造者のための日付再検査の記録",
+      "変更された事実とそれを確認したソースを命名するアラート",
+      "記録の現在の状態を反映した更新されたレポート",
+      "同一の証拠は一回限りのチェックとしてラベルを貼ります:レビュー、提供、制限"
     ],
-    "notCoveredTitle": "What monitoring does not cover",
-    "notCoveredLead": "Monitoring inherits the limits of a verification. It does not extend them.",
-    "pricingTitle": "Pricing",
-    "pricingLead": "Priced as a subscription, quoted per supplier per year, based on cadence and how many suppliers you want covered.",
-    "pricingNote": "No online checkout. Tell us the suppliers and the cadence, and we will quote.",
-    "pricingCta": "Ask for a quote",
-    "faqTitle": "Questions buyers ask",
+    "notCoveredTitle": "監視がカバーされていないもの",
+    "notCoveredLead": "監視は検証の限界を継承します。 それらを拡張しません。",
+    "pricingTitle": "コンテンツ",
+    "pricingLead": "サブスクリプションとして価格付け, 年間サプライヤーあたり引用, 経年に基づいており、あなたがカバーしたい多くのサプライヤー.",
+    "pricingNote": "オンラインチェックアウトはありません。 私達に製造者およびcadenceを知らせ、私達は引用します。",
+    "pricingCta": "見積依頼",
+    "faqTitle": "質問 バイヤーは尋ねます",
     "faq": [
       {
-        "q": "Is monitoring the same as a factory audit?",
-        "a": "No. An audit is an on-site assessment against a standard. Monitoring re-checks facts that leave a documentary or public trace. They answer different questions, and most buyers want both at different points."
+        "q": "工場監査と同じ監視ですか?",
+        "a": "いいえ。 監査は、標準に対するオンサイト評価です。 ドキュメンタリーやパブリックトレースを残す事実を再チェックする監視. 彼らは異なる質問に答え、そしてほとんどのバイヤーは両方の異なる点で望む。"
       },
       {
-        "q": "What if a supplier changes something between re-checks?",
-        "a": "Then the next re-check catches it, and the alert is dated to the day we confirmed it. A scheduled check cannot be continuous, and we do not claim it is."
+        "q": "製造者が再検査の間に何かを変えれば何か。",
+        "a": "その後、次の再チェックをキャッチし、確認した日にアラートが日付されます。 予定されているチェックは継続できませんので、そのチェックを申し立てません。"
       },
       {
-        "q": "Can I add suppliers later?",
-        "a": "Yes. The subscription is quoted per supplier, so adding one means adjusting the quote rather than starting over."
+        "q": "後でサプライヤーを追加できますか?",
+        "a": "はい。 サブスクリプションはサプライヤーごとに引用されるため、開始するよりも引用符を調整する手段を追加します。"
       },
       {
-        "q": "Do you visit the factory as part of monitoring?",
-        "a": "Not by default. Standard monitoring is a desk re-check of registers and documents. An on-site visit can be added at the cadence you choose and is quoted separately."
+        "q": "モニタリングの一環として工場を訪問しますか?",
+        "a": "デフォルトではありません。 スタンダードモニタリングは、レジスタや文書のリチェックを行うデスクです。 選択して別々に引用されている10年目に現地訪問を追加できます。"
       },
       {
-        "q": "Can a supplier pay to be monitored?",
-        "a": "No. Monitoring is bought by the buyer. A supplier cannot pay to change what a re-check reports."
+        "q": "サプライヤーは監視されるために支払うことができますか。",
+        "a": "いいえ。 買い手によって監視が買われます。 サプライヤーは、再チェックレポートを変更することはできません。"
       }
     ],
-    "ctaTitle": "Set up monitoring",
-    "ctaLead": "Tell us which suppliers you want covered and how often. We will confirm what can be re-checked and quote.",
-    "ctaPrimary": "Request monitoring",
-    "ctaSecondary": "See pricing"
+    "ctaTitle": "監視の設定",
+    "ctaLead": "カバーしたいサプライヤーと頻度を教えてください。 再確認・見積書の確認を行います。",
+    "ctaPrimary": "リクエスト監視",
+    "ctaSecondary": "料金を見る"
   },
   "fieldReports": {
-    "metaTitle": "Field Reports — On-Site Notes from Inspection, Audit and Verification",
-    "h1": "Field Reports",
-    "badge": "Field notes",
-    "lead": "Short notes from inspection, audit and verification work: what was checked on site, what was found, and how the finding was recorded.",
-    "updatedLabel": "Updated",
-    "readMore": "Read the field note",
+    "metaTitle": "フィールドレポート — 検査、監査、検証の現場ノート",
+    "h1": "フィールドレポート",
+    "badge": "フィールドノート",
+    "lead": "検査、監査、検証作業の短所メモ:現場でチェックされたもの、発見されたもの、および調査結果の記録方法。",
+    "updatedLabel": "新着情報",
+    "readMore": "フィールドノートを読む",
     "serviceLabels": {
-      "inspection": "Inspection",
-      "audit": "Factory audit",
-      "verification": "Supplier verification"
+      "inspection": "検査検査",
+      "audit": "工場監査",
+      "verification": "サプライヤー検証"
     },
-    "ctaTitle": "Want this level of detail on your own order?",
-    "ctaLead": "Tell us the product, the market and what worries you. We will scope the inspection, audit or verification.",
-    "ctaPrimary": "Post an RFQ",
-    "ctaSecondary": "Custom services"
+    "ctaTitle": "自分の注文にこのレベルの詳細をしたいですか?",
+    "ctaLead": "製品、市場、および心配を知らせて下さい。 検査、監査、検証を対象としています。",
+    "ctaPrimary": "RFQを投稿する",
+    "ctaSecondary": "カスタムサービス"
   },
   "caseStudies": {
     "h1": "事例紹介",
@@ -2857,7 +2767,9 @@
     "ctaTitle": "同じような状況ですか？",
     "ctaDesc": "ご要件をお送りいただければ、製品と市場に合わせて検証・監査・検査の範囲を設計します。",
     "ctaRfq": "RFQを投稿",
-    "ctaCustom": "カスタムサービス"
+    "ctaCustom": "カスタムサービス",
+    "detailCtaTitle": "あなたのサプライヤーのためにこれを行う必要がありますか?",
+    "detailCtaDesc": "あなたの条件を送れば私達はあなたのプロダクトおよび市場のための確認、監査または点検を規模で見ます。"
   },
   "auditScope": {
     "title": "監査範囲の提案",
@@ -2937,11 +2849,11 @@
     "nextTitle": "次のステップ",
     "nextLead": "送信後、1営業日以内に手動でアカウントを作成し、ログイン情報をメールでお送りします。",
     "noCard": "クレジットカードは不要です。",
-    "membershipLink": "Founding Buyer 会員について（年間 $49）",
+    "membershipLink": "Founding Buyer 会員について（年間 $99）",
     "formTitle": "登録",
     "form": {
       "emailLabel": "メール",
-      "emailPlaceholder": "you@company.com",
+      "emailPlaceholder": "お問い合わせ",
       "nameLabel": "氏名",
       "namePlaceholder": "お名前",
       "companyLabel": "会社（任意）",
@@ -2958,11 +2870,11 @@
   },
   "membership": {
     "badge": "バイヤー会員",
-    "metaTitle": "Founding Buyer 会員 — 年間 $49",
-    "metaDesc": "Founding Buyer 会員：全サプライヤープロフィール・リスク明細・証拠サマリー・工場情報を閲覧。年間 $49。",
+    "metaTitle": "Founding Buyer 会員 — 年間 $99",
+    "metaDesc": "Founding Buyer 会員：全サプライヤープロフィール・リスク明細・証拠サマリー・工場情報を閲覧。年間 $99。",
     "h1": "Founding Buyer 会員",
     "lead": "サプライヤーを深く評価する必要がある調達チーム向け。一度の契約で、サプライヤー情報機能を1年間利用できます。",
-    "planName": "Founding Buyer",
+    "planName": "創業バイヤー",
     "pricePeriod": "年",
     "priceNote": "先行割引価格。今後値上げ予定",
     "cta": "お問い合わせ",
@@ -2984,7 +2896,7 @@
     "faq": [
       {
         "q": "会員料金は？",
-        "a": "Founding Buyer は年間 $49（USD）です。先行割引価格のため、今後値上げされる場合があります。"
+        "a": "Founding Buyer は年間 $99（USD）です。先行割引価格のため、今後値上げされる場合があります。"
       },
       {
         "q": "支払い方法は？",
@@ -2994,6 +2906,261 @@
         "q": "会員なら検証結果は保証されますか？",
         "a": "保証されません。会員は閲覧権限のみを提供し、サプライヤーのリスクスコアや検証ステータスを変更することはありません。検証結果を販売することもありません。"
       }
+    ]
+  },
+  "toolsUi": {
+    "auditChecklist": {
+      "metaTitle": "工場監査チェックリストジェネレータ",
+      "metaDesc": "業界や監査タイプで工場監査チェックリストを作成。 正式な認証ではなく、無料準備ツール。",
+      "h1": "工場監査チェックリストジェネレータ",
+      "lead": "業界や監査タイプの構造チェックリストを生成します。 これは、正式な認証ではなく、準備と評価ツールです。",
+      "industryLabel": "業界ニュース",
+      "auditTypeLabel": "監査タイプ",
+      "cta": "チェックリストを生成する",
+      "summary": "{n}の項目",
+      "categoryLabel": "カテゴリー",
+      "evidenceLabel": "エビデンス",
+      "riskSuffix": "リスク",
+      "riskLow": "低い",
+      "riskMedium": "メディア",
+      "riskHigh": "高い",
+      "questions": {
+        "q_biz_license": {
+          "q": "事業許可証は有効で、登録住所と一致していますか？",
+          "cat": "法務",
+          "ev": "営業許可証"
+        },
+        "q_ownership": {
+          "q": "所有権と法定代理人は確認済みですか？",
+          "cat": "法務",
+          "ev": "法人書類"
+        },
+        "q_qm_org": {
+          "q": "品質マニュアルと組織図は用意されていますか？",
+          "cat": "経営管理",
+          "ev": "組織図"
+        },
+        "q_capacity_output": {
+          "q": "生産能力は申告された生産量と一致していますか？",
+          "cat": "生産",
+          "ev": "生産能力記録"
+        },
+        "q_incoming_qc": {
+          "q": "入荷材料の検査工程は定義されていますか？",
+          "cat": "品質管理",
+          "ev": "品質管理記録"
+        },
+        "q_final_qc": {
+          "q": "最終検査と不良率は追跡されていますか？",
+          "cat": "品質管理",
+          "ev": "検査報告書"
+        },
+        "q_esd": {
+          "q": "ESD対策とはんだ付け工程管理は実施されていますか？",
+          "cat": "技術",
+          "ev": "工程文書"
+        },
+        "q_rohs": {
+          "q": "輸出向けのRoHS/REACH関連書類は揃っていますか？",
+          "cat": "コンプライアンス",
+          "ev": "試験報告書"
+        },
+        "q_oekotex": {
+          "q": "OEKO-TEX／含有規制物質への適合は確認されていますか？",
+          "cat": "コンプライアンス",
+          "ev": "試験報告書"
+        },
+        "q_labor_hr": {
+          "q": "労働時間と賃金記録は確認されましたか？",
+          "cat": "労働",
+          "ev": "人事記録"
+        },
+        "q_msds": {
+          "q": "MSDSと化学品取扱手順は整備されていますか？",
+          "cat": "環境",
+          "ev": "MSDS"
+        },
+        "q_ppe": {
+          "q": "緊急対応と保護具（PPE）の遵守は確保されていますか？",
+          "cat": "安全",
+          "ev": "安全記録"
+        },
+        "q_waste": {
+          "q": "廃棄物と排出管理は文書化されていますか？",
+          "cat": "環境",
+          "ev": "環境許可証"
+        },
+        "q_haccp": {
+          "q": "HACCP／ISO 22000は導入されていますか？",
+          "cat": "食品安全",
+          "ev": "認証書"
+        },
+        "q_child_labor": {
+          "q": "児童労働・強制労働の兆候はありませんか？",
+          "cat": "労働",
+          "ev": "労働者インタビュー"
+        },
+        "q_ohs": {
+          "q": "労働安全衛生対策は講じられていますか？",
+          "cat": "健康",
+          "ev": "現場視察"
+        },
+        "q_wastewater": {
+          "q": "排水と排ガスは監視されていますか？",
+          "cat": "環境",
+          "ev": "許可証"
+        },
+        "q_equip_util": {
+          "q": "設備リストと稼働率は把握されていますか？",
+          "cat": "生産能力",
+          "ev": "設備台帳"
+        }
+      }
+    },
+    "reportAnalyzer": {
+      "metaTitle": "監査レポートアナライザー",
+      "metaDesc": "監査レポートを貼り付け、その構造、欠落した項目、リスク信号を確認します。 無料評価ツール。",
+      "h1": "監査レポートアナライザー",
+      "lead": "監査レポートを貼り付け、構造、欠落した項目、リスクを確認します。 これは、評価と意思決定支援ツールです。 正式認証は確認しておりません。",
+      "inputLabel": "監査報告書のテキストを貼り付ける",
+      "inputPlaceholder": "監査レポートのコンテンツをここに貼り付ける...",
+      "cta": "分析レポート",
+      "ctaLoading": "分析...",
+      "empty": "レポートを貼り付け、アナライザを実行します。",
+      "qualityLabel": "レポートの品質",
+      "scoreSuffix": "/100",
+      "sourceAi": "AI生成評価(DeepSeek)・意思決定支援",
+      "sourceLocal": "ローカルヒューリスティック・意思決定支援",
+      "issuesTitle": "ミス・不随意のアイテム",
+      "issuesNone": "明らかな欠けている項目は検出されません。"
+    },
+    "documentChecker": {
+      "metaTitle": "サプライヤー文書チェッカー",
+      "metaDesc": "内部の一貫性のための製造者の証明書そしてビジネス免許証を点検して下さい。 無料のツールは、公式検証ではありません。",
+      "h1": "サプライヤー文書チェッカー",
+      "lead": "文書情報の一貫性と妥当性フィールドをチェックします。 内部の一貫性のみを検証します。 公的機関による認証は認められません。",
+      "inputLabel": "ISO証明書+ビジネスライセンステキストを貼り付ける",
+      "cta": "一貫性チェック",
+      "empty": "ドキュメントを貼り付け、チェックを実行します。",
+      "scoreRow": "一貫性スコア: {score}/100",
+      "companyName": "会社概要",
+      "address": "郵便番号",
+      "legalEntity": "法的エンティティティティ",
+      "certificateNo": "証明書番号。",
+      "issueDate": "発行日",
+      "expiryDate": "有効期限",
+      "scope": "スコープ",
+      "statusFound": "ファンド",
+      "statusMissing": "マイシング",
+      "statusReview": "NEEDレビュー"
+    },
+    "scorecard": {
+      "metaTitle": "サプライヤー評価のスコアカード",
+      "metaDesc": "あなた自身の基準を重くし、それらに対してサプライヤーをスコアします。 無料評価ツール。",
+      "h1": "サプライヤー評価のスコアカード",
+      "lead": "全体のサプライヤースコアを計算するために重量とスコアを設定します。 重量は十分にカスタマイズ可能です。",
+      "overallLabel": "ソリューション",
+      "totalWeightLabel": "総重量",
+      "weightLabel": "カートン",
+      "scoreLabel": "スコア",
+      "criteria": {
+        "quality": "よくある質問",
+        "price": "販売価格",
+        "capacity": "定員",
+        "delivery": "デリバリー",
+        "compliance": "コンプライアンス",
+        "financial": "財務安定性",
+        "certification": "認証",
+        "communication": "コミュニケーション",
+        "risk": "リスク"
+      }
+    },
+    "riskAssessment": {
+      "metaTitle": "サプライヤーリスク評価",
+      "metaDesc": "サプライヤーの詳細を入力し、寸法ごとの証拠ステータスで最初のリスクスコアを取得します。",
+      "h1": "サプライヤーリスク評価",
+      "lead": "初期リスクスコアを生成するためにサプライヤーの詳細を入力してください。 寸法ごとの証拠状態を示します。 事実と予想を提示しません。",
+      "supplierName": "サプライヤー名",
+      "website": "サイトマップ",
+      "country": "カントリー",
+      "city": "シティ",
+      "productCategory": "製品カテゴリ",
+      "businessType": "ビジネスタイプ",
+      "businessTypeFactory": "本社工場",
+      "businessTypeTrading": "取引会社",
+      "yearsInBusiness": "事業年数",
+      "employeeRange": "従業員の範囲",
+      "exportMarkets": "輸出市場(コンマ区切り)",
+      "selectOption": "選択する",
+      "businessLicense": "ビジネスライセンス",
+      "isoCertificate": "ISO認証",
+      "auditReport": "監査レポート",
+      "catalog": "カタログ",
+      "productCertificates": "製品証明書",
+      "cta": "リスクスコアの生成",
+      "ctaLoading": "分析...",
+      "empty": "フォームに必要事項を記入し、[生成] をクリックして、リスクの故障を確認します。",
+      "levelSuffix": "RISK",
+      "sourceAi": "AI-generated(DeepSeek)・意思決定支援",
+      "sourceLocal": "ルールベースの見積もり — 正式検証ではなく",
+      "levels": {
+        "Critical": "クリティカル",
+        "High": "高い",
+        "Medium": "メディア",
+        "Low": "低い",
+        "Very Low": "非常に低い"
+      },
+      "status": {
+        "Verified": "プロフィール",
+        "Self-Reported": "自己報告",
+        "Estimated": "見積もり",
+        "Not Verified": "認証情報"
+      },
+      "dimensions": {
+        "company": "会社案内",
+        "capability": "工場の機能",
+        "quality": "品質システム",
+        "certification": "認証",
+        "capacity": "生産能力",
+        "compliance": "コンプライアンス",
+        "transparency": "透明性",
+        "supplychain": "サプライチェーンリスク"
+      },
+      "countryNames": {
+        "china": "中国",
+        "vietnam": "ベトナム",
+        "thailand": "タイ",
+        "india": "インド",
+        "indonesia": "インドネシア",
+        "bangladesh": "バングラデシュ",
+        "malaysia": "マレーシア",
+        "turkey": "トルコ",
+        "mexico": "メキシコ"
+      }
+    },
+    "industryNames": [
+      "電子機器",
+      "繊維",
+      "衣料",
+      "家具",
+      "化学品",
+      "プラスチック",
+      "自動車",
+      "機械",
+      "医療機器",
+      "食品",
+      "包装",
+      "宝飾品"
+    ],
+    "auditTypeNames": [
+      "工場検証",
+      "工場監査",
+      "サプライヤー品質監査",
+      "生産能力監査",
+      "社会的コンプライアンス監査",
+      "環境監査",
+      "技術監査",
+      "バイヤー指定監査"
     ]
   }
 }

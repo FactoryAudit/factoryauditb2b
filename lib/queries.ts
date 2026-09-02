@@ -10,14 +10,6 @@ import type { StaticSupplier } from "./staticData";
 import { getSupplierCapabilitiesResolved } from "./taxonomy";
 import { overallLevel } from "./riskEngine";
 
-export type SupplierCapabilityView = {
-  refType: string;
-  refCode: string;
-  label: string;
-  verified: boolean;
-  source: string;
-};
-
 // 与页面当前消费的供应商形状保持一致（mainProducts/exportMarkets/certifications 为数组）
 export type SupplierView = {
   slug: string;
@@ -132,11 +124,6 @@ export async function getSupplierBySlug(slug: string): Promise<SupplierView | nu
 
 export async function listSupplierSlugs(): Promise<{ country: string; slug: string }[]> {
   return STATIC_SUPPLIERS.map((s) => ({ country: s.countryCode, slug: s.slug }));
-}
-
-// STEP 4: 供应商能力标签（消费 taxonomy engine）—— 解析出可读名称
-export async function getSupplierCapabilities(slug: string): Promise<SupplierCapabilityView[]> {
-  return getSupplierCapabilitiesResolved(slug);
 }
 
 // ---------- 落地页 / SEO 矩阵消费用的原始静态行（保留 countryCode / capabilities / evidence） ----------

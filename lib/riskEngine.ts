@@ -52,7 +52,7 @@ export interface StructQuestion {
 
 export interface StructDimension {
   key: string;
-  weight: number; // 占总分百分比，六维合计 100
+  weight: number; // 占总分百分比，八维合计 100（12/16/16/12/12/12/10/10）
   questions: StructQuestion[];
 }
 

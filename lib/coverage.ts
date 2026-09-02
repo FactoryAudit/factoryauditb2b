@@ -992,6 +992,17 @@ export const COVERAGE_SERVICES: ServiceLocalized[] = [
   },
 ];
 
+/**
+ * 覆盖国名的人类可读枚举，例如 "China, Vietnam, Thailand, Malaysia and Philippines"。
+ * 供 llms.txt、OG alt、AI 提示词等处复用，避免各处硬编码国名后忘记同步。
+ */
+export const COVERAGE_COUNTRY_SENTENCE = (() => {
+  const names = COVERAGE_COUNTRIES.map((c) => c.name);
+  return names.length <= 1
+    ? names.join("")
+    : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+})();
+
 export const COVERAGE_SERVICE_SLUGS = COVERAGE_COUNTRIES.flatMap((c) =>
   COVERAGE_SERVICES.map((s) => ({ slug: `${c.slug}-${s.slugSuffix}`, country: c, service: s }))
 );

@@ -69,7 +69,7 @@ export default async function MethodologyPage({ params }: Props) {
       <p className="text-[#64748b] mt-3 text-lg">{m.lead}</p>
 
       <section className="mt-8 rounded-lg bg-[#f1f5f9] p-6">
-        <h2 className="font-bold text-[#0f172a]">Quick answer</h2>
+        <h2 className="font-bold text-[#0f172a]">{t.common.ui.quickAnswer}</h2>
         <p className="text-[#475569] mt-2">{m.quickAnswer}</p>
       </section>
 

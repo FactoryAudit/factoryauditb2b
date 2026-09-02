@@ -64,7 +64,7 @@ export default async function Page({ params }: Props) {
   ];
 
   return (
-    <main className="container py-10">
+    <main className="container py-10" data-track-page="tool_verification_checklist">
       <JsonLd data={jsonLd} />
 
       <section className="text-center max-w-3xl mx-auto mb-10">

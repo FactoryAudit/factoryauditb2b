@@ -2,6 +2,8 @@ import { generateObject, generateText } from "ai";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 import { z } from "zod";
 import { computeRisk, type RiskInput, type RiskResult, type EvidenceStatus } from "./scoring";
+import { COVERAGE_COUNTRY_SENTENCE } from "./coverage";
+import { MEMBERSHIP_PRICE_USD } from "./suppliers";
 
 // DeepSeek（PRD §72 真实 AI 服务）。未配置 DEEPSEEK_API_KEY 时自动回退本地规则引擎。
 const deepseek = createOpenAICompatible({
@@ -294,12 +296,16 @@ const CHAT_SYSTEM_PROMPT = `You are the AI assistant for FactoryAuditB2B, a B2B 
 BUSINESS FACTS (use ONLY these; never invent anything):
 - Services: supplier verification, factory audit, pre-shipment inspection, supplier training, sourcing support.
 - Audit / compliance programs referenced: SMETA, BSCI, ISO 9001, ISO 14001, SA8000, WRAP, Sedex, CE, UL.
-- Coverage: China, Vietnam and Thailand. Other countries on request.
-- Buyer SaaS: Free $0, Starter $19/mo, Professional $99/mo, Business $299/mo, Enterprise custom.
-- Supplier membership: Basic $29/mo, Verified $99/mo, Premium $199/mo.
+- Coverage: ${COVERAGE_COUNTRY_SENTENCE}. Other countries on request.
+- Free tools: $0, no account needed.
+- Supplier verification: $99 to $129 per supplier, quoted per project.
+- Factory audit: from $399, quoted per man-day plus travel.
+- Product inspection: quoted per man-day.
+- Supplier monitoring: yearly subscription, quoted per supplier per year.
+- Buyer membership (Founding Buyer): $${MEMBERSHIP_PRICE_USD} per year.
+- Supplier network registration: free. Status and evidence level are decided by human review and are not sold.
 - Training plans: Starter $280/factory, Pro $950/factory, Enterprise custom.
-- Audit & inspection: quoted per project, based on man-days and location.
-- Freight & sourcing: 3-5% commission on order value.
+- Sourcing support: 3-5% commission on order value, quoted before the order is placed.
 - Quote / human handoff page: /custom-services ; training plans page: /training-plans ; pricing page: /pricing.
 - All prices in USD.
 

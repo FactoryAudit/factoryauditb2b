@@ -10,6 +10,7 @@ import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config
 import { getDictionary } from "@/i18n/getDictionary";
 import { hreflangFor, canonicalFor } from "@/i18n/hreflang";
 import { OG_IMAGE } from "@/lib/pageMeta";
+import { pickZhCopy, pickZhPair } from "@/lib/tw";
 
 const BASE = "https://factoryauditb2b.com";
 type Props = { params: Promise<{ locale: string }> };
@@ -47,7 +48,6 @@ export default async function Home({ params }: Props) {
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
   const p = (href: string) => localePath(locale, href);
-  const zh = locale === "zh";
 
   const suppliers = await listSuppliers();
   const searchData = suppliers.map((s) => ({
@@ -70,8 +70,8 @@ export default async function Home({ params }: Props) {
   }));
 
   const guides = featuredGuides().map((g) => ({
-    title: zh ? g.titleZh : g.titleEn,
-    desc: (zh ? g.metaDescZh : g.metaDescEn).slice(0, 120),
+    title: pickZhPair(locale, g.titleEn, g.titleZh),
+    desc: pickZhPair(locale, g.metaDescEn, g.metaDescZh).slice(0, 120),
     href: `/guides/${g.slug}`,
   }));
 
@@ -183,8 +183,8 @@ export default async function Home({ params }: Props) {
         <div className="grid md:grid-cols-3 gap-5">
           {COVERAGE_COUNTRIES.map((c) => (
             <div key={c.code} className="card p-6">
-              <h3 className="text-xl font-bold text-[#0f172a]">{zh ? c.nameZh : c.name}</h3>
-              <p className="text-sm text-[#475569] mt-2">{zh ? c.zh.hook : c.en.hook}</p>
+              <h3 className="text-xl font-bold text-[#0f172a]">{pickZhPair(locale, c.name, c.nameZh)}</h3>
+              <p className="text-sm text-[#475569] mt-2">{pickZhCopy(locale, c).hook}</p>
               {/* 三项服务做成可点链接：验货直达 /services/inspection（V4.0 定位不变，入口打通） */}
               <ul className="mt-4 space-y-1 text-sm">
                 <li>

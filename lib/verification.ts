@@ -5,6 +5,8 @@
 // 2. 等级只能由实际核验范围决定，不能由营销需要决定。
 // 3. 「工厂提供了文件」与「我们审阅并确认了文件」必须分开表述。
 
+import { twText } from "./tw";
+
 export type VerificationLevel = 0 | 1 | 2 | 3 | 4;
 
 /** 供应商表 verificationStatus → 核验等级 */
@@ -114,7 +116,11 @@ export function normalizeEvidenceType(type: string): string {
 export function evidenceLabel(type: string, locale: "en" | "zh" | "zh-TW" = "en"): string {
   const code = normalizeEvidenceType(type);
   const entry = EVIDENCE_TYPE_LABELS[code];
-  if (entry) return locale === "en" ? entry.en : entry.zh;
+  // 数据层只有 en/zh 两版：zh-TW 复用 zh 文案并就地繁化
+  if (entry) {
+    if (locale === "en") return entry.en;
+    return locale === "zh-TW" ? twText(entry.zh) : entry.zh;
+  }
   // 未登记的类型：保留原始文本，但不要污染英文页
   return type;
 }

@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { Locale } from "@/i18n/config";
+import { ANALYTICS_EVENTS, trackEvent } from "@/lib/analytics";
 
 // client component 不能 import i18n/config 里的 server util（localePath），
 // 否则会在浏览器里抛异常。链接用 locale 前缀手动拼。
@@ -63,6 +64,8 @@ export default function SupplierVerificationChecklist({ stages, criticalItems, u
   const [ready, setReady] = useState(false);
   // V2：是否已点击"生成评估报告"（连续自评 → 提交 → 出结果 的提交动作）
   const [submitted, setSubmitted] = useState(false);
+  // 埋点：首次勾选 = 开始使用清单（每个会话只发一次）
+  const startedRef = useRef(false);
 
   const allItems = useMemo(
     () => stages.flatMap((s) => Object.entries(s.items).map(([id, text]) => ({ id, text, stage: s.key }))),
@@ -95,6 +98,10 @@ export default function SupplierVerificationChecklist({ stages, criticalItems, u
   const pct = TOTAL ? Math.round((doneCount / TOTAL) * 100) : 0;
 
   function toggle(id: string) {
+    if (!startedRef.current) {
+      startedRef.current = true;
+      trackEvent(ANALYTICS_EVENTS.verificationChecklistStart);
+    }
     setChecked((c) => ({ ...c, [id]: !c[id] }));
   }
 

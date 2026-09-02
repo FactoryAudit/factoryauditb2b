@@ -6,11 +6,13 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import AiChatWidget from "@/components/AiChatWidget";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
+import AnalyticsScripts from "@/components/AnalyticsScripts";
 import JsonLd from "@/components/JsonLd";
 import { LOCALES, isLocale, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { hreflangFor, canonicalFor } from "@/i18n/hreflang";
 import { OG_IMAGE } from "@/lib/pageMeta";
+import { activeSocialLinks } from "@/lib/social";
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -113,6 +115,10 @@ const siteGraph = [
       "Global supplier verification, factory audit, inspection and sourcing platform for China and Asia. Covers SMETA, BSCI, ISO 9001, ISO 14001, CE, UL and 20+ audit and certification programs.",
     // 此前引用 logo.png，但 public/ 下只有 .svg，导致结构化数据里的图片是 404
     logo: `${BASE}/logo.svg`,
+    // 社媒档案：帮助搜索引擎/AI 把社交账号关联到本品牌实体（未开通的平台不出现）
+    ...(activeSocialLinks().length > 0
+      ? { sameAs: activeSocialLinks().map((s) => s.url) }
+      : {}),
   },
   {
     "@context": "https://schema.org",
@@ -158,6 +164,7 @@ export default async function RootLayout({
       </head>
       <body>
         <JsonLd data={siteGraph} />
+        <AnalyticsScripts />
         <AnalyticsTracker />
         <SiteHeader locale={locale} dict={t.nav} />
         <main>{children}</main>

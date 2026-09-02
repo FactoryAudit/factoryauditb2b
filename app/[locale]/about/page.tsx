@@ -46,7 +46,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: `${BASE}/` },
+              { "@type": "ListItem", position: 1, name: t.common.ui.home, item: `${BASE}/` },
               { "@type": "ListItem", position: 2, name: a.h1, item: `${BASE}${lp(PATH)}` },
             ],
           },
@@ -55,7 +55,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
       <nav className="mb-6 text-sm text-[#64748b]">
         <Link href={lp("/")} className="hover:underline">
-          Home
+          {t.common.ui.home}
         </Link>{" "}
         / {a.h1}
       </nav>

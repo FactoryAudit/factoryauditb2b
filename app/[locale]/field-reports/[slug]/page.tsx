@@ -13,6 +13,7 @@ import { toolCardKeyByHref, serviceKeyByHref } from "@/lib/nav";
 import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import { pickZhCopy, pickZhPair } from "@/lib/tw";
 
 const BASE = "https://factoryauditb2b.com";
 type Params = { locale: string; slug: string };
@@ -37,8 +38,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return buildPageMetadata({
     locale,
     path: `/field-reports/${slug}`,
-    title: locale === "zh" ? r.titleZh : r.titleEn,
-    description: locale === "zh" ? r.metaDescZh : r.metaDescEn,
+    title: pickZhPair(locale, r.titleEn, r.titleZh),
+    description: pickZhPair(locale, r.metaDescEn, r.metaDescZh),
   });
 }
 
@@ -51,11 +52,10 @@ export default async function FieldReportPage({ params }: { params: Promise<Para
   const t = await getDictionary(locale);
   const f = t.fieldReports;
   const p = (href: string) => localePath(locale, href);
-  const zh = locale === "zh";
-  const x = zh ? r.zh : r.en;
-  const title = zh ? r.titleZh : r.titleEn;
-  const disclosure = zh ? FIELD_REPORT_DISCLOSURE.zh : FIELD_REPORT_DISCLOSURE.en;
-  const sec = zh ? FIELD_REPORT_SECTIONS.zh : FIELD_REPORT_SECTIONS.en;
+  const x = pickZhCopy(locale, r);
+  const title = pickZhPair(locale, r.titleEn, r.titleZh);
+  const disclosure = pickZhCopy(locale, FIELD_REPORT_DISCLOSURE);
+  const sec = pickZhCopy(locale, FIELD_REPORT_SECTIONS);
 
   const relatedGuides = r.related
     .map((s) => findGuide(s))
@@ -76,7 +76,7 @@ export default async function FieldReportPage({ params }: { params: Promise<Para
       "@context": "https://schema.org",
       "@type": "Article",
       headline: title,
-      description: zh ? r.metaDescZh : r.metaDescEn,
+      description: pickZhPair(locale, r.metaDescEn, r.metaDescZh),
       dateModified: r.updated,
       author: { "@type": "Organization", name: "FactoryAuditB2B", url: BASE },
       publisher: { "@id": `${BASE}/#organization` },
@@ -86,7 +86,7 @@ export default async function FieldReportPage({ params }: { params: Promise<Para
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: `${BASE}${p("/")}` },
+        { "@type": "ListItem", position: 1, name: t.common.ui.home, item: `${BASE}${p("/")}` },
         {
           "@type": "ListItem",
           position: 2,
@@ -110,7 +110,7 @@ export default async function FieldReportPage({ params }: { params: Promise<Para
 
       <nav className="mb-4 text-sm text-gray-500">
         <Link href={p("/")} className="hover:underline">
-          Home
+          {t.common.ui.home}
         </Link>
         {" / "}
         <Link href={p("/resources")} className="hover:underline">
@@ -175,7 +175,7 @@ export default async function FieldReportPage({ params }: { params: Promise<Para
             {relatedGuides.map((g) => (
               <li key={g.slug}>
                 <Link href={p(`/guides/${g.slug}`)} className="text-[#0f4c81] hover:underline">
-                  {zh ? g.titleZh : g.titleEn}
+                  {pickZhPair(locale, g.titleEn, g.titleZh)}
                 </Link>
               </li>
             ))}

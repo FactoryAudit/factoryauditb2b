@@ -9,6 +9,7 @@
 //   NOTIFY_ADMIN_EMAIL     管理员收件邮箱，必填才会发
 //   FROM_EMAIL             发件地址，默认 support@factoryauditb2b.com
 import nodemailer from "nodemailer";
+import { MEMBERSHIP_PRICE_USD } from "./suppliers";
 
 const mailProvider = (process.env.MAIL_PROVIDER || "smtp").toLowerCase();
 const httpMailConfigured = Boolean(process.env.MAIL_HTTP_KEY);
@@ -306,7 +307,7 @@ export async function notifyBuyerRegisterReceived(data: {
       "",
       "Our team creates accounts manually and will email you your sign-in details within one business day.",
       "Your free plan includes 5 supplier profiles per month, saved suppliers and basic comparison.",
-      "No credit card required. You can upgrade to Founding Buyer membership ($49/year) at any time.",
+      `No credit card required. You can upgrade to Founding Buyer membership ($${MEMBERSHIP_PRICE_USD}/year) at any time.`,
       "",
       "FactoryAuditB2B",
     ].join("\n"),

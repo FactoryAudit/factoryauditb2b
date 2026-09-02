@@ -68,10 +68,12 @@ export default async function SupplierProfilePage({
   const rp = t.reportPreview;
   const p = (href: string) => localePath(locale, href);
 
-  const s = await getSupplierDetail(slug, locale === "zh" || locale === "zh-TW" ? "zh" : "en");
+  // 内容层只有 en/zh 两版：zh-TW 走 zh 文案并在各自函数内繁化，其余语言一律 en。
+  const contentLocale = locale === "zh-TW" ? "zh-TW" : locale === "zh" ? "zh" : "en";
+  const s = await getSupplierDetail(slug, contentLocale);
   if (!s) notFound();
 
-  const uiLocale = locale === "zh" || locale === "zh-TW" ? "zh" : "en";
+  const uiLocale = contentLocale;
   const level = levelFromStatus(s.verificationStatus);
   const scope = LEVEL_SCOPE[level];
   // 风险等级由引擎推导，不在页面重复判定阈值

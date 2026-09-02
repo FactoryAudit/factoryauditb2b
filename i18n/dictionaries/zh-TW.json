@@ -72,35 +72,25 @@
     "badge": "覈查 · 採購 · 驗貨 · 發運",
     "h1": "付款之前，先弄清你的供應商。",
     "lead": "於中國及東南亞的現場供應商核查與工廠稽核支援。已啟用範圍：中國、越南、泰國、馬來西亞、菲律賓。",
-    "ctaScore": "免費評估供應商",
-    "ctaRfq": "發佈詢價",
-    "ctaAudit": "申請驗廠",
-    "services": "我們提供供應商驗證、工廠審覈、驗貨與貨運服務。",
     "toolsTitle": "免費的供應商評估工具",
     "toolsLead": "八款工具，用於覈查供應商、準備審覈與規劃發運。無需註冊，基礎結果也不設郵箱門檻。",
-    "value1Title": "「已驗證」到底意味着什麼",
-    "value1Body": "只有在覈對工商登記、確認廠房真實存在、並審閱審覈文件之後，供應商纔會被標記爲已驗證。",
-    "value2Title": "結論由人來做",
-    "value2Body": "軟件負責篩出明顯問題，驗證與審覈的最終結論由我們的審覈員出具，報告上會署名。",
-    "value3Title": "每一次覈查都會留檔",
-    "value3Body": "每次驗證與審覈都會留在該供應商的檔案裏。企業無法在我們這裏悄悄清空歷史記錄。",
-    "sub": "Use free tools to assess supplier risk, check verification readiness and prepare for a factory audit. When you need someone on the ground, request an independent verification or factory audit.",
+    "sub": "用免費工具評估供應商風險、檢查核驗完備度、為驗廠做準備。需要有人到現場時，申請獨立的供應商核查或工廠驗廠。",
     "ctaPrimary": "查我的供應商",
     "ctaSecondary": "免費風險核查",
     "ctaHighIntent": "申請工廠驗廠",
-    "evaTitle": "Evaluate. Verify. Audit.",
-    "evaLead": "Three steps between a supplier you found online and a supplier you can pay.",
-    "evaluateTitle": "Evaluate",
-    "evaluateBody": "Assess supplier risk before you place an order.",
-    "evaluateCta": "Evaluate a Supplier",
-    "verifyTitle": "Verify",
-    "verifyBody": "Check company information, documents, factory details and available evidence.",
-    "verifyCta": "Verify a Supplier",
-    "auditTitle": "Audit",
-    "auditBody": "Get an independent on-site factory audit with findings, evidence and a written report.",
-    "auditCta": "Request an Audit",
-    "howTitle": "How it works",
-    "howLead": "From a company name to a decision you can defend internally.",
+    "evaTitle": "評估。核驗。驗廠。",
+    "evaLead": "從網上找到的一家供應商，到一家你可以放心付款的供應商，中間三步。",
+    "evaluateTitle": "評估",
+    "evaluateBody": "在下訂單之前評估供應商風險。",
+    "evaluateCta": "評估供應商",
+    "verifyTitle": "核驗",
+    "verifyBody": "核查公司資訊、檔案、工廠詳情與現有證據。",
+    "verifyCta": "核驗供應商",
+    "auditTitle": "驗廠",
+    "auditBody": "獲得獨立的現場工廠驗廠，含發現項、證據與書面報告。",
+    "auditCta": "申請驗廠",
+    "howTitle": "流程怎麼走",
+    "howLead": "從一個公司名，到一個內部能講得通的結論。",
     "howSteps": [
       {
         "title": "評估",
@@ -120,7 +110,7 @@
       }
     ],
     "coverageTitle": "我們核實供應商的國家",
-    "coverageLead": "On-the-ground supplier verification and factory audit support across China and Southeast Asia.",
+    "coverageLead": "覆蓋中國及東南亞的現場供應商核查與工廠驗廠支援。",
     "coveragePhase": "第一階段涵蓋國家",
     "coverageService1": "供應商核實",
     "coverageService2": "工廠驗廠",
@@ -138,20 +128,14 @@
     "why4Body": "你拿到的是可內部轉發的書面報告，含風險摘要與我們建議的下一步。",
     "guidesTitle": "買家在下單前會讀的指南",
     "guidesLead": "由實際執行這些核查的人撰寫的實用指南。",
-    "casesTitle": "What the checks turn up",
-    "casesLead": "Supplier names removed. Findings and outcomes come from real engagements.",
-    "bottomTitle": "Have a supplier already?",
+    "casesTitle": "核查實際會查出什麼",
+    "casesLead": "供應商名稱已隱去。發現項與結論均來自真實專案。",
+    "bottomTitle": "已經有供應商了？",
     "bottomLead": "把公司名稱和地址發給我們。我們會告訴你能確認什麼、不能確認什麼，以及費用多少。",
     "bottomCta": "核實這家供應商",
     "otherRegionTitle": "其他地區",
-    "otherRegionBody": "Don't see your country? We accept enquiries for any region and review each one based on scope, location and inspector availability.",
-    "otherRegionCta": "告訴我們你的採購地區",
-    "primary": "評估供應商風險",
-    "secondary": "驗證供應商",
-    "highIntent": "申請工廠稽核",
-    "guide1Title": "如何驗證中國供應商",
-    "guide2Title": "工廠稽核檢查表",
-    "guide3Title": "供應商風險評估"
+    "otherRegionBody": "沒看到你的國家？我們接受任何地區的詢價，並按範圍、地點與合適的驗貨資源逐單評估。",
+    "otherRegionCta": "告訴我們你的採購地區"
   },
   "toolsIndex": {
     "badge": "免費工具",
@@ -168,7 +152,7 @@
   "toolCards": {
     "riskCalculator": {
       "title": "供應商風險計算器",
-      "desc": "按六個加權維度，爲任意供應商打出 0 到 100 的分數。"
+      "desc": "按八個加權維度，爲任意供應商打出 0 到 100 的分數。"
     },
     "verificationChecklist": {
       "title": "供應商核實清單",
@@ -213,7 +197,7 @@
   },
   "risk": {
     "ui": {
-      "stepOf": "第 {n} 步，共 6 步",
+      "stepOf": "第 {n} 步，共 8 步",
       "back": "上一步",
       "next": "下一步",
       "calculate": "計算風險分",
@@ -247,7 +231,7 @@
         "supplierWebsite": "供應商網址",
         "submit": "發送報告給我",
         "sending": "發送中",
-        "done": "已收到。報告已在下方生成，同時會發送到你的郵箱。",
+        "done": "已收到。報告已在下方生成。我們會在一個工作日內透過郵件與你跟進。",
         "error": "出錯了，請重試。"
       },
       "disclaimer": "本評分依據你所填寫的答案得出，僅作初步篩查，不構成法律或財務建議，也不代表我們已獨立覈實供應商的任何陳述。",
@@ -262,9 +246,9 @@
     "page": {
       "badge": "FactoryAuditB2B RiskScore™",
       "h1": "供應商風險計算器",
-      "lead": "回答 22 個關於供應商的問題，得到 0 到 100 的分數，並看清構成這個分數的六個維度。",
+      "lead": "回答 28 個關於供應商的問題，得到 0 到 100 的分數，並看清構成這個分數的八個維度。分數越高，風險越低。",
       "card1Title": "分數怎麼來的，你看得見",
-      "card1Body": "六個維度各有權重並單獨展示，哪一項拉高了分數一目瞭然。",
+      "card1Body": "八個維度各有權重並單獨展示，哪一項拉動了分數一目瞭然。",
       "card2Title": "大約三分鐘",
       "card2Body": "無需註冊，看分數也不用留郵箱。",
       "card3Title": "會告訴你要查什麼",
@@ -272,7 +256,7 @@
       "relatedTitle": "相關工具",
       "faqTitle": "常見問題",
       "metaTitle": "供應商風險計算器",
-      "metaDesc": "從公司、質量、合規、生產、供應鏈與文件六個維度，爲供應商打出 0 到 100 的風險分。免費，無需註冊。"
+      "metaDesc": "從公司、質量、合規、生產、供應鏈、文件、認證與數位足跡八個維度，爲供應商打出 0 到 100 的風險分。分數越高，風險越低。免費，無需註冊。"
     },
     "dimensions": {
       "company": {
@@ -372,7 +356,7 @@
         "unknown": "不清楚"
       },
       "quality_qms": {
-        "yes": "Yes",
+        "yes": "是",
         "partial": "部分有",
         "no": "沒有",
         "unknown": "不清楚"
@@ -403,7 +387,7 @@
         "unknown": "不清楚"
       },
       "comp_env": {
-        "comprehensive": "Comprehensive",
+        "comprehensive": "完整",
         "partial": "部分建立",
         "none": "沒有",
         "unknown": "不清楚"
@@ -589,7 +573,7 @@
     "faq": [
       {
         "q": "這個計算器測算的是什麼？",
-        "a": "它從公司、質量、合規、生產、供應鏈與文件六個維度，爲供應商打出 0 到 100 的分數。分數越高，風險越大。"
+        "a": "它從公司、質量、合規、生產、供應鏈、文件、認證與數位足跡八個維度，爲供應商打出 0 到 100 的分數。分數越高，風險越低。"
       },
       {
         "q": "這個分數等於最終驗證結論嗎？",
@@ -597,7 +581,7 @@
       },
       {
         "q": "權重是怎麼定的？",
-        "a": "公司 15%、質量 20%、合規 20%、生產 15%、供應鏈 15%、文件 15%。權重固定，並會在結果頁上列明。"
+        "a": "公司 12%、質量 16%、合規 16%、生產 12%、供應鏈 12%、文件 12%、認證 10%、數位足跡 10%。權重固定，並會在結果頁上列明。"
       },
       {
         "q": "使用需要付費嗎？",
@@ -605,7 +589,7 @@
       },
       {
         "q": "能同時比較多家供應商嗎？",
-        "a": "暫時不能。目前請對每家供應商分別運行並保存報告，橫向對比功能正在開發中。"
+        "a": "可以。對每家供應商分別運行計算器，然後用對比工具把它們放在同一組八個維度上橫向比較，一次最多五家。"
       }
     ]
   },
@@ -891,38 +875,29 @@
   "suppliers": {
     "h1": "供應商",
     "badge": "供應商名錄",
-    "ctaTitle": "您是供應商？",
-    "ctaLead": "加入名錄，發佈工廠檔案，通過平臺審覈，讓從中國及亞洲採購的買家找到您。",
-    "ctaSteps": [
-      "註冊",
-      "發佈信息",
-      "平臺審覈",
-      "上架展示"
-    ],
-    "ctaPrimary": "申請進駐",
     "metaTitle": "中國及亞洲已驗證供應商",
-    "metaDesc": "瀏覽中國、越南、泰國、印度及亞洲其他地區的已驗證製造商與貿易公司。每份檔案包含驗證狀態、風險評分與出口經驗。",
-    "lead": "Explore suppliers with available company, capability and verification information.",
-    "featuredTag": "Featured",
-    "exampleNote": "These are featured suppliers, not a complete marketplace. Coverage is still small, so if the supplier you need is not here, post an RFQ and we will source and verify it.",
-    "filterCountry": "Country",
-    "filterIndustry": "Industry",
-    "filterProduct": "Product",
-    "filterLevel": "Verification level",
-    "filterAudit": "Audit status",
-    "filterAll": "All",
-    "filterSubmit": "Apply filters",
-    "filterReset": "Clear",
-    "countLabel": "{n} suppliers listed",
-    "empty": "No supplier matches these filters. Post an RFQ and we will look outside the directory.",
-    "riskLabel": "Risk",
-    "businessTypeLabel": "Type",
-    "notListedTitle": "Looking for a supplier that isn't listed?",
-    "notListedLead": "Post an RFQ. We source it, verify the company and the site before you pay, and quote the whole thing.",
-    "notListedCta": "Post an RFQ",
-    "claimTitle": "Are you a supplier?",
-    "claimLead": "Join the directory, publish your factory profile, pass our verification and get discovered by buyers sourcing from China and Southeast Asia.",
-    "claimPrimary": "Join as a supplier",
+    "metaDesc": "瀏覽已有公司資訊、產能與查核資訊的供應商。收錄量有限：如果你要找的供應商不在其中，請發布 RFQ。",
+    "lead": "瀏覽已有公司資訊、產能與核驗資訊的供應商。",
+    "featuredTag": "精選",
+    "exampleNote": "以下是精選供應商，不是一個完整的交易市場。目前收錄量還很小，如果你要找的供應商不在其中，釋出 RFQ，我們負責尋源並核驗。",
+    "filterCountry": "國家",
+    "filterIndustry": "行業",
+    "filterProduct": "產品",
+    "filterLevel": "核驗等級",
+    "filterAudit": "驗廠狀態",
+    "filterAll": "全部",
+    "filterSubmit": "應用篩選",
+    "filterReset": "清除",
+    "countLabel": "已收錄 {n} 家供應商",
+    "empty": "沒有符合這些篩選條件的供應商。釋出 RFQ，我們到目錄之外去找。",
+    "riskLabel": "風險",
+    "businessTypeLabel": "型別",
+    "notListedTitle": "沒找到你要的供應商？",
+    "notListedLead": "釋出 RFQ。我們負責尋源，並在你付款之前核驗公司與廠區，整體報價。",
+    "notListedCta": "釋出 RFQ",
+    "claimTitle": "你是供應商嗎？",
+    "claimLead": "加入目錄、釋出你的工廠檔案、透過我們的核驗，讓從中國及東南亞採購的買家找到你。",
+    "claimPrimary": "以供應商身份加入",
     "heroBadge": "供應商情報",
     "featuredTitle": "精選供應商",
     "featuredLead": "真實企業，含可查證的核驗資訊。每家供應商的風險評分全部公開，不隱藏。",
@@ -942,17 +917,17 @@
     "disclaimer": "本內容僅供一般參考，不構成對任何供應商的獨立覈實，也不構成法律、財務或專業審計建議。",
     "whatsappChat": "WhatsApp 諮詢",
     "heroSearch": {
-      "tabSupplier": "Supplier",
-      "tabProduct": "Product",
-      "tabAudit": "Audit",
-      "tabInspector": "Inspector",
-      "placeholderSupplier": "e.g. China electronics supplier",
-      "placeholderProduct": "e.g. Stainless steel water bottle",
-      "placeholderAudit": "e.g. Factory audit China",
-      "placeholderInspector": "e.g. Inspector Shenzhen",
-      "search": "Search",
-      "combinedHint": "Combined SEO pages + live database results",
-      "noMatch": "No exact match for \"{q}\". This searches the indexed supplier database.",
+      "tabSupplier": "供應商",
+      "tabProduct": "產品",
+      "tabAudit": "驗廠",
+      "tabInspector": "驗貨",
+      "placeholderSupplier": "例：中國電子供應商",
+      "placeholderProduct": "例：不鏽鋼水瓶",
+      "placeholderAudit": "例：工廠驗廠 中國",
+      "placeholderInspector": "例：驗貨 深圳",
+      "search": "搜尋",
+      "combinedHint": "SEO 頁面 + 實時資料庫結果",
+      "noMatch": "未找到與\"{q}\"精確匹配的記錄。本頁檢索的是已索引的供應商資料庫。",
       "urlDetected": "看起來像公司名或網站，暫不在已收錄資料庫中。",
       "submitAssess": "提交初步評估",
       "assessHint": "我們會核查註冊記錄與線上足跡，然後回覆初步風險結論。",
@@ -963,6 +938,19 @@
       "assessSubmitting": "提交中…",
       "assessSuccess": "謝謝。我們的團隊會在工作日內回覆。",
       "assessError": "出錯了，請重試。"
+    },
+    "ui": {
+      "home": "首頁",
+      "relatedGuides": "相關指南",
+      "quickAnswer": "快速結論",
+      "definition": "定義",
+      "keyPoints": "核心要點",
+      "stepByStep": "分步說明",
+      "examples": "示例",
+      "checklist": "檢查清單",
+      "sources": "資料來源",
+      "guidesPageTitle": "供應商情報指南",
+      "caseStudiesLead": "供應商核驗、工廠驗廠、驗貨與採購流程的實操覆盤。"
     }
   },
   "container": {
@@ -1360,86 +1348,8 @@
     "metaTitle": "服務與方案 — 免費工具、供應商核實、驗廠、監控",
     "metaDesc": "免費的供應商評估工具、99 美元起的供應商核實、399 美元起的工廠驗廠、99 美元起的驗貨，以及訂閱制供應商監控。全部價格以美元計。",
     "h1": "服務與方案",
-    "lead": "買家 SaaS $19–299/月 · 供應商會員 $29–199/月 · 審覈、驗貨與運費按項目報價。",
+    "lead": "工具免費使用。只有當你需要有人到現場查覈供應商時才付費。",
     "currencyNote": "所有價格以美元計。查核與驗廠按專案報價。",
-    "forBuyers": "買家方案",
-    "forSuppliers": "供應商會員",
-    "perMonth": "/月",
-    "commissionTitle": "審覈、驗貨與運費",
-    "commissionCta": "獲取報價",
-    "buyerCtas": [
-      "免費開始",
-      "選擇 Starter",
-      "選擇 Pro",
-      "選擇 Business",
-      "聯繫我們"
-    ],
-    "supplierCta": "申請",
-    "buyerFeatures": [
-      [
-        "基礎供應商搜索",
-        "基礎風險評估",
-        "基礎覈查清單",
-        "每月 1 條 RFQ"
-      ],
-      [
-        "完整供應商搜索",
-        "無限風險評估",
-        "完整 29 項覈查清單",
-        "每月 5 條 RFQ",
-        "郵件支持"
-      ],
-      [
-        "包含 Starter 全部功能",
-        "PDF 報告",
-        "文檔分析",
-        "供應商工作臺",
-        "高級評分卡",
-        "優先支持"
-      ],
-      [
-        "包含 Professional 全部功能",
-        "5 個團隊成員",
-        "供應商數據庫",
-        "風險監控",
-        "審覈管理",
-        "CAPA 與高級報告"
-      ],
-      [
-        "API 接口",
-        "單點登錄 (SSO)",
-        "定製工作流",
-        "定製供應商數據庫",
-        "專屬支持"
-      ]
-    ],
-    "supplierFeatures": [
-      [
-        "公司檔案展示",
-        "基礎驗證徽章",
-        "接收 RFQ",
-        "標準排序"
-      ],
-      [
-        "已驗證供應商徽章",
-        "檔案展示審覈文件",
-        "搜索優先排序",
-        "RFQ 無限回覆",
-        "能力標籤"
-      ],
-      [
-        "搜索置頂",
-        "行業頁推薦位",
-        "買家引薦",
-        "專屬客戶支持",
-        "每季度檔案更新"
-      ]
-    ],
-    "commissionItems": [
-      "工廠審覈與驗貨：按項目報價，依據人天與地區",
-      "運費與採購：按訂單金額收取 3–5% 佣金",
-      "首單免平臺費"
-    ],
     "plansTitle": "現在就能使用的服務",
     "plansLead": "四項現已開放。查核、驗廠與驗貨按專案報價；監控為年度訂閱。",
     "plans": [
@@ -1568,9 +1478,9 @@
     "ctaText": "需要報價或人工服務？",
     "ctaButton": "聯繫我們的團隊",
     "fallbackAnswers": {
-      "pricing": "Buyer SaaS runs $0–299/month and supplier membership $29–199/month. Factory audits and inspections are quoted per project (man-days and location); freight and sourcing carry a 3–5% commission. All prices in USD. Tell me your product and country and I will point you to the right plan.",
+      "pricing": "免費工具為 $0。供應商查核每個供應商 $99 – $129，工廠驗廠 399 美元起（按人天，另加差旅），供應商監控按每個供應商每年報價。Founding Buyer 會員 $99/年，可查看完整供應商資料庫。採購尋源按訂單金額收取 3–5% 佣金，下單前報價。所有價格以美元計。告訴我你的產品和國家。",
       "audit": "我們提供供應商驗證、工廠審覈與出貨前驗貨，覆蓋 SMETA、BSCI、ISO 9001、ISO 14001、SA8000、WRAP、Sedex 等項目。我們不出售證書，只做驗證與培訓。告訴我你的產品與目標市場，我們爲你評估。",
-      "coverage": "我們目前覆蓋中國、越南和泰國。告訴我你從哪個國家採購，我會確認是否可以服務。",
+      "coverage": "我們目前覆蓋中國、越南、泰國、馬來西亞和菲律賓。告訴我你從哪個國家採購，我會確認在當地可以做哪些查核。",
       "training": "提供。我們先審覈工廠，再培訓團隊的質量體系、QC 與生產工藝。方案爲 Starter $280/廠、Pro $950/廠，另有 Enterprise 定製。每個方案都從差距審覈開始。",
       "default": "我可以解答審覈、供應商驗證、覆蓋範圍、定價與培訓相關問題。如需具體方案，留下聯繫方式，我們的團隊會在一個工作日內回覆。"
     },
@@ -1605,7 +1515,7 @@
     "statsTitle": "數據一覽",
     "stats": [
       {
-        "value": "9",
+        "value": "5",
         "label": "覆蓋國家"
       },
       {
@@ -1627,154 +1537,154 @@
   },
   "brand": {
     "name": "FactoryAuditB2B",
-    "tagline": "Supplier Intelligence & Verification for Global Buyers",
-    "eva": "Evaluate. Verify. Audit.",
-    "scope": "Supplier verification and factory audit services across China and Southeast Asia.",
-    "positioning": "We help global buyers evaluate suppliers, verify factories and reduce sourcing risk before an order is placed."
+    "tagline": "面向全球採購商的供應商情報與核驗平臺",
+    "eva": "評估。核驗。驗廠。",
+    "scope": "覆蓋中國及東南亞的供應商核驗與工廠驗廠服務。",
+    "positioning": "我們幫助全球採購商在下訂單之前評估供應商、核驗工廠並降低採購風險。"
   },
   "coverage": {
-    "badge": "Coverage",
-    "h1": "Where We Verify Suppliers",
-    "lead": "On-the-ground supplier verification and factory audit support across China and Southeast Asia. Phase 1 covers three countries. More are added as we have verified auditor capacity in them.",
-    "phase1": "Phase 1",
-    "phaseNext": "Planned next",
-    "countryCta": "Coverage in {country}",
-    "anotherCountryTitle": "Need verification in another country?",
-    "anotherCountryLead": "Tell us where you are sourcing. If we do not have confirmed auditor capacity there yet, we will say so instead of guessing.",
-    "anotherCountryCta": "Request Verification",
-    "metaTitle": "Where We Verify Suppliers",
-    "metaDesc": "Supplier verification and factory audit coverage across China, Vietnam and Thailand, with country-specific sourcing risks, verification notes and audit considerations."
+    "badge": "覆蓋範圍",
+    "h1": "我們在哪些地方核驗供應商",
+    "lead": "覆蓋中國及東南亞的現場供應商查核與工廠驗廠支援。第一階段覆蓋五個國家：中國、越南、泰國、馬來西亞、菲律賓。其餘國家在稽核員資源確認後逐步加入。",
+    "phase1": "第一階段",
+    "phaseNext": "後續計劃",
+    "countryCta": "{country}覆蓋範圍",
+    "anotherCountryTitle": "需要在其他國家核驗？",
+    "anotherCountryLead": "告訴我們你在哪裡採購。如果當地還沒有確認的稽核員資源，我們會直說，而不是猜。",
+    "anotherCountryCta": "申請核驗",
+    "metaTitle": "我們在哪些地方核驗供應商",
+    "metaDesc": "覆蓋中國、越南、泰國、馬來西亞、菲律賓的供應商查核與工廠驗廠服務。含各國採購風險、查核重點與驗廠注意事項。"
   },
   "countryHub": {
-    "profileTitle": "Manufacturing profile",
-    "risksTitle": "Typical sourcing risks",
-    "verificationTitle": "Supplier verification considerations",
-    "auditTitle": "Factory audit considerations",
-    "industriesTitle": "Relevant industries",
-    "logisticsTitle": "Local logistics considerations",
-    "standardsTitle": "Relevant standards",
-    "hubsTitle": "Main production hubs",
-    "registryTitle": "Where we check company records",
-    "servicesTitle": "Available services",
-    "toolsTitle": "Relevant tools",
-    "faqTitle": "Frequently asked questions",
-    "breadcrumb": "Countries",
-    "ctaTitle": "Need a supplier in {country} checked?",
-    "ctaLead": "Send us the company name and address. We confirm the registration, the site and the documents before you pay anything.",
-    "ctaPrimary": "Verify a supplier in {country}",
-    "ctaSecondary": "Request a {country} factory audit",
-    "suppliersTitle": "Suppliers listed for {country}",
-    "suppliersEmpty": "No supplier in {country} is listed yet. That does not mean we cannot check one. Send us the name and we will run the verification.",
-    "metaDesc": "Supplier verification and factory audit in {country}: manufacturing profile, typical sourcing risks, verification and audit considerations, industries, logistics and FAQs.",
+    "profileTitle": "製造業概況",
+    "risksTitle": "典型採購風險",
+    "verificationTitle": "供應商核查要點",
+    "auditTitle": "工廠驗廠要點",
+    "industriesTitle": "相關行業",
+    "logisticsTitle": "本地物流注意事項",
+    "standardsTitle": "相關標準",
+    "hubsTitle": "主要產業帶",
+    "registryTitle": "企業登記資訊查詢渠道",
+    "servicesTitle": "可提供的服務",
+    "toolsTitle": "相關工具",
+    "faqTitle": "常見問題",
+    "breadcrumb": "國家",
+    "ctaTitle": "需要核查{country}的供應商？",
+    "ctaLead": "把公司名稱和地址發給我們。在你付任何款項之前，我們會確認登記資訊、廠區和檔案。",
+    "ctaPrimary": "核驗{country}供應商",
+    "ctaSecondary": "申請{country}工廠驗廠",
+    "suppliersTitle": "已收錄的{country}供應商",
+    "suppliersEmpty": "{country}暫時沒有收錄供應商。這不代表我們不能核查。把公司名稱發給我們，我們直接跑核查。",
+    "metaDesc": "{country}供應商核查與工廠驗廠：製造業概況、典型採購風險、核查與驗廠要點、行業、物流與常見問題。",
     "breadcrumbHome": "首頁",
     "h1Template": "{country}供應商核實與工廠驗廠稽核"
   },
   "serviceCountry": {
-    "quickAnswerTitle": "Quick answer",
-    "scopeTitle": "What is included",
-    "deliverablesTitle": "What you receive",
-    "processTitle": "How it works",
-    "pricingTitle": "How pricing works",
-    "contextTitle": "{service} in {country}: what is different here",
-    "ctaTitle": "Request {service} in {country}",
-    "ctaLead": "Tell us the supplier and your requirements. We reply with a scoped proposal, a timeline and a price.",
-    "ctaPrimary": "Request a quote",
-    "ctaSecondary": "Score this supplier free first",
-    "relatedTitle": "Related pages",
-    "breadcrumb": "Services",
-    "metaDesc": "{service} in {country}. Scope, deliverables, process and pricing basis, plus the country-specific checks that matter in {country}.",
-    "scopedQ": "What do you actually check for a {country} supplier?",
-    "scopedA": "We confirm registration, the registered address, the production site, and the country-specific checks for {country} suppliers. Exact scope depends on the standard and the order, which we confirm in the scoped quote.",
-    "timelineQ": "How long does this take in {country}?",
-    "timelineA": "Documentary checks are usually finished within two business days. A package that includes a site visit in {country} is normally scheduled within a week, longer outside the main production hubs."
+    "quickAnswerTitle": "快速回答",
+    "scopeTitle": "服務內容",
+    "deliverablesTitle": "交付物",
+    "processTitle": "流程",
+    "pricingTitle": "定價方式",
+    "contextTitle": "{country}的{service}：這裡有什麼不一樣",
+    "ctaTitle": "申請{country}{service}",
+    "ctaLead": "告訴我們供應商和你的要求。我們會回覆範圍、時間和報價。",
+    "ctaPrimary": "申請報價",
+    "ctaSecondary": "先免費給這家供應商打分",
+    "relatedTitle": "相關頁面",
+    "breadcrumb": "服務",
+    "metaDesc": "{country}{service}。範圍、交付物、流程與定價方式，以及{country}本地必須做的核查動作。",
+    "scopedQ": "在{country}具體核查什麼？",
+    "scopedA": "我們確認登記、註冊地址、生產地點，以及{country}特有的檢查項。具體範圍取決於訂單型別與適用標準，我們在報價時確認。",
+    "timelineQ": "{country}需要多久？",
+    "timelineA": "檔案核查通常兩個工作日內完成。含現場走訪的方案在{country}主要製造樞紐通常一週內可排期，樞紐城市之外需要更長前置時間。"
   },
   "servicesIndex": {
     "badge": "服務",
-    "h1": "Supplier verification, audit and inspection services",
-    "lead": "Free tools tell you what to check. These services get it checked. Everything below is scoped and quoted per project, and none of it is a bundle you have to buy into.",
+    "h1": "供應商核查、驗廠與驗貨服務",
+    "lead": "免費工具告訴你該查什麼，這些服務負責把它查完。以下全部按專案報價，沒有任何需要整體購買的捆綁套餐。",
     "servicesTitle": "我們做什麼",
-    "servicesLead": "Pick the stage you are at.",
+    "servicesLead": "按你當前所處的階段選擇。",
     "items": {
       "verification": {
         "title": "供應商核實",
-        "desc": "Confirm the company, the site and the documents before you release a deposit.",
+        "desc": "在你付定金之前確認公司、廠區和檔案。",
         "href": "/services/supplier-verification"
       },
       "factoryAudit": {
         "title": "工廠驗廠",
-        "desc": "An auditor on site against the standard your buyer requires, with findings graded and corrective actions listed.",
+        "desc": "稽核員到現場，按你的買家要求的標準稽核，發現項分級、整改項列明。",
         "href": "/factory-audit/request"
       },
       "inspection": {
         "title": "驗貨",
-        "desc": "In-line and pre-shipment checks on your production, quoted per man-day.",
+        "desc": "生產中期與出貨前檢驗，按人天報價。",
         "href": "/custom-services"
       },
       "sourcing": {
         "title": "採購尋源",
-        "desc": "Post an RFQ, get matched with suppliers we can verify, and pay commission only on orders you place.",
+        "desc": "釋出 RFQ，匹配我們可以核驗的供應商，只在成交訂單上收佣金。",
         "href": "/rfq"
       },
       "improvement": {
         "title": "供應商改善",
-        "desc": "Audit findings turned into corrective action, training and a re-audit. Not a standalone training business.",
+        "desc": "把驗廠發現項轉化為整改、培訓和複審。不是獨立的培訓業務。",
         "href": "/services/supplier-improvement"
       },
       "monitoring": {
-        "title": "Supplier Monitoring",
-        "desc": "Keep verified supplier facts current. Scheduled re-checks of registration, address, certificates and public records, with an alert when something changes."
+        "title": "供應商監控",
+        "desc": "讓已核驗的資訊保持最新。按週期複核工商登記、地址、證書與公開記錄，發生變化時發出提醒。"
       }
     },
     "coverageTitle": "涵蓋國家",
-    "coverageLead": "Country-specific verification and audit pages with the local checks that matter.",
-    "notSureTitle": "Not sure which one you need?",
-    "notSureLead": "Run the free risk calculator first. It takes about three minutes and tells you what is missing.",
+    "coverageLead": "各國專屬的核查與驗廠頁面，寫明當地真正重要的檢查項。",
+    "notSureTitle": "不確定需要哪一個？",
+    "notSureLead": "先跑一遍免費的風險計算器。大約三分鐘，它會告訴你缺什麼。",
     "notSureCta": "評估供應商風險",
-    "metaTitle": "Supplier Verification, Factory Audit and Inspection Services",
-    "metaDesc": "Independent supplier verification, factory audit, inspection and sourcing support across China, Vietnam and Thailand. Scoped and quoted per project."
+    "metaTitle": "供應商核查、工廠驗廠與驗貨服務",
+    "metaDesc": "覆蓋中國、越南、泰國、馬來西亞、菲律賓的獨立供應商查核、工廠驗廠、驗貨與採購支援。按專案確定範圍並報價。"
   },
   "resourcesIndex": {
-    "badge": "Resources",
-    "h1": "Supplier Intelligence Resources",
-    "lead": "Practical guides and tools for evaluating suppliers, checking documents, preparing audits and reducing sourcing risk. Written by the people who run the checks.",
-    "categoriesTitle": "Browse by topic",
-    "categoriesLead": "Each topic lists the guides, tools and services that belong to it.",
-    "toolsTitle": "Tools",
-    "toolsLead": "Free, no account needed.",
+    "badge": "資源",
+    "h1": "供應商情報資源中心",
+    "lead": "用於評估供應商、核查檔案、準備驗廠和降低採購風險的實用指南與工具。由實際執行這些核查的人撰寫。",
+    "categoriesTitle": "按主題瀏覽",
+    "categoriesLead": "每個主題下列出屬於它的指南、工具和服務。",
+    "toolsTitle": "工具",
+    "toolsLead": "免費，無需註冊。",
     "cat": {
       "verification": {
-        "title": "Supplier Verification",
-        "desc": "How to confirm a company is real, the site is real, and the documents hold up."
+        "title": "供應商核查",
+        "desc": "如何確認公司真實、廠區真實、檔案站得住。"
       },
       "audit": {
-        "title": "Factory Audit",
-        "desc": "Standards, checklists, what auditors look at and how to read a report."
+        "title": "工廠驗廠",
+        "desc": "標準、檢查表、稽核員看什麼、怎麼讀報告。"
       },
       "risk": {
-        "title": "Supplier Risk",
-        "desc": "Scoring frameworks, weighting and how to act on a risk score."
+        "title": "供應商風險",
+        "desc": "評分框架、權重設定，以及拿到風險分數之後怎麼行動。"
       },
       "china": {
-        "title": "China Sourcing",
-        "desc": "Country-specific checks, registries and logistics for Chinese suppliers."
+        "title": "中國採購",
+        "desc": "中國供應商的國別檢查項、登記查詢渠道與物流。"
       },
       "sea": {
-        "title": "Southeast Asia Sourcing",
-        "desc": "Vietnam and Thailand sourcing context, risks and audit considerations."
+        "title": "東南亞採購",
+        "desc": "越南的採購背景、風險與驗廠注意事項。"
       },
       "compliance": {
-        "title": "Compliance",
-        "desc": "Social compliance, product compliance and what each standard actually covers."
+        "title": "合規",
+        "desc": "社會責任合規、產品合規，以及每個標準實際覆蓋什麼。"
       },
       "tools": {
-        "title": "Tools",
-        "desc": "The free calculators, checklists and scorecards."
+        "title": "工具",
+        "desc": "免費的計算器、檢查表和評分卡。"
       }
     },
-    "metaTitle": "Supplier Intelligence Resources",
-    "metaDesc": "Guides and tools on supplier verification, factory audit, supplier risk, China and Southeast Asia sourcing, and compliance.",
-    "storiesTitle": "Case studies and field notes",
-    "storiesLead": "How the checks work in practice, shown with de-identified examples."
+    "metaTitle": "供應商情報資源中心",
+    "metaDesc": "關於供應商核查、工廠驗廠、供應商風險、中國與東南亞採購及合規的指南與工具。",
+    "storiesTitle": "案例與現場記錄",
+    "storiesLead": "用脫敏示例說明各項檢查在實際場景中如何開展。"
   },
   "verification": {
     "levelLabel": "核實等級",
@@ -1792,21 +1702,21 @@
       "工廠已核驗",
       "工廠已驗廠"
     ],
-    "lastVerified": "Last verified",
-    "verifiedBy": "Verified by",
-    "scope": "Verification scope",
-    "whatVerified": "What was verified",
-    "whatNotVerified": "What was not verified",
-    "evidence": "Evidence reviewed",
-    "expiry": "Expires",
-    "noRecord": "No verification record yet.",
-    "notIndependentlyVerified": "Not independently verified",
-    "noRecentAudit": "No recent third-party audit found",
+    "lastVerified": "最近核驗",
+    "verifiedBy": "核驗方",
+    "scope": "核驗範圍",
+    "whatVerified": "已核驗內容",
+    "whatNotVerified": "未核驗內容",
+    "evidence": "已審閱證據",
+    "expiry": "有效期至",
+    "noRecord": "暫無核驗記錄。",
+    "notIndependentlyVerified": "未經獨立核驗",
+    "noRecentAudit": "未找到近期第三方稽核記錄",
     "notCovered": [
-      "Financial statements",
-      "Product performance in use",
-      "Current production utilisation",
-      "Subcontractors that were not disclosed to us"
+      "財務報表",
+      "產品在實際使用中的表現",
+      "當前產能利用率",
+      "未向我們披露的外協工廠"
     ]
   },
   "evidence": {
@@ -1825,68 +1735,68 @@
     "statusNote": "「文件已提供」表示供應商把材料交給了我們；「證據已審閱」表示我們對照來源核對過。"
   },
   "supplierProfile": {
-    "trustSummary": "Trust summary",
-    "verificationLevel": "Verification level",
-    "lastVerified": "Last verified",
-    "riskScore": "Risk score",
-    "verificationStatus": "Verification status",
-    "evidenceSummary": "Evidence summary",
+    "trustSummary": "可信度摘要",
+    "verificationLevel": "核驗等級",
+    "lastVerified": "最近核驗",
+    "riskScore": "風險分數",
+    "verificationStatus": "核驗狀態",
+    "evidenceSummary": "證據摘要",
     "auditHistory": "Audit history",
-    "notCoveredTitle": "Not covered",
-    "notCoveredLead": "Checks outside the current verification scope. We list them so you know what has not been looked at.",
-    "whatVerifiedTitle": "What we verified",
-    "whatVerifiedLead": "Each line reflects a recorded verification event. Where we have no record, we say so.",
-    "viewProfile": "View profile",
-    "claimTitle": "Is this your company?",
-    "claimLead": "Claim the profile, keep the record accurate and let buyers see your verification status.",
-    "claimCta": "Claim this profile",
-    "notSatisfiedTitle": "Not satisfied with this supplier?",
-    "notSatisfiedLead": "Post an RFQ and we will look for alternatives we can verify before you commit.",
-    "notSatisfiedCta": "Post an RFQ",
-    "reverifyCta": "Request independent re-verification",
-    "manufacturer": "Manufacturer",
-    "tradingCompany": "Trading company",
-    "established": "Established {year}",
-    "employees": "Employees",
-    "exportMarkets": "Export markets",
-    "mainProducts": "Main products",
-    "inspections": "{n} inspections",
-    "noAudit": "No audit on record.",
-    "featuredNote": "Featured supplier. This is not a marketplace listing and we are not a party to any transaction.",
-    "backToDirectory": "All suppliers",
-    "overviewTitle": "Company overview",
-    "capabilitiesTitle": "Capabilities",
-    "capabilitiesLead": "Tags are marked as evidence reviewed only where we have checked the underlying document. Unchecked tags reflect what the supplier told us.",
-    "capabilitiesEmpty": "No capability tags recorded for this supplier yet.",
-    "productsTitle": "Main products",
-    "evidenceAvailableTitle": "Evidence on record",
-    "evidenceEmpty": "No evidence record yet. Request a verification and we will build one.",
-    "noCertifications": "No certifications on record.",
-    "employeesLabel": "Employees",
-    "exportMarketsLabel": "Export markets",
-    "inspectionHistoryLabel": "Inspection history",
-    "requestAudit": "Request a factory audit",
-    "requestQuote": "Request a quote",
-    "scopeTitle": "Verification scope",
-    "lastUpdated": "Last updated",
-    "selfReported": "Self-reported",
-    "auditStatusLabel": "Audit status",
-    "businessTypeLabel": "Business type",
+    "notCoveredTitle": "未覆蓋範圍",
+    "notCoveredLead": "當前核驗範圍之外的檢查項。列出來，讓你知道哪些還沒看過。",
+    "whatVerifiedTitle": "我們核驗了什麼",
+    "whatVerifiedLead": "每一行都對應一條記錄在案的核驗事件。沒有記錄的，我們就說沒有。",
+    "viewProfile": "檢視檔案",
+    "claimTitle": "這家公司是你的嗎？",
+    "claimLead": "認領檔案、保持記錄準確，讓買家看到你的核驗狀態。",
+    "claimCta": "認領這家企業檔案",
+    "notSatisfiedTitle": "對這家供應商不滿意？",
+    "notSatisfiedLead": "釋出 RFQ，我們去找可以核驗的替代供應商，你再決定。",
+    "notSatisfiedCta": "釋出 RFQ",
+    "reverifyCta": "申請獨立複核",
+    "manufacturer": "生產型工廠",
+    "tradingCompany": "貿易公司",
+    "established": "{year} 年成立",
+    "employees": "員工人數",
+    "exportMarkets": "出口市場",
+    "mainProducts": "主要產品",
+    "inspections": "{n} 次驗貨",
+    "noAudit": "暫無驗廠記錄。",
+    "featuredNote": "精選供應商。這不是交易市場掛牌，我們也不是任何交易的當事方。",
+    "backToDirectory": "返回供應商目錄",
+    "overviewTitle": "公司概況",
+    "capabilitiesTitle": "能力標籤",
+    "capabilitiesLead": "只有在我們核對過底層檔案之後，標籤才會標註為「證據已審閱」。未核對的標籤反映的是供應商自述。",
+    "capabilitiesEmpty": "該供應商暫無能力標籤記錄。",
+    "productsTitle": "主要產品",
+    "evidenceAvailableTitle": "在檔證據",
+    "evidenceEmpty": "暫無證據記錄。申請核驗後我們會建立記錄。",
+    "noCertifications": "暫無認證記錄。",
+    "employeesLabel": "員工人數",
+    "exportMarketsLabel": "出口市場",
+    "inspectionHistoryLabel": "驗貨記錄",
+    "requestAudit": "申請工廠驗廠",
+    "requestQuote": "申請報價",
+    "scopeTitle": "核驗範圍",
+    "lastUpdated": "最後更新",
+    "selfReported": "供應商自述",
+    "auditStatusLabel": "驗廠狀態",
+    "businessTypeLabel": "企業型別",
     "verifiedByTitle": "Verification by FactoryAuditB2B",
-    "verifiedByLead": "This is what our team checked. It is separate from what the supplier told us, and both are labelled.",
-    "provenanceLead": "Each line is labelled by who stands behind it: what the supplier provided, what we reviewed, what we independently verified, and what was confirmed on site.",
-    "provProvided": "Supplier provided",
-    "provReviewed": "Document reviewed",
-    "provIndependent": "Independently verified",
-    "provOnsite": "On-site verified",
-    "provNote": "\"Supplier provided\" means the supplier gave it to us and we have not checked it. \"Independently verified\" means we checked it against its source.",
-    "neverClaimedTitle": "What we never claim",
-    "neverClaimed": "We do not describe a supplier as verified unless a matching verification event and evidence exist. We do not certify suppliers ourselves.",
-    "scoreDirection": "Higher score means lower risk.",
-    "lastChecked": "Last checked",
-    "noCheckRecord": "No check on record",
-    "recVerified": "Evidence on record covers the items listed above. Re-check the scope against your order before releasing a deposit, and refresh the record if the last check is more than 12 months old.",
-    "recUnverified": "Verify the factory address and request recent quality and audit records before placing a large order or releasing a deposit.",
+    "verifiedByLead": "以下是我們團隊實際核查過的內容。它與供應商自述分開列出，兩者都有標註。",
+    "provenanceLead": "每一行都標註了它由誰負責：供應商提供的、我們審閱過的、我們獨立核驗過的，以及現場確認過的。",
+    "provProvided": "供應商提供",
+    "provReviewed": "檔案已審閱",
+    "provIndependent": "已獨立核驗",
+    "provOnsite": "現場已核驗",
+    "provNote": "「供應商提供」表示對方把材料交給了我們，我們尚未核對。「已獨立核驗」表示我們對著來源核對過。",
+    "neverClaimedTitle": "我們絕不聲稱的內容",
+    "neverClaimed": "沒有對應的核驗事件與證據，我們不會把供應商標為已核驗。我們也不自行向供應商發證。",
+    "scoreDirection": "分數越高，風險越低。",
+    "lastChecked": "最近核驗",
+    "noCheckRecord": "暫無核驗記錄",
+    "recVerified": "上述條目已有記錄可查。付定金前請對照訂單複核核驗範圍；若最近一次核驗已超過 12 個月，建議重新核驗。",
+    "recUnverified": "下大單或付定金前，先核驗工廠地址，並索取近期的質量與稽核記錄。",
     "metaTitle": "供應商檔案",
     "metaDesc": "供應商公開檔案：風險評分、核驗狀態、產品與能力資訊。",
     "directoryBreadcrumb": "供應商目錄",
@@ -1896,82 +1806,82 @@
     "freeLockLead": "註冊免費帳號，查看成立年份、員工人數、出口市場與認證清單。",
     "freeLockCta": "建立免費帳號",
     "paidLockTitle": "會員查看證據與風險明細",
-    "paidLockLead": "Founding Buyer 會員（$49/年）可查看證據記錄、風險明細、稽核歷史與驗貨資料。",
+    "paidLockLead": "Founding Buyer 會員（$99/年）可查看證據記錄、風險明細、稽核歷史與驗貨資料。",
     "paidLockCta": "查看會員方案",
     "paidLockNote": "風險評分公開可見；證據與核驗明細為會員內容。"
   },
   "reportPreview": {
-    "badge": "Free preview",
-    "title": "Supplier Due Diligence Report",
-    "lead": "A structured review of supplier information, available evidence, risk factors and verification status.",
-    "execTitle": "Executive summary",
-    "verificationTitle": "Verification",
-    "keyRisksTitle": "Key risks",
-    "recommendationTitle": "Recommendation",
-    "riskLevel": "Risk level",
-    "score": "Score",
-    "unlockTitle": "Get the full due diligence report",
-    "unlockLead": "The full report covers company records, evidence review, risk analysis and the recommended next step. Original third-party documents stay restricted.",
-    "unlockCta": "View report options",
-    "methodologyLink": "View methodology",
-    "methodologyTitle": "How We Assess Suppliers",
-    "methodologyLead": "Risk scores come from a fixed rules engine with published weights. The report shows which inputs moved the number.",
+    "badge": "免費預覽",
+    "title": "供應商盡職調查報告",
+    "lead": "對供應商資訊、現有證據、風險因素與核驗狀態的結構化審閱。",
+    "execTitle": "摘要",
+    "verificationTitle": "核驗情況",
+    "keyRisksTitle": "關鍵風險",
+    "recommendationTitle": "建議",
+    "riskLevel": "風險等級",
+    "score": "分數",
+    "unlockTitle": "獲取完整盡職調查報告",
+    "unlockLead": "完整報告覆蓋企業記錄、證據審閱、風險分析與建議的下一步。第三方原始檔案保持受限。",
+    "unlockCta": "檢視報告方案",
+    "methodologyLink": "檢視方法說明",
+    "methodologyTitle": "我們如何評估供應商",
+    "methodologyLead": "風險分數來自權重公開的規則引擎。報告會顯示是哪些輸入項改變了分數。",
     "options": {
       "basic": {
-        "name": "Basic report",
+        "name": "基礎報告",
         "price": "$99",
         "items": [
-          "Supplier overview",
-          "Risk score with dimension breakdown",
-          "Verification status",
+          "供應商概況",
+          "含維度拆解的風險分數",
+          "核驗狀態",
           "Resumen de evidencia",
           "Principales factores de riesgo",
-          "Recommended actions",
+          "建議行動",
           "PDF"
         ]
       },
       "professional": {
-        "name": "Professional due diligence",
+        "name": "專業盡職調查",
         "price": "$129",
         "items": [
           "Todo en el informe básico",
           "Revisión detallada de la evidencia",
-          "Additional document checks",
+          "補充檔案核查",
           "按買家優先級定製的風險分析",
-          "Verification notes",
+          "核驗記錄",
           "PDF"
         ]
       },
       "independent": {
-        "name": "Independent verification",
-        "price": "Custom quote",
+        "name": "獨立核驗",
+        "price": "按專案報價",
         "items": [
-          "Business identity verification",
-          "Factory address verification",
-          "Document verification",
-          "On-site verification where required"
+          "企業身份核驗",
+          "工廠地址核驗",
+          "檔案核驗",
+          "必要時安排現場核驗"
         ]
       }
     },
-    "auditUpsellTitle": "Need the factory checked on site?",
-    "auditUpsellLead": "The report tells you what is missing. Our team can run an independent verification or a full factory audit.",
-    "auditUpsellCta": "Request an audit"
+    "auditUpsellTitle": "需要到現場核查這家工廠？",
+    "auditUpsellLead": "報告告訴你缺什麼。我們的團隊可以做獨立核驗或完整驗廠。",
+    "auditUpsellCta": "申請驗廠"
   },
   "claim": {
-    "h1": "Get Verified. Get Discovered. Get More Buyer Opportunities.",
-    "lead": "Buyers shortlist suppliers they can check. A claimed profile with verified evidence gets looked at first.",
-    "whyTitle": "Why claim your profile?",
-    "whyLead": "Help buyers understand your capabilities and verification status before they ask for a quote.",
+    "h1": "透過核驗。被看見。拿到更多買家機會。",
+    "lead": "買家只會把能核查的供應商放進短名單。帶已核驗證據的認領檔案會被優先看到。",
+    "whyTitle": "為什麼要認領檔案？",
+    "whyLead": "讓買家在詢價之前就瞭解你的產能與核驗狀態。",
     "benefits": [
-      "Keep your company information accurate",
-      "Add products, certifications and capability details",
-      "Show your verification level publicly",
+      "保持公司資訊準確",
+      "新增產品、認證與產能資訊",
+      "公開展示你的核驗等級",
       "接收買家詢價與 RFQ 機會"
     ],
-    "tiersTitle": "What you can do",
+    "tiersTitle": "你可以做什麼",
     "free": {
-      "name": "Free",
-      "cta": "Claim your profile",
+      "name": "免費",
+      "cta": "認領你的檔案",
       "items": [
         "更新公司資訊",
         "添加產品",
@@ -1980,22 +1890,22 @@
       ]
     },
     "verified": {
-      "name": "Verified",
-      "cta": "Apply for verification",
+      "name": "已核驗",
+      "cta": "申請核驗",
       "items": [
-        "Verification level on profile",
-        "Audit status and certifications shown to buyers",
+        "檔案展示核驗等級",
+        "向買家展示驗廠狀態與認證",
         "接收買家詢價",
         "產能標籤"
       ]
     },
     "premium": {
-      "name": "Premium",
-      "cta": "Talk to us",
+      "name": "優選",
+      "cta": "聯絡我們",
       "items": [
-        "Priority placement in search",
-        "Featured on relevant industry pages",
-        "Buyer introductions",
+        "搜尋優先展示",
+        "在相關行業頁面推薦",
+        "買家引薦",
         "Visibilidad del producto"
       ]
     },
@@ -2037,24 +1947,24 @@
     }
   },
   "consent": {
-    "title": "How your information is used",
+    "title": "你的資訊會被如何使用",
     "body": "Information submitted by suppliers is used to create and maintain their FactoryAuditB2B supplier profile and support buyer due diligence.",
-    "privacy": "We do not publicly disclose confidential documents without authorization.",
+    "privacy": "未經授權，我們不會公開披露保密檔案。",
     "authorize": "I authorize FactoryAuditB2B to use the information and documents I provide for supplier verification and buyer due diligence, subject to the platform's privacy and document-sharing rules.",
-    "prefsTitle": "Information sharing preferences",
+    "prefsTitle": "資訊共享偏好",
     "public": {
-      "title": "Public",
-      "lead": "Visible to everyone.",
+      "title": "公開",
+      "lead": "所有人可見。",
       "items": [
         "公司名稱",
-        "Location",
+        "所在地",
         "Productos",
-        "Verification status"
+        "核驗狀態"
       ]
     },
     "buyerView": {
-      "title": "Buyer view",
-      "lead": "Visible to verified buyers.",
+      "title": "買家可見",
+      "lead": "已驗證買家可見。",
       "items": [
         "Evidencia seleccionada",
         "Detalles del certificado",
@@ -2062,62 +1972,62 @@
       ]
     },
     "restricted": {
-      "title": "Restricted",
-      "lead": "Only with your explicit authorization.",
+      "title": "受限",
+      "lead": "僅在你的明確授權下可見。",
       "items": [
-        "Original audit reports",
+        "原始驗廠報告",
         "Documentos confidenciales",
         "Fotos internas del PFDC."
       ]
     },
     "private": {
-      "title": "Private",
-      "lead": "Used internally to maintain your verification record.",
+      "title": "私密",
+      "lead": "僅內部用於維護你的核驗記錄。",
       "items": [
         "Documentos fuente no compartidos",
-        "Verification working notes"
+        "核驗工作記錄"
       ]
     },
-    "thirdPartyNote": "Third-party audit reports from SGS, Intertek, Bureau Veritas, TÜV and similar bodies may carry licence or confidentiality restrictions. We show them as reviewed, and we do not redistribute the original document without the appropriate rights."
+    "thirdPartyNote": "SGS、Intertek、必維、TÜV 等機構出具的第三方報告可能存在許可或保密限制。我們將其標註為「已審閱」，在未取得相應權利前不會轉發原始檔案。"
   },
   "methodology": {
-    "badge": "Methodology",
-    "h1": "How Our Supplier Risk Assessment Works",
-    "lead": "Risk scores are calculated by a deterministic rules engine with published weights. The same inputs always produce the same score. Language models are used only to explain a result in plain language, and they cannot change the number.",
-    "quickAnswer": "We score a supplier across six weighted dimensions: company, quality, compliance, production, supply chain and documentation. Each answer you give maps to one dimension, contributes a weighted risk value, and rolls up into an overall figure out of 100, where higher means more risk. Missing evidence raises the score rather than being treated as neutral. The weights shown below are read directly from the scoring model, not typed by hand.",
-    "frameworkTitle": "Scoring framework",
-    "frameworkBody": "Each question belongs to one dimension. Within a dimension, answers carry a risk value between 0 and 100. The dimension score is the weighted mean of its answered questions, and the overall score is the weighted mean of the dimensions below.",
-    "weightsTitle": "Risk dimensions and weights",
-    "weightsLead": "Weights are configurable in our admin and shown here so you can see what actually moves the number.",
-    "weightsFallback": "Dimension weights are read from the risk model in our database and shown here when available.",
-    "dimensionTitle": "Dimension",
-    "weightTitle": "Weight",
-    "evidenceTitle": "Evidence",
-    "evidenceBody": "The score is only as good as the evidence behind it. Where you tell us you do not know something, we treat it as an open gap and score it accordingly. A supplier can lower its score by producing documents, not by arguing with the model.",
-    "limitationsTitle": "Limitations",
-    "limitationsLead": "What this score does not tell you.",
+    "badge": "方法說明",
+    "h1": "我們的供應商風險評估如何運作",
+    "lead": "風險分數由權重公開的規則引擎計算。相同輸入永遠得到相同分數。語言模型只負責把結果解釋成人話，它無法改變數字。",
+    "quickAnswer": "我們從八個加權維度給供應商打分：公司、質量、合規、生產、供應鏈、文件、認證、數位足跡。你的每個答案歸入其中一個維度，按權重計分，再彙總成 100 分制的總分，分數越高代表風險越低。證據缺失會拉低分數，而不是按中性處理。下面顯示的權重直接讀取自評分模型，不是手工錄入的。",
+    "frameworkTitle": "評分框架",
+    "frameworkBody": "每個問題歸屬一個維度。維度內每個答案的風險取值在 0 到 100 之間。維度得分是已作答問題的加權均值，總分是下面各維度的加權均值。",
+    "weightsTitle": "風險維度與權重",
+    "weightsLead": "權重在後臺可配置，並在此公開，讓你看清楚到底是什麼在影響數字。",
+    "weightsFallback": "維度權重從我們資料庫中的風險模型讀取，有資料時在此顯示。",
+    "dimensionTitle": "維度",
+    "weightTitle": "權重",
+    "evidenceTitle": "證據",
+    "evidenceBody": "分數只和它背後的證據一樣可靠。當你表示某項不知道時，我們把它記為待補缺口並據此計分。供應商可以用提交檔案的方式降低分數，而不是靠爭辯。",
+    "limitationsTitle": "侷限性",
+    "limitationsLead": "這個分數不能告訴你什麼。",
     "limitations": [
-      "It is not a financial credit assessment. We do not review financial statements unless you ask us to.",
-      "It does not confirm that equipment exists or that a quality system runs day to day. That needs a site visit or an audit.",
-      "It is a point-in-time assessment. A score is valid as of the date it was produced.",
-      "It cannot detect a supplier that deliberately provides false documents, although document cross-checks reduce the gap.",
-      "Weights are our judgement, not an industry standard. We publish them so you can disagree with us in specific terms."
+      "它不是財務信用評估。除非你另行要求，我們不會審閱財務報表。",
+      "它不能確認裝置是否存在、質量體系是否日常運轉。這需要現場走訪或驗廠。",
+      "它是一個時點評估。分數僅在產生當日有效。",
+      "對於蓄意提供虛假檔案的供應商，它無法識別，儘管檔案交叉核對可以縮小差距。",
+      "權重是我們的判斷，不是行業標準。公開它是為了讓你能具體地提出不同意見。"
     ],
-    "updateTitle": "Update policy",
-    "updateBody": "We review weights when we make a material change to the model, and we record the version in use when a score is produced. Methodology changes are listed here with their date.",
-    "changelogTitle": "Changelog",
-    "versionTitle": "Current version",
-    "aiTitle": "Where AI is used, and where it is not",
-    "aiBody": "Scores come from the rules engine alone. A language model may summarize or explain a result in plain language, and it may draft the recommended actions. It does not decide the score, and it cannot see the weights as a variable it can adjust.",
-    "ctaTitle": "Want the checks done rather than scored?",
-    "ctaLead": "Our verification service confirms registration, site, capability, quality and compliance, and gives you a written report before you pay anything.",
-    "ctaPrimary": "Supplier verification service",
-    "ctaSecondary": "Score a supplier free",
-    "metaTitle": "How Our Supplier Risk Assessment Works",
-    "metaDesc": "The scoring framework, risk dimensions, weights, evidence rules, limitations and update policy behind our supplier risk scores. Calculated by a deterministic rules engine, not by AI.",
-    "scoredInputsLabel": "Inputs",
-    "scoredTableNote": "{n} scored inputs · {d} dimensions · total weight {w}.",
-    "weightsSumLine": "— six dimensions, {n} inputs, weights summing to {w}.",
+    "updateTitle": "更新規則",
+    "updateBody": "當模型發生實質性變更時我們會複核權重，並在產生分數時記錄所用版本。方法變更會在此連同日期列出。",
+    "changelogTitle": "變更記錄",
+    "versionTitle": "當前版本",
+    "aiTitle": "AI 用在哪裡，不用在哪裡",
+    "aiBody": "分數完全由規則引擎決定。語言模型可以對結果做通俗概括或解釋，也可以草擬建議動作。它不決定分數，也無法把權重當作可調變數。",
+    "ctaTitle": "想要的是核查結果而不只是一個分數？",
+    "ctaLead": "我們的核查服務會確認登記資訊、廠區、產能、質量與合規，並在你付款之前給出書面報告。",
+    "ctaPrimary": "供應商核查服務",
+    "ctaSecondary": "免費給供應商打分",
+    "metaTitle": "我們的供應商風險評估如何運作",
+    "metaDesc": "供應商風險分數背後的評分框架、風險維度、權重、證據規則、侷限性與更新規則。由確定性規則引擎計算，而非 AI。",
+    "scoredInputsLabel": "已作答項",
+    "scoredTableNote": "{n} 項已作答 · {d} 個維度 · 總權重 {w}。",
+    "weightsSumLine": "— 八個維度，{n} 項輸入，權重和 {w}。",
     "howWeVerifyTitle": "我們如何核驗：六個步驟",
     "howWeVerifyLead": "核驗不是截圖或摘要，而是一套有記錄的流程，每一步都有書面產出。",
     "howWeVerifySteps": [
@@ -2176,7 +2086,7 @@
     "operatesLead": "FactoryAuditB2B 由一家在中國註冊的公司營運，為全球採購商提供供應商核查、工廠驗廠與採購支援。",
     "operatesNotConfigured": "FactoryAuditB2B 由一家註冊公司營運。法律實體名稱配置完成後我們會立即公開。",
     "scopeTitle": "業務範圍",
-    "scopeBody": "為從中國及東南亞採購的買家提供供應商核查、工廠驗廠、驗貨與採購支援。第一階段覆蓋中國、越南、泰國。",
+    "scopeBody": "為從中國及東南亞採購的買家提供供應商查核、工廠驗廠、驗貨與採購支援。第一階段覆蓋中國、越南、泰國、馬來西亞、菲律賓。",
     "verifyTitle": "我們核驗什麼",
     "verifyLead": "以下是核查服務覆蓋的檢查項。",
     "verify": [
@@ -2260,128 +2170,128 @@
   "inspection": {
     "badge": "產品驗貨",
     "h1": "產品驗貨",
-    "lead": "Order-specific quality checks at the production stage that matters, carried out by an independent inspector and reported in writing. Every request is reviewed individually and quoted per inspection.",
-    "metaTitle": "Product Inspection — PPI, DUPRO, PSI and Container Loading",
-    "metaDesc": "Pre-production, during-production, pre-shipment and container loading inspection for buyers sourcing from China, Vietnam, Thailand, Malaysia and the Philippines. Quoted per inspection.",
-    "quickAnswerTitle": "Quick answer",
-    "quickAnswer": "A product inspection checks a specific order at a specific stage: before production starts, while it is running, before shipment, or during container loading. The inspector works to your requirements or an AQL sampling plan, reports findings with photos, and gives a clear recommendation. It is quoted per inspection and priced by type, scope, location and duration.",
-    "honestNote": "Inspection requests are reviewed individually. We respond with a scoped quote based on inspection type, location, duration and qualified inspector availability.",
-    "howTitle": "How it works",
-    "howLead": "From request to report, without a platform to learn.",
+    "lead": "在生產的關鍵節點對具體訂單做質量檢驗，由獨立驗貨員執行並出具書面報告。每一單都單獨評估、按單報價。",
+    "metaTitle": "產品驗貨 — 生產前 / 生產中 / 出貨前 / 裝櫃監裝",
+    "metaDesc": "為中國、越南、泰國、馬來西亞、菲律賓採購買家提供的生產前、生產中、出貨前與裝櫃監裝驗貨服務。按單報價。",
+    "quickAnswerTitle": "快速回答",
+    "quickAnswer": "產品驗貨在特定節點檢查具體訂單：生產開始前、生產進行中、出貨前，或裝櫃期間。驗貨員按你的要求或 AQL 抽樣計劃執行，附照片報告發現，並給出明確結論。按單報價，價格取決於型別、範圍、地點與時長。",
+    "honestNote": "驗貨請求逐單評估。我們會根據驗貨型別、範圍、地點與合適的驗貨員資源給出報價。",
+    "howTitle": "流程",
+    "howLead": "從請求到報告，無需學習任何平臺。",
     "how": [
       {
-        "title": "Send the request",
-        "body": "Tell us the factory location, product, order quantity, preferred date and what to check."
+        "title": "提交請求",
+        "body": "告訴我們工廠位置、產品、訂單數量、期望日期與檢查要求。"
       },
       {
-        "title": "We quote",
-        "body": "A scoped quote based on inspection type, scope, location, duration and inspector availability. No payment until you confirm."
+        "title": "我們報價",
+        "body": "按驗貨型別、範圍、地點、時長與驗貨員資源給出報價。確認前不收費。"
       },
       {
-        "title": "An inspector goes on site",
-        "body": "The inspector is independent and matched to the location and product category. You can watch live if you want."
+        "title": "驗貨員到現場",
+        "body": "驗貨員保持獨立，按地點與產品品類匹配合適人選。需要時可實時參與。"
       },
       {
-        "title": "You get the report",
-        "body": "Findings with photos, defect summary, AQL result and a clear recommendation, usually within 24 hours of the visit."
+        "title": "收到報告",
+        "body": "發現項附照片、缺陷摘要、AQL 結果與明確結論，通常在走訪後 24 小時內交付。"
       }
     ],
-    "nodesTitle": "Inspection stages",
-    "nodesLead": "Each order is different. Pick the stage that fits your production calendar.",
-    "when": "When",
-    "what": "What is checked",
-    "why": "Why it is worth it",
+    "nodesTitle": "驗貨節點",
+    "nodesLead": "每張訂單不同。選擇與生產排期匹配的節點。",
+    "when": "什麼時候做",
+    "what": "檢查什麼",
+    "why": "為什麼值得做",
     "nodes": [
       {
         "key": "PPI",
-        "name": "Pre-Production Inspection",
-        "when": "Before production starts, on raw materials and the first sample.",
-        "what": "Raw materials, equipment readiness, production plan, BOM, packaging materials, colours, dimensions, labels, samples, process requirements.",
-        "why": "Catches the wrong thing before it is mass-produced. The cheapest defect is the one that never gets made."
+        "name": "生產前驗貨",
+        "when": "生產開始前，針對原材料與首件樣品。",
+        "what": "原材料、裝置就緒、生產計劃、BOM、包裝材料、顏色、尺寸、標籤、樣品、工藝要求。",
+        "why": "在批次生產之前攔截錯誤。最便宜的缺陷是從未生產出來的那一個。"
       },
       {
         "key": "DUPRO",
-        "name": "During Production Inspection",
-        "when": "While production is running, typically at 20–80% completion.",
-        "what": "Product quality, dimensions, appearance, workmanship, function, quantity, defect rate, production progress, packaging, labels.",
-        "why": "Problems found mid-run can still be fixed in time. Waiting for final inspection risks a whole batch you cannot repair."
+        "name": "生產中驗貨",
+        "when": "生產進行中，通常在完成 20%–80% 時介入。",
+        "what": "產品質量、尺寸、外觀、工藝、功能、數量、不良率、生產進度、包裝、標籤。",
+        "why": "中途發現的問題還來得及補救。等到終檢才發現，一整批可能都無法返工。"
       },
       {
         "key": "PSI",
-        "name": "Pre-Shipment Inspection",
-        "when": "After production, before the goods leave the factory.",
-        "what": "Quantity, appearance, dimensions, function, packaging, labels, barcodes, carton contents, specification, AQL sampling, defect classification, photos.",
-        "why": "The final quality gate before balance payment. Most buyers start with PSI because it is the moment money is about to move."
+        "name": "出貨前驗貨",
+        "when": "生產完成後、貨物離開工廠前。",
+        "what": "數量、外觀、尺寸、功能、包裝、標籤、條碼、裝箱內容、規格、AQL 抽檢、缺陷分級、照片。",
+        "why": "尾款支付前的最後一道質量關。多數買家從 PSI 開始，因為這是錢即將轉移的時刻。"
       },
       {
         "key": "CLS",
-        "name": "Container Loading Supervision",
-        "when": "During container loading at the factory or warehouse.",
-        "what": "Container condition, container number, seal, product quantity, carton count, SKU, packaging, labels, loading process, mixed or wrong goods, short loading, photos, video.",
-        "why": "Confirms that what you inspected is what actually gets loaded. Guards against substitution, short loading and mixed shipments."
+        "name": "裝櫃監裝",
+        "when": "在工廠或倉庫裝櫃期間。",
+        "what": "集裝箱狀況、箱號、封條、產品數量、紙箱數量、SKU、包裝、標籤、裝櫃過程、混貨或錯裝、短裝、照片、影片。",
+        "why": "確認驗過的貨確實被裝進集裝箱。防止調包、短裝與混裝。"
       }
     ],
-    "reportTitle": "What you receive",
-    "reportLead": "A written report you can act on, not a phone call.",
+    "reportTitle": "你會收到什麼",
+    "reportLead": "一份可以據此行動的書面報告，而不是一通電話。",
     "report": [
-      "Findings with photographs",
-      "Defect summary by severity (critical / major / minor)",
-      "AQL sampling result where applicable",
-      "Quantity and packaging check",
-      "Clear recommendation: PASS, FAIL or REWORK"
+      "發現項附照片",
+      "按嚴重度分級的缺陷摘要（嚴重 / 主要 / 次要）",
+      "適用的 AQL 抽樣結果",
+      "數量與包裝核查",
+      "明確結論：PASS / FAIL / REWORK"
     ],
-    "pricingTitle": "Pricing",
-    "pricingLead": "Quoted per inspection. Cost depends on inspection type, scope, location, duration and inspector availability.",
-    "pricingNote": "We do not publish fixed packages yet. Once real orders give us honest cost data per region, product category and stage, we will offer standard options.",
-    "pricingCta": "Request an inspection quote",
-    "faqTitle": "Frequently asked questions",
+    "pricingTitle": "定價",
+    "pricingLead": "按單報價。價格取決於驗貨型別、範圍、地點、時長與驗貨員資源。",
+    "pricingNote": "在真實訂單積累出各地區、各品類、各節點的誠實成本資料之前，我們不釋出固定套餐。",
+    "pricingCta": "申請驗貨報價",
+    "faqTitle": "常見問題",
     "faq": [
       {
-        "q": "What is the difference between DUPRO and PSI?",
-        "a": "DUPRO (during production) is done while the goods are being made, usually at 20–80% completion, so problems can be fixed before the batch finishes. PSI (pre-shipment) is done after production, before the goods leave the factory, and is the final quality gate before balance payment. Many buyers do DUPRO for first orders and PSI for repeat orders; some do both."
+        "q": "DUPRO 和 PSI 有什麼區別？",
+        "a": "DUPRO（生產中）在貨物生產期間進行，通常在完成 20%–80% 時，問題可以在整批完成前修復。PSI（出貨前）在生產完成後、貨物離廠前進行，是尾款支付前的最後質量關。很多買家首單做 DUPRO、返單做 PSI，也有兩者都做的。"
       },
       {
-        "q": "Do you have inspectors in every city?",
-        "a": "We do not publish a map of hundreds of inspectors because that would be a claim we cannot back. We match each order to a qualified independent inspector for the specific location and product category, and we confirm availability before quoting. If we cannot find the right person, we tell you instead of sending someone unsuitable."
+        "q": "每個城市都有驗貨員嗎？",
+        "a": "我們不釋出「幾百個驗貨員」的城市地圖，因為那是我們無法兌現的承諾。每一單我們都為具體地點與產品品類匹配合適的獨立驗貨員，並在報價前確認可用性。找不到合適人選時我們會直說，而不是派不合適的人。"
       },
       {
-        "q": "How much does an inspection cost?",
-        "a": "It depends on inspection type, scope, location, duration and the product. A standard single-site PSI in a major manufacturing hub is typically in the range of USD 200–350 per man-day, plus travel outside hub cities. Send us the factory location and we will quote it precisely."
+        "q": "驗貨多少錢？",
+        "a": "費用取決於檢驗型別、範圍、地點、工期和產品。在主要製造中心做一次標準單站點裝運前檢驗（PSI），通常為每人每天 200–350 美元，中心城市的差旅另計。把工廠地點發給我們，我們會給出準確報價。"
       },
       {
-        "q": "Can you inspect against my own checklist?",
-        "a": "Yes. If you have a buyer checklist or a spec sheet, send it with the request and the inspector will work to it. If you do not, we use a standard AQL-based inspection plan and tell you what we covered."
+        "q": "能按我自己的檢查表驗嗎？",
+        "a": "可以。有買家檢查表或規格書就隨請求發給我們，驗貨員按它執行。沒有就用標準的 AQL 檢查計劃，並說明覆蓋了哪些內容。"
       },
       {
-        "q": "How soon can an inspection be scheduled?",
-        "a": "In major hubs (Shenzhen, Dongguan, Guangzhou, Ningbo, Ho Chi Minh, Bangkok, Penang) we can usually schedule within 2–3 business days. Other locations need more lead time because the right inspector has to travel."
+        "q": "多久能排期？",
+        "a": "主要樞紐（深圳、東莞、廣州、寧波、胡志明、曼谷、檳城）通常 2–3 個工作日內可排期。其他地點需要更長前置時間，因為合適的驗貨員需要差旅。"
       }
     ],
-    "ctaTitle": "Need an inspection scheduled?",
-    "ctaLead": "Send us the factory location, product, order quantity and preferred date. We reply with a scoped quote within one business day.",
-    "ctaPrimary": "Request an inspection quote",
-    "ctaSecondary": "Assess the supplier risk first",
+    "ctaTitle": "需要安排驗貨？",
+    "ctaLead": "把工廠位置、產品、訂單數量與期望日期發給我們。一個工作日內回覆報價。",
+    "ctaPrimary": "申請驗貨報價",
+    "ctaSecondary": "先評估供應商風險",
     "form": {
-      "stageLabel": "Inspection stage",
-      "stageHint": "Pick the stage that matches your production calendar. Not sure? Choose \"Not sure yet\" and we will advise.",
+      "stageLabel": "驗貨節點",
+      "stageHint": "選擇與生產排期匹配的節點。不確定？選「暫不確定」，我們給建議。",
       "stages": [
-        "Pre-Production (PPI)",
-        "During Production (DUPRO)",
-        "Pre-Shipment (PSI)",
-        "Container Loading (CLS)",
-        "Not sure yet"
+        "生產前（PPI）",
+        "生產中（DUPRO）",
+        "出貨前（PSI）",
+        "裝櫃監裝（CLS）",
+        "暫不確定"
       ],
-      "factoryLocation": "Factory location",
-      "factoryLocationHint": "City and country, e.g. Shenzhen, China",
-      "product": "Product",
-      "quantity": "Order quantity",
-      "inspectionDate": "Preferred inspection date",
-      "requirements": "Inspection requirements",
-      "requirementsHint": "Your checklist, spec sheet, or what the inspector should pay attention to",
-      "submit": "Submit inspection request",
-      "submitting": "Submitting...",
-      "success": "Request received. We will reply with a scoped quote within one business day.",
-      "error": "Something went wrong. Please try again, or email us directly.",
+      "factoryLocation": "工廠位置",
+      "factoryLocationHint": "城市與國家，例如：深圳，中國",
+      "product": "產品",
+      "quantity": "訂單數量",
+      "inspectionDate": "期望驗貨日期",
+      "requirements": "驗貨要求",
+      "requirementsHint": "你的檢查表、規格書，或需要驗貨員重點關注的項",
+      "submit": "提交驗貨請求",
+      "submitting": "提交中...",
+      "success": "請求已收到。我們會在一個工作日內回覆報價。",
+      "error": "出錯了，請重試，或直接發郵件給我們。",
       "firstName": "你的姓名",
       "company": "公司",
       "email": "公司電子郵件",
@@ -2562,7 +2472,7 @@
     "preparedFor": "出具給：Sample Buyer Ltd.（示意）",
     "companySection": "1. 公司概覽",
     "companyNameLabel": "公司名稱",
-    "companyName": "深圳市北極星電子有限公司",
+    "companyName": "深圳市XX電子有限公司",
     "countryLabel": "國家",
     "companyCountry": "中國",
     "registeredLabel": "註冊狀態",
@@ -2598,7 +2508,7 @@
       "出口紀錄 — Restricted（第三方文件不轉發）"
     ],
     "recommendSection": "6. 建議",
-    "recommendBody": "Score 76/100, low risk. We recommend a document verification before the first order, and an on-site audit before a repeat order above USD 50,000.",
+    "recommendBody": "評分 76/100，低風險。我們建議在首單前做一次檔案核驗，在超過 5 萬美元的返單前做一次現場驗廠。",
     "ctaTitle": "訂購真實核驗",
     "ctaLead": "為你的真實供應商獲取同等詳細程度的報告。核驗按供應商計價，起價 99 美元，按專案報價。",
     "ctaPrimary": "申請核驗",
@@ -2699,13 +2609,13 @@
       "在出貨前取得續期後的 ISO 9001 證書。"
     ],
     "formTitle": "取得完整範例報告",
-    "formLead": "留下您的信箱，我們會把完整範例報告（PDF）和一頁閱讀指南發送給您。",
+    "formLead": "留下您的信箱，我們會在一個工作日內把完整範例報告和一頁閱讀指南發送給您。",
     "formEmailPlaceholder": "您的公司信箱",
-    "formCta": "發送報告給我",
-    "formPrivacyNote": "我們僅用您的信箱發送範例報告。不發送垃圾郵件，可隨時退訂。",
+    "formCta": "申請完整報告",
+    "formPrivacyNote": "我們用您的信箱發送報告並與您跟進。不發送垃圾郵件，可隨時退訂。",
     "socialTitle": "關注我們，獲取採購洞察",
     "socialNote": "驗廠案例研究與供應商風險解讀。",
-    "formSuccess": "請查收信箱——範例報告即將送達。",
+    "formSuccess": "已收到您的請求。我們會在一個工作日內把完整範例報告發送到您的信箱。",
     "formError": "出錯了，請重試，或直接寄信給我們。",
     "companyTypeLabel": "公司類型"
   },
@@ -2743,110 +2653,110 @@
     "reset": "重置"
   },
   "monitoring": {
-    "metaTitle": "Supplier Monitoring — Scheduled Re-Checks and Risk Change Alerts",
-    "metaDesc": "Keep verified supplier facts current. Scheduled re-checks of registration, site, certificates and public records, with an alert when something changes. Subscription, quoted per supplier per year.",
-    "badge": "Service",
-    "h1": "Supplier Monitoring",
-    "lead": "A verification is a snapshot. Monitoring re-runs the checks on a schedule and tells you when a fact you relied on has changed.",
-    "quickAnswerTitle": "What it is, in one paragraph",
-    "quickAnswer": "We re-check the facts we verified for you, on a cadence you choose, against public registers, scheme databases and the documents on file. When a fact changes or a certificate expires, you get an alert stating what changed, which source confirmed it, and what it means for your order. The evidence policy is the same as a one-off verification: we state what we could confirm and flag what we could not.",
-    "honestNote": "Monitoring lowers the chance of being surprised by a change that public records already show. It does not predict how a supplier will perform, and it cannot see a change that has not been recorded anywhere.",
-    "recheckTitle": "What we re-check",
-    "recheckLead": "Only items that leave a public or documentary trace. We do not re-check anything we cannot source.",
+    "metaTitle": "供應商監控 — 定期複核與風險變更提醒",
+    "metaDesc": "讓已核驗的供應商資訊保持最新。按設定週期複核工商登記、工廠地址、證書與公開記錄，發生變化時發出提醒。按年訂閱，按供應商家數報價。",
+    "badge": "服務",
+    "h1": "供應商監控",
+    "lead": "一次核驗只是一張快照。監控按週期重跑核查項，當你依賴的某個事實發生變化時通知你。",
+    "quickAnswerTitle": "一段話說明它是什麼",
+    "quickAnswer": "我們按你設定的週期，對已核驗的事實重新核查，比對公開登記、認證機構資料庫和存檔檔案。當某項事實發生變化或證書到期，你會收到提醒，寫明變了什麼、依據哪個來源確認、對你的訂單意味著什麼。證據口徑與單次核驗一致：能確認的寫確認，確認不了的明確標註。",
+    "honestNote": "監控能降低「公開記錄裡已經變了、但你不知道」的機率。它不預測供應商的履約表現，也看不到尚未被任何渠道記錄的變化。",
+    "recheckTitle": "複核哪些項",
+    "recheckLead": "只複核留有公開或檔案痕跡的條目。無法取證的條目不做複核。",
     "recheckItems": [
-      "Business registration status: active, revoked, relocated or renamed",
-      "Legal entity name and registered address",
-      "Certificate and audit report validity against the issuing scheme's database",
-      "Expiry dates on the documents we hold",
-      "Public records and adverse reports we can source and cite",
-      "The supplier's own declarations, compared against what we hold"
+      "工商登記狀態：存續、吊銷、遷址或更名",
+      "法人主體名稱與註冊地址",
+      "證書與稽核報告在發證機構資料庫中的有效性",
+      "存檔檔案的到期日",
+      "可溯源、可引用的公開記錄與負面資訊",
+      "供應商自述內容與我們存檔版本的比對"
     ],
-    "cadenceTitle": "How often",
-    "cadenceLead": "You set the cadence when we scope the engagement. Three common starting points:",
+    "cadenceTitle": "多久一次",
+    "cadenceLead": "週期在我們確認服務範圍時由你決定。三個常見起點：",
     "cadenceItems": [
       {
-        "name": "Quarterly",
-        "when": "Four re-checks a year.",
-        "note": "For suppliers carrying your largest volume or your tightest compliance requirement."
+        "name": "每季度",
+        "when": "每年四次複核。",
+        "note": "適用於訂單量最大或合規要求最嚴的供應商。"
       },
       {
-        "name": "Twice a year",
-        "when": "Two re-checks a year.",
-        "note": "The usual starting point for an active supplier."
+        "name": "每半年",
+        "when": "每年兩次複核。",
+        "note": "活躍供應商的常規起點。"
       },
       {
-        "name": "Once a year",
-        "when": "One re-check a year.",
-        "note": "For suppliers you buy from occasionally, or to keep a dormant record current."
+        "name": "每年",
+        "when": "每年一次複核。",
+        "note": "偶爾採購的供應商，或僅為保持檔案不過期。"
       }
     ],
-    "alertTitle": "What triggers an alert",
-    "alertLead": "An alert goes out when a re-check returns something different from what we hold:",
+    "alertTitle": "什麼情況會觸發提醒",
+    "alertLead": "當複核結果與我們存檔的內容不一致時發出提醒：",
     "alertItems": [
-      "Registration status changes",
-      "Legal name or registered address changes",
-      "A certificate or audit report on file expires or is withdrawn",
-      "A new public record or adverse report we can cite",
-      "A scheduled re-check finds no change, and you still get a dated confirmation"
+      "登記狀態發生變化",
+      "法人名稱或註冊地址發生變化",
+      "存檔的證書或稽核報告到期、被撤銷",
+      "出現可引用的新公開記錄或負面資訊",
+      "按時複核未發現變化，你仍會收到帶日期的確認記錄"
     ],
-    "deliverTitle": "What you receive",
-    "deliverLead": "Every re-check produces a dated record, whether or not anything changed.",
+    "deliverTitle": "你會收到什麼",
+    "deliverLead": "無論是否有變化，每次複核都會生成帶日期的記錄。",
     "deliverItems": [
-      "A dated re-check record for each supplier",
-      "An alert naming the fact that changed and the source that confirmed it",
-      "An updated report reflecting the current state of the record",
-      "The same evidence labels as a one-off check: reviewed, provided, restricted"
+      "每家供應商的帶日期複核記錄",
+      "變更提醒，寫明變化的事實與確認來源",
+      "反映當前狀態的更新版報告",
+      "與單次核驗相同的證據標註：已審閱 / 供應商提供 / 受限"
     ],
-    "notCoveredTitle": "What monitoring does not cover",
-    "notCoveredLead": "Monitoring inherits the limits of a verification. It does not extend them.",
-    "pricingTitle": "Pricing",
-    "pricingLead": "Priced as a subscription, quoted per supplier per year, based on cadence and how many suppliers you want covered.",
-    "pricingNote": "No online checkout. Tell us the suppliers and the cadence, and we will quote.",
-    "pricingCta": "Ask for a quote",
-    "faqTitle": "Questions buyers ask",
+    "notCoveredTitle": "監控不覆蓋什麼",
+    "notCoveredLead": "監控繼承核驗本身的邊界，不會擴大它。",
+    "pricingTitle": "價格",
+    "pricingLead": "按年訂閱，按供應商家數報價，取決於複核週期與覆蓋家數。",
+    "pricingNote": "無線上支付。告訴我們供應商清單與週期，我們報價。",
+    "pricingCta": "獲取報價",
+    "faqTitle": "買家常問的問題",
     "faq": [
       {
-        "q": "Is monitoring the same as a factory audit?",
-        "a": "No. An audit is an on-site assessment against a standard. Monitoring re-checks facts that leave a documentary or public trace. They answer different questions, and most buyers want both at different points."
+        "q": "監控等同於驗廠嗎？",
+        "a": "不是。驗廠是到現場按標準做評估；監控是對留有檔案或公開痕跡的事實做複核。兩者回答的問題不同，多數買家在不同階段都需要。"
       },
       {
-        "q": "What if a supplier changes something between re-checks?",
-        "a": "Then the next re-check catches it, and the alert is dated to the day we confirmed it. A scheduled check cannot be continuous, and we do not claim it is."
+        "q": "如果供應商在兩次複核之間變了呢？",
+        "a": "那就在下一次複核時發現，提醒日期以我們確認當天為準。定期核查不可能是連續的，我們也不會這樣宣稱。"
       },
       {
-        "q": "Can I add suppliers later?",
-        "a": "Yes. The subscription is quoted per supplier, so adding one means adjusting the quote rather than starting over."
+        "q": "後面能增加供應商嗎？",
+        "a": "可以。訂閱按供應商家數報價，增加一家是調整報價，不需要重新開始。"
       },
       {
-        "q": "Do you visit the factory as part of monitoring?",
-        "a": "Not by default. Standard monitoring is a desk re-check of registers and documents. An on-site visit can be added at the cadence you choose and is quoted separately."
+        "q": "監控包含到工廠現場嗎？",
+        "a": "預設不包含。標準監控是對登記與檔案的桌面複核。可以按你選擇的週期加現場走訪，單獨報價。"
       },
       {
-        "q": "Can a supplier pay to be monitored?",
-        "a": "No. Monitoring is bought by the buyer. A supplier cannot pay to change what a re-check reports."
+        "q": "供應商可以付費做監控嗎？",
+        "a": "不可以。監控由買方採購，供應商無法付費改變複核結果。"
       }
     ],
-    "ctaTitle": "Set up monitoring",
-    "ctaLead": "Tell us which suppliers you want covered and how often. We will confirm what can be re-checked and quote.",
-    "ctaPrimary": "Request monitoring",
-    "ctaSecondary": "See pricing"
+    "ctaTitle": "開通監控",
+    "ctaLead": "告訴我們要覆蓋哪些供應商、多久複核一次。我們會確認可複核項並報價。",
+    "ctaPrimary": "申請監控",
+    "ctaSecondary": "檢視定價"
   },
   "fieldReports": {
-    "metaTitle": "Field Reports — On-Site Notes from Inspection, Audit and Verification",
-    "h1": "Field Reports",
-    "badge": "Field notes",
-    "lead": "Short notes from inspection, audit and verification work: what was checked on site, what was found, and how the finding was recorded.",
-    "updatedLabel": "Updated",
-    "readMore": "Read the field note",
+    "metaTitle": "現場記錄 —— 來自驗貨、驗廠與核驗現場的筆記",
+    "h1": "現場記錄",
+    "badge": "現場筆記",
+    "lead": "來自驗貨、驗廠與核驗現場的短篇記錄：現場查了什麼、發現了什麼、發現項如何記錄。",
+    "updatedLabel": "更新於",
+    "readMore": "閱讀現場記錄",
     "serviceLabels": {
-      "inspection": "Inspection",
-      "audit": "Factory audit",
-      "verification": "Supplier verification"
+      "inspection": "驗貨",
+      "audit": "驗廠",
+      "verification": "供應商核驗"
     },
-    "ctaTitle": "Want this level of detail on your own order?",
-    "ctaLead": "Tell us the product, the market and what worries you. We will scope the inspection, audit or verification.",
-    "ctaPrimary": "Post an RFQ",
-    "ctaSecondary": "Custom services"
+    "ctaTitle": "想讓自己的訂單也有這種顆粒度？",
+    "ctaLead": "告訴我們產品、市場和你擔心的地方。我們來界定驗貨、驗廠或核驗的範圍。",
+    "ctaPrimary": "釋出 RFQ",
+    "ctaSecondary": "定製服務"
   },
   "caseStudies": {
     "h1": "案例研究",
@@ -2857,7 +2767,9 @@
     "ctaTitle": "遇到類似情況？",
     "ctaDesc": "把你的需求發給我們，我們會為你的產品和市場規劃核實、驗廠或驗貨方案。",
     "ctaRfq": "發布詢價",
-    "ctaCustom": "客製服務"
+    "ctaCustom": "客製服務",
+    "detailCtaTitle": "你的供應商也需要這樣做嗎？",
+    "detailCtaDesc": "把你的需求發給我們，我們會針對你的產品和市場，評估核驗、驗廠或驗貨的具體範圍。"
   },
   "auditScope": {
     "title": "稽核範圍推薦",
@@ -2937,7 +2849,7 @@
     "nextTitle": "下一步",
     "nextLead": "提交後，我們的團隊會在 1 個工作日內人工建立帳號，並透過電子郵件寄送登入資訊。",
     "noCard": "無需信用卡。",
-    "membershipLink": "瞭解 Founding Buyer 會員（$49/年）",
+    "membershipLink": "瞭解 Founding Buyer 會員（$99/年）",
     "formTitle": "註冊",
     "form": {
       "emailLabel": "電子信箱",
@@ -2958,11 +2870,11 @@
   },
   "membership": {
     "badge": "買家會員",
-    "metaTitle": "Founding Buyer 會員 — $49/年",
-    "metaDesc": "Founding Buyer 會員：查看全部供應商檔案、風險明細、證據摘要與工廠資訊。$49/年。",
+    "metaTitle": "Founding Buyer 會員 — $99/年",
+    "metaDesc": "Founding Buyer 會員：查看全部供應商檔案、風險明細、證據摘要與工廠資訊。$99/年。",
     "h1": "Founding Buyer 會員",
     "lead": "為需要深度評估供應商的採購團隊設計。一次訂閱，全年使用全部供應商情報功能。",
-    "planName": "Founding Buyer",
+    "planName": "創始買家",
     "pricePeriod": "年",
     "priceNote": "創始價，日後會上調",
     "cta": "諮詢開通",
@@ -2984,7 +2896,7 @@
     "faq": [
       {
         "q": "會員價格是多少？",
-        "a": "Founding Buyer 會員 $49/年（USD），一次訂閱全年有效。創始價，日後可能上調。"
+        "a": "Founding Buyer 會員 $99/年（USD），一次訂閱全年有效。創始價，日後可能上調。"
       },
       {
         "q": "如何付款？",
@@ -2994,6 +2906,261 @@
         "q": "會員是否保證核驗結果？",
         "a": "不保證。會員只提供檢視權限，不會改變任何供應商的風險評分或核驗狀態。核驗結論不出售。"
       }
+    ]
+  },
+  "toolsUi": {
+    "auditChecklist": {
+      "metaTitle": "工廠驗廠檢查表生成器",
+      "metaDesc": "按行業與驗廠型別生成工廠驗廠檢查表。免費準備工具，不是官方認證。",
+      "h1": "工廠驗廠檢查表生成器",
+      "lead": "按行業和驗廠型別生成一份結構化的檢查表。這是準備與自評工具，不是官方認證。",
+      "industryLabel": "行業",
+      "auditTypeLabel": "驗廠型別",
+      "cta": "生成檢查表",
+      "summary": "共 {n} 項",
+      "categoryLabel": "類別",
+      "evidenceLabel": "所需證據",
+      "riskSuffix": "風險",
+      "riskLow": "低",
+      "riskMedium": "中",
+      "riskHigh": "高",
+      "questions": {
+        "q_biz_license": {
+          "q": "營業執照有效且與註冊地址一致？",
+          "cat": "法律",
+          "ev": "營業執照"
+        },
+        "q_ownership": {
+          "q": "所有權與法定代表人已核驗？",
+          "cat": "法律",
+          "ev": "法人檔案"
+        },
+        "q_qm_org": {
+          "q": "質量手冊與組織架構圖可提供？",
+          "cat": "管理",
+          "ev": "組織架構圖"
+        },
+        "q_capacity_output": {
+          "q": "產能與實際產量匹配？",
+          "cat": "生產",
+          "ev": "產能記錄"
+        },
+        "q_incoming_qc": {
+          "q": "來料檢驗流程是否已定義？",
+          "cat": "QC",
+          "ev": "品控記錄"
+        },
+        "q_final_qc": {
+          "q": "終檢與不良率是否跟蹤？",
+          "cat": "QC",
+          "ev": "檢驗報告"
+        },
+        "q_esd": {
+          "q": "防靜電保護與焊接工藝受控？",
+          "cat": "技術",
+          "ev": "工藝檔案"
+        },
+        "q_rohs": {
+          "q": "出口產品 RoHS / REACH 檔案齊備？",
+          "cat": "合規",
+          "ev": "檢測報告"
+        },
+        "q_oekotex": {
+          "q": "OEKO-TEX / 受限物質合規？",
+          "cat": "合規",
+          "ev": "檢測報告"
+        },
+        "q_labor_hr": {
+          "q": "工時與工資記錄是否複核？",
+          "cat": "勞工",
+          "ev": "人事記錄"
+        },
+        "q_msds": {
+          "q": "MSDS 與化學品操作程式齊備？",
+          "cat": "環境",
+          "ev": "MSDS"
+        },
+        "q_ppe": {
+          "q": "應急響應與 PPE 合規？",
+          "cat": "安全",
+          "ev": "安全記錄"
+        },
+        "q_waste": {
+          "q": "廢棄物與排放控制是否成文？",
+          "cat": "環境",
+          "ev": "環保許可"
+        },
+        "q_haccp": {
+          "q": "HACCP / ISO 22000 已實施？",
+          "cat": "食品安全",
+          "ev": "證書"
+        },
+        "q_child_labor": {
+          "q": "無童工/強迫勞動跡象？",
+          "cat": "勞工",
+          "ev": "員工訪談"
+        },
+        "q_ohs": {
+          "q": "職業健康與安全措施到位？",
+          "cat": "健康",
+          "ev": "現場觀察"
+        },
+        "q_wastewater": {
+          "q": "廢水與廢氣排放是否監測？",
+          "cat": "環境",
+          "ev": "許可證"
+        },
+        "q_equip_util": {
+          "q": "裝置清單與利用率情況？",
+          "cat": "產能",
+          "ev": "裝置臺賬"
+        }
+      }
+    },
+    "reportAnalyzer": {
+      "metaTitle": "驗廠報告分析器",
+      "metaDesc": "貼上驗廠報告，檢查其結構完整性、缺失項與風險訊號。免費評估工具。",
+      "h1": "驗廠報告分析器",
+      "lead": "貼上一份驗廠報告，檢查其結構、缺失項與風險點。這是評估與決策輔助工具，不能確認官方認證狀態。",
+      "inputLabel": "貼上驗廠報告正文",
+      "inputPlaceholder": "在此貼上驗廠報告內容……",
+      "cta": "分析報告",
+      "ctaLoading": "分析中……",
+      "empty": "貼上報告後執行分析器。",
+      "qualityLabel": "報告質量",
+      "scoreSuffix": "/100",
+      "sourceAi": "AI 生成評估（DeepSeek）·僅作決策輔助",
+      "sourceLocal": "本地規則推斷 ·僅作決策輔助",
+      "issuesTitle": "缺失或不一致的項",
+      "issuesNone": "未發現明顯的缺失項。"
+    },
+    "documentChecker": {
+      "metaTitle": "供應商檔案核對器",
+      "metaDesc": "核對供應商證書與營業執照之間的內部一致性。免費工具，不構成官方核驗。",
+      "h1": "供應商檔案核對器",
+      "lead": "核對檔案資訊的一致性與有效期欄位。僅檢查內部一致性，不能確認任何官方機構的認證狀態。",
+      "inputLabel": "貼上 ISO 證書 + 營業執照文字",
+      "cta": "核對一致性",
+      "empty": "貼上檔案後執行核對。",
+      "scoreRow": "一致性評分：{score}/100",
+      "companyName": "公司名稱",
+      "address": "地址",
+      "legalEntity": "法人主體",
+      "certificateNo": "證書編號.",
+      "issueDate": "簽發日期",
+      "expiryDate": "到期日期",
+      "scope": "認證範圍",
+      "statusFound": "已找到",
+      "statusMissing": "缺失",
+      "statusReview": "需複核"
+    },
+    "scorecard": {
+      "metaTitle": "供應商評估記分卡",
+      "metaDesc": "自行設定權重，對供應商逐項打分。免費評估工具。",
+      "h1": "供應商評估記分卡",
+      "lead": "設定各項權重與得分，計算供應商綜合評分。權重可完全自定義。",
+      "overallLabel": "綜合得分",
+      "totalWeightLabel": "總權重",
+      "weightLabel": "權重",
+      "scoreLabel": "得分",
+      "criteria": {
+        "quality": "質量",
+        "price": "價格",
+        "capacity": "產能",
+        "delivery": "交期",
+        "compliance": "合規",
+        "financial": "財務穩定性",
+        "certification": "認證",
+        "communication": "溝通",
+        "risk": "風險"
+      }
+    },
+    "riskAssessment": {
+      "metaTitle": "供應商風險評估",
+      "metaDesc": "填寫供應商資訊，得到初步風險評分，並逐維度標註證據狀態。",
+      "h1": "供應商風險評估",
+      "lead": "填寫供應商資訊，生成初步風險評分。每個維度都會標註證據狀態——我們不會把推算結果當作事實呈現。",
+      "supplierName": "供應商名稱",
+      "website": "網站",
+      "country": "國家",
+      "city": "城市",
+      "productCategory": "產品類別",
+      "businessType": "企業型別",
+      "businessTypeFactory": "工廠",
+      "businessTypeTrading": "貿易公司",
+      "yearsInBusiness": "經營年限",
+      "employeeRange": "員工規模",
+      "exportMarkets": "出口市場（逗號分隔）",
+      "selectOption": "請選擇",
+      "businessLicense": "營業執照",
+      "isoCertificate": "ISO 證書",
+      "auditReport": "驗廠報告",
+      "catalog": "產品目錄",
+      "productCertificates": "產品證書",
+      "cta": "生成風險評分",
+      "ctaLoading": "分析中……",
+      "empty": "填寫表單後點選生成，即可檢視風險明細。",
+      "levelSuffix": "RISK",
+      "sourceAi": "AI 生成（DeepSeek）·僅作決策輔助",
+      "sourceLocal": "規則推算——不構成官方核驗",
+      "levels": {
+        "Critical": "極高",
+        "High": "高",
+        "Medium": "中",
+        "Low": "低",
+        "Very Low": "極低"
+      },
+      "status": {
+        "Verified": "已核驗",
+        "Self-Reported": "供應商自述",
+        "Estimated": "推算",
+        "Not Verified": "未核驗"
+      },
+      "dimensions": {
+        "company": "公司主體核驗",
+        "capability": "工廠能力",
+        "quality": "質量體系",
+        "certification": "認證",
+        "capacity": "生產能力",
+        "compliance": "合規性",
+        "transparency": "資訊透明度",
+        "supplychain": "供應鏈風險"
+      },
+      "countryNames": {
+        "china": "中國",
+        "vietnam": "越南",
+        "thailand": "泰國",
+        "india": "印度",
+        "indonesia": "印尼",
+        "bangladesh": "孟加拉",
+        "malaysia": "馬來西亞",
+        "turkey": "土耳其",
+        "mexico": "墨西哥"
+      }
+    },
+    "industryNames": [
+      "電子",
+      "紡織",
+      "服裝",
+      "傢俱",
+      "化工",
+      "塑膠",
+      "汽車",
+      "機械",
+      "醫療器械",
+      "食品",
+      "包裝",
+      "珠寶"
+    ],
+    "auditTypeNames": [
+      "工廠核驗",
+      "工廠驗廠",
+      "供應商質量稽核",
+      "產能稽核",
+      "社會責任合規稽核",
+      "環境稽核",
+      "技術稽核",
+      "買家定製稽核"
     ]
   }
 }

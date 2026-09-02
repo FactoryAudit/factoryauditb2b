@@ -1,22 +1,24 @@
 // lib/staticData.ts —— 第一阶段静态数据源（替代数据库）
 //
 // V2.0 轻量化：第一阶段"能不使用数据库就不使用"。
-// 本文件集中维护国家 / 行业 / 审核与认证项目 / 标准 / 分类树 / 供应商 / 风险权重，
+// 本文件集中维护行业 / 审核与认证项目 / 标准 / 分类树 / 供应商 / 风险权重；
+// 国家清单不在这里维护，派生自 lib/coverage.ts 的 COVERAGE_COUNTRIES（见下方第 1 节）。
 // 由 lib/taxonomy.ts 与 lib/queries.ts 统一消费，保持「单一事实来源」。
 // 未来若内容量大到需要动态管理，再切回 Prisma + Neon（schema.prisma / seed.js 已保留）。
 
-// ---------- 1. 国家（Phase 1 只覆盖中/越/泰；其余登记在 roadmap，不建页） ----------
-export const STATIC_COUNTRIES = [
-  { code: "china", name: "China", cn: "中国" },
-  { code: "vietnam", name: "Vietnam", cn: "越南" },
-  { code: "thailand", name: "Thailand", cn: "泰国" },
-  { code: "india", name: "India", cn: "印度" },
-  { code: "bangladesh", name: "Bangladesh", cn: "孟加拉" },
-  { code: "turkey", name: "Turkey", cn: "土耳其" },
-  { code: "indonesia", name: "Indonesia", cn: "印度尼西亚" },
-  { code: "pakistan", name: "Pakistan", cn: "巴基斯坦" },
-  { code: "mexico", name: "Mexico", cn: "墨西哥" },
-];
+import { COVERAGE_COUNTRIES } from "./coverage";
+
+// ---------- 1. 国家（单一事实来源 = lib/coverage.ts 的 COVERAGE_COUNTRIES） ----------
+// 历史坑：这里曾经硬编码 9 个国家（含印度/孟加拉/土耳其/印尼/巴基斯坦/墨西哥），
+// 与实际覆盖国不一致，导致 sitemap 与 COVERAGE_COUNTRIES 取交集后只剩中/越/泰，
+// 马来西亚与菲律宾的 audit-guide 页一个都没进 sitemap，llms.txt 还对外宣称覆盖印度等 9 国。
+// 现在直接派生：只有在 coverage.ts 里写了真实差异化内容的国家才会出现，
+// roadmap 国家（COVERAGE_ROADMAP）不建页、不进索引。
+export const STATIC_COUNTRIES = COVERAGE_COUNTRIES.map((c) => ({
+  code: c.code,
+  name: c.name,
+  cn: c.nameZh,
+}));
 
 // ---------- 2. 行业 ----------
 export const STATIC_INDUSTRIES = [

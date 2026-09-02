@@ -68,7 +68,7 @@
     "operatesLead": "FactoryAuditB2B is operated by a registered company in China and provides supplier verification, factory audit and sourcing support for global buyers.",
     "operatesNotConfigured": "FactoryAuditB2B is operated by a registered company. We publish the legal entity name as soon as it is configured in the Trust Center.",
     "scopeTitle": "Scope of business",
-    "scopeBody": "Supplier verification, factory audit, inspection and sourcing support for buyers importing from China and Southeast Asia. Phase 1 coverage is China, Vietnam and Thailand.",
+    "scopeBody": "Supplier verification, factory audit, inspection and sourcing support for buyers importing from China and Southeast Asia. Phase 1 coverage is China, Vietnam, Thailand, Malaysia and the Philippines.",
     "verifyTitle": "What We Verify",
     "verifyLead": "These are the checks our verification service covers.",
     "verify": [
@@ -205,7 +205,7 @@
     "auditBody": "Get an independent on-site factory audit with findings, evidence and a written report.",
     "auditCta": "Request an Audit",
     "toolsTitle": "Free tools for evaluating suppliers",
-    "toolsLead": "No account needed, and no email wall on the score itself.",
+    "toolsLead": "Eight tools for checking suppliers, preparing audits and planning shipments. No account needed, and no email wall on the basic result.",
     "howTitle": "How it works",
     "howLead": "From a company name to a decision you can defend internally.",
     "howSteps": [
@@ -257,7 +257,7 @@
   "coverage": {
     "badge": "Coverage",
     "h1": "Where We Verify Suppliers",
-    "lead": "On-the-ground supplier verification and factory audit support across China and Southeast Asia. Phase 1 covers three countries. More are added as we have verified auditor capacity in them.",
+    "lead": "On-the-ground supplier verification and factory audit support across China and Southeast Asia. Phase 1 covers five countries: China, Vietnam, Thailand, Malaysia and the Philippines. More are added as we have verified auditor capacity in them.",
     "phase1": "Phase 1",
     "phaseNext": "Planned next",
     "countryCta": "Coverage in {country}",
@@ -265,7 +265,7 @@
     "anotherCountryLead": "Tell us where you are sourcing. If we do not have confirmed auditor capacity there yet, we will say so instead of guessing.",
     "anotherCountryCta": "Request Verification",
     "metaTitle": "Where We Verify Suppliers",
-    "metaDesc": "Supplier verification and factory audit coverage across China, Vietnam and Thailand, with country-specific sourcing risks, verification notes and audit considerations."
+    "metaDesc": "Supplier verification and factory audit across China, Vietnam, Thailand, Malaysia and the Philippines. Country-specific sourcing risks, verification notes and audit considerations."
   },
   "countryHub": {
     "profileTitle": "Manufacturing profile",
@@ -353,7 +353,7 @@
     "notSureLead": "Run the free risk calculator first. It takes about three minutes and tells you what is missing.",
     "notSureCta": "Assess supplier risk",
     "metaTitle": "Supplier Verification, Factory Audit and Inspection Services",
-    "metaDesc": "Independent supplier verification, factory audit, inspection and sourcing support across China, Vietnam and Thailand. Scoped and quoted per project."
+    "metaDesc": "Independent supplier verification, factory audit, inspection and sourcing support across China, Vietnam, Thailand, Malaysia and the Philippines. Scoped and quoted per project."
   },
   "resourcesIndex": {
     "badge": "Resources",
@@ -382,7 +382,7 @@
       },
       "sea": {
         "title": "Southeast Asia Sourcing",
-        "desc": "Vietnam and Thailand sourcing context, risks and audit considerations."
+        "desc": "Vietnam sourcing context, risks and audit considerations."
       },
       "compliance": {
         "title": "Compliance",
@@ -413,7 +413,7 @@
   "toolCards": {
     "riskCalculator": {
       "title": "Supplier Risk Calculator",
-      "desc": "Score any supplier from 0 to 100 across six weighted risk dimensions."
+      "desc": "Score any supplier from 0 to 100 across eight weighted risk dimensions."
     },
     "verificationChecklist": {
       "title": "Supplier Verification Checklist",
@@ -458,7 +458,7 @@
   },
   "risk": {
     "ui": {
-      "stepOf": "Step {n} of 6",
+      "stepOf": "Step {n} of 8",
       "back": "Back",
       "next": "Next",
       "calculate": "Calculate risk score",
@@ -492,7 +492,7 @@
         "supplierWebsite": "Supplier website",
         "submit": "Send me the report",
         "sending": "Sending",
-        "done": "Thanks. Your report is ready below and on its way to your inbox.",
+        "done": "Thanks. Your report is ready below. We have your request and will follow up by email within one business day.",
         "error": "Something went wrong. Please try again."
       },
       "disclaimer": "This score comes from the answers you gave. It is a first pass, not legal or financial advice, and it does not independently verify anything the supplier told you.",
@@ -507,9 +507,9 @@
     "page": {
       "badge": "FactoryAuditB2B RiskScore™",
       "h1": "Supplier Risk Calculator",
-      "lead": "Answer 22 questions about a supplier and get a score from 0 to 100, with the six dimensions behind it laid out.",
+      "lead": "Answer 28 questions about a supplier and get a score from 0 to 100, with the eight dimensions behind it laid out. A higher score means lower risk.",
       "card1Title": "You can see how the score is built",
-      "card1Body": "Six dimensions, each weighted and shown separately, so you can tell which answers moved the number.",
+      "card1Body": "Eight dimensions, each weighted and shown separately, so you can tell which answers moved the number.",
       "card2Title": "About three minutes",
       "card2Body": "No account and no email needed for the score itself.",
       "card3Title": "Tells you what to check",
@@ -834,7 +834,7 @@
     "faq": [
       {
         "q": "What does the calculator measure?",
-        "a": "It scores a supplier from 0 to 100 across six areas: company, quality, compliance, production, supply chain and documentation. Higher means riskier."
+        "a": "It scores a supplier from 0 to 100 across eight areas: company, quality, compliance, production, supply chain, documentation, certification and digital footprint. A higher score means lower risk."
       },
       {
         "q": "Is the score a final verification?",
@@ -842,7 +842,7 @@
       },
       {
         "q": "How are the weights decided?",
-        "a": "Company 15%, quality 20%, compliance 20%, production 15%, supply chain 15%, documentation 15%. The weights are fixed and shown on the result page."
+        "a": "Company 12%, quality 16%, compliance 16%, production 12%, supply chain 12%, documentation 12%, certification 10%, digital footprint 10%. The weights are fixed and shown on the result page."
       },
       {
         "q": "Do I have to pay to use it?",
@@ -850,7 +850,7 @@
       },
       {
         "q": "Can I compare several suppliers?",
-        "a": "Not yet. Run the tool once per supplier and keep the reports; a side-by-side comparison is on the way."
+        "a": "Yes. Run each supplier through the calculator, then use the comparison tool to put up to five of them side by side on the same eight dimensions."
       }
     ]
   },
@@ -1291,7 +1291,7 @@
     "freeLockLead": "Create a free account to view the year established, employee count, export markets and certifications.",
     "freeLockCta": "Create free account",
     "paidLockTitle": "Members see evidence and risk details",
-    "paidLockLead": "Founding Buyer members ($49/year) see evidence records, risk breakdowns, audit history and inspection data.",
+    "paidLockLead": "Founding Buyer members ($99/year) see evidence records, risk breakdowns, audit history and inspection data.",
     "paidLockCta": "View membership",
     "paidLockNote": "The risk score is public. Evidence and verification details are member content."
   },
@@ -1299,7 +1299,7 @@
     "badge": "Methodology",
     "h1": "How Our Supplier Risk Assessment Works",
     "lead": "Risk scores are calculated by a deterministic rules engine with published weights. The same inputs always produce the same score. Language models are used only to explain a result in plain language, and they cannot change the number.",
-    "quickAnswer": "We score a supplier across six weighted dimensions: company, quality, compliance, production, supply chain and documentation. Each answer you give maps to one dimension, contributes a weighted risk value, and rolls up into an overall figure out of 100, where higher means more risk. Missing evidence raises the score rather than being treated as neutral. The weights shown below are read directly from the scoring model, not typed by hand.",
+    "quickAnswer": "We score a supplier across eight weighted dimensions: company, quality, compliance, production, supply chain, documentation, certification and digital footprint. Each answer you give maps to one dimension, contributes a weighted risk value, and rolls up into an overall figure out of 100, where a higher score means lower risk. Missing evidence lowers the score rather than being treated as neutral. The weights shown below are read directly from the scoring model, not typed by hand.",
     "frameworkTitle": "Scoring framework",
     "frameworkBody": "Each question belongs to one dimension. Within a dimension, answers carry a risk value between 0 and 100. The dimension score is the weighted mean of its answered questions, and the overall score is the weighted mean of the dimensions below.",
     "weightsTitle": "Risk dimensions and weights",
@@ -1332,7 +1332,7 @@
     "metaDesc": "The scoring framework, risk dimensions, weights, evidence rules, limitations and update policy behind our supplier risk scores. Calculated by a deterministic rules engine, not by AI.",
     "scoredInputsLabel": "Inputs",
     "scoredTableNote": "{n} scored inputs · {d} dimensions · total weight {w}.",
-    "weightsSumLine": "— six dimensions, {n} inputs, weights summing to {w}.",
+    "weightsSumLine": "— eight dimensions, {n} inputs, weights summing to {w}.",
     "howWeVerifyTitle": "How we verify: six steps",
     "howWeVerifyLead": "A verification is not a screenshot or a summary. It is a documented sequence, and each step has a written output.",
     "howWeVerifySteps": [
@@ -1643,6 +1643,19 @@
       "assessSubmitting": "Submitting…",
       "assessSuccess": "Thank you. Our team will reply within one business day.",
       "assessError": "Something went wrong. Please try again."
+    },
+    "ui": {
+      "home": "Home",
+      "relatedGuides": "Related guides",
+      "quickAnswer": "Quick answer",
+      "definition": "Definition",
+      "keyPoints": "Key points",
+      "stepByStep": "Step by step",
+      "examples": "Examples",
+      "checklist": "Checklist",
+      "sources": "Sources",
+      "guidesPageTitle": "Supplier Intelligence Guides",
+      "caseStudiesLead": "Supplier verification, factory audit, inspection and sourcing walk-throughs."
     }
   },
   "container": {
@@ -2097,9 +2110,9 @@
     "ctaText": "Need a quote or a human?",
     "ctaButton": "Talk to our team",
     "fallbackAnswers": {
-      "pricing": "Buyer SaaS runs $0–299/month and supplier membership $29–199/month. Factory audits and inspections are quoted per project (man-days and location); freight and sourcing carry a 3–5% commission. All prices in USD. Tell me your product and country and I will point you to the right plan.",
+      "pricing": "Free tools are $0. Supplier verification is $99 – $129 per supplier, factory audits start at 399 USD per man-day plus travel, and supplier monitoring is quoted per supplier per year. Founding Buyer membership is $99/year for full database access. Sourcing carries a 3–5% commission, quoted before you order. All prices in USD. Tell me your product and country.",
       "audit": "We cover supplier verification, factory audits and pre-shipment inspections against programs such as SMETA, BSCI, ISO 9001, ISO 14001, SA8000, WRAP and Sedex. We do not sell certificates; we verify and then train. Share your product and target market and we will scope it.",
-      "coverage": "We currently cover China, Vietnam and Thailand. Tell me which country you are sourcing from and I will confirm availability.",
+      "coverage": "We cover China, Vietnam, Thailand, Malaysia and the Philippines. Tell me which country you are sourcing from and I will confirm what we can check there.",
       "training": "Yes. We audit your factory and then train the teams in quality systems, QC and production process. Plans are Starter $280/factory and Pro $950/factory, with a custom Enterprise option. Every plan starts with a gap audit.",
       "default": "I can help with audits, supplier verification, coverage, pricing and training. For anything specific, leave your details and our team will reply within one business day."
     },
@@ -2134,7 +2147,7 @@
     "statsTitle": "By the numbers",
     "stats": [
       {
-        "value": "9",
+        "value": "5",
         "label": "Countries covered"
       },
       {
@@ -2459,7 +2472,7 @@
     "preparedFor": "Prepared for: Sample Buyer Ltd. (illustrative)",
     "companySection": "1. Company snapshot",
     "companyNameLabel": "Company name",
-    "companyName": "Shenzhen Northstar Electronics Co., Ltd.",
+    "companyName": "Shenzhen XX Electronics Co., Ltd.",
     "countryLabel": "Country",
     "companyCountry": "China",
     "registeredLabel": "Registered",
@@ -2596,13 +2609,13 @@
       "Request the renewed ISO 9001 certificate before shipment release."
     ],
     "formTitle": "Get the full sample report",
-    "formLead": "Leave your email and we will send the complete sample report as a PDF with a one-page reading guide.",
+    "formLead": "Leave your email and we will send you the complete sample report with a one-page reading guide within one business day.",
     "formEmailPlaceholder": "Your work email",
-    "formCta": "Send me the report",
-    "formPrivacyNote": "We only use your email to send the sample. No spam, unsubscribe anytime.",
+    "formCta": "Request the full report",
+    "formPrivacyNote": "We use your email to send the report and follow up. No spam, unsubscribe anytime.",
     "socialTitle": "Follow us for sourcing insights",
     "socialNote": "Factory verification case studies and supplier-risk explainers.",
-    "formSuccess": "Check your inbox — the sample report is on its way.",
+    "formSuccess": "Thanks. We have your request and will send the full sample report within one business day.",
     "formError": "Something went wrong. Please try again or email us directly.",
     "companyTypeLabel": "Company type"
   },
@@ -2754,7 +2767,9 @@
     "ctaTitle": "Have a similar situation?",
     "ctaDesc": "Send us your requirement and we will scope the verification, audit or inspection for your product and market.",
     "ctaRfq": "Post an RFQ",
-    "ctaCustom": "Custom services"
+    "ctaCustom": "Custom services",
+    "detailCtaTitle": "Need this done for your supplier?",
+    "detailCtaDesc": "Send your requirement and we will scope the verification, audit or inspection for your product and market."
   },
   "auditScope": {
     "title": "Audit scope advisor",
@@ -2834,7 +2849,7 @@
     "nextTitle": "What happens next",
     "nextLead": "After you submit, our team creates your account manually and emails your sign-in details within one business day.",
     "noCard": "No credit card required.",
-    "membershipLink": "Learn about Founding Buyer membership ($49/year)",
+    "membershipLink": "Learn about Founding Buyer membership ($99/year)",
     "formTitle": "Sign up",
     "form": {
       "emailLabel": "Email",
@@ -2855,8 +2870,8 @@
   },
   "membership": {
     "badge": "Buyer membership",
-    "metaTitle": "Founding Buyer Membership — $49/year",
-    "metaDesc": "Founding Buyer membership: full supplier database, risk breakdowns, evidence summaries and factory details. $49/year.",
+    "metaTitle": "Founding Buyer Membership — $99/year",
+    "metaDesc": "Founding Buyer membership: full supplier database, risk breakdowns, evidence summaries and factory details. $99/year.",
     "h1": "Founding Buyer membership",
     "lead": "For sourcing teams that need to evaluate suppliers in depth. One subscription, all supplier intelligence features for a year.",
     "planName": "Founding Buyer",
@@ -2881,7 +2896,7 @@
     "faq": [
       {
         "q": "How much does membership cost?",
-        "a": "Founding Buyer is $49/year (USD). One subscription covers a full year. The founding price may increase later."
+        "a": "Founding Buyer is $99/year (USD). One subscription covers a full year. The founding price may increase later."
       },
       {
         "q": "How do I pay?",
@@ -2891,6 +2906,261 @@
         "q": "Does membership guarantee verification results?",
         "a": "No. Membership grants viewing access only. It never changes a supplier's risk score or verification status. Verification outcomes are never sold."
       }
+    ]
+  },
+  "toolsUi": {
+    "auditChecklist": {
+      "metaTitle": "Factory Audit Checklist Generator",
+      "metaDesc": "Build a factory audit checklist by industry and audit type. Free preparation tool, not an official certification.",
+      "h1": "Factory Audit Checklist Generator",
+      "lead": "Generate a structured checklist by industry and audit type. This is a preparation and assessment tool, not an official certification.",
+      "industryLabel": "Industry",
+      "auditTypeLabel": "Audit Type",
+      "cta": "Generate Checklist",
+      "summary": "{n} items",
+      "categoryLabel": "Category",
+      "evidenceLabel": "Evidence",
+      "riskSuffix": "Risk",
+      "riskLow": "Low",
+      "riskMedium": "Medium",
+      "riskHigh": "High",
+      "questions": {
+        "q_biz_license": {
+          "q": "Business license valid and matches registered address?",
+          "cat": "Legal",
+          "ev": "Business Registration"
+        },
+        "q_ownership": {
+          "q": "Ownership and legal representative verified?",
+          "cat": "Legal",
+          "ev": "Legal Entity Docs"
+        },
+        "q_qm_org": {
+          "q": "Quality manual and organizational chart available?",
+          "cat": "Management",
+          "ev": "Organization Chart"
+        },
+        "q_capacity_output": {
+          "q": "Production capacity matches stated output?",
+          "cat": "Production",
+          "ev": "Capacity Records"
+        },
+        "q_incoming_qc": {
+          "q": "Incoming material inspection process defined?",
+          "cat": "QC",
+          "ev": "QC Records"
+        },
+        "q_final_qc": {
+          "q": "Final inspection and defect rate tracked?",
+          "cat": "QC",
+          "ev": "Inspection Reports"
+        },
+        "q_esd": {
+          "q": "ESD protection and soldering process control?",
+          "cat": "Technical",
+          "ev": "Process Docs"
+        },
+        "q_rohs": {
+          "q": "RoHS / REACH documentation for exports?",
+          "cat": "Compliance",
+          "ev": "Test Reports"
+        },
+        "q_oekotex": {
+          "q": "OEKO-TEX / restricted substance compliance?",
+          "cat": "Compliance",
+          "ev": "Test Reports"
+        },
+        "q_labor_hr": {
+          "q": "Working hours and wage records reviewed?",
+          "cat": "Social",
+          "ev": "HR Records"
+        },
+        "q_msds": {
+          "q": "MSDS and chemical handling procedures?",
+          "cat": "Environmental",
+          "ev": "MSDS"
+        },
+        "q_ppe": {
+          "q": "Emergency response and PPE compliance?",
+          "cat": "Safety",
+          "ev": "Safety Records"
+        },
+        "q_waste": {
+          "q": "Waste and emission control documented?",
+          "cat": "Environmental",
+          "ev": "Environmental Permit"
+        },
+        "q_haccp": {
+          "q": "HACCP / ISO 22000 implemented?",
+          "cat": "Food Safety",
+          "ev": "Certificates"
+        },
+        "q_child_labor": {
+          "q": "No child / forced labor indicators?",
+          "cat": "Labor",
+          "ev": "Worker Interviews"
+        },
+        "q_ohs": {
+          "q": "Occupational health & safety measures?",
+          "cat": "Health",
+          "ev": "Site Observation"
+        },
+        "q_wastewater": {
+          "q": "Wastewater and emissions monitored?",
+          "cat": "Environmental",
+          "ev": "Permits"
+        },
+        "q_equip_util": {
+          "q": "Equipment list and utilization rate?",
+          "cat": "Capacity",
+          "ev": "Equipment Log"
+        }
+      }
+    },
+    "reportAnalyzer": {
+      "metaTitle": "Audit Report Analyzer",
+      "metaDesc": "Paste an audit report to check its structure, missing items and risk signals. Free assessment tool.",
+      "h1": "Audit Report Analyzer",
+      "lead": "Paste an audit report to check structure, missing items and risk. This is an assessment and decision-support tool. It does not confirm official certification.",
+      "inputLabel": "Paste audit report text",
+      "inputPlaceholder": "Paste the audit report content here…",
+      "cta": "Analyze Report",
+      "ctaLoading": "Analyzing…",
+      "empty": "Paste a report and run the analyzer.",
+      "qualityLabel": "Report Quality",
+      "scoreSuffix": "/100",
+      "sourceAi": "AI-generated assessment (DeepSeek) · decision-support",
+      "sourceLocal": "Local heuristic · decision-support",
+      "issuesTitle": "Missing / Inconsistent Items",
+      "issuesNone": "No obvious missing items detected."
+    },
+    "documentChecker": {
+      "metaTitle": "Supplier Document Checker",
+      "metaDesc": "Check supplier certificates and business licences for internal consistency. Free tool, not an official verification.",
+      "h1": "Supplier Document Checker",
+      "lead": "Checks document information consistency and validity fields. It verifies internal consistency only. It does not confirm certification by any official body.",
+      "inputLabel": "Paste ISO certificate + Business License text",
+      "cta": "Check Consistency",
+      "empty": "Paste documents and run the check.",
+      "scoreRow": "Consistency Score: {score}/100",
+      "companyName": "Company Name",
+      "address": "Address",
+      "legalEntity": "Legal Entity",
+      "certificateNo": "Certificate No.",
+      "issueDate": "Issue Date",
+      "expiryDate": "Expiry Date",
+      "scope": "Scope",
+      "statusFound": "FOUND",
+      "statusMissing": "MISSING",
+      "statusReview": "NEED REVIEW"
+    },
+    "scorecard": {
+      "metaTitle": "Supplier Evaluation Scorecard",
+      "metaDesc": "Weight your own criteria and score a supplier against them. Free evaluation tool.",
+      "h1": "Supplier Evaluation Scorecard",
+      "lead": "Set weights and scores to compute an overall supplier score. Weights are fully customizable.",
+      "overallLabel": "Overall",
+      "totalWeightLabel": "Total weight",
+      "weightLabel": "Weight",
+      "scoreLabel": "Score",
+      "criteria": {
+        "quality": "Quality",
+        "price": "Price",
+        "capacity": "Capacity",
+        "delivery": "Delivery",
+        "compliance": "Compliance",
+        "financial": "Financial Stability",
+        "certification": "Certification",
+        "communication": "Communication",
+        "risk": "Risk"
+      }
+    },
+    "riskAssessment": {
+      "metaTitle": "Supplier Risk Assessment",
+      "metaDesc": "Enter supplier details and get an initial risk score with evidence status per dimension.",
+      "h1": "Supplier Risk Assessment",
+      "lead": "Enter supplier details to generate an initial risk score. Evidence status is shown per dimension. We never present estimates as facts.",
+      "supplierName": "Supplier Name",
+      "website": "Website",
+      "country": "Country",
+      "city": "City",
+      "productCategory": "Product Category",
+      "businessType": "Business Type",
+      "businessTypeFactory": "Factory",
+      "businessTypeTrading": "Trading Company",
+      "yearsInBusiness": "Years in Business",
+      "employeeRange": "Employee Range",
+      "exportMarkets": "Export Markets (comma separated)",
+      "selectOption": "Select",
+      "businessLicense": "Business License",
+      "isoCertificate": "ISO Certificate",
+      "auditReport": "Audit Report",
+      "catalog": "Catalog",
+      "productCertificates": "Product Certificates",
+      "cta": "Generate Risk Score",
+      "ctaLoading": "Analyzing…",
+      "empty": "Fill the form and click generate to see the risk breakdown.",
+      "levelSuffix": "RISK",
+      "sourceAi": "AI-generated (DeepSeek) · decision-support",
+      "sourceLocal": "Rule-based estimate — not official verification",
+      "levels": {
+        "Critical": "Critical",
+        "High": "High",
+        "Medium": "Medium",
+        "Low": "Low",
+        "Very Low": "Very Low"
+      },
+      "status": {
+        "Verified": "Verified",
+        "Self-Reported": "Self-Reported",
+        "Estimated": "Estimated",
+        "Not Verified": "Not Verified"
+      },
+      "dimensions": {
+        "company": "Company Verification",
+        "capability": "Factory Capability",
+        "quality": "Quality System",
+        "certification": "Certification",
+        "capacity": "Production Capacity",
+        "compliance": "Compliance",
+        "transparency": "Transparency",
+        "supplychain": "Supply Chain Risk"
+      },
+      "countryNames": {
+        "china": "China",
+        "vietnam": "Vietnam",
+        "thailand": "Thailand",
+        "india": "India",
+        "indonesia": "Indonesia",
+        "bangladesh": "Bangladesh",
+        "malaysia": "Malaysia",
+        "turkey": "Turkey",
+        "mexico": "Mexico"
+      }
+    },
+    "industryNames": [
+      "Electronics",
+      "Textiles",
+      "Garments",
+      "Furniture",
+      "Chemicals",
+      "Plastics",
+      "Automotive",
+      "Machinery",
+      "Medical Devices",
+      "Food",
+      "Packaging",
+      "Jewelry"
+    ],
+    "auditTypeNames": [
+      "Factory Verification",
+      "Factory Audit",
+      "Supplier Quality Audit",
+      "Production Capacity Audit",
+      "Social Compliance Audit",
+      "Environmental Audit",
+      "Technical Audit",
+      "Custom Buyer Audit"
     ]
   }
 }

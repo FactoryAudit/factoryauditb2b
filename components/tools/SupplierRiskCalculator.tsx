@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { ANALYTICS_EVENTS, trackEvent } from "@/lib/analytics";
 import {
   buildDimensions,
   computeRisk,
@@ -89,17 +90,31 @@ export default function SupplierRiskCalculator({ content, ui, locale }: Props) {
     [answers, dims]
   );
 
+  // risk_calculator_start 只发一次：用户第一次作答 = 真正开始使用工具
+  const startedRef = useRef(false);
+
   function choose(qid: string, val: string) {
+    if (!startedRef.current) {
+      startedRef.current = true;
+      trackEvent(ANALYTICS_EVENTS.riskCalculatorStart);
+    }
     setAnswers((a) => ({ ...a, [qid]: val }));
   }
 
   function calculate() {
-    setResult(computeRisk(answers, content));
+    const r = computeRisk(answers, content);
+    setResult(r);
+    // 埋点：完成评分（带等级与总分，用于分析「算出来的风险分布」；不含任何用户输入文本）
+    trackEvent(ANALYTICS_EVENTS.riskCalculatorComplete, {
+      level: r.level,
+      score: r.overall,
+    });
     setStep(totalSteps);
     if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   function reset() {
+    startedRef.current = false; // 重新计算时允许再发一次 start
     setAnswers({});
     setResult(null);
     setShowLead(false);

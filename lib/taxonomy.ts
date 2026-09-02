@@ -22,6 +22,7 @@ import type {
   TaxonomyCategory,
   CapabilityRefType,
 } from './types';
+import { twText } from './tw';
 
 export type { ServiceType, VerificationStatus, RiskLevel, TaxonomyCategory, CapabilityRefType };
 export { TAXONOMY_CATEGORIES, SERVICE_TYPES } from './types';
@@ -156,6 +157,15 @@ export async function listIndustries() {
   return STATIC_INDUSTRIES;
 }
 
+/**
+ * 行业名在静态数据里是「Electronics / 电子」这种中英混排串。
+ * zh-TW 就地繁化（中文部分会变成「電子」），其余语言原样返回 —— 不做拆分，
+ * 避免改动任何非 zh-TW 语种的既有显示。
+ */
+export function industryDisplayName(locale: string, name: string): string {
+  return locale === "zh-TW" ? twText(name) : name;
+}
+
 // 风险权重模型（§58 可配置）
 export async function getRiskModel(): Promise<RiskRule[]> {
   return STATIC_RISK_WEIGHTS.map((r) => ({
@@ -207,12 +217,14 @@ export async function getSupplierCapabilitiesResolved(
   const supplier = STATIC_SUPPLIERS.find((s) => s.slug === slug);
   if (!supplier) return [];
   const useZh = locale === 'zh' || locale === 'zh-TW';
+  // 数据层只维护 en/zh 两版：zh-TW 复用 zh 文案并就地繁化
+  const zhLabel = (zh: string) => (locale === 'zh-TW' ? twText(zh) : zh);
   return supplier.capabilities.map((c) => {
     const prog = STATIC_PROGRAMS.find((p) => p.code === c.refCode);
     const label = c.refType === 'TAXONOMY'
       ? null
       : prog
-        ? (useZh ? prog.nameZh : prog.nameEn)
+        ? (useZh ? zhLabel(prog.nameZh) : prog.nameEn)
         : c.refCode;
     return {
       refType: c.refType,

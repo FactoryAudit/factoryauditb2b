@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { ANALYTICS_EVENTS, trackEvent } from "@/lib/analytics";
 // 审核类型取值由 lib/auditScope 单一提供：顺序即下标，页面与范围推荐共用同一份，
 // 避免两边各写一份数组导致下标对不上
 import { AUDIT_TYPES } from "@/lib/auditScope";
@@ -90,6 +91,10 @@ export default function AuditRequestForm({
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    // 埋点：发起验厂请求（带验厂类型，用于统计哪种审核最受欢迎；不含任何表单内容）
+    trackEvent(ANALYTICS_EVENTS.auditRequest, {
+      value: AUDIT_TYPES[auditType] ?? "",
+    });
     setStatus("loading");
     setErrMsg(null);
     // 必须在 await 之前捕获表单元素：React 17+ 在事件处理同步段结束后
@@ -125,6 +130,10 @@ export default function AuditRequestForm({
       });
       const data = await res.json();
       if (data.ok) {
+        // 核心转化：验厂请求提交成功（只发验厂类型，公司名/邮箱等一律不进 Analytics）
+        trackEvent(ANALYTICS_EVENTS.auditRequestSubmit, {
+          value: AUDIT_TYPES[auditType] ?? "",
+        });
         setStatus("ok");
         formEl.reset();
         // 受控字段不受 form.reset() 影响，手动清掉，避免成功后仍留着上一单的内容

@@ -6,7 +6,9 @@ import { CASE_STUDIES, findCaseStudy, CASE_DISCLOSURE, CASE_SECTIONS } from "@/l
 import { overallLevel } from "@/lib/riskEngine";
 import { findGuide } from "@/lib/guides";
 import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import { pickZhCopy, pickZhPair } from "@/lib/tw";
 
 const BASE = "https://factoryauditb2b.com";
 type Params = { locale: string; slug: string };
@@ -31,8 +33,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return buildPageMetadata({
     locale,
     path: `/case-studies/${slug}`,
-    title: locale === "zh" ? c.titleZh : c.titleEn,
-    description: locale === "zh" ? c.metaDescZh : c.metaDescEn,
+    title: pickZhPair(locale, c.titleEn, c.titleZh),
+    description: pickZhPair(locale, c.metaDescEn, c.metaDescZh),
   });
 }
 
@@ -43,12 +45,13 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
   if (!c) notFound();
 
   const p = (href: string) => localePath(locale, href);
-  const zh = locale === "zh";
-  const x = zh ? c.zh : c.en;
-  const title = zh ? c.titleZh : c.titleEn;
-  const disclosure = zh ? CASE_DISCLOSURE.zh : CASE_DISCLOSURE.en;
+  // 名称用 dict（不是 t）以免和下面 c.tools.map((t) => …) 的参数重名
+  const dict = await getDictionary(locale);
+  const x = pickZhCopy(locale, c);
+  const title = pickZhPair(locale, c.titleEn, c.titleZh);
+  const disclosure = pickZhCopy(locale, CASE_DISCLOSURE);
   // 分段标题与分数说明：en/zh 手写，其余语言回退英文（与 CASE_DISCLOSURE 同模式）
-  const sec = zh ? CASE_SECTIONS.zh : CASE_SECTIONS.en;
+  const sec = pickZhCopy(locale, CASE_SECTIONS);
   const serviceLabel =
     c.service === "verification"
       ? "Supplier verification"
@@ -67,7 +70,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
       "@context": "https://schema.org",
       "@type": "Article",
       headline: title,
-      description: zh ? c.metaDescZh : c.metaDescEn,
+      description: pickZhPair(locale, c.metaDescEn, c.metaDescZh),
       dateModified: c.updated,
       inLanguage: locale,
       url: `${BASE}${p(`/case-studies/${c.slug}`)}`,
@@ -94,15 +97,15 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
       <JsonLd data={jsonLd} />
 
       <nav className="mb-4 text-sm text-gray-500">
-        <Link href={p("/")} className="hover:underline">Home</Link> /{" "}
-        <Link href={p("/case-studies")} className="hover:underline">Case studies</Link> / {title}
+        <Link href={p("/")} className="hover:underline">{dict.common.ui.home}</Link> /{" "}
+        <Link href={p("/case-studies")} className="hover:underline">{dict.caseStudies.breadcrumbCurrent}</Link> / {title}
       </nav>
 
       <span className="inline-block rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">
         {serviceLabel}
       </span>
       <h1 className="mt-3 text-3xl font-bold">{title}</h1>
-      <p className="mt-1 text-sm text-gray-500">{zh ? "更新日期" : "Updated"}: {c.updated}</p>
+      <p className="mt-1 text-sm text-gray-500">{pickZhPair(locale, "Updated", "更新日期")}: {c.updated}</p>
 
       <div className="mt-4 rounded-lg border border-[#d4232a]/30 bg-[#d4232a]/5 p-4 text-sm text-[#7f1d1d]">
         {disclosure}
@@ -168,7 +171,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
       {/* 内链：工具 / 服务 / 相关指南（与指南页同模式，禁止死链） */}
       <section className="mt-8 grid gap-5 md:grid-cols-2">
         <div className="card p-6">
-          <h2 className="font-bold text-[#0f172a]">Tools</h2>
+          <h2 className="font-bold text-[#0f172a]">{dict.nav.tools}</h2>
           <ul className="mt-3 space-y-2">
             {c.tools.map((t) => {
               const key =
@@ -183,14 +186,14 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
                         : t.href === "/tools/supplier-document-checker"
                           ? "documentChecker"
                           : "auditReportAnalyzer";
-              // 工具名取英文常量，避免引入字典依赖；与 guides 页行为一致
+              // 工具名统一取字典，避免硬编码英文
               const toolNames: Record<string, string> = {
-                riskCalculator: "Supplier Risk Calculator",
-                verificationChecklist: "Supplier Verification Checklist",
-                auditChecklist: "Factory Audit Checklist",
-                supplierScorecard: "Supplier Scorecard",
-                documentChecker: "Supplier Document Checker",
-                auditReportAnalyzer: "Audit Report Analyzer",
+                riskCalculator: dict.toolCards.riskCalculator.title,
+                verificationChecklist: dict.toolCards.verificationChecklist.title,
+                auditChecklist: dict.toolCards.auditChecklist.title,
+                supplierScorecard: dict.toolCards.supplierScorecard.title,
+                documentChecker: dict.toolCards.documentChecker.title,
+                auditReportAnalyzer: dict.toolCards.auditReportAnalyzer.title,
               };
               return (
                 <li key={t.href}>
@@ -203,18 +206,18 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
           </ul>
         </div>
         <div className="card p-6">
-          <h2 className="font-bold text-[#0f172a]">Services</h2>
+          <h2 className="font-bold text-[#0f172a]">{dict.nav.services}</h2>
           <ul className="mt-3 space-y-2">
             {c.services.map((s) => (
               <li key={s.href}>
                 <Link href={p(s.href)} className="text-[#0f4c81] hover:underline">
                   {s.href.includes("inspection")
-                    ? "Product Inspection"
+                    ? dict.servicesIndex.items.inspection.title
                     : s.href.includes("rfq")
                       ? "RFQ"
                       : s.href.includes("supplier-verification")
-                        ? "Supplier Verification"
-                        : "Factory Audit"}
+                        ? dict.servicesIndex.items.verification.title
+                        : dict.servicesIndex.items.factoryAudit.title}
                 </Link>
               </li>
             ))}
@@ -224,12 +227,12 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
 
       {relatedGuides.length > 0 && (
         <section className="mt-8">
-          <h2 className="text-xl font-semibold">Related guides</h2>
+          <h2 className="text-xl font-semibold">{dict.common.ui.relatedGuides}</h2>
           <ul className="mt-3 space-y-2">
             {relatedGuides.map((g) => (
               <li key={g.slug}>
                 <Link href={p(`/guides/${g.slug}`)} className="text-[#0f4c81] hover:underline">
-                  {zh ? g.titleZh : g.titleEn}
+                  {pickZhPair(locale, g.titleEn, g.titleZh)}
                 </Link>
               </li>
             ))}
@@ -238,17 +241,14 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
       )}
 
       <section className="mt-10 card p-8 bg-[#0f4c81]">
-        <h2 className="text-xl font-bold text-white">Need this done for your supplier?</h2>
-        <p className="mt-2 text-white/80">
-          Send your requirement and we will scope the verification, audit or inspection for your
-          product and market.
-        </p>
+        <h2 className="text-xl font-bold text-white">{dict.caseStudies.detailCtaTitle}</h2>
+        <p className="mt-2 text-white/80">{dict.caseStudies.detailCtaDesc}</p>
         <div className="mt-5 flex flex-wrap gap-3">
           <Link href={p("/rfq")} className="btn btn-accent">
-            Post an RFQ
+            {dict.caseStudies.ctaRfq}
           </Link>
           <Link href={p("/custom-services")} className="btn btn-outline border-white text-white">
-            Custom services
+            {dict.caseStudies.ctaCustom}
           </Link>
         </div>
       </section>

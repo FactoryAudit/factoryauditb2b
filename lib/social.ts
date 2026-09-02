@@ -11,7 +11,7 @@ export interface SocialLink {
 }
 
 export const SOCIAL_LINKS: SocialLink[] = [
-  { platform: "facebook", url: "" },
+  { platform: "facebook", url: "https://www.facebook.com/huawenli21" },
   { platform: "youtube", url: "" },
   { platform: "linkedin", url: "" },
 ];

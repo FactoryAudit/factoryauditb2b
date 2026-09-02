@@ -59,6 +59,7 @@ export default async function MembershipPage({
     <main
       className="container py-12 max-w-4xl"
       data-track-page={ANALYTICS_EVENTS.membershipView}
+      data-track-view={ANALYTICS_EVENTS.foundingBuyerView}
     >
       <JsonLd data={jsonLd} />
 
@@ -102,7 +103,7 @@ export default async function MembershipPage({
           <Link
             href={p("/custom-services")}
             className="mt-6 block w-full rounded-lg bg-[#d4232a] py-3 text-center font-semibold text-white shadow-lg transition hover:brightness-95"
-            data-track={ANALYTICS_EVENTS.membershipCta}
+            data-track={ANALYTICS_EVENTS.foundingBuyerCheckoutStart}
           >
             {m.cta}
           </Link>

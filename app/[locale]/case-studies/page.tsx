@@ -6,6 +6,7 @@ import { overallLevel } from "@/lib/riskEngine";
 import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import { pickZhCopy, pickZhPair } from "@/lib/tw";
 
 const BASE = "https://factoryauditb2b.com";
 type Props = { params: Promise<{ locale: string }> };
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     locale,
     path: "/case-studies",
     title: t.caseStudies.metaTitle,
-    description: locale === "zh" ? CASE_LIST_META.zh : CASE_LIST_META.en,
+    description: pickZhCopy(locale, CASE_LIST_META),
   });
 }
 
@@ -31,9 +32,8 @@ export default async function CaseStudiesPage({ params }: Props) {
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
   const p = (href: string) => localePath(locale, href);
-  const zh = locale === "zh";
-  const disclosure = zh ? CASE_DISCLOSURE.zh : CASE_DISCLOSURE.en;
-  const sec = zh ? CASE_SECTIONS.zh : CASE_SECTIONS.en;
+  const disclosure = pickZhCopy(locale, CASE_DISCLOSURE);
+  const sec = pickZhCopy(locale, CASE_SECTIONS);
 
   const jsonLd = [
     {
@@ -44,7 +44,7 @@ export default async function CaseStudiesPage({ params }: Props) {
         "@type": "ListItem",
         position: i + 1,
         url: `${BASE}${p(`/case-studies/${c.slug}`)}`,
-        name: zh ? c.titleZh : c.titleEn,
+        name: pickZhPair(locale, c.titleEn, c.titleZh),
       })),
     },
     {
@@ -72,7 +72,7 @@ export default async function CaseStudiesPage({ params }: Props) {
 
       <h1 className="text-3xl font-bold">{t.caseStudies.h1}</h1>
       <p className="mt-2 max-w-3xl text-gray-600">
-        Supplier verification, factory audit, inspection and sourcing walk-throughs.
+        {t.common.ui.caseStudiesLead}
       </p>
 
       {/* 诚实披露：当前无真实客户案例，全部为匿名方法示例 */}
@@ -102,9 +102,9 @@ export default async function CaseStudiesPage({ params }: Props) {
                       href={p(`/case-studies/${c.slug}`)}
                       className="font-semibold text-[#0f4c81] hover:underline"
                     >
-                      {zh ? c.titleZh : c.titleEn}
+                      {pickZhPair(locale, c.titleEn, c.titleZh)}
                     </Link>
-                    <p className="mt-1 text-sm text-gray-600">{zh ? c.zh.summary : c.en.summary}</p>
+                    <p className="mt-1 text-sm text-gray-600">{pickZhCopy(locale, c).summary}</p>
                     <p className="mt-3 text-xs text-gray-500">
                       {sec.riskScore}: {c.riskScore}
                       {sec.scoreUnit} · {overallLevel(c.riskScore)}

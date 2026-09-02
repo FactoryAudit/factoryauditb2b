@@ -7,6 +7,7 @@ import { DIMENSION_STRUCTURE } from "@/lib/riskEngine";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import { twText } from "@/lib/tw";
 
 const PATH = "/sample-report";
 const BASE = "https://factoryauditb2b.com";
@@ -28,14 +29,17 @@ const SAMPLE_DIM_SCORES: Record<string, number> = {
 // 为数据而非营销文案，跨语言通用，故放在代码常量；行标签全部走字典。
 const SAMPLE = {
   uscc: "91440300MA5EXXX7XX",
-  legalRep: "Chen X. 陈某",
+  legalRep: "XXX",
   capital: "CNY 8,000,000",
-  address: "Building 4, XX Industrial Park, Bao'an District, Shenzhen",
+  address: "Building 4, XX Industrial Park, Shenzhen",
+  // 经营范围是样例数据（非营销文案），按本文件约定放常量；但它是可读文本，
+  // 必须同时给英文版，否则英文页会直接露出中文。zh-TW 走 twText 繁化。
+  scopeEn: "Production · Manufacturing · Import & Export",
   scope: "生产 · 制造 · 进出口",
   ownership: [
-    { name: "Chen X. 陈某", type: "Individual", contribution: "CNY 5,200,000", stake: "65%", since: "2014" },
-    { name: "Liu X. 刘某", type: "Individual", contribution: "CNY 2,000,000", stake: "25%", since: "2016" },
-    { name: "Apex HK Trading Ltd.", type: "Corporate (HK)", contribution: "CNY 800,000", stake: "10%", since: "2019" },
+    { name: "Shareholder A", type: "Individual", contribution: "CNY 5,200,000", stake: "65%", since: "2014" },
+    { name: "Shareholder B", type: "Individual", contribution: "CNY 2,000,000", stake: "25%", since: "2016" },
+    { name: "Shareholder C", type: "Corporate (HK)", contribution: "CNY 800,000", stake: "10%", since: "2019" },
   ],
   taxRows: [
     { key: "rating", value: "B — 2025 / B — 2024 / B — 2023" },
@@ -130,7 +134,7 @@ export default async function SampleReportPage({ params }: Props) {
   );
 
   return (
-    <main className="container py-12 max-w-4xl">
+    <main className="container py-12 max-w-4xl" data-track-page="sample_report">
       <JsonLd data={jsonLd} />
 
       <span className="text-sm font-semibold uppercase tracking-wide text-[#0f4c81]">
@@ -220,7 +224,16 @@ export default async function SampleReportPage({ params }: Props) {
           <Field label={s.employeeLabel} value={s.companyEmployees} />
           <Field label={s.productsLabel} value={s.companyProducts} />
           <Field label={s.addressLabel} value={SAMPLE.address} />
-          <Field label={s.scopeLabel} value={SAMPLE.scope} />
+          <Field
+            label={s.scopeLabel}
+            value={
+              locale === "zh"
+                ? SAMPLE.scope
+                : locale === "zh-TW"
+                  ? twText(SAMPLE.scope)
+                  : SAMPLE.scopeEn
+            }
+          />
         </dl>
 
         {/* 03 · 股权结构 */}

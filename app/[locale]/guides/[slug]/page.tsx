@@ -6,6 +6,7 @@ import { GUIDES, findGuide } from "@/lib/guides";
 import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import { pickZhCopy, pickZhPair } from "@/lib/tw";
 
 const BASE = "https://factoryauditb2b.com";
 type Params = { locale: string; slug: string };
@@ -30,8 +31,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return buildPageMetadata({
     locale,
     path: `/guides/${slug}`,
-    title: locale === "zh" ? g.titleZh : g.titleEn,
-    description: locale === "zh" ? g.metaDescZh : g.metaDescEn,
+    title: pickZhPair(locale, g.titleEn, g.titleZh),
+    description: pickZhPair(locale, g.metaDescEn, g.metaDescZh),
   });
 }
 
@@ -43,9 +44,8 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
 
   const t = await getDictionary(locale);
   const p = (href: string) => localePath(locale, href);
-  const zh = locale === "zh";
-  const c = zh ? g.zh : g.en;
-  const title = zh ? g.titleZh : g.titleEn;
+  const c = pickZhCopy(locale, g);
+  const title = pickZhPair(locale, g.titleEn, g.titleZh);
 
   const relatedGuides = g.related
     .map((s) => findGuide(s))
@@ -56,7 +56,7 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
       "@context": "https://schema.org",
       "@type": "Article",
       headline: title,
-      description: zh ? g.metaDescZh : g.metaDescEn,
+      description: pickZhPair(locale, g.metaDescEn, g.metaDescZh),
       dateModified: g.updated,
       inLanguage: locale,
       url: `${BASE}${p(`/guides/${slug}`)}`,
@@ -92,7 +92,7 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
       <JsonLd data={jsonLd} />
 
       <nav className="mb-4 text-sm text-[#64748b]">
-        <Link href={p("/")} className="hover:underline">Home</Link>
+        <Link href={p("/")} className="hover:underline">{t.common.ui.home}</Link>
         {" / "}
         <Link href={p("/resources")} className="hover:underline">{t.resourcesIndex.h1}</Link>
         {" / "}{title}
@@ -103,17 +103,17 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
 
       {/* Quick Answer：AI Search 与 Google 摘要优先抓取这一段 */}
       <section className="mt-6 rounded-lg bg-[#f1f5f9] p-6">
-        <h2 className="font-bold text-[#0f172a]">Quick answer</h2>
+        <h2 className="font-bold text-[#0f172a]">{t.common.ui.quickAnswer}</h2>
         <p className="text-[#475569] mt-2">{c.quickAnswer}</p>
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">Definition</h2>
+        <h2 className="text-2xl font-bold text-[#0f172a]">{t.common.ui.definition}</h2>
         <p className="text-[#475569] mt-2">{c.definition}</p>
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">Key points</h2>
+        <h2 className="text-2xl font-bold text-[#0f172a]">{t.common.ui.keyPoints}</h2>
         <ul className="mt-3 space-y-2 text-[#475569]">
           {c.keyPoints.map((x) => (
             <li key={x}>· {x}</li>
@@ -122,7 +122,7 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">Step by step</h2>
+        <h2 className="text-2xl font-bold text-[#0f172a]">{t.common.ui.stepByStep}</h2>
         <ol className="mt-3 space-y-3">
           {c.steps.map((s, i) => (
             <li key={s.title} className="card p-4">
@@ -136,7 +136,7 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">Examples</h2>
+        <h2 className="text-2xl font-bold text-[#0f172a]">{t.common.ui.examples}</h2>
         <div className="mt-3 space-y-3">
           {c.examples.map((x) => (
             <div key={x.title} className="card p-4">
@@ -148,7 +148,7 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">Checklist</h2>
+        <h2 className="text-2xl font-bold text-[#0f172a]">{t.common.ui.checklist}</h2>
         <ul className="mt-3 space-y-1 text-[#475569]">
           {c.checklist.map((x) => (
             <li key={x}>☐ {x}</li>
@@ -218,7 +218,7 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">Sources</h2>
+        <h2 className="text-2xl font-bold text-[#0f172a]">{t.common.ui.sources}</h2>
         <ul className="mt-3 space-y-2 text-sm text-[#475569]">
           {c.sources.map((s) => (
             <li key={s.name}>
@@ -236,12 +236,12 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
 
       {relatedGuides.length > 0 && (
         <section className="mt-8">
-          <h2 className="text-2xl font-bold text-[#0f172a]">Related guides</h2>
+          <h2 className="text-2xl font-bold text-[#0f172a]">{t.common.ui.relatedGuides}</h2>
           <ul className="mt-3 space-y-2">
             {relatedGuides.map((x) => (
               <li key={x.slug}>
                 <Link href={p(`/guides/${x.slug}`)} className="text-[#0f4c81] hover:underline">
-                  {zh ? x.titleZh : x.titleEn}
+                  {pickZhPair(locale, x.titleEn, x.titleZh)}
                 </Link>
               </li>
             ))}

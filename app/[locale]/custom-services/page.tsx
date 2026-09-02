@@ -51,7 +51,7 @@ export default async function Page({ params }: Props) {
   ];
 
   return (
-    <main className="container py-10">
+    <main className="container py-10" data-track-page="custom_services">
       <JsonLd data={jsonLd} />
 
       <section className="max-w-3xl mx-auto text-center mb-10">

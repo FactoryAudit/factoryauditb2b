@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { ANALYTICS_EVENTS, trackEvent } from "@/lib/analytics";
 
 export type RfqFormDict = {
   labels: {
@@ -21,6 +22,13 @@ export type RfqFormDict = {
 
 export default function RfqForm({ t }: { t: RfqFormDict }) {
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
+  // rfq_start 只发一次：用户首次与表单交互即视为产生询价意图
+  const startedRef = useRef(false);
+  const handleFirstTouch = () => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    trackEvent(ANALYTICS_EVENTS.rfqStart);
+  };
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -54,7 +62,12 @@ export default function RfqForm({ t }: { t: RfqFormDict }) {
       });
       const data = await res.json();
       setStatus(data.ok ? "ok" : "error");
-      if (data.ok) formEl.reset();
+      if (data.ok) {
+        // 核心转化：询价提交成功。
+        // 只发事件名，绝不附带表单内容（邮箱/电话/公司名等一律不进 Analytics）。
+        trackEvent(ANALYTICS_EVENTS.rfqSubmit);
+        formEl.reset();
+      }
     } catch {
       setStatus("error");
     }
@@ -70,7 +83,11 @@ export default function RfqForm({ t }: { t: RfqFormDict }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="card p-6 max-w-2xl space-y-4">
+    <form
+      onSubmit={handleSubmit}
+      onFocus={handleFirstTouch}
+      className="card p-6 max-w-2xl space-y-4"
+    >
       <div className="grid md:grid-cols-2 gap-4">
         <div>
           <label className="text-sm font-medium">{t.labels.firstName}</label>

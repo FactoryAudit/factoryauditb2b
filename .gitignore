@@ -75,3 +75,13 @@ appdata_sizes.txt
 
 # Wrangler 本地开发变量
 .dev.vars
+
+# 会话临时产物（验证抓页 / 截图 / 一次性诊断脚本）
+v_*.html
+suppliers_jp.html
+suppliers-en.png
+suppliers-now.html
+.playwright-cli/
+scripts/_*.py
+scripts/translate_missing.py
+scripts/i18n_curated.json

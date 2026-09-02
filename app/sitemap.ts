@@ -98,8 +98,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // });
   // standards.forEach((s) => pages.push(...emit(`/supplier-audit/${s.code}`)));
 
-  // Country × AuditType 指南页。仅 Phase 1 覆盖国家（中/越/泰）生成，
-  // 其余国家尚无差异内容，生成会被判为薄内容、稀释主题权重（PRD §8）。
+  // Country × AuditType 指南页。国家清单来自 listCountries()（已派生自 COVERAGE_COUNTRIES），
+  // 这里的 coverageCodes 只作为第二道保险：确保 roadmap 国家永远不会漏进站点地图（PRD §8）。
   const coverageCodes = new Set(COVERAGE_COUNTRIES.map((c) => c.code));
   seo.auditTypes.forEach((a) => {
     countries

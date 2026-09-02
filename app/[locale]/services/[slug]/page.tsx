@@ -10,6 +10,7 @@ import {
 import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import { twDeep, pickZhCopy, pickZhPair } from "@/lib/tw";
 
 const BASE = "https://factoryauditb2b.com";
 type Params = { locale: string; slug: string };
@@ -34,8 +35,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     });
   }
   const t = await getDictionary(locale);
-  const countryName = locale === "zh" ? entry.country.nameZh : entry.country.name;
-  const serviceName = locale === "zh" ? entry.service.nameZh : entry.service.nameEn;
+  const countryName = pickZhPair(locale, entry.country.name, entry.country.nameZh);
+  const serviceName = pickZhPair(locale, entry.service.nameEn, entry.service.nameZh);
   return buildPageMetadata({
     locale,
     path: `/services/${slug}`,
@@ -55,12 +56,11 @@ export default async function CountryServicePage({ params }: { params: Promise<P
   const t = await getDictionary(locale);
   const sc = t.serviceCountry;
   const p = (href: string) => localePath(locale, href);
-  const zh = locale === "zh";
-
-  const countryName = zh ? entry.country.nameZh : entry.country.name;
-  const serviceName = zh ? entry.service.nameZh : entry.service.nameEn;
-  const svc = zh ? entry.service.zh : entry.service;
-  const countryCopy = zh ? entry.country.zh : entry.country.en;
+  const countryName = pickZhPair(locale, entry.country.name, entry.country.nameZh);
+  const serviceName = pickZhPair(locale, entry.service.nameEn, entry.service.nameZh);
+  const svc =
+    locale === "zh" ? entry.service.zh : locale === "zh-TW" ? twDeep(entry.service.zh) : entry.service;
+  const countryCopy = pickZhCopy(locale, entry.country);
 
   // 国家层面与该服务直接相关的要点：核查页用 verificationNotes，验厂页用 auditNotes。
   // 这是各国页面之间真正的内容差异，不是把 China 替换成 Vietnam。
@@ -127,8 +127,17 @@ export default async function CountryServicePage({ params }: { params: Promise<P
     },
   ];
 
+  const crossSlug =
+    entry.service.code === "verification"
+      ? `${entry.country.slug}-factory-audit`
+      : `${entry.country.slug}-supplier-verification`;
+  const crossService = COVERAGE_SERVICE_SLUGS.find((x) => x.slug === crossSlug)?.service;
+
   const related = COVERAGE_COUNTRIES.filter((c) => c.slug !== entry.country.slug).flatMap((c) => [
-    { href: `/services/${c.slug}-${entry.service.slugSuffix}`, label: `${zh ? c.nameZh : c.name} ${serviceName}` },
+    {
+      href: `/services/${c.slug}-${entry.service.slugSuffix}`,
+      label: `${pickZhPair(locale, c.name, c.nameZh)} ${serviceName}`,
+    },
   ]);
 
   return (
@@ -136,7 +145,7 @@ export default async function CountryServicePage({ params }: { params: Promise<P
       <JsonLd data={jsonLd} />
 
       <nav className="mb-4 text-sm text-[#64748b]">
-        <Link href={p("/")} className="hover:underline">Home</Link>
+        <Link href={p("/")} className="hover:underline">{t.common.ui.home}</Link>
         {" / "}
         <Link href={p("/services")} className="hover:underline">{sc.breadcrumb}</Link>
         {" / "}{countryName} {serviceName}
@@ -248,22 +257,11 @@ export default async function CountryServicePage({ params }: { params: Promise<P
             </Link>
           </li>
           <li>
-            <Link
-              href={p(
-                entry.service.code === "verification"
-                  ? `/services/${entry.country.slug}-factory-audit`
-                  : `/services/${entry.country.slug}-supplier-verification`
-              )}
-              className="text-[#0f4c81] hover:underline"
-            >
+            <Link href={p(crossSlug)} className="text-[#0f4c81] hover:underline">
               {countryName}{" "}
-              {entry.service.code === "verification"
-                ? zh
-                  ? COVERAGE_SERVICE_SLUGS.find((x) => x.slug === `${entry.country.slug}-factory-audit`)!.service.nameZh
-                  : "Factory Audit"
-                : zh
-                  ? "供应商核查"
-                  : "Supplier Verification"}
+              {crossService
+                ? pickZhPair(locale, crossService.nameEn, crossService.nameZh)
+                : pickZhPair(locale, entry.service.nameEn, entry.service.nameZh)}
             </Link>
           </li>
         </ul>

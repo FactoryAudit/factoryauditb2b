@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ANALYTICS_EVENTS, trackEvent } from "@/lib/analytics";
 
 export type InspectionFormDict = {
   firstName: string;
@@ -42,6 +43,8 @@ export default function InspectionRequestForm({ t }: { t: InspectionFormDict }) 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // 埋点：发起验货请求（带验货阶段，用于统计需求分布；工厂地址/邮箱等一律不发）
+    trackEvent(ANALYTICS_EVENTS.inspectionRequest, { value: form.stage });
     if (!form.factoryLocation.trim() || !form.product.trim() || !form.email.trim()) return;
     setStatus("loading");
     try {
@@ -68,6 +71,10 @@ export default function InspectionRequestForm({ t }: { t: InspectionFormDict }) 
         }),
       });
       const data = await res.json();
+      if (data.ok) {
+        // 核心转化：验货请求提交成功
+        trackEvent(ANALYTICS_EVENTS.inspectionRequestSubmit, { value: form.stage });
+      }
       setStatus(data.ok ? "ok" : "error");
     } catch {
       setStatus("error");

@@ -8,6 +8,7 @@ import { overallLevel } from "@/lib/riskEngine";
 import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import { pickZhCopy, pickZhPair } from "@/lib/tw";
 
 const BASE = "https://factoryauditb2b.com";
 type Params = { locale: string; slug: string };
@@ -36,7 +37,7 @@ export async function generateMetadata({
     });
   }
   const t = await getDictionary(locale);
-  const name = locale === "zh" ? country.nameZh : country.name;
+  const name = pickZhPair(locale, country.name, country.nameZh);
   return buildPageMetadata({
     locale,
     path: `/countries/${slug}`,
@@ -54,8 +55,8 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
   const t = await getDictionary(locale);
   const h = t.countryHub;
   const p = (href: string) => localePath(locale, href);
-  const name = locale === "zh" ? country.nameZh : country.name;
-  const copy = locale === "zh" ? country.zh : country.en;
+  const name = pickZhPair(locale, country.name, country.nameZh);
+  const copy = pickZhCopy(locale, country);
 
   const suppliers = (await listSuppliersByCountry(country.code)).slice(0, 12);
 
@@ -96,7 +97,7 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
   ];
 
   const services = COVERAGE_SERVICES.map((svc) => ({
-    title: locale === "zh" ? svc.nameZh : svc.nameEn,
+    title: pickZhPair(locale, svc.nameEn, svc.nameZh),
     href: `/services/${country.slug}-${svc.slugSuffix}`,
   }));
 

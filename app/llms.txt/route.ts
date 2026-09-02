@@ -1,9 +1,10 @@
 import { listAuditTypes, listStandards, listCountries } from "@/lib/taxonomy";
 import { LOCALES, LOCALE_META, localePath } from "@/i18n/config";
-import { COVERAGE_COUNTRIES, COVERAGE_SERVICE_SLUGS } from "@/lib/coverage";
+import { COVERAGE_COUNTRIES, COVERAGE_SERVICE_SLUGS, COVERAGE_COUNTRY_SENTENCE } from "@/lib/coverage";
 import { GUIDES } from "@/lib/guides";
 import { CASE_STUDIES } from "@/lib/caseStudies";
 import { FIELD_REPORTS } from "@/lib/fieldReports";
+import { MEMBERSHIP_PRICE_USD } from "@/lib/suppliers";
 
 // /llms.txt —— 面向 AI 抓取工具（ChatGPT / Perplexity / Bing Copilot 等）的站点说明文件。
 // 完全由中央 taxonomy 引擎驱动，确保与数据库一致（§91 单一事实来源）。
@@ -11,6 +12,9 @@ import { FIELD_REPORTS } from "@/lib/fieldReports";
 export const dynamic = "force-static";
 
 const BASE = "https://factoryauditb2b.com";
+
+// 覆盖国名统一用 COVERAGE_COUNTRY_SENTENCE（派生自 COVERAGE_COUNTRIES）。
+// 历史坑：这里曾经硬编码「China, Vietnam and Thailand」，实际已扩到 5 国。
 
 import enDict from "@/i18n/dictionaries/en.json";
 
@@ -37,7 +41,7 @@ export async function GET() {
   lines.push("");
   lines.push("## What this site is for");
   lines.push(
-    "Buyers use the free tools to assess a supplier, then request an independent verification or an on-site factory audit before placing an order. Coverage in Phase 1 is China, Vietnam and Thailand."
+    `Buyers use the free tools to assess a supplier, then request an independent verification or an on-site factory audit before placing an order. Coverage is ${COVERAGE_COUNTRY_SENTENCE}.`
   );
   lines.push("");
 
@@ -49,13 +53,13 @@ export async function GET() {
   lines.push(`- [Supplier Verification Checklist](${BASE}/tools/supplier-verification-checklist): 29 checks across 6 stages to complete before placing an order.`);
   lines.push(`- [Supplier Directory](${BASE}/suppliers): Featured suppliers with verification level, risk score and evidence on record. Each listed supplier has a public profile at /suppliers/{slug} showing company, products, capabilities and risk score; verification evidence and risk detail are member content. Coverage is limited; post an RFQ if a supplier is not listed.`);
   lines.push(`- [Free Account Registration](${BASE}/register): Free account for buyers — unlocks more supplier fields, up to 5 full profiles per month, saved profiles and side-by-side comparison. No payment card required.`);
-  lines.push(`- [Buyer Membership](${BASE}/membership): Founding Buyer membership at $49/year — full supplier database access, verification evidence summaries, factory details, advanced filters and export.`);
+  lines.push(`- [Buyer Membership](${BASE}/membership): Founding Buyer membership at $${MEMBERSHIP_PRICE_USD}/year — full supplier database access, verification evidence summaries, factory details, advanced filters and export.`);
   lines.push(`- [Services](${BASE}/services): Supplier verification, factory audit, inspection, sourcing and supplier improvement.`);
   lines.push(`- [Supplier Verification Service](${BASE}/services/supplier-verification): Independent verification of registration, site, capability, quality and compliance.`);
   lines.push(`- [Factory Audit Request](${BASE}/factory-audit/request): Request an on-site audit against your required standard.`);
   lines.push(`- [Product Inspection](${BASE}/services/inspection): Pre-production, during-production, pre-shipment and container loading inspection, quoted per inspection and fulfilled by an independent inspector.`);
   lines.push(`- [Supplier Monitoring](${BASE}/monitoring): Scheduled re-checks of verified facts with alerts when registration status, legal name, address or certificate validity changes. Subscription, quoted per supplier per year.`);
-  lines.push(`- [Coverage](${BASE}/countries): Country-specific sourcing risks, verification and audit considerations for China, Vietnam and Thailand.`);
+  lines.push(`- [Coverage](${BASE}/countries): Country-specific sourcing risks, verification and audit considerations for ${COVERAGE_COUNTRY_SENTENCE}.`);
   lines.push(`- [Resources](${BASE}/resources): Supplier intelligence guides and tools.`);
   lines.push(`- [Case Studies](${BASE}/case-studies): Anonymised illustrative walk-throughs of verification, audit, inspection and sourcing. Not client testimonials.`);
   lines.push(`- [Field Reports](${BASE}/field-reports): Short anonymised notes from inspection, audit and verification work, showing what is checked on site and how findings are recorded.`);

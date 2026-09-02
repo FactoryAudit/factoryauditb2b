@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { localePath, type Locale } from "@/i18n/config";
 import WhatsAppLink, { whatsappConfigured } from "@/components/WhatsAppLink";
+import SocialLinks from "@/components/SocialLinks";
 import { SERVICE_MENU, type ServiceMenuDict } from "@/lib/nav";
 import { COVERAGE_COUNTRIES } from "@/lib/coverage";
 import { operatorLine } from "@/lib/trust";
@@ -222,6 +223,7 @@ export default function SiteFooter({
         </div>
       </div>
       <div className="border-t border-white/10 py-4 text-center text-xs text-[#94a3b8]">
+        <SocialLinks className="mb-4 justify-center" />
         {dict.copyright}
       </div>
     </footer>

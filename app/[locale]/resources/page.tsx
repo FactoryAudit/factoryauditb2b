@@ -6,6 +6,7 @@ import { TOOL_ORDER } from "@/lib/nav";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import { pickZhPair } from "@/lib/tw";
 
 const PATH = "/resources";
 const BASE = "https://factoryauditb2b.com";
@@ -29,7 +30,6 @@ export default async function ResourcesPage({ params }: Props) {
   const t = await getDictionary(locale);
   const r = t.resourcesIndex;
   const p = (href: string) => localePath(locale, href);
-  const zh = locale === "zh";
 
   const categories = GUIDE_CATEGORY_ORDER.map((key) => ({
     key,
@@ -37,7 +37,7 @@ export default async function ResourcesPage({ params }: Props) {
     desc: r.cat[key].desc,
     guides: guidesByCategory(key).map((g) => ({
       href: `/guides/${g.slug}`,
-      title: zh ? g.titleZh : g.titleEn,
+      title: pickZhPair(locale, g.titleEn, g.titleZh),
       updated: g.updated,
     })),
   })).filter((c) => c.guides.length > 0);

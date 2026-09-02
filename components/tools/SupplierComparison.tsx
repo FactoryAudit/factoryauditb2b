@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   DIMENSION_STRUCTURE,
   LEVEL_SCORE,
   overallLevel,
   type RiskLevel,
 } from "@/lib/riskEngine";
+import { ANALYTICS_EVENTS, trackEvent } from "@/lib/analytics";
 
 // 对比工具的档位：沿用风险引擎的等级锚点（LEVEL_SCORE）与权重（DIMENSION_STRUCTURE），
 // 不在这里重复定义任何分数或阈值，避免与引擎脱节。
@@ -64,22 +65,34 @@ export default function SupplierComparison({
     defaultNames.map((name, i) => ({ id: i + 1, name, ratings: {} }))
   );
   const [nextId, setNextId] = useState(defaultNames.length + 1);
+  // 埋点：首次实际比较动作（改评分 / 添加供应商）= 开始比较，每个会话只发一次
+  const startedRef = useRef(false);
+
+  const markStarted = () => {
+    if (!startedRef.current) {
+      startedRef.current = true;
+      trackEvent(ANALYTICS_EVENTS.profileCompare);
+    }
+  };
 
   const setName = (id: number, name: string) =>
     setSuppliers((prev) => prev.map((s) => (s.id === id ? { ...s, name } : s)));
 
-  const setRating = (id: number, dimKey: string, level: CompareLevel) =>
+  const setRating = (id: number, dimKey: string, level: CompareLevel) => {
+    markStarted();
     setSuppliers((prev) =>
       prev.map((s) =>
         s.id === id ? { ...s, ratings: { ...s.ratings, [dimKey]: level } } : s
       )
     );
+  };
 
   const remove = (id: number) =>
     setSuppliers((prev) => (prev.length > 2 ? prev.filter((s) => s.id !== id) : prev));
 
   const add = () => {
     if (suppliers.length >= MAX_SUPPLIERS) return;
+    markStarted();
     setSuppliers((prev) => [
       ...prev,
       { id: nextId, name: `${dict.supplierLabel} ${String.fromCharCode(65 + prev.length)}`, ratings: {} },
