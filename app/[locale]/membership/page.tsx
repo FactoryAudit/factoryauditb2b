@@ -101,7 +101,7 @@ export default async function MembershipPage({
           <p className="mt-2 text-center text-sm text-[#b9cfe6]">{m.priceNote}</p>
           <Link
             href={p("/custom-services")}
-            className="mt-6 block w-full rounded-lg bg-white py-3 text-center font-semibold text-[#0f4c81] transition hover:bg-[#e6eef6]"
+            className="mt-6 block w-full rounded-lg bg-[#d4232a] py-3 text-center font-semibold text-white shadow-lg transition hover:brightness-95"
             data-track={ANALYTICS_EVENTS.membershipCta}
           >
             {m.cta}

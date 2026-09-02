@@ -2597,7 +2597,111 @@
     "ctaLead": "为你的真实供应商获取同等详细程度的报告。核验按供应商计价，起价 99 美元，按项目报价。",
     "ctaPrimary": "申请核验",
     "ctaSecondary": "返回定价页",
-    "disclaimer": "本样例使用虚构数据，仅供演示。它不是对任何真实公司的核验。第三方原始文件绝不转发给买家。"
+    "disclaimer": "本样例使用虚构数据，仅供演示。它不是对任何真实公司的核验。第三方原始文件绝不转发给买家。",
+    "execSection": "01 · 执行摘要",
+    "execLead": "综合得分 76/100 由下方八个维度的得分汇总而成。每个维度都对照公开记录与现场证据核查。",
+    "strengthsTitle": "优势",
+    "strengths": [
+      "注册地址与宝安区一栋 6200㎡ 工业厂房一致，视频核验已确认",
+      "出口资质自 2016 年持续有效，无海关处罚记录",
+      "连续三年税务信用评级 B 级",
+      "2019 年以来股权结构稳定，无股权质押记录"
+    ],
+    "concernsTitle": "需关注事项",
+    "concerns": [
+      "2026 年 3 月美国买家提起的一起合同纠纷仍在审理中",
+      "ISO 9001 证书 40 天后到期，需确认续证"
+    ],
+    "profileNote": "数据来源：国家企业信用信息公示系统（GSXT）与深圳市市场监督管理局。",
+    "usccLabel": "统一社会信用代码",
+    "legalRepLabel": "法定代表人",
+    "capitalLabel": "注册资本",
+    "companyTypeValue": "有限责任公司",
+    "addressLabel": "注册地址",
+    "scopeLabel": "经营范围",
+    "ownershipSection": "03 · 股权结构",
+    "ownershipNote": "股东名册取自 GSXT，并与股权质押、冻结记录交叉核对。",
+    "shareholderLabel": "股东",
+    "stakeLabel": "持股比例",
+    "sinceLabel": "入股时间",
+    "ownershipAnalyst": "2019 年以来股权结构稳定。香港主体由同一法定代表人控制，与档案中的付款指令一致。",
+    "courtSection": "04 · 涉诉与执行记录",
+    "courtNote": "数据来源：中国裁判文书网与最高人民法院执行信息公开网。",
+    "caseTotalLabel": "案件总数（2019–2026）",
+    "caseOpenLabel": "审理中",
+    "caseDefendantLabel": "作为被告",
+    "enforcementLabel": "被执行人记录",
+    "courtSummary": "2026 年 3 月立案的一起买卖合同纠纷正在审理中；此前两起案件已结案，一起延迟交货案判供应商胜诉。",
+    "changesSection": "05 · 工商变更记录",
+    "changesNote": "工商变更全部公开。法定代表人或注册资本在近期发生变更，是静默风险最强的信号之一。",
+    "impactLow": "影响低",
+    "impactMedium": "影响中",
+    "changes": [
+      {
+        "date": "2025 年 2 月",
+        "impact": "low",
+        "title": "经营范围扩增——新增医疗器械零部件",
+        "desc": "与买方的既定产品线一致。"
+      },
+      {
+        "date": "2023 年 6 月",
+        "impact": "medium",
+        "title": "注册资本增至 800 万元",
+        "desc": "已核实为实缴而非认缴。"
+      },
+      {
+        "date": "2022 年 8 月",
+        "impact": "medium",
+        "title": "列入经营异常名录",
+        "desc": "因年报逾期；六个月后移除。"
+      }
+    ],
+    "taxSection": "06 · 税务与进出口合规",
+    "taxNote": "供应商的税务评级，是判断其如何对待合同义务（包括对您的义务）的强有力指标。",
+    "taxLabels": {
+      "rating": "税务信用评级",
+      "vat": "增值税纳税人类型",
+      "customs": "海关备案号",
+      "export": "2025 年申报出口额",
+      "markets": "主要出口市场"
+    },
+    "siteSection": "07 · 工厂实地核验",
+    "siteNote": "对注册地址进行卫星与街景影像核查，并进行一次实时、不预先排练的视频验厂。",
+    "siteCheckLabels": {
+      "address": "注册地址与实体厂房一致",
+      "signage": "厂房标牌与公司名称一致",
+      "video": "实时视频验厂",
+      "machinery": "设备与产品描述一致",
+      "workers": "视频验厂时在岗工人数"
+    },
+    "certSection": "08 · 认证与知识产权",
+    "certNote": "在可行范围内，证书真伪均已对照发证机构登记系统核实。",
+    "certLabels": {
+      "certification": "认证项目",
+      "number": "证书编号",
+      "issued": "发证时间",
+      "status": "状态"
+    },
+    "certStatusValid": "有效",
+    "certStatusOnfile": "已存档",
+    "ipNote": "实用新型专利 7 项、外观设计专利 3 项、注册商标 2 项。未发现针对该公司的知识产权侵权诉讼。",
+    "analystRole": "高级分析师 · 深圳团队",
+    "analystQuote": "一家经营 11 年的真实制造商，出口记录干净——但有两处细节需要在付款前确认。",
+    "actionsTitle": "付款前请完成两件事",
+    "recommendActions": [
+      "取得一封盖章函件，确认香港主体为受控关联方，且向该主体付款即视为履行大陆发票义务。",
+      "在发货前取得续期后的 ISO 9001 证书。"
+    ],
+    "formTitle": "获取完整样例报告",
+    "formLead": "留下您的邮箱，我们会把完整样例报告（PDF）和一页阅读指南发送给您。",
+    "formEmailPlaceholder": "您的企业邮箱",
+    "formCta": "发送报告给我",
+    "formPrivacyNote": "我们仅用您的邮箱发送样例报告。不发送垃圾邮件，可随时退订。",
+    "socialTitle": "关注我们，获取采购洞察",
+    "socialNote": "验厂案例研究与供应商风险解读。",
+    "formSuccess": "请查收邮件——样例报告即将送达。",
+    "formError": "出错了，请重试，或直接给我们发邮件。",
+    "companyTypeLabel": "公司类型"
   },
   "compare": {
     "metaTitle": "供应商对比工具 — 2 到 5 家并排比较",

@@ -2500,7 +2500,111 @@
     "ctaLead": "Get this level of detail for your actual supplier. Verification starts at $99 per supplier, quoted per project.",
     "ctaPrimary": "Request verification",
     "ctaSecondary": "Back to pricing",
-    "disclaimer": "This sample uses fictional data and is for demonstration only. It is not a verification of any real company. Original third-party documents are never forwarded to buyers."
+    "disclaimer": "This sample uses fictional data and is for demonstration only. It is not a verification of any real company. Original third-party documents are never forwarded to buyers.",
+    "execSection": "01 · Executive summary",
+    "execLead": "The overall 76/100 is built from the eight dimension scores below. Each dimension is checked against public records and on-site evidence.",
+    "strengthsTitle": "Strengths",
+    "strengths": [
+      "Registered address matches a 6,200 m² industrial building, confirmed by video walkthrough",
+      "Export licence active since 2016 with no customs penalties",
+      "Tax credit rating B for three consecutive years",
+      "Ownership unchanged since 2019, no equity pledges filed"
+    ],
+    "concernsTitle": "Areas of concern",
+    "concerns": [
+      "One open contract dispute filed by a US buyer in March 2026, still pending",
+      "ISO 9001 certificate expires in 40 days, renewal confirmation required"
+    ],
+    "profileNote": "Sourced from the National Enterprise Credit Information System (GSXT) and the Shenzhen Administration for Market Regulation.",
+    "usccLabel": "Unified Social Credit Code",
+    "legalRepLabel": "Legal representative",
+    "capitalLabel": "Registered capital",
+    "companyTypeValue": "Limited liability company",
+    "addressLabel": "Registered address",
+    "scopeLabel": "Business scope",
+    "ownershipSection": "03 · Ownership & control",
+    "ownershipNote": "Shareholder ledger from GSXT, cross-referenced with equity-pledge and freeze records.",
+    "shareholderLabel": "Shareholder",
+    "stakeLabel": "Stake",
+    "sinceLabel": "Since",
+    "ownershipAnalyst": "Ownership has been stable since 2019. The Hong Kong entity is controlled by the same legal representative, consistent with the payment instructions on file.",
+    "courtSection": "04 · Court & enforcement records",
+    "courtNote": "Pulled from China Judgements Online and the Supreme People's Court enforcement register.",
+    "caseTotalLabel": "Total cases (2019–2026)",
+    "caseOpenLabel": "Open",
+    "caseDefendantLabel": "As defendant",
+    "enforcementLabel": "Enforcement (被执行人)",
+    "courtSummary": "One sales contract dispute (filed Mar 2026) is pending. Two earlier cases were settled; one delivery-delay case was ruled in the supplier's favour.",
+    "changesSection": "05 · Registration changes",
+    "changesNote": "Every registration change is public. Late-stage changes to legal representative or capital are the strongest quiet predictor of trouble.",
+    "impactLow": "Low impact",
+    "impactMedium": "Medium impact",
+    "changes": [
+      {
+        "date": "Feb 2025",
+        "impact": "low",
+        "title": "Business scope expanded — medical device components",
+        "desc": "Consistent with the buyer's declared product line."
+      },
+      {
+        "date": "Jun 2023",
+        "impact": "medium",
+        "title": "Registered capital increased to CNY 8M",
+        "desc": "Verified as paid-in, not just subscribed."
+      },
+      {
+        "date": "Aug 2022",
+        "impact": "medium",
+        "title": "Listed on operational-abnormality list",
+        "desc": "Late annual report; removed six months later."
+      }
+    ],
+    "taxSection": "06 · Tax & trade compliance",
+    "taxNote": "A supplier's tax rating is a strong proxy for how they treat contractual obligations.",
+    "taxLabels": {
+      "rating": "Tax credit rating",
+      "vat": "VAT status",
+      "customs": "Customs registration",
+      "export": "Declared export volume 2025",
+      "markets": "Top destinations"
+    },
+    "siteSection": "07 · Factory site verification",
+    "siteNote": "Satellite and street imagery review, plus a live unscripted video walkthrough of the registered address.",
+    "siteCheckLabels": {
+      "address": "Registered address matches physical building",
+      "signage": "Signage matches company name",
+      "video": "Live video walkthrough",
+      "machinery": "Machinery matches product claims",
+      "workers": "Workers on floor during walkthrough"
+    },
+    "certSection": "08 · Certifications & IP",
+    "certNote": "Certificate authenticity checked against issuer registries where available.",
+    "certLabels": {
+      "certification": "Certification",
+      "number": "Number",
+      "issued": "Issued",
+      "status": "Status"
+    },
+    "certStatusValid": "Valid",
+    "certStatusOnfile": "On file",
+    "ipNote": "7 utility-model patents, 3 design patents, 2 registered trademarks. No IP infringement lawsuits filed.",
+    "analystRole": "Senior analyst · Shenzhen desk",
+    "analystQuote": "A genuine manufacturer with eleven years of history and clean export records — but two loose ends to resolve before wiring the balance.",
+    "actionsTitle": "Before wiring the balance",
+    "recommendActions": [
+      "Get a signed letter confirming the Hong Kong entity is a controlled affiliate and that payment to it discharges the mainland invoice.",
+      "Request the renewed ISO 9001 certificate before shipment release."
+    ],
+    "formTitle": "Get the full sample report",
+    "formLead": "Leave your email and we will send the complete sample report as a PDF with a one-page reading guide.",
+    "formEmailPlaceholder": "Your work email",
+    "formCta": "Send me the report",
+    "formPrivacyNote": "We only use your email to send the sample. No spam, unsubscribe anytime.",
+    "socialTitle": "Follow us for sourcing insights",
+    "socialNote": "Factory verification case studies and supplier-risk explainers.",
+    "formSuccess": "Check your inbox — the sample report is on its way.",
+    "formError": "Something went wrong. Please try again or email us directly.",
+    "companyTypeLabel": "Company type"
   },
   "compare": {
     "metaTitle": "Supplier Comparison Tool — Compare 2 to 5 Suppliers Side by Side",

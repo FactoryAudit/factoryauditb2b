@@ -286,9 +286,9 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
 
       {/* 会员解锁 CTA（价值引导：先给免费路径，再给付费） */}
       <section className="card p-8 bg-gradient-to-br from-[#0f4c81] to-[#163a5f] text-white mb-10">
-        <h2 className="text-2xl font-bold">{s.unlockTitle}</h2>
-        <p className="mt-2 max-w-2xl text-[#dbe7f3]">{s.unlockLead}</p>
-        <p className="mt-2 text-sm text-[#b9cfe6]">
+        <h2 className="text-2xl font-bold text-white">{s.unlockTitle}</h2>
+        <p className="mt-2 max-w-2xl text-white/90">{s.unlockLead}</p>
+        <p className="mt-2 text-sm text-white/75">
           {s.unlockNote.replace("{n}", String(FREE_PROFILE_LIMIT))}
         </p>
         <div className="mt-5 flex flex-wrap gap-3">

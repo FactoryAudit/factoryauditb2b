@@ -2597,7 +2597,111 @@
     "ctaLead": "Get this level of detail for your actual supplier. Verification starts at $99 per supplier, quoted per project.",
     "ctaPrimary": "Request verification",
     "ctaSecondary": "Back to pricing",
-    "disclaimer": "This sample uses fictional data and is for demonstration only. It is not a verification of any real company. Original third-party documents are never forwarded to buyers."
+    "disclaimer": "This sample uses fictional data and is for demonstration only. It is not a verification of any real company. Original third-party documents are never forwarded to buyers.",
+    "execSection": "01 · Resumo executivo",
+    "execLead": "A pontuação geral de 76/100 é formada pelas oito dimensões abaixo. Cada dimensão é verificada contra registros públicos e evidências in loco.",
+    "strengthsTitle": "Pontos fortes",
+    "strengths": [
+      "Endereço registrado corresponde a um prédio industrial de 6.200 m², confirmado por vídeo",
+      "Licença de exportação ativa desde 2016, sem penalidades alfandegárias",
+      "Classificação fiscal B por três anos consecutivos",
+      "Estrutura societária estável desde 2019, sem penhor de ações"
+    ],
+    "concernsTitle": "Pontos de atenção",
+    "concerns": [
+      "Uma disputa contratual aberta por um comprador americano em março de 2026, ainda pendente",
+      "Certificado ISO 9001 expira em 40 dias, confirmação de renovação necessária"
+    ],
+    "profileNote": "Fonte: Sistema Nacional de Informações de Crédito Empresarial (GSXT) e Administração de Regulação do Mercado de Shenzhen.",
+    "usccLabel": "Código de crédito social unificado",
+    "legalRepLabel": "Representante legal",
+    "capitalLabel": "Capital registrado",
+    "companyTypeValue": "Sociedade limitada",
+    "addressLabel": "Endereço registrado",
+    "scopeLabel": "Objeto social",
+    "ownershipSection": "03 · Propriedade e controle",
+    "ownershipNote": "Registro de acionistas do GSXT, cruzado com registros de penhor e congelamento de ações.",
+    "shareholderLabel": "Acionista",
+    "stakeLabel": "Participação",
+    "sinceLabel": "Desde",
+    "ownershipAnalyst": "A estrutura societária é estável desde 2019. A entidade de Hong Kong é controlada pelo mesmo representante legal, consistente com as instruções de pagamento registradas.",
+    "courtSection": "04 · Registros judiciais e de execução",
+    "courtNote": "Fonte: China Judgements Online e o registro de execuções do Supremo Tribunal Popular.",
+    "caseTotalLabel": "Total de casos (2019–2026)",
+    "caseOpenLabel": "Em aberto",
+    "caseDefendantLabel": "Como réu",
+    "enforcementLabel": "Execução (被执行人)",
+    "courtSummary": "Uma disputa de contrato de compra e venda (março de 2026) está pendente. Dois casos anteriores foram encerrados; um caso de atraso de entrega foi julgado a favor do fornecedor.",
+    "changesSection": "05 · Alterações cadastrais",
+    "changesNote": "Toda alteração cadastral é pública. Mudanças tardias de representante legal ou capital são o indicador silencioso mais forte de problemas.",
+    "impactLow": "Baixo impacto",
+    "impactMedium": "Impacto médio",
+    "changes": [
+      {
+        "date": "Fev 2025",
+        "impact": "low",
+        "title": "Objeto social ampliado — componentes de dispositivos médicos",
+        "desc": "Consistente com a linha de produtos declarada pelo comprador."
+      },
+      {
+        "date": "Jun 2023",
+        "impact": "medium",
+        "title": "Capital registrado aumentado para CNY 8M",
+        "desc": "Verificado como integralizado, não apenas subscrito."
+      },
+      {
+        "date": "Ago 2022",
+        "impact": "medium",
+        "title": "Incluído na lista de anormalidades operacionais",
+        "desc": "Relatório anual atrasado; removido seis meses depois."
+      }
+    ],
+    "taxSection": "06 · Conformidade fiscal e comercial",
+    "taxNote": "A classificação fiscal de um fornecedor é um forte indicador de como ele trata obrigações contratuais.",
+    "taxLabels": {
+      "rating": "Classificação fiscal",
+      "vat": "Status de IVA",
+      "customs": "Registro alfandegário",
+      "export": "Volume exportado declarado 2025",
+      "markets": "Principais destinos"
+    },
+    "siteSection": "07 · Verificação da fábrica",
+    "siteNote": "Revisão de imagens de satélite e de rua, além de uma vídeo visita ao vivo sem roteiro do endereço registrado.",
+    "siteCheckLabels": {
+      "address": "Endereço registrado corresponde ao prédio físico",
+      "signage": "Placa corresponde ao nome da empresa",
+      "video": "Vídeo visita ao vivo",
+      "machinery": "Maquinário corresponde aos produtos declarados",
+      "workers": "Trabalhadores presentes durante a vídeo visita"
+    },
+    "certSection": "08 · Certificações e propriedade intelectual",
+    "certNote": "A autenticidade dos certificados foi verificada nos registros dos emissores quando possível.",
+    "certLabels": {
+      "certification": "Certificação",
+      "number": "Número",
+      "issued": "Emitido",
+      "status": "Status"
+    },
+    "certStatusValid": "Válido",
+    "certStatusOnfile": "Em arquivo",
+    "ipNote": "7 patentes de modelo de utilidade, 3 patentes de desenho, 2 marcas registradas. Nenhuma ação de violação de PI contra a empresa.",
+    "analystRole": "Analista sênior · Mesa de Shenzhen",
+    "analystQuote": "Um fabricante real com onze anos de história e registro de exportação limpo — mas duas pontas soltas para resolver antes de transferir o saldo.",
+    "actionsTitle": "Antes de transferir o saldo",
+    "recommendActions": [
+      "Obter uma carta assinada confirmando que a entidade de Hong Kong é uma afiliada controlada e que o pagamento a ela quita a fatura continental.",
+      "Solicitar o certificado ISO 9001 renovado antes da liberação do embarque."
+    ],
+    "formTitle": "Receba o relatório de amostra completo",
+    "formLead": "Deixe seu e-mail e enviaremos o relatório completo em PDF com um guia de leitura de uma página.",
+    "formEmailPlaceholder": "Seu e-mail corporativo",
+    "formCta": "Enviar relatório",
+    "formPrivacyNote": "Usamos seu e-mail apenas para enviar a amostra. Sem spam, cancele quando quiser.",
+    "socialTitle": "Siga-nos para dicas de sourcing",
+    "socialNote": "Estudos de caso de verificação de fábricas e análises de risco de fornecedores.",
+    "formSuccess": "Verifique sua caixa de entrada — o relatório de amostra está a caminho.",
+    "formError": "Algo deu errado. Tente novamente ou escreva-nos diretamente.",
+    "companyTypeLabel": "Tipo de empresa"
   },
   "compare": {
     "metaTitle": "Supplier Comparison Tool — Compare 2 to 5 Suppliers Side by Side",

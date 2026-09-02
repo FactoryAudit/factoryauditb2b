@@ -2603,7 +2603,111 @@
     "ctaLead": "Get this level of detail for your actual supplier. Verification starts at $99 per supplier, quoted per project.",
     "ctaPrimary": "Request verification",
     "ctaSecondary": "Back to pricing",
-    "disclaimer": "This sample uses fictional data and is for demonstration only. It is not a verification of any real company. Original third-party documents are never forwarded to buyers."
+    "disclaimer": "This sample uses fictional data and is for demonstration only. It is not a verification of any real company. Original third-party documents are never forwarded to buyers.",
+    "execSection": "01 · エグゼクティブサマリー",
+    "execLead": "総合スコア76/100は、以下の8つのディメンションのスコアから構成されます。各ディメンションは公開記録と現地調査の証拠に照らして確認されます。",
+    "strengthsTitle": "強み",
+    "strengths": [
+      "登録住所が宝安区の6,200㎡の工業ビルと一致（ビデオウォークスルーで確認）",
+      "2016年以降輸出許可が有効、税関処罰なし",
+      "3年連続で納税信用格付B",
+      "2019年以降株主構成に変更なし、株式質入れの記録なし"
+    ],
+    "concernsTitle": "注意事項",
+    "concerns": [
+      "2026年3月に米国バイヤーが提起した契約紛争が係争中",
+      "ISO 9001認証が40日後に失効、更新確認が必要"
+    ],
+    "profileNote": "出典：国家企業信用情報公示システム（GSXT）および深セン市市場監督管理局。",
+    "usccLabel": "統一社会信用コード",
+    "legalRepLabel": "法定代表者",
+    "capitalLabel": "登録資本",
+    "companyTypeValue": "有限責任公司",
+    "addressLabel": "登録住所",
+    "scopeLabel": "事業範囲",
+    "ownershipSection": "03 · 所有と支配構造",
+    "ownershipNote": "株主名簿はGSXTから取得し、株式質入れ・差し押さえ記録と照合。",
+    "shareholderLabel": "株主",
+    "stakeLabel": "保有比率",
+    "sinceLabel": "取得時期",
+    "ownershipAnalyst": "2019年以降、株主構成は安定しています。香港の法人は同一の法定代表者が支配しており、ファイル上の支払い指示と整合します。",
+    "courtSection": "04 · 訴訟・執行記録",
+    "courtNote": "出典：中国裁判文書網および最高人民法院執行情報公開網。",
+    "caseTotalLabel": "訴訟総数（2019–2026）",
+    "caseOpenLabel": "係争中",
+    "caseDefendantLabel": "被告として",
+    "enforcementLabel": "被執行人記録",
+    "courtSummary": "2026年3月提起の売買契約紛争が係争中。過去2件は和解、納期遅延1件は供給者勝訴の判決。",
+    "changesSection": "05 · 登記変更記録",
+    "changesNote": "登記変更はすべて公開されています。法定代表者や資本の直近の変更は、問題の最も強い静かな予兆です。",
+    "impactLow": "影響度：低",
+    "impactMedium": "影響度：中",
+    "changes": [
+      {
+        "date": "2025年2月",
+        "impact": "low",
+        "title": "事業範囲の拡大——医療機器部品を追加",
+        "desc": "バイヤーの申告製品ラインと一致。"
+      },
+      {
+        "date": "2023年6月",
+        "impact": "medium",
+        "title": "登録資本を800万元に増資",
+        "desc": "払込済み（単なる申込ではない）と確認。"
+      },
+      {
+        "date": "2022年8月",
+        "impact": "medium",
+        "title": "経営異常名簿に記載",
+        "desc": "年次報告の遅延によるもの。6か月後に解除。"
+      }
+    ],
+    "taxSection": "06 · 税務・輸出入コンプライアンス",
+    "taxNote": "供給者の納税信用格付は、契約上の義務をどう扱うかを示す有力な指標です。",
+    "taxLabels": {
+      "rating": "納税信用格付",
+      "vat": "付加価値税区分",
+      "customs": "税関登録番号",
+      "export": "2025年申告輸出額",
+      "markets": "主要輸出先"
+    },
+    "siteSection": "07 · 工場現地検証",
+    "siteNote": "登録住所の衛星・ストリートビュー調査に加え、台本なしのライブビデオウォークスルーを実施。",
+    "siteCheckLabels": {
+      "address": "登録住所と実在建物の一致",
+      "signage": "看板と会社名の一致",
+      "video": "ライブビデオウォークスルー",
+      "machinery": "設備と製品説明の一致",
+      "workers": "ウォークスルー時の従業員数"
+    },
+    "certSection": "08 · 認証と知的財産",
+    "certNote": "可能な範囲で、認証の真正性を発行機関の登録と照合。",
+    "certLabels": {
+      "certification": "認証",
+      "number": "番号",
+      "issued": "発行",
+      "status": "ステータス"
+    },
+    "certStatusValid": "有効",
+    "certStatusOnfile": "保管中",
+    "ipNote": "実用新案7件、意匠3件、登録商標2件。同社に対する知的財産権侵害訴訟なし。",
+    "analystRole": "シニアアナリスト · 深セン拠点",
+    "analystQuote": "11年の歴史を持つ実在のメーカーで輸出記録もクリーン——ただし残金振込前に確認すべき点が2つあります。",
+    "actionsTitle": "残金振込前の確認事項",
+    "recommendActions": [
+      "香港法人が支配下の関連会社であること、および同社への支払いが中国本土の請求書の支払いを満たすことを確認する署名入り書面を取得する。",
+      "出荷前に更新済みのISO 9001認証を入手する。"
+    ],
+    "formTitle": "完全なサンプルレポートを受け取る",
+    "formLead": "メールアドレスを残していただければ、完全なサンプルレポート（PDF）と1ページの読み方ガイドをお送りします。",
+    "formEmailPlaceholder": "勤務先メールアドレス",
+    "formCta": "レポートを送る",
+    "formPrivacyNote": "メールはサンプル送付にのみ使用します。迷惑メールは送信せず、いつでも購読解除できます。",
+    "socialTitle": "調達のヒントをフォロー",
+    "socialNote": "工場検証のケーススタディとサプライヤーリスク解説。",
+    "formSuccess": "メールボックスを確認してください。サンプルレポートをお送りしました。",
+    "formError": "エラーが発生しました。もう一度お試しいただくか、直接メールでお問い合わせください。",
+    "companyTypeLabel": "会社種別"
   },
   "compare": {
     "metaTitle": "Supplier Comparison Tool — Compare 2 to 5 Suppliers Side by Side",

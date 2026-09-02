@@ -2603,7 +2603,111 @@
     "ctaLead": "Get this level of detail for your actual supplier. Verification starts at $99 per supplier, quoted per project.",
     "ctaPrimary": "Request verification",
     "ctaSecondary": "Back to pricing",
-    "disclaimer": "This sample uses fictional data and is for demonstration only. It is not a verification of any real company. Original third-party documents are never forwarded to buyers."
+    "disclaimer": "This sample uses fictional data and is for demonstration only. It is not a verification of any real company. Original third-party documents are never forwarded to buyers.",
+    "execSection": "01 · Zusammenfassung",
+    "execLead": "Die Gesamtbewertung von 76/100 setzt sich aus den acht unten stehenden Dimensionswerten zusammen. Jede Dimension wird anhand öffentlicher Aufzeichnungen und Vor-Ort-Beweisen geprüft.",
+    "strengthsTitle": "Stärken",
+    "strengths": [
+      "Registrierte Adresse entspricht einem Industriegebäude mit 6.200 m², per Video-Walkthrough bestätigt",
+      "Exportlizenz seit 2016 aktiv, keine Zollstrafen",
+      "Steuerbonität B seit drei aufeinanderfolgenden Jahren",
+      "Eigentümerstruktur seit 2019 unverändert, keine Anteilsverpfändungen"
+    ],
+    "concernsTitle": "Zu prüfende Punkte",
+    "concerns": [
+      "Ein offener Vertragsstreit, eingereicht von einem US-Käufer im März 2026, noch anhängig",
+      "ISO-9001-Zertifikat läuft in 40 Tagen ab, Verlängerung erforderlich"
+    ],
+    "profileNote": "Quelle: Nationales System zur Unternehmenskreditinformation (GSXT) und die Marktaufsichtsbehörde von Shenzhen.",
+    "usccLabel": "Einheitlicher Sozialkredit-Code",
+    "legalRepLabel": "Gesetzlicher Vertreter",
+    "capitalLabel": "Registriertes Kapital",
+    "companyTypeValue": "Gesellschaft mit beschränkter Haftung",
+    "addressLabel": "Registrierte Adresse",
+    "scopeLabel": "Geschäftszweck",
+    "ownershipSection": "03 · Eigentum und Kontrolle",
+    "ownershipNote": "Aktionärsregister aus GSXT, abgeglichen mit Verpfändungs- und Einfrierungsregistern.",
+    "shareholderLabel": "Aktionär",
+    "stakeLabel": "Anteil",
+    "sinceLabel": "Seit",
+    "ownershipAnalyst": "Die Eigentümerstruktur ist seit 2019 stabil. Das Hongkong-Unternehmen wird vom selben gesetzlichen Vertreter kontrolliert, konsistent mit den Zahlungsanweisungen in den Akten.",
+    "courtSection": "04 · Gerichts- und Vollstreckungsverfahren",
+    "courtNote": "Quelle: China Judgements Online und das Vollstreckungsregister des Obersten Volksgerichts.",
+    "caseTotalLabel": "Fälle gesamt (2019–2026)",
+    "caseOpenLabel": "Offen",
+    "caseDefendantLabel": "Als Beklagter",
+    "enforcementLabel": "Vollstreckung (被执行人)",
+    "courtSummary": "Ein Vertragsstreit (eingereicht März 2026) ist anhängig. Zwei frühere Fälle wurden beigelegt; ein Lieferverzugsfall wurde zugunsten des Lieferanten entschieden.",
+    "changesSection": "05 · Registeränderungen",
+    "changesNote": "Jede Registeränderung ist öffentlich. Späte Änderungen bei Vertreter oder Kapital sind der stärkste stille Indikator für Probleme.",
+    "impactLow": "Geringe Auswirkung",
+    "impactMedium": "Mittlere Auswirkung",
+    "changes": [
+      {
+        "date": "Feb 2025",
+        "impact": "low",
+        "title": "Geschäftszweck erweitert — Komponenten für Medizinprodukte",
+        "desc": "Konsistent mit der deklarierten Produktlinie des Käufers."
+      },
+      {
+        "date": "Jun 2023",
+        "impact": "medium",
+        "title": "Registriertes Kapital auf 8 Mio. CNY erhöht",
+        "desc": "Als eingezahlt verifiziert, nicht nur gezeichnet."
+      },
+      {
+        "date": "Aug 2022",
+        "impact": "medium",
+        "title": "Auf Liste betrieblicher Auffälligkeiten",
+        "desc": "Verspäteter Jahresbericht; sechs Monate später entfernt."
+      }
+    ],
+    "taxSection": "06 · Steuer- und Handelskonformität",
+    "taxNote": "Die Steuerbonität eines Lieferanten ist ein starker Indikator dafür, wie er vertragliche Pflichten behandelt.",
+    "taxLabels": {
+      "rating": "Steuerbonität",
+      "vat": "Mehrwertsteuerstatus",
+      "customs": "Zollregistrierung",
+      "export": "Deklariertes Exportvolumen 2025",
+      "markets": "Hauptziele"
+    },
+    "siteSection": "07 · Werksverifizierung",
+    "siteNote": "Satelliten- und Straßenbildprüfung sowie ein ungeskripteter Video-Walkthrough der registrierten Adresse.",
+    "siteCheckLabels": {
+      "address": "Registrierte Adresse entspricht dem physischen Gebäude",
+      "signage": "Beschilderung entspricht dem Firmennamen",
+      "video": "Live-Video-Walkthrough",
+      "machinery": "Maschinen entsprechen den Produktangaben",
+      "workers": "Arbeiter im Werk während des Walkthroughs"
+    },
+    "certSection": "08 · Zertifizierungen und geistiges Eigentum",
+    "certNote": "Die Authentizität der Zertifikate wurde soweit möglich gegen Ausstellerregister geprüft.",
+    "certLabels": {
+      "certification": "Zertifizierung",
+      "number": "Nummer",
+      "issued": "Ausgestellt",
+      "status": "Status"
+    },
+    "certStatusValid": "Gültig",
+    "certStatusOnfile": "Aktenkundig",
+    "ipNote": "7 Gebrauchsmuster, 3 Geschmacksmuster, 2 eingetragene Marken. Keine IP-Verletzungsklagen gegen das Unternehmen.",
+    "analystRole": "Senior-Analyst · Standort Shenzhen",
+    "analystQuote": "Ein echter Hersteller mit elfjähriger Geschichte und sauberen Exportakten — aber zwei offene Punkte vor der Überweisung des Restbetrags.",
+    "actionsTitle": "Vor der Überweisung des Restbetrags",
+    "recommendActions": [
+      "Ein unterzeichnetes Schreiben einholen, das bestätigt, dass das Hongkong-Unternehmen eine kontrollierte Tochter ist und die Zahlung an sie die Festlandrechnung begleicht.",
+      "Das verlängerte ISO-9001-Zertifikat vor der Versandfreigabe anfordern."
+    ],
+    "formTitle": "Den vollständigen Beispielbericht erhalten",
+    "formLead": "Hinterlassen Sie Ihre E-Mail und wir senden Ihnen den vollständigen Beispielbericht als PDF mit einer einseitigen Leseanleitung.",
+    "formEmailPlaceholder": "Ihre geschäftliche E-Mail",
+    "formCta": "Bericht senden",
+    "formPrivacyNote": "Wir nutzen Ihre E-Mail nur zum Versand der Beispielprobe. Kein Spam, jederzeit abbestellbar.",
+    "socialTitle": "Folgen Sie uns für Einkaufseinblicke",
+    "socialNote": "Werksprüfungs-Fallstudien und Lieferantenrisiko-Erklärungen.",
+    "formSuccess": "Prüfen Sie Ihren Posteingang — der Beispielbericht ist unterwegs.",
+    "formError": "Etwas ist schiefgelaufen. Versuchen Sie es erneut oder schreiben Sie uns direkt.",
+    "companyTypeLabel": "Unternehmenstyp"
   },
   "compare": {
     "metaTitle": "Supplier Comparison Tool — Compare 2 to 5 Suppliers Side by Side",
