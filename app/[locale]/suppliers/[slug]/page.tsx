@@ -16,6 +16,7 @@ import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { ANALYTICS_EVENTS } from "@/lib/suppliers";
+import { UnlockGate } from "@/components/UnlockGate";
 
 const BASE = "https://factoryauditb2b.com";
 const DIRECTORY_PATH = "/suppliers";
@@ -255,35 +256,82 @@ export default async function SupplierProfilePage({
             <div className="text-xs text-[#64748b]">{sp.industryLabel}</div>
             <div className="font-semibold">{s.industryCode ?? "—"}</div>
           </div>
-          <div className="card p-4 opacity-80">
-            <div className="text-xs text-[#64748b]">{sp.employeesLabel}</div>
-            <div className="font-semibold text-[#94a3b8]">
-              🔒 <Link href={p("/register")} className="text-[#0f4c81] underline">{sp.freeLockCta}</Link>
+          {/* 员工规模（free 层）—— 服务端只输出锁态，真值由客户端解锁后填入 */}
+          <UnlockGate
+            layer="free"
+            variant="raw"
+            registerHref={p("/register")}
+            membershipHref={p("/membership")}
+            locked={
+              <div className="card p-4 opacity-80">
+                <div className="text-xs text-[#64748b]">{sp.employeesLabel}</div>
+                <div className="font-semibold text-[#94a3b8]">
+                  🔒{" "}
+                  <Link href={p("/register")} className="text-[#0f4c81] underline">
+                    {sp.freeLockCta}
+                  </Link>
+                </div>
+              </div>
+            }
+          >
+            <div className="card p-4">
+              <div className="text-xs text-[#64748b]">{sp.employeesLabel}</div>
+              <div className="font-semibold">{s.employees || "—"}</div>
             </div>
-          </div>
-          <div className="card p-4 opacity-80">
-            <div className="text-xs text-[#64748b]">{sp.exportMarketsLabel}</div>
-            <div className="font-semibold text-[#94a3b8]">
-              🔒 <Link href={p("/register")} className="text-[#0f4c81] underline">{sp.freeLockCta}</Link>
+          </UnlockGate>
+
+          {/* 出口市场（free 层） */}
+          <UnlockGate
+            layer="free"
+            variant="raw"
+            registerHref={p("/register")}
+            membershipHref={p("/membership")}
+            locked={
+              <div className="card p-4 opacity-80">
+                <div className="text-xs text-[#64748b]">{sp.exportMarketsLabel}</div>
+                <div className="font-semibold text-[#94a3b8]">
+                  🔒{" "}
+                  <Link href={p("/register")} className="text-[#0f4c81] underline">
+                    {sp.freeLockCta}
+                  </Link>
+                </div>
+              </div>
+            }
+          >
+            <div className="card p-4">
+              <div className="text-xs text-[#64748b]">{sp.exportMarketsLabel}</div>
+              <div className="font-semibold">
+                {s.exportMarkets.length > 0 ? s.exportMarkets.join(", ") : "—"}
+              </div>
             </div>
-          </div>
+          </UnlockGate>
         </div>
 
-        {/* 免费层解锁说明（先价值后锁定） */}
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#cbd5e1] bg-[#f8fafc] px-4 py-3">
-          <div className="text-sm text-[#475569]">
-            <span className="font-semibold text-[#0f172a]">{sp.freeLockTitle}.</span>{" "}
-            {sp.freeLockLead}
-          </div>
-          <Link
-            href={p("/register")}
-            className="btn btn-outline text-sm"
-            data-track={ANALYTICS_EVENTS.profileFreeCta}
-            data-track-value={s.slug}
-          >
-            {sp.freeLockCta}
-          </Link>
-        </div>
+        {/* 免费层解锁说明（已登录后不再显示注册引导） */}
+        <UnlockGate
+          layer="free"
+          variant="raw"
+          registerHref={p("/register")}
+          membershipHref={p("/membership")}
+          locked={
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#cbd5e1] bg-[#f8fafc] px-4 py-3">
+              <div className="text-sm text-[#475569]">
+                <span className="font-semibold text-[#0f172a]">{sp.freeLockTitle}.</span>{" "}
+                {sp.freeLockLead}
+              </div>
+              <Link
+                href={p("/register")}
+                className="btn btn-outline text-sm"
+                data-track={ANALYTICS_EVENTS.profileFreeCta}
+                data-track-value={s.slug}
+              >
+                {sp.freeLockCta}
+              </Link>
+            </div>
+          }
+        >
+          {null}
+        </UnlockGate>
       </section>
 
       {/* 平台核验范围（方法论级，公开） */}
@@ -316,7 +364,20 @@ export default async function SupplierProfilePage({
             {s.evidence.slice(0, 2).map((e) => (
               <li key={e.id} className="flex justify-between gap-3">
                 <span>{evidenceLabel(e.type, uiLocale)}</span>
-                <span className="text-[#94a3b8]">🔒</span>
+                {/* paid 层：证据核验状态 */}
+                <UnlockGate
+                  layer="paid"
+                  registerHref={p("/register")}
+                  membershipHref={p("/membership")}
+                  locked={<span className="text-[#94a3b8]">🔒</span>}
+                >
+                  <span
+                    className="font-medium"
+                    style={{ color: LEVEL_COLOR[overallLevel(s.riskScore ?? 0)] }}
+                  >
+                    {statusLabel[e.status] ?? e.status}
+                  </span>
+                </UnlockGate>
               </li>
             ))}
             {s.evidence.length === 0 && (
@@ -331,32 +392,58 @@ export default async function SupplierProfilePage({
           <ul className="space-y-2 text-sm text-[#475569]">
             <li className="flex justify-between gap-3">
               <span>{sp.inspectionHistoryLabel}</span>
-              <span className="text-[#94a3b8]">🔒</span>
+              <UnlockGate
+                layer="paid"
+                registerHref={p("/register")}
+                membershipHref={p("/membership")}
+                locked={<span className="text-[#94a3b8]">🔒</span>}
+              >
+                <span className="font-medium text-[#0f172a]">{s.inspectionHistory}</span>
+              </UnlockGate>
             </li>
             <li className="flex justify-between gap-3">
               <span>{sp.certificationsLabel ?? ev.title}</span>
-              <span className="text-[#94a3b8]">🔒</span>
+              <UnlockGate
+                layer="paid"
+                registerHref={p("/register")}
+                membershipHref={p("/membership")}
+                locked={<span className="text-[#94a3b8]">🔒</span>}
+              >
+                <span className="font-medium text-[#0f172a]">
+                  {s.certifications.length > 0 ? s.certifications.join(", ") : "—"}
+                </span>
+              </UnlockGate>
             </li>
           </ul>
           <p className="text-xs text-[#64748b] mt-3">{sp.paidLockNote}</p>
         </div>
       </section>
 
-      {/* 付费解锁 CTA */}
-      <section className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#0f4c81] bg-[#e6eef6] px-4 py-3">
-        <div className="text-sm text-[#475569]">
-          <span className="font-semibold text-[#0f172a]">{sp.paidLockTitle}.</span>{" "}
-          {sp.paidLockLead}
-        </div>
-        <Link
-          href={p("/membership")}
-          className="btn btn-primary text-sm"
-          data-track={ANALYTICS_EVENTS.profilePaidCta}
-          data-track-value={s.slug}
-        >
-          {sp.paidLockCta}
-        </Link>
-      </section>
+      {/* 付费解锁 CTA（成为 Founding Buyer 后不再显示） */}
+      <UnlockGate
+        layer="paid"
+        variant="raw"
+        registerHref={p("/register")}
+        membershipHref={p("/membership")}
+        locked={
+          <section className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#0f4c81] bg-[#e6eef6] px-4 py-3">
+            <div className="text-sm text-[#475569]">
+              <span className="font-semibold text-[#0f172a]">{sp.paidLockTitle}.</span>{" "}
+              {sp.paidLockLead}
+            </div>
+            <Link
+              href={p("/membership")}
+              className="btn btn-primary text-sm"
+              data-track={ANALYTICS_EVENTS.profilePaidCta}
+              data-track-value={s.slug}
+            >
+              {sp.paidLockCta}
+            </Link>
+          </section>
+        }
+      >
+        {null}
+      </UnlockGate>
 
       {/* Report preview（风险分公开，报告为服务产品） */}
       <section className="mt-10 card p-8">

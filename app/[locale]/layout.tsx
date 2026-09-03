@@ -7,6 +7,7 @@ import SiteFooter from "@/components/SiteFooter";
 import AiChatWidget from "@/components/AiChatWidget";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
 import AnalyticsScripts from "@/components/AnalyticsScripts";
+import { AuthProvider } from "@/components/AuthProvider";
 import JsonLd from "@/components/JsonLd";
 import { LOCALES, isLocale, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
@@ -165,11 +166,16 @@ export default async function RootLayout({
       <body>
         <JsonLd data={siteGraph} />
         <AnalyticsScripts />
-        <AnalyticsTracker />
-        <SiteHeader locale={locale} dict={t.nav} />
-        <main>{children}</main>
-        <SiteFooter locale={locale} dict={t.footer} menu={t.nav.menu} whatsappLabel={t.common.whatsappChat} />
-        <AiChatWidget locale={locale} dict={t.aiChat} whatsappLabel={t.common.whatsappChat} />
+        {/* AuthProvider 包裹全站：会员状态在 hydration 后由客户端拉 /api/me 获得。
+            放在这里而不是页面内部，是为了让 UnlockGate 在任何页面都能取到状态。
+            它不读 cookie、不阻断渲染，因此不影响各页面的 ● SSG 预渲染。 */}
+        <AuthProvider>
+          <AnalyticsTracker />
+          <SiteHeader locale={locale} dict={t.nav} />
+          <main>{children}</main>
+          <SiteFooter locale={locale} dict={t.footer} menu={t.nav.menu} whatsappLabel={t.common.whatsappChat} />
+          <AiChatWidget locale={locale} dict={t.aiChat} whatsappLabel={t.common.whatsappChat} />
+        </AuthProvider>
       </body>
     </html>
   );

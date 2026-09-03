@@ -62,6 +62,10 @@ export const ANALYTICS_EVENTS = {
   login: "login",
   membershipView: "membership_page_view",
   membershipCta: "membership_cta",
+  /** 会员软锁 UnlockGate 里的「注册 / 升级」CTA 点击（V2.1） */
+  unlockGateCta: "unlock_gate_cta",
+  /** 免费额度用尽（V2.1）：本月已看满 FREE_PROFILE_LIMIT 家 */
+  quotaReached: "free_quota_reached",
 
   // ---- 商业转化（Commercial Conversion）----
   foundingBuyerView: "founding_buyer_view",

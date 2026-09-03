@@ -9,7 +9,7 @@
 //   NOTIFY_ADMIN_EMAIL     管理员收件邮箱，必填才会发
 //   FROM_EMAIL             发件地址，默认 support@factoryauditb2b.com
 import nodemailer from "nodemailer";
-import { MEMBERSHIP_PRICE_USD } from "./suppliers";
+import { MEMBERSHIP_PRICE_USD, FREE_PROFILE_LIMIT } from "./suppliers";
 
 const mailProvider = (process.env.MAIL_PROVIDER || "smtp").toLowerCase();
 const httpMailConfigured = Boolean(process.env.MAIL_HTTP_KEY);
@@ -275,23 +275,25 @@ export async function notifyAdminBuyerRegister(data: {
   const f = data.fields;
   return sendMail({
     to: adminEmail,
-    subject: `[FactoryAuditB2B] New Free Account Sign-up ${data.id}`,
+    subject: `[FactoryAuditB2B] New Buyer Sign-up ${data.id}`,
     text: [
       `Account ID: ${data.id}`,
       "",
-      "— Free Account Registration —",
+      "— Buyer Account Created (V2.1) —",
       `Email: ${f.email ?? ""}`,
       `Name: ${f.name ?? ""}`,
       `Company: ${f.company ?? ""}`,
       "",
-      "Next steps: create the account in the admin system, confirm the email domain, then reply to the buyer with sign-in instructions.",
+      "Account was created automatically by Supabase Auth with a Free plan.",
+      "No manual setup is required. Review memberships in the admin dashboard if they request an upgrade.",
     ].join("\n"),
   });
 }
 
-// 买家回执：Reference ID + 审核周期 + 真实可用功能说明
-// 2026-09-03 修订：去掉「手动建号 + 发登录信息」空承诺（V2.0 无登录系统），
-// 改为与其他表单一致：收到 → 人工回复一个工作日；说明目录实际全开放。
+// 买家注册回执
+// 2026-09-03 修订：去掉「手动建号 + 发登录信息」空承诺（V2.0 无登录系统）。
+// 2026-09-03 再次修订（V2.1）：注册即自动建号，账号立即可用，
+//   因此改为「账号已创建 + 直接登录」，不再写「一个工作日内人工回复」。
 export async function notifyBuyerRegisterReceived(data: {
   email: string;
   name?: string | null;
@@ -300,16 +302,22 @@ export async function notifyBuyerRegisterReceived(data: {
   if (!data.email) return false;
   return sendMail({
     to: data.email,
-    subject: "We received your request — FactoryAuditB2B",
+    subject: "Your FactoryAuditB2B account is ready",
     text: [
       `Hi${data.name ? ` ${data.name}` : ""},`,
       "",
-      "We received your request for the Supplier Intelligence Directory.",
+      "Your FactoryAuditB2B account is ready. You can sign in now:",
+      "https://factoryauditb2b.com/login",
+      "",
       `Reference ID: ${data.id}`,
       "",
-      "Our team reviews requests manually and will reply within one business day.",
-      "The full supplier directory is free to browse on factoryauditb2b.com — no account is required to view profiles.",
-      `If you want Founding Buyer benefits ($${MEMBERSHIP_PRICE_USD}/year), reply to this email and we'll get you set up. Online payment is not open yet.`,
+      "With a free account you can:",
+      `- Open ${FREE_PROFILE_LIMIT} supplier profiles per month (company details, certifications, export markets)`,
+      "- Save suppliers to your list",
+      "- Submit RFQs and track their status",
+      "",
+      `Founding Buyer Membership ($${MEMBERSHIP_PRICE_USD}/year) unlocks the full directory, evidence records and risk breakdowns:`,
+      "https://factoryauditb2b.com/membership",
       "",
       "FactoryAuditB2B",
     ].join("\n"),
