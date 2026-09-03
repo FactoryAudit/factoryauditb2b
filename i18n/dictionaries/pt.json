@@ -3268,7 +3268,14 @@
     "rfqsTitle": "Minhas solicitações",
     "rfqsLead": "Solicitações que você enviou e o status atual de cada uma.",
     "rfqsEmpty": "Você ainda não enviou nenhuma solicitação.",
-    "rfqsEmptyCta": "Enviar uma solicitação"
+    "rfqsEmptyCta": "Enviar uma solicitação",
+    "savedMetaTitle": "Fornecedores salvos",
+    "savedMetaDesc": "Fornecedores que você salvou para avaliar depois.",
+    "rfqsMetaTitle": "Minhas solicitações",
+    "rfqsMetaDesc": "Solicitações que você enviou e o status atual.",
+    "submittedLabel": "Enviado",
+    "matchesLabel": "Fornecedores correspondentes",
+    "noMatches": "Nenhum fornecedor correspondente ainda."
   },
   "admin": {
     "title": "Administração",
@@ -3356,5 +3363,10 @@
     "noData": "Sem dados",
     "empty": "Ainda não há registros.",
     "editorNote": "As alterações entram no ar imediatamente. Os campos públicos ficam visíveis para todos e são indexados pelos buscadores, portanto mantenha-os corretos."
+  },
+  "quotaBanner": {
+    "cta": "Ver planos de assinatura",
+    "fallback": "Você usou todas as visualizações gratuitas deste mês.",
+    "dismissLabel": "Fechar"
   }
 }

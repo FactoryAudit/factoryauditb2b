@@ -13,6 +13,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { overallLevel, LEVEL_COLOR } from "@/lib/riskEngine";
+import { localePath, type Locale } from "@/i18n/config";
 
 export type SavedItem = {
   slug: string;
@@ -38,16 +39,24 @@ type Labels = {
 
 type Props = {
   labels: Labels;
-  /** 由页面用 localePath(locale, "/suppliers/{slug}") 的模板生成 */
-  profileHref: (slug: string) => string;
-  directoryHref: string;
+  /**
+   * 界面语言，用于在组件内部拼站内链接。
+   *
+   * ⚠️ 这里曾经是 `profileHref: (slug: string) => string`（由页面传函数进来），
+   * 结果是构建直接炸：`Functions cannot be passed directly to Client Components`。
+   * —— 服务端组件不能把**函数**当 props 传给客户端组件，因为要跨 RSC 边界序列化，
+   * 函数序列化不了（除非标 "use server"，但那是给 action 用的，不是给拼字符串用的）。
+   *
+   * 正解：传可序列化的 locale 字符串，链接在组件内部用 localePath 拼。
+   * 附带好处是全站链接拼法统一走 localePath 这一个事实源。
+   */
+  locale: Locale;
 };
 
-export default function SavedSuppliersList({
-  labels,
-  profileHref,
-  directoryHref,
-}: Props) {
+export default function SavedSuppliersList({ labels, locale }: Props) {
+  // 拼链放在组件内部：localePath 是纯函数，客户端可以安全调用
+  const profileHref = (slug: string) => localePath(locale, `/suppliers/${slug}`);
+  const directoryHref = localePath(locale, "/suppliers");
   const [items, setItems] = useState<SavedItem[] | null>(null);
   const [err, setErr] = useState(false);
   const [busy, setBusy] = useState<string | null>(null);

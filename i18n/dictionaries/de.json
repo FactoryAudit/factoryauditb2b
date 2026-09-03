@@ -3268,7 +3268,14 @@
     "rfqsTitle": "Meine Anfragen",
     "rfqsLead": "Von dir gesendete Anfragen und ihr aktueller Status.",
     "rfqsEmpty": "Du hast noch keine Anfrage gesendet.",
-    "rfqsEmptyCta": "Anfrage senden"
+    "rfqsEmptyCta": "Anfrage senden",
+    "savedMetaTitle": "Gespeicherte Lieferanten",
+    "savedMetaDesc": "Lieferanten, die du zur späteren Prüfung gespeichert hast.",
+    "rfqsMetaTitle": "Meine Anfragen",
+    "rfqsMetaDesc": "Von dir eingereichte Anfragen und ihr aktueller Status.",
+    "submittedLabel": "Eingereicht",
+    "matchesLabel": "Passende Lieferanten",
+    "noMatches": "Noch keine passenden Lieferanten."
   },
   "admin": {
     "title": "Verwaltung",
@@ -3356,5 +3363,10 @@
     "noData": "Keine Daten",
     "empty": "Noch keine Einträge.",
     "editorNote": "Änderungen werden sofort wirksam. Öffentliche Felder sind für alle sichtbar und werden von Suchmaschinen indexiert – halten Sie sie korrekt."
+  },
+  "quotaBanner": {
+    "cta": "Mitgliedschaften ansehen",
+    "fallback": "Sie haben alle kostenlosen Profilaufrufe dieses Monats genutzt.",
+    "dismissLabel": "Schließen"
   }
 }

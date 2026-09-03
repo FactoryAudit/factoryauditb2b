@@ -18,6 +18,9 @@ import { ANALYTICS_EVENTS } from "@/lib/suppliers";
 import { UnlockGate } from "@/components/UnlockGate";
 // 解锁字段按需取：真值不随页面下发，避免进 RSC flight payload（游客看源码就能读到）
 import { UnlockedValue, UnlockedEvidenceStatus } from "@/components/UnlockedValue";
+// 额度用尽时的升级引导（固定底栏）。整页只渲染一次，且必须是客户端组件 ——
+// 它依赖 /api/me 的档位，而页面本身要保持 ● SSG（不能在页面里读 cookies）。
+import QuotaBanner from "@/components/QuotaBanner";
 
 const BASE = "https://factoryauditb2b.com";
 const DIRECTORY_PATH = "/suppliers";
@@ -68,6 +71,7 @@ export default async function SupplierProfilePage({
   const ev = t.evidence;
   const v = t.verification;
   const rp = t.reportPreview;
+  const qb = t.quotaBanner;
   const p = (href: string) => localePath(locale, href);
 
   // 内容层只有 en/zh 两版：zh-TW 走 zh 文案并在各自函数内繁化，其余语言一律 en。
@@ -147,6 +151,20 @@ export default async function SupplierProfilePage({
   return (
     <main className="container py-10" data-track-page={ANALYTICS_EVENTS.profileView}>
       <JsonLd data={jsonLd} />
+
+      {/* 免费额度用尽时的升级引导。
+          放在这里而不是页面顶部横幅：固定底栏不占文档流，零布局抖动（CLS）。
+          未登录 / 付费会员 / 额度没用完时组件自己返回 null，不渲染任何东西。 */}
+      <QuotaBanner
+        slug={s.slug}
+        locale={locale}
+        contentLocale={uiLocale}
+        labels={{
+          cta: qb.cta,
+          fallback: qb.fallback,
+          dismissLabel: qb.dismissLabel,
+        }}
+      />
 
       {/* 面包屑（可见 + JSON-LD 一致） */}
       <nav aria-label={t.supplierProfile.directoryBreadcrumb} className="text-sm text-[#64748b]">

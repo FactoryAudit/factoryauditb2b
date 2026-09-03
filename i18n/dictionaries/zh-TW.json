@@ -3268,7 +3268,14 @@
     "rfqsTitle": "我的詢價",
     "rfqsLead": "你提交的詢價單及其目前狀態。",
     "rfqsEmpty": "你還沒有提交任何詢價。",
-    "rfqsEmptyCta": "提交詢價"
+    "rfqsEmptyCta": "提交詢價",
+    "savedMetaTitle": "我的收藏",
+    "savedMetaDesc": "你收藏、留待後續評估的供應商。",
+    "rfqsMetaTitle": "我的詢價單",
+    "rfqsMetaDesc": "你提交的詢價單及其目前狀態。",
+    "submittedLabel": "提交時間",
+    "matchesLabel": "匹配的供應商",
+    "noMatches": "暫無匹配的供應商。"
   },
   "admin": {
     "title": "管理後台",
@@ -3356,5 +3363,10 @@
     "noData": "無資料",
     "empty": "暫無記錄。",
     "editorNote": "修改立即生效。公開欄位對所有人可見且會被搜尋引擎收錄，請確保內容正確。"
+  },
+  "quotaBanner": {
+    "cta": "查看會員方案",
+    "fallback": "本月的免費查看額度已用完。",
+    "dismissLabel": "關閉"
   }
 }

@@ -3268,7 +3268,14 @@
     "rfqsTitle": "Mes demandes",
     "rfqsLead": "Demandes que vous avez envoyées et leur statut actuel.",
     "rfqsEmpty": "Vous n’avez encore envoyé aucune demande.",
-    "rfqsEmptyCta": "Envoyer une demande"
+    "rfqsEmptyCta": "Envoyer une demande",
+    "savedMetaTitle": "Fournisseurs enregistrés",
+    "savedMetaDesc": "Fournisseurs que vous avez enregistrés pour un examen ultérieur.",
+    "rfqsMetaTitle": "Mes demandes",
+    "rfqsMetaDesc": "Demandes que vous avez envoyées et leur statut actuel.",
+    "submittedLabel": "Envoyé",
+    "matchesLabel": "Fournisseurs correspondants",
+    "noMatches": "Aucun fournisseur correspondant pour l'instant."
   },
   "admin": {
     "title": "Administration",
@@ -3356,5 +3363,10 @@
     "noData": "Aucune donnée",
     "empty": "Aucun enregistrement pour l'instant.",
     "editorNote": "Les modifications sont publiées immédiatement. Les champs publics restent visibles par tous et sont indexés par les moteurs de recherche : gardez-les exacts."
+  },
+  "quotaBanner": {
+    "cta": "Voir les formules d'abonnement",
+    "fallback": "Vous avez utilisé toutes les consultations gratuites de ce mois.",
+    "dismissLabel": "Fermer"
   }
 }

@@ -171,7 +171,18 @@ export default async function RootLayout({
             它不读 cookie、不阻断渲染，因此不影响各页面的 ● SSG 预渲染。 */}
         <AuthProvider>
           <AnalyticsTracker />
-          <SiteHeader locale={locale} dict={t.nav} accountDict={t.auth.accountMenu} />
+          {/* 账号菜单的「收藏夹 / 询价单」入口文案复用 account 命名空间，
+              不在 auth.accountMenu 里再存一份 —— 两处文案永远是同一份，
+              改一个地方就够。 */}
+          <SiteHeader
+            locale={locale}
+            dict={t.nav}
+            accountDict={{
+              ...t.auth.accountMenu,
+              saved: t.account.navSaved,
+              rfqs: t.account.navRfqs,
+            }}
+          />
           <main>{children}</main>
           <SiteFooter locale={locale} dict={t.footer} menu={t.nav.menu} whatsappLabel={t.common.whatsappChat} />
           <AiChatWidget locale={locale} dict={t.aiChat} whatsappLabel={t.common.whatsappChat} />

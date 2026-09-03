@@ -3268,7 +3268,14 @@
     "rfqsTitle": "マイ RFQ",
     "rfqsLead": "送信した RFQ とその現在のステータスです。",
     "rfqsEmpty": "まだ RFQ を送信していません。",
-    "rfqsEmptyCta": "RFQ を送信する"
+    "rfqsEmptyCta": "RFQ を送信する",
+    "savedMetaTitle": "保存したサプライヤー",
+    "savedMetaDesc": "後で比較・検討するために保存したサプライヤーです。",
+    "rfqsMetaTitle": "マイ RFQ",
+    "rfqsMetaDesc": "提出した RFQ と現在のステータス。",
+    "submittedLabel": "提出日",
+    "matchesLabel": "マッチしたサプライヤー",
+    "noMatches": "まだマッチしたサプライヤーはいません。"
   },
   "admin": {
     "title": "管理画面",
@@ -3356,5 +3363,10 @@
     "noData": "データなし",
     "empty": "まだ記録はありません。",
     "editorNote": "変更はすぐに反映されます。公開フィールドは全員に表示され検索エンジンにも登録されるため、正確な内容を保ってください。"
+  },
+  "quotaBanner": {
+    "cta": "会員プランを見る",
+    "fallback": "今月の無料閲覧枠を使い切りました。",
+    "dismissLabel": "閉じる"
   }
 }

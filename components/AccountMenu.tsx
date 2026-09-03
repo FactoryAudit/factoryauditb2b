@@ -31,6 +31,10 @@ export type AccountMenuDict = {
   quota: string;
   /** 菜单按钮的 aria-label */
   menuLabel: string;
+  /** /account/saved 入口文案。复用 account.navSaved，不另存一份 */
+  saved: string;
+  /** /account/rfqs 入口文案。复用 account.navRfqs，不另存一份 */
+  rfqs: string;
 };
 
 export default function AccountMenu({
@@ -151,7 +155,28 @@ export default function AccountMenu({
             >
               {dict.myAccount}
             </Link>
-            {/* /account/saved 与 /account/rfqs 尚未建页，菜单里先不放入口 —— 不放假链接 */}
+            {/*
+              收藏夹与询价单入口。
+              这两个页面此前一直没建，所以按「不放假链接」的原则没放入口 ——
+              结果是用户收藏了供应商却找不到入口查看，功能等于不存在。
+              页面建好后这里就补上（若哪天页面被删，这两个入口也必须一起删）。
+            */}
+            <Link
+              href={p("/account/saved")}
+              role="menuitem"
+              className="block rounded-md px-3 py-2 text-sm hover:bg-[#f1f5f9]"
+              onClick={() => setOpen(false)}
+            >
+              {dict.saved}
+            </Link>
+            <Link
+              href={p("/account/rfqs")}
+              role="menuitem"
+              className="block rounded-md px-3 py-2 text-sm hover:bg-[#f1f5f9]"
+              onClick={() => setOpen(false)}
+            >
+              {dict.rfqs}
+            </Link>
             {!isPaid && (
               <Link
                 href={p("/membership")}

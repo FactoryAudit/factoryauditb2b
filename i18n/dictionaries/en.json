@@ -3268,7 +3268,14 @@
     "rfqsTitle": "My RFQs",
     "rfqsLead": "Requests you submitted and their current status.",
     "rfqsEmpty": "You have not submitted any RFQ yet.",
-    "rfqsEmptyCta": "Submit an RFQ"
+    "rfqsEmptyCta": "Submit an RFQ",
+    "savedMetaTitle": "Saved suppliers",
+    "savedMetaDesc": "Suppliers you saved for later review.",
+    "rfqsMetaTitle": "My RFQs",
+    "rfqsMetaDesc": "Requests you submitted and their current status.",
+    "submittedLabel": "Submitted",
+    "matchesLabel": "Matched suppliers",
+    "noMatches": "No suppliers matched yet."
   },
   "admin": {
     "title": "Admin",
@@ -3356,5 +3363,10 @@
     "noData": "No data",
     "empty": "No records yet.",
     "editorNote": "Changes go live immediately. Public fields stay visible to everyone and are indexed by search engines, so keep them accurate."
+  },
+  "quotaBanner": {
+    "cta": "View membership plans",
+    "fallback": "You've used all your free profile views this month.",
+    "dismissLabel": "Dismiss"
   }
 }
