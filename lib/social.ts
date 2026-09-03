@@ -11,7 +11,8 @@ export interface SocialLink {
 }
 
 export const SOCIAL_LINKS: SocialLink[] = [
-  { platform: "facebook", url: "https://www.facebook.com/huawenli21" },
+  // Facebook 入口已关闭（用户 2026-09-03 反馈：页脚图标太丑）
+  { platform: "facebook", url: "" },
   { platform: "youtube", url: "" },
   { platform: "linkedin", url: "" },
 ];

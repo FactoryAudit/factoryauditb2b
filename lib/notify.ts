@@ -289,7 +289,9 @@ export async function notifyAdminBuyerRegister(data: {
   });
 }
 
-// 买家回执：Reference ID + 建号周期 + 免费额度说明
+// 买家回执：Reference ID + 审核周期 + 真实可用功能说明
+// 2026-09-03 修订：去掉「手动建号 + 发登录信息」空承诺（V2.0 无登录系统），
+// 改为与其他表单一致：收到 → 人工回复一个工作日；说明目录实际全开放。
 export async function notifyBuyerRegisterReceived(data: {
   email: string;
   name?: string | null;
@@ -298,16 +300,16 @@ export async function notifyBuyerRegisterReceived(data: {
   if (!data.email) return false;
   return sendMail({
     to: data.email,
-    subject: "Your free account is being created — FactoryAuditB2B",
+    subject: "We received your request — FactoryAuditB2B",
     text: [
       `Hi${data.name ? ` ${data.name}` : ""},`,
       "",
-      "We received your free account request for the Supplier Intelligence Directory.",
+      "We received your request for the Supplier Intelligence Directory.",
       `Reference ID: ${data.id}`,
       "",
-      "Our team creates accounts manually and will email you your sign-in details within one business day.",
-      "Your free plan includes 5 supplier profiles per month, saved suppliers and basic comparison.",
-      `No credit card required. You can upgrade to Founding Buyer membership ($${MEMBERSHIP_PRICE_USD}/year) at any time.`,
+      "Our team reviews requests manually and will reply within one business day.",
+      "The full supplier directory is free to browse on factoryauditb2b.com — no account is required to view profiles.",
+      `If you want Founding Buyer benefits ($${MEMBERSHIP_PRICE_USD}/year), reply to this email and we'll get you set up. Online payment is not open yet.`,
       "",
       "FactoryAuditB2B",
     ].join("\n"),

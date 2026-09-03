@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { notifyAdminBuyerRegister, notifyBuyerRegisterReceived } from "@/lib/notify";
 import { checkRateLimit, clientIp } from "@/lib/rateLimit";
+import { appendRegisterRow } from "@/lib/googleSheets";
 
 // Free Account 注册（Supplier Directory V2 §12）。
-// 无数据库（V2.0）：数据经邮件送达管理员 → 人工建号（后续阶段接真实登录系统）。
+// 无数据库 / 无登录系统（V2.0）：注册实为「申请目录访问」，三路并行落数据：
+//   1. 通知管理员（邮件）→ 人工回复跟进；
+//   2. 给注册者发诚实回执（不承诺建号/登录，只承诺一个工作日内人工回复）；
+//   3. append 到 Google Sheet（可选 CRM，需 .env 配 webhook，fail-open）。
 // 表单不收集密码；字段白名单 + 限流 + 长度上限，与 supplier-register 同模式。
 
 const REG_LIMIT = 10; // 同 IP 每小时最多 10 次注册
@@ -51,10 +55,21 @@ export async function POST(req: NextRequest) {
 
     const id = crypto.randomUUID();
 
-    // 双邮件（通道未配置时降级为日志，不阻塞）
+    // 三路并行（通道未配置时各自降级为日志，不阻塞主流程）：
+    //   1. 通知管理员（邮件）
+    //   2. 给注册者发回执邮件
+    //   3. 把记录 append 到 Google Sheet（可选 CRM 视图；需 .env 配 webhook）
     await Promise.allSettled([
       notifyAdminBuyerRegister({ id, fields: f }),
       notifyBuyerRegisterReceived({ email, name: f.name, id }),
+      appendRegisterRow({
+        referenceId: id,
+        email,
+        name: f.name,
+        company: f.company ?? "",
+        submittedAt: new Date().toISOString(),
+        source: "buyer-register",
+      }),
     ]);
 
     return NextResponse.json({ ok: true, accountId: id });
