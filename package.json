@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "check:smtp": "node scripts/check-smtp.cjs",
+    "check:v21": "node --env-file-if-exists=.env scripts/check-v21-config.mjs",
     "cf:build": "opennextjs-cloudflare build",
     "cf:dev": "opennextjs-cloudflare dev",
     "cf:deploy": "opennextjs-cloudflare deploy"
