@@ -1,0 +1,83 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { isLocale, localePath, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/getDictionary";
+import { requireAdmin } from "@/lib/adminData";
+
+// Admin 布局 —— 权限闸门 + 侧边导航
+//
+// 三条安全设计：
+//   1. 非 admin 一律 notFound()（渲染 404），不返回 401/403 ——
+//      不向外界暴露"这里有个后台"，也不给攻击者可探测的响应差异。
+//   2. force-dynamic：后台数据必须实时，且绝不能被 Cloudflare 缓存。
+//   3. 这里只做**页面级**校验。每个 /api/admin/* 仍要各自调一次 requireAdmin()，
+//      因为 API 可以被直接调用，不经过任何 layout。
+//
+// 注意：本 layout 是整站唯一允许在页面层级读 cookie 的地方之一。
+//       /suppliers 与 /suppliers/[slug] 严禁这么做（会破坏 ● SSG）。
+
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
+
+type Props = {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+};
+
+const NAV = [
+  { href: "/admin", key: "navOverview" },
+  { href: "/admin/suppliers", key: "navSuppliers" },
+  { href: "/admin/rfqs", key: "navRfqs" },
+  { href: "/admin/members", key: "navMembers" },
+] as const;
+
+export default async function AdminLayout({ children, params }: Props) {
+  const { locale: raw } = await params;
+  if (!isLocale(raw)) notFound();
+  const locale: Locale = raw;
+
+  // 权限闸门：未登录 / 非管理员 → 404
+  const admin = await requireAdmin();
+  if (!admin) notFound();
+
+  const t = await getDictionary(locale);
+  const a = t.admin;
+  const p = (href: string) => localePath(locale, href);
+
+  return (
+    <div className="min-h-screen bg-[#f7f9fc]">
+      {/* 顶部：返回前台 + 当前管理员 */}
+      <div className="border-b border-[#e2e8f0] bg-white">
+        <div className="container flex items-center justify-between py-3 text-sm">
+          <span className="font-semibold text-[#0f172a]">{a.title}</span>
+          <div className="flex items-center gap-4">
+            <span className="text-[#64748b]">{admin.email ?? ""}</span>
+            <Link href={p("/")} className="text-[#0f4c81] hover:underline">
+              {a.backToSite}
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="container grid gap-8 py-8 lg:grid-cols-[200px_1fr]">
+        <nav aria-label={a.navLabel} className="space-y-1">
+          {NAV.map((item) => (
+            <Link
+              key={item.href}
+              href={p(item.href)}
+              className="block rounded-md px-3 py-2 text-sm font-medium text-[#0f172a] hover:bg-white"
+            >
+              {a[item.key]}
+            </Link>
+          ))}
+        </nav>
+
+        <div>{children}</div>
+      </div>
+    </div>
+  );
+}

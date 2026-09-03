@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import CheckoutButton from "@/components/CheckoutButton";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
@@ -100,13 +101,19 @@ export default async function MembershipPage({
             <span className="text-lg text-[#b9cfe6]">/ {m.pricePeriod}</span>
           </div>
           <p className="mt-2 text-center text-sm text-[#b9cfe6]">{m.priceNote}</p>
-          <Link
-            href={p("/custom-services")}
-            className="mt-6 block w-full rounded-lg bg-[#d4232a] py-3 text-center font-semibold text-white shadow-lg transition hover:brightness-95"
-            data-track={ANALYTICS_EVENTS.foundingBuyerCheckoutStart}
-          >
-            {m.cta}
-          </Link>
+          {/* V2.1：接真实结账。
+              未登录 → 跳 /login?next=/membership；在线收款未开通 → 降级到人工服务。
+              三种状态都接住用户的付费意图，绝不让他点了才发现付不了款。 */}
+          <CheckoutButton
+            locale={locale}
+            returnTo="/membership"
+            dict={{
+              cta: m.cta,
+              submitting: m.checkoutSubmitting ?? m.cta,
+              errorGeneric: m.checkoutError ?? "",
+            }}
+            className="mt-6 block w-full rounded-lg bg-[#d4232a] py-3 text-center font-semibold text-white shadow-lg transition hover:brightness-95 disabled:opacity-70"
+          />
           <p className="mt-3 text-center text-xs text-[#b9cfe6]">{m.paymentNote}</p>
         </div>
 

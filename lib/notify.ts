@@ -324,6 +324,85 @@ export async function notifyBuyerRegisterReceived(data: {
   });
 }
 
+// ---------- V2.1：Stripe 订阅通知（客户方向） ----------
+
+/**
+ * 支付成功 → 欢迎成为 Founding Buyer。
+ *
+ * 由 /api/stripe/webhook 的 checkout.session.completed 调用。
+ * 发送失败不影响会员开通（webhook 里已 catch），这里只负责组织文案。
+ *
+ * 文案铁律：只陈述已发生的事实（已开通、到期日、权益），
+ * 不做任何"保证找到供应商""保证成交"之类的承诺。
+ */
+export async function notifyPaymentSucceeded(data: {
+  email: string;
+  periodEnd: Date | null;
+}): Promise<boolean> {
+  if (!data.email) return false;
+
+  const renewLine = data.periodEnd
+    ? `Your subscription renews on ${data.periodEnd.toISOString().slice(0, 10)}.`
+    : "Your subscription is active.";
+
+  return sendMail({
+    to: data.email,
+    subject: "Welcome to Founding Buyer — FactoryAuditB2B",
+    text: [
+      "Your Founding Buyer Membership is active.",
+      "",
+      `Plan: Founding Buyer ($${MEMBERSHIP_PRICE_USD}/year)`,
+      renewLine,
+      "",
+      "What is now unlocked:",
+      "- Unlimited supplier profiles (the free plan is limited to " +
+        `${FREE_PROFILE_LIMIT} per month)`,
+      "- Evidence records with verification status and source",
+      "- Inspection history",
+      "- Risk breakdown by dimension",
+      "",
+      "Manage your subscription or update your card:",
+      "https://factoryauditb2b.com/account",
+      "",
+      "If you need supplier matching help, reply to this email or send an RFQ:",
+      "https://factoryauditb2b.com/rfq",
+      "",
+      "FactoryAuditB2B",
+    ].join("\n"),
+  });
+}
+
+/**
+ * 扣款失败 → 请更新支付方式。
+ *
+ * 由 /api/stripe/webhook 的 invoice.payment_failed 调用。
+ * 措辞要点：明确说明"会员权益暂时受限"而不是"已取消"，
+ * Stripe 会在一个月内重试数次，很多用户更新卡片后就恢复了。
+ */
+export async function notifyPaymentFailed(data: {
+  email: string;
+}): Promise<boolean> {
+  if (!data.email) return false;
+
+  return sendMail({
+    to: data.email,
+    subject: "Action needed: payment failed — FactoryAuditB2B",
+    text: [
+      "We could not process the payment for your Founding Buyer Membership.",
+      "",
+      "Stripe will retry the payment over the next few weeks. To avoid losing access,",
+      "update your card now:",
+      "https://factoryauditb2b.com/account",
+      "",
+      "Your saved suppliers and RFQ history stay on your account either way.",
+      "",
+      "If you believe this is a mistake, reply to this email.",
+      "",
+      "FactoryAuditB2B",
+    ].join("\n"),
+  });
+}
+
 // ---------- Supplier Directory V2：Supplier Claim Profile ----------
 
 // 管理员：新认领提交

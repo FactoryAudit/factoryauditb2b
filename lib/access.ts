@@ -158,6 +158,26 @@ export function redactEvidence<E extends { visibility?: string }>(
   return rows.filter((e) => (e.visibility ?? "public") === "public");
 }
 
+// ---------- 迁移保险丝 ----------
+
+/**
+ * 真实建号是否可用（V2.0 → V2.1 迁移开关）。
+ *
+ * 判定与 lib/supabaseClient.ts 的 isSupabaseConfigured() 完全一致（都只读
+ * NEXT_PUBLIC_ 的两个变量）。放在这里而不是直接 import 那边，是为了让客户端
+ * 组件不必把 @supabase/ssr 打进 bundle —— 判断"能不能建号"不需要那些代码。
+ *
+ * 未配置 → 注册走旧的 /api/register（发邮件 + 写 Sheets，不建号），站点行为与 V2.0 一致；
+ * 已配置 → 注册走 /api/auth/signup（Supabase Auth 真实建号 + 自动 free membership）。
+ * 这样 M0（Supabase 三件套）没做完时，注册漏斗不会归零。
+ */
+export function isSignupEnabled(): boolean {
+  return Boolean(
+    process.env.NEXT_PUBLIC_SUPABASE_URL?.trim() &&
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim()
+  );
+}
+
 // ---------- 免费额度 ----------
 
 /** 每月免费可看的 profile 数（单一事实来源在 lib/suppliers.ts） */

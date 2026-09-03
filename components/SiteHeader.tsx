@@ -1,5 +1,6 @@
 import Link from "next/link";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
+import AccountMenu, { type AccountMenuDict } from "@/components/AccountMenu";
 import { localePath, type Locale } from "@/i18n/config";
 import { SERVICE_MENU, type ServiceMenuDict } from "@/lib/nav";
 
@@ -28,9 +29,12 @@ export type NavDict = {
 export default function SiteHeader({
   locale,
   dict,
+  accountDict,
 }: {
   locale: Locale;
   dict: NavDict;
+  /** 账号入口文案（t.auth.accountMenu）。单独传是为了不和 nav 混在一起。 */
+  accountDict: AccountMenuDict;
 }) {
   const p = (href: string) => localePath(locale, href);
 
@@ -99,7 +103,10 @@ export default function SiteHeader({
           </Link>
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
+          {/* 账号入口：客户端组件，首帧渲染 "Sign in"（与 SSR 一致），
+              hydration 后按 /api/me 切换成账号菜单。不读 cookie，不影响 SSG。 */}
+          <AccountMenu locale={locale} dict={accountDict} />
           <LocaleSwitcher current={locale} languageLabel={dict.language} />
           <Link href={p("/rfq")} className="btn btn-primary whitespace-nowrap">
             {dict.postRfq}

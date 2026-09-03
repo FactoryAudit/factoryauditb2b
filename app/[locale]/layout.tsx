@@ -171,7 +171,7 @@ export default async function RootLayout({
             它不读 cookie、不阻断渲染，因此不影响各页面的 ● SSG 预渲染。 */}
         <AuthProvider>
           <AnalyticsTracker />
-          <SiteHeader locale={locale} dict={t.nav} />
+          <SiteHeader locale={locale} dict={t.nav} accountDict={t.auth.accountMenu} />
           <main>{children}</main>
           <SiteFooter locale={locale} dict={t.footer} menu={t.nav.menu} whatsappLabel={t.common.whatsappChat} />
           <AiChatWidget locale={locale} dict={t.aiChat} whatsappLabel={t.common.whatsappChat} />

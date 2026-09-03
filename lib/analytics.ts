@@ -60,6 +60,12 @@ export const ANALYTICS_EVENTS = {
   signupStart: "signup_start",
   signupComplete: "signup_complete",
   login: "login",
+  /** /login 页面曝光（V2.1） */
+  loginView: "login_view",
+  /** 退出登录（V2.1） */
+  logout: "logout",
+  /** 登录失败（V2.1）：用于观察登录漏斗的卡点，不记录邮箱/密码 */
+  loginFailed: "login_failed",
   membershipView: "membership_page_view",
   membershipCta: "membership_cta",
   /** 会员软锁 UnlockGate 里的「注册 / 升级」CTA 点击（V2.1） */

@@ -6,9 +6,23 @@ import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { FREE_PROFILE_LIMIT, ANALYTICS_EVENTS } from "@/lib/suppliers";
+import { isSignupEnabled } from "@/lib/access";
 
 const PATH = "/register";
 const BASE = "https://factoryauditb2b.com";
+
+/**
+ * 建号方式决定页面文案。
+ *
+ * V2.0：只收邮件线索，人工回复 → 文案承诺"一个工作日内回复"；
+ * V2.1：Supabase 配好后即时建号 → 那个承诺就不成立了，必须换成即时开通的文案。
+ * 不这么做就是无据声称（用户注册完发现根本没人来邮件）。
+ */
+const INSTANT = isSignupEnabled();
+
+function pick<T>(manual: T, instant: T | undefined): T {
+  return INSTANT && instant !== undefined ? instant : manual;
+}
 
 export async function generateMetadata({
   params,
@@ -21,8 +35,8 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale,
     path: PATH,
-    title: t.register.metaTitle,
-    description: t.register.metaDesc,
+    title: pick(t.register.metaTitle, t.register.instant?.metaTitle),
+    description: pick(t.register.metaDesc, t.register.instant?.metaDesc),
   });
 }
 
@@ -40,9 +54,9 @@ export default async function RegisterPage({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: r.h1,
+    name: pick(r.h1, r.instant?.h1),
     url: `${BASE}${p(PATH)}`,
-    description: r.metaDesc,
+    description: pick(r.metaDesc, r.instant?.metaDesc),
   };
 
   return (
@@ -56,8 +70,10 @@ export default async function RegisterPage({
         <span className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">
           {r.badge}
         </span>
-        <h1 className="text-3xl font-bold text-[#0f172a] mt-2">{r.h1}</h1>
-        <p className="text-[#64748b] mt-2 max-w-3xl">{r.lead}</p>
+        <h1 className="text-3xl font-bold text-[#0f172a] mt-2">
+          {pick(r.h1, r.instant?.h1)}
+        </h1>
+        <p className="text-[#64748b] mt-2 max-w-3xl">{pick(r.lead, r.instant?.lead)}</p>
       </section>
 
       <div className="grid md:grid-cols-2 gap-8 items-start">
@@ -76,8 +92,12 @@ export default async function RegisterPage({
           </ul>
 
           <div className="card p-5 mt-6 bg-[#f7f9fc]">
-            <h3 className="font-semibold text-[#0f172a]">{r.nextTitle}</h3>
-            <p className="text-sm text-[#475569] mt-1">{r.nextLead}</p>
+            <h3 className="font-semibold text-[#0f172a]">
+              {pick(r.nextTitle, r.instant?.nextTitle)}
+            </h3>
+            <p className="text-sm text-[#475569] mt-1">
+              {pick(r.nextLead, r.instant?.nextLead)}
+            </p>
           </div>
 
           <p className="text-xs text-[#64748b] mt-4">

@@ -88,11 +88,18 @@ export async function POST(req: NextRequest) {
     });
 
     if (error) {
-      // Supabase 在邮箱已注册时（开启了确认）会返回成功但 identities 为空，
-      // 这是防邮箱枚举的设计。这里统一按"已发送/已注册"处理，不泄露是否存在。
+      // ⚠️ 这里必须按「不确认邮箱是否存在」处理。
+      //    本站在部署时要求关掉 "Confirm email"（见文件头注释），
+      //    一旦关掉，Supabase 对已注册邮箱会直接抛 "already registered" 错误 ——
+      //    如果把这个结论原样翻译给用户，等于开了一个邮箱枚举接口
+      //    （能探测出某人是否在本站注册过买家账号）。
+      //
+      //    所以：内部错误码仍叫 email_in_use（便于日志排查），
+      //    但对前端只回一个「需要进一步操作」的中性错误，
+      //    前端文案也不得写成「该邮箱已注册」—— 见各语言字典的
+      //    register.form.errorEmailInUse。
       const msg = error.message.toLowerCase();
       if (msg.includes("already registered") || msg.includes("already been registered")) {
-        // 不告诉用户"该邮箱已注册"（防枚举），返回需要进一步操作的提示
         return NextResponse.json(
           { ok: false, error: "email_in_use" },
           { status: 409 }

@@ -88,6 +88,39 @@ export async function getProfileUsage(
   }
 }
 
+/**
+ * 本月是否已经看过这家供应商。
+ *
+ * 额度判定的前提：同一家供应商在一个月内重复查看不重复扣额度
+ * （profile_views 的唯一索引保证了这一点），所以判定"是否超额"时
+ * 必须先排除"这家已经看过了"的情况。
+ *
+ * ⚠️ 出错时返回 true（当作"已看过"）。
+ *    这是**放行**方向：数据库抖动不应该让一个正常用户被额度挡在门外。
+ *    配合 getProfileUsage 出错返回 0，两个失败方向一致 —— 都倾向于放行。
+ */
+export async function hasProfileView(
+  userId: string,
+  supplierId: string,
+  month: string = currentPeriodMonth()
+): Promise<boolean> {
+  const db = createAdminClient();
+  if (!db) return true;
+  try {
+    const { data, error } = await db
+      .from("profile_views")
+      .select("id")
+      .eq("user_id", userId)
+      .eq("supplier_id", supplierId)
+      .eq("period_month", month)
+      .maybeSingle();
+    if (error) return true;
+    return Boolean(data);
+  } catch {
+    return true;
+  }
+}
+
 // ---------- 写入 ----------
 
 /**
@@ -170,6 +203,28 @@ export async function upsertMembership(opts: {
   }
 }
 
+/**
+ * 读该用户已绑定的 Stripe customer id。
+ *
+ * 用途：创建 Checkout Session 时若已有 customer，必须复用（传 customer 而不是
+ * customer_email）。否则同一邮箱会在 Stripe 后台产生多个 customer 对象，
+ * 导致 Billing Portal 找不到订阅、续费邮件重复发送。
+ */
+export async function getStripeCustomerId(userId: string): Promise<string | null> {
+  const db = createAdminClient();
+  if (!db) return null;
+  try {
+    const { data } = await db
+      .from("memberships")
+      .select("stripe_customer_id")
+      .eq("user_id", userId)
+      .maybeSingle();
+    return data?.stripe_customer_id ?? null;
+  } catch {
+    return null;
+  }
+}
+
 /** 按 Stripe customer id 反查 user_id（webhook 里 subscription 事件只带 customer）。 */
 export async function findUserIdByStripeCustomer(
   customerId: string
@@ -189,6 +244,23 @@ export async function findUserIdByStripeCustomer(
 }
 
 // ---------- Webhook 幂等 ----------
+
+/**
+ * 按 user id 取邮箱（供邮件通知用）。
+ *
+ * 为什么需要：Stripe webhook 只有 user_id，发邮件必须有地址。
+ * 用 service_role 的 auth.admin 接口查；失败返回 null（邮件发不出去不阻塞开通）。
+ */
+export async function getUserEmail(userId: string): Promise<string | null> {
+  const db = createAdminClient();
+  if (!db) return null;
+  try {
+    const { data } = await db.auth.admin.getUserById(userId);
+    return data?.user?.email ?? null;
+  } catch {
+    return null;
+  }
+}
 
 /**
  * 标记 Stripe 事件已处理。返回 false 表示**之前已处理过**，调用方应跳过业务逻辑。
@@ -211,5 +283,46 @@ export async function markStripeEventProcessed(
     return true;
   } catch {
     return false;
+  }
+}
+
+// ---------- 买家侧：我的询价单 ----------
+
+export type MyRfqRow = {
+  id: string;
+  reference_id: string;
+  product: string;
+  quantity: string | null;
+  country: string | null;
+  status: string;
+  created_at: string;
+};
+
+/**
+ * 当前用户提交的询价单（/account/rfqs 用）。
+ *
+ * 只取买家该看到的 6 个字段 —— 不返回 email、user_id、内部 message，
+ * 因为这是"我的订单"视图，不是 Admin 视图。
+ *
+ * 降级：数据库未配置 → 返回空数组，页面显示空态而不是崩。
+ */
+export async function listMyRfqs(userId: string, limit = 100): Promise<MyRfqRow[]> {
+  const db = createAdminClient();
+  if (!db) return [];
+  try {
+    const { data, error } = await db
+      .from("rfqs")
+      .select("id, reference_id, product, quantity, country, status, created_at")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false })
+      .limit(limit);
+    if (error) {
+      console.error("[membership] list my rfqs failed", error.message);
+      return [];
+    }
+    return (data ?? []) as MyRfqRow[];
+  } catch (e) {
+    console.error("[membership] list my rfqs exception", e);
+    return [];
   }
 }
