@@ -3,8 +3,8 @@
  * scripts/seed-suppliers.mjs —— 把 lib/staticData.ts 的静态供应商迁移到 Supabase
  *
  * 用法（在项目根目录执行）：
- *   node --env-file-if-exists=.env scripts/seed-suppliers.mjs --dry-run   # 只预览，不写入
- *   node --env-file-if-exists=.env scripts/seed-suppliers.mjs             # 真正写入
+ *   node --env-file-if-exists=.env scripts/seed-suppliers.mjs           # 默认只预览，不写入
+ *   node --env-file-if-exists=.env scripts/seed-suppliers.mjs --apply   # 真正写入
  *
  * 前置条件：
  *   1. 已在 Supabase SQL Editor 执行 supabase/migrations/001_init.sql
@@ -12,7 +12,9 @@
  *
  * 设计原则：
  *   - 幂等：用 upsert(onConflict: slug)，重复执行不会产生重复数据
- *   - 安全：默认 dry-run，必须显式去掉 --dry-run 才写入
+ *   - 安全：默认 dry-run（只读预览）。必须**显式加 --apply** 才会写库。
+ *     曾有过注释写"默认 dry-run"而代码其实是默认写入的自相矛盾版本，
+ *     照注释操作会误写生产库 —— 所以这里把"写入"做成需要显式确认的开关。
  *   - 保 URL：slug 原样搬运，一个字符都不能改（改了会导致已收录页面 404）
  *
  * 为什么用 esbuild 临时打包：
@@ -26,7 +28,9 @@ import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
-const DRY_RUN = process.argv.includes("--dry-run");
+// ⚠️ 语义：只有显式传 --apply 才写库。不带参数 = 只读预览。
+//    （历史版本是 `--dry-run` 才预览、不带参数即写入，误操作风险高，已改为白名单式。）
+const DRY_RUN = !process.argv.includes("--apply");
 
 const URL = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
 const KEY = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim();
@@ -190,7 +194,7 @@ for (const s of suppliers) {
 
 console.log("");
 if (DRY_RUN) {
-  console.log(`🔍 预览完成：${ok} 家。确认无误后去掉 --dry-run 执行写入。`);
+  console.log(`🔍 预览完成：${ok} 家。确认无误后加 --apply 执行写入。`);
   process.exit(0);
 }
 
