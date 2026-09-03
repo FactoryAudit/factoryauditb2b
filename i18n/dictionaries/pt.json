@@ -1185,7 +1185,7 @@
   },
   "legal": {
     "privacyTitle": "Política de Privacidade",
-    "privacyUpdated": "Última atualização: 2026-08-30",
+    "privacyUpdated": "Última atualização: 2026-09-03",
     "privacyIntro": "A FactoryAuditB2B respeita sua privacidade. Esta política explica quais dados coletamos quando você usa nosso site e serviços, e como os usamos.",
     "privacySections": [
       {
@@ -1215,10 +1215,18 @@
       {
         "h": "Contato",
         "b": "Dúvidas sobre esta política? Escreva para privacy@factoryauditb2b.com."
+      },
+      {
+        "h": "Dados da conta",
+        "b": "Ao criar uma conta, armazenamos seu e-mail, nome, nome da empresa e status da assinatura. As senhas são gerenciadas pelo nosso provedor de autenticação e nunca ficam visíveis para nós. Você pode solicitar a exclusão dos dados da sua conta a qualquer momento."
+      },
+      {
+        "h": "Dados de pagamento",
+        "b": "Os pagamentos são processados pela Stripe. Nunca vemos ou armazenamos o número completo do seu cartão. Guardamos apenas a bandeira do cartão, os quatro últimos dígitos, o status da assinatura e a data de renovação necessários para operar sua assinatura."
       }
     ],
     "termsTitle": "Termos de Serviço",
-    "termsUpdated": "Última atualização: 2026-08-30",
+    "termsUpdated": "Última atualização: 2026-09-03",
     "termsIntro": "Ao usar a FactoryAuditB2B, você aceita estes termos. Nosso serviço ajuda compradores a verificar e auditar fornecedores, mas somos uma plataforma, não uma garantidora do desempenho do fornecedor.",
     "termsSections": [
       {
@@ -1248,6 +1256,14 @@
       {
         "h": "Contato",
         "b": "Dúvidas? Escreva para legal@factoryauditb2b.com."
+      },
+      {
+        "h": "Assinatura, cobrança e renovação",
+        "b": "A assinatura Founding Buyer é anual, ao preço de 99 USD por ano. O pagamento é processado pela Stripe. A assinatura renova automaticamente todos os anos, salvo se você cancelar antes da data de renovação. Você pode ver a data de renovação ou cancelar a qualquer momento na página da sua conta."
+      },
+      {
+        "h": "Reembolsos e cancelamento",
+        "b": "Você pode cancelar a qualquer momento na página da sua conta. O cancelamento passa a valer no fim do ciclo de cobrança atual e não há taxa de cancelamento. Se cancelar em até 14 dias após o primeiro pagamento, fale conosco para obter o reembolso integral. Após 14 dias não oferecemos reembolso proporcional, pois a assinatura dá acesso imediato ao conteúdo pago."
       }
     ],
     "privacyNav": "Privacidade",

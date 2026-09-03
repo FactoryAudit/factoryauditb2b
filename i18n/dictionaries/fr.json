@@ -1185,7 +1185,7 @@
   },
   "legal": {
     "privacyTitle": "Politique de Confidentialité",
-    "privacyUpdated": "Dernière mise à jour : 2026-08-30",
+    "privacyUpdated": "Dernière mise à jour : 2026-09-03",
     "privacyIntro": "FactoryAuditB2B respecte votre vie privée. Cette politique explique quelles données nous collectons lorsque vous utilisez notre site et nos services, et comment nous les utilisons.",
     "privacySections": [
       {
@@ -1215,10 +1215,18 @@
       {
         "h": "Coordonnées",
         "b": "Des questions sur cette politique ? Écrivez à privacy@factoryauditb2b.com."
+      },
+      {
+        "h": "Données du compte",
+        "b": "Si vous créez un compte, nous stockons votre adresse e-mail, votre nom, le nom de votre entreprise et votre statut d’adhésion. Les mots de passe sont gérés par notre fournisseur d’authentification et ne nous sont jamais visibles. Vous pouvez demander la suppression des données de votre compte à tout moment."
+      },
+      {
+        "h": "Données de paiement",
+        "b": "Les paiements sont traités par Stripe. Nous ne voyons ni ne stockons jamais votre numéro de carte complet. Nous conservons uniquement la marque de la carte, les quatre derniers chiffres, le statut de l’abonnement et la date de renouvellement nécessaires au fonctionnement de votre adhésion."
       }
     ],
     "termsTitle": "Conditions d'Utilisation",
-    "termsUpdated": "Dernière mise à jour : 2026-08-30",
+    "termsUpdated": "Dernière mise à jour : 2026-09-03",
     "termsIntro": "En utilisant FactoryAuditB2B, vous acceptez ces conditions. Notre service aide les acheteurs à vérifier et auditer des fournisseurs, mais nous sommes une plateforme, non un garant de la performance des fournisseurs.",
     "termsSections": [
       {
@@ -1248,6 +1256,14 @@
       {
         "h": "Coordonnées",
         "b": "Des questions ? Écrivez à legal@factoryauditb2b.com."
+      },
+      {
+        "h": "Adhésion, facturation et renouvellement",
+        "b": "L’adhésion Founding Buyer est un abonnement annuel au prix de 99 USD par an. Le paiement est traité par Stripe. Votre abonnement se renouvelle automatiquement chaque année, sauf si vous l’annulez avant la date de renouvellement. Vous pouvez consulter votre date de renouvellement ou annuler à tout moment depuis votre page de compte."
+      },
+      {
+        "h": "Remboursements et annulation",
+        "b": "Vous pouvez annuler à tout moment depuis votre page de compte. L’annulation prend effet à la fin de la période de facturation en cours et aucuns frais d’annulation ne sont appliqués. Si vous annulez dans les 14 jours suivant votre premier paiement, contactez-nous pour un remboursement intégral. Après 14 jours, nous n’accordons pas de remboursement au prorata, car l’adhésion donne un accès immédiat au contenu payant."
       }
     ],
     "privacyNav": "Confidentialité",

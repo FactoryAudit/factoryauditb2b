@@ -1185,7 +1185,7 @@
   },
   "legal": {
     "privacyTitle": "Datenschutzerklärung",
-    "privacyUpdated": "Zuletzt aktualisiert: 2026-08-30",
+    "privacyUpdated": "Zuletzt aktualisiert: 2026-09-03",
     "privacyIntro": "FactoryAuditB2B respektiert Ihre Privatsphäre. Diese Erklärung erläutert, welche Daten wir bei der Nutzung unserer Website und Dienste erheben und wie wir sie verwenden.",
     "privacySections": [
       {
@@ -1215,10 +1215,18 @@
       {
         "h": "Kontakt",
         "b": "Fragen zu dieser Erklärung? Schreiben Sie an privacy@factoryauditb2b.com."
+      },
+      {
+        "h": "Kontodaten",
+        "b": "Wenn Sie ein Konto erstellen, speichern wir Ihre E-Mail-Adresse, Ihren Namen, Ihren Firmennamen und Ihren Mitgliedschaftsstatus. Passwörter werden von unserem Authentifizierungsanbieter verwaltet und sind für uns niemals sichtbar. Sie können jederzeit die Löschung Ihrer Kontodaten verlangen."
+      },
+      {
+        "h": "Zahlungsdaten",
+        "b": "Zahlungen werden von Stripe verarbeitet. Wir sehen oder speichern niemals Ihre vollständige Kartennummer. Wir speichern nur Kartenmarke, die letzten vier Stellen, den Abonnementstatus und das Verlängerungsdatum, die für den Betrieb Ihrer Mitgliedschaft erforderlich sind."
       }
     ],
     "termsTitle": "Nutzungsbedingungen",
-    "termsUpdated": "Zuletzt aktualisiert: 2026-08-30",
+    "termsUpdated": "Zuletzt aktualisiert: 2026-09-03",
     "termsIntro": "Mit der Nutzung von FactoryAuditB2B akzeptieren Sie diese Bedingungen. Unser Service hilft Käufern, Lieferanten zu verifizieren und zu auditionieren, ist aber eine Plattform, keine Garantin für Lieferantenleistung.",
     "termsSections": [
       {
@@ -1248,6 +1256,14 @@
       {
         "h": "Kontakt",
         "b": "Fragen? Schreiben Sie an legal@factoryauditb2b.com."
+      },
+      {
+        "h": "Mitgliedschaft, Abrechnung und Verlängerung",
+        "b": "Die Founding Buyer Membership ist ein Jahresabonnement für 99 USD pro Jahr. Die Zahlung wird über Stripe abgewickelt. Ihr Abonnement verlängert sich jedes Jahr automatisch, sofern Sie nicht vor dem Verlängerungsdatum kündigen. Sie können Ihr Verlängerungsdatum einsehen oder jederzeit auf Ihrer Kontoseite kündigen."
+      },
+      {
+        "h": "Erstattungen und Kündigung",
+        "b": "Sie können jederzeit auf Ihrer Kontoseite kündigen. Die Kündigung wirkt zum Ende des laufenden Abrechnungszeitraums; es fallen keine Kündigungsgebühren an. Wenn Sie innerhalb von 14 Tagen nach Ihrer ersten Zahlung kündigen, kontaktieren Sie uns für eine vollständige Erstattung. Nach 14 Tagen bieten wir keine anteiligen Erstattungen an, da die Mitgliedschaft sofortigen Zugriff auf kostenpflichtige Inhalte gewährt."
       }
     ],
     "privacyNav": "Datenschutz",

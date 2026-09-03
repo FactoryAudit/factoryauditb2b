@@ -1817,7 +1817,7 @@
   },
   "legal": {
     "privacyTitle": "Privacy Policy",
-    "privacyUpdated": "Last updated: 2026-08-30",
+    "privacyUpdated": "Last updated: 2026-09-03",
     "privacyIntro": "FactoryAuditB2B (\"we\", \"us\") respects your privacy. This policy explains what data we collect when you use our website and services, and how we use it.",
     "privacySections": [
       {
@@ -1847,10 +1847,18 @@
       {
         "h": "Contact",
         "b": "Questions about this policy? Email privacy@factoryauditb2b.com."
+      },
+      {
+        "h": "Account data",
+        "b": "If you create an account, we store your email address, name, company name and membership status. Passwords are handled by our authentication provider and are never visible to us. You can ask us to delete your account data at any time."
+      },
+      {
+        "h": "Payment data",
+        "b": "Payments are processed by Stripe. We never see or store your full card number. We store only the card brand, last four digits, subscription status and renewal date needed to run your membership."
       }
     ],
     "termsTitle": "Terms of Service",
-    "termsUpdated": "Last updated: 2026-08-30",
+    "termsUpdated": "Last updated: 2026-09-03",
     "termsIntro": "By using FactoryAuditB2B, you agree to these terms. Our service helps buyers verify and audit suppliers, but we are a platform, not a guarantor of supplier performance.",
     "termsSections": [
       {
@@ -1880,6 +1888,14 @@
       {
         "h": "Contact",
         "b": "Questions? Email legal@factoryauditb2b.com."
+      },
+      {
+        "h": "Membership, billing and renewal",
+        "b": "Founding Buyer Membership is an annual subscription priced at USD 99 per year. Payment is processed by Stripe. Your subscription renews automatically each year unless you cancel before the renewal date. You can view your renewal date or cancel at any time from your account page."
+      },
+      {
+        "h": "Refunds and cancellation",
+        "b": "You can cancel at any time from your account page. Cancellation takes effect at the end of the current billing period, and there is no cancellation fee. If you cancel within 14 days of your first payment, contact us for a full refund. After 14 days we do not offer pro-rated refunds, because membership grants immediate access to paid content."
       }
     ],
     "privacyNav": "Privacy",

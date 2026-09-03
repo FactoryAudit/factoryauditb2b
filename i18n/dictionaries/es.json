@@ -1185,7 +1185,7 @@
   },
   "legal": {
     "privacyTitle": "Política de privacidad",
-    "privacyUpdated": "Última actualización: 30-08-2026",
+    "privacyUpdated": "Última actualización: 2026-09-03",
     "privacyIntro": "FactoryAuditB2B (\"we\", \"us\") respects your privacy. This policy explains what data we collect when you use our website and services, and how we use it.",
     "privacySections": [
       {
@@ -1215,10 +1215,18 @@
       {
         "h": "Contacto",
         "b": "¿Preguntas sobre esta política? Email privacy@factoryauditb2b.com."
+      },
+      {
+        "h": "Datos de la cuenta",
+        "b": "Si crea una cuenta, almacenamos su correo electrónico, nombre, nombre de la empresa y estado de la membresía. Las contraseñas las gestiona nuestro proveedor de autenticación y nunca son visibles para nosotros. Puede solicitarnos la eliminación de los datos de su cuenta en cualquier momento."
+      },
+      {
+        "h": "Datos de pago",
+        "b": "Los pagos los procesa Stripe. Nunca vemos ni almacenamos el número completo de su tarjeta. Solo guardamos la marca de la tarjeta, los últimos cuatro dígitos, el estado de la suscripción y la fecha de renovación necesarios para gestionar su membresía."
       }
     ],
     "termsTitle": "Términos del servicio",
-    "termsUpdated": "Última actualización: 30-08-2026",
+    "termsUpdated": "Última actualización: 2026-09-03",
     "termsIntro": "By using FactoryAuditB2B, you agree to these terms. Our service helps buyers verify and audit suppliers, but we are a platform, not a guarantor of supplier performance.",
     "termsSections": [
       {
@@ -1248,6 +1256,14 @@
       {
         "h": "Contacto",
         "b": "¿Preguntas? Email legal@factoryauditb2b.com."
+      },
+      {
+        "h": "Membresía, facturación y renovación",
+        "b": "La Membresía Founding Buyer es una suscripción anual de 99 USD al año. El pago se procesa con Stripe. La suscripción se renueva automáticamente cada año, salvo que la cancele antes de la fecha de renovación. Puede ver la fecha de renovación o cancelar en cualquier momento desde su página de cuenta."
+      },
+      {
+        "h": "Reembolsos y cancelación",
+        "b": "Puede cancelar en cualquier momento desde su página de cuenta. La cancelación surte efecto al final del periodo de facturación actual y no hay cargo por cancelación. Si cancela dentro de los 14 días posteriores a su primer pago, contáctenos para obtener un reembolso completo. Después de 14 días no ofrecemos reembolsos proporcionales, porque la membresía da acceso inmediato al contenido de pago."
       }
     ],
     "privacyNav": "Privacidad",

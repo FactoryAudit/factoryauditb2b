@@ -1185,7 +1185,7 @@
   },
   "legal": {
     "privacyTitle": "プライバシーポリシー",
-    "privacyUpdated": "最終更新日:2026-08-30",
+    "privacyUpdated": "最終更新日：2026-09-03",
     "privacyIntro": "FactoryAuditB2B (\"we\", \"us\") respects your privacy. This policy explains what data we collect when you use our website and services, and how we use it.",
     "privacySections": [
       {
@@ -1215,10 +1215,18 @@
       {
         "h": "お問い合わせ",
         "b": "本方針に関するお問い合わせ Eメール:privacy@factoryauditb2b.com."
+      },
+      {
+        "h": "アカウントデータ",
+        "b": "アカウントを作成した場合、メールアドレス、お名前、会社名、会員ステータスを保存します。パスワードは認証プロバイダーが管理し、当社が閲覧することはできません。アカウントデータの削除はいつでもご請求いただけます。"
+      },
+      {
+        "h": "お支払いデータ",
+        "b": "お支払いは Stripe が処理します。当社がカード番号の全桁を確認または保存することはありません。会員サービスの運営に必要なカードブランド、下 4 桁、サブスクリプションの状態、更新日のみを保存します。"
       }
     ],
     "termsTitle": "サービス利用規約",
-    "termsUpdated": "最終更新日:2026-08-30",
+    "termsUpdated": "最終更新日：2026-09-03",
     "termsIntro": "By using FactoryAuditB2B, you agree to these terms. Our service helps buyers verify and audit suppliers, but we are a platform, not a guarantor of supplier performance.",
     "termsSections": [
       {
@@ -1248,6 +1256,14 @@
       {
         "h": "お問い合わせ",
         "b": "お問い合わせ 電子メール 法的@factoryauditb2b.com."
+      },
+      {
+        "h": "会員・請求・更新について",
+        "b": "Founding Buyer メンバーシップは年額 99 米ドルの年間サブスクリプションです。お支払いは Stripe が処理します。更新日の前に解約しない限り、サブスクリプションは毎年自動的に更新されます。更新日の確認や解約は、アカウントページからいつでも行えます。"
+      },
+      {
+        "h": "返金と解約",
+        "b": "解約はアカウントページからいつでも行えます。解約は現在の請求期間の終了時に効力を生じ、解約手数料はかかりません。初回お支払いから 14 日以内に解約された場合は、全額返金についてご連絡ください。14 日を過ぎた場合は日割り返金はいたしません。メンバーシップは購入後ただちに有料コンテンツへアクセスできるためです。"
       }
     ],
     "privacyNav": "プロフィール",
