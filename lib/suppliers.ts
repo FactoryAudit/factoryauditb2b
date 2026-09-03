@@ -10,35 +10,45 @@
 
 export type AccessLayer = "public" | "free" | "paid";
 
-/** Public 层字段：目录卡片 + Profile 页 SEO 直出，任何情况下不得隐藏 */
+/** Public 层字段：目录卡片 + Profile 页 SEO 直出，任何情况下不得隐藏
+ *
+ * ⚠️ 字段名必须与 lib/queries.ts 的 SupplierView 完全一致。
+ *    曾把 industryCode 写成 "industry"，导致 Supabase 路径下行业字段被误裁（页面显示 "—"）。 */
 export const PUBLIC_FIELDS = [
   "legalName",
   "country",
+  "countryName",
   "city",
-  "industry",
+  "industryCode",
   "mainProducts",
   "capabilities",
   "verificationStatus",
   "riskScore",
+  "riskLevel",
   "evidenceCount",
+  "evidenceVerified",
   "lastChecked",
   "businessType",
 ] as const;
 
-/** Free 层字段：注册后可见 */
+/** Free 层字段：注册后可见（基础工商信息） */
 export const FREE_FIELDS = [
   "established",
   "employees",
   "exportMarkets",
-  "certifications",
   "auditStatus",
 ] as const;
 
-/** Paid 层字段：Buyer Membership 可见（证据明细 / 风险明细 / 验货历史） */
+/** Paid 层字段：Buyer Membership 可见（证据明细 / 认证明细 / 验货历史 / 风险明细）
+ *
+ * 分层依据 V2.1 PRD：「付费层锁区：证据明细 / 认证明细 / 验货历史」。
+ * certifications 原先写在 FREE_FIELDS，与 PRD 和详情页实现（layer="paid"）冲突，
+ * 已移到 paid 层 —— 免费注册能看到基础工商信息，核验明细才是付费理由。 */
 export const PAID_FIELDS = [
   "evidence",
   "inspectionHistory",
   "riskBreakdown",
+  "certifications",
 ] as const;
 
 /** Free Account 每月可查看的 supplier profile 数量 */

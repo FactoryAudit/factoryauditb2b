@@ -17,7 +17,7 @@ import { STATIC_SUPPLIERS, STATIC_COUNTRIES, type StaticSupplier } from "./stati
 import { getSupplierCapabilitiesResolved } from "./taxonomy";
 import { overallLevel } from "./riskEngine";
 import { isAdminConfigured } from "./supabaseAdmin";
-import { redactSupplier, redactEvidence, type MembershipTier } from "./access";
+import { redactSupplier, redactEvidence, canAccess, type MembershipTier } from "./access";
 
 // 与页面当前消费的供应商形状保持一致（mainProducts/exportMarkets/certifications 为数组）
 export type SupplierView = {
@@ -205,19 +205,24 @@ function redactViews(rows: SupplierRow[], tier: MembershipTier): SupplierView[] 
       view as unknown as Record<string, unknown>,
       tier
     ) as Partial<SupplierView>;
-    // public 字段与结构字段先铺底，再用裁剪结果覆盖，保证必填项不丢
+    // ⚠️ 铺底只能放 public 字段与结构字段。
+    //    曾在这里铺了 exportMarkets / certifications / inspectionHistory ——
+    //    它们分属 free / paid 层，裁剪结果里没有这些 key 时铺底值就会保留下来，
+    //    等于 visitor 白拿付费内容。裁剪结果覆盖铺底，非 public 字段一律不铺。
     return {
       slug: view.slug,
       legalName: view.legalName,
       country: view.country,
+      countryName: view.countryName,
       city: view.city,
       businessType: view.businessType,
       mainProducts: view.mainProducts,
-      exportMarkets: view.exportMarkets,
-      certifications: view.certifications,
-      inspectionHistory: view.inspectionHistory,
+      verificationStatus: view.verificationStatus,
+      riskScore: view.riskScore,
+      riskLevel: view.riskLevel,
       evidenceCount: view.evidenceCount,
       evidenceVerified: view.evidenceVerified,
+      lastChecked: view.lastChecked,
       ...redacted,
     } as SupplierView;
   });
@@ -255,6 +260,10 @@ export async function getSupplierDetail(
   locale: "en" | "zh" | "zh-TW" = "en",
   tier: MembershipTier = "visitor"
 ) {
+  // 「每条证据的核验状态」是 paid 层展示项：证据的类型名与日期属于公开信息
+  // （与"平台核验范围"同层），但状态值只有 paid 档位才返回。
+  const showEvidenceStatus = canAccess(tier, "paid");
+
   if (useSupabase()) {
     const { createAdminClient } = await import("./supabaseAdmin");
     const db = createAdminClient();
@@ -272,7 +281,7 @@ export async function getSupplierDetail(
           const view = rowToView(row);
           const capabilities = await getSupplierCapabilitiesResolved(slug, locale);
 
-          // 证据按 visibility 裁剪后再返回
+          // 证据按 visibility 裁剪后，再按档位决定是否带出核验状态
           const visibleEvidence = redactEvidence(
             (row.supplier_evidence ?? []).map((e, i) => ({
               id: `${slug}-ev-${i}`,
@@ -284,13 +293,13 @@ export async function getSupplierDetail(
               visibility: e.visibility,
             })),
             tier
-          );
+          ).map((e) => (showEvidenceStatus ? e : { ...e, status: "" }));
 
           const base = redactViews([row], tier)[0] ?? view;
           return {
             ...base,
             riskLevel: view.riskLevel,
-            ...(tier === "founding_buyer"
+            ...(canAccess(tier, "paid")
               ? { riskBreakdown: row.risk_breakdown ?? null }
               : {}),
             evidence: visibleEvidence,
@@ -305,16 +314,37 @@ export async function getSupplierDetail(
   }
 
   // ---- 静态路径（V2.0 原实现） ----
+  //
+  // ⚠️ 静态路径同样必须裁剪。本站默认跑静态数据（SUPPLIER_DATA_SOURCE 未配时），
+  //    若这里返回全量，解锁接口会把付费字段原样发给游客 —— 裁剪在服务端才有意义。
   const row = STATIC_SUPPLIERS.find((s) => s.slug === slug);
   if (!row) return null;
   const view = toView(row);
   const capabilities = await getSupplierCapabilitiesResolved(slug, locale);
+  const redacted = redactSupplier(
+    view as unknown as Record<string, unknown>,
+    tier
+  ) as Partial<SupplierView>;
   return {
-    ...view,
+    // public 字段铺底，非 public 字段完全由裁剪结果决定（顺序不能反）
+    slug: view.slug,
+    legalName: view.legalName,
+    country: view.country,
+    countryName: view.countryName,
+    city: view.city,
+    businessType: view.businessType,
+    mainProducts: view.mainProducts,
+    verificationStatus: view.verificationStatus,
+    riskScore: view.riskScore,
+    riskLevel: view.riskLevel,
+    evidenceCount: view.evidenceCount,
+    evidenceVerified: view.evidenceVerified,
+    lastChecked: view.lastChecked,
+    ...redacted,
     evidence: row.evidence.map((e, i) => ({
       id: `${slug}-ev-${i}`,
       type: e.type,
-      status: e.status,
+      status: showEvidenceStatus ? e.status : "",
       source: e.source,
       date: e.date,
       note: e.note ?? null,

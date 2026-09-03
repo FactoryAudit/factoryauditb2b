@@ -6,7 +6,6 @@ import { getSupplierDetail, listSupplierSlugs, lastCheckedOf } from "@/lib/queri
 import {
   levelFromStatus,
   LEVEL_SCOPE,
-  normalizeEvidenceStatus,
   evidenceLabel,
   evidenceProvenance,
   type EvidenceProvenance,
@@ -17,6 +16,8 @@ import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { ANALYTICS_EVENTS } from "@/lib/suppliers";
 import { UnlockGate } from "@/components/UnlockGate";
+// 解锁字段按需取：真值不随页面下发，避免进 RSC flight payload（游客看源码就能读到）
+import { UnlockedValue, UnlockedEvidenceStatus } from "@/components/UnlockedValue";
 
 const BASE = "https://factoryauditb2b.com";
 const DIRECTORY_PATH = "/suppliers";
@@ -80,15 +81,10 @@ export default async function SupplierProfilePage({
   // 风险等级由引擎推导，不在页面重复判定阈值
   const riskBand = overallLevel(s.riskScore ?? 0);
 
-  // 证据状态：只展示「已核验 / 部分核验 / 未核验 / 已过期 / 缺失」，
+  // 证据状态标签不再在本页拼装：核验状态属 paid 层，
+  // 由 /api/suppliers/[slug]/unlocked 校验档位后本地化返回（避免真值进 RSC payload）。
+  // 展示口径不变：只展示「已核验 / 部分核验 / 未核验 / 已过期 / 缺失」，
   // 不提供原始文件下载（PRD §20 + 第三方报告分发限制）。
-  const statusLabel: Record<string, string> = {
-    VERIFIED: ev.verified,
-    PARTIALLY_VERIFIED: ev.partiallyVerified,
-    UNVERIFIED: ev.unverified,
-    EXPIRED: ev.expired,
-    MISSING: ev.missing,
-  };
 
   const provenanceLabel: Record<EvidenceProvenance, string> = {
     provided: sp.provProvided,
@@ -276,7 +272,9 @@ export default async function SupplierProfilePage({
           >
             <div className="card p-4">
               <div className="text-xs text-[#64748b]">{sp.employeesLabel}</div>
-              <div className="font-semibold">{s.employees || "—"}</div>
+              <div className="font-semibold">
+                <UnlockedValue slug={s.slug} locale={uiLocale} field="employees" />
+              </div>
             </div>
           </UnlockGate>
 
@@ -301,7 +299,7 @@ export default async function SupplierProfilePage({
             <div className="card p-4">
               <div className="text-xs text-[#64748b]">{sp.exportMarketsLabel}</div>
               <div className="font-semibold">
-                {s.exportMarkets.length > 0 ? s.exportMarkets.join(", ") : "—"}
+                <UnlockedValue slug={s.slug} locale={uiLocale} field="exportMarkets" />
               </div>
             </div>
           </UnlockGate>
@@ -371,12 +369,13 @@ export default async function SupplierProfilePage({
                   membershipHref={p("/membership")}
                   locked={<span className="text-[#94a3b8]">🔒</span>}
                 >
-                  <span
+                  <UnlockedEvidenceStatus
+                    slug={s.slug}
+                    locale={uiLocale}
+                    evidenceId={e.id}
                     className="font-medium"
                     style={{ color: LEVEL_COLOR[overallLevel(s.riskScore ?? 0)] }}
-                  >
-                    {statusLabel[e.status] ?? e.status}
-                  </span>
+                  />
                 </UnlockGate>
               </li>
             ))}
@@ -398,7 +397,12 @@ export default async function SupplierProfilePage({
                 membershipHref={p("/membership")}
                 locked={<span className="text-[#94a3b8]">🔒</span>}
               >
-                <span className="font-medium text-[#0f172a]">{s.inspectionHistory}</span>
+                <UnlockedValue
+                  slug={s.slug}
+                  locale={uiLocale}
+                  field="inspectionHistory"
+                  className="font-medium text-[#0f172a]"
+                />
               </UnlockGate>
             </li>
             <li className="flex justify-between gap-3">
@@ -409,9 +413,12 @@ export default async function SupplierProfilePage({
                 membershipHref={p("/membership")}
                 locked={<span className="text-[#94a3b8]">🔒</span>}
               >
-                <span className="font-medium text-[#0f172a]">
-                  {s.certifications.length > 0 ? s.certifications.join(", ") : "—"}
-                </span>
+                <UnlockedValue
+                  slug={s.slug}
+                  locale={uiLocale}
+                  field="certifications"
+                  className="font-medium text-[#0f172a]"
+                />
               </UnlockGate>
             </li>
           </ul>
