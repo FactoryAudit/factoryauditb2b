@@ -47,8 +47,14 @@ if (!URL || !KEY) {
 }
 
 // ★ 防止把 service_role 误配成 anon key（anon 会被 RLS 挡住，报莫名其妙的错）
-if (KEY.split(".").length !== 3) {
-  console.error("❌ SUPABASE_SERVICE_ROLE_KEY 格式不对（应为 JWT，三段以 . 分隔）");
+// 兼容两种格式：老式 JWT（eyJ...，三段以 . 分隔）或 2024+ 新版 sb_secret_/sb_publishable_
+const keyLooksValid =
+  KEY.startsWith("sb_secret_") ||
+  KEY.startsWith("sb_publishable_") ||
+  KEY.startsWith("eyJ") ||
+  KEY.split(".").length === 3;
+if (!keyLooksValid) {
+  console.error("❌ SUPABASE_SERVICE_ROLE_KEY 格式不对（应 eyJ 开头或 sb_secret_/sb_publishable_ 开头）");
   process.exit(1);
 }
 

@@ -57,6 +57,17 @@ function section(title) {
   console.log(`\n\x1b[1m${title}\x1b[0m`);
 }
 
+// 兼容两种 Supabase key 格式：
+//   - 老式 JWT：eyJ...（旧项目）
+//   - 新版 publishable/secret：sb_publishable_xxx / sb_secret_xxx（2024+ 新项目）
+function isSupabaseKey(k, kind) {
+  if (!k) return false;
+  if (k.startsWith("eyJ")) return true;
+  if (kind === "anon" && k.startsWith("sb_publishable_")) return true;
+  if (kind === "service" && k.startsWith("sb_secret_")) return true;
+  return false;
+}
+
 // ---- 0. 读环境变量 ----
 
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
@@ -86,7 +97,7 @@ if (!url) {
 
 if (!anon) {
   bad("NEXT_PUBLIC_SUPABASE_ANON_KEY 未配置");
-} else if (!anon.startsWith("eyJ")) {
+} else if (!isSupabaseKey(anon, "anon")) {
   bad("NEXT_PUBLIC_SUPABASE_ANON_KEY 不像 JWT（应以 eyJ 开头）");
 } else {
   ok("NEXT_PUBLIC_SUPABASE_ANON_KEY 已配置（JWT 格式正确）");
@@ -96,7 +107,7 @@ if (!service) {
   bad("SUPABASE_SERVICE_ROLE_KEY 未配置");
   info("位置：Supabase → Project Settings → API Keys → service_role");
   info("⚠️ 这个 key 绕过全部 RLS，只能用 wrangler secret put 写 Workers");
-} else if (!service.startsWith("eyJ")) {
+} else if (!isSupabaseKey(service, "service")) {
   bad("SUPABASE_SERVICE_ROLE_KEY 不像 JWT（应以 eyJ 开头）");
 } else if (service === anon) {
   bad("SUPABASE_SERVICE_ROLE_KEY 与 anon key 相同 —— 你复制错了");
@@ -109,7 +120,7 @@ if (!service) {
 section("2. Supabase 连通性与建表");
 
 let db = null;
-if (url && service && service.startsWith("eyJ")) {
+if (url && service && isSupabaseKey(service, "service")) {
   db = createClient(url, service, {
     auth: { persistSession: false, autoRefreshToken: false },
   });
@@ -174,7 +185,7 @@ section("3. RLS 是否真的生效");
 // RLS 是保护数据的唯一防线。如果 RLS 没生效，
 // 任何人打开浏览器控制台就能拖走整张 profiles 表（含所有用户邮箱）。
 
-if (url && anon && anon.startsWith("eyJ")) {
+if (url && anon && isSupabaseKey(anon, "anon")) {
   const anonDb = createClient(url, anon, {
     auth: { persistSession: false, autoRefreshToken: false },
   });

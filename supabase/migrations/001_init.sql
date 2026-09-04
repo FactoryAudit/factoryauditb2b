@@ -26,13 +26,8 @@ $$;
 
 -- 判断当前请求者是否 admin（供所有 RLS policy 复用，避免重复子查询）
 -- SECURITY DEFINER：绕过 RLS 查 profiles，防止 policy 递归
-CREATE OR REPLACE FUNCTION is_admin()
-RETURNS boolean LANGUAGE sql STABLE SECURITY DEFINER
-SET search_path = public AS $$
-  SELECT EXISTS (
-    SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'admin'
-  );
-$$;
+-- 注：is_admin() 的实际定义已移至下方 profiles 建表之后（见第 1 节末尾），
+--     因为 SQL 函数在创建时会校验其引用的表是否已存在，必须先建 profiles 再建该函数。
 
 -- =============================================================================
 -- 1. profiles —— Supabase Auth 的 public 影子表
@@ -50,6 +45,17 @@ CREATE TABLE IF NOT EXISTS profiles (
 );
 
 COMMENT ON TABLE profiles IS '用户档案。auth.users 由 Supabase 托管，本表只放业务字段，禁止存密码。';
+
+-- 判断当前请求者是否 admin（供所有 RLS policy 复用，避免重复子查询）
+-- SECURITY DEFINER：绕过 RLS 查 profiles，防止 policy 递归
+-- 必须在 profiles 表创建之后定义（函数体引用 profiles，否则报 42P01 relation does not exist）
+CREATE OR REPLACE FUNCTION is_admin()
+RETURNS boolean LANGUAGE sql STABLE SECURITY DEFINER
+SET search_path = public AS $$
+  SELECT EXISTS (
+    SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'admin'
+  );
+$$;
 
 -- 新用户注册时自动建 profile（email 从 auth.users 取）
 CREATE OR REPLACE FUNCTION handle_new_user()

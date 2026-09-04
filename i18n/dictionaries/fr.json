@@ -870,7 +870,24 @@
       }
     ],
     "bottomTitle": "Vous ne savez pas ce qu'il vous faut ?",
-    "bottomLead": "Utilisez le calculateur de risque fournisseur pour un score rapide, puis revenez ici avec les résultats pour personnaliser votre plan de vérification ou d'audit."
+    "bottomLead": "Utilisez le calculateur de risque fournisseur pour un score rapide, puis revenez ici avec les résultats pour personnaliser votre plan de vérification ou d'audit.",
+    "paymentTitle": "Comment fonctionne le paiement",
+    "paymentLead": "Le paiement est simple et traçable. Nous ne collectons aucune donnée de carte sur ce site.",
+    "paymentMethods": [
+      {
+        "title": "Virement bancaire (T/T)",
+        "body": "Notre méthode privilégiée pour les audits et les inspections. Nous envoyons les coordonnées bancaires avec votre devis, une fois le périmètre et le prix confirmés."
+      },
+      {
+        "title": "PayPal",
+        "body": "Disponible pour les rapports de vérification et les prestations de faible montant. Vous recevez un lien de paiement par e-mail — aucun compte PayPal requis."
+      },
+      {
+        "title": "Alipay",
+        "body": "Disponible pour les clients réglant en CNY. Les coordonnées sont fournies avec votre devis."
+      }
+    ],
+    "paymentNote": "Nous ne publions jamais de coordonnées bancaires sur ce site. Les instructions de paiement sont envoyées uniquement depuis notre domaine officiel après confirmation de votre commande — vérifiez l'expéditeur avant tout virement."
   },
   "suppliers": {
     "h1": "Fournisseurs vérifiés",

@@ -870,7 +870,24 @@
       }
     ],
     "bottomTitle": "Sind Sie sich unsicher?",
-    "bottomLead": "Nutzen Sie den Lieferanten-Risikorechner für einen schnellen Wert und kehren Sie mit den Ergebnissen zurück, um Ihren Verifizierungs- oder Auditplan anzupassen."
+    "bottomLead": "Nutzen Sie den Lieferanten-Risikorechner für einen schnellen Wert und kehren Sie mit den Ergebnissen zurück, um Ihren Verifizierungs- oder Auditplan anzupassen.",
+    "paymentTitle": "So funktioniert die Zahlung",
+    "paymentLead": "Die Zahlung ist einfach und nachvollziehbar. Auf dieser Website werden keine Kartendaten erfasst.",
+    "paymentMethods": [
+      {
+        "title": "Banküberweisung (T/T)",
+        "body": "Unsere bevorzugte Methode für Audits und Inspektionen. Wir senden die Bankdaten zusammen mit Ihrem Angebot, sobald Umfang und Preis bestätigt sind."
+      },
+      {
+        "title": "PayPal",
+        "body": "Verfügbar für Verifizierungsberichte und kleinere Aufträge. Sie erhalten einen Zahlungslink per E-Mail – kein PayPal-Konto erforderlich."
+      },
+      {
+        "title": "Alipay",
+        "body": "Verfügbar für Kunden, die in CNY abrechnen. Die Details erhalten Sie mit Ihrem Angebot."
+      }
+    ],
+    "paymentNote": "Wir veröffentlichen niemals Bankdaten auf dieser Website. Zahlungsanweisungen werden erst nach Auftragsbestätigung von unserer offiziellen Domain gesendet – bitte prüfen Sie den Absender vor der Überweisung."
   },
   "suppliers": {
     "h1": "Geprüfte Lieferanten",

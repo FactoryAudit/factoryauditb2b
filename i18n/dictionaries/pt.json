@@ -870,7 +870,24 @@
       }
     ],
     "bottomTitle": "Não tem certeza do que precisa?",
-    "bottomLead": "Use a calculadora de risco do fornecedor para uma pontuação rápida e volte aqui com os resultados para personalizar seu plano de verificação ou auditoria."
+    "bottomLead": "Use a calculadora de risco do fornecedor para uma pontuação rápida e volte aqui com os resultados para personalizar seu plano de verificação ou auditoria.",
+    "paymentTitle": "Como funciona o pagamento",
+    "paymentLead": "O pagamento é simples e rastreável. Não coletamos dados de cartão neste site.",
+    "paymentMethods": [
+      {
+        "title": "Transferência bancária (T/T)",
+        "body": "Nosso método preferencial para auditorias e inspeções. Enviamos os dados bancários junto com sua cotação, após a confirmação do escopo e do preço."
+      },
+      {
+        "title": "PayPal",
+        "body": "Disponível para relatórios de verificação e serviços menores. Você recebe um link de pagamento por e-mail — não é necessário ter conta PayPal."
+      },
+      {
+        "title": "Alipay",
+        "body": "Disponível para clientes que liquidam em CNY. Os dados são fornecidos com sua cotação."
+      }
+    ],
+    "paymentNote": "Nunca publicamos dados bancários neste site. As instruções de pagamento são enviadas somente do nosso domínio oficial após a confirmação do pedido — verifique o remetente antes de transferir."
   },
   "suppliers": {
     "h1": "Fornecedores verificados",

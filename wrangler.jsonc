@@ -4,29 +4,14 @@
 	"main": ".open-next/worker.js",
 	"compatibility_date": "2026-08-31",
 	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+	"vars": {
+		// 数据源开关：supabase 走数据库；static 走 lib/staticData.ts 静态常量（5秒回滚保险丝）
+		"SUPPLIER_DATA_SOURCE": "supabase"
+	},
 	"assets": {
 		"directory": ".open-next/assets",
 		"binding": "ASSETS"
 	},
-	"services": [
-		{
-			// Self-reference service binding, the service name must match the worker name
-			// see https://opennext.js.org/cloudflare/caching
-			"binding": "WORKER_SELF_REFERENCE",
-			"service": "factoryauditb2b"
-		}
-	],
-	"r2_buckets": [
-		// Use R2 incremental cache
-		// See https://opennext.js.org/cloudflare/caching
-		{
-			"binding": "NEXT_INC_CACHE_R2_BUCKET",
-			// Create the bucket before deploying
-			// You can change the bucket name if you want
-			// See https://developers.cloudflare.com/workers/wrangler/commands/#r2-bucket-create
-			"bucket_name": "factoryauditb2b-opennext-cache"
-		}
-	],
 	"images": {
 		// Enable image optimization
 		// see https://opennext.js.org/cloudflare/howtos/image
@@ -34,9 +19,5 @@
 	},
 	"observability": {
 		"enabled": true
-	},
-	"routes": [
-		{ "pattern": "factoryauditb2b.com", "custom_domain": true },
-		{ "pattern": "www.factoryauditb2b.com", "custom_domain": true }
-	]
+	}
 }

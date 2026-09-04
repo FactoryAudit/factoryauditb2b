@@ -164,6 +164,43 @@ export async function notifyCustomerLeadReceived(lead: {
   });
 }
 
+/**
+ * RFQ 询价确认邮件（发给客户）
+ *
+ * 为什么单独写一封而不是复用 notifyCustomerLeadReceived：
+ *   RFQ 是本站转化主线。客户拿到 **RFQ 编号** 才能后续对账、追问进度；
+ *   同时要回显他填的产品，让他当场确认"我们收到的是对的"。
+ *   通用线索确认邮件两样都做不到。
+ *
+ * 措辞约束（避免无据声称）：
+ *   只承诺"一个工作日内回复"，与全站其他确认邮件口径一致，不承诺具体交付物或时效保证。
+ */
+export async function notifyCustomerRfqReceived(rfq: {
+  email: string;
+  name?: string | null;
+  referenceId: string;
+  product: string;
+}): Promise<boolean> {
+  if (!rfq.email) return false;
+  return sendMail({
+    to: rfq.email,
+    subject: `We received your RFQ ${rfq.referenceId} — FactoryAuditB2B`,
+    text: [
+      `Hi ${rfq.name || "there"},`,
+      "",
+      "Thank you. We have received your sourcing request.",
+      "",
+      `RFQ reference : ${rfq.referenceId}`,
+      `Product       : ${rfq.product}`,
+      "",
+      "Our team will review it and get back to you within one business day.",
+      "Please quote the RFQ reference above if you need to follow up.",
+      "",
+      "FactoryAuditB2B",
+    ].join("\n"),
+  });
+}
+
 // —— Supplier Network V1.0：供应商入驻双邮件 ——
 
 // 管理员通知：结构化文本，可直接粘贴进 Google Sheets（Supplier Master Sheet）

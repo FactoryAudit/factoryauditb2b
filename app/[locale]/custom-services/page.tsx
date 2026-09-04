@@ -73,6 +73,25 @@ export default async function Page({ params }: Props) {
         ))}
       </section>
 
+      {/* 付款方式：账户信息不公开，报价确认后由官方域名邮件发送 */}
+      <section className="mb-8">
+        <h2 className="text-2xl font-bold text-[#0f172a] text-center">{s.paymentTitle}</h2>
+        <p className="text-[#64748b] mt-2 mb-6 text-center max-w-2xl mx-auto">{s.paymentLead}</p>
+
+        <div className="grid md:grid-cols-3 gap-5">
+          {s.paymentMethods.map((m) => (
+            <div key={m.title} className="card p-5">
+              <div className="font-semibold text-[#0f4c81] mb-2">{m.title}</div>
+              <p className="text-sm text-[#475569]">{m.body}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="card p-5 mt-5 bg-[#fffaf0] border-l-4 border-l-[#e8a33d]">
+          <p className="text-sm text-[#0f172a]">{s.paymentNote}</p>
+        </div>
+      </section>
+
       <section className="card p-8 text-center bg-[#f7f9fc]">
         <h2 className="text-2xl font-bold text-[#0f172a]">{s.bottomTitle}</h2>
         <p className="text-[#64748b] mt-2 max-w-2xl mx-auto">{s.bottomLead}</p>

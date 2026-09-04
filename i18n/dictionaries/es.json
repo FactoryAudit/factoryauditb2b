@@ -870,7 +870,24 @@
       }
     ],
     "bottomTitle": "¿No está seguro de lo que necesita?",
-    "bottomLead": "Ejecute la calculadora de riesgos del proveedor para obtener una puntuación rápida, luego regrese aquí con los resultados de una verificación de alcance o un plan de auditoría."
+    "bottomLead": "Ejecute la calculadora de riesgos del proveedor para obtener una puntuación rápida, luego regrese aquí con los resultados de una verificación de alcance o un plan de auditoría.",
+    "paymentTitle": "Cómo funciona el pago",
+    "paymentLead": "El pago es sencillo y rastreable. No recopilamos datos de tarjetas en este sitio.",
+    "paymentMethods": [
+      {
+        "title": "Transferencia bancaria (T/T)",
+        "body": "Nuestro método preferido para auditorías e inspecciones. Enviamos los datos bancarios junto con su presupuesto, una vez confirmados el alcance y el precio."
+      },
+      {
+        "title": "PayPal",
+        "body": "Disponible para informes de verificación y servicios menores. Recibirá un enlace de pago por correo; no necesita cuenta PayPal."
+      },
+      {
+        "title": "Alipay",
+        "body": "Disponible para clientes que liquidan en CNY. Los datos se facilitan con su presupuesto."
+      }
+    ],
+    "paymentNote": "Nunca publicamos datos bancarios en este sitio web. Las instrucciones de pago se envían únicamente desde nuestro dominio oficial tras confirmar su pedido: verifique el remitente antes de transferir."
   },
   "suppliers": {
     "h1": "Directorio de proveedores",

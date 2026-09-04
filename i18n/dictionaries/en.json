@@ -1131,7 +1131,24 @@
       }
     ],
     "bottomTitle": "Not sure what you need?",
-    "bottomLead": "Run the supplier risk calculator for a quick score, then come back here with the results for a scoped verification or audit plan."
+    "bottomLead": "Run the supplier risk calculator for a quick score, then come back here with the results for a scoped verification or audit plan.",
+    "paymentTitle": "How payment works",
+    "paymentLead": "Payment is simple and traceable. We do not collect any card details on this website.",
+    "paymentMethods": [
+      {
+        "title": "Bank transfer (T/T)",
+        "body": "Our preferred method for audits and inspections. We send bank details together with your quotation, once scope and pricing are confirmed."
+      },
+      {
+        "title": "PayPal",
+        "body": "Available for verification reports and smaller engagements. You receive a payment link by email — no PayPal account required."
+      },
+      {
+        "title": "Alipay",
+        "body": "Available for clients settling in CNY. Details are provided with your quotation."
+      }
+    ],
+    "paymentNote": "We never publish bank account details on this website. Payment instructions are sent only from our official domain after your order is confirmed — please verify the sender before transferring funds."
   },
   "suppliers": {
     "h1": "Supplier Directory",

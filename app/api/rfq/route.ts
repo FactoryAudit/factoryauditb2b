@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/supabaseServer";
 import { createAdminClient } from "@/lib/supabaseAdmin";
 import { checkRateLimit, clientIp, clamp } from "@/lib/rateLimit";
-import { notifyAdminNewLead } from "@/lib/notify";
+import { notifyAdminNewLead, notifyCustomerRfqReceived } from "@/lib/notify";
 
 // POST /api/rfq —— 询价单入库
 //
@@ -119,7 +119,15 @@ export async function POST(req: Request) {
     }
   }
 
-  // ---- 通知管理员（无论落库成功与否都要发，一单生意不能凭空消失） ----
+  // ---- 双邮件：管理员 + 客户（无论落库成功与否都要发） ----
+  //
+  // 为什么客户确认邮件不能省：
+  //   客户填完询价单，页面上只有一个"提交成功"提示，邮箱里空空如也 ——
+  //   他会怀疑到底提交成功没有，于是重复提交或直接流失。
+  //   **确认邮件是这个环节唯一的"收据"**，对转化是刚需，不是锦上添花。
+  //
+  // 两封都走 allSettled：任何一封失败都不影响接口返回成功
+  // （sendMail 内部本身也是 fail-open），一单生意不能因为邮件通道抖动而丢失。
   await Promise.allSettled([
     notifyAdminNewLead({
       id: referenceId,
@@ -132,6 +140,12 @@ export async function POST(req: Request) {
         .filter(Boolean)
         .join("\n"),
       score: stored ? 10 : 5,
+    }),
+    notifyCustomerRfqReceived({
+      email,
+      name: company ?? null,
+      referenceId,
+      product,
     }),
   ]);
 
