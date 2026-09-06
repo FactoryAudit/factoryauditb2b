@@ -247,7 +247,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
           <Link href={p("/rfq")} className="btn btn-accent">
             {dict.caseStudies.ctaRfq}
           </Link>
-          <Link href={p("/custom-services")} className="btn btn-outline border-white text-white">
+          <Link href={p("/custom-services")} className="btn btn-outline-dark">
             {dict.caseStudies.ctaCustom}
           </Link>
         </div>

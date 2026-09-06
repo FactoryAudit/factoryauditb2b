@@ -126,7 +126,7 @@ export default async function CaseStudiesPage({ params }: Props) {
           <Link href={p("/rfq")} className="btn btn-accent">
             {t.caseStudies.ctaRfq}
           </Link>
-          <Link href={p("/custom-services")} className="btn btn-outline border-white text-white">
+          <Link href={p("/custom-services")} className="btn btn-outline-dark">
             {t.caseStudies.ctaCustom}
           </Link>
         </div>

@@ -215,7 +215,7 @@ export default function SiteFooter({
                 <WhatsAppLink
                   label={whatsappLabel}
                   message="Hi FactoryAuditB2B, I would like to ask about supplier verification."
-                  className="mt-3 inline-block rounded bg-[#25D366] px-3 py-2 text-xs font-medium text-white hover:opacity-90"
+                  className="mt-3 inline-block rounded bg-[#25D366] px-3 py-2 text-xs font-medium text-[#0a3320] hover:opacity-90"
                 />
               )}
             </div>

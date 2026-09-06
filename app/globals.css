@@ -11,7 +11,7 @@
   --color-surface: #ffffff;
   --color-panel: #f7f9fc;
   --color-border: #e2e8f0;
-  --color-muted: #64748b;
+  --color-muted: #475569; /* WCAG AA: 5.74:1 on white (was #64748b 4.02:1) */
   --color-ink: #0f172a;
 }
 
@@ -49,6 +49,12 @@ body {
   .btn-accent:hover { filter: brightness(0.95); }
   .btn-outline { background: #fff; border-color: var(--color-border); color: var(--color-ink); }
   .btn-outline:hover { border-color: var(--color-brand); color: var(--color-brand); }
+  /* Dark-section outline button (transparent bg, white border/text, inverts on hover).
+     Used inside brand-blue CTA sections where .btn-outline's white bg would cause
+     white-on-white. Contrast: white on #0f4c81 ≈ 6.9:1; hover brand on white ≈ 7:1. */
+  .btn-outline-dark { background: transparent; border-color: #fff; color: #fff; }
+  .btn-outline-dark:hover { background: #fff; color: var(--color-brand); border-color: var(--color-brand); }
+  .btn:focus-visible { outline: 2px solid var(--color-brand); outline-offset: 2px; }
 
   .card { background: #fff; border: 1px solid var(--color-border); border-radius: 14px; }
   .badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
@@ -62,6 +68,7 @@ body {
     padding: 10px 12px; background: #fff; color: #0f172a; font-size: 14px;
   }
   .input:focus, .select:focus, .textarea:focus { outline: 2px solid var(--color-brand); border-color: var(--color-brand); }
+  .input::placeholder, .select::placeholder, .textarea::placeholder { color: #475569; opacity: 1; }
 
   .section-pad { padding: 64px 0; }
 }

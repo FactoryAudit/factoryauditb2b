@@ -209,7 +209,7 @@ export default async function FieldReportPage({ params }: { params: Promise<Para
             <Link
               key={s.href}
               href={p(s.href)}
-              className="btn btn-outline border-white text-white"
+              className="btn btn-outline-dark"
             >
               {s.label}
             </Link>

@@ -134,7 +134,7 @@ export default async function FieldReportsPage({ params }: Props) {
           </Link>
           <Link
             href={p("/custom-services")}
-            className="btn btn-outline border-white text-white"
+            className="btn btn-outline-dark"
           >
             {f.ctaSecondary}
           </Link>

@@ -274,7 +274,7 @@ export default async function TrustPage({ params }: Props) {
             <WhatsAppLink
               label={t.common.whatsappChat}
               message="Hi FactoryAuditB2B, I have a question about your verification service."
-              className="inline-block rounded bg-[#25D366] px-3 py-2 text-xs font-medium text-white hover:opacity-90"
+              className="inline-block rounded bg-[#25D366] px-3 py-2 text-xs font-medium text-[#0a3320] hover:opacity-90"
             />
           )}
         </div>

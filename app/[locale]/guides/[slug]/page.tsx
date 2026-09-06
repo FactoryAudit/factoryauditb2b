@@ -256,7 +256,7 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
           <Link href={p("/services/supplier-verification")} className="btn btn-accent">
             {t.home.bottomCta}
           </Link>
-          <Link href={p("/tools/supplier-risk-calculator")} className="btn btn-outline border-white text-white">
+          <Link href={p("/tools/supplier-risk-calculator")} className="btn btn-outline-dark">
             {t.methodology.ctaSecondary}
           </Link>
         </div>

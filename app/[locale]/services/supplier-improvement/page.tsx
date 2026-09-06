@@ -109,7 +109,7 @@ export default async function SupplierImprovementPage({
           </Link>
           <Link
             href={lp("/training-plans")}
-            className="btn btn-outline border-white text-white"
+            className="btn btn-outline-dark"
           >
             {t.footer.trainingPlans}
           </Link>

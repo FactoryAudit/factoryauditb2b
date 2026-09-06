@@ -70,9 +70,9 @@ export function organizationSchema(
     },
     description:
       options.description ??
-      "FactoryAuditB2B publishes supplier risk scores and on-site verification " +
-        "records for manufacturers across Asia, so buyers can check a factory " +
-        "before paying a deposit.",
+      "FactoryAuditB2B helps global buyers discover and verify reliable " +
+        "manufacturers across Asia, and helps suppliers demonstrate their " +
+        "real capabilities with verified evidence.",
     // 覆盖国家取自 lib/coverage.ts —— 唯一事实源，新增国家会自动同步，无需改这里
     areaServed: COVERAGE_COUNTRIES.map((c) => ({
       "@type": "Country",

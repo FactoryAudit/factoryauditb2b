@@ -276,7 +276,7 @@ export default async function CountryServicePage({ params }: { params: Promise<P
           <Link href={p("/custom-services")} className="btn btn-accent">
             {sc.ctaPrimary}
           </Link>
-          <Link href={p("/tools/supplier-risk-calculator")} className="btn btn-outline border-white text-white">
+          <Link href={p("/tools/supplier-risk-calculator")} className="btn btn-outline-dark">
             {sc.ctaSecondary}
           </Link>
         </div>

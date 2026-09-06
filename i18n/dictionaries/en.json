@@ -1,10 +1,10 @@
 {
   "brand": {
     "name": "FactoryAuditB2B",
-    "tagline": "Supplier Intelligence & Verification for Global Buyers",
-    "eva": "Evaluate. Verify. Audit.",
-    "scope": "Supplier verification and factory audit services across China and Southeast Asia.",
-    "positioning": "We help global buyers evaluate suppliers, verify factories and reduce sourcing risk before an order is placed."
+    "tagline": "Global Supplier Discovery, Verification & Trust Platform",
+    "eva": "Discover. Verify. Trust.",
+    "scope": "Supplier discovery, verification and factory audit across China and Southeast Asia — for global buyers and manufacturers.",
+    "positioning": "FactoryAuditB2B is a global supplier discovery, verification and trust platform. We help buyers find and evaluate reliable suppliers, and help manufacturers demonstrate their real capabilities to the world."
   },
   "nav": {
     "tools": "Tools",
@@ -65,10 +65,10 @@
     "notConfiguredLead": "We publish our registration record once the administrator has added it. Until then, ask us directly and we will send it to you.",
     "operatesTitle": "Who Operates FactoryAuditB2B?",
     "operatesBody": "FactoryAuditB2B is a platform and brand operated by {entity}. The brand name is not the legal entity name, and we do not present them as the same thing.",
-    "operatesLead": "FactoryAuditB2B is operated by a registered company in China and provides supplier verification, factory audit and sourcing support for global buyers.",
+    "operatesLead": "FactoryAuditB2B is operated by a registered company in China and provides supplier verification, factory audit and sourcing support for global buyers and manufacturers.",
     "operatesNotConfigured": "FactoryAuditB2B is operated by a registered company. We publish the legal entity name as soon as it is configured in the Trust Center.",
     "scopeTitle": "Scope of business",
-    "scopeBody": "Supplier verification, factory audit, inspection and sourcing support for buyers importing from China and Southeast Asia. Phase 1 coverage is China, Vietnam, Thailand, Malaysia and the Philippines.",
+    "scopeBody": "Supplier verification, factory audit, inspection and sourcing support for buyers sourcing from, and manufacturers exporting to, China and Southeast Asia. Phase 1 coverage is China, Vietnam, Thailand, Malaysia and the Philippines.",
     "verifyTitle": "What We Verify",
     "verifyLead": "These are the checks our verification service covers.",
     "verify": [
@@ -164,7 +164,7 @@
     "factoryAudit": "Factory audit",
     "knowledgeBase": "Resources",
     "pricing": "Pricing",
-    "tagline": "Supplier Intelligence & Verification for Global Buyers. Evaluate. Verify. Audit.",
+    "tagline": "Global Supplier Discovery, Verification & Trust Platform. Discover. Verify. Trust.",
     "copyright": "© 2026 FactoryAuditB2B.com. We do not sell certificates. We provide trusted supply chain information, supplier verification, inspection, and sourcing support to help you make better decisions.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
@@ -186,18 +186,18 @@
     "membership": "Membership"
   },
   "home": {
-    "badge": "Supplier intelligence for global buyers",
-    "h1": "Know Your Supplier Before You Risk Your Money.",
-    "lead": "Evaluate suppliers, verify factories and reduce sourcing risk across China and Southeast Asia.",
-    "sub": "Use free tools to assess supplier risk, check verification readiness and prepare for a factory audit. When you need someone on the ground, request an independent verification or factory audit.",
-    "ctaPrimary": "Check My Supplier",
-    "ctaSecondary": "Free Risk Check",
-    "ctaHighIntent": "Request Factory Audit",
-    "evaTitle": "Evaluate. Verify. Audit.",
-    "evaLead": "Three steps between a supplier you found online and a supplier you can pay.",
-    "evaluateTitle": "Evaluate",
-    "evaluateBody": "Assess supplier risk before you place an order.",
-    "evaluateCta": "Evaluate a Supplier",
+    "badge": "Supplier discovery, verification & trust",
+    "h1": "Find Reliable Suppliers. Verify Capabilities. Build Trust.",
+    "lead": "Discover, evaluate and verify suppliers across China and Southeast Asia — so good manufacturers get found and buyers can source with confidence.",
+    "sub": "Use free tools to assess a supplier's capabilities, check verification readiness and prepare for a factory audit. When you need someone on the ground, request an independent verification or factory audit.",
+    "ctaPrimary": "Find Suppliers",
+    "ctaSecondary": "Free Supplier Check",
+    "ctaHighIntent": "Request a Factory Audit",
+    "evaTitle": "Discover. Verify. Trust.",
+    "evaLead": "From a supplier you found online to a supplier you can trust.",
+    "evaluateTitle": "Discover",
+    "evaluateBody": "Check a supplier's capabilities and verification status before you commit.",
+    "evaluateCta": "Assess a Supplier",
     "verifyTitle": "Verify",
     "verifyBody": "Check company information, documents, factory details and available evidence.",
     "verifyCta": "Verify a Supplier",
@@ -351,14 +351,14 @@
     "coverageLead": "Country-specific verification and audit pages with the local checks that matter.",
     "notSureTitle": "Not sure which one you need?",
     "notSureLead": "Run the free risk calculator first. It takes about three minutes and tells you what is missing.",
-    "notSureCta": "Assess supplier risk",
+    "notSureCta": "Assess a supplier",
     "metaTitle": "Supplier Verification, Factory Audit and Inspection Services",
     "metaDesc": "Independent supplier verification, factory audit, inspection and sourcing support across China, Vietnam, Thailand, Malaysia and the Philippines. Scoped and quoted per project."
   },
   "resourcesIndex": {
     "badge": "Resources",
     "h1": "Supplier Intelligence Resources",
-    "lead": "Practical guides and tools for evaluating suppliers, checking documents, preparing audits and reducing sourcing risk. Written by the people who run the checks.",
+    "lead": "Practical guides and tools for evaluating suppliers, checking documents, preparing audits and making confident sourcing decisions. Written by the people who run the checks.",
     "categoriesTitle": "Browse by topic",
     "categoriesLead": "Each topic lists the guides, tools and services that belong to it.",
     "toolsTitle": "Tools",
@@ -1800,14 +1800,14 @@
   },
   "trainingPage": {
     "badge": "Supplier Training",
-    "h1": "We audit your factory, then we train it",
-    "lead": "Auditing shows you what is wrong. Training fixes it. We verify suppliers across China and Asia to keep your orders out of trouble, and we train your factory's teams so the same defects do not come back.",
-    "pillarAuditTitle": "First, we audit and surface the risk",
-    "pillarAuditDesc": "Before any training, we run supplier verification, factory audits and inspections. You receive a written report listing the gaps that put your orders at risk.",
+    "h1": "Verify your supplier, then train your factory",
+    "lead": "Verification shows what a supplier can really do. Training builds on it. We help reliable suppliers prove their capabilities across China and Asia, and we train your factory's teams so the same gaps do not return.",
+    "pillarAuditTitle": "First, we verify and surface the gaps",
+    "pillarAuditDesc": "Before any training, we run supplier verification, factory audits and inspections. You receive a written report listing the gaps that hold a factory back.",
     "pillarTrainTitle": "Then we train your factory, on your behalf",
     "pillarTrainDesc": "We go to the factory floor and train your supplier's staff the way you would if you were there. You stay in control without flying out.",
     "offeringsTitle": "What we train",
-    "offeringsLead": "Practical, on-site programs built around the defects and risks we find in your audits.",
+    "offeringsLead": "Practical, on-site programs built around the gaps we find in your audits.",
     "offerings": [
       {
         "title": "Quality system training",
@@ -1829,8 +1829,8 @@
     "ctaTitle": "Want your factory trained, not just checked?",
     "ctaDesc": "Tell us the supplier and the problems you keep seeing. We scope a training plan around your audit findings.",
     "ctaButton": "Talk to our team",
-    "metaTitle": "Supplier Training - We Audit and Train Your Factory",
-    "metaDesc": "We verify suppliers in China and Asia to avoid risk, then train your factory's teams in quality and QC so defects do not return."
+    "metaTitle": "Supplier Training - Verify Your Supplier, Then Train Your Factory",
+    "metaDesc": "We help suppliers prove their capabilities, then train your factory's teams in quality and QC so the same gaps do not return."
   },
   "legal": {
     "privacyTitle": "Privacy Policy",
@@ -1934,7 +1934,7 @@
   },
   "countryPage": {
     "pageTitle": "Supplier Verification & Training",
-    "metaDesc": "Verify factories and train supplier teams in {country}. Audits, inspections and certified suppliers for buyers importing from {country}.",
+    "metaDesc": "Verify factories and train supplier teams in {country}. Audits, inspections and certified suppliers for buyers sourcing from, and manufacturers exporting to, {country}.",
     "auditTypesIn": "Audit types available in {country}",
     "verifiedSuppliers": "Verified suppliers in {country}",
     "ctaTitle": "Train your {country} suppliers",
@@ -2152,12 +2152,12 @@
     "close": "Close"
   },
   "about": {
-    "metaTitle": "About Us — Factory Audit & Supplier Training",
-    "metaDesc": "We verify factories across Asia and train the teams inside them, so the problems we find do not come back. Evidence first, no certificates for sale.",
+    "metaTitle": "About Us — Supplier Verification, Training & Trust",
+    "metaDesc": "We help reliable suppliers prove their capabilities and help buyers source with confidence. We verify factories across Asia and train the teams inside them, so good suppliers get discovered and the same problems do not return. Evidence first, no certificates for sale.",
     "h1": "About FactoryAuditB2B",
-    "lead": "We verify factories across Asia and train the teams inside them, so the problems we find do not come back.",
+    "lead": "We help reliable suppliers prove their capabilities and help buyers source with confidence — verifying factories across Asia and training the teams inside them.",
     "storyTitle": "Who we are",
-    "storyBody": "FactoryAuditB2B was built by auditors and QC engineers who spent years inside factories in China and across Asia. We kept seeing the same loop: a buyer places an order, defects show up, an audit gets commissioned, the report lands in a drawer, and the next order repeats the failure. So we built a platform that closes the loop: verify the supplier, then train the people who actually make the product.",
+    "storyBody": "FactoryAuditB2B was built by auditors and QC engineers who spent years inside factories in China and across Asia. We kept seeing the same gap from both sides: good manufacturers struggled to prove their real capabilities to overseas buyers, while buyers struggled to tell a capable supplier from a risky one. So we built a platform that serves both — verify a supplier's real capabilities, then train the people who actually make the product, so good factories get discovered and buyers can source with confidence.",
     "valuesTitle": "How we work",
     "values": [
       {
@@ -2205,7 +2205,7 @@
     "h1": "Product Inspection",
     "lead": "Order-specific quality checks at the production stage that matters, carried out by an independent inspector and reported in writing. Every request is reviewed individually and quoted per inspection.",
     "metaTitle": "Product Inspection — PPI, DUPRO, PSI and Container Loading",
-    "metaDesc": "Pre-production, during-production, pre-shipment and container loading inspection for buyers sourcing from China, Vietnam, Thailand, Malaysia and the Philippines. Quoted per inspection.",
+    "metaDesc": "Pre-production, during-production, pre-shipment and container loading inspection for buyers and suppliers across China, Vietnam, Thailand, Malaysia and the Philippines. Quoted per inspection.",
     "quickAnswerTitle": "Quick answer",
     "quickAnswer": "A product inspection checks a specific order at a specific stage: before production starts, while it is running, before shipment, or during container loading. The inspector works to your requirements or an AQL sampling plan, reports findings with photos, and gives a clear recommendation. It is quoted per inspection and priced by type, scope, location and duration.",
     "honestNote": "Inspection requests are reviewed individually. We respond with a scoped quote based on inspection type, location, duration and qualified inspector availability.",
