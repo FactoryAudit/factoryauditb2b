@@ -61,7 +61,7 @@ export default async function CountriesPage({ params }: Props) {
           const copy = pickZhCopy(locale, x);
           return (
             <div key={x.code} className="card p-6 flex flex-col">
-              <div className="text-xs font-semibold uppercase tracking-wide text-[#a86a13]">
+              <div className="text-xs font-semibold uppercase tracking-wide text-[#8a5410]">
                 {c.phase1}
               </div>
               <h2 className="text-2xl font-bold text-[#0f172a] mt-1">

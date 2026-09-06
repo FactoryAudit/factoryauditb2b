@@ -387,7 +387,7 @@ export default function ContainerLoadCalculator({
                 </p>
               )}
               {!recommended.doorOk && (
-                <p className="mt-3 text-sm text-[#a86a13] bg-[#fff4e0] rounded-lg p-3">
+                <p className="mt-3 text-sm text-[#8a5410] bg-[#fff4e0] rounded-lg p-3">
                   {t.warnDoor}
                 </p>
               )}
@@ -499,7 +499,7 @@ function Field({
 
 function Bar({ pct }: { pct: number }) {
   const capped = Math.min(100, Math.max(0, pct));
-  const color = capped >= 95 ? "#d4232a" : capped >= 75 ? "#a86a13" : "#0f4c81";
+  const color = capped >= 95 ? "#d4232a" : capped >= 75 ? "#8a5410" : "#0f4c81";
   return (
     <div
       className="h-2.5 w-full rounded-full bg-[#eef2f7] mt-1"

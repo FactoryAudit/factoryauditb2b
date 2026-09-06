@@ -79,7 +79,7 @@ export default async function AdminMembersPage({ params }: Props) {
                           {r.email}
                         </a>
                         {r.role === "admin" && (
-                          <span className="ml-2 rounded-full bg-[#fff4e0] px-2 py-0.5 text-xs text-[#a86a13]">
+                          <span className="ml-2 rounded-full bg-[#fff4e0] px-2 py-0.5 text-xs text-[#8a5410]">
                             admin
                           </span>
                         )}

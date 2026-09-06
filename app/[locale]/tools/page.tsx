@@ -67,7 +67,7 @@ export default async function Page({ params }: Props) {
             <div className="flex items-center gap-2 mb-2">
               <span className="font-semibold text-[#0f4c81]">{tool.title}</span>
               {"tag" in tool && tool.tag && (
-                <span className="px-2 py-0.5 rounded text-xs font-semibold bg-[#fff4e0] text-[#a86a13]">
+                <span className="px-2 py-0.5 rounded text-xs font-semibold bg-[#fff4e0] text-[#8a5410]">
                   {tool.tag}
                 </span>
               )}

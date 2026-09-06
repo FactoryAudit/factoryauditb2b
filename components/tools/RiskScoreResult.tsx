@@ -126,16 +126,16 @@ export default function RiskScoreResult({
 
           {result.dataGaps.length > 0 && (
             <div className="rounded-lg border border-[#f0e0b8] bg-[#fdf9ef] p-3">
-              <div className="text-sm font-semibold text-[#a86a13] mb-1">{ui.gapsTitle}</div>
+              <div className="text-sm font-semibold text-[#8a5410] mb-1">{ui.gapsTitle}</div>
               <ul className="space-y-1 text-sm text-[#475569]">
                 {result.dataGaps.map((g, i) => (
                   <li key={i} className="flex gap-1.5">
-                    <span className="text-[#a86a13] shrink-0">?</span>
+                    <span className="text-[#8a5410] shrink-0">?</span>
                     <span>{g}</span>
                   </li>
                 ))}
               </ul>
-              <p className="text-xs text-[#a86a13] mt-2">{ui.gapsNote}</p>
+              <p className="text-xs text-[#8a5410] mt-2">{ui.gapsNote}</p>
             </div>
           )}
         </div>

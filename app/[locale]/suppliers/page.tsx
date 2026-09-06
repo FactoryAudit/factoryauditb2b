@@ -115,7 +115,7 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
         </span>
         <h1 className="text-3xl font-bold text-[#0f172a] mt-2">{s.h1}</h1>
         <p className="text-[#64748b] mt-2 max-w-3xl">{s.lead}</p>
-        <p className="mt-3 text-sm text-[#a86a13] bg-[#fff4e0] rounded-md px-3 py-2 max-w-3xl">
+        <p className="mt-3 text-sm text-[#8a5410] bg-[#fff4e0] rounded-md px-3 py-2 max-w-3xl">
           {s.exampleNote}
         </p>
       </section>
@@ -238,7 +238,7 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
                 >
                   <div className="flex justify-between items-start gap-2">
                     <div className="font-semibold text-[#0f172a]">{x.legalName}</div>
-                    <span className="shrink-0 px-2 py-0.5 rounded text-xs font-semibold bg-[#fff4e0] text-[#a86a13]">
+                    <span className="shrink-0 px-2 py-0.5 rounded text-xs font-semibold bg-[#fff4e0] text-[#8a5410]">
                       {s.featuredTag}
                     </span>
                   </div>

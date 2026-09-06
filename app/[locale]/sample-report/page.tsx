@@ -302,7 +302,7 @@ export default async function SampleReportPage({ params }: Props) {
                   className={`rounded-full px-2 py-0.5 text-xs font-medium ${
                     c.impact === "low"
                       ? "bg-[#e8f5ea] text-[#1f7a36]"
-                      : "bg-[#fff4e0] text-[#a86a13]"
+                      : "bg-[#fff4e0] text-[#8a5410]"
                   }`}
                 >
                   {c.impact === "low" ? s.impactLow : s.impactMedium}

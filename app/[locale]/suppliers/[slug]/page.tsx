@@ -206,7 +206,7 @@ export default async function SupplierProfilePage({
             ))}
           </div>
 
-          <p className="mt-3 text-sm text-[#a86a13] bg-[#fff4e0] rounded-md px-3 py-2">
+          <p className="mt-3 text-sm text-[#8a5410] bg-[#fff4e0] rounded-md px-3 py-2">
             {sp.featuredNote}
           </p>
         </div>

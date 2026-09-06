@@ -41,7 +41,7 @@ export default function SupplierDocumentCheckerTool({ ui }: { ui: DocumentChecke
             {checks.map((c, i) => (
               <div key={i} className="flex justify-between border-b border-[#e2e8f0] py-2 text-sm">
                 <span className="font-medium">{c.name}</span>
-                <span className={c.status === MISSING ? "text-[#c0392b]" : c.status === REVIEW ? "text-[#a86a13]" : "text-[#1f7a36]"}>{c.status || c.note}</span>
+                <span className={c.status === MISSING ? "text-[#c0392b]" : c.status === REVIEW ? "text-[#8a5410]" : "text-[#1f7a36]"}>{c.status || c.note}</span>
               </div>
             ))}
           </div>
