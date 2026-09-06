@@ -22,6 +22,7 @@
 
 import { COVERAGE_COUNTRIES } from "@/lib/coverage";
 import { getTrustConfig } from "@/lib/trust";
+import { activeSocialLinks } from "@/lib/social";
 
 export const ORG_NAME = "FactoryAuditB2B";
 export const ORG_URL = "https://factoryauditb2b.com";
@@ -78,6 +79,10 @@ export function organizationSchema(
       name: c.name,
     })),
     knowsAbout: KNOWS_ABOUT,
+    // 社媒档案：帮助搜索引擎/AI 把社交账号关联到本品牌实体（未开通的平台不出现）
+    ...(activeSocialLinks().length > 0
+      ? { sameAs: activeSocialLinks().map((s) => s.url) }
+      : {}),
   };
 
   // ---- 联系点：只输出真实存在的渠道 ----

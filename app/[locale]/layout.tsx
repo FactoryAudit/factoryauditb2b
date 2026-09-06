@@ -13,7 +13,7 @@ import { LOCALES, isLocale, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { hreflangFor, canonicalFor } from "@/i18n/hreflang";
 import { OG_IMAGE } from "@/lib/pageMeta";
-import { activeSocialLinks } from "@/lib/social";
+import { organizationSchema } from "@/lib/organizationSchema";
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -104,29 +104,22 @@ export async function generateMetadata({
   };
 }
 
-// 全局结构化数据：让搜索引擎与 AI 抓取工具理解站点身份
+// 全局结构化数据：让搜索引擎与 AI 抓取工具理解站点身份。
+// Organization 用 lib/organizationSchema 作为全站唯一事实源（含 areaServed / knowsAbout /
+// contactPoint / sameAs），避免每页重复或字段不一致。@id 统一用无斜杠形式
+// （https://factoryauditb2b.com#organization），与 organizationSchema() 内部保持一致。
 const siteGraph = [
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": `${BASE}/#organization`,
-    name: "FactoryAuditB2B",
-    url: BASE,
-    description:
-      "Global supplier verification, factory audit, inspection and sourcing platform for China and Asia. Covers SMETA, BSCI, ISO 9001, ISO 14001, CE, UL and 20+ audit and certification programs.",
-    // 此前引用 logo.png，但 public/ 下只有 .svg，导致结构化数据里的图片是 404
-    logo: `${BASE}/logo.svg`,
-    // 社媒档案：帮助搜索引擎/AI 把社交账号关联到本品牌实体（未开通的平台不出现）
-    ...(activeSocialLinks().length > 0
-      ? { sameAs: activeSocialLinks().map((s) => s.url) }
-      : {}),
+    ...organizationSchema(),
   },
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": `${BASE}/#website`,
+    "@id": `${BASE}#website`,
     url: BASE,
     name: "FactoryAuditB2B",
+    publisher: { "@id": `${BASE}#organization` },
     potentialAction: {
       "@type": "SearchAction",
       target: `${BASE}/suppliers?q={search_term_string}`,

@@ -10,7 +10,6 @@ import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config
 import { getDictionary } from "@/i18n/getDictionary";
 import { hreflangFor, canonicalFor } from "@/i18n/hreflang";
 import { OG_IMAGE } from "@/lib/pageMeta";
-import { organizationSchema, websiteSchema } from "@/lib/organizationSchema";
 import { pickZhCopy, pickZhPair } from "@/lib/tw";
 
 const BASE = "https://factoryauditb2b.com";
@@ -83,27 +82,22 @@ export default async function Home({ params }: Props) {
     [t.home.why4Title, t.home.why4Body],
   ];
 
-  // 首页结构化数据三件套：
-  //   Organization —— E-E-A-T 实体背书（以前首页完全没有，是最大的信任缺口）
-  //   WebSite      —— 站点实体，通过 publisher 指向 Organization，让 Google 认出
-  //                   "这个网站就是这个品牌的官网"而不是两个不相干的对象
-  //   ItemList     —— 工具导航（原有）
-  const jsonLd = [
-    { "@context": "https://schema.org", ...organizationSchema() },
-    { "@context": "https://schema.org", ...websiteSchema() },
-    {
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      name: t.home.toolsTitle,
-      url: canonicalFor(locale, "/"),
-      itemListElement: featuredTools.map((tool, i) => ({
-        "@type": "ListItem",
-        position: i + 1,
-        name: tool.title,
-        url: canonicalFor(locale, tool.href),
-      })),
-    },
-  ];
+  // 首页结构化数据：工具导航 ItemList。
+  // 站点身份（Organization / WebSite）由根布局 app/[locale]/layout.tsx 的 siteGraph
+  // 统一输出一次（全站唯一事实源），此处不再重复，避免同页两套 @id 相同但字段
+  // 不同的 Organization 让 Google 混淆。
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: t.home.toolsTitle,
+    url: canonicalFor(locale, "/"),
+    itemListElement: featuredTools.map((tool, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: tool.title,
+      url: canonicalFor(locale, tool.href),
+    })),
+  };
 
   return (
     <>
