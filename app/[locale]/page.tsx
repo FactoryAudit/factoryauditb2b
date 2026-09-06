@@ -105,7 +105,7 @@ export default async function Home({ params }: Props) {
       <section className="bg-gradient-to-b from-[#e6eef6] to-[#f7f9fc]">
         <div className="container py-20 grid md:grid-cols-2 gap-10 items-center">
           <div>
-            <div className="inline-block px-3 py-1 rounded-full bg-[#fff4e0] text-[#a86a13] text-sm font-semibold mb-4">
+            <div className="inline-block px-3 py-1 rounded-full bg-[#fff4e0] text-[#8a5410] text-sm font-semibold mb-4">
               {t.home.badge}
             </div>
             <h1 className="text-4xl md:text-5xl font-extrabold text-[#0f172a] leading-tight">

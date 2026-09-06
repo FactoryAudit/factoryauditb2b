@@ -116,7 +116,7 @@ export default function HeroSearch({
             key={k}
             onClick={() => setTab(k)}
             className={`px-3 py-1.5 rounded-lg text-sm font-medium ${
-              tab === k ? "bg-[#0f4c81] text-white" : "bg-[#f1f5f9] text-[#64748b]"
+              tab === k ? "bg-[#0f4c81] text-white" : "bg-[#f1f5f9] text-[#475569]"
             }`}
           >
             {t[k]}
