@@ -5,6 +5,7 @@ import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import JsonLd from "@/components/JsonLd";
 import { getTrustConfig } from "@/lib/trust";
+import { organizationSchema } from "@/lib/organizationSchema";
 
 const PATH = "/about";
 const BASE = "https://factoryauditb2b.com";
@@ -40,7 +41,10 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             "@type": "AboutPage",
             name: a.h1,
             description: a.metaDesc,
-            mainEntity: { "@type": "Organization", name: "FactoryAuditB2B", url: BASE },
+            // 统一走 lib/organizationSchema：法律主体名、注册号、注册地址等
+            // 仅在 TRUST_* 真实配置后才输出（值已脱敏），未配置时只输出
+            // name/url/logo/覆盖国家/服务领域这类确定信息 —— 不编造任何企业信息。
+            mainEntity: organizationSchema(),
           },
           {
             "@context": "https://schema.org",
