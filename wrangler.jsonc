@@ -10,7 +10,13 @@
 	},
 	"assets": {
 		"directory": ".open-next/assets",
-		"binding": "ASSETS"
+		"binding": "ASSETS",
+		// "none" = 不做扩展名推断/自动重定向。
+		// 默认的 "auto-trailing-slash" 会把 /xxx.html 307 跳到 /xxx，
+		// 导致 Google 站点验证文件无法按要求以原文件名返回 200。
+		// 本目录内仅 public/ 的静态文件（当前只有 1 个 .html），无依赖
+		// 无扩展名访问的 HTML，故设为 "none" 无副作用。
+		"html_handling": "none"
 	},
 	"images": {
 		// Enable image optimization

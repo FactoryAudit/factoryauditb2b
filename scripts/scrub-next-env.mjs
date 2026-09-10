@@ -19,6 +19,12 @@
 //   没做成 secret 的运行时变量一旦清空，线上就会读不到值。加新 secret 后
 //   同步把 key 加进 SCRUB，并确认 wrangler secret list 里有它。
 //
+// ⚠️ 必须覆盖全部导出对象：next-env.mjs 会同时导出
+//   production / development / test 三份（按 NODE_ENV 生成）。
+//   init.js 只在 NEXTJS_ENV=test 时读 test 段，但该段同样会被打包上传，
+//   所以三个对象都要清。此前只扫前两个，导致 test 段曾带着
+//   CLOUDFLARE_API_TOKEN / SUPABASE_SERVICE_ROLE_KEY 明文上线（2026-09-10 修复）。
+//
 // 用法：opennextjs-cloudflare build 之后、wrangler deploy 之前跑。
 //   node scripts/scrub-next-env.mjs
 
@@ -58,9 +64,12 @@ if (!fs.existsSync(TARGET)) {
 
 const before = fs.readFileSync(TARGET, "utf8");
 let cleared = 0;
+const touched = [];
 
+// 注意：next-env.mjs 会导出 production / development / test 三个对象
+// （OpenNext 按 NODE_ENV 生成）。必须全部清理，否则 test 段会带着明文密钥上传。
 const after = before.replace(
-  /export const (production|development) = (\{.*?\});/gs,
+  /export const (\w+) = (\{.*?\});/gs,
   (match, mode, json) => {
     let obj;
     try {
@@ -69,12 +78,15 @@ const after = before.replace(
       console.error(`[scrub] ${mode} 段 JSON 解析失败，已跳过（不改动）`);
       return match;
     }
+    let hit = 0;
     for (const key of Object.keys(obj)) {
       if (SCRUB.has(key) && obj[key]) {
         obj[key] = "";
         cleared += 1;
+        hit += 1;
       }
     }
+    if (hit > 0) touched.push(`${mode}(${hit})`);
     return `export const ${mode} = ${JSON.stringify(obj)};`;
   },
 );
@@ -86,16 +98,20 @@ if (cleared === 0) {
 
 fs.writeFileSync(TARGET, after);
 
-// 自检：确认目标 key 在产物里已无残留非空值
-const verify = JSON.parse(
-  after.match(/export const production = (\{.*?\});/s)[1],
-);
-const leaked = [...SCRUB].filter((k) => verify[k]);
-if (leaked.length > 0) {
-  console.error(`[scrub] 自检失败，仍有残留：${leaked.join(", ")}`);
+// 自检：遍历所有导出对象，确认目标 key 已无残留非空值
+const allExports = [...after.matchAll(/export const (\w+) = (\{.*?\});/gs)];
+const stillLeaked = [];
+for (const m of allExports) {
+  const obj = JSON.parse(m[2]);
+  for (const k of SCRUB) if (obj[k]) stillLeaked.push(`${m[1]}.${k}`);
+}
+if (stillLeaked.length > 0) {
+  console.error(`[scrub] 自检失败，仍有残留：${stillLeaked.join(", ")}`);
   process.exit(1);
 }
 
-console.log(`[scrub] 已清空 ${cleared} 处密钥明文，自检通过`);
+console.log(
+  `[scrub] 已清空 ${cleared} 处密钥明文（${touched.join(", ")}），自检通过（覆盖全部 ${allExports.length} 个导出对象）`,
+);
 console.log(`[scrub] 提示：这些 key 必须已用 wrangler secret put 绑定，否则线上读不到值`);
 console.log(`[scrub]   ${HAS_SECRET.join(", ")}`);
