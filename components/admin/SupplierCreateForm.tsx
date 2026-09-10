@@ -31,6 +31,8 @@ export type SupplierCreateDict = {
   employeesLabel: string;
   websiteLabel: string;
   websiteHint: string;
+  mainProductsLabel: string;
+  mainProductsHint: string;
   phoneLabel: string;
   addressLabel: string;
   regNoLabel: string;
@@ -82,6 +84,7 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
   const [established, setEstablished] = useState("");
   const [employees, setEmployees] = useState("");
   const [website, setWebsite] = useState("");
+  const [mainProducts, setMainProducts] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [regNo, setRegNo] = useState("");
@@ -121,6 +124,7 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
       established: established || null,
       employees: employees || null,
       website: website || null,
+      main_products: mainProducts,
       phone: phone || null,
       address: address || null,
       registration_number: regNo || null,
@@ -312,6 +316,17 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
+          </label>
+
+          <label className="block md:col-span-2">
+            <span className="text-sm font-medium text-[#0f172a]">{dict.mainProductsLabel}</span>
+            <textarea
+              className={`mt-1 ${inputClass}`}
+              rows={2}
+              value={mainProducts}
+              onChange={(e) => setMainProducts(e.target.value)}
+            />
+            <span className="mt-1 block text-xs text-[#94a3b8]">{dict.mainProductsHint}</span>
           </label>
         </div>
 

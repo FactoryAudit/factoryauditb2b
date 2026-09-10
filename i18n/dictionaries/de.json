@@ -3423,6 +3423,8 @@
       "employeesLabel": "Mitarbeiter",
       "websiteLabel": "Website",
       "websiteHint": "Optional. Muss mit http:// oder https:// beginnen.",
+      "mainProductsLabel": "Hauptprodukte",
+      "mainProductsHint": "Optional. Mit Kommas oder Zeilenumbrüchen trennen.",
       "phoneLabel": "Telefon",
       "addressLabel": "Adresse",
       "regNoLabel": "Registriernummer",

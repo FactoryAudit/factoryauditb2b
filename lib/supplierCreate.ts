@@ -32,6 +32,8 @@ export type SupplierCreateInput = {
   source_url: string | null;
   source_type: string | null;
   source_name: string | null;
+  /** 主营产品（描述性字段，非高信任）：数组或分隔字符串归一化后落地 text[]。 */
+  main_products: string[];
   /** 原材料里写的是"声称"的认证显示名；落地为 supplier_certifications SELF_DECLARED */
   certificationClaims: string[];
 };
@@ -171,6 +173,21 @@ export function validateSupplierCreateInput(
       .slice(0, 50);
   }
 
+  // ---- 主营产品：数组或分隔字符串（、,，;；换行），逐个裁剪，最多 100 条 ----
+  let mainProducts: string[] = [];
+  if (Array.isArray(body.main_products)) {
+    mainProducts = (body.main_products as unknown[])
+      .map((p) => clamp(p, 200))
+      .filter((p): p is string => !!p)
+      .slice(0, 100);
+  } else if (typeof body.main_products === "string" && body.main_products.trim()) {
+    mainProducts = body.main_products
+      .split(/[,，、;；\n]/)
+      .map((p) => clamp(p.trim(), 200))
+      .filter((p): p is string => !!p)
+      .slice(0, 100);
+  }
+
   const value: SupplierCreateInput = {
     slug,
     legal_name,
@@ -188,6 +205,7 @@ export function validateSupplierCreateInput(
     source_url: clamp(body.source_url, 400),
     source_type: clamp(body.source_type, 64),
     source_name: clamp(body.source_name, 200),
+    main_products: mainProducts,
     certificationClaims,
   };
 

@@ -352,7 +352,7 @@ export async function createAdminSupplier(
     business_type: input.business_type,
     established: input.established,
     employees: input.employees,
-    main_products: [] as string[],
+    main_products: input.main_products,
     export_markets: [] as string[],
     verification_status: null,
     risk_score: null,

@@ -3423,6 +3423,8 @@
       "employeesLabel": "従業員数",
       "websiteLabel": "ウェブサイト",
       "websiteHint": "任意。http:// または https:// で始まる必要があります。",
+      "mainProductsLabel": "主要製品",
+      "mainProductsHint": "任意。カンマまたは改行で区切ります。",
       "phoneLabel": "電話",
       "addressLabel": "住所",
       "regNoLabel": "登録番号",

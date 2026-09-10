@@ -3423,6 +3423,8 @@
       "employeesLabel": "員工人數",
       "websiteLabel": "網站",
       "websiteHint": "選填。必須以 http:// 或 https:// 開頭。",
+      "mainProductsLabel": "主營產品",
+      "mainProductsHint": "選填。可用逗號或換行分隔。",
       "phoneLabel": "電話",
       "addressLabel": "地址",
       "regNoLabel": "註冊號",

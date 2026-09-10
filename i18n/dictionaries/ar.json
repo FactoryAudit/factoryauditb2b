@@ -3423,6 +3423,8 @@
       "employeesLabel": "عدد الموظفين",
       "websiteLabel": "الموقع",
       "websiteHint": "اختياري. يجب أن يبدأ بـ http:// أو https://.",
+      "mainProductsLabel": "المنتجات الرئيسية",
+      "mainProductsHint": "اختياري. افصل بفواصل أو أسطر جديدة.",
       "phoneLabel": "الهاتف",
       "addressLabel": "العنوان",
       "regNoLabel": "رقم التسجيل",

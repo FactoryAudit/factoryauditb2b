@@ -57,6 +57,9 @@ export default async function AdminSupplierNewPage({ params }: Props) {
             employeesLabel: c.employeesLabel ?? "Employees",
             websiteLabel: c.websiteLabel ?? "Website",
             websiteHint: c.websiteHint ?? "Optional. Must start with http:// or https://.",
+            mainProductsLabel: c.mainProductsLabel ?? "Main products",
+            mainProductsHint:
+              c.mainProductsHint ?? "Optional. Separate with commas or new lines.",
             phoneLabel: c.phoneLabel ?? "Phone",
             addressLabel: c.addressLabel ?? "Address",
             regNoLabel: c.regNoLabel ?? "Registration number",
