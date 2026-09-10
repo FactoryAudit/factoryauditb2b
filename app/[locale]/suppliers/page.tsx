@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { listSupplierDirectory, type SupplierView } from "@/lib/queries";
-import { levelFromStatus } from "@/lib/verification";
 import { overallLevel, LEVEL_COLOR, type RiskLevel } from "@/lib/riskEngine";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
@@ -90,31 +89,76 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
     return p(qs ? `${PATH}?${qs}` : PATH);
   };
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: s.h1,
-    url: `${BASE}${p(PATH)}`,
-    numberOfItems: filtered.length,
-    itemListElement: filtered.map((x, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: x.legalName,
-      url: `${BASE}${p(`/suppliers/${x.slug}`)}`,
-    })),
-  };
+  const faqs = [
+    { q: s.faq1q, a: s.faq1a },
+    { q: s.faq2q, a: s.faq2a },
+    { q: s.faq3q, a: s.faq3a },
+  ];
+
+  // FAQPage 与 ItemList 并列输出（JsonLd 组件支持数组）
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: s.h1,
+      url: `${BASE}${p(PATH)}`,
+      numberOfItems: filtered.length,
+      itemListElement: filtered.map((x, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: x.legalName,
+        url: `${BASE}${p(`/suppliers/${x.slug}`)}`,
+      })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
+  ];
 
   return (
     <main className="container py-12" data-track-page={ANALYTICS_EVENTS.directoryView}>
       <JsonLd data={jsonLd} />
 
-      {/* Hero */}
+      {/* Hero
+          定位从「付费供应商目录」改为「免费发现 + 付费情报 + 服务」。
+          第一 CTA 是 Find Suppliers（发现），Membership 降级为文字链（指令 §8）。 */}
       <section className="mb-6">
         <span className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">
           {s.heroBadge}
         </span>
         <h1 className="text-3xl font-bold text-[#0f172a] mt-2">{s.h1}</h1>
         <p className="text-[#64748b] mt-2 max-w-3xl">{s.lead}</p>
+        <p className="mt-2 text-sm font-medium text-[#475569]">{s.freeNote}</p>
+
+        <div className="mt-5 flex flex-wrap items-center gap-3">
+          {/* 页内锚点：落到下方供应商目录，不产生新页面也不伪造转化事件 */}
+          <a href="#supplier-directory" className="btn btn-primary font-semibold">
+            {t.home.ctaPrimary}
+          </a>
+          <Link
+            href={p("/services/supplier-verification")}
+            className="btn btn-outline font-semibold"
+            data-track={ANALYTICS_EVENTS.verificationRequest}
+            data-track-value="directory_hero"
+          >
+            {t.home.verifyCta}
+          </Link>
+          <Link
+            href={p("/membership")}
+            className="text-sm text-[#0f4c81] hover:underline"
+            data-track={ANALYTICS_EVENTS.profilePaidCta}
+            data-track-value="directory_hero"
+          >
+            {s.memberCta}
+          </Link>
+        </div>
+
         <p className="mt-3 text-sm text-[#8a5410] bg-[#fff4e0] rounded-md px-3 py-2 max-w-3xl">
           {s.exampleNote}
         </p>
@@ -210,8 +254,8 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
         </div>
       </section>
 
-      {/* Featured 供应商 */}
-      <section className="mb-8">
+      {/* Featured 供应商（Hero 的 Find Suppliers 锚点落在这里） */}
+      <section id="supplier-directory" className="mb-8 scroll-mt-6">
         <div className="flex items-baseline justify-between gap-4 mb-4">
           <div>
             <h2 className="text-2xl font-bold text-[#0f172a]">{s.featuredTitle}</h2>
@@ -227,7 +271,13 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
         ) : (
           <section className="grid md:grid-cols-3 gap-5 mb-14">
             {featured.map((x) => {
-              const level = levelFromStatus(x.verificationStatus);
+              // ★ 等级只由「真实证据」决定，绝不采信 legacy verification_status。
+              //   现状：dongguan / ho-chi-minh 零证据却显示 "Business checked"；
+              //   shenzhen 显示 "Factory verified" 但库里没有任何 audit 记录。
+              //   在没有 supplier_audits 记录的前提下，公开侧最高只能到「文件已审核」，
+              //   绝不允许出现 Factory verified / Factory audited。
+              //   （Phase 7 的 L0–L6 引擎上线后，这里改为读引擎结果。）
+              const hasEvidence = (x.evidenceVerified ?? 0) > 0;
               return (
                 <Link
                   key={x.slug}
@@ -236,12 +286,7 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
                   data-track={ANALYTICS_EVENTS.profileView}
                   data-track-value={x.slug}
                 >
-                  <div className="flex justify-between items-start gap-2">
-                    <div className="font-semibold text-[#0f172a]">{x.legalName}</div>
-                    <span className="shrink-0 px-2 py-0.5 rounded text-xs font-semibold bg-[#fff4e0] text-[#8a5410]">
-                      {s.featuredTag}
-                    </span>
-                  </div>
+                  <div className="font-semibold text-[#0f172a]">{x.legalName}</div>
                   <div className="text-sm text-[#64748b] mt-1">
                     {x.city}, {x.countryName ?? x.country.toUpperCase()}
                   </div>
@@ -249,9 +294,15 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
 
                   <dl className="mt-4 space-y-1 text-sm">
                     <div className="flex justify-between gap-2">
-                      <dt className="text-[#64748b]">{v.levelLabel}</dt>
+                      <dt className="text-[#64748b]">{s.businessTypeLabel}</dt>
                       <dd className="font-medium text-[#0f172a] text-right">
-                        {v.levelsShort[level]}
+                        {x.businessType || "—"}
+                      </dd>
+                    </div>
+                    <div className="flex justify-between gap-2">
+                      <dt className="text-[#64748b]">{s.evidenceLevel}</dt>
+                      <dd className="font-medium text-[#0f172a] text-right">
+                        {hasEvidence ? s.evidenceDocs : s.evidenceNone}
                       </dd>
                     </div>
                     <div className="flex justify-between gap-2">
@@ -264,7 +315,7 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
                       </dd>
                     </div>
                     <div className="flex justify-between gap-2">
-                      <dt className="text-[#64748b]">{v.lastVerified}</dt>
+                      <dt className="text-[#64748b]">{s.lastEvidence}</dt>
                       <dd className="font-medium text-[#0f172a] text-right">
                         {x.lastChecked ?? sp.noCheckRecord}
                       </dd>
@@ -312,6 +363,20 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
         </div>
       </section>
 
+      {/* 服务转化：发现之后的下一步是核验 / 验厂 / 验货（指令 §16） */}
+      <section className="card p-8 mb-10">
+        <h2 className="text-2xl font-bold text-[#0f172a]">{s.svcTitle}</h2>
+        <p className="text-[#475569] mt-2 max-w-2xl">{s.svcLead}</p>
+        <Link
+          href={p("/custom-services")}
+          className="btn btn-primary mt-5 inline-block"
+          data-track={ANALYTICS_EVENTS.verificationRequest}
+          data-track-value="directory_service_block"
+        >
+          {s.svcCta}
+        </Link>
+      </section>
+
       {/* 找不到 → RFQ */}
       <section className="card p-8 bg-gradient-to-br from-[#e6eef6] to-[#f7f9fc] mb-10">
         <h2 className="text-2xl font-bold text-[#0f172a]">{s.notListedTitle}</h2>
@@ -331,6 +396,29 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
         >
           {s.claimPrimary}
         </Link>
+      </section>
+
+      {/* FAQ（指令 §21：只写真实、对 Buyer 有帮助的问题） */}
+      <section className="mb-4">
+        <h2 className="text-2xl font-bold text-[#0f172a]">{t.common.faq}</h2>
+        <div className="mt-4 space-y-4">
+          {faqs.map((f) => (
+            <div key={f.q} className="card p-5">
+              <h3 className="font-semibold text-[#0f172a]">{f.q}</h3>
+              <p className="text-[#475569] mt-2 text-sm">{f.a}</p>
+            </div>
+          ))}
+        </div>
+        <p className="mt-4 text-sm">
+          <Link
+            href={p("/custom-services")}
+            className="text-[#0f4c81] font-medium hover:underline"
+            data-track={ANALYTICS_EVENTS.verificationRequest}
+            data-track-value="directory_faq"
+          >
+            {s.svcCta} →
+          </Link>
+        </p>
       </section>
     </main>
   );
