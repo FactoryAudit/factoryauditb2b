@@ -6,18 +6,32 @@
 -- =============================================================================
 
 -- ---------- 1. 表是否存在 + 行数（期望：4 张新表均为 0 行）----------
-SELECT 'supplier_documents' AS tbl, to_regclass('public.supplier_documents') IS NOT NULL AS exists,
-       (SELECT COUNT(*) FROM public.supplier_documents) AS n
-UNION ALL SELECT 'supplier_certifications', to_regclass('public.supplier_certifications') IS NOT NULL,
-       (SELECT COUNT(*) FROM public.supplier_certifications)
-UNION ALL SELECT 'supplier_audits', to_regclass('public.supplier_audits') IS NOT NULL,
-       (SELECT COUNT(*) FROM public.supplier_audits)
-UNION ALL SELECT 'admin_audit_log', to_regclass('public.admin_audit_log') IS NOT NULL,
-       (SELECT COUNT(*) FROM public.admin_audit_log)
-UNION ALL SELECT 'certification_program_alias', to_regclass('public.certification_program_alias') IS NOT NULL,
-       (SELECT COUNT(*) FROM public.certification_program_alias)
-UNION ALL SELECT 'schema_migrations', to_regclass('public.schema_migrations') IS NOT NULL,
-       (SELECT COUNT(*) FROM public.schema_migrations)
+--    ⚠️ 修复：之前用 (SELECT COUNT(*) FROM public.X) 硬引用，若表不存在整段 42P01。
+--    现在用 CASE WHEN to_regclass 守护，表不存在时返回 NULL，不报错。
+SELECT 'supplier_documents' AS tbl,
+       to_regclass('public.supplier_documents') IS NOT NULL AS exists,
+       CASE WHEN to_regclass('public.supplier_documents') IS NOT NULL
+            THEN (SELECT COUNT(*) FROM public.supplier_documents) END AS n
+UNION ALL SELECT 'supplier_certifications',
+       to_regclass('public.supplier_certifications') IS NOT NULL,
+       CASE WHEN to_regclass('public.supplier_certifications') IS NOT NULL
+            THEN (SELECT COUNT(*) FROM public.supplier_certifications) END
+UNION ALL SELECT 'supplier_audits',
+       to_regclass('public.supplier_audits') IS NOT NULL,
+       CASE WHEN to_regclass('public.supplier_audits') IS NOT NULL
+            THEN (SELECT COUNT(*) FROM public.supplier_audits) END
+UNION ALL SELECT 'admin_audit_log',
+       to_regclass('public.admin_audit_log') IS NOT NULL,
+       CASE WHEN to_regclass('public.admin_audit_log') IS NOT NULL
+            THEN (SELECT COUNT(*) FROM public.admin_audit_log) END
+UNION ALL SELECT 'certification_program_alias',
+       to_regclass('public.certification_program_alias') IS NOT NULL,
+       CASE WHEN to_regclass('public.certification_program_alias') IS NOT NULL
+            THEN (SELECT COUNT(*) FROM public.certification_program_alias) END
+UNION ALL SELECT 'schema_migrations',
+       to_regclass('public.schema_migrations') IS NOT NULL,
+       CASE WHEN to_regclass('public.schema_migrations') IS NOT NULL
+            THEN (SELECT COUNT(*) FROM public.schema_migrations) END
 ORDER BY 1;
 
 -- ---------- 2. suppliers.verification_level（期望：存在，且 4 家全是 unverified）----------
