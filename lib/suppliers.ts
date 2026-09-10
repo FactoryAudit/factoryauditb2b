@@ -23,6 +23,9 @@ export const PUBLIC_FIELDS = [
   "mainProducts",
   "capabilities",
   "verificationStatus",
+  // CS-02 起：**公开 Verification Level 的唯一权威字段**。
+  // 来源 suppliers.verification_level（DB），绝不由 legacy verification_status 推导。
+  "verificationLevel",
   "riskScore",
   "riskLevel",
   "evidenceCount",

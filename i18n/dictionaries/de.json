@@ -1773,7 +1773,8 @@
       "Produktleistung im Betrieb",
       "Aktuelle Produktionsauslastung",
       "Subunternehmer, die uns nicht offengelegt wurden"
-    ]
+    ],
+    "evidenceOnFile": "Hinterlegte Nachweise"
   },
   "evidence": {
     "title": "Zertifizierungen & Belege",
@@ -1864,7 +1865,8 @@
     "paidLockTitle": "Mitglieder sehen Nachweise und Risikodetails",
     "paidLockLead": "Founding-Buyer-Mitglieder (99 $/Jahr) sehen Nachweisaufzeichnungen, Risikoaufschlüsselungen, Audit-Historie und Inspektionsdaten.",
     "paidLockCta": "Mitgliedschaft ansehen",
-    "paidLockNote": "Der Risiko-Score ist öffentlich. Nachweise und Verifizierungsdetails sind Mitglieder-Inhalte."
+    "paidLockNote": "Der Risiko-Score ist öffentlich. Nachweise und Verifizierungsdetails sind Mitglieder-Inhalte.",
+    "certClaimsReported": "Gemeldete Zertifikatsangaben"
   },
   "reportPreview": {
     "badge": "Kostenlose Preview",

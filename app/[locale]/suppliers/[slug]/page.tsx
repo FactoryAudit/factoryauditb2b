@@ -10,7 +10,7 @@ import {
 import { CertificationList } from "@/components/CertificationList";
 import { AuditHistoryPanel } from "@/components/AuditHistoryPanel";
 import {
-  levelFromStatus,
+  publicVerificationLevel,
   LEVEL_SCOPE,
   evidenceLabel,
   evidenceProvenance,
@@ -56,7 +56,12 @@ export async function generateMetadata({
     });
   }
   const title = `${s.legalName} — ${t.supplierProfile.metaTitle}`;
-  const description = `${s.legalName}, ${s.city}, ${s.countryName ?? s.country.toUpperCase()}. ${s.businessType}. Main products: ${s.mainProducts.join(", ")}. Risk score ${s.riskScore ?? "n/a"} / 100. Verification: ${s.verificationStatus ?? t.supplierProfile.noCheckRecord}.`;
+  // ⚠️ CS-02：meta description 绝不允许再输出 legacy verification_status 原文。
+  //    那是历史声明（"Identity Verified" / "Factory Verified"），无证据支撑，
+  //    而 meta description 会直接显示在 Google 搜索结果里 —— 属于最高风险的公开位。
+  //    这里只用真实、公开、可支持的事实：公司名 / 地点 / 类型 / 主产品 / 风险分。
+  //    核验状态一律不写（要写也只能写当前权威字段，当前 4 家均为 unverified）。
+  const description = `${s.legalName}, ${s.city}, ${s.countryName ?? s.country.toUpperCase()}. ${s.businessType}. Main products: ${s.mainProducts.join(", ")}. Risk score ${s.riskScore ?? "n/a"} / 100.`;
   return buildPageMetadata({
     locale,
     path,
@@ -94,7 +99,16 @@ export default async function SupplierProfilePage({
 
   const ec = t.evidenceCenter;
   const uiLocale = contentLocale;
-  const level = levelFromStatus(s.verificationStatus);
+
+  // ★ CS-02：公开等级的唯一权威推导。
+  //   旧代码 `levelFromStatus(s.verificationStatus)` 直接拿 legacy 声明文本
+  //   （"Identity Verified" / "Factory Verified"）当等级，导致零证据的供应商
+  //   也显示 Business checked / Factory verified。这里改为：
+  //     ① 权威字段 suppliers.verification_level
+  //     ② 且必须有真实已发布的审核/核验事件
+  //   二者缺一 → Level 0 · Unverified。Evidence 条数不参与升档。
+  const hasRealVerificationEvent = verifiedAudits.length > 0;
+  const level = publicVerificationLevel(s.verificationLevel, hasRealVerificationEvent);
   const scope = LEVEL_SCOPE[level];
   // 风险等级由引擎推导，不在页面重复判定阈值
   const riskBand = overallLevel(s.riskScore ?? 0);
@@ -286,8 +300,12 @@ export default async function SupplierProfilePage({
             {lastVerifiedDate ?? sp.noCheckRecord}
           </div>
 
+          {/* ⚠️ CS-02：这里标签必须是 "Evidence on file"，不能用 "Evidence reviewed"。
+              s.evidenceCount 是**档案里存在多少条证据记录**（事实计数），
+              不等于「平台已复核」。存在证据 ≠ 已核验 —— 二者是两条轴。
+              旧代码用 v.evidence（"Evidence reviewed"）是错误暗示。 */}
           <div className="mt-3 flex justify-between text-sm">
-            <span className="text-[#64748b]">{v.evidence}</span>
+            <span className="text-[#64748b]">{v.evidenceOnFile}</span>
             <span className="font-medium text-[#0f172a]">{s.evidenceCount ?? 0}</span>
           </div>
         </div>
@@ -465,7 +483,11 @@ export default async function SupplierProfilePage({
               </UnlockGate>
             </li>
             <li className="flex justify-between gap-3">
-              <span>{sp.certificationsLabel ?? ev.title}</span>
+              {/* ⚠️ CS-02：这里展示的是 suppliers.certifications 原始数组 ——
+                  它是**供应商/来源自述的声明**，不是平台核验结果。
+                  标签必须是 "Reported certification claims"，绝不能只写 "Certifications"
+                  （那会让人误读成「已获认证」）。 */}
+              <span>{sp.certClaimsReported}</span>
               <UnlockGate
                 layer="paid"
                 registerHref={p("/register")}

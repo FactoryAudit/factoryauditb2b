@@ -1773,7 +1773,8 @@
       "使用中の製品性能",
       "現在の生産ユーティリティ",
       "当社に開示されていない委託先"
-    ]
+    ],
+    "evidenceOnFile": "記録されている証拠の件数"
   },
   "evidence": {
     "title": "認証と証拠",
@@ -1864,7 +1865,8 @@
     "paidLockTitle": "会員は証拠とリスク明細を閲覧",
     "paidLockLead": "Founding Buyer 会員（年間 $99）は証拠記録・リスク明細・監査履歴・検査データを閲覧できます。",
     "paidLockCta": "会員プランを見る",
-    "paidLockNote": "リスクスコアは公開です。証拠と検証の詳細は会員向けコンテンツです。"
+    "paidLockNote": "リスクスコアは公開です。証拠と検証の詳細は会員向けコンテンツです。",
+    "certClaimsReported": "申告された認証情報"
   },
   "reportPreview": {
     "badge": "無料プレビュー",

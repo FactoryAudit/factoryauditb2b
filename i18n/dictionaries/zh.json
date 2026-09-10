@@ -1132,7 +1132,8 @@
       "产品在实际使用中的表现",
       "当前产能利用率",
       "未向我们披露的外协工厂"
-    ]
+    ],
+    "evidenceOnFile": "档案内证据条数"
   },
   "evidence": {
     "title": "认证与证据",
@@ -1223,7 +1224,8 @@
     "paidLockTitle": "会员查看证据与风险明细",
     "paidLockLead": "Founding Buyer 会员（$99/年）可查看证据记录、风险明细、审核历史与验货数据。",
     "paidLockCta": "查看会员方案",
-    "paidLockNote": "风险评分公开可见；证据与核验明细为会员内容。"
+    "paidLockNote": "风险评分公开可见；证据与核验明细为会员内容。",
+    "certClaimsReported": "已申报的认证声明"
   },
   "reportPreview": {
     "badge": "免费预览",

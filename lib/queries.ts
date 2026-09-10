@@ -33,6 +33,11 @@ export type SupplierView = {
   mainProducts: string[];
   exportMarkets: string[];
   verificationStatus?: string;
+  /**
+   * CS-02 —— 公开 Verification Level 的**唯一权威字段**（DB: suppliers.verification_level）。
+   * 页面推导等级必须用它，禁止再用 verificationStatus（legacy 声明文本）。
+   */
+  verificationLevel: string;
   /** V1.1 语义：分数越高 = 风险越低 */
   riskScore?: number;
   /** 由 overallLevel(riskScore) 推导，不在数据里存一份等级文案（单一事实来源） */
@@ -90,6 +95,9 @@ function toView(s: (typeof STATIC_SUPPLIERS)[number]): SupplierView {
     mainProducts: s.mainProducts,
     exportMarkets: s.exportMarkets,
     verificationStatus: s.verificationStatus,
+    // 静态数据没有 verification_level 字段。缺省值取 'unverified' ——
+    // 这是**保守方向**（宁可显示未核验，也不能显示未经验证的信任等级）。
+    verificationLevel: "unverified",
     riskScore: s.riskScore,
     riskLevel: overallLevel(s.riskScore),
     lastChecked: lastCheckedOf(s.evidence),
@@ -117,6 +125,8 @@ type SupplierRow = {
   main_products: string[] | null;
   export_markets: string[] | null;
   verification_status: string | null;
+  /** CS-01 004_documents.sql 建，NOT NULL DEFAULT 'unverified' */
+  verification_level: string;
   risk_score: number | null;
   certifications: string[] | null;
   audit_status: string | null;
@@ -139,6 +149,7 @@ type SupplierRow = {
 const ROW_SELECT = `
   id, slug, legal_name, country_code, city, industry_code, business_type,
   established, employees, main_products, export_markets, verification_status,
+  verification_level,
   risk_score, certifications, audit_status, inspection_history,
   risk_breakdown, access_tier, is_published,
   supplier_evidence ( id, type, status, source, date, note, visibility )
@@ -169,6 +180,8 @@ function rowToView(row: SupplierRow): SupplierView {
     mainProducts: row.main_products ?? [],
     exportMarkets: row.export_markets ?? [],
     verificationStatus: row.verification_status ?? undefined,
+    // CS-02：公开等级权威源。列缺失（旧 schema）时兜底 unverified —— 保守方向。
+    verificationLevel: row.verification_level ?? "unverified",
     riskScore,
     riskLevel: overallLevel(riskScore),
     lastChecked: lastCheckedOf(publicEvidence),
@@ -226,6 +239,7 @@ function redactViews(rows: SupplierRow[], tier: MembershipTier): SupplierView[] 
       businessType: view.businessType,
       mainProducts: view.mainProducts,
       verificationStatus: view.verificationStatus,
+      verificationLevel: view.verificationLevel,
       riskScore: view.riskScore,
       riskLevel: view.riskLevel,
       evidenceCount: view.evidenceCount,
@@ -343,6 +357,7 @@ export async function getSupplierDetail(
     businessType: view.businessType,
     mainProducts: view.mainProducts,
     verificationStatus: view.verificationStatus,
+    verificationLevel: view.verificationLevel,
     riskScore: view.riskScore,
     riskLevel: view.riskLevel,
     evidenceCount: view.evidenceCount,

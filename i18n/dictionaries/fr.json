@@ -1773,7 +1773,8 @@
       "Performance du produit en utilisation",
       "Utilisation actuelle de la production",
       "Sous-traitants qui ne nous ont pas été communiqués"
-    ]
+    ],
+    "evidenceOnFile": "Preuves archivées"
   },
   "evidence": {
     "title": "Certifications et preuves",
@@ -1864,7 +1865,8 @@
     "paidLockTitle": "Les membres voient les preuves et les risques",
     "paidLockLead": "Les membres Founding Buyer (99 $/an) voient les enregistrements de preuves, les détails de risque, l'historique d'audit et les données d'inspection.",
     "paidLockCta": "Voir l'adhésion",
-    "paidLockNote": "Le score de risque est public. Les preuves et les détails de vérification sont réservés aux membres."
+    "paidLockNote": "Le score de risque est public. Les preuves et les détails de vérification sont réservés aux membres.",
+    "certClaimsReported": "Certifications déclarées"
   },
   "reportPreview": {
     "badge": "(Aperçu gratuit)",

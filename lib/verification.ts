@@ -27,6 +27,46 @@ export function levelFromStatus(status?: string | null): VerificationLevel {
   return STATUS_TO_LEVEL[key] ?? 0;
 }
 
+// =============================================================================
+// CS-02 —— 公开 Verification Level 的权威推导
+//
+// ⚠️ levelFromStatus() 是 legacy 路径，读的是 suppliers.verification_status
+//    （历史声明文本）。CS-02 起**公开侧禁止再使用它** —— 那正是
+//    「零证据却显示 Business checked / Factory verified」的根因。
+//
+// 权威来源只有两个，缺一不可：
+//   1. suppliers.verification_level（DB 字段，平台核验证据链的结果）
+//   2. 真实存在的核验/审核事件（supplier_audits 等）
+//
+// 规则：没有真实事件 → 一律 Level 0。Evidence 条数本身**不能**升等级
+//       （有证据 ≠ 已核验，二者是两条轴）。
+// =============================================================================
+
+/** suppliers.verification_level → 展示等级 */
+const LEVEL_FROM_VERIFICATION_LEVEL: Record<string, VerificationLevel> = {
+  unverified: 0,
+  self_assessment: 1,
+  platform_assessment: 2,
+  on_site_audit: 3,
+  third_party_audit: 4,
+};
+
+/**
+ * 公开侧唯一允许的等级推导。
+ *
+ * @param verificationLevel  suppliers.verification_level（权威字段）
+ * @param hasRealEvent       是否存在真实核验/审核事件（如已发布的 supplier_audits 记录）
+ */
+export function publicVerificationLevel(
+  verificationLevel?: string | null,
+  hasRealEvent: boolean = false
+): VerificationLevel {
+  // 无真实事件 → 一律 0。绝不因为「有 2 条证据」或 legacy 文本就升档。
+  if (!hasRealEvent) return 0;
+  const key = (verificationLevel ?? "").trim().toLowerCase();
+  return LEVEL_FROM_VERIFICATION_LEVEL[key] ?? 0;
+}
+
 /** 该等级实际覆盖的核验范围（页面显示「核验范围」用） */
 export const LEVEL_SCOPE: Record<VerificationLevel, string[]> = {
   0: [],

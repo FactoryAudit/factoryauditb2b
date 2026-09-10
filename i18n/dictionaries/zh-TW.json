@@ -1773,7 +1773,8 @@
       "產品在實際使用中的表現",
       "當前產能利用率",
       "未向我們披露的外協工廠"
-    ]
+    ],
+    "evidenceOnFile": "檔案內證據筆數"
   },
   "evidence": {
     "title": "認證與證據",
@@ -1864,7 +1865,8 @@
     "paidLockTitle": "會員查看證據與風險明細",
     "paidLockLead": "Founding Buyer 會員（$99/年）可查看證據記錄、風險明細、稽核歷史與驗貨資料。",
     "paidLockCta": "查看會員方案",
-    "paidLockNote": "風險評分公開可見；證據與核驗明細為會員內容。"
+    "paidLockNote": "風險評分公開可見；證據與核驗明細為會員內容。",
+    "certClaimsReported": "已申報的認證聲明"
   },
   "reportPreview": {
     "badge": "免費預覽",

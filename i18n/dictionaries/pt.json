@@ -1773,7 +1773,8 @@
       "Desempenho do produto em uso",
       "Utilização da produção actual",
       "Subcontratantes que não nos foram divulgados"
-    ]
+    ],
+    "evidenceOnFile": "Evidências registradas"
   },
   "evidence": {
     "title": "Certificações e evidências",
@@ -1864,7 +1865,8 @@
     "paidLockTitle": "Assinantes veem evidências e detalhes de risco",
     "paidLockLead": "Assinantes Founding Buyer (US$ 99/ano) veem registros de evidências, detalhamentos de risco, histórico de auditoria e dados de inspeção.",
     "paidLockCta": "Ver assinatura",
-    "paidLockNote": "A pontuação de risco é pública. Evidências e detalhes de verificação são conteúdo para assinantes."
+    "paidLockNote": "A pontuação de risco é pública. Evidências e detalhes de verificação são conteúdo para assinantes.",
+    "certClaimsReported": "Certificações declaradas"
   },
   "reportPreview": {
     "badge": "Pré-visualização gratuita",

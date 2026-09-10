@@ -1242,7 +1242,8 @@
       "Product performance in use",
       "Current production utilisation",
       "Subcontractors that were not disclosed to us"
-    ]
+    ],
+    "evidenceOnFile": "Evidence on file"
   },
   "evidence": {
     "title": "Certifications & Evidence",
@@ -1333,7 +1334,8 @@
     "paidLockTitle": "Members see evidence and risk details",
     "paidLockLead": "Founding Buyer members ($99/year) see evidence records, risk breakdowns, audit history and inspection data.",
     "paidLockCta": "View membership",
-    "paidLockNote": "The risk score is public. Evidence and verification details are member content."
+    "paidLockNote": "The risk score is public. Evidence and verification details are member content.",
+    "certClaimsReported": "Reported certification claims"
   },
   "methodology": {
     "badge": "Methodology",
