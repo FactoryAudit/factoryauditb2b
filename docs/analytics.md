@@ -13,12 +13,19 @@
 > `*_cta_click` 真实送达 `www.google-analytics.com`（`tid=G-1GKLYNLVQ5`），且点击服务卡片
 > **不产生任何 `*_request`**。Cloudflare beacon token 仍为空（未接入）。
 >
-> ⚠️ **本节曾有一处错误结论，已更正（2026-09-11）**：早期记录称 `page_view_group` 首次加载
-> **不被投递**（P2）。经复核，该结论是**投递探针的解析缺陷造成的误判** —— GA4 把事件批量放在
-> 一个 POST body 里且以 `\n` 分行，旧探针只按 `&` 匹配，每批**只能读到第一条事件**。
-> 实测（修正探针后）：`page_view_group` 一直正常投递，`/suppliers` 与供应商详情页各 1 次/页。
-> 探针与回归脚本均已修正并加守护断言。真正被修掉的是另一个**潜在静默丢事件竞态**：
-> 页面浏览事件的「分析通道就绪等待」，详见 §9 架构备注。
+> **GA4 复核状态（2026-09-11）**：9/9 验证项 PASS。回归 `PASS=39 FAIL=0`，线上 13/13 页面 200。
+> Worker `531012e8-4634-459c-9f0d-40ba00e677e4`。**CS-04 已关闭，不再改动 Analytics。**
+
+> ℹ️ **Historical Probe False Positive**
+> **Root Cause** — Probe incorrectly parsed batched GA4 POST bodies and only detected the first
+> `en=` event per request.
+> **Impact** — No production event loss. The original product implementation was not defective.
+> **Correction** — Probe parser was corrected to parse newline-delimited batched events correctly.
+> **Verification** — `page_view_group` was confirmed to be sent once per page without requiring a
+> product-code change.
+> **This issue was a monitoring/probe false positive, not a production analytics defect.**
+> 早期记录中「`page_view_group` 未投递（P2）」一条已作废，勿据此修改产品代码。
+> 同批另修的真问题（`whenAnalyticsReady` 就绪等待）见 §9 架构备注，与本次误判无关。
 
 ---
 
@@ -304,15 +311,16 @@ GA4 「探索」→「漏斗探索」按上面顺序逐层添加即可看到逐�
    `data-track-page` 的页面各 1 次、四个 `*_cta_click` 各 1 次、**`*_request` 为 0**、
    gtag.js 每页只加载 1 次。
 
-   🔴 **解析陷阱（曾导致误判，务必保留）**：GA4 把多个事件**批量**塞进一个 POST body，
-   body 是「按 `\n` 分行、行内用 `&` 分隔」的：
+   🔴 **解析陷阱（务必保留）**：GA4 把多个事件**批量**塞进一个 POST body，body 是
+   「按 `\n` 分行、行内用 `&` 分隔」的：
    ```
    en=page_view&_ee=1&ep.debug_mode=false
    en=page_view_group&_ee=1&ep.debug_mode=false&ep.page=supplier_directory_view
    ```
-   所以解析必须**先按行切分再全局匹配 `en=`**。早期版本用 `/(?:^|&)en=/`（无 `m` 标志）
-   只匹配字符串开头，结果每批**只读到第一条事件**，其余全被漏掉 —— 由此得出过
-   「`page_view_group` 从未投递」的**错误结论**。回归脚本第 8 节已加断言守护这一点。
+   解析必须**先按行切分、再全局匹配 `en=`**。用 `/(?:^|&)en=/`（无 `m` 标志）只会匹配到
+   字符串开头那一条，批次内其余事件会被静默漏掉。回归脚本第 8 节已加断言守护这一点。
+   PII 扫描同理只扫**应用可控面**（事件名 + `ep.*`/`up.*` 值）：`cid`/`sid`/`tag_exp`/`uaa`
+   等 GA4 协议参数天然含长数字串，算进去必然 100% 假阳性。
 4. 配了真实 GA4 ID 时，GA4 →「管理」→「DebugView」几秒内应出现同样的事件（dev 环境自动 debug_mode，不污染生产报表）。
 5. 生产验证：改 `.env` → 重新构建部署 → 线上 Ctrl+U 查源码，确认 `gtag/js?id=G-...` 和 `beacon.min.js` 各出现**一次**；GA4「报告」→「实时」应出现活跃用户。
 6. 测完把 `NEXT_PUBLIC_ANALYTICS_DEBUG` 改回空。
@@ -331,7 +339,7 @@ GA4 「探索」→「漏斗探索」按上面顺序逐层添加即可看到逐�
 | SEO 不受影响 | Google Search Console / 抓取 | 脚本 `strategy="afterInteractive"` 不阻塞 SSR：正文 HTML 完整、robots.txt / sitemap.xml / canonical / 结构化数据与安装前一致 |
 | 无敏感数据外泄 | Console 调试模式抽查事件参数 | 只有白名单键，永远看不到 email / 电话 / 密码 |
 | **投递对账** | `node scripts/cs04-ga4-probe.mjs` | `*_request` 计数为 0；`*_cta_click` 各 1 次；`page_view` 每页 1 次；`page_view_group` 在声明了 `data-track-page` 的页面各 1 次 |
-| `page_view_group` | 干净浏览器加载 `/suppliers` → GA4 实时 | ✅ **正常投递**（2026-09-11 实测，每页 1 次）。早期曾记为「未投递 P2」，实为**探针漏读批次 body 造成的误判**，已在探针与回归脚本中修正 |
+| `page_view_group` | 干净浏览器加载 `/suppliers` → GA4 实时 | ✅ **正常投递**（2026-09-11 实测，每页 1 次）。早期「未投递 P2」记录已作废 —— 属 **monitoring/probe false positive，非产品缺陷**，勿据此改产品代码 |
 
 ## 9. 架构备注（给未来的自己）
 
