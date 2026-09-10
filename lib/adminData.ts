@@ -9,8 +9,8 @@
 //   3. 这里返回的数据**不裁剪**（Admin 本来就该看全部），但绝不出现在任何公开页面
 
 import { createAdminClient } from "./supabaseAdmin";
-import { getCurrentUser } from "./supabaseServer";
 import { isAdminUser } from "./membership";
+import { type SupplierCreateInput, domainOf } from "./supplierCreate";
 
 export type AdminContext = { userId: string; email: string | null } | null;
 
@@ -22,6 +22,9 @@ export type AdminContext = { userId: string; email: string | null } | null;
  *   不向外界暴露"这里有个后台"这个事实。
  */
 export async function requireAdmin(): Promise<AdminContext> {
+  // supabaseServer 静态依赖 next/headers，动态 import 使其脱离打包/测试静态图，
+  // 仅在调用 requireAdmin 时按需加载（Next 运行时才安全）。
+  const { getCurrentUser } = await import("./supabaseServer");
   const user = await getCurrentUser();
   if (!user?.id) return null;
   const ok = await isAdminUser(user.id);
@@ -211,6 +214,309 @@ export async function updateAdminSupplier(
     return true;
   } catch (e) {
     console.error("[adminData] update supplier exception", e);
+    return false;
+  }
+}
+
+// ---------- 供应商创建（CS-03 POST 写入路径） ----------
+
+export type CreateSupplierResult =
+  | {
+      ok: true;
+      id: string;
+      slug: string;
+      cert_inserted: number;
+      cert_warnings: string[];
+    }
+  | { ok: false; error: "duplicate" | "db" };
+
+export type DuplicateHit = { slug: string; field: string };
+
+/**
+ * 应用层多维度去重（slug 唯一约束之外的兜底）。
+ * 命中任一维度即视为重复：slug / registration_number / website(domain) /
+ * legal_name（大小写不敏感）/ country+city+name / phone / address。
+ */
+export async function findDuplicateSupplier(
+  input: SupplierCreateInput
+): Promise<DuplicateHit | null> {
+  const db = createAdminClient();
+  if (!db) return null;
+  try {
+    const bySlug = await db
+      .from("suppliers")
+      .select("slug")
+      .eq("slug", input.slug)
+      .maybeSingle();
+    if (bySlug.data) return { slug: input.slug, field: "slug" };
+
+    if (input.registration_number) {
+      const r = await db
+        .from("suppliers")
+        .select("slug")
+        .eq("registration_number", input.registration_number)
+        .maybeSingle();
+      if (r.data) return { slug: (r.data as { slug: string }).slug, field: "registration_number" };
+    }
+
+    if (input.website) {
+      const w = await db
+        .from("suppliers")
+        .select("slug")
+        .eq("website", input.website)
+        .maybeSingle();
+      if (w.data) return { slug: (w.data as { slug: string }).slug, field: "website" };
+      const domain = domainOf(input.website);
+      if (domain) {
+        const w2 = await db
+          .from("suppliers")
+          .select("slug")
+          .eq("website", `https://www.${domain}`)
+          .maybeSingle();
+        if (w2.data) return { slug: (w2.data as { slug: string }).slug, field: "website" };
+      }
+    }
+
+    const byName = await db
+      .from("suppliers")
+      .select("slug")
+      .ilike("legal_name", input.legal_name)
+      .maybeSingle();
+    if (byName.data) return { slug: (byName.data as { slug: string }).slug, field: "legal_name" };
+
+    const byCombo = await db
+      .from("suppliers")
+      .select("slug")
+      .eq("country_code", input.country_code)
+      .eq("city", input.city)
+      .ilike("legal_name", input.legal_name)
+      .maybeSingle();
+    if (byCombo.data)
+      return { slug: (byCombo.data as { slug: string }).slug, field: "country+city+name" };
+
+    if (input.phone) {
+      const p = await db
+        .from("suppliers")
+        .select("slug")
+        .eq("phone", input.phone)
+        .maybeSingle();
+      if (p.data) return { slug: (p.data as { slug: string }).slug, field: "phone" };
+    }
+
+    if (input.address) {
+      const a = await db
+        .from("suppliers")
+        .select("slug")
+        .eq("address", input.address)
+        .maybeSingle();
+      if (a.data) return { slug: (a.data as { slug: string }).slug, field: "address" };
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * 创建供应商（白名单 + 硬编码安全默认）。
+ *
+ * 高信任字段一律不来自客户端（验证层已拦截伪造）：
+ *   is_published=false（覆盖 001 默认 true）
+ *   verification_level='unverified'
+ *   verification_status/audit_status/risk_score/risk_breakdown=null
+ *   inspection_history=0
+ *   access_tier='public'
+ *
+ * 返回 duplicate 时调用方应回 409；db 错误回 500。
+ */
+export async function createAdminSupplier(
+  ctx: AdminContext,
+  input: SupplierCreateInput
+): Promise<CreateSupplierResult> {
+  const db = createAdminClient();
+  if (!db) return { ok: false, error: "db" };
+
+  const dup = await findDuplicateSupplier(input);
+  if (dup) return { ok: false, error: "duplicate" };
+
+  const now = new Date().toISOString();
+  const hasSource = !!(input.source_url || input.source_type || input.source_name);
+
+  const row = {
+    slug: input.slug,
+    legal_name: input.legal_name,
+    country_code: input.country_code,
+    city: input.city,
+    industry_code: input.industry_code,
+    business_type: input.business_type,
+    established: input.established,
+    employees: input.employees,
+    main_products: [] as string[],
+    export_markets: [] as string[],
+    verification_status: null,
+    risk_score: null,
+    certifications: [] as string[],
+    audit_status: null,
+    inspection_history: 0,
+    risk_breakdown: null,
+    access_tier: "public",
+    is_published: false,
+    verification_level: "unverified",
+    display_name: input.display_name,
+    address: input.address,
+    website: input.website,
+    phone: input.phone,
+    registration_number: input.registration_number,
+    source_url: input.source_url,
+    source_type: input.source_type,
+    source_name: input.source_name,
+    discovered_at: hasSource ? now : null,
+  };
+
+  try {
+    const { data, error } = await db
+      .from("suppliers")
+      .insert(row)
+      .select("id, slug")
+      .single();
+    if (error) {
+      // slug 唯一约束兜底（应用层去重漏网时）
+      if (error.code === "23505") return { ok: false, error: "duplicate" };
+      console.error("[adminData] create supplier failed", error.message);
+      return { ok: false, error: "db" };
+    }
+    if (!data) return { ok: false, error: "db" };
+    const id = (data as { id: string }).id;
+    const slug = (data as { slug: string }).slug;
+
+    // 认证"声称"：原材料 → supplier_certifications（SELF_DECLARED）
+    let certInserted = 0;
+    let certWarnings: string[] = [];
+    if (input.certificationClaims.length) {
+      const cr = await createSupplierCertClaims(id, input.certificationClaims);
+      certInserted = cr.inserted;
+      certWarnings = cr.warnings;
+    }
+
+    // 审计日志（尽力而为，失败不影响创建结果）
+    await logAdminAction(ctx, "supplier.create", "supplier", id, {
+      slug,
+      legal_name: input.legal_name,
+      country_code: input.country_code,
+      city: input.city,
+      is_published: false,
+      verification_level: "unverified",
+      cert_claims: input.certificationClaims.length,
+      cert_unmapped: certWarnings,
+    });
+
+    return { ok: true, id, slug, cert_inserted: certInserted, cert_warnings: certWarnings };
+  } catch (e) {
+    console.error("[adminData] create supplier exception", e);
+    return { ok: false, error: "db" };
+  }
+}
+
+export type CertAlias = {
+  display_name: string;
+  program_code: string | null;
+  mapped: boolean;
+};
+
+/** 读取认证显示名→程序代码映射（参照数据）。 */
+export async function listCertAliases(): Promise<CertAlias[]> {
+  const db = createAdminClient();
+  if (!db) return [];
+  try {
+    const { data, error } = await db
+      .from("certification_program_alias")
+      .select("display_name, program_code, mapped");
+    if (error) {
+      console.error("[adminData] list cert aliases failed", error.message);
+      return [];
+    }
+    return (data ?? []) as CertAlias[];
+  } catch {
+    return [];
+  }
+}
+
+export type CertClaimResult = {
+  inserted: number;
+  warnings: string[];
+};
+
+/**
+ * 写入认证"声称"：supplier_certifications，claim_status='SELF_DECLARED'，
+ * evidence_status='NONE'，verification_status='PENDING'。
+ *
+ * 通过 certification_program_alias 映射 program_code：
+ *   - 命中且 mapped=true → 用 program_code
+ *   - 命中但 mapped=false，或完全未收录 → program_code='UNMAPPED' + warnings
+ * 绝不臆测 program_code（CS-01 §6）。
+ */
+export async function createSupplierCertClaims(
+  supplierId: string,
+  claims: string[]
+): Promise<CertClaimResult> {
+  const result: CertClaimResult = { inserted: 0, warnings: [] };
+  if (!claims.length) return result;
+  const db = createAdminClient();
+  if (!db) return result;
+
+  const aliases = await listCertAliases();
+  const byName = new Map<string, CertAlias>();
+  for (const a of aliases) byName.set(a.display_name.toLowerCase(), a);
+
+  const rows = claims.map((rawName) => {
+    const name = (rawName || "").trim();
+    const key = name.toLowerCase();
+    const alias = byName.get(key);
+    let programCode = "UNMAPPED";
+    let displayName = name;
+    if (alias) {
+      displayName = alias.display_name;
+      if (alias.mapped && alias.program_code) {
+        programCode = alias.program_code;
+      } else {
+        result.warnings.push(name);
+      }
+    } else {
+      result.warnings.push(name);
+    }
+    return {
+      supplier_id: supplierId,
+      program_code: programCode,
+      display_name: displayName,
+      claim_status: "SELF_DECLARED",
+      evidence_status: "NONE",
+      verification_status: "PENDING",
+    };
+  });
+
+  try {
+    const { error } = await db.from("supplier_certifications").insert(rows);
+    if (error) {
+      console.error("[adminData] insert cert claims failed", error.message);
+      return result;
+    }
+    result.inserted = rows.length;
+    return result;
+  } catch (e) {
+    console.error("[adminData] insert cert claims exception", e);
+    return result;
+  }
+}
+
+/** 测试/清理用：按 slug 删除供应商（级联删 certification 等）。不对外暴露为 API。 */
+export async function deleteAdminSupplierBySlug(slug: string): Promise<boolean> {
+  const db = createAdminClient();
+  if (!db) return false;
+  try {
+    const { error } = await db.from("suppliers").delete().eq("slug", slug);
+    return !error;
+  } catch {
     return false;
   }
 }

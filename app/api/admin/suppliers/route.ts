@@ -3,9 +3,12 @@ import {
   requireAdmin,
   updateAdminSupplier,
   getAdminSupplier,
+  createAdminSupplier,
+  findDuplicateSupplier,
   logAdminAction,
 } from "@/lib/adminData";
-import { checkRateLimit, clientIp, clamp } from "@/lib/rateLimit";
+import { checkRateLimit, clamp } from "@/lib/rateLimit";
+import { validateSupplierCreateInput } from "@/lib/supplierCreate";
 
 // PATCH /api/admin/suppliers —— 更新供应商（白名单字段）
 //
@@ -141,5 +144,95 @@ export async function PATCH(req: Request) {
   return NextResponse.json(
     { ok },
     { status: ok ? 200 : 500, headers: NO_STORE }
+  );
+}
+
+// POST /api/admin/suppliers —— 新建供应商（CS-03 写入路径）
+//
+// 安全模型（与 PATCH 一致，三层）：
+//   1. requireAdmin()：非 admin → 404（不暴露后台存在）
+//   2. validateSupplierCreateInput()：白名单 + 高信任字段 422 显式拒绝
+//   3. findDuplicateSupplier()：应用层 7 维去重 → 409（附带 existing slug + 命中字段）
+//
+// 新建供应商永远 is_published=false / verification_level=unverified，
+// 高信任字段不来自客户端（已在校验层拦截）。
+
+export async function POST(req: Request) {
+  const admin = await requireAdmin();
+  if (!admin) {
+    // 404 而不是 401：不暴露后台存在
+    return NextResponse.json({ ok: false, error: "not_found" }, { status: 404 });
+  }
+
+  const rl = checkRateLimit(`admin:${admin.userId}`, 300, 60 * 60 * 1000);
+  if (!rl.ok) {
+    return NextResponse.json(
+      { ok: false, error: "rate_limited" },
+      { status: 429, headers: NO_STORE }
+    );
+  }
+
+  let body: Record<string, unknown>;
+  try {
+    body = (await req.json()) as Record<string, unknown>;
+  } catch {
+    return NextResponse.json(
+      { ok: false, error: "invalid_body" },
+      { status: 400, headers: NO_STORE }
+    );
+  }
+  if (typeof body !== "object" || body === null) {
+    return NextResponse.json(
+      { ok: false, error: "invalid_body" },
+      { status: 400, headers: NO_STORE }
+    );
+  }
+
+  const v = validateSupplierCreateInput(body);
+  if (!v.ok) {
+    // 400=格式/必填；422=高信任字段伪造
+    return NextResponse.json(
+      { ok: false, error: v.error },
+      { status: v.status, headers: NO_STORE }
+    );
+  }
+
+  // 去重：命中则 409，附带已有 slug 与命中字段，提示管理员先去审查而非重复建
+  const dup = await findDuplicateSupplier(v.value);
+  if (dup) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: "duplicate",
+        existing_slug: dup.slug,
+        field: dup.field,
+      },
+      { status: 409, headers: NO_STORE }
+    );
+  }
+
+  const res = await createAdminSupplier(admin, v.value);
+  if (!res.ok) {
+    if (res.error === "duplicate") {
+      return NextResponse.json(
+        { ok: false, error: "duplicate" },
+        { status: 409, headers: NO_STORE }
+      );
+    }
+    return NextResponse.json(
+      { ok: false, error: "db_error" },
+      { status: 500, headers: NO_STORE }
+    );
+  }
+
+  return NextResponse.json(
+    {
+      ok: true,
+      id: res.id,
+      slug: res.slug,
+      cert_inserted: res.cert_inserted,
+      cert_warnings: res.cert_warnings,
+    },
+    { status: 201, headers: NO_STORE }
   );
 }
