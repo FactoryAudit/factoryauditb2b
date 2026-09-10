@@ -43,9 +43,11 @@ export default function InspectionRequestForm({ t }: { t: InspectionFormDict }) 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // CS-04 口径：必填校验必须放在埋点之前 ——
+    // 空表单点一下提交不应被计为一次「验货请求」，否则 Request 数虚高。
+    if (!form.factoryLocation.trim() || !form.product.trim() || !form.email.trim()) return;
     // 埋点：发起验货请求（带验货阶段，用于统计需求分布；工厂地址/邮箱等一律不发）
     trackEvent(ANALYTICS_EVENTS.inspectionRequest, { value: form.stage });
-    if (!form.factoryLocation.trim() || !form.product.trim() || !form.email.trim()) return;
     setStatus("loading");
     try {
       const res = await fetch("/api/lead", {

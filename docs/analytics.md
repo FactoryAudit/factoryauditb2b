@@ -1,9 +1,12 @@
 # 网站数据分析（Analytics）配置文档
 
-> 最后更新：2026-09-03 ｜ 适用：FactoryAuditB2B.com（Next.js 15 + OpenNext / Cloudflare Workers）
+> 最后更新：2026-09-10 ｜ 适用：FactoryAuditB2B.com（Next.js 15 + OpenNext / Cloudflare Workers）
 >
 > 本站已内置两套分析通道：**Cloudflare Web Analytics**（流量与性能）+ **Google Analytics 4**（事件与转化）。
 > 两者都是「配置即生效」：不填 ID 时完全不加载任何脚本，页面零额外开销。
+>
+> **CS-04（2026-09-10）**：a) 修正 CTA 点击被误记为服务请求的事件口径问题；b) 重新划分
+> 转化桶 / 点击桶 / 未接线桶。GA4 Measurement ID 目前仍为空，尚未激活。
 
 ---
 
@@ -24,12 +27,13 @@ NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN="32位十六进制串"
 ```
 
 > ⚠️ **`NEXT_PUBLIC_` 前缀的变量是构建时内联的**：改完 `.env` 必须重新构建部署才生效，只改文件、只重启 dev server 都不够。
-> 生产部署命令（两步，勿用 `npm run cf:build`）：
+> 生产部署命令（四步，勿用 `npm run cf:build`）：
 >
 > ```bash
-> # 1. next build（带 NEXT_PRIVATE_STANDALONE=true，环境变量见 .env 注释）
+> # 1. next build（NEXT_PRIVATE_STANDALONE=true，环境变量见 .env 注释），必须后台跑
 > # 2. ./node_modules/.bin/opennextjs-cloudflare build --skipNextBuild
-> # 3. ./node_modules/.bin/opennextjs-cloudflare deploy
+> # 3. node scripts/scrub-next-env.mjs        ← 必须有，否则密钥会被内联进 Worker
+> # 4. node --env-file=.env ./node_modules/wrangler/bin/wrangler.js deploy
 > ```
 
 这两个 ID 是**公开标识符**（本来就会出现在网页源码里，任何人查看源码都能看到），不是密钥，用 `NEXT_PUBLIC_` 前缀是安全的。真正的密钥（如 `MAIL_HTTP_KEY`）绝不放 `NEXT_PUBLIC_`。
@@ -70,7 +74,7 @@ NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN="32位十六进制串"
 
 ## 3. 已安装的事件清单
 
-事件常量的**单一事实来源**是 `lib/analytics.ts` 的 `ANALYTICS_EVENTS`。以下均为**已真实接线**（有真实用户行为才会触发，不造假数据）：
+事件常量的**单一事实来源**是 `lib/analytics.ts` 的 `ANALYTICS_EVENTS`。以下均为**已真实接线**（有真实用户行为才会触发，不造假数据）。
 
 ### 3.1 页面浏览类
 
@@ -82,6 +86,7 @@ NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN="32位十六进制串"
 | `supplier_profile_view` | 供应商详情页（页面级）；目录卡片点击（点击级，带 slug） | value=slug |
 | `supplier_claim_view` | /suppliers/{slug}/claim 页 | — |
 | `register_view` | /register 注册页 | — |
+| `login_view` | /login 登录页 | — |
 | `membership_page_view` | /membership 会员页 | — |
 | `founding_buyer_view` | /membership 会员页曝光（Founding Buyer 商业意图） | — |
 | `tool_risk_calculator` / `tool_verification_checklist` / `tool_compare` / `tool_audit_checklist` / `tool_audit_report_analyzer` / `tool_document_checker` / `tool_risk_assessment` / `tool_scorecard` / `rfq` / `custom_services` / `supplier_network` / `sample_report` | 对应工具页 / RFQ 页 / 付费咨询页 / 供应商入驻页 / 样例报告页 | page |
@@ -105,51 +110,85 @@ NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN="32位十六进制串"
 | `risk_calculator_complete` | 计算完成 | level、score |
 | `verification_checklist_start` | 核查清单首次勾选 | — |
 
-### 3.4 服务请求类（含表单）
+### 3.4 点击层（CTA Click）—— 只表示「意向」，**不是转化**
+
+> ⚠️ **CS-04 口径铁律**：点击 ≠ 请求 ≠ 成交 ≠ 收入确认。
+> 本节事件全部属于漏斗上层，**绝不可**标记为 GA4 关键事件，也不在 `CONVERSION_EVENTS` 里。
+> 绝对不要用这些数字去算「转化率」。
 
 | 事件 | 触发点 | 参数 |
 |---|---|---|
-| `verification_request` | /services 核查服务卡片点击 | — |
-| `audit_request` | 验厂服务卡片点击 + 验厂表单提交 | value=类型 |
-| `audit_request_submit` | 验厂表单提交**成功** | value=类型 |
-| `inspection_request` | 验货服务卡片点击 + 验货表单提交 | value=阶段 |
-| `inspection_request_submit` | 验货表单提交**成功** | value=阶段 |
-| `sourcing_request` | /services sourcing 卡片点击 | — |
+| `verification_cta_click` | /services 核查服务卡片、/suppliers 各处核查 CTA（3 处） | — |
+| `audit_cta_click` | /services 验厂服务卡片 | — |
+| `inspection_cta_click` | /services 验货服务卡片 | — |
+| `sourcing_cta_click` | /services sourcing 服务卡片（落地页是 /rfq） | — |
+| `rfq_cta_click` | 目录页 RFQ 入口 | — |
+| `sample_report_cta` | 样例报告留资按钮点击 | — |
+| `register_cta` | 各处「创建账号」入口点击 | — |
+| `founding_buyer_checkout_start` | /membership Founding Buyer CTA 点击（购买意向点击，非转化） | — |
+| `verification_checkout_start` | /pricing 推荐档（核查套餐）CTA 点击（购买意向点击，非转化） | — |
+
+> ⚠️ `founding_buyer_checkout_start` / `verification_checkout_start` 是**点击驱动**的旧命名。
+> 它们表达的是「购买意向点击」，与 `*_cta_click` 属同一层，故已从 `CONVERSION_EVENTS` 移除。
+> 为不改动既有页面，本次 CS-04 保留原名；若将来统一命名，应改为 `founding_buyer_cta_click` / 直接复用 `verification_cta_click`。
+> 两者**当前已有 emitter**（不像 3.8 的预留事件），只是不属于转化。
+
+### 3.5 服务请求类（表单）—— 真实 Request
+
+> 只有**用户真正提交表单**才会触发本节事件。服务卡片点击不再进这里（见 3.4）。
+
+| 事件 | 触发点 | 参数 |
+|---|---|---|
+| `audit_request` | /factory-audit/request 验厂表单提交 | value=审核类型 |
+| `audit_request_submit` | 验厂表单提交**成功**（服务端受理） | value=审核类型 |
+| `inspection_request` | /services/inspection 验货表单提交（**通过必填校验之后**才发） | value=阶段 |
+| `inspection_request_submit` | 验货表单提交**成功**（服务端受理） | value=阶段 |
 | `rfq_start` | RFQ 表单首次聚焦 | — |
 | `rfq_submit` | RFQ 提交**成功** | — |
 | `custom_service_start` | /custom-services 付费咨询表单首次聚焦（全站付费档 CTA 的落地页） | — |
 | `custom_service_submit` | 付费咨询表单提交**成功**（核心转化终点） | — |
-| `sample_report_cta` | 样例报告留资按钮点击 | — |
 | `sample_report_submit` | 样例报告留资提交**成功**（线索转化） | — |
 | `supplier_network_start` | /join-supplier-network 入驻表单首次聚焦 | — |
 | `supplier_network_submit` | 供应商入驻提交**成功**（供给侧线索转化） | — |
 
-### 3.5 账户类
+### 3.6 账户类
 
 | 事件 | 触发点 | 参数 |
 |---|---|---|
-| `register_cta` | 各处「创建账号」入口点击 | — |
-| `signup_start` | 注册表单首次聚焦 | — |
+| `signup_start` | 注册表单首次交互（每人只发一次） | — |
 | `register_submit` | 注册表单通过校验、发起提交 | — |
-| `signup_complete` | 注册**成功**（核心转化） | — |
+| `signup_complete` | 注册**成功** / 线索落库成功（核心转化） | — |
+| `login` | 登录成功 | — |
+| `login_failed` | 登录失败（只记失败事实，不记邮箱密码） | — |
+| `logout` | 退出登录 | — |
+| `unlock_gate_cta` | 会员软锁 UnlockGate / QuotaBanner 的注册升级 CTA 点击（点击层） | — |
 
-### 3.6 商业转化类
+### 3.7 付费成交类
 
 | 事件 | 触发点 | 参数 |
 |---|---|---|
-| `founding_buyer_checkout_start` | 会员页 Founding Buyer CTA 点击 | — |
-| `verification_checkout_start` | /pricing 推荐档（核查套餐）CTA 点击 | — |
+| `founding_buyer_purchase` | 会员付费成功（**Stripe 未激活，当前无 emitter**） | — |
+| `verification_purchase` | 核查套餐付费成功（**Stripe 未激活，当前无 emitter**） | — |
 
-### 3.7 预留未接线（诚实标注）
+> 这两个事件语义上确属「成交（Paid Order）」，因此保留在 `CONVERSION_EVENTS` 中；
+> 但 Stripe 目前不支持大陆主体（已知 P0），尚无任何代码触发它们，GA4 里会恒为 0 —— 这是**预期**而非故障。
 
-以下事件**常量已定义但不会触发**，因为 V2.0 没有对应功能。等未来功能上线时接线，避免出现假数据：
+### 3.8 预留未接线（诚实标注）
+
+以下事件**常量已定义但不会触发**，因为当前没有对应功能。等功能上线时接线，避免出现假数据：
 
 | 事件 | 为什么没接 |
 |---|---|
 | `supplier_save` | 站内无收藏功能 |
-| `login` | V2.0 已禁用 auth，无登录系统 |
-| `founding_buyer_purchase` / `verification_purchase` | 在线支付未接入（线下成交） |
-| `membership_cta` | 旧常量；会员页 CTA 已分别改用 `founding_buyer_checkout_start` / `register_cta` |
+| `supplier_card_click` | 目录卡片点击当前复用 `supplier_profile_view`（带 slug），本常量未接线 |
+| `verification_request` | Verification Request 真实表单未上线（CS-05+）；核查 CTA 现只发 `verification_cta_click` |
+| `sourcing_request` | sourcing 落地页是 /rfq，真实提交事件为 `rfq_submit`，本事件与之重复 |
+| `guest_limit_reached` / `free_account_signup_start` / `free_account_signup_complete` | Guest Limit UI 待接线（CS-05） |
+| `free_quota_reached` | 免费额度上限功能待接线 |
+| `membership_cta` | 旧常量；会员页 CTA 已改用 `register_cta` 等 |
+
+> 这些常量在代码里汇总于 `lib/analytics.ts` 的 `UNWIRED_EVENTS`，并有回归脚本守护：
+> 一旦某个「未接线」事件被误写进 `CONVERSION_EVENTS`，验证会失败。
 
 ---
 
@@ -160,31 +199,50 @@ NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN="32位十六进制串"
 - **`supplier_profile_view` 的 value（slug）**：哪些供应商页访问最高。
 - **`supplier_compare`**：买家开始用对比工具权衡多个供应商（高购买意向信号）。
 - **`risk_calculator_complete` 的 level/score**：免费工具的完成率与输出分布（质量信号）。
-- **`*_request`（无 submit 后缀）**：用户表达了意向（点击 / 提交表单）。
-- **`*_submit`（有后缀）**：表单**成功**送达 → 这才是真实线索数。
-- **`founding_buyer_view` → `founding_buyer_checkout_start` → `signup_complete`**：会员页曝光 → 付费意向 → 免费注册的递进。
+- **`*_cta_click`**：用户**点了**某个入口，只代表意向。比 `*_request` 高一层，只能用来算点击率 / 入口吸引力。
+- **`*_request`（无 submit 后缀）**：用户**真实提交了表单**（Request）。这是「询盘」口径。
+- **`*_submit`（有后缀）**：表单**成功送达服务端**（Qualified Lead）。这才是真实线索数。
+- **`*_purchase`**：收到钱（Paid Order）。
+- **收入确认（Revenue Recognition）**：财务口径，**不存在于前端事件流**，由后台/账务系统人工记录。切勿用任何前端事件冒充它。
+- **`founding_buyer_view` → `founding_buyer_checkout_start`（点击）→ `signup_complete`**：会员页曝光 → 付费意向 → 免费注册的递进（注意中间那步是点击，不是成交）。
 
 ## 5. 核心转化事件（Key Events）
 
-`lib/analytics.ts` 的 `CONVERSION_EVENTS` 列出 16 个：`signup_complete`、`register_submit`、`founding_buyer_purchase`*、`verification_purchase`*、`founding_buyer_checkout_start`、`verification_checkout_start`、`audit_request_submit`、`inspection_request_submit`、`rfq_submit`、`custom_service_submit`、`sample_report_submit`、`supplier_network_submit`、`verification_request`、`audit_request`、`inspection_request`、`sourcing_request`（* 为支付未接入的预留）。
+`lib/analytics.ts` 的 `CONVERSION_EVENTS` 列出 **12 个**（CS-04 后）：
+
+| 分组 | 事件 |
+|---|---|
+| 真实账号 | `register_submit`、`signup_complete` |
+| Form Submit（Request） | `audit_request`、`inspection_request`、`rfq_submit`、`custom_service_submit`、`sample_report_submit`、`supplier_network_submit` |
+| Qualified Lead（服务端受理） | `audit_request_submit`、`inspection_request_submit` |
+| Paid Order（待 Stripe） | `founding_buyer_purchase`、`verification_purchase` |
+
+**已从转化清单移除**（原因见括号）：`founding_buyer_checkout_start`（点击层）、
+`verification_checkout_start`（点击层）、`verification_request`（未接线）、`sourcing_request`（未接线且与 `rfq_submit` 重复）。
 
 **在 GA4 标记为关键事件**：管理 → 事件 → 找到事件名 → 右侧开关「标记为关键事件」。
 
-**主漏斗**（`FUNNEL_STEPS`，对应「Google 搜索 → 落地 → 档案/工具 → 免费账号 → Founding Buyer → 核查 → 验厂 → 验货/Sourcing」）：
+**主漏斗**（`FUNNEL_STEPS`）——严格区分行为漏斗与商业漏斗：
 
 ```
-page_view（落地页）
-  → supplier_profile_view / risk_calculator_start（档案或免费工具）
-    → signup_complete（免费账号）
-      → founding_buyer_view → founding_buyer_checkout_start（会员意向）
-        → verification_checkout_start → verification_request（核查）
-          → audit_request_submit（验厂）
-            → inspection_request_submit / rfq_submit / custom_service_submit（验货 / Sourcing / 付费咨询）
-```
+【行为漏斗】点击 ≠ 请求
+page_view（自然搜索落地）
+  → supplier_search（供应商搜索 / 筛选）
+    → supplier_profile_view（查看供应商档案）
+      → *_cta_click（CTA 点击：意向层，不是转化）
+        → rfq_start（Form Start：开始填表）
+          → audit_request / inspection_request / rfq_submit（Form Submit：真实提交）
+            → audit_request_submit / inspection_request_submit（Qualified Lead：服务端受理）
 
-> 注：付费档 CTA 全部导流到 /custom-services 询价（无在线支付），因此 `custom_service_submit` 是当前付费转化的实际终点。
+【商业漏斗】Request ≠ Paid Order
+  → founding_buyer_purchase（Paid Order：收到钱）
+
+【财务口径】Paid Order ≠ Revenue Recognition
+  → 收入确认（不在前端事件流，人工回填）
+```
 
 GA4 「探索」→「漏斗探索」按上面顺序逐层添加即可看到逐级转化率。
+⚠️ 不要把 `*_cta_click` 加进漏斗的转化步骤，否则点击率会被误读成转化率。
 
 ## 6. 如何增加新事件
 
@@ -193,17 +251,29 @@ GA4 「探索」→「漏斗探索」按上面顺序逐层添加即可看到逐�
    - 点击：`<Link data-track={ANALYTICS_EVENTS.xxx} data-track-value="某值">`（Tracker 自动委托）。
    - 表单提交：`<form data-track-submit={ANALYTICS_EVENTS.xxx} data-track-field="q">`。
    - 代码调用：`trackEvent(ANALYTICS_EVENTS.xxx, { level: r.level })`（先 focus / 提交成功等语义点）。
-3. **参数限制**：只允许白名单键（value/query/slug/country/industry/locale/plan/step/score/level/method 等，见 `ALLOWED_PARAM_KEYS`）；邮箱、电话、密码等敏感数据在两层防护下不可能被发出（键名敏感词黑名单 + 值正则过滤）。**新增埋点严禁携带任何个人敏感信息。**
-4. 若是重要商业节点，同时把它加进 `CONVERSION_EVENTS`，并去 GA4 标记关键事件。
+3. **命名约定（口径）**：点击用 `*_cta_click`；表单提交用 `*_request`；服务端受理用 `*_submit`；收款用 `*_purchase`。
+4. **参数限制**：只允许白名单键（value/query/slug/country/industry/locale/plan/step/score/level/method 等，见 `ALLOWED_PARAM_KEYS`）；邮箱、电话、密码等敏感数据在两层防护下不可能被发出（键名敏感词黑名单 + 值正则过滤）。**新增埋点严禁携带任何个人敏感信息。**
+5. **归类**：只把「真实表单提交」或「真实付款」加进 `CONVERSION_EVENTS`；点击一律归入 `CLICK_LEVEL_EVENTS`；暂时没人触发的先放进 `UNWIRED_EVENTS`。
+6. 跑一遍回归脚本（见第 7 节），它会检查三个桶互斥、转化事件确有 emitter、以及 PII 清洗是否失效。
 
 ## 7. 如何测试
 
 1. `.env` 里设 `NEXT_PUBLIC_ANALYTICS_DEBUG="1"`，`npm run dev`。
 2. 打开 localhost:3000，F12 Console。操作页面（搜索、点筛选、跑计算器、提交 RFQ……），每个事件应打印：
    `[analytics] supplier_search {query: "led"}`
-3. 配了真实 GA4 ID 时，GA4 →「管理」→「DebugView」几秒内应出现同样的事件（dev 环境自动 debug_mode，不污染生产报表）。
-4. 生产验证：改 `.env` → 重新构建部署 → 线上 Ctrl+U 查源码，确认 `gtag/js?id=G-...` 和 `beacon.min.js` 各出现**一次**；GA4「报告」→「实时」应出现活跃用户。
-5. 测完把 `NEXT_PUBLIC_ANALYTICS_DEBUG` 改回空。
+3. **口径回归（无需浏览器，纯只读）**：
+
+   ```bash
+   ./node_modules/.bin/esbuild scripts/cs04-analytics-regression.ts \
+     --bundle --platform=node --format=cjs --outfile=/tmp/cs04-reg.cjs
+   CS04_ROOT="$PWD" node /tmp/cs04-reg.cjs
+   ```
+
+   期望输出 `PASS=32 FAIL=0`。它校验：三桶互斥、`/services` 卡片点击不泄漏进转化、
+   漏斗顺序、转化事件确有 emitter、Reserved 事件确实无人触发、PII 双层清洗。
+4. 配了真实 GA4 ID 时，GA4 →「管理」→「DebugView」几秒内应出现同样的事件（dev 环境自动 debug_mode，不污染生产报表）。
+5. 生产验证：改 `.env` → 重新构建部署 → 线上 Ctrl+U 查源码，确认 `gtag/js?id=G-...` 和 `beacon.min.js` 各出现**一次**；GA4「报告」→「实时」应出现活跃用户。
+6. 测完把 `NEXT_PUBLIC_ANALYTICS_DEBUG` 改回空。
 
 ## 8. 如何判断 Analytics 正常工作（健康检查清单）
 
@@ -214,6 +284,7 @@ GA4 「探索」→「漏斗探索」按上面顺序逐层添加即可看到逐�
 | Cloudflare 收数 | dash.cloudflare.com → Web Analytics | 24h 内有 Visitors / Top Pages 数据 |
 | GA4 收数 | GA4 → 实时报告 | 自己访问网站时「活跃用户 ≥ 1」 |
 | 事件收数 | GA4 → DebugView（dev）或实时报告 | 操作后几秒内出现对应事件名 |
+| **口径正确** | GA4 → 事件报表 | 点一下服务卡片只产生 `*_cta_click`，**不产生** `*_request` |
 | PV 不翻倍 | GA4 → 报告 → 互动度 | Page Views 与实际访问次数同量级；`page_view_group` 与 `page_view` 是两类不同事件 |
 | SEO 不受影响 | Google Search Console / 抓取 | 脚本 `strategy="afterInteractive"` 不阻塞 SSR：正文 HTML 完整、robots.txt / sitemap.xml / canonical / 结构化数据与安装前一致 |
 | 无敏感数据外泄 | Console 调试模式抽查事件参数 | 只有白名单键，永远看不到 email / 电话 / 密码 |
@@ -225,4 +296,5 @@ GA4 「探索」→「漏斗探索」按上面顺序逐层添加即可看到逐�
 - **fail-open**：`trackEvent` 无 gtag/dataLayer 时静默 no-op；埋点任何异常都不影响业务。
 - **PV 不翻倍**：gtag.js 自动上报标准 `page_view`；自定义的页面类型事件命名 `page_view_group`；SPA 跳转由 `usePathname` 补发 `page_view`。
 - **不用 `useSearchParams`**：避免 Suspense 边界让静态页退化（SEO 硬要求）。
-- **ID 格式校验**：GA4 只接受 `G-` 开头，CF token 只接受 32 位 hex，填错不加载、不报错。
+- **ID 格式校验**：GA4 只接受 `G-` 开头 6–15 位（`/^G-[A-Z0-9]{6,15}$/i`），CF token 只接受 32 位 hex，填错不加载、不报错。
+- **三个事件桶**：`CONVERSION_EVENTS`（真转化）/ `CLICK_LEVEL_EVENTS`（点击层）/ `UNWIRED_EVENTS`（未接线），三者互斥，由 `scripts/cs04-analytics-regression.ts` 守护。

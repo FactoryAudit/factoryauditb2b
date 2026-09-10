@@ -28,13 +28,16 @@ export const ANALYTICS_EVENTS = {
   claimView: "supplier_claim_view",
   claimSubmit: "supplier_claim_submit",
 
-  // ---- CTA 点击（与「表单提交」分开：点击是漏斗上层，提交才是转化）----
-  // 不要把 cta_click 当成转化事件统计，否则会虚高转化率。
+  // ---- CTA 点击（CS-04 口径铁律：点击 ≠ 请求 ≠ 成交 ≠ 收入确认）----
+  // 点击是漏斗上层，**绝不可**计入 CONVERSION_EVENTS，否则转化率虚高。
+  // 服务卡片 / 入口点击一律发 *_cta_click；只有真实表单提交才发 *_request / *_submit。
   supplierCardClick: "supplier_card_click",
   verificationCtaClick: "verification_cta_click",
   auditCtaClick: "audit_cta_click",
   inspectionCtaClick: "inspection_cta_click",
   rfqCtaClick: "rfq_cta_click",
+  /** /services Sourcing 卡片点击（sourcing 的落地页是 /rfq） */
+  sourcingCtaClick: "sourcing_cta_click",
 
   // ---- 游客限额 / 免费注册（Guest Limit，CS-05 实现 UI 后接线）----
   guestLimitReached: "guest_limit_reached",
@@ -101,51 +104,126 @@ export type AnalyticsEventName =
 
 /**
  * 核心转化事件（Core Conversions）
+ *
+ * CS-04 口径铁律（不可违反）：
+ *   点击（*_cta_click） ≠ 请求（*_request） ≠ 成交（Paid Order） ≠ 收入确认
+ * 只有「真实表单提交」与「真实付款」才配进入本清单。
+ * 把 CTA 点击塞进来会让转化率虚高 —— 这正是本次修复要消灭的问题。
+ *
  * 在 GA4 后台把这些标记为「关键事件 / Key events」即可构成转化漏斗：
  *   Google Search → Landing → Profile/Free Tool → Free Account
  *   → Founding Buyer → Verification → Factory Audit → Inspection
  */
 export const CONVERSION_EVENTS = [
-  ANALYTICS_EVENTS.signupComplete,
-  ANALYTICS_EVENTS.registerSubmit,
-  ANALYTICS_EVENTS.foundingBuyerPurchase,
-  ANALYTICS_EVENTS.verificationPurchase,
-  ANALYTICS_EVENTS.foundingBuyerCheckoutStart,
-  ANALYTICS_EVENTS.verificationCheckoutStart,
+  // ---- 真实账号（服务端确认）----
+  ANALYTICS_EVENTS.registerSubmit, // 注册表单通过校验并真实发起提交
+  ANALYTICS_EVENTS.signupComplete, // 建号 / 线索落库成功
+  // ---- Form Submit：真实表单提交（Request）----
+  ANALYTICS_EVENTS.auditRequest, // /factory-audit/request 表单提交
+  ANALYTICS_EVENTS.inspectionRequest, // /services/inspection 表单提交
+  ANALYTICS_EVENTS.rfqSubmit, // /rfq 正式询价提交
+  ANALYTICS_EVENTS.customServiceSubmit, // /custom-services 咨询提交
+  ANALYTICS_EVENTS.sampleReportSubmit, // 样例报告留资提交
+  ANALYTICS_EVENTS.supplierNetworkSubmit, // 供应商入驻提交
+  // ---- Qualified Lead：服务端确认已受理 ----
   ANALYTICS_EVENTS.auditRequestSubmit,
   ANALYTICS_EVENTS.inspectionRequestSubmit,
-  ANALYTICS_EVENTS.rfqSubmit,
-  ANALYTICS_EVENTS.customServiceSubmit,
-  ANALYTICS_EVENTS.sampleReportSubmit,
-  ANALYTICS_EVENTS.supplierNetworkSubmit,
-  ANALYTICS_EVENTS.verificationRequest,
-  ANALYTICS_EVENTS.auditRequest,
-  ANALYTICS_EVENTS.inspectionRequest,
-  ANALYTICS_EVENTS.sourcingRequest,
-] as const;
-
-/** 漏斗各阶段的代表事件（按用户旅程顺序） */
-export const FUNNEL_STEPS = [
-  { step: "landing", event: "page_view", note: "自然搜索落地页" },
-  { step: "profile_or_tool", event: ANALYTICS_EVENTS.profileView, note: "供应商档案 / 免费工具" },
-  { step: "free_account", event: ANALYTICS_EVENTS.signupComplete, note: "免费账号" },
-  { step: "founding_buyer", event: ANALYTICS_EVENTS.foundingBuyerPurchase, note: "Founding Buyer 付费" },
-  { step: "verification", event: ANALYTICS_EVENTS.verificationPurchase, note: "供应商核查付费" },
-  { step: "audit", event: ANALYTICS_EVENTS.auditRequestSubmit, note: "验厂请求" },
-  { step: "inspection", event: ANALYTICS_EVENTS.inspectionRequestSubmit, note: "验货 / sourcing 请求" },
+  // ---- Paid Order（付费成交）----
+  // 注意：Stripe 尚未支持大陆主体（CS-05 前的已知 P0），这两个事件
+  // 目前没有任何 emitter，GA4 中会恒为 0，这是**预期**而非故障。
+  // 保留在这里是因为它们语义上确属「成交」，Stripe 激活后即自动生效。
+  ANALYTICS_EVENTS.foundingBuyerPurchase,
+  ANALYTICS_EVENTS.verificationPurchase,
 ] as const;
 
 /**
- * 服务菜单 key → 服务咨询事件名。
- * 用于 /services 索引页与页脚服务入口：点击某个服务卡片 = 表达对该服务的意向。
+ * 点击层事件（Click-level）—— **绝不可**进入 CONVERSION_EVENTS。
+ * 它们是漏斗上层的「意向」，一旦计入转化就会让转化率虚高。
+ *
+ * 注：founding_buyer_checkout_start / verification_checkout_start 这两个旧名同样是
+ * 点击驱动（分别见 components/CheckoutButton.tsx 与 app/[locale]/pricing/page.tsx），
+ * 已从 CONVERSION_EVENTS 中移除。为不改动既有页面事件名，这里原样保留并归档在点击层；
+ * 未来若统一命名，应改名为 *_cta_click。
+ */
+export const CLICK_LEVEL_EVENTS = [
+  ANALYTICS_EVENTS.verificationCtaClick,
+  ANALYTICS_EVENTS.auditCtaClick,
+  ANALYTICS_EVENTS.inspectionCtaClick,
+  ANALYTICS_EVENTS.sourcingCtaClick,
+  ANALYTICS_EVENTS.rfqCtaClick,
+  ANALYTICS_EVENTS.supplierCardClick,
+  ANALYTICS_EVENTS.profileFreeCta,
+  ANALYTICS_EVENTS.profilePaidCta,
+  ANALYTICS_EVENTS.registerCta,
+  ANALYTICS_EVENTS.membershipCta,
+  ANALYTICS_EVENTS.unlockGateCta,
+  ANALYTICS_EVENTS.sampleReportCta,
+  ANALYTICS_EVENTS.foundingBuyerCheckoutStart,
+  ANALYTICS_EVENTS.verificationCheckoutStart,
+] as const;
+
+/**
+ * 已声明但**当前没有任何 emitter**、且不属于点击层的事件（Reserved / Unwired）。
+ *
+ * 保留常量是为了将来接线时命名统一；在真实接线之前它们既不进
+ * CONVERSION_EVENTS（否则 GA4 里出现恒为 0 的假转化），也不进
+ * CLICK_LEVEL_EVENTS。跨 CHANGESET 接线时请同步把事件移入正确的桶。
+ *
+ *   - verification_request  ：等 Verification Request 真实表单上线（CS-05+）；
+ *                            现阶段核查 CTA 只发 verification_cta_click
+ *   - sourcing_request      ：sourcing 落地页是 /rfq，真实提交事件是 rfq_submit；
+ *                            本事件与之重复，等独立 sourcing 表单上线再启用
+ *   - guest_limit_reached / free_account_signup_* ：等 Guest Limit UI 接线（CS-05）
+ *   - profile_save / free_quota_reached ：功能未接线
+ */
+export const UNWIRED_EVENTS = [
+  ANALYTICS_EVENTS.verificationRequest,
+  ANALYTICS_EVENTS.sourcingRequest,
+  ANALYTICS_EVENTS.guestLimitReached,
+  ANALYTICS_EVENTS.freeAccountSignupStart,
+  ANALYTICS_EVENTS.freeAccountSignupComplete,
+  ANALYTICS_EVENTS.profileSave,
+  ANALYTICS_EVENTS.quotaReached,
+] as const;
+
+/**
+ * 漏斗各阶段的代表事件（按用户旅程顺序）
+ *
+ * ⚠️ 口径铁律（CS-04）：点击 ≠ 请求 ≠ 成交 ≠ 收入确认
+ *   - 前 7 步是「行为漏斗」：page_view → … → qualified_lead
+ *   - paid_order 起进入「商业漏斗」，两者不可混算同一个转化率
+ *   - 收入确认（Revenue Recognition）是**财务口径**，不存在于前端事件流中，
+ *     因此刻意不放进本数组 —— 绝不允许用某个前端事件冒充它。
+ */
+export const FUNNEL_STEPS = [
+  { step: "page_view", event: "page_view", note: "自然搜索落地（GA4 自动上报，前端勿重复发 page_view）" },
+  { step: "supplier_search", event: ANALYTICS_EVENTS.directorySearch, note: "供应商搜索 / 筛选" },
+  { step: "supplier_profile_view", event: ANALYTICS_EVENTS.profileView, note: "查看供应商档案" },
+  // CTA Click 属于意向层：进漏斗是为了算点击率，但绝不进 CONVERSION_EVENTS
+  { step: "cta_click", event: ANALYTICS_EVENTS.verificationCtaClick, note: "CTA 点击（意向层，非转化）" },
+  { step: "form_start", event: ANALYTICS_EVENTS.rfqStart, note: "开始填写表单（Form Start）" },
+  { step: "form_submit", event: ANALYTICS_EVENTS.auditRequest, note: "表单提交（Form Submit / Request）" },
+  { step: "qualified_lead", event: ANALYTICS_EVENTS.auditRequestSubmit, note: "服务端确认受理（Qualified Lead）" },
+  { step: "paid_order", event: ANALYTICS_EVENTS.foundingBuyerPurchase, note: "付费成交（Paid Order，待 Stripe 接线）" },
+] as const;
+
+/**
+ * 服务菜单 key → 服务卡片**点击**事件名。
+ *
+ * ⚠️ CS-04 修复：这里以前映射到 *_request（verification_request / audit_request /
+ * inspection_request / sourcing_request），而这些是 Conversion Event —— 于是
+ * 「/services 上点一下卡片」就被记成了一次「服务请求」，转化率严重虚高。
+ * 现在一律映射到 *_cta_click（意向层，**不在** CONVERSION_EVENTS）。
+ * 真实请求只在用户真正提交表单时由对应表单组件发送 *_request / *_submit。
+ *
  * 映射以 lib/nav.ts 的 SERVICE_MENU 为准（注意 sourcing 指向 /rfq，不是 /custom-services）。
  * 未列出的 key（monitoring / improvement）没有对应事件，因此不加埋点。
  */
 export const SERVICE_EVENT_BY_KEY: Record<string, string> = {
-  verification: ANALYTICS_EVENTS.verificationRequest,
-  factoryAudit: ANALYTICS_EVENTS.auditRequest,
-  inspection: ANALYTICS_EVENTS.inspectionRequest,
-  sourcing: ANALYTICS_EVENTS.sourcingRequest,
+  verification: ANALYTICS_EVENTS.verificationCtaClick,
+  factoryAudit: ANALYTICS_EVENTS.auditCtaClick,
+  inspection: ANALYTICS_EVENTS.inspectionCtaClick,
+  sourcing: ANALYTICS_EVENTS.sourcingCtaClick,
 };
 
 // ---------------------------------------------------------------------------
