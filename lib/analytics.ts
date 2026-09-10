@@ -28,6 +28,19 @@ export const ANALYTICS_EVENTS = {
   claimView: "supplier_claim_view",
   claimSubmit: "supplier_claim_submit",
 
+  // ---- CTA 点击（与「表单提交」分开：点击是漏斗上层，提交才是转化）----
+  // 不要把 cta_click 当成转化事件统计，否则会虚高转化率。
+  supplierCardClick: "supplier_card_click",
+  verificationCtaClick: "verification_cta_click",
+  auditCtaClick: "audit_cta_click",
+  inspectionCtaClick: "inspection_cta_click",
+  rfqCtaClick: "rfq_cta_click",
+
+  // ---- 游客限额 / 免费注册（Guest Limit，CS-05 实现 UI 后接线）----
+  guestLimitReached: "guest_limit_reached",
+  freeAccountSignupStart: "free_account_signup_start",
+  freeAccountSignupComplete: "free_account_signup_complete",
+
   // ---- 免费工具（Free Tools）----
   riskCalculatorStart: "risk_calculator_start",
   riskCalculatorComplete: "risk_calculator_complete",
