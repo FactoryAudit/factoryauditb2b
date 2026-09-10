@@ -17,7 +17,7 @@ import {
   PUBLIC_FIELDS,
   FREE_FIELDS,
   PAID_FIELDS,
-  FREE_PROFILE_LIMIT,
+  GUEST_PROFILE_LIMIT,
   MEMBERSHIP_PRICE_USD,
 } from "./suppliers";
 
@@ -178,11 +178,56 @@ export function isSignupEnabled(): boolean {
   );
 }
 
-// ---------- 免费额度 ----------
+// ---------- 访问模型（CS-05a） ----------
+//
+// 商业模型：Supplier Discovery 免费 → 第 6 家触发注册 → Free Buyer 无限基础浏览
+//          →  deeper intelligence / verification / audit / service 收费
+//
+//   Guest          → guest_limited：最多 GUEST_PROFILE_LIMIT 个**不同** supplier 的 basic 字段
+//   Free Buyer     → unlimited：basic 字段无限（**不获得** paid intelligence）
+//   Founder Buyer  → unlimited：basic + paid intelligence（本档位不由 CS-05 修改）
+//
+// ⚠️ Guest 的 5 家是**转化机制**而非安全边界：计数在客户端（localStorage，CS-05b 实现），
+//    可被清除。真正的安全边界只有 paid 层，且永远在服务端。
 
-/** 每月免费可看的 profile 数（单一事实来源在 lib/suppliers.ts） */
-export function freeProfileLimit(): number {
-  return FREE_PROFILE_LIMIT;
+/**
+ * basic Supplier Profile 的访问模型。
+ *   - "guest_limited"：受 GUEST_PROFILE_LIMIT 约束（游客）
+ *   - "unlimited"    ：basic 字段无限（Free Buyer / Founder Buyer / admin）
+ */
+export type BasicAccess = "guest_limited" | "unlimited";
+
+/** 额度归属，避免客户端把 guest 额度误读成 Free Buyer 额度 */
+export type QuotaScope = "guest" | "none";
+
+/** Guest 可浏览的不同 supplier 上限（单一事实来源在 lib/suppliers.ts） */
+export function guestProfileLimit(): number {
+  return GUEST_PROFILE_LIMIT;
+}
+
+/**
+ * 该档位是否拥有「basic Supplier Profile 无限浏览」。
+ *
+ * Free Buyer 自 CS-05a 起为 unlimited（旧的「每月 5 家」已废止）。
+ * 注意：unlimited 仅指 **basic** 层，绝不包含 paid intelligence。
+ */
+export function hasUnlimitedBasicAccess(tier: MembershipTier): boolean {
+  return tier === "free" || tier === "founding_buyer";
+}
+
+/**
+ * 由档位推导 basic 访问模型。admin 视同 Founder Buyer。
+ */
+export function basicAccessFor(tier: MembershipTier, isAdmin = false): BasicAccess {
+  return isAdmin || hasUnlimitedBasicAccess(tier) ? "unlimited" : "guest_limited";
+}
+
+/**
+ * Guest 是否还能再看一家**新的** supplier。
+ * @param uniqueSeen 已浏览过的不同 supplier 数量（客户端按 supplier ID 去重）
+ */
+export function withinGuestLimit(uniqueSeen: number): boolean {
+  return uniqueSeen < GUEST_PROFILE_LIMIT;
 }
 
 /** 会员价（USD，单一事实来源在 lib/suppliers.ts） */
@@ -195,25 +240,35 @@ export function currentPeriodMonth(now: Date = new Date()): string {
   return `${now.getUTCFullYear()}-${String(now.getUTCMonth() + 1).padStart(2, "0")}-01`;
 }
 
-/**
- * 免费用户本月是否还能再看一家。
- * @param used 已用额度（去重后的 profile 数）
- */
-export function hasFreeQuota(used: number, limit: number = FREE_PROFILE_LIMIT): boolean {
-  return used < limit;
-}
-
 // ---------- /api/me 的统一返回形状 ----------
 
 export type MeResponse = {
   authenticated: boolean;
   tier: MembershipTier;
-  /** 免费用户本月已用额度（去重计数） */
+
+  // ---- CS-05a：访问模型（客户端判断"该显示什么"的唯一依据）----
+  /** basic Supplier Profile 访问模型 */
+  basicAccess: BasicAccess;
+  /** 额度归属："guest" = GUEST_PROFILE_LIMIT 约束；"none" = 无额度概念 */
+  quotaScope: QuotaScope;
+  /** guest 才可浏览的不同 supplier 上限；非 guest 为 null */
+  guestProfileLimit: number | null;
+
+  // ---- 以下三个为兼容旧字段，语义已按 CS-05a 重定义 ----
+  /**
+   * 已用额度。**仅服务端记账的档位有意义**；
+   * Guest 用量由客户端 localStorage 记账（CS-05b），服务端恒为 0。
+   */
   profilesUsed: number;
-  /** 免费额度上限 */
-  profilesLimit: number;
-  /** 剩余额度；付费用户返回 null 表示不限 */
+  /** 额度上限。guest → GUEST_PROFILE_LIMIT；unlimited → null */
+  profilesLimit: number | null;
+  /**
+   * 剩余额度。unlimited → null；
+   * **guest 也返回 null** —— 服务端不掌握游客已看几家，
+   * 绝不再谎报一个 `5` 让客户端误读成「Free Buyer 还剩 5 家」。
+   */
   profilesRemaining: number | null;
+
   /** 订阅到期时间（ISO 字符串），仅付费用户有 */
   currentPeriodEnd: string | null;
   email: string | null;
@@ -223,6 +278,13 @@ export type MeResponse = {
 /**
  * 构造 /api/me 的响应体。
  * 客户端 UnlockGate 完全依赖这个结构，改结构必须同步改 components/AuthProvider.tsx。
+ *
+ * CS-05a 语义：
+ *   - Guest        → guest_limited，guestProfileLimit = 5，remaining = null（服务端不掌握）
+ *   - Free Buyer   → unlimited，不再有「每月 5 家」
+ *   - Founder/Admin→ unlimited（paid intelligence 由既有逻辑控制，本函数不涉及）
+ *
+ * ⚠️ 本函数**不参与** paid 字段授权 —— 那是 redactSupplier / canAccess 的职责，CS-05 未改。
  */
 export function buildMeResponse(opts: {
   tier: MembershipTier;
@@ -231,15 +293,20 @@ export function buildMeResponse(opts: {
   email: string | null;
   isAdmin: boolean;
 }): MeResponse {
-  const unlimited = opts.tier === "founding_buyer" || opts.isAdmin;
+  const basicAccess = basicAccessFor(opts.tier, opts.isAdmin);
+  const isGuestLimited = basicAccess === "guest_limited";
+
   return {
     authenticated: isAuthenticated(opts.tier),
     tier: opts.tier,
-    profilesUsed: opts.profilesUsed,
-    profilesLimit: FREE_PROFILE_LIMIT,
-    profilesRemaining: unlimited
-      ? null
-      : Math.max(0, FREE_PROFILE_LIMIT - opts.profilesUsed),
+    basicAccess,
+    quotaScope: isGuestLimited ? "guest" : "none",
+    guestProfileLimit: isGuestLimited ? GUEST_PROFILE_LIMIT : null,
+    profilesUsed: isGuestLimited ? 0 : opts.profilesUsed,
+    profilesLimit: isGuestLimited ? GUEST_PROFILE_LIMIT : null,
+    // 恒为 null：unlimited 档位没有上限；Guest 由客户端记账、服务端不掌握。
+    // **不再返回误导性的 5**（旧实现会让客户端把游客额度误读成 Free Buyer 额度）。
+    profilesRemaining: null,
     currentPeriodEnd: opts.currentPeriodEnd,
     email: opts.email,
     isAdmin: opts.isAdmin,

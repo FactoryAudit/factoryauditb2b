@@ -3,13 +3,9 @@ import { getCurrentUser } from "@/lib/supabaseServer";
 import {
   getMembershipRecord,
   isAdminUser,
-  getProfileUsage,
-  hasProfileView,
-  recordProfileView,
 } from "@/lib/membership";
 import { resolveTier, canAccess, type MembershipTier } from "@/lib/access";
 import { getSupplierDetail } from "@/lib/queries";
-import { FREE_PROFILE_LIMIT } from "@/lib/suppliers";
 import { isLocale, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 
@@ -70,12 +66,9 @@ export async function GET(
 
   // ---- 1. 服务端判定档位 ----
   let tier: MembershipTier = "visitor";
-  /** 保留 userId：免费额度计数需要它 */
-  let userId: string | null = null;
   try {
     const user = await getCurrentUser();
     if (user) {
-      userId = user.id;
       const [record, isAdmin] = await Promise.all([
         getMembershipRecord(user.id),
         isAdminUser(user.id),
@@ -85,10 +78,13 @@ export async function GET(
   } catch (e) {
     console.error("[api/suppliers/unlocked] auth lookup failed", e);
     tier = "visitor";
-    userId = null;
   }
 
   // 游客连 free 层都没有，不必查数据（省一次查询，也少一个出错点）
+  //
+  // CS-05a：此处**保持不变** —— 游客在 05a 仍然拿不到 basic 字段。
+  // 授予游客 basic 访问 + 5 家唯一性计数 + 注册门，统一在 CS-05b 实现。
+  // 若在 05a 就放开而 05b 的计数未上线，会形成「游客无限看」的过度授权窗口。
   if (!canAccess(tier, "free")) {
     return NextResponse.json(
       { slug, tier, ...EMPTY },
@@ -96,41 +92,12 @@ export async function GET(
     );
   }
 
-  // ---- 2. 免费额度判定（只对 free 档生效；paid / admin 不限量） ----
+  // ---- 2. 取已裁剪的数据 ----
   //
-  // 为什么放在这里：这是会员真正"看到付费/免费字段"的唯一入口，
-  // 计数必须发生在**授予之前**，否则就成了"先给内容再记账"，超额拦不住。
-  //
-  // 失败方向：getProfileUsage 出错返回 0、hasProfileView 出错返回 true，
-  // 两个都倾向于**放行** —— 数据库抖动不该把正常用户挡在门外。
-  let profilesUsed = 0;
-  let quotaExceeded = false;
-
-  if (userId && tier === "free") {
-    profilesUsed = await getProfileUsage(userId);
-    // 只有"已到上限"时才多查一次"这家看过没"，常见路径仍是 1 次查询
-    if (profilesUsed >= FREE_PROFILE_LIMIT) {
-      const already = await hasProfileView(userId, slug);
-      // 同一家供应商本月重复查看不重复扣额度，所以看过的可以继续看
-      quotaExceeded = !already;
-    }
-  }
-
-  if (quotaExceeded) {
-    return NextResponse.json(
-      {
-        slug,
-        tier,
-        ...EMPTY,
-        quotaExceeded: true,
-        profilesUsed,
-        quotaMessage: await buildQuotaMessage(locale, FREE_PROFILE_LIMIT),
-      },
-      { headers: NO_STORE }
-    );
-  }
-
-  // ---- 3. 取已裁剪的数据 ----
+  // CS-05a：删除了旧的「Free Buyer 每月 5 家」额度闸门与 profile_views 记账。
+  // 原因：① Free Buyer 改为 unlimited，闸门语义已废止；
+  //      ② 旧记账把 slug 写进 profile_views.supplier_id(uuid) 列，实际从未成功入库，
+  //         额度一直是 0/5 —— 即旧的 5 家限制从未真正生效过，删除它不削弱任何现有控制。
   let detail: Awaited<ReturnType<typeof getSupplierDetail>> = null;
   try {
     detail = await getSupplierDetail(slug, contentLocale, tier);
@@ -185,13 +152,9 @@ export async function GET(
     }
   }
 
-  // ---- 5. 记一次额度（仅 free 档；recordProfileView 内部对 founding_buyer 直接跳过）----
-  // 放在授予之后：先确保这一档确实能拿到内容，再计入用量。
-  // 唯一索引保证重复查看同一家不会重复计数。
-  if (userId && tier === "free") {
-    const rec = await recordProfileView(userId, slug, tier);
-    if (rec.used > 0) profilesUsed = rec.used;
-  }
+  // ---- 4. 组装响应 ----
+  // CS-05a：不再记账（Free Buyer 已是 unlimited，见上方 §2 注释）。
+  const profilesUsed = 0;
 
   return NextResponse.json(
     {
@@ -207,7 +170,11 @@ export async function GET(
 }
 
 /**
- * 额度用尽的提示文案（服务端本地化）。
+ * 额度/门槛提示文案（服务端本地化）。
+ *
+ * ⚠️ CS-05a 起暂时无调用方 —— 旧的「Free 每月 5 家」额度闸门已删除。
+ * **保留用于 CS-05b** 的 Guest 第 6 家注册门（注册引导文案），届时会重新接线；
+ * 若 05b 最终改用它处文案，则可删除本函数。
  *
  * 放在服务端而不是让前端自己备一份：本接口已经加载了字典，
  * 前端组件就不用再多收一个 props，9 语文案也只有这一处来源。

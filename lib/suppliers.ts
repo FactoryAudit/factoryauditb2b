@@ -54,7 +54,26 @@ export const PAID_FIELDS = [
   "certifications",
 ] as const;
 
-/** Free Account 每月可查看的 supplier profile 数量 */
+/**
+ * Guest（未登录访客）可浏览的**不同** Supplier 数量上限（CS-05a）。
+ *
+ * 计数单位 = unique supplier ID（不是 URL、不是 slug 数量、不是刷新次数、不是标签页数）。
+ * 记账位置 = 客户端 localStorage（CS-05b 实现），服务端不掌握游客用量。
+ *
+ * ⚠️ 性质界定：这是**营销/转化机制**，不是安全边界。
+ *    真正的安全边界只有一处 —— paid intelligence（evidence / inspectionHistory /
+ *    riskBreakdown / certifications）始终由服务端的 tier 裁剪控制，与这个值无关。
+ */
+export const GUEST_PROFILE_LIMIT = 5;
+
+/**
+ * @deprecated CS-05a：Free Buyer 已改为「basic Supplier Profile 无限浏览」，
+ * 这个 5 **不再是 Free Buyer 的额度**。保留导出仅为兼容旧引用（注册页 / membership 页 /
+ * 欢迎邮件文案），CS-05c 会连同文案一起清理。
+ *
+ * 🚫 **禁止在任何访问判定 / 额度计算里使用本常量** —— 新代码一律用 `GUEST_PROFILE_LIMIT`。
+ *    （历史坑：它曾被当成「Free 每月 5 家」，与本名极易混淆，故显式废弃。）
+ */
 export const FREE_PROFILE_LIMIT = 5;
 
 /** Featured 数量区间（需求：4–10 家；当前真实收录 4 家，全部 Featured） */

@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/supabaseServer";
 import {
   getMembershipRecord,
-  getProfileUsage,
   isAdminUser,
 } from "@/lib/membership";
 import { buildMeResponse, resolveTier } from "@/lib/access";
@@ -52,13 +51,12 @@ export async function GET() {
     ]);
 
     const tier = isAdmin ? "founding_buyer" : resolveTier(record);
-    // 付费用户不限量，没必要查用量（省一次查询）
-    const profilesUsed =
-      tier === "founding_buyer" ? 0 : await getProfileUsage(user.id);
 
+    // CS-05a：Free Buyer 起 basic profile 浏览为 unlimited，不再查用量（省一次查询）。
+    // 只有 founding_buyer 之外、且仍按服务端记账的档位才需要 profilesUsed —— 当前没有。
     return NextResponse.json(buildMeResponse({
       tier,
-      profilesUsed,
+      profilesUsed: 0,
       currentPeriodEnd: record?.current_period_end ?? null,
       email: user.email ?? null,
       isAdmin,
