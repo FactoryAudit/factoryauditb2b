@@ -13,9 +13,12 @@
 > `*_cta_click` 真实送达 `www.google-analytics.com`（`tid=G-1GKLYNLVQ5`），且点击服务卡片
 > **不产生任何 `*_request`**。Cloudflare beacon token 仍为空（未接入）。
 >
-> ⚠️ 已知项（P2，非阻断）：`page_view_group` 首次加载时**不被投递**。触发时点（~0ms）早于
-> gtag.js 就绪（~1s），事件进入 dataLayer 但未被处理。仅影响「按页面类型聚合」这一个事件，
-> 不影响 `page_view` 与任何点击/表单事件。详见 §8 健康检查清单末行。
+> ⚠️ **本节曾有一处错误结论，已更正（2026-09-11）**：早期记录称 `page_view_group` 首次加载
+> **不被投递**（P2）。经复核，该结论是**投递探针的解析缺陷造成的误判** —— GA4 把事件批量放在
+> 一个 POST body 里且以 `\n` 分行，旧探针只按 `&` 匹配，每批**只能读到第一条事件**。
+> 实测（修正探针后）：`page_view_group` 一直正常投递，`/suppliers` 与供应商详情页各 1 次/页。
+> 探针与回归脚本均已修正并加守护断言。真正被修掉的是另一个**潜在静默丢事件竞态**：
+> 页面浏览事件的「分析通道就绪等待」，详见 §9 架构备注。
 
 ---
 
@@ -273,13 +276,17 @@ GA4 「探索」→「漏斗探索」按上面顺序逐层添加即可看到逐�
 3. **口径回归（无需浏览器，纯只读）**：
 
    ```bash
+   # ⚠️ Windows/Git Bash 下不要用 /tmp —— node 会把它解析成 F:\tmp 而找不到文件。
+   #    CS04_ROOT 必须是 Windows 风格路径，不能直接给 $PWD（那是 /f/... 形态）。
+   OUT="$LOCALAPPDATA/Temp/cs04-reg.cjs"
    ./node_modules/.bin/esbuild scripts/cs04-analytics-regression.ts \
-     --bundle --platform=node --format=cjs --outfile=/tmp/cs04-reg.cjs
-   CS04_ROOT="$PWD" node /tmp/cs04-reg.cjs
+     --bundle --platform=node --format=cjs --outfile="$OUT"
+   CS04_ROOT="F:/AI-验厂SEO网站" node "$OUT"
    ```
 
-   期望输出 `PASS=32 FAIL=0`。它校验：三桶互斥、`/services` 卡片点击不泄漏进转化、
-   漏斗顺序、转化事件确有 emitter、Reserved 事件确实无人触发、PII 双层清洗。
+   期望输出 `PASS=39 FAIL=0`。它校验：三桶互斥、`/services` 卡片点击不泄漏进转化、
+   漏斗顺序、转化事件确有 emitter、Reserved 事件确实无人触发、PII 双层清洗，
+   以及第 8 节的「页面浏览就绪等待 + 投递探针按行解析」守护断言。
 
 3b. **投递对账（需要真实浏览器，验证 GA4 到底收到了什么）**：
 
@@ -292,9 +299,20 @@ GA4 「探索」→「漏斗探索」按上面顺序逐层添加即可看到逐�
    node scripts/cs04-ga4-probe.mjs
    ```
 
-   它会驱动线上站点、点击四张服务卡片，并解析 `/g/collect` 请求（含 POST body）后输出
-   投递计数。期望：`page_view` 每页恰好 1 次、四个 `*_cta_click` 各 1 次、
-   **`*_request` 为 0**、gtag.js 每页只加载 1 次。
+   它会驱动线上站点、点击四张服务卡片，并解析 `/g/collect` 请求（query + POST body）后输出
+   投递计数与每批条数。期望：`page_view` 每页恰好 1 次、`page_view_group` 在声明了
+   `data-track-page` 的页面各 1 次、四个 `*_cta_click` 各 1 次、**`*_request` 为 0**、
+   gtag.js 每页只加载 1 次。
+
+   🔴 **解析陷阱（曾导致误判，务必保留）**：GA4 把多个事件**批量**塞进一个 POST body，
+   body 是「按 `\n` 分行、行内用 `&` 分隔」的：
+   ```
+   en=page_view&_ee=1&ep.debug_mode=false
+   en=page_view_group&_ee=1&ep.debug_mode=false&ep.page=supplier_directory_view
+   ```
+   所以解析必须**先按行切分再全局匹配 `en=`**。早期版本用 `/(?:^|&)en=/`（无 `m` 标志）
+   只匹配字符串开头，结果每批**只读到第一条事件**，其余全被漏掉 —— 由此得出过
+   「`page_view_group` 从未投递」的**错误结论**。回归脚本第 8 节已加断言守护这一点。
 4. 配了真实 GA4 ID 时，GA4 →「管理」→「DebugView」几秒内应出现同样的事件（dev 环境自动 debug_mode，不污染生产报表）。
 5. 生产验证：改 `.env` → 重新构建部署 → 线上 Ctrl+U 查源码，确认 `gtag/js?id=G-...` 和 `beacon.min.js` 各出现**一次**；GA4「报告」→「实时」应出现活跃用户。
 6. 测完把 `NEXT_PUBLIC_ANALYTICS_DEBUG` 改回空。
@@ -312,14 +330,15 @@ GA4 「探索」→「漏斗探索」按上面顺序逐层添加即可看到逐�
 | PV 不翻倍 | GA4 → 报告 → 互动度 | Page Views 与实际访问次数同量级；`page_view_group` 与 `page_view` 是两类不同事件 |
 | SEO 不受影响 | Google Search Console / 抓取 | 脚本 `strategy="afterInteractive"` 不阻塞 SSR：正文 HTML 完整、robots.txt / sitemap.xml / canonical / 结构化数据与安装前一致 |
 | 无敏感数据外泄 | Console 调试模式抽查事件参数 | 只有白名单键，永远看不到 email / 电话 / 密码 |
-| **投递对账** | `node scripts/cs04-ga4-probe.mjs` | `*_request` 计数为 0；`*_cta_click` 各 1 次；`page_view` 每页 1 次 |
-| ⚠️ `page_view_group` | 干净浏览器加载任一页 → GA4 实时 | **已知未投递**（触发早于 gtag.js 就绪），P2，待修 |
+| **投递对账** | `node scripts/cs04-ga4-probe.mjs` | `*_request` 计数为 0；`*_cta_click` 各 1 次；`page_view` 每页 1 次；`page_view_group` 在声明了 `data-track-page` 的页面各 1 次 |
+| `page_view_group` | 干净浏览器加载 `/suppliers` → GA4 实时 | ✅ **正常投递**（2026-09-11 实测，每页 1 次）。早期曾记为「未投递 P2」，实为**探针漏读批次 body 造成的误判**，已在探针与回归脚本中修正 |
 
 ## 9. 架构备注（给未来的自己）
 
 - **注入点唯一**：`components/AnalyticsScripts.tsx` 只在 `app/[locale]/layout.tsx` 挂载一次，任何页面/组件不要再写 `<Script>`。
 - **事件委托**：`components/AnalyticsTracker.tsx` 全局监听 `data-track` / `data-track-submit` / `data-track-page` / `data-track-view` 四类属性，页面只加属性、不写监听。
 - **fail-open**：`trackEvent` 无 gtag/dataLayer 时静默 no-op；埋点任何异常都不影响业务。
+- **页面浏览要等就绪**：`AnalyticsTracker` 发页面浏览事件前会经 `whenAnalyticsReady()` 轮询等待（间隔 50ms、上限 10s）。原因是 GA4 内联初始化片段由 `next/script(afterInteractive)` 注入，其执行时机与 React 首次 passive effect **同一时间段且顺序不保证**；若 Tracker 先跑，`trackEvent` 会因「既无 gtag 也无 dataLayer」静默 no-op，该次浏览事件**永久丢失**（无报错、无重试）。轮询把这层竞态消除掉，超时即放弃。
 - **PV 不翻倍**：gtag.js 自动上报标准 `page_view`；自定义的页面类型事件命名 `page_view_group`；SPA 跳转由 `usePathname` 补发 `page_view`。
 - **不用 `useSearchParams`**：避免 Suspense 边界让静态页退化（SEO 硬要求）。
 - **ID 格式校验**：GA4 只接受 `G-` 开头 6–15 位（`/^G-[A-Z0-9]{6,15}$/i`），CF token 只接受 32 位 hex，填错不加载、不报错。

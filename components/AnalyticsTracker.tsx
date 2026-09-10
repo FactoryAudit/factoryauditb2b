@@ -33,6 +33,63 @@ function readViewEvent(): string | undefined {
   return el?.getAttribute("data-track-view") ?? undefined;
 }
 
+/**
+ * 分析通道是否可用。
+ * GA4 的内联初始化片段一旦执行，至少会提供 window.gtag 或 window.dataLayer 之一；
+ * 两者皆无 = 脚本尚未注入（此时调用 trackEvent 会静默 no-op）。
+ */
+function isAnalyticsReady(): boolean {
+  const w = window as unknown as { gtag?: unknown; dataLayer?: unknown };
+  return typeof w.gtag === "function" || Array.isArray(w.dataLayer);
+}
+
+/** 等待分析通道就绪的轮询间隔 / 上限 */
+const READY_POLL_MS = 50;
+const READY_TIMEOUT_MS = 10000;
+
+/**
+ * 等分析通道就绪后再执行（fail-open：超时即放弃，绝不阻塞渲染或业务）。
+ *
+ * ⚠️ 为什么必须等：
+ * GA4 的内联初始化片段由 next/script(strategy="afterInteractive") 注入，其执行时机
+ * 与 React 首次 passive effect 处于同一时间段，二者先后顺序**不保证**。
+ * 若本组件先跑，trackEvent 会因「既无 gtag 也无 dataLayer」而静默 no-op ——
+ * 该次页面浏览的事件就**永久丢失**：不报错、不重试、GA4 里也看不出来少了什么。
+ * 轮询等待可把这个不确定因素彻底消除（脚本就绪后 dataLayer 垫片路径已被实测
+ * 证明能真实投递到 /g/collect）。
+ *
+ * 返回取消函数，供 effect 清理时调用。
+ */
+function whenAnalyticsReady(run: () => void): () => void {
+  if (isAnalyticsReady()) {
+    run();
+    return () => {};
+  }
+
+  let done = false;
+  let deadline = 0;
+
+  const timer = window.setInterval(() => {
+    if (done || !isAnalyticsReady()) return;
+    done = true;
+    window.clearInterval(timer);
+    window.clearTimeout(deadline);
+    run();
+  }, READY_POLL_MS);
+
+  deadline = window.setTimeout(() => {
+    if (done) return;
+    done = true;
+    window.clearInterval(timer);
+  }, READY_TIMEOUT_MS);
+
+  return () => {
+    done = true;
+    window.clearInterval(timer);
+    window.clearTimeout(deadline);
+  };
+}
+
 export default function AnalyticsTracker() {
   const pathname = usePathname();
   const isFirstRender = useRef(true);
@@ -76,26 +133,37 @@ export default function AnalyticsTracker() {
 
   // ---- 页面浏览 ----
   useEffect(() => {
-    // 延后一帧，确保路由切换后的 DOM 已更新，能读到新页面的 data-track-page
-    const id = window.setTimeout(() => {
-      const page = readPageType();
-      const view = readViewEvent();
+    // 首次渲染标记在 effect 主体里就地消费：若放到延后回调里，
+    // 回调被 cleanup 取消时标记会悬空，后续 SPA 跳转会漏发 page_view。
+    const isFirst = isFirstRender.current;
+    isFirstRender.current = false;
 
-      if (isFirstRender.current) {
-        // 首次加载：gtag('config') 已自动上报标准 page_view，这里只补页面类型，
-        // 不要再发一次 page_view，否则 PV 翻倍。
-        isFirstRender.current = false;
-      } else if (pathname) {
-        // 客户端路由跳转：手动补发标准 page_view（GA4 感知不到 SPA 跳转）
-        trackEvent("page_view", { page_path: pathname });
-      }
+    let domTimer: number | undefined;
 
-      if (page) trackPageView(page);
-      // 页面级曝光事件（如 founding_buyer_view）：每次页面呈现发一次
-      if (view) trackEvent(view);
-    }, 0);
+    // 两道等待，缺一不可：
+    //   ① 等分析通道就绪 —— 否则事件静默丢失（见 whenAnalyticsReady 注释）
+    //   ② 再延后一帧读 DOM —— 确保路由切换后新页面的 data-track-page 已挂上
+    const cancelReady = whenAnalyticsReady(() => {
+      domTimer = window.setTimeout(() => {
+        const page = readPageType();
+        const view = readViewEvent();
 
-    return () => window.clearTimeout(id);
+        if (!isFirst && pathname) {
+          // 客户端路由跳转：手动补发标准 page_view（GA4 感知不到 SPA 跳转）。
+          // 首次加载不发 —— gtag('config') 已自动上报标准 page_view，再发一次 PV 会翻倍。
+          trackEvent("page_view", { page_path: pathname });
+        }
+
+        if (page) trackPageView(page);
+        // 页面级曝光事件（如 founding_buyer_view）：每次页面呈现发一次
+        if (view) trackEvent(view);
+      }, 0);
+    });
+
+    return () => {
+      cancelReady();
+      if (domTimer !== undefined) window.clearTimeout(domTimer);
+    };
   }, [pathname]);
 
   return null;

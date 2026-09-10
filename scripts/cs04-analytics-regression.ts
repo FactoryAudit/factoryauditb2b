@@ -337,6 +337,38 @@ section("7. trackEvent fail-open");
   check("无 window/gtag 环境下 trackEvent 不抛错（静默 no-op）", !threw);
 }
 
+section("8. 页面浏览就绪等待 / 投递探针解析（CS-04 P2 守护）");
+{
+  const trackerPath = path.join(ROOT, "components", "AnalyticsTracker.tsx");
+  const probePath = path.join(ROOT, "scripts", "cs04-ga4-probe.mjs");
+  const tracker = fs.existsSync(trackerPath) ? fs.readFileSync(trackerPath, "utf8") : "";
+  const probe = fs.existsSync(probePath) ? fs.readFileSync(probePath, "utf8") : "";
+
+  check("AnalyticsTracker 可读", tracker.length > 0, trackerPath);
+  check(
+    "页面浏览使用 whenAnalyticsReady 就绪等待（消除脚本注入竞态）",
+    /function whenAnalyticsReady\(/.test(tracker) && /whenAnalyticsReady\(\(\) =>/.test(tracker)
+  );
+  check(
+    "就绪判定同时接受 gtag 与 dataLayer（缺一即会在竞态中静默丢事件）",
+    /typeof w\.gtag === "function"\s*\|\|\s*Array\.isArray\(w\.dataLayer\)/.test(tracker)
+  );
+  const pvEffect = tracker.slice(tracker.indexOf("---- 页面浏览 ----"));
+  check(
+    "页面浏览 effect 不再裸 setTimeout 直接发送（必须经就绪等待）",
+    pvEffect.length > 0 && !/const id = window\.setTimeout\(/.test(pvEffect)
+  );
+
+  check("投递探针可读", probe.length > 0, probePath);
+  // GA4 批量 body 是「按 \n 分行」的；若只按 & 匹配，每批只能读到第一条 en，
+  // 会把批次内其余事件全部漏掉 —— 这正是曾误报「page_view_group 从未投递」的根因。
+  check(
+    "投递探针按行解析批次 body（防「只读第一条 en」漏读回归）",
+    /post\.split\(\/\\r\?\\n\/\)/.test(probe)
+  );
+  check("投递探针断言覆盖 page_view_group 每页 1 次", /page_view_group/.test(probe));
+}
+
 // ---------------------------------------------------------------------------
 // 汇总
 // ---------------------------------------------------------------------------
