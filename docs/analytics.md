@@ -6,7 +6,16 @@
 > 两者都是「配置即生效」：不填 ID 时完全不加载任何脚本，页面零额外开销。
 >
 > **CS-04（2026-09-10）**：a) 修正 CTA 点击被误记为服务请求的事件口径问题；b) 重新划分
-> 转化桶 / 点击桶 / 未接线桶。GA4 Measurement ID 目前仍为空，尚未激活。
+> 转化桶 / 点击桶 / 未接线桶；c) **GA4 生产通道已激活**。
+>
+> **GA4 激活状态**：`NEXT_PUBLIC_GA4_MEASUREMENT_ID = "G-1GKLYNLVQ5"`，已随 Worker 版本
+> `f333f339-3f55-4f71-bfc2-2b28e8932c20` 部署。实测已确认 `page_view`、`supplier_profile_view`、
+> `*_cta_click` 真实送达 `www.google-analytics.com`（`tid=G-1GKLYNLVQ5`），且点击服务卡片
+> **不产生任何 `*_request`**。Cloudflare beacon token 仍为空（未接入）。
+>
+> ⚠️ 已知项（P2，非阻断）：`page_view_group` 首次加载时**不被投递**。触发时点（~0ms）早于
+> gtag.js 就绪（~1s），事件进入 dataLayer 但未被处理。仅影响「按页面类型聚合」这一个事件，
+> 不影响 `page_view` 与任何点击/表单事件。详见 §8 健康检查清单末行。
 
 ---
 
@@ -22,8 +31,8 @@
 ### 第 2 步：填进项目根目录的 `.env`
 
 ```ini
-NEXT_PUBLIC_GA4_MEASUREMENT_ID="G-XXXXXXXXXX"
-NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN="32位十六进制串"
+NEXT_PUBLIC_GA4_MEASUREMENT_ID="G-1GKLYNLVQ5"   # 已于 2026-09-10 配置
+NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN=""        # 仍未配置（可选）
 ```
 
 > ⚠️ **`NEXT_PUBLIC_` 前缀的变量是构建时内联的**：改完 `.env` 必须重新构建部署才生效，只改文件、只重启 dev server 都不够。
@@ -271,6 +280,21 @@ GA4 「探索」→「漏斗探索」按上面顺序逐层添加即可看到逐�
 
    期望输出 `PASS=32 FAIL=0`。它校验：三桶互斥、`/services` 卡片点击不泄漏进转化、
    漏斗顺序、转化事件确有 emitter、Reserved 事件确实无人触发、PII 双层清洗。
+
+3b. **投递对账（需要真实浏览器，验证 GA4 到底收到了什么）**：
+
+   ```bash
+   # 先起一个无头 Chrome 调试端口
+   "/c/Program Files/Google/Chrome/Application/chrome.exe" \
+     --headless=new --disable-gpu --no-sandbox --disable-extensions \
+     --user-data-dir=/tmp/cd-ga4 --remote-debugging-port=9333 \
+     --remote-allow-origins=* about:blank &
+   node scripts/cs04-ga4-probe.mjs
+   ```
+
+   它会驱动线上站点、点击四张服务卡片，并解析 `/g/collect` 请求（含 POST body）后输出
+   投递计数。期望：`page_view` 每页恰好 1 次、四个 `*_cta_click` 各 1 次、
+   **`*_request` 为 0**、gtag.js 每页只加载 1 次。
 4. 配了真实 GA4 ID 时，GA4 →「管理」→「DebugView」几秒内应出现同样的事件（dev 环境自动 debug_mode，不污染生产报表）。
 5. 生产验证：改 `.env` → 重新构建部署 → 线上 Ctrl+U 查源码，确认 `gtag/js?id=G-...` 和 `beacon.min.js` 各出现**一次**；GA4「报告」→「实时」应出现活跃用户。
 6. 测完把 `NEXT_PUBLIC_ANALYTICS_DEBUG` 改回空。
@@ -288,6 +312,8 @@ GA4 「探索」→「漏斗探索」按上面顺序逐层添加即可看到逐�
 | PV 不翻倍 | GA4 → 报告 → 互动度 | Page Views 与实际访问次数同量级；`page_view_group` 与 `page_view` 是两类不同事件 |
 | SEO 不受影响 | Google Search Console / 抓取 | 脚本 `strategy="afterInteractive"` 不阻塞 SSR：正文 HTML 完整、robots.txt / sitemap.xml / canonical / 结构化数据与安装前一致 |
 | 无敏感数据外泄 | Console 调试模式抽查事件参数 | 只有白名单键，永远看不到 email / 电话 / 密码 |
+| **投递对账** | `node scripts/cs04-ga4-probe.mjs` | `*_request` 计数为 0；`*_cta_click` 各 1 次；`page_view` 每页 1 次 |
+| ⚠️ `page_view_group` | 干净浏览器加载任一页 → GA4 实时 | **已知未投递**（触发早于 gtag.js 就绪），P2，待修 |
 
 ## 9. 架构备注（给未来的自己）
 
