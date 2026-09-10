@@ -155,3 +155,57 @@ export function evidenceProvenance(
 export function certificateStatus(verified: boolean): "reviewed" | "provided" {
   return verified ? "reviewed" : "provided";
 }
+
+// =============================================================================
+// 验证与证据中心：证书/报告有效期状态（spec §10/§11）
+//
+// 说明：
+//   - 「Valid / Expiring Soon」不落库，一律由 expiry_date 现算，避免任务未跑
+//     导致状态与日期长期不一致（例如证书已过期却一直显示 Valid）。
+//   - 本函数与上方遗留的 certificateStatus(verified) 语义不同，故不复用其名：
+//     后者是「平台是否审阅过」，本函数是「证书自身是否仍在有效期」。
+// =============================================================================
+
+/** 距到期 N 天内视为「即将到期」（spec 示例有 30/45/60 天，取 60 更保守） */
+export const EXPIRING_SOON_DAYS = 60;
+
+export type CertificateExpiryState =
+  | "PENDING"        // 待审核
+  | "REJECTED"       // 已驳回
+  | "EXPIRED"        // 已过期
+  | "EXPIRING_SOON"  // 即将到期
+  | "VALID";         // 有效
+
+/** 距指定日期还有多少天（按 UTC 日粒度；无效日期返回 null） */
+export function daysUntilDate(
+  dateStr?: string | null,
+  now: Date = new Date()
+): number | null {
+  if (!dateStr) return null;
+  const target = new Date(`${dateStr}T00:00:00Z`);
+  if (Number.isNaN(target.getTime())) return null;
+  const today = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+  return Math.round((target.getTime() - today) / 86400000);
+}
+
+/**
+ * 计算证书显示状态。
+ * 优先级：审核态（PENDING/REJECTED）> 到期态（EXPIRED/EXPIRING_SOON）> VALID。
+ * 未填 expiry_date 且已审核通过 → VALID（无固定有效期的资质文件）。
+ */
+export function certificateExpiryState(params: {
+  verificationStatus?: string | null;
+  expiryDate?: string | null;
+  now?: Date;
+}): CertificateExpiryState {
+  const st = (params.verificationStatus ?? "").trim().toUpperCase();
+  if (st === "REJECTED") return "REJECTED";
+  if (st === "PENDING") return "PENDING";
+  if (st === "EXPIRED") return "EXPIRED";
+
+  const days = daysUntilDate(params.expiryDate, params.now ?? new Date());
+  if (days === null) return "VALID";
+  if (days < 0) return "EXPIRED";
+  if (days <= EXPIRING_SOON_DAYS) return "EXPIRING_SOON";
+  return "VALID";
+}

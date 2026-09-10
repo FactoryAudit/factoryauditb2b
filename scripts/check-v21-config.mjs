@@ -30,6 +30,11 @@ const EXPECTED_TABLES = [
   "rfqs",
   "rfq_matches",
   "stripe_events",
+  // ---- 004_documents.sql（Verification & Evidence Center）----
+  "supplier_documents",
+  "supplier_certifications",
+  "supplier_audits",
+  "admin_audit_log",
 ];
 
 // ---- 输出辅助 ----
@@ -131,9 +136,11 @@ if (url && service && isSupabaseKey(service, "service")) {
 
   for (const t of EXPECTED_TABLES) {
     try {
-      const { error } = await db
-        .from(t)
-        .select("*", { count: "exact", head: true });
+      // ⚠️ 必须用 GET 探测，不能用 { head: true }。
+      //    实测：supabase-js 的 HEAD 请求打到不存在的表时返回 status=204 且
+      //    error=null（同一表用 GET 则是 404 + PGRST205）。
+      //    用 head:true 会让"表全就绪"变成假 PASS —— 这是 2026-09-07 实测复现的缺陷。
+      const { error } = await db.from(t).select("*").limit(1);
       if (error) {
         // PGRST205 = 表不在 PostgREST 的 schema cache 里（多半是没建）
         if (error.code === "PGRST205" || error.code === "42P01") {
@@ -148,11 +155,11 @@ if (url && service && isSupabaseKey(service, "service")) {
   }
 
   if (missing.length === 0 && broken.length === 0) {
-    ok(`10 张表全部就绪`);
+    ok(`${EXPECTED_TABLES.length} 张表全部就绪`);
   } else {
     if (missing.length) {
       bad(`缺少 ${missing.length} 张表：${missing.join(", ")}`);
-      info("去 SQL Editor 执行 supabase/migrations/001_init.sql");
+      info("在 SQL Editor 依次执行 supabase/migrations/001_init.sql、004_documents.sql、005_storage.sql");
     }
     if (broken.length) {
       bad(`${broken.length} 张表查询异常：${broken.join("; ")}`);
@@ -163,7 +170,8 @@ if (url && service && isSupabaseKey(service, "service")) {
   if (!missing.includes("suppliers")) {
     const { count, error } = await db
       .from("suppliers")
-      .select("*", { count: "exact", head: true });
+      .select("*", { count: "exact" })
+      .limit(1);
     if (error) {
       wrn(`suppliers 表行数查不到：${error.message}`);
     } else if (count === 0) {

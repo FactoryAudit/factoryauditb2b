@@ -28,13 +28,6 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-const NAV = [
-  { href: "/admin", key: "navOverview" },
-  { href: "/admin/suppliers", key: "navSuppliers" },
-  { href: "/admin/rfqs", key: "navRfqs" },
-  { href: "/admin/members", key: "navMembers" },
-] as const;
-
 export default async function AdminLayout({ children, params }: Props) {
   const { locale: raw } = await params;
   if (!isLocale(raw)) notFound();
@@ -47,6 +40,16 @@ export default async function AdminLayout({ children, params }: Props) {
   const t = await getDictionary(locale);
   const a = t.admin;
   const p = (href: string) => localePath(locale, href);
+
+  // 侧边导航。前四项来自 admin 命名空间；「待审核」标签复用 evidenceCenter，
+  // 避免为 1 个标签在 admin 命名空间再补 9 语翻译（后台是单人工具，noindex）。
+  const NAV = [
+    { href: "/admin", label: a.navOverview },
+    { href: "/admin/suppliers", label: a.navSuppliers },
+    { href: "/admin/rfqs", label: a.navRfqs },
+    { href: "/admin/members", label: a.navMembers },
+    { href: "/admin/pending-review", label: t.evidenceCenter.adminNavPending },
+  ];
 
   return (
     <div className="min-h-screen bg-[#f7f9fc]">
@@ -71,7 +74,7 @@ export default async function AdminLayout({ children, params }: Props) {
               href={p(item.href)}
               className="block rounded-md px-3 py-2 text-sm font-medium text-[#0f172a] hover:bg-white"
             >
-              {a[item.key]}
+              {item.label}
             </Link>
           ))}
         </nav>

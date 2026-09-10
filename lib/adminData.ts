@@ -143,6 +143,13 @@ export type AdminSupplierDetail = AdminSupplierRow & {
   certifications: string[];
   audit_status: string | null;
   inspection_history: number;
+  /** 004_documents.sql 新增；NOT NULL DEFAULT 'unverified'，故总是存在。 */
+  verification_level:
+    | "unverified"
+    | "self_assessment"
+    | "platform_assessment"
+    | "on_site_audit"
+    | "third_party_audit";
 };
 
 export async function getAdminSupplier(
@@ -185,6 +192,12 @@ export async function updateAdminSupplier(
     inspection_history: number;
     access_tier: "public" | "free" | "paid";
     is_published: boolean;
+    verification_level:
+      | "unverified"
+      | "self_assessment"
+      | "platform_assessment"
+      | "on_site_audit"
+      | "third_party_audit";
   }>
 ): Promise<boolean> {
   const db = createAdminClient();
@@ -314,4 +327,658 @@ export async function listAdminMembers(limit = 200): Promise<AdminMemberRow[]> {
     console.error("[adminData] list members exception", e);
     return [];
   }
+}
+
+// =============================================================================
+// 验证与证据中心（Verification & Evidence Center）
+// 依赖迁移 004_documents.sql 的 4 张表 + suppliers.verification_level
+// =============================================================================
+
+/** supplier slug → id。找不到返回 null。 */
+export async function getAdminSupplierIdBySlug(slug: string): Promise<string | null> {
+  const db = createAdminClient();
+  if (!db) return null;
+  try {
+    const { data, error } = await db
+      .from("suppliers")
+      .select("id")
+      .eq("slug", slug)
+      .maybeSingle();
+    if (error || !data) return null;
+    return (data as { id: string }).id;
+  } catch {
+    return null;
+  }
+}
+
+/** 内部别名（本文件内使用） */
+const supplierIdBySlug = getAdminSupplierIdBySlug;
+
+/**
+ * 写审计日志（spec §19）。
+ * 尽力而为：日志失败绝不影响主操作结果，只在服务端打日志。
+ * 仅 service_role 可写（表上无 INSERT policy）。
+ */
+export async function logAdminAction(
+  ctx: AdminContext,
+  action: string,
+  targetType: "document" | "certification" | "audit" | "supplier",
+  targetId: string,
+  diff?: Record<string, unknown>
+): Promise<void> {
+  const db = createAdminClient();
+  if (!db) return;
+  try {
+    await db.from("admin_audit_log").insert({
+      actor_id: ctx?.userId ?? null,
+      actor_email: ctx?.email ?? null,
+      action,
+      target_type: targetType,
+      target_id: targetId,
+      diff: diff ?? null,
+    });
+  } catch (e) {
+    console.error("[adminData] audit log failed", e);
+  }
+}
+
+// ---------- 文件（supplier_documents） ----------
+
+export type AdminDocumentRow = {
+  id: string;
+  supplier_id: string;
+  document_type: string;
+  document_name: string;
+  program_code: string | null;
+  file_path: string;
+  mime: string;
+  size_bytes: number;
+  sha256: string | null;
+  verification_status: string;
+  extraction_status: string;
+  expiry_date: string | null;
+  visibility: string;
+  uploaded_by: string | null;
+  uploaded_at: string;
+  verified_by: string | null;
+  verified_at: string | null;
+  notes: string | null;
+};
+
+export async function listAdminDocuments(slug: string): Promise<AdminDocumentRow[]> {
+  const id = await supplierIdBySlug(slug);
+  if (!id) return [];
+  const db = createAdminClient();
+  if (!db) return [];
+  try {
+    const { data, error } = await db
+      .from("supplier_documents")
+      .select("*")
+      .eq("supplier_id", id)
+      .order("uploaded_at", { ascending: false });
+    if (error) {
+      console.error("[adminData] list documents failed", error.message);
+      return [];
+    }
+    return (data ?? []) as AdminDocumentRow[];
+  } catch (e) {
+    console.error("[adminData] list documents exception", e);
+    return [];
+  }
+}
+
+/** 插入文件记录（文件本体的上传由 lib/storage.ts 完成，此处只写元数据）。 */
+export async function insertAdminDocument(params: {
+  slug: string;
+  documentType: string;
+  documentName: string;
+  programCode?: string | null;
+  filePath: string;
+  mime: string;
+  sizeBytes: number;
+  sha256?: string | null;
+  expiryDate?: string | null;
+  visibility?: "admin" | "paid" | "public";
+  uploadedBy: string | null;
+  notes?: string | null;
+}): Promise<{ ok: true; id: string } | { ok: false; error: string }> {
+  const id = await supplierIdBySlug(params.slug);
+  if (!id) return { ok: false, error: "supplier_not_found" };
+  const db = createAdminClient();
+  if (!db) return { ok: false, error: "db_not_configured" };
+  try {
+    const { data, error } = await db
+      .from("supplier_documents")
+      .insert({
+        supplier_id: id,
+        document_type: params.documentType,
+        document_name: params.documentName,
+        program_code: params.programCode ?? null,
+        file_path: params.filePath,
+        mime: params.mime,
+        size_bytes: params.sizeBytes,
+        sha256: params.sha256 ?? null,
+        expiry_date: params.expiryDate ?? null,
+        visibility: params.visibility ?? "admin",
+        uploaded_by: params.uploadedBy,
+        notes: params.notes ?? null,
+      })
+      .select("id")
+      .single();
+    if (error || !data) {
+      console.error("[adminData] insert document failed", error?.message);
+      return { ok: false, error: "insert_failed" };
+    }
+    return { ok: true, id: (data as { id: string }).id };
+  } catch (e) {
+    console.error("[adminData] insert document exception", e);
+    return { ok: false, error: "exception" };
+  }
+}
+
+/** 删除文件记录。返回其 file_path 供调用方同步删除 Storage 对象。 */
+export async function deleteAdminDocument(
+  docId: string
+): Promise<{ ok: true; filePath: string } | { ok: false; error: string }> {
+  const db = createAdminClient();
+  if (!db) return { ok: false, error: "db_not_configured" };
+  try {
+    const { data, error } = await db
+      .from("supplier_documents")
+      .select("file_path")
+      .eq("id", docId)
+      .maybeSingle();
+    if (error || !data) return { ok: false, error: "not_found" };
+    const filePath = (data as { file_path: string }).file_path;
+
+    const del = await db.from("supplier_documents").delete().eq("id", docId);
+    if (del.error) {
+      console.error("[adminData] delete document failed", del.error.message);
+      return { ok: false, error: "delete_failed" };
+    }
+    return { ok: true, filePath };
+  } catch (e) {
+    console.error("[adminData] delete document exception", e);
+    return { ok: false, error: "exception" };
+  }
+}
+
+/** 更新文件的审核状态 / 可见性 / 备注（白名单）。 */
+export async function updateAdminDocument(
+  docId: string,
+  patch: Partial<{
+    verification_status: string;
+    extraction_status: string;
+    visibility: "admin" | "paid" | "public";
+    expiry_date: string | null;
+    document_name: string;
+    notes: string | null;
+  }>,
+  verifiedBy?: string | null
+): Promise<boolean> {
+  const db = createAdminClient();
+  if (!db) return false;
+  try {
+    const payload: Record<string, unknown> = { ...patch };
+    if (patch.verification_status === "VERIFIED") {
+      payload.verified_by = verifiedBy ?? null;
+      payload.verified_at = new Date().toISOString();
+    }
+    const { error } = await db
+      .from("supplier_documents")
+      .update(payload)
+      .eq("id", docId);
+    if (error) {
+      console.error("[adminData] update document failed", error.message);
+      return false;
+    }
+    return true;
+  } catch (e) {
+    console.error("[adminData] update document exception", e);
+    return false;
+  }
+}
+
+// ---------- 证书（supplier_certifications） ----------
+
+export type AdminCertificationRow = {
+  id: string;
+  supplier_id: string;
+  program_code: string;
+  certificate_no: string | null;
+  issuing_body: string | null;
+  issue_date: string | null;
+  expiry_date: string | null;
+  scope: string | null;
+  verification_status: string;
+  evidence_doc_id: string | null;
+  verified_by: string | null;
+  verified_at: string | null;
+  notes: string | null;
+  created_at: string;
+};
+
+export async function listAdminCertifications(
+  slug: string
+): Promise<AdminCertificationRow[]> {
+  const id = await supplierIdBySlug(slug);
+  if (!id) return [];
+  const db = createAdminClient();
+  if (!db) return [];
+  try {
+    const { data, error } = await db
+      .from("supplier_certifications")
+      .select("*")
+      .eq("supplier_id", id)
+      .order("expiry_date", { ascending: true, nullsFirst: false });
+    if (error) {
+      console.error("[adminData] list certifications failed", error.message);
+      return [];
+    }
+    return (data ?? []) as AdminCertificationRow[];
+  } catch (e) {
+    console.error("[adminData] list certifications exception", e);
+    return [];
+  }
+}
+
+/** 新建或更新证书。传 id 为更新，否则新建。 */
+export async function upsertAdminCertification(params: {
+  slug: string;
+  id?: string | null;
+  programCode: string;
+  certificateNo?: string | null;
+  issuingBody?: string | null;
+  issueDate?: string | null;
+  expiryDate?: string | null;
+  scope?: string | null;
+  verificationStatus?: string;
+  evidenceDocId?: string | null;
+  notes?: string | null;
+}): Promise<{ ok: true; id: string } | { ok: false; error: string }> {
+  const db = createAdminClient();
+  if (!db) return { ok: false, error: "db_not_configured" };
+  try {
+    if (params.id) {
+      const { error } = await db
+        .from("supplier_certifications")
+        .update({
+          program_code: params.programCode,
+          certificate_no: params.certificateNo ?? null,
+          issuing_body: params.issuingBody ?? null,
+          issue_date: params.issueDate ?? null,
+          expiry_date: params.expiryDate ?? null,
+          scope: params.scope ?? null,
+          verification_status: params.verificationStatus ?? "PENDING",
+          evidence_doc_id: params.evidenceDocId ?? null,
+          notes: params.notes ?? null,
+        })
+        .eq("id", params.id);
+      if (error) {
+        console.error("[adminData] update certification failed", error.message);
+        return { ok: false, error: "update_failed" };
+      }
+      return { ok: true, id: params.id };
+    }
+
+    const supplierId = await supplierIdBySlug(params.slug);
+    if (!supplierId) return { ok: false, error: "supplier_not_found" };
+    const { data, error } = await db
+      .from("supplier_certifications")
+      .insert({
+        supplier_id: supplierId,
+        program_code: params.programCode,
+        certificate_no: params.certificateNo ?? null,
+        issuing_body: params.issuingBody ?? null,
+        issue_date: params.issueDate ?? null,
+        expiry_date: params.expiryDate ?? null,
+        scope: params.scope ?? null,
+        verification_status: params.verificationStatus ?? "PENDING",
+        evidence_doc_id: params.evidenceDocId ?? null,
+        notes: params.notes ?? null,
+      })
+      .select("id")
+      .single();
+    if (error || !data) {
+      console.error("[adminData] insert certification failed", error?.message);
+      return { ok: false, error: "insert_failed" };
+    }
+    return { ok: true, id: (data as { id: string }).id };
+  } catch (e) {
+    console.error("[adminData] upsert certification exception", e);
+    return { ok: false, error: "exception" };
+  }
+}
+
+export async function deleteAdminCertification(certId: string): Promise<boolean> {
+  const db = createAdminClient();
+  if (!db) return false;
+  try {
+    const { error } = await db
+      .from("supplier_certifications")
+      .delete()
+      .eq("id", certId);
+    return !error;
+  } catch {
+    return false;
+  }
+}
+
+// ---------- 审核事件（supplier_audits） ----------
+
+export type AdminAuditRow = {
+  id: string;
+  supplier_id: string;
+  audit_type: string;
+  standard_code: string | null;
+  auditor_name: string | null;
+  auditor_org: string | null;
+  audit_date: string;
+  report_doc_id: string | null;
+  result: string | null;
+  findings_critical: number;
+  findings_major: number;
+  findings_minor: number;
+  cap_deadline: string | null;
+  verification_status: string;
+  verified_by: string | null;
+  verified_at: string | null;
+  notes: string | null;
+};
+
+export async function listAdminAudits(slug: string): Promise<AdminAuditRow[]> {
+  const id = await supplierIdBySlug(slug);
+  if (!id) return [];
+  const db = createAdminClient();
+  if (!db) return [];
+  try {
+    const { data, error } = await db
+      .from("supplier_audits")
+      .select("*")
+      .eq("supplier_id", id)
+      .order("audit_date", { ascending: false });
+    if (error) {
+      console.error("[adminData] list audits failed", error.message);
+      return [];
+    }
+    return (data ?? []) as AdminAuditRow[];
+  } catch (e) {
+    console.error("[adminData] list audits exception", e);
+    return [];
+  }
+}
+
+export async function upsertAdminAudit(params: {
+  slug: string;
+  id?: string | null;
+  auditType: string;
+  standardCode?: string | null;
+  auditorName?: string | null;
+  auditorOrg?: string | null;
+  auditDate: string;
+  reportDocId?: string | null;
+  result?: string | null;
+  findingsCritical?: number;
+  findingsMajor?: number;
+  findingsMinor?: number;
+  capDeadline?: string | null;
+  verificationStatus?: string;
+  notes?: string | null;
+}): Promise<{ ok: true; id: string } | { ok: false; error: string }> {
+  const db = createAdminClient();
+  if (!db) return { ok: false, error: "db_not_configured" };
+  const payload = {
+    audit_type: params.auditType,
+    standard_code: params.standardCode ?? null,
+    auditor_name: params.auditorName ?? null,
+    auditor_org: params.auditorOrg ?? null,
+    audit_date: params.auditDate,
+    report_doc_id: params.reportDocId ?? null,
+    result: params.result ?? null,
+    findings_critical: params.findingsCritical ?? 0,
+    findings_major: params.findingsMajor ?? 0,
+    findings_minor: params.findingsMinor ?? 0,
+    cap_deadline: params.capDeadline ?? null,
+    verification_status: params.verificationStatus ?? "PENDING",
+    notes: params.notes ?? null,
+  };
+  try {
+    if (params.id) {
+      const { error } = await db
+        .from("supplier_audits")
+        .update(payload)
+        .eq("id", params.id);
+      if (error) {
+        console.error("[adminData] update audit failed", error.message);
+        return { ok: false, error: "update_failed" };
+      }
+      return { ok: true, id: params.id };
+    }
+    const supplierId = await supplierIdBySlug(params.slug);
+    if (!supplierId) return { ok: false, error: "supplier_not_found" };
+    const { data, error } = await db
+      .from("supplier_audits")
+      .insert({ supplier_id: supplierId, ...payload })
+      .select("id")
+      .single();
+    if (error || !data) {
+      console.error("[adminData] insert audit failed", error?.message);
+      return { ok: false, error: "insert_failed" };
+    }
+    return { ok: true, id: (data as { id: string }).id };
+  } catch (e) {
+    console.error("[adminData] upsert audit exception", e);
+    return { ok: false, error: "exception" };
+  }
+}
+
+/** 设置审核/证书/文件的审核状态（三表通用），并记录验证人。 */
+export async function setReviewStatus(
+  table: "supplier_documents" | "supplier_certifications" | "supplier_audits",
+  id: string,
+  status: "PENDING" | "VERIFIED" | "REJECTED" | "EXPIRED",
+  ctx: AdminContext
+): Promise<boolean> {
+  const db = createAdminClient();
+  if (!db) return false;
+  try {
+    const payload: Record<string, unknown> = { verification_status: status };
+    if (status === "VERIFIED") {
+      payload.verified_by = ctx?.userId ?? null;
+      payload.verified_at = new Date().toISOString();
+    }
+    const { error } = await db.from(table).update(payload).eq("id", id);
+    if (error) {
+      console.error(`[adminData] setReviewStatus ${table} failed`, error.message);
+      return false;
+    }
+    return true;
+  } catch (e) {
+    console.error("[adminData] setReviewStatus exception", e);
+    return false;
+  }
+}
+
+// ---------- Pending Review / 到期提醒 ----------
+
+export type PendingReviewItem = {
+  kind: "document" | "certification" | "audit";
+  id: string;
+  supplierSlug: string;
+  supplierName: string;
+  label: string;
+  createdAt: string;
+};
+
+/**
+ * 待审核队列（spec §6）。聚合三张表的 PENDING 记录。
+ * 无 SUPABASE 配置或未建表时返回空数组（后台不崩）。
+ */
+export async function listPendingReview(limit = 100): Promise<PendingReviewItem[]> {
+  const db = createAdminClient();
+  if (!db) return [];
+  try {
+    const [docs, certs, audits] = await Promise.all([
+      db
+        .from("supplier_documents")
+        .select("id, document_name, uploaded_at, suppliers(slug, legal_name)")
+        .eq("verification_status", "PENDING")
+        .order("uploaded_at", { ascending: false })
+        .limit(limit),
+      db
+        .from("supplier_certifications")
+        .select("id, program_code, created_at, suppliers(slug, legal_name)")
+        .eq("verification_status", "PENDING")
+        .order("created_at", { ascending: false })
+        .limit(limit),
+      db
+        .from("supplier_audits")
+        .select("id, audit_type, audit_date, suppliers(slug, legal_name)")
+        .eq("verification_status", "PENDING")
+        .order("audit_date", { ascending: false })
+        .limit(limit),
+    ]);
+
+    type Joined = { slug: string; legal_name: string } | null;
+    const pick = (v: unknown): Joined => {
+      if (Array.isArray(v)) return (v[0] as Joined) ?? null;
+      return (v as Joined) ?? null;
+    };
+
+    const items: PendingReviewItem[] = [];
+    for (const r of (docs.data ?? []) as Record<string, unknown>[]) {
+      const s = pick(r.suppliers);
+      items.push({
+        kind: "document",
+        id: String(r.id),
+        supplierSlug: s?.slug ?? "",
+        supplierName: s?.legal_name ?? "",
+        label: String(r.document_name ?? ""),
+        createdAt: String(r.uploaded_at ?? ""),
+      });
+    }
+    for (const r of (certs.data ?? []) as Record<string, unknown>[]) {
+      const s = pick(r.suppliers);
+      items.push({
+        kind: "certification",
+        id: String(r.id),
+        supplierSlug: s?.slug ?? "",
+        supplierName: s?.legal_name ?? "",
+        label: String(r.program_code ?? ""),
+        createdAt: String(r.created_at ?? ""),
+      });
+    }
+    for (const r of (audits.data ?? []) as Record<string, unknown>[]) {
+      const s = pick(r.suppliers);
+      items.push({
+        kind: "audit",
+        id: String(r.id),
+        supplierSlug: s?.slug ?? "",
+        supplierName: s?.legal_name ?? "",
+        label: String(r.audit_type ?? ""),
+        createdAt: String(r.audit_date ?? ""),
+      });
+    }
+    return items;
+  } catch (e) {
+    console.error("[adminData] list pending review exception", e);
+    return [];
+  }
+}
+
+export type ExpiringCertification = {
+  id: string;
+  supplierSlug: string;
+  supplierName: string;
+  programCode: string;
+  expiryDate: string | null;
+  daysLeft: number | null;
+  verificationStatus: string;
+};
+
+/**
+ * 即将到期 / 已过期的证书（spec §11）。
+ * 只做后台展示，不发邮件（第一版范围）。
+ */
+export async function listExpiringCertifications(
+  withinDays = 60
+): Promise<ExpiringCertification[]> {
+  const db = createAdminClient();
+  if (!db) return [];
+  try {
+    const horizon = new Date(Date.now() + withinDays * 86400000)
+      .toISOString()
+      .slice(0, 10);
+    const { data, error } = await db
+      .from("supplier_certifications")
+      .select("id, program_code, expiry_date, verification_status, suppliers(slug, legal_name)")
+      .not("expiry_date", "is", null)
+      .lte("expiry_date", horizon)
+      .neq("verification_status", "REJECTED")
+      .order("expiry_date", { ascending: true })
+      .limit(200);
+    if (error) {
+      console.error("[adminData] list expiring failed", error.message);
+      return [];
+    }
+    const { daysUntilDate } = await import("./verification");
+    type Joined = { slug: string; legal_name: string } | null;
+    return ((data ?? []) as Record<string, unknown>[]).map((r) => {
+      const raw = r.suppliers;
+      const s: Joined = Array.isArray(raw)
+        ? ((raw[0] as Joined) ?? null)
+        : ((raw as Joined) ?? null);
+      const expiryDate = (r.expiry_date as string | null) ?? null;
+      return {
+        id: String(r.id),
+        supplierSlug: s?.slug ?? "",
+        supplierName: s?.legal_name ?? "",
+        programCode: String(r.program_code ?? ""),
+        expiryDate,
+        daysLeft: daysUntilDate(expiryDate),
+        verificationStatus: String(r.verification_status ?? ""),
+      };
+    });
+  } catch (e) {
+    console.error("[adminData] list expiring exception", e);
+    return [];
+  }
+}
+
+/** 供应商核验等级（spec §2）。白名单值。 */
+export async function setVerificationLevel(
+  slug: string,
+  level: "unverified" | "self_assessment" | "platform_assessment" | "on_site_audit" | "third_party_audit"
+): Promise<boolean> {
+  const db = createAdminClient();
+  if (!db) return false;
+  try {
+    const { error } = await db
+      .from("suppliers")
+      .update({ verification_level: level })
+      .eq("slug", slug);
+    if (error) {
+      console.error("[adminData] set verification level failed", error.message);
+      return false;
+    }
+    return true;
+  } catch (e) {
+    console.error("[adminData] set verification level exception", e);
+    return false;
+  }
+}
+
+/** 设置供应商核验等级（含审计日志）。 */
+export async function setAdminVerificationLevel(
+  slug: string,
+  level: "unverified" | "self_assessment" | "platform_assessment" | "on_site_audit" | "third_party_audit",
+  ctx: AdminContext
+): Promise<boolean> {
+  const ok = await setVerificationLevel(slug, level);
+  if (ok) {
+    await logAdminAction(ctx, "supplier.set_verification_level", "supplier", slug, {
+      verification_level: level,
+    });
+  }
+  return ok;
 }

@@ -4,6 +4,12 @@ import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
 import { getSupplierDetail, listSupplierSlugs, lastCheckedOf } from "@/lib/queries";
 import {
+  getSupplierPublicCertifications,
+  getSupplierPublicAudits,
+} from "@/lib/queries";
+import { CertificationList } from "@/components/CertificationList";
+import { AuditHistoryPanel } from "@/components/AuditHistoryPanel";
+import {
   levelFromStatus,
   LEVEL_SCOPE,
   evidenceLabel,
@@ -79,6 +85,14 @@ export default async function SupplierProfilePage({
   const s = await getSupplierDetail(slug, contentLocale);
   if (!s) notFound();
 
+  // 公开认证 / 审核记录（spec §5/§12）。queries 层只返回 VERIFIED 且供应商已发布的记录，
+  // 表未建或未配置数据库时返回 [] —— 前台不崩，只是不渲染内容。
+  const [verifiedCerts, verifiedAudits] = await Promise.all([
+    getSupplierPublicCertifications(slug),
+    getSupplierPublicAudits(slug),
+  ]);
+
+  const ec = t.evidenceCenter;
   const uiLocale = contentLocale;
   const level = levelFromStatus(s.verificationStatus);
   const scope = LEVEL_SCOPE[level];
@@ -121,6 +135,27 @@ export default async function SupplierProfilePage({
         },
         description: `${s.businessType}. Main products: ${s.mainProducts.join(", ")}.`,
         url: profileUrl,
+        // 只在确有「已验证」证书时才输出 hasCredential（spec §15）。
+        // 没有证书就整段不出现 —— 绝不用空数组或占位符伪装成"有认证"。
+        ...(verifiedCerts.length > 0
+          ? {
+              hasCredential: verifiedCerts.map((c) => ({
+                "@type": "EducationalOccupationalCredential",
+                name: c.programCode,
+                credentialCategory: "certification",
+                ...(c.certificateNo ? { identifier: c.certificateNo } : {}),
+                ...(c.issuingBody
+                  ? {
+                      recognizedBy: {
+                        "@type": "Organization",
+                        name: c.issuingBody,
+                      },
+                    }
+                  : {}),
+                ...(c.expiryDate ? { validUntil: c.expiryDate } : {}),
+              })),
+            }
+          : {}),
       },
       {
         "@type": "BreadcrumbList",
@@ -370,6 +405,12 @@ export default async function SupplierProfilePage({
           <p className="text-xs text-[#64748b] mt-1">{sp.neverClaimed}</p>
         </div>
       </section>
+
+      {/* 认证（公开层，仅已验证记录，只展示元数据、不提供原始文件） */}
+      <CertificationList items={verifiedCerts} dict={ec} />
+
+      {/* 审核记录（公开层，仅已验证记录） */}
+      <AuditHistoryPanel items={verifiedAudits} dict={ec} />
 
       {/* 付费层锁区：证据明细 / 认证明细 / 验货历史 */}
       <section className="mt-8 grid md:grid-cols-2 gap-6">

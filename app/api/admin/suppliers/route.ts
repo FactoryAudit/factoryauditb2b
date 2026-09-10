@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server";
-import { requireAdmin, updateAdminSupplier, getAdminSupplier } from "@/lib/adminData";
+import {
+  requireAdmin,
+  updateAdminSupplier,
+  getAdminSupplier,
+  logAdminAction,
+} from "@/lib/adminData";
 import { checkRateLimit, clientIp, clamp } from "@/lib/rateLimit";
 
 // PATCH /api/admin/suppliers —— 更新供应商（白名单字段）
@@ -15,6 +20,14 @@ export const dynamic = "force-dynamic";
 const NO_STORE = { "Cache-Control": "no-store" } as const;
 
 const TIERS = new Set(["public", "free", "paid"]);
+
+const VERIFICATION_LEVELS = new Set([
+  "unverified",
+  "self_assessment",
+  "platform_assessment",
+  "on_site_audit",
+  "third_party_audit",
+]);
 
 function toInt(v: unknown): number | null {
   if (v === null || v === "" || v === undefined) return null;
@@ -106,7 +119,25 @@ export async function PATCH(req: Request) {
     patch.is_published = body.is_published;
   }
 
+  // 平台核验等级（spec §2）。白名单五档，防止写入任意字符串触发 CHECK 报错。
+  if (
+    typeof body.verification_level === "string" &&
+    VERIFICATION_LEVELS.has(body.verification_level)
+  ) {
+    patch.verification_level =
+      body.verification_level as Parameters<typeof updateAdminSupplier>[1]["verification_level"];
+  }
+
   const ok = await updateAdminSupplier(slugRaw, patch);
+  if (ok && patch.verification_level) {
+    await logAdminAction(
+      admin,
+      "supplier.set_verification_level",
+      "supplier",
+      slugRaw,
+      { verification_level: patch.verification_level }
+    );
+  }
   return NextResponse.json(
     { ok },
     { status: ok ? 200 : 500, headers: NO_STORE }

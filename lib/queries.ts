@@ -125,7 +125,15 @@ type SupplierRow = {
   access_tier: string;
   is_published: boolean;
   /** join 出来的证据（可缺省） */
-  supplier_evidence?: { status: string; date: string | null; visibility: string }[];
+  supplier_evidence?: {
+    id: string;
+    type: string | null;
+    status: string;
+    source: string | null;
+    date: string | null;
+    note: string | null;
+    visibility: string;
+  }[];
 };
 
 const ROW_SELECT = `
@@ -133,7 +141,7 @@ const ROW_SELECT = `
   established, employees, main_products, export_markets, verification_status,
   risk_score, certifications, audit_status, inspection_history,
   risk_breakdown, access_tier, is_published,
-  supplier_evidence ( status, date, visibility )
+  supplier_evidence ( id, type, status, source, date, note, visibility )
 `;
 
 /**
@@ -284,12 +292,12 @@ export async function getSupplierDetail(
           // 证据按 visibility 裁剪后，再按档位决定是否带出核验状态
           const visibleEvidence = redactEvidence(
             (row.supplier_evidence ?? []).map((e, i) => ({
-              id: `${slug}-ev-${i}`,
-              type: "",
+              id: e.id ?? `${slug}-ev-${i}`,
+              type: e.type ?? "",
               status: e.status,
-              source: "",
+              source: e.source ?? "",
               date: e.date,
-              note: null as string | null,
+              note: e.note ?? null,
               visibility: e.visibility,
             })),
             tier
@@ -419,4 +427,136 @@ export async function listSuppliersByAuditType(
         s.capabilities.some((c) => c.refType === "AUDIT_TYPE" && c.refCode === refCode)
     )
   );
+}
+
+// ---------- 公开认证 / 审核记录（004_documents.sql 新增表） ----------
+//
+// 三条硬约束（spec §18 + §20）：
+//   1. 只返回 verification_status='VERIFIED' 的记录 —— 草稿 / 待审 / 已驳回一律不出前台。
+//   2. 绝不返回 file_path / verified_by / notes 等内部字段；公开侧只有元数据，没有文件。
+//   3. 未配置数据库、或 004 迁移尚未执行时返回 []，前台不崩、只是没有内容。
+//
+// 这里用 service_role 读（createAdminClient），因此**过滤必须在代码里显式做**，
+// 不能依赖 RLS。RLS 是第二道防线，不是唯一防线。
+
+export type PublicCertification = {
+  id: string;
+  programCode: string;
+  certificateNo: string | null;
+  issuingBody: string | null;
+  issueDate: string | null;
+  expiryDate: string | null;
+  scope: string | null;
+};
+
+export type PublicAudit = {
+  id: string;
+  auditType: string;
+  standardCode: string | null;
+  auditDate: string;
+  auditorName: string | null;
+  auditorOrg: string | null;
+  result: string | null;
+};
+
+/** 未建表 / 无权限时的 PostgREST 错误码，静默处理，避免刷构建日志。 */
+function isMissingTable(code?: string): boolean {
+  return code === "PGRST205" || code === "42P01";
+}
+
+/** slug → 已发布供应商的 id。找不到返回 null。 */
+async function publishedSupplierId(slug: string): Promise<string | null> {
+  const { createAdminClient } = await import("./supabaseAdmin");
+  const db = createAdminClient();
+  if (!db) return null;
+  const { data, error } = await db
+    .from("suppliers")
+    .select("id")
+    .eq("slug", slug)
+    .eq("is_published", true)
+    .maybeSingle();
+  if (error || !data) return null;
+  return (data as { id: string }).id;
+}
+
+export async function getSupplierPublicCertifications(
+  slug: string
+): Promise<PublicCertification[]> {
+  if (!useSupabase()) return [];
+  try {
+    const supplierId = await publishedSupplierId(slug);
+    if (!supplierId) return [];
+    const { createAdminClient } = await import("./supabaseAdmin");
+    const db = createAdminClient();
+    if (!db) return [];
+    const { data, error } = await db
+      .from("supplier_certifications")
+      .select(
+        "id, program_code, certificate_no, issuing_body, issue_date, expiry_date, scope, verification_status"
+      )
+      .eq("supplier_id", supplierId)
+      .eq("verification_status", "VERIFIED")
+      .order("expiry_date", { ascending: false, nullsFirst: false });
+    if (error) {
+      if (!isMissingTable(error.code)) {
+        console.error("[queries] public certifications failed", error.code, error.message);
+      }
+      return [];
+    }
+    return (data ?? []).map((r) => {
+      const x = r as Record<string, unknown>;
+      return {
+        id: String(x.id),
+        programCode: String(x.program_code ?? ""),
+        certificateNo: (x.certificate_no as string | null) ?? null,
+        issuingBody: (x.issuing_body as string | null) ?? null,
+        issueDate: (x.issue_date as string | null) ?? null,
+        expiryDate: (x.expiry_date as string | null) ?? null,
+        scope: (x.scope as string | null) ?? null,
+      };
+    });
+  } catch (e) {
+    console.error("[queries] public certifications exception", e);
+    return [];
+  }
+}
+
+export async function getSupplierPublicAudits(slug: string): Promise<PublicAudit[]> {
+  if (!useSupabase()) return [];
+  try {
+    const supplierId = await publishedSupplierId(slug);
+    if (!supplierId) return [];
+    const { createAdminClient } = await import("./supabaseAdmin");
+    const db = createAdminClient();
+    if (!db) return [];
+    const { data, error } = await db
+      .from("supplier_audits")
+      .select(
+        "id, audit_type, standard_code, audit_date, auditor_name, auditor_org, result, verification_status"
+      )
+      .eq("supplier_id", supplierId)
+      .eq("verification_status", "VERIFIED")
+      .order("audit_date", { ascending: false });
+    if (error) {
+      if (!isMissingTable(error.code)) {
+        console.error("[queries] public audits failed", error.code, error.message);
+      }
+      return [];
+    }
+    return (data ?? []).map((r) => {
+      const x = r as Record<string, unknown>;
+      return {
+        id: String(x.id),
+        auditType: String(x.audit_type ?? ""),
+        standardCode: (x.standard_code as string | null) ?? null,
+        auditDate: String(x.audit_date ?? ""),
+        auditorName: (x.auditor_name as string | null) ?? null,
+        auditorOrg: (x.auditor_org as string | null) ?? null,
+        result: (x.result as string | null) ?? null,
+      };
+    });
+  } catch (e) {
+    console.error("[queries] public audits exception", e);
+    return [];
+  }
 }

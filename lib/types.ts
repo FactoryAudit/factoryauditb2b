@@ -115,3 +115,80 @@ export const CATEGORY_LABEL: Record<string, string> = Object.fromEntries(
 
 // 能力标签 refType
 export type CapabilityRefType = "TAXONOMY" | "AUDIT_TYPE" | "STANDARD";
+
+// =============================================================================
+// 验证与证据中心（Verification & Evidence Center）
+//
+// 铁律：
+//   1. Verification（平台核验行为）与 Certification（第三方证书）是两条独立轴。
+//      ISO 9001 是 Certification；BSCI/SMETA 是社会合规报告；
+//      FactoryAuditB2B 现场审核是 Verification。数据不混用。
+//   2. 「Document Verified」只代表平台审核过该文件，不代表证书真实性背书。
+//   3. 状态枚举复用 EvidenceStatus（已含 PENDING/VERIFIED/REJECTED/EXPIRED），
+//      不再新增第四套状态枚举。
+// =============================================================================
+
+/** 平台核验等级（spec §2 五档），与 suppliers.verification_level 同源 */
+export type VerificationLevelKey =
+  | "unverified"
+  | "self_assessment"
+  | "platform_assessment"
+  | "on_site_audit"
+  | "third_party_audit";
+
+export const VERIFICATION_LEVEL_KEYS: readonly VerificationLevelKey[] = [
+  "unverified",
+  "self_assessment",
+  "platform_assessment",
+  "on_site_audit",
+  "third_party_audit",
+] as const;
+
+/** 文件类型（与 supplier_documents.document_type 的 CHECK 一致） */
+export type DocumentType =
+  | "business_license"
+  | "factory_license"
+  | "iso_certificate"
+  | "social_audit_report"
+  | "quality_audit_report"
+  | "product_test_report"
+  | "other";
+
+export const DOCUMENT_TYPES: readonly DocumentType[] = [
+  "business_license",
+  "factory_license",
+  "iso_certificate",
+  "social_audit_report",
+  "quality_audit_report",
+  "product_test_report",
+  "other",
+] as const;
+
+/** AI 抽取流水线状态（spec §22），与 supplier_documents.extraction_status 同源 */
+export type DocumentExtractionStatus =
+  | "NONE"
+  | "PROCESSING"
+  | "PENDING_REVIEW"
+  | "REVIEWED"
+  | "FAILED";
+
+export const DOCUMENT_EXTRACTION_STATUSES: readonly DocumentExtractionStatus[] = [
+  "NONE",
+  "PROCESSING",
+  "PENDING_REVIEW",
+  "REVIEWED",
+  "FAILED",
+] as const;
+
+/** 审核事件类型（与 supplier_audits.audit_type 一致，取值同 verification_level） */
+export type AuditType = Exclude<VerificationLevelKey, "unverified">;
+
+export const AUDIT_TYPES: readonly AuditType[] = [
+  "self_assessment",
+  "platform_assessment",
+  "on_site_audit",
+  "third_party_audit",
+] as const;
+
+/** 审核结论 */
+export type AuditResult = "pass" | "pass_with_findings" | "fail" | "pending";
