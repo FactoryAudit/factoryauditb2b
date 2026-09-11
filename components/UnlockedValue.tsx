@@ -17,6 +17,7 @@
 
 import { useEffect, useState, type CSSProperties } from "react";
 import { useAuth } from "./AuthProvider";
+import { useGuestAccess } from "./GuestAccessProvider";
 
 type Unlocked = {
   fields: Record<string, string>;
@@ -85,16 +86,21 @@ async function loadUnlocked(
  */
 export function useUnlocked(slug: string, locale: string) {
   const { me, loading: authLoading } = useAuth();
+  // CS-05b：游客在「5 家不同 supplier」额度内也能取 basic 字段；
+  // 额度用完（blocked）或还没判定（pending）时**不发起请求** ——
+  // 拿不到数据就不会渲染出来，避免出现"锁着却把值塞进 DOM"的撕裂状态。
+  const guest = useGuestAccess();
   const [data, setData] = useState<Unlocked | null>(null);
   const [loading, setLoading] = useState(true);
 
   const authed = me.authenticated;
   const tier = me.tier;
+  const canFetch = authed || guest.status === "allowed";
 
   useEffect(() => {
     // 等 /api/me 回来再决定，避免游客也发一次注定为空的请求
     if (authLoading) return;
-    if (!authed) {
+    if (!canFetch) {
       setData(null);
       setLoading(false);
       return;
@@ -111,9 +117,12 @@ export function useUnlocked(slug: string, locale: string) {
     return () => {
       alive = false;
     };
-  }, [slug, locale, tier, authed, authLoading]);
+  }, [slug, locale, tier, canFetch, authLoading]);
 
-  return { data, loading: loading || authLoading };
+  return {
+    data,
+    loading: loading || authLoading || (!authed && guest.status === "pending"),
+  };
 }
 
 /**

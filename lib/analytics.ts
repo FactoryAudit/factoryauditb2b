@@ -39,7 +39,8 @@ export const ANALYTICS_EVENTS = {
   /** /services Sourcing 卡片点击（sourcing 的落地页是 /rfq） */
   sourcingCtaClick: "sourcing_cta_click",
 
-  // ---- 游客限额 / 免费注册（Guest Limit，CS-05 实现 UI 后接线）----
+  // ---- 游客限额 / 免费注册（Guest Limit）----
+  /** CS-05b 已接线：Guest 看完 5 家不同 supplier 后，第 6 家被注册门拦下时发出 */
   guestLimitReached: "guest_limit_reached",
   freeAccountSignupStart: "free_account_signup_start",
   freeAccountSignupComplete: "free_account_signup_complete",
@@ -86,7 +87,14 @@ export const ANALYTICS_EVENTS = {
   membershipCta: "membership_cta",
   /** 会员软锁 UnlockGate 里的「注册 / 升级」CTA 点击（V2.1） */
   unlockGateCta: "unlock_gate_cta",
-  /** 免费额度用尽（V2.1）：本月已看满 FREE_PROFILE_LIMIT 家 */
+  /**
+   * 免费额度用尽（V2.1 旧口径：本月已看满 FREE_PROFILE_LIMIT 家）。
+   *
+   * ⚠️ CS-05a 起该额度已废止（Free Buyer = basic 无限浏览），本事件**永不接线**，
+   *    留在 UNWIRED_EVENTS 里是刻意的 —— 防止有人把它当"新事件"重新接上，
+   *    那会让 GA4 里出现一个口径错误的转化信号。
+   *    任何 Free Buyer 的正常浏览都不得触发它。
+   */
   quotaReached: "free_quota_reached",
 
   // ---- 商业转化（Commercial Conversion）----
@@ -173,13 +181,20 @@ export const CLICK_LEVEL_EVENTS = [
  *                            现阶段核查 CTA 只发 verification_cta_click
  *   - sourcing_request      ：sourcing 落地页是 /rfq，真实提交事件是 rfq_submit；
  *                            本事件与之重复，等独立 sourcing 表单上线再启用
- *   - guest_limit_reached / free_account_signup_* ：等 Guest Limit UI 接线（CS-05）
- *   - profile_save / free_quota_reached ：功能未接线
+ *   - free_account_signup_* ：等 Free Account 专属注册漏斗上线
+ *   - profile_save          ：功能未接线
+ *   - free_quota_reached    ：旧的「Free 每月 5 家」额度事件。该额度已由 CS-05a 废止
+ *                            （Free Buyer 改为 basic 无限浏览），**永不接线**；
+ *                            保留常量只为避免误把它当新事件重建。
+ *                            游客侧的等价信号是 guest_limit_reached（CS-05b 已接线）。
+ *
+ * ✅ 已于 CS-05b 移出本清单：guest_limit_reached —— 现由
+ *    lib/guestAccess.ts 的 emitGuestLimitReachedOnce 在 Guest 第 6 家注册门发出
+ *    （同一 supplier 只发一次，刷新/重渲不重复）。
  */
 export const UNWIRED_EVENTS = [
   ANALYTICS_EVENTS.verificationRequest,
   ANALYTICS_EVENTS.sourcingRequest,
-  ANALYTICS_EVENTS.guestLimitReached,
   ANALYTICS_EVENTS.freeAccountSignupStart,
   ANALYTICS_EVENTS.freeAccountSignupComplete,
   ANALYTICS_EVENTS.profileSave,

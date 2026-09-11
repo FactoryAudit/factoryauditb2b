@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { trackEvent } from "@/lib/analytics";
 import { ANALYTICS_EVENTS } from "@/lib/suppliers";
 import { isSignupEnabled } from "@/lib/access";
@@ -36,6 +37,15 @@ export type RegisterFormDict = {
 
 type Props = {
   t: RegisterFormDict;
+  /**
+   * CS-05b：注册成功后要回到的站内路径（已由服务端 sanitizeReturnPath 过滤）。
+   *
+   * 典型值 `/en/suppliers/{第 6 家 slug}` —— 用户是被 Guest 额度拦在这里的，
+   * 注册完必须回到这一家，否则等于把最强的注册意图信号浪费掉。
+   * 只在**真实建号成功**时跳转：旧路径（只发邮件线索、不建号）跳回去仍会被拦住，
+   * 那才是真正的糟糕体验。
+   */
+  nextHref?: string;
 };
 
 /** 密码最短 8 位，与 app/api/auth/signup 的 MIN_PASSWORD_LENGTH 保持一致 */
@@ -48,12 +58,13 @@ const MIN_PASSWORD_LENGTH = 8;
  */
 const SIGNUP_ENABLED = isSignupEnabled();
 
-export default function RegisterForm({ t }: Props) {
+export default function RegisterForm({ t, nextHref }: Props) {
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
   const [errMsg, setErrMsg] = useState<string | null>(null);
   /** 区分本次提交走的是哪条路径，决定成功文案 */
   const [instant, setInstant] = useState(false);
   const { refresh } = useAuth();
+  const router = useRouter();
   // signup_start 只发一次：用户首次与表单交互即视为产生注册意图
   const startedRef = useRef(false);
   const handleFirstTouch = () => {
@@ -104,6 +115,8 @@ export default function RegisterForm({ t }: Props) {
           setInstant(true);
           setStatus("ok");
           formEl.reset();
+          // CS-05b：注册成功后优先回到来源页（被 Guest 额度拦下的那家供应商），不是首页
+          if (nextHref) router.replace(nextHref);
           return;
         }
         setStatus("error");

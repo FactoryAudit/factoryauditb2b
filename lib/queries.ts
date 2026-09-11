@@ -21,6 +21,12 @@ import { redactSupplier, redactEvidence, canAccess, type MembershipTier } from "
 
 // 与页面当前消费的供应商形状保持一致（mainProducts/exportMarkets/certifications 为数组）
 export type SupplierView = {
+  /**
+   * CS-05b：供应商的稳定身份（supplier ID）。
+   * DB 路径 = suppliers.id（uuid）；静态兜底 = lib/staticData.ts 的 StaticSupplier.id。
+   * Guest 的「5 家不同 supplier」按它去重 —— 不按 slug / URL / 标签页 / 刷新。
+   */
+  id: string;
   slug: string;
   legalName: string;
   country: string;
@@ -83,6 +89,7 @@ export function lastCheckedOf(
 
 function toView(s: (typeof STATIC_SUPPLIERS)[number]): SupplierView {
   return {
+    id: s.id,
     slug: s.slug,
     legalName: s.legalName,
     country: s.countryCode,
@@ -168,6 +175,7 @@ function rowToView(row: SupplierRow): SupplierView {
   );
   const riskScore = row.risk_score ?? 0;
   return {
+    id: row.id,
     slug: row.slug,
     legalName: row.legal_name,
     country: row.country_code,
@@ -231,6 +239,7 @@ function redactViews(rows: SupplierRow[], tier: MembershipTier): SupplierView[] 
     //    它们分属 free / paid 层，裁剪结果里没有这些 key 时铺底值就会保留下来，
     //    等于 visitor 白拿付费内容。裁剪结果覆盖铺底，非 public 字段一律不铺。
     return {
+      id: view.id,
       slug: view.slug,
       legalName: view.legalName,
       country: view.country,
@@ -349,6 +358,7 @@ export async function getSupplierDetail(
   ) as Partial<SupplierView>;
   return {
     // public 字段铺底，非 public 字段完全由裁剪结果决定（顺序不能反）
+    id: view.id,
     slug: view.slug,
     legalName: view.legalName,
     country: view.country,

@@ -27,8 +27,18 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL(rest === "" ? "/" : rest, req.url), 301);
   }
 
+  // ⚠️ 必须显式拼上 search —— `new URL(target, req.url)` 只继承 origin，
+  //    base 上的 query string **不会**被带过去。
+  //   后果：浏览器地址栏明明是 /register?next=/suppliers/xxx，
+  //   服务端渲染拿到的 searchParams 却是空的（已实测确认）。
+  //   这正是已知 Bug A 的根因（英文主站筛选 100% 失效）。
+  //
+  // CS-05b：注册回流 ?next= 依赖 query，故这里先解开 Bug A 的 **query 保留**这一最小子集；
+  //         Bug A 的剩余部分（下方 /en/* → /* 的 301 同样丢 query）仍归 CS-06 处理，
+  //         本 Change Set 不扩大改动面。
   const target =
-    pathname === "/" ? `/${DEFAULT_LOCALE}` : `/${DEFAULT_LOCALE}${pathname}`;
+    (pathname === "/" ? `/${DEFAULT_LOCALE}` : `/${DEFAULT_LOCALE}${pathname}`) +
+    req.nextUrl.search;
   return NextResponse.rewrite(new URL(target, req.url), {
     request: { headers: requestHeaders },
   });

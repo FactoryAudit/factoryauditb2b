@@ -24,6 +24,8 @@ import { ANALYTICS_EVENTS } from "@/lib/suppliers";
 import { UnlockGate } from "@/components/UnlockGate";
 // 解锁字段按需取：真值不随页面下发，避免进 RSC flight payload（游客看源码就能读到）
 import { UnlockedValue, UnlockedEvidenceStatus } from "@/components/UnlockedValue";
+// CS-05b：Guest 的「5 家不同 supplier」额度判定（客户端 localStorage 记账）
+import { GuestAccessProvider } from "@/components/GuestAccessProvider";
 // 额度用尽时的升级引导（固定底栏）。整页只渲染一次，且必须是客户端组件 ——
 // 它依赖 /api/me 的档位，而页面本身要保持 ● SSG（不能在页面里读 cookies）。
 import QuotaBanner from "@/components/QuotaBanner";
@@ -84,6 +86,12 @@ export default async function SupplierProfilePage({
   const rp = t.reportPreview;
   const qb = t.quotaBanner;
   const p = (href: string) => localePath(locale, href);
+
+  // CS-05b：注册 CTA 一律带 ?next= 回到**当前**供应商页。
+  // 第 6 家被 Guest 额度拦下时尤其关键 —— 用户注册完必须回到他原本想看的那家，
+  // 被丢回首页等于把最强的注册意图信号浪费掉。
+  const supplierPath = p(`${DIRECTORY_PATH}/${slug}`);
+  const registerHref = `${p("/register")}?next=${encodeURIComponent(supplierPath)}`;
 
   // 内容层只有 en/zh 两版：zh-TW 走 zh 文案并在各自函数内繁化，其余语言一律 en。
   const contentLocale = locale === "zh-TW" ? "zh-TW" : locale === "zh" ? "zh" : "en";
@@ -198,417 +206,425 @@ export default async function SupplierProfilePage({
   };
 
   return (
-    <main className="container py-10" data-track-page={ANALYTICS_EVENTS.profileView}>
-      <JsonLd data={jsonLd} />
+    // CS-05b：整页共享同一次 Guest 额度判定（避免"字段 A 解锁、字段 B 锁着"的撕裂）。
+    // key={s.id} —— 客户端在两家供应商之间跳转时强制重新判定，不沿用上一家的结果。
+    <GuestAccessProvider key={s.id} supplierId={s.id}>
+      <main className="container py-10" data-track-page={ANALYTICS_EVENTS.profileView}>
+        <JsonLd data={jsonLd} />
 
-      {/* 免费额度用尽时的升级引导。
-          放在这里而不是页面顶部横幅：固定底栏不占文档流，零布局抖动（CLS）。
-          未登录 / 付费会员 / 额度没用完时组件自己返回 null，不渲染任何东西。 */}
-      <QuotaBanner
-        slug={s.slug}
-        locale={locale}
-        contentLocale={uiLocale}
-        labels={{
-          cta: qb.cta,
-          fallback: qb.fallback,
-          dismissLabel: qb.dismissLabel,
-        }}
-      />
+        {/* 升级引导底栏。
+            放在这里而不是页面顶部横幅：固定底栏不占文档流，零布局抖动（CLS）。
+            ⚠️ CS-05a 起 quotaExceeded 恒为 false（Free Buyer 已 unlimited），
+               因此本组件当前恒返回 null。CS-05b 的 Guest 第 6 家注册门**不复用**它 ——
+               它的文案是旧的「本月免费额度已用完」，给游客看属于无据声称。
+               注册门由下方 UnlockGate 的 freeLock* 文案承担。
+               是否删除本组件由 CS-05c 决定（本 CS 不改它，避免扩大改动面）。 */}
+        <QuotaBanner
+          slug={s.slug}
+          locale={locale}
+          contentLocale={uiLocale}
+          labels={{
+            cta: qb.cta,
+            fallback: qb.fallback,
+            dismissLabel: qb.dismissLabel,
+          }}
+        />
 
-      {/* 面包屑（可见 + JSON-LD 一致） */}
-      <nav aria-label={t.supplierProfile.directoryBreadcrumb} className="text-sm text-[#64748b]">
-        <Link href={p("/")} className="hover:text-[#0f4c81]">
-          {t.countryHub.breadcrumbHome}
-        </Link>
-        <span className="mx-2">/</span>
-        <Link href={p(DIRECTORY_PATH)} className="hover:text-[#0f4c81]">
-          {sp.directoryBreadcrumb}
-        </Link>
-        <span className="mx-2">/</span>
-        <span className="text-[#0f172a]">{s.legalName}</span>
-      </nav>
+        {/* 面包屑（可见 + JSON-LD 一致） */}
+        <nav aria-label={t.supplierProfile.directoryBreadcrumb} className="text-sm text-[#64748b]">
+          <Link href={p("/")} className="hover:text-[#0f4c81]">
+            {t.countryHub.breadcrumbHome}
+          </Link>
+          <span className="mx-2">/</span>
+          <Link href={p(DIRECTORY_PATH)} className="hover:text-[#0f4c81]">
+            {sp.directoryBreadcrumb}
+          </Link>
+          <span className="mx-2">/</span>
+          <span className="text-[#0f172a]">{s.legalName}</span>
+        </nav>
 
-      {/* 公开摘要：核心价值直出，会员墙不放在顶部 */}
-      <section className="mt-6 grid md:grid-cols-3 gap-6">
-        <div className="md:col-span-2">
-          <h1 className="text-3xl font-bold text-[#0f172a]">{s.legalName}</h1>
-          <p className="text-[#64748b] mt-1">
-            {s.city}, {s.countryName ?? s.country.toUpperCase()} ·{" "}
-            {s.businessType === "Manufacturer" ? sp.manufacturer : sp.tradingCompany}
-          </p>
-          <p className="mt-3 text-sm text-[#475569]">{s.mainProducts.join(" · ")}</p>
+        {/* 公开摘要：核心价值直出，会员墙不放在顶部 */}
+        <section className="mt-6 grid md:grid-cols-3 gap-6">
+          <div className="md:col-span-2">
+            <h1 className="text-3xl font-bold text-[#0f172a]">{s.legalName}</h1>
+            <p className="text-[#64748b] mt-1">
+              {s.city}, {s.countryName ?? s.country.toUpperCase()} ·{" "}
+              {s.businessType === "Manufacturer" ? sp.manufacturer : sp.tradingCompany}
+            </p>
+            <p className="mt-3 text-sm text-[#475569]">{s.mainProducts.join(" · ")}</p>
 
-          <div className="mt-4 flex flex-wrap gap-2">
-            {s.capabilities.map((c) => (
-              <span
-                key={c.refType + c.refCode}
-                title={`${c.refType} · ${c.source}`}
-                className={`rounded-full px-3 py-1 text-sm border ${
-                  c.verified
-                    ? "border-[#0f4c81] text-[#0f4c81] bg-[#e6eef6]"
-                    : "border-[#cbd5e1] text-[#475569]"
-                }`}
-              >
-                {c.verified ? "✓ " : "○ "}
-                {c.label} · {c.verified ? ev.reviewed : sp.selfReported}
-              </span>
-            ))}
+            <div className="mt-4 flex flex-wrap gap-2">
+              {s.capabilities.map((c) => (
+                <span
+                  key={c.refType + c.refCode}
+                  title={`${c.refType} · ${c.source}`}
+                  className={`rounded-full px-3 py-1 text-sm border ${
+                    c.verified
+                      ? "border-[#0f4c81] text-[#0f4c81] bg-[#e6eef6]"
+                      : "border-[#cbd5e1] text-[#475569]"
+                  }`}
+                >
+                  {c.verified ? "✓ " : "○ "}
+                  {c.label} · {c.verified ? ev.reviewed : sp.selfReported}
+                </span>
+              ))}
+            </div>
+
+            <p className="mt-3 text-sm text-[#8a5410] bg-[#fff4e0] rounded-md px-3 py-2">
+              {sp.featuredNote}
+            </p>
           </div>
 
-          <p className="mt-3 text-sm text-[#8a5410] bg-[#fff4e0] rounded-md px-3 py-2">
-            {sp.featuredNote}
-          </p>
-        </div>
+          {/* 信任摘要卡（公开） */}
+          <div className="card p-5">
+            <div className="text-xs uppercase tracking-wide text-[#64748b]">
+              {sp.verificationLevel}
+            </div>
+            <div className="text-2xl font-extrabold text-[#0f4c81] mt-1">
+              {v.levelLabel} {level}
+            </div>
+            <div className="font-medium text-[#0f172a]">{v.levelsShort[level]}</div>
 
-        {/* 信任摘要卡（公开） */}
-        <div className="card p-5">
-          <div className="text-xs uppercase tracking-wide text-[#64748b]">
-            {sp.verificationLevel}
-          </div>
-          <div className="text-2xl font-extrabold text-[#0f4c81] mt-1">
-            {v.levelLabel} {level}
-          </div>
-          <div className="font-medium text-[#0f172a]">{v.levelsShort[level]}</div>
+            <div className="mt-4 text-xs uppercase tracking-wide text-[#64748b]">
+              {sp.riskScore}
+            </div>
+            {typeof s.riskScore === "number" ? (
+              <>
+                <div className="text-2xl font-extrabold" style={{ color: LEVEL_COLOR[riskBand] }}>
+                  {s.riskScore} / 100
+                </div>
+                <div className="text-sm font-medium" style={{ color: LEVEL_COLOR[riskBand] }}>
+                  {t.risk.ui.level[riskBand]}
+                </div>
+                <div className="mt-2 h-2 overflow-hidden rounded-full bg-[#e2e8f0]">
+                  <div
+                    className="h-full rounded-full"
+                    style={{ width: `${s.riskScore}%`, background: LEVEL_COLOR[riskBand] }}
+                  />
+                </div>
+              </>
+            ) : (
+              <div className="text-2xl font-extrabold text-[#64748b]">—</div>
+            )}
+            <p className="mt-1 text-xs text-[#64748b]">{sp.scoreDirection}</p>
 
-          <div className="mt-4 text-xs uppercase tracking-wide text-[#64748b]">
-            {sp.riskScore}
-          </div>
-          {typeof s.riskScore === "number" ? (
-            <>
-              <div className="text-2xl font-extrabold" style={{ color: LEVEL_COLOR[riskBand] }}>
-                {s.riskScore} / 100
-              </div>
-              <div className="text-sm font-medium" style={{ color: LEVEL_COLOR[riskBand] }}>
-                {t.risk.ui.level[riskBand]}
-              </div>
-              <div className="mt-2 h-2 overflow-hidden rounded-full bg-[#e2e8f0]">
-                <div
-                  className="h-full rounded-full"
-                  style={{ width: `${s.riskScore}%`, background: LEVEL_COLOR[riskBand] }}
-                />
-              </div>
-            </>
-          ) : (
-            <div className="text-2xl font-extrabold text-[#64748b]">—</div>
-          )}
-          <p className="mt-1 text-xs text-[#64748b]">{sp.scoreDirection}</p>
+            <div className="mt-4 text-xs uppercase tracking-wide text-[#64748b]">
+              {sp.lastChecked}
+            </div>
+            <div className="text-sm font-medium text-[#0f172a]">
+              {lastVerifiedDate ?? sp.noCheckRecord}
+            </div>
 
-          <div className="mt-4 text-xs uppercase tracking-wide text-[#64748b]">
-            {sp.lastChecked}
+            {/* ⚠️ CS-02：这里标签必须是 "Evidence on file"，不能用 "Evidence reviewed"。
+                s.evidenceCount 是**档案里存在多少条证据记录**（事实计数），
+                不等于「平台已复核」。存在证据 ≠ 已核验 —— 二者是两条轴。
+                旧代码用 v.evidence（"Evidence reviewed"）是错误暗示。 */}
+            <div className="mt-3 flex justify-between text-sm">
+              <span className="text-[#64748b]">{v.evidenceOnFile}</span>
+              <span className="font-medium text-[#0f172a]">{s.evidenceCount ?? 0}</span>
+            </div>
           </div>
-          <div className="text-sm font-medium text-[#0f172a]">
-            {lastVerifiedDate ?? sp.noCheckRecord}
-          </div>
+        </section>
 
-          {/* ⚠️ CS-02：这里标签必须是 "Evidence on file"，不能用 "Evidence reviewed"。
-              s.evidenceCount 是**档案里存在多少条证据记录**（事实计数），
-              不等于「平台已复核」。存在证据 ≠ 已核验 —— 二者是两条轴。
-              旧代码用 v.evidence（"Evidence reviewed"）是错误暗示。 */}
-          <div className="mt-3 flex justify-between text-sm">
-            <span className="text-[#64748b]">{v.evidenceOnFile}</span>
-            <span className="font-medium text-[#0f172a]">{s.evidenceCount ?? 0}</span>
-          </div>
-        </div>
-      </section>
-
-      {/* Overview：公开字段 + 免费层锁区 */}
-      <section className="mt-8">
-        <h2 className="text-xl font-bold text-[#0f172a] mb-3">{sp.overviewTitle}</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="card p-4">
-            <div className="text-xs text-[#64748b]">{sp.businessTypeLabel}</div>
-            <div className="font-semibold">{s.businessType}</div>
-          </div>
-          <div className="card p-4">
-            <div className="text-xs text-[#64748b]">{sp.industryLabel}</div>
-            <div className="font-semibold">{s.industryCode ?? "—"}</div>
-          </div>
-          {/* 员工规模（free 层）—— 服务端只输出锁态，真值由客户端解锁后填入 */}
-          <UnlockGate
-            layer="free"
-            variant="raw"
-            registerHref={p("/register")}
-            membershipHref={p("/membership")}
-            locked={
-              <div className="card p-4 opacity-80">
+        {/* Overview：公开字段 + 免费层锁区 */}
+        <section className="mt-8">
+          <h2 className="text-xl font-bold text-[#0f172a] mb-3">{sp.overviewTitle}</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="card p-4">
+              <div className="text-xs text-[#64748b]">{sp.businessTypeLabel}</div>
+              <div className="font-semibold">{s.businessType}</div>
+            </div>
+            <div className="card p-4">
+              <div className="text-xs text-[#64748b]">{sp.industryLabel}</div>
+              <div className="font-semibold">{s.industryCode ?? "—"}</div>
+            </div>
+            {/* 员工规模（free 层）—— 服务端只输出锁态，真值由客户端解锁后填入 */}
+            <UnlockGate
+              layer="free"
+              variant="raw"
+              registerHref={registerHref}
+              membershipHref={p("/membership")}
+              locked={
+                <div className="card p-4 opacity-80">
+                  <div className="text-xs text-[#64748b]">{sp.employeesLabel}</div>
+                  <div className="font-semibold text-[#94a3b8]">
+                    🔒{" "}
+                    <Link href={registerHref} className="text-[#0f4c81] underline">
+                      {sp.freeLockCta}
+                    </Link>
+                  </div>
+                </div>
+              }
+            >
+              <div className="card p-4">
                 <div className="text-xs text-[#64748b]">{sp.employeesLabel}</div>
-                <div className="font-semibold text-[#94a3b8]">
-                  🔒{" "}
-                  <Link href={p("/register")} className="text-[#0f4c81] underline">
-                    {sp.freeLockCta}
-                  </Link>
+                <div className="font-semibold">
+                  <UnlockedValue slug={s.slug} locale={uiLocale} field="employees" />
                 </div>
               </div>
-            }
-          >
-            <div className="card p-4">
-              <div className="text-xs text-[#64748b]">{sp.employeesLabel}</div>
-              <div className="font-semibold">
-                <UnlockedValue slug={s.slug} locale={uiLocale} field="employees" />
-              </div>
-            </div>
-          </UnlockGate>
+            </UnlockGate>
 
-          {/* 出口市场（free 层） */}
+            {/* 出口市场（free 层） */}
+            <UnlockGate
+              layer="free"
+              variant="raw"
+              registerHref={registerHref}
+              membershipHref={p("/membership")}
+              locked={
+                <div className="card p-4 opacity-80">
+                  <div className="text-xs text-[#64748b]">{sp.exportMarketsLabel}</div>
+                  <div className="font-semibold text-[#94a3b8]">
+                    🔒{" "}
+                    <Link href={registerHref} className="text-[#0f4c81] underline">
+                      {sp.freeLockCta}
+                    </Link>
+                  </div>
+                </div>
+              }
+            >
+              <div className="card p-4">
+                <div className="text-xs text-[#64748b]">{sp.exportMarketsLabel}</div>
+                <div className="font-semibold">
+                  <UnlockedValue slug={s.slug} locale={uiLocale} field="exportMarkets" />
+                </div>
+              </div>
+            </UnlockGate>
+          </div>
+
+          {/* 免费层解锁说明（已登录后不再显示注册引导） */}
           <UnlockGate
             layer="free"
             variant="raw"
-            registerHref={p("/register")}
+            registerHref={registerHref}
             membershipHref={p("/membership")}
             locked={
-              <div className="card p-4 opacity-80">
-                <div className="text-xs text-[#64748b]">{sp.exportMarketsLabel}</div>
-                <div className="font-semibold text-[#94a3b8]">
-                  🔒{" "}
-                  <Link href={p("/register")} className="text-[#0f4c81] underline">
-                    {sp.freeLockCta}
-                  </Link>
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#cbd5e1] bg-[#f8fafc] px-4 py-3">
+                <div className="text-sm text-[#475569]">
+                  <span className="font-semibold text-[#0f172a]">{sp.freeLockTitle}.</span>{" "}
+                  {sp.freeLockLead}
                 </div>
+                <Link
+                  href={registerHref}
+                  className="btn btn-outline text-sm"
+                  data-track={ANALYTICS_EVENTS.profileFreeCta}
+                  data-track-value={s.slug}
+                >
+                  {sp.freeLockCta}
+                </Link>
               </div>
             }
           >
-            <div className="card p-4">
-              <div className="text-xs text-[#64748b]">{sp.exportMarketsLabel}</div>
-              <div className="font-semibold">
-                <UnlockedValue slug={s.slug} locale={uiLocale} field="exportMarkets" />
-              </div>
-            </div>
+            {null}
           </UnlockGate>
-        </div>
+        </section>
 
-        {/* 免费层解锁说明（已登录后不再显示注册引导） */}
+        {/* 平台核验范围（方法论级，公开） */}
+        <section className="mt-8 card p-6 bg-[#f7f9fc]">
+          <h2 className="text-xl font-bold text-[#0f172a]">{sp.verifiedByTitle}</h2>
+          <p className="text-sm text-[#64748b] mt-1 mb-4">{sp.verifiedByLead}</p>
+          <ul className="space-y-1 text-sm text-[#475569]">
+            {scope.length === 0 ? (
+              <li>{v.noRecord}</li>
+            ) : (
+              scope.map((x) => <li key={x}>✓ {x}</li>)
+            )}
+          </ul>
+          <div className="mt-4 text-sm text-[#0f172a]">
+            <span className="text-[#64748b]">{sp.lastChecked}: </span>
+            <span className="font-medium">{lastVerifiedDate ?? sp.noCheckRecord}</span>
+          </div>
+          <div className="mt-4 border-t border-[#e2e8f0] pt-3">
+            <h3 className="font-semibold text-[#0f172a] text-sm">{sp.neverClaimedTitle}</h3>
+            <p className="text-xs text-[#64748b] mt-1">{sp.neverClaimed}</p>
+          </div>
+        </section>
+
+        {/* 认证（公开层，仅已验证记录，只展示元数据、不提供原始文件） */}
+        <CertificationList items={verifiedCerts} dict={ec} />
+
+        {/* 审核记录（公开层，仅已验证记录） */}
+        <AuditHistoryPanel items={verifiedAudits} dict={ec} />
+
+        {/* 付费层锁区：证据明细 / 认证明细 / 验货历史 */}
+        <section className="mt-8 grid md:grid-cols-2 gap-6">
+          <div className="card p-6">
+            <h2 className="text-lg font-bold text-[#0f172a]">{ev.title}</h2>
+            <p className="text-sm text-[#64748b] mt-1 mb-3">{sp.paidLockLead}</p>
+            <ul className="space-y-2 text-sm text-[#475569]">
+              {s.evidence.slice(0, 2).map((e) => (
+                <li key={e.id} className="flex justify-between gap-3">
+                  <span>{evidenceLabel(e.type, uiLocale)}</span>
+                  {/* paid 层：证据核验状态 */}
+                  <UnlockGate
+                    layer="paid"
+                    registerHref={registerHref}
+                    membershipHref={p("/membership")}
+                    locked={<span className="text-[#94a3b8]">🔒</span>}
+                  >
+                    <UnlockedEvidenceStatus
+                      slug={s.slug}
+                      locale={uiLocale}
+                      evidenceId={e.id}
+                      className="font-medium"
+                      style={{ color: LEVEL_COLOR[overallLevel(s.riskScore ?? 0)] }}
+                    />
+                  </UnlockGate>
+                </li>
+              ))}
+              {s.evidence.length === 0 && (
+                <li className="text-[#94a3b8]">{sp.evidenceEmpty}</li>
+              )}
+            </ul>
+            <p className="text-xs text-[#64748b] mt-3">{ev.statusNote}</p>
+          </div>
+          <div className="card p-6">
+            <h2 className="text-lg font-bold text-[#0f172a]">{sp.auditHistory ?? sp.auditStatusLabel}</h2>
+            <p className="text-sm text-[#64748b] mt-1 mb-3">{sp.paidLockLead}</p>
+            <ul className="space-y-2 text-sm text-[#475569]">
+              <li className="flex justify-between gap-3">
+                <span>{sp.inspectionHistoryLabel}</span>
+                <UnlockGate
+                  layer="paid"
+                  registerHref={registerHref}
+                  membershipHref={p("/membership")}
+                  locked={<span className="text-[#94a3b8]">🔒</span>}
+                >
+                  <UnlockedValue
+                    slug={s.slug}
+                    locale={uiLocale}
+                    field="inspectionHistory"
+                    className="font-medium text-[#0f172a]"
+                  />
+                </UnlockGate>
+              </li>
+              <li className="flex justify-between gap-3">
+                {/* ⚠️ CS-02：这里展示的是 suppliers.certifications 原始数组 ——
+                    它是**供应商/来源自述的声明**，不是平台核验结果。
+                    标签必须是 "Reported certification claims"，绝不能只写 "Certifications"
+                    （那会让人误读成「已获认证」）。 */}
+                <span>{sp.certClaimsReported}</span>
+                <UnlockGate
+                  layer="paid"
+                  registerHref={registerHref}
+                  membershipHref={p("/membership")}
+                  locked={<span className="text-[#94a3b8]">🔒</span>}
+                >
+                  <UnlockedValue
+                    slug={s.slug}
+                    locale={uiLocale}
+                    field="certifications"
+                    className="font-medium text-[#0f172a]"
+                  />
+                </UnlockGate>
+              </li>
+            </ul>
+            <p className="text-xs text-[#64748b] mt-3">{sp.paidLockNote}</p>
+          </div>
+        </section>
+
+        {/* 付费解锁 CTA（成为 Founding Buyer 后不再显示） */}
         <UnlockGate
-          layer="free"
+          layer="paid"
           variant="raw"
-          registerHref={p("/register")}
+          registerHref={registerHref}
           membershipHref={p("/membership")}
           locked={
-            <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#cbd5e1] bg-[#f8fafc] px-4 py-3">
+            <section className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#0f4c81] bg-[#e6eef6] px-4 py-3">
               <div className="text-sm text-[#475569]">
-                <span className="font-semibold text-[#0f172a]">{sp.freeLockTitle}.</span>{" "}
-                {sp.freeLockLead}
+                <span className="font-semibold text-[#0f172a]">{sp.paidLockTitle}.</span>{" "}
+                {sp.paidLockLead}
               </div>
               <Link
-                href={p("/register")}
-                className="btn btn-outline text-sm"
-                data-track={ANALYTICS_EVENTS.profileFreeCta}
+                href={p("/membership")}
+                className="btn btn-primary text-sm"
+                data-track={ANALYTICS_EVENTS.profilePaidCta}
                 data-track-value={s.slug}
               >
-                {sp.freeLockCta}
+                {sp.paidLockCta}
               </Link>
-            </div>
+            </section>
           }
         >
           {null}
         </UnlockGate>
-      </section>
 
-      {/* 平台核验范围（方法论级，公开） */}
-      <section className="mt-8 card p-6 bg-[#f7f9fc]">
-        <h2 className="text-xl font-bold text-[#0f172a]">{sp.verifiedByTitle}</h2>
-        <p className="text-sm text-[#64748b] mt-1 mb-4">{sp.verifiedByLead}</p>
-        <ul className="space-y-1 text-sm text-[#475569]">
-          {scope.length === 0 ? (
-            <li>{v.noRecord}</li>
-          ) : (
-            scope.map((x) => <li key={x}>✓ {x}</li>)
-          )}
-        </ul>
-        <div className="mt-4 text-sm text-[#0f172a]">
-          <span className="text-[#64748b]">{sp.lastChecked}: </span>
-          <span className="font-medium">{lastVerifiedDate ?? sp.noCheckRecord}</span>
-        </div>
-        <div className="mt-4 border-t border-[#e2e8f0] pt-3">
-          <h3 className="font-semibold text-[#0f172a] text-sm">{sp.neverClaimedTitle}</h3>
-          <p className="text-xs text-[#64748b] mt-1">{sp.neverClaimed}</p>
-        </div>
-      </section>
+        {/* Report preview（风险分公开，报告为服务产品） */}
+        <section className="mt-10 card p-8">
+          <span className="text-xs font-semibold uppercase tracking-wide text-[#0f4c81]">
+            {rp.badge}
+          </span>
+          <h2 className="text-2xl font-bold text-[#0f172a] mt-1">{rp.title}</h2>
+          <p className="text-sm text-[#64748b] mt-1">{rp.lead}</p>
 
-      {/* 认证（公开层，仅已验证记录，只展示元数据、不提供原始文件） */}
-      <CertificationList items={verifiedCerts} dict={ec} />
-
-      {/* 审核记录（公开层，仅已验证记录） */}
-      <AuditHistoryPanel items={verifiedAudits} dict={ec} />
-
-      {/* 付费层锁区：证据明细 / 认证明细 / 验货历史 */}
-      <section className="mt-8 grid md:grid-cols-2 gap-6">
-        <div className="card p-6">
-          <h2 className="text-lg font-bold text-[#0f172a]">{ev.title}</h2>
-          <p className="text-sm text-[#64748b] mt-1 mb-3">{sp.paidLockLead}</p>
-          <ul className="space-y-2 text-sm text-[#475569]">
-            {s.evidence.slice(0, 2).map((e) => (
-              <li key={e.id} className="flex justify-between gap-3">
-                <span>{evidenceLabel(e.type, uiLocale)}</span>
-                {/* paid 层：证据核验状态 */}
-                <UnlockGate
-                  layer="paid"
-                  registerHref={p("/register")}
-                  membershipHref={p("/membership")}
-                  locked={<span className="text-[#94a3b8]">🔒</span>}
-                >
-                  <UnlockedEvidenceStatus
-                    slug={s.slug}
-                    locale={uiLocale}
-                    evidenceId={e.id}
-                    className="font-medium"
-                    style={{ color: LEVEL_COLOR[overallLevel(s.riskScore ?? 0)] }}
-                  />
-                </UnlockGate>
-              </li>
-            ))}
-            {s.evidence.length === 0 && (
-              <li className="text-[#94a3b8]">{sp.evidenceEmpty}</li>
-            )}
-          </ul>
-          <p className="text-xs text-[#64748b] mt-3">{ev.statusNote}</p>
-        </div>
-        <div className="card p-6">
-          <h2 className="text-lg font-bold text-[#0f172a]">{sp.auditHistory ?? sp.auditStatusLabel}</h2>
-          <p className="text-sm text-[#64748b] mt-1 mb-3">{sp.paidLockLead}</p>
-          <ul className="space-y-2 text-sm text-[#475569]">
-            <li className="flex justify-between gap-3">
-              <span>{sp.inspectionHistoryLabel}</span>
-              <UnlockGate
-                layer="paid"
-                registerHref={p("/register")}
-                membershipHref={p("/membership")}
-                locked={<span className="text-[#94a3b8]">🔒</span>}
-              >
-                <UnlockedValue
-                  slug={s.slug}
-                  locale={uiLocale}
-                  field="inspectionHistory"
-                  className="font-medium text-[#0f172a]"
-                />
-              </UnlockGate>
-            </li>
-            <li className="flex justify-between gap-3">
-              {/* ⚠️ CS-02：这里展示的是 suppliers.certifications 原始数组 ——
-                  它是**供应商/来源自述的声明**，不是平台核验结果。
-                  标签必须是 "Reported certification claims"，绝不能只写 "Certifications"
-                  （那会让人误读成「已获认证」）。 */}
-              <span>{sp.certClaimsReported}</span>
-              <UnlockGate
-                layer="paid"
-                registerHref={p("/register")}
-                membershipHref={p("/membership")}
-                locked={<span className="text-[#94a3b8]">🔒</span>}
-              >
-                <UnlockedValue
-                  slug={s.slug}
-                  locale={uiLocale}
-                  field="certifications"
-                  className="font-medium text-[#0f172a]"
-                />
-              </UnlockGate>
-            </li>
-          </ul>
-          <p className="text-xs text-[#64748b] mt-3">{sp.paidLockNote}</p>
-        </div>
-      </section>
-
-      {/* 付费解锁 CTA（成为 Founding Buyer 后不再显示） */}
-      <UnlockGate
-        layer="paid"
-        variant="raw"
-        registerHref={p("/register")}
-        membershipHref={p("/membership")}
-        locked={
-          <section className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#0f4c81] bg-[#e6eef6] px-4 py-3">
-            <div className="text-sm text-[#475569]">
-              <span className="font-semibold text-[#0f172a]">{sp.paidLockTitle}.</span>{" "}
-              {sp.paidLockLead}
+          <div className="grid md:grid-cols-2 gap-6 mt-6">
+            <div>
+              <h3 className="font-semibold text-[#0f172a]">{rp.execTitle}</h3>
+              <p className="text-sm text-[#475569] mt-1">
+                {rp.riskLevel}: {t.risk.ui.level[riskBand]}
+              </p>
+              <p className="text-sm text-[#475569]">
+                {rp.score}: {typeof s.riskScore === "number" ? `${s.riskScore} / 100` : "—"}
+              </p>
             </div>
+            <div>
+              <h3 className="font-semibold text-[#0f172a]">{rp.verificationTitle}</h3>
+              <ul className="text-sm text-[#475569] mt-1 space-y-1">
+                {scope.length === 0 ? (
+                  <li>{v.noRecord}</li>
+                ) : (
+                  scope.map((x) => <li key={x}>✓ {x}</li>)
+                )}
+              </ul>
+              <h3 className="font-semibold text-[#0f172a] mt-4">{rp.recommendationTitle}</h3>
+              <p className="text-sm text-[#475569] mt-1">
+                {level >= 3 ? sp.recVerified : sp.recUnverified}
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-6 border-t border-[#e2e8f0] pt-5">
+            <h3 className="font-semibold text-[#0f172a]">{rp.unlockTitle}</h3>
+            <p className="text-sm text-[#475569] mt-1">{rp.unlockLead}</p>
+          </div>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <Link href={p("/custom-services")} className="btn btn-primary">
+              {rp.unlockCta}
+            </Link>
+            <Link href={p("/factory-audit/request")} className="btn btn-outline">
+              {sp.requestAudit}
+            </Link>
+          </div>
+          <p className="text-xs text-[#64748b] mt-3">
+            {rp.methodologyLead}{" "}
+            <Link href={p("/methodology")} className="text-[#0f4c81] underline">
+              {rp.methodologyLink}
+            </Link>
+          </p>
+        </section>
+
+        {/* Claim / RFQ */}
+        <section className="mt-10 grid md:grid-cols-2 gap-6">
+          <div className="card p-6">
+            <h2 className="font-semibold text-[#0f172a]">{sp.claimTitle}</h2>
+            <p className="text-sm text-[#475569] mt-1">{sp.claimLead}</p>
             <Link
-              href={p("/membership")}
-              className="btn btn-primary text-sm"
-              data-track={ANALYTICS_EVENTS.profilePaidCta}
+              href={p(`${DIRECTORY_PATH}/${slug}/claim`)}
+              className="btn btn-outline mt-4 inline-block"
+              data-track={ANALYTICS_EVENTS.claimView}
               data-track-value={s.slug}
             >
-              {sp.paidLockCta}
+              {sp.claimCta}
             </Link>
-          </section>
-        }
-      >
-        {null}
-      </UnlockGate>
-
-      {/* Report preview（风险分公开，报告为服务产品） */}
-      <section className="mt-10 card p-8">
-        <span className="text-xs font-semibold uppercase tracking-wide text-[#0f4c81]">
-          {rp.badge}
-        </span>
-        <h2 className="text-2xl font-bold text-[#0f172a] mt-1">{rp.title}</h2>
-        <p className="text-sm text-[#64748b] mt-1">{rp.lead}</p>
-
-        <div className="grid md:grid-cols-2 gap-6 mt-6">
-          <div>
-            <h3 className="font-semibold text-[#0f172a]">{rp.execTitle}</h3>
-            <p className="text-sm text-[#475569] mt-1">
-              {rp.riskLevel}: {t.risk.ui.level[riskBand]}
-            </p>
-            <p className="text-sm text-[#475569]">
-              {rp.score}: {typeof s.riskScore === "number" ? `${s.riskScore} / 100` : "—"}
-            </p>
           </div>
-          <div>
-            <h3 className="font-semibold text-[#0f172a]">{rp.verificationTitle}</h3>
-            <ul className="text-sm text-[#475569] mt-1 space-y-1">
-              {scope.length === 0 ? (
-                <li>{v.noRecord}</li>
-              ) : (
-                scope.map((x) => <li key={x}>✓ {x}</li>)
-              )}
-            </ul>
-            <h3 className="font-semibold text-[#0f172a] mt-4">{rp.recommendationTitle}</h3>
-            <p className="text-sm text-[#475569] mt-1">
-              {level >= 3 ? sp.recVerified : sp.recUnverified}
-            </p>
+          <div className="card p-6">
+            <h2 className="font-semibold text-[#0f172a]">{sp.notSatisfiedTitle}</h2>
+            <p className="text-sm text-[#475569] mt-1">{sp.notSatisfiedLead}</p>
+            <Link href={p("/rfq")} className="btn btn-outline mt-4 inline-block">
+              {sp.notSatisfiedCta}
+            </Link>
           </div>
-        </div>
-
-        <div className="mt-6 border-t border-[#e2e8f0] pt-5">
-          <h3 className="font-semibold text-[#0f172a]">{rp.unlockTitle}</h3>
-          <p className="text-sm text-[#475569] mt-1">{rp.unlockLead}</p>
-        </div>
-        <div className="mt-4 flex flex-wrap gap-3">
-          <Link href={p("/custom-services")} className="btn btn-primary">
-            {rp.unlockCta}
-          </Link>
-          <Link href={p("/factory-audit/request")} className="btn btn-outline">
-            {sp.requestAudit}
-          </Link>
-        </div>
-        <p className="text-xs text-[#64748b] mt-3">
-          {rp.methodologyLead}{" "}
-          <Link href={p("/methodology")} className="text-[#0f4c81] underline">
-            {rp.methodologyLink}
-          </Link>
-        </p>
-      </section>
-
-      {/* Claim / RFQ */}
-      <section className="mt-10 grid md:grid-cols-2 gap-6">
-        <div className="card p-6">
-          <h2 className="font-semibold text-[#0f172a]">{sp.claimTitle}</h2>
-          <p className="text-sm text-[#475569] mt-1">{sp.claimLead}</p>
-          <Link
-            href={p(`${DIRECTORY_PATH}/${slug}/claim`)}
-            className="btn btn-outline mt-4 inline-block"
-            data-track={ANALYTICS_EVENTS.claimView}
-            data-track-value={s.slug}
-          >
-            {sp.claimCta}
-          </Link>
-        </div>
-        <div className="card p-6">
-          <h2 className="font-semibold text-[#0f172a]">{sp.notSatisfiedTitle}</h2>
-          <p className="text-sm text-[#475569] mt-1">{sp.notSatisfiedLead}</p>
-          <Link href={p("/rfq")} className="btn btn-outline mt-4 inline-block">
-            {sp.notSatisfiedCta}
-          </Link>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </GuestAccessProvider>
   );
 }

@@ -20,6 +20,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { useAuth } from "./AuthProvider";
+import { useGuestAccess } from "./GuestAccessProvider";
 import { ANALYTICS_EVENTS } from "@/lib/analytics";
 
 export type AccessLayer = "public" | "free" | "paid";
@@ -92,6 +93,8 @@ type RawProps = BaseProps & {
  */
 function useUnlocked(layer: AccessLayer): { unlocked: boolean; loading: boolean; authed: boolean } {
   const { me, loading } = useAuth();
+  // CS-05b：Guest 的「5 家不同 supplier」额度（客户端记账）
+  const guest = useGuestAccess();
   if (me.isAdmin) return { unlocked: true, loading, authed: true };
 
   const tierRank: Record<string, number> = {
@@ -102,11 +105,23 @@ function useUnlocked(layer: AccessLayer): { unlocked: boolean; loading: boolean;
   const layerRank: Record<AccessLayer, number> = { public: 0, free: 1, paid: 2 };
   const rank = tierRank[me.tier] ?? 0;
 
-  return {
-    unlocked: rank >= layerRank[layer],
-    loading,
-    authed: me.authenticated,
-  };
+  // 档位够（Free Buyer 及以上）→ 直接放行
+  if (rank >= layerRank[layer]) {
+    return { unlocked: true, loading, authed: me.authenticated };
+  }
+
+  // 档位不够时，只有 **free（basic）层** 能靠 Guest 额度放行。
+  // paid 层永远只看服务端档位 —— localStorage 不是安全边界，也绝不可能打开付费情报。
+  if (layer === "free") {
+    return {
+      unlocked: guest.status === "allowed",
+      // pending 期间按"未解锁"渲染（安全默认，也保证 SSR 首帧与水合一致）
+      loading: loading || guest.status === "pending",
+      authed: me.authenticated,
+    };
+  }
+
+  return { unlocked: false, loading, authed: me.authenticated };
 }
 
 /** 根据登录状态给出正确的引导链接与文案 */

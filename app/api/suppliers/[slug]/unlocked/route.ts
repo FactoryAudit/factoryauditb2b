@@ -45,13 +45,6 @@ export type UnlockedResponse = {
   quotaMessage?: string;
 };
 
-const EMPTY: Omit<UnlockedResponse, "slug" | "tier"> = {
-  fields: {},
-  evidenceStatus: {},
-  quotaExceeded: false,
-  profilesUsed: 0,
-};
-
 export async function GET(
   req: Request,
   { params }: { params: Promise<{ slug: string }> }
@@ -80,17 +73,19 @@ export async function GET(
     tier = "visitor";
   }
 
-  // 游客连 free 层都没有，不必查数据（省一次查询，也少一个出错点）
+  // ---- 1b. CS-05b：basic（free）层对所有人开放，paid 层仍严格服务端把关 ----
   //
-  // CS-05a：此处**保持不变** —— 游客在 05a 仍然拿不到 basic 字段。
-  // 授予游客 basic 访问 + 5 家唯一性计数 + 注册门，统一在 CS-05b 实现。
-  // 若在 05a 就放开而 05b 的计数未上线，会形成「游客无限看」的过度授权窗口。
-  if (!canAccess(tier, "free")) {
-    return NextResponse.json(
-      { slug, tier, ...EMPTY },
-      { headers: NO_STORE }
-    );
-  }
+  // 为什么游客也能拿到 basic 字段：
+  //   Guest 的「5 家不同 supplier」额度是**客户端 localStorage 记账**（D1），
+  //   服务端既不掌握、也不承担这个闸门。若服务端仍按 visitor 返回空 fields，
+  //   那么第 1–5 家也拿不到值，Guest 额度就成了"什么都看不到的 5 次"。
+  //
+  // ★ 安全边界没有移动半分：
+  //     paid intelligence（evidence / inspectionHistory / riskBreakdown /
+  //     certifications）依旧由下面的 `canAccess(tier, "paid")` 与
+  //     lib/queries.ts 的 redactSupplier(tier) 双重裁剪决定。
+  //     清空 / 伪造 localStorage 只能多拿 4 个 basic 字段，绝拿不到付费情报。
+  const effectiveTier: MembershipTier = canAccess(tier, "free") ? tier : "free";
 
   // ---- 2. 取已裁剪的数据 ----
   //
@@ -100,7 +95,8 @@ export async function GET(
   //         额度一直是 0/5 —— 即旧的 5 家限制从未真正生效过，删除它不削弱任何现有控制。
   let detail: Awaited<ReturnType<typeof getSupplierDetail>> = null;
   try {
-    detail = await getSupplierDetail(slug, contentLocale, tier);
+    // 注意传的是 effectiveTier：游客也要能取到 basic 字段（CS-05b，见 §1b）
+    detail = await getSupplierDetail(slug, contentLocale, effectiveTier);
   } catch (e) {
     console.error("[api/suppliers/unlocked] detail lookup failed", e);
   }
@@ -115,7 +111,7 @@ export async function GET(
   const fields: Record<string, string> = {};
   const evidenceStatus: Record<string, string> = {};
 
-  if (canAccess(tier, "free")) {
+  if (canAccess(effectiveTier, "free")) {
     if (detail.established) fields.established = String(detail.established);
     if (detail.employees) fields.employees = detail.employees;
     if (detail.auditStatus) fields.auditStatus = detail.auditStatus;
@@ -124,6 +120,7 @@ export async function GET(
     }
   }
 
+  // ⚠️ 付费层只认 **真实 tier**（不是 effectiveTier）—— 篡改 localStorage 换不来付费情报
   if (canAccess(tier, "paid")) {
     if (detail.certifications && detail.certifications.length > 0) {
       fields.certifications = detail.certifications.join(", ");
@@ -169,27 +166,9 @@ export async function GET(
   );
 }
 
-/**
- * 额度/门槛提示文案（服务端本地化）。
- *
- * ⚠️ CS-05a 起暂时无调用方 —— 旧的「Free 每月 5 家」额度闸门已删除。
- * **保留用于 CS-05b** 的 Guest 第 6 家注册门（注册引导文案），届时会重新接线；
- * 若 05b 最终改用它处文案，则可删除本函数。
- *
- * 放在服务端而不是让前端自己备一份：本接口已经加载了字典，
- * 前端组件就不用再多收一个 props，9 语文案也只有这一处来源。
- * 拿不到字典时返回 undefined —— 宁可不提示，也不要给用户看英文占位符。
- */
-async function buildQuotaMessage(
-  locale: Locale,
-  limit: number
-): Promise<string | undefined> {
-  try {
-    const dict = await getDictionary(locale);
-    const tpl = dict.auth?.quotaReached;
-    if (!tpl) return undefined;
-    return tpl.replace("{limit}", String(limit));
-  } catch {
-    return undefined;
-  }
-}
+// CS-05b 说明：这里原本留着一个 buildQuotaMessage()（渲染 dict.auth.quotaReached
+// 「You have used all {limit} free profiles this month.」）。已删除，原因有二：
+//   ① 那句话是旧的「Free 每月 5 家」口径，CS-05a 起该额度已废止 —— 继续渲染就是无据声称；
+//   ② CS-05b 的 Guest 第 6 家注册门复用 UnlockGate 既有的 freeLock* 文案（9 语齐备），
+//      不需要服务端再产一份提示。
+

@@ -7,6 +7,7 @@ import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { FREE_PROFILE_LIMIT, ANALYTICS_EVENTS } from "@/lib/suppliers";
 import { isSignupEnabled } from "@/lib/access";
+import { sanitizeReturnPath } from "@/lib/guestAccess";
 
 const PATH = "/register";
 const BASE = "https://factoryauditb2b.com";
@@ -42,14 +43,31 @@ export async function generateMetadata({
 
 export default async function RegisterPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  /**
+   * CS-05b：注册回流目标。
+   *   /register?next=/en/suppliers/ho-chi-minh-garment
+   * 来源：供应商详情页的注册门（Guest 看完 5 家后第 6 家被拦下）。
+   *
+   * ⚠️ 只用 sanitizeReturnPath 过滤后的值 —— 直接把 query 丢给 router 会变成开放重定向。
+   * ⚠️ 读 searchParams 会让本页从 ● SSG 变成 ƒ Dynamic（服务端必须看到 query 才能渲染）。
+   *    取舍：/register 是转化页，动态渲染换取"注册完回到原处"的确定性，值。
+   *    URL / sitemap / canonical 均未改变。
+   */
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { locale: raw } = await params;
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
   const r = t.register;
   const p = (href: string) => localePath(locale, href);
+
+  const rawNext = (await searchParams)?.next;
+  const nextHref = sanitizeReturnPath(
+    typeof rawNext === "string" ? rawNext : undefined
+  );
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -110,7 +128,7 @@ export default async function RegisterPage({
 
         <section>
           <h2 className="text-xl font-bold text-[#0f172a] mb-3">{r.formTitle}</h2>
-          <RegisterForm t={r.form} />
+          <RegisterForm t={r.form} nextHref={nextHref ?? undefined} />
         </section>
       </div>
     </main>

@@ -202,12 +202,17 @@ NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN=""        # 仍未配置（可选）
 | `supplier_card_click` | 目录卡片点击当前复用 `supplier_profile_view`（带 slug），本常量未接线 |
 | `verification_request` | Verification Request 真实表单未上线（CS-05+）；核查 CTA 现只发 `verification_cta_click` |
 | `sourcing_request` | sourcing 落地页是 /rfq，真实提交事件为 `rfq_submit`，本事件与之重复 |
-| `guest_limit_reached` / `free_account_signup_start` / `free_account_signup_complete` | Guest Limit UI 待接线（CS-05） |
-| `free_quota_reached` | 免费额度上限功能待接线 |
+| `free_account_signup_start` / `free_account_signup_complete` | Free Account 专属注册漏斗未上线 |
+| `free_quota_reached` | **永不接线**：旧的「Free 每月 5 家」额度已由 CS-05a 废止（Free Buyer = basic 无限浏览）。保留常量只为防止有人把它当新事件接回来、制造口径错误的信号 |
 | `membership_cta` | 旧常量；会员页 CTA 已改用 `register_cta` 等 |
 
 > 这些常量在代码里汇总于 `lib/analytics.ts` 的 `UNWIRED_EVENTS`，并有回归脚本守护：
 > 一旦某个「未接线」事件被误写进 `CONVERSION_EVENTS`，验证会失败。
+>
+> CS-05b 起 `guest_limit_reached` **已移出**本表：Guest 看完 5 家不同 supplier、
+> 第 6 家被注册门拦下时，由 `lib/guestAccess.ts` 的 `emitGuestLimitReachedOnce()` 发出，
+> **同一 supplier 只发一次**（刷新 / 重渲染 / StrictMode 双跑都不重复，
+> 靠内存 Set + sessionStorage 双重去重）。
 
 ---
 

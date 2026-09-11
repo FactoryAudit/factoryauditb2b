@@ -137,6 +137,17 @@ export type StaticEvidence = {
 };
 
 export type StaticSupplier = {
+  /**
+   * CS-05b：供应商的稳定身份标识（supplier ID）。
+   *
+   * 用途：Guest 的「5 家不同 supplier」计数必须按 supplier ID 去重，
+   * 不能按 slug / URL / 页面浏览 / 标签页 / 刷新来算。
+   *
+   * ⚠️ 命名空间：生产走 Supabase 时身份是 `suppliers.id`（uuid，见 lib/queries.ts 的
+   * rowToView）。这里是**静态兜底数据**的稳定 id，前缀 `sup_` 以示区别，
+   * 一旦发布就不可更改（改了等于把同一家供应商算成两家）。
+   */
+  id: string;
   slug: string;
   legalName: string;
   countryCode: string;
@@ -159,6 +170,7 @@ export type StaticSupplier = {
 
 export const STATIC_SUPPLIERS: StaticSupplier[] = [
   {
+    id: "sup_shenzhen_precision_electronics",
     slug: "shenzhen-precision-electronics",
     legalName: "Shenzhen Precision Electronics Co., Ltd.",
     countryCode: "china",
@@ -186,6 +198,7 @@ export const STATIC_SUPPLIERS: StaticSupplier[] = [
     ],
   },
   {
+    id: "sup_guangzhou_textile_factory",
     slug: "guangzhou-textile-factory",
     legalName: "Guangzhou Sunrise Textile Co., Ltd.",
     countryCode: "china",
@@ -211,6 +224,7 @@ export const STATIC_SUPPLIERS: StaticSupplier[] = [
     ],
   },
   {
+    id: "sup_dongguan_plastic_molding",
     slug: "dongguan-plastic-molding",
     legalName: "Dongguan Hengda Plastics Co., Ltd.",
     countryCode: "china",
@@ -234,6 +248,7 @@ export const STATIC_SUPPLIERS: StaticSupplier[] = [
     evidence: [],
   },
   {
+    id: "sup_ho_chi_minh_garment",
     slug: "ho-chi-minh-garment",
     legalName: "Ho Chi Minh Garment JSC",
     countryCode: "vietnam",
