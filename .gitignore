@@ -87,3 +87,4 @@ scripts/translate_missing.py
 scripts/i18n_curated.json
 scripts/.cs03-post-test.bundle.mjs
 scripts/.*.bundle.mjs
+scripts/.*.bundle.cjs

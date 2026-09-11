@@ -297,6 +297,43 @@ export async function notifySupplierReceived(data: {
   });
 }
 
+// —— CS-08：认证辅导需求（入驻表「我要获得证书」按钮）——
+
+// 管理员通知：供应商在入驻表里提交的验厂/认证辅导需求。
+// 与入驻申请分开（kind="certification_request"），便于独立跟进，不混进 Supplier Master Sheet。
+export async function notifyAdminCertificationRequest(data: {
+  id: string;
+  fields: Record<string, string>;
+}): Promise<boolean> {
+  const adminEmail = process.env.NOTIFY_ADMIN_EMAIL;
+  if (!adminEmail) {
+    console.log("[notify] NOTIFY_ADMIN_EMAIL 未配置，跳过认证辅导需求通知");
+    return false;
+  }
+  const f = data.fields;
+  const line = (label: string, val?: string) => (val ? `${label}: ${val}` : null);
+  const body = [
+    `Request ID: ${data.id}`,
+    "",
+    "— Certification Consulting Request —",
+    line("Requested certification(s)", f.certHelpWanted),
+    line("Company", f.certHelpCompany),
+    line("Contact person", f.certHelpContactName),
+    line("Email", f.certHelpContactEmail),
+    line("Notes", f.certHelpNote),
+    "",
+    "Source: the 'I want to obtain certification' button on the supplier application form.",
+    "Next steps: reply to the contact above with scope, timeline and pricing for factory audit / certification consulting.",
+  ]
+    .filter(Boolean)
+    .join("\n");
+  return sendMail({
+    to: adminEmail,
+    subject: `[FactoryAuditB2B] Certification Consulting Request ${data.id}`,
+    text: body,
+  });
+}
+
 // ---------- Supplier Directory V2：Free Account 注册 ----------
 
 // 管理员：新买家注册通知

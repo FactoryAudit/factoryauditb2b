@@ -160,3 +160,30 @@ export const REGISTRATION_FIELDS = [
   "message",
 ] as const;
 export type RegistrationField = (typeof REGISTRATION_FIELDS)[number];
+
+// ---------- 证书结构化子表单（CS-08） ----------
+// 入驻表「Certificates」块由可重复行组成，每行 4 个字段。
+// 客户端按行收集后序列化进两个载荷键：
+//   · certificates     —— 人类可读多行文本（管理员邮件正文直接可读）
+//   · certificatesJson —— 结构化 JSON 数组（后续报告生成解析用）
+// 注意：这两个键是「派生值」，不单独出现在表单控件里。
+export const CERTIFICATE_ROW_FIELDS = [
+  "certName",
+  "certNumber",
+  "certIssued",
+  "certExpires",
+] as const;
+export const CERTIFICATE_MAX_ROWS = 10;
+
+// ---------- 「我要获得证书」咨询请求（CS-08） ----------
+// 与入驻申请共用 /api/supplier-register，靠 body.kind === "certification_request" 分流；
+// 只发管理员邮件（无数据库落库），供跟进国内验厂/认证辅导业务。
+export const CERTIFICATION_REQUEST_FIELDS = [
+  "certHelpWanted",
+  "certHelpCompany",
+  "certHelpContactName",
+  "certHelpContactEmail",
+  "certHelpNote",
+] as const;
+export const REGISTRATION_KIND = "supplier_application";
+export const CERTIFICATION_REQUEST_KIND = "certification_request";

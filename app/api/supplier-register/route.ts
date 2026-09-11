@@ -1,16 +1,34 @@
 import { NextRequest, NextResponse } from "next/server";
-import { notifyAdminSupplierRegistration, notifySupplierReceived } from "@/lib/notify";
+import {
+  notifyAdminSupplierRegistration,
+  notifyAdminCertificationRequest,
+  notifySupplierReceived,
+} from "@/lib/notify";
+import { CERTIFICATION_REQUEST_FIELDS, CERTIFICATION_REQUEST_KIND } from "@/lib/supplierNetwork";
 import { checkRateLimit, clientIp, clamp } from "@/lib/rateLimit";
 
 // Supplier Network V1.0：供应商免费入驻表单统一入口。
 // 无数据库：数据经邮件送达管理员（结构化文本，可直接粘贴进 Google Sheets），
 // 后续人工审核 → 定 Evidence Level / Status / Risk Score → 通过后录入 staticData 发布。
 // 与 /api/lead 的关系：独立路由（字段差异大），限流与邮件通道复用。
+// CS-08：同一路由按 body.kind 分流 —— 入驻申请（默认）／认证辅导需求（certification_request）。
 
-const REG_LIMIT = 5; // 同 IP 每小时最多 5 次入驻申请
+const REG_LIMIT = 5; // 同 IP 每小时最多 5 次（入驻申请与认证需求共用额度）
 const REG_WINDOW_MS = 60 * 60 * 1000;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+// 字段长度上限（防超长输入撑爆邮件正文）。
+// ⚠️ `new Set<string>([...])` 必须显式标注泛型，否则推断成字面量联合类型导致 .has(string) 报 TS2345。
+const LONG_TEXT_FIELDS = new Set<string>(["message", "certificates", "certificatesJson"]);
+const MEDIUM_TEXT_FIELDS = new Set<string>(["certHelpWanted", "certHelpNote"]);
+
+function maxFieldLength(key: string): number {
+  if (LONG_TEXT_FIELDS.has(key)) return 5000;
+  if (MEDIUM_TEXT_FIELDS.has(key)) return 500;
+  if (key.includes("Address")) return 500;
+  return 300;
+}
 
 // 白名单校验：只保留已声明字段，防止任意键注入邮件正文
 const KNOWN_FIELDS = [
@@ -31,6 +49,7 @@ const KNOWN_FIELDS = [
   "exportMarkets",
   "exportSince",
   "certificates",
+  "certificatesJson",
   "contactName",
   "contactEmail",
   "contactPhone",
@@ -60,15 +79,43 @@ export async function POST(req: NextRequest) {
     }
 
     const body = await req.json();
+    const kind = String(body?.kind || "");
     const raw = body?.fields ?? {};
 
-    // 字段长度上限（防超长输入撑爆邮件正文）
+    // —— 分支 A：认证辅导需求（入驻表「我要获得证书」）——
+    // 只发管理员邮件，不落库、不给供应商回执、不产生任何信任状态副作用。
+    if (kind === CERTIFICATION_REQUEST_KIND) {
+      const cr: Record<string, string> = {};
+      for (const key of CERTIFICATION_REQUEST_FIELDS) {
+        const rawVal = raw[key];
+        if (rawVal === undefined || rawVal === null) continue;
+        const v = String(rawVal).trim().slice(0, maxFieldLength(key));
+        if (v) cr[key] = v;
+      }
+
+      const wanted = String(cr.certHelpWanted || "");
+      if (!wanted) {
+        return NextResponse.json({ ok: false, error: "certification required" }, { status: 400 });
+      }
+      const helpEmail = String(cr.certHelpContactEmail || "").toLowerCase();
+      if (!helpEmail) {
+        return NextResponse.json({ ok: false, error: "email required" }, { status: 400 });
+      }
+      if (helpEmail.length > 254 || !EMAIL_RE.test(helpEmail)) {
+        return NextResponse.json({ ok: false, error: "invalid_email" }, { status: 400 });
+      }
+
+      const requestId = crypto.randomUUID();
+      await Promise.allSettled([notifyAdminCertificationRequest({ id: requestId, fields: cr })]);
+      return NextResponse.json({ ok: true, requestId });
+    }
+
+    // —— 分支 B：供应商入驻申请（默认）——
     const f: Record<string, string> = {};
     for (const key of KNOWN_FIELDS) {
       const rawVal = raw[key];
       if (rawVal === undefined || rawVal === null) continue;
-      const max = key === "message" ? 5000 : key.includes("Address") ? 500 : 300;
-      const v = String(rawVal).trim().slice(0, max);
+      const v = String(rawVal).trim().slice(0, maxFieldLength(key));
       if (v) f[key] = v;
     }
 
