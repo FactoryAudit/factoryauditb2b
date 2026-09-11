@@ -6,10 +6,7 @@ import { overallLevel, LEVEL_COLOR, type RiskLevel } from "@/lib/riskEngine";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
-import {
-  FEATURED_MAX,
-  ANALYTICS_EVENTS,
-} from "@/lib/suppliers";
+import { ANALYTICS_EVENTS } from "@/lib/suppliers";
 
 const PATH = "/suppliers";
 const BASE = "https://factoryauditb2b.com";
@@ -74,8 +71,17 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
       (!industry || x.industryCode === industry) &&
       matchQ(x)
   );
-  // Featured = 全部真实收录供应商（当前 4 家，满足 4–10 区间；绝不虚构补齐）
-  const featured = all.slice(0, FEATURED_MAX);
+  // CS-06a（Bug B 修复）：展示集合必须是**筛选结果**，不是全量前 N 条。
+  //   此前这里是 `all.slice(0, FEATURED_MAX)`，导致 country / industry / q 三个筛选
+  //   只改了计数标签与 JSON-LD，卡片永远渲染全量 —— 线上表现为
+  //   「1 suppliers listed」旁边并排躺着 4 张卡（其中 3 家是中国工厂）。
+  //   产品定位是 Explore Global Suppliers（不是 Featured Suppliers），
+  //   不应该人为隐藏筛选结果，故**不再截断**：
+  //     count 标签 = filtered.length = 实际卡片数 —— 恒等成立。
+  //   无筛选时 filtered === all，展示结果与修复前逐字一致。
+  //   ⚠️ 已发布供应商超过 ~60 家后，需要以**新的 Change Set**引入
+  //      分页 / Load More / 结果排序；本轮明确不做分页。
+  const displayed = filtered;
 
   const linkWith = (next: { country?: string | null; industry?: string | null; q?: string | null }) => {
     const params = new URLSearchParams();
@@ -273,11 +279,11 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
           {s.trustNote}
         </p>
 
-        {featured.length === 0 ? (
+        {displayed.length === 0 ? (
           <p className="text-[#475569] mb-10">{s.empty}</p>
         ) : (
           <section className="grid md:grid-cols-3 gap-5 mb-14">
-            {featured.map((x) => {
+            {displayed.map((x) => {
               // ★ 等级只由「真实证据」决定，绝不采信 legacy verification_status。
               //   现状：dongguan / ho-chi-minh 零证据却显示 "Business checked"；
               //   shenzhen 显示 "Factory verified" 但库里没有任何 audit 记录。

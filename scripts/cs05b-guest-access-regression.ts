@@ -413,12 +413,26 @@ section("9. 注册回流：回到第 6 家，且防开放重定向");
   );
   const mwLines = stripComments(read("middleware.ts")).split("\n");
   const searchLines = mwLines.filter((l) => l.includes("req.nextUrl.search"));
-  const redirectLine = mwLines.find((l) => l.includes("NextResponse.redirect")) ?? "";
-  check("query 保留只加了 1 处（未顺手改动其它行为）", searchLines.length === 1, String(searchLines.length));
+  // CS-05b 期间，下面两条是**范围冻结**断言：「只加了 1 处」+「/en/* 的 301 仍未保留 query」。
+  //   它们当时的作用，是把 Bug A 的另一半明确留给后续 Change Set，并防止顺手扩大改动面。
+  // CS-06a 正是接手的那个 Change Set —— 301 分支补上了 search，于是：
+  //   · 显式引用由 1 处变 2 处（rewrite + 301）
+  //   · 「/en/* 未保留 query」由「期望成立」变成「必须不成立」
+  // 两条断言按新事实改写（**断言数不变，仍 106**），守护对象升级为：
+  //   「两处 URL 重建都必须显式保留 query，且不得出现第三处」。
+  // ⚠️ 旧写法用 `mwLines.find(NextResponse.redirect)` 取**单行**判定，对换行格式化毫无抵抗力
+  //    —— 只要把 new URL 折到下一行，它就会变成假 PASS（本次实测已复现）。
+  //    故改为对**整个 redirect 调用块**做跨行匹配。
   check(
-    "/en/* → /* 的 301 仍未保留 query（Bug A 剩余部分归 CS-06，本 CS 不扩大改动面）",
-    !redirectLine.includes("req.nextUrl.search"),
-    redirectLine.trim()
+    "query 保留恰好 2 处：rewrite 分支 + 301 分支（CS-06a 补完 Bug A 的另一半）",
+    searchLines.length === 2,
+    String(searchLines.length)
+  );
+  const redirectBlock = mw.match(/NextResponse\.redirect\([\s\S]*?\);/)?.[0] ?? "";
+  check(
+    "/en/* → /* 的 301 现在**必须**保留 query（Bug A 已收口，不再是『仍丢 query』）",
+    /req\.nextUrl\.search/.test(redirectBlock),
+    redirectBlock.replace(/\s+/g, " ").slice(0, 120)
   );
 
   const form = read("components/RegisterForm.tsx");

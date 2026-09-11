@@ -24,7 +24,14 @@ export function middleware(req: NextRequest) {
 
   if (first === DEFAULT_LOCALE) {
     const rest = pathname.slice(DEFAULT_LOCALE.length + 1);
-    return NextResponse.redirect(new URL(rest === "" ? "/" : rest, req.url), 301);
+    // ⚠️ 与下方 rewrite 分支同一个坑：`new URL(target, req.url)` 只继承 origin，
+    //    base 上的 query string **不会**被带过去。不补 search 的话
+    //    /en/suppliers?country=china → 301 /suppliers（筛选态被静默丢弃）。
+    //    CS-05b 只解开了 rewrite 分支的 query 保留；这里补上 301 分支的剩余部分。
+    return NextResponse.redirect(
+      new URL((rest === "" ? "/" : rest) + req.nextUrl.search, req.url),
+      301
+    );
   }
 
   // ⚠️ 必须显式拼上 search —— `new URL(target, req.url)` 只继承 origin，
@@ -33,9 +40,8 @@ export function middleware(req: NextRequest) {
   //   服务端渲染拿到的 searchParams 却是空的（已实测确认）。
   //   这正是已知 Bug A 的根因（英文主站筛选 100% 失效）。
   //
-  // CS-05b：注册回流 ?next= 依赖 query，故这里先解开 Bug A 的 **query 保留**这一最小子集；
-  //         Bug A 的剩余部分（下方 /en/* → /* 的 301 同样丢 query）仍归 CS-06 处理，
-  //         本 Change Set 不扩大改动面。
+  // CS-05b：注册回流 ?next= 依赖 query，故这里先解开 Bug A 的 **query 保留**这一最小子集。
+  // CS-06a：剩余的 301 分支（上方 /en/* → /*）已补齐 search，Bug A 至此收口。
   const target =
     (pathname === "/" ? `/${DEFAULT_LOCALE}` : `/${DEFAULT_LOCALE}${pathname}`) +
     req.nextUrl.search;
