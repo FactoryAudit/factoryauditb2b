@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { isLocale, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { requireAdmin } from "@/lib/adminData";
+import { REPORT_HEADER } from "@/lib/standardReport";
 
 // Admin 布局 —— 权限闸门 + 侧边导航
 //
@@ -49,6 +50,8 @@ export default async function AdminLayout({ children, params }: Props) {
     { href: "/admin/rfqs", label: a.navRfqs },
     { href: "/admin/members", label: a.navMembers },
     { href: "/admin/pending-review", label: t.evidenceCenter.adminNavPending },
+    // 「标准报告样张」标签取双语常量，不为 1 个内部标签补 9 语翻译
+    { href: "/admin/report-standard", label: REPORT_HEADER.title[locale === "zh" || locale === "zh-TW" ? "zh" : "en"] },
   ];
 
   return (
