@@ -6,7 +6,14 @@
 //   3) 退役口径的**代码出口**全部关闭（常量、组件、响应字段、硬编码兜底）
 //   4) 顺带修掉的 {n} 语义错配不会回退（对比上限 = 单一事实来源）
 //
-// 为什么要单独一个回归：
+// CS-05c-r2 追加（Pre-check 确认的 2 处残留）：
+//   5) `/llms.txt` 不再有「up to 5 full profiles per month」
+//      —— 它**不在 [locale] 前缀下**，所以躲过了 CS-05c 的 75 条 locale 烟雾。
+//   6) 九语 `supplierProfile.freeLockLead` 不再把 paid 层的 certifications 许给免费账号
+//   7) `/llms.txt` 路由骨架与 register {n} 绑定未被这次修复波及
+//   8) 邮件模板的 Free / Paid 字段语义正确（付费邮件**应当**保留 Certification claims）
+//
+// 为什么还要单独一个回归：
 //   文案问题不会让 tsc 报错、不会让页面 500，只会让站点对着用户说一件不成立的事。
 //   这类「无据声称」只能靠扫描守住。
 //
@@ -53,13 +60,19 @@ function section(title: string) {
   console.log(`\n=== ${title} ===`);
 }
 
-/** 读源码并**剥掉注释**再判定 —— 注释里提到某个名字不构成"还在用它"。
- *  这条经验来自 CS-05b：安全注释必须点名 paid 字段，曾导致误报 FAIL。 */
-function readSource(rel: string): string {
-  return fs
-    .readFileSync(path.join(ROOT, rel), "utf8")
+/** 剥掉 TS 注释 —— 注释里提到某个名字不构成"还在用它"。
+ *  注意 `(^|[^:])` 这个前缀守卫：URL 里的 `https://` 不能被当成行注释切掉。 */
+function stripComments(text: string): string {
+  return text
     .replace(/\/\*[\s\S]*?\*\//g, "")
     .replace(/(^|[^:])\/\/[^\n]*/g, "$1");
+}
+
+/** 读源码并**剥掉注释**再判定 —— 注释里提到某个名字不构成"还在用它"。
+ *  这条经验来自 CS-05b：安全注释必须点名 paid 字段，曾导致误报 FAIL。
+ *  CS-05c-r2 再次踩到：修复说明的注释里引用了 certifications，被判成残留。 */
+function readSource(rel: string): string {
+  return stripComments(fs.readFileSync(path.join(ROOT, rel), "utf8"));
 }
 
 function readRaw(rel: string): string {
@@ -458,6 +471,236 @@ section("8. 访问分层 / 定价 / 路径未被波及");
   check("MEMBERSHIP_PRICE_USD 仍为 99", MEMBERSHIP_PRICE_USD === 99);
   check("DIRECTORY_PATH 仍为 /suppliers", DIRECTORY_PATH === "/suppliers");
   check("GUEST_PROFILE_LIMIT 仍为 5", GUEST_PROFILE_LIMIT === 5);
+}
+
+// ---------------------------------------------------------------------------
+// 9. CS-05c-r2：Pre-check 确认的 2 处残留（+ 2 条防回退）
+// ---------------------------------------------------------------------------
+//
+// 为什么还要再加一段：
+//   CS-05c 的线上烟雾只扫 `/[locale]` 页面，而 `/llms.txt` **不在 locale 前缀下**，
+//   于是「up to 5 full profiles per month」在 75 条烟雾全绿的情况下活了下来。
+//   教训写进断言 —— 独立路由必须有自己的守护。
+
+section("9. CS-05c-r2 A：/llms.txt 已无「每月 N 家档案」语义");
+
+{
+  // ⚠️ 必须剥注释后再判定：r2 的修复注释里**故意**引用了旧串
+  //    「up to 5 full profiles per month」来说明删掉了什么。
+  //    直接扫原文会把「解释」当成「残留」（CS-05b 同类误报的翻版）。
+  const llmsCode = readSource("app/llms.txt/route.ts");
+  const llmsRaw = readRaw("app/llms.txt/route.ts");
+
+  const oldHits = llmsCode.match(/up to\s+5[^\n]{0,80}/gi) ?? [];
+  check(
+    "A1 /llms.txt 源码（剥注释）已无 up to 5 ... profiles per month",
+    !/up to\s+5\s+full\s+profiles\s+per\s+month/i.test(llmsCode) && oldHits.length === 0,
+    oldHits.slice(0, 2).join(" | ")
+  );
+  check(
+    "A2 /llms.txt 全文再无 per month 这一计量说法",
+    !/per\s+month/i.test(llmsCode)
+  );
+  check(
+    "A3 /llms.txt 已改为「unlimited browsing of basic supplier profiles」口径",
+    /unlimited browsing of basic supplier profiles/i.test(llmsCode)
+  );
+
+  // 结构性守护：这次修复不许动路由骨架 / 不许把它挪进 [locale]
+  check(
+    "A4 /llms.txt 路由骨架未变（force-static + GET）",
+    /export const dynamic = "force-static"/.test(llmsRaw) &&
+      /export async function GET\(\)/.test(llmsRaw)
+  );
+  check(
+    "A5 /llms.txt 仍未挂在 [locale] 下（这正是它躲过 locale 烟雾的原因）",
+    !/\[locale\]/.test(llmsCode)
+  );
+
+  // 站点权威说明里凡涉及免费账号，都必须与既有 canonical 口径同义
+  const freeLines = llmsCode
+    .split("\n")
+    .filter((l) => /Free Account Registration/i.test(l));
+  check(
+    "A6 /llms.txt 的免费账号条目仍只有 1 条（未被复制成多处口径）",
+    freeLines.length === 1,
+    `实际 ${freeLines.length} 条`
+  );
+}
+
+section("9. CS-05c-r2 B：九语 freeLockLead 不再承诺 paid 层的 certifications");
+
+{
+  // 认证类词汇的九语写法（含阿拉伯语 الشهادات / شهادة）
+  const CERT_RE = /(certificat|Zertifizier|认证|認證|認証|الشهادات|شهادة|گواهی)/i;
+  // paid 层另外三项的九语写法 —— 免费层同样不得点名
+  const PAID_LEAK_RE =
+    /(inspection history|验货历史|驗貨歷史|検査履歴|historial de inspecciones|inspektionsverlauf|historique des inspections|histórico de inspeções|سجل عمليات التفتيش|risk breakdown|风险拆解|風險拆解|リスク内訳|desglose de riesgo|risikoaufschlüsselung|détail des risques|detalhamento de risco|تفصيل المخاطر|evidence record|证据记录|證據紀錄|証拠記録|registros de evidencia|evidenzdatensätze|preuves|registros de evidência|سجلات الأدلة)/i;
+
+  const certBad = LOCALES.filter((l) =>
+    CERT_RE.test(String(getIn(DICTS[l], "supplierProfile.freeLockLead") ?? ""))
+  );
+  check(
+    "B1 九语 freeLockLead 均不再出现认证类词汇",
+    certBad.length === 0,
+    certBad.join(", ")
+  );
+
+  // 正向断言：必须点名**本语言既有**的 auditStatusLabel。
+  // 这条防的不是「漏改」，而是「自造术语」——同一块界面出现两种说法。
+  const labelBad = LOCALES.filter((l) => {
+    const v = String(getIn(DICTS[l], "supplierProfile.freeLockLead") ?? "");
+    const label = String(getIn(DICTS[l], "supplierProfile.auditStatusLabel") ?? "");
+    return !label || !v.toLowerCase().includes(label.toLowerCase());
+  });
+  check(
+    "B2 九语 freeLockLead 点名的第 4 项 = 本语言 supplierProfile.auditStatusLabel（术语单一事实源）",
+    labelBad.length === 0,
+    labelBad.join(", ")
+  );
+
+  const leakBad = LOCALES.filter((l) =>
+    PAID_LEAK_RE.test(String(getIn(DICTS[l], "supplierProfile.freeLockLead") ?? ""))
+  );
+  check(
+    "B3 九语 freeLockLead 未把任何其它 paid 字段（evidence / inspectionHistory / riskBreakdown）写进免费权益",
+    leakBad.length === 0,
+    leakBad.join(", ")
+  );
+
+  // 承诺的字段集合必须恰好落在 FREE_FIELDS 内
+  check(
+    "B4 FREE 层仍是 4 项且 freeLockLead 与之对齐（established/employees/exportMarkets/auditStatus）",
+    FREE_FIELDS.length === 4 &&
+      (FREE_FIELDS as readonly string[]).every((f) =>
+        ["established", "employees", "exportMarkets", "auditStatus"].includes(f)
+      ) &&
+      !(FREE_FIELDS as readonly string[]).includes("certifications")
+  );
+  check(
+    "B5 certifications 仍在 PAID 层（未被顺手挪回免费层）",
+    (PAID_FIELDS as readonly string[]).includes("certifications") &&
+      !(FREE_FIELDS as readonly string[]).includes("certifications")
+  );
+}
+
+section("9. CS-05c-r2 C：register {n} 仍绑定 COMPARE_MAX_SUPPLIERS");
+
+{
+  const reg = readSource("app/[locale]/register/page.tsx");
+
+  check(
+    "C1 register 页仍用 String(COMPARE_MAX_SUPPLIERS) 填充 {n}",
+    /String\(COMPARE_MAX_SUPPLIERS\)/.test(reg)
+  );
+  check(
+    "C2 register 页完全不引用 GUEST_PROFILE_LIMIT",
+    !/GUEST_PROFILE_LIMIT/.test(reg)
+  );
+  // 陷阱说明：两者**数值都是 5**，换错后页面照常渲染、tsc 无感、肉眼难辨。
+  check(
+    "C3 两个常量语义不同但数值巧合相同（这就是必须靠断言拦住的原因）",
+    GUEST_PROFILE_LIMIT === 5 && COMPARE_MAX_SUPPLIERS === 5
+  );
+
+  const raw = readRaw("app/[locale]/register/page.tsx");
+  const importBlock = raw.match(/^import[\s\S]*?from\s+"@\/lib\/suppliers";/m)?.[0] ?? "";
+  check(
+    "C4 register 页从 @/lib/suppliers 只取了 COMPARE_MAX_SUPPLIERS 相关符号",
+    /COMPARE_MAX_SUPPLIERS/.test(importBlock) && !/GUEST_PROFILE_LIMIT/.test(importBlock),
+    importBlock.replace(/\s+/g, " ").slice(0, 120)
+  );
+}
+
+section("9. CS-05c-r2 D：邮件模板符合当前 Free / Paid 字段语义");
+
+{
+  const notify = readRaw("lib/notify.ts");
+
+  // 只截取**注册回执（免费账号）**那一段。
+  // 付费欢迎邮件**合法地**包含 "Certification claims with their source"
+  // —— 那是 paid 层权益，一刀切会误伤。
+  const rStart = notify.indexOf("export async function notifyBuyerRegisterReceived");
+  const rEnd = notify.indexOf("// ---------- V2.1", rStart);
+  // 剥注释：函数体里就有 r2 的修复说明，其中**点名**了 certifications
+  // （"原句把 certifications 算进免费权益是错的"）。不剥就会把解释当残留。
+  const receipt =
+    rStart >= 0 && rEnd > rStart ? stripComments(notify.slice(rStart, rEnd)) : "";
+
+  check("D1 已定位注册回执 notifyBuyerRegisterReceived", receipt.length > 0);
+  check("D2 注册回执不再声称「per month」", !/per\s+month/i.test(receipt));
+  check(
+    "D3 注册回执的免费权益不含 certifications（那是 paid 层）",
+    !/certificat/i.test(receipt)
+  );
+  check(
+    "D4 注册回执点名的免费字段含 audit status（与 FREE_FIELDS 一致）",
+    /audit status/i.test(receipt)
+  );
+  check(
+    "D5 注册回执明确写出「no monthly limit」",
+    /no monthly limit/i.test(receipt)
+  );
+
+  // 反向守护：付费邮件必须**继续**把认证算作会员权益（防「一刀切删干净」）
+  const pStart = notify.indexOf("export async function notifyPaymentSucceeded");
+  const pEnd = notify.indexOf("export async function notifyPaymentFailed", pStart);
+  const paid =
+    pStart >= 0 && pEnd > pStart ? stripComments(notify.slice(pStart, pEnd)) : "";
+  check(
+    "D6 付费欢迎邮件仍把 Certification claims 列为已解锁权益（paid 层未被误删）",
+    /Certification claims/i.test(paid)
+  );
+  check(
+    "D7 付费欢迎邮件仍列出 evidence / inspection history / risk breakdown",
+    /Evidence records/i.test(paid) &&
+      /Inspection history/i.test(paid) &&
+      /Risk breakdown/i.test(paid)
+  );
+}
+
+// ---------------------------------------------------------------------------
+// 10. Final acceptance —— 本轮 6 条验收，逐条落成断言
+// ---------------------------------------------------------------------------
+
+section("10. Final acceptance（CS-05c-r2）");
+
+{
+  check("Guest 仍然是 5 unique suppliers", GUEST_PROFILE_LIMIT === 5, `实际 ${GUEST_PROFILE_LIMIT}`);
+
+  const access = readSource("lib/access.ts");
+  check(
+    "Free Buyer 仍是 unlimited basic（不再有每月额度）",
+    /unlimited/i.test(access) && !/FREE_PROFILE_LIMIT/.test(access)
+  );
+
+  check(
+    "Paid：certifications 仍是 paid",
+    (PAID_FIELDS as readonly string[]).includes("certifications")
+  );
+
+  const llmsCode = readSource("app/llms.txt/route.ts");
+  check("`/llms.txt` 不再出现「5 full profiles per month」", !/5\s+full\s+profiles\s+per\s+month/i.test(llmsCode));
+
+  const CERT_RE = /(certificat|Zertifizier|认证|認證|認証|الشهادات|شهادة|گواهی)/i;
+  const stillCert = LOCALES.filter((l) =>
+    CERT_RE.test(String(getIn(DICTS[l], "supplierProfile.freeLockLead") ?? ""))
+  );
+  check("9 locales freeLockLead 不再承诺 certifications", stillCert.length === 0, stillCert.join(", "));
+
+  // 「历史文档不修改」不能靠嘴说 —— 断言它们**仍保留原始记录**（= 没被顺手改写）
+  check(
+    "历史归档未被改写：docs/V2.1-GO-LIVE-CHECKLIST.md 仍保留「5 家/月」原始记录",
+    /5 家\/月/.test(readRaw("docs/V2.1-GO-LIVE-CHECKLIST.md"))
+  );
+  check(
+    "历史归档未被改写：docs/analytics.md 仍保留 free_quota_reached 的废止记录",
+    /free_quota_reached/.test(readRaw("docs/analytics.md"))
+  );
+  check(
+    "历史归档未被改写：supabase/migrations/001_init.sql 仍在版本库中",
+    exists("supabase/migrations/001_init.sql")
+  );
 }
 
 // ---------------------------------------------------------------------------

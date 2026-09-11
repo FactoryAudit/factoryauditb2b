@@ -52,7 +52,10 @@ export async function GET() {
   lines.push(`- [Supplier Comparison Tool](${BASE}/tools/compare): Rates two to five suppliers side by side across the same eight dimensions and shows where they diverge most. Self-assessment only, not verification.`);
   lines.push(`- [Supplier Verification Checklist](${BASE}/tools/supplier-verification-checklist): 29 checks across 6 stages to complete before placing an order.`);
   lines.push(`- [Supplier Directory](${BASE}/suppliers): Featured suppliers with verification level, risk score and evidence on record. Each listed supplier has a public profile at /suppliers/{slug} showing company, products, capabilities and risk score; verification evidence and risk detail are member content. Coverage is limited; post an RFQ if a supplier is not listed.`);
-  lines.push(`- [Free Account Registration](${BASE}/register): Free account for buyers — unlocks more supplier fields, up to 5 full profiles per month, saved profiles and side-by-side comparison. No payment card required.`);
+  // CS-05c-r2：旧文案写的是「up to 5 full profiles per month」—— CS-05a 起该额度已退役，
+  // Free Buyer 是**基础层无限浏览**。口径以 membership.freeLead 为准（本文件为机器可读的
+  // 站点权威说明，会被 AI 抓取器直接引述，不能停留在已废止的规则上）。
+  lines.push(`- [Free Account Registration](${BASE}/register): Free account for buyers — unlocks more supplier fields and unlimited browsing of basic supplier profiles, plus saved profiles and side-by-side comparison. No payment card required.`);
   lines.push(`- [Buyer Membership](${BASE}/membership): Founding Buyer membership at $${MEMBERSHIP_PRICE_USD}/year — full supplier database access, verification evidence summaries, factory details, advanced filters and export.`);
   lines.push(`- [Services](${BASE}/services): Supplier verification, factory audit, inspection, sourcing and supplier improvement.`);
   lines.push(`- [Supplier Verification Service](${BASE}/services/supplier-verification): Independent verification of registration, site, capability, quality and compliance.`);

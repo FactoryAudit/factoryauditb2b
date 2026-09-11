@@ -1860,7 +1860,7 @@
     "industryLabel": "Sector",
     "certificationsLabel": "Certificaciones",
     "freeLockTitle": "La cuenta gratuita desbloquea más detalles",
-    "freeLockLead": "Crea una cuenta gratuita para ver el año de fundación, el número de empleados, los mercados de exportación y las certificaciones.",
+    "freeLockLead": "Crea una cuenta gratuita para ver el año de fundación, el número de empleados, los mercados de exportación y el estado de la auditoría.",
     "freeLockCta": "Crear cuenta gratuita",
     "paidLockTitle": "Los miembros ven evidencias y detalles de riesgo",
     "paidLockLead": "Los miembros Founding Buyer (99 $/año) ven registros de evidencia, desgloses de riesgo, historial de auditoría y datos de inspección.",
