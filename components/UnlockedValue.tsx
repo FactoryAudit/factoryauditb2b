@@ -22,10 +22,6 @@ import { useGuestAccess } from "./GuestAccessProvider";
 type Unlocked = {
   fields: Record<string, string>;
   evidenceStatus: Record<string, string>;
-  /** 免费额度已用尽：字段拿不到不是因为档位不够，而是本月额度用完了 */
-  quotaExceeded?: boolean;
-  /** 服务端已本地化的额度提示，直接展示即可 */
-  quotaMessage?: string;
 };
 
 // 模块级缓存：一个详情页有 5 个字段要取，去重后只发一次请求。
@@ -61,8 +57,6 @@ async function loadUnlocked(
       const value: Unlocked = {
         fields: data.fields ?? {},
         evidenceStatus: data.evidenceStatus ?? {},
-        quotaExceeded: data.quotaExceeded === true,
-        quotaMessage: data.quotaMessage,
       };
       CACHE.set(key, value);
       return value;
@@ -152,17 +146,13 @@ export function UnlockedValue({
   const { data, loading } = useUnlocked(slug, locale);
   const value = data?.fields?.[field];
   if (loading || !value) {
-    // 额度用尽时给出解释。否则用户只看到一个占位符却不知道为什么 ——
-    // 比"不显示"更让人困惑，也不知道该去升级还是换个账号。
-    const hint = data?.quotaExceeded ? data.quotaMessage : undefined;
+    // CS-05c：这里原本在「额度用尽」时挂一个 title 提示，现已随额度口径一并撤掉。
+    // 拿不到值的原因只剩「档位不够（locked）」与「还在加载」两种，
+    // 而 locked 的含义由 UnlockGate 的 9 语 freeLock* / paidLock* 文案承担。
     if (className) {
-      return (
-        <span className={className} title={hint}>
-          {fallback}
-        </span>
-      );
+      return <span className={className}>{fallback}</span>;
     }
-    return hint ? <span title={hint}>{fallback}</span> : <>{fallback}</>;
+    return <>{fallback}</>;
   }
   return className ? <span className={className}>{value}</span> : <>{value}</>;
 }
@@ -189,9 +179,8 @@ export function UnlockedEvidenceStatus({
   const { data, loading } = useUnlocked(slug, locale);
   const label = data?.evidenceStatus?.[evidenceId];
   if (loading || !label) {
-    const hint = data?.quotaExceeded ? data.quotaMessage : undefined;
     return (
-      <span className={className} role="img" aria-label="Locked" title={hint}>
+      <span className={className} role="img" aria-label="Locked">
         {fallback}
       </span>
     );

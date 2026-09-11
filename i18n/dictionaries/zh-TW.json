@@ -923,7 +923,7 @@
     "searchClear": "清除",
     "unlockTitle": "需要更深入的供應商情報？",
     "unlockLead": "Founder Buyer 會員可取得增強的供應商情報，包括證據紀錄、風險洞察、更深入的工廠資訊、進階供應商研究與供應商監控。",
-    "unlockNote": "基礎供應商資訊免費瀏覽。免費帳戶每月可存取有限數量的增強供應商檔案。",
+    "unlockNote": "基礎供應商資訊免費瀏覽。證據紀錄、驗貨歷史與風險拆解屬於 Founder Buyer 會員權益。",
     "freeCta": "建立免費帳號",
     "memberCta": "查看會員方案",
     "freeNote": "基礎供應商資訊免費瀏覽。",
@@ -2964,7 +2964,7 @@
       "優先回應的核驗服務"
     ],
     "freeTitle": "先免費試用",
-    "freeLead": "免費帳號每月可查看 {n} 個供應商檔案。",
+    "freeLead": "免費帳號瀏覽基礎供應商檔案，沒有每月上限。",
     "freeCta": "建立免費帳號",
     "faqTitle": "常見問題",
     "faq": [
@@ -3247,14 +3247,12 @@
       "upgrade": "升級為 Founding Buyer",
       "planFree": "免費版",
       "planFounding": "Founding Buyer",
-      "quota": "本月已檢視 {used} / {limit} 家",
       "menuLabel": "帳號選單"
-    },
-    "quotaReached": "本月的 {limit} 個免費檔案額度已用完，升級後可繼續檢視。"
+    }
   },
   "login": {
     "metaTitle": "登入",
-    "metaDesc": "登入 FactoryAuditB2B 帳號，檢視供應商檔案、收藏的供應商與本月用量。",
+    "metaDesc": "登入 FactoryAuditB2B 帳號，檢視供應商檔案與收藏的供應商。",
     "h1": "登入",
     "lead": "使用註冊時填寫的電子信箱與密碼登入。",
     "noAccount": "還沒有帳號？",
@@ -3274,12 +3272,12 @@
   },
   "account": {
     "metaTitle": "我的帳號",
-    "metaDesc": "你的 FactoryAuditB2B 帳號：方案、本月檔案檢視用量與會員狀態。",
+    "metaDesc": "你的 FactoryAuditB2B 帳號：方案與會員狀態。",
     "h1": "我的帳號",
-    "lead": "方案、本月用量與會員資訊。",
+    "lead": "方案與會員資訊。",
     "panel": {
       "signedOutTitle": "登入後檢視帳號資訊",
-      "signedOutLead": "登入後即可檢視方案與本月用量。",
+      "signedOutLead": "登入後即可檢視方案與會員資訊。",
       "signInCta": "登入",
       "registerCta": "免費註冊",
       "noAccount": "還沒有帳號？",
@@ -3287,12 +3285,11 @@
       "planLabel": "目前方案",
       "planFree": "免費版",
       "planFounding": "Founding Buyer",
-      "quota": "本月已檢視 {used} / {limit} 家",
-      "quotaLabel": "本月用量",
+      "quotaLabel": "基礎檔案存取",
       "quotaUnlimited": "不限次數",
       "renewsLabel": "續費日期",
       "upgradeTitle": "解鎖完整供應商檔案",
-      "upgradeLead": "Founding Buyer 每年 ${price}，取消每月檔案檢視數量限制。",
+      "upgradeLead": "Founding Buyer 每年 ${price}，解鎖證據紀錄、驗貨歷史與風險拆解。",
       "upgradeCta": "查看會員方案"
     },
     "loading": "載入中…",
@@ -3450,11 +3447,6 @@
       "statusUnpublished": "預設未發布",
       "statusUnverified": "預設未核驗"
     }
-  },
-  "quotaBanner": {
-    "cta": "查看會員方案",
-    "fallback": "本月的免費查看額度已用完。",
-    "dismissLabel": "關閉"
   },
   "evidenceCenter": {
     "sectionVerification": "平台核驗",

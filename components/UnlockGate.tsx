@@ -30,8 +30,6 @@ type Labels = {
   signupCta: string;
   /** 已登录但档位不够时的引导文案 */
   upgradeCta: string;
-  /** 免费额度用尽时的提示 */
-  quotaReached?: string;
   /** 无障碍标签：锁定图标 */
   lockedLabel?: string;
 };
@@ -39,7 +37,6 @@ type Labels = {
 const DEFAULT_LABELS: Labels = {
   signupCta: "Sign up free",
   upgradeCta: "Upgrade",
-  quotaReached: "Monthly limit reached",
   lockedLabel: "Locked",
 };
 

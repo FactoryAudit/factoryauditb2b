@@ -27,8 +27,6 @@ export type AccountMenuDict = {
   upgrade: string;
   planFree: string;
   planFounding: string;
-  /** 免费额度提示："{used} / {limit} profiles this month" */
-  quota: string;
   /** 菜单按钮的 aria-label */
   menuLabel: string;
   /** /account/saved 入口文案。复用 account.navSaved，不另存一份 */
@@ -94,12 +92,6 @@ export default function AccountMenu({
   // 只显示 @ 前一段，避免在公共场合/截图里暴露完整邮箱
   const shortName = me.email ? me.email.split("@")[0] : dict.myAccount;
   const isPaid = me.tier === "founding_buyer" || me.isAdmin;
-  const quotaText =
-    me.profilesRemaining === null
-      ? null
-      : dict.quota
-          .replace("{used}", String(me.profilesUsed))
-          .replace("{limit}", String(me.profilesLimit));
 
   return (
     <div className="relative" ref={wrapRef}>
@@ -141,9 +133,6 @@ export default function AccountMenu({
                 >
                   {isPaid ? dict.planFounding : dict.planFree}
                 </span>
-                {quotaText && (
-                  <span className="text-xs text-[#64748b]">{quotaText}</span>
-                )}
               </div>
             </div>
 

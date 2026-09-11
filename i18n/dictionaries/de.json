@@ -923,7 +923,7 @@
     "searchClear": "Zurücksetzen",
     "unlockTitle": "Brauchen Sie tiefere Lieferanten-Intelligenz?",
     "unlockLead": "Founder Buyer Mitglieder erhalten erweiterte Intelligenz: Evidenzakten, Risikoanalysen, tiefere Fabrikdaten, erweiterte Recherche und Monitoring.",
-    "unlockNote": "Grundlegende Lieferanteninformationen sind kostenlos. Kostenlose Konten können jeden Monat eine begrenzte Anzahl erweiterter Profile aufrufen.",
+    "unlockNote": "Grundlegende Lieferanteninformationen sind kostenlos. Evidenzdatensätze, Inspektionsverlauf und Risikoaufschlüsselung sind Teil der Founder-Buyer-Mitgliedschaft.",
     "freeCta": "Kostenloses Konto erstellen",
     "memberCta": "Mitgliedschaft ansehen",
     "freeNote": "Grundlegende Lieferanteninformationen sind kostenlos einsehbar.",
@@ -2964,7 +2964,7 @@
       "Priorisierter Verifizierungssupport"
     ],
     "freeTitle": "Erst kostenlos starten",
-    "freeLead": "Kostenlose Konten erhalten {n} Lieferantenprofile pro Monat.",
+    "freeLead": "Kostenlose Konten durchsuchen Basisprofile ohne monatliches Limit.",
     "freeCta": "Kostenloses Konto erstellen",
     "faqTitle": "Häufige Fragen",
     "faq": [
@@ -3247,14 +3247,12 @@
       "upgrade": "Auf Founding Buyer upgraden",
       "planFree": "Free",
       "planFounding": "Founding Buyer",
-      "quota": "{used} / {limit} Profile diesen Monat",
       "menuLabel": "Kontomenü"
-    },
-    "quotaReached": "Du hast alle {limit} kostenlosen Profile dieses Monats genutzt. Upgrade für weitere Ansichten."
+    }
   },
   "login": {
     "metaTitle": "Anmelden",
-    "metaDesc": "Melden Sie sich bei Ihrem FactoryAuditB2B-Konto an, um Lieferantenprofile, gespeicherte Lieferanten und Ihre monatliche Nutzung zu sehen.",
+    "metaDesc": "Melden Sie sich bei Ihrem FactoryAuditB2B-Konto an, um Lieferantenprofile und gespeicherte Lieferanten zu sehen.",
     "h1": "Anmelden",
     "lead": "Verwenden Sie die E-Mail-Adresse und das Passwort, mit denen Sie sich registriert haben.",
     "noAccount": "Noch kein Konto?",
@@ -3274,12 +3272,12 @@
   },
   "account": {
     "metaTitle": "Mein Konto",
-    "metaDesc": "Ihr FactoryAuditB2B-Konto: Tarif, monatliche Profilnutzung und Mitgliedschaftsstatus.",
+    "metaDesc": "Ihr FactoryAuditB2B-Konto: Tarif und Mitgliedschaftsstatus.",
     "h1": "Mein Konto",
-    "lead": "Ihr Tarif, die monatliche Nutzung und die Details Ihrer Mitgliedschaft.",
+    "lead": "Ihr Tarif und die Details Ihrer Mitgliedschaft.",
     "panel": {
       "signedOutTitle": "Melden Sie sich an, um Ihr Konto zu sehen",
-      "signedOutLead": "Tarif und monatliche Nutzung erscheinen hier, sobald Sie angemeldet sind.",
+      "signedOutLead": "Tarif und Mitgliedschaftsdetails erscheinen hier, sobald Sie angemeldet sind.",
       "signInCta": "Anmelden",
       "registerCta": "Kostenloses Konto erstellen",
       "noAccount": "Noch kein Konto?",
@@ -3287,12 +3285,11 @@
       "planLabel": "Tarif",
       "planFree": "Free",
       "planFounding": "Founding Buyer",
-      "quota": "{used} / {limit} Profile diesen Monat",
-      "quotaLabel": "Nutzung dieses Monats",
-      "quotaUnlimited": "Unbegrenzte Profile",
+      "quotaLabel": "Zugriff auf Basisprofile",
+      "quotaUnlimited": "Unbegrenzt",
       "renewsLabel": "Verlängerung am",
       "upgradeTitle": "Vollständige Lieferantenprofile freischalten",
-      "upgradeLead": "Founding Buyer kostet {price} $ pro Jahr und hebt das monatliche Profillimit auf.",
+      "upgradeLead": "Founding Buyer kostet {price} $ pro Jahr und schaltet Evidenzdatensätze, Inspektionsverlauf und Risikoaufschlüsselung frei.",
       "upgradeCta": "Mitgliedschaft ansehen"
     },
     "loading": "Wird geladen…",
@@ -3450,11 +3447,6 @@
       "statusUnpublished": "Beginnt unveröffentlicht",
       "statusUnverified": "Beginnt unverifiziert"
     }
-  },
-  "quotaBanner": {
-    "cta": "Mitgliedschaften ansehen",
-    "fallback": "Sie haben alle kostenlosen Profilaufrufe dieses Monats genutzt.",
-    "dismissLabel": "Schließen"
   },
   "evidenceCenter": {
     "sectionVerification": "Verifizierung",

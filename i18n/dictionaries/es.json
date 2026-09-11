@@ -923,7 +923,7 @@
     "searchClear": "Limpiar",
     "unlockTitle": "¿Necesita inteligencia de proveedores más profunda?",
     "unlockLead": "Los miembros Founder Buyer acceden a inteligencia mejorada: registros de evidencia, análisis de riesgo, información más profunda de fábrica, investigación avanzada y monitorización.",
-    "unlockNote": "La información básica es gratuita. Las cuentas gratuitas pueden acceder a un número limitado de perfiles mejorados cada mes.",
+    "unlockNote": "La información básica es gratuita. Los registros de evidencia, el historial de inspecciones y el desglose de riesgo forman parte de la membresía Founder Buyer.",
     "freeCta": "Crear cuenta gratuita",
     "memberCta": "Ver membresía",
     "freeNote": "La información básica de proveedores se consulta gratis.",
@@ -2964,7 +2964,7 @@
       "Soporte de verificación prioritario"
     ],
     "freeTitle": "Empieza gratis",
-    "freeLead": "Las cuentas gratuitas obtienen {n} perfiles al mes.",
+    "freeLead": "Las cuentas gratuitas navegan los perfiles básicos sin límite mensual.",
     "freeCta": "Crear cuenta gratuita",
     "faqTitle": "Preguntas frecuentes",
     "faq": [
@@ -3247,14 +3247,12 @@
       "upgrade": "Actualizar a Founding Buyer",
       "planFree": "Free",
       "planFounding": "Founding Buyer",
-      "quota": "{used} / {limit} perfiles este mes",
       "menuLabel": "Menú de cuenta"
-    },
-    "quotaReached": "Ya usaste los {limit} perfiles gratuitos de este mes. Mejora tu plan para seguir viendo."
+    }
   },
   "login": {
     "metaTitle": "Iniciar sesión",
-    "metaDesc": "Accede a tu cuenta de FactoryAuditB2B para ver perfiles de proveedores, proveedores guardados y tu uso mensual.",
+    "metaDesc": "Accede a tu cuenta de FactoryAuditB2B para ver perfiles de proveedores y proveedores guardados.",
     "h1": "Iniciar sesión",
     "lead": "Usa el correo electrónico y la contraseña con los que te registraste.",
     "noAccount": "¿No tienes cuenta?",
@@ -3274,12 +3272,12 @@
   },
   "account": {
     "metaTitle": "Mi cuenta",
-    "metaDesc": "Tu cuenta de FactoryAuditB2B: plan, uso mensual de perfiles y estado de la membresía.",
+    "metaDesc": "Tu cuenta de FactoryAuditB2B: plan y estado de la membresía.",
     "h1": "Mi cuenta",
-    "lead": "Tu plan, tu uso mensual y los detalles de la membresía.",
+    "lead": "Tu plan y los detalles de la membresía.",
     "panel": {
       "signedOutTitle": "Inicia sesión para ver tu cuenta",
-      "signedOutLead": "Tu plan y tu uso mensual aparecen aquí cuando inicies sesión.",
+      "signedOutLead": "Tu plan y los detalles de la membresía aparecen aquí cuando inicies sesión.",
       "signInCta": "Iniciar sesión",
       "registerCta": "Crear una cuenta gratuita",
       "noAccount": "¿Aún no tienes cuenta?",
@@ -3287,12 +3285,11 @@
       "planLabel": "Plan",
       "planFree": "Free",
       "planFounding": "Founding Buyer",
-      "quota": "{used} / {limit} perfiles este mes",
-      "quotaLabel": "Uso mensual",
-      "quotaUnlimited": "Perfiles ilimitados",
+      "quotaLabel": "Acceso a perfiles básicos",
+      "quotaUnlimited": "Sin límite",
       "renewsLabel": "Se renueva el",
       "upgradeTitle": "Desbloquea los perfiles completos de proveedores",
-      "upgradeLead": "Founding Buyer cuesta {price} $ al año y elimina el límite mensual de perfiles.",
+      "upgradeLead": "Founding Buyer cuesta {price} $ al año y desbloquea registros de evidencia, historial de inspecciones y desglose de riesgo.",
       "upgradeCta": "Ver la membresía"
     },
     "loading": "Cargando…",
@@ -3450,11 +3447,6 @@
       "statusUnpublished": "Empieza sin publicar",
       "statusUnverified": "Empieza sin verificar"
     }
-  },
-  "quotaBanner": {
-    "cta": "Ver planes de membresía",
-    "fallback": "Has usado todas las visualizaciones gratuitas de este mes.",
-    "dismissLabel": "Cerrar"
   },
   "evidenceCenter": {
     "sectionVerification": "Verificación",

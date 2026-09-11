@@ -8,6 +8,9 @@ import {
   type RiskLevel,
 } from "@/lib/riskEngine";
 import { ANALYTICS_EVENTS, trackEvent } from "@/lib/analytics";
+// CS-05c：上限改为单一事实来源。此前这里硬编码 MAX_SUPPLIERS=5，
+// 而注册页权益文案的 {n} 用的是另一个常量 —— 数值碰巧相等，语义并不相同。
+import { COMPARE_MAX_SUPPLIERS } from "@/lib/suppliers";
 
 // 对比工具的档位：沿用风险引擎的等级锚点（LEVEL_SCORE）与权重（DIMENSION_STRUCTURE），
 // 不在这里重复定义任何分数或阈值，避免与引擎脱节。
@@ -39,7 +42,7 @@ interface Supplier {
   ratings: Record<string, CompareLevel>;
 }
 
-const MAX_SUPPLIERS = 5;
+const MAX_SUPPLIERS = COMPARE_MAX_SUPPLIERS;
 
 function scoreOf(ratings: Record<string, CompareLevel>): number {
   let total = 0;

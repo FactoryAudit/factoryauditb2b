@@ -1074,7 +1074,7 @@
     "searchClear": "清除",
     "unlockTitle": "需要更深入的供应商情报？",
     "unlockLead": "Founder Buyer 会员可获取增强的供应商情报，包括证据记录、风险洞察、更深入的工厂信息、高级供应商研究与供应商监控。",
-    "unlockNote": "基础供应商信息免费浏览。免费账户每月可访问有限数量的增强供应商档案。",
+    "unlockNote": "基础供应商信息免费浏览。证据记录、验货历史与风险拆解属于 Founder Buyer 会员权益。",
     "freeCta": "创建免费账号",
     "memberCta": "查看会员方案",
     "freeNote": "基础供应商信息免费浏览。",
@@ -2964,7 +2964,7 @@
       "优先响应的核验服务"
     ],
     "freeTitle": "先免费试用",
-    "freeLead": "免费账号每月可查看 {n} 个供应商档案。",
+    "freeLead": "免费账号浏览基础供应商档案，没有每月上限。",
     "freeCta": "创建免费账号",
     "faqTitle": "常见问题",
     "faq": [
@@ -3247,14 +3247,12 @@
       "upgrade": "升级为 Founding Buyer",
       "planFree": "免费版",
       "planFounding": "Founding Buyer",
-      "quota": "本月已查看 {used} / {limit} 家",
       "menuLabel": "账号菜单"
-    },
-    "quotaReached": "本月的 {limit} 个免费档案额度已用完，升级后可继续查看。"
+    }
   },
   "login": {
     "metaTitle": "登录",
-    "metaDesc": "登录 FactoryAuditB2B 账号，查看供应商档案、收藏的供应商与本月用量。",
+    "metaDesc": "登录 FactoryAuditB2B 账号，查看供应商档案与收藏的供应商。",
     "h1": "登录",
     "lead": "使用注册时填写的邮箱和密码登录。",
     "noAccount": "还没有账号？",
@@ -3274,12 +3272,12 @@
   },
   "account": {
     "metaTitle": "我的账号",
-    "metaDesc": "你的 FactoryAuditB2B 账号：套餐、本月档案查看用量与会员状态。",
+    "metaDesc": "你的 FactoryAuditB2B 账号：套餐与会员状态。",
     "h1": "我的账号",
-    "lead": "套餐、本月用量与会员信息。",
+    "lead": "套餐与会员信息。",
     "panel": {
       "signedOutTitle": "登录后查看账号信息",
-      "signedOutLead": "登录后即可查看套餐与本月用量。",
+      "signedOutLead": "登录后即可查看套餐与会员信息。",
       "signInCta": "登录",
       "registerCta": "免费注册",
       "noAccount": "还没有账号？",
@@ -3287,12 +3285,11 @@
       "planLabel": "当前套餐",
       "planFree": "免费版",
       "planFounding": "Founding Buyer",
-      "quota": "本月已查看 {used} / {limit} 家",
-      "quotaLabel": "本月用量",
+      "quotaLabel": "基础档案访问",
       "quotaUnlimited": "不限次数",
       "renewsLabel": "续费日期",
       "upgradeTitle": "解锁完整供应商档案",
-      "upgradeLead": "Founding Buyer 每年 ${price}，取消每月档案查看数量限制。",
+      "upgradeLead": "Founding Buyer 每年 ${price}，解锁证据记录、验货历史与风险拆解。",
       "upgradeCta": "查看会员方案"
     },
     "loading": "载入中…",
@@ -3450,11 +3447,6 @@
       "statusUnpublished": "默认未发布",
       "statusUnverified": "默认未核验"
     }
-  },
-  "quotaBanner": {
-    "cta": "查看会员方案",
-    "fallback": "本月的免费查看额度已用完。",
-    "dismissLabel": "关闭"
   },
   "evidenceCenter": {
     "sectionVerification": "平台核验",

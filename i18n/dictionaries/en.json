@@ -1184,7 +1184,7 @@
     "searchClear": "Clear",
     "unlockTitle": "Need deeper supplier intelligence?",
     "unlockLead": "Founder Buyer members can access enhanced supplier intelligence, including evidence records, risk insights, deeper factory information, advanced supplier research and supplier monitoring.",
-    "unlockNote": "Basic supplier information is free to browse. Free accounts can access a limited number of enhanced supplier profiles each month.",
+    "unlockNote": "Basic supplier information is free to browse. Evidence records, inspection history and risk breakdowns are part of Founder Buyer membership.",
     "freeCta": "Create free account",
     "memberCta": "View membership",
     "freeNote": "Basic supplier information is free to browse.",
@@ -2964,7 +2964,7 @@
       "Priority verification support"
     ],
     "freeTitle": "Start free first",
-    "freeLead": "Free accounts get {n} supplier profiles per month.",
+    "freeLead": "Free accounts browse basic supplier profiles with no monthly limit.",
     "freeCta": "Create free account",
     "faqTitle": "Frequently asked questions",
     "faq": [
@@ -3247,14 +3247,12 @@
       "upgrade": "Upgrade to Founding Buyer",
       "planFree": "Free",
       "planFounding": "Founding Buyer",
-      "quota": "{used} / {limit} profiles this month",
       "menuLabel": "Account menu"
-    },
-    "quotaReached": "You have used all {limit} free profiles this month. Upgrade to keep viewing."
+    }
   },
   "login": {
     "metaTitle": "Sign in",
-    "metaDesc": "Sign in to your FactoryAuditB2B account to view supplier profiles, saved suppliers and your monthly usage.",
+    "metaDesc": "Sign in to your FactoryAuditB2B account to view supplier profiles and saved suppliers.",
     "h1": "Sign in",
     "lead": "Use the email address and password you registered with.",
     "noAccount": "Don't have an account?",
@@ -3274,12 +3272,12 @@
   },
   "account": {
     "metaTitle": "My account",
-    "metaDesc": "Your FactoryAuditB2B account: plan, monthly profile usage and membership status.",
+    "metaDesc": "Your FactoryAuditB2B account: plan and membership status.",
     "h1": "My account",
-    "lead": "Your plan, monthly usage and membership details.",
+    "lead": "Your plan and membership details.",
     "panel": {
       "signedOutTitle": "Sign in to view your account",
-      "signedOutLead": "Your plan and monthly usage appear here once you sign in.",
+      "signedOutLead": "Your plan and membership details appear here once you sign in.",
       "signInCta": "Sign in",
       "registerCta": "Create a free account",
       "noAccount": "No account yet?",
@@ -3287,12 +3285,11 @@
       "planLabel": "Plan",
       "planFree": "Free",
       "planFounding": "Founding Buyer",
-      "quota": "{used} / {limit} profiles this month",
-      "quotaLabel": "Monthly usage",
-      "quotaUnlimited": "Unlimited profiles",
+      "quotaLabel": "Basic profile access",
+      "quotaUnlimited": "Unlimited",
       "renewsLabel": "Renews on",
       "upgradeTitle": "Unlock full supplier profiles",
-      "upgradeLead": "Founding Buyer is ${price} per year and removes the monthly profile limit.",
+      "upgradeLead": "Founding Buyer is ${price} per year and unlocks evidence records, inspection history and risk breakdowns.",
       "upgradeCta": "See membership"
     },
     "loading": "Loading…",
@@ -3450,11 +3447,6 @@
       "statusUnpublished": "Starts unpublished",
       "statusUnverified": "Starts unverified"
     }
-  },
-  "quotaBanner": {
-    "cta": "View membership plans",
-    "fallback": "You've used all your free profile views this month.",
-    "dismissLabel": "Dismiss"
   },
   "evidenceCenter": {
     "sectionVerification": "Verification",

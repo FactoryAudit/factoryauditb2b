@@ -25,11 +25,10 @@ export type AccountPanelDict = {
   planLabel: string;
   planFree: string;
   planFounding: string;
-  /** "{used} / {limit} profiles this month" */
-  quota: string;
-  /** 额度字段的小标题 */
+  /** 基础档案访问的小标题（CS-05c：不再是「本月用量」） */
   quotaLabel: string;
-  /** 付费用户：不限量 */
+  /** 基础层：不限量。CS-05c 起这是**唯一**的额度陈述 ——
+   *  「{used} / {limit} profiles this month」已随按月额度口径一并删除 */
   quotaUnlimited: string;
   renewsLabel: string;
   upgradeTitle: string;
@@ -84,11 +83,9 @@ export default function AccountPanel({
   }
 
   const isPaid = me.tier === "founding_buyer" || me.isAdmin;
-  const quotaText = me.profilesRemaining === null
-    ? t.quotaUnlimited
-    : t.quota
-        .replace("{used}", String(me.profilesUsed))
-        .replace("{limit}", String(me.profilesLimit));
+  // CS-05c：额度口径已退役 —— Free Buyer 的基础档案浏览就是无限，
+  // 面板只陈述这一个事实，不再显示 "{used} / {limit} profiles this month"。
+  const quotaText = t.quotaUnlimited;
 
   return (
     <div className="space-y-6">

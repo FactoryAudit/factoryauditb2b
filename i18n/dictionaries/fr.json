@@ -923,7 +923,7 @@
     "searchClear": "Effacer",
     "unlockTitle": "Besoin d'une intelligence fournisseur plus approfondie ?",
     "unlockLead": "Les membres Founder Buyer accèdent à une intelligence enrichie : dossiers de preuves, analyses de risque, informations d'usine approfondies, recherche avancée et suivi.",
-    "unlockNote": "Les informations de base sont gratuites. Les comptes gratuits peuvent consulter un nombre limité de profils enrichis chaque mois.",
+    "unlockNote": "Les informations de base sont gratuites. Les preuves, l'historique des inspections et le détail des risques font partie de l'adhésion Founder Buyer.",
     "freeCta": "Créer un compte gratuit",
     "memberCta": "Voir l'adhésion",
     "freeNote": "Les informations de base sur les fournisseurs sont consultables gratuitement.",
@@ -2964,7 +2964,7 @@
       "Support de vérification prioritaire"
     ],
     "freeTitle": "Commencez gratuitement",
-    "freeLead": "Les comptes gratuits donnent accès à {n} profils par mois.",
+    "freeLead": "Les comptes gratuits consultent les profils de base sans limite mensuelle.",
     "freeCta": "Créer un compte gratuit",
     "faqTitle": "Questions fréquentes",
     "faq": [
@@ -3247,14 +3247,12 @@
       "upgrade": "Passer à Founding Buyer",
       "planFree": "Free",
       "planFounding": "Founding Buyer",
-      "quota": "{used} / {limit} profils ce mois-ci",
       "menuLabel": "Menu du compte"
-    },
-    "quotaReached": "Vous avez utilisé les {limit} profils gratuits de ce mois. Passez au plan supérieur pour continuer."
+    }
   },
   "login": {
     "metaTitle": "Se connecter",
-    "metaDesc": "Connectez-vous à votre compte FactoryAuditB2B pour consulter les profils fournisseurs, vos fournisseurs enregistrés et votre utilisation mensuelle.",
+    "metaDesc": "Connectez-vous à votre compte FactoryAuditB2B pour consulter les profils fournisseurs et vos fournisseurs enregistrés.",
     "h1": "Se connecter",
     "lead": "Utilisez l'adresse e-mail et le mot de passe que vous avez utilisés lors de l'inscription.",
     "noAccount": "Vous n'avez pas de compte ?",
@@ -3274,12 +3272,12 @@
   },
   "account": {
     "metaTitle": "Mon compte",
-    "metaDesc": "Votre compte FactoryAuditB2B : formule, utilisation mensuelle des profils et statut d'adhésion.",
+    "metaDesc": "Votre compte FactoryAuditB2B : formule et statut d'adhésion.",
     "h1": "Mon compte",
-    "lead": "Votre formule, votre utilisation mensuelle et les détails de votre adhésion.",
+    "lead": "Votre formule et les détails de votre adhésion.",
     "panel": {
       "signedOutTitle": "Connectez-vous pour voir votre compte",
-      "signedOutLead": "Votre formule et votre utilisation mensuelle apparaîtront ici une fois connecté.",
+      "signedOutLead": "Votre formule et les détails de votre adhésion apparaîtront ici une fois connecté.",
       "signInCta": "Se connecter",
       "registerCta": "Créer un compte gratuit",
       "noAccount": "Pas encore de compte ?",
@@ -3287,12 +3285,11 @@
       "planLabel": "Formule",
       "planFree": "Free",
       "planFounding": "Founding Buyer",
-      "quota": "{used} / {limit} profils ce mois-ci",
-      "quotaLabel": "Utilisation mensuelle",
-      "quotaUnlimited": "Profils illimités",
+      "quotaLabel": "Accès aux profils de base",
+      "quotaUnlimited": "Illimité",
       "renewsLabel": "Renouvellement le",
       "upgradeTitle": "Débloquer les profils fournisseurs complets",
-      "upgradeLead": "Founding Buyer coûte {price} $ par an et supprime la limite mensuelle de profils.",
+      "upgradeLead": "Founding Buyer coûte {price} $ par an et débloque les preuves, l'historique des inspections et le détail des risques.",
       "upgradeCta": "Voir l'adhésion"
     },
     "loading": "Chargement…",
@@ -3450,11 +3447,6 @@
       "statusUnpublished": "Commence non publié",
       "statusUnverified": "Commence non vérifié"
     }
-  },
-  "quotaBanner": {
-    "cta": "Voir les formules d'abonnement",
-    "fallback": "Vous avez utilisé toutes les consultations gratuites de ce mois.",
-    "dismissLabel": "Fermer"
   },
   "evidenceCenter": {
     "sectionVerification": "Vérification",

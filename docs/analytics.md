@@ -180,7 +180,7 @@ NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN=""        # 仍未配置（可选）
 | `login` | 登录成功 | — |
 | `login_failed` | 登录失败（只记失败事实，不记邮箱密码） | — |
 | `logout` | 退出登录 | — |
-| `unlock_gate_cta` | 会员软锁 UnlockGate / QuotaBanner 的注册升级 CTA 点击（点击层） | — |
+| `unlock_gate_cta` | 会员软锁 UnlockGate 的注册升级 CTA 点击（点击层）。CS-05c 起 QuotaBanner 已删除，本事件只剩 UnlockGate 一个来源 | — |
 
 ### 3.7 付费成交类
 

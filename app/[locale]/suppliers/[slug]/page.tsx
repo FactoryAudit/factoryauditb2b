@@ -26,9 +26,6 @@ import { UnlockGate } from "@/components/UnlockGate";
 import { UnlockedValue, UnlockedEvidenceStatus } from "@/components/UnlockedValue";
 // CS-05b：Guest 的「5 家不同 supplier」额度判定（客户端 localStorage 记账）
 import { GuestAccessProvider } from "@/components/GuestAccessProvider";
-// 额度用尽时的升级引导（固定底栏）。整页只渲染一次，且必须是客户端组件 ——
-// 它依赖 /api/me 的档位，而页面本身要保持 ● SSG（不能在页面里读 cookies）。
-import QuotaBanner from "@/components/QuotaBanner";
 
 const BASE = "https://factoryauditb2b.com";
 const DIRECTORY_PATH = "/suppliers";
@@ -84,7 +81,6 @@ export default async function SupplierProfilePage({
   const ev = t.evidence;
   const v = t.verification;
   const rp = t.reportPreview;
-  const qb = t.quotaBanner;
   const p = (href: string) => localePath(locale, href);
 
   // CS-05b：注册 CTA 一律带 ?next= 回到**当前**供应商页。
@@ -211,24 +207,6 @@ export default async function SupplierProfilePage({
     <GuestAccessProvider key={s.id} supplierId={s.id}>
       <main className="container py-10" data-track-page={ANALYTICS_EVENTS.profileView}>
         <JsonLd data={jsonLd} />
-
-        {/* 升级引导底栏。
-            放在这里而不是页面顶部横幅：固定底栏不占文档流，零布局抖动（CLS）。
-            ⚠️ CS-05a 起 quotaExceeded 恒为 false（Free Buyer 已 unlimited），
-               因此本组件当前恒返回 null。CS-05b 的 Guest 第 6 家注册门**不复用**它 ——
-               它的文案是旧的「本月免费额度已用完」，给游客看属于无据声称。
-               注册门由下方 UnlockGate 的 freeLock* 文案承担。
-               是否删除本组件由 CS-05c 决定（本 CS 不改它，避免扩大改动面）。 */}
-        <QuotaBanner
-          slug={s.slug}
-          locale={locale}
-          contentLocale={uiLocale}
-          labels={{
-            cta: qb.cta,
-            fallback: qb.fallback,
-            dismissLabel: qb.dismissLabel,
-          }}
-        />
 
         {/* 面包屑（可见 + JSON-LD 一致） */}
         <nav aria-label={t.supplierProfile.directoryBreadcrumb} className="text-sm text-[#64748b]">

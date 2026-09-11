@@ -9,7 +9,7 @@
 //   NOTIFY_ADMIN_EMAIL     管理员收件邮箱，必填才会发
 //   FROM_EMAIL             发件地址，默认 support@factoryauditb2b.com
 import nodemailer from "nodemailer";
-import { MEMBERSHIP_PRICE_USD, FREE_PROFILE_LIMIT } from "./suppliers";
+import { MEMBERSHIP_PRICE_USD } from "./suppliers";
 
 const mailProvider = (process.env.MAIL_PROVIDER || "smtp").toLowerCase();
 const httpMailConfigured = Boolean(process.env.MAIL_HTTP_KEY);
@@ -349,7 +349,9 @@ export async function notifyBuyerRegisterReceived(data: {
       `Reference ID: ${data.id}`,
       "",
       "With a free account you can:",
-      `- Open ${FREE_PROFILE_LIMIT} supplier profiles per month (company details, certifications, export markets)`,
+      // CS-05c：不再是「每月 5 家」。免费档位是基础档案**无限**浏览；
+      // 且原句把 certifications 算进免费权益是错的 —— 认证属 paid 层。
+      "- Browse basic supplier profiles with no monthly limit (established year, employee count, export markets, audit status)",
       "- Save suppliers to your list",
       "- Submit RFQs and track their status",
       "",
@@ -392,11 +394,10 @@ export async function notifyPaymentSucceeded(data: {
       renewLine,
       "",
       "What is now unlocked:",
-      "- Unlimited supplier profiles (the free plan is limited to " +
-        `${FREE_PROFILE_LIMIT} per month)`,
       "- Evidence records with verification status and source",
       "- Inspection history",
       "- Risk breakdown by dimension",
+      "- Certification claims with their source",
       "",
       "Manage your subscription or update your card:",
       "https://factoryauditb2b.com/account",

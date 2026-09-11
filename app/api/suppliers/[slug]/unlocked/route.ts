@@ -37,13 +37,12 @@ export type UnlockedResponse = {
   fields: Record<string, string>;
   /** evidence id → 核验状态标签（已本地化）。paid 层才有内容 */
   evidenceStatus: Record<string, string>;
-  /** 免费额度已用尽（仅 free 档位可能出现） */
-  quotaExceeded?: boolean;
-  /** 本月已用额度。free 档位才有意义，其余为 0 */
-  profilesUsed?: number;
-  /** 额度用尽时的提示（已本地化）。由服务端产出，前端无需再备一份文案 */
-  quotaMessage?: string;
 };
+
+// CS-05c 移除：quotaExceeded / profilesUsed / quotaMessage。
+//   CS-05a 起「Free Buyer 每月 5 家」额度已废止，quotaExceeded 恒 false、
+//   profilesUsed 恒 0，这三个字段只剩下"看起来还有额度系统"的误导作用，
+//   且它们的唯一消费者 QuotaBanner 已删除。契约收敛为「能给什么就给什么」。
 
 export async function GET(
   req: Request,
@@ -151,16 +150,13 @@ export async function GET(
 
   // ---- 4. 组装响应 ----
   // CS-05a：不再记账（Free Buyer 已是 unlimited，见上方 §2 注释）。
-  const profilesUsed = 0;
-
+  // CS-05c：不再回传 quotaExceeded / profilesUsed —— 已无额度概念。
   return NextResponse.json(
     {
       slug,
       tier,
       fields,
       evidenceStatus,
-      quotaExceeded: false,
-      profilesUsed,
     } satisfies UnlockedResponse,
     { headers: NO_STORE }
   );
@@ -171,4 +167,7 @@ export async function GET(
 //   ① 那句话是旧的「Free 每月 5 家」口径，CS-05a 起该额度已废止 —— 继续渲染就是无据声称；
 //   ② CS-05b 的 Guest 第 6 家注册门复用 UnlockGate 既有的 freeLock* 文案（9 语齐备），
 //      不需要服务端再产一份提示。
+// CS-05c 收尾：dict.auth.quotaReached 这个键本身也已从 9 份字典中删除，
+//   同时删掉了 UnlockGate 的 labels.quotaReached（含硬编码英文兜底 "Monthly limit reached"）。
+//   至此「每月额度」在本仓库里没有任何可渲染的出口。
 

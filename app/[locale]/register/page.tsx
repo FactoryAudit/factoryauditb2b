@@ -5,7 +5,7 @@ import RegisterForm from "@/components/RegisterForm";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
-import { FREE_PROFILE_LIMIT, ANALYTICS_EVENTS } from "@/lib/suppliers";
+import { COMPARE_MAX_SUPPLIERS, ANALYTICS_EVENTS } from "@/lib/suppliers";
 import { isSignupEnabled } from "@/lib/access";
 import { sanitizeReturnPath } from "@/lib/guestAccess";
 
@@ -99,14 +99,22 @@ export default async function RegisterPage({
         <section>
           <h2 className="text-xl font-bold text-[#0f172a] mb-3">{r.benefitsTitle}</h2>
           <ul className="space-y-3">
-            {r.benefits.map((b: string) => (
-              <li key={b} className="flex gap-3 text-sm text-[#475569]">
-                <span className="shrink-0 w-5 h-5 rounded-full bg-[#e6eef6] text-[#0f4c81] text-xs flex items-center justify-center font-bold">
-                  ✓
-                </span>
-                {b.replace("{n}", String(FREE_PROFILE_LIMIT))}
-              </li>
-            ))}
+            {r.benefits.map((b: string) => {
+              // CS-05c：先替换、再拿替换后的文本当 key。
+              //   ① {n} 是**并排对比**的上限，不是免费额度 —— 此前误用
+              //      FREE_PROFILE_LIMIT 填充（数值同为 5，语义完全不同）。
+              //   ② key 不能直接用字典原文：带占位符的模板会被 React 原样写进 RSC payload，
+              //      任何"渲染产物不含 {n} 这类占位符"的检查都会因此失效。
+              const text = b.replace("{n}", String(COMPARE_MAX_SUPPLIERS));
+              return (
+                <li key={text} className="flex gap-3 text-sm text-[#475569]">
+                  <span className="shrink-0 w-5 h-5 rounded-full bg-[#e6eef6] text-[#0f4c81] text-xs flex items-center justify-center font-bold">
+                    ✓
+                  </span>
+                  {text}
+                </li>
+              );
+            })}
           </ul>
 
           <div className="card p-5 mt-6 bg-[#f7f9fc]">

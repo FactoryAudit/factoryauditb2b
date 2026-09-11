@@ -17,6 +17,7 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import {
   GUEST_PROFILE_LIMIT,
+  COMPARE_MAX_SUPPLIERS,
   FREE_FIELDS,
   PAID_FIELDS,
 } from "../lib/suppliers";
@@ -53,6 +54,15 @@ function section(title: string) {
   console.log(`\n=== ${title} ===`);
 }
 
+/** 读源码并**剥掉注释**再判定 —— 注释里提到某个名字不等于代码还在引用它。
+ *  （这条经验来自 CS-05b：曾因安全注释必须点名 paid 字段而误报 FAIL。） */
+function readModuleSource(rel: string): string {
+  return fs
+    .readFileSync(path.join(ROOT, rel), "utf8")
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/(^|[^:])\/\/[^\n]*/g, "$1");
+}
+
 // ---------------------------------------------------------------------------
 section("1. 常量与命名（防止把 Guest limit 误当成 Free limit）");
 // ---------------------------------------------------------------------------
@@ -60,7 +70,7 @@ section("1. 常量与命名（防止把 Guest limit 误当成 Free limit）");
   check("GUEST_PROFILE_LIMIT === 5", GUEST_PROFILE_LIMIT === 5, `实际 ${GUEST_PROFILE_LIMIT}`);
   check("guestProfileLimit() 与常量一致", guestProfileLimit() === GUEST_PROFILE_LIMIT);
 
-  // 源码扫描：访问判定文件不得再引用被废弃的 FREE_PROFILE_LIMIT
+  // 源码扫描：访问判定文件不得再引用 FREE_PROFILE_LIMIT
   const accessSrc = fs.readFileSync(path.join(ROOT, "lib", "access.ts"), "utf8");
   const unlockedSrc = fs.readFileSync(
     path.join(ROOT, "app", "api", "suppliers", "[slug]", "unlocked", "route.ts"),
@@ -74,11 +84,23 @@ section("1. 常量与命名（防止把 Guest limit 误当成 Free limit）");
     "unlocked 路由不再引用 FREE_PROFILE_LIMIT",
     !/FREE_PROFILE_LIMIT/.test(unlockedSrc)
   );
+  // CS-05c：该常量已**彻底删除**（说明文字里提到它不算引用，故先剥注释再判定）。
+  // 从「@deprecated 但仍在」升级为「不存在」—— 只要它还在导出，就还有人可能误用。
+  const suppliersSrc = readModuleSource("lib/suppliers.ts");
   check(
-    "lib/suppliers.ts 已把 FREE_PROFILE_LIMIT 标记 @deprecated",
-    /@deprecated[\s\S]{0,400}FREE_PROFILE_LIMIT/.test(
-      fs.readFileSync(path.join(ROOT, "lib", "suppliers.ts"), "utf8")
-    )
+    "lib/suppliers.ts 已彻底移除 FREE_PROFILE_LIMIT（导出语句不存在）",
+    !/export\s+const\s+FREE_PROFILE_LIMIT\b/.test(suppliersSrc),
+    "仍存在 export const FREE_PROFILE_LIMIT"
+  );
+  check(
+    "FREE_PROFILE_LIMIT 没有可从 lib/suppliers 导入的出口",
+    !/FREE_PROFILE_LIMIT\s*,/.test(suppliersSrc) &&
+      !/\{\s*FREE_PROFILE_LIMIT/.test(suppliersSrc)
+  );
+  check(
+    "COMPARE_MAX_SUPPLIERS === 5（对比工具上限的单一事实来源）",
+    COMPARE_MAX_SUPPLIERS === 5,
+    `实际 ${COMPARE_MAX_SUPPLIERS}`
   );
 }
 

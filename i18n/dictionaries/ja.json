@@ -923,7 +923,7 @@
     "searchClear": "クリア",
     "unlockTitle": "より深いサプライヤー情報が必要ですか？",
     "unlockLead": "Founder Buyer メンバーは、証拠記録、リスク分析、詳細な工場情報、高度なリサーチ、サプライヤーモニタリングを含む強化情報を利用できます。",
-    "unlockNote": "基本的なサプライヤー情報は無料で閲覧できます。無料アカウントでは、拡張プロフィールの閲覧は毎月一定数までです。",
+    "unlockNote": "基本的なサプライヤー情報は無料で閲覧できます。証拠記録、検査履歴、リスク内訳は Founder Buyer 会員の対象です。",
     "freeCta": "無料アカウント作成",
     "memberCta": "会員プランを見る",
     "freeNote": "基本的なサプライヤー情報は無料でご覧いただけます。",
@@ -2964,7 +2964,7 @@
       "優先対応の検証サポート"
     ],
     "freeTitle": "まずは無料で",
-    "freeLead": "無料アカウントでは毎月 {n} 件のプロフィールを閲覧できます。",
+    "freeLead": "無料アカウントは基本プロフィールを月間上限なしで閲覧できます。",
     "freeCta": "無料アカウント作成",
     "faqTitle": "よくある質問",
     "faq": [
@@ -3247,14 +3247,12 @@
       "upgrade": "Founding Buyer にアップグレード",
       "planFree": "Free",
       "planFounding": "Founding Buyer",
-      "quota": "今月の閲覧数 {used} / {limit} 社",
       "menuLabel": "アカウントメニュー"
-    },
-    "quotaReached": "今月の無料枠 {limit} 社を使い切りました。引き続きご覧になるにはアップグレードしてください。"
+    }
   },
   "login": {
     "metaTitle": "ログイン",
-    "metaDesc": "FactoryAuditB2B アカウントにログインして、サプライヤープロフィール、保存したサプライヤー、今月の利用状況を確認できます。",
+    "metaDesc": "FactoryAuditB2B アカウントにログインして、サプライヤープロフィールと保存したサプライヤーを確認できます。",
     "h1": "ログイン",
     "lead": "登録時に使用したメールアドレスとパスワードでログインしてください。",
     "noAccount": "アカウントをお持ちでない場合",
@@ -3274,12 +3272,12 @@
   },
   "account": {
     "metaTitle": "マイアカウント",
-    "metaDesc": "FactoryAuditB2B アカウントのプラン、今月のプロフィール閲覧数、会員ステータスを確認できます。",
+    "metaDesc": "FactoryAuditB2B アカウントのプランと会員ステータスを確認できます。",
     "h1": "マイアカウント",
-    "lead": "プラン、今月の利用状況、会員情報。",
+    "lead": "プランと会員情報。",
     "panel": {
       "signedOutTitle": "ログインするとアカウント情報を確認できます",
-      "signedOutLead": "ログインすると、プランと今月の利用状況が表示されます。",
+      "signedOutLead": "ログインすると、プランと会員情報が表示されます。",
       "signInCta": "ログイン",
       "registerCta": "無料アカウントを作成",
       "noAccount": "アカウントをお持ちでない場合",
@@ -3287,12 +3285,11 @@
       "planLabel": "プラン",
       "planFree": "Free",
       "planFounding": "Founding Buyer",
-      "quota": "今月の閲覧数 {used} / {limit} 社",
-      "quotaLabel": "今月の利用状況",
-      "quotaUnlimited": "閲覧数無制限",
+      "quotaLabel": "基本プロフィール閲覧",
+      "quotaUnlimited": "無制限",
       "renewsLabel": "更新日",
       "upgradeTitle": "サプライヤープロフィールをすべて表示",
-      "upgradeLead": "Founding Buyer は年額 $ {price} で、月間の閲覧制限がなくなります。",
+      "upgradeLead": "Founding Buyer は年額 $ {price} で、証拠記録・検査履歴・リスク内訳を利用できます。",
       "upgradeCta": "会員プランを見る"
     },
     "loading": "読み込み中…",
@@ -3450,11 +3447,6 @@
       "statusUnpublished": "初期は非公開",
       "statusUnverified": "初期は未検証"
     }
-  },
-  "quotaBanner": {
-    "cta": "会員プランを見る",
-    "fallback": "今月の無料閲覧枠を使い切りました。",
-    "dismissLabel": "閉じる"
   },
   "evidenceCenter": {
     "sectionVerification": "プラットフォーム検証",

@@ -8,7 +8,6 @@ import { buildPageMetadata } from "@/lib/pageMeta";
 import {
   MEMBERSHIP_PRICE_USD,
   MEMBERSHIP_PERIOD,
-  FREE_PROFILE_LIMIT,
   ANALYTICS_EVENTS,
 } from "@/lib/suppliers";
 
@@ -124,8 +123,10 @@ export default async function MembershipPage({
             <span className="text-5xl font-extrabold text-[#0f172a]">$0</span>
             <span className="text-lg text-[#64748b]">/ {m.pricePeriod}</span>
           </div>
+          {/* CS-05c：文案里已无 {n} —— 免费档位不再是「每月 N 家」，
+              而是基础档案无限浏览，付费档解锁证据/验货历史/风险拆解。 */}
           <p className="mt-3 text-sm leading-relaxed text-[#475569]">
-            {m.freeLead.replace("{n}", String(FREE_PROFILE_LIMIT))}
+            {m.freeLead}
           </p>
           <div className="flex-1" />
           <Link

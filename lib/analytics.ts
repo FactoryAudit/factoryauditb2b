@@ -88,12 +88,14 @@ export const ANALYTICS_EVENTS = {
   /** 会员软锁 UnlockGate 里的「注册 / 升级」CTA 点击（V2.1） */
   unlockGateCta: "unlock_gate_cta",
   /**
-   * 免费额度用尽（V2.1 旧口径：本月已看满 FREE_PROFILE_LIMIT 家）。
+   * 免费额度用尽（V2.1 旧口径：本月已看满 5 家）。
    *
    * ⚠️ CS-05a 起该额度已废止（Free Buyer = basic 无限浏览），本事件**永不接线**，
    *    留在 UNWIRED_EVENTS 里是刻意的 —— 防止有人把它当"新事件"重新接上，
    *    那会让 GA4 里出现一个口径错误的转化信号。
    *    任何 Free Buyer 的正常浏览都不得触发它。
+   *    CS-05c 又移除了它唯一可能的发射点（QuotaBanner）与对应常量，
+   *    现在源码里连"能重新接上"的钩子都不存在了。
    */
   quotaReached: "free_quota_reached",
 

@@ -2,7 +2,7 @@
 //
 // 三层权限模型（需求 V2 §9/§10/§11）：
 //   public —— 游客可见，SEO 直出（禁止隐藏 Risk Score，禁止做成空墙）
-//   free   —— 注册 Free Account 后可见（每月 FREE_PROFILE_LIMIT 个 profile）
+//   free   —— 注册 Free Account 后可见（CS-05a 起为**无限**浏览，不再有每月额度）
 //   paid   —— Founding Buyer Membership（价格见下方 MEMBERSHIP_PRICE_USD）可见
 //
 // 页面/组件只消费本文件的字段清单与常量；分层逻辑不散落在页面代码里。
@@ -67,14 +67,14 @@ export const PAID_FIELDS = [
 export const GUEST_PROFILE_LIMIT = 5;
 
 /**
- * @deprecated CS-05a：Free Buyer 已改为「basic Supplier Profile 无限浏览」，
- * 这个 5 **不再是 Free Buyer 的额度**。保留导出仅为兼容旧引用（注册页 / membership 页 /
- * 欢迎邮件文案），CS-05c 会连同文案一起清理。
+ * 并排对比工具（/tools/compare）一次可加入的供应商数量上限。
  *
- * 🚫 **禁止在任何访问判定 / 额度计算里使用本常量** —— 新代码一律用 `GUEST_PROFILE_LIMIT`。
- *    （历史坑：它曾被当成「Free 每月 5 家」，与本名极易混淆，故显式废弃。）
+ * CS-05c 抽出为单一事实来源。此前这个 5 在 `components/tools/SupplierComparison.tsx`
+ * 里硬编码为 `MAX_SUPPLIERS`，而注册页的权益文案「并排对比多达 {n} 家供应商」
+ * 却用 `FREE_PROFILE_LIMIT` 去填 `{n}` —— **语义错配，只是数值碰巧都是 5**。
+ * 一旦任一常量变动，页面就会开始撒一个自己都不知道的谎。两处现在共用本常量。
  */
-export const FREE_PROFILE_LIMIT = 5;
+export const COMPARE_MAX_SUPPLIERS = 5;
 
 /** Featured 数量区间（需求：4–10 家；当前真实收录 4 家，全部 Featured） */
 export const FEATURED_MIN = 4;
