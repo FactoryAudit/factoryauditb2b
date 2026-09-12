@@ -29,8 +29,12 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function get(path, { accept = "text/html" } = {}) {
   let lastErr = null;
-  for (let i = 0; i < 4; i++) {
-    if (i > 0) await sleep(400 * i);
+  // Cloudflare 边缘偶发 503（2026-09-12 实测：/ar/standard-report 连续 503 约 2s+）。
+  // 退避必须到「秒级指数」——400ms 级退避扛不住边缘抖动，会制造假 FAIL。
+  // 只加韧性和重试次数，**不放宽任何断言**。
+  const ATTEMPTS = 5;
+  for (let i = 0; i < ATTEMPTS; i++) {
+    if (i > 0) await sleep(1000 * Math.pow(2, i - 1)); // 1s, 2s, 4s, 8s
     try {
       const res = await fetch(BASE + path, {
         redirect: "follow",
@@ -47,7 +51,7 @@ async function get(path, { accept = "text/html" } = {}) {
       continue;
     }
   }
-  throw new Error("GET " + path + " 重试耗尽: " + lastErr);
+  throw new Error("GET " + path + " 重试 " + ATTEMPTS + " 次耗尽: " + lastErr);
 }
 
 async function main() {
