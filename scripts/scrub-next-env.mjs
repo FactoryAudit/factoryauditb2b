@@ -53,6 +53,10 @@ const BUILD_OR_UNUSED = [
   "SMTP_USER",
   "SMTP_PASS",
   "GOOGLE_SHEETS_REGISTER_WEBHOOK",
+  // 🔴 Supabase Management API 个人访问令牌（可执行任意 SQL，含 DDL）。
+  //    只在本地跑迁移脚本时用，**运行时 Worker 完全不需要它**。
+  //    不清空 = 把「能改数据库结构」的令牌随 Worker 一起上传，必须清。
+  "SUPABASE_ACCESS_TOKEN",
 ];
 
 const SCRUB = new Set([...HAS_SECRET, ...BUILD_OR_UNUSED]);
