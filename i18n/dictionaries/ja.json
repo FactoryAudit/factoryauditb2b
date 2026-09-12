@@ -2379,7 +2379,7 @@
   "auditGuide": {
     "breadcrumb": "監査ガイド",
     "metaTitle": "{country}の{type}監査",
-    "metaDesc": "Find {type} audit, inspection and qualified suppliers in {country}. Verified factory directory, RFQ and audit request by FactoryAuditB2B.",
+    "metaDesc": "{country}の{type}監査・検査・認定サプライヤーを探す。FactoryAuditB2B の検証済み工場ディレクトリ、RFQ、監査依頼。",
     "h1": "{country}の{type}監査",
     "ownerLabel": "発行・管理機関：",
     "standardsTitle": "関連規格と認証",

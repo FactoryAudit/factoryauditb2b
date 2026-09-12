@@ -2379,7 +2379,7 @@
   "auditGuide": {
     "breadcrumb": "أدلة التدقيق",
     "metaTitle": "تدقيق {type} في {country}",
-    "metaDesc": "Find {type} audit, inspection and qualified suppliers in {country}. Verified factory directory, RFQ and audit request by FactoryAuditB2B.",
+    "metaDesc": "اعثر على تدقيق {type} والفحص والموردين المؤهلين في {country}. دليل مصانع مُتحقَّق منه، وطلب RFQ وتدقيق من FactoryAuditB2B.",
     "h1": "تدقيق {type} في {country}",
     "ownerLabel": "الجهة المُصدِرة:",
     "standardsTitle": "المعايير والشهادات ذات الصلة",

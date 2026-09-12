@@ -137,7 +137,9 @@ export const CONVERSION_EVENTS = [
   ANALYTICS_EVENTS.inspectionRequest, // /services/inspection 表单提交
   ANALYTICS_EVENTS.rfqSubmit, // /rfq 正式询价提交
   ANALYTICS_EVENTS.customServiceSubmit, // /custom-services 咨询提交
-  ANALYTICS_EVENTS.sampleReportSubmit, // 样例报告留资提交
+  // CS-01：sampleReportSubmit 已移出 —— /sample-report 308 到 /standard-report 之后
+  // 该页不再渲染，这个留资事件事实上没有 emitter。继续留在转化桶会在 GA4 里出现
+  // 恒为 0 的假转化。已移入 UNWIRED_EVENTS，与同类的 quotaReached 一致。
   ANALYTICS_EVENTS.standardReportSubmit, // 标准报告样张下载留资提交（/standard-report）
   ANALYTICS_EVENTS.supplierNetworkSubmit, // 供应商入驻提交
   // ---- Qualified Lead：服务端确认已受理 ----
@@ -172,7 +174,7 @@ export const CLICK_LEVEL_EVENTS = [
   ANALYTICS_EVENTS.registerCta,
   ANALYTICS_EVENTS.membershipCta,
   ANALYTICS_EVENTS.unlockGateCta,
-  ANALYTICS_EVENTS.sampleReportCta,
+  // CS-01：sampleReportCta 已移入 UNWIRED_EVENTS（/sample-report 已 308，无 emitter）
   ANALYTICS_EVENTS.standardReportCtaClick,
   ANALYTICS_EVENTS.foundingBuyerCheckoutStart,
   ANALYTICS_EVENTS.verificationCheckoutStart,
@@ -207,6 +209,11 @@ export const UNWIRED_EVENTS = [
   ANALYTICS_EVENTS.freeAccountSignupComplete,
   ANALYTICS_EVENTS.profileSave,
   ANALYTICS_EVENTS.quotaReached,
+  // CS-01：/sample-report 已 308 到 /standard-report，该页不再渲染 ⇒
+  // sample-report 相关的两个事件都没有 emitter 了。等后续专项清理确认不再需要后
+  // 可一并删除常量；在那之前按「已声明但未接线」归档在此。
+  ANALYTICS_EVENTS.sampleReportCta,
+  ANALYTICS_EVENTS.sampleReportSubmit,
 ] as const;
 
 /**

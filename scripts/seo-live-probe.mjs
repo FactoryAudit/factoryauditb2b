@@ -19,7 +19,8 @@ const SAMPLES = [
   "/zh/suppliers",
   "/zh/suppliers/guangzhou-sunny-food",
   "/standard-report",
-  "/sample-report",
+  // CS-01：/sample-report 已 308 到 /standard-report，不再作为独立可索引页抽样
+  "/zh/standard-report",
   "/membership",
   "/pricing",
   "/register",

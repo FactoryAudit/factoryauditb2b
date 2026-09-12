@@ -134,11 +134,9 @@ export default function SiteFooter({
                 {dict.monitoring}
               </Link>
             </li>
-            <li>
-              <Link href={p("/sample-report")} className="hover:text-white">
-                {dict.sampleReport}
-              </Link>
-            </li>
+            {/* CS-01：这里原本还有一个 /sample-report 链接。该页已 308 到
+                /standard-report，再留一条会变成「点进去先跳一次」，且页脚出现两条
+                指向同一目标的链接。已删除，保留下方 /standard-report 条目。 */}
             <li>
               <Link href={p("/standard-report")} className="hover:text-white">
                 {dict.standardReport}

@@ -68,7 +68,9 @@ export async function GET() {
   lines.push(`- [Field Reports](${BASE}/field-reports): Short anonymised notes from inspection, audit and verification work, showing what is checked on site and how findings are recorded.`);
   lines.push(`- [Methodology](${BASE}/methodology): How supplier risk scores are calculated, including dimension weights and limitations.`);
   lines.push(`- [Pricing](${BASE}/pricing): Services and plans, with indicative ranges for reports, verification and audits.`);
-  lines.push(`- [Sample Report](${BASE}/sample-report): A worked example of a Supplier Due Diligence Report with fictional data, showing the structure and detail you receive.`);
+  // CS-01：原「[Sample Report](${BASE}/sample-report)」条目已删除 —— 该页 308 到
+  // /standard-report，llms.txt 里保留一个指向重定向的入口没有意义，
+  // 且下面已有一条信息更完整的 Standard Report Specimen 条目。
   lines.push(`- [Standard Report Specimen](${BASE}/standard-report): The full standard report template, 13 sections and 8 scored dimensions, readable in full without registration. Downloading a copy requires a short registration.`);
   lines.push(`- [RFQ](${BASE}/rfq): Turn sourcing requirements into a structured RFQ.`);
   lines.push(`- [Join the Supplier Network](${BASE}/join-supplier-network): Free supplier registration for an international buyer-facing profile. No guarantee of orders or certification; status and evidence level are decided by human review.`);

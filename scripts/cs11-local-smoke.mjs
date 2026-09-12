@@ -82,8 +82,15 @@ const sm = await get("/sitemap.xml");
 check("4a sitemap.xml 收录 /standard-report", sm.html.includes("/standard-report"));
 const llms = await get("/llms.txt");
 check("4b llms.txt 收录 /standard-report", llms.html.includes("/standard-report"));
+// CS-01 P1-8：/sample-report 已 308 到 /standard-report（原两页争夺同一批
+//「supplier audit report sample」词）。断言语义由「仍 200」改写为
+//「跟随重定向后确实落在标准报告页」——用页面自身的埋点标识判定，不看 URL。
 const sample = await get("/sample-report");
-check("4c /sample-report 未回归（仍 200）", sample.status === 200, `status=${sample.status}`);
+check(
+  "4c /sample-report 308 到 /standard-report",
+  sample.status === 200 && sample.html.includes('data-track-page="standard_report"'),
+  `status=${sample.status}`
+);
 const admin = await get("/admin/report-standard");
 check("4d 🔴 /admin/report-standard 匿名仍 404（闸门未丢）", admin.status === 404, `status=${admin.status}`);
 

@@ -10,6 +10,7 @@ import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i1
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { twText } from "@/lib/tw";
+import { countryDisplayName } from "@/lib/countryNames";
 
 export const dynamic = "force-static";
 
@@ -43,8 +44,10 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { locale, c, a } = await resolve(params);
   const t = await getDictionary(locale);
   const g = t.auditGuide;
-  const title = g.metaTitle.replaceAll("{type}", a.nameEn).replaceAll("{country}", c.name);
-  const description = g.metaDesc.replaceAll("{type}", a.nameEn).replaceAll("{country}", c.name);
+  // CS-01：国名必须本地化。此前一律填英文名，中文页渲染成「ChinaBSCI 验厂」。
+  const country = countryDisplayName(locale, c.code, c.name);
+  const title = g.metaTitle.replaceAll("{type}", a.nameEn).replaceAll("{country}", country);
+  const description = g.metaDesc.replaceAll("{type}", a.nameEn).replaceAll("{country}", country);
   return buildPageMetadata({
     locale,
     path: `/audit-guide/${c.code}/${a.code}`,
@@ -58,6 +61,8 @@ export default async function AuditGuidePage({ params }: { params: Promise<Param
   const t = await getDictionary(locale);
   const lp = (href: string) => localePath(locale, href);
   const g = t.auditGuide;
+  // CS-01：正文里所有国名显示同样走本地化（面包屑 / H1 / 供应商标题 / 结构化数据）
+  const country = countryDisplayName(locale, c.code, c.name);
   const isZhTW = locale === "zh-TW";
   const zhName = (v: string | null) => (v ? (isZhTW ? twText(v) : v) : null);
 
@@ -75,12 +80,12 @@ export default async function AuditGuidePage({ params }: { params: Promise<Param
           {
             "@context": "https://schema.org",
             "@type": "Service",
-            name: `${a.nameEn} Audit & Verification in ${c.name}`,
+            name: `${a.nameEn} Audit & Verification in ${country}`,
             description: g.metaDesc
               .replaceAll("{type}", a.nameEn)
-              .replaceAll("{country}", c.name),
+              .replaceAll("{country}", country),
             serviceType: a.nameEn,
-            areaServed: c.name,
+            areaServed: country,
             provider: { "@type": "Organization", name: "FactoryAuditB2B", url: BASE },
           },
           {
@@ -93,13 +98,13 @@ export default async function AuditGuidePage({ params }: { params: Promise<Param
               {
                 "@type": "ListItem",
                 position: 2,
-                name: c.name,
+                name: country,
                 item: `${BASE}/countries/${c.code}`,
               },
               {
                 "@type": "ListItem",
                 position: 3,
-                name: `${a.nameEn} — ${c.name}`,
+                name: `${a.nameEn} — ${country}`,
                 item: `${BASE}/audit-guide/${c.code}/${a.code}`,
               },
             ],
@@ -113,13 +118,13 @@ export default async function AuditGuidePage({ params }: { params: Promise<Param
         </Link>{" "}
         /{" "}
         <Link href={lp(`/countries/${c.code}`)} className="hover:underline">
-          {c.name}
+          {country}
         </Link>{" "}
         / {a.nameEn}
       </nav>
 
       <h1 className="text-3xl font-bold">
-        {g.h1.replaceAll("{type}", a.nameEn).replaceAll("{country}", c.name)}
+        {g.h1.replaceAll("{type}", a.nameEn).replaceAll("{country}", country)}
       </h1>
       <p className="mt-2 max-w-3xl text-gray-600">
         {a.nameZh && <span className="block">{zhName(a.nameZh)}</span>}
@@ -150,7 +155,7 @@ export default async function AuditGuidePage({ params }: { params: Promise<Param
         <h2 className="text-xl font-semibold">
           {g.suppliersTitle
             .replaceAll("{type}", a.nameEn)
-            .replaceAll("{country}", c.name)
+            .replaceAll("{country}", country)
             .replaceAll("{n}", String(suppliers.length))}
         </h2>
         {suppliers.length === 0 ? (

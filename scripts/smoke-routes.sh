@@ -36,7 +36,7 @@ paths=(
   "/methodology"
   "/trust"
   "/pricing"
-  "/sample-report"
+  "/standard-report"
   "/case-studies"
   "/case-studies/trading-company-posing-as-factory"
   "/field-reports"

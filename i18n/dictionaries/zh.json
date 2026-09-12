@@ -2378,9 +2378,9 @@
   },
   "auditGuide": {
     "breadcrumb": "验厂指南",
-    "metaTitle": "{country}{type} 验厂",
-    "metaDesc": "Find {type} audit, inspection and qualified suppliers in {country}. Verified factory directory, RFQ and audit request by FactoryAuditB2B.",
-    "h1": "{country}{type} 验厂",
+    "metaTitle": "{country} {type} 验厂",
+    "metaDesc": "在{country}寻找{type}验厂、检验与合格供应商。FactoryAuditB2B 提供经核查的工厂目录、RFQ 与验厂申请。",
+    "h1": "{country} {type} 验厂",
     "ownerLabel": "发证/管理主体：",
     "standardsTitle": "相关认证与标准",
     "noStandards": "暂未记录相关标准。",

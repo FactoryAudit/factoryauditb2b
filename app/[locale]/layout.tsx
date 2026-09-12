@@ -100,7 +100,9 @@ export async function generateMetadata({
           },
         }
       : {}),
-    other: { "llms.txt": `${BASE}/llms.txt` },
+    // CS-01：此处原本还有 `other: { "llms.txt": ... }`，会渲染成
+    // <meta name="llms.txt" content="...">。`name="llms.txt"` 不是任何标准/注册过的
+    // meta 名，属于无效标签；llms.txt 的声明位置应该是文件本身，不是 meta。已移除。
   };
 }
 
@@ -153,9 +155,10 @@ export default async function RootLayout({
       }
       dir={locale === "ar" ? "rtl" : "ltr"}
     >
-      <head>
-        <link rel="llms.txt" href={`${BASE}/llms.txt`} />
-      </head>
+      {/* CS-01：这里原本有一个手写的 <head>，里面只有 <link rel="llms.txt">。
+          `rel="llms.txt"` 不是合法 link relation（既不在 IANA link-relation 注册表，
+          也不是任何爬虫约定）⇒ 无效标签，已随 <head> 一起移除。
+          Next 会自行渲染 <head> 并注入 generateMetadata 的产出，无需手写。 */}
       <body>
         <JsonLd data={siteGraph} />
         <AnalyticsScripts />

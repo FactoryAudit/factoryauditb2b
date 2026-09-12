@@ -38,6 +38,11 @@ export async function generateMetadata({
     path: PATH,
     title: pick(t.register.metaTitle, t.register.instant?.metaTitle),
     description: pick(t.register.metaDesc, t.register.instant?.metaDesc),
+    // CS-01：与 /login、/account 下各页保持一致 —— 账户体系页面一律不参与搜索索引。
+    // 此前它是全站唯一「既可索引又在 sitemap 里」的账户页，策略上是个孤例。
+    // 注：注释里不要出现「斜杠 + 星号」开头的序列 —— 回归脚本剥注释时
+    // 会把它当成块注释起点，把后面的代码一起吃掉（曾导致 F1 假 FAIL）。
+    robots: { index: false, follow: false },
   });
 }
 

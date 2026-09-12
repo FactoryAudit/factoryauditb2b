@@ -2379,7 +2379,7 @@
   "auditGuide": {
     "breadcrumb": "Guias de auditoria",
     "metaTitle": "Auditoria {type} em {country}",
-    "metaDesc": "Find {type} audit, inspection and qualified suppliers in {country}. Verified factory directory, RFQ and audit request by FactoryAuditB2B.",
+    "metaDesc": "Encontre auditoria {type}, inspeção e fornecedores qualificados em {country}. Diretório de fábricas verificado, RFQ e solicitação de auditoria da FactoryAuditB2B.",
     "h1": "Auditoria {type} em {country}",
     "ownerLabel": "Organismo emissor:",
     "standardsTitle": "Normas e certificações relacionadas",

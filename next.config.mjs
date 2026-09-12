@@ -1,6 +1,104 @@
 /** @type {import('next').NextConfig} */
+
+// CS-01 P0-1 —— 元数据必须进入 <head>
+// ---------------------------------------------------------------------------
+// Next 15 的「流式元数据」机制：title / description / canonical / hreflang / robots
+// 会被渲染到 <body> 末尾，再由客户端脚本搬进 <head>。只有 UA 命中 `htmlLimitedBots`
+// 正则时，Next 才改为**直接输出在 <head>**（代价是等元数据 resolve 完再发首字节）。
+//
+// Next 内置默认名单是：
+//   [\w-]+-Google|Google-[\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|
+//   yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|
+//   Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|
+//   LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight
+//
+// 实测（2026-09-13，/membership · /about · /tools/compare 三页各两次，结论完全一致）：
+//   Bingbot  → 命中名单 → </head>@4173、title@1105  → 元数据在 head ✅
+//   Googlebot→ **不在名单**（名单里只有 `*-Google` / `Google-*` 形式）→ title@18534 → 在 body ❌
+//   OAI-SearchBot / GPTBot / ClaudeBot / PerplexityBot → 全部在 body ❌
+//
+// ⇒ 结论：Google 会执行 JS 所以实际不受影响；但**不执行 JS 的 AI 检索/引用爬虫完全读不到
+//   canonical、9 语 hreflang 与 robots 指令**。这正是 AI Citation 的硬伤。
+//
+// 修法：在内置名单之后**追加**，不替换。只影响「元数据放哪」，不影响能否抓取
+//（抓取许可始终由 robots.txt 决定）。
+const HTML_LIMITED_BOTS = new RegExp(
+  [
+    // ---------- Next 内置默认名单，逐条保留 ----------
+    "[\\w-]+-Google",
+    "Google-[\\w-]+",
+    "Chrome-Lighthouse",
+    "Slurp",
+    "DuckDuckBot",
+    "baiduspider",
+    "yandex",
+    "sogou",
+    "bitlybot",
+    "tumblr",
+    "vkShare",
+    "quora link preview",
+    "redditbot",
+    "ia_archiver",
+    "Bingbot",
+    "BingPreview",
+    "applebot",
+    "facebookexternalhit",
+    "facebookcatalog",
+    "Twitterbot",
+    "LinkedInBot",
+    "Slackbot",
+    "Discordbot",
+    "WhatsApp",
+    "SkypeUriPreview",
+    "Yeti",
+    "googleweblight",
+    // ---------- 追加：传统搜索 ----------
+    "Googlebot",
+    "Google-Extended",
+    "Google-InspectionTool",
+    "Google-Read-Aloud",
+    "Mediapartners-Google",
+    "AdsBot-Google",
+    "YandexBot",
+    "Mail.RU_Bot",
+    "SeznamBot",
+    "Qwantify",
+    "Applebot-Extended",
+    // ---------- 追加：AI 检索 / 引用（robots.txt 中明确放行的一类）----------
+    "OAI-SearchBot",
+    "ChatGPT-User",
+    "GPTBot",
+    "Claude-SearchBot",
+    "Claude-User",
+    "ClaudeBot",
+    "anthropic-ai",
+    "PerplexityBot",
+    "Perplexity-User",
+    "PerplexityBot-User",
+    "YouBot",
+    "Meltwater",
+    "Seekr",
+    "AI2Bot",
+    "Diffbot",
+    "omgili",
+    "omgilibot",
+    "ImagesiftBot",
+    "Timpibot",
+    // ---------- 追加：其他已知 AI / 聚合抓取器 ----------
+    "Meta-ExternalAgent",
+    "meta-externalagent",
+    "FacebookBot",
+    "Amazonbot",
+    "Bytespider",
+    "CCBot",
+    "cohere-ai",
+    "cohere-training-data-crawler",
+  ].join("|")
+);
+
 const nextConfig = {
   reactStrictMode: true,
+  htmlLimitedBots: HTML_LIMITED_BOTS,
   async headers() {
     return [
       {

@@ -2378,9 +2378,9 @@
   },
   "auditGuide": {
     "breadcrumb": "驗廠指南",
-    "metaTitle": "{country}{type} 驗廠",
-    "metaDesc": "Find {type} audit, inspection and qualified suppliers in {country}. Verified factory directory, RFQ and audit request by FactoryAuditB2B.",
-    "h1": "{country}{type} 驗廠",
+    "metaTitle": "{country} {type} 驗廠",
+    "metaDesc": "在{country}尋找{type}驗廠、檢驗與合格供應商。FactoryAuditB2B 提供經核查的工廠目錄、RFQ 與驗廠申請。",
+    "h1": "{country} {type} 驗廠",
     "ownerLabel": "發證/管理主體：",
     "standardsTitle": "相關認證與標準",
     "noStandards": "暫未記錄相關標準。",

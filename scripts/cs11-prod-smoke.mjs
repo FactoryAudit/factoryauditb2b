@@ -141,11 +141,19 @@ async function main() {
   await sleep(200);
   ok(adm.status === 404, "5a 匿名访问 /admin/report-standard = 404", "got " + adm.status);
 
-  // ---------- 6. 回归：旧样板页不受影响 ----------
+  // ---------- 6. 回归：样板页重定向（CS-01）----------
   console.log("\n--- 6. 回归 ---");
+  // CS-01 P1-8：/sample-report 已 308 到 /standard-report（原先两页争夺同一批
+  //「supplier audit report sample」词）。本断言**保留但改写语义**：
+  // 由「仍 200」改为「最终落在 /standard-report」。
+  // get() 使用 redirect:"follow"，所以看 res.url 而不是 status。
   const sr = await get("/en/sample-report");
   await sleep(200);
-  ok(sr.status === 200, "6a /en/sample-report 仍 200", "got " + sr.status);
+  ok(
+    sr.status === 200 && /\/standard-report$/.test(sr.url),
+    "6a /en/sample-report 308 到 /standard-report",
+    "status=" + sr.status + " url=" + sr.url
+  );
 
   // ---------- 7. 留资接口 ----------
   // 契约是 { lead: {...}, result: {...} } 嵌套结构（见 app/api/lead/route.ts）。
