@@ -72,7 +72,9 @@ if (inlineIdx >= 0) {
   sql = argv[inlineIdx + 1] || "";
   source = "--sql 内联";
 } else {
-  const file = argv.find((a) => !a.startsWith("--") && a !== argv[inlineIdx + 1]);
+  // 注意：不可写成 `a !== argv[inlineIdx + 1]`——未传 --sql 时 inlineIdx=-1，
+  // argv[0] 正是文件路径本身，会被误过滤成 undefined（曾致「文件不存在：undefined」）。
+  const file = argv.find((a) => !a.startsWith("--"));
   if (!file || !existsSync(file)) die("用法：node scripts/db-apply-sql.mjs <file.sql>（文件不存在：" + file + "）");
   sql = readFileSync(file, "utf8");
   source = file;
