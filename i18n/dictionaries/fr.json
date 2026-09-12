@@ -1317,12 +1317,15 @@
     "relatedAudit": "Types d'audit et normes associés",
     "whyTitle": "Pourquoi les fournisseurs de {industry} ont besoin d'une vérification",
     "whyLead": "Les défauts et les lacunes de conformité coûtent cher. Nous vérifions avant la commande et formons les équipes d'usine pour éviter le retour des mêmes problèmes.",
-    "ctaTitle": "Formez vos fournisseurs de {industry}",
-    "ctaDesc": "Associez la vérification des fournisseurs à des plans de formation payants conçus pour votre secteur.",
-    "ctaButton": "Voir les plans de formation payants",
+    "ctaTitle": "Demandez des devis à des fournisseurs de {industry}",
+    "ctaDesc": "Publiez une RFQ avec vos exigences. Nous retournons des devis avec le contexte de capacité et de risque.",
+    "ctaButton": "Publier une RFQ",
     "breadcrumb": "Secteurs",
     "empty": "Aucun fournisseur vérifié de {industry} n'est encore référencé. Publiez une RFQ pour commencer à trouver des correspondances.",
-    "riskLabel": "Risque"
+    "riskLabel": "Risque",
+    "hubMetaDesc": "Guides de vérification des fournisseurs par secteur : quoi vérifier avant de commander, quels audits s'appliquent et les fournisseurs référencés par secteur.",
+    "hubLead": "Chaque page sectorielle liste les audits applicables, les fournisseurs référencés et les vérifications importantes avant de commander.",
+    "topicsTitle": "Guides {industry}"
   },
   "countryPage": {
     "pageTitle": "Vérification et formation des fournisseurs",

@@ -12,6 +12,7 @@ import { COVERAGE_COUNTRIES, COVERAGE_SERVICE_SLUGS } from "@/lib/coverage";
 import { GUIDES } from "@/lib/guides";
 import { CASE_STUDIES } from "@/lib/caseStudies";
 import { FIELD_REPORTS } from "@/lib/fieldReports";
+import { topicsForIndustry } from "@/lib/industryContent";
 
 const BASE = "https://factoryauditb2b.com";
 
@@ -48,6 +49,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/services/supplier-improvement",
     "/monitoring",
     "/countries",
+    "/industry",
     "/resources",
     "/guides",
     "/case-studies",
@@ -114,8 +116,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 供应商详情页（Supplier Directory V2 独立 SEO URL；旧 /supplier/{country}/{slug} 已 308 到此处，不再单独提交）
   supplierSlugs.forEach(({ slug }) => pages.push(...emit(`/suppliers/${slug}`)));
 
-  // 行业 SEO 落地页
-  industries.forEach((i) => pages.push(...emit(`/industry/${i.code}`)));
+  // 行业 SEO 落地页 + 行业子主题页（CS-02A P2–P5）。
+  // 子主题只提交 lib/industryContent.ts 里真正配了内容的组合，
+  // 与页面 generateStaticParams 同源 —— 未配置的组合不存在页面，绝不进站点地图。
+  industries.forEach((i) => {
+    pages.push(...emit(`/industry/${i.code}`));
+    topicsForIndustry(i.code).forEach((tp) =>
+      pages.push(...emit(`/industry/${i.code}/${tp.slug}`))
+    );
+  });
   // 注意：/country/{code} 已 308 到 /countries/{code}，不再作为独立条目提交。
   // 只有 Phase 1 三个国家有差异化内容页，已在上面的 coverage 中提交（PRD §8）。
 

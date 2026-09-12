@@ -1970,12 +1970,15 @@
     "relatedAudit": "Related audit types & standards",
     "whyTitle": "Why {industry} suppliers need verification",
     "whyLead": "Defects and compliance gaps are costly. We verify before you order and train your factory teams so the same problems do not return.",
-    "ctaTitle": "Train your {industry} suppliers",
-    "ctaDesc": "Pair supplier verification with paid training plans built for your industry.",
-    "ctaButton": "View paid training plans",
+    "ctaTitle": "Request quotes from {industry} suppliers",
+    "ctaDesc": "Post an RFQ with your requirements. We return quotes with capability and risk context.",
+    "ctaButton": "Post an RFQ",
     "breadcrumb": "Industries",
     "empty": "No verified {industry} suppliers are listed yet. Post an RFQ to start collecting matches.",
-    "riskLabel": "Risk"
+    "riskLabel": "Risk",
+    "hubMetaDesc": "Industry guides to supplier verification: what to check before you order, which audits apply, and the suppliers on record for each industry.",
+    "hubLead": "Each industry page lists the audits that apply, the suppliers on record, and the checks that matter before you place an order.",
+    "topicsTitle": "{industry} guides"
   },
   "countryPage": {
     "pageTitle": "Supplier Verification & Training",

@@ -1317,12 +1317,15 @@
     "relatedAudit": "Tipos de auditoria e normas relacionados",
     "whyTitle": "Por que os fornecedores de {industry} precisam de verificação",
     "whyLead": "Defeitos e lacunas de conformidade são caros. Verificamos antes de pedir e treinamos as equipes da fábrica para que os mesmos problemas não voltem a ocorrer.",
-    "ctaTitle": "Treine seus fornecedores de {industry}",
-    "ctaDesc": "Combine a verificação de fornecedores com planos de treinamento pagos feitos para o seu setor.",
-    "ctaButton": "Ver planos de treinamento pagos",
+    "ctaTitle": "Peça orçamentos a fornecedores de {industry}",
+    "ctaDesc": "Publique uma RFQ com os seus requisitos. Devolvemos orçamentos com contexto de capacidade e risco.",
+    "ctaButton": "Publicar RFQ",
     "breadcrumb": "Setores",
     "empty": "Ainda não há fornecedores verificados de {industry} listados. Publique uma RFQ para começar a coletar correspondências.",
-    "riskLabel": "Risco"
+    "riskLabel": "Risco",
+    "hubMetaDesc": "Guias de verificação de fornecedores por setor: o que verificar antes de pedir, quais auditorias se aplicam e os fornecedores registados em cada setor.",
+    "hubLead": "Cada página setorial lista as auditorias aplicáveis, os fornecedores registados e as verificações importantes antes de fazer um pedido.",
+    "topicsTitle": "Guias de {industry}"
   },
   "countryPage": {
     "pageTitle": "Verificação e treinamento de fornecedores",

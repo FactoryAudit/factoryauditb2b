@@ -1317,12 +1317,15 @@
     "relatedAudit": "相關審覈類型與標準",
     "whyTitle": "爲什麼 {industry} 供應商需要驗證",
     "whyLead": "缺陷與合規漏洞代價高昂。我們在您下單前完成驗證，並培訓工廠團隊，避免同類問題再次發生。",
-    "ctaTitle": "培訓您的 {industry} 供應商",
-    "ctaDesc": "將供應商驗證與爲您的行業定製的付費培訓方案結合。",
-    "ctaButton": "查看付費培訓方案",
+    "ctaTitle": "向 {industry} 供應商詢價",
+    "ctaDesc": "提交 RFQ 並寫明你的要求。我們會回傳帶能力與風險背景的報價。",
+    "ctaButton": "發佈 RFQ",
     "breadcrumb": "行業",
     "empty": "暫無已驗證的 {industry} 供應商。發佈 RFQ 以開始匹配。",
-    "riskLabel": "風險"
+    "riskLabel": "風險",
+    "hubMetaDesc": "按行業的供應商驗證指南：下單前應檢查什麼、適用哪些審覈項目，以及各行業已登記的供應商。",
+    "hubLead": "每個行業頁列出適用的審覈項目、已登記的供應商，以及下單前真正重要的檢查項。",
+    "topicsTitle": "{industry} 指南"
   },
   "countryPage": {
     "pageTitle": "供應商驗證與培訓",

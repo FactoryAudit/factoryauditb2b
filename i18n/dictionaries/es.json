@@ -1317,12 +1317,15 @@
     "relatedAudit": "Tipos y normas de auditoría relacionados",
     "whyTitle": "Por qué los proveedores de {industry} necesitan verificación",
     "whyLead": "Los defectos y las lagunas de cumplimiento son costosos. Verificamos antes de que usted ordene y capacite a sus equipos de fábrica para que los mismos problemas no vuelvan.",
-    "ctaTitle": "Capacita a tus proveedores de {industry}",
-    "ctaDesc": "Empareje la verificación de proveedores con planes de capacitación pagados creados para su industria.",
-    "ctaButton": "Ver planes de formación de pago",
+    "ctaTitle": "Solicita presupuestos a proveedores de {industry}",
+    "ctaDesc": "Publica una RFQ con tus requisitos. Devolvemos presupuestos con contexto de capacidad y riesgo.",
+    "ctaButton": "Publicar RFQ",
     "breadcrumb": "Industrias",
     "empty": "Todavía no hay proveedores verificados de {industry} en la lista. Publica una RFQ para comenzar a recolectar coincidencias.",
-    "riskLabel": "Riesgo"
+    "riskLabel": "Riesgo",
+    "hubMetaDesc": "Guías de verificación de proveedores por sector: qué comprobar antes de pedir, qué auditorías aplican y los proveedores registrados en cada sector.",
+    "hubLead": "Cada página de sector enumera las auditorías que aplican, los proveedores registrados y las comprobaciones importantes antes de hacer un pedido.",
+    "topicsTitle": "Guías de {industry}"
   },
   "countryPage": {
     "pageTitle": "Verificación y formación de proveedores",

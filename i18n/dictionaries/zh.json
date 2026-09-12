@@ -1793,12 +1793,15 @@
     "relatedAudit": "相关审核类型与标准",
     "whyTitle": "为什么 {industry} 供应商需要验证",
     "whyLead": "缺陷与合规漏洞代价高昂。我们在您下单前完成验证，并培训工厂团队，避免同类问题再次发生。",
-    "ctaTitle": "培训您的 {industry} 供应商",
-    "ctaDesc": "将供应商验证与为您的行业定制的付费培训方案结合。",
-    "ctaButton": "查看付费培训方案",
+    "ctaTitle": "向 {industry} 供应商询价",
+    "ctaDesc": "提交 RFQ 并写明你的要求。我们会返回带能力与风险背景的报价。",
+    "ctaButton": "发布 RFQ",
     "breadcrumb": "行业",
     "empty": "暂无已验证的 {industry} 供应商。发布 RFQ 以开始匹配。",
-    "riskLabel": "风险"
+    "riskLabel": "风险",
+    "hubMetaDesc": "按行业的供应商验证指南：下单前应检查什么、适用哪些审核项目，以及各行业已登记的供应商。",
+    "hubLead": "每个行业页列出适用的审核项目、已登记的供应商，以及下单前真正重要的检查项。",
+    "topicsTitle": "{industry} 指南"
   },
   "countryPage": {
     "pageTitle": "供应商验证与培训",

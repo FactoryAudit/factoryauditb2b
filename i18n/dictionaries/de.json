@@ -1317,12 +1317,15 @@
     "relatedAudit": "Verwandte Audit-Typen und Standards",
     "whyTitle": "Warum {industry}-Lieferanten eine Prüfung brauchen",
     "whyLead": "Fehler und Compliance-Lücken sind teuer. Wir prüfen vor der Bestellung und schulen die Werks-Teams, damit sich dieselben Probleme nicht wiederholen.",
-    "ctaTitle": "Schulen Sie Ihre {industry}-Lieferanten",
-    "ctaDesc": "Kombinieren Sie die Lieferantenprüfung mit kostenpflichtigen Schulungsplänen für Ihre Branche.",
-    "ctaButton": "Kostenpflichtige Schulungspläne ansehen",
+    "ctaTitle": "Angebote von {industry}-Lieferanten anfordern",
+    "ctaDesc": "Veröffentlichen Sie eine RFQ mit Ihren Anforderungen. Wir liefern Angebote mit Kontext zu Kapazität und Risiko.",
+    "ctaButton": "RFQ veröffentlichen",
     "breadcrumb": "Branchen",
     "empty": "Noch keine verifizierten {industry}-Lieferanten gelistet. Veröffentlichen Sie eine RFQ, um Übereinstimmungen zu sammeln.",
-    "riskLabel": "Risiko"
+    "riskLabel": "Risiko",
+    "hubMetaDesc": "Branchen-Guides zur Lieferantenprüfung: was vor der Bestellung zu prüfen ist, welche Audits gelten und welche Lieferanten je Branche erfasst sind.",
+    "hubLead": "Jede Branchenseite listet die geltenden Audits, die erfassten Lieferanten und die vor der Bestellung wichtigen Prüfungen.",
+    "topicsTitle": "{industry}-Guides"
   },
   "countryPage": {
     "pageTitle": "Lieferantenprüfung und Schulung",

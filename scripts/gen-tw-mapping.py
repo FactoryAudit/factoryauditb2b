@@ -26,6 +26,9 @@ SRC_FILES = [
     # 页面里的硬编码中文（样例报告经营范围等）同样走 twText，
     # 纳入源表后整串精确命中，不再依赖单字兜底（「制造」词组级差异单字表覆盖不到）
     "app/[locale]/sample-report/page.tsx",
+    # CS-02A：行业内容层（Master 页 Block A + 子主题正文）同样走 twText 兜底，
+    # 纳入源表后可整串精确命中，避免「危害分析」「过敏原」等新词落回简体。
+    "lib/industryContent.ts",
 ]
 OUT = os.path.join(ROOT, "lib", "twData.generated.ts")
 

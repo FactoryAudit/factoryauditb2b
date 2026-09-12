@@ -1,10 +1,11 @@
-import { listAuditTypes, listStandards, listCountries } from "@/lib/taxonomy";
+import { listAuditTypes, listStandards, listCountries, listIndustries } from "@/lib/taxonomy";
 import { LOCALES, LOCALE_META, localePath } from "@/i18n/config";
 import { COVERAGE_COUNTRIES, COVERAGE_SERVICE_SLUGS, COVERAGE_COUNTRY_SENTENCE } from "@/lib/coverage";
 import { GUIDES } from "@/lib/guides";
 import { CASE_STUDIES } from "@/lib/caseStudies";
 import { FIELD_REPORTS } from "@/lib/fieldReports";
 import { MEMBERSHIP_PRICE_USD } from "@/lib/suppliers";
+import { topicsForIndustry } from "@/lib/industryContent";
 
 // /llms.txt —— 面向 AI 抓取工具（ChatGPT / Perplexity / Bing Copilot 等）的站点说明文件。
 // 完全由中央 taxonomy 引擎驱动，确保与数据库一致（§91 单一事实来源）。
@@ -106,6 +107,23 @@ export async function GET() {
   lines.push("## Field reports (illustrative)");
   for (const r of FIELD_REPORTS) {
     lines.push(`- [${r.titleEn}](${BASE}/field-reports/${r.slug}): ${r.en.takeaway}`);
+  }
+  lines.push("");
+
+  // CS-02A：行业索引页 + 行业子主题页（P2–P5）。
+  // 子主题清单与页面 generateStaticParams / sitemap 同源，未配置的组合不会出现在这里。
+  lines.push("## Industry pages");
+  const industries = await listIndustries();
+  const enIndustryName = (n: string) => n.split(" / ")[0];
+  lines.push(`- [${en.industryPage.breadcrumb}](${BASE}/industry): ${en.industryPage.hubMetaDesc}`);
+  for (const i of industries) {
+    const nm = enIndustryName(i.name);
+    lines.push(
+      `- [${nm}](${BASE}/industry/${i.code}): ${en.industryPage.metaDesc.replaceAll("{industry}", nm)}`
+    );
+    for (const tp of topicsForIndustry(i.code)) {
+      lines.push(`- [${tp.title.en}](${BASE}/industry/${i.code}/${tp.slug}): ${tp.metaDesc.en}`);
+    }
   }
   lines.push("");
 

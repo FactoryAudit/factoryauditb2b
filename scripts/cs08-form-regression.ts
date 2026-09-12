@@ -194,8 +194,8 @@ for (const loc of LOCALES) {
   leafCounts.push(lv.length);
 }
 check("G3 九语叶子数完全一致", new Set(leafCounts).size === 1, leafCounts.join("/"));
-check("G4 叶子数 = 2714（与 cs06a C8 常量同源；再改字典必须两处同改）", leafCounts[0] === 2714, `实际 ${leafCounts[0]}`);
-check("G5 cs06a 回归里的 C8 常量已同步为 2714", read("scripts/cs06a-directory-regression.ts").includes("baseKeys.length === 2714"));
+check("G4 叶子数 = 2717（与 cs06a C8 常量同源；再改字典必须两处同改）", leafCounts[0] === 2717, `实际 ${leafCounts[0]}`);
+check("G5 cs06a 回归里的 C8 常量已同步为 2717", read("scripts/cs06a-directory-regression.ts").includes("baseKeys.length === 2717"));
 
 console.log("\n============================================================");
 if (fail === 0) {
