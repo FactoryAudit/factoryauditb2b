@@ -1867,7 +1867,26 @@
     "paidLockLead": "Les membres Founding Buyer (99 $/an) voient les enregistrements de preuves, les détails de risque, l'historique d'audit et les données d'inspection.",
     "paidLockCta": "Voir l'adhésion",
     "paidLockNote": "Le score de risque est public. Les preuves et les détails de vérification sont réservés aux membres.",
-    "certClaimsReported": "Certifications déclarées"
+    "certClaimsReported": "Certifications déclarées",
+    "registrationTitle": "Informations d'immatriculation de l'entreprise",
+    "registrationLead": "Données d'immatriculation déclarées par l'entreprise elle-même. Les coordonnées ne sont pas publiées.",
+    "regEnglishName": "Nom en anglais",
+    "regCompanyType": "Forme juridique",
+    "regRegistrationNo": "Numéro d'immatriculation",
+    "regWebsite": "Site web",
+    "regAddress": "Siège social",
+    "selfCertTitle": "Certificats déclarés par l'usine",
+    "selfCertLead": "Déclaré par l'usine, non vérifié",
+    "selfCertNone": "Cette usine n'a déclaré aucun certificat.",
+    "selfCertName": "Certificat",
+    "selfCertNumber": "N°",
+    "selfCertIssued": "Délivré le",
+    "selfCertExpires": "Expire le",
+    "selfCertDisclaimer": "Ces informations ont été fournies par l'usine et n'ont été ni examinées ni vérifiées par FactoryAuditB2B. Elles ne constituent pas un résultat de vérification de la plateforme.",
+    "capacityProduction": "Capacité de production",
+    "capacityMonthly": "Production mensuelle",
+    "capacityFactorySize": "Taille de l'usine",
+    "capacityExportSince": "Exporte depuis"
   },
   "reportPreview": {
     "badge": "(Aperçu gratuit)",
@@ -3520,7 +3539,8 @@
     "adminDocsEmpty": "Aucun document pour l'instant.",
     "adminCertsEmpty": "Aucune certification pour l'instant.",
     "adminAuditsEmpty": "Aucun audit pour l'instant.",
-    "levelUnverified": "Non vérifié"
+    "levelUnverified": "Non vérifié",
+    "issuedOn": "Délivré le"
   },
   "standardReport": {
     "metaTitle": "Rapport standard de diligence fournisseurs — Spécimen complet",

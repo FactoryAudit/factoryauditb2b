@@ -1336,7 +1336,26 @@
     "paidLockLead": "Founding Buyer members ($99/year) see evidence records, risk breakdowns, audit history and inspection data.",
     "paidLockCta": "View membership",
     "paidLockNote": "The risk score is public. Evidence and verification details are member content.",
-    "certClaimsReported": "Reported certification claims"
+    "certClaimsReported": "Reported certification claims",
+    "registrationTitle": "Company registration details",
+    "registrationLead": "Registration facts as reported by the company. Contact details are not published.",
+    "regEnglishName": "English name",
+    "regCompanyType": "Company type",
+    "regRegistrationNo": "Registration number",
+    "regWebsite": "Website",
+    "regAddress": "Registered address",
+    "selfCertTitle": "Certificates reported by the factory",
+    "selfCertLead": "Self-reported, not verified",
+    "selfCertNone": "This factory has not reported any certificates.",
+    "selfCertName": "Certificate",
+    "selfCertNumber": "No.",
+    "selfCertIssued": "Issued",
+    "selfCertExpires": "Expires",
+    "selfCertDisclaimer": "These entries were provided by the factory and have not been reviewed or verified by FactoryAuditB2B. They are not a platform verification result.",
+    "capacityProduction": "Production capacity",
+    "capacityMonthly": "Monthly output",
+    "capacityFactorySize": "Factory size",
+    "capacityExportSince": "Exporting since"
   },
   "methodology": {
     "badge": "Methodology",
@@ -3520,7 +3539,8 @@
     "adminDocsEmpty": "No documents yet.",
     "adminCertsEmpty": "No certifications yet.",
     "adminAuditsEmpty": "No audits yet.",
-    "levelUnverified": "Unverified"
+    "levelUnverified": "Unverified",
+    "issuedOn": "Issued"
   },
   "standardReport": {
     "metaTitle": "Standard Supplier Due Diligence Report — Full Specimen",

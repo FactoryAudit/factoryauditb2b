@@ -1867,7 +1867,26 @@
     "paidLockLead": "Los miembros Founding Buyer (99 $/año) ven registros de evidencia, desgloses de riesgo, historial de auditoría y datos de inspección.",
     "paidLockCta": "Ver membresía",
     "paidLockNote": "La puntuación de riesgo es pública. Las evidencias y los detalles de verificación son contenido para miembros.",
-    "certClaimsReported": "Certificaciones declaradas"
+    "certClaimsReported": "Certificaciones declaradas",
+    "registrationTitle": "Datos registrales de la empresa",
+    "registrationLead": "Datos registrales declarados por la propia empresa. Los datos de contacto no se publican.",
+    "regEnglishName": "Nombre en inglés",
+    "regCompanyType": "Tipo de sociedad",
+    "regRegistrationNo": "Número de registro",
+    "regWebsite": "Sitio web",
+    "regAddress": "Domicilio social",
+    "selfCertTitle": "Certificados declarados por la fábrica",
+    "selfCertLead": "Declarado por la fábrica, sin verificar",
+    "selfCertNone": "Esta fábrica no ha declarado ningún certificado.",
+    "selfCertName": "Certificado",
+    "selfCertNumber": "N.º",
+    "selfCertIssued": "Emitido",
+    "selfCertExpires": "Vence",
+    "selfCertDisclaimer": "Estos datos los aportó la fábrica y FactoryAuditB2B no los ha revisado ni verificado. No son un resultado de verificación de la plataforma.",
+    "capacityProduction": "Capacidad de producción",
+    "capacityMonthly": "Producción mensual",
+    "capacityFactorySize": "Tamaño de la fábrica",
+    "capacityExportSince": "Exporta desde"
   },
   "reportPreview": {
     "badge": "Previsualización gratuita",
@@ -3520,7 +3539,8 @@
     "adminDocsEmpty": "Aún no hay documentos.",
     "adminCertsEmpty": "Aún no hay certificaciones.",
     "adminAuditsEmpty": "Aún no hay auditorías.",
-    "levelUnverified": "Sin verificar"
+    "levelUnverified": "Sin verificar",
+    "issuedOn": "Emitido"
   },
   "standardReport": {
     "metaTitle": "Informe estándar de diligencia debida de proveedores — Espécimen completo",

@@ -1867,7 +1867,26 @@
     "paidLockLead": "Founding Buyer 會員（$99/年）可查看證據記錄、風險明細、稽核歷史與驗貨資料。",
     "paidLockCta": "查看會員方案",
     "paidLockNote": "風險評分公開可見；證據與核驗明細為會員內容。",
-    "certClaimsReported": "已申報的認證聲明"
+    "certClaimsReported": "已申報的認證聲明",
+    "registrationTitle": "公司登記資訊",
+    "registrationLead": "以下為企業自行申報的登記事實。聯絡方式不予公開。",
+    "regEnglishName": "英文名稱",
+    "regCompanyType": "公司類型",
+    "regRegistrationNo": "註冊號",
+    "regWebsite": "官網",
+    "regAddress": "註冊地址",
+    "selfCertTitle": "工廠自述證書",
+    "selfCertLead": "工廠自述 · 未經核驗",
+    "selfCertNone": "該工廠未提供任何證書資訊。",
+    "selfCertName": "證書名稱",
+    "selfCertNumber": "編號",
+    "selfCertIssued": "頒發日期",
+    "selfCertExpires": "到期日期",
+    "selfCertDisclaimer": "以上內容由工廠自行填報，FactoryAuditB2B 未做任何審核或核驗，不構成平台核驗結果。",
+    "capacityProduction": "生產能力",
+    "capacityMonthly": "月產量",
+    "capacityFactorySize": "工廠規模",
+    "capacityExportSince": "出口起始年份"
   },
   "reportPreview": {
     "badge": "免費預覽",
@@ -3520,7 +3539,8 @@
     "adminDocsEmpty": "尚無文件。",
     "adminCertsEmpty": "尚無認證。",
     "adminAuditsEmpty": "尚無審核紀錄。",
-    "levelUnverified": "未驗證"
+    "levelUnverified": "未驗證",
+    "issuedOn": "頒發日期"
   },
   "standardReport": {
     "metaTitle": "標準版供應商盡職調查報告 — 完整樣張",

@@ -32,14 +32,39 @@ export const PUBLIC_FIELDS = [
   "evidenceVerified",
   "lastChecked",
   "businessType",
+  // ---- CS-12：工商登记级公开字段 ----
+  // 用户 2026-09-12 拍板：公开边界「只放开工商登记级」。
+  // 判定标准 = 企业自己申报、且能被公开工商/官网渠道独立核对的登记事实，
+  // 不含任何平台判断，也不含商业情报（产能、客户、价格一律不进 public）。
+  "englishName",
+  "companyType",
+  "website",
+  "registrationNumber",
+  "address",
+  /**
+   * CS-12：工厂**自述**证书（DB: suppliers.self_reported_certificates，jsonb 数组）。
+   *
+   * 🔴 与 PAID 层的 `certifications` 是**两条互不相通的轴**，永不交叉填充：
+   *    · selfReportedCertificates —— 工厂在入驻表单里自己填的证书（含颁发日/到期日），
+   *      平台**未做任何核验**，必须始终带「自述、未核验」标注渲染。
+   *    · certifications —— 平台/来源自述的认领声明，属 paid 层，CS-12 未改动其分层。
+   *    · supplier_certifications（另一张表）—— 平台核验过的证书，走 VERIFIED 过滤。
+   *    三者混用 = 把「工厂说」洗成「平台已核验」，属 P0 级误导。
+   */
+  "selfReportedCertificates",
 ] as const;
 
-/** Free 层字段：注册后可见（基础工商信息） */
+/** Free 层字段：注册后可见（基础工商信息 + 产能情报） */
 export const FREE_FIELDS = [
   "established",
   "employees",
   "exportMarkets",
   "auditStatus",
+  // CS-12：产能与出口年限属商业情报（非登记事实），留在注册后可见层。
+  "productionCapacity",
+  "monthlyOutput",
+  "factorySize",
+  "exportSince",
 ] as const;
 
 /** Paid 层字段：Buyer Membership 可见（证据明细 / 认证明细 / 验货历史 / 风险明细）

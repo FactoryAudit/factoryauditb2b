@@ -257,11 +257,41 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
     String(MEMBERSHIP_PRICE_USD)
   );
   check(
-    "C4 字段分层未变：PUBLIC 15 / FREE 4 / PAID 4",
-    PUBLIC_FIELDS.length === 15 &&
-      FREE_FIELDS.length === 4 &&
+    "C4 字段分层：PUBLIC 15→21 / FREE 4→8（CS-12 扩容），PAID 恒为 4",
+    PUBLIC_FIELDS.length === 21 &&
+      FREE_FIELDS.length === 8 &&
       PAID_FIELDS.length === 4,
     `${PUBLIC_FIELDS.length}/${FREE_FIELDS.length}/${PAID_FIELDS.length}`
+  );
+  // CS-12 扩容红线：paid 层四项一字未动（付费墙没有被这次扩容动过）
+  check(
+    "C4b PAID 层四项未被 CS-12 改动",
+    PAID_FIELDS.length === 4 &&
+      ["evidence", "inspectionHistory", "riskBreakdown", "certifications"].every((f) =>
+        (PAID_FIELDS as readonly string[]).includes(f)
+      ),
+    PAID_FIELDS.join(",")
+  );
+  // CS-12 公开边界：只放开工商登记级；产能属商业情报，必须留在 free 层不公开
+  check(
+    "C4c PUBLIC 含 6 项登记级字段（englishName/companyType/website/registrationNumber/address/selfReportedCertificates）",
+    [
+      "englishName",
+      "companyType",
+      "website",
+      "registrationNumber",
+      "address",
+      "selfReportedCertificates",
+    ].every((f) => (PUBLIC_FIELDS as readonly string[]).includes(f)) &&
+      !(PUBLIC_FIELDS as readonly string[]).includes("productionCapacity"),
+    PUBLIC_FIELDS.join(",")
+  );
+  // 🔴 两条证书轴禁互通：自述证书（public）绝不允许出现在 paid 的 certifications 语义里，
+  //    也绝不允许把 paid 的 certifications 升成 public（那会把"平台已核验"洗成"工厂自述"的反向误导）。
+  check(
+    "C4d 自述证书 ⊥ 平台核验证书（selfReportedCertificates 不得进 PAID，certifications 不得进 PUBLIC）",
+    !(PAID_FIELDS as readonly string[]).includes("selfReportedCertificates") &&
+      !(PUBLIC_FIELDS as readonly string[]).includes("certifications")
   );
   check("C5 DIRECTORY_PATH 仍为 /suppliers", DIRECTORY_PATH === "/suppliers", DIRECTORY_PATH);
 
@@ -273,9 +303,10 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
       /export\s+const\s+FEATURED_MIN\s*=/.test(sup)
   );
 
-  // C7 九语字典：键集合与 en 完全一致，叶子数恒为 2694（= 2690 字符串 + 4 boolean）
+  // C7 九语字典：键集合与 en 完全一致，叶子数恒为 2714（= 2710 字符串 + 4 boolean）
   // 2648 → 2666：CS-08 入驻表证书子表单 + 「我要获得证书」咨询弹窗新增 18 键 × 9 语
   // 2666 → 2694：CS-11 公开标准报告样板页 standardReport 命名空间 27 键 + footer.standardReport 1 键
+  // 2694 → 2714：CS-12 档案页登记信息 7 键 + 工厂自述证书 8 键 + 产能 4 键 + evidenceCenter.issuedOn 1 键 = 20 键 × 9 语
   const LOCALES = ["en", "zh", "zh-TW", "ja", "es", "de", "fr", "pt", "ar"] as const;
   type Leaf = { key: string; value: unknown };
   function leaves(obj: unknown, prefix = "", out: Leaf[] = []): Leaf[] {
@@ -300,7 +331,7 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
     dictLeaves[loc] = leaves(JSON.parse(fs.readFileSync(p, "utf8")));
   }
   const baseKeys = dictLeaves.en.map((l) => l.key).sort();
-  check("C8 en 字典叶子数 = 2694（未被截断/新增）", baseKeys.length === 2694, `实际 ${baseKeys.length}`);
+  check("C8 en 字典叶子数 = 2714（未被截断/新增）", baseKeys.length === 2714, `实际 ${baseKeys.length}`);
 
   for (const loc of LOCALES) {
     if (loc === "en") continue;

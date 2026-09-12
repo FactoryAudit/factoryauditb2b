@@ -1,4 +1,4 @@
-// 部署前产物验证：确认 CS-08 / CS-11 真的进了 Worker 产物，且无密钥明文
+// 部署前产物验证：确认 CS-08 / CS-11 / CS-12 真的进了 Worker 产物，且无密钥明文
 import fs from "node:fs";
 
 // 页面/组件代码只在 server-functions 的 handler 里；middleware 只做密钥自检
@@ -18,6 +18,11 @@ const PAGE_PROBES = [
   ["CS11 章节锚点（scroll-mt-20 类名）", "scroll-mt-20"],
   ["CS08 埋点 supplierNetworkSubmit", "supplierNetworkSubmit"],
   ["CS08 结构化证书字段 certStatus", "certStatus"],
+  // CS-12：登记信息区块 / 自述证书区块的 DOM id（字面量，压缩后仍在）
+  ["CS12 登记信息区块 id profile-registration", "profile-registration"],
+  ["CS12 自述证书区块 id profile-self-certs", "profile-self-certs"],
+  ["CS12 自述证书字段 selfReportedCertificates", "selfReportedCertificates"],
+  ["CS12 产能字段 exportSince", "exportSince"],
 ];
 
 const LEAKS = [
@@ -25,6 +30,10 @@ const LEAKS = [
   'SUPABASE_SERVICE_ROLE_KEY="sb_secret',
   'MAIL_HTTP_KEY="re_',
   "STRIPE_SECRET_KEY=",
+  // CS-12 新增：管理令牌（可改库结构）绝不允许随 Worker 上传。
+  // 用变量名 + PAT 前缀做 needle，不把真 token 片段写进仓库。
+  "SUPABASE_ACCESS_TOKEN",
+  "sbp_",
 ];
 
 let fail = 0;
@@ -63,8 +72,8 @@ if (fs.existsSync(en)) {
     for (const v of Object.values(o)) n += v && typeof v === "object" ? c(v) : 1;
     return n;
   })(obj);
-  console.log("=== 产物内 en 字典叶子数 = " + cnt + " (期望 2694) ===");
-  if (cnt !== 2694) fail++;
+  console.log("=== 产物内 en 字典叶子数 = " + cnt + " (期望 2714) ===");
+  if (cnt !== 2714) fail++;
 } else {
   console.log("FAIL  产物内缺失 en 字典");
   fail++;

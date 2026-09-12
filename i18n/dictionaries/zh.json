@@ -1226,7 +1226,26 @@
     "paidLockLead": "Founding Buyer 会员（$99/年）可查看证据记录、风险明细、审核历史与验货数据。",
     "paidLockCta": "查看会员方案",
     "paidLockNote": "风险评分公开可见；证据与核验明细为会员内容。",
-    "certClaimsReported": "已申报的认证声明"
+    "certClaimsReported": "已申报的认证声明",
+    "registrationTitle": "公司登记信息",
+    "registrationLead": "以下为企业自行申报的登记事实。联系方式不予公开。",
+    "regEnglishName": "英文名称",
+    "regCompanyType": "公司类型",
+    "regRegistrationNo": "注册号",
+    "regWebsite": "官网",
+    "regAddress": "注册地址",
+    "selfCertTitle": "工厂自述证书",
+    "selfCertLead": "工厂自述 · 未经核验",
+    "selfCertNone": "该工厂未提供任何证书信息。",
+    "selfCertName": "证书名称",
+    "selfCertNumber": "编号",
+    "selfCertIssued": "颁发日期",
+    "selfCertExpires": "到期日期",
+    "selfCertDisclaimer": "以上内容由工厂自行填报，FactoryAuditB2B 未做任何审核或核验，不构成平台核验结果。",
+    "capacityProduction": "生产能力",
+    "capacityMonthly": "月产量",
+    "capacityFactorySize": "工厂规模",
+    "capacityExportSince": "出口起始年份"
   },
   "reportPreview": {
     "badge": "免费预览",
@@ -3520,7 +3539,8 @@
     "adminDocsEmpty": "暂无文件。",
     "adminCertsEmpty": "暂无认证。",
     "adminAuditsEmpty": "暂无审核记录。",
-    "levelUnverified": "未验证"
+    "levelUnverified": "未验证",
+    "issuedOn": "颁发日期"
   },
   "standardReport": {
     "metaTitle": "标准版供应商尽职调查报告 — 完整样张",

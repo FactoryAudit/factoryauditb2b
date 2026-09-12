@@ -1867,7 +1867,26 @@
     "paidLockLead": "Founding Buyer 会員（年間 $99）は証拠記録・リスク明細・監査履歴・検査データを閲覧できます。",
     "paidLockCta": "会員プランを見る",
     "paidLockNote": "リスクスコアは公開です。証拠と検証の詳細は会員向けコンテンツです。",
-    "certClaimsReported": "申告された認証情報"
+    "certClaimsReported": "申告された認証情報",
+    "registrationTitle": "会社登記情報",
+    "registrationLead": "以下は企業が自ら申告した登記情報です。連絡先は公開していません。",
+    "regEnglishName": "英文社名",
+    "regCompanyType": "会社形態",
+    "regRegistrationNo": "登記番号",
+    "regWebsite": "ウェブサイト",
+    "regAddress": "登記上の所在地",
+    "selfCertTitle": "工場が申告した証明書",
+    "selfCertLead": "自己申告・未検証",
+    "selfCertNone": "この工場は証明書を申告していません。",
+    "selfCertName": "証明書名",
+    "selfCertNumber": "番号",
+    "selfCertIssued": "発行日",
+    "selfCertExpires": "有効期限",
+    "selfCertDisclaimer": "これらの内容は工場が自ら申告したもので、FactoryAuditB2B による審査・検証は行っていません。プラットフォームの検証結果ではありません。",
+    "capacityProduction": "生産能力",
+    "capacityMonthly": "月間生産量",
+    "capacityFactorySize": "工場規模",
+    "capacityExportSince": "輸出開始年"
   },
   "reportPreview": {
     "badge": "無料プレビュー",
@@ -3520,7 +3539,8 @@
     "adminDocsEmpty": "書類はまだありません。",
     "adminCertsEmpty": "認証はまだありません。",
     "adminAuditsEmpty": "監査記録はまだありません。",
-    "levelUnverified": "未検証"
+    "levelUnverified": "未検証",
+    "issuedOn": "発行日"
   },
   "standardReport": {
     "metaTitle": "標準版サプライヤー調査レポート — 完全見本",

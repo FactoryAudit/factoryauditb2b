@@ -17,6 +17,8 @@ export type CertificationListDict = {
   noneCertifications: string;
   issuer: string;
   certificateNo: string;
+  /** CS-12：颁发日期（此前只渲染到期日，issueDate 一直躺在数据里没被用过） */
+  issuedOn: string;
   validUntil: string;
   statusValid: string;
   statusExpiringSoon: string;
@@ -97,6 +99,12 @@ export function CertificationList({
                       <dd className="font-mono text-xs text-[#0f172a]">
                         {c.certificateNo}
                       </dd>
+                    </div>
+                  ) : null}
+                  {c.issueDate ? (
+                    <div className="flex gap-2">
+                      <dt className="text-[#64748b]">{d.issuedOn}</dt>
+                      <dd className="text-[#0f172a]">{c.issueDate}</dd>
                     </div>
                   ) : null}
                   {c.expiryDate ? (

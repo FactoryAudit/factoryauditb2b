@@ -1867,7 +1867,26 @@
     "paidLockLead": "أعضاء Founding Buyer (99$ سنوياً) يشاهدون سجلات الأدلة وتفاصيل المخاطر وتاريخ التدقيق وبيانات الفحص.",
     "paidLockCta": "عرض العضوية",
     "paidLockNote": "درجة المخاطر عامة. الأدلة وتفاصيل التحقق محتوى خاص بالأعضاء.",
-    "certClaimsReported": "شهادات مُصرَّح بها"
+    "certClaimsReported": "شهادات مُصرَّح بها",
+    "registrationTitle": "بيانات تسجيل الشركة",
+    "registrationLead": "بيانات التسجيل المعلنة من الشركة نفسها. لا تُنشر بيانات الاتصال.",
+    "regEnglishName": "الاسم بالإنجليزية",
+    "regCompanyType": "نوع الشركة",
+    "regRegistrationNo": "رقم التسجيل",
+    "regWebsite": "الموقع الإلكتروني",
+    "regAddress": "العنوان المسجل",
+    "selfCertTitle": "شهادات صرّح بها المصنع",
+    "selfCertLead": "إفادة المصنع · غير مُتحقَّق منها",
+    "selfCertNone": "لم يعلن هذا المصنع عن أي شهادات.",
+    "selfCertName": "الشهادة",
+    "selfCertNumber": "الرقم",
+    "selfCertIssued": "تاريخ الإصدار",
+    "selfCertExpires": "تاريخ الانتهاء",
+    "selfCertDisclaimer": "هذه البيانات مقدمة من المصنع ولم تخضع لأي مراجعة أو تحقق من FactoryAuditB2B، ولا تُعد نتيجة تحقق من المنصة.",
+    "capacityProduction": "الطاقة الإنتاجية",
+    "capacityMonthly": "الإنتاج الشهري",
+    "capacityFactorySize": "حجم المصنع",
+    "capacityExportSince": "يصدّر منذ"
   },
   "reportPreview": {
     "badge": "عرض مجاني",
@@ -3520,7 +3539,8 @@
     "adminDocsEmpty": "لا توجد مستندات بعد.",
     "adminCertsEmpty": "لا توجد شهادات بعد.",
     "adminAuditsEmpty": "لا توجد عمليات تدقيق بعد.",
-    "levelUnverified": "غير موثّق"
+    "levelUnverified": "غير موثّق",
+    "issuedOn": "تاريخ الإصدار"
   },
   "standardReport": {
     "metaTitle": "تقرير العناية الواجبة القياسي للموردين — نموذج كامل",

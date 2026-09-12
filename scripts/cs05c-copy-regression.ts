@@ -459,8 +459,16 @@ section("7. 注册页 {n}：语义已归位（并排对比上限，不再是免�
 section("8. 访问分层 / 定价 / 路径未被波及");
 
 {
-  check("PUBLIC 层仍为 15 个字段", PUBLIC_FIELDS.length === 15, `实际 ${PUBLIC_FIELDS.length}`);
-  check("FREE 层仍为 4 个字段", FREE_FIELDS.length === 4, `实际 ${FREE_FIELDS.length}`);
+  check(
+    "PUBLIC 层 = CS-05c 的 15 项 + CS-12 的 6 项工商登记级字段 = 21",
+    PUBLIC_FIELDS.length === 21,
+    `实际 ${PUBLIC_FIELDS.length}`
+  );
+  check(
+    "FREE 层 = 4 项 basic + CS-12 的 4 项产能 = 8",
+    FREE_FIELDS.length === 8,
+    `实际 ${FREE_FIELDS.length}`
+  );
   check("PAID 层仍为 4 个字段", PAID_FIELDS.length === 4, `实际 ${PAID_FIELDS.length}`);
   check(
     "PAID 层四项未变",
@@ -568,12 +576,21 @@ section("9. CS-05c-r2 B：九语 freeLockLead 不再承诺 paid 层的 certifica
     leakBad.join(", ")
   );
 
-  // 承诺的字段集合必须恰好落在 FREE_FIELDS 内
+  // 承诺的字段集合必须落在 FREE_FIELDS 内，且 free 层绝不允许混入 paid 字段
   check(
-    "B4 FREE 层仍是 4 项且 freeLockLead 与之对齐（established/employees/exportMarkets/auditStatus）",
-    FREE_FIELDS.length === 4 &&
+    "B4 FREE 层 = 4 项承诺字段 + 4 项 CS-12 产能字段，且绝不含 certifications",
+    FREE_FIELDS.length === 8 &&
       (FREE_FIELDS as readonly string[]).every((f) =>
-        ["established", "employees", "exportMarkets", "auditStatus"].includes(f)
+        [
+          "established",
+          "employees",
+          "exportMarkets",
+          "auditStatus",
+          "productionCapacity",
+          "monthlyOutput",
+          "factorySize",
+          "exportSince",
+        ].includes(f)
       ) &&
       !(FREE_FIELDS as readonly string[]).includes("certifications")
   );

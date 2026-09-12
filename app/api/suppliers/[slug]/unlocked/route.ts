@@ -117,6 +117,12 @@ export async function GET(
     if (detail.exportMarkets && detail.exportMarkets.length > 0) {
       fields.exportMarkets = detail.exportMarkets.join(", ");
     }
+    // CS-12：产能与出口年限（工厂在入驻表单里自填，属商业情报 ⇒ 留在注册后可见层）。
+    // 与 basic 层其余字段同等对待：游客在 Guest 5 家额度内也能取到。
+    if (detail.productionCapacity) fields.productionCapacity = detail.productionCapacity;
+    if (detail.monthlyOutput) fields.monthlyOutput = detail.monthlyOutput;
+    if (detail.factorySize) fields.factorySize = detail.factorySize;
+    if (detail.exportSince) fields.exportSince = String(detail.exportSince);
   }
 
   // ⚠️ 付费层只认 **真实 tier**（不是 effectiveTier）—— 篡改 localStorage 换不来付费情报

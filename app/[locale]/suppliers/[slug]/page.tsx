@@ -9,6 +9,11 @@ import {
 } from "@/lib/queries";
 import { CertificationList } from "@/components/CertificationList";
 import { AuditHistoryPanel } from "@/components/AuditHistoryPanel";
+// CS-12：公开侧「工商登记信息」与「工厂自述证书」（两条独立区块，分别落位）
+import {
+  SupplierRegistrationPanel,
+  SupplierSelfReportedCerts,
+} from "@/components/SupplierRegistrationPanel";
 import {
   publicVerificationLevel,
   LEVEL_SCOPE,
@@ -367,6 +372,44 @@ export default async function SupplierProfilePage({
                 </div>
               </div>
             </UnlockGate>
+
+            {/* CS-12：产能与出口年限（free 层）。
+                这些是工厂在入驻表单里自填的商业情报，不是工商登记事实 ⇒
+                不随页面直出，和 established / employees 同等对待。 */}
+            {(
+              [
+                ["productionCapacity", sp.capacityProduction],
+                ["monthlyOutput", sp.capacityMonthly],
+                ["factorySize", sp.capacityFactorySize],
+                ["exportSince", sp.capacityExportSince],
+              ] as const
+            ).map(([field, label]) => (
+              <UnlockGate
+                key={field}
+                layer="free"
+                variant="raw"
+                registerHref={registerHref}
+                membershipHref={p("/membership")}
+                locked={
+                  <div className="card p-4 opacity-80">
+                    <div className="text-xs text-[#64748b]">{label}</div>
+                    <div className="font-semibold text-[#94a3b8]">
+                      🔒{" "}
+                      <Link href={registerHref} className="text-[#0f4c81] underline">
+                        {sp.freeLockCta}
+                      </Link>
+                    </div>
+                  </div>
+                }
+              >
+                <div className="card p-4">
+                  <div className="text-xs text-[#64748b]">{label}</div>
+                  <div className="font-semibold">
+                    <UnlockedValue slug={s.slug} locale={uiLocale} field={field} />
+                  </div>
+                </div>
+              </UnlockGate>
+            ))}
           </div>
 
           {/* 免费层解锁说明（已登录后不再显示注册引导） */}
@@ -396,6 +439,10 @@ export default async function SupplierProfilePage({
           </UnlockGate>
         </section>
 
+        {/* CS-12：工商登记信息（公开层）。排在"平台核验范围"之前 ——
+            这几行是档案的事实底座，读者应先看到"这家是谁"，再看"平台核验了什么"。 */}
+        <SupplierRegistrationPanel data={s} dict={sp} />
+
         {/* 平台核验范围（方法论级，公开） */}
         <section className="mt-8 card p-6 bg-[#f7f9fc]">
           <h2 className="text-xl font-bold text-[#0f172a]">{sp.verifiedByTitle}</h2>
@@ -422,6 +469,10 @@ export default async function SupplierProfilePage({
 
         {/* 审核记录（公开层，仅已验证记录） */}
         <AuditHistoryPanel items={verifiedAudits} dict={ec} />
+
+        {/* CS-12：工厂自述证书（公开层）。刻意排在平台已核验内容之后 ——
+            版本顺序本身就在传递"平台核验过什么"与"工厂自己说了什么"的可信度差异。 */}
+        <SupplierSelfReportedCerts data={s} dict={sp} />
 
         {/* 付费层锁区：证据明细 / 认证明细 / 验货历史 */}
         <section className="mt-8 grid md:grid-cols-2 gap-6">

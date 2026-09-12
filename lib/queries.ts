@@ -57,6 +57,46 @@ export type SupplierView = {
   evidenceCount: number;
   /** 其中已核验的条数 */
   evidenceVerified: number;
+
+  // ---- CS-12：工商登记级公开字段（用户 2026-09-12 拍板「只放开工商登记级」）----
+  // 全部可选：静态兜底数据（lib/staticData.ts）没有这些字段，缺失时前台不渲染该行。
+  /** 英文名（企业对外使用名，与 legalName 并列展示） */
+  englishName?: string;
+  /** 公司类型（如 Limited Liability Company / Joint-Stock） */
+  companyType?: string;
+  /** 官网（须为登记/官网可核对的公开地址） */
+  website?: string;
+  /** 工商注册号 / 统一社会信用代码 */
+  registrationNumber?: string;
+  /** 注册地址 */
+  address?: string;
+
+  // ---- CS-12：FREE 层（注册后可见的产能情报）----
+  productionCapacity?: string;
+  monthlyOutput?: string;
+  factorySize?: string;
+  /** 开始出口年份 —— 与 established（成立年份）**不是同一个事实**，禁互推 */
+  exportSince?: number;
+
+  /**
+   * CS-12：工厂**自述**证书（DB: suppliers.self_reported_certificates）。
+   * 🔴 平台未核验，渲染时必须带「自述、未核验」标注。与 `certifications` 是两条轴。
+   */
+  selfReportedCertificates?: SelfReportedCertificate[];
+};
+
+/**
+ * 工厂在入驻表单里自述的证书行。
+ *
+ * 形状**逐字对齐** components/SupplierRegistrationForm.tsx 序列化出的 certificatesJson：
+ * `{ name, number, issued, expires }` —— 保证 CS-07 落库时无需转换。
+ * 🔴 不要在这里改名（如 issued → issueDate），否则落库数据与读取层对不上且 TS 无感。
+ */
+export type SelfReportedCertificate = {
+  name: string;
+  number: string;
+  issued: string;
+  expires: string;
 };
 
 // ---------- 数据源开关 ----------
@@ -141,6 +181,23 @@ type SupplierRow = {
   risk_breakdown: unknown;
   access_tier: string;
   is_published: boolean;
+  // ---- CS-12 / 009_supplier_profile_extras.sql 新增列 ----
+  // 可空：009 迁移之前写入的行这些列全是 NULL。
+  company_type: string | null;
+  english_name: string | null;
+  production_capacity: string | null;
+  monthly_output: string | null;
+  factory_size: string | null;
+  export_since: number | null;
+  self_reported_certificates: unknown;
+  // 注意：`profile_authorized` / `contact_visibility` / `phone` **刻意不进本类型也不进
+  // ROW_SELECT** —— 联系方式属同意书管辖（用户拍板的公开边界只含工商登记级，不含电话）。
+  // 把它们排除在类型外，是为了让「谁也没读过这两列」在 TS 层面可见，
+  // 而不是留一个恒为 undefined 的字段等人误用。待 CS-07 写入时再一并接出。
+  // ---- CS-03 起就存在、此前从未被读取的列 ----
+  address: string | null;
+  website: string | null;
+  registration_number: string | null;
   /** join 出来的证据（可缺省） */
   supplier_evidence?: {
     id: string;
@@ -159,8 +216,45 @@ const ROW_SELECT = `
   verification_level,
   risk_score, certifications, audit_status, inspection_history,
   risk_breakdown, access_tier, is_published,
+  company_type, english_name, production_capacity, monthly_output, factory_size,
+  export_since, self_reported_certificates,
+  address, website, registration_number,
   supplier_evidence ( id, type, status, source, date, note, visibility )
 `;
+
+/**
+ * 自述证书 jsonb → 结构化数组。
+ *
+ * 🔴 三个"宁可少显示"的收敛点（都是为了让脏数据不变成假可信信息）：
+ *   1. 非数组 / null → []（**不抛错**，一张脏行不能让整个档案页 fallback 到静态数据）；
+ *   2. 逐行只保留四个已知键，字符串外的类型一律丢弃；
+ *   3. 四键全空的整行丢弃（表单允许留空行，空行不该渲染成一条证书）。
+ */
+function parseSelfReportedCerts(raw: unknown): SelfReportedCertificate[] | undefined {
+  if (!Array.isArray(raw)) return undefined;
+  const out: SelfReportedCertificate[] = [];
+  for (const item of raw) {
+    if (!item || typeof item !== "object") continue;
+    const r = item as Record<string, unknown>;
+    const pick = (k: string): string =>
+      typeof r[k] === "string" ? (r[k] as string).trim() : "";
+    const row: SelfReportedCertificate = {
+      name: pick("name"),
+      number: pick("number"),
+      issued: pick("issued"),
+      expires: pick("expires"),
+    };
+    if (!row.name && !row.number && !row.issued && !row.expires) continue;
+    out.push(row);
+  }
+  return out.length > 0 ? out : undefined;
+}
+
+/** 空字符串与 null 一律归一为 undefined，避免前台渲染出空行 / "null" */
+function nz(v: string | null | undefined): string | undefined {
+  const s = (v ?? "").trim();
+  return s ? s : undefined;
+}
 
 /**
  * 数据库行 → SupplierView。
@@ -198,6 +292,18 @@ function rowToView(row: SupplierRow): SupplierView {
     inspectionHistory: row.inspection_history ?? 0,
     evidenceCount: publicEvidence.length,
     evidenceVerified: publicEvidence.filter((e) => e.status === "VERIFIED").length,
+    // ---- CS-12 ----
+    englishName: nz(row.english_name),
+    companyType: nz(row.company_type),
+    website: nz(row.website),
+    registrationNumber: nz(row.registration_number),
+    address: nz(row.address),
+    productionCapacity: nz(row.production_capacity),
+    monthlyOutput: nz(row.monthly_output),
+    factorySize: nz(row.factory_size),
+    // export_since 是 integer；0 / 负数不是合法年份，一律丢弃（009 的 CHECK 只兜 1800–2100）
+    exportSince: row.export_since && row.export_since > 0 ? row.export_since : undefined,
+    selfReportedCertificates: parseSelfReportedCerts(row.self_reported_certificates),
   };
 }
 

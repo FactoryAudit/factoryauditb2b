@@ -1867,7 +1867,26 @@
     "paidLockLead": "Founding-Buyer-Mitglieder (99 $/Jahr) sehen Nachweisaufzeichnungen, Risikoaufschlüsselungen, Audit-Historie und Inspektionsdaten.",
     "paidLockCta": "Mitgliedschaft ansehen",
     "paidLockNote": "Der Risiko-Score ist öffentlich. Nachweise und Verifizierungsdetails sind Mitglieder-Inhalte.",
-    "certClaimsReported": "Gemeldete Zertifikatsangaben"
+    "certClaimsReported": "Gemeldete Zertifikatsangaben",
+    "registrationTitle": "Handelsregisterdaten des Unternehmens",
+    "registrationLead": "Vom Unternehmen selbst angegebene Registerdaten. Kontaktdaten werden nicht veröffentlicht.",
+    "regEnglishName": "Englischer Name",
+    "regCompanyType": "Rechtsform",
+    "regRegistrationNo": "Registernummer",
+    "regWebsite": "Website",
+    "regAddress": "Eingetragener Sitz",
+    "selfCertTitle": "Von der Fabrik angegebene Zertifikate",
+    "selfCertLead": "Selbstauskunft, nicht überprüft",
+    "selfCertNone": "Diese Fabrik hat keine Zertifikate angegeben.",
+    "selfCertName": "Zertifikat",
+    "selfCertNumber": "Nr.",
+    "selfCertIssued": "Ausgestellt",
+    "selfCertExpires": "Gültig bis",
+    "selfCertDisclaimer": "Diese Angaben stammen von der Fabrik selbst. FactoryAuditB2B hat sie weder geprüft noch verifiziert; sie sind kein Verifizierungsergebnis der Plattform.",
+    "capacityProduction": "Produktionskapazität",
+    "capacityMonthly": "Monatliche Produktion",
+    "capacityFactorySize": "Fabrikgröße",
+    "capacityExportSince": "Exportiert seit"
   },
   "reportPreview": {
     "badge": "Kostenlose Preview",
@@ -3520,7 +3539,8 @@
     "adminDocsEmpty": "Noch keine Dokumente.",
     "adminCertsEmpty": "Noch keine Zertifizierungen.",
     "adminAuditsEmpty": "Noch keine Audits.",
-    "levelUnverified": "Nicht verifiziert"
+    "levelUnverified": "Nicht verifiziert",
+    "issuedOn": "Ausgestellt"
   },
   "standardReport": {
     "metaTitle": "Standardbericht zur Lieferantenprüfung — Vollständiges Muster",

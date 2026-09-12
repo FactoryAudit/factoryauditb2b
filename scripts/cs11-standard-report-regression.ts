@@ -135,7 +135,15 @@ section("C. 单一事实源");
     "C3 🔴 本地预览脚本不再自己拼 HTML（改为调用生成器）",
     gen.includes("buildStandardReportHtml") && !gen.includes("<!DOCTYPE html>")
   );
-  check("C4 本地预览脚本仍保留后台演示框（adminPreview: true）", gen.includes("adminPreview: true"));
+  // CS-11 落地后（commit 4254b23）预览脚本改为 lang + --admin 两个开关，
+  // adminPreview **默认 false** —— 默认产物就等同于买家留资后拿到的公开件。
+  // 旧断言要求脚本里出现 `adminPreview: true`，随该改动必然过期，故按新事实改写：
+  // 现在要守的是「默认关」这个性质本身（万一有人把默认值翻回去，公开件就会带上后台演示框）。
+  check(
+    "C4 本地预览脚本 adminPreview 由 --admin 开关控制且默认关（默认=公开下载版）",
+    /const\s+adminPreview\s*=\s*argv\.includes\("--admin"\)/.test(gen) &&
+      gen.includes("buildStandardReportHtml(lang, { adminPreview })")
+  );
   check("C5 🔴 后台页改用共享渲染器", admin.includes("StandardReportDocument"));
   check(
     "C6 🔴 后台页 admin 闸门未丢（requireAdmin + notFound）",
