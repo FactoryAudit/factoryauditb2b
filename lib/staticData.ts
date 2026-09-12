@@ -62,9 +62,14 @@ export const STATIC_PROGRAMS: StaticProgram[] = [
   { code: "GMP", nameEn: "GMP", nameZh: "GMP 良好生产规范", serviceType: "CERTIFICATION_SUPPORT", isCertification: true, owner: "FDA/WHO", category: "QUALITY_AUDIT" },
   { code: "ISO14001", nameEn: "ISO 14001", nameZh: "ISO 14001 环境管理体系", serviceType: "CERTIFICATION_SUPPORT", isCertification: true, owner: "ISO", category: "ENVIRONMENTAL" },
   { code: "ISO45001", nameEn: "ISO 45001", nameZh: "ISO 45001 职业健康安全", serviceType: "CERTIFICATION_SUPPORT", isCertification: true, owner: "ISO", category: "SAFETY" },
-  { code: "BRC", nameEn: "BRCGS", nameZh: "BRC 全球食品安全标准", serviceType: "CERTIFICATION_SUPPORT", isCertification: true, owner: "BRCGS", category: "FOOD_SAFETY" },
-  { code: "HACCP", nameEn: "HACCP", nameZh: "HACCP 危害分析与关键控制点", serviceType: "CERTIFICATION_SUPPORT", isCertification: true, owner: "Codex", category: "FOOD_SAFETY" },
-  { code: "FSSC22000", nameEn: "FSSC 22000", nameZh: "FSSC 22000 食品安全体系认证", serviceType: "CERTIFICATION_SUPPORT", isCertification: true, owner: "FSSC", category: "FOOD_SAFETY" },
+  // CS-02C G2（用户 2026-09-13 拍板）：三个食品安全项目补 isAudit:true，
+  // 让它们进入 getSeoMatrix().auditTypes ⇒ 生成 /audit-guide/{country}/{code} 页。
+  // 展示名统一用现行正式名称 BRCGS（BRC 已于 2019 更名）；内部 code 保持 "BRC" 不动，
+  // 绝不改库 —— certification_program_alias 与供应商声明里的历史值照旧保留。
+  // serviceType 维持 CERTIFICATION_SUPPORT 不变（改动会影响 listAuditTypes 的既有消费方）。
+  { code: "BRC", nameEn: "BRCGS", nameZh: "BRCGS 全球食品安全标准", serviceType: "CERTIFICATION_SUPPORT", isAudit: true, isCertification: true, owner: "BRCGS", category: "FOOD_SAFETY" },
+  { code: "HACCP", nameEn: "HACCP", nameZh: "HACCP 危害分析与关键控制点", serviceType: "CERTIFICATION_SUPPORT", isAudit: true, isCertification: true, owner: "Codex", category: "FOOD_SAFETY" },
+  { code: "FSSC22000", nameEn: "FSSC 22000", nameZh: "FSSC 22000 食品安全体系认证", serviceType: "CERTIFICATION_SUPPORT", isAudit: true, isCertification: true, owner: "FSSC", category: "FOOD_SAFETY" },
   { code: "CE", nameEn: "CE Marking", nameZh: "CE 认证", serviceType: "CERTIFICATION_SUPPORT", isCertification: true, owner: "EU", category: "PRODUCT_CERT" },
   { code: "UL", nameEn: "UL Certification", nameZh: "UL 认证", serviceType: "CERTIFICATION_SUPPORT", isCertification: true, owner: "UL", category: "PRODUCT_CERT" },
   { code: "CCC", nameEn: "CCC", nameZh: "CCC 中国强制性产品认证", serviceType: "CERTIFICATION_SUPPORT", isCertification: true, owner: "CNCA", category: "PRODUCT_CERT" },

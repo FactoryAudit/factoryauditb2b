@@ -529,28 +529,98 @@ export async function listSupplierSlugs(): Promise<{ country: string; slug: stri
   return STATIC_SUPPLIERS.map((s) => ({ country: s.countryCode, slug: s.slug }));
 }
 
-// ---------- 落地页 / SEO 矩阵消费用的原始静态行（保留 countryCode / capabilities / evidence） ----------
-// 说明：这些函数返回静态原始形状（含 countryCode 与 capabilities），
-// 供 /countries / /industry / /audit-guide 页面按维度过滤与渲染，避免二次解析。
-// V2.1 说明：SEO 矩阵页一律走静态数据（内容是编辑维护的，不进库），保持原实现不变。
+// ---------- 落地页 / SEO 矩阵消费用的供应商行（CS-02C G1 起 DB 优先，静态兜底） ----------
+//
+// 消费方：/countries/[slug] · /industry/[slug] · /audit-guide/[country]/[auditType]。
+//
+// 🔴 G1 历史缺陷（2026-09-13 修复）：这三个函数曾一律只读 STATIC_SUPPLIERS，
+//    而目录 /suppliers 读库 ⇒ 库里已发布但静态表没有的供应商（如唯一一家食品厂
+//    guangzhou-sunny-food）在行业页渲染 0 家 —— 「数据库明明有、行业页却看不见」的分裂。
+//    现在：Supabase 可用时读库（is_published=true，risk_score 降序），失败回落静态。
+//
+// 返回形状仍为 StaticSupplier（页面零改动）。DB 行映射时**只放公开层字段**：
+//    capabilities/evidence 置空（行业页的能力标签由 getSupplierCapabilitiesResolved
+//    按 slug 另取；certifications 属 PAID 层，矩阵行绝不携带）。
 
-// 分数越高 = 风险越低，落地页先展示风险最低的供应商。
+/** 分数越高 = 风险越低，落地页先展示风险最低的供应商。 */
 function sortByRisk(rows: StaticSupplier[]): StaticSupplier[] {
   return [...rows].sort((a, b) => b.riskScore - a.riskScore);
 }
 
-export async function listSuppliersByCountry(countryCode: string): Promise<StaticSupplier[]> {
-  return sortByRisk(STATIC_SUPPLIERS.filter((s) => s.countryCode === countryCode));
+/** DB 行 → 矩阵行。只映射公开层 + 结构字段，付费字段一律不进（与 redactViews 同纪律）。 */
+function rowToMatrix(row: SupplierRow): StaticSupplier {
+  return {
+    id: row.id,
+    slug: row.slug,
+    legalName: row.legal_name,
+    countryCode: row.country_code,
+    city: row.city,
+    industryCode: row.industry_code ?? "",
+    businessType: row.business_type ?? "",
+    established: row.established ?? 0,
+    employees: row.employees ?? "",
+    mainProducts: row.main_products ?? [],
+    exportMarkets: row.export_markets ?? [],
+    verificationStatus: row.verification_status ?? "",
+    riskScore: row.risk_score ?? 0,
+    certifications: [],
+    auditStatus: row.audit_status ?? "",
+    inspectionHistory: row.inspection_history ?? 0,
+    capabilities: [],
+    evidence: [],
+  };
 }
 
-export async function listSuppliersByIndustry(industryCode: string): Promise<StaticSupplier[]> {
-  return sortByRisk(STATIC_SUPPLIERS.filter((s) => s.industryCode === industryCode));
+function staticMatrix(
+  filter: (s: StaticSupplier) => boolean
+): StaticSupplier[] {
+  return sortByRisk(STATIC_SUPPLIERS.filter(filter));
+}
+
+export async function listSuppliersByCountry(
+  countryCode: string
+): Promise<StaticSupplier[]> {
+  if (useSupabase()) {
+    const rows = await fetchRows(); // 已按 risk_score 降序
+    if (rows) return rows.filter((r) => r.country_code === countryCode).map(rowToMatrix);
+  }
+  return staticMatrix((s) => s.countryCode === countryCode);
+}
+
+export async function listSuppliersByIndustry(
+  industryCode: string
+): Promise<StaticSupplier[]> {
+  if (useSupabase()) {
+    const rows = await fetchRows();
+    if (rows) return rows.filter((r) => r.industry_code === industryCode).map(rowToMatrix);
+  }
+  return staticMatrix((s) => s.industryCode === industryCode);
 }
 
 export async function listSuppliersByAuditType(
   countryCode: string,
   refCode: string
 ): Promise<StaticSupplier[]> {
+  if (useSupabase()) {
+    const rows = await fetchRows();
+    if (rows) {
+      const caps = await fetchAuditTypeCaps();
+      // 静态表的能力标签并入判定：静态四家在库里有副本，但若 capabilities 表缺行，
+      // 不能因为 G1 切库而让它们从 audit-guide 页消失（宁可多判，不可漏判）。
+      const staticCaps = new Map(STATIC_SUPPLIERS.map((s) => [s.slug, s.capabilities]));
+      const matched = rows
+        .filter(
+          (r) =>
+            r.country_code === countryCode &&
+            (caps.get(r.id)?.has(refCode) ||
+              staticCaps
+                .get(r.slug)
+                ?.some((c) => c.refType === "AUDIT_TYPE" && c.refCode === refCode))
+        )
+        .map(rowToMatrix);
+      return matched;
+    }
+  }
   return sortByRisk(
     STATIC_SUPPLIERS.filter(
       (s) =>
@@ -558,6 +628,31 @@ export async function listSuppliersByAuditType(
         s.capabilities.some((c) => c.refType === "AUDIT_TYPE" && c.refCode === refCode)
     )
   );
+}
+
+/** supplier_capabilities 里 ref_type=AUDIT_TYPE 的行，按 supplier_id 分组。出错返回空表。 */
+async function fetchAuditTypeCaps(): Promise<Map<string, Set<string>>> {
+  const { createAdminClient } = await import("./supabaseAdmin");
+  const db = createAdminClient();
+  const out = new Map<string, Set<string>>();
+  if (!db) return out;
+  try {
+    const { data, error } = await db
+      .from("supplier_capabilities")
+      .select("supplier_id, ref_code")
+      .eq("ref_type", "AUDIT_TYPE");
+    if (error) {
+      console.error("[queries] capabilities query failed", error.message);
+      return out;
+    }
+    for (const r of (data ?? []) as { supplier_id: string; ref_code: string }[]) {
+      if (!out.has(r.supplier_id)) out.set(r.supplier_id, new Set());
+      out.get(r.supplier_id)!.add(r.ref_code);
+    }
+  } catch (e) {
+    console.error("[queries] capabilities query exception", e);
+  }
+  return out;
 }
 
 // ---------- 公开认证 / 审核记录（004_documents.sql 新增表） ----------

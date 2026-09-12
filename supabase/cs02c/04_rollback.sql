@@ -1,0 +1,21 @@
+-- =============================================================================
+-- CS-02C G3 · ROLLBACK —— 默认整文件注释，回滚时手工去掉注释再执行
+--
+-- ⚠️⚠️ 这是**破坏性操作**（删列 = 删数据）：
+--   1. 先备份：node scripts/db-apply-sql.mjs --read-only 确认 rfqs 现有数据已导出
+--      （cs02c 的 backup JSON 在 .workbuddy/artifacts/）；
+--   2. db-apply-sql.mjs 自带破坏性守卫，必须加 --allow-destructive 才会放行；
+--   3. 执行前必须再与用户二次确认。
+-- =============================================================================
+
+-- DROP INDEX IF EXISTS public.rfqs_industry;
+--
+-- ALTER TABLE public.rfqs DROP COLUMN IF EXISTS locale;
+-- ALTER TABLE public.rfqs DROP COLUMN IF EXISTS source_path;
+-- ALTER TABLE public.rfqs DROP COLUMN IF EXISTS incoterm;
+-- ALTER TABLE public.rfqs DROP COLUMN IF EXISTS target_market;
+-- ALTER TABLE public.rfqs DROP COLUMN IF EXISTS oem_required;
+-- ALTER TABLE public.rfqs DROP COLUMN IF EXISTS certifications_req;
+-- ALTER TABLE public.rfqs DROP COLUMN IF EXISTS industry_code;
+--
+-- NOTIFY pgrst, 'reload schema';

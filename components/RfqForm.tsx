@@ -20,7 +20,30 @@ export type RfqFormDict = {
   error: string;
 };
 
-export default function RfqForm({ t }: { t: RfqFormDict }) {
+/**
+ * CS-02C G3：行业化上下文（全部可选）。
+ * 由宿主页面注入（CS-02A 起 /industry/* 的 RFQ CTA 会带上 industryCode /
+ * certificationsReq）；locale 由 /rfq 页传入。缺省时这些字段不进 payload，
+ * 服务端落库为 NULL —— 绝不编值。
+ */
+export type RfqFormContext = {
+  locale?: string;
+  industryCode?: string;
+  certificationsReq?: string[];
+  oemRequired?: boolean;
+  targetMarket?: string;
+  incoterm?: string;
+  /** 询价来源页路径；未注入时回退读 URL 的 ?src= 参数 */
+  sourcePath?: string;
+};
+
+export default function RfqForm({
+  t,
+  context,
+}: {
+  t: RfqFormDict;
+  context?: RfqFormContext;
+}) {
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
   // rfq_start 只发一次：用户首次与表单交互即视为产生询价意图
   const startedRef = useRef(false);
@@ -38,24 +61,36 @@ export default function RfqForm({ t }: { t: RfqFormDict }) {
     // 提交成功却报"提交失败"的隐藏 bug）
     const formEl = e.currentTarget;
     const form = new FormData(e.currentTarget);
+    // CS-02C G3：来源归因。页面注入优先，其次取落地 URL 的 ?src=（行业页 CTA 带参）。
+    const srcParam =
+      context?.sourcePath ??
+      (typeof window !== "undefined"
+        ? new URLSearchParams(window.location.search).get("src")
+        : null) ??
+      undefined;
     const payload = {
-      lead: {
-        firstName: String(form.get("firstName") || ""),
-        company: String(form.get("company") || ""),
-        email: String(form.get("email") || ""),
-        country: String(form.get("country") || ""),
-        sourcing: [
-          String(form.get("product") || ""),
-          String(form.get("quantity") || ""),
-        ]
-          .filter(Boolean)
-          .join(" · "),
-        message: String(form.get("message") || ""),
-        tool: "rfq",
-      },
+      // ---- 既有 12 列对应的字段 ----
+      contact_name: String(form.get("firstName") || ""), // 只进管理员邮件，不落库
+      company: String(form.get("company") || ""),
+      email: String(form.get("email") || ""),
+      country: String(form.get("country") || ""),
+      product: String(form.get("product") || ""),
+      quantity: String(form.get("quantity") || ""),
+      message: String(form.get("message") || ""),
+      // ---- CS-02C G3：可空上下文；undefined 的键会被服务端归一为 NULL ----
+      locale: context?.locale,
+      industry_code: context?.industryCode,
+      certifications_req: context?.certificationsReq,
+      oem_required: context?.oemRequired,
+      target_market: context?.targetMarket,
+      incoterm: context?.incoterm,
+      source_path: srcParam,
     };
     try {
-      const res = await fetch("/api/lead", {
+      // 🔴 CS-02C 修复：此前这里 POST /api/lead —— 只发邮件、**一行不落库**，
+      //    /account/rfqs 永远查不到记录，admin 匹配（rfq_matches）也无从谈起。
+      //    /api/rfq 才是「正式询价单」通道：落库 + 双邮件 + 限流 3/h。
+      const res = await fetch("/api/rfq", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -106,8 +141,10 @@ export default function RfqForm({ t }: { t: RfqFormDict }) {
           <input className="input" name="country" placeholder={t.labels.country} />
         </div>
         <div>
+          {/* /api/rfq 强制要求 product（product_required 400）。此前留空提交
+              在 /api/lead 时代静默成功，切到落库通道后必须在表单层拦住 */}
           <label className="text-sm font-medium">{t.labels.product}</label>
-          <input className="input" name="product" placeholder={t.labels.product} />
+          <input className="input" name="product" required placeholder={t.labels.product} />
         </div>
         <div>
           <label className="text-sm font-medium">{t.labels.quantity}</label>

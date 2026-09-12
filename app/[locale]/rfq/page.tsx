@@ -59,7 +59,9 @@ export default async function Page({ params }: Props) {
         <p className="text-[#64748b] mt-3 text-lg">{s.lead}</p>
       </section>
       <section className="max-w-3xl mx-auto">
-        <RfqForm t={s.form} />
+        {/* CS-02C G3：带上提交语言落 rfqs.locale；行业上下文由 CS-02A 的
+            /industry/* CTA 通过 ?src= 与页面注入补齐 */}
+        <RfqForm t={s.form} context={{ locale }} />
       </section>
     </main>
   );
