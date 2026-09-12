@@ -54,6 +54,10 @@ export const ANALYTICS_EVENTS = {
   // Sample Report 留资表单（提交邮箱换样例报告）
   sampleReportCta: "sample_report_cta",
   sampleReportSubmit: "sample_report_submit",
+  // 公开标准报告样板页 /standard-report（CS-11）：全文免注册可读，下载需留资
+  // 口径与 sample-report 一致：按钮点击 = 意向层，提交成功 = 转化。
+  standardReportCtaClick: "standard_report_cta_click",
+  standardReportSubmit: "standard_report_submit",
   // Supplier Network 入驻表单（/join-supplier-network，31 字段人工工作流）
   supplierNetworkStart: "supplier_network_start",
   supplierNetworkSubmit: "supplier_network_submit",
@@ -134,6 +138,7 @@ export const CONVERSION_EVENTS = [
   ANALYTICS_EVENTS.rfqSubmit, // /rfq 正式询价提交
   ANALYTICS_EVENTS.customServiceSubmit, // /custom-services 咨询提交
   ANALYTICS_EVENTS.sampleReportSubmit, // 样例报告留资提交
+  ANALYTICS_EVENTS.standardReportSubmit, // 标准报告样张下载留资提交（/standard-report）
   ANALYTICS_EVENTS.supplierNetworkSubmit, // 供应商入驻提交
   // ---- Qualified Lead：服务端确认已受理 ----
   ANALYTICS_EVENTS.auditRequestSubmit,
@@ -168,6 +173,7 @@ export const CLICK_LEVEL_EVENTS = [
   ANALYTICS_EVENTS.membershipCta,
   ANALYTICS_EVENTS.unlockGateCta,
   ANALYTICS_EVENTS.sampleReportCta,
+  ANALYTICS_EVENTS.standardReportCtaClick,
   ANALYTICS_EVENTS.foundingBuyerCheckoutStart,
   ANALYTICS_EVENTS.verificationCheckoutStart,
 ] as const;

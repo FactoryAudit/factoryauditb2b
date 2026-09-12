@@ -66,7 +66,8 @@
     "fieldReports": "Rapports de terrain",
     "caseStudies": "Études de cas",
     "suppliers": "Annuaire de fournisseurs",
-    "membership": "Adhésion"
+    "membership": "Adhésion",
+    "standardReport": "Rapport standard"
   },
   "home": {
     "badge": "Vérifier. Sourcer. Inspecter. Expédier.",
@@ -3520,5 +3521,34 @@
     "adminCertsEmpty": "Aucune certification pour l'instant.",
     "adminAuditsEmpty": "Aucun audit pour l'instant.",
     "levelUnverified": "Non vérifié"
+  },
+  "standardReport": {
+    "metaTitle": "Rapport standard de diligence fournisseurs — Spécimen complet",
+    "metaDesc": "Lisez gratuitement et sans inscription le rapport standard complet : 13 sections, 8 dimensions notées et classement des preuves. Téléchargez le spécimen après une courte inscription.",
+    "badge": "Spécimen de rapport standard",
+    "h1": "Rapport standard de diligence fournisseurs",
+    "lead": "Voici la structure exacte que suit chaque rapport FactoryAuditB2B. Lisez les 13 sections ci-dessous, sans créer de compte.",
+    "freeNote": "Lecture intégrale gratuite, sans inscription. L'inscription n'est nécessaire que pour le téléchargement.",
+    "tocTitle": "Sommaire",
+    "downloadTitle": "Télécharger ce rapport",
+    "downloadLead": "Dites-nous qui vous êtes et nous vous enverrons une copie. Nous n'utilisons ces informations que pour le suivi de votre demande de sourcing.",
+    "formName": "Votre nom",
+    "formEmail": "E-mail professionnel",
+    "formCompany": "Entreprise",
+    "formCountry": "Pays ou région (facultatif)",
+    "formSourcing": "Que souhaitez-vous sourcer ? (facultatif)",
+    "formLang": "Langue du rapport",
+    "langEn": "English",
+    "langZh": "中文",
+    "formCta": "Obtenir le rapport",
+    "formPrivacy": "Nous utilisons vos informations pour envoyer le rapport et assurer le suivi de votre demande. Aucune newsletter, aucun tiers.",
+    "formError": "Une erreur est survenue. Réessayez ou écrivez-nous directement.",
+    "unlockedTitle": "Merci — votre téléchargement est prêt.",
+    "unlockedNote": "Choisissez une langue et téléchargez le rapport. Nous vous avons également envoyé une confirmation par e-mail.",
+    "downloadCta": "Télécharger le rapport",
+    "ctaTitle": "Ce rapport pour un fournisseur réel ?",
+    "ctaLead": "Commandez une vérification et nous produisons le même dossier en 13 sections pour l'usine que vous évaluez.",
+    "ctaPrimary": "Demander une vérification",
+    "ctaSecondary": "Publier une demande de sourcing"
   }
 }

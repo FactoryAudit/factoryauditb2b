@@ -66,7 +66,8 @@
     "fieldReports": "現場記錄",
     "caseStudies": "案例研究",
     "suppliers": "供應商目錄",
-    "membership": "會員"
+    "membership": "會員",
+    "standardReport": "標準版報告"
   },
   "home": {
     "badge": "覈查 · 採購 · 驗貨 · 發運",
@@ -3520,5 +3521,34 @@
     "adminCertsEmpty": "尚無認證。",
     "adminAuditsEmpty": "尚無審核紀錄。",
     "levelUnverified": "未驗證"
+  },
+  "standardReport": {
+    "metaTitle": "標準版供應商盡職調查報告 — 完整樣張",
+    "metaDesc": "免註冊免費閱讀完整標準版報告：13 個章節、8 個評分維度、證據分級標註。填寫一次登記資訊即可下載樣張。",
+    "badge": "標準版報告樣張",
+    "h1": "標準版供應商盡職調查報告",
+    "lead": "這是 FactoryAuditB2B 每一份報告遵循的結構。下方 13 個章節全部公開，無需註冊即可閱讀。",
+    "freeNote": "全文免費閱讀，無需註冊。只有在下載副本時才需要登記。",
+    "tocTitle": "目錄",
+    "downloadTitle": "下載這份報告",
+    "downloadLead": "留下你的資訊，我們會把報告發給你。這些資訊僅用於跟進你的採購需求，不做他用。",
+    "formName": "你的姓名",
+    "formEmail": "工作信箱",
+    "formCompany": "公司名稱",
+    "formCountry": "國家或地區（選填）",
+    "formSourcing": "你準備採購什麼？（選填）",
+    "formLang": "報告語言",
+    "langEn": "英文",
+    "langZh": "中文",
+    "formCta": "取得報告",
+    "formPrivacy": "我們只會用這些資訊發送報告並跟進你的需求，不訂閱、不分享給第三方。",
+    "formError": "送出失敗，請重試，或直接寄信給我們。",
+    "unlockedTitle": "謝謝 — 報告可以下載了。",
+    "unlockedNote": "選擇語言後即可下載。我們同時寄了一封確認信給你。",
+    "downloadCta": "下載報告",
+    "ctaTitle": "想看某家真實工廠的這份報告？",
+    "ctaLead": "下單核驗服務，我們會為你在評估的工廠出具同樣 13 個章節的檔案。",
+    "ctaPrimary": "申請核驗",
+    "ctaSecondary": "發布採購需求"
   }
 }

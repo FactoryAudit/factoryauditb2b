@@ -66,7 +66,8 @@
     "fieldReports": "Feldberichte",
     "caseStudies": "Fallstudien",
     "suppliers": "Lieferantenverzeichnis",
-    "membership": "Mitgliedschaft"
+    "membership": "Mitgliedschaft",
+    "standardReport": "Standardbericht"
   },
   "home": {
     "badge": "Prüfen. Beschaffen. Inspizieren. Versenden.",
@@ -3520,5 +3521,34 @@
     "adminCertsEmpty": "Noch keine Zertifizierungen.",
     "adminAuditsEmpty": "Noch keine Audits.",
     "levelUnverified": "Nicht verifiziert"
+  },
+  "standardReport": {
+    "metaTitle": "Standardbericht zur Lieferantenprüfung — Vollständiges Muster",
+    "metaDesc": "Lesen Sie den vollständigen Standardbericht kostenlos und ohne Registrierung: 13 Abschnitte, 8 bewertete Dimensionen, Kennzeichnung der Belege. Download nach kurzer Registrierung.",
+    "badge": "Muster des Standardberichts",
+    "h1": "Standardbericht zur Lieferantenprüfung",
+    "lead": "Dies ist die Struktur, der jeder FactoryAuditB2B-Bericht folgt. Lesen Sie alle 13 Abschnitte unten — ohne Konto.",
+    "freeNote": "Vollständig kostenlos lesbar, ohne Registrierung. Eine Registrierung ist nur für den Download nötig.",
+    "tocTitle": "Inhalt",
+    "downloadTitle": "Diesen Bericht herunterladen",
+    "downloadLead": "Sagen Sie uns, wer Sie sind, und wir senden Ihnen ein Exemplar. Wir nutzen diese Angaben ausschließlich für die Bearbeitung Ihrer Beschaffungsanfrage.",
+    "formName": "Ihr Name",
+    "formEmail": "Geschäftliche E-Mail",
+    "formCompany": "Unternehmen",
+    "formCountry": "Land oder Region (optional)",
+    "formSourcing": "Was möchten Sie beschaffen? (optional)",
+    "formLang": "Sprache des Berichts",
+    "langEn": "English",
+    "langZh": "中文",
+    "formCta": "Bericht erhalten",
+    "formPrivacy": "Wir nutzen Ihre Angaben nur für den Versand des Berichts und die Bearbeitung Ihrer Anfrage. Keine Newsletter, keine Weitergabe.",
+    "formError": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.",
+    "unlockedTitle": "Danke — Ihr Download ist bereit.",
+    "unlockedNote": "Wählen Sie eine Sprache und laden Sie den Bericht herunter. Wir haben Ihnen außerdem eine Bestätigung per E-Mail gesendet.",
+    "downloadCta": "Bericht herunterladen",
+    "ctaTitle": "Dieser Bericht für einen echten Lieferanten?",
+    "ctaLead": "Beauftragen Sie eine Verifizierung und wir erstellen dasselbe 13-teilige Dossier für die Fabrik, die Sie prüfen.",
+    "ctaPrimary": "Verifizierung anfragen",
+    "ctaSecondary": "Beschaffungsanfrage veröffentlichen"
   }
 }

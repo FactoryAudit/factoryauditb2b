@@ -73,7 +73,8 @@
     "fieldReports": "现场记录",
     "caseStudies": "案例研究",
     "suppliers": "供应商目录",
-    "membership": "会员"
+    "membership": "会员",
+    "standardReport": "标准版报告"
   },
   "home": {
     "badge": "供应商发现、核验与信任",
@@ -3520,5 +3521,34 @@
     "adminCertsEmpty": "暂无认证。",
     "adminAuditsEmpty": "暂无审核记录。",
     "levelUnverified": "未验证"
+  },
+  "standardReport": {
+    "metaTitle": "标准版供应商尽职调查报告 — 完整样张",
+    "metaDesc": "免注册免费阅读完整标准版报告：13 个章节、8 个评分维度、证据分级标注。填写一次登记信息即可下载样张。",
+    "badge": "标准版报告样张",
+    "h1": "标准版供应商尽职调查报告",
+    "lead": "这是 FactoryAuditB2B 每一份报告遵循的结构。下方 13 个章节全部公开，无需注册即可阅读。",
+    "freeNote": "全文免费阅读，无需注册。只有在下载副本时才需要登记。",
+    "tocTitle": "目录",
+    "downloadTitle": "下载这份报告",
+    "downloadLead": "留下你的信息，我们会把报告发给你。这些信息仅用于跟进你的采购需求，不做他用。",
+    "formName": "你的姓名",
+    "formEmail": "工作邮箱",
+    "formCompany": "公司名称",
+    "formCountry": "国家或地区（选填）",
+    "formSourcing": "你准备采购什么？（选填）",
+    "formLang": "报告语言",
+    "langEn": "英文",
+    "langZh": "中文",
+    "formCta": "获取报告",
+    "formPrivacy": "我们只会用这些信息发送报告并跟进你的需求，不订阅、不共享给第三方。",
+    "formError": "提交失败，请重试，或直接发邮件联系我们。",
+    "unlockedTitle": "谢谢 — 报告可以下载了。",
+    "unlockedNote": "选择语言后即可下载。我们同时给你发了一封确认邮件。",
+    "downloadCta": "下载报告",
+    "ctaTitle": "想看某家真实工厂的这份报告？",
+    "ctaLead": "下单核验服务，我们会为你在评估的工厂出具同样 13 个章节的档案。",
+    "ctaPrimary": "申请核验",
+    "ctaSecondary": "发布采购需求"
   }
 }

@@ -183,7 +183,8 @@
     "fieldReports": "Field Reports",
     "caseStudies": "Case Studies",
     "suppliers": "Supplier Directory",
-    "membership": "Membership"
+    "membership": "Membership",
+    "standardReport": "Standard report"
   },
   "home": {
     "badge": "Supplier discovery, verification & trust",
@@ -3520,5 +3521,34 @@
     "adminCertsEmpty": "No certifications yet.",
     "adminAuditsEmpty": "No audits yet.",
     "levelUnverified": "Unverified"
+  },
+  "standardReport": {
+    "metaTitle": "Standard Supplier Due Diligence Report — Full Specimen",
+    "metaDesc": "Read the full standard supplier due diligence report free and without registering: 13 sections, 8 scored dimensions, evidence grading. Register once to download the specimen.",
+    "badge": "Standard report specimen",
+    "h1": "Standard supplier due diligence report",
+    "lead": "This is the exact structure every FactoryAuditB2B report follows. Read all 13 sections below — no account needed.",
+    "freeNote": "Free to read in full — no registration required. Registration is only needed to download a copy.",
+    "tocTitle": "Contents",
+    "downloadTitle": "Download this report",
+    "downloadLead": "Tell us who you are and we will send you a copy. We use these details to follow up on your sourcing request and nothing else.",
+    "formName": "Your name",
+    "formEmail": "Business email",
+    "formCompany": "Company",
+    "formCountry": "Country or region (optional)",
+    "formSourcing": "What are you sourcing? (optional)",
+    "formLang": "Report language",
+    "langEn": "English",
+    "langZh": "中文",
+    "formCta": "Get the report",
+    "formPrivacy": "We use your details to send the report and to follow up on your request. No newsletters, no third parties.",
+    "formError": "Something went wrong. Please try again, or email us directly.",
+    "unlockedTitle": "Thank you — your download is ready.",
+    "unlockedNote": "Choose a language and download the report. We have also sent you a confirmation by email.",
+    "downloadCta": "Download report",
+    "ctaTitle": "Want this report for a real supplier?",
+    "ctaLead": "Order a verification and we produce the same 13-section dossier for the factory you are evaluating.",
+    "ctaPrimary": "Request a verification",
+    "ctaSecondary": "Post a sourcing request"
   }
 }

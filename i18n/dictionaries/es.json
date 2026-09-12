@@ -66,7 +66,8 @@
     "fieldReports": "Informes de campo",
     "caseStudies": "Casos de estudio",
     "suppliers": "Directorio de proveedores",
-    "membership": "Membresía"
+    "membership": "Membresía",
+    "standardReport": "Informe estándar"
   },
   "home": {
     "badge": "Inteligencia de proveedores para compradores globales",
@@ -3520,5 +3521,34 @@
     "adminCertsEmpty": "Aún no hay certificaciones.",
     "adminAuditsEmpty": "Aún no hay auditorías.",
     "levelUnverified": "Sin verificar"
+  },
+  "standardReport": {
+    "metaTitle": "Informe estándar de diligencia debida de proveedores — Espécimen completo",
+    "metaDesc": "Lea gratis y sin registrarse el informe estándar completo: 13 secciones, 8 dimensiones puntuadas y clasificación de evidencias. Descargue el espécimen tras un breve registro.",
+    "badge": "Espécimen de informe estándar",
+    "h1": "Informe estándar de diligencia debida de proveedores",
+    "lead": "Esta es la estructura exacta que sigue cada informe de FactoryAuditB2B. Lea las 13 secciones a continuación, sin crear una cuenta.",
+    "freeNote": "Lectura completa gratuita, sin registro. El registro solo es necesario para descargar una copia.",
+    "tocTitle": "Contenido",
+    "downloadTitle": "Descargar este informe",
+    "downloadLead": "Indíquenos quién es y le enviaremos una copia. Usamos estos datos solo para dar seguimiento a su solicitud de abastecimiento.",
+    "formName": "Su nombre",
+    "formEmail": "Correo electrónico de empresa",
+    "formCompany": "Empresa",
+    "formCountry": "País o región (opcional)",
+    "formSourcing": "¿Qué va a comprar? (opcional)",
+    "formLang": "Idioma del informe",
+    "langEn": "English",
+    "langZh": "中文",
+    "formCta": "Obtener el informe",
+    "formPrivacy": "Usamos sus datos para enviarle el informe y dar seguimiento a su solicitud. Sin boletines ni terceros.",
+    "formError": "Algo salió mal. Inténtelo de nuevo o escríbanos directamente.",
+    "unlockedTitle": "Gracias: su descarga está lista.",
+    "unlockedNote": "Elija un idioma y descargue el informe. También le hemos enviado una confirmación por correo.",
+    "downloadCta": "Descargar informe",
+    "ctaTitle": "¿Quiere este informe sobre un proveedor real?",
+    "ctaLead": "Solicite una verificación y elaboramos el mismo dossier de 13 secciones para la fábrica que está evaluando.",
+    "ctaPrimary": "Solicitar una verificación",
+    "ctaSecondary": "Publicar una solicitud de abastecimiento"
   }
 }

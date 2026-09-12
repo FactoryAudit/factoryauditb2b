@@ -66,7 +66,8 @@
     "fieldReports": "Relatórios de campo",
     "caseStudies": "Estudos de caso",
     "suppliers": "Diretório de fornecedores",
-    "membership": "Assinatura"
+    "membership": "Assinatura",
+    "standardReport": "Relatório padrão"
   },
   "home": {
     "badge": "Verificar. Comprar. Inspecionar. Enviar.",
@@ -3520,5 +3521,34 @@
     "adminCertsEmpty": "Ainda não há certificações.",
     "adminAuditsEmpty": "Ainda não há auditorias.",
     "levelUnverified": "Não verificado"
+  },
+  "standardReport": {
+    "metaTitle": "Relatório padrão de diligência de fornecedores — Espécime completo",
+    "metaDesc": "Leia gratuitamente e sem cadastro o relatório padrão completo: 13 seções, 8 dimensões pontuadas e classificação de evidências. Baixe o espécime após um breve cadastro.",
+    "badge": "Espécime de relatório padrão",
+    "h1": "Relatório padrão de diligência de fornecedores",
+    "lead": "Esta é a estrutura exata que todo relatório da FactoryAuditB2B segue. Leia as 13 seções abaixo, sem criar uma conta.",
+    "freeNote": "Leitura completa gratuita, sem cadastro. O cadastro só é necessário para baixar uma cópia.",
+    "tocTitle": "Conteúdo",
+    "downloadTitle": "Baixar este relatório",
+    "downloadLead": "Diga-nos quem você é e enviaremos uma cópia. Usamos esses dados apenas para acompanhar sua demanda de sourcing.",
+    "formName": "Seu nome",
+    "formEmail": "E-mail corporativo",
+    "formCompany": "Empresa",
+    "formCountry": "País ou região (opcional)",
+    "formSourcing": "O que você vai comprar? (opcional)",
+    "formLang": "Idioma do relatório",
+    "langEn": "English",
+    "langZh": "中文",
+    "formCta": "Receber o relatório",
+    "formPrivacy": "Usamos seus dados para enviar o relatório e acompanhar sua solicitação. Sem newsletters e sem terceiros.",
+    "formError": "Algo deu errado. Tente novamente ou escreva para nós diretamente.",
+    "unlockedTitle": "Obrigado — seu download está pronto.",
+    "unlockedNote": "Escolha um idioma e baixe o relatório. Também enviamos uma confirmação por e-mail.",
+    "downloadCta": "Baixar relatório",
+    "ctaTitle": "Quer este relatório sobre um fornecedor real?",
+    "ctaLead": "Solicite uma verificação e produzimos o mesmo dossiê de 13 seções para a fábrica que você está avaliando.",
+    "ctaPrimary": "Solicitar uma verificação",
+    "ctaSecondary": "Publicar um pedido de sourcing"
   }
 }

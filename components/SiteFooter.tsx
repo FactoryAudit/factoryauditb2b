@@ -35,6 +35,7 @@ export type FooterDict = {
   containerCalculator: string;
   supplierNetwork: string;
   sampleReport: string;
+  standardReport: string;
   monitoring: string;
   fieldReports: string;
   caseStudies: string;
@@ -136,6 +137,11 @@ export default function SiteFooter({
             <li>
               <Link href={p("/sample-report")} className="hover:text-white">
                 {dict.sampleReport}
+              </Link>
+            </li>
+            <li>
+              <Link href={p("/standard-report")} className="hover:text-white">
+                {dict.standardReport}
               </Link>
             </li>
             <li>
