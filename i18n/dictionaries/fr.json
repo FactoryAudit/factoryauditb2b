@@ -3573,5 +3573,16 @@
     "ctaLead": "Commandez une vérification et nous produisons le même dossier en 13 sections pour l'usine que vous évaluez.",
     "ctaPrimary": "Demander une vérification",
     "ctaSecondary": "Publier une demande de sourcing"
+  },
+  "chemicals": {
+    "metaTitle": "Matières premières chimiques : applications, documents et fournisseurs",
+    "metaDesc": "Matières premières chimiques de Chine : usages, documents demandés par les acheteurs et comment demander des devis à des fournisseurs vérifiés.",
+    "lead": "Chaque page couvre une matière première : usages, spécifications habituelles des acheteurs et documents à demander avant de commander. Si aucun fournisseur n'est référencé, publiez une RFQ.",
+    "casLabel": "CAS RN",
+    "synonymsLabel": "Synonymes",
+    "applicationLabel": "Application",
+    "complianceLabel": "Ce que demandent les acheteurs",
+    "downstreamLabel": "Usages en aval",
+    "relatedIndustries": "Secteurs liés"
   }
 }

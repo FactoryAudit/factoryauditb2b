@@ -35,6 +35,14 @@ export type RfqFormContext = {
   incoterm?: string;
   /** 询价来源页路径；未注入时回退读 URL 的 ?src= 参数 */
   sourcePath?: string;
+  /**
+   * CS-02B：来源页的合法主题预填（化学品名、审核类型名之类）。
+   * 只预填**页面的主题本身**，不替买家编需求 —— 与 certificationsReq 的区别在于：
+   * 买家点进「柠檬酸」页发询价时，采购品就是柠檬酸，这是页面事实而非推断。
+   */
+  defaultProduct?: string;
+  /** 预填的补充说明，同样只写页面已知事实。用户可自由清空。 */
+  defaultMessage?: string;
 };
 
 export default function RfqForm({
@@ -144,7 +152,13 @@ export default function RfqForm({
           {/* /api/rfq 强制要求 product（product_required 400）。此前留空提交
               在 /api/lead 时代静默成功，切到落库通道后必须在表单层拦住 */}
           <label className="text-sm font-medium">{t.labels.product}</label>
-          <input className="input" name="product" required placeholder={t.labels.product} />
+          <input
+            className="input"
+            name="product"
+            required
+            defaultValue={context?.defaultProduct ?? ""}
+            placeholder={t.labels.product}
+          />
         </div>
         <div>
           <label className="text-sm font-medium">{t.labels.quantity}</label>
@@ -153,7 +167,13 @@ export default function RfqForm({
       </div>
       <div>
         <label className="text-sm font-medium">{t.labels.message}</label>
-        <textarea className="textarea" name="message" rows={4} placeholder={t.labels.messageHint} />
+        <textarea
+          className="textarea"
+          name="message"
+          rows={4}
+          defaultValue={context?.defaultMessage ?? ""}
+          placeholder={t.labels.messageHint}
+        />
       </div>
       <button type="submit" disabled={status === "loading"} className="btn btn-accent w-full">
         {status === "loading" ? t.labels.submitting : t.labels.submit}

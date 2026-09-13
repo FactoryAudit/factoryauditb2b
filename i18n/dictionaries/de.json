@@ -3573,5 +3573,16 @@
     "ctaLead": "Beauftragen Sie eine Verifizierung und wir erstellen dasselbe 13-teilige Dossier für die Fabrik, die Sie prüfen.",
     "ctaPrimary": "Verifizierung anfragen",
     "ctaSecondary": "Beschaffungsanfrage veröffentlichen"
+  },
+  "chemicals": {
+    "metaTitle": "Chemische Rohstoffe: Anwendungen, Dokumente und Lieferanten",
+    "metaDesc": "Chemische Rohstoffe aus China: Verwendung, von Käufern angeforderte Dokumente und wie Sie Angebote von geprüften Lieferanten anfordern.",
+    "lead": "Jede Seite behandelt einen Rohstoff: Verwendung, wie Käufer ihn spezifizieren und welche Dokumente vor der Bestellung anzufordern sind. Wenn noch kein Lieferant gelistet ist, veröffentlichen Sie eine RFQ.",
+    "casLabel": "CAS RN",
+    "synonymsLabel": "Synonyme",
+    "applicationLabel": "Anwendung",
+    "complianceLabel": "Was Käufer anfordern",
+    "downstreamLabel": "Weiterverwendung",
+    "relatedIndustries": "Verwandte Branchen"
   }
 }

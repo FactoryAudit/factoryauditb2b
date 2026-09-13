@@ -3573,5 +3573,16 @@
     "ctaLead": "Order a verification and we produce the same 13-section dossier for the factory you are evaluating.",
     "ctaPrimary": "Request a verification",
     "ctaSecondary": "Post a sourcing request"
+  },
+  "chemicals": {
+    "metaTitle": "Chemical raw materials: applications, documents and suppliers",
+    "metaDesc": "Chemical raw materials sourced from China: what each is used for, the documents buyers ask for, and how to request quotes from verified suppliers.",
+    "lead": "Each page covers one raw material: what it is used for, how buyers normally specify it, and the documents to request before an order. Where no supplier is listed yet, post an RFQ.",
+    "casLabel": "CAS RN",
+    "synonymsLabel": "Synonyms",
+    "applicationLabel": "Application",
+    "complianceLabel": "What buyers ask for",
+    "downstreamLabel": "Downstream uses",
+    "relatedIndustries": "Related industries"
   }
 }

@@ -288,12 +288,141 @@ const FOOD: IndustryCopy = {
 };
 
 // ---------------------------------------------------------------------------
+// Chemicals（CS-02B 最小可用版本）
+//
+// 刻意只配 2 个子主题：收尾冲刺期不做程序化扩张（用户指令 §六）。
+// 🔴 子主题**不带 programCode**：REACH / RoHS / GHS 都还没进 STATIC_PROGRAMS，
+//    带上就会生成 404 死链，且会给 audit-guide 再塞一批没有真实内容的 URL。
+//    等真的有化工审核供给时再补。
+// ---------------------------------------------------------------------------
+
+const CHEM_TOPICS: IndustryTopic[] = [
+  {
+    slug: "chemical-compliance",
+    pageType: "P2",
+    title: {
+      en: "Chemical compliance: what buyers should ask for",
+      zh: "化工合规：买家应该索取什么",
+    },
+    metaDesc: {
+      en: "What to request from a chemical supplier: safety data sheet, lot-specific certificate of analysis, grade declaration and destination-market rules. No certificate claims.",
+      zh: "向化工供应商索取什么：安全数据表、批次分析证书、等级声明与目标市场规则。不含任何证书承诺。",
+    },
+    intro: {
+      en: "Chemical sourcing fails less often on price than on documents. The four items below are what most buyers end up asking for, and the ones a factory should be able to produce without delay.",
+      zh: "化工采购出问题的地方，往往不是价格而是文件。下面四项是多数买家最终会索取的内容，也是工厂应当能够立刻提供的。",
+    },
+    sections: [
+      {
+        h2: { en: "Safety data sheet (SDS)", zh: "安全数据表（SDS）" },
+        body: [
+          {
+            en: "Ask for the current SDS for the exact product and check the revision date. An SDS written for a different grade or a different supplier does not describe what you are buying.",
+            zh: "索取与所购产品完全对应的现行 SDS，并核对修订日期。为其他牌号或其他供应商编写的 SDS，描述的并不是你正在买的东西。",
+          },
+        ],
+      },
+      {
+        h2: { en: "Lot-specific certificate of analysis", zh: "批次分析证书（COA）" },
+        body: [
+          {
+            en: "A certificate of analysis describes the lot, not the factory. Match the lot number on the certificate to the lot on the packing, and check that the tested parameters cover the specification you agreed.",
+            zh: "分析证书描述的是批次，不是工厂。把证书上的批号与包装上的批号对齐，并确认检测项目覆盖了你约定的规格。",
+          },
+        ],
+      },
+      {
+        h2: { en: "Grade and intended use", zh: "等级与实际用途" },
+        body: [
+          {
+            en: "Food grade, cosmetic grade, pharmaceutical grade and technical grade are different products with different impurity limits and different paperwork. State the intended use before you order, not after.",
+            zh: "食品级、化妆品级、药用级与工业级是不同产品，杂质限值与随附文件都不同。下单前就要说明实际用途，而不是事后补。",
+          },
+        ],
+      },
+      {
+        h2: { en: "Destination-market rules", zh: "目标市场规则" },
+        body: [
+          {
+            en: "Preservative limits, food-contact status and labelling requirements differ by market and change over time. Confirm the rule currently in force at the destination instead of relying on what applied last year.",
+            zh: "防腐剂限量、食品接触状态与标签要求因市场而异，且会随时间变化。应确认目标市场现行规则，而不是沿用去年的做法。",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "chemical-supplier-verification",
+    pageType: "P5",
+    title: {
+      en: "Chemical supplier verification",
+      zh: "化工供应商核验",
+    },
+    metaDesc: {
+      en: "What verification checks on a chemical manufacturer: registered identity, licence and permit scope, the site that actually produces, and the documents behind a grade claim.",
+      zh: "化工生产企业的核验检查什么：登记身份、许可范围、实际生产场地，以及支撑等级声称的文件。",
+    },
+    intro: {
+      en: "Chemical sourcing has one failure mode that is harder to see than in most industries: the company you contracted may not be the company that produced the material. Verification separates those two questions before you pay.",
+      zh: "化工采购有一个比其他行业更难发现的失败模式：跟你签合同的公司，未必是实际生产这批料的公司。核验就是在付款前把这两个问题分开。",
+    },
+    sections: [
+      {
+        h2: { en: "What is checked", zh: "检查内容" },
+        body: [
+          {
+            en: "Registered identity and the business licence, whether the licence and any production permit actually cover the substance in question, which site is named on those documents, and whether the site named is the site shipping your order.",
+            zh: "登记身份与营业执照、该执照与生产许可是否真的覆盖相关物质、这些文件上写的是哪个场地，以及该场地是否就是发你这批货的场地。",
+          },
+          {
+            en: "Verification reports what was found and what could not be confirmed. It does not certify a material and it does not accept a grade claim as true because the supplier made it.",
+            zh: "核验报告写明发现了什么、什么无法确认。它不对物料作认证，也不会因为供应商自己声称就采信等级。",
+          },
+        ],
+      },
+      {
+        h2: { en: "Trading company or manufacturer", zh: "贸易商还是生产厂" },
+        body: [
+          {
+            en: "Both are legitimate, but they need to be checked differently. Confirm which one you are dealing with, then check the production site separately from the contracting entity.",
+            zh: "两者都正当，但核验方式不同。先确认你面对的是哪一类，再把生产场地与签约主体分开核查。",
+          },
+        ],
+      },
+    ],
+  },
+];
+
+const CHEM: IndustryCopy = {
+  differenceTitle: {
+    en: "What makes chemical suppliers different",
+    zh: "化工供应商的特殊之处",
+  },
+  differenceBody: [
+    {
+      en: "A chemical order is specified by documents, not by samples alone. Grade, crystal form, particle size, surface treatment and impurity limits are all part of what you are buying, and a supplier that cannot produce the matching paperwork is not selling what you think.",
+      zh: "化工订单是靠文件定义的，不只是靠样品。等级、晶型、粒径、表面处理与杂质限值都属于你购买的内容；拿不出对应文件的供应商，卖给你的并不是你以为的东西。",
+    },
+    {
+      en: "The contracting company and the producing site are often two different entities. This is normal in chemicals, but it means identity checks have to cover both before an order is placed.",
+      zh: "签约公司与实际生产场地常常是两个不同主体。这在化工行业属正常，但意味着下单前必须把两者都核查一遍。",
+    },
+    {
+      en: "Rules are market-specific and change: preservative limits, food-contact status and labelling requirements are set by the destination market. Verification on chemical suppliers therefore starts from documents and the site, not from a certificate logo.",
+      zh: "规则因市场而异且会变动：防腐剂限量、食品接触状态与标签要求都由目标市场规定。因此化工供应商的核验从文件与场地开始，而不是从证书标识开始。",
+    },
+  ],
+  topics: CHEM_TOPICS,
+};
+
+// ---------------------------------------------------------------------------
 // 注册表：行业 code → 内容。没有配置 = Master 模板只渲染通用区块。
 // 新增行业时只在这里加一条，页面代码零改动。
 // ---------------------------------------------------------------------------
 
 export const INDUSTRY_COPY: Record<string, IndustryCopy> = {
   "food-beverage": FOOD,
+  chemicals: CHEM,
 };
 
 /** 该行业是否有已配置的子主题（决定 Block B 是否渲染）。 */

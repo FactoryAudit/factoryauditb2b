@@ -30,6 +30,9 @@ export const STATIC_INDUSTRIES = [
   { code: "plastics", name: "Plastics / 塑料" },
   { code: "home-appliances", name: "Home Appliances / 家电" },
   { code: "food-beverage", name: "Food & Beverage / 食品饮料" },
+  // CS-02B：化工行业入口。加这一行即被 sitemap / /industry 索引 / llms.txt 自动接住
+  // （三处都由 listIndustries() 驱动），页面代码零改动。
+  { code: "chemicals", name: "Chemicals / 化工" },
   { code: "automotive", name: "Automotive / 汽车" },
   { code: "furniture", name: "Furniture / 家具" },
   { code: "packaging", name: "Packaging / 包装" },

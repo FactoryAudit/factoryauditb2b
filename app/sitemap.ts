@@ -13,6 +13,7 @@ import { GUIDES } from "@/lib/guides";
 import { CASE_STUDIES } from "@/lib/caseStudies";
 import { FIELD_REPORTS } from "@/lib/fieldReports";
 import { topicsForIndustry } from "@/lib/industryContent";
+import { CHEMICALS } from "@/lib/chemicals";
 
 const BASE = "https://factoryauditb2b.com";
 
@@ -50,6 +51,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/monitoring",
     "/countries",
     "/industry",
+    "/chemicals",
+    ...CHEMICALS.map((c) => `/chemicals/${c.slug}`),
     "/resources",
     "/guides",
     "/case-studies",

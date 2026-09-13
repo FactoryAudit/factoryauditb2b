@@ -29,6 +29,8 @@ SRC_FILES = [
     # CS-02A：行业内容层（Master 页 Block A + 子主题正文）同样走 twText 兜底，
     # 纳入源表后可整串精确命中，避免「危害分析」「过敏原」等新词落回简体。
     "lib/industryContent.ts",
+    # CS-02B：化工原料正文（应用 / 合规）同样走 twText 兜底。
+    "lib/chemicals.ts",
 ]
 OUT = os.path.join(ROOT, "lib", "twData.generated.ts")
 

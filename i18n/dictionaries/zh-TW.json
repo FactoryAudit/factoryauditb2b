@@ -3573,5 +3573,16 @@
     "ctaLead": "下單核驗服務，我們會為你在評估的工廠出具同樣 13 個章節的檔案。",
     "ctaPrimary": "申請核驗",
     "ctaSecondary": "發布採購需求"
+  },
+  "chemicals": {
+    "metaTitle": "化工原料：應用、文件與供應商",
+    "metaDesc": "來自中國的化工原料：各自用途、買家需索取的文件，以及如何向已驗證供應商詢價。",
+    "lead": "每頁涵蓋一種原料：用途、買家通常如何定規格，以及下單前應索取的文件。若暫無登記供應商，可直接發佈 RFQ。",
+    "casLabel": "CAS RN",
+    "synonymsLabel": "同義詞",
+    "applicationLabel": "應用",
+    "complianceLabel": "買家索取什麼",
+    "downstreamLabel": "下游應用",
+    "relatedIndustries": "相關行業"
   }
 }

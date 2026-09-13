@@ -6,6 +6,7 @@ import { CASE_STUDIES } from "@/lib/caseStudies";
 import { FIELD_REPORTS } from "@/lib/fieldReports";
 import { MEMBERSHIP_PRICE_USD } from "@/lib/suppliers";
 import { topicsForIndustry } from "@/lib/industryContent";
+import { CHEMICALS } from "@/lib/chemicals";
 
 // /llms.txt —— 面向 AI 抓取工具（ChatGPT / Perplexity / Bing Copilot 等）的站点说明文件。
 // 完全由中央 taxonomy 引擎驱动，确保与数据库一致（§91 单一事实来源）。
@@ -124,6 +125,14 @@ export async function GET() {
     for (const tp of topicsForIndustry(i.code)) {
       lines.push(`- [${tp.title.en}](${BASE}/industry/${i.code}/${tp.slug}): ${tp.metaDesc.en}`);
     }
+  }
+  lines.push("");
+
+  // CS-02B：化工原料页（最小可用版本，一期 6 个）。清单与页面 generateStaticParams 同源。
+  lines.push("## Chemical raw materials");
+  lines.push(`- [${en.chemicals.metaTitle}](${BASE}/chemicals): ${en.chemicals.metaDesc}`);
+  for (const x of CHEMICALS) {
+    lines.push(`- [${x.nameEn} (CAS ${x.cas})](${BASE}/chemicals/${x.slug}): ${x.application.en}`);
   }
   lines.push("");
 

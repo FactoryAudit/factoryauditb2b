@@ -3573,5 +3573,16 @@
     "ctaLead": "検証サービスをご依頼いただければ、評価中の工場について同じ13セクションのレポートを作成します。",
     "ctaPrimary": "検証を依頼する",
     "ctaSecondary": "調達依頼を投稿する"
+  },
+  "chemicals": {
+    "metaTitle": "化学原料：用途・書類・サプライヤー",
+    "metaDesc": "中国から調達する化学原料：用途、買い手が求める書類、検証済みサプライヤーへの見積もり依頼方法。",
+    "lead": "各ページは原料を 1 件ずつ扱います：用途、買い手が通常指定する項目、発注前に求める書類。登録サプライヤーがいない場合は RFQ を投稿してください。",
+    "casLabel": "CAS RN",
+    "synonymsLabel": "別名",
+    "applicationLabel": "用途",
+    "complianceLabel": "買い手が求める書類",
+    "downstreamLabel": "用途分野",
+    "relatedIndustries": "関連業界"
   }
 }

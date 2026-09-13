@@ -3573,5 +3573,16 @@
     "ctaLead": "Solicite uma verificação e produzimos o mesmo dossiê de 13 seções para a fábrica que você está avaliando.",
     "ctaPrimary": "Solicitar uma verificação",
     "ctaSecondary": "Publicar um pedido de sourcing"
+  },
+  "chemicals": {
+    "metaTitle": "Matérias-primas químicas: aplicações, documentos e fornecedores",
+    "metaDesc": "Matérias-primas químicas da China: usos, documentos exigidos pelos compradores e como pedir orçamentos a fornecedores verificados.",
+    "lead": "Cada página cobre uma matéria-prima: usos, como os compradores a especificam e os documentos a pedir antes de encomendar. Se ainda não houver fornecedores registados, publique uma RFQ.",
+    "casLabel": "CAS RN",
+    "synonymsLabel": "Sinónimos",
+    "applicationLabel": "Aplicação",
+    "complianceLabel": "O que os compradores pedem",
+    "downstreamLabel": "Usos a jusante",
+    "relatedIndustries": "Setores relacionados"
   }
 }
