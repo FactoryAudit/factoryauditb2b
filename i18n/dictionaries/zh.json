@@ -3487,7 +3487,16 @@
       "errGeneric": "无法创建供应商。",
       "statusUnpublished": "默认未发布",
       "statusUnverified": "默认未核验"
-    }
+    },
+    "navLeads": "线索",
+    "leadsTitle": "线索",
+    "leadsLead": "买家咨询、供应商入驻申请与档案认领。所有提交都会带编号留档，不只发邮件。",
+    "leadsEmpty": "暂无线索。买家提交表单或供应商提交申请后，会带编号出现在这里。",
+    "statNewLeads": "近 7 天新线索",
+    "statTotalLeads": "线索总数",
+    "recentLeads": "最近线索",
+    "colKind": "类型",
+    "colTool": "来源"
   },
   "evidenceCenter": {
     "sectionVerification": "平台核验",

@@ -3487,7 +3487,16 @@
       "errGeneric": "No se pudo crear el proveedor.",
       "statusUnpublished": "Empieza sin publicar",
       "statusUnverified": "Empieza sin verificar"
-    }
+    },
+    "navLeads": "Leads",
+    "leadsTitle": "Leads",
+    "leadsLead": "Consultas de compradores, solicitudes de proveedores y reclamaciones de perfil. Todo envío se guarda aquí con número de referencia, no solo por correo.",
+    "leadsEmpty": "Aún no hay leads. Cuando un comprador envía un formulario o un proveedor solicita registrarse, aparecerá aquí con un número de referencia.",
+    "statNewLeads": "Leads nuevos (7 días)",
+    "statTotalLeads": "Total de leads",
+    "recentLeads": "Leads recientes",
+    "colKind": "Tipo",
+    "colTool": "Origen"
   },
   "evidenceCenter": {
     "sectionVerification": "Verificación",

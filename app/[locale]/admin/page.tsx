@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { isLocale, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
-import { getAdminStats, listAdminRfqs, requireAdmin } from "@/lib/adminData";
+import { getAdminStats, listAdminLeads, listAdminRfqs, requireAdmin } from "@/lib/adminData";
 import { notFound } from "next/navigation";
 
 export const dynamic = "force-dynamic";
@@ -22,7 +22,11 @@ export default async function AdminOverviewPage({ params }: Props) {
   const a = t.admin;
   const p = (href: string) => localePath(locale, href);
 
-  const [stats, rfqs] = await Promise.all([getAdminStats(), listAdminRfqs(10)]);
+  const [stats, rfqs, leads] = await Promise.all([
+    getAdminStats(),
+    listAdminRfqs(10),
+    listAdminLeads(10),
+  ]);
 
   // 数据库里的 status 是 string，字典对象是字面量联合键。
   // 这里放宽成 Record<string,string>，避免 TS7053；取不到时回落到原始值。
@@ -33,6 +37,8 @@ export default async function AdminOverviewPage({ params }: Props) {
     { label: a.statUsers, value: stats.totalUsers, href: "/admin/members" },
     { label: a.statNewRfqs, value: stats.newRfqs, href: "/admin/rfqs" },
     { label: a.statTotalRfqs, value: stats.totalRfqs, href: "/admin/rfqs" },
+    { label: a.statNewLeads, value: stats.newLeads, href: "/admin/leads" },
+    { label: a.statTotalLeads, value: stats.totalLeads, href: "/admin/leads" },
     { label: a.statSuppliers, value: stats.publishedSuppliers, href: "/admin/suppliers" },
   ];
 
@@ -72,6 +78,35 @@ export default async function AdminOverviewPage({ params }: Props) {
                 </span>
                 <span className="text-xs text-[#94a3b8]">
                   {new Date(r.created_at).toISOString().slice(0, 10)}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+      {/* CS-02D：线索入库后，概览页必须能看到最近线索 —— 否则"落库"对运营等于不存在 */}
+      <section className="mt-8">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-bold text-[#0f172a]">{a.recentLeads}</h2>
+          <Link href={p("/admin/leads")} className="text-sm text-[#0f4c81] hover:underline">
+            {a.viewAll}
+          </Link>
+        </div>
+
+        {leads.length === 0 ? (
+          <p className="mt-4 text-sm text-[#64748b]">{a.leadsEmpty}</p>
+        ) : (
+          <div className="mt-4 divide-y divide-[#e2e8f0] overflow-hidden rounded-lg border border-[#e2e8f0] bg-white">
+            {leads.map((l) => (
+              <div key={l.id} className="flex flex-wrap items-center gap-3 px-4 py-3 text-sm">
+                <span className="font-mono text-xs text-[#64748b]">{l.reference_id}</span>
+                <span className="text-[#64748b]">{l.tool}</span>
+                <span className="text-[#64748b]">{l.email}</span>
+                <span className="ml-auto rounded-full bg-[#e6eef6] px-2 py-0.5 text-xs text-[#0f4c81]">
+                  {l.kind}
+                </span>
+                <span className="text-xs text-[#94a3b8]">
+                  {new Date(l.created_at).toISOString().slice(0, 10)}
                 </span>
               </div>
             ))}

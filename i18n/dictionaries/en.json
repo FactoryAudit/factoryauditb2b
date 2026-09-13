@@ -3487,7 +3487,16 @@
       "errGeneric": "Could not create supplier.",
       "statusUnpublished": "Starts unpublished",
       "statusUnverified": "Starts unverified"
-    }
+    },
+    "navLeads": "Leads",
+    "leadsTitle": "Leads",
+    "leadsLead": "Buyer enquiries, supplier applications and profile claims. Every submission is stored here with a reference number, not only emailed.",
+    "leadsEmpty": "No leads yet. Once a buyer submits a form or a supplier applies, it appears here with a reference number.",
+    "statNewLeads": "New leads (7 days)",
+    "statTotalLeads": "Total leads",
+    "recentLeads": "Recent leads",
+    "colKind": "Type",
+    "colTool": "Source"
   },
   "evidenceCenter": {
     "sectionVerification": "Verification",

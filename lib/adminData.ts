@@ -41,6 +41,9 @@ export type AdminStats = {
   publishedSuppliers: number;
   newRfqs: number;
   totalRfqs: number;
+  // CS-02D：leads 落库后才有意义。newLeads = 近 7 天，totalLeads = 全量。
+  newLeads: number;
+  totalLeads: number;
 };
 
 /**
@@ -60,13 +63,16 @@ export async function getAdminStats(): Promise<AdminStats> {
     publishedSuppliers: 0,
     newRfqs: 0,
     totalRfqs: 0,
+    newLeads: 0,
+    totalLeads: 0,
   };
   const db = createAdminClient();
   if (!db) return empty;
 
   try {
     const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
-    const [users, paid, suppliers, published, newRfqs, totalRfqs] = await Promise.all([
+    const [users, paid, suppliers, published, newRfqs, totalRfqs, newLeads, totalLeads] =
+      await Promise.all([
       db.from("profiles").select("id", { count: "exact", head: true }),
       db
         .from("memberships")
@@ -83,6 +89,9 @@ export async function getAdminStats(): Promise<AdminStats> {
         .select("id", { count: "exact", head: true })
         .gte("created_at", since),
       db.from("rfqs").select("id", { count: "exact", head: true }),
+      // CS-02D：leads 统计。表不存在/权限异常时 count 为 null → 回落 0，后台不崩。
+      db.from("leads").select("id", { count: "exact", head: true }).gte("created_at", since),
+      db.from("leads").select("id", { count: "exact", head: true }),
     ]);
 
     return {
@@ -92,6 +101,8 @@ export async function getAdminStats(): Promise<AdminStats> {
       publishedSuppliers: published.count ?? 0,
       newRfqs: newRfqs.count ?? 0,
       totalRfqs: totalRfqs.count ?? 0,
+      newLeads: newLeads.count ?? 0,
+      totalLeads: totalLeads.count ?? 0,
     };
   } catch (e) {
     console.error("[adminData] stats failed", e);
@@ -572,6 +583,76 @@ export async function updateRfqStatus(
       .eq("reference_id", referenceId);
     if (error) {
       console.error("[adminData] update rfq failed", error.message);
+      return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+// ---------- 线索（CS-02D） ----------
+//
+// public.leads 收三类：买家留资 / 供应商入驻申请 / 供应商认领申请。
+// 这里只做**只读展示**；状态流转（new → contacted → …）暂由邮件跟进处理，
+// 状态编辑 UI 列入 Backlog，避免为单人后台过早加交互面。
+
+export type AdminLeadRow = {
+  id: string;
+  reference_id: string;
+  kind: string;
+  tool: string;
+  status: string;
+  email: string;
+  first_name: string | null;
+  company: string | null;
+  country: string | null;
+  phone: string | null;
+  sourcing: string | null;
+  supplier_name: string | null;
+  supplier_website: string | null;
+  message: string | null;
+  score: number | null;
+  payload: unknown;
+  created_at: string;
+};
+
+export async function listAdminLeads(limit = 100): Promise<AdminLeadRow[]> {
+  const db = createAdminClient();
+  if (!db) return [];
+  try {
+    const { data, error } = await db
+      .from("leads")
+      .select(
+        "id, reference_id, kind, tool, status, email, first_name, company, country, phone, sourcing, supplier_name, supplier_website, message, score, payload, created_at"
+      )
+      .order("created_at", { ascending: false })
+      .limit(limit);
+    if (error) {
+      console.error("[adminData] list leads failed", error.message);
+      return [];
+    }
+    return (data ?? []) as AdminLeadRow[];
+  } catch (e) {
+    console.error("[adminData] list leads exception", e);
+    return [];
+  }
+}
+
+/** leads_status_check 允许的五值，与 /api/admin/leads 的枚举白名单同源 */
+export const LEAD_STATUSES = ["new", "contacted", "quoted", "won", "lost"] as const;
+export type LeadStatus = (typeof LEAD_STATUSES)[number];
+
+export async function updateLeadStatus(
+  referenceId: string,
+  status: LeadStatus
+): Promise<boolean> {
+  const db = createAdminClient();
+  if (!db) return false;
+  try {
+    const { error } = await db.from("leads").update({ status }).eq("reference_id", referenceId);
+    if (error) {
+      console.error("[adminData] update lead failed", error.message);
       return false;
     }
     return true;

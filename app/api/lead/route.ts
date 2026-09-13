@@ -1,13 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 import { leadScore } from "@/lib/leadScore";
+import { insertLead } from "@/lib/leads";
+import { getCurrentUser } from "@/lib/supabaseServer";
 import { notifyAdminNewLead, notifyCustomerLeadReceived } from "@/lib/notify";
 import { checkRateLimit, clientIp, clamp } from "@/lib/rateLimit";
 
 // 保存 Lead 并通知管理员/客户（PRD §21 漏斗：工具使用 → 邮箱捕获 → Lead）
-// V2.0 去数据库：不再写 Prisma。线索通过邮件通知送达管理员，
-// 后续由运营手动归档到 Google Sheets（CRM）。leadId 用随机 UUID 生成，仅作关联标识。
+//
+// CS-02D：本路由**落库**（public.leads，kind=buyer_lead）。
+//   此前这里只发邮件、一行不落库 —— migration 008 把表建好了却没有写入方，
+//   后台永远查不到线索，是典型的一等「假功能」。现在由 lib/leads.ts 统一写入。
+//
+// 失败方向（重要）：落库失败**不阻断**邮件、不阻断成功响应。
+//   数据库抖动不该让一单真实意向凭空消失；邮件是最后一道兜底。
+//   响应里的 stored=false 是给运营看的信号，不是给用户的失败提示。
+//
 // 统一入口：TOOL / SERVICE / RFQ / SUPPLIER / CONTACT 等所有商业意向
 // 支持 tool 值：supplier-risk-calculator / custom-services / audit-request / rfq / contact ...
+//
+// 登录用户（如有）会写入 user_id，游客为 NULL。
 
 // 限流阈值：同一个 IP 每小时最多 5 条线索。
 // 真实买家不会一小时提交 5 次询价；超过这个量基本是脚本灌数据或竞对骚扰。
@@ -66,14 +77,39 @@ export async function POST(req: NextRequest) {
       message,
     });
 
-    // 随机 leadId 作为线索关联标识（不再有数据库自增 id）
+    // 落库短号 LEAD-XXXXXX（运营可在邮件/工单里直接引用）；撞号由 lib/leads.ts 重试解决。
+    // 旧的 uuid leadId 保留在响应里作向后兼容（既有前端与回归脚本读它）。
     const id = crypto.randomUUID();
 
+    // 登录用户才带 user_id；游客为 NULL（leads 只对 service_role 开放写权限，RLS 双保险）
+    const user = await getCurrentUser().catch(() => null);
+    const saved = await insertLead({
+      kind: "buyer_lead",
+      tool,
+      email,
+      firstName,
+      company,
+      country,
+      sourcing,
+      supplierName: clamp(lead.supplierName || lead.supplier, 300) || null,
+      supplierWebsite,
+      message,
+      score,
+      // 原始载荷无损兜底：上游表单以后加字段，即使列没跟上，这里也一定找得到
+      payload: { lead, result: risk },
+      userId: user?.id ?? null,
+    });
+    const referenceId = saved.stored ? saved.referenceId : null;
+    if (!saved.stored) {
+      console.error("[api/lead] not stored", saved.reason, saved.message ?? "");
+    }
+
     // 通知（邮件通道未配置时自动降级为日志，不阻塞主流程）
+    // 管理员邮件用短号做标识 —— 与库里 reference_id 一致，可直接反查。
     await Promise.allSettled([
       notifyAdminNewLead({
-        id,
-        tool,
+        id: referenceId ?? id,
+        tool: saved.stored ? tool : `${tool} (not stored)`,
         firstName,
         email,
         company,
@@ -84,7 +120,7 @@ export async function POST(req: NextRequest) {
       notifyCustomerLeadReceived({ email, firstName, tool }),
     ]);
 
-    return NextResponse.json({ ok: true, leadId: id, score });
+    return NextResponse.json({ ok: true, leadId: id, referenceId, stored: saved.stored, score });
   } catch (e) {
     console.error("lead save failed", e);
     return NextResponse.json({ ok: false, error: "save failed" }, { status: 500 });

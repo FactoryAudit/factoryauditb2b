@@ -134,8 +134,10 @@ export default function SupplierRegistrationForm({ t, success, error }: Props) {
       if (data.ok) {
         // 供应商入驻转化：提交成功（不携带任何表单内容，referenceId 属敏感追踪号也不发）
         trackEvent(ANALYTICS_EVENTS.supplierNetworkSubmit);
+        // CS-02D：优先展示落库短号 LEAD-XXXXXX（供应商可直接拿它问进度），
+        // 落库失败时接口没有 referenceId，退回旧键 supplierId（UUID）保持 UX 不空窗。
         setStatus("ok");
-        setReferenceId(String(data.supplierId || ""));
+        setReferenceId(String(data.referenceId || data.supplierId || ""));
         formEl.reset();
         setCerts([{ ...EMPTY_CERT }]);
         return;

@@ -5,10 +5,13 @@
 //   2) 「我要获得证书」咨询弹窗：独立表单（不嵌套主表单）→ POST kind="certification_request"。
 //   3) /api/supplier-register 分流不破坏既有入驻契约（26 字段白名单逐条仍在、限流仍在最前）。
 //   4) 九语字典同步（18 新键 × 9 语），叶子数仍与 cs06a C8 常量同源。
+//   5) CS-02D 起：/api/supplier-register 两个分支都落库（public.leads），
+//      响应契约向后兼容地扩展（旧键保留 + referenceId / stored）。
 //
-// 为什么不写浏览器测试：本 CS 零后端依赖（只发邮件），
-// 而"表单是不是真的渲染成 date 控件 / 弹窗是不是独立表单"这类**结构**问题
-// 不会让 tsc 报错、不会 500，只能靠源码级断言守住。
+// 为什么主体是源码级断言而不是浏览器测试：
+//   "表单是不是真的渲染成 date 控件 / 弹窗是不是独立表单"这类**结构**问题
+//   不会让 tsc 报错、不会 500，只能靠源码级断言守住。
+//   （落库行为由 cs02d-leads 系列脚本做真实 POST → DB 往返验证，不在这里重复。）
 //
 // 用法：
 //   node scripts/run-regression.mjs cs08-form-regression CS08_ROOT
@@ -108,7 +111,9 @@ check("D1 路由可读", routeSrc.length > 500);
 check("D2 导入咨询字段清单与 kind 常量", routeSrc.includes("CERTIFICATION_REQUEST_FIELDS") && routeSrc.includes("CERTIFICATION_REQUEST_KIND"));
 check("D3 存在分流分支", new RegExp(`if \\(kind === CERTIFICATION_REQUEST_KIND\\)`).test(routeSrc));
 check("D4 咨询分支校验必填（wanted + email）", /certification required/.test(routeSrc) && /email required/.test(routeSrc) && /invalid_email/.test(routeSrc));
-check("D5 咨询分支只发 notifyAdminCertificationRequest", routeSrc.includes("notifyAdminCertificationRequest({ id: requestId, fields: cr })"));
+// CS-02D：id 从 uuid 换成落库短号 LEAD-XXXXXX（落库失败退回 requestId），语义不变
+check("D5 咨询分支只发 notifyAdminCertificationRequest",
+  routeSrc.includes("notifyAdminCertificationRequest({ id: saved.stored ? saved.referenceId : requestId, fields: cr })"));
 
 // 咨询分支不得触发供应商回执/入驻邮件（否则污染 Supplier Master Sheet 语义）
 const certBranch = routeSrc.slice(routeSrc.indexOf(`if (kind === CERTIFICATION_REQUEST_KIND)`), routeSrc.indexOf("—— 分支 B"));
@@ -116,13 +121,22 @@ check(
   "D6 咨询分支不调用入驻/回执邮件",
   !certBranch.includes("notifyAdminSupplierRegistration") && !certBranch.includes("notifySupplierReceived")
 );
-check("D7 咨询分支返回 requestId", /NextResponse\.json\(\{ ok: true, requestId \}\)/.test(routeSrc));
+// CS-02D：两个分支都从「只发邮件」升级为「落库 + 发邮件」，响应契约随之后向兼容地扩展
+// （旧键 requestId / supplierId 一律保留，新增 referenceId 短号与 stored 落库标志）。
+check(
+  "D7 咨询分支返回 requestId（CS-02D 起同返回 referenceId / stored）",
+  routeSrc.includes("requestId,") &&
+    routeSrc.includes("referenceId: saved.stored ? saved.referenceId : null")
+);
 
 // 26 字段白名单逐条仍在
 const missingFields = REGISTRATION_FIELDS.filter((k) => !new RegExp(`"${k}"`).test(routeSrc));
 check(`D8 既有 ${REGISTRATION_FIELDS.length} 个入驻字段白名单逐条仍在`, missingFields.length === 0, missingFields.join(","));
 check("D9 白名单新增 certificatesJson（结构化证书）", routeSrc.includes('"certificatesJson"'));
-check("D10 入驻路径响应契约未变（仍返回 supplierId）", /NextResponse\.json\(\{ ok: true, supplierId: id \}\)/.test(routeSrc));
+check(
+  "D10 入驻路径响应契约：supplierId 仍在（CS-02D 增补 referenceId / stored，向后兼容）",
+  routeSrc.includes("supplierId: id, referenceId, stored: saved.stored")
+);
 
 // 限流必须仍在解析 body 之前（fail-open 前置于一切 IO）
 const rlIdx = routeSrc.indexOf("checkRateLimit(");
@@ -194,8 +208,8 @@ for (const loc of LOCALES) {
   leafCounts.push(lv.length);
 }
 check("G3 九语叶子数完全一致", new Set(leafCounts).size === 1, leafCounts.join("/"));
-check("G4 叶子数 = 2726（与 cs06a C8 常量同源；再改字典必须两处同改）", leafCounts[0] === 2726, `实际 ${leafCounts[0]}`);
-check("G5 cs06a 回归里的 C8 常量已同步为 2726", read("scripts/cs06a-directory-regression.ts").includes("baseKeys.length === 2726"));
+check("G4 叶子数 = 2735（与 cs06a C8 常量同源；再改字典必须两处同改）", leafCounts[0] === 2735, `实际 ${leafCounts[0]}`);
+check("G5 cs06a 回归里的 C8 常量已同步为 2735", read("scripts/cs06a-directory-regression.ts").includes("baseKeys.length === 2735"));
 
 console.log("\n============================================================");
 if (fail === 0) {

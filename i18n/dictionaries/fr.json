@@ -3487,7 +3487,16 @@
       "errGeneric": "Impossible de créer le fournisseur.",
       "statusUnpublished": "Commence non publié",
       "statusUnverified": "Commence non vérifié"
-    }
+    },
+    "navLeads": "Leads",
+    "leadsTitle": "Leads",
+    "leadsLead": "Demandes d'acheteurs, candidatures de fournisseurs et revendications de fiche. Chaque envoi est consigné ici avec un numéro de référence, pas seulement envoyé par e-mail.",
+    "leadsEmpty": "Aucun lead pour l'instant. Dès qu'un acheteur envoie un formulaire ou qu'un fournisseur dépose une candidature, il apparaît ici avec un numéro de référence.",
+    "statNewLeads": "Nouveaux leads (7 jours)",
+    "statTotalLeads": "Total des leads",
+    "recentLeads": "Leads récents",
+    "colKind": "Type",
+    "colTool": "Source"
   },
   "evidenceCenter": {
     "sectionVerification": "Vérification",

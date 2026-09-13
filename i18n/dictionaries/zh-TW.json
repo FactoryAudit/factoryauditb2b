@@ -3487,7 +3487,16 @@
       "errGeneric": "無法建立供應商。",
       "statusUnpublished": "預設未發布",
       "statusUnverified": "預設未核驗"
-    }
+    },
+    "navLeads": "線索",
+    "leadsTitle": "線索",
+    "leadsLead": "買家諮詢、供應商入駐申請與檔案認領。所有提交都會帶編號留檔，不只發信。",
+    "leadsEmpty": "暫無線索。買家提交表單或供應商提交申請後，會帶編號出現在這裡。",
+    "statNewLeads": "近 7 天新線索",
+    "statTotalLeads": "線索總數",
+    "recentLeads": "最近線索",
+    "colKind": "類型",
+    "colTool": "來源"
   },
   "evidenceCenter": {
     "sectionVerification": "平台核驗",

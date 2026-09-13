@@ -3487,7 +3487,16 @@
       "errGeneric": "供給者を作成できませんでした。",
       "statusUnpublished": "初期は非公開",
       "statusUnverified": "初期は未検証"
-    }
+    },
+    "navLeads": "リード",
+    "leadsTitle": "リード",
+    "leadsLead": "バイヤーの問い合わせ、サプライヤー登録申請、プロファイル申請。すべての送信内容はメールだけでなく、番号付きでここに記録されます。",
+    "leadsEmpty": "まだリードはありません。バイヤーがフォームを送信するか、サプライヤーが申請すると、参照番号付きでここに表示されます。",
+    "statNewLeads": "新規リード（7日間）",
+    "statTotalLeads": "リード総数",
+    "recentLeads": "最近のリード",
+    "colKind": "種別",
+    "colTool": "送信元"
   },
   "evidenceCenter": {
     "sectionVerification": "プラットフォーム検証",

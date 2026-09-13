@@ -3487,7 +3487,16 @@
       "errGeneric": "Lieferant konnte nicht erstellt werden.",
       "statusUnpublished": "Beginnt unveröffentlicht",
       "statusUnverified": "Beginnt unverifiziert"
-    }
+    },
+    "navLeads": "Leads",
+    "leadsTitle": "Leads",
+    "leadsLead": "Käuferanfragen, Lieferantenbewerbungen und Profil-Ansprüche. Jede Einsendung wird hier mit Referenznummer gespeichert, nicht nur per E-Mail versandt.",
+    "leadsEmpty": "Noch keine Leads. Sobald ein Käufer ein Formular sendet oder ein Lieferant sich bewirbt, erscheint der Eintrag hier mit Referenznummer.",
+    "statNewLeads": "Neue Leads (7 Tage)",
+    "statTotalLeads": "Leads insgesamt",
+    "recentLeads": "Neueste Leads",
+    "colKind": "Art",
+    "colTool": "Quelle"
   },
   "evidenceCenter": {
     "sectionVerification": "Verifizierung",
