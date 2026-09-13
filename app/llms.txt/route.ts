@@ -77,7 +77,7 @@ export async function GET() {
   lines.push(`- [RFQ](${BASE}/rfq): Turn sourcing requirements into a structured RFQ.`);
   lines.push(`- [Join the Supplier Network](${BASE}/join-supplier-network): Free supplier registration for an international buyer-facing profile. No guarantee of orders or certification; status and evidence level are decided by human review.`);
   lines.push(`- [Custom Services](${BASE}/custom-services): Tailored audit, verification and inspection requests.`);
-  lines.push(`- [Trust Center](${BASE}/trust): Who operates FactoryAuditB2B, business registration, what we verify, verification levels, evidence policy and data protection.`);
+  lines.push(`- [About FactoryAuditB2B](${BASE}/trust): Who operates FactoryAuditB2B (Jiangmen Zhiyu Technology Co., Ltd.), why we understand suppliers, how we verify, and how buyers can request an audit or submit an RFQ.`);
   lines.push(`- [Container Load Calculator](${BASE}/logistics): Calculates how many cartons fit in a 20GP, 40GP, 40HQ, 45HQ, reefer or open-top container, and how many containers a shipment needs, with volume and payload utilisation.`);
   lines.push("");
 

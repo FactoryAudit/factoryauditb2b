@@ -43,8 +43,8 @@
     "badge": "Trust Center",
     "h1": "Trust Center",
     "lead": "Who we are, what we verify, what we do not, and how we handle evidence. Published so you can check us before you ask us to check anyone else.",
-    "metaTitle": "Trust Center — Who Operates FactoryAuditB2B and What We Verify",
-    "metaDesc": "Business registration, operating entity, verification methodology, verification levels, evidence policy and data protection for FactoryAuditB2B.",
+    "metaTitle": "About FactoryAuditB2B",
+    "metaDesc": "FactoryAuditB2B is operated by Jiangmen Zhiyu Technology Co., Ltd. We help global buyers find, screen, verify and audit suppliers in China and Southeast Asia.",
     "regTitle": "Business Registration",
     "regLead": "Public verification, not full disclosure. We publish the registration facts a buyer needs and keep personal and sensitive identifiers partially masked.",
     "legalEntityLabel": "Legal entity name",
@@ -150,7 +150,7 @@
     ]
   },
   "footer": {
-    "trustCenter": "Trust Center",
+    "trustCenter": "About",
     "operatedBy": "FactoryAuditB2B is a platform and brand operated by {entity}.",
     "registeredBusiness": "China Registered Business",
     "platform": "Platform",
