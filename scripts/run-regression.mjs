@@ -31,6 +31,25 @@ if (rootEnvName && !process.env[rootEnvName]) {
   process.env[rootEnvName] = root.replace(/\\/g, "/");
 }
 
+// 🔑 兜底桩：`server-only` / `client-only` 是 Next 的**构建期哨兵包**
+//    （exports 里只有 "react-server" 条件才指向空模块，Node 直跑会抛错）。
+//    `lib/taxonomy.ts` 依赖 `server-only`，任何 import `lib/queries` 的回归脚本
+//    都会因此打包失败 → 这里统一替换成空模块。
+//    注意：只对这两个包名生效，绝不放宽其它未解析依赖（否则会把真错吞掉）。
+const stubNextSentinels = {
+  name: "stub-next-sentinels",
+  setup(b) {
+    b.onResolve({ filter: /^(server-only|client-only)$/ }, (a) => ({
+      path: a.path,
+      namespace: "next-sentinel-stub",
+    }));
+    b.onLoad({ filter: /.*/, namespace: "next-sentinel-stub" }, () => ({
+      contents: "export {};",
+      loader: "js",
+    }));
+  },
+};
+
 await build({
   entryPoints: [entry],
   bundle: true,
@@ -38,6 +57,7 @@ await build({
   format: "cjs",
   outfile: out,
   logLevel: "warning",
+  plugins: [stubNextSentinels],
 });
 
 await import(pathToFileURL(out).href);

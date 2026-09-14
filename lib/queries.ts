@@ -16,6 +16,7 @@
 import { STATIC_SUPPLIERS, STATIC_COUNTRIES, type StaticSupplier } from "./staticData";
 import { getSupplierCapabilitiesResolved } from "./taxonomy";
 import { overallLevel } from "./riskEngine";
+import { publicVerificationLevel } from "./verification";
 import { isAdminConfigured } from "./supabaseAdmin";
 import { redactSupplier, redactEvidence, canAccess, type MembershipTier } from "./access";
 
@@ -50,6 +51,16 @@ export type SupplierView = {
   riskLevel?: string;
   /** 最近一次核验日期，取自"公开证据"里最新的 date；无记录则为 null，绝不回落到当前日期 */
   lastChecked?: string | null;
+  /**
+   * PHASE 03（§十）：档案记录的最后更新时间（DB `suppliers.updated_at`）。
+   *
+   * 🔴 与 `lastChecked` 是**两个不同的时间事实**，禁互相顶替：
+   *    `updatedAt`  = 档案被修改（含「发布」这个动作，由 `suppliers_set_updated_at` 触发器维护）
+   *    `lastChecked`= 公开证据里最新的一条核验日期
+   *    sitemap 的 lastModified 用前者；页面「最近核验」用后者。
+   * 静态兜底数据没有时间戳 ⇒ null（绝不拿 new Date() 顶替）。
+   */
+  updatedAt?: string | null;
   certifications: string[];
   auditStatus?: string;
   inspectionHistory: number;
@@ -57,6 +68,17 @@ export type SupplierView = {
   evidenceCount: number;
   /** 其中已核验的条数 */
   evidenceVerified: number;
+  /**
+   * PHASE 03（§一）：是否存在风险分维度明细（`risk_breakdown` 非空）。
+   *
+   * 🔴 **只暴露布尔，不暴露内容**。`risk_breakdown` 本身是 PAID 层字段（付费才能看明细），
+   *    但「有没有明细」是档案的结构性事实，页面必须如实说明：
+   *      · 有明细 → 评分可归因到具体维度（明细给会员看）
+   *      · 没明细 → 评分无法归因，绝不能暗示"分维评估过"
+   *    当前全部已发布供应商的 risk_breakdown 均为 NULL，
+   *    所以「评分方法论」文案必须走「无明细」分支，这是真实情况而非占位。
+   */
+  hasScoreBreakdown: boolean;
 
   // ---- CS-12：工商登记级公开字段（用户 2026-09-12 拍板「只放开工商登记级」）----
   // 全部可选：静态兜底数据（lib/staticData.ts）没有这些字段，缺失时前台不渲染该行。
@@ -83,6 +105,20 @@ export type SupplierView = {
    * 🔴 平台未核验，渲染时必须带「自述、未核验」标注。与 `certifications` 是两条轴。
    */
   selfReportedCertificates?: SelfReportedCertificate[];
+
+  /**
+   * PHASE 03（P0 修复）：目录卡片用的**公开核验等级**，
+   * 由 CS-02 权威逻辑推导：`publicVerificationLevel(verification_level, hasRealEvent)`，
+   * 与详情页 `/suppliers/[slug]` 完全同源。
+   *
+   * 为什么要有这个字段：目录页此前把「尚未核验」写死在卡片上，
+   * 导致已 Level 3 的 guangzhou-sunny-food 在目录里仍显示未核验 —— 与档案页自相矛盾。
+   *
+   * 只由 `listSupplierDirectory()` 填充（它才有那次聚合查询）；
+   * 其它路径（`getSupplierDetail` / `getSupplierBySlug`）不填 ⇒ 消费方必须
+   * `?? 0` 兜底（保守方向：宁可显示未核验，绝不虚升等级）。
+   */
+  publicVerificationLevel?: number;
 };
 
 /**
@@ -148,11 +184,15 @@ function toView(s: (typeof STATIC_SUPPLIERS)[number]): SupplierView {
     riskScore: s.riskScore,
     riskLevel: overallLevel(s.riskScore),
     lastChecked: lastCheckedOf(s.evidence),
+    // 静态兜底数据没有档案时间戳 ⇒ null（sitemap 会退化为「不带 lastModified」，绝不编造时间）
+    updatedAt: null,
     certifications: s.certifications,
     auditStatus: s.auditStatus,
     inspectionHistory: s.inspectionHistory,
     evidenceCount: s.evidence.length,
     evidenceVerified: s.evidence.filter((e) => e.status === "VERIFIED").length,
+    // 静态兜底数据里没有风险分维度明细
+    hasScoreBreakdown: false,
   };
 }
 
@@ -174,6 +214,8 @@ type SupplierRow = {
   verification_status: string | null;
   /** CS-01 004_documents.sql 建，NOT NULL DEFAULT 'unverified' */
   verification_level: string;
+  /** 建档即有；由 suppliers_set_updated_at 触发器在每次 UPDATE 时刷新 */
+  updated_at: string | null;
   risk_score: number | null;
   certifications: string[] | null;
   audit_status: string | null;
@@ -213,7 +255,7 @@ type SupplierRow = {
 const ROW_SELECT = `
   id, slug, legal_name, country_code, city, industry_code, business_type,
   established, employees, main_products, export_markets, verification_status,
-  verification_level,
+  verification_level, updated_at,
   risk_score, certifications, audit_status, inspection_history,
   risk_breakdown, access_tier, is_published,
   company_type, english_name, production_capacity, monthly_output, factory_size,
@@ -287,11 +329,15 @@ function rowToView(row: SupplierRow): SupplierView {
     riskScore,
     riskLevel: overallLevel(riskScore),
     lastChecked: lastCheckedOf(publicEvidence),
+    // 档案最后更新时间：直接取 DB 值。触发器 `suppliers_set_updated_at` 保证每次 UPDATE 都刷新。
+    updatedAt: row.updated_at ?? null,
     certifications: row.certifications ?? [],
     auditStatus: row.audit_status ?? undefined,
     inspectionHistory: row.inspection_history ?? 0,
     evidenceCount: publicEvidence.length,
     evidenceVerified: publicEvidence.filter((e) => e.status === "VERIFIED").length,
+    // 只看"有没有"，绝不把明细内容带出公开层（明细是 paid 层）
+    hasScoreBreakdown: row.risk_breakdown != null,
     // ---- CS-12 ----
     englishName: nz(row.english_name),
     companyType: nz(row.company_type),
@@ -359,13 +405,58 @@ function redactViews(rows: SupplierRow[], tier: MembershipTier): SupplierView[] 
       riskLevel: view.riskLevel,
       evidenceCount: view.evidenceCount,
       evidenceVerified: view.evidenceVerified,
+      // 结构性布尔（不是内容）：「有没有风险分维度明细」。三档位看到的是同一个值。
+      hasScoreBreakdown: view.hasScoreBreakdown,
       lastChecked: view.lastChecked,
+      // PHASE 03：档案最后更新时间。与 lastChecked 同族（公开的结构性时间事实），
+      // 但**刻意不进 PUBLIC_FIELDS** —— 那样会改动 public/free/paid 边界常量，
+      // 触发 cs05c / cs06a 的 `PUBLIC_FIELDS.length === 21` 断言。
+      // 这里走「public 铺底」通道：它不是内容字段，三档位都应看到同一个值。
+      updatedAt: view.updatedAt,
       ...redacted,
     } as SupplierView;
   });
 }
 
 // ---------- 对外 API（签名与 V2.0 完全一致） ----------
+
+/**
+ * 目录专用只读聚合：存在 ≥1 条 `verification_status='VERIFIED'` 审核记录的 supplier_id。
+ *
+ * 为什么目录要单独聚合一次：CS-02 的公开等级 = `publicVerificationLevel(verification_level, hasRealEvent)`，
+ * 其中「真实核验事件」= 已发布的 `supplier_audits` 里 VERIFIED 的记录。
+ * 详情页有 `getSupplierPublicAudits(slug)` 可逐家判定；目录一次渲染多家，
+ * 逐家查就是 N+1，故这里只取 `supplier_id` 做一次分组（审核元数据仍走各自的公开函数，
+ * 不在这里返回任何审计细节 —— 目录卡不需要，也不该携带）。
+ *
+ * 🔴 失败方向保守：未配置数据库 / 表未建 / 查询出错 → 返回**空集** ⇒ 一律判成 Level 0（未核验）。
+ *    绝不因为一次查询失败把「无事件」误显成「已核验」。
+ */
+async function verifiedAuditSupplierIds(): Promise<Set<string>> {
+  const out = new Set<string>();
+  const { createAdminClient } = await import("./supabaseAdmin");
+  const db = createAdminClient();
+  if (!db) return out;
+  try {
+    const { data, error } = await db
+      .from("supplier_audits")
+      .select("supplier_id")
+      .eq("verification_status", "VERIFIED");
+    if (error) {
+      if (!isMissingTable(error.code)) {
+        console.error("[queries] verified audit ids failed", error.code, error.message);
+      }
+      return out;
+    }
+    for (const r of (data ?? []) as { supplier_id: string }[]) {
+      if (r?.supplier_id) out.add(r.supplier_id);
+    }
+    return out;
+  } catch (e) {
+    console.error("[queries] verified audit ids exception", e);
+    return out;
+  }
+}
 
 /**
  * 供应商目录：带证据统计与国家名。
@@ -377,13 +468,28 @@ function redactViews(rows: SupplierRow[], tier: MembershipTier): SupplierView[] 
 export async function listSupplierDirectory(): Promise<SupplierView[]> {
   if (useSupabase()) {
     const rows = await fetchRows();
-    if (rows) return redactViews(rows, "visitor");
+    if (rows) {
+      const views = redactViews(rows, "visitor");
+      // PHASE 03（P0）：目录卡片必须显示**真实**公开核验等级。
+      // 与 /suppliers/[slug] 同一函数（publicVerificationLevel），保证两处永不打架。
+      const withEvent = await verifiedAuditSupplierIds();
+      return views.map((v) => ({
+        ...v,
+        publicVerificationLevel: publicVerificationLevel(
+          v.verificationLevel,
+          withEvent.has(v.id)
+        ),
+      }));
+    }
   }
+  // 静态兜底数据里不存在任何核验事件记录 ⇒ 一律 Level 0（保守方向，与修复前显示一致）。
   // V1.1：分数越高 = 风险越低，因此目录按分数降序排（风险最低的在前）。
-  return STATIC_SUPPLIERS.map(toView).sort((a, b) => {
-    if (a.riskScore !== b.riskScore) return (b.riskScore ?? 0) - (a.riskScore ?? 0);
-    return a.legalName.localeCompare(b.legalName);
-  });
+  return STATIC_SUPPLIERS.map(toView)
+    .map((v) => ({ ...v, publicVerificationLevel: 0 }))
+    .sort((a, b) => {
+      if (a.riskScore !== b.riskScore) return (b.riskScore ?? 0) - (a.riskScore ?? 0);
+      return a.legalName.localeCompare(b.legalName);
+    });
 }
 
 /**
@@ -478,7 +584,9 @@ export async function getSupplierDetail(
     riskLevel: view.riskLevel,
     evidenceCount: view.evidenceCount,
     evidenceVerified: view.evidenceVerified,
+    hasScoreBreakdown: view.hasScoreBreakdown,
     lastChecked: view.lastChecked,
+    updatedAt: view.updatedAt,
     ...redacted,
     evidence: row.evidence.map((e, i) => ({
       id: `${slug}-ev-${i}`,
@@ -527,6 +635,81 @@ export async function listSupplierSlugs(): Promise<{ country: string; slug: stri
     if (rows) return rows.map((r) => ({ country: r.country_code, slug: r.slug }));
   }
   return STATIC_SUPPLIERS.map((s) => ({ country: s.countryCode, slug: s.slug }));
+}
+
+/**
+ * sitemap 专用（PHASE 03 §十）：已发布供应商的「可索引性判定输入」+ **真实** updated_at。
+ *
+ * 为什么不能继续用 `listSupplierSlugs()`：
+ *   它只返回 {country, slug}，sitemap 无法判断某条 URL 是否够格进站内地图，
+ *   于是历史上是「只要 published 就提交」。§八 要求提交集合必须与可索引性闸门**同源**，
+ *   否则会向 Google 提交 noindex 页面（Search Console 会报 "Submitted URL marked noindex"）。
+ *
+ * 只暴露判定闸门需要的公开字段 —— free / paid 字段一律不出（本函数可能被构建期调用）。
+ */
+export type SupplierSitemapRow = {
+  slug: string;
+  /** 真实档案更新时间（DB updated_at）。静态兜底为 null ⇒ sitemap 不带 lastModified，绝不编造 */
+  updatedAt: string | null;
+  legalName: string;
+  city: string;
+  countryName: string;
+  mainProducts: string[];
+  /** 已按 CS-02 权威逻辑推导的公开等级 */
+  verificationLevel: number;
+  hasRealVerificationEvent: boolean;
+  website?: string;
+  registrationNumber?: string;
+  address?: string;
+  profileScore?: number | null;
+  evidenceOnFile: number;
+};
+
+export async function listSupplierSitemapRows(): Promise<SupplierSitemapRow[]> {
+  if (useSupabase()) {
+    const rows = await fetchRows();
+    if (rows) {
+      const withEvent = await verifiedAuditSupplierIds();
+      return rows.map((row) => {
+        const view = rowToView(row);
+        const hasReal = withEvent.has(view.id);
+        return {
+          slug: view.slug,
+          updatedAt: view.updatedAt ?? null,
+          legalName: view.legalName,
+          city: view.city,
+          countryName: view.countryName ?? view.country.toUpperCase(),
+          mainProducts: view.mainProducts,
+          verificationLevel: publicVerificationLevel(view.verificationLevel, hasReal),
+          hasRealVerificationEvent: hasReal,
+          website: view.website,
+          registrationNumber: view.registrationNumber,
+          address: view.address,
+          profileScore: view.riskScore ?? null,
+          evidenceOnFile: view.evidenceCount,
+        };
+      });
+    }
+  }
+  // 静态兜底：无核验事件、无档案更新时间（都由静态表的结构决定）。
+  return STATIC_SUPPLIERS.map((s) => {
+    const view = toView(s);
+    return {
+      slug: view.slug,
+      updatedAt: null,
+      legalName: view.legalName,
+      city: view.city,
+      countryName: view.countryName ?? view.country.toUpperCase(),
+      mainProducts: view.mainProducts,
+      verificationLevel: 0,
+      hasRealVerificationEvent: false,
+      website: undefined,
+      registrationNumber: undefined,
+      address: undefined,
+      profileScore: view.riskScore ?? null,
+      evidenceOnFile: view.evidenceCount,
+    };
+  });
 }
 
 // ---------- 落地页 / SEO 矩阵消费用的供应商行（CS-02C G1 起 DB 优先，静态兜底） ----------

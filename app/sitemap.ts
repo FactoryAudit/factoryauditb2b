@@ -5,7 +5,8 @@ import {
   listIndustries,
   listStandards,
 } from "@/lib/taxonomy";
-import { listSupplierSlugs } from "@/lib/queries";
+import { listSupplierSitemapRows, type SupplierSitemapRow } from "@/lib/queries";
+import { determineSupplierIndexability } from "@/lib/seo/supplierSeo";
 import { LOCALES, localePath } from "@/i18n/config";
 import { hreflangFor } from "@/i18n/hreflang";
 import { COVERAGE_COUNTRIES, COVERAGE_SERVICE_SLUGS } from "@/lib/coverage";
@@ -88,11 +89,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const pages: MetadataRoute.Sitemap = [...core, ...coverage].flatMap((p) => emit(p));
 
-  const [countries, industries, standards, supplierSlugs, seo] = await Promise.all([
+  const [countries, industries, standards, supplierRows, seo] = await Promise.all([
     listCountries(),
     listIndustries(),
     listStandards(),
-    listSupplierSlugs(),
+    listSupplierSitemapRows(),
     getSeoMatrix(),
   ]);
 
@@ -117,7 +118,39 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
 
   // 供应商详情页（Supplier Directory V2 独立 SEO URL；旧 /supplier/{country}/{slug} 已 308 到此处，不再单独提交）
-  supplierSlugs.forEach(({ slug }) => pages.push(...emit(`/suppliers/${slug}`)));
+  //
+  // PHASE 03（§八 / §十）：提交集合必须与**可索引性闸门同源**。
+  //   ① 只有 determineSupplierIndexability() 判为可索引的档案才进站内地图。
+  //      否则会出现「sitemap 里有、页面却 noindex」——Search Console 直接报
+  //      "Submitted URL marked noindex"，是明确的抓取预算浪费。
+  //   ② lastModified 改用**真实** updated_at（DB suppliers.updated_at，
+  //      由 suppliers_set_updated_at 触发器在每次 UPDATE 时刷新；「发布」本身也是 UPDATE）。
+  //      此前一律 new Date()，等于每次都告诉 Google「所有页面刚刚全部变过」——
+  //      既无意义，也会让真实更新淹没在噪声里。
+  //      取值缺失时**不传** lastModified，绝不用当前时间顶替。
+  supplierRows.forEach((row: SupplierSitemapRow) => {
+    const verdict = determineSupplierIndexability({
+      legalName: row.legalName,
+      city: row.city,
+      countryName: row.countryName,
+      mainProducts: row.mainProducts,
+      verificationLevel: row.verificationLevel,
+      hasRealVerificationEvent: row.hasRealVerificationEvent,
+      website: row.website,
+      registrationNumber: row.registrationNumber,
+      address: row.address,
+      profileScore: row.profileScore,
+      evidenceOnFile: row.evidenceOnFile,
+    });
+    if (!verdict.indexable) return;
+    const lm = row.updatedAt ? new Date(row.updatedAt) : undefined;
+    pages.push(
+      ...emit(
+        `/suppliers/${row.slug}`,
+        lm && !Number.isNaN(lm.getTime()) ? lm : undefined
+      )
+    );
+  });
 
   // 行业 SEO 落地页 + 行业子主题页（CS-02A P2–P5）。
   // 子主题只提交 lib/industryContent.ts 里真正配了内容的组合，

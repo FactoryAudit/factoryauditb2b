@@ -46,6 +46,9 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
   const t = await getDictionary(locale);
   const s = t.suppliers;
   const sp = t.supplierProfile;
+  // PHASE 03（P0）：卡片核验状态与档案页共用同一套等级文案（verification.levelsShort），
+  // 不再在目录里另造一份「等级 → 文案」映射。
+  const v = t.verification;
   // 服务名复用既有 taxonomy（含 9 语译文），不重复造词
   const si = t.servicesIndex.items;
   const p = (href: string) => localePath(locale, href);
@@ -291,6 +294,12 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
               //   绝不允许出现 Factory verified / Factory audited。
               //   （Phase 7 的 L0–L6 引擎上线后，这里改为读引擎结果。）
               const hasEvidence = (x.evidenceVerified ?? 0) > 0;
+              // PHASE 03（P0 修复）：核验状态必须来自**真实**数据，不得写死。
+              //   level 由 queries 层按 CS-02 权威逻辑算出：
+              //     publicVerificationLevel(suppliers.verification_level, hasRealEvent)
+              //   hasRealEvent = 该供应商存在 VERIFIED 的 supplier_audits 记录。
+              //   ?? 0 兜底：字段缺失（如静态兜底 / 详情页路径）一律按未核验显示。
+              const level = x.publicVerificationLevel ?? 0;
               return (
                 <Link
                   key={x.slug}
@@ -320,12 +329,19 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
                           : s.evidenceNone}
                       </dd>
                     </div>
-                    {/* 核验状态独立一行：4 家全部无 audit 记录，一律「尚未核验」。
-                        绝不因为「有 2 条证据」就说供应商已被核验（§8 / §9）。 */}
+                    {/* 核验状态独立一行（P0 修复，2026-09-13）。
+                        修复前：无条件输出 s.verificationNotYet（"Not yet verified"），
+                        于是 guangzhou-sunny-food —— 它已有 1 条 VERIFIED 现场审核记录、
+                        verification_level='on_site_audit'、公开等级 Level 3 ——
+                        在目录卡上仍显示「未核验」，与它自己的档案页直接矛盾。
+                        现在按真实等级显示：
+                          level ≥ 1 → t.verification.levelsShort[level]（与档案页同一字典）
+                          level = 0 → 继续用 s.verificationNotYet，措辞与修复前逐字一致
+                        ⚠️ 等级仍**不**因为「有 N 条证据」而升档（有证据 ≠ 已核验，§8 / §9）。 */}
                     <div className="flex justify-between gap-2">
                       <dt className="text-[#64748b]">{s.verificationLabel}</dt>
                       <dd className="font-medium text-[#0f172a] text-right">
-                        {s.verificationNotYet}
+                        {level === 0 ? s.verificationNotYet : v.levelsShort[level]}
                       </dd>
                     </div>
                     <div className="flex justify-between gap-2">
