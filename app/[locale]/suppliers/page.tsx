@@ -354,7 +354,15 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
                       <dd
                         className="font-medium text-right"
                         title={s.riskNote}
-                        style={{ color: LEVEL_COLOR[overallLevel(x.riskScore ?? 0)] }}
+                        /* 无分数 ⇒ 中性灰（riskLabel 本身会渲染「—」）。
+                           绝不用 `overallLevel(x.riskScore ?? 0)` —— 那是 CRITICAL 的红，
+                           等于给一家「尚未评分」的企业涂上最高风险色。 */
+                        style={{
+                          color:
+                            typeof x.riskScore === "number"
+                              ? LEVEL_COLOR[overallLevel(x.riskScore)]
+                              : "#64748b",
+                        }}
                       >
                         {riskLabel(x.riskScore, t.risk.ui.level)}
                       </dd>

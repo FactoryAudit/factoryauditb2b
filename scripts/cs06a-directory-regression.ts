@@ -183,9 +183,15 @@ section("A. Bug B —— 筛选结果 = 实际渲染的卡片（源码级防回�
     /await\s+listSupplierDirectory\(\)/.test(page)
   );
   check(
-    "A12 `fetchRows` 仍过滤 is_published 且按 risk_score 降序",
+    "A12 `fetchRows` 仍过滤 is_published 且按 risk_score 降序、未评分沉底",
+    // 2026-09-15 改写：原断言只要求 `{ ascending: false }`，但 PostgREST 在 DESC 下
+    // 默认 NULLS FIRST，会把「尚未评分」的供应商顶到目录最前 —— 与静态兜底路径的
+    // 排序不一致，且让一个以「已核验」为卖点的目录以未评分企业开篇。
+    // 现在要求显式 `nullsFirst: false`。（断言数不变：仍是 1 条。）
     /\.eq\("is_published",\s*true\)/.test(queries) &&
-      /\.order\("risk_score",\s*\{\s*ascending:\s*false\s*\}\)/.test(queries)
+      /\.order\("risk_score",\s*\{\s*ascending:\s*false,\s*nullsFirst:\s*false\s*\}\)/.test(
+        queries
+      )
   );
 }
 

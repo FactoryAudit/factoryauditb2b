@@ -171,8 +171,11 @@ export default async function AuditGuidePage({ params }: { params: Promise<Param
                   {s.legalName}
                 </Link>
                 <span className="text-sm text-gray-500">
-                  {s.city} · {g.riskLabel} {s.riskScore} / 100 ·{" "}
-                  {t.risk.ui.level[overallLevel(s.riskScore)]}
+                  {s.city} · {g.riskLabel}{" "}
+                  {/* 同 industry 页：无分数 ⇒ 「—」，绝不渲染成 0 / 100 */}
+                  {typeof s.riskScore === "number"
+                    ? `${s.riskScore} / 100 · ${t.risk.ui.level[overallLevel(s.riskScore)]}`
+                    : "—"}
                 </span>
               </li>
             ))}

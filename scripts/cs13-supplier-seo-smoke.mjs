@@ -9,8 +9,12 @@
 
 // 已知前提（写错会造成假 FAIL）：
 //   - en 是 DEFAULT_LOCALE，中间件会把 /en/* 301 到 /*，所以英文站点路径**不带前缀**。
-//   - 生产库当前**已发布 5 家**：guangzhou-sunny-food / shenzhen-precision-electronics /
-//     guangzhou-textile-factory / dongguan-plastic-molding / ho-chi-minh-garment。
+//   - 生产库当前**已发布 10 家**：CS-13 上线时的 5 家（guangzhou-sunny-food /
+//     shenzhen-precision-electronics / guangzhou-textile-factory / dongguan-plastic-molding /
+//     ho-chi-minh-garment）+ CS-14 扩量发布的 5 家真实入驻申请
+//     （nanjing-mxcomm / xiamen-jings-eyewear / shenzhen-jorigin-packaging /
+//      shandong-loyal-industrial / jiangsu-liquid-damper）。
+//     ⇒ 供应商 URL 条目 = 10 家 × 9 语 = 90。
 
 const BASE = process.env.PROBE_BASE ?? "http://127.0.0.1:3400";
 const BOT_UA =
@@ -18,13 +22,23 @@ const BOT_UA =
 const BROWSER_UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126 Safari/537.36";
 
+/** 已发布供应商（CS-13 的 5 家 + CS-14 扩量的 5 家） */
 const PUBLISHED = [
+  // CS-13 上线时的存量
   "guangzhou-sunny-food",
   "shenzhen-precision-electronics",
   "guangzhou-textile-factory",
   "dongguan-plastic-molding",
   "ho-chi-minh-garment",
+  // CS-14 扩量发布（来源：Resend 入驻申请邮件，授权 Authorize Company Profile: yes）
+  "nanjing-mxcomm",
+  "xiamen-jings-eyewear",
+  "shenzhen-jorigin-packaging",
+  "shandong-loyal-industrial",
+  "jiangsu-liquid-damper",
 ];
+const EXPECTED_ROSTER = PUBLISHED.length;
+const EXPECTED_URLS = EXPECTED_ROSTER * 9;
 
 let pass = 0;
 let fail = 0;
@@ -199,7 +213,7 @@ ok("HTTP 200", sm.status === 200, "status=" + sm.status);
 const urls = [...sm.body.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => m[1]);
 const supEntries = urls.filter((u) => /<loc>[^<]*\/suppliers\//.test(u));
 console.log("  供应商 URL 条目 = " + supEntries.length);
-ok("供应商 URL = 5 家 × 9 语 = 45", supEntries.length === 45, "实际 " + supEntries.length);
+ok(`供应商 URL = ${EXPECTED_ROSTER} 家 × 9 语 = ${EXPECTED_URLS}`, supEntries.length === EXPECTED_URLS, "实际 " + supEntries.length);
 // 每家供应商的 lastmod（取 en 那条，即无语言前缀）
 const supLm = {};
 for (const s of PUBLISHED) {
@@ -213,12 +227,15 @@ for (const [k, v] of Object.entries(supLm)) console.log("    " + k.padEnd(32) + 
 ok("Sunny Food lastmod = 真实 DB updated_at 2026-09-14T02:59:52.251Z", supLm["guangzhou-sunny-food"] === "2026-09-14T02:59:52.251Z", supLm["guangzhou-sunny-food"] || "");
 ok("未核验家 lastmod 是 2026-09-03（真实历史值，非构建时刻）", /^2026-09-03T/.test(supLm["shenzhen-precision-electronics"] || ""), supLm["shenzhen-precision-electronics"] || "");
 ok("供应商间 lastmod 不同（证明不是同一个 new Date()）", new Set(Object.values(supLm)).size >= 2, "distinct=" + new Set(Object.values(supLm)).size);
-ok("sitemap 里 5 家已发布供应商齐全", PUBLISHED.every((s) => new RegExp(`/suppliers/${s}<`).test(sm.body) || new RegExp(`/suppliers/${s}</loc>`).test(sm.body)));
+ok(`sitemap 里 ${EXPECTED_ROSTER} 家已发布供应商齐全`, PUBLISHED.every((s) => new RegExp(`/suppliers/${s}<`).test(sm.body) || new RegExp(`/suppliers/${s}</loc>`).test(sm.body)));
 
 console.log("\n=== 6. 目录页与 sitemap 必须同源（不许两套名单）===");
 const slugOf = (u) => grab(u, /<loc>https:\/\/factoryauditb2b\.com\/suppliers\/([^<]+)<\/loc>/);
 const slugs = [...new Set(supEntries.map(slugOf).filter(Boolean))];
 console.log("  sitemap 内供应商 slug（" + slugs.length + " 家）: " + slugs.join(", "));
+ok(`sitemap 供应商名单 == ${EXPECTED_ROSTER} 家（新增供应商必须进 sitemap）`, slugs.length === EXPECTED_ROSTER, "实际 " + slugs.length);
+const missingFromSitemap = PUBLISHED.filter((s) => !slugs.includes(s));
+ok("名单内每家都真的出现在 sitemap 里（非只对总数）", missingFromSitemap.length === 0, missingFromSitemap.join(","));
 ok("每家 slug 恰好 9 条（9 个语言版本）", supEntries.length === slugs.length * 9, `${supEntries.length} / ${slugs.length * 9}`);
 const missingInDir = slugs.filter((s) => !dirEn.body.includes(s));
 ok("sitemap 里每家都能在目录页 HTML 找到（同源，非两套名单）", missingInDir.length === 0, missingInDir.join(","));

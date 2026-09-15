@@ -167,8 +167,14 @@ export type StaticSupplier = {
   mainProducts: string[];
   exportMarkets: string[];
   verificationStatus: string;
-  /** V1.1 语义：分数越高 = 风险越低。等级不在此存储，一律由 overallLevel(score) 推导。 */
-  riskScore: number;
+  /**
+   * V1.1 语义：分数越高 = 风险越低。等级不在此存储，一律由 overallLevel(score) 推导。
+   *
+   * 🔴 `null` = 「平台尚未评分」（库内无 risk_score 来源数据）。
+   *    绝不用 0 顶替缺失分数 —— 0 是分桶里**最差的一档**（CRITICAL），
+   *    填 0 等于公开宣称该企业风险最高（见 lib/queries.ts rowToView 注释）。
+   */
+  riskScore: number | null;
   certifications: string[];
   auditStatus: string;
   inspectionHistory: number;

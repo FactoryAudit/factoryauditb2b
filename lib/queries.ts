@@ -181,8 +181,9 @@ function toView(s: (typeof STATIC_SUPPLIERS)[number]): SupplierView {
     // 静态数据没有 verification_level 字段。缺省值取 'unverified' ——
     // 这是**保守方向**（宁可显示未核验，也不能显示未经验证的信任等级）。
     verificationLevel: "unverified",
-    riskScore: s.riskScore,
-    riskLevel: overallLevel(s.riskScore),
+    riskScore: s.riskScore ?? undefined,
+    // 同 rowToView：无分数 ⇒ 无等级（静态种子 4 家都有分数，此处只为保持两条路径同构）
+    riskLevel: typeof s.riskScore === "number" ? overallLevel(s.riskScore) : undefined,
     lastChecked: lastCheckedOf(s.evidence),
     // 静态兜底数据没有档案时间戳 ⇒ null（sitemap 会退化为「不带 lastModified」，绝不编造时间）
     updatedAt: null,
@@ -309,7 +310,17 @@ function rowToView(row: SupplierRow): SupplierView {
   const publicEvidence = allEvidence.filter(
     (e) => (e.visibility ?? "public") === "public"
   );
-  const riskScore = row.risk_score ?? 0;
+  /**
+   * 🔴 缺失分数必须保持**缺失**，绝不能 `?? 0`。
+   *
+   * 0 不是「没有分数」，而是 V1.1 分桶里**最差的一档**（`overallLevel(0)` = CRITICAL）。
+   * 库内 `risk_score` 为 NULL 的供应商（无问卷来源 ⇒ 平台未评分）一旦被填成 0，
+   * 会顺着 `profileScore` 一路流到 `generateSupplierDescription()`，
+   * 在 meta description 里公开断言「Supplier profile score 0 out of 100」——
+   * 这是对真实企业的诋毁性陈述，2026-09-15 已在 5 家新发布供应商上实际发生。
+   */
+  const riskScore =
+    typeof row.risk_score === "number" ? row.risk_score : undefined;
   return {
     id: row.id,
     slug: row.slug,
@@ -327,7 +338,8 @@ function rowToView(row: SupplierRow): SupplierView {
     // CS-02：公开等级权威源。列缺失（旧 schema）时兜底 unverified —— 保守方向。
     verificationLevel: row.verification_level ?? "unverified",
     riskScore,
-    riskLevel: overallLevel(riskScore),
+    // 等级由分数推导（单一事实来源）。无分数 ⇒ 无等级，绝不落回 0 ⇒ CRITICAL。
+    riskLevel: riskScore === undefined ? undefined : overallLevel(riskScore),
     lastChecked: lastCheckedOf(publicEvidence),
     // 档案最后更新时间：直接取 DB 值。触发器 `suppliers_set_updated_at` 保证每次 UPDATE 都刷新。
     updatedAt: row.updated_at ?? null,
@@ -363,7 +375,11 @@ async function fetchRows(): Promise<SupplierRow[] | null> {
       .from("suppliers")
       .select(ROW_SELECT)
       .eq("is_published", true)
-      .order("risk_score", { ascending: false }); // 低风险在前（分数越高风险越低）
+      // 低风险在前（分数越高风险越低）。
+      // 🔴 `nullsFirst: false` 是必需的，不是可选项：PostgREST 在 DESC 下的默认行为是
+      //    **NULLS FIRST**，会把「尚未评分」的供应商顶到目录最前面 —— 既与静态兜底路径
+      //    的排序（未评分排最后）不一致，也让一个以「已核验」为卖点的目录以未评分企业开篇。
+      .order("risk_score", { ascending: false, nullsFirst: false });
     if (error) {
       console.error("[queries] suppliers query failed", error.message);
       return null;
@@ -487,7 +503,11 @@ export async function listSupplierDirectory(): Promise<SupplierView[]> {
   return STATIC_SUPPLIERS.map(toView)
     .map((v) => ({ ...v, publicVerificationLevel: 0 }))
     .sort((a, b) => {
-      if (a.riskScore !== b.riskScore) return (b.riskScore ?? 0) - (a.riskScore ?? 0);
+      // 未评分（undefined）不得当作 0 参与排序：0 是最差等级，会把它错误地排到最后一名
+      // 之外还暗示「风险最高」。统一用 -1 沉底，与 DB 路径的 `nullsFirst: false` 对齐。
+      if (a.riskScore !== b.riskScore) {
+        return (b.riskScore ?? -1) - (a.riskScore ?? -1);
+      }
       return a.legalName.localeCompare(b.legalName);
     });
 }
@@ -725,9 +745,9 @@ export async function listSupplierSitemapRows(): Promise<SupplierSitemapRow[]> {
 //    capabilities/evidence 置空（行业页的能力标签由 getSupplierCapabilitiesResolved
 //    按 slug 另取；certifications 属 PAID 层，矩阵行绝不携带）。
 
-/** 分数越高 = 风险越低，落地页先展示风险最低的供应商。 */
+/** 分数越高 = 风险越低，落地页先展示风险最低的供应商。未评分（null）沉底。 */
 function sortByRisk(rows: StaticSupplier[]): StaticSupplier[] {
-  return [...rows].sort((a, b) => b.riskScore - a.riskScore);
+  return [...rows].sort((a, b) => (b.riskScore ?? -1) - (a.riskScore ?? -1));
 }
 
 /** DB 行 → 矩阵行。只映射公开层 + 结构字段，付费字段一律不进（与 redactViews 同纪律）。 */
@@ -745,7 +765,9 @@ function rowToMatrix(row: SupplierRow): StaticSupplier {
     mainProducts: row.main_products ?? [],
     exportMarkets: row.export_markets ?? [],
     verificationStatus: row.verification_status ?? "",
-    riskScore: row.risk_score ?? 0,
+    // 同 rowToView：NULL 保持 null（不编造 0 分）。矩阵行会渲染到行业/国家/审核指南
+    // 落地页的供应商列表里，那三处必须靠 null 判定显示「—」。
+    riskScore: typeof row.risk_score === "number" ? row.risk_score : null,
     certifications: [],
     auditStatus: row.audit_status ?? "",
     inspectionHistory: row.inspection_history ?? 0,

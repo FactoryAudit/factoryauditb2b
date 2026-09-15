@@ -229,7 +229,10 @@ export function supplierSeoDataFromView(
     verifiedCertifications: opts.verifiedCertifications ?? [],
     selfReportedCertificates: v.selfReportedCertificates,
     profileScore: typeof v.riskScore === "number" ? v.riskScore : null,
-    profileScoreBand: overallLevel(v.riskScore ?? 0),
+    // 🔴 与上面同一条件：无分数 ⇒ 无等级。绝不能 `overallLevel(v.riskScore ?? 0)`，
+    //    那会把「尚未评分」标成 CRITICAL，并让快照渲染出「0 / 100 · High risk」。
+    profileScoreBand:
+      typeof v.riskScore === "number" ? overallLevel(v.riskScore) : undefined,
     hasScoreBreakdown: v.hasScoreBreakdown ?? false,
     profileUpdatedAt: v.updatedAt ?? null,
     lastChecked: dates.length > 0 ? dates[dates.length - 1] : null,

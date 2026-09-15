@@ -172,8 +172,13 @@ export default async function SupplierProfilePage({
   const hasRealVerificationEvent = verifiedAudits.length > 0;
   const level = publicVerificationLevel(s.verificationLevel, hasRealVerificationEvent);
   const scope = LEVEL_SCOPE[level];
-  // 风险等级由引擎推导，不在页面重复判定阈值
-  const riskBand = overallLevel(s.riskScore ?? 0);
+  // 风险等级由引擎推导，不在页面重复判定阈值。
+  // 🔴 无分数 ⇒ 无等级。绝不用 `overallLevel(s.riskScore ?? 0)` —— 0 是 CRITICAL，
+  //    会让一个「平台尚未评分」的企业在页面上被标成「High risk」。
+  const riskBand =
+    typeof s.riskScore === "number" ? overallLevel(s.riskScore) : null;
+  // 无分数时用中性灰，绝不借用 CRITICAL 的红 —— 颜色本身也是一种风险断言。
+  const riskColor = riskBand ? LEVEL_COLOR[riskBand] : "#64748b";
 
   // 证据状态标签不再在本页拼装：核验状态属 paid 层，
   // 由 /api/suppliers/[slug]/unlocked 校验档位后本地化返回（避免真值进 RSC payload）。
@@ -224,7 +229,9 @@ export default async function SupplierProfilePage({
     lastUpdated: sp.lastUpdated,
     lastChecked: sp.lastChecked,
     evidenceOnFile: v.evidenceOnFile,
-    scoreBand: t.risk.ui.level[riskBand],
+    // 无分数时留空：generateSupplierSnapshot 只在 profileScore 是数字时才会读这个标签，
+    // 留空让它不参与，绝不为了填满字段而给一个不存在的等级。
+    scoreBand: riskBand ? t.risk.ui.level[riskBand] : "",
   };
   const snapshot = generateSupplierSnapshot(seo, locale, snapshotLabels, seoOpts);
 
@@ -323,16 +330,16 @@ export default async function SupplierProfilePage({
             </div>
             {typeof s.riskScore === "number" ? (
               <>
-                <div className="text-2xl font-extrabold" style={{ color: LEVEL_COLOR[riskBand] }}>
+                <div className="text-2xl font-extrabold" style={{ color: riskColor }}>
                   {s.riskScore} / 100
                 </div>
-                <div className="text-sm font-medium" style={{ color: LEVEL_COLOR[riskBand] }}>
-                  {t.risk.ui.level[riskBand]}
+                <div className="text-sm font-medium" style={{ color: riskColor }}>
+                  {t.risk.ui.level[overallLevel(s.riskScore)]}
                 </div>
                 <div className="mt-2 h-2 overflow-hidden rounded-full bg-[#e2e8f0]">
                   <div
                     className="h-full rounded-full"
-                    style={{ width: `${s.riskScore}%`, background: LEVEL_COLOR[riskBand] }}
+                    style={{ width: `${s.riskScore}%`, background: riskColor }}
                   />
                 </div>
               </>
@@ -596,7 +603,7 @@ export default async function SupplierProfilePage({
                       locale={uiLocale}
                       evidenceId={e.id}
                       className="font-medium"
-                      style={{ color: LEVEL_COLOR[overallLevel(s.riskScore ?? 0)] }}
+                      style={{ color: riskColor }}
                     />
                   </UnlockGate>
                 </li>
@@ -690,7 +697,7 @@ export default async function SupplierProfilePage({
             <div>
               <h3 className="font-semibold text-[#0f172a]">{rp.execTitle}</h3>
               <p className="text-sm text-[#475569] mt-1">
-                {rp.riskLevel}: {t.risk.ui.level[riskBand]}
+                {rp.riskLevel}: {riskBand ? t.risk.ui.level[riskBand] : "—"}
               </p>
               <p className="text-sm text-[#475569]">
                 {rp.score}: {typeof s.riskScore === "number" ? `${s.riskScore} / 100` : "—"}

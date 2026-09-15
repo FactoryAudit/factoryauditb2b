@@ -206,8 +206,12 @@ export default async function IndustryPage({ params }: { params: Promise<Params>
                   {s.legalName}
                 </a>
                 <span className="ml-2 text-sm text-gray-500">
-                  {s.city} · {s.countryCode} · {p.riskLabel} {s.riskScore} / 100 ·{" "}
-                  {t.risk.ui.level[overallLevel(s.riskScore)]}
+                  {s.city} · {s.countryCode} · {p.riskLabel}{" "}
+                  {/* 🔴 无分数（null）必须显示「—」。旧的 `{s.riskScore} / 100` 在 null 下
+                      会渲染成「0 / 100 · High risk」——对真实企业的诋毁性陈述。 */}
+                  {typeof s.riskScore === "number"
+                    ? `${s.riskScore} / 100 · ${t.risk.ui.level[overallLevel(s.riskScore)]}`
+                    : "—"}
                 </span>
                 <div className="mt-1 flex flex-wrap gap-1">
                   {caps
