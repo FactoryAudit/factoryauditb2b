@@ -227,6 +227,14 @@ export default function SiteFooter({
         </div>
       </div>
       <div className="border-t border-white/10 py-4 text-center text-xs text-[#94a3b8]">
+        {/* 域名邮箱做信任背书。邮箱地址本身是标识符、不是文案，9 语通用，故不进词典。
+            WhatsApp 是询盘主渠道（见 Coverage 栏），这里给不装 WhatsApp 的访客留一条路。 */}
+        <a
+          href="mailto:hello@factoryauditb2b.com"
+          className="mb-3 inline-block text-[#cbd5e1] underline decoration-[#94a3b8] hover:text-white hover:decoration-white"
+        >
+          hello@factoryauditb2b.com
+        </a>
         <SocialLinks className="mb-4 justify-center" />
         {dict.copyright}
       </div>

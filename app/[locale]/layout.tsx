@@ -178,6 +178,7 @@ export default async function RootLayout({
               saved: t.account.navSaved,
               rfqs: t.account.navRfqs,
             }}
+            whatsappLabel={t.common.whatsappChat}
           />
           <main>{children}</main>
           <SiteFooter locale={locale} dict={t.footer} menu={t.nav.menu} whatsappLabel={t.common.whatsappChat} />

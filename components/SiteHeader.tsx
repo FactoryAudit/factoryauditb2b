@@ -30,11 +30,14 @@ export default function SiteHeader({
   locale,
   dict,
   accountDict,
+  whatsappLabel,
 }: {
   locale: Locale;
   dict: NavDict;
   /** 账号入口文案（t.auth.accountMenu）。单独传是为了不和 nav 混在一起。 */
   accountDict: AccountMenuDict;
+  /** WhatsApp 入口文案（t.common.whatsappChat）。与页脚 / AI 客服复用同一份，避免各存一份。 */
+  whatsappLabel?: string;
 }) {
   const p = (href: string) => localePath(locale, href);
 
@@ -104,9 +107,12 @@ export default function SiteHeader({
         </nav>
 
         <div className="flex items-center gap-3">
-          {/* 账号入口：客户端组件，首帧渲染 "Sign in"（与 SSR 一致），
-              hydration 后按 /api/me 切换成账号菜单。不读 cookie，不影响 SSG。 */}
-          <AccountMenu locale={locale} dict={accountDict} />
+          {/* 账号入口：客户端组件，首帧渲染「未登录态」（与 SSR 一致），
+              hydration 后按 /api/me 切换成账号菜单。不读 cookie，不影响 SSG。
+              未登录态不再指向 /login —— 询盘主渠道是 WhatsApp，
+              登录页仍可通过直接输入 URL 访问（/api/auth/login 后端仍可用），
+              只是不再作为公开入口摆在导航栏里。 */}
+          <AccountMenu locale={locale} dict={accountDict} whatsappLabel={whatsappLabel} />
           <LocaleSwitcher current={locale} languageLabel={dict.language} />
           <Link href={p("/rfq")} className="btn btn-primary whitespace-nowrap">
             {dict.postRfq}

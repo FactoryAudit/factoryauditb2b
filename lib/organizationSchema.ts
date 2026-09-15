@@ -13,7 +13,7 @@
 //      两者分开用 name 与 legalName 表达，不让客户误认。
 //   3. **脱敏后再公开**。注册号/法人名/地址走 lib/trust.ts 的 mask* 函数。
 //   4. 只写能确定的真实信息：域名、logo、覆盖国家（lib/coverage.ts 唯一事实源）、
-//      服务领域、客服邮箱（已实测可收发的 support@factoryauditb2b.com）。
+//      服务领域、客服邮箱（已实测可收发的 hello@factoryauditb2b.com）。
 //
 // 配置方式（二选一，都支持）：
 //   · 写进 .env → 构建期内联作为兜底值
@@ -86,7 +86,7 @@ export function organizationSchema(
   };
 
   // ---- 联系点：只输出真实存在的渠道 ----
-  const email = cfg.contactEmail || "support@factoryauditb2b.com";
+  const email = cfg.contactEmail || "hello@factoryauditb2b.com";
   const whatsapp = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "").trim();
   const contactPoints: Record<string, unknown>[] = [
     {

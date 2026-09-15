@@ -57,7 +57,7 @@ async function sendMailSmtp({ to, subject, text, html }: NotifyInput): Promise<b
   }
   try {
     const info = await t.sendMail({
-      from: process.env.FROM_EMAIL || "support@factoryauditb2b.com",
+      from: process.env.FROM_EMAIL || "hello@factoryauditb2b.com",
       to,
       subject,
       text,
@@ -91,7 +91,7 @@ async function sendMailHttp({ to, subject, text, html }: NotifyInput): Promise<b
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: process.env.FROM_EMAIL || "FactoryAuditB2B <support@factoryauditb2b.com>",
+        from: process.env.FROM_EMAIL || "FactoryAuditB2B <hello@factoryauditb2b.com>",
         to: [to],
         subject,
         text,
