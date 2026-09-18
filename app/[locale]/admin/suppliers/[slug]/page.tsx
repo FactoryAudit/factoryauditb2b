@@ -2,13 +2,21 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { isLocale, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
-import { getAdminSupplier, listAdminAudits, requireAdmin, getLatestSupplierConsent } from "@/lib/adminData";
+import {
+  getAdminSupplier,
+  listAdminAudits,
+  requireAdmin,
+  getLatestSupplierConsent,
+  getAdminSupplierReport,
+} from "@/lib/adminData";
 import { COVERAGE_COUNTRIES } from "@/lib/coverage";
 import SupplierEditor, {
   type SupplierFormValues,
   type SupplierAuthInfo,
 } from "@/components/admin/SupplierEditor";
 import SupplierReportDownloadButton from "@/components/admin/SupplierReportDownloadButton";
+import SupplierReportEditor from "@/components/admin/SupplierReportEditor";
+import { emptyReportTemplate } from "@/lib/supplierReportTemplate";
 import type { SupplierReportInput, ReportLang } from "@/lib/supplierReportHtml";
 
 export const dynamic = "force-dynamic";
@@ -31,6 +39,10 @@ export default async function AdminSupplierEditPage({ params }: Props) {
 
   const audits = await listAdminAudits(slug);
   const consent = await getLatestSupplierConsent(slug);
+
+  // CS-20：报告正文（每工厂一份）。库里无记录 ⇒ 下发空模板（13 章骨架，内容全空）。
+  // 🔴 绝不用样张的虚构数据当默认值（emptyReportTemplate 只带章节标题与来源说明）。
+  const reportRow = await getAdminSupplierReport(slug);
 
   // 组装「核验报告」输入：只取 DB 中的真实记录，绝不编造。
   const reportData: SupplierReportInput = {
@@ -183,6 +195,18 @@ export default async function AdminSupplierEditPage({ params }: Props) {
       </div>
 
       <p className="mt-4 text-xs text-[#64748b]">{a.editorNote}</p>
+
+      {/* CS-20：报告正文编辑器（人工录入；导出为自包含 HTML） */}
+      <div className="mt-10">
+        <SupplierReportEditor
+          slug={row.slug}
+          supplierName={row.legal_name}
+          initial={reportRow?.doc ?? emptyReportTemplate()}
+          isNew={!reportRow}
+          updatedBy={reportRow?.updatedBy ?? null}
+          updatedAt={reportRow?.updatedAt ?? null}
+        />
+      </div>
     </div>
   );
 }

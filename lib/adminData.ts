@@ -11,6 +11,11 @@
 import { createAdminClient } from "./supabaseAdmin";
 import { isAdminUser } from "./membership";
 import { type SupplierCreateInput, domainOf } from "./supplierCreate";
+import {
+  DEFAULT_DISCLAIMER,
+  sanitizeReportDoc,
+  type SupplierReportDoc,
+} from "./supplierReports";
 
 export type AdminContext = { userId: string; email: string | null } | null;
 
@@ -850,7 +855,7 @@ const supplierIdBySlug = getAdminSupplierIdBySlug;
 export async function logAdminAction(
   ctx: AdminContext,
   action: string,
-  targetType: "document" | "certification" | "audit" | "supplier",
+  targetType: "document" | "certification" | "audit" | "supplier" | "report",
   targetId: string,
   diff?: Record<string, unknown>,
   opts?: { ipAddress?: string | null; notes?: string | null }
@@ -1473,4 +1478,144 @@ export async function setAdminVerificationLevel(
     });
   }
   return ok;
+}
+
+// =============================================================================
+// CS-20 报告正文（每工厂一份可编辑报告）
+// 依赖 supabase/cs20/02_migration.sql 的 supplier_reports
+//
+// 铁律（与 lib/audits.ts / lib/orders.ts 一致）：
+//   1. 只走 service_role；表对 anon 零权限、对 authenticated 只有 admin-select policy。
+//   2. 🔴 overall_score 的 NULL 表示**未评分**，绝不补 0；写回时原样保留 null。
+//   3. 读回来也过一遍 sanitizeReportDoc()：库里若被别的通道写脏，形状仍可保证，
+//      且异常数据一律当「无数据」处理（后台不崩、不渲染脏内容）。
+//   4. 本表只存**人工录入**的报告正文，不做任何自动生成/推断。
+// =============================================================================
+
+export type AdminSupplierReportRow = {
+  supplierId: string;
+  doc: SupplierReportDoc;
+  updatedBy: string | null;
+  updatedAt: string | null;
+};
+
+/** DB 行 → 净化后的报告文档。供读写两处复用。 */
+function docFromReportRow(r: Record<string, unknown>): SupplierReportDoc | null {
+  const res = sanitizeReportDoc({
+    reportNumber: r.report_number,
+    reportDate: r.report_date,
+    preparedFor: r.prepared_for,
+    // ⚠️ 不写 `?? 0`：null 就是 null（未评分）
+    overallScore: r.overall_score,
+    scoreNote: r.score_note,
+    sections: r.sections,
+    actions: r.actions,
+    disclaimerEn: r.disclaimer_en,
+    disclaimerZh: r.disclaimer_zh,
+    status: r.status,
+  });
+  if (!res.ok) return null;
+  const doc = res.doc;
+  // 库里免责声明为空时，回填平台标准文本，保证编辑器/渲染方口径一致
+  if (!doc.disclaimerEn) doc.disclaimerEn = DEFAULT_DISCLAIMER.en;
+  if (!doc.disclaimerZh) doc.disclaimerZh = DEFAULT_DISCLAIMER.zh;
+  return doc;
+}
+
+/**
+ * 读某供应商的报告正文。无行 / 未配置 / 数据异常 一律返回 null，
+ * 调用方据此回退到 emptyReportTemplate()。
+ */
+export async function getAdminSupplierReport(
+  slug: string
+): Promise<AdminSupplierReportRow | null> {
+  const db = createAdminClient();
+  if (!db) return null;
+  try {
+    const supplierId = await getAdminSupplierIdBySlug(slug);
+    if (!supplierId) return null;
+
+    const { data, error } = await db
+      .from("supplier_reports")
+      .select("*")
+      .eq("supplier_id", supplierId)
+      .maybeSingle();
+    if (error || !data) return null;
+
+    const r = data as Record<string, unknown>;
+    const doc = docFromReportRow(r);
+    if (!doc) return null;
+
+    return {
+      supplierId,
+      doc,
+      updatedBy: (r.updated_by as string | null) ?? null,
+      updatedAt: (r.updated_at as string | null) ?? null,
+    };
+  } catch (e) {
+    console.error("[adminData] get supplier report exception", e);
+    return null;
+  }
+}
+
+export type SaveSupplierReportResult =
+  | { ok: true }
+  | { ok: false; error: "not_configured" | "supplier_not_found" | "save_failed"; message?: string };
+
+/**
+ * 写入报告正文（upsert，按 supplier_id 唯一键）。
+ *
+ * 🔴 入参 doc 必须是 sanitizeReportDoc() 的产物 —— 本函数只做落库，
+ *    不再二次放宽；overall_score 为 null 时写 null，绝不补 0。
+ */
+export async function saveAdminSupplierReport(
+  slug: string,
+  doc: SupplierReportDoc,
+  ctx: AdminContext
+): Promise<SaveSupplierReportResult> {
+  const db = createAdminClient();
+  if (!db) return { ok: false, error: "not_configured" };
+
+  try {
+    const supplierId = await getAdminSupplierIdBySlug(slug);
+    if (!supplierId) return { ok: false, error: "supplier_not_found" };
+
+    const { error } = await db.from("supplier_reports").upsert(
+      {
+        supplier_id: supplierId,
+        report_number: doc.reportNumber || null,
+        report_date: doc.reportDate || null,
+        prepared_for: doc.preparedFor || null,
+        overall_score: doc.overallScore,
+        score_note: doc.scoreNote || null,
+        sections: doc.sections,
+        actions: doc.actions,
+        disclaimer_en: doc.disclaimerEn || null,
+        disclaimer_zh: doc.disclaimerZh || null,
+        status: doc.status,
+        // updated_by 由服务端填，绝不来自客户端
+        updated_by: ctx?.email ?? ctx?.userId ?? "system",
+      },
+      { onConflict: "supplier_id" }
+    );
+
+    if (error) {
+      console.error("[adminData] save supplier report failed", error.message);
+      return { ok: false, error: "save_failed", message: error.message };
+    }
+
+    await logAdminAction(ctx, "report.save", "report", slug, {
+      status: doc.status,
+      sections: doc.sections.length,
+      actions: doc.actions.length,
+      // 记录分数原样（null 也如实记），便于事后追溯
+      overall_score: doc.overallScore,
+    });
+
+    return { ok: true };
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    console.error("[adminData] save supplier report exception", msg);
+    return { ok: false, error: "save_failed", message: msg };
+  }
 }
