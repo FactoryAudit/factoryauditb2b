@@ -70,6 +70,13 @@ _uniq_en.txt
 disk*.txt
 appdata_sizes.txt
 
+# 会话临时产物（根目录 _ 前缀的抓页/探针/日志/补丁备份）
+/_*
+!/_patch-opennext.cjs
+/.wrangler-dryrun/
+/scripts/_*.mjs
+/scripts/_*.cjs
+
 # WorkBuddy 本地项目数据（记忆/技能，不进仓库）
 .workbuddy/
 

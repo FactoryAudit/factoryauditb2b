@@ -29,6 +29,12 @@
 
 `tsc --noEmit` EXIT=0；`next build` BUILD_EXIT=0；回归 **655 PASS / 0 FAIL**。
 
+> ⚠️ **但上表「修复后」全是构建期数字，不等于生产行为。** 本轮追加实测发现：
+> `open-next.config.ts` = `defineCloudflareConfig({})` ⇒ `incrementalCache` 解析为 `"dummy"`
+> ⇒ `populateCache` 不会把 `.open-next/cache/` 复制进 assets ⇒ **1,505 个预渲染产物
+> （151.5 MB）在部署时被整体丢弃**，线上仍是每请求现场 SSR。
+> **不改这一处配置，本报告的 SSG 收益一项也落不了地。** 详见 §4-0。
+
 ---
 
 ## 1. 根因（已实测钉死，非推断）
@@ -232,6 +238,84 @@ v22   61 PASS / 0 FAIL
 
 ## 4. 剩余需要人工操作的清单
 
+### 4-0　🔴🔴 部署前必读：不改一处配置，本次 SSG 收益全部作废
+
+**实测（非推断）**：本轮追加跑了一次完整打包 + `wrangler deploy --dry-run` 交叉验证。
+
+| 产物 | 数量 / 体积 | 去向 |
+|---|---|---|
+| `.open-next/cache/`（**CS-19 的全部成果**） | **1,505 个 `.cache` / 151.5 MB** | ❌ **不上传，部署时丢弃** |
+| `.open-next/assets/`（静态资源层，绕过 Worker） | 150 文件 / 1.32 MB，**无 `cdn-cgi/_next_cache`** | ✅ 上传 |
+| Worker bundle（`server-functions` 经 esbuild 打包后） | **15,531 KiB 未压缩** | ✅ 上传（免费版上限 64 MiB） |
+
+**为什么被丢弃**：`open-next.config.ts` = `defineCloudflareConfig({})`，
+`resolveIncrementalCache(value = "dummy")` ⇒ `incrementalCache` = `"dummy"`
+⇒ `cli/commands/populate-cache.js` 的 switch 走 `default` 分支 ⇒ 不执行
+`populateStaticAssetsIncrementalCache()`（该函数只做一件事：把 `.open-next/cache/`
+复制进 `assets/cdn-cgi/_next_cache/`）。
+
+**后果**：生产上那 1,450 条预渲染页根本不存在，每个请求仍现场 SSR。官方文档给出量化佐证：
+
+> "The average Worker uses approximately 2.2 ms per request. Heavier workloads that handle
+> authentication, **server-side rendering**, or parse large payloads typically use **10–20 ms**."
+
+10–20 ms > 免费版 10 ms ⇒ **1102 必然复发**。
+
+#### 免费解法（$0，官方支持）
+
+`open-next.config.ts` 改为：
+
+```ts
+import { defineCloudflareConfig } from "@opennextjs/cloudflare";
+import staticAssetsIncrementalCache from "@opennextjs/cloudflare/overrides/incremental-cache/static-assets-incremental-cache";
+
+export default defineCloudflareConfig({
+  incrementalCache: staticAssetsIncrementalCache,
+  enableCacheInterception: true,
+});
+```
+
+官方原话：*"If your site is static, you do not need a Queue nor a Tag Cache. You can use a
+read-only Workers Static Assets-based incremental cache for the prerendered routes."*
+
+**免费版承载力核算（逐项核对官方 Limits 文档）**：
+
+| 项 | 需求 | 免费版上限 | 结论 |
+|---|---|---|---|
+| 静态资源文件数 | 150 + 1,505 = **1,655** | **20,000** | ✅ |
+| 单文件最大 | 1.58 MB（`sitemap.xml.cache`） | **25 MiB** | ✅ |
+| 资源总量 | 152.8 MB | **无限制** | ✅ |
+| 静态资源请求 | — | **免费且不限量** | ✅ |
+| 资源存储费 | — | **无** | ✅ |
+| Worker bundle 未压缩 | 15.2 MB | **64 MiB**（Free 与 Paid 相同，**无压缩后限制**） | ✅ |
+
+#### 🔴 代价（知情后再决定）
+
+官方明确：*"A read-only store for the incremental cache... **Revalidation is not supported
+with this cache**."* ⇒ `revalidate = 3600` **不生效**，全部预渲染页（含 81 个供应商页）
+的数据**冻结在构建时**；发布新供应商 / 改数据后**必须重新部署**才更新。
+
+#### 三方案对比
+
+| | 现状（dummy） | 配 staticAssets（**免费**） | 升 Paid + R2 |
+|---|---|---|---|
+| 预渲染产物 | **丢弃** | 上传 | 上传 |
+| 页面响应 | 每次完整 SSR | Worker 读缓存文件即返回 | 读 R2 缓存 |
+| 免费版 10 ms | ❌ 必然超 | ✅ 大概率够 | ✅（上限 30 s） |
+| 数据更新 | 实时 | **需重新部署**（热构建约 6 min） | `revalidate` 自动 |
+| 费用 | $0 | **$0** | $5/月 |
+
+> ⚠️ 若采纳 staticAssets 方案，须复查 `/suppliers` 的 `revalidate = 3600` 已无意义。
+> 若要求供应商数据实时，须把该页移出 `generateStaticParams` 预渲染集合，使其保持动态
+> —— 但这会把它放回「进 Worker」的集合，需与 §4-2 的 Cache Rule 配合。
+
+#### 另两项免费顺手优化
+
+1. 补 `public/_headers`：`/_next/static/*` → `Cache-Control: public,max-age=31536000,immutable`
+   （官方推荐；当前**缺失**，浏览器与爬虫每次都回源验证）。注意 `_headers` 限 100 条规则、每行 ≤ 2000 字符。
+2. 免费版另有 **100,000 请求/天**上限（超出报 **Error 1027**）。静态资源请求**不计入**此配额，
+   故静态化可同时规避该风险。
+
 ### 4-1　🔴 部署本次修复（必做，否则线上无变化）
 
 我**只做了构建验证，未部署**。部署须按项目既有四步走，并**关闭沙箱**：
@@ -254,11 +338,15 @@ v22   61 PASS / 0 FAIL
 > ⚠️ 新增的排除项 `/suppliers`：供应商详情页现在是 `revalidate = 3600` 的 ISR，
 > 若被边缘缓存，会按**边缘 TTL** 提供过期档案（比 1 小时的 ISR 窗口更久）。
 
-### 4-3　让 ISR 真正生效（可选，二选一）
+### 4-3　让缓存真正生效（三选一，详见 §4-0）
 
-- **a) R2 增量缓存（真 ISR）**：建 R2 bucket → `wrangler.jsonc` 加 `r2_buckets` 绑定 →
-  `open-next.config.ts` 传 `incrementalCache: r2IncrementalCache`。
-- **b) Cache Rule 边缘缓存**：见 4-2 第 2 项（注意排除 `/suppliers`）。
+| 方案 | 做法 | 代价 |
+|---|---|---|
+| **a) staticAssets 增量缓存（免费，推荐）** | `incrementalCache: staticAssetsIncrementalCache` + `enableCacheInterception: true` | 只读，`revalidate` 不生效，改数据要重新部署 |
+| **b) R2 增量缓存（真 ISR，需 Paid）** | 建 R2 bucket → `wrangler.jsonc` 加 `r2_buckets` 绑定 → `incrementalCache: r2IncrementalCache`（可叠 `withRegionalCache`） | $5/月 |
+| **c) Cache Rule 边缘缓存（免费）** | 见 §4-2 第 2 项 | 注意排除 `/api` `/admin` `/account` `/checkout` `/order` `/verify` `/suppliers` |
+
+> 🔴 **a) 与 b) 二选一必做**，否则 §4-0 所述「预渲染产物被丢弃」的问题依旧存在。
 
 ### 4-4　搜索平台侧
 
