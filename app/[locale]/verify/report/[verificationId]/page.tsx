@@ -6,6 +6,7 @@
 
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { notFound } from "next/navigation";
 import { getReportByVerificationId } from "@/lib/audits";
 import { auditVerifyPhrases, auditTypeLabel, type AuditLocale } from "@/lib/auditI18n";
 import { CopyButton } from "@/components/verify/CopyButton";
@@ -57,6 +58,15 @@ export default async function VerifyReportPage({
   const verifyUrl = `${siteUrl}/verify/report/${encodeURIComponent(verificationId)}`;
 
   if (!result.viewable) {
+    // ★ 工单 SEO-20260918-FAB 任务 1.2 —— 不存在的验真 ID 必须返回**真 404**。
+    // 此前一律 200 + 「不可验真」页 ⇒ 爬虫记为 soft 404
+    // （实测 2026-09-18：/verify/report/NOTEXIST → 200 + 44 KB 页面）。
+    //
+    // 只对 not_found 这样做，其余三种原因保持不变：
+    //   · not_issued / visibility_restricted / revoked 对应**真实存在**的报告，
+    //     返回 200 是其正确语义（revoked 还必须展示「已撤销」状态）；
+    //   · 页面本身已 robots:{index:false, follow:false}，无索引风险。
+    if (result.reason === "not_found") notFound();
     return (
       <main className="mx-auto flex min-h-[60vh] max-w-xl flex-col items-center justify-center px-4 py-16 text-center">
         <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 text-2xl">

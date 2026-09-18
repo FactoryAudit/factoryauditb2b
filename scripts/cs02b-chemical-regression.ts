@@ -170,6 +170,10 @@ section("F. 九语字典");
 const LOCALES = ["en", "zh", "zh-TW", "ja", "es", "de", "fr", "pt", "ar"] as const;
 const KEYS = [
   "metaTitle",
+  // CS-19 / 工单 SEO-20260918-FAB 任务 2.1：/chemicals/[slug] 详情页标题尾部短标签。
+  // 此前详情页标题尾部直接用列表页的 metaTitle（fr 70 / es 64 / pt 63 / de 59 字符），
+  // 与「品种名 + CAS + 品牌后缀」拼出 48–124 字符的标题（最长 1,121px，超 Google 标题区一倍）。
+  "detailTitleTail",
   "metaDesc",
   "lead",
   "casLabel",
@@ -191,12 +195,12 @@ for (const loc of LOCALES) {
   }
   check(`F2 ${loc} chemicals 命名空间存在`, true);
   const missing = KEYS.filter((k) => typeof ns[k] !== "string" || ns[k].trim() === "");
-  check(`F3 ${loc} chemicals 九键齐备且非空`, missing.length === 0, missing.join(","));
+  check(`F3 ${loc} chemicals 十键齐备且非空`, missing.length === 0, missing.join(","));
   const ks = Object.keys(ns).sort();
   if (loc === "en") enKeys.push(...ks);
   else check(`F4 ${loc} chemicals 键集与 en 一致`, JSON.stringify(ks) === JSON.stringify([...KEYS].sort()));
 }
-check("F5 en chemicals 键数 = 9", enKeys.length === 9, String(enKeys.length));
+check("F5 en chemicals 键数 = 10", enKeys.length === 10, String(enKeys.length));
 
 // ---------------------------------------------------------------------------
 console.log("\n============================================================");

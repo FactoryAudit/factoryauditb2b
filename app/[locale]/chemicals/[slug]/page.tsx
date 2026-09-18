@@ -5,7 +5,7 @@ import { CHEMICALS, findChemical } from "@/lib/chemicals";
 import { industryDisplayName, listIndustries } from "@/lib/taxonomy";
 import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
-import { buildPageMetadata } from "@/lib/pageMeta";
+import { buildPageMetadata, trimMetaDescription } from "@/lib/pageMeta";
 import { pickZhPair, twText } from "@/lib/tw";
 import JsonLd from "@/components/JsonLd";
 import RfqForm from "@/components/RfqForm";
@@ -38,11 +38,34 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   }
   const t = await getDictionary(locale);
   const name = pickZhPair(locale, chem.nameEn, chem.nameZh);
+  // ★ 工单 SEO-20260918-FAB 任务 2.1 —— 化工详情页的 title / description 收口。
+  //
+  // 实测（2026-09-18，读构建产物逐页量取）：本模板是全站最长的标题族。
+  //   · title  48–124 字符 / 最高 1,121px（fr）—— Google 桌面端标题区约 600px，
+  //            等于被砍掉近一半。成因是三段拼接：品种名 + CAS（最长约 32 字符）
+  //            + `chemicals.metaTitle`（fr 70 / es 64 / pt 63 / de 59 字符，
+  //            而它是**列表页**的关键词堆叠串）+ 品牌后缀（18 字符）。
+  //   · desc   169–200 字符，且 `.slice(0, 200)` 把正文截在句中——
+  //            实测 fr 版以「…whiteness, 」结尾（半个清单，缺收尾）。
+  //
+  // 修法（只改模板，不动那 212 个分散页面）：
+  //   ① 标题尾部改用**短标签** `chemicals.detailTitleTail`（≤25 字符，9 语齐备），
+  //      并去掉品牌后缀（`withBrand: false`）—— 18 字符的品牌位是这 60 字符
+  //      预算里最贵的一段，而 Google 现已单独展示站点名，删它不损失品牌识别。
+  //      结果：9 语 × 6 品种的 title 全部 ≤ 60 字符 / ≤ ~560px。
+  //   ② 描述改走 `trimMetaDescription()`：按书写系统给预算（CJK 90 / 拉丁 158），
+  //      并在句末标点处收尾，不再是半句话。
+  //
+  // ⚠️ 未做（需人工内容，不属代码范围）：化学品正文（application / compliance）
+  //    只有 en / zh 两版，`pickZhPair` 对 ja/de/fr/es/pt/ar 一律回落英文 ⇒
+  //    **这 6 个语言的详情页正文与描述目前都是英文**。要真正本地化描述，需要
+  //    6 语言 × 6 品种的译文（36 条）。按项目「不编造」铁律，此处不代为翻译。
   return buildPageMetadata({
     locale,
     path: `/chemicals/${slug}`,
-    title: `${name} (CAS ${chem.cas}) — ${t.chemicals.metaTitle}`,
-    description: pickZhPair(locale, chem.application.en, chem.application.zh).slice(0, 200),
+    title: `${name} (CAS ${chem.cas}) — ${t.chemicals.detailTitleTail}`,
+    withBrand: false,
+    description: trimMetaDescription(pickZhPair(locale, chem.application.en, chem.application.zh)),
   });
 }
 

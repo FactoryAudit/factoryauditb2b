@@ -3630,6 +3630,7 @@
   },
   "chemicals": {
     "metaTitle": "Chemical raw materials: applications, documents and suppliers",
+    "detailTitleTail": "Applications & documents",
     "metaDesc": "Chemical raw materials sourced from China: what each is used for, the documents buyers ask for, and how to request quotes from verified suppliers.",
     "lead": "Each page covers one raw material: what it is used for, how buyers normally specify it, and the documents to request before an order. Where no supplier is listed yet, post an RFQ.",
     "casLabel": "CAS RN",

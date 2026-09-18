@@ -239,8 +239,18 @@ section("B. Bug A —— `/en/*` 301 必须保住 query（源码级防回归）"
     Boolean(urlCalls && urlCalls.length === 2),
     `实际 ${urlCalls ? urlCalls.length : 0} 处`
   );
+  // CS-19（工单 SEO-20260918-FAB 任务 1.1）—— 本断言按新事实改写，**断言数不变**。
+  //
+  // 变更：`x-pathname` 的**消费方**（app/[locale]/layout.tsx 的 generateMetadata）
+  //       已被移除。原因是它在那里调用了 `await headers()`，而 Next 15 中只要
+  //       generateMetadata 触碰 Dynamic API，**整棵 [locale] 子树就永久退出静态生成**
+  //       （实测 prerender-manifest 仅 319 条 = 315 audit-guide + 3 元数据路由 + _not-found，
+  //        全站内容页都在每次请求现场 SSR，1,233 个 sitemap URL 因此把 Worker 打成 535 个 5xx）。
+  //
+  // 保留：middleware 的**注入**不动 —— 它不参与静态化判定，但保留可避免未来为一个
+  //       请求上下文字段再改一次路由核心。⚠️ 任何人不得再在 generateMetadata 里读它。
   check(
-    "B7 `x-pathname` 注入仍在",
+    "B7 `x-pathname` 注入仍在（消费方已于 CS-19 移除，注入保留备用，不得在 generateMetadata 中读取）",
     /requestHeaders\.set\("x-pathname",\s*pathname\)/.test(mw)
   );
   check(
@@ -309,7 +319,7 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
       /export\s+const\s+FEATURED_MIN\s*=/.test(sup)
   );
 
-  // C7 九语字典：键集合与 en 完全一致，叶子数恒为 2822（= 2818 字符串 + 4 boolean）
+  // C7 九语字典：键集合与 en 完全一致，叶子数恒为 2823（= 2819 字符串 + 4 boolean）
   // 2648 → 2666：CS-08 入驻表证书子表单 + 「我要获得证书」咨询弹窗新增 18 键 × 9 语
   // 2666 → 2694：CS-11 公开标准报告样板页 standardReport 命名空间 27 键 + footer.standardReport 1 键
   // 2694 → 2714：CS-12 档案页登记信息 7 键 + 工厂自述证书 8 键 + 产能 4 键 + evidenceCenter.issuedOn 1 键 = 20 键 × 9 语
@@ -319,6 +329,8 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
   // 2735 → 2767：CS-16 后台供应商管理 admin 命名空间 32 键（publish/unpublish/authorizedTitle/consentHistoryNote + 18 字段 label + filter/search 等，× 9 语）
   // 2767 → 2809：CS-17 Commerce V1 checkout 命名空间 31 键 + admin.orders 11 键 = 42 键 × 9 语
   // 2809 → 2822：CS-17 下单页 order 命名空间 13 键 × 9 语
+  // 2822 → 2823：CS-19 / 工单 SEO-20260918-FAB 任务 2.1 —— 化工详情页标题尾部短标签
+  //              chemicals.detailTitleTail 1 键 × 9 语（替换列表页用的 metaTitle 去拼标题）
   const LOCALES = ["en", "zh", "zh-TW", "ja", "es", "de", "fr", "pt", "ar"] as const;
   type Leaf = { key: string; value: unknown };
   function leaves(obj: unknown, prefix = "", out: Leaf[] = []): Leaf[] {
@@ -343,7 +355,7 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
     dictLeaves[loc] = leaves(JSON.parse(fs.readFileSync(p, "utf8")));
   }
   const baseKeys = dictLeaves.en.map((l) => l.key).sort();
-  check("C8 en 字典叶子数 = 2822（未被截断/新增）", baseKeys.length === 2822, `实际 ${baseKeys.length}`);
+  check("C8 en 字典叶子数 = 2823（未被截断/新增）", baseKeys.length === 2823, `实际 ${baseKeys.length}`);
 
   for (const loc of LOCALES) {
     if (loc === "en") continue;

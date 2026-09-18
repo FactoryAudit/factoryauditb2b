@@ -119,6 +119,19 @@ const nextConfig = {
     return [
       { source: "/membership", destination: "/pricing", permanent: true },
       { source: "/:locale/membership", destination: "/:locale/pricing", permanent: true },
+      // ★ CS-19（工单 SEO-20260918-FAB 任务 1.3）—— 收口 /en 家族的重定向链。
+      //
+      // 实测（2026-09-18）：/en/ → 308 → /en → 301 → /（2 跳，爬虫记为 Redirect Chain）。
+      // 那个 308 来自 Next 核心的**尾斜杠归一化**，它发生在 middleware **之前**，
+      // 因此 middleware.ts 里已有的 `/en/*` → `/*` 301 无法把这个链条缩短。
+      //
+      // 修法：把同一套语义提前到 next.config 的 redirects 阶段（与尾斜杠归一化同级）。
+      // 两条规则都写：`:path*` 在 path-to-regexp 下是否匹配零段在不同版本间有差异，
+      // 显式补一条 `/en` 精确规则可消除该不确定性。
+      // 注意：`/en/membership` 会先到这里变成 `/membership`，再由上面那条规则送到 /pricing，
+      // 与改动前的跳转数一致，无回退。
+      { source: "/en", destination: "/", permanent: true },
+      { source: "/en/:path*", destination: "/:path*", permanent: true },
     ];
   },
 };

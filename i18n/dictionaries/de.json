@@ -3630,6 +3630,7 @@
   },
   "chemicals": {
     "metaTitle": "Chemische Rohstoffe: Anwendungen, Dokumente und Lieferanten",
+    "detailTitleTail": "Anwendungen & Dokumente",
     "metaDesc": "Chemische Rohstoffe aus China: Verwendung, von Käufern angeforderte Dokumente und wie Sie Angebote von geprüften Lieferanten anfordern.",
     "lead": "Jede Seite behandelt einen Rohstoff: Verwendung, wie Käufer ihn spezifizieren und welche Dokumente vor der Bestellung anzufordern sind. Wenn noch kein Lieferant gelistet ist, veröffentlichen Sie eine RFQ.",
     "casLabel": "CAS RN",

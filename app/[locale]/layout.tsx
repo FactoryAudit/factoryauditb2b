@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { headers } from "next/headers";
 import "../globals.css";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -11,7 +10,6 @@ import { AuthProvider } from "@/components/AuthProvider";
 import JsonLd from "@/components/JsonLd";
 import { LOCALES, isLocale, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
-import { hreflangFor, canonicalFor } from "@/i18n/hreflang";
 import { OG_IMAGE } from "@/lib/pageMeta";
 import { organizationSchema } from "@/lib/organizationSchema";
 
@@ -21,15 +19,36 @@ export function generateStaticParams() {
 
 const BASE = "https://factoryauditb2b.com";
 
-// 没有独立 generateMetadata 的客户端工具页，用 toolCards 兜底差异化 title/canonical
-// （修复 SEO-AUDIT P0-1：此前这些页面 canonical 全部指向首页）
-const TOOL_TITLE_KEY: Record<string, "auditChecklist" | "auditReportAnalyzer" | "documentChecker" | "riskAssessment" | "supplierScorecard"> = {
-  "/tools/audit-checklist": "auditChecklist",
-  "/tools/audit-report-analyzer": "auditReportAnalyzer",
-  "/tools/supplier-document-checker": "documentChecker",
-  "/tools/supplier-risk-assessment": "riskAssessment",
-  "/tools/supplier-scorecard": "supplierScorecard",
-};
+// ★ CS-19（工单 SEO-20260918-FAB 任务 1.1）—— 本文件不再读取 x-pathname。
+// ─────────────────────────────────────────────────────────────────────────────
+// 历史：此前这里用 `await headers()` 取 middleware 注入的 x-pathname 推 basePath，
+// 再由 basePath 生成 canonical / hreflang，并为 5 个客户端工具页兜底 title。
+//
+// 问题：Next 15 中 generateMetadata 只要调用 `headers()` 这类 Dynamic API，
+// **整棵 [locale] 子树就永久退出静态生成**。实测后果（2026-09-18）：
+//   · .next/prerender-manifest.json 仅 319 条路由 = 315 条 audit-guide
+//     + sitemap.xml / robots.txt / llms.txt / _not-found；
+//     **站点没有任何一个内容页被预渲染**，sitemap 里 1,233 个 URL 全部是
+//     每次请求现场 SSR（含 Supabase 往返）。一次 1,233 URL 的爬虫扫描据此
+//     把 Free 套餐 Worker 打成 535 个 5xx（Cloudflare 1102）。
+//
+// 为什么可以安全摘除（均已实测核对，非推断）：
+//   · 62 个非 admin 页面中 **54 个自带 generateMetadata**，经 lib/pageMeta.ts 的
+//     buildPageMetadata() 显式声明 canonical + languages；Next 元数据合并中
+//     同名字段由**子级覆盖父级** ⇒ 本文件的 alternates 对它们一直是死值。
+//   · 其余 8 个（checkout/[ref]、country/[slug]、inspectors、knowledge、
+//     membership、order、sample-report、supplier/[country]/[slug]）全部是
+//     308 重定向页或**已带 noindex 的事务页**，不依赖 canonical。
+//   · 9 个 /tools/* 页面**全部自带 generateMetadata** ⇒ 原 TOOL_TITLE_KEY
+//     兜底分支已是死代码，一并移除。
+//
+// 保留项：icons / metadataBase / verification / robots / OG / Twitter 默认值
+// —— 均不依赖请求上下文，摘除 headers() 后行为完全不变。
+//
+// ⚠️ 因此本文件**不得**再出现 canonical / alternates：它算不出真实路径，
+//    只能给出 "/"，那正是 SEO-AUDIT P0-1（canonical 全指首页）的复现方式。
+//    canonical 的唯一责任方是各页面自己的 buildPageMetadata()。
+const DEFAULT_TITLE = "Factory Audit & Supplier Verification | FactoryAuditB2B";
 
 export async function generateMetadata({
   params,
@@ -40,27 +59,9 @@ export async function generateMetadata({
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
 
-  // 从 middleware 注入的 x-pathname 取当前路径（可能带语言前缀）
-  const h = await headers();
-  const rawPath = h.get("x-pathname") || "/";
-  let basePath = rawPath;
-  for (const l of LOCALES) {
-    if (rawPath.startsWith(`/${l}`)) {
-      basePath = rawPath.slice(l.length + 1) || "/";
-      break;
-    }
-  }
-  if (!basePath.startsWith("/")) basePath = `/${basePath}`;
-
-  const toolKey = TOOL_TITLE_KEY[basePath];
-  const title = toolKey
-    ? `${t.toolCards[toolKey].title} | FactoryAuditB2B`
-    : "Factory Audit & Supplier Verification | FactoryAuditB2B";
-  const description = toolKey ? t.toolCards[toolKey].desc : t.footer.tagline;
-
   return {
-    title,
-    description,
+    title: DEFAULT_TITLE,
+    description: t.footer.tagline,
     metadataBase: new URL(BASE),
     // 浏览器标签 / 收藏夹 / PWA 图标。此前未配置，浏览器会回退到默认的空白 favicon
     icons: {
@@ -70,22 +71,17 @@ export async function generateMetadata({
       ],
       apple: "/logo-icon.svg",
     },
-    alternates: {
-      canonical: canonicalFor(locale, basePath),
-      languages: hreflangFor(basePath),
-    },
     openGraph: {
-      title,
-      description,
+      title: DEFAULT_TITLE,
+      description: t.footer.tagline,
       type: "website",
-      url: canonicalFor(locale, basePath),
       images: [OG_IMAGE],
       locale: undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title,
-      description,
+      title: DEFAULT_TITLE,
+      description: t.footer.tagline,
       images: [OG_IMAGE],
     },
     robots: { index: true, follow: true },

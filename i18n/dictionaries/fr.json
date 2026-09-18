@@ -3630,6 +3630,7 @@
   },
   "chemicals": {
     "metaTitle": "Matières premières chimiques : applications, documents et fournisseurs",
+    "detailTitleTail": "Applications & documents",
     "metaDesc": "Matières premières chimiques de Chine : usages, documents demandés par les acheteurs et comment demander des devis à des fournisseurs vérifiés.",
     "lead": "Chaque page couvre une matière première : usages, spécifications habituelles des acheteurs et documents à demander avant de commander. Si aucun fournisseur n'est référencé, publiez une RFQ.",
     "casLabel": "CAS RN",

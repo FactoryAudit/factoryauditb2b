@@ -72,6 +72,35 @@ function buildSupplierSeoData(
   });
 }
 
+// ★ CS-19（工单 SEO-20260918-FAB 任务 1.1 / 1.3）—— 本页改走 ISR（一小时窗口）。
+//
+// 背景：此前 app/[locale]/layout.tsx 的 `await headers()` 把整棵 [locale] 子树拖成
+// 动态渲染；摘除后其余页面转为构建期预渲染（prerender-manifest 319 → 1,597）。
+// 本页则按工单任务 1.3 由 `force-dynamic` 改为 ISR。
+//
+// 取舍：
+//   · 收益：构建期为 sitemap 中本页家族（81 / 1,233 = 6.6%）产出静态产物；
+//     增量缓存就位后，不再逐请求跑 React SSR + 3 次 Supabase 往返。
+//   · 代价：窗口内数据最多滞后 1 小时。供应商「发布」= DB 的 is_published 改 true
+//     （一次 UPDATE），改完未必立刻可见。**若发布时效重新成为硬要求，
+//     把下面的 revalidate 去掉并恢复 `export const dynamic = "force-dynamic";` 即可。**
+//
+// 🔴 部署事实（2026-09-18 核对 @opennextjs/cloudflare 1.20.4 源码，非推断）：
+//   `open-next.config.ts` 现为 `defineCloudflareConfig({})` ⇒ incrementalCache /
+//   tagCache / queue 全部解析为 **"dummy"**，而 dummy 的 `get()` 直接抛
+//   `IgnorableError`（@opennextjs/aws/dist/overrides/incrementalCache/dummy.js）
+//   ⇒ **当前没有任何缓存层**：
+//     · 缓存永远 miss ⇒ 每个请求仍现场渲染，与改动前的 force-dynamic 等价，
+//       因此本次改动**不引入回归**，数据依然实时；
+//     · `revalidate` 的「静态分发 + 按时更新」要等增量缓存真正配好才成立。
+//   要让它生效（属 Cloudflare 侧人工操作），二选一：
+//     a) 配 R2 增量缓存：建 bucket + 加 r2_buckets 绑定 + 在 open-next.config.ts
+//        传 `incrementalCache: r2IncrementalCache`（真 ISR，按窗口更新）；
+//     b) 加 Cache Rule 边缘缓存 —— ⚠️ 届时**必须排除 /suppliers**，
+//        否则会按边缘 TTL 提供过期档案。
+export const revalidate = 3600;
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
   const slugs = await listSupplierSlugs();
   return slugs.map(({ slug }) => ({ slug }));
