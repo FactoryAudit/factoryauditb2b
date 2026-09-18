@@ -3,6 +3,16 @@
 > 2026-09-18 收自用户微信，两份 docx 已**原文完整提取**为 Markdown（见同目录两个 `.source.md`）。
 > 原始 docx 位于微信临时目录，**会被清理**，故此处为准。
 
+## 本目录文件
+
+| 文件 | 说明 |
+|---|---|
+| `Supplier-Quality-Audit-Checklist.source.md` | 质量审核清单**原文提取**（Markdown，人读/AI 读） |
+| `Supplier-Social-Compliance-Audit-Checklist.source.md` | 社会责任审核清单**原文提取** |
+| `Supplier-Quality-Audit-Checklist.original.docx` | 质量审核清单**原始 docx 备份**（63,621 B，含原始版式） |
+| `Supplier-Social-Compliance-Audit-Checklist.original.docx` | 社会责任审核清单**原始 docx 备份**（64,341 B） |
+| `README.md` | 本文件：内容盘点 + 平台映射 + 冲突清单 |
+
 ## 这两份是什么
 
 | | 质量审核 | 社会责任审核 |
@@ -50,5 +60,5 @@ CS-18 已建三张表，schema 就是为此设计的，至今**零行**：
 
 ## 状态
 
-- 已做：原文提取落盘、与平台实现逐项对照、冲突清单。
+- 已做：原文提取落盘 + 原始 docx 备份、与平台实现逐项对照、冲突清单。
 - **未做**：未写入任何 DB、未改任何代码、未提交决策。等用户拍板方向。
