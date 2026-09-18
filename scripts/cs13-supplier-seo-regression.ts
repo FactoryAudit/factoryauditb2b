@@ -59,7 +59,7 @@ function leaves(obj: unknown, prefix = "", out: Leaf[] = []): Leaf[] {
 
 const LOCALES = ["en", "zh", "zh-TW", "ja", "es", "de", "fr", "pt", "ar"];
 /** 单一事实源：与 cs06a C8 / cs08 G4,G5 / cs12 E4,E5 / verify-opennext-bundle 同源 */
-const EN_LEAF_COUNT = 2823;
+const EN_LEAF_COUNT = 2824;
 
 async function main() {
   console.log("=".repeat(60));
@@ -436,16 +436,16 @@ async function main() {
   const badScoreLabel = LOCALES.filter((l) => /risk[\s-]?score/i.test(JSON.parse(read(`i18n/dictionaries/${l}.json`)).suppliers.riskLabel));
   check("F1h 九语 riskLabel 均不再表述为「risk score」", badScoreLabel.length === 0, badScoreLabel.join(","));
   for (const [f, pat] of [
-    ["scripts/cs06a-directory-regression.ts", "baseKeys.length === 2823"],
-    ["scripts/cs08-form-regression.ts", "leafCounts[0] === 2823"],
-    ["scripts/cs12-profile-regression.ts", "enLeaf === 2823"],
-    ["scripts/verify-opennext-bundle.mjs", "cnt !== 2823"],
+    ["scripts/cs06a-directory-regression.ts", "baseKeys.length === 2824"],
+    ["scripts/cs08-form-regression.ts", "leafCounts[0] === 2824"],
+    ["scripts/cs12-profile-regression.ts", "enLeaf === 2824"],
+    ["scripts/verify-opennext-bundle.mjs", "cnt !== 2824"],
   ] as const) {
-    check(`F1i ${f} 的叶子数常量仍为 2823（五处同源）`, read(f).includes(pat));
+    check(`F1i ${f} 的叶子数常量仍为 2824（五处同源）`, read(f).includes(pat));
   }
   check(
     "F1j verify-opennext-bundle 的期望值文本未被弱化",
-    read("scripts/verify-opennext-bundle.mjs").includes("(期望 2823)")
+    read("scripts/verify-opennext-bundle.mjs").includes("(期望 2824)")
   );
 
   console.log("\n=== F2. 字段分层 / 迁移 / 历史（本轮零越界） ===");

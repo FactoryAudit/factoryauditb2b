@@ -34,6 +34,8 @@ export type AccountMenuDict = {
   saved: string;
   /** /account/rfqs 入口文案。复用 account.navRfqs，不另存一份 */
   rfqs: string;
+  /** 管理后台入口文案。复用 admin.title，不另存一份；仅 isAdmin 渲染 */
+  adminConsole: string;
 };
 
 export default function AccountMenu({
@@ -191,6 +193,24 @@ export default function AccountMenu({
             >
               {dict.rfqs}
             </Link>
+            {/*
+              管理后台入口（2026-09-18 补）。
+              此前**前台零入口**：全站所有 /admin 链接都是后台页面之间的互链，
+              管理员每次进后台都得手敲 URL，而登录只跳到 /account。
+              仅 isAdmin 渲染 —— 普通用户看不到这个链接，菜单里没有任何可探测的差异。
+              安全：闸门是服务端 requireAdmin()（非 admin 一律渲染 404），
+              这里只是显示开关，前端改标记也只是得到一个点进去就 404 的链接。
+            */}
+            {me.isAdmin && (
+              <Link
+                href={p("/admin")}
+                role="menuitem"
+                className="block rounded-md px-3 py-2 text-sm hover:bg-[#f1f5f9]"
+                onClick={() => setOpen(false)}
+              >
+                {dict.adminConsole}
+              </Link>
+            )}
             {!isPaid && (
               <Link
                 href={p("/pricing#founding-buyer")}

@@ -319,7 +319,7 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
       /export\s+const\s+FEATURED_MIN\s*=/.test(sup)
   );
 
-  // C7 九语字典：键集合与 en 完全一致，叶子数恒为 2823（= 2819 字符串 + 4 boolean）
+  // C7 九语字典：键集合与 en 完全一致，叶子数恒为 2824（= 2820 字符串 + 4 boolean）
   // 2648 → 2666：CS-08 入驻表证书子表单 + 「我要获得证书」咨询弹窗新增 18 键 × 9 语
   // 2666 → 2694：CS-11 公开标准报告样板页 standardReport 命名空间 27 键 + footer.standardReport 1 键
   // 2694 → 2714：CS-12 档案页登记信息 7 键 + 工厂自述证书 8 键 + 产能 4 键 + evidenceCenter.issuedOn 1 键 = 20 键 × 9 语
@@ -331,6 +331,9 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
   // 2809 → 2822：CS-17 下单页 order 命名空间 13 键 × 9 语
   // 2822 → 2823：CS-19 / 工单 SEO-20260918-FAB 任务 2.1 —— 化工详情页标题尾部短标签
   //              chemicals.detailTitleTail 1 键 × 9 语（替换列表页用的 metaTitle 去拼标题）
+  // 2823 → 2824：账号中心功能导航区小节标题 account.panel.linksTitle 1 键 × 9 语
+  //              （卡片标题/说明全部复用 savedTitle/savedLead/rfqsTitle/rfqsLead
+  //               与 admin.title/admin.overviewLead，故只增 1 个叶子而非 7 个）
   const LOCALES = ["en", "zh", "zh-TW", "ja", "es", "de", "fr", "pt", "ar"] as const;
   type Leaf = { key: string; value: unknown };
   function leaves(obj: unknown, prefix = "", out: Leaf[] = []): Leaf[] {
@@ -355,7 +358,7 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
     dictLeaves[loc] = leaves(JSON.parse(fs.readFileSync(p, "utf8")));
   }
   const baseKeys = dictLeaves.en.map((l) => l.key).sort();
-  check("C8 en 字典叶子数 = 2823（未被截断/新增）", baseKeys.length === 2823, `实际 ${baseKeys.length}`);
+  check("C8 en 字典叶子数 = 2824（未被截断/新增）", baseKeys.length === 2824, `实际 ${baseKeys.length}`);
 
   for (const loc of LOCALES) {
     if (loc === "en") continue;

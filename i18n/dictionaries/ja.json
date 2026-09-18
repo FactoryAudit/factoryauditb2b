@@ -3329,6 +3329,7 @@
       "quotaLabel": "基本プロフィール閲覧",
       "quotaUnlimited": "無制限",
       "renewsLabel": "更新日",
+      "linksTitle": "アクティビティ",
       "upgradeTitle": "サプライヤープロフィールをすべて表示",
       "upgradeLead": "Founding Buyer は年額 $ {price} で、証拠記録・検査履歴・リスク内訳を利用できます。",
       "upgradeCta": "会員プランを見る"

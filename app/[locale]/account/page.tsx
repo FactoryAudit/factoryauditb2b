@@ -54,8 +54,19 @@ export default async function AccountPage({
 
       <div className="mt-8">
         <AccountPanel
-          t={a.panel}
           locale={locale}
+          // 功能导航区（收藏夹 / 我的询价 / 管理后台）的卡片文案**全部复用既有键**，
+          // 不新造文案：见 components/AccountPanel.tsx 的 AccountPanelDict 注释。
+          // 只补了一个 panel.linksTitle（九语各 1 个叶子）。
+          t={{
+            ...a.panel,
+            savedLinkTitle: a.savedTitle,
+            savedLinkLead: a.savedLead,
+            rfqsLinkTitle: a.rfqsTitle,
+            rfqsLinkLead: a.rfqsLead,
+            adminLinkTitle: t.admin.title,
+            adminLinkLead: t.admin.overviewLead,
+          }}
           signInHref={p("/login")}
           registerHref={p("/register")}
           membershipHref={p("/pricing#founding-buyer")}

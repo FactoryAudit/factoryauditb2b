@@ -3329,6 +3329,7 @@
       "quotaLabel": "Basic profile access",
       "quotaUnlimited": "Unlimited",
       "renewsLabel": "Renews on",
+      "linksTitle": "Your activity",
       "upgradeTitle": "Unlock full supplier profiles",
       "upgradeLead": "Founding Buyer is ${price} per year and unlocks evidence records, inspection history and risk breakdowns.",
       "upgradeCta": "See membership"

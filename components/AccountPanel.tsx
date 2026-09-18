@@ -13,6 +13,7 @@
 import Link from "next/link";
 import { useAuth } from "./AuthProvider";
 import { MEMBERSHIP_PRICE_USD } from "@/lib/suppliers";
+import { localePath, type Locale } from "@/i18n/config";
 
 export type AccountPanelDict = {
   /** 未登录引导 */
@@ -35,6 +36,23 @@ export type AccountPanelDict = {
   /** "{price}" 占位符由 MEMBERSHIP_PRICE_USD 填充（定价单一事实源） */
   upgradeLead: string;
   upgradeCta: string;
+
+  // ---- 功能导航区（2026-09-18 补）----
+  // 卡片标题与说明**全部复用既有键**，不新造文案：
+  //   savedLink* ← account.savedTitle / account.savedLead
+  //   rfqsLink*  ← account.rfqsTitle  / account.rfqsLead
+  //   adminLink* ← admin.title        / admin.overviewLead
+  /** 「你的活动」小节标题（account.panel.linksTitle，九语各一份） */
+  linksTitle: string;
+  /** /account/saved 入口文案 */
+  savedLinkTitle: string;
+  savedLinkLead: string;
+  /** /account/rfqs 入口文案 */
+  rfqsLinkTitle: string;
+  rfqsLinkLead: string;
+  /** 管理后台入口文案。仅 me.isAdmin 时渲染 */
+  adminLinkTitle: string;
+  adminLinkLead: string;
 };
 
 export default function AccountPanel({
@@ -45,12 +63,15 @@ export default function AccountPanel({
   membershipHref,
 }: {
   t: AccountPanelDict;
-  locale: string;
+  /** 已登录页面的 locale（用于拼子页面链接的 /xx 前缀） */
+  locale: Locale;
   signInHref: string;
   registerHref: string;
   membershipHref: string;
 }) {
   const { me, loading } = useAuth();
+  // 功能导航区的链接在组件内用 localePath 拼 —— 不把函数当 prop 传给客户端组件
+  const p = (href: string) => localePath(locale, href);
 
   // 首帧与 SSR 一致：先出骨架，避免已登录用户看到"请登录"闪一下
   if (loading) {
@@ -119,6 +140,53 @@ export default function AccountPanel({
           </p>
         )}
       </div>
+
+      {/*
+        功能导航区。2026-09-18 补：/account/saved 与 /account/rfqs 两个页面早就建好了，
+        但入口只藏在右上角那个**折叠状态**的下拉里 —— 账号主页一个链接都没有，
+        于是「收藏了供应商却没地方看」「提交了询价看不到状态」，
+        等于功能不存在。这里把入口摆到主页，与下拉菜单并存（同一份文案，不各存一份）。
+        只对已登录用户渲染：未登录时整块面板本就是「去登录」卡片，
+        摆出入口只会让游客点进另一个登录闸门。
+      */}
+      <section className="card p-6">
+        <h2 className="text-xs uppercase tracking-wide text-[#64748b]">
+          {t.linksTitle}
+        </h2>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <Link
+            href={p("/account/saved")}
+            className="rounded-lg border border-[#e2e8f0] p-4 transition-colors hover:border-[#0f4c81] hover:bg-[#f8fafc]"
+          >
+            <div className="font-semibold text-[#0f172a]">{t.savedLinkTitle}</div>
+            <p className="text-sm text-[#475569] mt-1">{t.savedLinkLead}</p>
+          </Link>
+
+          <Link
+            href={p("/account/rfqs")}
+            className="rounded-lg border border-[#e2e8f0] p-4 transition-colors hover:border-[#0f4c81] hover:bg-[#f8fafc]"
+          >
+            <div className="font-semibold text-[#0f172a]">{t.rfqsLinkTitle}</div>
+            <p className="text-sm text-[#475569] mt-1">{t.rfqsLinkLead}</p>
+          </Link>
+
+          {/*
+            管理后台入口 —— 此前**前台零入口**：/admin 的所有链接都是后台页面之间的互链，
+            管理员每次进后台都要手敲 URL。这里只对 me.isAdmin 渲染。
+            安全：这只是一个链接的显示开关，真正的闸门是服务端 requireAdmin()（非 admin 渲染 404）。
+            即便有人在浏览器里把 isAdmin 改成 true，他也只是看到一个点进去就 404 的链接。
+          */}
+          {me.isAdmin && (
+            <Link
+              href={p("/admin")}
+              className="rounded-lg border border-[#e2e8f0] p-4 transition-colors hover:border-[#0f4c81] hover:bg-[#f8fafc]"
+            >
+              <div className="font-semibold text-[#0f172a]">{t.adminLinkTitle}</div>
+              <p className="text-sm text-[#475569] mt-1">{t.adminLinkLead}</p>
+            </Link>
+          )}
+        </div>
+      </section>
 
       {!isPaid && (
         <div className="card p-6 border-l-4 border-[#0f4c81]">

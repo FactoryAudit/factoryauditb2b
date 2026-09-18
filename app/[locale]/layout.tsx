@@ -163,9 +163,9 @@ export default async function RootLayout({
             它不读 cookie、不阻断渲染，因此不影响各页面的 ● SSG 预渲染。 */}
         <AuthProvider>
           <AnalyticsTracker />
-          {/* 账号菜单的「收藏夹 / 询价单」入口文案复用 account 命名空间，
+          {/* 账号菜单的「收藏夹 / 询价单 / 管理后台」入口文案一律复用既有命名空间，
               不在 auth.accountMenu 里再存一份 —— 两处文案永远是同一份，
-              改一个地方就够。 */}
+              改一个地方就够。adminConsole 取 admin.title（后台自己的标题）。 */}
           <SiteHeader
             locale={locale}
             dict={t.nav}
@@ -173,6 +173,7 @@ export default async function RootLayout({
               ...t.auth.accountMenu,
               saved: t.account.navSaved,
               rfqs: t.account.navRfqs,
+              adminConsole: t.admin.title,
             }}
             whatsappLabel={t.common.whatsappChat}
           />
