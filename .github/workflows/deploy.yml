@@ -53,6 +53,18 @@ jobs:
           tail -c 6000 opennext-build.log | sed 's/%/%25/g; s/\r//g; s/\n/%0A/g' | sed 's/^/::error::/'
           exit 1
 
+      # 🔴 必须有这一步：`open-next.config.ts` 选的是 staticAssetsIncrementalCache，
+      # 预渲染产物要靠 `populateCache` 从 .open-next/cache 复制进
+      # .open-next/assets/cdn-cgi/_next_cache/。该命令**不在 build 流程里**
+      # （只挂在 deploy 子命令下），所以手工链路与 CI 都要显式补。
+      # 缺这步的后果：1454 个 .cache（151 MB）被静默丢弃、零报错，线上退化为
+      # 每请求现场 SSR；CF 免费版 CPU 上限 10 ms ⇒ Error 1102 复发。
+      - name: Populate static-assets incremental cache
+        run: npx --yes @opennextjs/cloudflare@1.20.5 populateCache local
+
+      - name: Verify prerendered assets landed (fail fast)
+        run: node scripts/verify-opennext-bundle.mjs
+
       - name: Upload build log
         if: always()
         uses: actions/upload-artifact@v4
@@ -100,3 +112,8 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # 上面已显式跑过 populateCache + verify。若让 wrangler 再自动代理到
+          # `opennextjs-cloudflare deploy`，它会**重复**执行一遍 populateCache 的
+          # 全量 fs.cpSync，白烧 IO 且掩盖真实失败点。opennext 自己也是用这个开关
+          # 防止代理递归的，这里沿用它。
+          OPEN_NEXT_DEPLOY: "true"

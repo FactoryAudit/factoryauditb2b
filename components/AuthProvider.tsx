@@ -30,6 +30,7 @@ import { buildMeResponse } from "@/lib/access";
 /** 未登录的初始状态（也是 SSR 期间的状态） */
 const VISITOR: MeResponse = buildMeResponse({
   tier: "visitor",
+  planTier: "visitor",
   profilesUsed: 0,
   currentPeriodEnd: null,
   email: null,

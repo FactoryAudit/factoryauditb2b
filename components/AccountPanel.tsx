@@ -103,7 +103,14 @@ export default function AccountPanel({
     );
   }
 
-  const isPaid = me.tier === "founding_buyer" || me.isAdmin;
+  // 两个口径必须分开（2026-09-18 修）：
+  //   hasPaidAccess = 权限口径 —— 能不能解锁付费内容。管理员也 true。
+  //   isPayingPlan  = 账单口径 —— 到底买没买会员。管理员照实为 false。
+  // 曾经只有一个 isPaid 兼作两用，于是 /account 对着一个 DB 里 plan='free'、
+  // 从没买过会员的管理员显示「当前套餐：Founding Buyer」—— 陈述了不存在的套餐。
+  // 权限可以提，账单不能编：显示一律读 planTier。
+  const hasPaidAccess = me.tier === "founding_buyer" || me.isAdmin;
+  const isPayingPlan = me.planTier === "founding_buyer";
   // CS-05c：额度口径已退役 —— Free Buyer 的基础档案浏览就是无限，
   // 面板只陈述这一个事实，不再显示 "{used} / {limit} profiles this month"。
   const quotaText = t.quotaUnlimited;
@@ -120,7 +127,7 @@ export default function AccountPanel({
               {t.planLabel}
             </div>
             <div className="font-semibold text-[#0f172a] mt-1">
-              {isPaid ? t.planFounding : t.planFree}
+              {isPayingPlan ? t.planFounding : t.planFree}
             </div>
           </div>
           <div>
@@ -131,7 +138,7 @@ export default function AccountPanel({
           </div>
         </div>
 
-        {isPaid && me.currentPeriodEnd && (
+        {isPayingPlan && me.currentPeriodEnd && (
           <p className="text-sm text-[#475569] mt-4">
             {t.renewsLabel}{" "}
             <span className="font-medium text-[#0f172a]">
@@ -188,7 +195,7 @@ export default function AccountPanel({
         </div>
       </section>
 
-      {!isPaid && (
+      {!hasPaidAccess && (
         <div className="card p-6 border-l-4 border-[#0f4c81]">
           <h2 className="font-semibold text-[#0f172a]">{t.upgradeTitle}</h2>
           <p className="text-sm text-[#475569] mt-1">

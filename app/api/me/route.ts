@@ -37,6 +37,7 @@ export async function GET() {
       // 未登录：返回 visitor 档位（不是 401 —— 游客是正常状态，不是错误）
       return NextResponse.json(buildMeResponse({
         tier: "visitor",
+        planTier: "visitor",
         profilesUsed: 0,
         currentPeriodEnd: null,
         email: null,
@@ -50,12 +51,20 @@ export async function GET() {
       isAdminUser(user.id),
     ]);
 
-    const tier = isAdmin ? "founding_buyer" : resolveTier(record);
+    // 🔴 两个口径必须分开算，绝不可混用：
+    //   planTier = 这个人**实际买了什么**（直接来自 DB 记录）—— 界面显示套餐用这个。
+    //   tier     = 这个人**能解锁什么**（权限）—— 管理员由 isAdmin 提到 founding_buyer。
+    // 曾经只有一个 tier：管理员被提到 founding_buyer 后，/account 就对着一个
+    // DB 里 plan='free'、从没买过会员的人显示「当前套餐：Founding Buyer」。
+    // 权限可以提，账单不能编 —— 所以显示层一律读 planTier。
+    const planTier = resolveTier(record);
+    const tier = isAdmin ? "founding_buyer" : planTier;
 
     // CS-05a：Free Buyer 起 basic profile 浏览为 unlimited，不再查用量（省一次查询）。
     // 只有 founding_buyer 之外、且仍按服务端记账的档位才需要 profilesUsed —— 当前没有。
     return NextResponse.json(buildMeResponse({
       tier,
+      planTier,
       profilesUsed: 0,
       currentPeriodEnd: record?.current_period_end ?? null,
       email: user.email ?? null,
@@ -66,6 +75,7 @@ export async function GET() {
     // 任何异常都降级为 visitor，绝不让前端拿到"部分解锁"的脏状态
     return NextResponse.json(buildMeResponse({
       tier: "visitor",
+      planTier: "visitor",
       profilesUsed: 0,
       currentPeriodEnd: null,
       email: null,

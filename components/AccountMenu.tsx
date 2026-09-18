@@ -118,7 +118,11 @@ export default function AccountMenu({
 
   // 只显示 @ 前一段，避免在公共场合/截图里暴露完整邮箱
   const shortName = me.email ? me.email.split("@")[0] : dict.myAccount;
-  const isPaid = me.tier === "founding_buyer" || me.isAdmin;
+  // 权限口径 / 账单口径分开（2026-09-18 修，与 AccountPanel 同一处理）：
+  //   hasPaidAccess → 要不要显示"升级"入口；isPayingPlan → 徽章上写什么。
+  // 管理员有 full access，但没买过会员 —— 徽章不能替他编一个套餐。
+  const hasPaidAccess = me.tier === "founding_buyer" || me.isAdmin;
+  const isPayingPlan = me.planTier === "founding_buyer";
 
   return (
     <div className="relative" ref={wrapRef}>
@@ -153,12 +157,12 @@ export default function AccountMenu({
               <div className="mt-1 flex items-center gap-2">
                 <span
                   className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
-                    isPaid
+                    isPayingPlan
                       ? "bg-[#0f4c81] text-white"
                       : "bg-[#e6eef6] text-[#0f4c81]"
                   }`}
                 >
-                  {isPaid ? dict.planFounding : dict.planFree}
+                  {isPayingPlan ? dict.planFounding : dict.planFree}
                 </span>
               </div>
             </div>
@@ -211,7 +215,7 @@ export default function AccountMenu({
                 {dict.adminConsole}
               </Link>
             )}
-            {!isPaid && (
+            {!hasPaidAccess && (
               <Link
                 href={p("/pricing#founding-buyer")}
                 role="menuitem"

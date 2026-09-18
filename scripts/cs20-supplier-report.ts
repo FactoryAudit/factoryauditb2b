@@ -69,9 +69,11 @@ function read(p: string): string {
   return fs.readFileSync(path.join(ROOT, p), "utf8");
 }
 /** 剥注释：先块注释、再行注释（(^|[^:]) 防切 https://） */
-function stripComments(src: string): string {
-  return src.replace(/\/\*[\s\S]*?\*\//g, "").replace(/(^|[^:])\/\/.*$/gm, "$1");
-}
+// 统一口径：见 scripts/stripComments.ts。
+// 🔴 曾经这里各写一份「先块注释、再行注释」的两段正则 —— 当被扫文件的行注释里含 `/*`
+//    （如 AccountMenu.tsx 的 `// /api/auth/*`），它会吞掉后面整段真实代码，
+//    导致正向断言假 FAIL、反向断言假 PASS。
+import { stripComments } from "./stripComments";
 function countLeaves(obj: unknown): number {
   if (obj === null || typeof obj !== "object") return 1;
   if (Array.isArray(obj)) return obj.reduce<number>((a, x) => a + countLeaves(x), 0);

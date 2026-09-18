@@ -62,12 +62,11 @@ function section(title: string) {
 
 /** 剥掉 TS 注释 —— 注释里提到某个名字不构成"还在用它"。
  *  注意 `(^|[^:])` 这个前缀守卫：URL 里的 `https://` 不能被当成行注释切掉。 */
-function stripComments(text: string): string {
-  return text
-    .replace(/\/\*[\s\S]*?\*\//g, "")
-    .replace(/(^|[^:])\/\/[^\n]*/g, "$1");
-}
-
+// 统一口径：见 scripts/stripComments.ts。
+// 🔴 曾经这里各写一份「先块注释、再行注释」的两段正则 —— 当被扫文件的行注释里含 `/*`
+//    （如 AccountMenu.tsx 的 `// /api/auth/*`），它会吞掉后面整段真实代码，
+//    导致正向断言假 FAIL、反向断言假 PASS。
+import { stripComments } from "./stripComments";
 /** 读源码并**剥掉注释**再判定 —— 注释里提到某个名字不构成"还在用它"。
  *  这条经验来自 CS-05b：安全注释必须点名 paid 字段，曾导致误报 FAIL。
  *  CS-05c-r2 再次踩到：修复说明的注释里引用了 certifications，被判成残留。 */

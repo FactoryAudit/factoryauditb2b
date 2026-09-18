@@ -244,7 +244,21 @@ export function currentPeriodMonth(now: Date = new Date()): string {
 
 export type MeResponse = {
   authenticated: boolean;
+  /**
+   * **访问档位** —— 控制能解锁什么，是权限口径。
+   * 管理员在此被提到 `founding_buyer`（他确实拥有 full access）。
+   */
   tier: MembershipTier;
+  /**
+   * **已购套餐** —— 控制界面上「当前套餐」那一行显示什么，是账单口径。
+   *
+   * 🔴 为什么必须与 `tier` 分开：`tier` 是权限，`planTier` 是「这个人实际买了什么」。
+   * 管理员靠 `isAdmin` 拿到 full access，DB 里 `plan` 仍是 `'free'`。
+   * 若界面拿 `tier` 当套餐显示，就会对着一个从没买过会员的人写
+   * 「当前套餐：Founding Buyer」—— 那是**陈述了一个不存在的套餐**。
+   * 权限可以提，账单不能编。故显示一律用本字段。
+   */
+  planTier: MembershipTier;
 
   // ---- CS-05a：访问模型（客户端判断"该显示什么"的唯一依据）----
   /** basic Supplier Profile 访问模型 */
@@ -285,9 +299,15 @@ export type MeResponse = {
  *   - Founder/Admin→ unlimited（paid intelligence 由既有逻辑控制，本函数不涉及）
  *
  * ⚠️ 本函数**不参与** paid 字段授权 —— 那是 redactSupplier / canAccess 的职责，CS-05 未改。
+ *
+ * `planTier` 与 `tier` 是两个口径，调用方**必须分别传**（不给默认值，
+ * 免得有人忘了传就悄悄把「访问档位」当成「已购套餐」显示出去）：
+ *   - `tier`     = 权限。管理员由 isAdmin 提到 founding_buyer。
+ *   - `planTier` = 账单。管理员就是 DB 里那条记录的档位（通常是 free）。
  */
 export function buildMeResponse(opts: {
   tier: MembershipTier;
+  planTier: MembershipTier;
   profilesUsed: number;
   currentPeriodEnd: string | null;
   email: string | null;
@@ -299,6 +319,7 @@ export function buildMeResponse(opts: {
   return {
     authenticated: isAuthenticated(opts.tier),
     tier: opts.tier,
+    planTier: opts.planTier,
     basicAccess,
     quotaScope: isGuestLimited ? "guest" : "none",
     guestProfileLimit: isGuestLimited ? GUEST_PROFILE_LIMIT : null,

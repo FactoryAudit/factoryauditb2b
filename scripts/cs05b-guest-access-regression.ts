@@ -77,15 +77,11 @@ function read(rel: string): string {
  * （"篡改 localStorage 拿不到 evidence / inspectionHistory / ..."），
  * 不剥注释就会把这段安全说明本身误判成泄漏 —— 是断言的假阳性，不是产品缺陷。
  */
-function stripComments(src: string): string {
-  return src
-    .replace(/\/\*[\s\S]*?\*\//g, "")
-    .split("\n")
-    .filter((l) => !l.trimStart().startsWith("//"))
-    .map((l) => l.replace(/\/\/.*$/, ""))
-    .join("\n");
-}
-
+// 统一口径：见 scripts/stripComments.ts。
+// 🔴 曾经这里各写一份「先块注释、再行注释」的两段正则 —— 当被扫文件的行注释里含 `/*`
+//    （如 AccountMenu.tsx 的 `// /api/auth/*`），它会吞掉后面整段真实代码，
+//    导致正向断言假 FAIL、反向断言假 PASS。
+import { stripComments } from "./stripComments";
 /** 内存假 storage —— 模拟 localStorage / sessionStorage */
 class MemStorage implements StorageLike {
   private m = new Map<string, string>();
@@ -495,10 +491,17 @@ section("10. 解锁链路：UnlockGate / UnlockedValue 接线正确");
 section("11. SEO 不变（SSG / metadata / 不读 cookies）");
 // ---------------------------------------------------------------------------
 {
-  const page = read("app/[locale]/suppliers/[slug]/page.tsx");
+  // 🔴 必须剥注释再判：详情页的说明性注释里**逐字提到了** `await headers()`
+  //（"此前 layout.tsx 的 `await headers()` 把整棵 [locale] 拖成动态"），
+  // 那是历史背景说明，不是代码在调用。不剥就是稳定假 FAIL。
+  // 断言意图不变：**代码里不得调用** cookies()/headers()。断言条数不变。
+  const page = stripComments(read("app/[locale]/suppliers/[slug]/page.tsx"));
   check("详情页仍导出 generateStaticParams", /export async function generateStaticParams/.test(page));
   check("详情页仍导出 generateMetadata", /export async function generateMetadata/.test(page));
-  check("详情页不读 cookies / headers（否则会退化成 Dynamic）", !/cookies\(|headers\(/.test(page));
+  check(
+    "详情页不读 cookies / headers（否则会退化成 Dynamic）",
+    !/\b(cookies|headers)\s*\(/.test(page)
+  );
   check("详情页仍带 data-track-page（supplier_profile_view）", /data-track-page=\{ANALYTICS_EVENTS\.profileView\}/.test(page));
 
   const registerPage = read("app/[locale]/register/page.tsx");

@@ -61,16 +61,14 @@ function section(title: string) {
  *
  * 只删两种注释，避免误伤字符串里的 "https://"：
  *   1) 块注释（含 JSX 的 {/* ... *\/}）
- *   2) trim 后以 // 开头的整行
+ *   2) 行注释（整行与行尾都算）
+ *
+ * ⚠️ 历史：这里曾经是「先按行过滤掉 // 整行注释，再跑块注释正则」。
+ * 它确实躲开了「先块后行」顺序的坑，但仍漏掉**行尾**注释
+ * （`code; // 见 /api/auth/*` 这种）—— 那个 `/*` 会进入块注释阶段。
+ * 2026-09-18 起统一改走 scripts/stripComments.ts 的逐字符状态机。
  */
-// 顺序很关键：**先删行注释，再删块注释**。反过来的话，写在 // 注释里的
-//「斜杠 + 星号」序列会被当成块注释起点，把后面真正要匹配的代码一起吃掉。
-const stripComments = (src: string): string =>
-  src
-    .split(/\r?\n/)
-    .filter((l) => !l.trimStart().startsWith("//"))
-    .join("\n")
-    .replace(/\/\*[\s\S]*?\*\//g, "");
+import { stripComments } from "./stripComments";
 
 const read = (rel: string): string => {
   const p = path.join(ROOT, rel);

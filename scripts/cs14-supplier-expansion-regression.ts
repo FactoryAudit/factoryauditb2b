@@ -43,12 +43,11 @@ function countOf(hay: string, needle: string): number {
 /** 剥掉注释 —— 注释里**引用**旧写法（比如「绝不能用 `risk_score ?? 0`」）不构成"还在用它"。
  *  `(^|[^:])` 前缀守卫：URL 里的 `https://` 不能被当成行注释切掉。
  *  与 cs06a / cs05c / cs05b 同一实现，避免每个脚本各写一版。 */
-function stripComments(text: string): string {
-  return text
-    .replace(/\/\*[\s\S]*?\*\//g, "")
-    .replace(/(^|[^:])\/\/[^\n]*/g, "$1");
-}
-
+// 统一口径：见 scripts/stripComments.ts。
+// 🔴 曾经这里各写一份「先块注释、再行注释」的两段正则 —— 当被扫文件的行注释里含 `/*`
+//    （如 AccountMenu.tsx 的 `// /api/auth/*`），它会吞掉后面整段真实代码，
+//    导致正向断言假 FAIL、反向断言假 PASS。
+import { stripComments } from "./stripComments";
 // ——— 环境（自读 .env，覆盖 process.env） ———
 const fileEnv: Record<string, string> = {};
 try {

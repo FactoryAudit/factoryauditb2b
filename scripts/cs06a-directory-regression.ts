@@ -63,12 +63,11 @@ function section(title: string) {
 /** 剥掉注释 —— 注释里提到旧写法不构成"还在用它"。
  *  `(^|[^:])` 前缀守卫：URL 里的 `https://` 不能被当成行注释切掉。
  *  （这条守卫在 CS-05c-r2 已踩过两次，此处直接沿用。） */
-function stripComments(text: string): string {
-  return text
-    .replace(/\/\*[\s\S]*?\*\//g, "")
-    .replace(/(^|[^:])\/\/[^\n]*/g, "$1");
-}
-
+// 统一口径：见 scripts/stripComments.ts。
+// 🔴 曾经这里各写一份「先块注释、再行注释」的两段正则 —— 当被扫文件的行注释里含 `/*`
+//    （如 AccountMenu.tsx 的 `// /api/auth/*`），它会吞掉后面整段真实代码，
+//    导致正向断言假 FAIL、反向断言假 PASS。
+import { stripComments } from "./stripComments";
 function readSource(rel: string): string {
   return stripComments(fs.readFileSync(path.join(ROOT, rel), "utf8"));
 }
