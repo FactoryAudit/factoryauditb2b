@@ -923,7 +923,7 @@
     "searchButton": "Lieferanten suchen",
     "searchClear": "Zurücksetzen",
     "unlockTitle": "Brauchen Sie tiefere Lieferanten-Intelligenz?",
-    "unlockLead": "Founder Buyer Mitglieder erhalten erweiterte Intelligenz: Evidenzakten, Risikoanalysen, tiefere Fabrikdaten, erweiterte Recherche und Monitoring.",
+    "unlockLead": "Founding Buyer Mitglieder erhalten erweiterte Intelligenz: Evidenzakten, Risikoanalysen, tiefere Fabrikdaten, erweiterte Recherche und Monitoring.",
     "unlockNote": "Grundlegende Lieferanteninformationen sind kostenlos. Evidenzdatensätze, Inspektionsverlauf und Risikoaufschlüsselung sind Teil der Founder-Buyer-Mitgliedschaft.",
     "freeCta": "Kostenloses Konto erstellen",
     "memberCta": "Mitgliedschaft ansehen",
@@ -946,7 +946,7 @@
     "trustNote": "Profile können selbst gemeldete Angaben und öffentliche Daten enthalten. Verifizierungsstatus und Evidenzstufen werden getrennt ausgewiesen. FactoryAuditB2B behandelt Lieferantenangaben nicht als unabhängige Verifizierung.",
     "riskNote": "Risikosignale basieren auf verfügbaren Informationen und Evidenz. Sie ersetzen keine unabhängige Verifizierung oder Vor-Ort-Audit.",
     "svcNote": "Die Lieferantensuche ist kostenlos. Verifizierung und Feldservices sind kostenpflichtig.",
-    "founderCta": "Founder Buyer ansehen",
+    "founderCta": "Founding Buyer ansehen",
     "cardCta": "Lieferant ansehen",
     "faq4q": "Was bedeutet das Risikosignal?",
     "faq4a": "Risikosignale basieren auf verfügbaren Informationen und Evidenz. Sie ersetzen keine unabhängige Verifizierung oder ein Vor-Ort-Audit."
@@ -1251,11 +1251,11 @@
       },
       {
         "h": "Ihre Rechte",
-        "b": "Sie können Auskunft, Berichtigung oder Löschung Ihrer Daten anfragen unter hello@factoryauditb2b.com."
+        "b": "Sie können Auskunft, Berichtigung oder Löschung Ihrer Daten anfragen unter privacy@factoryauditb2b.com."
       },
       {
         "h": "Kontakt",
-        "b": "Fragen zu dieser Erklärung? Schreiben Sie an hello@factoryauditb2b.com."
+        "b": "Fragen zu dieser Erklärung? Schreiben Sie an privacy@factoryauditb2b.com."
       },
       {
         "h": "Kontodaten",
@@ -1296,7 +1296,7 @@
       },
       {
         "h": "Kontakt",
-        "b": "Fragen? Schreiben Sie an hello@factoryauditb2b.com."
+        "b": "Fragen? Schreiben Sie an legal@factoryauditb2b.com."
       },
       {
         "h": "Mitgliedschaft, Abrechnung und Verlängerung",
@@ -1329,7 +1329,7 @@
   },
   "countryPage": {
     "pageTitle": "Lieferantenprüfung und Schulung",
-    "metaDesc": "Prüfen Sie Fabriken und schulen Sie Lieferantenteams in {country}. Audits, Inspektionen und zertifizierte Lieferanten für Käufer, die aus {country} importieren.",
+    "metaDesc": "Prüfen Sie Fabriken und schulen Sie Lieferantenteams in {country}. Audits, Inspektionen und verifizierte Lieferanten für Käufer, die aus {country} importieren.",
     "auditTypesIn": "Verfügbare Audit-Typen in {country}",
     "verifiedSuppliers": "Verifizierte Lieferanten in {country}",
     "ctaTitle": "Schulen Sie Ihre {country}-Lieferanten",
@@ -1406,7 +1406,7 @@
   },
   "pricing": {
     "metaTitle": "Leistungen & Pläne — Kostenlose Tools, Verifizierung, Audit, Monitoring",
-    "metaDesc": "Kostenlose Lieferanten-Tools, Lieferantenverifizierung ab 99 USD, Werksaudits ab 399 USD, Produktinspektion ab 99 USD und Lieferanten-Monitoring im Abonnement. Alle Preise in USD.",
+    "metaDesc": "Kostenlose Lieferanten-Tools, Lieferantenverifizierung ab 99 USD, Werksaudits ab 399 USD, Produktinspektion ab 199 USD und Lieferanten-Monitoring im Abonnement. Alle Preise in USD.",
     "h1": "Leistungen & Pläne",
     "lead": "Die Tools sind kostenlos. Sie zahlen nur, wenn jemand einen Lieferanten vor Ort prüfen soll.",
     "currencyNote": "Alle Preise in USD. Verifizierung und Audit werden pro Projekt angeboten.",
@@ -1490,7 +1490,7 @@
       },
       {
         "name": "Produktinspektion",
-        "range": "USD 99+",
+        "range": "USD 199+",
         "note": "Angebot pro Personentag plus Reisekosten, je nach Land und Umfang."
       },
       {
@@ -2322,7 +2322,7 @@
       "Klare Empfehlung: PASS, FAIL oder REWORK"
     ],
     "pricingTitle": "Preisgestaltung",
-    "pricingLead": "Angabe je Inspektion. Die Kosten hängen von Inspektionsart, Umfang, Standort, Dauer und Verfügbarkeit des Inspektors ab.",
+    "pricingLead": "Preise ab USD 199 pro Mann-Tag. Angebot je Inspektion — der endgültige Preis hängt von Inspektionsart, Umfang, Standort, Dauer und Verfügbarkeit des Inspektors ab.",
     "pricingNote": "Wir veröffentlichen noch keine festen Pakete. Sobald uns echte Bestellungen ehrliche Kostendaten pro Region, Produktkategorie und Phase liefern, bieten wir Standardoptionen an.",
     "pricingCta": "Fordern Sie ein Inspektionsangebot an",
     "faqTitle": "Häufig gestellte Fragen",
@@ -2517,11 +2517,11 @@
       "Vollständigkeitsprüfung der übermittelten Informationen",
       "Dokumentenkonsistenzprüfung (KI-unterstützt)",
       "Zuordnung der Nachweisebene",
-      "Risiko-Score (100-Punkte-, 10-Dimensions-Modell)",
+      "Risiko-Score (100-Punkte-, 8-Dimensions-Modell)",
       "Entscheidung über die menschliche Überprüfung des Lieferantenstatus"
     ],
     "riskTitle": "Lieferantenrisiko-Score",
-    "riskLead": "Wir bewerten jeden Lieferanten nach einem 100-Punkte-Modell in zehn Dimensionen: Unternehmensidentität, Geschäftsinformationen, Fabrikinformationen, Dokumentenkonsistenz, Zertifikatsnachweis, Produktionsfähigkeit, Exporterfahrung, Kontaktprüfung, Auditnachweis und andere Risikoindikatoren.",
+    "riskLead": "Wir bewerten jeden Lieferanten nach einem 100-Punkte-Modell in acht Dimensionen: Unternehmensidentität, Qualitätsmanagement, soziale und regulatorische Compliance, Produktions- und Fertigungsfähigkeit, Lieferkette, Dokumente und Zertifikate, Zertifizierungsauthentizität sowie digitale Fußspuren und Evidenzkonsistenz.",
     "riskBands": [
       "80-100: Geringes Risiko / starkes Profil",
       "60-79: Moderates Risiko",
@@ -3496,7 +3496,52 @@
     "statTotalLeads": "Leads insgesamt",
     "recentLeads": "Neueste Leads",
     "colKind": "Art",
-    "colTool": "Quelle"
+    "colTool": "Quelle",
+    "fieldEnglishName": "Englischer Name",
+    "fieldCompanyType": "Unternehmenstyp",
+    "fieldRegistrationNumber": "Registrierungsnummer",
+    "fieldWebsite": "Website",
+    "fieldCountry": "Land",
+    "fieldProvince": "Bundesland / Staat",
+    "fieldAddress": "Adresse",
+    "fieldProducts": "Produkte",
+    "fieldExportMarkets": "Exportmärkte",
+    "fieldContactPerson": "Kontaktperson",
+    "fieldContactEmail": "Kontakt-E-Mail",
+    "fieldPhone": "Telefon",
+    "fieldWhatsapp": "WhatsApp",
+    "fieldCompanyDescription": "Unternehmensbeschreibung",
+    "colAuthorized": "Autorisiert",
+    "colCreatedAt": "Erstellt",
+    "colUpdatedAt": "Aktualisiert",
+    "filterAll": "Alle",
+    "filterUnpublished": "Nicht veröffentlicht",
+    "filterNotAuthorized": "Nicht autorisiert",
+    "searchPlaceholder": "Name, E-Mail oder Website suchen",
+    "authorizedTitle": "Autorisierung",
+    "authorizedBy": "Autorisiert von",
+    "authorizedAt": "Autorisiert am",
+    "consentVersion": "Einwilligungsversion",
+    "consentAt": "Einwilligungsdatum",
+    "consentIp": "IP-Adresse",
+    "consentUserAgent": "User-Agent",
+    "consentHistoryNote": "Einwilligungsdatensätze sind historisch und können nicht geändert werden.",
+    "publishButton": "Veröffentlichen",
+    "unpublishButton": "Zurückziehen",
+    "publishBlocked": "Veröffentlichung nicht möglich: Der Lieferant hat sein Profil nicht autorisiert.",
+    "orders": {
+      "ordersTitle": "Orders",
+      "ordersLead": "Service orders and their payment status.",
+      "colRef": "Order",
+      "colCreated": "Created",
+      "colEmail": "Email",
+      "ordersSearch": "Search reference, email or company",
+      "actionPaid": "Mark paid",
+      "actionCancel": "Cancel",
+      "actionRefund": "Refund",
+      "empty": "No orders yet.",
+      "updated": "Updated"
+    }
   },
   "evidenceCenter": {
     "sectionVerification": "Verifizierung",
@@ -3593,5 +3638,53 @@
     "complianceLabel": "Was Käufer anfordern",
     "downstreamLabel": "Weiterverwendung",
     "relatedIndustries": "Verwandte Branchen"
+  },
+  "checkout": {
+    "title": "Order received",
+    "lead": "Your service order has been recorded. Keep the reference below for payment and follow-up.",
+    "orderRef": "Order reference",
+    "colService": "Service",
+    "colQuantity": "Quantity",
+    "colAmount": "Amount",
+    "colStatus": "Status",
+    "statusPending": "Awaiting payment",
+    "statusPaid": "Paid",
+    "statusCancelled": "Cancelled",
+    "statusRefunded": "Refunded",
+    "quoted": "To be quoted",
+    "payTitle": "How to pay",
+    "payPaypal": "Pay now with PayPal",
+    "payManualTitle": "Payment instructions",
+    "payManualBody": "Our team will email your order reference and payment instructions within one business day.",
+    "bankTitle": "Bank transfer details",
+    "referenceNote": "Quote this reference in your payment and in any follow-up.",
+    "nextTitle": "What happens next",
+    "nextBody": "We confirm the scope and price with you, then schedule the work once payment is received.",
+    "notFoundTitle": "Order not found",
+    "notFoundBody": "Check the reference in your confirmation email, or contact us and we will look it up.",
+    "svcVerificationBasic": "Supplier verification — basic report",
+    "svcVerificationPro": "Supplier verification — professional due diligence",
+    "svcFactoryAudit": "On-site factory audit",
+    "svcInspection": "Product inspection",
+    "svcMonitoring": "Supplier monitoring",
+    "svcCustom": "Custom scope",
+    "unitPerSupplier": "per supplier",
+    "unitManDay": "per man-day plus travel",
+    "unitQuoted": "quoted per project"
+  },
+  "order": {
+    "title": "Place an order",
+    "lead": "Choose the service and quantity. We confirm the scope and price with you before payment.",
+    "serviceLabel": "Service",
+    "quantityLabel": "Quantity",
+    "emailLabel": "Email",
+    "companyLabel": "Company",
+    "countryLabel": "Country",
+    "notesLabel": "Notes",
+    "notesHint": "Supplier name, factory country and your deadline.",
+    "amountHint": "Prices are indicative. The final price is confirmed by our team before payment.",
+    "submit": "Place order",
+    "submitting": "Placing order…",
+    "errorGeneric": "We could not place the order. Please try again or contact us."
   }
 }

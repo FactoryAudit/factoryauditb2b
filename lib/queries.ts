@@ -106,6 +106,18 @@ export type SupplierView = {
    */
   selfReportedCertificates?: SelfReportedCertificate[];
 
+  // ---- CS-16：注册买家可见的联系方式 / 属地（FREE 层，不进 PUBLIC，符合 CS-12 公开边界）----
+  /** 省份/州 */
+  province?: string;
+  /** 联系人姓名 */
+  contactPerson?: string;
+  /** 联系邮箱 */
+  contactEmail?: string;
+  /** WhatsApp 号码 */
+  whatsapp?: string;
+  /** 公司简介 */
+  companyDescription?: string;
+
   /**
    * PHASE 03（P0 修复）：目录卡片用的**公开核验等级**，
    * 由 CS-02 权威逻辑推导：`publicVerificationLevel(verification_level, hasRealEvent)`，
@@ -233,6 +245,15 @@ type SupplierRow = {
   factory_size: string | null;
   export_since: number | null;
   self_reported_certificates: unknown;
+  // ---- CS-16：非敏感业务字段（注册买家可见，FREE 层）----
+  // 与下方刻意排除的 `profile_authorized` / `contact_visibility` / `phone` 是两回事：
+  // 这些是供应商自述的联系/属地信息，属商业匹配用途，放 FREE 层即可；
+  // 敏感元数据（consent_*/authorized_*/unpublished_*/updated_by 等）不在此列，只走 adminData `select("*")`。
+  province: string | null;
+  contact_person: string | null;
+  contact_email: string | null;
+  whatsapp: string | null;
+  company_description: string | null;
   // 注意：`profile_authorized` / `contact_visibility` / `phone` **刻意不进本类型也不进
   // ROW_SELECT** —— 联系方式属同意书管辖（用户拍板的公开边界只含工商登记级，不含电话）。
   // 把它们排除在类型外，是为了让「谁也没读过这两列」在 TS 层面可见，
@@ -362,6 +383,12 @@ function rowToView(row: SupplierRow): SupplierView {
     // export_since 是 integer；0 / 负数不是合法年份，一律丢弃（009 的 CHECK 只兜 1800–2100）
     exportSince: row.export_since && row.export_since > 0 ? row.export_since : undefined,
     selfReportedCertificates: parseSelfReportedCerts(row.self_reported_certificates),
+    // ---- CS-16：FREE 层联系方式 / 属地 ----
+    province: nz(row.province),
+    contactPerson: nz(row.contact_person),
+    contactEmail: nz(row.contact_email),
+    whatsapp: nz(row.whatsapp),
+    companyDescription: nz(row.company_description),
   };
 }
 

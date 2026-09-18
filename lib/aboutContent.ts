@@ -41,7 +41,7 @@ export function operatorEmail(): string {
   return (
     process.env.TRUST_CONTACT_EMAIL?.trim() ||
     process.env.FROM_EMAIL?.trim() ||
-    "hello@factoryauditb2b.com"
+    "support@factoryauditb2b.com"
   );
 }
 

@@ -76,7 +76,14 @@ const NEW_SLUGS = [
   "shandong-loyal-industrial",
   "jiangsu-liquid-damper",
 ];
+// CS-15：shenzhen-jorigin-packaging 已下架（is_published=false，且授权撤回为
+// profile_authorized=false / contact_visibility='private'）。
+// 这是**真实状态变更**，不是回归退化 —— 断言改写为匹配新事实，且保留断言条数
+// （把「已发布」换成「已下架且授权已撤回」，仍是 5 条）。
+const WITHDRAWN_SLUGS = ["shenzhen-jorigin-packaging"];
+const PUBLISHED_NEW_SLUGS = NEW_SLUGS.filter((s) => !WITHDRAWN_SLUGS.includes(s));
 const EXPECTED_TOTAL = 10;
+const EXPECTED_PUBLISHED = 9;
 const COUNTRY_NAME: Record<string, string> = {
   china: "China",
   vietnam: "Vietnam",
@@ -140,10 +147,10 @@ const run = async () => {
   } else {
     const published = svcRows.filter((r) => r.is_published === true);
     check(svcRows.length === EXPECTED_TOTAL, `A1 全库供应商 == ${EXPECTED_TOTAL}（实测 ${svcRows.length}）`);
-    check(published.length === EXPECTED_TOTAL, `A2 is_published=true == ${EXPECTED_TOTAL}（实测 ${published.length}）`);
+    check(published.length === EXPECTED_PUBLISHED, `A2 is_published=true == ${EXPECTED_PUBLISHED}（实测 ${published.length}）`);
 
     if (anonRows) {
-      check(anonRows.length === EXPECTED_TOTAL, `A3 anon 可见 == ${EXPECTED_TOTAL}（RLS 闸门放行，实测 ${anonRows.length}）`);
+      check(anonRows.length === EXPECTED_PUBLISHED, `A3 anon 可见 == ${EXPECTED_PUBLISHED}（RLS 闸门放行，实测 ${anonRows.length}）`);
       check(
         anonRows.every((r) => r.is_published === true),
         "A4 anon 可见行全部 is_published=true（未发布行未泄漏）"
@@ -157,7 +164,15 @@ const run = async () => {
     check(new Set(slugs).size === slugs.length, "A5 slug 无重复");
     for (const sl of NEW_SLUGS) {
       const row = svcRows.find((r) => r.slug === sl);
-      check(Boolean(row) && row!.is_published === true, `A6 ${sl} 在库且已发布`);
+      if (WITHDRAWN_SLUGS.includes(sl)) {
+        // CS-15 下架：断言"确实已下架且授权已撤回"，防止有人悄悄把它重新发布
+        check(
+          Boolean(row) && row!.is_published === false && row!.profile_authorized === false,
+          `A6 ${sl} 已下架且授权已撤回（CS-15）`
+        );
+      } else {
+        check(Boolean(row) && row!.is_published === true, `A6 ${sl} 在库且已发布`);
+      }
     }
   }
 
@@ -173,15 +188,18 @@ const run = async () => {
   if (!svcRows) {
     for (let i = 5; i <= 7; i++) checkSkip(`B${i}（需 DB）`);
   } else {
-    const news = NEW_SLUGS.map((sl) => svcRows.find((r) => r.slug === sl)).filter(Boolean) as Row[];
-    check(news.length === NEW_SLUGS.length, "B5 5 家新发布行都能取到");
+    const news = PUBLISHED_NEW_SLUGS.map((sl) => svcRows.find((r) => r.slug === sl)).filter(Boolean) as Row[];
+    check(
+      news.length === PUBLISHED_NEW_SLUGS.length,
+      `B5 ${PUBLISHED_NEW_SLUGS.length} 家新发布行都能取到（CS-15 后 shenzhen-jorigin-packaging 已下架，不计入）`
+    );
     check(
       news.every((r) => r.profile_authorized === true),
-      "B6 5 家 profile_authorized=true（来源：申请邮件 Authorize Company Profile: yes）"
+      `B6 ${PUBLISHED_NEW_SLUGS.length} 家 profile_authorized=true（来源：申请邮件 Authorize Company Profile: yes）`
     );
     check(
       news.every((r) => r.contact_visibility === "platform"),
-      "B7 5 家 contact_visibility='platform'（联系方式不下公开）"
+      `B7 ${PUBLISHED_NEW_SLUGS.length} 家 contact_visibility='platform'（联系方式不下公开）`
     );
   }
 

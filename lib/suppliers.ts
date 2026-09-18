@@ -54,7 +54,7 @@ export const PUBLIC_FIELDS = [
   "selfReportedCertificates",
 ] as const;
 
-/** Free 层字段：注册后可见（基础工商信息 + 产能情报） */
+/** Free 层字段：注册后可见（基础工商信息 + 产能情报 + 联系方式） */
 export const FREE_FIELDS = [
   "established",
   "employees",
@@ -65,6 +65,14 @@ export const FREE_FIELDS = [
   "monthlyOutput",
   "factorySize",
   "exportSince",
+  // ---- CS-16：注册买家可见的联系方式 / 属地（非工商登记级，不进 PUBLIC，符合 CS-12 公开边界）----
+  // province 比 city 更粗，且与联系方式同属「注册后才值得暴露」的信息，统一放 FREE 层。
+  "province",
+  // 联系方式是商业匹配用，注册买家可见；严禁进入 PUBLIC 层。
+  "contactPerson",
+  "contactEmail",
+  "whatsapp",
+  "companyDescription",
 ] as const;
 
 /** Paid 层字段：Buyer Membership 可见（证据明细 / 认证明细 / 验货历史 / 风险明细）

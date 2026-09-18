@@ -300,7 +300,7 @@ BUSINESS FACTS (use ONLY these; never invent anything):
 - Free tools: $0, no account needed.
 - Supplier verification: $99 to $129 per supplier, quoted per project.
 - Factory audit: from $399, quoted per man-day plus travel.
-- Product inspection: quoted per man-day.
+- Product inspection: from $199, quoted per man-day plus travel.
 - Supplier monitoring: yearly subscription, quoted per supplier per year.
 - Buyer membership (Founding Buyer): $${MEMBERSHIP_PRICE_USD} per year.
 - Supplier network registration: free. Status and evidence level are decided by human review and are not sold.

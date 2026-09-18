@@ -160,7 +160,7 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
             {t.home.verifyCta}
           </Link>
           <Link
-            href={p("/membership")}
+            href={p("/pricing#founding-buyer")}
             className="text-sm text-[#0f4c81] hover:underline"
             data-track={ANALYTICS_EVENTS.profilePaidCta}
             data-track-value="directory_hero"
@@ -427,7 +427,7 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
             {s.freeCta}
           </Link>
           <Link
-            href={p("/membership")}
+            href={p("/pricing#founding-buyer")}
             className="btn border border-white text-white hover:bg-[#163a5f] font-semibold"
             data-track={ANALYTICS_EVENTS.profilePaidCta}
             data-track-value="directory_founder_block"

@@ -87,8 +87,8 @@ export const ANALYTICS_EVENTS = {
   logout: "logout",
   /** 登录失败（V2.1）：用于观察登录漏斗的卡点，不记录邮箱/密码 */
   loginFailed: "login_failed",
-  membershipView: "membership_page_view",
-  membershipCta: "membership_cta",
+  /** V2.2 §48/§52：/membership 页面已 308 合并进 /pricing（Founding Buyer），原 membership_* 事件退役；
+   *  Founding Buyer 漏斗由 foundingBuyerView / foundingBuyerCheckoutStart / foundingBuyerPurchase 覆盖。 */
   /** 会员软锁 UnlockGate 里的「注册 / 升级」CTA 点击（V2.1） */
   unlockGateCta: "unlock_gate_cta",
   /**
@@ -172,7 +172,7 @@ export const CLICK_LEVEL_EVENTS = [
   ANALYTICS_EVENTS.profileFreeCta,
   ANALYTICS_EVENTS.profilePaidCta,
   ANALYTICS_EVENTS.registerCta,
-  ANALYTICS_EVENTS.membershipCta,
+  // V2.2：原会员页 CTA 事件退役（/membership 已合并进 /pricing），改用 founding_buyer_* 漏斗
   ANALYTICS_EVENTS.unlockGateCta,
   // CS-01：sampleReportCta 已移入 UNWIRED_EVENTS（/sample-report 已 308，无 emitter）
   ANALYTICS_EVENTS.standardReportCtaClick,

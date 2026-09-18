@@ -41,7 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // CS-01：/register 是账户体系页面，与 /login、/account 同类，不应进 sitemap
     //（SEO 规范 §二十五：account / login 类页面不得提交）。此前只有它在 core 列表里
     // 而 /login、/account 不在 ⇒ 三处策略不一致。已移除，并对该页补 noindex。
-    "/membership",
+    // V2.2 §75：/membership 已 301/308 合并进 /pricing，不得继续出现在 sitemap。
     "/pricing",
     // CS-01：/sample-report 已 308 到 /standard-report（两者此前争夺同一批
     //「supplier audit report sample」词）。重定向目标**不能**继续留在 sitemap 里。

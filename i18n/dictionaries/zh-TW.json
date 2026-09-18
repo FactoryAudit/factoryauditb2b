@@ -923,8 +923,8 @@
     "searchButton": "搜尋供應商",
     "searchClear": "清除",
     "unlockTitle": "需要更深入的供應商情報？",
-    "unlockLead": "Founder Buyer 會員可取得增強的供應商情報，包括證據紀錄、風險洞察、更深入的工廠資訊、進階供應商研究與供應商監控。",
-    "unlockNote": "基礎供應商資訊免費瀏覽。證據紀錄、驗貨歷史與風險拆解屬於 Founder Buyer 會員權益。",
+    "unlockLead": "Founding Buyer 會員可取得增強的供應商情報，包括證據紀錄、風險洞察、更深入的工廠資訊、進階供應商研究與供應商監控。",
+    "unlockNote": "基礎供應商資訊免費瀏覽。證據紀錄、驗貨歷史與風險拆解屬於 Founding Buyer 會員權益。",
     "freeCta": "建立免費帳號",
     "memberCta": "查看會員方案",
     "freeNote": "基礎供應商資訊免費瀏覽。",
@@ -946,7 +946,7 @@
     "trustNote": "供應商檔案可能包含供應商自我聲明的資訊與公開資料。驗證狀態與證據等級分開呈現。FactoryAuditB2B 不會將供應商聲明視為獨立驗證。",
     "riskNote": "風險訊號基於目前可得的供應商資訊與證據，不能取代獨立驗證或現場審核。",
     "svcNote": "供應商發掘免費。驗證與現場服務為付費服務。",
-    "founderCta": "了解 Founder Buyer",
+    "founderCta": "了解 Founding Buyer",
     "cardCta": "查看供應商",
     "faq4q": "風險訊號是什麼意思？",
     "faq4a": "風險訊號基於目前可得的供應商資訊與證據，不能取代獨立驗證或現場審核。"
@@ -1251,11 +1251,11 @@
       },
       {
         "h": "您的權利",
-        "b": "您可通過 hello@factoryauditb2b.com 聯繫我們，申請訪問、更正或刪除您的個人數據。"
+        "b": "您可通過 privacy@factoryauditb2b.com 聯繫我們，申請訪問、更正或刪除您的個人數據。"
       },
       {
         "h": "聯繫方式",
-        "b": "對本政策有疑問？請發郵件至 hello@factoryauditb2b.com。"
+        "b": "對本政策有疑問？請發郵件至 privacy@factoryauditb2b.com。"
       },
       {
         "h": "帳號資料",
@@ -1296,7 +1296,7 @@
       },
       {
         "h": "聯繫方式",
-        "b": "有疑問？請發郵件至 hello@factoryauditb2b.com。"
+        "b": "有疑問？請發郵件至 legal@factoryauditb2b.com。"
       },
       {
         "h": "會員、帳單與續費",
@@ -1329,7 +1329,7 @@
   },
   "countryPage": {
     "pageTitle": "供應商驗證與培訓",
-    "metaDesc": "在 {country} 驗廠並培訓供應商團隊。爲從 {country} 進口的買家提供審覈、驗貨與認證供應商。",
+    "metaDesc": "在 {country} 驗廠並培訓供應商團隊。爲從 {country} 進口的買家提供審覈、驗貨與已驗證供應商。",
     "auditTypesIn": "{country} 可提供的審覈類型",
     "verifiedSuppliers": "已驗證的 {country} 供應商",
     "ctaTitle": "培訓您的 {country} 供應商",
@@ -1406,7 +1406,7 @@
   },
   "pricing": {
     "metaTitle": "服務與方案 — 免費工具、供應商核實、驗廠、監控",
-    "metaDesc": "免費的供應商評估工具、99 美元起的供應商核實、399 美元起的工廠驗廠、99 美元起的驗貨，以及訂閱制供應商監控。全部價格以美元計。",
+    "metaDesc": "免費的供應商評估工具、99 美元起的供應商核實、399 美元起的工廠驗廠、199 美元起的驗貨，以及訂閱制供應商監控。全部價格以美元計。",
     "h1": "服務與方案",
     "lead": "工具免費使用。只有當你需要有人到現場查覈供應商時才付費。",
     "currencyNote": "所有價格以美元計。查核與驗廠按專案報價。",
@@ -1490,7 +1490,7 @@
       },
       {
         "name": "產品驗貨",
-        "range": "USD 99+",
+        "range": "USD 199+",
         "note": "按人天計費，另加差旅，視國家與範圍而定。"
       },
       {
@@ -2322,7 +2322,7 @@
       "明確結論：PASS / FAIL / REWORK"
     ],
     "pricingTitle": "定價",
-    "pricingLead": "按單報價。價格取決於驗貨型別、範圍、地點、時長與驗貨員資源。",
+    "pricingLead": "起價 USD 199 / 人天。按單報價——最終價格取決於驗貨型別、範圍、地點、時長與驗貨員資源。",
     "pricingNote": "在真實訂單積累出各地區、各品類、各節點的誠實成本資料之前，我們不釋出固定套餐。",
     "pricingCta": "申請驗貨報價",
     "faqTitle": "常見問題",
@@ -2517,11 +2517,11 @@
       "提交資訊完整性檢查",
       "文件一致性檢查（AI 輔助）",
       "證據級別判定",
-      "風險評分（100 分制，10 個維度）",
+      "風險評分（100 分制，8 個維度）",
       "人工審核決定供應商狀態"
     ],
     "riskTitle": "供應商風險評分",
-    "riskLead": "我們用 100 分制模型為每家供應商評分，涵蓋十個維度：公司身份、經營資訊、工廠資訊、文件一致性、證書證據、生產能力、出口經驗、聯絡方式核驗、審核證據、其他風險指標。",
+    "riskLead": "我們用 100 分制模型為每家供應商評分，涵蓋八個維度：公司身份、品質管理、社會與法規合規、生產與製造能力、供應鏈、文件與證書、證書真實性、數位足跡與證據一致性。",
     "riskBands": [
       "80–100：低風險 / 資料紮實",
       "60–79：中等風險",
@@ -3496,7 +3496,52 @@
     "statTotalLeads": "線索總數",
     "recentLeads": "最近線索",
     "colKind": "類型",
-    "colTool": "來源"
+    "colTool": "來源",
+    "fieldEnglishName": "英文名稱",
+    "fieldCompanyType": "公司類型",
+    "fieldRegistrationNumber": "註冊號",
+    "fieldWebsite": "官網",
+    "fieldCountry": "國家",
+    "fieldProvince": "省/州",
+    "fieldAddress": "地址",
+    "fieldProducts": "產品",
+    "fieldExportMarkets": "出口市場",
+    "fieldContactPerson": "聯絡人",
+    "fieldContactEmail": "聯絡信箱",
+    "fieldPhone": "電話",
+    "fieldWhatsapp": "WhatsApp",
+    "fieldCompanyDescription": "公司簡介",
+    "colAuthorized": "已授權",
+    "colCreatedAt": "建立時間",
+    "colUpdatedAt": "更新時間",
+    "filterAll": "全部",
+    "filterUnpublished": "未發布",
+    "filterNotAuthorized": "未授權",
+    "searchPlaceholder": "搜尋名稱、信箱或官網",
+    "authorizedTitle": "授權",
+    "authorizedBy": "授權人",
+    "authorizedAt": "授權時間",
+    "consentVersion": "同意條款版本",
+    "consentAt": "同意日期",
+    "consentIp": "IP 位址",
+    "consentUserAgent": "使用者代理",
+    "consentHistoryNote": "同意記錄為歷史留痕，不可修改。",
+    "publishButton": "發布",
+    "unpublishButton": "下架",
+    "publishBlocked": "無法發布：該供應商未授權公開其檔案。",
+    "orders": {
+      "ordersTitle": "訂單",
+      "ordersLead": "服務訂單及其付款狀態。",
+      "colRef": "訂單編號",
+      "colCreated": "建立時間",
+      "colEmail": "信箱",
+      "ordersSearch": "搜尋訂單編號、信箱或公司",
+      "actionPaid": "標記已付款",
+      "actionCancel": "取消",
+      "actionRefund": "退款",
+      "empty": "暫無訂單。",
+      "updated": "已更新"
+    }
   },
   "evidenceCenter": {
     "sectionVerification": "平台核驗",
@@ -3593,5 +3638,53 @@
     "complianceLabel": "買家索取什麼",
     "downstreamLabel": "下游應用",
     "relatedIndustries": "相關行業"
+  },
+  "checkout": {
+    "title": "訂單已送出",
+    "lead": "您的服務訂單已記錄。請保留下方訂單編號，用於付款與後續溝通。",
+    "orderRef": "訂單編號",
+    "colService": "服務",
+    "colQuantity": "數量",
+    "colAmount": "金額",
+    "colStatus": "狀態",
+    "statusPending": "待付款",
+    "statusPaid": "已付款",
+    "statusCancelled": "已取消",
+    "statusRefunded": "已退款",
+    "quoted": "待報價",
+    "payTitle": "付款方式",
+    "payPaypal": "使用 PayPal 立即付款",
+    "payManualTitle": "付款指引",
+    "payManualBody": "我們的團隊將在一個工作日內透過郵件寄送訂單編號與付款指引。",
+    "bankTitle": "銀行電匯資訊",
+    "referenceNote": "付款與後續溝通時請註明該訂單編號。",
+    "nextTitle": "下一步",
+    "nextBody": "我們會與您確認服務範圍與價格，收到款項後安排執行。",
+    "notFoundTitle": "找不到訂單",
+    "notFoundBody": "請核對確認郵件中的訂單編號，或聯繫我們協助查詢。",
+    "svcVerificationBasic": "供應商核驗 — 基礎報告",
+    "svcVerificationPro": "供應商核驗 — 專業盡調報告",
+    "svcFactoryAudit": "現場驗廠審核",
+    "svcInspection": "產品驗貨",
+    "svcMonitoring": "供應商持續監控",
+    "svcCustom": "客製服務範圍",
+    "unitPerSupplier": "每家供應商",
+    "unitManDay": "每人天，另加差旅",
+    "unitQuoted": "按專案報價"
+  },
+  "order": {
+    "title": "送出訂單",
+    "lead": "選擇服務與數量。付款前我們會與您確認服務範圍與價格。",
+    "serviceLabel": "服務",
+    "quantityLabel": "數量",
+    "emailLabel": "信箱",
+    "companyLabel": "公司",
+    "countryLabel": "國家",
+    "notesLabel": "備註",
+    "notesHint": "供應商名稱、工廠所在國家與您的時間要求。",
+    "amountHint": "價格為參考區間。最終價格由我們的團隊在付款前與您確認。",
+    "submit": "送出訂單",
+    "submitting": "送出中…",
+    "errorGeneric": "訂單送出失敗，請重試或聯絡我們。"
   }
 }

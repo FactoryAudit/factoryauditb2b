@@ -115,9 +115,11 @@ export default function SiteFooter({
               </Link>
             </li>
             <li>
-              <Link href={p("/membership")} className="hover:text-white">
-                {dict.membership}
-              </Link>
+            {/* V2.2 §48/§52：Membership 已合并进 Pricing（Founding Buyer 选项）。
+                内部导航统一指向 /pricing#founding-buyer，不再单独维护 /membership。 */}
+            <Link href={p("/pricing#founding-buyer")} className="hover:text-white">
+              {dict.membership}
+            </Link>
             </li>
             <li>
               <Link href={p("/join-supplier-network")} className="hover:text-white">
@@ -230,10 +232,10 @@ export default function SiteFooter({
         {/* 域名邮箱做信任背书。邮箱地址本身是标识符、不是文案，9 语通用，故不进词典。
             WhatsApp 是询盘主渠道（见 Coverage 栏），这里给不装 WhatsApp 的访客留一条路。 */}
         <a
-          href="mailto:hello@factoryauditb2b.com"
+          href="mailto:support@factoryauditb2b.com"
           className="mb-3 inline-block text-[#cbd5e1] underline decoration-[#94a3b8] hover:text-white hover:decoration-white"
         >
-          hello@factoryauditb2b.com
+          support@factoryauditb2b.com
         </a>
         <SocialLinks className="mb-4 justify-center" />
         {dict.copyright}

@@ -5,6 +5,8 @@ import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { ANALYTICS_EVENTS } from "@/lib/analytics";
+import CheckoutButton from "@/components/CheckoutButton";
+import { MEMBERSHIP_PRICE_USD } from "@/lib/suppliers";
 
 const PATH = "/pricing";
 
@@ -37,6 +39,7 @@ export default async function PricingPage({
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
   const p = t.pricing;
+  const m = t.membership;
   const lp = (href: string) => localePath(locale, href);
 
   const jsonLd = [
@@ -138,6 +141,41 @@ export default async function PricingPage({
         <Link href={lp("/custom-services")} className="btn btn-primary mt-4 inline-block">
           {p.alsoCta}
         </Link>
+        {/* CS-17：商业化入口。与「人工对接」并列，让已有购买意向的用户能直接下单，
+            而不是只能留线索等回电。文案复用 order 命名空间，不新增字典键。 */}
+        <Link
+          href={lp("/order")}
+          className="btn btn-primary mt-4 ml-3 inline-block bg-[#0f4c81] text-white"
+        >
+          {t.order.title}
+        </Link>
+      </section>
+
+      {/* V2.2 §13：Founding Buyer 作为 Pricing 下的选项，带 #founding-buyer 锚点。
+          Membership 不再独立成页；内部导航统一指向 /pricing#founding-buyer（spec §48/§52）。 */}
+      <section id="founding-buyer" className="mt-14 rounded-lg border border-[#0f4c81] p-6">
+        <h2 className="font-semibold text-[#0f172a]">{m.h1}</h2>
+        <p className="text-sm text-[#64748b] mt-2">{m.lead}</p>
+        <p className="text-2xl font-extrabold text-[#0f4c81] my-3">
+          ${MEMBERSHIP_PRICE_USD}
+          <span className="text-base font-normal text-[#64748b]">/ {m.pricePeriod}</span>
+        </p>
+        <ul className="text-sm text-[#475569] space-y-1 mb-4">
+          {m.benefits.slice(0, 4).map((b: string) => (
+            <li key={b}>✓ {b}</li>
+          ))}
+        </ul>
+        <CheckoutButton
+          locale={locale}
+          returnTo="/pricing"
+          dict={{
+            cta: m.cta,
+            submitting: m.checkoutSubmitting ?? m.cta,
+            errorGeneric: m.checkoutError ?? "",
+          }}
+          className="btn btn-primary w-full"
+        />
+        <p className="mt-3 text-xs text-[#64748b]">{m.paymentNote}</p>
       </section>
 
       <section className="mt-14">

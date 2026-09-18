@@ -57,7 +57,7 @@ async function sendMailSmtp({ to, subject, text, html }: NotifyInput): Promise<b
   }
   try {
     const info = await t.sendMail({
-      from: process.env.FROM_EMAIL || "hello@factoryauditb2b.com",
+      from: process.env.FROM_EMAIL || "support@factoryauditb2b.com",
       to,
       subject,
       text,
@@ -91,7 +91,7 @@ async function sendMailHttp({ to, subject, text, html }: NotifyInput): Promise<b
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: process.env.FROM_EMAIL || "FactoryAuditB2B <hello@factoryauditb2b.com>",
+        from: process.env.FROM_EMAIL || "FactoryAuditB2B <support@factoryauditb2b.com>",
         to: [to],
         subject,
         text,
@@ -472,6 +472,101 @@ export async function notifyPaymentFailed(data: {
       "Your saved suppliers and RFQ history stay on your account either way.",
       "",
       "If you believe this is a mistake, reply to this email.",
+      "",
+      "FactoryAuditB2B",
+    ].join("\n"),
+  });
+}
+
+// ---------- CS-17 Commerce V1：服务订单双邮件 ----------
+
+/**
+ * 管理员通知：新服务订单。
+ *
+ * 与 notifyAdminNewLead 的区别（所以不复用）：
+ *   订单带**金额与收款方式**，是财务口径而不是线索口径 ——
+ *   运营要拿它去对账、去核销，必须一眼看到 ORD 号、金额、状态。
+ *
+ * 文案铁律：只陈述已发生的事实，不承诺交付时效（时效由人工确认后再回）。
+ */
+export async function notifyAdminNewOrder(order: {
+  referenceId: string;
+  serviceName: string;
+  amountText: string | null;
+  quantity: number;
+  email: string;
+  company?: string | null;
+  country?: string | null;
+  supplierSlug?: string | null;
+  locale?: string | null;
+  provider?: string | null;
+}): Promise<boolean> {
+  const adminEmail = process.env.NOTIFY_ADMIN_EMAIL;
+  if (!adminEmail) {
+    console.log("[notify] NOTIFY_ADMIN_EMAIL 未配置，跳过新订单通知");
+    return false;
+  }
+  const line = (label: string, val?: string | null) => (val ? `${label}: ${val}` : null);
+  const body = [
+    `Order: ${order.referenceId}`,
+    "",
+    "— Service Order —",
+    line("Service", order.serviceName),
+    line("Quantity", String(order.quantity)),
+    line("Amount", order.amountText ?? "To be quoted"),
+    line("Status", "pending_payment"),
+    line("Payment channel", order.provider ?? "not selected yet"),
+    "",
+    "— Buyer —",
+    line("Email", order.email),
+    line("Company", order.company),
+    line("Country", order.country),
+    line("Supplier", order.supplierSlug),
+    line("Locale", order.locale),
+    "",
+    "Next steps: confirm scope and price with the buyer, then mark the order as paid in the admin console once payment arrives.",
+  ]
+    .filter(Boolean)
+    .join("\n");
+  return sendMail({
+    to: adminEmail,
+    subject: `[FactoryAuditB2B] New Order ${order.referenceId}`,
+    text: body,
+  });
+}
+
+/**
+ * 客户订单回执。
+ *
+ * 必须让客户拿到**订单号**——他要把它抄进电汇附言，也靠它追问进度。
+ * 措辞铁律：不写"已付款"、不承诺交付时效；金额若是待报价就明说 To be quoted，
+ * 绝不用 0 或占位数字顶替。
+ */
+export async function notifyCustomerOrderReceived(order: {
+  referenceId: string;
+  serviceName: string;
+  amountText: string | null;
+  quantity: number;
+  email: string;
+  locale?: string | null;
+}): Promise<boolean> {
+  if (!order.email) return false;
+  const lang = order.locale && order.locale !== "en" ? `/${order.locale}` : "";
+  return sendMail({
+    to: order.email,
+    subject: `We received your order ${order.referenceId} — FactoryAuditB2B`,
+    text: [
+      "Thank you. We have received your order.",
+      "",
+      `Order reference : ${order.referenceId}`,
+      `Service         : ${order.serviceName}`,
+      `Quantity        : ${order.quantity}`,
+      `Amount          : ${order.amountText ?? "To be quoted"}`,
+      "",
+      "Our team will confirm the scope and send payment instructions within one business day.",
+      "Please quote the order reference above in your payment and in any follow-up.",
+      "",
+      `Order status: https://factoryauditb2b.com${lang}/checkout/${order.referenceId}`,
       "",
       "FactoryAuditB2B",
     ].join("\n"),

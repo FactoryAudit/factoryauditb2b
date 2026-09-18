@@ -12,6 +12,7 @@
 //   集中后，每个渠道的 webhook 只负责"验签 + 归一化"，剩下全走这里。
 
 import { createAdminClient } from "../supabaseAdmin";
+import { markOrderPaidByProvider } from "../orders";
 import { paypalChannel } from "./paypal";
 import type {
   CurrencyCode,
@@ -233,6 +234,14 @@ export async function handleWebhook(
 
   // 3) 无关事件（normalize 阶段已过滤，这里兜底）
   if (!ev.kind) return { status: 200, reason: "ignored" };
+
+  // 3.5) CS-17：服务订单核销。
+  //   服务订单不需要登录，custom_id 里放的是订单号 ORD-XXXXXX 而不是 userId。
+  //   靠前缀区分两条业务线，避免"给会员开通"和"给订单置已付"互相误伤。
+  if (ev.kind === "activated" && ev.userId && ev.userId.startsWith("ORD-")) {
+    const paid = await markOrderPaidByProvider(ev.userId, ev.provider, ev.providerRef);
+    return { status: 200, reason: paid ? "order_paid" : "order_not_found" };
+  }
 
   // 4) 落到 memberships
   await applyMembershipEvent(ev);

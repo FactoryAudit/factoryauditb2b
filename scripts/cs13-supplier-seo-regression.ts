@@ -59,7 +59,7 @@ function leaves(obj: unknown, prefix = "", out: Leaf[] = []): Leaf[] {
 
 const LOCALES = ["en", "zh", "zh-TW", "ja", "es", "de", "fr", "pt", "ar"];
 /** 单一事实源：与 cs06a C8 / cs08 G4,G5 / cs12 E4,E5 / verify-opennext-bundle 同源 */
-const EN_LEAF_COUNT = 2735;
+const EN_LEAF_COUNT = 2822;
 
 async function main() {
   console.log("=".repeat(60));
@@ -436,16 +436,16 @@ async function main() {
   const badScoreLabel = LOCALES.filter((l) => /risk[\s-]?score/i.test(JSON.parse(read(`i18n/dictionaries/${l}.json`)).suppliers.riskLabel));
   check("F1h 九语 riskLabel 均不再表述为「risk score」", badScoreLabel.length === 0, badScoreLabel.join(","));
   for (const [f, pat] of [
-    ["scripts/cs06a-directory-regression.ts", "baseKeys.length === 2735"],
-    ["scripts/cs08-form-regression.ts", "leafCounts[0] === 2735"],
-    ["scripts/cs12-profile-regression.ts", "enLeaf === 2735"],
-    ["scripts/verify-opennext-bundle.mjs", "cnt !== 2735"],
+    ["scripts/cs06a-directory-regression.ts", "baseKeys.length === 2822"],
+    ["scripts/cs08-form-regression.ts", "leafCounts[0] === 2822"],
+    ["scripts/cs12-profile-regression.ts", "enLeaf === 2822"],
+    ["scripts/verify-opennext-bundle.mjs", "cnt !== 2822"],
   ] as const) {
-    check(`F1i ${f} 的叶子数常量仍为 2735（五处同源）`, read(f).includes(pat));
+    check(`F1i ${f} 的叶子数常量仍为 2822（五处同源）`, read(f).includes(pat));
   }
   check(
     "F1j verify-opennext-bundle 的期望值文本未被弱化",
-    read("scripts/verify-opennext-bundle.mjs").includes("(期望 2735)")
+    read("scripts/verify-opennext-bundle.mjs").includes("(期望 2822)")
   );
 
   console.log("\n=== F2. 字段分层 / 迁移 / 历史（本轮零越界） ===");
@@ -458,7 +458,7 @@ async function main() {
     return ((arr.slice(start, end).match(/"/g) || []).length / 2);
   };
   check("F2a PUBLIC_FIELDS 仍 21 项", countOf(supLib, "export const PUBLIC_FIELDS") === 21, String(countOf(supLib, "export const PUBLIC_FIELDS")));
-  check("F2b FREE_FIELDS 仍 8 项", countOf(supLib, "export const FREE_FIELDS") === 8, String(countOf(supLib, "export const FREE_FIELDS")));
+  check("F2b FREE_FIELDS 仍 13 项（4 basic + 4 产能 + 5 CS-16 联系/属地）", countOf(supLib, "export const FREE_FIELDS") === 13, String(countOf(supLib, "export const FREE_FIELDS")));
   check("F2c PAID_FIELDS 仍 4 项", countOf(supLib, "export const PAID_FIELDS") === 4, String(countOf(supLib, "export const PAID_FIELDS")));
   const migDir = path.join(ROOT, "supabase/migrations");
   const migs = fs.readdirSync(migDir).filter((f) => f.endsWith(".sql"));

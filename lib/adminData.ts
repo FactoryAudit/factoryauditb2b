@@ -124,19 +124,46 @@ export type AdminSupplierRow = {
   access_tier: string;
   is_published: boolean;
   updated_at: string;
+  // ---- CS-16：列表所需的额外列 ----
+  english_name: string | null;
+  website: string | null;
+  contact_email: string | null;
+  profile_authorized: boolean | null;
+  created_at: string | null;
+  province: string | null;
 };
 
-export async function listAdminSuppliers(): Promise<AdminSupplierRow[]> {
+export type ListSuppliersFilter = {
+  search?: string;
+  published?: "all" | "published" | "unpublished";
+  authorized?: "all" | "authorized" | "not_authorized";
+};
+
+export async function listAdminSuppliers(
+  filter: ListSuppliersFilter = {}
+): Promise<AdminSupplierRow[]> {
   const db = createAdminClient();
   if (!db) return [];
   try {
-    const { data, error } = await db
+    let q = db
       .from("suppliers")
       .select(
-        "id, slug, legal_name, country_code, city, industry_code, risk_score, verification_status, access_tier, is_published, updated_at"
+        "id, slug, legal_name, country_code, city, industry_code, risk_score, verification_status, access_tier, is_published, updated_at, english_name, website, contact_email, profile_authorized, created_at, province"
       )
       .order("updated_at", { ascending: false })
       .limit(500);
+
+    if (filter.search && filter.search.trim()) {
+      const s = `%${filter.search.trim()}%`;
+      q = q.or(`legal_name.ilike.${s},contact_email.ilike.${s},website.ilike.${s}`);
+    }
+    if (filter.published === "published") q = q.eq("is_published", true);
+    else if (filter.published === "unpublished") q = q.eq("is_published", false);
+    if (filter.authorized === "authorized") q = q.eq("profile_authorized", true);
+    else if (filter.authorized === "not_authorized")
+      q = q.or("profile_authorized.is.null,profile_authorized.eq.false");
+
+    const { data, error } = await q;
     if (error) {
       console.error("[adminData] list suppliers failed", error.message);
       return [];
@@ -150,6 +177,20 @@ export async function listAdminSuppliers(): Promise<AdminSupplierRow[]> {
 
 export type AdminSupplierDetail = AdminSupplierRow & {
   business_type: string | null;
+  company_type: string | null;
+  registration_number: string | null;
+  address: string | null;
+  contact_person: string | null;
+  phone: string | null;
+  whatsapp: string | null;
+  company_description: string | null;
+  authorized_at: string | null;
+  authorized_by: string | null;
+  consent_version: string | null;
+  consent_ip: string | null;
+  consent_user_agent: string | null;
+  unpublished_at: string | null;
+  unpublished_by: string | null;
   established: number | null;
   employees: string | null;
   main_products: string[];
@@ -195,11 +236,25 @@ export async function updateAdminSupplier(
   slug: string,
   patch: Partial<{
     legal_name: string;
+    english_name: string;
+    company_type: string;
+    registration_number: string;
+    website: string | null;
+    country_code: string;
+    province: string;
     city: string;
+    address: string;
     industry_code: string;
     business_type: string;
     established: number;
     employees: string;
+    main_products: string[];
+    export_markets: string[];
+    contact_person: string;
+    contact_email: string;
+    phone: string;
+    whatsapp: string;
+    company_description: string;
     verification_status: string;
     risk_score: number;
     audit_status: string;
@@ -212,6 +267,12 @@ export async function updateAdminSupplier(
       | "platform_assessment"
       | "on_site_audit"
       | "third_party_audit";
+    // CS-16：授权/发布/审计元数据（仅后台白名单可写，绝不来自公开路径）
+    authorized_at: string | null;
+    authorized_by: string | null;
+    updated_by: string;
+    unpublished_at: string | null;
+    unpublished_by: string | null;
   }>
 ): Promise<boolean> {
   const db = createAdminClient();
@@ -226,6 +287,46 @@ export async function updateAdminSupplier(
   } catch (e) {
     console.error("[adminData] update supplier exception", e);
     return false;
+  }
+}
+
+// ---------- 供应商 Consent 历史（CS-16） ----------
+
+export type SupplierConsentRow = {
+  id: string;
+  supplier_id: string;
+  user_id: string | null;
+  consent_type: string;
+  consent_version: string;
+  consent_given: boolean;
+  consent_timestamp: string;
+  ip_address: string | null;
+  user_agent: string | null;
+};
+
+/**
+ * 取该供应商最近一条 consent 记录（supplier_consents 表，仅 service_role 可读）。
+ * 用于后台编辑页的 Authorization 区块展示「Consent date / IP / User agent」。
+ * 无记录返回 null（不崩）。
+ */
+export async function getLatestSupplierConsent(
+  slug: string
+): Promise<SupplierConsentRow | null> {
+  const id = await supplierIdBySlug(slug);
+  if (!id) return null;
+  const db = createAdminClient();
+  if (!db) return null;
+  try {
+    const { data, error } = await db
+      .from("supplier_consents")
+      .select("*")
+      .eq("supplier_id", id)
+      .order("consent_timestamp", { ascending: false })
+      .limit(1);
+    if (error || !data || data.length === 0) return null;
+    return data[0] as SupplierConsentRow;
+  } catch {
+    return null;
   }
 }
 
@@ -751,7 +852,8 @@ export async function logAdminAction(
   action: string,
   targetType: "document" | "certification" | "audit" | "supplier",
   targetId: string,
-  diff?: Record<string, unknown>
+  diff?: Record<string, unknown>,
+  opts?: { ipAddress?: string | null; notes?: string | null }
 ): Promise<void> {
   const db = createAdminClient();
   if (!db) return;
@@ -763,6 +865,9 @@ export async function logAdminAction(
       target_type: targetType,
       target_id: targetId,
       diff: diff ?? null,
+      // CS-16：扩展列 ip_address / notes（迁移 016），记录操作来源 IP 与备注
+      ip_address: opts?.ipAddress ?? null,
+      notes: opts?.notes ?? null,
     });
   } catch (e) {
     console.error("[adminData] audit log failed", e);

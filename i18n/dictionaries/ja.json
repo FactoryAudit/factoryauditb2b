@@ -923,8 +923,8 @@
     "searchButton": "サプライヤーを検索",
     "searchClear": "クリア",
     "unlockTitle": "より深いサプライヤー情報が必要ですか？",
-    "unlockLead": "Founder Buyer メンバーは、証拠記録、リスク分析、詳細な工場情報、高度なリサーチ、サプライヤーモニタリングを含む強化情報を利用できます。",
-    "unlockNote": "基本的なサプライヤー情報は無料で閲覧できます。証拠記録、検査履歴、リスク内訳は Founder Buyer 会員の対象です。",
+    "unlockLead": "Founding Buyer メンバーは、証拠記録、リスク分析、詳細な工場情報、高度なリサーチ、サプライヤーモニタリングを含む強化情報を利用できます。",
+    "unlockNote": "基本的なサプライヤー情報は無料で閲覧できます。証拠記録、検査履歴、リスク内訳は Founding Buyer 会員の対象です。",
     "freeCta": "無料アカウント作成",
     "memberCta": "会員プランを見る",
     "freeNote": "基本的なサプライヤー情報は無料でご覧いただけます。",
@@ -946,7 +946,7 @@
     "trustNote": "サプライヤープロフィールには自己申告情報や公開データが含まれる場合があります。検証ステータスと証拠レベルは別々に表示されます。FactoryAuditB2B はサプライヤーの申告を独立した検証とはみなしません。",
     "riskNote": "リスクシグナルは現在入手可能な情報と証拠に基づくもので、独立した検証や実地監査の代わりにはなりません。",
     "svcNote": "サプライヤーの探索は無料です。検証および現場サービスは有料です。",
-    "founderCta": "Founder Buyer を見る",
+    "founderCta": "Founding Buyer を見る",
     "cardCta": "サプライヤーを見る",
     "faq4q": "リスクシグナルとは何ですか？",
     "faq4a": "リスクシグナルは現在入手可能な情報と証拠に基づくもので、独立した検証や実地監査の代わりにはなりません。"
@@ -1251,11 +1251,11 @@
       },
       {
         "h": "あなたの権利",
-        "b": "お客様は、hello@factoryauditb2b.comで当社に連絡することにより、お客様の個人データの要求、訂正、または削除にアクセスすることができます。"
+        "b": "お客様は、privacy@factoryauditb2b.comで当社に連絡することにより、お客様の個人データの要求、訂正、または削除にアクセスすることができます。"
       },
       {
         "h": "お問い合わせ",
-        "b": "本方針に関するお問い合わせ Eメール:hello@factoryauditb2b.com."
+        "b": "本方針に関するお問い合わせ Eメール:privacy@factoryauditb2b.com."
       },
       {
         "h": "アカウントデータ",
@@ -1296,7 +1296,7 @@
       },
       {
         "h": "お問い合わせ",
-        "b": "お問い合わせ 電子メール hello@factoryauditb2b.com."
+        "b": "お問い合わせ 電子メール legal@factoryauditb2b.com."
       },
       {
         "h": "会員・請求・更新について",
@@ -1329,7 +1329,7 @@
   },
   "countryPage": {
     "pageTitle": "サプライヤー検証とトレーニング",
-    "metaDesc": "{country} で工場を検証し、サプライヤーチームをトレーニングします。{country} から輸入するバイヤー向けの監査、検品、認定サプライヤーを提供します。",
+    "metaDesc": "{country} で工場を検証し、サプライヤーチームをトレーニングします。{country} から輸入するバイヤー向けの監査、検品、検証済みサプライヤーを提供します。",
     "auditTypesIn": "{country} で利用可能な監査タイプ",
     "verifiedSuppliers": "検証済みの {country} サプライヤー",
     "ctaTitle": "あなたの {country} サプライヤーをトレーニングする",
@@ -1406,7 +1406,7 @@
   },
   "pricing": {
     "metaTitle": "サービスとプラン — 無料ツール、ベンダー検証、監査、モニタリング",
-    "metaDesc": "無料のサプライヤー評価ツール、99米ドルからのサプライヤー検証、399米ドルからの工場監査、99米ドルからの製品検査、サブスクリプション型のサプライヤーモニタリング。すべての価格は米ドル表示です。",
+    "metaDesc": "無料のサプライヤー評価ツール、99米ドルからのサプライヤー検証、399米ドルからの工場監査、199米ドルからの製品検査、サブスクリプション型のサプライヤーモニタリング。すべての価格は米ドル表示です。",
     "h1": "サービスと料金プラン",
     "lead": "ツールは無料です。現地でサプライヤーを確認する必要があるときだけお支払いください。",
     "currencyNote": "すべて米ドル建てです。核查と監査は案件ごとに見積もります。",
@@ -1490,7 +1490,7 @@
       },
       {
         "name": "製品検品",
-        "range": "USD 99+",
+        "range": "USD 199+",
         "note": "国と範囲に応じて、人日単位の料金に交通費を加算します。"
       },
       {
@@ -2322,7 +2322,7 @@
       "明確な勧告: PASS、FAILまたはREWORK"
     ],
     "pricingTitle": "コンテンツ",
-    "pricingLead": "点検ごとの引用。 費用は点検タイプ、規模、位置、持続期間および検査官の可用性によって決まります。",
+    "pricingLead": "価格はUSD 199 / 人日から。点検ごとの見積もり——最終価格は点検タイプ、規模、場所、期間および検査官の可用性により決まります。",
     "pricingNote": "固定パッケージは公開していません。 実際の注文が地域、製品カテゴリ、ステージごとの正直なコストデータを与えると、標準オプションを提供します。",
     "pricingCta": "点検引用を要求して下さい",
     "faqTitle": "よくある質問",
@@ -2382,7 +2382,7 @@
   "auditGuide": {
     "breadcrumb": "監査ガイド",
     "metaTitle": "{country}の{type}監査",
-    "metaDesc": "{country}の{type}監査・検査・認定サプライヤーを探す。FactoryAuditB2B の検証済み工場ディレクトリ、RFQ、監査依頼。",
+    "metaDesc": "{country}の{type}監査・検査・検証済みサプライヤーを探す。FactoryAuditB2B の検証済み工場ディレクトリ、RFQ、監査依頼。",
     "h1": "{country}の{type}監査",
     "ownerLabel": "発行・管理機関：",
     "standardsTitle": "関連規格と認証",
@@ -2517,11 +2517,11 @@
       "提出された情報の完全な確認",
       "文書の一貫性チェック(AI-assisted)",
       "証拠レベルの割り当て",
-      "リスクスコア(100点、10次元モデル)",
+      "リスクスコア(100点、8次元モデル)",
       "サプライヤーの状態の人間の検討の決定"
     ],
     "riskTitle": "サプライヤーリスクスコア",
-    "riskLead": "会社のアイデンティティ、ビジネス情報、工場情報、文書の一貫性、証明書の証拠、生産能力、輸出経験、連絡先の検証、監査証拠、およびその他のリスクインジケーターの100ポイントモデルの各サプライヤーをスコアします。",
+    "riskLead": "各サプライヤーを100ポイントモデルで、会社のアイデンティティ、品質管理、社会および法規制コンプライアンス、生産および製造能力、サプライチェーン、文書と証明書、証明書の真正性、デジタルフットプリントと証拠の一貫性の8つの次元からスコアします。",
     "riskBands": [
       "80–100: 低い危険/強いプロフィール",
       "60～79: 適度リスク",
@@ -3496,7 +3496,52 @@
     "statTotalLeads": "リード総数",
     "recentLeads": "最近のリード",
     "colKind": "種別",
-    "colTool": "送信元"
+    "colTool": "送信元",
+    "fieldEnglishName": "英語名",
+    "fieldCompanyType": "企業タイプ",
+    "fieldRegistrationNumber": "登録番号",
+    "fieldWebsite": "ウェブサイト",
+    "fieldCountry": "国",
+    "fieldProvince": "州・省",
+    "fieldAddress": "住所",
+    "fieldProducts": "製品",
+    "fieldExportMarkets": "輸出市場",
+    "fieldContactPerson": "担当者",
+    "fieldContactEmail": "連絡先メール",
+    "fieldPhone": "電話",
+    "fieldWhatsapp": "WhatsApp",
+    "fieldCompanyDescription": "会社概要",
+    "colAuthorized": "認可済み",
+    "colCreatedAt": "作成日",
+    "colUpdatedAt": "更新日",
+    "filterAll": "すべて",
+    "filterUnpublished": "未公開",
+    "filterNotAuthorized": "未認可",
+    "searchPlaceholder": "名前・メール・ウェブサイトで検索",
+    "authorizedTitle": "認可",
+    "authorizedBy": "認可者",
+    "authorizedAt": "認可日",
+    "consentVersion": "同意バージョン",
+    "consentAt": "同意日",
+    "consentIp": "IP アドレス",
+    "consentUserAgent": "ユーザーエージェント",
+    "consentHistoryNote": "同意記録は履歴として保存され、変更できません。",
+    "publishButton": "公開する",
+    "unpublishButton": "非公開にする",
+    "publishBlocked": "公開できません：このサプライヤーはプロフィールの公開を認可していません。",
+    "orders": {
+      "ordersTitle": "Orders",
+      "ordersLead": "Service orders and their payment status.",
+      "colRef": "Order",
+      "colCreated": "Created",
+      "colEmail": "Email",
+      "ordersSearch": "Search reference, email or company",
+      "actionPaid": "Mark paid",
+      "actionCancel": "Cancel",
+      "actionRefund": "Refund",
+      "empty": "No orders yet.",
+      "updated": "Updated"
+    }
   },
   "evidenceCenter": {
     "sectionVerification": "プラットフォーム検証",
@@ -3593,5 +3638,53 @@
     "complianceLabel": "買い手が求める書類",
     "downstreamLabel": "用途分野",
     "relatedIndustries": "関連業界"
+  },
+  "checkout": {
+    "title": "Order received",
+    "lead": "Your service order has been recorded. Keep the reference below for payment and follow-up.",
+    "orderRef": "Order reference",
+    "colService": "Service",
+    "colQuantity": "Quantity",
+    "colAmount": "Amount",
+    "colStatus": "Status",
+    "statusPending": "Awaiting payment",
+    "statusPaid": "Paid",
+    "statusCancelled": "Cancelled",
+    "statusRefunded": "Refunded",
+    "quoted": "To be quoted",
+    "payTitle": "How to pay",
+    "payPaypal": "Pay now with PayPal",
+    "payManualTitle": "Payment instructions",
+    "payManualBody": "Our team will email your order reference and payment instructions within one business day.",
+    "bankTitle": "Bank transfer details",
+    "referenceNote": "Quote this reference in your payment and in any follow-up.",
+    "nextTitle": "What happens next",
+    "nextBody": "We confirm the scope and price with you, then schedule the work once payment is received.",
+    "notFoundTitle": "Order not found",
+    "notFoundBody": "Check the reference in your confirmation email, or contact us and we will look it up.",
+    "svcVerificationBasic": "Supplier verification — basic report",
+    "svcVerificationPro": "Supplier verification — professional due diligence",
+    "svcFactoryAudit": "On-site factory audit",
+    "svcInspection": "Product inspection",
+    "svcMonitoring": "Supplier monitoring",
+    "svcCustom": "Custom scope",
+    "unitPerSupplier": "per supplier",
+    "unitManDay": "per man-day plus travel",
+    "unitQuoted": "quoted per project"
+  },
+  "order": {
+    "title": "Place an order",
+    "lead": "Choose the service and quantity. We confirm the scope and price with you before payment.",
+    "serviceLabel": "Service",
+    "quantityLabel": "Quantity",
+    "emailLabel": "Email",
+    "companyLabel": "Company",
+    "countryLabel": "Country",
+    "notesLabel": "Notes",
+    "notesHint": "Supplier name, factory country and your deadline.",
+    "amountHint": "Prices are indicative. The final price is confirmed by our team before payment.",
+    "submit": "Place order",
+    "submitting": "Placing order…",
+    "errorGeneric": "We could not place the order. Please try again or contact us."
   }
 }

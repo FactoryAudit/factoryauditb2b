@@ -49,6 +49,10 @@ export default async function AdminLayout({ children, params }: Props) {
     { href: "/admin/suppliers", label: a.navSuppliers },
     { href: "/admin/rfqs", label: a.navRfqs },
     { href: "/admin/leads", label: a.navLeads },
+    // CS-17：订单。标签复用 admin.orders.ordersTitle，不为内部导航再补 9 语键
+    { href: "/admin/orders", label: a.orders.ordersTitle },
+    // CS-18：审核工作流后台。标签用双语常量，不为内部导航补 9 语键（后台单人、noindex）
+    { href: "/admin/audits", label: locale === "zh" || locale === "zh-TW" ? "验厂工单" : "Audits" },
     { href: "/admin/members", label: a.navMembers },
     { href: "/admin/pending-review", label: t.evidenceCenter.adminNavPending },
     // 「标准报告样张」标签取双语常量，不为 1 个内部标签补 9 语翻译

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
-import AuditRequestPanel from "@/components/AuditRequestPanel";
+import AuditRequestPanel, { type SupplierOption } from "@/components/AuditRequestPanel";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { hreflangFor, canonicalFor } from "@/i18n/hreflang";
+import { listSupplierDirectory } from "@/lib/queries";
+import { auditRequestFormPhrases } from "@/lib/auditI18n";
 
 const PATH = "/factory-audit/request";
 type Props = { params: Promise<{ locale: string }> };
@@ -27,6 +29,11 @@ export default async function Page({ params }: Props) {
   const t = await getDictionary(locale);
   const s = t.auditRequest;
   const p = (href: string) => localePath(locale, href);
+
+  // 已发布供应商列表：作为真实审核请求（audits.supplier_id FK）的来源。
+  // 失败静默退化为空数组（表单仍可提交，但无供应商可选 —— 与「先询盘后成交」一致）。
+  const supplierViews = await listSupplierDirectory().catch(() => []);
+  const suppliers: SupplierOption[] = supplierViews.map((v) => ({ id: v.id, name: v.legalName }));
 
   // 八维 key 必须与 lib/riskEngine 的维度一致，顺序即 chips 展示顺序
   const DIM_KEYS = [
@@ -83,6 +90,8 @@ export default async function Page({ params }: Props) {
           levelLabels={t.risk.ui.level}
           dimensionOptions={dimensionOptions}
           auditTypeLabels={s.form.auditTypes}
+          suppliers={suppliers}
+          reqT={auditRequestFormPhrases(locale)}
         />
       </section>
     </main>

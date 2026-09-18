@@ -1074,8 +1074,8 @@
     "searchButton": "搜索供应商",
     "searchClear": "清除",
     "unlockTitle": "需要更深入的供应商情报？",
-    "unlockLead": "Founder Buyer 会员可获取增强的供应商情报，包括证据记录、风险洞察、更深入的工厂信息、高级供应商研究与供应商监控。",
-    "unlockNote": "基础供应商信息免费浏览。证据记录、验货历史与风险拆解属于 Founder Buyer 会员权益。",
+    "unlockLead": "Founding Buyer 会员可获取增强的供应商情报，包括证据记录、风险洞察、更深入的工厂信息、高级供应商研究与供应商监控。",
+    "unlockNote": "基础供应商信息免费浏览。证据记录、验货历史与风险拆解属于 Founding Buyer 会员权益。",
     "freeCta": "创建免费账号",
     "memberCta": "查看会员方案",
     "freeNote": "基础供应商信息免费浏览。",
@@ -1097,7 +1097,7 @@
     "trustNote": "供应商档案可能包含供应商自我声明的信息与公开数据。核验状态与证据等级分开呈现。FactoryAuditB2B 不会将供应商声明视为独立核验。",
     "riskNote": "风险信号基于当前可得的供应商信息与证据，不能替代独立核验或现场审核。",
     "svcNote": "供应商发现免费。核验与现场服务为付费服务。",
-    "founderCta": "了解 Founder Buyer",
+    "founderCta": "了解 Founding Buyer",
     "cardCta": "查看供应商",
     "faq4q": "风险信号是什么意思？",
     "faq4a": "风险信号基于当前可得的供应商信息与证据，不能替代独立核验或现场审核。"
@@ -1727,11 +1727,11 @@
       },
       {
         "h": "您的权利",
-        "b": "您可通过 hello@factoryauditb2b.com 联系我们，申请访问、更正或删除您的个人数据。"
+        "b": "您可通过 privacy@factoryauditb2b.com 联系我们，申请访问、更正或删除您的个人数据。"
       },
       {
         "h": "联系方式",
-        "b": "对本政策有疑问？请发邮件至 hello@factoryauditb2b.com。"
+        "b": "对本政策有疑问？请发邮件至 privacy@factoryauditb2b.com。"
       },
       {
         "h": "账号数据",
@@ -1772,7 +1772,7 @@
       },
       {
         "h": "联系方式",
-        "b": "有疑问？请发邮件至 hello@factoryauditb2b.com。"
+        "b": "有疑问？请发邮件至 legal@factoryauditb2b.com。"
       },
       {
         "h": "会员、账单与续费",
@@ -1805,7 +1805,7 @@
   },
   "countryPage": {
     "pageTitle": "供应商验证与培训",
-    "metaDesc": "在 {country} 验厂并培训供应商团队。为从 {country} 采购的买家与向全球出口的制造商提供审核、验货与认证供应商。",
+    "metaDesc": "在 {country} 验厂并培训供应商团队。为从 {country} 采购的买家与向全球出口的制造商提供审核、验货与已验证供应商。",
     "auditTypesIn": "{country} 可提供的审核类型",
     "verifiedSuppliers": "已验证的 {country} 供应商",
     "ctaTitle": "培训您的 {country} 供应商",
@@ -1882,7 +1882,7 @@
   },
   "pricing": {
     "metaTitle": "服务与方案 — 免费工具、供应商核查、验厂、监控",
-    "metaDesc": "免费的供应商评估工具、99 美元起的供应商核查、399 美元起的工厂验厂、99 美元起的验货，以及订阅制供应商监控。全部价格以美元计。",
+    "metaDesc": "免费的供应商评估工具、99 美元起的供应商核查、399 美元起的工厂验厂、199 美元起的验货，以及订阅制供应商监控。全部价格以美元计。",
     "h1": "服务与方案",
     "lead": "工具免费使用。只有当你需要有人到现场核查供应商时才付费。",
     "currencyNote": "全部价格以美元计。核查与验厂按项目报价。",
@@ -1966,7 +1966,7 @@
       },
       {
         "name": "产品验货",
-        "range": "USD 99+",
+        "range": "USD 199+",
         "note": "按人天计费，另加差旅，视国家与范围而定。"
       },
       {
@@ -2322,7 +2322,7 @@
       "明确结论：PASS / FAIL / REWORK"
     ],
     "pricingTitle": "定价",
-    "pricingLead": "按单报价。价格取决于验货类型、范围、地点、时长与验货员资源。",
+    "pricingLead": "起价 USD 199 / 人天。按单报价——最终价格取决于验货类型、范围、地点、时长与验货员资源。",
     "pricingNote": "在真实订单积累出各地区、各品类、各节点的诚实成本数据之前，我们不发布固定套餐。",
     "pricingCta": "申请验货报价",
     "faqTitle": "常见问题",
@@ -2517,11 +2517,11 @@
       "提交信息完整性检查",
       "文件一致性检查（AI 辅助）",
       "证据级别判定",
-      "风险评分（100 分制，10 个维度）",
+      "风险评分（100 分制，8 个维度）",
       "人工审核决定供应商状态"
     ],
     "riskTitle": "供应商风险评分",
-    "riskLead": "我们用 100 分制模型为每家供应商评分，覆盖十个维度：公司身份、经营信息、工厂信息、文件一致性、证书证据、生产能力、出口经验、联系方式核验、审核证据、其他风险指标。",
+    "riskLead": "我们用 100 分制模型为每家供应商评分，覆盖八个维度：公司身份、质量管理、社会与法规合规、生产与制造能力、供应链、文件与证书、证书真实性、数字足迹与证据一致性。",
     "riskBands": [
       "80–100：低风险 / 资料扎实",
       "60–79：中等风险",
@@ -3496,7 +3496,52 @@
     "statTotalLeads": "线索总数",
     "recentLeads": "最近线索",
     "colKind": "类型",
-    "colTool": "来源"
+    "colTool": "来源",
+    "fieldEnglishName": "英文名",
+    "fieldCompanyType": "公司类型",
+    "fieldRegistrationNumber": "注册号",
+    "fieldWebsite": "官网",
+    "fieldCountry": "国家",
+    "fieldProvince": "省/州",
+    "fieldAddress": "地址",
+    "fieldProducts": "产品",
+    "fieldExportMarkets": "出口市场",
+    "fieldContactPerson": "联系人",
+    "fieldContactEmail": "联系邮箱",
+    "fieldPhone": "电话",
+    "fieldWhatsapp": "WhatsApp",
+    "fieldCompanyDescription": "公司简介",
+    "colAuthorized": "已授权",
+    "colCreatedAt": "创建时间",
+    "colUpdatedAt": "更新时间",
+    "filterAll": "全部",
+    "filterUnpublished": "未发布",
+    "filterNotAuthorized": "未授权",
+    "searchPlaceholder": "搜索名称、邮箱或官网",
+    "authorizedTitle": "授权",
+    "authorizedBy": "授权人",
+    "authorizedAt": "授权时间",
+    "consentVersion": "同意条款版本",
+    "consentAt": "同意日期",
+    "consentIp": "IP 地址",
+    "consentUserAgent": "用户代理",
+    "consentHistoryNote": "同意记录为历史留痕，不可修改。",
+    "publishButton": "发布",
+    "unpublishButton": "下架",
+    "publishBlocked": "无法发布：该供应商未授权公开其档案。",
+    "orders": {
+      "ordersTitle": "订单",
+      "ordersLead": "服务订单及其付款状态。",
+      "colRef": "订单号",
+      "colCreated": "创建时间",
+      "colEmail": "邮箱",
+      "ordersSearch": "搜索订单号、邮箱或公司",
+      "actionPaid": "标记已付款",
+      "actionCancel": "取消",
+      "actionRefund": "退款",
+      "empty": "暂无订单。",
+      "updated": "已更新"
+    }
   },
   "evidenceCenter": {
     "sectionVerification": "平台核验",
@@ -3593,5 +3638,53 @@
     "complianceLabel": "买家索取什么",
     "downstreamLabel": "下游应用",
     "relatedIndustries": "相关行业"
+  },
+  "checkout": {
+    "title": "订单已提交",
+    "lead": "您的服务订单已记录。请保留下方订单号，用于付款与后续沟通。",
+    "orderRef": "订单号",
+    "colService": "服务",
+    "colQuantity": "数量",
+    "colAmount": "金额",
+    "colStatus": "状态",
+    "statusPending": "待付款",
+    "statusPaid": "已付款",
+    "statusCancelled": "已取消",
+    "statusRefunded": "已退款",
+    "quoted": "待报价",
+    "payTitle": "付款方式",
+    "payPaypal": "使用 PayPal 立即付款",
+    "payManualTitle": "付款指引",
+    "payManualBody": "我们的团队将在一个工作日内通过邮件发送订单号与付款指引。",
+    "bankTitle": "银行电汇信息",
+    "referenceNote": "付款与后续沟通时请注明该订单号。",
+    "nextTitle": "下一步",
+    "nextBody": "我们会与您确认服务范围与价格，收到款项后安排执行。",
+    "notFoundTitle": "未找到订单",
+    "notFoundBody": "请核对确认邮件中的订单号，或联系我们协助查询。",
+    "svcVerificationBasic": "供应商核验 — 基础报告",
+    "svcVerificationPro": "供应商核验 — 专业尽调报告",
+    "svcFactoryAudit": "现场验厂审核",
+    "svcInspection": "产品验货",
+    "svcMonitoring": "供应商持续监控",
+    "svcCustom": "定制服务范围",
+    "unitPerSupplier": "每家供应商",
+    "unitManDay": "每人天，另加差旅",
+    "unitQuoted": "按项目报价"
+  },
+  "order": {
+    "title": "提交订单",
+    "lead": "选择服务与数量。付款前我们会与您确认服务范围与价格。",
+    "serviceLabel": "服务",
+    "quantityLabel": "数量",
+    "emailLabel": "邮箱",
+    "companyLabel": "公司",
+    "countryLabel": "国家",
+    "notesLabel": "备注",
+    "notesHint": "供应商名称、工厂所在国家与您的时间要求。",
+    "amountHint": "价格为参考区间。最终价格由我们的团队在付款前与您确认。",
+    "submit": "提交订单",
+    "submitting": "提交中…",
+    "errorGeneric": "订单提交失败，请重试或联系我们。"
   }
 }

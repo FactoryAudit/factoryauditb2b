@@ -38,7 +38,7 @@ type Props = {
 export default function CheckoutButton({
   locale,
   dict,
-  returnTo = "/membership",
+  returnTo = "/pricing",
   className,
 }: Props) {
   const router = useRouter();

@@ -134,8 +134,10 @@ const missingFields = REGISTRATION_FIELDS.filter((k) => !new RegExp(`"${k}"`).te
 check(`D8 既有 ${REGISTRATION_FIELDS.length} 个入驻字段白名单逐条仍在`, missingFields.length === 0, missingFields.join(","));
 check("D9 白名单新增 certificatesJson（结构化证书）", routeSrc.includes('"certificatesJson"'));
 check(
-  "D10 入驻路径响应契约：supplierId 仍在（CS-02D 增补 referenceId / stored，向后兼容）",
-  routeSrc.includes("supplierId: id, referenceId, stored: saved.stored")
+  "D10 入驻路径响应契约：supplierId / referenceId / stored 仍在（CS-02D 增补，向后兼容；CS-16F 在其后追加 draftSlug/draftId）",
+  routeSrc.includes("supplierId: id") &&
+    routeSrc.includes("referenceId,") &&
+    routeSrc.includes("stored: saved.stored")
 );
 
 // 限流必须仍在解析 body 之前（fail-open 前置于一切 IO）
@@ -208,8 +210,8 @@ for (const loc of LOCALES) {
   leafCounts.push(lv.length);
 }
 check("G3 九语叶子数完全一致", new Set(leafCounts).size === 1, leafCounts.join("/"));
-check("G4 叶子数 = 2735（与 cs06a C8 常量同源；再改字典必须两处同改）", leafCounts[0] === 2735, `实际 ${leafCounts[0]}`);
-check("G5 cs06a 回归里的 C8 常量已同步为 2735", read("scripts/cs06a-directory-regression.ts").includes("baseKeys.length === 2735"));
+check("G4 叶子数 = 2822（与 cs06a C8 常量同源；再改字典必须两处同改）", leafCounts[0] === 2822, `实际 ${leafCounts[0]}`);
+check("G5 cs06a 回归里的 C8 常量已同步为 2822", read("scripts/cs06a-directory-regression.ts").includes("baseKeys.length === 2822"));
 
 console.log("\n============================================================");
 if (fail === 0) {

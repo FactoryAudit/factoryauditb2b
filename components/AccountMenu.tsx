@@ -193,7 +193,7 @@ export default function AccountMenu({
             </Link>
             {!isPaid && (
               <Link
-                href={p("/membership")}
+                href={p("/pricing#founding-buyer")}
                 role="menuitem"
                 className="block rounded-md px-3 py-2 text-sm font-medium text-[#0f4c81] hover:bg-[#e6eef6]"
                 onClick={() => setOpen(false)}

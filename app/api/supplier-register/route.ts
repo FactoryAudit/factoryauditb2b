@@ -4,6 +4,9 @@ import { insertLead } from "@/lib/leads";
 import { leadScore } from "@/lib/leadScore";
 import { CERTIFICATION_REQUEST_FIELDS, CERTIFICATION_REQUEST_KIND } from "@/lib/supplierNetwork";
 import { checkRateLimit, clientIp, clamp } from "@/lib/rateLimit";
+import { createAdminClient } from "@/lib/supabaseAdmin";
+import { COVERAGE_COUNTRIES } from "@/lib/coverage";
+import { slugify } from "@/lib/supplierCreate";
 
 // Supplier Network V1.0：供应商免费入驻表单统一入口。
 //
@@ -32,6 +35,185 @@ function maxFieldLength(key: string): number {
   if (MEDIUM_TEXT_FIELDS.has(key)) return 500;
   if (key.includes("Address")) return 500;
   return 300;
+}
+
+// =============================================================================
+// CS-16F：注册成功后落库供应商草稿 + 授权留痕
+//   三个写入均走 service_role（BYPASSRLS），且不阻断成功响应（失败仅记录日志）。
+//   IP/UA 服务端取，绝不信任客户端提交。
+// =============================================================================
+const SUPPLIER_CONSENT_VERSION = "1.0";
+
+function parseList(s: string | undefined, max = 100): string[] {
+  if (!s) return [];
+  return s
+    .split(/[,\n，、;；]/)
+    .map((x) => x.trim())
+    .filter(Boolean)
+    .slice(0, max);
+}
+
+function toIntInRange(s: string | undefined, lo: number, hi: number): number | null {
+  if (!s) return null;
+  const n = Number(s);
+  if (!Number.isFinite(n)) return null;
+  const t = Math.trunc(n);
+  if (t < lo || t > hi) return null;
+  return t;
+}
+
+// factoryCountry 是自由文本，归一化为 coverage country code；无法识别降级 "unknown"（草稿未发布，admin 发布前会修正）。
+async function resolveCountryCode(raw: string | undefined): Promise<string> {
+  const v = (raw || "").trim();
+  if (!v) return "unknown";
+  const lower = v.toLowerCase();
+  const hit = COVERAGE_COUNTRIES.find(
+    (c) => c.code === lower || c.name.toLowerCase() === lower
+  );
+  if (hit) return hit.code;
+  return slugify(v) || "unknown";
+}
+
+// 生成不重复的 slug（slug 唯一约束兜底）：base → base-2 → ... → base-<time36>
+async function uniqueSlug(base: string): Promise<string> {
+  const root = slugify(base) || "supplier";
+  const db = createAdminClient();
+  if (!db) return root;
+  for (let i = 0; i < 5; i++) {
+    const cand = i === 0 ? root : `${root}-${i}`;
+    const { data } = await db.from("suppliers").select("slug").eq("slug", cand).maybeSingle();
+    if (!data) return cand;
+  }
+  return `${root}-${Date.now().toString(36)}`;
+}
+
+function parseCertsJson(s: string | undefined): unknown[] | null {
+  if (!s) return null;
+  try {
+    const v = JSON.parse(s);
+    return Array.isArray(v) ? v : null;
+  } catch {
+    return null;
+  }
+}
+
+type DraftInput = {
+  companyName: string;
+  englishName?: string;
+  companyType?: string;
+  registrationNumber?: string;
+  website?: string;
+  factoryCountry?: string;
+  factoryCity?: string;
+  factoryAddress?: string;
+  employees?: string;
+  factorySize?: string;
+  establishedYear?: string;
+  mainProducts?: string;
+  productionCapacity?: string;
+  monthlyOutput?: string;
+  exportMarkets?: string;
+  exportSince?: string;
+  contactName?: string;
+  contactEmail?: string;
+  contactPhone?: string;
+  contactWhatsapp?: string;
+  contactVisibility?: string;
+  certificatesJson?: string;
+  consentGiven: boolean;
+  ip: string;
+  ua: string | null;
+};
+
+/**
+ * 创建 suppliers 草稿行 + 写 supplier_consents + 写 admin_audit_log(consent_submitted)。
+ * 任一写入失败仅记录日志，不抛出（不阻断注册成功响应）。
+ * 返回 { id, slug } 或 null。
+ */
+async function createSupplierDraft(input: DraftInput): Promise<{ id: string; slug: string } | null> {
+  const db = createAdminClient();
+  if (!db) return null;
+
+  const slug = await uniqueSlug(input.companyName);
+  const legalName = clamp(input.companyName, 200) ?? "";
+  const city = clamp(input.factoryCity, 120) || "unknown";
+  if (!legalName) return null;
+
+  const websiteRaw = clamp(input.website, 400);
+  const website = websiteRaw && /^https?:\/\/.+/i.test(websiteRaw) ? websiteRaw : null;
+  const emailRaw = (input.contactEmail || "").toLowerCase();
+  const contactEmail = emailRaw && EMAIL_RE.test(emailRaw) ? emailRaw : null;
+  const consentGiven = input.consentGiven;
+  const visibility = ["public", "platform", "private"].includes(input.contactVisibility || "")
+    ? input.contactVisibility
+    : null;
+  const certs = parseCertsJson(input.certificatesJson);
+
+  const row = {
+    slug,
+    legal_name: legalName,
+    country_code: await resolveCountryCode(input.factoryCountry),
+    city,
+    english_name: clamp(input.englishName, 200),
+    company_type: clamp(input.companyType, 120),
+    registration_number: clamp(input.registrationNumber, 120),
+    website,
+    address: clamp(input.factoryAddress, 400),
+    employees: clamp(input.employees, 64),
+    factory_size: clamp(input.factorySize, 64),
+    production_capacity: clamp(input.productionCapacity, 200),
+    monthly_output: clamp(input.monthlyOutput, 200),
+    established: toIntInRange(input.establishedYear, 1800, 2100),
+    export_since: toIntInRange(input.exportSince, 1800, 2100),
+    main_products: parseList(input.mainProducts),
+    export_markets: parseList(input.exportMarkets),
+    contact_person: clamp(input.contactName, 120),
+    contact_email: contactEmail,
+    phone: clamp(input.contactPhone, 64),
+    whatsapp: clamp(input.contactWhatsapp, 64),
+    contact_visibility: visibility,
+    self_reported_certificates: certs,
+    is_published: false,
+    profile_authorized: consentGiven,
+    consent_version: SUPPLIER_CONSENT_VERSION,
+    consent_ip: input.ip,
+    consent_user_agent: input.ua,
+    verification_level: "unverified",
+    access_tier: "public",
+    inspection_history: 0,
+  };
+
+  const { data, error } = await db.from("suppliers").insert(row).select("id").maybeSingle();
+  if (error || !data) {
+    console.error("[api/supplier-register] draft insert failed", error?.message ?? "no data");
+    return null;
+  }
+  const supplierId = (data as { id: string }).id;
+
+  const { error: cErr } = await db.from("supplier_consents").insert({
+    supplier_id: supplierId,
+    consent_type: "supplier_profile",
+    consent_version: SUPPLIER_CONSENT_VERSION,
+    consent_given: consentGiven,
+    consent_timestamp: new Date().toISOString(),
+    ip_address: input.ip,
+    user_agent: input.ua,
+  });
+  if (cErr) console.error("[api/supplier-register] consent insert failed", cErr.message);
+
+  const { error: aErr } = await db.from("admin_audit_log").insert({
+    actor_id: null,
+    actor_email: contactEmail,
+    action: "consent_submitted",
+    target_type: "supplier",
+    target_id: supplierId,
+    diff: { consent_version: SUPPLIER_CONSENT_VERSION, consent_given: consentGiven },
+    ip_address: input.ip,
+    notes: "supplier registration consent",
+  });
+  if (aErr) console.error("[api/supplier-register] audit insert failed", aErr.message);
+
+  return { id: supplierId, slug };
 }
 
 // 白名单校验：只保留已声明字段，防止任意键注入邮件正文
@@ -160,6 +342,39 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: false, error: "authorization required" }, { status: 400 });
     }
 
+    // CS-16F：服务端取 UA（IP 已在限流处取过）。落库草稿 + 授权留痕（best-effort，不阻断成功响应）。
+    const ua = req.headers.get("user-agent") || null;
+    const draft = await createSupplierDraft({
+      companyName: f.companyName,
+      englishName: f.englishName,
+      companyType: f.companyType,
+      registrationNumber: f.registrationNumber,
+      website: f.website,
+      factoryCountry: f.factoryCountry,
+      factoryCity: f.factoryCity,
+      factoryAddress: f.factoryAddress,
+      employees: f.employees,
+      factorySize: f.factorySize,
+      establishedYear: f.establishedYear,
+      mainProducts: f.mainProducts,
+      productionCapacity: f.productionCapacity,
+      monthlyOutput: f.monthlyOutput,
+      exportMarkets: f.exportMarkets,
+      exportSince: f.exportSince,
+      contactName: f.contactName,
+      contactEmail: f.contactEmail,
+      contactPhone: f.contactPhone,
+      contactWhatsapp: f.contactWhatsapp,
+      contactVisibility: f.contactVisibility,
+      certificatesJson: f.certificatesJson,
+      consentGiven: f.authorizeCompanyProfile === "yes",
+      ip,
+      ua,
+    });
+    if (draft) {
+      console.log(`[api/supplier-register] draft created slug=${draft.slug} id=${draft.id}`);
+    }
+
     const id = crypto.randomUUID();
 
     // 落库（kind=supplier_application）。payload 存白名单后的全量字段，
@@ -196,7 +411,14 @@ export async function POST(req: NextRequest) {
       notifySupplierReceived({ email, companyName: f.companyName, id: referenceId ?? id }),
     ]);
 
-    return NextResponse.json({ ok: true, supplierId: id, referenceId, stored: saved.stored });
+    return NextResponse.json({
+      ok: true,
+      supplierId: id,
+      referenceId,
+      stored: saved.stored,
+      draftSlug: draft?.slug ?? null,
+      draftId: draft?.id ?? null,
+    });
   } catch (e) {
     console.error("supplier register failed", e);
     return NextResponse.json({ ok: false, error: "save failed" }, { status: 500 });

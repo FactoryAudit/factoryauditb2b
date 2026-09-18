@@ -7,7 +7,7 @@ import {
   findDuplicateSupplier,
   logAdminAction,
 } from "@/lib/adminData";
-import { checkRateLimit, clamp } from "@/lib/rateLimit";
+import { checkRateLimit, clamp, clientIp } from "@/lib/rateLimit";
 import { validateSupplierCreateInput } from "@/lib/supplierCreate";
 
 // PATCH /api/admin/suppliers —— 更新供应商（白名单字段）
@@ -36,6 +36,22 @@ function toInt(v: unknown): number | null {
   if (v === null || v === "" || v === undefined) return null;
   const n = Number(v);
   return Number.isFinite(n) ? Math.trunc(n) : null;
+}
+
+/** 将逗号/分号/换行分隔字符串或字符串数组归一为 string[]（去空白、去空）。 */
+function toStrArray(v: unknown): string[] | null {
+  if (Array.isArray(v)) {
+    const arr = (v as unknown[]).map(String).map((s) => s.trim()).filter(Boolean);
+    return arr.length ? arr : null;
+  }
+  if (typeof v === "string" && v.trim()) {
+    const arr = v
+      .split(/[,，、;；\n]/)
+      .map((s) => s.trim())
+      .filter(Boolean);
+    return arr.length ? arr : null;
+  }
+  return null;
 }
 
 export async function PATCH(req: Request) {
@@ -81,6 +97,8 @@ export async function PATCH(req: Request) {
     );
   }
 
+  const ip = clientIp(req);
+
   // ---- 白名单构造 patch ----
   const patch: Parameters<typeof updateAdminSupplier>[1] = {};
 
@@ -118,9 +136,43 @@ export async function PATCH(req: Request) {
   if (typeof body.access_tier === "string" && TIERS.has(body.access_tier)) {
     patch.access_tier = body.access_tier as "public" | "free" | "paid";
   }
-  if (typeof body.is_published === "boolean") {
-    patch.is_published = body.is_published;
+
+  // ---- CS-16：新增可编辑字段白名单 ----
+  if (typeof body.english_name === "string")
+    patch.english_name = clamp(body.english_name, 200) ?? "";
+  if (typeof body.company_type === "string")
+    patch.company_type = clamp(body.company_type, 120) ?? "";
+  if (typeof body.registration_number === "string")
+    patch.registration_number = clamp(body.registration_number, 120) ?? "";
+  if (typeof body.website === "string") {
+    const w = clamp(body.website, 400);
+    // 允许清空（null）或合法 http(s) URL；其它值丢弃，避免污染
+    if (!w) patch.website = null;
+    else if (/^https?:\/\/.+/i.test(w)) patch.website = w;
   }
+  if (typeof body.country_code === "string") {
+    const c = clamp(body.country_code, 64);
+    if (c && /^[a-z][a-z-]{1,63}$/.test(c)) patch.country_code = c;
+  }
+  if (typeof body.province === "string")
+    patch.province = clamp(body.province, 120) ?? "";
+  if (typeof body.address === "string")
+    patch.address = clamp(body.address, 400) ?? "";
+
+  const mp = toStrArray(body.main_products);
+  if (mp) patch.main_products = mp;
+  const em = toStrArray(body.export_markets);
+  if (em) patch.export_markets = em;
+
+  if (typeof body.contact_person === "string")
+    patch.contact_person = clamp(body.contact_person, 120) ?? "";
+  if (typeof body.contact_email === "string")
+    patch.contact_email = clamp(body.contact_email, 200) ?? "";
+  if (typeof body.phone === "string") patch.phone = clamp(body.phone, 64) ?? "";
+  if (typeof body.whatsapp === "string")
+    patch.whatsapp = clamp(body.whatsapp, 64) ?? "";
+  if (typeof body.company_description === "string")
+    patch.company_description = clamp(body.company_description, 2000) ?? "";
 
   // 平台核验等级（spec §2）。白名单五档，防止写入任意字符串触发 CHECK 报错。
   if (
@@ -131,20 +183,68 @@ export async function PATCH(req: Request) {
       body.verification_level as Parameters<typeof updateAdminSupplier>[1]["verification_level"];
   }
 
+  // ---- 发布闸门（规格七）：发布前必须已授权；未授权 → 422 ----
+  let publishAction: "supplier.published" | "supplier.unpublished" | null = null;
+  if (typeof body.is_published === "boolean") {
+    if (body.is_published === true) {
+      if (existing.profile_authorized !== true) {
+        return NextResponse.json(
+          { ok: false, error: "not_authorized", message: "profile not authorized" },
+          { status: 422, headers: NO_STORE }
+        );
+      }
+      patch.is_published = true;
+      patch.unpublished_at = null;
+      patch.unpublished_by = null;
+      publishAction = "supplier.published";
+    } else {
+      patch.is_published = false;
+      patch.unpublished_at = new Date().toISOString();
+      patch.unpublished_by = admin.email ?? "system";
+      publishAction = "supplier.unpublished";
+    }
+  }
+
+  // 保存时记录操作人（updated_by 由服务端填充，绝不来自客户端）
+  patch.updated_by = admin.email ?? "system";
+
   const ok = await updateAdminSupplier(slugRaw, patch);
-  if (ok && patch.verification_level) {
+  if (!ok) {
+    return NextResponse.json(
+      { ok: false, error: "db_error" },
+      { status: 500, headers: NO_STORE }
+    );
+  }
+
+  // ---- 审计日志（尽力而为，含操作 IP）----
+  if (publishAction) {
+    await logAdminAction(
+      admin,
+      publishAction,
+      "supplier",
+      slugRaw,
+      { is_published: patch.is_published },
+      { ipAddress: ip }
+    );
+  } else if (patch.verification_level) {
     await logAdminAction(
       admin,
       "supplier.set_verification_level",
       "supplier",
       slugRaw,
-      { verification_level: patch.verification_level }
+      { verification_level: patch.verification_level },
+      { ipAddress: ip }
     );
+  } else {
+    // 有其它字段变更则记 supplier.updated（去掉 updated_by 这个每次都写的字段）
+    const { updated_by, ...rest } = patch;
+    if (Object.keys(rest).length > 0) {
+      await logAdminAction(admin, "supplier.updated", "supplier", slugRaw, rest, {
+        ipAddress: ip,
+      });
+    }
   }
-  return NextResponse.json(
-    { ok },
-    { status: ok ? 200 : 500, headers: NO_STORE }
-  );
+  return NextResponse.json({ ok: true }, { status: 200, headers: NO_STORE });
 }
 
 // POST /api/admin/suppliers —— 新建供应商（CS-03 写入路径）

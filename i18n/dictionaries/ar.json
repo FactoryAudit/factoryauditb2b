@@ -923,8 +923,8 @@
     "searchButton": "ابحث عن موردين",
     "searchClear": "مسح",
     "unlockTitle": "هل تحتاج إلى معلومات أعمق عن الموردين؟",
-    "unlockLead": "يمكن لأعضاء Founder Buyer الوصول إلى معلومات محسّنة: سجلات الأدلة وتحليلات المخاطر ومعلومات المصنع والبحث المتقدم والمراقبة.",
-    "unlockNote": "المعلومات الأساسية مجانية. سجلات الأدلة وسجل عمليات التفتيش وتفصيل المخاطر جزء من عضوية Founder Buyer.",
+    "unlockLead": "يمكن لأعضاء Founding Buyer الوصول إلى معلومات محسّنة: سجلات الأدلة وتحليلات المخاطر ومعلومات المصنع والبحث المتقدم والمراقبة.",
+    "unlockNote": "المعلومات الأساسية مجانية. سجلات الأدلة وسجل عمليات التفتيش وتفصيل المخاطر جزء من عضوية Founding Buyer.",
     "freeCta": "إنشاء حساب مجاني",
     "memberCta": "عرض العضوية",
     "freeNote": "يمكن تصفح المعلومات الأساسية عن الموردين مجانًا.",
@@ -946,7 +946,7 @@
     "trustNote": "قد تحتوي ملفات الموردين على معلومات مُصرَّح بها ذاتيًا وبيانات عامة. يُعرض حالة التحقق ومستويات الأدلة بشكل منفصل. لا تعتبر FactoryAuditB2B تصريحات الموردين تحققًا مستقلًا.",
     "riskNote": "تعتمد مؤشرات المخاطر على المعلومات والأدلة المتاحة حاليًا. لا تغني عن التحقق المستقل أو التدقيق الميداني.",
     "svcNote": "اكتشاف الموردين مجاني. التحقق والخدمات الميدانية خدمات مدفوعة.",
-    "founderCta": "اطّلع على Founder Buyer",
+    "founderCta": "اطّلع على Founding Buyer",
     "cardCta": "عرض المورد",
     "faq4q": "ماذا يعني مؤشر المخاطر؟",
     "faq4a": "تعتمد مؤشرات المخاطر على المعلومات والأدلة المتاحة. لا تغني عن التحقق المستقل أو التدقيق الميداني."
@@ -1255,7 +1255,7 @@
       },
       {
         "h": "الاتصال",
-        "b": "أسئلة حول هذه السياسة؟ Email hello@factoryauditb2b.com."
+        "b": "أسئلة حول هذه السياسة؟ Email privacy@factoryauditb2b.com."
       },
       {
         "h": "بيانات الحساب",
@@ -1296,7 +1296,7 @@
       },
       {
         "h": "الاتصال",
-        "b": "أسئلة؟ Email hello@factoryauditb2b.com."
+        "b": "أسئلة؟ Email legal@factoryauditb2b.com."
       },
       {
         "h": "العضوية والفوترة والتجديد",
@@ -1329,7 +1329,7 @@
   },
   "countryPage": {
     "pageTitle": "التحقق من الموردين والتدريب",
-    "metaDesc": "تحقق من المصانع ودرّب فرق الموردين في {country}. عمليات تدقيق وعمليات فحص وموردون معتمدون للمشترين المستوردين من {country}.",
+    "metaDesc": "تحقق من المصانع ودرّب فرق الموردين في {country}. عمليات تدقيق وعمليات فحص وموردون مصدقون للمشترين المستوردين من {country}.",
     "auditTypesIn": "أنواع التدقيق المتاحة في {country}",
     "verifiedSuppliers": "موردون موثّقون في {country}",
     "ctaTitle": "درّب موردي {country}",
@@ -1406,7 +1406,7 @@
   },
   "pricing": {
     "metaTitle": "الخدمات والخطط — أدوات مجانية، تحقق، تدقيق، مراقبة",
-    "metaDesc": "أدوات مجانية لتقييم الموردين، وتحقق من الموردين من 99 دولاراً، وتدقيق مصانع من 399 دولاراً، وفحص منتجات من 99 دولاراً، ومراقبة موردين بالاشتراك. جميع الأسعار بالدولار الأمريكي.",
+    "metaDesc": "أدوات مجانية لتقييم الموردين، وتحقق من الموردين من 99 دولاراً، وتدقيق مصانع من 399 دولاراً، وفحص منتجات من 199 دولاراً، ومراقبة موردين بالاشتراك. جميع الأسعار بالدولار الأمريكي.",
     "h1": "الخدمات والخطط",
     "lead": "الأدوات مجانية. تدفع فقط عندما تحتاج إلى شخص يتحقق من المورد على الأرض.",
     "currencyNote": "جميع الأسعار بالدولار الأمريكي. يُسعَّر التحقق والتدقيق لكل مشروع.",
@@ -1490,7 +1490,7 @@
       },
       {
         "name": "فحص المنتج",
-        "range": "USD 99+",
+        "range": "USD 199+",
         "note": "يُسعَّر لكل يوم عمل إضافة إلى السفر، بحسب البلد والنطاق."
       },
       {
@@ -2322,7 +2322,7 @@
       "توصية واضحة: PASS أو FAIL أو REWORK"
     ],
     "pricingTitle": "التسعير",
-    "pricingLead": "يُسعَّر لكل فحص. يعتمد السعر على نوع الفحص ونطاقه وموقعه ومدته وتوفّر المفتش.",
+    "pricingLead": "تبدأ الأسعار من USD 199 لكل يوم-عامل. يُسعَّر لكل فحص — يعتمد السعر النهائي على نوع الفحص ونطاقه وموقعه ومدته وتوفّر المفتش.",
     "pricingNote": "لا ننشر باقات ثابتة بعد. عندما تمنحنا الطلبات الفعلية بيانات تكلفة صادقة لكل منطقة وفئة منتج ومرحلة، سنطرح خيارات قياسية.",
     "pricingCta": "طلب عرض سعر للفحص",
     "faqTitle": "الأسئلة الشائعة",
@@ -2517,11 +2517,11 @@
       "التحقق من اكتمال المعلومات المقدمة",
       "التحقق من اتساق الوثائق (مساعدة من منظمة العفو الدولية)",
       "تعيين على مستوى الأدلة",
-      "معدل المخاطر (100 نقطة، نموذج 10 أبعاد)",
+      "معدل المخاطر (100 نقطة، نموذج 8 أبعاد)",
       "قرار استعراض حالة الموردين"
     ],
     "riskTitle": "تقييم مخاطر الموردين",
-    "riskLead": "ونسجل كل مورد على نموذج 100 نقطة عبر عشرة أبعاد: هوية الشركة، والمعلومات التجارية، والمعلومات المتعلقة بالمصانع، واتساق الوثائق، والأدلة على صحة الشهادات، والقدرة الإنتاجية، وخبرة التصدير، والتحقق من الاتصال، وأدلة مراجعة الحسابات، ومؤشرات المخاطر الأخرى.",
+    "riskLead": "ونسجل كل مورد على نموذج 100 نقطة عبر ثمانية أبعاد: هوية الشركة، وإدارة الجودة، والامتثال الاجتماعي والتنظيمي، والقدرة على الإنتاج والتصنيع، وسلسلة التوريد، والوثائق والشهادات، وأصالة الشهادات، والأثر الرقمي واتساق الأدلة.",
     "riskBands": [
       "80-100: منخفض المخاطر/ملامح قوية",
       "٦٠-٧٩: المخاطر الحديثة",
@@ -3496,7 +3496,52 @@
     "statTotalLeads": "إجمالي العملاء المحتملين",
     "recentLeads": "أحدث العملاء المحتملين",
     "colKind": "النوع",
-    "colTool": "المصدر"
+    "colTool": "المصدر",
+    "fieldEnglishName": "الاسم بالإنجليزية",
+    "fieldCompanyType": "نوع الشركة",
+    "fieldRegistrationNumber": "رقم التسجيل",
+    "fieldWebsite": "الموقع الإلكتروني",
+    "fieldCountry": "الدولة",
+    "fieldProvince": "المقاطعة / الولاية",
+    "fieldAddress": "العنوان",
+    "fieldProducts": "المنتجات",
+    "fieldExportMarkets": "أسواق التصدير",
+    "fieldContactPerson": "شخص الاتصال",
+    "fieldContactEmail": "البريد الإلكتروني للاتصال",
+    "fieldPhone": "الهاتف",
+    "fieldWhatsapp": "واتساب",
+    "fieldCompanyDescription": "وصف الشركة",
+    "colAuthorized": "مُصرّح",
+    "colCreatedAt": "أنشئ في",
+    "colUpdatedAt": "حُدّث في",
+    "filterAll": "الكل",
+    "filterUnpublished": "غير منشور",
+    "filterNotAuthorized": "غير مصرّح",
+    "searchPlaceholder": "ابحث بالاسم أو البريد أو الموقع",
+    "authorizedTitle": "التصريح",
+    "authorizedBy": "صرّح بواسطة",
+    "authorizedAt": "صُرّح في",
+    "consentVersion": "إصدار الموافقة",
+    "consentAt": "تاريخ الموافقة",
+    "consentIp": "عنوان IP",
+    "consentUserAgent": "وكيل المستخدم",
+    "consentHistoryNote": "سجلات الموافقة تاريخية ولا يمكن تغييرها.",
+    "publishButton": "نشر",
+    "unpublishButton": "إخفاء",
+    "publishBlocked": "تعذّر النشر: المورّد لم يُصرّح بنشر ملفه.",
+    "orders": {
+      "ordersTitle": "Orders",
+      "ordersLead": "Service orders and their payment status.",
+      "colRef": "Order",
+      "colCreated": "Created",
+      "colEmail": "Email",
+      "ordersSearch": "Search reference, email or company",
+      "actionPaid": "Mark paid",
+      "actionCancel": "Cancel",
+      "actionRefund": "Refund",
+      "empty": "No orders yet.",
+      "updated": "Updated"
+    }
   },
   "evidenceCenter": {
     "sectionVerification": "التحقق",
@@ -3593,5 +3638,53 @@
     "complianceLabel": "ما يطلبه المشترون",
     "downstreamLabel": "الاستخدامات النهائية",
     "relatedIndustries": "القطاعات ذات الصلة"
+  },
+  "checkout": {
+    "title": "Order received",
+    "lead": "Your service order has been recorded. Keep the reference below for payment and follow-up.",
+    "orderRef": "Order reference",
+    "colService": "Service",
+    "colQuantity": "Quantity",
+    "colAmount": "Amount",
+    "colStatus": "Status",
+    "statusPending": "Awaiting payment",
+    "statusPaid": "Paid",
+    "statusCancelled": "Cancelled",
+    "statusRefunded": "Refunded",
+    "quoted": "To be quoted",
+    "payTitle": "How to pay",
+    "payPaypal": "Pay now with PayPal",
+    "payManualTitle": "Payment instructions",
+    "payManualBody": "Our team will email your order reference and payment instructions within one business day.",
+    "bankTitle": "Bank transfer details",
+    "referenceNote": "Quote this reference in your payment and in any follow-up.",
+    "nextTitle": "What happens next",
+    "nextBody": "We confirm the scope and price with you, then schedule the work once payment is received.",
+    "notFoundTitle": "Order not found",
+    "notFoundBody": "Check the reference in your confirmation email, or contact us and we will look it up.",
+    "svcVerificationBasic": "Supplier verification — basic report",
+    "svcVerificationPro": "Supplier verification — professional due diligence",
+    "svcFactoryAudit": "On-site factory audit",
+    "svcInspection": "Product inspection",
+    "svcMonitoring": "Supplier monitoring",
+    "svcCustom": "Custom scope",
+    "unitPerSupplier": "per supplier",
+    "unitManDay": "per man-day plus travel",
+    "unitQuoted": "quoted per project"
+  },
+  "order": {
+    "title": "Place an order",
+    "lead": "Choose the service and quantity. We confirm the scope and price with you before payment.",
+    "serviceLabel": "Service",
+    "quantityLabel": "Quantity",
+    "emailLabel": "Email",
+    "companyLabel": "Company",
+    "countryLabel": "Country",
+    "notesLabel": "Notes",
+    "notesHint": "Supplier name, factory country and your deadline.",
+    "amountHint": "Prices are indicative. The final price is confirmed by our team before payment.",
+    "submit": "Place order",
+    "submitting": "Placing order…",
+    "errorGeneric": "We could not place the order. Please try again or contact us."
   }
 }

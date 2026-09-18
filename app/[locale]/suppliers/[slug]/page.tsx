@@ -434,7 +434,7 @@ export default async function SupplierProfilePage({
               layer="free"
               variant="raw"
               registerHref={registerHref}
-              membershipHref={p("/membership")}
+              membershipHref={p("/pricing#founding-buyer")}
               locked={
                 <div className="card p-4 opacity-80">
                   <div className="text-xs text-[#64748b]">{sp.employeesLabel}</div>
@@ -460,7 +460,7 @@ export default async function SupplierProfilePage({
               layer="free"
               variant="raw"
               registerHref={registerHref}
-              membershipHref={p("/membership")}
+              membershipHref={p("/pricing#founding-buyer")}
               locked={
                 <div className="card p-4 opacity-80">
                   <div className="text-xs text-[#64748b]">{sp.exportMarketsLabel}</div>
@@ -497,7 +497,7 @@ export default async function SupplierProfilePage({
                 layer="free"
                 variant="raw"
                 registerHref={registerHref}
-                membershipHref={p("/membership")}
+                membershipHref={p("/pricing#founding-buyer")}
                 locked={
                   <div className="card p-4 opacity-80">
                     <div className="text-xs text-[#64748b]">{label}</div>
@@ -525,7 +525,7 @@ export default async function SupplierProfilePage({
             layer="free"
             variant="raw"
             registerHref={registerHref}
-            membershipHref={p("/membership")}
+            membershipHref={p("/pricing#founding-buyer")}
             locked={
               <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#cbd5e1] bg-[#f8fafc] px-4 py-3">
                 <div className="text-sm text-[#475569]">
@@ -595,7 +595,7 @@ export default async function SupplierProfilePage({
                   <UnlockGate
                     layer="paid"
                     registerHref={registerHref}
-                    membershipHref={p("/membership")}
+                    membershipHref={p("/pricing#founding-buyer")}
                     locked={<span className="text-[#94a3b8]">🔒</span>}
                   >
                     <UnlockedEvidenceStatus
@@ -623,7 +623,7 @@ export default async function SupplierProfilePage({
                 <UnlockGate
                   layer="paid"
                   registerHref={registerHref}
-                  membershipHref={p("/membership")}
+                  membershipHref={p("/pricing#founding-buyer")}
                   locked={<span className="text-[#94a3b8]">🔒</span>}
                 >
                   <UnlockedValue
@@ -643,7 +643,7 @@ export default async function SupplierProfilePage({
                 <UnlockGate
                   layer="paid"
                   registerHref={registerHref}
-                  membershipHref={p("/membership")}
+                  membershipHref={p("/pricing#founding-buyer")}
                   locked={<span className="text-[#94a3b8]">🔒</span>}
                 >
                   <UnlockedValue
@@ -664,7 +664,7 @@ export default async function SupplierProfilePage({
           layer="paid"
           variant="raw"
           registerHref={registerHref}
-          membershipHref={p("/membership")}
+          membershipHref={p("/pricing#founding-buyer")}
           locked={
             <section className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#0f4c81] bg-[#e6eef6] px-4 py-3">
               <div className="text-sm text-[#475569]">
@@ -672,7 +672,7 @@ export default async function SupplierProfilePage({
                 {sp.paidLockLead}
               </div>
               <Link
-                href={p("/membership")}
+                href={p("/pricing#founding-buyer")}
                 className="btn btn-primary text-sm"
                 data-track={ANALYTICS_EVENTS.profilePaidCta}
                 data-track-value={s.slug}

@@ -309,6 +309,69 @@ export const paypalChannel: PaymentChannel = {
   },
 };
 
+// ---------- 服务订单一次性收款（CS-17） ----------
+
+/**
+ * 为 **服务订单** 创建 PayPal 一次性收款（与会员订阅分开）。
+ *
+ * 为什么不复用 createCheckout：
+ *   会员是固定 $99 / 订阅，金额可以写死；服务订单金额来自 lib/commerce.ts 的价目表
+ *   （$99 / $129 / $399×man-day …），必须按订单传入。硬编码金额 = 收错钱。
+ *
+ * 关联回订单的唯一可靠方式：
+ *   custom_id + invoice_id 都写订单号 ORD-XXXXXX。
+ *   webhook 验签通过后由 lib/orders.ts markOrderPaidByProvider() 核销。
+ */
+export async function createOrderCheckout(input: {
+  referenceId: string;
+  itemName: string;
+  /** 金额（USD 元），来自价目表，不是客户端输入 */
+  amountUsd: number;
+  locale?: string;
+}): Promise<CheckoutResult> {
+  if (!paypalChannel.isConfigured()) {
+    return { ok: false, error: "payment_not_configured" };
+  }
+  if (!Number.isFinite(input.amountUsd) || input.amountUsd <= 0) {
+    return { ok: false, error: "provider_api_error" };
+  }
+
+  const locale = input.locale || "en";
+  const lang = locale !== "en" ? `/${locale}` : "";
+  const base = siteUrl();
+
+  const r = await paypalFetch<{ id: string; links?: { rel?: string; href?: string }[] }>(
+    "/v2/checkout/orders",
+    {
+      method: "POST",
+      body: {
+        intent: "CAPTURE",
+        purchase_units: [
+          {
+            description: input.itemName,
+            custom_id: input.referenceId,
+            invoice_id: input.referenceId,
+            amount: { currency_code: "USD", value: input.amountUsd.toFixed(2) },
+          },
+        ],
+        application_context: {
+          brand_name: "FactoryAuditB2B",
+          locale,
+          return_url: `${base}${lang}/checkout/${input.referenceId}?checkout=success`,
+          cancel_url: `${base}${lang}/checkout/${input.referenceId}?checkout=cancelled`,
+          user_action: "PAY_NOW",
+          shipping_preference: "NO_SHIPPING",
+        },
+      },
+    }
+  );
+  if (!r.ok) return { ok: false, error: r.error };
+
+  const url = approveUrl(r.data.links);
+  if (!url) return { ok: false, error: "provider_api_error" };
+  return { ok: true, url, providerRef: r.data.id };
+}
+
 // ---------- 事件归一化 ----------
 
 type PayPalWebhookEvent = {

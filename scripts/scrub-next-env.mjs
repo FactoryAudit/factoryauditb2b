@@ -48,6 +48,12 @@ const BUILD_OR_UNUSED = [
   "STRIPE_SECRET_KEY",
   "STRIPE_WEBHOOK_SECRET",
   "STRIPE_PRICE_ID_FOUNDING_BUYER",
+  // CS-17 Commerce：PayPal 服务订单收款。
+  // 上线后这三个会是**真值**（CLIENT_SECRET 能发起扣款，WEBHOOK_ID 参与验签），
+  // 必须从 next-env.mjs 清掉、改走 wrangler secret put，否则随 Worker 明文上传。
+  "PAYPAL_CLIENT_ID",
+  "PAYPAL_CLIENT_SECRET",
+  "PAYPAL_WEBHOOK_ID",
   "SMTP_HOST",
   "SMTP_PORT",
   "SMTP_USER",

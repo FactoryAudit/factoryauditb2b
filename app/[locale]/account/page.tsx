@@ -58,7 +58,7 @@ export default async function AccountPage({
           locale={locale}
           signInHref={p("/login")}
           registerHref={p("/register")}
-          membershipHref={p("/membership")}
+          membershipHref={p("/pricing#founding-buyer")}
         />
       </div>
     </main>

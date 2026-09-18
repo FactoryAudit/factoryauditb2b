@@ -25,7 +25,7 @@ export async function listSeoAuditGuidePages(): Promise<SeoAuditGuidePage[]> {
         auditTypeName: a.nameEn,
         url: `/audit-guide/${c.code}/${a.code}`,
         title: `${a.nameEn} Audit in ${c.name} | FactoryAuditB2B`,
-        description: `Find ${a.nameEn} (${a.nameZh || ""}) audit, inspection and certified suppliers in ${c.name}. Verified factory directory, RFQ and auditor matching.`,
+        description: `Find ${a.nameEn} (${a.nameZh || ""}) audit, inspection and verified suppliers in ${c.name}. Verified factory directory, RFQ and auditor matching.`,
       });
     }
   }

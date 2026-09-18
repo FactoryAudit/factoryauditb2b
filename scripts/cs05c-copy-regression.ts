@@ -465,8 +465,8 @@ section("8. 访问分层 / 定价 / 路径未被波及");
     `实际 ${PUBLIC_FIELDS.length}`
   );
   check(
-    "FREE 层 = 4 项 basic + CS-12 的 4 项产能 = 8",
-    FREE_FIELDS.length === 8,
+    "FREE 层 = 4 项 basic + CS-12 的 4 项产能 + CS-16 的 5 项联系/属地 = 13",
+    FREE_FIELDS.length === 13,
     `实际 ${FREE_FIELDS.length}`
   );
   check("PAID 层仍为 4 个字段", PAID_FIELDS.length === 4, `实际 ${PAID_FIELDS.length}`);
@@ -577,9 +577,11 @@ section("9. CS-05c-r2 B：九语 freeLockLead 不再承诺 paid 层的 certifica
   );
 
   // 承诺的字段集合必须落在 FREE_FIELDS 内，且 free 层绝不允许混入 paid 字段
+  // CS-16 新增 5 项注册买家可见的联系/属地字段（province/contactPerson/contactEmail/whatsapp/companyDescription），
+  // FREE 层由 8 项扩为 13 项：4 承诺 + 4 CS-12 产能 + 5 CS-16 联系/属地。
   check(
-    "B4 FREE 层 = 4 项承诺字段 + 4 项 CS-12 产能字段，且绝不含 certifications",
-    FREE_FIELDS.length === 8 &&
+    "B4 FREE 层 = 4 项承诺字段 + 4 项 CS-12 产能字段 + 5 项 CS-16 联系/属地字段，且绝不含 certifications",
+    FREE_FIELDS.length === 13 &&
       (FREE_FIELDS as readonly string[]).every((f) =>
         [
           "established",
@@ -590,6 +592,11 @@ section("9. CS-05c-r2 B：九语 freeLockLead 不再承诺 paid 层的 certifica
           "monthlyOutput",
           "factorySize",
           "exportSince",
+          "province",
+          "contactPerson",
+          "contactEmail",
+          "whatsapp",
+          "companyDescription",
         ].includes(f)
       ) &&
       !(FREE_FIELDS as readonly string[]).includes("certifications")

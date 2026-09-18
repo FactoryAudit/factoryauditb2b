@@ -3,9 +3,12 @@
 import { useState } from "react";
 import AuditScopeAdvisor, { type AppliedScope, type AuditScopeDict } from "./AuditScopeAdvisor";
 import AuditRequestForm, { type AuditRequestFormDict } from "./AuditRequestForm";
+import type { AuditRequestFormPhrases } from "@/lib/auditI18n";
 import type { RiskLevel } from "@/lib/riskEngine";
 
 export type DimensionOption = { key: string; label: string };
+
+export type SupplierOption = { id: string; name: string };
 
 type Props = {
   auditScopeT: AuditScopeDict;
@@ -15,6 +18,10 @@ type Props = {
   levelLabels: Record<RiskLevel, string>;
   dimensionOptions: DimensionOption[];
   auditTypeLabels: string[];
+  /** 已发布供应商列表（真实审核请求的 FK 来源） */
+  suppliers: SupplierOption[];
+  /** 新增字段的本地化文案 */
+  reqT: AuditRequestFormPhrases;
 };
 
 /**
@@ -30,6 +37,8 @@ export default function AuditRequestPanel({
   levelLabels,
   dimensionOptions,
   auditTypeLabels,
+  suppliers,
+  reqT,
 }: Props) {
   const [preset, setPreset] = useState<AppliedScope | null>(null);
 
@@ -45,7 +54,14 @@ export default function AuditRequestPanel({
         onApply={setPreset}
       />
       <div className="mt-10">
-        <AuditRequestForm t={formT} auditTypeLabels={auditTypeLabels} preset={preset} />
+        <AuditRequestForm
+          t={formT}
+          auditTypeLabels={auditTypeLabels}
+          preset={preset}
+          suppliers={suppliers}
+          reqT={reqT}
+          locale={locale}
+        />
       </div>
     </>
   );

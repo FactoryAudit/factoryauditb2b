@@ -46,7 +46,7 @@ type BaseProps = {
   labels?: Partial<Labels>;
   /** 由页面用 localePath(locale, "/register") 生成，保证链接带语言前缀 */
   registerHref: string;
-  /** 由页面用 localePath(locale, "/membership") 生成 */
+  /** 由页面用 localePath(locale, "/pricing#founding-buyer") 生成（V2.2 §48/§52：/membership 已合并进 /pricing） */
   membershipHref: string;
   className?: string;
 };
@@ -135,7 +135,7 @@ function useCta(labels: Labels, registerHref: string, membershipHref: string) {
  * 行内软锁：用于"某个字段值"。
  *
  * 用法：
- *   <UnlockGate layer="free" locked={<span>🔒</span>} registerHref={p("/register")} membershipHref={p("/membership")}>
+ *   <UnlockGate layer="free" locked={<span>🔒</span>} registerHref={p("/register")} membershipHref={p("/pricing#founding-buyer")}>
  *     <span>{supplier.established}</span>
  *   </UnlockGate>
  */

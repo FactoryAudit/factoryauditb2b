@@ -2,9 +2,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { isLocale, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
-import { getAdminSupplier, listAdminAudits, requireAdmin } from "@/lib/adminData";
+import { getAdminSupplier, listAdminAudits, requireAdmin, getLatestSupplierConsent } from "@/lib/adminData";
+import { COVERAGE_COUNTRIES } from "@/lib/coverage";
 import SupplierEditor, {
   type SupplierFormValues,
+  type SupplierAuthInfo,
 } from "@/components/admin/SupplierEditor";
 import SupplierReportDownloadButton from "@/components/admin/SupplierReportDownloadButton";
 import type { SupplierReportInput, ReportLang } from "@/lib/supplierReportHtml";
@@ -28,6 +30,7 @@ export default async function AdminSupplierEditPage({ params }: Props) {
   if (!row) notFound();
 
   const audits = await listAdminAudits(slug);
+  const consent = await getLatestSupplierConsent(slug);
 
   // 组装「核验报告」输入：只取 DB 中的真实记录，绝不编造。
   const reportData: SupplierReportInput = {
@@ -66,17 +69,41 @@ export default async function AdminSupplierEditPage({ params }: Props) {
   const initial: SupplierFormValues = {
     slug: row.slug,
     legal_name: row.legal_name,
-    city: row.city,
+    english_name: row.english_name ?? "",
+    company_type: row.company_type ?? "",
+    registration_number: row.registration_number ?? "",
+    website: row.website ?? "",
+    country_code: row.country_code ?? "",
+    province: row.province ?? "",
+    city: row.city ?? "",
+    address: row.address ?? "",
     industry_code: row.industry_code ?? "",
     business_type: row.business_type ?? "",
     established: row.established === null ? "" : String(row.established),
     employees: row.employees ?? "",
+    main_products: (row.main_products ?? []).join(", "),
+    export_markets: (row.export_markets ?? []).join(", "),
+    contact_person: row.contact_person ?? "",
+    contact_email: row.contact_email ?? "",
+    phone: row.phone ?? "",
+    whatsapp: row.whatsapp ?? "",
+    company_description: row.company_description ?? "",
     verification_status: row.verification_status ?? "",
-    risk_score: row.risk_score === null ? "" : String(row.risk_score),
     audit_status: row.audit_status ?? "",
+    risk_score: row.risk_score === null ? "" : String(row.risk_score),
     inspection_history: String(row.inspection_history ?? 0),
     access_tier: (row.access_tier as "public" | "free" | "paid") ?? "public",
     is_published: row.is_published,
+  };
+
+  const auth: SupplierAuthInfo = {
+    profileAuthorized: row.profile_authorized,
+    authorizedBy: row.authorized_by ?? null,
+    authorizedAt: row.authorized_at ?? null,
+    consentVersion: row.consent_version ?? null,
+    consentAt: consent?.consent_timestamp ?? null,
+    consentIp: (consent?.ip_address ?? row.consent_ip) ?? null,
+    consentUserAgent: (consent?.user_agent ?? row.consent_user_agent) ?? null,
   };
 
   return (
@@ -99,11 +126,18 @@ export default async function AdminSupplierEditPage({ params }: Props) {
         <SupplierEditor
           slug={row.slug}
           initial={initial}
+          auth={auth}
+          countryOptions={COVERAGE_COUNTRIES.map((c) => ({ code: c.code, name: c.name }))}
           dict={{
             save: a.save,
             saving: a.saving,
             saved: a.saved,
             error: a.error,
+            publish: a.publishButton,
+            unpublish: a.unpublishButton,
+            publishBlocked: a.publishBlocked,
+            consentHistoryNote: a.consentHistoryNote,
+            authorizedTitle: a.authorizedTitle,
             tierPublic: a.tier?.public ?? "Public",
             tierFree: a.tier?.free ?? "Free",
             tierPaid: a.tier?.paid ?? "Paid",
@@ -111,17 +145,38 @@ export default async function AdminSupplierEditPage({ params }: Props) {
             tierHint: a.tierHint,
             labels: {
               legalName: a.fieldLegalName,
+              englishName: a.fieldEnglishName,
+              companyType: a.fieldCompanyType,
+              registrationNumber: a.fieldRegistrationNumber,
+              website: a.fieldWebsite,
+              country: a.fieldCountry,
+              province: a.fieldProvince,
               city: a.fieldCity,
+              address: a.fieldAddress,
               industry: a.fieldIndustry,
               businessType: a.fieldBusinessType,
               established: a.fieldEstablished,
               employees: a.fieldEmployees,
+              products: a.fieldProducts,
+              exportMarkets: a.fieldExportMarkets,
+              contactPerson: a.fieldContactPerson,
+              contactEmail: a.fieldContactEmail,
+              phone: a.fieldPhone,
+              whatsapp: a.fieldWhatsapp,
+              companyDescription: a.fieldCompanyDescription,
               verification: a.fieldVerification,
-              riskScore: a.fieldRiskScore,
               auditStatus: a.fieldAuditStatus,
+              riskScore: a.fieldRiskScore,
               inspectionHistory: a.fieldInspectionHistory,
               accessTier: a.fieldAccessTier,
               published: a.fieldPublished,
+              authorized: a.colAuthorized,
+              authorizedBy: a.authorizedBy,
+              authorizedAt: a.authorizedAt,
+              consentVersion: a.consentVersion,
+              consentAt: a.consentAt,
+              consentIp: a.consentIp,
+              consentUserAgent: a.consentUserAgent,
             },
           }}
         />

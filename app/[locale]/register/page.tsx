@@ -133,7 +133,7 @@ export default async function RegisterPage({
 
           <p className="text-xs text-[#64748b] mt-4">
             {r.noCard}{" "}
-            <Link href={p("/membership")} className="text-[#0f4c81] underline">
+            <Link href={p("/pricing#founding-buyer")} className="text-[#0f4c81] underline">
               {r.membershipLink}
             </Link>
           </p>

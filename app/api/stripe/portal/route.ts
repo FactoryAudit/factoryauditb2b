@@ -61,7 +61,7 @@ export async function POST(req: Request) {
 
   const customerId = await getStripeCustomerId(user.id);
   if (!customerId) {
-    // 免费用户：不是错误，前端应引导去 /membership 结账
+    // 免费用户：不是错误，前端应引导去 /pricing（Founding Buyer）结账
     return NextResponse.json(
       { ok: false, error: "no_subscription" },
       { status: 404, headers: NO_STORE }

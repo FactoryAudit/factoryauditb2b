@@ -18,6 +18,9 @@ import type { SupplierView, SelfReportedCertificate } from "@/lib/queries";
 export type RegistrationPanelDict = {
   registrationTitle: string;
   registrationLead: string;
+  // CS-16G：来源标签（"Supplier provided"）—— 明确工商登记信息为工厂自述、平台未核验，
+  // 与 selfReportedCerts 的 selfCertLead 徽章保持同一视觉语言。复用 supplierProfile.provProvided（9 语已齐）。
+  provProvided: string;
   regEnglishName: string;
   regCompanyType: string;
   regRegistrationNo: string;
@@ -71,7 +74,13 @@ export function SupplierRegistrationPanel({
   return (
     <section className="mt-8">
       <div className="card p-6" id="profile-registration">
-        <h2 className="text-xl font-bold text-[#0f172a]">{d.registrationTitle}</h2>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <h2 className="text-xl font-bold text-[#0f172a]">{d.registrationTitle}</h2>
+          {/* CS-16G：来源标签 —— 中性灰，绝不用平台蓝/绿（颜色本身就是一种信任断言） */}
+          <span className="rounded-full border border-[#cbd5e1] bg-[#f1f5f9] px-3 py-1 text-xs font-medium text-[#475569]">
+            {d.provProvided}
+          </span>
+        </div>
         <p className="mt-1 text-sm text-[#64748b]">{d.registrationLead}</p>
         <dl className="mt-4 grid gap-x-6 gap-y-3 sm:grid-cols-2">
           <Row label={d.regEnglishName} value={data.englishName} />

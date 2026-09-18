@@ -112,6 +112,14 @@ const nextConfig = {
   },
   // Cloudflare Workers 部署（OpenNext）
   // 已去除数据库（V2.0 轻量化）：不再需要外部化 Prisma / pg / postgres。
-  serverExternalPackages: []
+  serverExternalPackages: [],
+  // V2.2 §13/§41：/membership 合并进 /pricing（Founding Buyer 选项）。
+  // permanent: true ⇒ Next 发出 308（永久重定向）；Google 视作永久合并，SEO 效果等同 301。
+  async redirects() {
+    return [
+      { source: "/membership", destination: "/pricing", permanent: true },
+      { source: "/:locale/membership", destination: "/:locale/pricing", permanent: true },
+    ];
+  },
 };
 export default nextConfig;

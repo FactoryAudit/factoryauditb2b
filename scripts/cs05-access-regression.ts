@@ -154,8 +154,8 @@ section("3. paid intelligence 红线（任何档位变更都不得泄漏）");
     PAID_FIELDS.join(",")
   );
   check(
-    "free 层 = CS-05 的 4 项 basic 字段 + CS-12 的 4 项产能字段（CS-05 部分未扩未减）",
-    FREE_FIELDS.length === 8 &&
+    "free 层 = CS-05 的 4 项 basic 字段 + CS-12 的 4 项产能字段 + CS-16 的 5 项联系/属地字段",
+    FREE_FIELDS.length === 13 &&
       ["established", "employees", "exportMarkets", "auditStatus"].every((f) =>
         (FREE_FIELDS as readonly string[]).includes(f)
       ),

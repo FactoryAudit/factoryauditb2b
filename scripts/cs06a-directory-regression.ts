@@ -263,9 +263,9 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
     String(MEMBERSHIP_PRICE_USD)
   );
   check(
-    "C4 字段分层：PUBLIC 15→21 / FREE 4→8（CS-12 扩容），PAID 恒为 4",
+    "C4 字段分层：PUBLIC 21 / FREE 8→13（CS-16 加 5 项联系/属地）/ PAID 恒为 4",
     PUBLIC_FIELDS.length === 21 &&
-      FREE_FIELDS.length === 8 &&
+      FREE_FIELDS.length === 13 &&
       PAID_FIELDS.length === 4,
     `${PUBLIC_FIELDS.length}/${FREE_FIELDS.length}/${PAID_FIELDS.length}`
   );
@@ -309,13 +309,16 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
       /export\s+const\s+FEATURED_MIN\s*=/.test(sup)
   );
 
-  // C7 九语字典：键集合与 en 完全一致，叶子数恒为 2735（= 2731 字符串 + 4 boolean）
+  // C7 九语字典：键集合与 en 完全一致，叶子数恒为 2822（= 2818 字符串 + 4 boolean）
   // 2648 → 2666：CS-08 入驻表证书子表单 + 「我要获得证书」咨询弹窗新增 18 键 × 9 语
   // 2666 → 2694：CS-11 公开标准报告样板页 standardReport 命名空间 27 键 + footer.standardReport 1 键
   // 2694 → 2714：CS-12 档案页登记信息 7 键 + 工厂自述证书 8 键 + 产能 4 键 + evidenceCenter.issuedOn 1 键 = 20 键 × 9 语
   // 2714 → 2717：CS-02A /industry 索引页与 Master 页指南区块新增 industryPage.hubMetaDesc / hubLead / topicsTitle 3 键 × 9 语
   // 2717 → 2726：CS-02B 化工原料页新增 chemicals 命名空间 9 键 × 9 语
   // 2726 → 2735：CS-02D 后台线索列表 admin 命名空间 9 键 × 9 语（navLeads/leadsTitle/leadsLead/leadsEmpty/statNewLeads/statTotalLeads/recentLeads/colKind/colTool）
+  // 2735 → 2767：CS-16 后台供应商管理 admin 命名空间 32 键（publish/unpublish/authorizedTitle/consentHistoryNote + 18 字段 label + filter/search 等，× 9 语）
+  // 2767 → 2809：CS-17 Commerce V1 checkout 命名空间 31 键 + admin.orders 11 键 = 42 键 × 9 语
+  // 2809 → 2822：CS-17 下单页 order 命名空间 13 键 × 9 语
   const LOCALES = ["en", "zh", "zh-TW", "ja", "es", "de", "fr", "pt", "ar"] as const;
   type Leaf = { key: string; value: unknown };
   function leaves(obj: unknown, prefix = "", out: Leaf[] = []): Leaf[] {
@@ -340,7 +343,7 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
     dictLeaves[loc] = leaves(JSON.parse(fs.readFileSync(p, "utf8")));
   }
   const baseKeys = dictLeaves.en.map((l) => l.key).sort();
-  check("C8 en 字典叶子数 = 2735（未被截断/新增）", baseKeys.length === 2735, `实际 ${baseKeys.length}`);
+  check("C8 en 字典叶子数 = 2822（未被截断/新增）", baseKeys.length === 2822, `实际 ${baseKeys.length}`);
 
   for (const loc of LOCALES) {
     if (loc === "en") continue;
