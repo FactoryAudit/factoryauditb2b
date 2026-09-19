@@ -15,7 +15,9 @@ import SupplierEditor, {
   type SupplierAuthInfo,
 } from "@/components/admin/SupplierEditor";
 import SupplierReportDownloadButton from "@/components/admin/SupplierReportDownloadButton";
+import AssessmentAdminPanel from "@/components/admin/AssessmentAdminPanel";
 import SupplierReportEditor from "@/components/admin/SupplierReportEditor";
+import { ASSESSMENT_TYPE_LABELS } from "@/lib/supplierAssessments";
 import { emptyReportTemplate } from "@/lib/supplierReportTemplate";
 import type { SupplierReportInput, ReportLang } from "@/lib/supplierReportHtml";
 
@@ -132,6 +134,11 @@ export default async function AdminSupplierEditPage({ params }: Props) {
 
       <div className="mt-4">
         <SupplierReportDownloadButton reportData={reportData} defaultLang={defaultLang} />
+      </div>
+
+      {/* CS-21：三标签审核管理块（标签①②③审核/发布） */}
+      <div className="mt-6">
+        <AssessmentAdminPanel supplierId={row.id} labels={ASSESSMENT_TYPE_LABELS} />
       </div>
 
       <div className="mt-6">

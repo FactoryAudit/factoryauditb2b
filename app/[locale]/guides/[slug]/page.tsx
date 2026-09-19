@@ -88,7 +88,7 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
   ];
 
   return (
-    <main className="container py-12 max-w-3xl">
+    <article className="container py-12 max-w-3xl">
       <JsonLd data={jsonLd} />
 
       <nav className="mb-4 text-sm text-[#64748b]">
@@ -261,6 +261,6 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
           </Link>
         </div>
       </section>
-    </main>
+    </article>
   );
 }

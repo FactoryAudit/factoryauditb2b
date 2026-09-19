@@ -18,6 +18,28 @@ export function middleware(req: NextRequest) {
   const requestHeaders = new Headers(req.headers);
   requestHeaders.set("x-pathname", pathname);
 
+  // ── SEO 规范化：HTTPS / www / 尾斜杠（在 locale 逻辑之前，单一 308）──
+  // Cloudflare 边缘通常已做 HTTPS 跳转，这里兜底；本地 dev 跳过以免死循环。
+  const host = req.headers.get("host") || "";
+  const proto = (req.headers.get("x-forwarded-proto") || "https").replace(/:$/, "");
+  if (process.env.NODE_ENV !== "development" && proto !== "https") {
+    const u = req.nextUrl.clone();
+    u.protocol = "https:";
+    return NextResponse.redirect(u, 308);
+  }
+  // www → 非 www（规范域名统一为 factoryauditb2b.com）
+  if (host.startsWith("www.")) {
+    const u = req.nextUrl.clone();
+    u.host = host.replace(/^www\./, "");
+    return NextResponse.redirect(u, 308);
+  }
+  // 去尾斜杠（根路径 / 除外），保证 clean URL 一致
+  if (pathname.length > 1 && pathname.endsWith("/")) {
+    const u = req.nextUrl.clone();
+    u.pathname = pathname.replace(/\/+$/, "");
+    return NextResponse.redirect(u, 308);
+  }
+
   if (isLocale(first) && first !== DEFAULT_LOCALE) {
     return NextResponse.next({ request: { headers: requestHeaders } });
   }

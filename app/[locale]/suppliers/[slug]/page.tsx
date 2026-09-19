@@ -14,6 +14,11 @@ import {
   SupplierRegistrationPanel,
   SupplierSelfReportedCerts,
 } from "@/components/SupplierRegistrationPanel";
+// CS-21：三标签审核徽章（工厂自评估 / 平台在线评估 / 平台现场审核）
+import { getSupplierTags } from "@/lib/supplierAssessments";
+import AssessmentTags from "@/components/supplier/AssessmentTags";
+// CS-21：采购商侧审核报告付费下载占位（标签①②③）
+import AssessmentReportPaywall from "@/components/buyer/AssessmentReportPaywall";
 import {
   publicVerificationLevel,
   LEVEL_SCOPE,
@@ -188,6 +193,9 @@ export default async function SupplierProfilePage({
     getSupplierPublicAudits(slug),
   ]);
 
+  // CS-21：三标签审核（仅展示已发布 published 的标签）
+  const assessmentTags = await getSupplierTags(s.id);
+
   const ec = t.evidenceCenter;
   const uiLocale = contentLocale;
 
@@ -353,6 +361,9 @@ export default async function SupplierProfilePage({
               {v.levelLabel} {level}
             </div>
             <div className="font-medium text-[#0f172a]">{v.levelsShort[level]}</div>
+
+            {/* CS-21：三标签审核徽章 */}
+            <AssessmentTags tags={assessmentTags} />
 
             <div className="mt-4 text-xs uppercase tracking-wide text-[#64748b]">
               {sp.riskScore}
@@ -767,6 +778,9 @@ export default async function SupplierProfilePage({
             </Link>
           </p>
         </section>
+
+        {/* CS-21：采购商审核报告付费下载（占位，不接真实支付） */}
+        <AssessmentReportPaywall supplierId={s.id} tags={assessmentTags} locale={locale} />
 
         {/* ==================================================================
             FAQ（PHASE 03 §七 / §九）

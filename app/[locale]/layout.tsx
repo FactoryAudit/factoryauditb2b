@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import "../globals.css";
 import SiteHeader from "@/components/SiteHeader";
@@ -50,6 +50,16 @@ const BASE = "https://factoryauditb2b.com";
 //    canonical 的唯一责任方是各页面自己的 buildPageMetadata()。
 const DEFAULT_TITLE = "Factory Audit & Supplier Verification | FactoryAuditB2B";
 
+// 响应式视口（工单 SEO-20260918-FAB 任务 4）：显式声明，保证移动端正确缩放。
+// 此前的 viewport 依赖 Next 默认注入，未显式声明；这里固定为设备宽度 + 主题色。
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#0f4c81",
+};
+
+
 export async function generateMetadata({
   params,
 }: {
@@ -75,6 +85,8 @@ export async function generateMetadata({
       title: DEFAULT_TITLE,
       description: t.footer.tagline,
       type: "website",
+      url: BASE,
+      siteName: "FactoryAuditB2B",
       images: [OG_IMAGE],
       locale: undefined,
     },

@@ -52,19 +52,26 @@ const DISALLOWED_BOTS = [
   "CloudflareBrowserRenderingCrawler",
 ];
 
+// 全站统一禁止抓取的路径（无论哪个 UA）：
+//  - /api               后端接口（/api/lead、/api/me 等），绝不可收录
+//  - /admin             管理后台（未授权返回 404，显式禁止更稳妥）
+//  - /staging           预发布 / 测试环境（若启用）
+//  - /*?                任何带查询字符串的 URL（搜索 / 筛选 / 表单态）—— 避免重复薄页被收录
+const DISALLOW_PATHS = ["/api", "/admin", "/staging", "/*?"];
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       ...ALLOWED_BOTS.map((userAgent) => ({
         userAgent,
         allow: "/",
-        disallow: ["/api"],
+        disallow: DISALLOW_PATHS,
       })),
       ...DISALLOWED_BOTS.map((userAgent) => ({
         userAgent,
         disallow: "/",
       })),
-      { userAgent: "*", allow: "/", disallow: ["/api"] },
+      { userAgent: "*", allow: "/", disallow: DISALLOW_PATHS },
     ],
     sitemap: `${BASE}/sitemap.xml`,
     host: BASE,

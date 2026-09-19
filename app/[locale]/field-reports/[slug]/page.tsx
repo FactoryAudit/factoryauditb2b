@@ -105,7 +105,7 @@ export default async function FieldReportPage({ params }: { params: Promise<Para
   ];
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-10">
+    <article className="mx-auto max-w-3xl px-4 py-10">
       <JsonLd data={jsonLd} />
 
       <nav className="mb-4 text-sm text-gray-500">
@@ -216,6 +216,6 @@ export default async function FieldReportPage({ params }: { params: Promise<Para
           ))}
         </div>
       </section>
-    </main>
+    </article>
   );
 }

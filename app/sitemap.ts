@@ -65,6 +65,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/custom-services",
     "/privacy",
     "/terms",
+    // 联系页：此前全站无 /contact，访客只能靠页脚邮箱找人。补上以承接
+    //「品牌词 + contact」这类高意图搜索，并给询盘一个明确落点。
+    "/contact",
   ];
 
   // Phase 1 国家覆盖页与国家 × 服务商业页（内容差异化后才提交，PRD §8）
@@ -79,13 +82,61 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 已 308 到新地址的旧路径，不进站点地图
   // （/knowledge → /services/supplier-improvement，/inspectors → /resources）
 
-  // 一个基础路径 → 六条语言 URL，每条都带 hreflang 全集
-  const emit = (path: string, lastModified?: Date): MetadataRoute.Sitemap =>
-    LOCALES.map((l) => ({
+  // 一个基础路径 → 六条语言 URL，每条都带 hreflang 全集。
+  // 同时给出 changefreq / priority（工单 SEO-20260918-FAB 任务 3）：Google 仅作相对提示，
+  // 真实抓取节奏仍由内容更新频率决定；这里按页面类型分层，避免全站一刀切。
+  function seoFor(path: string): {
+    changeFrequency: NonNullable<MetadataRoute.Sitemap[number]["changeFrequency"]>;
+    priority: number;
+  } {
+    if (path === "") return { changeFrequency: "daily", priority: 1.0 };
+    if (path.startsWith("/privacy") || path.startsWith("/terms"))
+      return { changeFrequency: "yearly", priority: 0.3 };
+    if (path.startsWith("/contact")) return { changeFrequency: "yearly", priority: 0.4 };
+    if (path.startsWith("/standard-report") || path.startsWith("/sample"))
+      return { changeFrequency: "monthly", priority: 0.8 }; // 样例报告（核心转化）
+    if (path.startsWith("/tools")) return { changeFrequency: "weekly", priority: 0.8 };
+    if (path.startsWith("/services")) return { changeFrequency: "monthly", priority: 0.8 };
+    if (path.startsWith("/suppliers")) return { changeFrequency: "weekly", priority: 0.8 };
+    if (
+      [
+        "/about",
+        "/trust",
+        "/training-plans",
+        "/methodology",
+        "/logistics",
+        "/custom-services",
+        "/monitoring",
+        "/countries",
+        "/industry",
+        "/chemicals",
+      ].includes(path)
+    )
+      return { changeFrequency: "monthly", priority: 0.7 };
+    if (
+      path.startsWith("/guides") ||
+      path.startsWith("/case-studies") ||
+      path.startsWith("/field-reports") ||
+      path.startsWith("/resources") ||
+      path.startsWith("/audit-guide")
+    )
+      return { changeFrequency: "monthly", priority: 0.6 }; // 博客 / 指南 / 案例
+    if (path.startsWith("/industry/")) return { changeFrequency: "monthly", priority: 0.6 };
+    if (path.startsWith("/chemicals/")) return { changeFrequency: "monthly", priority: 0.5 };
+    if (path.startsWith("/countries/")) return { changeFrequency: "monthly", priority: 0.6 };
+    return { changeFrequency: "monthly", priority: 0.5 };
+  }
+
+  const emit = (path: string, lastModified?: Date): MetadataRoute.Sitemap => {
+    const { changeFrequency, priority } = seoFor(path);
+    return LOCALES.map((l) => ({
       url: `${BASE}${localePath(l, path)}`,
       lastModified: lastModified ?? new Date(),
+      changeFrequency,
+      priority,
       alternates: { languages: hreflangFor(path) },
     }));
+  };
 
   const pages: MetadataRoute.Sitemap = [...core, ...coverage].flatMap((p) => emit(p));
 

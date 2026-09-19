@@ -180,3 +180,67 @@ export async function createSignedUrl(
     return null;
   }
 }
+
+// -----------------------------------------------------------------------------
+// CS-21 审核报告文件（标签②③ 平台出具的报告）
+// 与供应商文档(supplier_documents)共用私有 bucket，但走独立路径段 assessment_report，
+// 不污染 DOCUMENT_TYPES 白名单（避免与 supplier_documents 表 CHECK 约束语义混淆）。
+// -----------------------------------------------------------------------------
+
+/** 审核报告对象路径段（非 DOCUMENT_TYPES 白名单，独立常量） */
+export const ASSESSMENT_REPORT_TYPE = "assessment_report";
+
+/**
+ * 拼装审核报告对象路径。supplierId 必须合法 uuid。
+ * 路径：{supplier_id}/assessment_report/{yyyy-mm}/{uuid}-{safeName}
+ */
+export function buildAssessmentReportPath(supplierId: string, fileName: string): string {
+  if (!UUID_RE.test(supplierId)) {
+    throw new Error("buildAssessmentReportPath: supplierId 不是合法 uuid");
+  }
+  const month = new Date().toISOString().slice(0, 7); // yyyy-mm
+  const uid = crypto.randomUUID();
+  return `${supplierId}/${ASSESSMENT_REPORT_TYPE}/${month}/${uid}-${sanitizeFileName(fileName)}`;
+}
+
+/**
+ * 上传审核报告到私有 bucket（中转：服务端读字节后转发 Supabase）。
+ * 与 uploadDoc 同源约束：MIME 白名单 + 大小上限双校验。
+ */
+export async function uploadAssessmentReport(params: {
+  supplierId: string;
+  fileName: string;
+  mime: string;
+  bytes: ArrayBuffer;
+}): Promise<UploadResult> {
+  const { createAdminClient } = await import("./supabaseAdmin");
+  const db = createAdminClient();
+  if (!db) return { ok: false, error: "storage_not_configured" };
+
+  if (!isAllowedDocMime(params.mime)) {
+    return { ok: false, error: "mime_not_allowed" };
+  }
+  if (params.bytes.byteLength <= 0 || params.bytes.byteLength > MAX_DOC_BYTES) {
+    return { ok: false, error: "size_out_of_range" };
+  }
+
+  let path: string;
+  try {
+    path = buildAssessmentReportPath(params.supplierId, params.fileName);
+  } catch {
+    return { ok: false, error: "invalid_path" };
+  }
+
+  const { error } = await db.storage
+    .from(DOC_BUCKET)
+    .upload(path, params.bytes, {
+      contentType: params.mime,
+      upsert: false,
+    });
+
+  if (error) {
+    console.error("[storage] assessment report upload failed", error.message);
+    return { ok: false, error: "upload_failed" };
+  }
+  return { ok: true, path };
+}

@@ -23,6 +23,7 @@ export type FooterDict = {
   tagline: string;
   copyright: string;
   about: string;
+  contact: string;
   coverageOnly: string;
   operatedBy: string;
   registeredBusiness: string;
@@ -192,6 +193,11 @@ export default function SiteFooter({
                 <li>
                   <Link href={p("/about")} className="hover:text-white">
                     {dict.about}
+                  </Link>
+                </li>
+                <li>
+                  <Link href={p("/contact")} className="hover:text-white">
+                    {dict.contact}
                   </Link>
                 </li>
                 <li>
