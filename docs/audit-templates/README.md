@@ -61,4 +61,24 @@ CS-18 已建三张表，schema 就是为此设计的，至今**零行**：
 ## 状态
 
 - 已做：原文提取落盘 + 原始 docx 备份、与平台实现逐项对照、冲突清单。
-- **未做**：未写入任何 DB、未改任何代码、未提交决策。等用户拍板方向。
+- **方向已拍板（2026-09-19）**：按报告用途/类型**并列为模板家族，不合并、不删除**。详见下方「方向决策」。
+
+## 方向决策（2026-09-19）
+
+用户拍板「完善」CS-18 报告模板家族。结论：
+
+- **架构方向：模板家族并列，不合并。**
+  - `standard_due_diligence`（CS-20，13 章通用尽调报告）—— 由 `lib/supplierReportTemplate.emptyReportTemplate()` 生成空白件。
+  - `social_compliance_audit`（CS-18，7 章，SMETA 7.0 / amfori BSCI）—— 清单来自 `audit_templates(code=SOCIAL_COMPLIANCE)`，37 项。
+  - `quality_audit`（CS-18，7 章，ISO 19011:2026 / ISO 9001）—— 清单来自 `audit_templates(code=QUALITY)`，35 项。
+  - 三者服务对象不同（通用档案 vs 清单式现场/桌面审核），合并会模糊语义，故共存。
+- **落地（本次「完善」，全新增，零删除）：**
+  - 新增 `lib/reportTemplateFamily.ts`：家族登记单一事实来源（章节骨架 + 评分卡权重 + 严重度规则 + 决策区间 + 证据索引模板）+ `buildBlankAuditReport()` 复用 CS-20 的 `SupplierReportDoc` 形状生成空白审核报告。
+  - 新增 `app/api/admin/report-template/route.ts`：requireAdmin 闸门，GET 清单 / GET `?type=` 完整成员 / POST 空白报告骨架。
+  - CS-20 的 `lib/standardReport.ts` 与 `lib/supplierReportTemplate.ts` **原样保留，不删除、不重构**。
+- **纪律已写入模块：**
+  - 审核报告 Risk Level 是 **3 档(LOW/MED/HIGH) 审核结论带**，与平台 supplier risk 指数(5 档)是**两回事**，渲染文案必须标明，绝不并为一档。
+  - 空白模板只预填「结构/方法/评分权重/证据索引项」，任何结论性内容空白；`overall_score = null`（未评分，绝不补 0）。
+- **仍待办（本次未做，按需求再议）：**
+  - 后台编辑器增加「家族类型选择器」，按 type 调 POST 生成对应空白模板（接线点已就绪）。
+  - 72 项清单确认已从 `supabase/cs21/02_seed_audit_checklists.sql` 灌入生产 `audit_templates`（seed SQL 已 commit；DB 行数需核验）。

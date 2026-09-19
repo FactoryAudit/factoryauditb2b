@@ -17,6 +17,12 @@ import {
   type SectionKind,
   type SupplierReportDoc,
 } from "@/lib/supplierReports";
+import { emptyReportTemplate } from "@/lib/supplierReportTemplate";
+import {
+  REPORT_FAMILY,
+  REPORT_FAMILY_ORDER,
+  type ReportFamilyType,
+} from "@/lib/reportTemplateFamily";
 import { buildReportDocHtml, reportDocFileName } from "@/lib/supplierReportDocHtml";
 
 // components/admin/SupplierReportEditor.tsx —— CS-20 报告正文编辑器
@@ -146,6 +152,8 @@ export default function SupplierReportEditor({
     by: updatedBy,
     at: updatedAt,
   });
+  // 当前载入的模板家族（默认标准尽调 = 13 章 CS-20 骨架）
+  const [selectedType, setSelectedType] = useState<ReportFamilyType>("standard_due_diligence");
 
   const progress = useMemo(() => reportProgress(doc), [doc]);
 
@@ -211,6 +219,56 @@ export default function SupplierReportEditor({
     }
   }
 
+  /* ---- 按家族类型载入空白模板 ---- */
+  async function loadBlank(type: ReportFamilyType) {
+    if (busy) return;
+    const dirty =
+      doc.sections.some((s) => sectionHasContent(s)) ||
+      doc.actions.length > 0 ||
+      doc.overallScore !== null ||
+      Boolean(doc.reportNumber) ||
+      Boolean(doc.preparedFor);
+    if (
+      dirty &&
+      !window.confirm("载入空白模板将替换当前编辑器内的内容（尚未保存的草稿会丢失）。继续？")
+    ) {
+      return; // 受控 select 自动回弹到 selectedType
+    }
+    if (type === "standard_due_diligence") {
+      setDoc(emptyReportTemplate());
+      setSelectedType(type);
+      setErr(null);
+      setMsg("已载入「标准供应商尽职调查报告」空白模板（13 章）。");
+      return;
+    }
+    setBusy(true);
+    setErr(null);
+    try {
+      const r = await fetch("/api/admin/report-template", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type }),
+      });
+      const j = (await r.json().catch(() => ({}))) as {
+        doc?: SupplierReportDoc;
+        error?: string;
+      };
+      if (!r.ok || !j.doc) {
+        setErr(j.error ? `生成空白模板失败（${j.error}）。` : "生成空白模板失败。");
+        return;
+      }
+      setDoc(j.doc);
+      setSelectedType(type);
+      setMsg(
+        `已载入「${REPORT_FAMILY[type].label.zh}」空白模板（${REPORT_FAMILY[type].chapters.length} 章）。`
+      );
+    } catch {
+      setErr("网络异常，未生成空白模板。");
+    } finally {
+      setBusy(false);
+    }
+  }
+
   /* ---- 导出自包含 HTML ---- */
   function download(lang: "en" | "zh") {
     try {
@@ -261,6 +319,29 @@ export default function SupplierReportEditor({
               {busy ? "…" : "保存"}
             </button>
           </div>
+        </div>
+
+        {/* ===== 报告模板家族选择器（按类型生成空白骨架） ===== */}
+        <div className="mt-4 flex flex-wrap items-end gap-3 border-t border-[#eef2f7] pt-4">
+          <label className="block">
+            <span className="mb-1 block text-xs font-medium text-[#64748b]">
+              报告模板家族
+            </span>
+            <select
+              className="input max-w-[360px]"
+              value={selectedType}
+              onChange={(e) => loadBlank(e.target.value as ReportFamilyType)}
+            >
+              {REPORT_FAMILY_ORDER.map((t) => (
+                <option key={t} value={t}>
+                  {REPORT_FAMILY[t].label.zh} · {REPORT_FAMILY[t].label.en}
+                </option>
+              ))}
+            </select>
+          </label>
+          <span className="text-xs text-[#94a3b8]">
+            切换类型载入对应空白骨架，<strong className="text-[#854f0b]">替换当前未保存内容</strong>。
+          </span>
         </div>
 
         {msg && <p className="mt-2 text-sm text-[#1f7a36]">{msg}</p>}

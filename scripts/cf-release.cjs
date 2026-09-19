@@ -143,5 +143,22 @@ step("④ wrangler deploy", () => {
   });
 });
 
+// ⑤ 发布后自动通知搜索引擎（Bing IndexNow / Google Indexing API / GSC sitemap ping）。
+//    best-effort：凭据缺失或网络异常仅告警，绝不影响已经上线的部署。
+//    脚本内部已做幂等（sitemap-diff 只提交新增 URL），可安全每次发布触发。
+console.log("\n=========== ⑤ post-publish URL submission ===========");
+try {
+  execFileSync(process.execPath, [path.join(ROOT, "scripts", "post-publish-submit.cjs")], {
+    cwd: ROOT,
+    stdio: "inherit",
+    env: process.env,
+  });
+  console.log("[release] ✓ ⑤ 发布后 URL 提交完成");
+} catch (e) {
+  console.error(
+    "[release] ⚠️ ⑤ URL 提交未成功（凭据缺失或网络问题），不影响已上线部署；补齐 .env 后手动重跑即可。",
+  );
+}
+
 console.log("\n[release] 全部步骤完成 ✅");
 if (DRY) console.log("[release] 这是 dry-run，线上没有任何变更。");

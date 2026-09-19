@@ -94,7 +94,12 @@ export default async function CountryServicePage({ params }: { params: Promise<P
       serviceType: serviceName,
       areaServed: countryName,
       description: svc.quickAnswer,
-      provider: { "@type": "Organization", name: "FactoryAuditB2B", url: BASE },
+      provider: { "@id": `${BASE}#organization` },
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "USD",
+        url: `${BASE}/rfq`,
+      },
       url: `${BASE}${p(`/services/${slug}`)}`,
     },
     {

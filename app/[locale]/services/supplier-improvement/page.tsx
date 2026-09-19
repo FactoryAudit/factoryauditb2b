@@ -45,7 +45,12 @@ export default async function SupplierImprovementPage({
     name: p.h1,
     serviceType: "Supplier improvement and training",
     description: p.metaDesc,
-    provider: { "@type": "Organization", name: "FactoryAuditB2B", url: BASE },
+    provider: { "@id": `${BASE}#organization` },
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "USD",
+      url: `${BASE}/rfq`,
+    },
     url: `${BASE}${lp(PATH)}`,
   };
 

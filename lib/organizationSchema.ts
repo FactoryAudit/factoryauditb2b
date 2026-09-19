@@ -57,7 +57,9 @@ export function organizationSchema(
   const cfg = getTrustConfig();
 
   const org: Record<string, unknown> = {
-    "@type": "Organization",
+    // 双类型：Organization 提供实体识别，ProfessionalService 强化"专业服务机构"语义
+    // （LocalBusiness 子类型；无实体地址不出本地面板，但 E-E-A-T 实体识别有效）
+    "@type": ["Organization", "ProfessionalService"],
     // @id 让其他 Schema（WebSite / WebPage / Service）能用 publisher 引用同一个实体，
     // 避免 Google 把"品牌"和"网站"识别成两个不相关对象。
     "@id": `${ORG_URL}#organization`,
@@ -68,6 +70,11 @@ export function organizationSchema(
       url: `${ORG_URL}/logo.svg`,
       caption: ORG_NAME,
     },
+    // 视觉标识（与 OG/Twitter 同款），供 ProfessionalService 富结果/知识图谱引用
+    image: `${ORG_URL}/logo.svg`,
+    // 专业服务类型（模板 1：Organization + ProfessionalService 双类型）
+    serviceType: "Third-Party B2B Factory Audit & Quality Inspection Services",
+    slogan: "Verify before you pay.",
     description:
       options.description ??
       "FactoryAuditB2B helps global buyers discover and verify reliable " +

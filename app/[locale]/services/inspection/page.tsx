@@ -37,7 +37,12 @@ export default async function InspectionPage({ params }: Props) {
       serviceType: "Product inspection",
       areaServed: ["China", "Vietnam", "Thailand", "Malaysia", "Philippines"],
       description: i.metaDesc,
-      provider: { "@type": "Organization", name: "FactoryAuditB2B", url: BASE },
+      provider: { "@id": `${BASE}#organization` },
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "USD",
+        url: `${BASE}/rfq`,
+      },
       url: `${BASE}${p(PATH)}`,
     },
     {
