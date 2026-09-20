@@ -318,7 +318,7 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
       /export\s+const\s+FEATURED_MIN\s*=/.test(sup)
   );
 
-  // C7 九语字典：键集合与 en 完全一致，叶子数恒为 2824（= 2820 字符串 + 4 boolean）
+  // C7 九语字典：键集合与 en 完全一致，叶子数恒为 2938（= 2934 字符串 + 4 boolean）
   // 2648 → 2666：CS-08 入驻表证书子表单 + 「我要获得证书」咨询弹窗新增 18 键 × 9 语
   // 2666 → 2694：CS-11 公开标准报告样板页 standardReport 命名空间 27 键 + footer.standardReport 1 键
   // 2694 → 2714：CS-12 档案页登记信息 7 键 + 工厂自述证书 8 键 + 产能 4 键 + evidenceCenter.issuedOn 1 键 = 20 键 × 9 语
@@ -333,6 +333,26 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
   // 2823 → 2824：账号中心功能导航区小节标题 account.panel.linksTitle 1 键 × 9 语
   //              （卡片标题/说明全部复用 savedTitle/savedLead/rfqsTitle/rfqsLead
   //               与 admin.title/admin.overviewLead，故只增 1 个叶子而非 7 个）
+  // 2824 → 2825：⚠️ 既有失准的记录 —— 该次攒键后**本文件与 cs08/cs12/cs13/cs16/cs17/cs20
+  //              都停在 2827 之前未同步**，而发布门禁 verify-opennext-bundle.mjs 已按
+  //              实际值校准。STEP-04 一并校正为同一常量，恢复"六处同源"不变式。
+  // 2825 → 2827：STEP-04 供应商档案展示「地理大区 + 产业带」——
+  //              supplierProfile.regionLabel / industrialClusterLabel 2 键 × 9 语
+  //              （脚本：scripts/apply-step04-i18n.cjs，幂等 + 九语键集自检）
+  // 2827 → 2846：CHANGE SET B 首页 Industrial Clusters 轻量入口 + 产业带目录/详情页 ——
+  //              home.clusters* 3 键 + clusters.* 命名空间 16 键 × 9 语
+  // 2846 → 2912：STEP-05 /verify-supplier 最小闭环（提交 → 收集 → 入库 → 人工核验）——
+  //              verifySupplier.* 命名空间 65 键（含 checks[3] / rules[4] /
+  //              valueOptions 5 / urgencyOptions 3 叶子）+ supplierProfile.verifyThisSupplier 1 键 × 9 语
+  //              （脚本：scripts/apply-step05-i18n.cjs，幂等 + 九语键集自检）
+  // 2912 → 2926：STEP-06 首页「What do you need?」四入口（home.* 下 14 键，全字符串）——
+  //              needTitle/needLead + entry{Find,Cluster,Verify,Rfq}{Title,Desc,Cta} × 9 语
+  //              （脚本：scripts/apply-step06-i18n.cjs，幂等 + 九语键集自检；ctaSecondary 仅改写值）
+  // 2926 → 2938：STEP-07 首页 Live Buyer Requests 模块（home.* 下 12 键，全字符串）——
+  //              liveTitle/liveLead + liveEmptyTitle/liveEmptyLead/liveEmptyCta + liveViewAll
+  //              + liveRespondCta/livePosted/liveQuantity/liveMarket/liveIndustry/liveCerts × 9 语
+  //              （脚本：scripts/apply-step07-i18n.cjs，幂等 + 九语键集自检；复用 /rfq 提交流，不新建表）
+  //              （脚本：scripts/apply-changesetB-i18n.cjs，幂等 + 九语键集自检）
   const LOCALES = ["en", "zh", "zh-TW", "ja", "es", "de", "fr", "pt", "ar"] as const;
   type Leaf = { key: string; value: unknown };
   function leaves(obj: unknown, prefix = "", out: Leaf[] = []): Leaf[] {
@@ -357,7 +377,7 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
     dictLeaves[loc] = leaves(JSON.parse(fs.readFileSync(p, "utf8")));
   }
   const baseKeys = dictLeaves.en.map((l) => l.key).sort();
-  check("C8 en 字典叶子数 = 2824（未被截断/新增）", baseKeys.length === 2824, `实际 ${baseKeys.length}`);
+  check("C8 en 字典叶子数 = 2938（未被截断/新增）", baseKeys.length === 2938, `实际 ${baseKeys.length}`);
 
   for (const loc of LOCALES) {
     if (loc === "en") continue;

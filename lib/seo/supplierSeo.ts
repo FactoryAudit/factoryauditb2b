@@ -59,7 +59,26 @@ export type SupplierSeoData = {
   /** 国家展示名（已本地化） */
   countryName: string;
   city: string;
+  /**
+   * 地理大区（DB `suppliers.region`，公开层）。STEP-04 新增。
+   *
+   * 与 `city` 同族的地理描述，且**粒度比 city 更粗**（city 早已在 PUBLIC_FIELDS 里）。
+   * 缺值一律 undefined / null ⇒ 该行**不渲染**（见 `generateSupplierSnapshot` 的
+   * `pushIfPresent`），绝不写 "N/A" / "Unknown"。
+   */
+  region?: string | null;
   industryCode?: string;
+  /**
+   * 产业带展示名（DB `industrial_clusters.name`，DB-first，仅 `is_published = true`）。
+   * STEP-04 新增。
+   *
+   * 🔴 与 `industryCode` 是**两个维度**，不可互相顶替：
+   *    · industryCode / industryName = 行业分类（食品、家具……）
+   *    · clusterName               = 「某地在某行业的制造聚集」（Foshan Furniture）
+   * 解析不到（无 cluster_slug / 产业带不存在 / 未发布 / 查询失败）⇒ undefined ⇒ 不渲染该行。
+   * 无据不声称：宁可整行消失，也不显示一条未经确认的产业带。
+   */
+  clusterName?: string | null;
   /** 行业展示名（已本地化，可缺省） */
   industryName?: string;
   businessType: string;
@@ -169,7 +188,11 @@ export type SupplierSeoSourceView = {
   country: string;
   countryName?: string;
   city: string;
+  /** STEP-04：地理大区（DB suppliers.region）。缺值 ⇒ 不渲染该行 */
+  region?: string;
   industryCode?: string;
+  /** STEP-04：产业带展示名（DB-first，仅已发布）。缺值 ⇒ 不渲染该行 */
+  clusterName?: string;
   businessType: string;
   website?: string;
   registrationNumber?: string;
@@ -213,6 +236,10 @@ export function supplierSeoDataFromView(
     countryCode: v.country,
     countryName: v.countryName ?? v.country.toUpperCase(),
     city: v.city,
+    // STEP-04：两个新公开描述字段。缺值一律 undefined（不是 ""），
+    // 让「有值才渲染」只需看 truthiness。industryName 仍透传 code，本轮不引入新行为。
+    region: v.region,
+    clusterName: v.clusterName,
     industryCode: v.industryCode,
     // ⚠️ 行业名当前未本地化（页面既有的「英文页也带中文」约定）；这里直接透传 code，
     //    不引入新行为。拆 nameEn/nameZh 是会动 108 页的独立周期。
@@ -672,9 +699,18 @@ export type SnapshotRow = {
 export type SnapshotLabels = {
   englishName?: string;
   city?: string;
+  /** STEP-04：地理大区行标签（字典 `supplierProfile.regionLabel`） */
+  region?: string;
   country?: string;
   businessType?: string;
   industry?: string;
+  /**
+   * STEP-04：产业带行标签（字典 `supplierProfile.industrialClusterLabel`）。
+   *
+   * 渲染为**纯文本**，不做链接 —— `/industrial-clusters/[slug]` 属后续 Change Set，
+   * 现在挂 href 就会在全站供应商页产出 404。
+   */
+  industrialCluster?: string;
   products?: string;
   address?: string;
   website?: string;
@@ -711,13 +747,39 @@ export function generateSupplierSnapshot(
     rows.push({ id, label, value: v || copy.unknownUnavailable, unknown: !v });
   };
 
+  /**
+   * STEP-04：与 `push` 的唯一区别 —— **空值直接不渲染这一行**（不写「无资料」占位）。
+   *
+   * 为什么新增一个而不是复用 push：
+   *   region / industrialCluster 对当前**所有**供应商都还没有值（region、cluster_slug
+   *   17/17 为 NULL）。若走 push，每张档案页会凭空多出两行 "Not available" ——
+   *   那不是「多显示了信息」，而是**把平台的数据缺口写成了企业的负面信号**。
+   *   「没有这一行」才是中性且诚实的表达。
+   */
+  const pushIfPresent = (
+    id: string,
+    label: string | undefined,
+    raw: string | undefined | null
+  ) => {
+    if (!label) return;
+    const v = (raw ?? "").trim();
+    if (!v) return;
+    rows.push({ id, label, value: v, unknown: false });
+  };
+
   push("englishName", labels.englishName, data.englishName);
   // 城市与国家分成两行（而不是拼成 "City, Country"）：这样标签可以复用已有的
   // 本地化字典键（trust.cityLabel / suppliers.filterCountry），不必新造 "Location" 文案。
   push("city", labels.city, data.city);
+  // STEP-04：region 空值 ⇒ **整行不渲染**（不给「无资料」占位，理由见 pushIfPresent 注释）。
+  // 位置在地理三元组中间（city → region → country，由细到粗），保持既有的 location 分组。
+  pushIfPresent("region", labels.region, data.region);
   push("country", labels.country, data.countryName);
   push("businessType", labels.businessType, (data.businessType ?? "").trim() || data.companyType);
   push("industry", labels.industry, data.industryName ?? data.industryCode);
+  // STEP-04：产业带（DB-first，仅 is_published=true）。
+  // 解析不到 ⇒ 无此行；绝不显示 "Unknown"、绝不产出指向不存在产业带的链接。
+  pushIfPresent("industrialCluster", labels.industrialCluster, data.clusterName);
   push("products", labels.products, joinList(data.mainProducts ?? [], locale));
   push("address", labels.address, data.address);
   push("website", labels.website, data.website);

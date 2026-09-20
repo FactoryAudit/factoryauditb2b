@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
 import RfqForm from "@/components/RfqForm";
+import RfqEnterTracker from "@/components/RfqEnterTracker";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { hreflangFor, canonicalFor } from "@/i18n/hreflang";
@@ -52,6 +53,8 @@ export default async function Page({ params }: Props) {
 
   return (
     <main className="container py-10" data-track-page="rfq">
+      {/* P2（STEP 08）：进入 /rfq 时发一次独立业务事件 rfq_enter */}
+      <RfqEnterTracker locale={locale} />
       <JsonLd data={jsonLd} />
       <section className="max-w-3xl mx-auto text-center mb-10">
         <span className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">{s.badge}</span>

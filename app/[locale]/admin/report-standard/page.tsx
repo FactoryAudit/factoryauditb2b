@@ -4,11 +4,11 @@ import { requireAdmin } from "@/lib/adminData";
 import {
   REPORT_HEADER,
   BUYER_DOWNLOAD,
-  REPORT_LANGUAGES,
   type Lang,
   type Bi,
 } from "@/lib/standardReport";
 import StandardReportDocument from "@/components/StandardReportDocument";
+import StandardReportAdminDownload from "@/components/admin/StandardReportAdminDownload";
 
 // 标准版工厂尽调报告 —— 内部样张（后台 requireAdmin 闸门，工厂不可见）。
 //
@@ -56,21 +56,12 @@ export default async function ReportStandardPage({ params }: Props) {
         </div>
         <p className="mt-1 text-xs text-[#64748b]">{tr(BUYER_DOWNLOAD.note)}</p>
 
-        <div className="mt-3 flex flex-wrap items-center gap-3">
-          <label className="text-sm font-medium text-[#0f172a]" htmlFor="report-lang">
-            {tr(BUYER_DOWNLOAD.langLabel)}
-          </label>
-          <select id="report-lang" className="input max-w-[220px]" defaultValue="en">
-            {REPORT_LANGUAGES.map((l) => (
-              <option key={l} value={l}>
-                {l}
-              </option>
-            ))}
-          </select>
-          <button type="button" className="btn btn-primary" disabled>
-            {tr(BUYER_DOWNLOAD.cta)}
-          </button>
-        </div>
+        {/* 管理员预览：直接下载样张（客户端生成，无服务端端点）。
+            买家侧付费/手动解锁流程在公开页 /standard-report 门禁表单，与本按钮无关。 */}
+        <StandardReportAdminDownload
+          labels={{ langLabel: tr(BUYER_DOWNLOAD.langLabel), downloadCta: tr(BUYER_DOWNLOAD.cta) }}
+          defaultLang={lang}
+        />
         <p className="mt-2 text-xs text-[#941b1b]">{tr(BUYER_DOWNLOAD.priceNote)}</p>
       </div>
     </div>

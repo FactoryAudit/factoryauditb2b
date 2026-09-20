@@ -633,3 +633,80 @@ export async function notifyClaimReceived(data: {
     ].join("\n"),
   });
 }
+
+// ---------- STEP-05：Verify Supplier（买家请求核验某供应商）----------
+//
+// 语义红线（与 supplier_claim 完全一致）：
+//   收到一条 "Verify Supplier" 请求 ≠ 该供应商已核验。落库 kind=supplier_verification
+//   只代表「买家提出了一项核验需求，等待人工跟进」。绝不触发任何 Trust / Level 变更，
+//   也绝不因为「有人提交过」就对外声称该供应商「verified」。
+
+// 管理员：新核验请求（= 一条待跟进的商业线索）
+export async function notifyAdminSupplierVerificationRequest(data: {
+  id: string;
+  /** 买家填写的供应商网址或公司名（原文，未做任何解析/断言） */
+  supplierRef: string;
+  /** 若请求来自某条档案页，这里是该档案 slug；否则 null */
+  slug?: string | null;
+  /** 供应商档案名（仅当 slug 命中时存在） */
+  supplierName?: string | null;
+  fields: Record<string, string>;
+}): Promise<boolean> {
+  const adminEmail = process.env.NOTIFY_ADMIN_EMAIL;
+  if (!adminEmail) {
+    console.log("[notify] NOTIFY_ADMIN_EMAIL 未配置，跳过核验请求通知");
+    return false;
+  }
+  const f = data.fields;
+  return sendMail({
+    to: adminEmail,
+    subject: `[FactoryAuditB2B] Supplier Verification Request (${data.id})`,
+    text: [
+      `Request ID: ${data.id}`,
+      `Supplier on record: ${data.supplierName ? `${data.supplierName} (${data.slug})` : "— (not linked to a profile)"}`,
+      "",
+      "— Supplier as given by the buyer —",
+      `Supplier reference: ${data.supplierRef}`,
+      `Product / category  : ${f.productCategory ?? ""}`,
+      `Order value band    : ${f.orderValueBand ?? ""}`,
+      `Country of import   : ${f.buyerCountry ?? ""}`,
+      `Urgency             : ${f.urgency ?? ""}`,
+      "",
+      "— Buyer —",
+      `Company Email : ${f.buyerEmail ?? ""}`,
+      `Contact Name  : ${f.contactName ?? ""}`,
+      `Company Name  : ${f.buyerCompany ?? ""}`,
+      "",
+      "— What the buyer wants checked —",
+      `Concerns: ${f.concerns ?? ""}`,
+      "",
+      "Next steps: confirm the supplier identity (URL + company name), check whether a profile exists, then scope a verification or audit. This is a lead, not a verification result. Never mark the supplier verified on the basis of this submission alone.",
+    ].join("\n"),
+  });
+}
+
+// 买家回执：Reference ID + 人工跟进周期 + 明确「非核验结论」
+export async function notifyVerificationRequestReceived(data: {
+  email: string;
+  companyName?: string | null;
+  id: string;
+  supplierRef: string;
+}): Promise<boolean> {
+  if (!data.email) return false;
+  return sendMail({
+    to: data.email,
+    subject: "We received your supplier verification request — FactoryAuditB2B",
+    text: [
+      `Hi${data.companyName ? ` ${data.companyName}` : ""},`,
+      "",
+      `We received your verification request for: ${data.supplierRef}`,
+      `Reference ID: ${data.id}`,
+      "",
+      "A specialist will review the details and reply within one business day with the scope, what can be checked, and the cost.",
+      "",
+      "Please note: this submission is a request, not a verification result. It does not change any supplier's status, and payment does not guarantee a particular outcome. We tell you what we find, including when we cannot confirm something.",
+      "",
+      "FactoryAuditB2B",
+    ].join("\n"),
+  });
+}

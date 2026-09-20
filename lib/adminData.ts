@@ -652,6 +652,10 @@ export type AdminRfqRow = {
   status: string;
   created_at: string;
   user_id: string | null;
+  /** STEP-02B（migration 024）：是否对外公开展示（首页 Live Buyer Requests）。与 status 语义分离 */
+  is_public: boolean;
+  /** STEP-02B：对外发布时间。未公开过则为 null */
+  published_at: string | null;
 };
 
 export async function listAdminRfqs(limit = 100): Promise<AdminRfqRow[]> {
@@ -661,7 +665,7 @@ export async function listAdminRfqs(limit = 100): Promise<AdminRfqRow[]> {
     const { data, error } = await db
       .from("rfqs")
       .select(
-        "id, reference_id, product, quantity, country, email, company, message, status, created_at, user_id"
+        "id, reference_id, product, quantity, country, email, company, message, status, created_at, user_id, is_public, published_at"
       )
       .order("created_at", { ascending: false })
       .limit(limit);
@@ -689,6 +693,36 @@ export async function updateRfqStatus(
       .eq("reference_id", referenceId);
     if (error) {
       console.error("[adminData] update rfq failed", error.message);
+      return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * STEP-02B：RFQ 对外公开闸门（is_public）。
+ *
+ * 为什么与 status 分开：status 表示**内部处理进度**（new/reviewing/matched/closed），
+ * is_public 表示**是否对外展示**（首页 Live Buyer Requests / 公开采购需求）。
+ * 两者语义正交：一条 closed 的案例仍可能值得公开展示，一条 new 的也可能不宜公开。
+ * 本函数不动 status。
+ *
+ * 首次公开时写入 published_at；下架时**保留** published_at（保留"曾公开发布过"的事实）。
+ */
+export async function setRfqPublic(
+  referenceId: string,
+  isPublic: boolean
+): Promise<boolean> {
+  const db = createAdminClient();
+  if (!db) return false;
+  try {
+    const patch: Record<string, unknown> = { is_public: isPublic };
+    if (isPublic) patch.published_at = new Date().toISOString();
+    const { error } = await db.from("rfqs").update(patch).eq("reference_id", referenceId);
+    if (error) {
+      console.error("[adminData] set rfq public failed", error.message);
       return false;
     }
     return true;

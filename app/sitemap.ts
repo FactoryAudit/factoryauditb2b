@@ -15,6 +15,9 @@ import { CASE_STUDIES } from "@/lib/caseStudies";
 import { FIELD_REPORTS } from "@/lib/fieldReports";
 import { topicsForIndustry } from "@/lib/industryContent";
 import { CHEMICALS } from "@/lib/chemicals";
+// CHANGE SET B：产业带目录/详情。与 suppliers 同样走「只提交已发布行」——
+// 提交集合必须与页面可索引性同源，否则 Search Console 报 "Submitted URL marked noindex"。
+import { listPublishedClusters } from "@/lib/industrialClusters";
 
 const BASE = "https://factoryauditb2b.com";
 
@@ -53,6 +56,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/countries",
     "/industry",
     "/chemicals",
+    // CHANGE SET B：产业带目录（按国家/地区/行业聚合的制造集聚区）
+    "/industrial-clusters",
     ...CHEMICALS.map((c) => `/chemicals/${c.slug}`),
     "/resources",
     "/guides",
@@ -98,6 +103,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     if (path.startsWith("/tools")) return { changeFrequency: "weekly", priority: 0.8 };
     if (path.startsWith("/services")) return { changeFrequency: "monthly", priority: 0.8 };
     if (path.startsWith("/suppliers")) return { changeFrequency: "weekly", priority: 0.8 };
+    // 产业带目录与详情：目录型着陆页，但内容由运营按需新增 ⇒ 提交节奏用 monthly。
+    if (path.startsWith("/industrial-clusters"))
+      return { changeFrequency: "monthly", priority: 0.7 };
     if (
       [
         "/about",
@@ -140,12 +148,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const pages: MetadataRoute.Sitemap = [...core, ...coverage].flatMap((p) => emit(p));
 
-  const [countries, industries, standards, supplierRows, seo] = await Promise.all([
+  const [countries, industries, standards, supplierRows, seo, clusterRows] = await Promise.all([
     listCountries(),
     listIndustries(),
     listStandards(),
     listSupplierSitemapRows(),
     getSeoMatrix(),
+    listPublishedClusters(),
   ]);
 
   // 注意：以下程序化矩阵 URL 对应的页面尚未建成，提交会导致大量 404（SEO-AUDIT P0-3）。
@@ -198,6 +207,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     pages.push(
       ...emit(
         `/suppliers/${row.slug}`,
+        lm && !Number.isNaN(lm.getTime()) ? lm : undefined
+      )
+    );
+  });
+
+  // 产业带详情页（CHANGE SET B）。
+  // 提交集合 = **已发布** cluster，与页面侧可索引性同源：详情页对「不存在 / 未发布」
+  // 一律 notFound() + noindex，所以这里绝不能提交 is_published = false 的行。
+  // lastModified 用真实 updated_at，缺失时不传（绝不用当前时间顶替）。
+  clusterRows.forEach((c) => {
+    const lm = c.updated_at ? new Date(c.updated_at) : undefined;
+    pages.push(
+      ...emit(
+        `/industrial-clusters/${c.slug}`,
         lm && !Number.isNaN(lm.getTime()) ? lm : undefined
       )
     );

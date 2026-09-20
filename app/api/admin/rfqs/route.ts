@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { requireAdmin, updateRfqStatus } from "@/lib/adminData";
+import { requireAdmin, updateRfqStatus, setRfqPublic } from "@/lib/adminData";
 import { checkRateLimit, clamp } from "@/lib/rateLimit";
 
 // PATCH /api/admin/rfqs —— 流转询价单状态
@@ -47,6 +47,16 @@ export async function PATCH(req: Request) {
     return NextResponse.json(
       { ok: false, error: "invalid_reference" },
       { status: 400, headers: NO_STORE }
+    );
+  }
+
+  // ---- STEP-02B：对外公开闸门（与 status 语义分离）----
+  // 传 isPublic（布尔）→ 切换公开状态；否则按原逻辑流转 status。
+  if (typeof body.isPublic === "boolean") {
+    const okPub = await setRfqPublic(referenceId, body.isPublic);
+    return NextResponse.json(
+      { ok: okPub },
+      { status: okPub ? 200 : 500, headers: NO_STORE }
     );
   }
 

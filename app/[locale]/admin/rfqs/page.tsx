@@ -3,6 +3,9 @@ import { isLocale, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { listAdminRfqs, requireAdmin } from "@/lib/adminData";
 import RfqStatusSelect from "@/components/admin/RfqStatusSelect";
+import RfqPublicToggle, {
+  type RfqPublicToggleDict,
+} from "@/components/admin/RfqPublicToggle";
 
 // Admin · 询价单列表
 //
@@ -34,6 +37,28 @@ export default async function AdminRfqsPage({ params }: Props) {
     error: a.error,
   };
 
+  // STEP-02B：对外公开闸门文案。后台为单人 noindex 工具，
+  // 按 admin/layout.tsx 既有约定用双语常量，不为内部标签补 9 语字典键。
+  const isZh = locale === "zh" || locale === "zh-TW";
+  const publicDict: RfqPublicToggleDict = isZh
+    ? {
+        publicOn: "公开",
+        publicOff: "下架",
+        shown: "前台可见",
+        hidden: "未公开",
+        saving: "保存中…",
+        error: "失败",
+      }
+    : {
+        publicOn: "Show",
+        publicOff: "Hide",
+        shown: "Live",
+        hidden: "Hidden",
+        saving: "Saving…",
+        error: "Failed",
+      };
+  const colPublic = isZh ? "前台公开" : "Public";
+
   return (
     <div>
       <h1 className="text-2xl font-bold text-[#0f172a]">{a.rfqsTitle}</h1>
@@ -53,6 +78,7 @@ export default async function AdminRfqsPage({ params }: Props) {
                 <th className="px-4 py-3">{a.colEmail}</th>
                 <th className="px-4 py-3">{a.colCountry}</th>
                 <th className="px-4 py-3">{a.colCreated}</th>
+                <th className="px-4 py-3">{colPublic}</th>
                 <th className="px-4 py-3">{a.colStatus}</th>
               </tr>
             </thead>
@@ -87,6 +113,13 @@ export default async function AdminRfqsPage({ params }: Props) {
                   <td className="px-4 py-3 text-[#475569]">{r.country ?? "—"}</td>
                   <td className="px-4 py-3 text-xs text-[#94a3b8]">
                     {new Date(r.created_at).toISOString().slice(0, 10)}
+                  </td>
+                  <td className="px-4 py-3">
+                    <RfqPublicToggle
+                      referenceId={r.reference_id}
+                      isPublic={Boolean(r.is_public)}
+                      dict={publicDict}
+                    />
                   </td>
                   <td className="px-4 py-3">
                     <RfqStatusSelect

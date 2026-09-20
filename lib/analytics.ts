@@ -28,6 +28,12 @@ export const ANALYTICS_EVENTS = {
   claimView: "supplier_claim_view",
   claimSubmit: "supplier_claim_submit",
 
+  // ---- STEP-05：Verify Supplier（买家请求核验某供应商）----
+  // 口径与 claimSubmit 同源：`*_view` 是页面浏览，`*_submit` 是真实表单提交（转化）。
+  // 与 CONVERSION_EVENTS 的关系见下方清单 —— submit 计入转化，view 不计。
+  verifySupplierView: "verify_supplier_view",
+  verifySupplierSubmit: "verify_supplier_submit",
+
   // ---- CTA 点击（CS-04 口径铁律：点击 ≠ 请求 ≠ 成交 ≠ 收入确认）----
   // 点击是漏斗上层，**绝不可**计入 CONVERSION_EVENTS，否则转化率虚高。
   // 服务卡片 / 入口点击一律发 *_cta_click；只有真实表单提交才发 *_request / *_submit。
@@ -38,6 +44,18 @@ export const ANALYTICS_EVENTS = {
   rfqCtaClick: "rfq_cta_click",
   /** /services Sourcing 卡片点击（sourcing 的落地页是 /rfq） */
   sourcingCtaClick: "sourcing_cta_click",
+  // ---- STEP-06：首页「What do you need?」四入口点击（CTA 点击层，不进转化桶）----
+  // 与既有 *_cta_click 同口径；home_ 前缀用于区分首页来源，便于 GA4 分渠道看点击率。
+  homeFindSuppliersClick: "home_find_suppliers_cta_click",
+  homeIndustrialClustersClick: "home_industrial_clusters_cta_click",
+  homeVerifySupplierClick: "home_verify_supplier_cta_click",
+  homeRfqClick: "home_rfq_cta_click",
+  // ---- STEP-07：首页 Live Buyer Requests（买家需求流展示层）----
+  // 口径：曝光 = 页面级视（data-track-view），点击 = CTA 点击层（data-track）。
+  // 点击名沿用 CS-04 铁律的 *_cta_click 后缀（与 STEP-06 的 home_*_cta_click 同源），
+  // 绝不可进 CONVERSION_EVENTS。
+  homeLiveBuyerRequestView: "home_live_buyer_request_view",
+  homeLiveBuyerRequestClick: "home_live_buyer_request_cta_click",
 
   // ---- 游客限额 / 免费注册（Guest Limit）----
   /** CS-05b 已接线：Guest 看完 5 家不同 supplier 后，第 6 家被注册门拦下时发出 */
@@ -68,6 +86,8 @@ export const ANALYTICS_EVENTS = {
   inspectionRequest: "inspection_request",
   sourcingRequest: "sourcing_request",
   rfqStart: "rfq_start",
+  /** P2（STEP 08）：用户真正进入 /rfq 页面的独立业务语义事件（区别于自动 page_view） */
+  rfqEnter: "rfq_enter",
   rfqSubmit: "rfq_submit",
   // /custom-services 通用咨询表单：全站付费档 CTA 的落地页（V1.1 定价无在线支付，
   // 付费意向统一导流到这里），是商业转化分析的终点事件
@@ -142,6 +162,9 @@ export const CONVERSION_EVENTS = [
   // 恒为 0 的假转化。已移入 UNWIRED_EVENTS，与同类的 quotaReached 一致。
   ANALYTICS_EVENTS.standardReportSubmit, // 标准报告样张下载留资提交（/standard-report）
   ANALYTICS_EVENTS.supplierNetworkSubmit, // 供应商入驻提交
+  // STEP-05：/verify-supplier 真实表单提交 —— 这是本 Change Set 的**唯一**转化事件。
+  // 页面浏览（verify_supplier_view）属漏斗上层，刻意不进本清单。
+  ANALYTICS_EVENTS.verifySupplierSubmit,
   // ---- Qualified Lead：服务端确认已受理 ----
   ANALYTICS_EVENTS.auditRequestSubmit,
   ANALYTICS_EVENTS.inspectionRequestSubmit,
@@ -169,6 +192,13 @@ export const CLICK_LEVEL_EVENTS = [
   ANALYTICS_EVENTS.sourcingCtaClick,
   ANALYTICS_EVENTS.rfqCtaClick,
   ANALYTICS_EVENTS.supplierCardClick,
+  // STEP-06：首页四入口点击（与上面同属点击层，绝不可进 CONVERSION_EVENTS）
+  ANALYTICS_EVENTS.homeFindSuppliersClick,
+  ANALYTICS_EVENTS.homeIndustrialClustersClick,
+  ANALYTICS_EVENTS.homeVerifySupplierClick,
+  ANALYTICS_EVENTS.homeRfqClick,
+  // STEP-07：首页 Live Buyer Requests 卡片点击（点击层，绝不可进 CONVERSION_EVENTS）
+  ANALYTICS_EVENTS.homeLiveBuyerRequestClick,
   ANALYTICS_EVENTS.profileFreeCta,
   ANALYTICS_EVENTS.profilePaidCta,
   ANALYTICS_EVENTS.registerCta,

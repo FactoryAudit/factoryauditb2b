@@ -49,6 +49,11 @@ export default async function AdminLayout({ children, params }: Props) {
     { href: "/admin/suppliers", label: a.navSuppliers },
     { href: "/admin/rfqs", label: a.navRfqs },
     { href: "/admin/leads", label: a.navLeads },
+    // STEP-02B：产业带管理。标签用双语常量，不为内部导航补 9 语键（后台单人、noindex）
+    {
+      href: "/admin/industrial-clusters",
+      label: locale === "zh" || locale === "zh-TW" ? "产业带" : "Clusters",
+    },
     // CS-17：订单。标签复用 admin.orders.ordersTitle，不为内部导航再补 9 语键
     { href: "/admin/orders", label: a.orders.ordersTitle },
     // CS-18：审核工作流后台。标签用双语常量，不为内部导航补 9 语键（后台单人、noindex）

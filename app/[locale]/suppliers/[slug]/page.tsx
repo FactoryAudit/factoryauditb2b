@@ -90,19 +90,35 @@ function buildSupplierSeoData(
 //     （一次 UPDATE），改完未必立刻可见。**若发布时效重新成为硬要求，
 //     把下面的 revalidate 去掉并恢复 `export const dynamic = "force-dynamic";` 即可。**
 //
-// 🔴 部署事实（2026-09-18 核对 @opennextjs/cloudflare 1.20.4 源码，非推断）：
-//   `open-next.config.ts` 现为 `defineCloudflareConfig({})` ⇒ incrementalCache /
-//   tagCache / queue 全部解析为 **"dummy"**，而 dummy 的 `get()` 直接抛
-//   `IgnorableError`（@opennextjs/aws/dist/overrides/incrementalCache/dummy.js）
-//   ⇒ **当前没有任何缓存层**：
-//     · 缓存永远 miss ⇒ 每个请求仍现场渲染，与改动前的 force-dynamic 等价，
-//       因此本次改动**不引入回归**，数据依然实时；
-//     · `revalidate` 的「静态分发 + 按时更新」要等增量缓存真正配好才成立。
-//   要让它生效（属 Cloudflare 侧人工操作），二选一：
-//     a) 配 R2 增量缓存：建 bucket + 加 r2_buckets 绑定 + 在 open-next.config.ts
-//        传 `incrementalCache: r2IncrementalCache`（真 ISR，按窗口更新）；
-//     b) 加 Cache Rule 边缘缓存 —— ⚠️ 届时**必须排除 /suppliers**，
-//        否则会按边缘 TTL 提供过期档案。
+// 🔴 部署事实（2026-09-20 核对，**已修正 09-18 的过时结论**）：
+//   09-18 曾判定 `open-next.config.ts` 是 `defineCloudflareConfig({})` ⇒ 缓存层为 dummy
+//   ⇒ 每请求现场渲染、revalidate 形同虚设但**数据实时**。该结论**已失效**。
+//
+//   现配置为 `incrementalCache: staticAssetsIncrementalCache` +
+//   `enableCacheInterception: true`：`.open-next/cache/` 被复制进
+//   `assets/cdn-cgi/_next_cache/`，其 `set()` / `delete()` 均为 no-op
+//   ⇒ **缓存只读，页面数据在构建时冻结**。
+//
+//   实测响应头（线上）：
+//     · 本页（预渲染/ISR）：`Cache-Control: s-maxage=30xx, stale-while-revalidate=2592000`
+//       + `x-nextjs-prerender: 1` ⇒ 构建时快照
+//     · /industrial-clusters（force-dynamic）：`private, no-cache, no-store, max-age=0,
+//       must-revalidate` ⇒ 即时
+//
+//   ⚠️ 因此 `revalidate = 3600` 当前**不生效**：本页内容会冻结到下一次
+//      build + deploy，而不是每小时自更新。改库（如后台填 cluster_slug / region、
+//      发布供应商）后，产业带页可能马上可见，本页却要等下一次发布。
+//
+//   ✅ 现行策略（用户 2026-09-20 拍板，写进发布流程）：
+//      **数据库修改 → 正式发布时必须重新 build/deploy。**
+//      在后台开始频繁改供应商资料之前，不改 R2 ISR —— 收益不抵风险。
+//      将来若发布时效重新成为硬要求，二选一：
+//        a) 配 R2 增量缓存：建 bucket + 加 r2_buckets 绑定 + 传入
+//           `incrementalCache: r2IncrementalCache`（真 ISR，按窗口更新）；
+//        b) 去掉下面的 revalidate 并恢复 `export const dynamic = "force-dynamic";`
+//           （放弃静态产物，换回逐请求实时）。
+//      ⚠️ 无论选哪条，都**不要**加 Cache Rule 边缘缓存并覆盖 /suppliers ——
+//         那会按边缘 TTL 提供过期档案。
 export const revalidate = 3600;
 export const dynamicParams = true;
 
@@ -255,9 +271,14 @@ export default async function SupplierProfilePage({
   const snapshotLabels: SnapshotLabels = {
     englishName: sp.regEnglishName,
     city: t.trust.cityLabel,
+    // STEP-04：region / industrialCluster 两个新行标签。
+    // 两者都由 generateSupplierSnapshot 的 pushIfPresent 渲染 —— **无值即无该行**，
+    // 不会出现「无资料」占位（当前 region / cluster_slug 全为 NULL ⇒ 页面与改动前逐字一致）。
+    region: sp.regionLabel,
     country: t.suppliers.filterCountry,
     businessType: sp.businessTypeLabel,
     industry: sp.industryLabel,
+    industrialCluster: sp.industrialClusterLabel,
     products: sp.productsTitle,
     address: sp.regAddress,
     website: sp.regWebsite,
@@ -769,6 +790,19 @@ export default async function SupplierProfilePage({
             </Link>
             <Link href={p("/factory-audit/request")} className="btn btn-outline">
               {sp.requestAudit}
+            </Link>
+            {/* STEP-05：把「这家到底靠不靠谱」的疑问接到 /verify-supplier 最小闭环。
+                带 ?supplier=<slug> —— 目标页在客户端按此关联后台档案，
+                买家不用重新打一遍供应商名（减少提交摩擦 = 提高线索转化）。
+                同时带 supplier_name 作为**纯兜底**：目标页在服务端不读 searchParams
+                （读了就无法预渲染），因此这个参数只在客户端 JS 不可用时用于展示。
+                ⚠️ 这是**链接**不是按钮动作：本页仍保持零客户端交互的预渲染形态，
+                不因新增入口把档案页从静态产物拖回动态渲染。 */}
+            <Link
+              href={`${p("/verify-supplier")}?supplier=${encodeURIComponent(slug)}`}
+              className="btn btn-outline"
+            >
+              {sp.verifyThisSupplier}
             </Link>
           </div>
           <p className="text-xs text-[#64748b] mt-3">

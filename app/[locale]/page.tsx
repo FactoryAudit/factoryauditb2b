@@ -2,8 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import HeroSearch from "@/components/HeroSearch";
 import JsonLd from "@/components/JsonLd";
-import { listSuppliers } from "@/lib/queries";
+import RelativeTime from "@/components/RelativeTime";
+import { listSuppliers, listPublicRfqs } from "@/lib/queries";
+import { STATIC_INDUSTRIES } from "@/lib/staticData";
 import { COVERAGE_COUNTRIES } from "@/lib/coverage";
+
+/** STEP-07：industry_code → 展示名（与 /rfq 表单同源，复用 STATIC_INDUSTRIES）。 */
+function industryName(code: string | null): string {
+  if (!code) return "";
+  return STATIC_INDUSTRIES.find((i) => i.code === code)?.name ?? code;
+}
 import { TOOL_ORDER } from "@/lib/nav";
 import { featuredGuides } from "@/lib/guides";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
@@ -11,6 +19,7 @@ import { getDictionary } from "@/i18n/getDictionary";
 import { hreflangFor, canonicalFor } from "@/i18n/hreflang";
 import { OG_IMAGE } from "@/lib/pageMeta";
 import { pickZhCopy, pickZhPair } from "@/lib/tw";
+import { ANALYTICS_EVENTS } from "@/lib/analytics";
 
 const BASE = "https://factoryauditb2b.com";
 type Props = { params: Promise<{ locale: string }> };
@@ -50,6 +59,7 @@ export default async function Home({ params }: Props) {
   const p = (href: string) => localePath(locale, href);
 
   const suppliers = await listSuppliers();
+  const buyerRequests = await listPublicRfqs(5);
   const searchData = suppliers.map((s) => ({
     slug: s.slug,
     legalName: s.legalName,
@@ -114,19 +124,153 @@ export default async function Home({ params }: Props) {
             <p className="mt-4 text-lg text-[#0f172a] font-medium max-w-xl">{t.home.lead}</p>
             <p className="mt-2 text-[#475569] max-w-xl">{t.home.sub}</p>
             <div className="mt-6 flex gap-3 flex-wrap">
-              <Link href={p("/tools/supplier-risk-calculator")} className="btn btn-primary">
+              <Link href={p("/suppliers")} className="btn btn-primary">
                 {t.home.ctaPrimary}
               </Link>
-              <Link href={p("/services/supplier-verification")} className="btn btn-accent">
+              <Link href={p("/verify-supplier")} className="btn btn-accent">
                 {t.home.ctaSecondary}
-              </Link>
-              <Link href={p("/factory-audit/request")} className="btn btn-outline">
-                {t.home.ctaHighIntent}
               </Link>
             </div>
           </div>
           <HeroSearch suppliers={searchData} t={t.common.heroSearch} />
         </div>
+      </section>
+
+      {/* WHAT DO YOU NEED? —— STEP-06 四入口轻量卡片
+          位置：Hero 正下方。每张卡是真实 <a href>（SSR 直出，非 JS 跳转），
+          点击经全局 AnalyticsTracker 的 data-track 委托发 *_cta_click。
+          四张卡语义互斥：找供应商 / 按产业带找 / 已有供应商要核验 / 有明确采购需求。
+          为避免与下方各自专区重复，本区块只做「分流入口」，不承载详细内容。 */}
+      <section className="container pb-16">
+        <h2 className="text-3xl font-bold text-[#0f172a]">{t.home.needTitle}</h2>
+        <p className="text-[#64748b] mt-2 mb-8">{t.home.needLead}</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <Link
+            href={p("/suppliers")}
+            data-track={ANALYTICS_EVENTS.homeFindSuppliersClick}
+            className="card p-6 flex flex-col hover:border-[#0f4c81] transition"
+          >
+            <div className="text-sm font-semibold text-[#0f4c81] mb-1">01</div>
+            <h3 className="text-lg font-bold text-[#0f172a]">{t.home.entryFindTitle}</h3>
+            <p className="text-sm text-[#475569] mt-2 flex-1">{t.home.entryFindDesc}</p>
+            <span className="btn btn-outline mt-5 self-start">{t.home.entryFindCta}</span>
+          </Link>
+          <Link
+            href={p("/industrial-clusters")}
+            data-track={ANALYTICS_EVENTS.homeIndustrialClustersClick}
+            className="card p-6 flex flex-col hover:border-[#0f4c81] transition"
+          >
+            <div className="text-sm font-semibold text-[#0f4c81] mb-1">02</div>
+            <h3 className="text-lg font-bold text-[#0f172a]">{t.home.entryClusterTitle}</h3>
+            <p className="text-sm text-[#475569] mt-2 flex-1">{t.home.entryClusterDesc}</p>
+            <span className="btn btn-outline mt-5 self-start">{t.home.entryClusterCta}</span>
+          </Link>
+          <Link
+            href={p("/verify-supplier")}
+            data-track={ANALYTICS_EVENTS.homeVerifySupplierClick}
+            className="card p-6 flex flex-col hover:border-[#0f4c81] transition"
+          >
+            <div className="text-sm font-semibold text-[#0f4c81] mb-1">03</div>
+            <h3 className="text-lg font-bold text-[#0f172a]">{t.home.entryVerifyTitle}</h3>
+            <p className="text-sm text-[#475569] mt-2 flex-1">{t.home.entryVerifyDesc}</p>
+            <span className="btn btn-outline mt-5 self-start">{t.home.entryVerifyCta}</span>
+          </Link>
+          <Link
+            href={p("/rfq")}
+            data-track={ANALYTICS_EVENTS.homeRfqClick}
+            className="card p-6 flex flex-col hover:border-[#0f4c81] transition"
+          >
+            <div className="text-sm font-semibold text-[#0f4c81] mb-1">04</div>
+            <h3 className="text-lg font-bold text-[#0f172a]">{t.home.entryRfqTitle}</h3>
+            <p className="text-sm text-[#475569] mt-2 flex-1">{t.home.entryRfqDesc}</p>
+            <span className="btn btn-outline mt-5 self-start">{t.home.entryRfqCta}</span>
+          </Link>
+        </div>
+      </section>
+
+      {/* LIVE BUYER REQUESTS —— STEP-07：首页买家需求流展示层
+           位置：STEP-06 四入口正下方。数据源 listPublicRfqs（构建期冻结，与 suppliers 同源）。
+           仅展示公开白名单字段；CTA 复用现有 /rfq（不新建 detail/list 路由、不改 /rfq 逻辑）。
+           data-track-view 发曝光事件；卡片 CTA 发 home_live_buyer_request_cta_click（点击层）。 */}
+      <section
+        className="container pb-16"
+        data-track-view={ANALYTICS_EVENTS.homeLiveBuyerRequestView}
+      >
+        <h2 className="text-3xl font-bold text-[#0f172a]">{t.home.liveTitle}</h2>
+        <p className="text-[#64748b] mt-2 mb-8">{t.home.liveLead}</p>
+
+        {buyerRequests.length === 0 ? (
+          <div className="rounded-lg border border-dashed border-[#cbd5e1] p-8 text-center">
+            <p className="text-lg font-semibold text-[#0f172a]">{t.home.liveEmptyTitle}</p>
+            <p className="text-sm text-[#64748b] mt-2">{t.home.liveEmptyLead}</p>
+            <Link href={p("/rfq")} className="btn btn-primary mt-5 inline-block">
+              {t.home.liveEmptyCta}
+            </Link>
+          </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {buyerRequests.map((r, i) => (
+                <div key={r.referenceId} className="card p-6 flex flex-col">
+                  <h3 className="text-lg font-bold text-[#0f172a]">{r.product}</h3>
+                  <dl className="mt-3 space-y-1 text-sm text-[#475569]">
+                    {r.quantity ? (
+                      <div>
+                        <dt className="inline font-medium text-[#0f172a]">
+                          {t.home.liveQuantity}:{" "}
+                        </dt>
+                        <dd className="inline">{r.quantity}</dd>
+                      </div>
+                    ) : null}
+                    {r.targetMarket ? (
+                      <div>
+                        <dt className="inline font-medium text-[#0f172a]">
+                          {t.home.liveMarket}:{" "}
+                        </dt>
+                        <dd className="inline">{r.targetMarket}</dd>
+                      </div>
+                    ) : null}
+                    {r.industryCode ? (
+                      <div>
+                        <dt className="inline font-medium text-[#0f172a]">
+                          {t.home.liveIndustry}:{" "}
+                        </dt>
+                        <dd className="inline">{industryName(r.industryCode)}</dd>
+                      </div>
+                    ) : null}
+                    {r.certificationsReq && r.certificationsReq.length > 0 ? (
+                      <div>
+                        <dt className="inline font-medium text-[#0f172a]">
+                          {t.home.liveCerts}:{" "}
+                        </dt>
+                        <dd className="inline">{r.certificationsReq.join(", ")}</dd>
+                      </div>
+                    ) : null}
+                  </dl>
+                  <div className="text-xs text-[#94a3b8] mt-3">
+                    <RelativeTime date={r.createdAt} prefix={t.home.livePosted} />
+                  </div>
+                  <Link
+                    href={p(`/rfq?request=${encodeURIComponent(r.referenceId)}`)}
+                    data-track={ANALYTICS_EVENTS.homeLiveBuyerRequestClick}
+                    data-track-value={String(i + 1)}
+                    className="btn btn-outline mt-5 self-start"
+                  >
+                    {t.home.liveRespondCta}
+                  </Link>
+                </div>
+              ))}
+            </div>
+            <div className="mt-6">
+              <Link
+                href={p("/rfq")}
+                className="text-[#0f4c81] font-medium hover:underline"
+              >
+                {t.home.liveViewAll} →
+              </Link>
+            </div>
+          </>
+        )}
       </section>
 
       {/* EVALUATE / VERIFY / AUDIT */}
@@ -248,6 +392,10 @@ export default async function Home({ params }: Props) {
           </Link>
         </div>
       </section>
+
+      {/* INDUSTRIAL CLUSTERS 入口已并入上方「What do you need?」四卡区（入口 02），
+          此处不再保留独立紧凑卡，避免同页出现两个 /industrial-clusters 入口。
+          home.clustersTitle/Lead/Cta 字典键保留（孤儿键，无害），不回改 STEP-04。 */}
 
       {/* WHY */}
       <section className="bg-[#f7f9fc]">

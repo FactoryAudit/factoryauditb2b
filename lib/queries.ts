@@ -15,6 +15,9 @@
 
 import { STATIC_SUPPLIERS, STATIC_COUNTRIES, type StaticSupplier } from "./staticData";
 import { getSupplierCapabilitiesResolved } from "./taxonomy";
+// STEP-04：产业带名解析的唯一入口（与后台 Admin 共用同一个数据层文件，
+// 不在这里重写一份 `.from("industrial_clusters")` 查询 —— 那等于造第二套数据源）。
+import { resolvePublishedClusterNames } from "./industrialClusters";
 import { overallLevel } from "./riskEngine";
 import { publicVerificationLevel } from "./verification";
 import { isAdminConfigured } from "./supabaseAdmin";
@@ -33,6 +36,26 @@ export type SupplierView = {
   country: string;
   countryName?: string;
   city: string;
+  // ---- STEP-02（migration 023）：地理大区 + 产业带 ----
+  /** 地理大区（如 Guangdong）。**与 province 并存**：region 是大区、province 是省/州，禁止互推、禁止用 region 覆盖 province */
+  region?: string;
+  /** 主产业带（如 Foshan Furniture）。产业带 ≠ 行政区：country/region/city 是行政维度，cluster 是产业聚集维度 */
+  cluster?: string;
+  /** 产业带 slug，供 /industrial-clusters/[slug] 使用 */
+  clusterSlug?: string;
+  /** 多产业带标签（一个供应商可属多个产业带）。主值冗余在 cluster，两者不一致时以 cluster 为准 */
+  clusterTags?: string[];
+  /**
+   * STEP-04：产业带**展示名**（DB-first 解析 `cluster_slug` → `industrial_clusters.name`）。
+   *
+   * 🔴 解析规则（全部在 `lib/industrialClusters.ts` 的 resolvePublishedClusterNames 内，
+   *    这里只登记语义，不重复实现）：
+   *      · 只在 `clusterSlug` 非空时才去查，且是**一次批量** `.in(slug, …)`（禁 N+1）；
+   *      · 必须 `is_published = true` —— 公开读走 service_role，RLS 不生效；
+   *      · 查不到 / 未发布 / 出错 ⇒ **保持 undefined**（不是空串、不是 "Unknown"）。
+   *    前台据此**不渲染这一行**；当前 17/17 供应商 cluster_slug 为 NULL ⇒ 恒为 undefined。
+   */
+  clusterName?: string;
   industryCode?: string;
   businessType: string;
   established?: number;
@@ -254,6 +277,24 @@ type SupplierRow = {
   contact_email: string | null;
   whatsapp: string | null;
   company_description: string | null;
+  // ---- STEP-02（migration 023）：地理大区 + 产业带 ----
+  // 只加列、不改既有语义；历史行一律 NULL（不回填、不推测）。
+  region: string | null;
+  cluster: string | null;
+  cluster_slug: string | null;
+  cluster_tags: string[] | null;
+  /**
+   * ---- STEP-02（migration 023）：来源追踪 ----
+   * ⚠️ 刻意**不进** ROW_SELECT：utm / referrer / landing_page 属内部归因数据，
+   *    不是供应商档案的公开事实，只允许 admin（select("*")）与写入路径触及。
+   *    放进公共读取白名单等于把买家的来源轨迹公开，故此处仅登记类型、不进白名单。
+   */
+  utm_source: string | null;
+  utm_medium: string | null;
+  utm_campaign: string | null;
+  referrer: string | null;
+  landing_page: string | null;
+  first_touch_at: string | null;
   // 注意：`profile_authorized` / `contact_visibility` / `phone` **刻意不进本类型也不进
   // ROW_SELECT** —— 联系方式属同意书管辖（用户拍板的公开边界只含工商登记级，不含电话）。
   // 把它们排除在类型外，是为了让「谁也没读过这两列」在 TS 层面可见，
@@ -274,6 +315,15 @@ type SupplierRow = {
   }[];
 };
 
+// STEP-02（migration 023）：新增 region / cluster / cluster_slug / cluster_tags。
+//
+// ⚠️ 来源追踪列（utm_* / referrer / landing_page / first_touch_at）刻意**不在此白名单**：
+//    它们是内部归因数据，不是供应商档案的公开事实，只允许 admin select("*") 读取。
+//
+// 🔴 铁律：严禁在本字符串内写 `--` 形式的注释。
+//    PostgREST 把 `--` 当作 SQL 行注释，会把整段 select 连同后续列一起吞掉，
+//    导致 `failed to parse select parameter` —— 表现是构建期 SSG 全部查不到供应商、
+//    页面 200 但数据空（fail-open 回落静态常量），极难察觉。注释一律写在字符串外。
 const ROW_SELECT = `
   id, slug, legal_name, country_code, city, industry_code, business_type,
   established, employees, main_products, export_markets, verification_status,
@@ -283,6 +333,7 @@ const ROW_SELECT = `
   company_type, english_name, production_capacity, monthly_output, factory_size,
   export_since, self_reported_certificates,
   address, website, registration_number,
+  region, cluster, cluster_slug, cluster_tags,
   supplier_evidence ( id, type, status, source, date, note, visibility )
 `;
 
@@ -389,6 +440,12 @@ function rowToView(row: SupplierRow): SupplierView {
     contactEmail: nz(row.contact_email),
     whatsapp: nz(row.whatsapp),
     companyDescription: nz(row.company_description),
+    // ---- STEP-02（migration 023）：地理大区 + 产业带 ----
+    // 历史行这些列全为 NULL ⇒ undefined ⇒ 前台不渲染，绝不回推、绝不编造。
+    region: nz(row.region),
+    cluster: nz(row.cluster),
+    clusterSlug: nz(row.cluster_slug),
+    clusterTags: row.cluster_tags && row.cluster_tags.length > 0 ? row.cluster_tags : undefined,
   };
 }
 
@@ -422,7 +479,16 @@ async function fetchRows(): Promise<SupplierRow[] | null> {
  * 按 tier 裁剪一层。
  * 所有对外函数都必须过这里 —— 这是付费内容不泄漏的唯一保证。
  */
-function redactViews(rows: SupplierRow[], tier: MembershipTier): SupplierView[] {
+function redactViews(
+  rows: SupplierRow[],
+  tier: MembershipTier,
+  /**
+   * STEP-04：`cluster_slug` → 已发布产业带名。**由调用方批量查好后传入**，
+   * 不在本函数里查（本函数是纯同步映射，且每次渲染只允许一次批量查询）。
+   * 缺省 = 不解析 ⇒ clusterName 一律 undefined。
+   */
+  clusterNames?: Map<string, string>
+): SupplierView[] {
   return rows.map((row) => {
     const view = rowToView(row);
     const redacted = redactSupplier(
@@ -456,6 +522,19 @@ function redactViews(rows: SupplierRow[], tier: MembershipTier): SupplierView[] 
       // 触发 cs05c / cs06a 的 `PUBLIC_FIELDS.length === 21` 断言。
       // 这里走「public 铺底」通道：它不是内容字段，三档位都应看到同一个值。
       updatedAt: view.updatedAt,
+      // ---- STEP-04：地理大区 + 产业带（**走 public 铺底通道**，不进 PUBLIC_FIELDS）----
+      // 为什么不加进 PUBLIC_FIELDS：那会改动 public/free/paid 的字段边界常量，
+      // 触发 cs05c / cs06a 的 `PUBLIC_FIELDS.length === 21` 断言，属"改权限口径"。
+      //
+      // 为什么这样铺底是安全的：
+      //   · region 是**比 city 更粗**的地理描述，而 city 早已是 public；
+      //   · clusterName 的来源（industrial_clusters）只放行 is_published=true 的行；
+      //   · 三者对三档位返回**同一个值**，不构成任何付费内容泄漏。
+      // 与 updatedAt 同族处理：结构化/非内容的公开描述字段，走铺底而非改分层常量。
+      region: view.region,
+      cluster: view.cluster,
+      clusterSlug: view.clusterSlug,
+      clusterName: view.clusterSlug ? clusterNames?.get(view.clusterSlug) : undefined,
       ...redacted,
     } as SupplierView;
   });
@@ -512,7 +591,12 @@ export async function listSupplierDirectory(): Promise<SupplierView[]> {
   if (useSupabase()) {
     const rows = await fetchRows();
     if (rows) {
-      const views = redactViews(rows, "visitor");
+      // STEP-04：产业带名 DB-first 解析。
+      //   · 当前 17/17 供应商 cluster_slug 为 NULL ⇒ 解析函数早退，**零额外查询**；
+      //   · 有 slug 时是**一次** `.in(slug, …)` 批量查询（不是 N+1），
+      //     且函数内显式 `.eq("is_published", true)`（公开读走 service_role，RLS 不生效）。
+      const clusterNames = await resolvePublishedClusterNames(rows.map((r) => r.cluster_slug));
+      const views = redactViews(rows, "visitor", clusterNames);
       // PHASE 03（P0）：目录卡片必须显示**真实**公开核验等级。
       // 与 /suppliers/[slug] 同一函数（publicVerificationLevel），保证两处永不打架。
       const withEvent = await verifiedAuditSupplierIds();
@@ -537,6 +621,66 @@ export async function listSupplierDirectory(): Promise<SupplierView[]> {
       }
       return a.legalName.localeCompare(b.legalName);
     });
+}
+
+/**
+ * STEP-07：首页 Live Buyer Requests 公开读取。
+ *
+ * 数据源与 listSupplierDirectory 完全同源（useSupabase / createAdminClient / 静态兜底），
+ * 因此首页仍是构建期冻结的 Server Component，不会因本函数变成动态页。
+ *
+ * 安全红线：
+ *   · 只 SELECT 公开白名单列（绝不 select("*")，绝不把整行传给前台）；
+ *   · 过滤 is_public = true AND status <> 'closed'（status 是内部处理进度，关闭需求不展示）；
+ *   · 单次查询、LIMIT 5，零 N+1；
+ *   · 返回 DTO（PublicRfq），不含 email/company/message/user_id/status/utm 等任何私密/内部字段。
+ */
+export type PublicRfq = {
+  referenceId: string;
+  product: string;
+  quantity: string | null;
+  targetMarket: string | null;
+  industryCode: string | null;
+  certificationsReq: string[] | null;
+  createdAt: string;
+};
+
+export async function listPublicRfqs(limit = 5): Promise<PublicRfq[]> {
+  if (!useSupabase()) return [];
+  const { createAdminClient } = await import("./supabaseAdmin");
+  const db = createAdminClient();
+  if (!db) return [];
+  try {
+    const { data, error } = await db
+      .from("rfqs")
+      .select(
+        "reference_id, product, quantity, target_market, industry_code, certifications_req, created_at"
+      )
+      .eq("is_public", true)
+      .neq("status", "closed")
+      .order("created_at", { ascending: false })
+      .limit(Math.max(1, Math.min(limit, 20)));
+    if (error) {
+      if (!isMissingTable(error.code)) {
+        console.error("[queries] public rfqs failed", error.code, error.message);
+      }
+      return [];
+    }
+    return ((data ?? []) as Array<Record<string, unknown>>).map((r) => ({
+      referenceId: String(r.reference_id ?? ""),
+      product: String(r.product ?? ""),
+      quantity: r.quantity == null ? null : String(r.quantity),
+      targetMarket: r.target_market == null ? null : String(r.target_market),
+      industryCode: r.industry_code == null ? null : String(r.industry_code),
+      certificationsReq: Array.isArray(r.certifications_req)
+        ? (r.certifications_req as unknown[]).map(String)
+        : null,
+      createdAt: String(r.created_at ?? ""),
+    }));
+  } catch (e) {
+    console.error("[queries] public rfqs exception", e);
+    return [];
+  }
 }
 
 /**
@@ -585,7 +729,10 @@ export async function getSupplierDetail(
             tier
           ).map((e) => (showEvidenceStatus ? e : { ...e, status: "" }));
 
-          const base = redactViews([row], tier)[0] ?? view;
+          // STEP-04：详情页只有 1 家供应商 ⇒ 传 1 个 slug 给**同一个**批量函数
+          // （不另写单条查询路径，避免两条路径行为漂移）。无 slug 时仍是零查询。
+          const clusterNames = await resolvePublishedClusterNames([row.cluster_slug]);
+          const base = redactViews([row], tier, clusterNames)[0] ?? view;
           return {
             ...base,
             riskLevel: view.riskLevel,
@@ -663,7 +810,13 @@ export async function getSupplierBySlug(slug: string): Promise<SupplierView | nu
           .eq("slug", slug)
           .eq("is_published", true)
           .maybeSingle();
-        if (data) return redactViews([data as unknown as SupplierRow], "visitor")[0];
+        if (data) {
+          const row = data as unknown as SupplierRow;
+          // STEP-04：与 listSupplierDirectory / getSupplierDetail 用**同一个**解析函数，
+          // 保证「列表卡」与「档案页」永不出现两种产业带命名。
+          const clusterNames = await resolvePublishedClusterNames([row.cluster_slug]);
+          return redactViews([row], "visitor", clusterNames)[0];
+        }
         return null;
       } catch {
         /* 回落静态 */
@@ -827,6 +980,62 @@ export async function listSuppliersByIndustry(
     if (rows) return rows.filter((r) => r.industry_code === industryCode).map(rowToMatrix);
   }
   return staticMatrix((s) => s.industryCode === industryCode);
+}
+
+/**
+ * 按产业带 slug 取已发布供应商（`/industrial-clusters/[slug]` 详情页用）。
+ *
+ * 与 listSuppliersByCountry 同构：一次 fetchRows（内部已带 `.eq("is_published", true)`）
+ * 后在内存过滤，不按 cluster 逐个往返。
+ *
+ * 空/缺省返回 `[]`，**刻意不回落到静态种子数据** —— 静态种子里没有产业带维度，
+ * 若回落就会让「某个产业带恰好包含那 4 家种子企业」变成凭空的商业关联。宁可列表为空。
+ */
+export async function listSuppliersByClusterSlug(
+  clusterSlug: string
+): Promise<StaticSupplier[]> {
+  const key = (clusterSlug ?? "").trim();
+  if (!key) return [];
+  if (useSupabase()) {
+    const rows = await fetchRows();
+    if (rows) return rows.filter((r) => r.cluster_slug === key).map(rowToMatrix);
+  }
+  return [];
+}
+
+/**
+ * Cluster Directory 的「每家产业带有多少已发布供应商」计数。
+ *
+ * 🔴 铁律一：**禁止 N+1**。反例是 `clusters.map(c => countSuppliersInCluster(c.slug))` ——
+ *    N 个产业带就是 N 次数据库往返（外加各自的连接开销）。这里固定为
+ *    **1 次查询 + 内存分组**：Cluster Query ≤ 1、Supplier Count Query ≤ 1。
+ *
+ * 🔴 铁律二：只统计**已发布**供应商。公开读走 service_role，RLS 不生效，
+ *    `fetchRows` 内部那行 `.eq("is_published", true)` 是唯一闸门。
+ *
+ * 返回的 Map 对每个传入 slug 都给条目（缺省 0），让调用方能区分
+ * 「该产业带已发布但暂无供应商」与「计数根本没跑」；空入参 ⇒ 零查询。
+ */
+export async function countSuppliersByClusterSlugs(
+  slugs: (string | null | undefined)[]
+): Promise<Map<string, number>> {
+  const out = new Map<string, number>();
+  const wanted = new Set(
+    slugs.map((s) => (s ?? "").trim()).filter((s) => s.length > 0)
+  );
+  if (wanted.size === 0) return out; // 零 slug ⇒ 零查询
+  for (const s of wanted) out.set(s, 0);
+
+  if (useSupabase()) {
+    const rows = await fetchRows();
+    if (rows) {
+      for (const r of rows) {
+        const key = (r.cluster_slug ?? "").trim();
+        if (key && wanted.has(key)) out.set(key, (out.get(key) ?? 0) + 1);
+      }
+    }
+  }
+  return out;
 }
 
 export async function listSuppliersByAuditType(

@@ -105,7 +105,11 @@ export default function RfqForm({
       });
       const data = await res.json();
       setStatus(data.ok ? "ok" : "error");
-      if (data.ok) {
+      // 业务真实性：rfq_submit 仅在「真实落库成功」时发。
+      // /api/rfq 返回 { ok, stored }；stored=false（落库失败）即使 ok=true 也绝不记为转化，
+      // 否则 Analytics 成功事件会与数据库写入真相解耦（见 STEP 08 Phase 1-2 审计）。
+      // 注：UI 成功/失败文案保持原样，不在本轮调整（FOLLOW-UP BUSINESS SEMANTICS ISSUE）。
+      if (data.ok && data.stored === true) {
         // 核心转化：询价提交成功。
         // 只发事件名，绝不附带表单内容（邮箱/电话/公司名等一律不进 Analytics）。
         trackEvent(ANALYTICS_EVENTS.rfqSubmit);

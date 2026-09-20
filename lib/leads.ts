@@ -26,7 +26,13 @@
 import { createAdminClient } from "@/lib/supabaseAdmin";
 
 /** 三类来源，严格区分、不混用（与 leads_kind_check 一致） */
-export type LeadKind = "buyer_lead" | "supplier_application" | "supplier_claim";
+export type LeadKind =
+  | "buyer_lead"
+  | "supplier_application"
+  | "supplier_claim"
+  /** STEP-02（migration 023 放宽 leads_kind_check）：买家提交「核验某供应商」请求。
+   *  ⚠️ 与 supplier_claim 一样，只代表「收到一条请求」，绝不等同于 verified。 */
+  | "supplier_verification";
 
 export const LEAD_KINDS: readonly LeadKind[] = [
   "buyer_lead",
@@ -107,6 +113,14 @@ export type LeadInsertInput = {
   /** 原始业务字段全量兜底（会被 fitPayload 处理） */
   payload?: unknown;
   userId?: string | null;
+  // ---- STEP-02（migration 023）：来源追踪。全部可空，缺省即不写（历史语义零变化）----
+  utmSource?: string | null;
+  utmMedium?: string | null;
+  utmCampaign?: string | null;
+  referrer?: string | null;
+  landingPage?: string | null;
+  /** 首次触达时间（ISO 字符串）。缺省即不写，绝不拿 now() 顶替 */
+  firstTouchAt?: string | null;
 };
 
 export type LeadInsertResult =
@@ -154,6 +168,13 @@ export async function insertLead(input: LeadInsertInput): Promise<LeadInsertResu
     score: clampScore(input.score),
     payload: fitPayload(input.payload),
     user_id: input.userId ?? null,
+    // ---- STEP-02：来源追踪（缺则写 NULL，绝不编造来源）----
+    utm_source: input.utmSource ?? null,
+    utm_medium: input.utmMedium ?? null,
+    utm_campaign: input.utmCampaign ?? null,
+    referrer: input.referrer ?? null,
+    landing_page: input.landingPage ?? null,
+    first_touch_at: input.firstTouchAt ?? null,
   };
 
   let lastCollision = "";

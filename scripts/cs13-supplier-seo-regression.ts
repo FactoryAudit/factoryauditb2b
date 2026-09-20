@@ -59,7 +59,7 @@ function leaves(obj: unknown, prefix = "", out: Leaf[] = []): Leaf[] {
 
 const LOCALES = ["en", "zh", "zh-TW", "ja", "es", "de", "fr", "pt", "ar"];
 /** 单一事实源：与 cs06a C8 / cs08 G4,G5 / cs12 E4,E5 / verify-opennext-bundle 同源 */
-const EN_LEAF_COUNT = 2824;
+const EN_LEAF_COUNT = 2938;
 
 async function main() {
   console.log("=".repeat(60));
@@ -436,16 +436,16 @@ async function main() {
   const badScoreLabel = LOCALES.filter((l) => /risk[\s-]?score/i.test(JSON.parse(read(`i18n/dictionaries/${l}.json`)).suppliers.riskLabel));
   check("F1h 九语 riskLabel 均不再表述为「risk score」", badScoreLabel.length === 0, badScoreLabel.join(","));
   for (const [f, pat] of [
-    ["scripts/cs06a-directory-regression.ts", "baseKeys.length === 2824"],
-    ["scripts/cs08-form-regression.ts", "leafCounts[0] === 2824"],
-    ["scripts/cs12-profile-regression.ts", "enLeaf === 2824"],
-    ["scripts/verify-opennext-bundle.mjs", "cnt !== 2824"],
+    ["scripts/cs06a-directory-regression.ts", "baseKeys.length === 2938"],
+    ["scripts/cs08-form-regression.ts", "leafCounts[0] === 2938"],
+    ["scripts/cs12-profile-regression.ts", "enLeaf === 2938"],
+    ["scripts/verify-opennext-bundle.mjs", "cnt !== 2938"],
   ] as const) {
-    check(`F1i ${f} 的叶子数常量仍为 2824（五处同源）`, read(f).includes(pat));
+    check(`F1i ${f} 的叶子数常量仍为 2938（五处同源）`, read(f).includes(pat));
   }
   check(
     "F1j verify-opennext-bundle 的期望值文本未被弱化",
-    read("scripts/verify-opennext-bundle.mjs").includes("(期望 2824)")
+    read("scripts/verify-opennext-bundle.mjs").includes("(期望 2938)")
   );
 
   console.log("\n=== F2. 字段分层 / 迁移 / 历史（本轮零越界） ===");
@@ -462,7 +462,15 @@ async function main() {
   check("F2c PAID_FIELDS 仍 4 项", countOf(supLib, "export const PAID_FIELDS") === 4, String(countOf(supLib, "export const PAID_FIELDS")));
   const migDir = path.join(ROOT, "supabase/migrations");
   const migs = fs.readdirSync(migDir).filter((f) => f.endsWith(".sql"));
-  check("F2d supabase/migrations 仍 8 个 .sql（本轮零 DDL）", migs.length === 8, migs.join(","));
+  // 8 → 10：STEP-02 加 023_supplier_geo_cluster_source.sql、
+  //          STEP-02B 加 024_industrial_clusters_and_public_rfq.sql（均为用户指令内的增量变更）。
+  //          CS-13 本轮零 DDL —— 这里只是把"历史上限"与真实文件数对齐。
+  const MIGRATION_COUNT = 10;
+  check(
+    `F2d supabase/migrations 仍 ${MIGRATION_COUNT} 个 .sql（CS-13 本轮零 DDL）`,
+    migs.length === MIGRATION_COUNT,
+    migs.join(",")
+  );
   for (const m of ["001_init.sql", "004_documents.sql", "006_compliance_fields.sql", "008_leads.sql", "009_supplier_profile_extras.sql"]) {
     check(`F2e 迁移仍在：${m}`, exists(`supabase/migrations/${m}`));
   }

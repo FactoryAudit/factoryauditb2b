@@ -53,6 +53,8 @@ _test-*.cjs
 
 # 构建备份 / 临时目录
 .next_bak*/
+.next.bak*/
+.open-next.bak*/
 .prisma-cache/
 .prisma-tmp*/
 .tmp/

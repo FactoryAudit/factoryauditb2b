@@ -93,6 +93,9 @@ function whenAnalyticsReady(run: () => void): () => void {
 export default function AnalyticsTracker() {
   const pathname = usePathname();
   const isFirstRender = useRef(true);
+  // 页面级曝光（如 Live Buyer Requests）只触发一次，防止 React re-render / hydration /
+  // StrictMode 双调用造成重复 impression。每次路由切换重新武装，保证「每次访问最多一次」。
+  const viewFiredRef = useRef(false);
 
   // ---- 点击 / 表单提交委托（只注册一次）----
   useEffect(() => {
@@ -133,6 +136,8 @@ export default function AnalyticsTracker() {
 
   // ---- 页面浏览 ----
   useEffect(() => {
+    // 每次路由切换重新武装曝光守卫：一次页面访问最多一次 impression
+    viewFiredRef.current = false;
     // 首次渲染标记在 effect 主体里就地消费：若放到延后回调里，
     // 回调被 cleanup 取消时标记会悬空，后续 SPA 跳转会漏发 page_view。
     const isFirst = isFirstRender.current;
@@ -155,8 +160,11 @@ export default function AnalyticsTracker() {
         }
 
         if (page) trackPageView(page);
-        // 页面级曝光事件（如 founding_buyer_view）：每次页面呈现发一次
-        if (view) trackEvent(view);
+        // 页面级曝光事件（如 home_live_buyer_request_view）：每次页面呈现最多发一次
+        if (view && !viewFiredRef.current) {
+          viewFiredRef.current = true;
+          trackEvent(view);
+        }
       }, 0);
     });
 
