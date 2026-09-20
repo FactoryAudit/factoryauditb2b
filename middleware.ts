@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isLocale, DEFAULT_LOCALE } from "@/i18n/config";
+import { LEGACY_CLUSTER_REDIRECTS } from "@/lib/clusterRoutes";
 
 // 多语言路由中间件
 // - /zh/tools、/es/tools 等带前缀：直接命中 app/[locale]/
@@ -38,6 +39,27 @@ export function middleware(req: NextRequest) {
     const u = req.nextUrl.clone();
     u.pathname = pathname.replace(/\/+$/, "");
     return NextResponse.redirect(u, 308);
+  }
+
+  // ── STEP 09 ROUTE-04：旧扁平产业带 URL → 新层级 canonical URL（永久 301）──
+  // 例：/industrial-clusters/dongguan-electronics
+  //     → /industrial-clusters/china/guangdong/dongguan-electronics
+  // 兼容 /<locale>/industrial-clusters/<slug>（locale 前缀原样保留）。
+  // 仅覆盖 P0（8 条）；新集群上线后由 Admin 写入 LEGACY_CLUSTER_REDIRECTS 或改 DB 驱动。
+  // 必须在 locale 改写之前拦截，确保 301 由边缘直接返回（非页面内 308）。
+  const icM = pathname.match(
+    /^\/((?:en|zh-TW|zh|es|de|fr|pt|ja|ar)\/)?industrial-clusters\/([^/]+)$/
+  );
+  if (icM) {
+    const localePart = icM[1] ? `/${icM[1].replace(/\/$/, "")}` : "";
+    const slug = icM[2];
+    const canonical = LEGACY_CLUSTER_REDIRECTS[slug];
+    if (canonical && canonical !== `/industrial-clusters/${slug}`) {
+      return NextResponse.redirect(
+        new URL(`${localePart}${canonical}${req.nextUrl.search}`, req.url),
+        301
+      );
+    }
   }
 
   if (isLocale(first) && first !== DEFAULT_LOCALE) {
