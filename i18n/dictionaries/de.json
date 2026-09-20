@@ -1186,6 +1186,7 @@
         "country": "Zielland",
         "message": "Spezifikationen",
         "messageHint": "Materialien, Maße, Zertifizierungen, Zielpreis…",
+        "publicConsent": "Meine Anfrage öffentlich für Lieferanten anzeigen lassen, ohne meine Kontaktdaten",
         "submit": "Anfrage veröffentlichen",
         "submitting": "Wird veröffentlicht…"
       },

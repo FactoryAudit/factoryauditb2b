@@ -102,7 +102,7 @@ node -e "const fs=require('fs');if(fs.existsSync('.next')){const t='.next.trash-
 **加/删字典键时**：先跑 `apply-*-i18n.cjs` 注入，再用配套的 `sync-*-gates.cjs` 同步常量，
 最后跑全部回归 + `verify-opennext-bundle` 验证。
 
-当前基线：**2938**（= 2934 字符串 + 4 boolean）。
+当前基线：**2939**（= 2935 字符串 + 4 boolean）。
 变更历史见 `scripts/cs06a-directory-regression.ts` 的 C7 注释 —— **历史条目不可篡改**，
 同步脚本必须保护 `A → B` 这类既成事实的标记。
 

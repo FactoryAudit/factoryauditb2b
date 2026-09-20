@@ -23,12 +23,14 @@ export type IndustrialCluster = {
   country_code: string | null;
   region: string | null;
   city: string | null;
+  province: string | null;
   industry: string | null;
   industry_tags: string[] | null;
   description: string | null;
   seo_title: string | null;
   seo_description: string | null;
   is_published: boolean;
+  featured: boolean;
   sort_order: number;
   created_at: string;
   updated_at: string;
@@ -39,7 +41,43 @@ const ORDER = "sort_order.asc,name.asc";
 
 /** 稳定的列白名单。**不返回**任何来源追踪字段（产业带是内容实体，无来源归因）。 */
 const COLS =
-  "id,name,slug,country,country_code,region,city,industry,industry_tags,description,seo_title,seo_description,is_published,sort_order,created_at,updated_at";
+  "id,name,slug,country,country_code,region,province,city,industry,industry_tags,description,seo_title,seo_description,is_published,featured,sort_order,created_at,updated_at";
+
+/**
+ * 统一国家归一（spec 10-B Decision A §4）。
+ *
+ * 关键：cluster 的 country_code 存大写（CN/TH/VN/ID），supplier 的 country 存小写（china/…），
+ * **不能只做 lowercase()**（lowercase(CN) 仍是 "cn" ≠ "china"）。本函数把两种表示都映射到
+ * 同一 canonical key，仅在匹配层使用，**绝不修改数据库存值**。
+ *
+ *   CN → china
+ *   TH → thailand
+ *   VN → vietnam
+ *   ID → indonesia
+ *   其余（如未知值）→ 返回小写的输入（保守：不臆造映射）。
+ */
+const COUNTRY_KEY_BY_CODE: Record<string, string> = {
+  CN: "china",
+  TH: "thailand",
+  VN: "vietnam",
+  ID: "indonesia",
+};
+const COUNTRY_KEY_BY_NAME: Record<string, string> = {
+  china: "china",
+  thailand: "thailand",
+  vietnam: "vietnam",
+  indonesia: "indonesia",
+};
+
+export function normalizeCountryKey(input?: string | null): string | null {
+  if (!input) return null;
+  const raw = input.trim();
+  if (!raw) return null;
+  if (COUNTRY_KEY_BY_CODE[raw.toUpperCase()]) return COUNTRY_KEY_BY_CODE[raw.toUpperCase()];
+  const lower = raw.toLowerCase();
+  if (COUNTRY_KEY_BY_NAME[lower]) return COUNTRY_KEY_BY_NAME[lower];
+  return lower;
+}
 
 /** 把任意文本转成 URL slug。中文保留原样会被 URL 编码，因此要求后台显式填 slug（英文）。 */
 export function slugifyCluster(input: string): string {
@@ -51,17 +89,22 @@ export function slugifyCluster(input: string): string {
     .slice(0, 80);
 }
 
-/** 前台/公开：只返回已发布产业带。未发布 = 前台不可见（后台下架即消失）。 */
-export async function listPublishedClusters(): Promise<IndustrialCluster[]> {
+/** 前台/公开：只返回已发布产业带。未发布 = 前台不可见（后台下架即消失）。
+ *  10-B：支持按 featured 过滤（首页 Featured Clusters 模块用）。不传 = 不过滤。 */
+export async function listPublishedClusters(
+  opts?: { featured?: boolean }
+): Promise<IndustrialCluster[]> {
   const db = createAdminClient();
   if (!db) return [];
   try {
-    const { data, error } = await db
+    let q = db
       .from(TABLE)
       .select(COLS)
       .eq("is_published", true)
       .order("sort_order", { ascending: true })
       .order("name", { ascending: true });
+    if (opts?.featured === true) q = q.eq("featured", true);
+    const { data, error } = await q;
     if (error) {
       console.error("[industrialClusters] list published failed", error.message);
       return [];
@@ -71,6 +114,17 @@ export async function listPublishedClusters(): Promise<IndustrialCluster[]> {
     console.error("[industrialClusters] list published exception", e);
     return [];
   }
+}
+
+/** 前台/公开：已发布且 featured = true 的产业带（首页 Featured Clusters 模块专用）。 */
+export async function listFeaturedClusters(): Promise<IndustrialCluster[]> {
+  return listPublishedClusters({ featured: true });
+}
+
+/** STEP 10-B：已发布产业带的 slug 集合（后台校验供应商关联用，避免写入不存在的 slug）。 */
+export async function listPublishedClusterSlugs(): Promise<Set<string>> {
+  const rows = await listPublishedClusters();
+  return new Set(rows.map((r) => (r.slug ?? "").trim()).filter(Boolean));
 }
 
 /** 前台/公开：按 slug 取已发布产业带。未发布或不存在一律 null（详情页走 notFound）。 */
@@ -176,6 +230,7 @@ export type ClusterUpsertInput = {
   country?: string | null;
   countryCode?: string | null;
   region?: string | null;
+  province?: string | null;
   city?: string | null;
   industry?: string | null;
   industryTags?: string[] | null;
@@ -183,6 +238,7 @@ export type ClusterUpsertInput = {
   seoTitle?: string | null;
   seoDescription?: string | null;
   isPublished?: boolean;
+  featured?: boolean;
   sortOrder?: number;
 };
 
@@ -207,6 +263,7 @@ export async function upsertAdminCluster(
     country: input.country?.trim() || null,
     country_code: input.countryCode?.trim().toLowerCase() || null,
     region: input.region?.trim() || null,
+    province: input.province?.trim() || null,
     city: input.city?.trim() || null,
     industry: input.industry?.trim() || null,
     industry_tags: input.industryTags?.length ? input.industryTags : null,
@@ -214,6 +271,7 @@ export async function upsertAdminCluster(
     seo_title: input.seoTitle?.trim() || null,
     seo_description: input.seoDescription?.trim() || null,
     is_published: Boolean(input.isPublished),
+    featured: Boolean(input.featured),
     sort_order: Number.isFinite(input.sortOrder) ? Number(input.sortOrder) : 100,
     updated_at: new Date().toISOString(),
   };

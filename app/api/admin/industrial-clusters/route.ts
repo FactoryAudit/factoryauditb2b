@@ -75,6 +75,7 @@ export async function POST(req: Request) {
     country: str(body.country, 120),
     countryCode: str(body.countryCode, 32),
     region: str(body.region, 120),
+    province: str(body.province, 120),
     city: str(body.city, 120),
     industry: str(body.industry, 120),
     industryTags: tags(body.industryTags),
@@ -82,6 +83,7 @@ export async function POST(req: Request) {
     seoTitle: str(body.seoTitle, 200),
     seoDescription: str(body.seoDescription, 400),
     isPublished: body.isPublished === true,
+    featured: body.featured === true,
     sortOrder: Number.isFinite(Number(body.sortOrder))
       ? Math.trunc(Number(body.sortOrder))
       : 100,

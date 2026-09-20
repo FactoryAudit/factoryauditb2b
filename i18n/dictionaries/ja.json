@@ -1045,6 +1045,7 @@
         "country": "対象国",
         "message": "仕様",
         "messageHint": "素材、寸法、認証、ターゲット価格…",
+        "publicConsent": "連絡先を伏せたうえで、私の依頼をサプライヤーに公開表示することを許可する",
         "submit": "RFQの投稿",
         "submitting": "投稿"
       },

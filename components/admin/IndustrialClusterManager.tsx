@@ -35,6 +35,7 @@ export type ClusterDict = {
   fCountryCode: string;
   fRegion: string;
   fCity: string;
+  fProvince: string;
   fIndustry: string;
   fTags: string;
   fDesc: string;
@@ -42,6 +43,7 @@ export type ClusterDict = {
   fSeoDesc: string;
   fSort: string;
   fPublished: string;
+  fFeatured: string;
   slugHint: string;
   duplicateSlug: string;
 };
@@ -54,6 +56,7 @@ type Draft = {
   countryCode: string;
   region: string;
   city: string;
+  province: string;
   industry: string;
   industryTags: string;
   description: string;
@@ -61,6 +64,7 @@ type Draft = {
   seoDescription: string;
   sortOrder: string;
   isPublished: boolean;
+  featured: boolean;
 };
 
 const EMPTY: Draft = {
@@ -71,6 +75,7 @@ const EMPTY: Draft = {
   countryCode: "",
   region: "",
   city: "",
+  province: "",
   industry: "",
   industryTags: "",
   description: "",
@@ -78,6 +83,7 @@ const EMPTY: Draft = {
   seoDescription: "",
   sortOrder: "100",
   isPublished: false,
+  featured: false,
 };
 
 function toDraft(c: IndustrialCluster): Draft {
@@ -89,6 +95,7 @@ function toDraft(c: IndustrialCluster): Draft {
     countryCode: c.country_code ?? "",
     region: c.region ?? "",
     city: c.city ?? "",
+    province: c.province ?? "",
     industry: c.industry ?? "",
     industryTags: (c.industry_tags ?? []).join(", "),
     description: c.description ?? "",
@@ -96,6 +103,7 @@ function toDraft(c: IndustrialCluster): Draft {
     seoDescription: c.seo_description ?? "",
     sortOrder: String(c.sort_order ?? 100),
     isPublished: Boolean(c.is_published),
+    featured: Boolean(c.featured),
   };
 }
 
@@ -139,6 +147,8 @@ export default function IndustrialClusterManager({
           seoTitle: draft.seoTitle,
           seoDescription: draft.seoDescription,
           isPublished: draft.isPublished,
+          featured: draft.featured,
+          province: draft.province,
           sortOrder: Number(draft.sortOrder) || 100,
         }),
       });
@@ -287,6 +297,15 @@ export default function IndustrialClusterManager({
               />
             </label>
             <label className="block">
+              <span className="text-xs font-medium text-[#475569]">{dict.fProvince}</span>
+              <input
+                className={inputCls}
+                value={draft.province}
+                onChange={(e) => set("province", e.target.value)}
+                placeholder="Guangdong（中国省份；泰国/越南/印尼可留空）"
+              />
+            </label>
+            <label className="block">
               <span className="text-xs font-medium text-[#475569]">{dict.fIndustry}</span>
               <input
                 className={inputCls}
@@ -353,6 +372,15 @@ export default function IndustrialClusterManager({
               onChange={(e) => set("isPublished", e.target.checked)}
             />
             {dict.fPublished}
+          </label>
+
+          <label className="flex items-center gap-2 text-sm text-[#0f172a]">
+            <input
+              type="checkbox"
+              checked={draft.featured}
+              onChange={(e) => set("featured", e.target.checked)}
+            />
+            {dict.fFeatured}
           </label>
 
           <div className="flex items-center gap-3">

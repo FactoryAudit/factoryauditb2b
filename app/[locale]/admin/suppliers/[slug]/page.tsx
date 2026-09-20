@@ -9,6 +9,7 @@ import {
   getLatestSupplierConsent,
   getAdminSupplierReport,
 } from "@/lib/adminData";
+import { listPublishedClusters } from "@/lib/industrialClusters";
 import { COVERAGE_COUNTRIES } from "@/lib/coverage";
 import SupplierEditor, {
   type SupplierFormValues,
@@ -41,6 +42,13 @@ export default async function AdminSupplierEditPage({ params }: Props) {
 
   const audits = await listAdminAudits(slug);
   const consent = await getLatestSupplierConsent(slug);
+
+  // STEP 10-B：已发布产业带（仅这些可作为供应商关联下拉项；value=slug）。
+  const publishedClusters = await listPublishedClusters();
+  const clusterOptions = publishedClusters.map((c) => ({
+    slug: c.slug,
+    label: `${c.name} · ${[c.country, c.province, c.city].filter(Boolean).join(" · ")}`,
+  }));
 
   // CS-20：报告正文（每工厂一份）。库里无记录 ⇒ 下发空模板（13 章骨架，内容全空）。
   // 🔴 绝不用样张的虚构数据当默认值（emptyReportTemplate 只带章节标题与来源说明）。
@@ -108,6 +116,7 @@ export default async function AdminSupplierEditPage({ params }: Props) {
     inspection_history: String(row.inspection_history ?? 0),
     access_tier: (row.access_tier as "public" | "free" | "paid") ?? "public",
     is_published: row.is_published,
+    cluster_slug: row.cluster_slug ?? "",
   };
 
   const auth: SupplierAuthInfo = {
@@ -132,6 +141,46 @@ export default async function AdminSupplierEditPage({ params }: Props) {
       <h1 className="mt-2 text-2xl font-bold text-[#0f172a]">{row.legal_name}</h1>
       <p className="mt-1 font-mono text-xs text-[#94a3b8]">{row.slug}</p>
 
+      {/* STEP 12 Change Set B：审核入口要能一眼看到「数据完整度 / 授权 / 核验」。
+          后台是内部 noindex 工具，按 admin 既有约定用双语常量，**不补 9 语字典键**
+          （避免再动 en 叶子数冻结常量）。 */}
+      {(() => {
+        const zh = locale === "zh" || locale === "zh-TW";
+        const items: Array<[string, boolean]> = [
+          [zh ? "国家" : "Country", Boolean(row.country_code && row.country_code !== "unknown")],
+          [zh ? "省份" : "Province", Boolean(row.province)],
+          [zh ? "城市" : "City", Boolean(row.city && row.city !== "unknown")],
+          [zh ? "行业" : "Industry", Boolean(row.industry_code)],
+          [zh ? "主营产品" : "Products", (row.main_products ?? []).length > 0],
+          [zh ? "授权/同意" : "Consent", Boolean(row.profile_authorized || auth.consentAt)],
+          [
+            zh ? "核验等级" : "Verified",
+            Boolean(row.verification_level && row.verification_level !== "unverified"),
+          ],
+        ];
+        const done = items.filter(([, ok]) => ok).length;
+        return (
+          <div className="mt-3 rounded-lg border border-[#e2e8f0] bg-white p-3">
+            <div className="text-xs font-semibold uppercase text-[#64748b]">
+              {zh ? `数据完整度 ${done}/${items.length}` : `Data completeness ${done}/${items.length}`}
+            </div>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {items.map(([label, ok]) => (
+                <span
+                  key={label}
+                  className={`rounded px-2 py-1 text-xs ${
+                    ok ? "bg-[#f0fdf4] text-[#1f7a36]" : "bg-[#fef2f2] text-[#d4232a]"
+                  }`}
+                >
+                  {ok ? "✓ " : "✗ "}
+                  {label}
+                </span>
+              ))}
+            </div>
+          </div>
+        );
+      })()}
+
       <div className="mt-4">
         <SupplierReportDownloadButton reportData={reportData} defaultLang={defaultLang} />
       </div>
@@ -147,6 +196,7 @@ export default async function AdminSupplierEditPage({ params }: Props) {
           initial={initial}
           auth={auth}
           countryOptions={COVERAGE_COUNTRIES.map((c) => ({ code: c.code, name: c.name }))}
+          clusterOptions={clusterOptions}
           dict={{
             save: a.save,
             saving: a.saving,

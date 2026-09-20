@@ -1186,6 +1186,7 @@
         "country": "País-alvo",
         "message": "Especificações",
         "messageHint": "Materiais, dimensões, certificações, preço-alvo…",
+        "publicConsent": "Permitir exibir meu pedido publicamente aos fornecedores, ocultando meus dados de contato",
         "submit": "Publicar RFQ",
         "submitting": "Publicando…"
       },

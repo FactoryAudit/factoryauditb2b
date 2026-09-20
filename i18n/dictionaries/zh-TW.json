@@ -1186,6 +1186,7 @@
         "country": "目標國家",
         "message": "規格說明",
         "messageHint": "材料、尺寸、認證、目標價格……",
+        "publicConsent": "允許將我的採購需求公開展示給供應商（隱藏我的聯絡方式）",
         "submit": "發佈詢價單",
         "submitting": "發佈中…"
       },

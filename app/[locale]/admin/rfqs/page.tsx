@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { isLocale, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
@@ -58,6 +59,8 @@ export default async function AdminRfqsPage({ params }: Props) {
         error: "Failed",
       };
   const colPublic = isZh ? "前台公开" : "Public";
+  // STEP 12 Change Set D：进入该 RFQ 的推荐供应商页（Admin 手动确认匹配）
+  const colMatch = isZh ? "匹配" : "Match";
 
   return (
     <div>
@@ -80,6 +83,7 @@ export default async function AdminRfqsPage({ params }: Props) {
                 <th className="px-4 py-3">{a.colCreated}</th>
                 <th className="px-4 py-3">{colPublic}</th>
                 <th className="px-4 py-3">{a.colStatus}</th>
+                <th className="px-4 py-3">{colMatch}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#e2e8f0]">
@@ -127,6 +131,14 @@ export default async function AdminRfqsPage({ params }: Props) {
                       status={r.status}
                       dict={statusDict}
                     />
+                  </td>
+                  <td className="px-4 py-3">
+                    <Link
+                      href={p(`/admin/rfqs/${r.reference_id}`)}
+                      className="text-xs text-[#0f4c81] hover:underline"
+                    >
+                      {colMatch} →
+                    </Link>
                   </td>
                 </tr>
               ))}

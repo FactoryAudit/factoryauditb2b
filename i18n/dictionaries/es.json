@@ -1186,6 +1186,7 @@
         "country": "País objetivo",
         "message": "Especificaciones",
         "messageHint": "Materiales, dimensiones, certificaciones, precio objetivo…",
+        "publicConsent": "Permitir mostrar mi solicitud públicamente a los proveedores, ocultando mis datos de contacto",
         "submit": "Publicar RFQ",
         "submitting": "Publicación"
       },

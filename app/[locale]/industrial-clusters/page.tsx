@@ -6,6 +6,8 @@ import { countSuppliersByClusterSlugs } from "@/lib/queries";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+// STEP 09 ROUTE-05：目录页内链 / JSON-LD 一律指向正式层级 canonical URL。
+import { buildClusterCanonicalPath } from "@/lib/clusterRoutes";
 
 /**
  * Industrial Clusters —— 产业带目录
@@ -27,6 +29,20 @@ import { buildPageMetadata } from "@/lib/pageMeta";
 const BASE = "https://factoryauditb2b.com";
 const PATH = "/industrial-clusters";
 type Props = { params: Promise<{ locale: string }> };
+
+// STEP 09 ROUTE-05：目录卡 / JSON-LD 一律指向正式层级 canonical URL（非旧扁平 slug）。
+const urlOf = (x: {
+  slug: string;
+  country_code: string | null;
+  province: string | null;
+  city: string | null;
+}): string =>
+  buildClusterCanonicalPath({
+    slug: x.slug,
+    country_code: x.country_code,
+    province: x.province,
+    city: x.city,
+  });
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: raw } = await params;
@@ -62,7 +78,7 @@ export default async function IndustrialClustersPage({ params }: Props) {
       "@type": "ListItem",
       position: i + 1,
       name: x.name,
-      url: `${BASE}${p(`${PATH}/${x.slug}`)}`,
+      url: `${BASE}${p(urlOf(x))}`,
     })),
   };
 
@@ -116,7 +132,7 @@ export default async function IndustrialClustersPage({ params }: Props) {
                   {c.supplierCount.replace("{count}", String(counts.get(x.slug) ?? 0))}
                 </div>
                 <Link
-                  href={p(`${PATH}/${x.slug}`)}
+                  href={p(urlOf(x))}
                   className="btn btn-outline mt-5 self-start"
                 >
                   {c.viewSuppliers}

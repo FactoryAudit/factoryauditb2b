@@ -18,6 +18,8 @@ import { CHEMICALS } from "@/lib/chemicals";
 // CHANGE SET B：产业带目录/详情。与 suppliers 同样走「只提交已发布行」——
 // 提交集合必须与页面可索引性同源，否则 Search Console 报 "Submitted URL marked noindex"。
 import { listPublishedClusters } from "@/lib/industrialClusters";
+// STEP 09 ROUTE-05：sitemap 只输出正式层级 canonical URL（不再是扁平 slug URL）。
+import { buildClusterCanonicalPath } from "@/lib/clusterRoutes";
 
 const BASE = "https://factoryauditb2b.com";
 
@@ -218,12 +220,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // lastModified 用真实 updated_at，缺失时不传（绝不用当前时间顶替）。
   clusterRows.forEach((c) => {
     const lm = c.updated_at ? new Date(c.updated_at) : undefined;
-    pages.push(
-      ...emit(
-        `/industrial-clusters/${c.slug}`,
-        lm && !Number.isNaN(lm.getTime()) ? lm : undefined
-      )
-    );
+    // 正式层级 canonical URL（如 /china/guangdong/dongguan-electronics），
+    // 与页面侧可索引性同源；扁平 /industrial-clusters/<slug> 仅作 301，不进 sitemap。
+    const canonical = buildClusterCanonicalPath({
+      slug: c.slug,
+      country_code: c.country_code,
+      province: c.province,
+      city: c.city,
+    });
+    pages.push(...emit(canonical, lm && !Number.isNaN(lm.getTime()) ? lm : undefined));
   });
 
   // 行业 SEO 落地页 + 行业子主题页（CS-02A P2–P5）。

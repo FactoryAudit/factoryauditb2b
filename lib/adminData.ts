@@ -210,6 +210,8 @@ export type AdminSupplierDetail = AdminSupplierRow & {
     | "platform_assessment"
     | "on_site_audit"
     | "third_party_audit";
+  /** STEP 10-B：关联产业带 slug（与 suppliers.cluster_slug 同列；getAdminSupplier 走 select("*")，故运行时已带回）。 */
+  cluster_slug: string | null;
 };
 
 export async function getAdminSupplier(
@@ -272,6 +274,7 @@ export async function updateAdminSupplier(
       | "platform_assessment"
       | "on_site_audit"
       | "third_party_audit";
+    cluster_slug: string | null;
     // CS-16：授权/发布/审计元数据（仅后台白名单可写，绝不来自公开路径）
     authorized_at: string | null;
     authorized_by: string | null;

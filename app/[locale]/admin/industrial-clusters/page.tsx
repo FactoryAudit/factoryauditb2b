@@ -45,6 +45,7 @@ const ZH: ClusterDict = {
   fCountryCode: "国家代码（小写单词，如 china / vietnam）",
   fRegion: "地区 / 大区",
   fCity: "城市",
+  fProvince: "省份 / 州（中国必填；其他国家可留空）",
   fIndustry: "行业",
   fTags: "行业标签（逗号分隔）",
   fDesc: "描述",
@@ -52,6 +53,7 @@ const ZH: ClusterDict = {
   fSeoDesc: "SEO 描述",
   fSort: "排序（升序）",
   fPublished: "立即发布（前台可见）",
+  fFeatured: "首页推荐（战略 Featured Cluster）",
   slugHint: "留空则由名称自动生成。建议英文小写连字符，例如 foshan-furniture。",
   duplicateSlug: "该 slug 已存在，请换一个。",
 };
@@ -80,6 +82,7 @@ const EN: ClusterDict = {
   fCountryCode: "Country code (lowercase word, e.g. china / vietnam)",
   fRegion: "Region",
   fCity: "City",
+  fProvince: "Province / State (required for China; blank for others)",
   fIndustry: "Industry",
   fTags: "Industry tags (comma separated)",
   fDesc: "Description",
@@ -87,6 +90,7 @@ const EN: ClusterDict = {
   fSeoDesc: "SEO description",
   fSort: "Sort order (ascending)",
   fPublished: "Publish now (visible on site)",
+  fFeatured: "Featured on homepage (strategic cluster)",
   slugHint:
     "Auto-generated from name if left blank. Use lowercase hyphens, e.g. foshan-furniture.",
   duplicateSlug: "This slug already exists. Please choose another.",

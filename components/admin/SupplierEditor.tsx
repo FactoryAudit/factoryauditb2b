@@ -48,6 +48,7 @@ export type SupplierEditorDict = {
     inspectionHistory: string;
     accessTier: string;
     published: string;
+    cluster?: string;
     authorized: string;
     authorizedBy: string;
     authorizedAt: string;
@@ -91,7 +92,11 @@ export type SupplierFormValues = {
   inspection_history: string;
   access_tier: "public" | "free" | "paid";
   is_published: boolean;
+  cluster_slug: string; // STEP 10-B：关联产业带 slug（空串 = 不关联 / None·REVIEW）
 };
+
+/** STEP 10-B：产业带下拉选项（仅已发布集群；value=slug，label=名称 + 国家·省·市）。 */
+export type ClusterOption = { slug: string; label: string };
 
 /** 只读授权信息（来自 suppliers 行 + supplier_consents 最新一条）。 */
 export type SupplierAuthInfo = {
@@ -109,10 +114,11 @@ type Props = {
   initial: SupplierFormValues;
   auth: SupplierAuthInfo;
   countryOptions: { code: string; name: string }[];
+  clusterOptions: ClusterOption[];
   dict: SupplierEditorDict;
 };
 
-export default function SupplierEditor({ slug, initial, auth, countryOptions, dict }: Props) {
+export default function SupplierEditor({ slug, initial, auth, countryOptions, clusterOptions, dict }: Props) {
   const router = useRouter();
   const [v, setV] = useState<SupplierFormValues>(initial);
   const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
@@ -234,6 +240,23 @@ export default function SupplierEditor({ slug, initial, auth, countryOptions, di
           <label className="block">
             <span className="text-sm font-medium text-[#0f172a]">{L.address}</span>
             <input className={`mt-1 ${inputClass}`} value={v.address} onChange={(e) => set("address", e.target.value)} />
+          </label>
+          <label className="block">
+            <span className="text-sm font-medium text-[#0f172a]">
+              {L.cluster ?? "Manufacturing Cluster / 产业带"}
+            </span>
+            <select
+              className={`mt-1 ${inputClass}`}
+              value={v.cluster_slug}
+              onChange={(e) => set("cluster_slug", e.target.value)}
+            >
+              <option value="">— None / REVIEW —</option>
+              {clusterOptions.map((c) => (
+                <option key={c.slug} value={c.slug}>
+                  {c.label}
+                </option>
+              ))}
+            </select>
           </label>
         </div>
 

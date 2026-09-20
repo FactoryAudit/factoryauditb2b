@@ -13,6 +13,8 @@ export type RfqFormDict = {
     country: string;
     message: string;
     messageHint: string;
+    /** STEP 12 C2：公开授权勾选项文案。默认不勾选 —— 未获明确同意绝不公开 RFQ。 */
+    publicConsent: string;
     submit: string;
     submitting: string;
   };
@@ -33,8 +35,10 @@ export type RfqFormContext = {
   oemRequired?: boolean;
   targetMarket?: string;
   incoterm?: string;
-  /** 询价来源页路径；未注入时回退读 URL 的 ?src= 参数 */
+  /** 询价来源页路径；未注入时回退读 URL 的 ?src= 参数，再回退到当前页路径 */
   sourcePath?: string;
+  /** STEP 12 C1：显式来源类型（可选）。缺省时由服务端从 source_path 推导（仍走白名单）。 */
+  sourceType?: string;
   /**
    * CS-02B：来源页的合法主题预填（化学品名、审核类型名之类）。
    * 只预填**页面的主题本身**，不替买家编需求 —— 与 certificationsReq 的区别在于：
@@ -70,12 +74,20 @@ export default function RfqForm({
     const formEl = e.currentTarget;
     const form = new FormData(e.currentTarget);
     // CS-02C G3：来源归因。页面注入优先，其次取落地 URL 的 ?src=（行业页 CTA 带参）。
+    // STEP 12 C1：来源归因优先级 = 显式注入 → 落地页 ?src= → 当前页路径
+    //   （直接进 /rfq 提交 ⇒ 当前路径就是 /rfq ⇒ 服务端推导为 direct）
+    const currentPath =
+      typeof window !== "undefined" ? window.location.pathname : null;
     const srcParam =
       context?.sourcePath ??
       (typeof window !== "undefined"
         ? new URLSearchParams(window.location.search).get("src")
         : null) ??
+      currentPath ??
       undefined;
+    // STEP 12 C2：公开授权。勾选 = "on"，未勾选 = null ⇒ 严格 false。
+    // 🔴 默认不勾选：没有买家明确同意，绝不把 RFQ 公开出去。
+    const allowPublic = Boolean(form.get("allowPublic"));
     const payload = {
       // ---- 既有 12 列对应的字段 ----
       contact_name: String(form.get("firstName") || ""), // 只进管理员邮件，不落库
@@ -93,6 +105,9 @@ export default function RfqForm({
       target_market: context?.targetMarket,
       incoterm: context?.incoterm,
       source_path: srcParam,
+      source_type: context?.sourceType,
+      // STEP 12 C2：公开与否**只**来自买家明确授权；缺省 false，绝不自动公开
+      is_public: allowPublic,
     };
     try {
       // 🔴 CS-02C 修复：此前这里 POST /api/lead —— 只发邮件、**一行不落库**，
@@ -179,6 +194,15 @@ export default function RfqForm({
           placeholder={t.labels.messageHint}
         />
       </div>
+      {/* STEP 12 C2：公开授权勾选项（默认不勾选 —— 未获明确同意绝不公开） */}
+      <label className="flex items-start gap-2 text-sm text-[#475569]">
+        <input
+          type="checkbox"
+          name="allowPublic"
+          className="mt-0.5 h-4 w-4 shrink-0"
+        />
+        <span>{t.labels.publicConsent}</span>
+      </label>
       <button type="submit" disabled={status === "loading"} className="btn btn-accent w-full">
         {status === "loading" ? t.labels.submitting : t.labels.submit}
       </button>

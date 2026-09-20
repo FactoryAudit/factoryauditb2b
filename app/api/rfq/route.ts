@@ -80,6 +80,40 @@ function makeReferenceId(): string {
   return `RFQ-${out}`;
 }
 
+/** STEP 10-B：RFQ 来源类型（可空；只认白名单值，其余一律丢弃为 null，绝不编值）。
+ *  取值：industrial_cluster / industry / home / direct。 */
+function normalizeSourceType(v: unknown): string | null {
+  const allowed = new Set(["industrial_cluster", "industry", "home", "direct"]);
+  const s = typeof v === "string" ? v.trim().toLowerCase() : "";
+  return s && allowed.has(s) ? s : null;
+}
+
+/** STEP 10-B：关联产业带 slug（可空；clamp 120，空串归 null）。无 FK 校验（与 suppliers.cluster_slug 同模式）。 */
+function normalizeClusterSlug(v: unknown): string | null {
+  const s = typeof v === "string" ? v.trim().toLowerCase() : "";
+  return s ? s.slice(0, 120) : null;
+}
+
+/** STEP 12 C2：公开授权必须是**买家明确同意**。
+ *
+ * 🔴 硬约束：严禁在没有用户明确同意的情况下把 RFQ 自动公开。
+ *    只有 true / "true" / "on" / "1" 视为同意；缺省、false、其它值一律 false。
+ *    测试探针不走这条路径（不传该字段）⇒ 保持 is_public=false，不污染公开/SEO/意图指标。 */
+function normalizePublicConsent(v: unknown): boolean {
+  return v === true || v === "true" || v === "on" || v === "1" || v === 1;
+}
+
+/** STEP 12 C1：来源类型兜底推导（表单未显式传 source_type 时由路径推导）。
+ *  返回值仍受白名单约束：industrial_cluster / industry / home / direct。绝不编值。 */
+function deriveSourceType(p: string | null): string | null {
+  if (!p) return null;
+  if (p.startsWith("/industrial-clusters")) return "industrial_cluster";
+  if (p.startsWith("/industry") || p.startsWith("/chemicals")) return "industry";
+  // 首页：裸 "/" 或仅语言段（/en、/zh-TW）
+  if (p === "/" || /^\/[a-z]{2}(-[A-Za-z]{2})?$/.test(p)) return "home";
+  return "direct";
+}
+
 export async function POST(req: Request) {
   // ---- 限流放最前 ----
   const ip = clientIp(req);
@@ -122,6 +156,13 @@ export async function POST(req: Request) {
   const incoterm = clamp(b.incoterm, 20) || null;
   const sourcePath = normalizeSourcePath(b.source_path);
   const locale = normalizeLocale(b.locale);
+  // ---- STEP 10-B：RFQ 来源聚类（可空；仅作业务入口归因，绝不改既有落库门禁） ----
+  const sourceType = normalizeSourceType(b.source_type);
+  const clusterSlug = normalizeClusterSlug(b.industrial_cluster_slug);
+  // ---- STEP 12 C1：来源归因。表单未显式给 source_type 时由 source_path 推导（仍走白名单）----
+  const effSourceType = sourceType ?? deriveSourceType(sourcePath);
+  // ---- STEP 12 C2：公开与否**只**来自买家明确授权；缺省/未表态一律 false ----
+  const publicConsent = normalizePublicConsent(b.is_public);
 
   if (!email || email.length > 254 || !EMAIL_RE.test(email)) {
     return NextResponse.json(
@@ -166,6 +207,11 @@ export async function POST(req: Request) {
         incoterm,
         source_path: sourcePath,
         locale,
+        // ---- STEP 10-B：可空来源归类，缺省 null（历史 RFQ 不受影响） ----
+        source_type: effSourceType,
+        industrial_cluster_slug: clusterSlug,
+        // ---- STEP 12 C2：公开与否**只**来自买家明确授权，绝不自动公开 ----
+        is_public: publicConsent,
       });
       if (error) {
         console.error("[api/rfq] insert failed", error.message);

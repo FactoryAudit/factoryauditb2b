@@ -1524,6 +1524,7 @@
         "country": "目标国家",
         "message": "规格说明",
         "messageHint": "材料、尺寸、认证、目标价格……",
+        "publicConsent": "允许将我的采购需求公开展示给供应商（隐藏我的联系方式）",
         "submit": "发布询价单",
         "submitting": "发布中…"
       },

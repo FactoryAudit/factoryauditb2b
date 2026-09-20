@@ -1186,6 +1186,7 @@
         "country": "Pays cible",
         "message": "Spécifications",
         "messageHint": "Matériaux, dimensions, certifications, prix cible…",
+        "publicConsent": "Autoriser l'affichage public de ma demande aux fournisseurs, mes coordonnées masquées",
         "submit": "Publier la demande",
         "submitting": "Publication…"
       },

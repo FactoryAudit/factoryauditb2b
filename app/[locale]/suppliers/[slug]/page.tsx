@@ -47,6 +47,9 @@ import {
   type SnapshotLabels,
 } from "@/lib/seo/supplierSeo";
 import { ORG_URL } from "@/lib/organizationSchema";
+// STEP 10-D §22：供应商档案的「产业带」回链 —— 用正式层级 canonical URL（不得手写）。
+// LEGACY_CLUSTER_REDIRECTS 仅含 8 个 P0 slug→canonical，恰好等于 Admin 允许写入的已发布集群集合。
+import { LEGACY_CLUSTER_REDIRECTS } from "@/lib/clusterRoutes";
 import { UnlockGate } from "@/components/UnlockGate";
 // 解锁字段按需取：真值不随页面下发，避免进 RSC flight payload（游客看源码就能读到）
 import { UnlockedValue, UnlockedEvidenceStatus } from "@/components/UnlockedValue";
@@ -211,6 +214,11 @@ export default async function SupplierProfilePage({
 
   // CS-21：三标签审核（仅展示已发布 published 的标签）
   const assessmentTags = await getSupplierTags(s.id);
+
+  // STEP 10-D §22：供应商档案「产业带」回链。仅当 cluster_slug 命中已发布 P0 集群
+  // （LEGACY_CLUSTER_REDIRECTS 即 Admin 允许写入的集合）时才给可点击链接；
+  // REVIEW / KEEP_NULL（cluster_slug = NULL）一律为 undefined ⇒ 纯文本展示。
+  const clusterHref = s.clusterSlug ? LEGACY_CLUSTER_REDIRECTS[s.clusterSlug] : undefined;
 
   const ec = t.evidenceCenter;
   const uiLocale = contentLocale;
@@ -469,7 +477,17 @@ export default async function SupplierProfilePage({
                   <dd
                     className={`text-right ${row.unknown ? "text-[#94a3b8] italic" : "font-medium text-[#0f172a]"}`}
                   >
-                    {row.value}
+                    {row.id === "industrialCluster" && clusterHref ? (
+                      <Link
+                        href={p(clusterHref)}
+                        className="text-[#0f4c81] hover:underline"
+                        data-track="supplier_cluster_backlink"
+                      >
+                        {row.value}
+                      </Link>
+                    ) : (
+                      row.value
+                    )}
                   </dd>
                 </div>
               )

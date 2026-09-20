@@ -9,6 +9,7 @@ import {
 } from "@/lib/adminData";
 import { checkRateLimit, clamp, clientIp } from "@/lib/rateLimit";
 import { validateSupplierCreateInput } from "@/lib/supplierCreate";
+import { listPublishedClusterSlugs } from "@/lib/industrialClusters";
 
 // PATCH /api/admin/suppliers —— 更新供应商（白名单字段）
 //
@@ -173,6 +174,19 @@ export async function PATCH(req: Request) {
     patch.whatsapp = clamp(body.whatsapp, 64) ?? "";
   if (typeof body.company_description === "string")
     patch.company_description = clamp(body.company_description, 2000) ?? "";
+
+  // ---- STEP 10-B：供应商关联产业带（白名单 + 存在性校验） ----
+  // 只允许空串（清除关联）或已发布的产业带 slug；其余值丢弃，避免写入不存在的 slug
+  // 造成指向不存在产业带的链接（spec §24：管理员手工关联必须验证 cluster_slug 存在）。
+  if (typeof body.cluster_slug === "string") {
+    const raw = body.cluster_slug.trim().toLowerCase();
+    if (!raw) {
+      patch.cluster_slug = null; // 显式清除
+    } else {
+      const known = await listPublishedClusterSlugs();
+      if (known.has(raw)) patch.cluster_slug = raw;
+    }
+  }
 
   // 平台核验等级（spec §2）。白名单五档，防止写入任意字符串触发 CHECK 报错。
   if (

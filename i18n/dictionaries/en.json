@@ -1701,6 +1701,7 @@
         "country": "Target country",
         "message": "Specifications",
         "messageHint": "Materials, dimensions, certifications, target price…",
+        "publicConsent": "Allow my request to be shown publicly to suppliers, with my contact details hidden",
         "submit": "Post RFQ",
         "submitting": "Posting…"
       },

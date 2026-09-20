@@ -642,24 +642,43 @@ export type PublicRfq = {
   targetMarket: string | null;
   industryCode: string | null;
   certificationsReq: string[] | null;
+  /** STEP 10-B：关联产业带 slug（仅当该 RFQ 从集群入口提交时非空；隐私安全，不含任何私密字段） */
+  clusterSlug?: string | null;
   createdAt: string;
 };
 
-export async function listPublicRfqs(limit = 5): Promise<PublicRfq[]> {
+/**
+ * STEP 10-B：公开 Buyer Requests 列表（数据源 = rfqs.is_public=true，不新建 buyer_requests 表）。
+ *
+ * @param limit 上限（1–20）
+ * @param opts.clusterSlug 可选：仅返回某产业带的 Buyer Requests（集群详情页用）。
+ *        为空/缺省 = 返回全部公开 RFQ（首页 Live Buyer Requests 模块用）。
+ *
+ * 安全红线不变：只 SELECT 公开白名单列，**绝不**返回 email/company/message/user_id/status/utm。
+ * 新增的 industrial_cluster_slug 是公开元数据（集群详情页本就公开），不构成泄露。
+ */
+export async function listPublicRfqs(
+  limit = 5,
+  opts?: { clusterSlug?: string }
+): Promise<PublicRfq[]> {
   if (!useSupabase()) return [];
   const { createAdminClient } = await import("./supabaseAdmin");
   const db = createAdminClient();
   if (!db) return [];
   try {
-    const { data, error } = await db
+    let q = db
       .from("rfqs")
       .select(
-        "reference_id, product, quantity, target_market, industry_code, certifications_req, created_at"
+        "reference_id, product, quantity, target_market, industry_code, certifications_req, industrial_cluster_slug, created_at"
       )
       .eq("is_public", true)
       .neq("status", "closed")
       .order("created_at", { ascending: false })
       .limit(Math.max(1, Math.min(limit, 20)));
+    if (opts?.clusterSlug) {
+      q = q.eq("industrial_cluster_slug", opts.clusterSlug);
+    }
+    const { data, error } = await q;
     if (error) {
       if (!isMissingTable(error.code)) {
         console.error("[queries] public rfqs failed", error.code, error.message);
@@ -675,6 +694,8 @@ export async function listPublicRfqs(limit = 5): Promise<PublicRfq[]> {
       certificationsReq: Array.isArray(r.certifications_req)
         ? (r.certifications_req as unknown[]).map(String)
         : null,
+      clusterSlug:
+        typeof r.industrial_cluster_slug === "string" ? r.industrial_cluster_slug : null,
       createdAt: String(r.created_at ?? ""),
     }));
   } catch (e) {
