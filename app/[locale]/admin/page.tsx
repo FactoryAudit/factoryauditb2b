@@ -2,6 +2,7 @@ import Link from "next/link";
 import { isLocale, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { getAdminStats, listAdminLeads, listAdminRfqs, requireAdmin } from "@/lib/adminData";
+import { getBusinessFunnel } from "@/lib/adminBusiness";
 import { notFound } from "next/navigation";
 
 export const dynamic = "force-dynamic";
@@ -22,11 +23,120 @@ export default async function AdminOverviewPage({ params }: Props) {
   const a = t.admin;
   const p = (href: string) => localePath(locale, href);
 
-  const [stats, rfqs, leads] = await Promise.all([
+  const [stats, rfqs, leads, funnel] = await Promise.all([
     getAdminStats(),
     listAdminRfqs(10),
     listAdminLeads(10),
+    getBusinessFunnel(),
   ]);
+
+  // STEP 13 CHANGE SET E —— 业务激活漏斗（很轻的一张表，不做 BI）
+  //
+  // 🔴 测试探针一律剔除：rfq.real / matching.real* 只算真实数据。
+  //    截至本轮实测，库内 8 条 RFQ **全部**是验收探针（real=0），
+  //    所以这里如实显示 0，而不是把探针算成"商机"。
+  //    后台是内部 noindex 工具，沿用 admin 既有约定用双语常量，不补 9 语字典键
+  //    （避免再动 en 叶子数冻结常量 2940）。
+  const zhAdmin = locale === "zh" || locale === "zh-TW";
+  const F = zhAdmin
+    ? {
+        bizTitle: "业务激活漏斗",
+        bizHint: "仅统计真实数据；测试探针已排除。",
+        rReal: "真实询价 RFQ",
+        rTest: "测试探针 RFQ（已排除）",
+        rPublic: "前台公开中",
+        rMatched: "已确认匹配的真实 RFQ",
+        rMatchRows: "匹配记录",
+        rSuggested: "待跟进",
+        rAdvanced: "已推进（联系/成交/未成）",
+        rContacted: "已联系",
+        rWon: "成交",
+        rLost: "未成 / 不跟进",
+        rQuotes: "报价",
+        rQuotesNa: "未实现（尚无报价工作流）",
+        supTitle: "供应商激活",
+        sTotal: "真实供应商",
+        sPublished: "已发布",
+        sDraft: "草稿",
+        sNeedsReview: "资料齐、待发布",
+        sRejected: "已标记不完整",
+        sPublishable: "可发布",
+        leadTitle: "供应商入驻线索",
+        lReal: "真实线索",
+        lNew: "未处理",
+        lReviewed: "已流转",
+        lRejected: "已拒绝",
+      }
+    : {
+        bizTitle: "Business activation funnel",
+        bizHint: "Real data only; test probes excluded.",
+        rReal: "Real RFQs",
+        rTest: "Test-probe RFQs (excluded)",
+        rPublic: "Publicly listed",
+        rMatched: "Real RFQs with confirmed match",
+        rMatchRows: "Match rows",
+        rSuggested: "suggested",
+        rAdvanced: "Advanced (contacted/won/lost)",
+        rContacted: "contacted",
+        rWon: "won",
+        rLost: "lost",
+        rQuotes: "Quotes",
+        rQuotesNa: "not implemented (no quote workflow yet)",
+        supTitle: "Supplier activation",
+        sTotal: "Real suppliers",
+        sPublished: "Published",
+        sDraft: "Draft",
+        sNeedsReview: "Complete, awaiting publish",
+        sRejected: "Marked incomplete",
+        sPublishable: "Publishable",
+        leadTitle: "Supplier application leads",
+        lReal: "Real leads",
+        lNew: "Unhandled",
+        lReviewed: "In progress",
+        lRejected: "Rejected",
+      };
+
+  const bizRows: Array<[string, string | number, boolean?]> = [
+    [F.rReal, funnel.rfq.real],
+    [F.rMatched, funnel.matching.realRfqsMatched],
+    [F.rSuggested, funnel.matching.realSuggested],
+    [F.rContacted, funnel.matching.realContacted],
+    [F.rWon, funnel.matching.realWon],
+    [F.rLost, funnel.matching.realLost],
+    [F.rQuotes, F.rQuotesNa, true],
+    [F.rTest, funnel.rfq.test],
+    [F.rPublic, funnel.rfq.publicCount],
+  ];
+
+  const supRows: Array<[string, number]> = [
+    [F.sTotal, funnel.supplier.total],
+    [F.sPublished, funnel.supplier.published],
+    [F.sDraft, funnel.supplier.draft],
+    [F.sNeedsReview, funnel.supplier.needsReview],
+    [F.sPublishable, funnel.supplier.publishable],
+    [F.sRejected, funnel.supplier.rejected],
+  ];
+
+  const leadRows: Array<[string, number]> = [
+    [F.lReal, funnel.leads.real],
+    [F.lNew, funnel.leads.newCount],
+    [F.lReviewed, funnel.leads.reviewed],
+    [F.lRejected, funnel.leads.rejected],
+  ];
+
+  const funnelCard = (title: string, rows: Array<[string, string | number, boolean?]>) => (
+    <div className="rounded-lg border border-[#e2e8f0] bg-white p-4">
+      <h3 className="text-sm font-bold text-[#0f172a]">{title}</h3>
+      <dl className="mt-2 space-y-1">
+        {rows.map(([label, value, muted]) => (
+          <div key={label} className="flex items-baseline justify-between gap-3 text-sm">
+            <dt className="text-[#475569]">{label}</dt>
+            <dd className={muted ? "text-xs text-[#94a3b8]" : "font-semibold text-[#0f4c81]"}>{value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  );
 
   // 数据库里的 status 是 string，字典对象是字面量联合键。
   // 这里放宽成 Record<string,string>，避免 TS7053；取不到时回落到原始值。
@@ -54,6 +164,18 @@ export default async function AdminOverviewPage({ params }: Props) {
             <div className="mt-1 text-sm text-[#475569]">{c.label}</div>
           </Link>
         ))}
+      </section>
+
+      <section className="mt-8">
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <h2 className="text-lg font-bold text-[#0f172a]">{F.bizTitle}</h2>
+          <span className="text-xs text-[#94a3b8]">{F.bizHint}</span>
+        </div>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {funnelCard(F.bizTitle + " · RFQ → Match", bizRows)}
+          {funnelCard(F.supTitle, supRows)}
+          {funnelCard(F.leadTitle, leadRows)}
+        </div>
       </section>
 
       <section className="mt-8">

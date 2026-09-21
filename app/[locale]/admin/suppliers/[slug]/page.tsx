@@ -19,6 +19,11 @@ import SupplierReportDownloadButton from "@/components/admin/SupplierReportDownl
 import AssessmentAdminPanel from "@/components/admin/AssessmentAdminPanel";
 import SupplierReportEditor from "@/components/admin/SupplierReportEditor";
 import { ASSESSMENT_TYPE_LABELS } from "@/lib/supplierAssessments";
+import {
+  supplierCompleteness,
+  completenessStateClass,
+  completenessStateLabel,
+} from "@/lib/supplierCompleteness";
 import { emptyReportTemplate } from "@/lib/supplierReportTemplate";
 import type { SupplierReportInput, ReportLang } from "@/lib/supplierReportHtml";
 
@@ -129,6 +134,24 @@ export default async function AdminSupplierEditPage({ params }: Props) {
     consentUserAgent: (consent?.user_agent ?? row.consent_user_agent) ?? null,
   };
 
+  // STEP 13 CS-A：完整度**只算一次**，同时供页面徽章与 SupplierEditor 的发布闸门使用。
+  // 与 POST/PATCH /api/admin/suppliers 的服务端校验同源（同一个 lib/supplierCompleteness），
+  // 所以"按钮禁用"与"服务端拒绝"永远是同一套理由。
+  const completeness = supplierCompleteness({
+    slug: row.slug,
+    countryCode: row.country_code,
+    province: row.province,
+    city: row.city,
+    industryCode: row.industry_code,
+    mainProducts: row.main_products ?? [],
+    verificationLevel: row.verification_level,
+    verificationStatus: row.verification_status,
+    consentVersion: row.consent_version,
+    hasConsentRecord: Boolean(consent),
+    profileAuthorized: row.profile_authorized,
+    isPublished: row.is_published,
+  });
+
   return (
     <div>
       <Link
@@ -141,42 +164,61 @@ export default async function AdminSupplierEditPage({ params }: Props) {
       <h1 className="mt-2 text-2xl font-bold text-[#0f172a]">{row.legal_name}</h1>
       <p className="mt-1 font-mono text-xs text-[#94a3b8]">{row.slug}</p>
 
-      {/* STEP 12 Change Set B：审核入口要能一眼看到「数据完整度 / 授权 / 核验」。
+      {/* STEP 12 Change Set B → STEP 13 A2：审核入口要能一眼看到「数据完整度 / 授权 / 核验」。
+          完整度判定统一走 lib/supplierCompleteness.ts（与 Lead 列表、发布闸门同一份口径），
+          不再在本页内联一份 —— 否则后台会出现两套"能不能发布"的标准。
           后台是内部 noindex 工具，按 admin 既有约定用双语常量，**不补 9 语字典键**
-          （避免再动 en 叶子数冻结常量）。 */}
+          （避免再动 en 叶子数冻结常量 2940）。 */}
       {(() => {
         const zh = locale === "zh" || locale === "zh-TW";
-        const items: Array<[string, boolean]> = [
-          [zh ? "国家" : "Country", Boolean(row.country_code && row.country_code !== "unknown")],
-          [zh ? "省份" : "Province", Boolean(row.province)],
-          [zh ? "城市" : "City", Boolean(row.city && row.city !== "unknown")],
-          [zh ? "行业" : "Industry", Boolean(row.industry_code)],
-          [zh ? "主营产品" : "Products", (row.main_products ?? []).length > 0],
-          [zh ? "授权/同意" : "Consent", Boolean(row.profile_authorized || auth.consentAt)],
-          [
-            zh ? "核验等级" : "Verified",
-            Boolean(row.verification_level && row.verification_level !== "unverified"),
-          ],
-        ];
-        const done = items.filter(([, ok]) => ok).length;
+        const c = completeness;
         return (
           <div className="mt-3 rounded-lg border border-[#e2e8f0] bg-white p-3">
-            <div className="text-xs font-semibold uppercase text-[#64748b]">
-              {zh ? `数据完整度 ${done}/${items.length}` : `Data completeness ${done}/${items.length}`}
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="text-xs font-semibold uppercase text-[#64748b]">
+                {zh ? `数据完整度 ${c.score}/${c.total}` : `Data completeness ${c.score}/${c.total}`}
+              </span>
+              <span
+                className={`rounded px-2 py-0.5 text-xs font-medium ${
+                  c.rejected
+                    ? "bg-[#fdeaea] text-[#d4232a]"
+                    : c.publishable
+                      ? "bg-[#e6eef6] text-[#0f4c81]"
+                      : "bg-[#fdf3d8] text-[#8a5a00]"
+                }`}
+              >
+                {c.rejected
+                  ? zh
+                    ? "不合格记录"
+                    : "REJECTED"
+                  : c.publishable
+                    ? zh
+                      ? "可发布"
+                      : "Publishable"
+                    : zh
+                      ? "暂不可发布"
+                      : "Not publishable"}
+              </span>
             </div>
             <div className="mt-2 flex flex-wrap gap-2">
-              {items.map(([label, ok]) => (
+              {c.items.map((it) => (
                 <span
-                  key={label}
-                  className={`rounded px-2 py-1 text-xs ${
-                    ok ? "bg-[#f0fdf4] text-[#1f7a36]" : "bg-[#fef2f2] text-[#d4232a]"
-                  }`}
+                  key={it.key}
+                  className={`rounded px-2 py-1 text-xs ${completenessStateClass(it.state)}`}
+                  title={it.value || undefined}
                 >
-                  {ok ? "✓ " : "✗ "}
-                  {label}
+                  {it.state === "PASS" ? "✓ " : it.state === "UNKNOWN" ? "? " : "✗ "}
+                  {zh ? it.labelZh : it.labelEn}
+                  {it.state !== "PASS" && ` · ${completenessStateLabel(it.state, zh)}`}
                 </span>
               ))}
             </div>
+            {c.blockers.length > 0 && (
+              <p className="mt-2 text-xs text-[#8a5a00]">
+                {zh ? "不能发布：" : "Cannot publish: "}
+                {c.blockers.join(" / ")}
+              </p>
+            )}
           </div>
         );
       })()}
@@ -197,6 +239,11 @@ export default async function AdminSupplierEditPage({ params }: Props) {
           auth={auth}
           countryOptions={COVERAGE_COUNTRIES.map((c) => ({ code: c.code, name: c.name }))}
           clusterOptions={clusterOptions}
+          publishGate={{
+            publishable: completeness.publishable,
+            blockers: completeness.blockers,
+            isPublished: row.is_published,
+          }}
           dict={{
             save: a.save,
             saving: a.saving,

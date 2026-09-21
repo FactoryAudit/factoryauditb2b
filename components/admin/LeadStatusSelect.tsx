@@ -6,14 +6,16 @@ import { useState } from "react";
 //
 // 与 RfqStatusSelect 同构（不做乐观 UI：状态是唯一的协作真相）。
 // 差异：leads 的五档状态是内部运营口径，后台是单人工具，**不补 9 语翻译**，
-//       下拉直接显示数据库里的原始值（new / contacted / quoted / won / lost）。
+//       下拉直接显示数据库里的原始值。
+//       STEP 13 CS-B 新增 rejected（migration 027）——本列表必须与
+//       lib/adminData.ts 的 LEAD_STATUSES 同源，否则会被库的 CHECK 拒绝。
 
 export type LeadStatusSelectDict = {
   saving: string;
   error: string;
 };
 
-const OPTIONS = ["new", "contacted", "quoted", "won", "lost"];
+const OPTIONS = ["new", "contacted", "quoted", "won", "lost", "rejected"];
 
 export default function LeadStatusSelect({
   referenceId,

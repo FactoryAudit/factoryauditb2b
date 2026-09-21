@@ -109,6 +109,27 @@ export type SupplierAuthInfo = {
   consentUserAgent: string | null;
 };
 
+/**
+ * 发布闸门快照（STEP 13 CS-A）。
+ *
+ * 为什么要把服务端的判定传给按钮：
+ *   服务端已经用 lib/supplierCompleteness.ts 做真实校验（未授权 / 缺 city / 缺 industry /
+ *   缺产品 / country=unknown ⇒ 422）。但按钮此前只看 profileAuthorized，
+ *   于是"资料不齐但已授权"的草稿会**显示可点**，点了只弹一句泛化的"不能发布"，
+ *   Admin 根本不知道缺什么 —— 正是 spec A2 禁止的误导性状态。
+ *   这里把同一份判定（同源函数）透给 UI：按钮禁用 + 逐条列出缺哪一项。
+ *
+ * 注意：这只是**提示**，不是权限 —— 真正的拦截永远在服务端（客户端判断毫无意义的旧注释仍成立）。
+ */
+export type PublishGate = {
+  /** 服务端 supplierCompleteness().publishable */
+  publishable: boolean;
+  /** 服务端 supplierCompleteness().blockers（英文短语，直接给 Admin 看） */
+  blockers: string[];
+  /** 当前是否已在架上 */
+  isPublished: boolean;
+};
+
 type Props = {
   slug: string;
   initial: SupplierFormValues;
@@ -116,9 +137,19 @@ type Props = {
   countryOptions: { code: string; name: string }[];
   clusterOptions: ClusterOption[];
   dict: SupplierEditorDict;
+  /** STEP 13 CS-A：发布闸门快照（缺省则退回旧的"仅看授权"行为） */
+  publishGate?: PublishGate;
 };
 
-export default function SupplierEditor({ slug, initial, auth, countryOptions, clusterOptions, dict }: Props) {
+export default function SupplierEditor({
+  slug,
+  initial,
+  auth,
+  countryOptions,
+  clusterOptions,
+  dict,
+  publishGate,
+}: Props) {
   const router = useRouter();
   const [v, setV] = useState<SupplierFormValues>(initial);
   const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
@@ -156,14 +187,16 @@ export default function SupplierEditor({ slug, initial, auth, countryOptions, cl
         body: JSON.stringify({ slug, is_published: published }),
         cache: "no-store",
       });
-      const data = (await res.json()) as { ok?: boolean; error?: string };
+      const data = (await res.json()) as { ok?: boolean; error?: string; message?: string };
       if (data.ok) {
         setPubStatus("done");
+        setPubError(null);
         router.refresh();
       } else {
-        // 422 = 未授权不能发布
+        // 422 = 被发布闸门拦下。**必须显示服务端给的具体原因**（缺 city / 缺 industry …），
+        // 否则 Admin 只看到一句泛化文案，等于没说。
         setPubStatus("error");
-        setPubError(res.status === 422 ? dict.publishBlocked : dict.error);
+        setPubError(data.message ?? (res.status === 422 ? dict.publishBlocked : dict.error));
       }
     } catch {
       setPubStatus("error");
@@ -174,7 +207,13 @@ export default function SupplierEditor({ slug, initial, auth, countryOptions, cl
   const L = dict.labels;
   const inputClass =
     "w-full rounded-md border border-[#e2e8f0] px-3 py-2 text-sm text-[#0f172a] focus:border-[#0f4c81] focus:outline-none";
-  const canPublish = auth.profileAuthorized === true;
+  // 发布闸门：优先用服务端算好的完整度快照（同一份 lib/supplierCompleteness 口径）；
+  // 没有快照时退回旧行为（只看是否已授权）。
+  // 「已在架上」的行不再追索授权（历史 legacy 行 profile_authorized=null），与 API 一致。
+  const alreadyPublished = v.is_published || Boolean(publishGate?.isPublished);
+  const gatePublishable = publishGate ? publishGate.publishable || alreadyPublished : true;
+  const canPublish = (alreadyPublished || auth.profileAuthorized === true) && gatePublishable;
+  const publishBlockers = publishGate?.blockers ?? [];
 
   const authText = (val: string | null | boolean) =>
     val === null || val === ""
@@ -361,7 +400,9 @@ export default function SupplierEditor({ slug, initial, auth, countryOptions, cl
         </div>
       </form>
 
-      {/* 发布 / 下架：规则由服务端强制（未授权不能发布） */}
+      {/* 发布 / 下架：规则由服务端强制（未授权 / 资料不齐均不能发布）。
+          STEP 13 CS-A：这里把服务端同一份判定透出来 —— 按钮禁用时**列出到底缺什么**，
+          不再只显示一句泛化的"不能发布"。 */}
       <div className="card space-y-3 p-6">
         <div className="flex flex-wrap items-center gap-3">
           <button
@@ -384,6 +425,19 @@ export default function SupplierEditor({ slug, initial, auth, countryOptions, cl
           {pubStatus === "done" && <span className="text-sm text-[#0f4c81]">{dict.saved}</span>}
           {pubStatus === "error" && pubError && <span className="text-sm text-[#d4232a]">{pubError}</span>}
         </div>
+
+        {!canPublish && (
+          <div className="rounded-md border border-[#f2d5a0] bg-[#fdf3d8] p-3">
+            <p className="text-xs font-semibold text-[#8a5a00]">{dict.publishBlocked}</p>
+            {publishBlockers.length > 0 && (
+              <ul className="mt-1 list-inside list-disc space-y-0.5 text-xs text-[#8a5a00]">
+                {publishBlockers.map((b) => (
+                  <li key={b}>{b}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
         {!canPublish && <p className="text-xs text-[#d4232a]">{dict.publishBlocked}</p>}
       </div>
 

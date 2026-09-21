@@ -659,6 +659,12 @@ export type AdminRfqRow = {
   is_public: boolean;
   /** STEP-02B：对外发布时间。未公开过则为 null */
   published_at: string | null;
+  /** STEP 12 CS-C1：来源归因（industry / industrial_cluster / home / direct） */
+  source_type: string | null;
+  /** STEP 12 CS-C1：来源页面路径（用于判断买家从哪个 SEO 页发起询价） */
+  source_path: string | null;
+  /** STEP 13 CS-C1：行业码（推荐打分的依据之一） */
+  industry_code: string | null;
 };
 
 export async function listAdminRfqs(limit = 100): Promise<AdminRfqRow[]> {
@@ -668,7 +674,7 @@ export async function listAdminRfqs(limit = 100): Promise<AdminRfqRow[]> {
     const { data, error } = await db
       .from("rfqs")
       .select(
-        "id, reference_id, product, quantity, country, email, company, message, status, created_at, user_id, is_public, published_at"
+        "id, reference_id, product, quantity, country, email, company, message, status, created_at, user_id, is_public, published_at, source_type, source_path, industry_code"
       )
       .order("created_at", { ascending: false })
       .limit(limit);
@@ -782,8 +788,15 @@ export async function listAdminLeads(limit = 100): Promise<AdminLeadRow[]> {
   }
 }
 
-/** leads_status_check 允许的五值，与 /api/admin/leads 的枚举白名单同源 */
-export const LEAD_STATUSES = ["new", "contacted", "quoted", "won", "lost"] as const;
+/**
+ * leads_status_check 允许的取值，与 /api/admin/leads 的枚举白名单同源。
+ *
+ * STEP 13 CS-B（migration 027）新增 `rejected`：
+ *   之前五档里没有任何一档能表达"审核不通过"，而 spec B3 要求
+ *   Reject 必须落 status='rejected'（保留审计轨迹，不得 DELETE）。
+ *   新增后必须同步三处：本常量 + /api/admin/leads 的 STATUSES + LeadStatusSelect 的 OPTIONS。
+ */
+export const LEAD_STATUSES = ["new", "contacted", "quoted", "won", "lost", "rejected"] as const;
 export type LeadStatus = (typeof LEAD_STATUSES)[number];
 
 export async function updateLeadStatus(

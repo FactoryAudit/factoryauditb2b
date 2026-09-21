@@ -10,6 +10,7 @@ import {
 import { checkRateLimit, clamp, clientIp } from "@/lib/rateLimit";
 import { validateSupplierCreateInput } from "@/lib/supplierCreate";
 import { listPublishedClusterSlugs } from "@/lib/industrialClusters";
+import { supplierCompleteness } from "@/lib/supplierCompleteness";
 
 // PATCH /api/admin/suppliers —— 更新供应商（白名单字段）
 //
@@ -37,6 +38,12 @@ function toInt(v: unknown): number | null {
   if (v === null || v === "" || v === undefined) return null;
   const n = Number(v);
   return Number.isFinite(n) ? Math.trunc(n) : null;
+}
+
+/** 取「本次 patch 生效后」的字段值：patch 里有就用 patch，否则回落到库里的旧值。 */
+function fieldOf(patched: string | undefined, existing: string | null): string | null {
+  if (typeof patched === "string") return patched;
+  return existing ?? null;
 }
 
 /** 将逗号/分号/换行分隔字符串或字符串数组归一为 string[]（去空白、去空）。 */
@@ -197,15 +204,54 @@ export async function PATCH(req: Request) {
       body.verification_level as Parameters<typeof updateAdminSupplier>[1]["verification_level"];
   }
 
-  // ---- 发布闸门（规格七）：发布前必须已授权；未授权 → 422 ----
+  // ---- 发布闸门 ----
+  //   1) 既有规则（规格七）：发布前必须已授权，未授权 → 422
+  //   2) STEP 13 A5：发布前还必须满足关键字段完整度，缺失 → 422 并回传明确原因
+  //      🔴 判定必须基于「本次 patch 生效后」的字段值：
+  //         后台是「填完资料 + 点发布」一次提交，若只看库里的旧值，
+  //         Admin 刚填好的 city/industry/products 会被判成缺失 —— 那是假阻断。
+  //      🔴 只阻断 spec 点名的 city / industry / products + country=unknown，
+  //         不自行扩大必须字段范围（province / consent 缺失不阻断）。
   let publishAction: "supplier.published" | "supplier.unpublished" | null = null;
   if (typeof body.is_published === "boolean") {
     if (body.is_published === true) {
-      if (existing.profile_authorized !== true) {
-        return NextResponse.json(
-          { ok: false, error: "not_authorized", message: "profile not authorized" },
-          { status: 422, headers: NO_STORE }
-        );
+      // 🔴 只在「未发布 → 已发布」这次跃迁上执行闸门。
+      //    已发布的行 Admin 每次保存都会带上 is_published=true，
+      //    若不加这个判断，5 家"历史已发布但 profile_authorized 为 null"的供应商
+      //    会在任何一次保存时被 422 拦住 —— 那是本轮凭空造出来的回归。
+      const transitioning = existing.is_published !== true;
+      if (transitioning) {
+        if (existing.profile_authorized !== true) {
+          return NextResponse.json(
+            { ok: false, error: "not_authorized", message: "profile not authorized" },
+            { status: 422, headers: NO_STORE }
+          );
+        }
+        const eff = supplierCompleteness({
+          slug: existing.slug,
+          countryCode: fieldOf(patch.country_code, existing.country_code),
+          province: fieldOf(patch.province, existing.province),
+          city: fieldOf(patch.city, existing.city),
+          industryCode: fieldOf(patch.industry_code, existing.industry_code),
+          mainProducts: patch.main_products ?? existing.main_products ?? [],
+          verificationLevel: existing.verification_level,
+          verificationStatus: existing.verification_status,
+          consentVersion: existing.consent_version,
+          profileAuthorized: existing.profile_authorized,
+          isPublished: existing.is_published,
+        });
+        if (!eff.publishable) {
+          return NextResponse.json(
+            {
+              ok: false,
+              error: "incomplete_profile",
+              message: `Cannot publish: ${eff.blockers.join(" / ")}`,
+              blockers: eff.blockers,
+              completeness: { score: eff.score, total: eff.total, missing: eff.missing },
+            },
+            { status: 422, headers: NO_STORE }
+          );
+        }
       }
       patch.is_published = true;
       patch.unpublished_at = null;

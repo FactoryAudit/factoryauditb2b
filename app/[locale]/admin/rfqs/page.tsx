@@ -7,6 +7,7 @@ import RfqStatusSelect from "@/components/admin/RfqStatusSelect";
 import RfqPublicToggle, {
   type RfqPublicToggleDict,
 } from "@/components/admin/RfqPublicToggle";
+import { isTestRfq } from "@/lib/adminBusiness";
 
 // Admin · 询价单列表
 //
@@ -61,6 +62,19 @@ export default async function AdminRfqsPage({ params }: Props) {
   const colPublic = isZh ? "前台公开" : "Public";
   // STEP 12 Change Set D：进入该 RFQ 的推荐供应商页（Admin 手动确认匹配）
   const colMatch = isZh ? "匹配" : "Match";
+  // STEP 13 CS-C1：来源归因（买家从哪个页面发起）+ 测试探针标记
+  const colSource = isZh ? "来源" : "Source";
+  const testBadge = isZh ? "测试探针" : "TEST";
+  // STEP 13：名单里就把探针标出来 —— 否则 Admin 会把 8 条验收探针当成 8 个商机去跟
+  const rowsTagged = rows.map((r) => ({
+    r,
+    isTest: isTestRfq({
+      referenceId: r.reference_id,
+      product: r.product,
+      company: r.company,
+      email: r.email,
+    }),
+  }));
 
   return (
     <div>
@@ -80,6 +94,7 @@ export default async function AdminRfqsPage({ params }: Props) {
                 <th className="px-4 py-3">{a.colProduct}</th>
                 <th className="px-4 py-3">{a.colEmail}</th>
                 <th className="px-4 py-3">{a.colCountry}</th>
+                <th className="px-4 py-3">{colSource}</th>
                 <th className="px-4 py-3">{a.colCreated}</th>
                 <th className="px-4 py-3">{colPublic}</th>
                 <th className="px-4 py-3">{a.colStatus}</th>
@@ -87,10 +102,15 @@ export default async function AdminRfqsPage({ params }: Props) {
               </tr>
             </thead>
             <tbody className="divide-y divide-[#e2e8f0]">
-              {rows.map((r) => (
+              {rowsTagged.map(({ r, isTest }) => (
                 <tr key={r.id} className="align-top hover:bg-[#f7f9fc]">
                   <td className="px-4 py-3">
                     <span className="font-mono text-xs text-[#64748b]">{r.reference_id}</span>
+                    {isTest && (
+                      <span className="ml-2 rounded bg-[#fdf3d8] px-1.5 py-0.5 text-[10px] font-semibold text-[#8a5a00]">
+                        {testBadge}
+                      </span>
+                    )}
                     {r.company && (
                       <div className="mt-0.5 text-xs text-[#94a3b8]">{r.company}</div>
                     )}
@@ -115,6 +135,14 @@ export default async function AdminRfqsPage({ params }: Props) {
                     </a>
                   </td>
                   <td className="px-4 py-3 text-[#475569]">{r.country ?? "—"}</td>
+                  <td className="px-4 py-3 text-xs">
+                    <span className="text-[#475569]">{r.source_type ?? "—"}</span>
+                    {r.source_path && (
+                      <div className="mt-0.5 max-w-[220px] truncate text-[#94a3b8]" title={r.source_path}>
+                        {r.source_path}
+                      </div>
+                    )}
+                  </td>
                   <td className="px-4 py-3 text-xs text-[#94a3b8]">
                     {new Date(r.created_at).toISOString().slice(0, 10)}
                   </td>
