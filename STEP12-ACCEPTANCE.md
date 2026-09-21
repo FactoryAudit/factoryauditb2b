@@ -198,7 +198,9 @@ Supplier Lead      17（7 条真实 application + 8 草稿 in suppliers）
 
 ## 8. Change Set Summary / 提交与部署
 
-- **commit**：见 `git log -1`（本节由提交后补充）
+- **commit**：**`2042b4b06a9d998d7273feb2447a1fd2cd683ff7`**（short `2042b4b`，55 files changed）
+  - 已复核：`git rev-parse HEAD` 与 `git log -1 --format=%H` 一致 ⇒ ref 真落盘（本机 Windows git 有「假成功」前科，必须复核）
+  - 本次提交同时把 STEP 09/10 遗留的未提交漂移（`lib/clusterRoutes.ts`、产业带层级页等）一并入库
 - **deploy version**：`a1757fd1-5158-4bf2-b72d-56deca06a90a`
 - **buildId / 门禁**：en 字典叶子数 **2939**（常量已从 2938 同步，8 处同源 + verify-opennext-bundle + RELEASE-RULES）
 - **回滚**：`node scripts/step12-activate-data.mjs --rollback`（备份 `step12-backup.json`，16 行）

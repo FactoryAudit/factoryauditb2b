@@ -61,11 +61,14 @@ ok("B1.6 测试 lead 被标记 isTest", testLeads.length >= 2, String(testLeads.
 // ---------- CHANGE SET E：漏斗（真实口径） ----------
 // 🔴 2026-09-21 取证纠正：STEP 11/12 文档里的"真实 RFQ = 1（RFQ-CXJCRL）"是**错的**。
 //    RFQ-CXJCRL 的 email=cs02b.smoke@example.com、company="CS-02B Test Co"
-//    ⇒ 它是 CS-02B 冒烟探针。库内 8 条 RFQ **全部**是验收探针，真实 RFQ = 0。
-//    因此断言不能写死"=1"，要断言这条**判据**本身。
+//    ⇒ 它是 CS-02B 冒烟探针。库内 RFQ **全部**是验收探针，真实 RFQ = 0。
+//    因此断言不能写死条数 —— 条数会随每次线上验收新增探针而变
+//    （2026-09-21 实测：跑完 step13-live-verify 后由 8 → 10，写死 8 的断言当场误报 FAIL）。
+//    **不变量**是 "test = total"：没有任何一条 RFQ 是真实买家。一旦出现真实 RFQ，
+//    这条断言会自动 FAIL —— 这正是我们要的哨兵，而不是一个会过期的数字。
 const f = await getBusinessFunnel();
 ok("E1.1 真实 RFQ = 0（库内全为探针，实测纠正）", f.rfq.real === 0, JSON.stringify(f.rfq));
-ok("E1.2 测试 RFQ = 8（= total）", f.rfq.test === f.rfq.total && f.rfq.total === 8, JSON.stringify(f.rfq));
+ok("E1.2 全部 RFQ 均为测试探针（test = total）", f.rfq.test === f.rfq.total, JSON.stringify(f.rfq));
 ok("E1.3 探针隔离后 public RFQ = 0", f.rfq.publicCount === 0, JSON.stringify(f.rfq));
 ok(
   "E2.1 匹配统计只计真实 RFQ（探针上的机制验证不计入业务漏斗）",

@@ -54,6 +54,13 @@ async function get(url) {
 
 const uniq = (a) => Array.from(new Set(a));
 const countOcc = (s, needle) => s.split(needle).length - 1;
+// ⚠️ 文本计数类断言必须先把 <script> 剥掉。
+// Next.js App Router 会把同一段文案输出两份：一份是 server-render 的**可见 DOM**，
+// 一份是 **RSC flight payload**（`self.__next_f.push("...")`）。直接对全量 HTML 计数会得到 2 倍。
+// 2026-09-21 部署后首次跑本脚本时，断言 13/14 就因此误报 FAIL（16 vs 8），
+// 而实测 DOM 层是正确的 8 —— 属于**断言缺陷，不是页面缺陷**。
+// 标签型断言（<h2>/<h3>）不受影响：flight payload 里的标签不是真实标签形态。
+const stripScripts = (html) => html.replace(/<script[^>]*>[\s\S]*?<\/script>/g, "");
 
 function extract(html) {
   // 只取**站内相对** href（绝对 URL 属于 canonical / hreflang，不是内链）；
@@ -78,6 +85,8 @@ function extract(html) {
 
 const en = await get(`${BASE}/en/industrial-clusters`);
 const info = extract(en.text);
+// 可见 DOM（剥掉 <script> 后的 HTML）—— 所有"出现 N 次"的断言都以它为基准，避免 RSC flight payload 干扰
+const visible = stripScripts(en.text);
 
 if (isBaseline) {
   const sm = await get(`${BASE}/sitemap.xml`);
@@ -125,9 +134,18 @@ ok("10 tab 锚点与 H2 id 对应", EXPECTED_COUNTRIES.map((c) => c.toLowerCase(
 console.log("--- 3. 布局与内容 ---");
 ok("11 Desktop 2 列（md:grid-cols-2）", en.text.includes("md:grid-cols-2"));
 ok("12 Mobile 1 列（grid-cols-1，无 md:grid-cols-3）", en.text.includes("grid-cols-1") && !en.text.includes("md:grid-cols-3"));
-ok("13 供应商计数 = 8 处 0 suppliers（不虚构数字）", countOcc(en.text, "0 suppliers") === 8, String(countOcc(en.text, "0 suppliers")));
-ok("14 CTA View Suppliers → 出现 8 次", countOcc(en.text, "View Suppliers →") === 8, String(countOcc(en.text, "View Suppliers →")));
-ok("15 卡片定位行 City · Province · Country 正确", en.text.includes("Jiangmen · Guangdong · China") && en.text.includes("Rayong · Thailand"));
+ok("13 供应商计数 = 8 处 0 suppliers（不虚构数字）", countOcc(visible, "0 suppliers") === 8, String(countOcc(visible, "0 suppliers")));
+ok("14 CTA View Suppliers → 出现 8 次", countOcc(visible, "View Suppliers →") === 8, String(countOcc(visible, "View Suppliers →")));
+ok(
+  "15 卡片定位行 City · Province · Country 正确",
+  visible.includes("Jiangmen · Guangdong · China") && visible.includes("Rayong · Thailand")
+);
+ok(
+  "15b 卡片容器数量 = 8（DOM 层，与诊断脚本同口径）",
+  (visible.match(/class="[^"]*\bcard\b[^"]*"/g) || []).length === 8,
+  String((visible.match(/class="[^"]*\bcard\b[^"]*"/g) || []).length)
+);
+ok("15c 可见 DOM 内不存在 RSC payload 残留", !visible.includes("self.__next_f.push"));
 
 console.log("--- 4. SEO 未变 ---");
 const baseline = existsSync(BASELINE) ? JSON.parse(readFileSync(BASELINE, "utf8")) : null;
