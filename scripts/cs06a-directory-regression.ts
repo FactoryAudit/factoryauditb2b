@@ -233,9 +233,22 @@ section("B. Bug A —— `/en/*` 301 必须保住 query（源码级防回归）"
     /matcher:\s*\["\/\(\(\?!api\|_next\|\.\*\\\\\.\.\*\)\.\*\)"\]/.test(mw)
   );
   const urlCalls = mw.match(/new URL\(/g);
+  // B6 原为「恰好 2 处（rewrite + redirect）」——写于 middleware 只有两个分支的年代。
+  //
+  // 🔴 STEP 13-B 修正（陈旧断言，非本轮回归）：STEP 09 上线了**第三条合法分支**
+  //    —— 旧扁平产业带 URL → 层级 canonical 的 308（middleware 里的
+  //    `LEGACY_CLUSTER_REDIRECTS[slug]`）。该分支已通过 STEP 09 生产验收，
+  //    属已接受的架构。它随 STEP 09 一起上线却一直没进版本库（"线上有、库里没有"），
+  //    本轮才补提交，因此这条断言从那时起就是 FAIL，只是没人跑过 cs06a。
+  //
+  //    处置：不降低强度，改成**按语义逐个钉死** —— 3 处，且每一处必须仍是它原本的角色。
+  //    任何第 4 处新分支或角色漂移依然会立刻 FAIL（比原来的纯计数更严）。
   check(
-    "B6 `new URL(` 仍恰好 2 处（rewrite + redirect），未新增分支",
-    Boolean(urlCalls && urlCalls.length === 2),
+    "B6 `new URL(` 恰好 3 处，且三处角色各自守恒（rewrite + 两条 redirect）",
+    Boolean(urlCalls && urlCalls.length === 3) &&
+      /new URL\(`\$\{localePart\}\$\{canonical\}\$\{req\.nextUrl\.search\}`,\s*req\.url\)/.test(mw) &&
+      /new URL\(\(rest === "" \? "\/" : rest\) \+ req\.nextUrl\.search,\s*req\.url\)/.test(mw) &&
+      /new URL\(target,\s*req\.url\)/.test(mw),
     `实际 ${urlCalls ? urlCalls.length : 0} 处`
   );
   // CS-19（工单 SEO-20260918-FAB 任务 1.1）—— 本断言按新事实改写，**断言数不变**。
@@ -318,7 +331,7 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
       /export\s+const\s+FEATURED_MIN\s*=/.test(sup)
   );
 
-  // C7 九语字典：键集合与 en 完全一致，叶子数恒为 2939（= 2935 字符串 + 4 boolean）
+  // C7 九语字典：键集合与 en 完全一致，叶子数恒为 2940（= 2936 字符串 + 4 boolean）
   // 2648 → 2666：CS-08 入驻表证书子表单 + 「我要获得证书」咨询弹窗新增 18 键 × 9 语
   // 2666 → 2694：CS-11 公开标准报告样板页 standardReport 命名空间 27 键 + footer.standardReport 1 键
   // 2694 → 2714：CS-12 档案页登记信息 7 键 + 工厂自述证书 8 键 + 产能 4 键 + evidenceCenter.issuedOn 1 键 = 20 键 × 9 语
@@ -377,7 +390,7 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
     dictLeaves[loc] = leaves(JSON.parse(fs.readFileSync(p, "utf8")));
   }
   const baseKeys = dictLeaves.en.map((l) => l.key).sort();
-  check("C8 en 字典叶子数 = 2939（未被截断/新增）", baseKeys.length === 2939, `实际 ${baseKeys.length}`);
+  check("C8 en 字典叶子数 = 2940（未被截断/新增）", baseKeys.length === 2940, `实际 ${baseKeys.length}`);
 
   for (const loc of LOCALES) {
     if (loc === "en") continue;

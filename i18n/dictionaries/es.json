@@ -3733,6 +3733,7 @@
     "emptyTitle": "Aún no hay clústeres industriales disponibles.",
     "emptyLead": "Estamos ampliando nuestra cobertura de proveedores. Vuelva pronto.",
     "countryLabel": "País",
+    "allCountries": "Todos",
     "regionLabel": "Región",
     "industryLabel": "Industria",
     "supplierCount": "{count} proveedores",

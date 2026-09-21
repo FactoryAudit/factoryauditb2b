@@ -74,8 +74,8 @@ if (fs.existsSync(en)) {
     for (const v of Object.values(o)) n += v && typeof v === "object" ? c(v) : 1;
     return n;
   })(obj);
-  console.log("=== 产物内 en 字典叶子数 = " + cnt + " (期望 2939) ===");
-  if (cnt !== 2939) fail++;
+  console.log("=== 产物内 en 字典叶子数 = " + cnt + " (期望 2940) ===");
+  if (cnt !== 2940) fail++;
 } else {
   console.log("FAIL  产物内缺失 en 字典");
   fail++;
