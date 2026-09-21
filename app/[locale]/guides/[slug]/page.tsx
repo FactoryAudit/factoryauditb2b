@@ -147,6 +147,49 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
         </div>
       </section>
 
+      {/* 结构化表格：对比 / 清单 / 时间线 / 风险矩阵。
+          服务端直出真实 <table>，不做图片、不藏进 JS tab —— AI Search 与精选摘要可直接抽取。 */}
+      {Array.isArray(c.tables) && c.tables.length > 0 && (
+        <>
+          {c.tables.map((tb) => (
+            <section key={tb.title} className="mt-8">
+              <h2 className="text-2xl font-bold text-[#0f172a]">{tb.title}</h2>
+              <div className="mt-3 overflow-x-auto">
+                <table className="w-full border-collapse text-sm">
+                  <thead>
+                    <tr className="bg-[#f1f5f9]">
+                      {tb.headers.map((h) => (
+                        <th
+                          key={h}
+                          scope="col"
+                          className="border border-[#cbd5e1] px-3 py-2 text-left font-semibold text-[#0f172a]"
+                        >
+                          {h}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {tb.rows.map((row, i) => (
+                      <tr key={`${tb.title}-row-${i}`}>
+                        {row.map((cell, j) => (
+                          <td
+                            key={`${tb.title}-cell-${i}-${j}`}
+                            className="border border-[#cbd5e1] px-3 py-2 align-top text-[#475569]"
+                          >
+                            {cell}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          ))}
+        </>
+      )}
+
       <section className="mt-8">
         <h2 className="text-2xl font-bold text-[#0f172a]">{t.common.ui.checklist}</h2>
         <ul className="mt-3 space-y-1 text-[#475569]">

@@ -24,6 +24,13 @@ export interface GuideContent {
   checklist: string[];
   faq: { q: string; a: string }[];
   sources: { name: string; note: string }[];
+  /**
+   * 可选的对比 / 清单 / 时间线 / 风险矩阵表格。
+   * 服务端直出真实 <table>：AI Search 与精选摘要优先抽取结构化表格，
+   * 且指令禁止把核心信息做成图片或隐藏在 JS tab 后。
+   * 标题随数据携带，不占字典 key（避免触碰 en 叶子数冻结常量）。
+   */
+  tables?: { title: string; headers: string[]; rows: string[][] }[];
 }
 
 export interface Guide {
@@ -42,6 +49,11 @@ export interface Guide {
   services: { href: string }[];
   /** 相关指南 slug */
   related: string[];
+  /**
+   * 编辑性上下文内链（非工具 / 非服务），例如 RFQ、产业带、供应商入驻。
+   * 锚文本随数据携带且每篇不同，避免全站重复 anchor text。
+   */
+  links?: { href: string; labelEn: string; labelZh: string }[];
   en: GuideContent;
   zh: GuideContent;
 }
@@ -3919,6 +3931,4132 @@ export const GUIDES: Guide[] = [
       sources: [
         { name: "FactoryAuditB2B 供应商质量审核", note: "质量维度的现场审核。" },
         { name: "ISO 9001 条款结构", note: "质量审核打分的体系区域。" },
+      ],
+    },
+  },
+  {
+    slug: "verify-alibaba-supplier-before-paying",
+    category: "verification",
+    titleEn: "How to Verify an Alibaba Supplier Before Paying a Deposit",
+    titleZh: "付定金前如何核验阿里巴巴供应商",
+    metaDescEn:
+      "Learn how to verify an Alibaba supplier before paying a deposit: confirm the legal entity, factory address, capability, certificates and payment entity with a 17-point buyer checklist.",
+    metaDescZh:
+      "付定金前核验阿里巴巴供应商的17项清单：核对法律主体、工厂地址、生产能力、证书与收款主体，判断何时必须改为现场验厂。",
+    updated: "2026-09-22",
+    tools: [
+      { href: "/tools/supplier-risk-calculator" },
+      { href: "/tools/supplier-verification-checklist" },
+      { href: "/tools/supplier-document-checker" },
+    ],
+    services: [
+      { href: "/services/china-supplier-verification" },
+      { href: "/services/china-factory-audit" },
+    ],
+    related: [
+      "verify-supplier-before-deposit",
+      "china-factory-or-trading-company",
+      "how-to-check-china-company-registration",
+      "alibaba-trade-assurance-safe-payment",
+      "chinese-supplier-scam-red-flags",
+    ],
+    links: [
+      { href: "/rfq", labelEn: "See live buyer requests", labelZh: "查看真实采购需求" },
+      {
+        href: "/suppliers",
+        labelEn: "Browse supplier profiles with evidence on record",
+        labelZh: "浏览带证据记录的供应商档案",
+      },
+      {
+        href: "/factory-audit/request",
+        labelEn: "Request an on-site factory audit",
+        labelZh: "申请现场工厂验厂",
+      },
+    ],
+    en: {
+      quickAnswer:
+        "Before paying a deposit, verify five things: the legal entity behind the storefront (Chinese registered name and Unified Social Credit Code), the address where your product will actually be made, the manufacturing capability for your specific product, the certificates and test reports required in your market, and the bank entity that will receive your money. Alibaba badges and Trade Assurance describe platform activity, not manufacturing. If any of these five cannot be evidenced in documents, treat the deposit as unsecured: request further evidence first, or commission an on-site audit.",
+      definition:
+        "Alibaba supplier verification is the process of confirming that the company behind a platform storefront is a legally registered entity that actually manufactures, or legitimately controls the manufacture of, the product you intend to buy. It combines business registration checks, address matching, capability evidence, document review and payment-entity checks. It is not the same as a factory audit: verification can largely be completed from documents and public records, while an audit requires a physical site visit and is the only method that can confirm production reality on the day of the visit.",
+      keyPoints: [
+        "A Gold Supplier badge, years-on-platform or response rate describe platform activity. They are not evidence of manufacturing capability.",
+        "Match the Unified Social Credit Code to the Chinese registered name. The English trading name shown on the platform is usually not the legal entity.",
+        "A business licence proves that a company is registered to exist. It does not prove that the company owns or operates a factory.",
+        "If the bank account beneficiary differs from the legal entity on the licence, treat the payment as high risk regardless of how professional the communication is.",
+        "Subcontracting is common and is not inherently fraudulent, but you should know who actually makes your product and where.",
+        "Document checks can be completed in days; an on-site audit is the only way to confirm that production equipment and staff are actually there.",
+      ],
+      steps: [
+        {
+          title: "Verify the legal company name",
+          body: "Ask for the Chinese registered name, the Unified Social Credit Code (an 18-character code on the business licence) and a copy of the licence. Confirm that the registered name on the licence matches the entity you will contract with. The English name on the storefront is a marketing label and carries no legal weight.",
+        },
+        {
+          title: "Decide whether the counterparty is a factory or a trading company",
+          body: "Read the registered business scope on the licence. Manufacturing scope typically names the product category and includes production or processing wording; a trading scope is usually limited to sales, wholesale, import and export. A company can hold both, so read the scope rather than the self-description.",
+        },
+        {
+          title: "Match the factory address to the production site",
+          body: "Compare the registered address, the address quoted for production and the address that will appear on export documents. A registered address in an office building while production is claimed elsewhere is normal, but you need the production address in writing, because that is the address an auditor would visit.",
+        },
+        {
+          title: "Verify manufacturing capability for your product",
+          body: "Request the equipment list, the number of production lines, shift pattern and monthly capacity for your product category specifically. Capability is product-specific: a factory that makes stainless steel fabrication is not automatically capable of making your injection-moulded housing.",
+        },
+        {
+          title: "Check certificates and test reports against the legal entity",
+          body: "ISO 9001, product test reports and market-specific approvals must name the same legal entity and cover the product and scope you are buying. A certificate issued to a parent company, a sister company or an expired scope is not evidence for your order.",
+        },
+        {
+          title: "Verify bank and contract information",
+          body: "The beneficiary of the bank account should be the legal entity on the business licence, or an entity the supplier can document as its own export arm. Requests to pay a personal account, a third-party account or an unrelated company name are the single most reliable fraud signal in cross-border sourcing.",
+        },
+        {
+          title: "Check subcontracting risk",
+          body: "Ask directly which operations are performed in-house and which are subcontracted, and ask for the subcontractor names. Uncontrolled subcontracting is how quality and compliance obligations quietly move to a facility nobody has assessed.",
+        },
+        {
+          title: "Decide whether documentary verification is enough",
+          body: "If the order value is low and the documents are consistent, documented verification may be sufficient. If the order is large, the product carries safety or compliance risk, or the evidence is incomplete, an on-site audit is the appropriate next step before the deposit is released.",
+        },
+      ],
+      examples: [
+        {
+          title: "Mistake: treating the platform badge as verification",
+          body: "A buyer saw five years of Gold Supplier history and assumed the supplier was a factory. The business scope on the licence was wholesale and import-export only. The goods were made by an unnamed third workshop, and the buyer had no contractual relationship with the actual manufacturer.",
+        },
+        {
+          title: "Mistake: paying a bank account that does not match the licence",
+          body: "The pro forma invoice named one company while the bank beneficiary was a different entity in another city. The supplier explained it as an export agent. When the shipment failed inspection, the buyer had no enforceable claim against the entity that received the money.",
+        },
+        {
+          title: "Example: consistent evidence chain",
+          body: "The licence name, the ISO 9001 certificate, the test report and the bank beneficiary all named the same legal entity, and the quoted production address matched the address on the export documents. That consistency is what reduces risk, not the badge count.",
+        },
+      ],
+      checklist: [
+        "Chinese registered name obtained, not only the English storefront name.",
+        "Unified Social Credit Code captured from the business licence.",
+        "Registered business scope read and understood (manufacturing vs trading).",
+        "Registered capital and establishment date reviewed for plausibility against claimed scale.",
+        "Production address confirmed in writing and distinct from the registered office if different.",
+        "Equipment list and line count provided for your product category.",
+        "Monthly capacity stated and cross-checked against your order volume.",
+        "Quality system certificate valid, in scope, and naming the same legal entity.",
+        "Product test reports issued by an accredited laboratory for your destination market.",
+        "Bank beneficiary name identical to the legal entity on the licence.",
+        "Contract signed by, or on behalf of, the same legal entity.",
+        "Subcontracted operations disclosed, with subcontractor identity where applicable.",
+        "Export experience evidenced by previous shipment records to your market.",
+        "Sample produced on the quoted production line, not sourced elsewhere.",
+        "Red-flag scan completed: pressure tactics, unusual payment routing, reluctance to share the licence.",
+        "Deposit amount limited to what you could lose without a legal claim.",
+        "Decision recorded: proceed, request more evidence, or commission an audit.",
+      ],
+      tables: [
+        {
+          title: "17-Point Alibaba Supplier Verification Checklist",
+          headers: ["#", "Check", "Acceptable evidence", "Risk if missing"],
+          rows: [
+            ["1", "Chinese registered name", "Copy of business licence", "You may be contracting an entity that does not exist"],
+            ["2", "Unified Social Credit Code", "18-character code on the licence", "No way to confirm registration status"],
+            ["3", "Legal entity status", "Registration record shows active, not revoked", "Contract may be unenforceable"],
+            ["4", "Establishment date", "Date on the licence", "Claimed experience may be fabricated"],
+            ["5", "Registered capital", "Amount on the licence", "Scale claims may be unsupported"],
+            ["6", "Business scope", "Manufacturing or trading wording", "You may be buying from an intermediary"],
+            ["7", "Legal representative", "Name on the licence matches signatory", "Signature may not bind the company"],
+            ["8", "Registered address", "Licence address", "Cannot locate the entity if disputes arise"],
+            ["9", "Production address", "Written confirmation, site photos with geolocation", "Audit and inspection cannot be correctly scoped"],
+            ["10", "Equipment list", "Machine inventory for your process", "Capability claims unverified"],
+            ["11", "Production capacity", "Lines x shifts x monthly output", "Delivery dates may be unrealistic"],
+            ["12", "Quality system certificate", "Valid ISO 9001 naming the same entity", "No systematic process control"],
+            ["13", "Product test reports", "Accredited lab report for your market", "Compliance and safety risk"],
+            ["14", "Bank beneficiary", "Account name equals legal entity", "Payment recovery risk"],
+            ["15", "Export record", "Prior shipment documentation", "Unknown experience with your market"],
+            ["16", "Subcontracting disclosure", "Written statement of outsourced steps", "Hidden compliance and quality exposure"],
+            ["17", "Deposit exposure", "Deposit sized to an acceptable loss", "Disproportionate loss if the deal fails"],
+          ],
+        },
+        {
+          title: "Platform Signals vs Independent Verification",
+          headers: ["Signal", "What it actually tells you", "What it does not tell you"],
+          rows: [
+            ["Gold Supplier membership", "The company paid for a platform membership tier", "Whether it manufactures anything"],
+            ["Years on platform", "Account age", "Whether the entity or ownership changed"],
+            ["Trade Assurance coverage", "The platform holds a dispute mechanism for covered orders", "Product quality, compliance or factory existence"],
+            ["Response rate", "Communication behaviour", "Production reality"],
+            ["On-site check by platform", "A visit occurred at some point by some party", "Current capability for your product, or who owns the site"],
+            ["Verified supplier badge", "The platform validated specific documents it chose to check", "That the documents cover your product and order"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "How do I verify an Alibaba supplier before paying?",
+          a: "Confirm the Chinese registered name and Unified Social Credit Code, read the business scope to tell factory from trading company, get the production address in writing, check capability evidence for your product, confirm certificates name the same entity, and make sure the bank beneficiary matches the licence. Complete all of these before releasing a deposit.",
+        },
+        {
+          q: "Is Trade Assurance enough protection when paying a deposit?",
+          a: "Trade Assurance is a platform dispute and payment-holding mechanism with defined coverage limits and eligibility rules. It addresses order disputes, not the underlying question of whether the supplier can manufacture your product or whether the factory exists. Treat it as a payment safeguard layered on top of verification, not as a substitute for it.",
+        },
+        {
+          q: "Can I verify a Chinese supplier without visiting the factory?",
+          a: "Yes, documentary verification covers registration, scope, address plausibility, certificates, test reports and payment entity, and can be completed remotely in days. What it cannot confirm is production reality: that the equipment, staff and processes exist at the stated site. That requires an on-site audit.",
+        },
+        {
+          q: "How do I check if an Alibaba supplier is a real factory?",
+          a: "Read the registered business scope on the business licence for manufacturing wording, compare the registered address with the stated production address, request the equipment list and line count, and check whether certificates name the same legal entity. A video walkthrough showing the company name at the entrance is supporting evidence, not proof on its own.",
+        },
+        {
+          q: "What is a Unified Social Credit Code?",
+          a: "It is the 18-character identifier issued to every registered entity in China and printed on the business licence. It is the most reliable single key for confirming that a company is legally registered, and it is the reference you should use when checking registration status and matching a supplier to its certificates.",
+        },
+        {
+          q: "Should I pay the deposit to a personal bank account?",
+          a: "No. A request to pay an individual, a third-party company or an unrelated entity is a well-established fraud pattern. The beneficiary should be the legal entity named on the business licence, or an export entity the supplier can document as its own.",
+        },
+        {
+          q: "When should I order a factory audit instead of just checking documents?",
+          a: "Order an audit when the order value is material, the product carries safety, regulatory or customer-mandated compliance risk, the evidence chain is inconsistent, or the supplier is new to you and claims capability you cannot verify any other way. Document checks answer whether the paperwork is consistent; an audit answers whether the factory is real.",
+        },
+      ],
+      sources: [
+        {
+          name: "Alibaba.com platform documentation",
+          note: "Describes what supplier badges, membership tiers and Trade Assurance cover, and the limits of platform-held protections.",
+        },
+        {
+          name: "State Administration for Market Regulation (SAMR), China",
+          note: "The national authority for enterprise registration; the Unified Social Credit Code and registered business scope are issued and recorded here.",
+        },
+        {
+          name: "FactoryAuditB2B Methodology",
+          note: "How this site defines evidence levels and risk scores, and why a risk score is decision support rather than certification.",
+        },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "付定金前必须核验五件事：店铺背后的法律主体（中文注册名与统一社会信用代码）、产品实际生产地址、针对你产品的具体生产能力、目标市场要求的证书与检测报告，以及最终收款的银行主体。阿里巴巴的徽章与信保描述的是平台活跃度，不是制造能力。这五项中任何一项拿不出文件证据，就该把这笔定金视为无保障：先补证据，或直接做现场验厂。",
+      definition:
+        "阿里巴巴供应商核验，是确认平台店铺背后公司是否为合法注册主体，且该主体是否真实生产、或合法掌控你所购产品生产的过程。它结合工商登记核查、地址比对、能力证据、文件审阅与收款主体核验。它不等同于验厂：核验主要靠文件与公开记录完成，而验厂必须到现场，是唯一能确认「访问当天生产真实存在」的方法。",
+      keyPoints: [
+        "金牌供应商徽章、在平台年限、回复率描述的是平台活跃度，不是制造能力的证据。",
+        "把统一社会信用代码与中文注册名对上；平台展示的英文商号通常不是法律主体。",
+        "营业执照只证明公司合法注册存在，不证明这家公司拥有或运营工厂。",
+        "若银行账户收款人与执照上的法律主体不一致，无论沟通多专业，都应视为高风险付款。",
+        "分包很常见，本身不等于欺诈，但你必须知道产品实际是谁、在哪里生产的。",
+        "文件核查几天可完成；现场验厂是唯一能确认设备与人员真实存在的方式。",
+      ],
+      steps: [
+        {
+          title: "核验法律主体名称",
+          body: "索取中文注册名、统一社会信用代码（执照上的18位代码）与执照复印件，确认执照上的注册名与你将签约的主体一致。店铺展示的英文名称只是营销标签，没有法律效力。",
+        },
+        {
+          title: "判断交易对手是工厂还是贸易公司",
+          body: "看执照上的经营范围。生产类经营范围通常会写明产品类别并含生产、加工等表述；贸易类范围通常仅限销售、批发、进出口。一家公司可以同时具备两类资质，所以要看经营范围而不是对方的自我描述。",
+        },
+        {
+          title: "把工厂地址与实际生产地对上",
+          body: "比对注册地址、对方声称的生产地址、以及将来出现在出口单证上的地址。注册地在写字楼而生产在别处很常见，但你需要拿到书面的生产地址，因为那才是审核员会去现场的地址。",
+        },
+        {
+          title: "核验针对你产品的生产能力",
+          body: "索取设备清单、产线数量、班次安排，以及针对你所在产品类别的月产能。能力是产品特定的：会做不锈钢钣金的工厂，不等于能做你的注塑外壳。",
+        },
+        {
+          title: "核对证书与检测报告是否指向同一主体",
+          body: "ISO 9001、产品检测报告与市场准入认证，必须写明同一法律主体，且覆盖你所购产品与范围。开给母公司、兄弟公司或已过期范围的证书，不构成你这笔订单的证据。",
+        },
+        {
+          title: "核验银行与合同信息",
+          body: "银行账户收款人应当是执照上的法律主体，或者是供应商能证明为其自有出口主体的实体。要求付款到个人账户、第三方账户或无关公司名下的账户，是跨境采购中最可靠的欺诈信号。",
+        },
+        {
+          title: "排查分包风险",
+          body: "直接问哪些工序自制、哪些外包，并要求提供外协厂名称。失控的分包，正是质量与合规义务悄悄转移到一家无人评估过的工厂的路径。",
+        },
+        {
+          title: "判断文件核验是否足够",
+          body: "订单金额小且文件一致时，文件核验可能已足够。订单金额大、产品涉及安全或合规风险、或证据链不完整时，在放出定金前做现场验厂才是合适的下一步。",
+        },
+      ],
+      examples: [
+        {
+          title: "错误做法：把平台徽章当成核验",
+          body: "买家看到五年金牌供应商记录，就认定对方是工厂。但执照经营范围只有批发与进出口。货物由一家未披露的第三方作坊生产，买家与真正的制造商之间没有任何合同关系。",
+        },
+        {
+          title: "错误做法：付款到与执照不符的账户",
+          body: "形式发票写的是甲公司，银行收款人却是异地另一家实体，供应商解释为出口代理。货物验货失败后，买家对实际收款方没有任何可执行的索赔依据。",
+        },
+        {
+          title: "正面示例：证据链一致",
+          body: "执照名称、ISO 9001 证书、检测报告与银行收款人四者都指向同一法律主体，且报价中的生产地址与出口单证一致。降低风险的是这种一致性，而不是徽章数量。",
+        },
+      ],
+      checklist: [
+        "已拿到中文注册名，而不只是英文店铺名。",
+        "已从营业执照上取得统一社会信用代码。",
+        "已阅读并理解经营范围（生产类还是贸易类）。",
+        "已核对注册资本与成立日期是否与声称规模相符。",
+        "已书面确认生产地址，如与注册地不同需分别记录。",
+        "已取得针对你产品类别的设备清单与产线数量。",
+        "已取得月产能，并与你的订单量交叉核对。",
+        "质量体系证书有效、范围正确且指向同一法律主体。",
+        "产品检测报告由认可实验室出具，覆盖你的目标市场。",
+        "银行收款人名称与执照上的法律主体完全一致。",
+        "合同由同一法律主体签署或授权签署。",
+        "已书面披露外包工序，并在适用时提供外协方身份。",
+        "已有发往你目标市场的既往出货记录作为出口经验证据。",
+        "样品是在报价产线上生产的，而非外购。",
+        "已完成红旗扫描：施压话术、异常付款路径、不愿提供执照。",
+        "定金金额已控制在「即使没有索赔权也可承受」的范围内。",
+        "已记录决策：继续、补充证据，或委托验厂。",
+      ],
+      tables: [
+        {
+          title: "阿里巴巴供应商17项核验清单",
+          headers: ["#", "核验项", "可接受的证据", "缺失的后果"],
+          rows: [
+            ["1", "中文注册名", "营业执照复印件", "你可能在与一个不存在的主体签约"],
+            ["2", "统一社会信用代码", "执照上的18位代码", "无法确认注册状态"],
+            ["3", "主体状态", "登记记录显示在营而非吊销", "合同可能不可执行"],
+            ["4", "成立日期", "执照上的日期", "声称的经验年限可能造假"],
+            ["5", "注册资本", "执照上的金额", "规模声称可能无依据"],
+            ["6", "经营范围", "生产类或贸易类表述", "你可能是在向中间商采购"],
+            ["7", "法定代表人", "执照上的姓名与签字人一致", "签字可能无法约束公司"],
+            ["8", "注册地址", "执照地址", "发生纠纷时找不到主体"],
+            ["9", "生产地址", "书面确认，含定位的现场照片", "验厂与验货无法正确界定范围"],
+            ["10", "设备清单", "对应你工艺的机器清单", "能力声称未经验证"],
+            ["11", "生产能力", "产线数×班次×月产量", "交期承诺可能不现实"],
+            ["12", "质量体系证书", "有效的ISO 9001且指向同一主体", "缺乏系统化的过程控制"],
+            ["13", "产品检测报告", "认可实验室针对目标市场的报告", "合规与安全风险"],
+            ["14", "银行收款人", "账户名等于法律主体", "付款回收风险"],
+            ["15", "出口记录", "既往出货单证", "对目标市场经验不明"],
+            ["16", "分包披露", "外包工序的书面说明", "隐藏的合规与质量敞口"],
+            ["17", "定金敞口", "定金规模在可承受损失内", "交易失败时损失不成比例"],
+          ],
+        },
+        {
+          title: "平台信号与独立核验的区别",
+          headers: ["信号", "它实际告诉你什么", "它不能告诉你什么"],
+          rows: [
+            ["金牌供应商会员", "这家公司购买了平台会员等级", "它是否生产任何东西"],
+            ["在平台年限", "账号注册时长", "主体或股权是否变更过"],
+            ["信保覆盖", "平台对符合条件的订单提供争议机制", "产品质量、合规性或工厂是否存在"],
+            ["回复率", "沟通行为", "生产真实情况"],
+            ["平台实地核验", "某时曾有某方到访过", "当前对你产品的能力，或场地归属"],
+            ["已核验供应商徽章", "平台验证过它选择核查的特定文件", "这些文件是否覆盖你的产品与订单"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "付定金前如何核验阿里巴巴供应商？",
+          a: "确认中文注册名与统一社会信用代码；通过经营范围判断工厂还是贸易公司；书面取得生产地址；核验针对你产品的能力证据；确认证书指向同一主体；并确保银行收款人与执照一致。全部完成再放定金。",
+        },
+        {
+          q: "有信保（Trade Assurance）就够了吗？",
+          a: "信保是平台提供的争议与货款保全机制，有明确的保障上限与适用规则，解决的是订单争议，而不是「供应商能否生产你的产品」或「工厂是否存在」这个根本问题。应把它当作叠在核验之上的付款保障，而非核验的替代品。",
+        },
+        {
+          q: "不去工厂现场能核验中国供应商吗？",
+          a: "可以。文件核验覆盖注册、经营范围、地址合理性、证书、检测报告与收款主体，几天内可远程完成。它无法确认的是生产真实性，即设备、人员与流程是否真在所称场地存在——那需要现场验厂。",
+        },
+        {
+          q: "怎么判断阿里巴巴供应商是不是真工厂？",
+          a: "查看执照经营范围是否有生产类表述；比对注册地址与声称的生产地址；索取设备清单与产线数量；核对证书是否指向同一法律主体。展示门口公司名称的视频是辅助证据，本身不构成证明。",
+        },
+        {
+          q: "统一社会信用代码是什么？",
+          a: "是中国发给每个注册主体的18位标识符，印在营业执照上。它是确认公司是否合法注册最可靠的单一索引，也是你在核查注册状态、以及把供应商与其证书对应起来时应使用的参照。",
+        },
+        {
+          q: "可以把定金付到个人账户吗？",
+          a: "不可以。要求付款给个人、第三方公司或无关实体，是跨境采购中公认的欺诈模式。收款人应当是执照上的法律主体，或供应商能证明为其自有的出口主体。",
+        },
+        {
+          q: "什么时候该做验厂而不是只查文件？",
+          a: "当订单金额重大、产品涉及安全/法规/客户强制合规风险、证据链不一致，或供应商是新合作方且声称的能力无法通过其他方式验证时，应做验厂。文件核查回答的是「文件是否自洽」，验厂回答的是「工厂是否真实」。",
+        },
+      ],
+      sources: [
+        { name: "阿里巴巴平台规则文档", note: "说明供应商徽章、会员等级与信保的覆盖范围，以及平台保障机制的边界。" },
+        { name: "中国国家市场监督管理总局（SAMR）", note: "全国企业登记机关；统一社会信用代码与经营范围由其核发并记录。" },
+        { name: "FactoryAuditB2B 方法论", note: "本站如何定义证据等级与风险评分，以及为何风险评分只是决策参考而非认证。" },
+      ],
+    },
+  },
+  {
+    slug: "china-factory-or-trading-company",
+    category: "verification",
+    titleEn: "Factory or Trading Company? How to Check Your Chinese Supplier",
+    titleZh: "工厂还是贸易公司？如何判断中国供应商的真实身份",
+    metaDescEn:
+      "How to tell whether a Chinese supplier is a factory or a trading company: read the business scope, match addresses, check equipment evidence, export records and certificates against the legal entity.",
+    metaDescZh:
+      "判断中国供应商是工厂还是贸易公司：看经营范围、比对注册地址与生产地址、核验设备证据、出口记录与证书是否指向同一法律主体。",
+    updated: "2026-09-22",
+    tools: [
+      { href: "/tools/supplier-verification-checklist" },
+      { href: "/tools/supplier-document-checker" },
+      { href: "/tools/supplier-risk-calculator" },
+    ],
+    services: [
+      { href: "/services/china-supplier-verification" },
+      { href: "/services/china-factory-audit" },
+    ],
+    related: [
+      "verify-alibaba-supplier-before-paying",
+      "how-to-check-china-company-registration",
+      "how-to-verify-a-chinese-supplier",
+      "supplier-evaluation-checklist",
+      "chinese-supplier-scam-red-flags",
+    ],
+    links: [
+      { href: "/rfq", labelEn: "Post a buyer RFQ", labelZh: "发布采购需求" },
+      {
+        href: "/suppliers",
+        labelEn: "Compare supplier profiles by company type",
+        labelZh: "按公司类型比较供应商档案",
+      },
+    ],
+    en: {
+      quickAnswer:
+        "Read the registered business scope on the Chinese business licence first. Manufacturing scope names the product category and includes production or processing wording; a trading scope is usually limited to sales, wholesale and import-export. Then cross-check three things: whether the registered address and the stated production address match, whether the equipment and capacity evidence is specific to your product, and whether certificates such as ISO 9001 name the same legal entity. A trading company is not automatically a problem, but you should know who actually manufactures your product before you pay.",
+      definition:
+        "In China, a factory (manufacturer) holds a business licence whose registered scope permits production or processing of goods, and typically owns or leases the production site and equipment. A trading company holds a licence whose scope permits sale, wholesale and import-export, and buys from manufacturers to resell. The distinction matters because contracts, quality obligations, audit scope and compliance responsibility usually sit with whoever actually controls production, which is not always the entity that signs your contract.",
+      keyPoints: [
+        "The registered business scope on the licence is the most direct evidence; self-description on a website or platform profile is not.",
+        "A company can hold both manufacturing and trading scope, so read the scope rather than accepting a label.",
+        "The registered address is frequently an office; the production address is what matters for audits and inspections.",
+        "Certificates naming a different legal entity do not transfer to the company you are contracting.",
+        "A trading company can be commercially useful: consolidation, smaller MOQs, export handling and communication.",
+        "The risk is not that an intermediary exists, but that you do not know the actual manufacturer when compliance or quality is at stake.",
+      ],
+      steps: [
+        {
+          title: "Obtain the business licence and read the scope",
+          body: "Ask for a copy of the business licence and read the registered scope in Chinese. Production wording tied to your product category indicates manufacturing scope. Scope limited to sales, wholesale, import and export indicates a trading company.",
+        },
+        {
+          title: "Compare the registered address with the production address",
+          body: "A manufacturer's production site is usually where its equipment is; a trading company often quotes a manufacturer's address as its own. Ask which address will appear on export documents and which address an auditor should visit.",
+        },
+        {
+          title: "Ask for production equipment evidence",
+          body: "A factory can list its machines, line count, shift pattern and output. A trading company usually cannot produce equipment evidence for your product because it does not own the equipment. Vague or stock-photo responses are a signal, not proof of either.",
+        },
+        {
+          title: "Check employee numbers and capacity claims",
+          body: "Cross-check headcount, social insurance records where available, and stated monthly capacity against the order size you plan. Capacity claimed without any link to equipment or staffing is assertion, not evidence.",
+        },
+        {
+          title: "Match certificates to the legal entity",
+          body: "ISO 9001, product certifications and test reports must name the entity that will manufacture your product. If a certificate names a different company, ask for the contractual relationship that makes it applicable to your order.",
+        },
+        {
+          title: "Review export documentation",
+          body: "Export records, customs documentation and previous bills of lading show whether the entity exports in its own name. A trading company exporting in its own name is normal; what you need is clarity on who is the manufacturer of record.",
+        },
+        {
+          title: "Decide what level of identity certainty you need",
+          body: "For low-risk, low-value goods, knowing you are dealing with a trading company may be enough. Where product safety, customer-mandated compliance or IP is at stake, identify the actual manufacturer and have it assessed or audited.",
+        },
+      ],
+      examples: [
+        {
+          title: "Signal: scope says trading, profile says manufacturer",
+          body: "The platform profile described a factory with 200 staff. The licence scope listed only wholesale and import-export, and the equipment list could not be produced. The supplier was a trading company buying from two workshops it would not name.",
+        },
+        {
+          title: "Signal: equipment evidence is product-specific and consistent",
+          body: "The supplier provided a machine list matching the process, stated a capacity consistent with the line count, and its ISO certificate named the same entity at the stated production address. The evidence chain supported the manufacturing claim.",
+        },
+        {
+          title: "Acceptable outcome: trading company, disclosed",
+          body: "A buyer sources five product lines through one trading company that consolidates shipments and handles export formalities, and the buyer has separately audited the two named factories. The intermediary adds value and the manufacturer is known.",
+        },
+      ],
+      checklist: [
+        "Business licence obtained and the registered scope read in Chinese.",
+        "Scope checked for production or processing wording for your product category.",
+        "Registered address recorded separately from the stated production address.",
+        "Equipment list requested and assessed for relevance to your process.",
+        "Line count, shifts and monthly capacity stated and cross-checked.",
+        "Headcount and staffing claims checked against claimed output.",
+        "ISO 9001 and product certificates checked for the same legal entity name.",
+        "Certificate scope verified as covering your product, not just the company.",
+        "Export documentation reviewed to see who exports in whose name.",
+        "Subcontracted operations disclosed in writing.",
+        "Whether the supplier permits a site visit at the production address confirmed.",
+        "Decision recorded: acceptable as intermediary, or manufacturer must be identified and assessed.",
+      ],
+      tables: [
+        {
+          title: "Factory vs Trading Company: Evidence Signals",
+          headers: ["Evidence", "Manufacturer signal", "Trading company signal"],
+          rows: [
+            ["Registered business scope", "Names product category with production or processing wording", "Limited to sales, wholesale, import-export"],
+            ["Registered address", "Often the production site or an office at the same site", "Office address, production site elsewhere and unnamed"],
+            ["Equipment list", "Can list machines, lines and output for the process", "Cannot produce equipment evidence for the product"],
+            ["Capacity statement", "Tied to lines, shifts and staffing", "Stated without link to equipment or staff"],
+            ["ISO 9001 certificate", "Issued to the same entity at the production address", "Issued to another entity, or not available"],
+            ["Product test reports", "Applicant is the manufacturer", "Applicant is a trading entity or unrelated company"],
+            ["Export records", "Exports in own name as manufacturer of record", "Exports in own name as seller, manufacturer not identified"],
+            ["Site visit response", "Welcomes a visit to the stated production site", "Deflects, or offers a visit to an unrelated showroom"],
+          ],
+        },
+        {
+          title: "Is a Trading Company a Problem?",
+          headers: ["Situation", "Assessment", "What to do"],
+          rows: [
+            ["Small order, standard product, disclosed intermediary", "Low risk", "Contract the trading company, confirm product specification in writing"],
+            ["Consolidation across several factories", "Useful, if factories are known", "Ask for the factory list and assess the one making your product"],
+            ["Intermediary will not name the manufacturer", "High risk", "Treat as unverified; do not rely on compliance claims"],
+            ["Customer requires SMETA, BSCI or RBA at the production site", "Identity is critical", "Identify the manufacturer and audit that site, not the intermediary"],
+            ["Product safety, certification or IP exposure", "Identity is critical", "Contract with the manufacturer, or obtain its written commitment and audit rights"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "How do I tell if a Chinese supplier is a factory or a trading company?",
+          a: "Start with the registered business scope on the business licence: production or processing wording indicates a manufacturer, while sales, wholesale and import-export wording indicates a trading company. Then confirm with equipment evidence, address matching and certificates issued to the same legal entity.",
+        },
+        {
+          q: "Is a trading company bad?",
+          a: "No. A trading company can add real value through consolidation, smaller minimum order quantities, export formalities and communication. The problem is not the intermediary itself, it is not knowing who actually manufactures the product when quality, safety or compliance obligations are at stake.",
+        },
+        {
+          q: "Can a company be both a factory and a trading company?",
+          a: "Yes. Many Chinese companies hold both manufacturing and trading scope, and some manufacture part of their range while reselling the rest. This is why the business scope should be read rather than relying on a self-declared label.",
+        },
+        {
+          q: "Does ISO 9001 prove the supplier is a manufacturer?",
+          a: "Not on its own. ISO 9001 certifies a quality management system for a named entity and scope. It proves the certificate holder operates a documented quality system, not that it owns production equipment. Check that the certificate names the entity making your product and that the scope covers it.",
+        },
+        {
+          q: "Why does the registered address differ from the factory address?",
+          a: "It is common for the registered address to be an office or a registered agent address while production happens elsewhere. That is normal, but you need the actual production address in writing because that is the site an audit or inspection would cover.",
+        },
+        {
+          q: "Should I audit the trading company or the factory?",
+          a: "Audit the site where your product is made. Auditing an intermediary's office tells you little about production capability, working conditions or process control. If the intermediary will not identify the factory, that itself is the finding.",
+        },
+      ],
+      sources: [
+        {
+          name: "State Administration for Market Regulation (SAMR), China",
+          note: "Issues the business licence and records the registered business scope, which is the primary evidence of manufacturing versus trading status.",
+        },
+        {
+          name: "ISO (International Organization for Standardization)",
+          note: "Publishes ISO 9001 and maintains the certification framework; certificates are issued to a named entity and a defined scope.",
+        },
+        {
+          name: "FactoryAuditB2B Methodology",
+          note: "How evidence levels are assigned when a supplier's identity and production site cannot be matched to the contracting entity.",
+        },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "先看营业执照上的经营范围。生产类范围会写明产品类别并含生产、加工等表述；贸易类范围通常仅限销售、批发、进出口。再交叉核对三件事：注册地址与声称的生产地址是否一致；设备与产能证据是否针对你的产品；ISO 9001 等证书是否指向同一法律主体。贸易公司本身不是问题，但付款前你必须知道产品到底是谁生产的。",
+      definition:
+        "在中国，工厂（制造商）持有的营业执照，其经营范围允许生产或加工货物，通常拥有或租赁生产场地与设备；贸易公司持有的执照，其经营范围允许销售、批发与进出口，通过向制造商采购后转售。这个区分很重要，因为合同、质量义务、审核范围与合规责任通常落在实际控制生产的一方，而它并不总是与你签约的那一方。",
+      keyPoints: [
+        "执照上的经营范围是最直接的证据；网站或平台主页上的自我描述不是。",
+        "一家公司可以同时具备生产与贸易两类经营范围，所以要看范围而不是接受标签。",
+        "注册地址常常是办公室；对验厂与验货而言，重要的是生产地址。",
+        "证书上写的是另一家法律主体，则该证书不能转移给你正在签约的公司。",
+        "贸易公司可以很有商业价值：拼柜整合、更低起订量、出口手续与沟通。",
+        "风险不在于中间商存在，而在于当合规或质量出问题时，你不知道真正的制造商是谁。",
+      ],
+      steps: [
+        {
+          title: "取得营业执照并阅读经营范围",
+          body: "索取营业执照复印件，阅读中文的经营范围。与你产品类别绑定的生产类表述说明具备生产资质；仅限销售、批发、进出口的范围说明是贸易公司。",
+        },
+        {
+          title: "比对注册地址与生产地址",
+          body: "制造商的生产场地通常就是设备所在地；贸易公司常把制造商的地址当作自己的来报。要问清楚哪个地址会出现在出口单证上、审核员应该去哪个地址。",
+        },
+        {
+          title: "索取生产设备证据",
+          body: "工厂能列出机器、产线数、班次与产量。贸易公司通常拿不出针对你产品的设备证据，因为设备不是它的。回答含糊或用图库照片是信号，但不足以单独证明任一种身份。",
+        },
+        {
+          title: "核对员工人数与产能声称",
+          body: "把人数、可获得的社保记录、以及声称的月产能，与你计划的订单量交叉核对。没有与设备或人员挂钩的产能声称只是断言，不是证据。",
+        },
+        {
+          title: "把证书与法律主体对上",
+          body: "ISO 9001、产品认证与检测报告必须写明将生产你产品的主体。若证书写的是另一家公司，要求对方说明使其适用于你订单的合同关系。",
+        },
+        {
+          title: "审阅出口单证",
+          body: "出口记录、报关单证与既往提单能显示该主体是否以自己名义出口。贸易公司以自己名义出口很正常；你需要明确的是谁是其记录中的制造商。",
+        },
+        {
+          title: "判断你需要多高的身份确定性",
+          body: "低风险低值商品，知道对方是贸易公司可能就够了。涉及产品安全、客户强制合规或知识产权时，必须识别真正的制造商并对其评估或验厂。",
+        },
+      ],
+      examples: [
+        {
+          title: "信号：范围写贸易，主页写工厂",
+          body: "平台主页描述一家200人的工厂，但执照经营范围只有批发与进出口，且拿不出设备清单。这家供应商是贸易公司，从两家它不愿透露的作坊采购。",
+        },
+        {
+          title: "信号：设备证据产品对口且一致",
+          body: "供应商提供了与工艺匹配的机器清单，声称的产能与产线数量一致，其 ISO 证书又指向同一主体且位于所称生产地址。证据链支持其制造声称。",
+        },
+        {
+          title: "可接受的结果：贸易公司，但已披露",
+          body: "买家通过一家贸易公司采购五条产品线，由其拼柜并处理出口手续，同时买家已分别对两家点名的工厂做过验厂。中间商创造了价值，且制造商是已知的。",
+        },
+      ],
+      checklist: [
+        "已取得营业执照，并阅读了中文经营范围。",
+        "已核对经营范围中是否有针对你产品类别的生产或加工表述。",
+        "已分别记录注册地址与声称的生产地址。",
+        "已索取设备清单，并评估其与你的工艺是否相关。",
+        "已取得产线数、班次与月产能并交叉核对。",
+        "已把人数与用工声称同声称产量核对。",
+        "已核对 ISO 9001 与产品证书上的法律主体名称是否一致。",
+        "已确认证书范围覆盖你的产品，而不只是这家公司。",
+        "已审阅出口单证，看清谁以谁的名义出口。",
+        "已书面披露外包工序。",
+        "已确认对方是否允许到所称生产地址实地走访。",
+        "已记录决策：可作为中间商接受，或必须识别制造商并评估。",
+      ],
+      tables: [
+        {
+          title: "工厂与贸易公司的证据信号对照",
+          headers: ["证据", "制造商信号", "贸易公司信号"],
+          rows: [
+            ["经营范围", "写明产品类别并含生产、加工表述", "仅限销售、批发、进出口"],
+            ["注册地址", "通常是生产场地或同址办公室", "办公地址，生产场地在别处且不透露"],
+            ["设备清单", "能列出该工艺的机器、产线与产量", "拿不出该产品的设备证据"],
+            ["产能说明", "与产线、班次、人员挂钩", "与设备或人员无关的口头声称"],
+            ["ISO 9001 证书", "发给生产地址上的同一主体", "发给另一主体，或无法提供"],
+            ["产品检测报告", "申请人为制造商", "申请人为贸易主体或无关公司"],
+            ["出口记录", "以制造商名义出口并作为记录制造商", "以卖方名义出口，制造商未识别"],
+            ["对实地走访的反应", "欢迎到所称生产地址走访", "推脱，或只带你去无关的展厅"],
+          ],
+        },
+        {
+          title: "贸易公司是不是问题？分情况判断",
+          headers: ["情形", "评估", "该怎么做"],
+          rows: [
+            ["小订单、标准品、中间商已披露", "低风险", "与贸易公司签约，书面确认产品规格"],
+            ["多家工厂拼柜整合", "只要工厂已知就有价值", "索取工厂清单，评估真正生产你产品的那家"],
+            ["中间商不愿透露制造商", "高风险", "视为未核验；不要依赖其合规声称"],
+            ["客户要求在生产场地做 SMETA/BSCI/RBA", "身份是决定性的", "识别制造商并审核该场地，而不是中间商"],
+            ["涉及产品安全、认证或知识产权", "身份是决定性的", "与制造商签约，或取得其书面承诺与审核权"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "怎么判断中国供应商是工厂还是贸易公司？",
+          a: "先看营业执照上的经营范围：含生产、加工表述说明是制造商，仅限销售、批发、进出口说明是贸易公司。再用设备证据、地址比对、以及开给同一法律主体的证书来确认。",
+        },
+        {
+          q: "贸易公司不好吗？",
+          a: "不一定。贸易公司能通过拼柜整合、更低的起订量、出口手续与沟通创造真实价值。问题不在中间商本身，而在于当质量、安全或合规责任出现时，你不知道产品到底是谁生产的。",
+        },
+        {
+          q: "一家公司能既是工厂又是贸易公司吗？",
+          a: "可以。很多中国公司同时具备生产与贸易两类经营范围，有些自己生产一部分、转售其余部分。所以必须阅读经营范围，而不是依赖自我声明的标签。",
+        },
+        {
+          q: "ISO 9001 能证明供应商是制造商吗？",
+          a: "单靠它不能。ISO 9001 认证的是某具名主体与范围内的质量管理体系，证明持证方运行着文件化的质量体系，而不证明它拥有生产设备。要核查证书是否写明生产你产品的主体，且范围覆盖该产品。",
+        },
+        {
+          q: "为什么注册地址和工厂地址不一样？",
+          a: "注册地址是办公室或注册代理地址、而生产在别处，这很常见，本身正常。但你需要书面的实际生产地址，因为验厂与验货覆盖的是那个场地。",
+        },
+        {
+          q: "应该审核贸易公司还是工厂？",
+          a: "审核生产你产品的场地。审核中间商的办公室，几乎无法告诉你生产能力、工作条件或过程控制的情况。如果中间商不愿指出工厂，这本身就构成审核发现。",
+        },
+      ],
+      sources: [
+        { name: "中国国家市场监督管理总局（SAMR）", note: "核发营业执照并记录经营范围，是判断生产资质与贸易资质的首要证据来源。" },
+        { name: "ISO（国际标准化组织）", note: "发布 ISO 9001 并维护认证框架；证书发给具名主体并界定明确范围。" },
+        { name: "FactoryAuditB2B 方法论", note: "当供应商身份与生产场地无法与签约主体对应时，本站如何判定证据等级。" },
+      ],
+    },
+  },
+  {
+    slug: "china-supplier-risk-assessment-framework",
+    category: "risk",
+    titleEn: "How to Compare Chinese Suppliers: A Practical Supplier Risk Assessment Framework",
+    titleZh: "如何比较中国供应商：一套可落地的供应商风险评估框架",
+    metaDescEn:
+      "A practical supplier risk assessment framework for comparing Chinese suppliers across eight dimensions, scoring them consistently and deciding when a comparison should become a factory audit.",
+    metaDescZh:
+      "用八个维度比较中国供应商的实用风险评估框架：统一打分、横向对比三家供应商，并判断何时应从比较升级为现场验厂。",
+    updated: "2026-09-22",
+    tools: [
+      { href: "/tools/supplier-risk-calculator" },
+      { href: "/tools/supplier-scorecard" },
+      { href: "/tools/supplier-document-checker" },
+    ],
+    services: [
+      { href: "/services/china-supplier-verification" },
+      { href: "/services/china-factory-audit" },
+    ],
+    related: [
+      "supplier-risk-assessment-guide",
+      "supplier-evaluation-checklist",
+      "verify-alibaba-supplier-before-paying",
+      "when-to-order-china-factory-audit",
+      "how-to-verify-a-chinese-supplier",
+    ],
+    links: [
+      { href: "/rfq", labelEn: "Post a buyer RFQ and shortlist suppliers", labelZh: "发布采购需求并筛选供应商" },
+      { href: "/suppliers", labelEn: "Compare supplier profiles side by side", labelZh: "并排比较供应商档案" },
+    ],
+    en: {
+      quickAnswer:
+        "Score every candidate supplier on the same eight dimensions: company, factory, production, quality, compliance, supply chain, documentation and digital reputation. Give each dimension a level rather than a guess, and keep the evidence that supports it. When you place three suppliers side by side on the same grid, the differences that matter stop being about price and start being about where the risk actually sits. Use the comparison to choose what to verify next, not to declare a winner.",
+      definition:
+        "Supplier risk assessment is a structured way of comparing candidate suppliers on comparable evidence instead of impressions. It assigns a level to each risk dimension, records the evidence behind each level, and produces a comparable picture across suppliers. A risk score is decision support: it tells you where to look, what to verify and which gaps matter. It is not a certificate, and it does not replace verification or an on-site audit where production reality has to be confirmed.",
+      keyPoints: [
+        "Compare suppliers on the same dimensions with the same definitions, or the comparison is meaningless.",
+        "Score what you have evidence for and mark the rest as unknown. Unknown is not low risk.",
+        "Price differences usually reflect capability, compliance and capacity differences that the grid makes visible.",
+        "A supplier with strong documents and weak production evidence is a different risk from the reverse; treat them differently.",
+        "The output of a comparison is a decision about what to verify next, not a final ranking.",
+        "Recalculate after new evidence arrives; a risk score is a snapshot, not a permanent grade.",
+      ],
+      steps: [
+        {
+          title: "Fix the candidate list and the product scope",
+          body: "Decide which suppliers are actually comparable for the same product, specification and volume. Comparing a specialist against a generalist on price alone produces the wrong answer before you start.",
+        },
+        {
+          title: "Collect the same evidence pack from each supplier",
+          body: "Request the same documents from every candidate: business licence, scope, production address, equipment or capability evidence, certificates, test reports and export record. Uneven evidence is itself a finding.",
+        },
+        {
+          title: "Score the eight dimensions",
+          body: "Work through company, factory, production, quality, compliance, supply chain, documentation and digital reputation for each supplier, assigning a level supported by named evidence rather than an overall impression.",
+        },
+        {
+          title: "Mark unknowns explicitly",
+          body: "Where evidence is missing, record unknown. Treating missing data as acceptable is the most common way a comparison produces false confidence.",
+        },
+        {
+          title: "Place the suppliers side by side",
+          body: "Build one grid with suppliers as columns and dimensions as rows. Differences that were invisible in separate conversations become obvious: one supplier is strong on documents and weak on production, another the reverse.",
+        },
+        {
+          title: "Decide what each gap means",
+          body: "For each weak dimension, decide whether it can be closed with documents, requires a site visit, or is disqualifying for your product and market. Not every gap deserves the same response.",
+        },
+        {
+          title: "Convert the decision into verification or audit scope",
+          body: "Turn the identified gaps into a specific request: document checks for documentary gaps, an on-site audit for production and compliance gaps, and inspection for order-specific quality risk.",
+        },
+        {
+          title: "Recalculate after evidence arrives",
+          body: "Update the score when new documents, an audit or an inspection result lands. A supplier's risk profile changes, and the comparison should reflect the current state.",
+        },
+      ],
+      examples: [
+        {
+          title: "Three suppliers, same product, different risk shape",
+          body: "Supplier A is cheapest but has no production evidence and will not confirm the production address. Supplier B has complete documents but a capacity far below the required volume. Supplier C is mid-priced with consistent evidence and an audit on record. On price alone A wins; on the grid, C is the only one whose risk is understood.",
+        },
+        {
+          title: "Unknown treated as low risk",
+          body: "A scoring sheet left compliance blank for two suppliers because no certificates had been received, and the tool averaged the missing dimensions as acceptable. Both suppliers looked stronger than they were. Blank should read as unknown.",
+        },
+        {
+          title: "Comparison becomes an audit scope",
+          body: "The grid showed that all three candidates were unverified on production reality and subcontracting. Instead of ranking them, the buyer ordered a site audit for the two finalists, scoped to the dimensions where the grid showed gaps.",
+        },
+      ],
+      checklist: [
+        "Candidate suppliers are comparable on product, specification and volume.",
+        "The same evidence pack has been requested from every candidate.",
+        "Business licence and scope obtained for each candidate.",
+        "Production address confirmed in writing for each candidate.",
+        "Capability evidence reviewed for the specific product, not the company overall.",
+        "Certificates checked for validity, scope and matching legal entity.",
+        "Compliance requirements for the destination market identified and mapped.",
+        "Supply chain and subcontracting position understood for each candidate.",
+        "Export experience to your market evidenced.",
+        "Every blank dimension recorded as unknown, not as acceptable.",
+        "Side-by-side grid completed with suppliers as columns.",
+        "Each gap assigned a response: document check, site audit, or disqualifying.",
+        "Score recalculated after new evidence arrives.",
+      ],
+      tables: [
+        {
+          title: "The Eight Supplier Risk Dimensions",
+          headers: ["Dimension", "What it covers", "Typical evidence", "Common failure mode"],
+          rows: [
+            ["Company", "Legal identity, registration status, ownership stability", "Business licence, Unified Social Credit Code, registration record", "Contracting an entity that is not the counterparty on paper"],
+            ["Factory", "Whether the production site exists and is the stated one", "Address confirmation, site photos with geolocation, site visit", "Registered office presented as the factory"],
+            ["Production", "Equipment, lines, capacity and process fit", "Equipment list, line count, shift pattern, output records", "Capacity claimed with no link to equipment or staff"],
+            ["Quality", "Quality management system and process control", "ISO 9001 in scope, inspection records, defect history", "Certificate held but no evidence of it being applied"],
+            ["Compliance", "Social, environmental and market compliance", "SMETA, BSCI, RBA or equivalent; product test reports", "Certificate issued to a different legal entity"],
+            ["Supply chain", "Subcontracting, material sources, dependency", "Subcontractor disclosure, material declarations", "Undisclosed subcontracting to unassessed sites"],
+            ["Documentation", "Consistency and traceability of the paperwork", "Matching names and addresses across all documents", "Inconsistent entity names between licence, certificate and invoice"],
+            ["Digital reputation", "Public footprint and consistency of claims", "Website, platform history, public records, dispute traces", "Claimed scale inconsistent with any public footprint"],
+          ],
+        },
+        {
+          title: "Comparing Three Suppliers on the Same Grid",
+          headers: ["Dimension", "Supplier A", "Supplier B", "Supplier C"],
+          rows: [
+            ["Price", "Lowest", "Highest", "Mid"],
+            ["Company", "Verified registration", "Verified registration", "Verified registration"],
+            ["Factory", "Production address not confirmed", "Confirmed", "Confirmed"],
+            ["Production", "No equipment evidence", "Capacity below requirement", "Capacity matches requirement"],
+            ["Quality", "No system evidence", "ISO 9001 in scope", "ISO 9001 in scope, records shown"],
+            ["Compliance", "Unknown", "Unknown", "Audit on record"],
+            ["Supply chain", "Subcontracting not disclosed", "Disclosed", "Disclosed, subcontractor named"],
+            ["Overall read", "Cheapest, risk not understood", "Strong documents, cannot deliver volume", "Risk understood and verifiable"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "What is supplier risk assessment?",
+          a: "It is a structured comparison of candidate suppliers across defined risk dimensions, scored on evidence rather than impressions. The output shows where risk sits in each supplier, which gaps matter for your product and market, and what should be verified or audited next.",
+        },
+        {
+          q: "How do I compare suppliers fairly?",
+          a: "Fix the product, specification and volume first so the candidates are genuinely comparable, then request the same evidence pack from each and score the same dimensions with the same definitions. Comparing on price alone hides exactly the differences that cause failures later.",
+        },
+        {
+          q: "Should missing information be scored as low risk?",
+          a: "No. Missing information should be recorded as unknown, and unknown should be treated as a reason to ask for evidence. Averaging blanks into an acceptable score is the most common way a comparison creates false confidence.",
+        },
+        {
+          q: "How many dimensions should a supplier scorecard have?",
+          a: "Enough to cover where risk actually arises: company identity, factory reality, production capability, quality, compliance, supply chain, documentation and public footprint. Fewer than this misses structural risk; far more becomes administration without decisions.",
+        },
+        {
+          q: "Does a good risk score mean a supplier is safe?",
+          a: "No. A risk score describes what is known at a point in time and where the gaps are. It is decision support for choosing what to verify, and it is not a certificate, a guarantee or a substitute for an on-site audit where production reality matters.",
+        },
+        {
+          q: "When should a comparison become a factory audit?",
+          a: "When the grid shows gaps that documents cannot close, typically production reality, working conditions, subcontracting and process control. If two or more finalists have the same unresolved production gaps, audit them rather than ranking them on incomplete data.",
+        },
+      ],
+      sources: [
+        {
+          name: "FactoryAuditB2B Supplier Risk Calculator",
+          note: "The free tool that scores a supplier across these dimensions and shows where evidence is missing.",
+        },
+        {
+          name: "ISO 9001 quality management systems",
+          note: "The standard most commonly cited as quality evidence; valid only for the named entity and scope.",
+        },
+        {
+          name: "FactoryAuditB2B Methodology",
+          note: "Dimension weights, how unknown is handled, and the stated limitations of a risk score.",
+        },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "用同样的八个维度给每个候选供应商打分：公司、工厂、生产、质量、合规、供应链、文件、数字声誉。每个维度给的是「等级」而不是猜测，并保留支撑它的证据。当三家供应商被放在同一张网格上并排比较时，真正重要的差异就不再停留在价格，而变成「风险到底在哪里」。用比较结果决定下一步核验什么，而不是宣布谁胜出。",
+      definition:
+        "供应商风险评估，是用可比证据而非印象来比较候选供应商的结构化方法。它给每个风险维度定级、记录支撑该等级的证据，并生成可横向比较的图景。风险评分是决策支持：它告诉你该看哪里、该核验什么、哪些缺口重要。它不是证书，也不能替代核验；在必须确认生产真实性时，更不能替代现场验厂。",
+      keyPoints: [
+        "必须用同样的维度、同样的定义比较供应商，否则比较没有意义。",
+        "只给有证据的维度打分，其余标记为未知。未知不等于低风险。",
+        "价格差异通常反映的是能力、合规与产能差异，网格会让这些差异显形。",
+        "文件强而生产证据弱的供应商，与相反情况的供应商风险不同，应当区别对待。",
+        "比较的输出是「下一步核验什么」的决策，而不是最终排名。",
+        "新证据到达后要重算；风险评分是快照，不是永久评级。",
+      ],
+      steps: [
+        {
+          title: "锁定候选名单与产品范围",
+          body: "确定哪些供应商在同一产品、规格与数量上真正可比。在开始之前，只比价格地拿专业厂和综合厂对比，得出的答案就已经是错的。",
+        },
+        {
+          title: "向每家供应商索取同一套证据包",
+          body: "向每个候选方索取相同的文件：营业执照、经营范围、生产地址、设备或能力证据、证书、检测报告与出口记录。证据不齐本身就是一项发现。",
+        },
+        {
+          title: "给八个维度打分",
+          body: "对每家供应商逐一评估公司、工厂、生产、质量、合规、供应链、文件与数字声誉，依据具名证据给出等级，而不是凭整体印象。",
+        },
+        {
+          title: "明确标注未知",
+          body: "证据缺失处记录为未知。把缺失数据当作可接受，是让比较产生虚假信心最常见的原因。",
+        },
+        {
+          title: "把供应商并排放在一起",
+          body: "做一张网格：供应商为列、维度为行。分散沟通中看不见的差异就会显形：一家文件强而生产弱，另一家正好相反。",
+        },
+        {
+          title: "判断每个缺口意味着什么",
+          body: "对每个薄弱维度，判断它可以用文件补齐、需要现场走访，还是对你的产品与市场而言直接出局。不是每个缺口都值得同等应对。",
+        },
+        {
+          title: "把决策转化为核验或验厂范围",
+          body: "把识别出的缺口变成具体请求：文件缺口做文件核查，生产与合规缺口做现场验厂，订单特定的质量风险做验货。",
+        },
+        {
+          title: "证据到达后重算",
+          body: "当新文件、验厂或验货结果到达时更新评分。供应商的风险画像会变化，比较也应反映当前状态。",
+        },
+      ],
+      examples: [
+        {
+          title: "三家供应商，同一产品，风险形状不同",
+          body: "A 家最便宜，但拿不出生产证据且不愿确认生产地址；B 家文件齐全，但产能远低于需求；C 家价格居中，证据一致且有既往验厂记录。只比价格 A 胜出；放在网格上，C 是唯一风险被看清的一家。",
+        },
+        {
+          title: "把未知当成低风险",
+          body: "一份评分表因未收到证书而把两家供应商的合规项留空，工具把缺失维度按可接受处理并计入平均，两家看起来都比实际更强。空白应读作未知。",
+        },
+        {
+          title: "比较升级为验厂范围",
+          body: "网格显示三家候选方在生产真实性与分包上都未核验。买家没有排序，而是对两家入围方下达现场验厂，范围正好覆盖网格中显示缺口的维度。",
+        },
+      ],
+      checklist: [
+        "候选供应商在产品、规格与数量上可比。",
+        "已向每个候选方索取同一套证据包。",
+        "已取得每家的营业执照与经营范围。",
+        "已书面确认每家的生产地址。",
+        "已针对具体产品（而非公司整体）审阅能力证据。",
+        "已核对证书的有效性、范围与法律主体一致性。",
+        "已识别并映射目标市场的合规要求。",
+        "已了解每家的供应链与分包状况。",
+        "已有发往你目标市场的出口经验证据。",
+        "每个空白维度都记录为未知，而不是可接受。",
+        "已完成供应商为列的并排网格。",
+        "已为每个缺口指定应对：文件核查、现场验厂或出局。",
+        "新证据到达后已重算评分。",
+      ],
+      tables: [
+        {
+          title: "供应商风险的八个维度",
+          headers: ["维度", "覆盖什么", "典型证据", "常见失效模式"],
+          rows: [
+            ["公司", "法律身份、注册状态、股权稳定性", "营业执照、统一社会信用代码、登记记录", "签约主体与纸面对手方不一致"],
+            ["工厂", "生产场地是否存在、是否为所称场地", "地址确认、带定位的现场照片、实地走访", "把注册办公室当作工厂呈现"],
+            ["生产", "设备、产线、产能与工艺匹配度", "设备清单、产线数、班次、产量记录", "产能声称与设备人员无关联"],
+            ["质量", "质量管理体系与过程控制", "范围有效的 ISO 9001、检验记录、不良史", "有证书但无执行证据"],
+            ["合规", "社会责任、环境与目标市场合规", "SMETA、BSCI、RBA 或等效；产品检测报告", "证书开给另一法律主体"],
+            ["供应链", "分包、材料来源、依赖性", "分包披露、材料声明", "向未评估场地未披露分包"],
+            ["文件", "单证的一致性与可追溯性", "所有文件上的名称与地址相互吻合", "执照、证书、发票上的主体名不一致"],
+            ["数字声誉", "公开足迹与声称的一致性", "官网、平台历史、公开记录、纠纷痕迹", "声称规模与任何公开足迹都对不上"],
+          ],
+        },
+        {
+          title: "三家供应商在同一网格上的比较",
+          headers: ["维度", "供应商 A", "供应商 B", "供应商 C"],
+          rows: [
+            ["价格", "最低", "最高", "居中"],
+            ["公司", "注册已核验", "注册已核验", "注册已核验"],
+            ["工厂", "生产地址未确认", "已确认", "已确认"],
+            ["生产", "无设备证据", "产能低于需求", "产能匹配需求"],
+            ["质量", "无体系证据", "ISO 9001 范围有效", "ISO 9001 范围有效且有记录"],
+            ["合规", "未知", "未知", "有既往验厂记录"],
+            ["供应链", "分包未披露", "已披露", "已披露并点名外协方"],
+            ["总体判断", "最便宜，但风险未被看清", "文件强，但交付不了量", "风险被看清且可验证"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "什么是供应商风险评估？",
+          a: "它是按既定风险维度、以证据而非印象给候选供应商打分的结构化比较。输出显示每家供应商的风险落在哪里、哪些缺口对你的产品与市场重要、以及接下来应核验或验厂什么。",
+        },
+        {
+          q: "怎样才叫公平地比较供应商？",
+          a: "先锁定产品、规格与数量，使候选方真正可比；然后向每家索取同一套证据包，并用同样定义、同样维度打分。只比价格，恰好会掩盖那些日后造成失败差异。",
+        },
+        {
+          q: "缺失信息可以按低风险计分吗？",
+          a: "不可以。缺失应记录为未知，而未知应当成为索取证据的理由。把空白按可接受计入平均，是让比较产生虚假信心最常见的方式。",
+        },
+        {
+          q: "供应商评分卡应该有多少个维度？",
+          a: "足以覆盖风险真正产生的环节即可：公司身份、工厂真实性、生产能力、质量、合规、供应链、文件与公开足迹。少于这些会漏掉结构性风险；多得多则变成不产生决策的行政负担。",
+        },
+        {
+          q: "风险评分高就等于供应商安全吗？",
+          a: "不等于。风险评分描述的是某一时点上已知的信息与缺口所在，它是用来决定核验什么的决策支持，不是证书、不是保证，在生产真实性重要时更不能替代现场验厂。",
+        },
+        {
+          q: "什么时候比较应升级为验厂？",
+          a: "当网格显示文件无法补齐的缺口时，通常是生产真实性、工作条件、分包与过程控制。若两家及以上入围方存在同样的未解决生产缺口，应当去验厂，而不是在 incomplete 数据上排序。",
+        },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B 供应商风险计算器", note: "按上述维度给供应商打分并指出证据缺失之处的免费工具。" },
+        { name: "ISO 9001 质量管理体系", note: "最常被援引为质量证据的标准；仅对具名主体与范围有效。" },
+        { name: "FactoryAuditB2B 方法论", note: "维度权重、未知项的处理方式，以及风险评分的既定局限。" },
+      ],
+    },
+  },
+  {
+    slug: "when-to-order-china-factory-audit",
+    category: "audit",
+    titleEn: "When Should You Order a Factory Audit in China?",
+    titleZh: "什么时候该在中国做工厂验厂？",
+    metaDescEn:
+      "A risk-based guide to deciding when to order a China factory audit: order value, product risk, evidence gaps, supplier change, customer requirements and suspected subcontracting.",
+    metaDescZh:
+      "按风险判断何时该在中国下单验厂：订单金额、产品风险、证据缺口、更换供应商、客户要求与疑似分包，附决策表与验厂能证明与不能证明的边界。",
+    updated: "2026-09-22",
+    tools: [
+      { href: "/tools/audit-checklist" },
+      { href: "/tools/supplier-risk-calculator" },
+      { href: "/tools/supplier-verification-checklist" },
+    ],
+    services: [
+      { href: "/services/china-factory-audit" },
+      { href: "/services/china-supplier-verification" },
+    ],
+    related: [
+      "what-is-a-factory-audit",
+      "supplier-verification-vs-factory-audit-vs-inspection",
+      "on-site-vs-desk-audit",
+      "china-supplier-risk-assessment-framework",
+      "factory-audit-checklist",
+    ],
+    links: [
+      {
+        href: "/factory-audit/request",
+        labelEn: "Request a factory audit",
+        labelZh: "申请工厂验厂",
+      },
+      { href: "/rfq", labelEn: "See what buyers are sourcing", labelZh: "查看买家正在采购什么" },
+    ],
+    en: {
+      quickAnswer:
+        "Order a factory audit when the decision cannot be made from documents: before a large first order, when the supplier's evidence is incomplete or inconsistent, when the product carries safety or regulatory risk, when you are switching suppliers, when a customer mandates a standard such as SMETA, BSCI or RBA, when you suspect undisclosed subcontracting, or after a previous supplier failure. An audit is a baseline at a point in time. It is not the first step for every order, and it does not certify that a factory will stay compliant.",
+      definition:
+        "A factory audit is an on-site assessment of a production facility against a defined scope, carried out by an auditor who visits the site, reviews records, observes processes and interviews management and workers where the scope includes social criteria. It produces a report of findings at the time of the visit. Audits are described as baselines rather than guarantees: they show what was true on the day, which is why follow-up and corrective action closure matter more than a single pass result.",
+      keyPoints: [
+        "An audit is not always the first step. Documentary verification is faster and cheaper and often resolves the question.",
+        "Order value alone should not drive the decision; product risk and evidence quality matter more.",
+        "A customer-mandated standard determines the audit scope, not the supplier's preference.",
+        "Undisclosed subcontracting is one of the strongest reasons to audit, because documents rarely reveal it.",
+        "An audit records a baseline on the day of the visit and does not guarantee future performance.",
+        "The value of an audit is what happens after it: corrective actions, closure and re-checks.",
+      ],
+      steps: [
+        {
+          title: "Start with documentary verification, not an audit",
+          body: "Confirm registration, scope, address, certificates and payment entity first. Many supplier questions are answered by documents within days, and an audit requested too early spends money on gaps that a document request would have closed.",
+        },
+        {
+          title: "Audit before the first large order",
+          body: "When the first order is large enough that a failure would be material, an audit before release converts an unknown into a documented baseline. Size the decision by what you could lose, not by a fixed order threshold.",
+        },
+        {
+          title: "Audit when supplier evidence is incomplete",
+          body: "If the supplier cannot produce equipment evidence, will not confirm the production address, or provides certificates naming a different entity, the gap is not administrative; it is a reason to visit the site.",
+        },
+        {
+          title: "Audit when product risk is high",
+          body: "Products with safety, electrical, chemical, children's or food-contact exposure carry consequences that documents alone cannot price. Higher product risk lowers the threshold for auditing.",
+        },
+        {
+          title: "Audit when changing suppliers or adding capacity",
+          body: "A new supplier, a new production site or a rapid capacity increase changes what you know. Moving volume to a site nobody has visited is a common source of quality and compliance surprises.",
+        },
+        {
+          title: "Audit when a customer requires SMETA, BSCI or RBA",
+          body: "Where a customer mandates a standard, the scope is set by that requirement. Confirm which programme, which pillars or modules, and whether the customer accepts an existing report before commissioning a new one.",
+        },
+        {
+          title: "Audit when you suspect subcontracting",
+          body: "If you suspect your product is made somewhere other than the stated site, documents will usually confirm nothing. An unannounced or semi-announced visit is the method that establishes where production actually happens.",
+        },
+        {
+          title: "Audit after a previous supplier failure",
+          body: "After a failed inspection, a delivery collapse or a compliance incident, an audit scoped to the failure mode tells you whether the cause is systemic and whether remaining with the supplier is defensible.",
+        },
+      ],
+      examples: [
+        {
+          title: "Audit not needed: small reorder, consistent history",
+          body: "A buyer reorders a standard product from a supplier with three clean inspections and unchanged ownership. Documentary checks plus a pre-shipment inspection answer the actual question at lower cost than another audit.",
+        },
+        {
+          title: "Audit needed: new supplier, large first order",
+          body: "A first order of significant value with a supplier found online, whose capability evidence cannot be verified remotely. An audit before the deposit converts an unverified claim into an observed baseline.",
+        },
+        {
+          title: "Audit needed: customer mandate",
+          body: "A European retailer requires a SMETA 4-pillar report before onboarding. The scope is fixed by the customer, and a general factory audit will not satisfy the requirement.",
+        },
+      ],
+      checklist: [
+        "Documentary verification completed before considering an audit.",
+        "Order value and exposure quantified, not guessed.",
+        "Product risk identified: safety, regulatory, customer-mandated.",
+        "Evidence gaps listed with what would close each one.",
+        "Customer requirement confirmed: programme, pillars, report age accepted.",
+        "Production address confirmed as the site to be audited.",
+        "Subcontracting position understood and noted in the audit scope.",
+        "Audit scope written down: what must be covered and why.",
+        "Announced or semi-announced approach decided.",
+        "Corrective action and follow-up expectations agreed in advance.",
+        "Decision recorded: audit now, verify documents first, or inspect the shipment.",
+      ],
+      tables: [
+        {
+          title: "Factory Audit Decision Table",
+          headers: ["Situation", "Order value", "Product risk", "Recommended action"],
+          rows: [
+            ["New supplier, no prior history", "Low", "Low", "Documentary verification, then inspect the first shipment"],
+            ["New supplier, no prior history", "Low", "High", "Verification plus a scoped audit"],
+            ["New supplier, no prior history", "High", "Low", "Audit before releasing significant payment"],
+            ["New supplier, no prior history", "High", "High", "Audit before order confirmation; inspection before shipment"],
+            ["Existing supplier, clean history", "Any", "Low", "Periodic re-check; inspect shipments"],
+            ["Existing supplier, compliance incident", "Any", "Any", "Audit scoped to the failure mode"],
+            ["Suspected undisclosed subcontracting", "Any", "Any", "Site visit at the stated production address"],
+            ["Customer requires SMETA, BSCI or RBA", "Any", "Any", "Audit to the mandated programme and pillars"],
+            ["Capacity increase or new site", "High", "Any", "Audit the new site before moving volume"],
+          ],
+        },
+        {
+          title: "What a Factory Audit Can and Cannot Prove",
+          headers: ["Question", "Can an audit answer it?", "Note"],
+          rows: [
+            ["Does the production site exist at the stated address?", "Yes", "Confirmed by physical presence on the day"],
+            ["Are the stated equipment and lines present?", "Yes", "Observed during the visit"],
+            ["Are working hours and wage records consistent?", "Yes, for the period reviewed", "Based on records sampled and interviews conducted"],
+            ["Are certificates valid and in scope?", "Yes", "Checked against issuing body records where available"],
+            ["Will the factory stay compliant after the audit?", "No", "An audit is a baseline on the day of the visit"],
+            ["Will this specific shipment be defect-free?", "No", "That is what inspection is for"],
+            ["Is the supplier financially stable?", "Partly", "Not a financial audit; limited to observable indicators"],
+            ["Does the factory own the site?", "Partly", "Ownership may require separate documentary checks"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "When should I order a factory audit?",
+          a: "Order one when the decision cannot be settled with documents: before a materially large first order, when evidence is incomplete, when product risk is high, when switching suppliers or sites, when a customer mandates a standard, when you suspect subcontracting, or after a supplier failure.",
+        },
+        {
+          q: "Is a factory audit always necessary before the first order?",
+          a: "No. For small, low-risk orders with a supplier whose documents are consistent, documentary verification plus a pre-shipment inspection is often the proportionate response. Scale the check to what you could lose.",
+        },
+        {
+          q: "Can a factory audit guarantee future compliance?",
+          a: "No. An audit records conditions on the day of the visit and is best understood as a baseline. Sustained compliance depends on corrective action closure, monitoring and re-checks, which is why follow-up matters more than a single result.",
+        },
+        {
+          q: "What is the difference between an audit and an inspection?",
+          a: "An audit assesses the factory and its systems, usually independent of a specific shipment. An inspection checks a specific shipment against your specification and quantity. They answer different questions and are often both needed at different stages.",
+        },
+        {
+          q: "Should the audit be announced?",
+          a: "Announced audits are standard for most programmes and allow records to be prepared. Semi-announced or unannounced approaches are used where the concern is whether normal conditions are visible. The right approach depends on what you are trying to establish.",
+        },
+        {
+          q: "Can I reuse an audit report the supplier already has?",
+          a: "Sometimes. Check the issuing body, the standard and pillars covered, the date, and whether your customer accepts it. A report issued to a different legal entity, or covering a different site, does not apply to your order.",
+        },
+        {
+          q: "How long does a factory audit take?",
+          a: "A single-site audit is commonly completed within one to several days on site depending on scope, size and the standard applied, with the report following afterwards. Multi-site programmes and 4-pillar social audits take longer than a focused capability assessment.",
+        },
+      ],
+      sources: [
+        {
+          name: "Sedex (SMETA)",
+          note: "Publishes the SMETA methodology and the distinction between audit types and pillars; reports are produced by independent audit companies.",
+        },
+        {
+          name: "Responsible Business Alliance (RBA)",
+          note: "Operates the Validated Assessment Program (VAP) and states that an assessment is a baseline at a point in time rather than a guarantee.",
+        },
+        {
+          name: "amfori (BSCI)",
+          note: "Operates the amfori Social Sustainability audit programme used by many European buyers.",
+        },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "当决策无法靠文件做出时，就该验厂：大额首单之前、供应商证据不完整或不一致时、产品涉及安全或法规风险时、更换供应商时、客户强制要求 SMETA/BSCI/RBA 等标准时、怀疑存在未披露分包时，或在上一次供应商失败之后。验厂是某一时点的基线快照，它不是每一单的第一步，也不证明工厂会持续合规。",
+      definition:
+        "工厂验厂是由审核员到生产现场，按既定范围进行的实地评估：走访场地、审阅记录、观察流程，并在范围含社会责任标准时访谈管理层与员工。产出的是访问当天的发现报告。验厂被描述为基线而非保证：它呈现的是当天为真的情况，因此整改关闭与复审跟进比单次通过结果更重要。",
+      keyPoints: [
+        "验厂不总是第一步。文件核验更快更便宜，往往就能解决问题。",
+        "不应只由订单金额驱动决策；产品风险与证据质量更重要。",
+        "客户强制的标准决定审核范围，而不是供应商的偏好。",
+        "未披露的分包是验厂最强的理由之一，因为文件几乎不会暴露它。",
+        "验厂记录的是访问当天的基线，不保证未来表现。",
+        "验厂的价值在于之后发生的事：纠正措施、关闭与复审。",
+      ],
+      steps: [
+        {
+          title: "先做文件核验，而不是直接验厂",
+          body: "先确认注册、经营范围、地址、证书与收款主体。很多供应商问题几天内靠文件就能回答，过早下单验厂，会把钱花在一次文件索取就能补齐的缺口上。",
+        },
+        {
+          title: "大额首单之前验厂",
+          body: "当首单大到失败会造成实质损失时，在付款前验厂能把未知转化为有记录的基线。按你可能损失多少来决定，而不是按某个固定订单门槛。",
+        },
+        {
+          title: "供应商证据不完整时验厂",
+          body: "若供应商拿不出设备证据、不愿确认生产地址，或提供的证书指向另一主体，这个缺口不是行政性的，它就是去现场的理由。",
+        },
+        {
+          title: "产品风险高时验厂",
+          body: "涉及安全、电气、化学、儿童用品或食品接触的产品，其后果无法只靠文件衡量。产品风险越高，验厂的触发门槛越低。",
+        },
+        {
+          title: "更换供应商或增加产能时验厂",
+          body: "新供应商、新生产场地或快速扩产，都会改变你已知的信息。把订单量转到没人去过的场地，是质量与合规意外的常见来源。",
+        },
+        {
+          title: "客户要求 SMETA、BSCI 或 RBA 时验厂",
+          body: "客户强制某项标准时，范围由该要求决定。先确认具体项目、涵盖哪些支柱或模块，以及客户是否接受已有的报告，再决定是否新做一次。",
+        },
+        {
+          title: "怀疑分包时验厂",
+          body: "若怀疑产品在所称场地之外生产，文件通常什么也确认不了。通知或半通知的实地走访，才是确定生产实际发生在哪里的方法。",
+        },
+        {
+          title: "上一次供应商失败之后验厂",
+          body: "在验货失败、交付崩塌或合规事件之后，针对失效模式设定范围的验厂，能告诉你是系统性原因，以及继续合作是否站得住脚。",
+        },
+      ],
+      examples: [
+        {
+          title: "不需要验厂：小额返单、历史一致",
+          body: "买家向一家有三次干净验货记录、股权未变的供应商返单标准品。文件核查加出货前验货，就能以低于再验一次厂的成本回答真正的问题。",
+        },
+        {
+          title: "需要验厂：新供应商、大额首单",
+          body: "首单金额可观，供应商来自线上，其能力证据无法远程验证。在付定金前验厂，能把未经核实的声称转化为观察到的基线。",
+        },
+        {
+          title: "需要验厂：客户强制要求",
+          body: "某欧洲零售商要求入驻前提供 SMETA 四支柱报告。范围由客户固定，通用工厂验厂无法满足该要求。",
+        },
+      ],
+      checklist: [
+        "在考虑验厂之前已完成文件核验。",
+        "已量化（而非猜测）订单金额与风险敞口。",
+        "已识别产品风险：安全、法规、客户强制。",
+        "已列出证据缺口，以及各自靠什么补齐。",
+        "已确认客户要求：项目、支柱、可接受的报告时效。",
+        "已确认生产地址即为待审场地。",
+        "已了解分包状况，并写入验厂范围。",
+        "已书面写下验厂范围：必须覆盖什么、为什么。",
+        "已决定通知、半通知或不通知的方式。",
+        "已事先约定纠正措施与跟进预期。",
+        "已记录决策：现在验厂、先查文件，还是只验这批货。",
+      ],
+      tables: [
+        {
+          title: "验厂决策表",
+          headers: ["情形", "订单金额", "产品风险", "建议动作"],
+          rows: [
+            ["新供应商，无既往记录", "低", "低", "先文件核验，再验首批货"],
+            ["新供应商，无既往记录", "低", "高", "核验 + 有范围的验厂"],
+            ["新供应商，无既往记录", "高", "低", "放出大额款项前验厂"],
+            ["新供应商，无既往记录", "高", "高", "确认订单前验厂，出货前验货"],
+            ["现有供应商，历史干净", "任意", "低", "定期复审 + 验货"],
+            ["现有供应商，发生合规事件", "任意", "任意", "针对失效模式验厂"],
+            ["怀疑未披露分包", "任意", "任意", "到所称生产地址实地走访"],
+            ["客户要求 SMETA/BSCI/RBA", "任意", "任意", "按强制项目与支柱验厂"],
+            ["扩产或新增场地", "高", "任意", "转移订单量前先审新场地"],
+          ],
+        },
+        {
+          title: "验厂能证明与不能证明什么",
+          headers: ["问题", "验厂能回答吗", "说明"],
+          rows: [
+            ["生产场地是否在所称地址存在", "能", "以当天实地到场确认"],
+            ["所称设备与产线是否存在", "能", "访问期间现场观察"],
+            ["工时与工资记录是否一致", "能，针对所审阅期间", "基于抽样记录与所开展的访谈"],
+            ["证书是否有效且在范围内", "能", "在可获得时与发证机构记录核对"],
+            ["验厂后工厂会持续合规吗", "不能", "验厂是访问当天的基线"],
+            ["这一批货会无缺陷吗", "不能", "那是验货的职责"],
+            ["供应商财务是否稳健", "部分", "不是财务审计，仅限于可观察迹象"],
+            ["工厂是否拥有该场地", "部分", "权属可能需另行文件核查"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "什么时候该做工厂验厂？",
+          a: "当决策无法靠文件解决时：大额首单前、证据不完整时、产品风险高时、更换供应商或场地时、客户强制标准时、怀疑分包时，或供应商失败之后。",
+        },
+        {
+          q: "首单前一定要验厂吗？",
+          a: "不一定。金额小、风险低、且供应商文件自洽时，文件核验加出货前验货往往是相称的应对。按你可能损失多少来配置检查力度。",
+        },
+        {
+          q: "验厂能保证未来合规吗？",
+          a: "不能。验厂记录的是访问当天的状况，最准确的理解是基线。持续合规取决于整改关闭、监控与复审，因此跟进比单次结果更重要。",
+        },
+        {
+          q: "验厂和验货有什么区别？",
+          a: "验厂评估的是工厂及其体系，通常与某一批货无关；验货检查的是某一批货是否符合你的规格与数量。两者回答不同问题，常在不同阶段都需要。",
+        },
+        {
+          q: "验厂应该提前通知吗？",
+          a: "多数项目采用通知式，便于准备记录；当关注点是「能否看到常态」时，会采用半通知或不通知方式。选哪种取决于你要确认什么。",
+        },
+        {
+          q: "供应商已有的验厂报告可以复用吗？",
+          a: "有时可以。核查发证机构、覆盖的标准与支柱、日期，以及客户是否接受。开给另一法律主体、或覆盖另一场地的报告，不适用于你的订单。",
+        },
+        {
+          q: "工厂验厂需要多久？",
+          a: "单场地验厂通常在现场一到数天完成，取决于范围、规模与所适用的标准，报告随后出具。多场地项目与四支柱社会责任验厂，比聚焦的能力评估耗时更长。",
+        },
+      ],
+      sources: [
+        { name: "Sedex（SMETA）", note: "发布 SMETA 方法论及审核类型与支柱的区分；报告由独立审核公司出具。" },
+        { name: "责任商业联盟（RBA）", note: "运营 VAP 验证评估计划，并明确评估是某一时点的基线而非保证。" },
+        { name: "amfori（BSCI）", note: "运营众多欧洲买家使用的 amfori 社会可持续性审核项目。" },
+      ],
+    },
+  },
+  {
+    slug: "china-factory-audit-cost",
+    category: "audit",
+    titleEn: "China Factory Audit Cost in 2026: What Affects the Price",
+    titleZh: "2026年中国工厂验厂费用：价格由什么决定",
+    metaDescEn:
+      "What determines China factory audit cost: location, audit type, duration, number of sites, required standard, auditor qualification, scope, travel and corrective action follow-up. How to read a quote.",
+    metaDescZh:
+      "中国工厂验厂费用由什么决定：所在地、验厂类型、天数、场地数量、要求的标准、审核员资质、范围、差旅与整改跟进。教你读懂报价单。",
+    updated: "2026-09-22",
+    tools: [
+      { href: "/tools/audit-checklist" },
+      { href: "/tools/supplier-risk-calculator" },
+    ],
+    services: [
+      { href: "/services/china-factory-audit" },
+      { href: "/services/china-supplier-verification" },
+    ],
+    related: [
+      "when-to-order-china-factory-audit",
+      "what-is-a-factory-audit",
+      "rba-vap-vs-smeta-vs-bsci",
+      "supplier-verification-vs-factory-audit-vs-inspection",
+      "on-site-vs-desk-audit",
+    ],
+    links: [
+      {
+        href: "/factory-audit/request",
+        labelEn: "Request a factory audit quote",
+        labelZh: "索取验厂报价",
+      },
+      {
+        href: "/methodology",
+        labelEn: "How audit scope and risk scores are defined",
+        labelZh: "验厂范围与风险评分如何界定",
+      },
+    ],
+    en: {
+      quickAnswer:
+        "There is no single market price for a China factory audit, and any figure quoted without scope should be treated as incomplete. Cost is driven by location and travel, audit type, time on site, number of sites, the standard required, auditor qualification and experience, reporting scope and language, and whether corrective action follow-up is included. Two quotes can differ substantially because they are quoting different scopes. Compare quotes on what is included, not on the headline number.",
+      definition:
+        "Factory audit cost is the price of delivering a defined scope of work at a defined site: auditor time on site, preparation, travel, reporting, and any follow-up to close corrective actions. Because scope is the main variable, cost is best understood by decomposition rather than by benchmark. A quote that specifies the standard, the site, the duration, the deliverable and the follow-up terms is comparable; a quote that states only a day rate is not.",
+      keyPoints: [
+        "A single number without a scope is not a price; it is an incomplete specification.",
+        "Location drives travel time and cost more than most buyers expect, especially outside major manufacturing clusters.",
+        "The required standard sets the scope: a 4-pillar social audit is a different amount of work from a focused capability assessment.",
+        "Multi-site programmes cost more than a single site, and each additional site adds auditor days and travel.",
+        "Auditor qualification and language capability affect both price and report usefulness.",
+        "Corrective action follow-up is frequently excluded from the headline price and should be confirmed before ordering.",
+      ],
+      steps: [
+        {
+          title: "Define the question the audit must answer",
+          body: "Write down what you need to know: capability, quality system, social compliance, a customer-mandated standard, or a specific failure mode. An audit quoted without a question will be priced on assumptions.",
+        },
+        {
+          title: "Fix the site and the legal entity",
+          body: "Confirm the production address and the legal entity in scope. Quoting the wrong site or entity is the most common cause of a quote changing after order.",
+        },
+        {
+          title: "Choose the standard or scope",
+          body: "Decide whether you need a defined programme such as SMETA, BSCI or RBA, or a buyer-defined scope. The programme determines pillars, record sampling and reporting format, and therefore the work involved.",
+        },
+        {
+          title: "Estimate auditor days from size and complexity",
+          body: "Larger sites, more workers and more processes require more auditor time. Headcount, number of buildings and shift patterns are the inputs that determine duration.",
+        },
+        {
+          title: "Account for travel and location",
+          body: "Auditor travel time and cost depend on where the site is relative to the auditor base. Remote sites and multi-city programmes add both days and expenses.",
+        },
+        {
+          title: "Confirm reporting scope and language",
+          body: "Specify report language, format and turnaround. Reports requiring translation, customer-specific templates or additional reviewers cost more than a standard report.",
+        },
+        {
+          title: "Decide on corrective action follow-up",
+          body: "Ask whether closure of corrective actions, a follow-up visit or a desktop review of evidence is included. Follow-up is where an audit produces lasting value and is often priced separately.",
+        },
+        {
+          title: "Compare quotes on inclusions",
+          body: "Put quotes side by side and compare site, standard, auditor days, deliverables, turnaround and follow-up. The cheapest quote is usually the one with the narrowest scope, not the best value.",
+        },
+      ],
+      examples: [
+        {
+          title: "Two quotes, different scopes",
+          body: "One quote covers a one-day capability assessment at a single site with a standard English report. The other covers a two-day 4-pillar social audit with worker interviews, translated report and corrective action follow-up. They differ substantially because they are different jobs, not because one provider is overpriced.",
+        },
+        {
+          title: "Scope creep after order",
+          body: "A buyer ordered a general audit and later added a customer-mandated SMETA requirement. The price changed because the standard changed the sampling, reporting and record review requirements.",
+        },
+        {
+          title: "Cheap quote, narrow scope",
+          body: "A low quote covered a site walk-through and a photographic report, with no record review and no worker interviews. It was inexpensive because it could not answer the compliance question the buyer actually had.",
+        },
+      ],
+      checklist: [
+        "The question the audit must answer is written down.",
+        "Production address and legal entity confirmed for the quote.",
+        "Standard or scope named: programme, pillars, or buyer-defined scope.",
+        "Site size, headcount and shift pattern provided to the provider.",
+        "Number of auditor days stated in the quote.",
+        "Travel and location assumptions stated.",
+        "Report language, format and turnaround specified.",
+        "Corrective action follow-up included or explicitly excluded.",
+        "Whether a desktop document review is included, clarified.",
+        "Whether re-audit or follow-up visits are priced separately, clarified.",
+        "Quotes compared on inclusions rather than headline price.",
+      ],
+      tables: [
+        {
+          title: "What Determines Factory Audit Cost",
+          headers: ["Cost driver", "Why it changes the price", "What to specify when requesting a quote"],
+          rows: [
+            ["Location and travel", "Auditor travel time and expenses vary by distance from the auditor base", "Full production address, and whether remote travel is involved"],
+            ["Audit type", "Capability, quality, social compliance and customer-mandated programmes require different work", "Which type of audit you need"],
+            ["Duration on site", "Auditor days scale with site size, headcount and process complexity", "Headcount, number of buildings, shift pattern"],
+            ["Number of sites", "Each additional site adds auditor days and travel", "How many sites must be covered"],
+            ["Required standard", "Programmes such as SMETA, BSCI or RBA set sampling and reporting requirements", "The exact programme and pillars required"],
+            ["Auditor qualification", "Lead auditor experience and language capability affect delivery", "Required auditor profile and working language"],
+            ["Reporting scope", "Translation, customer templates and additional reviewers add work", "Report language, format and turnaround"],
+            ["Corrective action follow-up", "Closure review, desktop verification or a follow-up visit is additional work", "Whether follow-up to closure is included"],
+            ["Announcement approach", "Unannounced or semi-announced visits affect planning", "Whether the visit is announced"],
+            ["Turnaround time", "Expedited reporting compresses scheduling", "Required report delivery date"],
+          ],
+        },
+        {
+          title: "Reading a Quote: What Should Be Included",
+          headers: ["Item", "Should appear in the quote", "Why it matters"],
+          rows: [
+            ["Scope statement", "Yes", "Defines what the auditor will and will not cover"],
+            ["Site and legal entity", "Yes", "Prevents the audit being delivered at the wrong place"],
+            ["Standard or pillars", "Yes, if mandated", "Determines sampling and report acceptance"],
+            ["Auditor days", "Yes", "The main driver of cost"],
+            ["Travel assumptions", "Yes", "Avoids later adjustments"],
+            ["Deliverable", "Yes", "Report format, language and turnaround"],
+            ["Corrective action handling", "Explicitly stated", "Often excluded; determines what happens after findings"],
+            ["Follow-up visit terms", "Explicitly stated", "Closure usually requires revisiting evidence"],
+            ["Exclusions", "Yes", "Makes the boundary of the work explicit"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "How much does a China factory audit cost?",
+          a: "There is no single market price that applies across scopes. Cost is determined by location and travel, audit type, auditor days, number of sites, the required standard, auditor qualification, reporting scope and corrective action follow-up. Request a quote against a written scope and compare providers on what is included.",
+        },
+        {
+          q: "Why do two audit quotes differ so much?",
+          a: "Usually because they are quoting different scopes. One may be a one-day capability assessment while another is a multi-day social audit with worker interviews, translation and follow-up. Compare the inclusions rather than the headline figure.",
+        },
+        {
+          q: "Is a cheaper audit worse?",
+          a: "Not necessarily, but a materially cheaper quote usually reflects a narrower scope: fewer auditor days, no record review, no interviews or no follow-up. Check whether the cheaper scope can still answer your question.",
+        },
+        {
+          q: "What affects factory audit cost the most?",
+          a: "Auditor days on site and the required standard. Both are driven by site size, headcount and programme requirements, which is why providing accurate site information produces a more accurate quote.",
+        },
+        {
+          q: "Is corrective action follow-up included?",
+          a: "Frequently it is not. Many quotes cover the audit and report only, with closure of corrective actions priced separately. Confirm this before ordering, because follow-up is where the audit produces lasting value.",
+        },
+        {
+          q: "Does a SMETA audit cost more than a general factory audit?",
+          a: "It can, because a defined programme sets specific requirements for record sampling, worker interviews, reporting format and, depending on the pillars, the breadth of the assessment. The difference reflects scope, not a premium for the name.",
+        },
+        {
+          q: "Can I reduce cost without reducing value?",
+          a: "Yes, by defining the scope tightly around the question you need answered, providing accurate site information, and choosing a single site where the risk is actually concentrated. Reducing auditor days on a complex site usually reduces value rather than cost.",
+        },
+      ],
+      sources: [
+        {
+          name: "Sedex (SMETA)",
+          note: "Defines SMETA audit types and pillars, which are a primary driver of audit scope and therefore of the work involved.",
+        },
+        {
+          name: "Responsible Business Alliance (RBA)",
+          note: "Sets the VAP assessment framework and scope requirements that determine assessment duration.",
+        },
+        {
+          name: "FactoryAuditB2B Methodology",
+          note: "How this site defines audit scope, evidence levels and the limitations of what an audit can establish.",
+        },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "中国工厂验厂没有一个统一市场价，任何不带范围就报出的数字都应视为不完整。费用受所在地与差旅、验厂类型、现场天数、场地数量、要求的标准、审核员资质与经验、报告范围与语言、以及是否含整改跟进等因素驱动。两份报价可能相差很大，因为它们报的是不同的范围。比较报价要看包含项，而不是看表面数字。",
+      definition:
+        "验厂费用，是在既定场地交付既定工作范围的价格：审核员现场时间、准备、差旅、报告，以及关闭纠正措施的任何跟进。由于范围是主要变量，费用最适合用拆解来理解，而不是用基准价。写明了标准、场地、时长、交付物与跟进条款的报价才可比；只报一个日费率的报价不可比。",
+      keyPoints: [
+        "没有范围的单一数字不是价格，而是一份不完整的规格说明。",
+        "所在地对差旅时间与成本的影响，超出多数买家的预期，尤其在主要制造集群之外。",
+        "要求的标准决定范围：四支柱社会责任验厂与聚焦的能力评估，工作量完全不同。",
+        "多场地项目比单场地贵，每增加一个场地都会叠加审核人天与差旅。",
+        "审核员资质与语言能力同时影响价格与报告的可用性。",
+        "整改跟进常被排除在表面报价之外，下单前应确认。",
+      ],
+      steps: [
+        {
+          title: "写下验厂必须回答的问题",
+          body: "明确你要知道什么：能力、质量体系、社会责任合规、客户强制标准，还是某个具体失效模式。没有问题就报价，只会按假设定价。",
+        },
+        {
+          title: "锁定场地与法律主体",
+          body: "确认范围内的生产地址与法律主体。报错场地或主体，是下单后报价变动最常见的原因。",
+        },
+        {
+          title: "选择标准或范围",
+          body: "决定你需要 SMETA、BSCI、RBA 等既定项目，还是买家自定义范围。项目决定了支柱、记录抽样与报告格式，因而决定工作量。",
+        },
+        {
+          title: "按规模与复杂度估算审核人天",
+          body: "场地越大、员工越多、流程越复杂，所需审核时间越长。人数、厂房数与班次，是决定时长的输入项。",
+        },
+        {
+          title: "计入差旅与地理位置",
+          body: "审核员差旅时间与成本，取决于场地相对审核员驻地的距离。偏远场地与多城市项目会同时增加天数与费用。",
+        },
+        {
+          title: "确认报告范围与语言",
+          body: "明确报告语言、格式与交付时限。需要翻译、客户定制模板或额外复核人手的报告，成本高于标准报告。",
+        },
+        {
+          title: "决定是否含整改跟进",
+          body: "询问是否包含纠正措施关闭、跟进走访或证据的桌面复核。跟进正是验厂产生长期价值之处，常单独计价。",
+        },
+        {
+          title: "按包含项比较报价",
+          body: "把报价并排，比较场地、标准、审核人天、交付物、时限与跟进。最便宜的报价通常是范围最窄的那个，而不是性价比最好的。",
+        },
+      ],
+      examples: [
+        {
+          title: "两份报价，两个范围",
+          body: "一份覆盖单场地一天的能力评估加标准英文报告；另一份覆盖两天四支柱社会责任验厂，含员工访谈、报告翻译与整改跟进。两者相差很大，因为它们是不同的工作，而不是某一家定价过高。",
+        },
+        {
+          title: "下单后范围蔓延",
+          body: "买家先订了通用验厂，后来追加客户强制的 SMETA 要求。价格变了，因为标准改变了抽样、报告与记录审阅的要求。",
+        },
+        {
+          title: "便宜的报价，狭窄的范围",
+          body: "一份低价报价只覆盖场地走一遍加照片报告，没有记录审阅、没有员工访谈。它便宜，是因为它回答不了买家真正关心的合规问题。",
+        },
+      ],
+      checklist: [
+        "已写下验厂必须回答的问题。",
+        "已为报价确认生产地址与法律主体。",
+        "已点明标准或范围：项目、支柱或买家自定义范围。",
+        "已向服务方提供场地规模、人数与班次。",
+        "报价中已写明审核人天。",
+        "已写明差旅与地理假设。",
+        "已明确报告语言、格式与时限。",
+        "已明确整改跟进是包含还是排除。",
+        "已澄清是否包含桌面文件审阅。",
+        "已澄清复审或跟进走访是否单独计价。",
+        "已按包含项（而非表面价格）比较报价。",
+      ],
+      tables: [
+        {
+          title: "验厂费用由什么决定",
+          headers: ["成本驱动因素", "它为何改变价格", "询价时应说明什么"],
+          rows: [
+            ["所在地与差旅", "审核员差旅时间与费用随距驻地远近而变", "完整生产地址，是否涉及偏远差旅"],
+            ["验厂类型", "能力、质量、社会责任合规与客户强制项目工作量不同", "你需要哪类验厂"],
+            ["现场时长", "审核人天随场地规模、人数与流程复杂度增加", "人数、厂房数、班次安排"],
+            ["场地数量", "每多一个场地都叠加审核人天与差旅", "必须覆盖几个场地"],
+            ["要求的标准", "SMETA、BSCI、RBA 等项目规定抽样与报告要求", "具体的项目与支柱"],
+            ["审核员资质", "主任审核员经验与语言能力影响交付", "要求的审核员背景与工作语言"],
+            ["报告范围", "翻译、客户模板与额外复核增加工作量", "报告语言、格式与时限"],
+            ["整改跟进", "关闭复核、桌面验证或跟进走访属额外工作", "是否包含整改关闭"],
+            ["通知方式", "不通知或半通知走访影响排期", "走访是否预先通知"],
+            ["交付时限", "加急报告压缩排期", "要求的报告交付日期"],
+          ],
+        },
+        {
+          title: "读懂报价单：应该包含哪些项",
+          headers: ["项目", "报价中应出现", "为何重要"],
+          rows: [
+            ["范围说明", "是", "界定审核员覆盖与不覆盖什么"],
+            ["场地与法律主体", "是", "防止验厂被交付在错误的地点"],
+            ["标准或支柱", "如客户强制则必须有", "决定抽样与报告是否被接受"],
+            ["审核人天", "是", "成本的主要驱动因素"],
+            ["差旅假设", "是", "避免后续调整"],
+            ["交付物", "是", "报告格式、语言与时限"],
+            ["纠正措施处理", "必须明确写明", "常被排除；决定发现项之后发生什么"],
+            ["跟进走访条款", "必须明确写明", "关闭通常需要重新审视证据"],
+            ["排除项", "是", "让工作边界变得明确"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "中国工厂验厂多少钱？",
+          a: "没有一个适用所有范围的统一市场价。费用由所在地与差旅、验厂类型、审核人天、场地数量、要求的标准、审核员资质、报告范围与整改跟进决定。请按书面范围索取报价，并按包含项比较服务方。",
+        },
+        {
+          q: "为什么两份验厂报价差这么多？",
+          a: "通常因为它们报的范围不同。一份可能是一天的能力评估，另一份是含员工访谈、翻译与跟进的多日社会责任验厂。应比较包含项，而不是表面数字。",
+        },
+        {
+          q: "便宜的验厂就差吗？",
+          a: "不一定，但明显便宜的报价通常反映范围更窄：审核人天更少、无记录审阅、无访谈或无跟进。要核查这个更窄的范围是否仍能回答你的问题。",
+        },
+        {
+          q: "什么对验厂费用影响最大？",
+          a: "现场审核人天与所要求的标准。两者都由场地规模、人数与项目要求驱动，因此提供准确的场地信息，才能得到更准确的报价。",
+        },
+        {
+          q: "整改跟进包含在内吗？",
+          a: "常常不包含。许多报价只覆盖验厂与报告，纠正措施关闭单独计价。下单前务必确认，因为跟进正是验厂产生长期价值的地方。",
+        },
+        {
+          q: "SMETA 验厂比通用验厂贵吗？",
+          a: "有可能。因为既定项目对记录抽样、员工访谈、报告格式有具体要求，并按支柱决定评估广度。这个差异反映的是范围，而不是为名称付溢价。",
+        },
+        {
+          q: "能在不降低价值的前提下省钱吗？",
+          a: "可以：围绕你真正要回答的问题收紧范围、提供准确的场地信息、以及在风险真正集中的单一场地做。在复杂场地上压缩审核人天，通常减少的是价值而不是成本。",
+        },
+      ],
+      sources: [
+        { name: "Sedex（SMETA）", note: "界定 SMETA 审核类型与支柱，这是审核范围、进而工作量的主要驱动因素。" },
+        { name: "责任商业联盟（RBA）", note: "设定 VAP 评估框架与决定评估时长的范围要求。" },
+        { name: "FactoryAuditB2B 方法论", note: "本站如何界定验厂范围、证据等级，以及验厂能够确立之事项的局限。" },
+      ],
+    },
+  },
+  {
+    slug: "supplier-verification-vs-factory-audit-vs-inspection",
+    category: "verification",
+    titleEn: "Supplier Verification vs Factory Audit vs Inspection: What a Buyer Needs",
+    titleZh: "供应商核验、工厂验厂与验货的区别：买家到底需要哪个",
+    metaDescEn:
+      "A direct comparison of supplier verification, factory audit and pre-shipment inspection: what each one answers, what it costs in time, and which to order first in common sourcing situations.",
+    metaDescZh:
+      "直接对比供应商核验、工厂验厂与出货前验货：各自回答什么问题、时间成本如何，以及在常见采购场景下该先做哪个。",
+    updated: "2026-09-22",
+    tools: [
+      { href: "/tools/supplier-verification-checklist" },
+      { href: "/tools/audit-checklist" },
+      { href: "/tools/supplier-risk-calculator" },
+    ],
+    services: [
+      { href: "/services/china-supplier-verification" },
+      { href: "/services/china-factory-audit" },
+    ],
+    related: [
+      "verify-alibaba-supplier-before-paying",
+      "when-to-order-china-factory-audit",
+      "what-is-a-factory-audit",
+      "pre-shipment-inspection-checklist",
+      "on-site-vs-desk-audit",
+    ],
+    links: [
+      {
+        href: "/factory-audit/request",
+        labelEn: "Request a factory audit",
+        labelZh: "申请工厂验厂",
+      },
+      { href: "/rfq", labelEn: "Post a buyer RFQ", labelZh: "发布采购需求" },
+    ],
+    en: {
+      quickAnswer:
+        "Verification answers whether the company is real and legally who it claims to be. A factory audit answers whether the site can make your product and meets the standard you require. An inspection answers whether this specific shipment matches your specification. Most buyers need verification first, an audit before committing significant volume, and inspection before shipping. They answer different questions, so ordering the wrong one produces a clean report that does not address your risk.",
+      definition:
+        "These are three different scopes of work. Supplier verification is documentary: registration, business scope, address, certificates, payment entity and consistency across records. A factory audit is on-site: it assesses capability, systems and compliance at the production site against a defined scope. An inspection is shipment-specific: it checks quantity, workmanship, specification and packing of a particular order. Confusing them is the most common reason a buyer pays for a report that does not answer the question they had.",
+      keyPoints: [
+        "Verification is about identity and documents; it can be completed remotely in days.",
+        "An audit is about the site and its systems; it requires physical presence and produces a baseline.",
+        "An inspection is about a shipment; it says nothing about the factory's ongoing capability.",
+        "A clean inspection does not mean the supplier is verified, and a verified supplier can still ship a bad batch.",
+        "The right sequence is usually verification, then audit, then inspection, scaled to order value and risk.",
+        "State the question first, then choose the scope; choosing a service first often produces the wrong answer.",
+      ],
+      steps: [
+        {
+          title: "Write down the question you need answered",
+          body: "Is this company real? Can this factory make my product? Is this shipment acceptable? The question determines the scope, and most mis-ordered work comes from skipping this step.",
+        },
+        {
+          title: "Start with verification for any new supplier",
+          body: "Confirm the legal entity, business scope, production address, certificates and payment entity. This is the fastest and least expensive check, and it frequently resolves whether to proceed at all.",
+        },
+        {
+          title: "Add an audit when documents cannot settle the question",
+          body: "When capability, working conditions, process control or a customer-mandated standard must be established on site, an audit is the appropriate scope. It produces a baseline at the time of the visit.",
+        },
+        {
+          title: "Use inspection to protect each shipment",
+          body: "Before shipment, check quantity, workmanship, specification compliance and packing against your requirements. Inspection protects the order in front of you, not the supplier relationship behind it.",
+        },
+        {
+          title: "Combine them where the risk is layered",
+          body: "A new supplier for a safety-critical product justifies verification, an audit before the deposit and inspection before shipment. Each layer addresses a failure mode the others cannot.",
+        },
+        {
+          title: "Keep the reports and compare over time",
+          body: "Verification records, audit baselines and inspection history together show whether a supplier is improving or drifting. A single report of any type is a snapshot.",
+        },
+      ],
+      examples: [
+        {
+          title: "New Alibaba supplier, first moderate order",
+          body: "Start with verification: licence, scope, address, certificates and payment entity. If the evidence chain is consistent and the product is low risk, add a pre-shipment inspection and skip the audit for this order.",
+        },
+        {
+          title: "Existing supplier with recurring quality problems",
+          body: "Verification is not the answer; the supplier is real. A quality-focused audit addresses the process cause, while inspection contains the damage on the current shipment. Both may be needed.",
+        },
+        {
+          title: "Customer requires SMETA before onboarding",
+          body: "Only an audit against the required programme and pillars satisfies this. Neither verification nor inspection substitutes for it, because the customer is asking about the site and its systems.",
+        },
+      ],
+      checklist: [
+        "The question to be answered is written before ordering any service.",
+        "Supplier identity confirmed: legal entity and Unified Social Credit Code.",
+        "Business scope reviewed to distinguish factory from trading company.",
+        "Production address confirmed and used consistently across documents.",
+        "Decision made on whether an audit is needed before the deposit.",
+        "Audit scope matched to the customer requirement where one exists.",
+        "Inspection booked before shipment for the specific order.",
+        "Inspection criteria, AQL and packing requirements defined in advance.",
+        "Reports retained and compared across orders.",
+      ],
+      tables: [
+        {
+          title: "What Each Service Answers",
+          headers: ["Need", "Best starting point", "Why"],
+          rows: [
+            ["Is this company real?", "Supplier verification", "Registration records answer it directly"],
+            ["Does this factory actually exist?", "Supplier verification, then site visit", "Documents first, physical confirmation second"],
+            ["Can it manufacture my product?", "Verification plus factory audit", "Capability must be observed, not asserted"],
+            ["Does the factory meet buyer requirements?", "Factory audit", "Requires on-site assessment against a scope"],
+            ["Is my current order produced correctly?", "Pre-shipment inspection", "Checks the specific shipment against specification"],
+            ["Are working conditions acceptable?", "Social compliance audit", "Requires record review and interviews on site"],
+            ["Will the next order also be good?", "Audit plus inspection history", "No single check predicts future performance"],
+          ],
+        },
+        {
+          title: "Comparison: Verification vs Audit vs Inspection",
+          headers: ["Aspect", "Supplier verification", "Factory audit", "Pre-shipment inspection"],
+          rows: [
+            ["Question answered", "Is the company real and who is it legally?", "Can the site make this and does it meet the standard?", "Is this shipment acceptable?"],
+            ["Method", "Documentary and public records", "On-site assessment", "Physical check of goods"],
+            ["Typical duration", "Days", "One to several days on site plus report", "Hours to a day per shipment"],
+            ["Output", "Verification record with evidence levels", "Findings report with corrective actions", "Inspection report with defect classification"],
+            ["Main limitation", "Cannot confirm production reality", "Baseline on the day, not a guarantee", "Says little about ongoing capability"],
+            ["Best used", "Before any commitment", "Before significant volume or a customer mandate", "Before shipping each order"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "What is the difference between supplier verification and a factory audit?",
+          a: "Verification confirms the company's legal identity, registration, scope, address and consistency of records, largely from documents. An audit is an on-site assessment of whether the site can make your product and meets the required standard. Verification can be done remotely; an audit cannot.",
+        },
+        {
+          q: "Is a factory audit the same as an inspection?",
+          a: "No. An audit assesses the factory and its systems, usually independent of any shipment. An inspection checks a specific order for quantity, workmanship, specification and packing. A supplier can pass an audit and still ship a defective batch.",
+        },
+        {
+          q: "Which one should I order first?",
+          a: "Usually verification first, because it is fastest and cheapest and often determines whether to proceed. Then an audit before committing significant volume or when a customer mandates a standard. Then inspection before each shipment.",
+        },
+        {
+          q: "Can one service replace another?",
+          a: "No. They answer different questions. A verification report does not prove capability, an audit does not certify a shipment, and an inspection does not establish that the factory is compliant or stable.",
+        },
+        {
+          q: "Do I still need an audit if the supplier passed inspection?",
+          a: "It depends on your question. Passing inspection means that shipment was acceptable. If you need to know about capability, working conditions or systems for future volume, inspection does not answer that.",
+        },
+        {
+          q: "What if my customer requires a specific audit?",
+          a: "Follow the requirement exactly: the programme, the pillars or modules, and the report format. Neither verification nor inspection satisfies a customer-mandated social compliance audit.",
+        },
+      ],
+      sources: [
+        {
+          name: "ISO 2859-1 (AQL sampling)",
+          note: "The sampling standard underlying accept/reject decisions in pre-shipment inspection.",
+        },
+        {
+          name: "Sedex (SMETA) and Responsible Business Alliance (RBA)",
+          note: "Programmes that define social compliance audit scope; neither is satisfied by verification or inspection alone.",
+        },
+        {
+          name: "FactoryAuditB2B Methodology",
+          note: "How this site separates verification evidence levels from audit findings and inspection results.",
+        },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "核验回答「这家公司是否真实、法律上是否如其所称」；验厂回答「这个场地能否生产你的产品、是否满足你要求的标准」；验货回答「这一批货是否符合你的规格」。多数买家的顺序是：先核验，在投入可观订单量前验厂，出货前验货。三者回答不同问题，选错就会拿到一份干净但不回应你风险的报告。",
+      definition:
+        "这是三种不同的工作范围。供应商核验是文件性的：注册、经营范围、地址、证书、收款主体，以及各项记录之间的一致性。工厂验厂是现场性的：按既定范围评估生产场地的能力、体系与合规。验货是订单特定的：检查某笔订单的数量、做工、规格符合性与包装。混淆三者，是买家花钱买到一份不回答其问题报告的最常见原因。",
+      keyPoints: [
+        "核验关乎身份与文件，可在几天内远程完成。",
+        "验厂关乎场地及其体系，需要实地到场，产出的是基线。",
+        "验货关乎某一批货，它不说明工厂的持续能力。",
+        "验货合格不等于供应商已核验；已核验的供应商仍可能发运一批不良品。",
+        "正确顺序通常是核验→验厂→验货，并按订单金额与风险调整力度。",
+        "先写出问题，再选范围；先选服务，往往得到错误答案。",
+      ],
+      steps: [
+        {
+          title: "写下你需要回答的问题",
+          body: "这家公司是真的吗？这家工厂能做我的产品吗？这批货可以接受吗？问题决定范围，而多数选错服务都源于跳过这一步。",
+        },
+        {
+          title: "任何新供应商都从核验开始",
+          body: "确认法律主体、经营范围、生产地址、证书与收款主体。这是最快、最省钱的检查，且常常直接决定是否继续推进。",
+        },
+        {
+          title: "文件无法定论时加做验厂",
+          body: "当能力、工作条件、过程控制或客户强制标准必须在现场确立时，验厂就是合适的范围，它产出的是访问时点的基线。",
+        },
+        {
+          title: "用验货保护每一批货",
+          body: "出货前按你的要求检查数量、做工、规格符合性与包装。验货保护的是眼前这批订单，而不是背后的供应商关系。",
+        },
+        {
+          title: "风险分层时组合使用",
+          body: "为安全关键产品引入新供应商，值得做核验、付定金前验厂、出货前验货。每一层都应对其他层无法覆盖的失效模式。",
+        },
+        {
+          title: "保留报告并长期对比",
+          body: "核验记录、验厂基线与验货历史合在一起，能显示供应商是在改善还是在滑坡。任何单份报告都只是快照。",
+        },
+      ],
+      examples: [
+        {
+          title: "阿里巴巴新供应商，首单金额中等",
+          body: "从核验开始：执照、经营范围、地址、证书与收款主体。若证据链一致且产品风险低，加做出货前验货，这一单可跳过验厂。",
+        },
+        {
+          title: "现有供应商反复出现质量问题",
+          body: "核验不是答案，供应商是真的。聚焦质量的验厂针对的是过程原因，而验货用于控制当前这批货的损失。两者可能都需要。",
+        },
+        {
+          title: "客户要求入驻前提供 SMETA",
+          body: "只有按所要求的项目与支柱做验厂才能满足。核验与验货都不能替代，因为客户问的是场地及其体系。",
+        },
+      ],
+      checklist: [
+        "订购任何服务前先写下要回答的问题。",
+        "已确认供应商身份：法律主体与统一社会信用代码。",
+        "已审阅经营范围以区分工厂与贸易公司。",
+        "已确认生产地址，并在所有文件中一致使用。",
+        "已决策付定金前是否需要验厂。",
+        "在有客户要求时，验厂范围已与该要求对齐。",
+        "已为具体订单在出货前预约验货。",
+        "已提前定义验货判定标准、AQL 与包装要求。",
+        "已保留报告并跨订单对比。",
+      ],
+      tables: [
+        {
+          title: "各自回答什么问题",
+          headers: ["需求", "最佳起点", "原因"],
+          rows: [
+            ["这家公司是真的吗", "供应商核验", "登记记录可直接回答"],
+            ["这家工厂真的存在吗", "先核验，再实地走访", "先文件，再现场确认"],
+            ["它能生产我的产品吗", "核验 + 工厂验厂", "能力必须被观察，而不是被声称"],
+            ["工厂满足买家要求吗", "工厂验厂", "需按范围做现场评估"],
+            ["我当前这批货做得对吗", "出货前验货", "检查具体批次是否符合规格"],
+            ["工作条件可接受吗", "社会责任验厂", "需现场审阅记录并访谈"],
+            ["下一批也会好吗", "验厂 + 验货历史", "没有任何单次检查能预测未来表现"],
+          ],
+        },
+        {
+          title: "核验、验厂、验货对比",
+          headers: ["方面", "供应商核验", "工厂验厂", "出货前验货"],
+          rows: [
+            ["回答的问题", "公司是否真实、法律上是谁", "场地能否生产、是否符合标准", "这批货是否可接受"],
+            ["方法", "文件与公开记录", "现场评估", "实物检查"],
+            ["典型耗时", "数天", "现场一到数天，另加报告", "每批数小时至一天"],
+            ["产出", "带证据等级的核验记录", "含纠正措施的发现报告", "含缺陷分级的验货报告"],
+            ["主要局限", "无法确认生产真实性", "是当天基线而非保证", "对持续能力说明有限"],
+            ["最佳用途", "任何承诺之前", "投入可观订单量或客户强制前", "每批出货之前"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "供应商核验和工厂验厂有什么区别？",
+          a: "核验主要靠文件确认公司的法律身份、注册、经营范围、地址与记录一致性；验厂是现场评估该场地能否生产你的产品并满足要求标准。核验可远程完成，验厂不能。",
+        },
+        {
+          q: "验厂和验货是一回事吗？",
+          a: "不是。验厂评估的是工厂及其体系，通常与某批货无关；验货检查的是具体订单的数量、做工、规格与包装。供应商可以通过验厂，仍然发运一批不良品。",
+        },
+        {
+          q: "应该先做哪个？",
+          a: "通常先核验，因为它最快最省，且常常决定是否继续；然后在投入可观订单量前或客户强制时验厂；最后每批出货前验货。",
+        },
+        {
+          q: "三者可以互相替代吗？",
+          a: "不可以。它们回答不同问题。核验报告不证明能力，验厂不认证某批货，验货也不能确立工厂是否合规或稳定。",
+        },
+        {
+          q: "供应商验货通过了，还需要验厂吗？",
+          a: "取决于你的问题。验货通过只说明这批货可接受。若你想知道未来订单量下的能力、工作条件或体系，验货回答不了。",
+        },
+        {
+          q: "如果客户要求做特定验厂怎么办？",
+          a: "严格按要求执行：项目、支柱或模块、报告格式。核验与验货都不能满足客户强制的社会责任验厂要求。",
+        },
+      ],
+      sources: [
+        { name: "ISO 2859-1（AQL 抽样）", note: "支撑出货前验货合格/不合格判定的抽样标准。" },
+        { name: "Sedex（SMETA）与责任商业联盟（RBA）", note: "界定社会责任验厂范围的项目；仅靠核验或验货均无法满足。" },
+        { name: "FactoryAuditB2B 方法论", note: "本站如何区分核验证据等级、验厂发现与验货结果。" },
+      ],
+    },
+  },
+  {
+    slug: "eu-forced-labour-regulation-china-suppliers",
+    category: "compliance",
+    titleEn: "EU Forced Labour Regulation: What Importers Need From Chinese Suppliers",
+    titleZh: "欧盟强迫劳动法规：进口商需要向中国供应商索取什么",
+    metaDescEn:
+      "What the EU Forced Labour Regulation means for importers of Chinese goods: the official timeline, the supplier and factory evidence to collect, supply chain risk, and when an on-site audit supports due diligence.",
+    metaDescZh:
+      "欧盟强迫劳动法规对中国商品进口商意味着什么：官方时间表、需收集的供应商与工厂证据、供应链风险，以及现场验厂如何支撑尽职调查。",
+    updated: "2026-09-22",
+    tools: [
+      { href: "/tools/supplier-document-checker" },
+      { href: "/tools/supplier-risk-calculator" },
+      { href: "/tools/supplier-verification-checklist" },
+    ],
+    services: [
+      { href: "/services/china-supplier-verification" },
+      { href: "/services/china-factory-audit" },
+    ],
+    related: [
+      "eudr-supplier-due-diligence-china",
+      "rba-vap-vs-smeta-vs-bsci",
+      "smeta-7-supplier-audit-buyer-guide",
+      "ethical-audit-mandatory-requirements",
+      "supplier-quality-audit-checklist",
+    ],
+    links: [
+      {
+        href: "/factory-audit/request",
+        labelEn: "Request a factory audit for due diligence evidence",
+        labelZh: "为尽职调查证据申请工厂验厂",
+      },
+      { href: "/methodology", labelEn: "How evidence levels are defined", labelZh: "证据等级如何界定" },
+    ],
+    en: {
+      quickAnswer:
+        "The EU Forced Labour Regulation prohibits placing products made with forced labour on the EU market, and it applies regardless of where the goods were made. For importers of Chinese goods, the practical work is documentary and supply chain based: know the legal entity and production site behind each product, collect workforce and labour records, map subcontractors, and be able to produce that evidence if a competent authority asks. On-site audits support due diligence but do not certify compliance. This page is general information, not legal advice; check the official European Commission sources for the current text and dates.",
+      definition:
+        "The EU Forced Labour Regulation is a European Union regulation that prohibits economic operators from placing or exporting products made with forced labour on the EU market. It is product-based rather than company-based, meaning the obligation attaches to the product and its supply chain rather than to a certification status. Authorities may request information during investigations, and importers are expected to be able to show what they knew and what they did about identified risk.",
+      keyPoints: [
+        "The obligation is product-based and applies regardless of the country of manufacture.",
+        "Knowing the production site, not just the contracting supplier, is the foundation of any response.",
+        "Subcontracting and labour supply arrangements are where forced labour risk most often hides in practice.",
+        "Authorities can request information during an investigation; being able to produce evidence is the practical test.",
+        "An audit records conditions at a point in time. It supports due diligence but is not a compliance certificate.",
+        "This is general information, not legal advice. Verify current requirements with official EU sources or your own counsel.",
+      ],
+      steps: [
+        {
+          title: "Establish the product-to-site map",
+          body: "For each product you import, identify the legal entity and the actual production site. A product made by an undisclosed subcontractor cannot be assessed, and an unidentifiable site is itself the finding.",
+        },
+        {
+          title: "Collect supplier-level evidence",
+          body: "Obtain the business licence, Unified Social Credit Code, business scope and registered status for each entity in the chain, and confirm that the entity contracting with you is the entity making or controlling the product.",
+        },
+        {
+          title: "Collect factory-level evidence",
+          body: "Confirm the production address, site ownership or lease position, the operations performed there, and the headcount. This is the level at which working conditions can actually be assessed.",
+        },
+        {
+          title: "Request workforce and labour records",
+          body: "Ask for working hour records, wage records, employment contracts and, where relevant, records relating to labour dispatch or student and migrant worker arrangements. Compare what is documented against what is observed on site.",
+        },
+        {
+          title: "Map subcontractors and labour supply chains",
+          body: "Request a written statement of which operations are subcontracted and by whom, including labour dispatch agencies. Forced labour risk is frequently in the layers a buyer has never named.",
+        },
+        {
+          title: "Decide whether an on-site audit is warranted",
+          body: "Where risk indicators exist, or where documentary evidence is inconsistent, an on-site audit with a social compliance scope provides observable evidence. It records a baseline and should be followed by corrective action closure.",
+        },
+        {
+          title: "Record decisions and keep evidence current",
+          body: "Document what you asked, what you received, what you concluded and what you did about gaps. Due diligence is evidenced by the record of decisions, not by the existence of a policy document.",
+        },
+      ],
+      examples: [
+        {
+          title: "Gap: production site never identified",
+          body: "An importer bought through a trading company and never established where the goods were made. When questioned about labour conditions, it could produce supplier documents but nothing about the site. The gap was identity, not documentation volume.",
+        },
+        {
+          title: "Gap: subcontracting undisclosed",
+          body: "The contracted factory disclosed its own records, but a finishing operation was subcontracted to a workshop with different working hour practices. The risk was in a layer the importer had never mapped.",
+        },
+        {
+          title: "Useful response: evidence chain plus audit",
+          body: "An importer mapped the product to a named site, obtained workforce records, commissioned a social compliance audit scoped to working hours and labour supply, and closed the corrective actions. The evidence chain was documented and current.",
+        },
+      ],
+      checklist: [
+        "Each imported product mapped to a named legal entity and production site.",
+        "Business licence and Unified Social Credit Code held for each entity in the chain.",
+        "Production address confirmed and consistent across documents.",
+        "Operations performed at each site identified.",
+        "Working hour and wage records requested and reviewed.",
+        "Employment contracts and labour dispatch arrangements reviewed where applicable.",
+        "Subcontractors and labour supply agencies named in writing.",
+        "Social compliance audit considered where risk indicators exist.",
+        "Corrective actions from any audit tracked to closure.",
+        "Decisions and evidence recorded with dates.",
+        "Current official EU text and dates checked before relying on this summary.",
+      ],
+      tables: [
+        {
+          title: "EU Forced Labour Regulation: Official Milestones",
+          headers: ["Stage", "What happens", "What importers should do"],
+          rows: [
+            ["Adoption", "The regulation was adopted and entered into force following publication in the Official Journal", "Note the obligations and start mapping products to sites"],
+            ["Preparedness phase", "The European Commission made guidance and preparedness tools available ahead of application", "Build the evidence pack and identify supply chain gaps while there is time"],
+            ["Application", "The prohibition on placing products made with forced labour on the EU market becomes applicable and enforceable", "Be able to produce supplier, factory and workforce evidence on request"],
+          ],
+        },
+        {
+          title: "Evidence to Collect: Supplier Level vs Factory Level",
+          headers: ["Level", "Evidence", "What it establishes"],
+          rows: [
+            ["Supplier", "Business licence, Unified Social Credit Code, registration status", "The legal entity exists and is who it claims to be"],
+            ["Supplier", "Business scope and contracted entity", "Whether it manufactures or intermediates"],
+            ["Factory", "Production address confirmed in writing", "Where the product is actually made"],
+            ["Factory", "Operations performed at the site", "Which processes are in scope for assessment"],
+            ["Workforce", "Working hour and wage records", "Whether documented practice is consistent"],
+            ["Workforce", "Employment contracts and labour dispatch records", "How workers are engaged and through whom"],
+            ["Supply chain", "Subcontractor and labour agency disclosure", "Which layers are yet to be assessed"],
+            ["Assessment", "Social compliance audit report and corrective actions", "Observed conditions at a point in time, and what was fixed"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "What is the EU Forced Labour Regulation?",
+          a: "It is an EU regulation prohibiting products made with forced labour from being placed on or exported from the EU market. The obligation attaches to the product and its supply chain rather than to a company certification, so importers need to know where and how their products are made.",
+        },
+        {
+          q: "When does the EU Forced Labour Regulation apply?",
+          a: "The regulation was adopted in 2024, followed by a preparedness phase in which the European Commission published guidance and tools, with application and enforcement set to begin in December 2027. Because these are official milestones that may be updated, check the European Commission and EUR-Lex pages for the current dates before relying on them.",
+        },
+        {
+          q: "Does it apply to goods imported from China?",
+          a: "Yes. The regulation is product-based and applies regardless of the country of manufacture. Goods imported into the EU from any origin, including China, are within scope if they were made with forced labour.",
+        },
+        {
+          q: "What information should I collect from Chinese suppliers?",
+          a: "At minimum: the legal entity and Unified Social Credit Code, confirmation of the production address, the operations performed there, workforce and wage records, and a written disclosure of subcontractors and labour supply arrangements. Keep the evidence dated and current.",
+        },
+        {
+          q: "Is a social compliance audit enough to demonstrate compliance?",
+          a: "No single audit demonstrates compliance. An audit records conditions at the time of the visit and supports due diligence, but it is a baseline, not a certificate. What matters is the evidence chain, corrective action closure and ongoing monitoring.",
+        },
+        {
+          q: "Does FactoryAuditB2B certify forced labour compliance?",
+          a: "No. This platform provides supplier verification, factory assessment and evidence records that support a buyer's own due diligence. It does not issue legal certifications or determine compliance, which rests with the importer and the competent authorities.",
+        },
+        {
+          q: "Is this legal advice?",
+          a: "No. This page is general information for sourcing and due diligence planning. Obligations depend on your role, your products and the applicable rules, so confirm requirements with official EU sources and your own legal counsel.",
+        },
+      ],
+      sources: [
+        {
+          name: "European Commission — Forced Labour Regulation",
+          note: "The official Commission pages setting out the regulation's scope, the prohibition and the preparedness guidance and tools. Check here for current dates and official text.",
+        },
+        {
+          name: "EUR-Lex",
+          note: "The official EU legal database carrying the adopted regulation text and its application dates.",
+        },
+        {
+          name: "International Labour Organization (ILO)",
+          note: "Defines the forced labour indicators used internationally to identify risk in recruitment, work and wage practices.",
+        },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "欧盟强迫劳动法规禁止在欧盟市场投放以强迫劳动生产的产品，且不论货物在何地生产均适用。对中国商品进口商而言，实际工作是文件与供应链层面的：知道每件产品背后的法律主体与生产场地、收集用工与劳动记录、绘制分包图谱，并在主管机关询问时能够出示证据。现场验厂可支撑尽职调查，但不构成合规认证。本页为通用信息，非法律建议；请以欧盟委员会官方来源核对当前文本与日期。",
+      definition:
+        "欧盟强迫劳动法规是一项欧盟法规，禁止经营者在欧盟市场投放或出口以强迫劳动生产的产品。它以产品为基础而非以公司为基础，即义务附着于产品及其供应链，而不是某种认证状态。主管机关可在调查中要求提供信息，进口商应能说明其已知悉什么、以及针对已识别风险采取了什么行动。",
+      keyPoints: [
+        "义务以产品为基础，不论制造国均适用。",
+        "知道生产场地而不只是签约供应商，是任何应对的基础。",
+        "实践中，强迫劳动风险最常隐藏在分包与用工供给安排中。",
+        "主管机关可在调查中要求提供信息；能否出示证据是实际的检验标准。",
+        "验厂记录的是某一时点的状况，它支撑尽职调查，但不是合规证书。",
+        "本页为通用信息而非法律建议；请以欧盟官方来源或你的法律顾问核对当前要求。",
+      ],
+      steps: [
+        {
+          title: "建立产品到场地的映射",
+          body: "对你进口的每件产品，识别其法律主体与实际生产场地。由未披露的分包方生产的产品无从评估，而「场地不可识别」本身就是一项发现。",
+        },
+        {
+          title: "收集供应商层面证据",
+          body: "取得链条中每个主体的营业执照、统一社会信用代码、经营范围与登记状态，并确认与你签约的主体就是生产或掌控该产品的主体。",
+        },
+        {
+          title: "收集工厂层面证据",
+          body: "确认生产地址、场地权属或租赁状况、在该场地进行的工序，以及员工人数。工作条件只有在这一层才可能被真正评估。",
+        },
+        {
+          title: "索取用工与劳动记录",
+          body: "索取工时记录、工资记录、劳动合同，以及在适用时与劳务派遣、学生工、农民工安排相关的记录。把文件所载与现场所见进行比对。",
+        },
+        {
+          title: "绘制分包与用工供给链图谱",
+          body: "要求书面说明哪些工序被分包、由谁分包，包括劳务派遣机构。强迫劳动风险常处在买家从未点名的层级。",
+        },
+        {
+          title: "判断是否需要现场验厂",
+          body: "当存在风险指标、或文件证据不一致时，含社会责任范围的现场验厂能提供可观察的证据。它记录的是基线，之后应完成纠正措施关闭。",
+        },
+        {
+          title: "记录决策并保持证据时效",
+          body: "记录你问了什么、收到什么、得出什么结论、以及针对缺口做了什么。尽职调查由决策记录来证明，而不是靠存在一份政策文件。",
+        },
+      ],
+      examples: [
+        {
+          title: "缺口：生产场地从未被识别",
+          body: "某进口商通过贸易公司采购，从未确认货物在哪里生产。被问及劳动条件时，它能拿出供应商文件，却拿不出任何关于场地的信息。这个缺口是身份性的，而不是文件数量不够。",
+        },
+        {
+          title: "缺口：分包未披露",
+          body: "签约工厂披露了自己的记录，但某道后整理工序被分包给一家工时做法不同的作坊。风险处在进口商从未绘制过的层级。",
+        },
+        {
+          title: "有效应对：证据链加验厂",
+          body: "某进口商把产品映射到具名场地、取得用工记录、委托了针对工时与用工供给的社会责任验厂，并关闭了纠正措施。证据链既有记录又保持时效。",
+        },
+      ],
+      checklist: [
+        "每件进口产品已映射到具名的法律主体与生产场地。",
+        "已持有链条中每个主体的营业执照与统一社会信用代码。",
+        "已确认生产地址，且各文件一致。",
+        "已识别每个场地进行的工序。",
+        "已索取并审阅工时与工资记录。",
+        "已在适用时审阅劳动合同与劳务派遣安排。",
+        "已书面点名分包方与劳务派遣机构。",
+        "存在风险指标时已考虑社会责任验厂。",
+        "任何验厂的纠正措施已跟踪至关闭。",
+        "决策与证据已带日期记录。",
+        "依赖本摘要前已核对欧盟官方文本与当前日期。",
+      ],
+      tables: [
+        {
+          title: "欧盟强迫劳动法规：官方里程碑",
+          headers: ["阶段", "发生什么", "进口商该做什么"],
+          rows: [
+            ["通过", "法规通过，并在《官方公报》公布后生效", "记录义务内容，开始把产品映射到场地"],
+            ["准备期", "欧盟委员会在适用前提供指南与准备工具", "趁有时间建立证据包、识别供应链缺口"],
+            ["适用", "禁止在欧盟市场投放以强迫劳动生产的产品开始适用并可被执行", "能够在被要求时出示供应商、工厂与用工证据"],
+          ],
+        },
+        {
+          title: "要收集的证据：供应商层与工厂层",
+          headers: ["层级", "证据", "它确立了什么"],
+          rows: [
+            ["供应商", "营业执照、统一社会信用代码、登记状态", "该法律主体存在且身份如其所称"],
+            ["供应商", "经营范围与签约主体", "它是制造方还是中间方"],
+            ["工厂", "书面确认的生产地址", "产品实际在哪里生产"],
+            ["工厂", "该场地进行的工序", "哪些流程在评估范围内"],
+            ["用工", "工时与工资记录", "文件做法是否自洽"],
+            ["用工", "劳动合同与劳务派遣记录", "工人如何被招用、经由谁"],
+            ["供应链", "分包方与劳务派遣机构披露", "哪些层级尚未被评估"],
+            ["评估", "社会责任验厂报告与纠正措施", "某一时点观察到的状况，以及修好了什么"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "什么是欧盟强迫劳动法规？",
+          a: "它是一项欧盟法规，禁止以强迫劳动生产的产品被投放或出口到欧盟市场。义务附着于产品及其供应链，而不是公司认证，因此进口商必须知道其产品在哪里、如何被生产。",
+        },
+        {
+          q: "欧盟强迫劳动法规何时适用？",
+          a: "该法规于 2024 年通过，随后进入准备期，欧盟委员会发布了指南与工具，适用与执行定于 2027 年 12 月开始。由于这些官方里程碑可能更新，依赖前请核对欧盟委员会与 EUR-Lex 页面上的当前日期。",
+        },
+        {
+          q: "它适用于从中国进口的商品吗？",
+          a: "适用。该法规以产品为基础，不论制造国均适用。从任何来源（包括中国）进口到欧盟的货物，若以强迫劳动生产，均在范围内。",
+        },
+        {
+          q: "我应该向中国供应商收集哪些信息？",
+          a: "至少包括：法律主体与统一社会信用代码、生产地址的确认、在该场地进行的工序、用工与工资记录，以及分包方与用工供给安排的书面披露。证据要带日期并保持时效。",
+        },
+        {
+          q: "做一次社会责任验厂就足以证明合规吗？",
+          a: "任何单次验厂都不足以证明合规。验厂记录的是访问当时的状况，它支撑尽职调查，但属于基线而非证书。重要的是证据链、纠正措施关闭与持续监控。",
+        },
+        {
+          q: "FactoryAuditB2B 能认证强迫劳动合规吗？",
+          a: "不能。本平台提供支撑买家自身尽职调查的供应商核验、工厂评估与证据记录，不签发法律认证，也不判定合规与否——合规责任在于进口商与主管机关。",
+        },
+        {
+          q: "这是法律建议吗？",
+          a: "不是。本页是用于采购与尽职调查规划的通用信息。义务取决于你的角色、产品与适用规则，请以欧盟官方来源与你自己的法律顾问确认要求。",
+        },
+      ],
+      sources: [
+        { name: "欧盟委员会——强迫劳动法规", note: "官方页面阐明法规范围、禁止性规定以及准备期指南与工具；当前日期与官方文本以此为准。" },
+        { name: "EUR-Lex", note: "欧盟官方法律数据库，载有已通过的法规文本及其适用日期。" },
+        { name: "国际劳工组织（ILO）", note: "定义了国际上用于识别招聘、工作与薪酬做法中强迫劳动风险的指标。" },
+      ],
+    },
+  },
+  {
+    slug: "eudr-supplier-due-diligence-china",
+    category: "compliance",
+    titleEn: "EUDR Supplier Due Diligence: What EU Buyers Need From China Suppliers",
+    titleZh: "EUDR 供应商尽职调查：欧盟买家需要向中国供应商索取什么",
+    metaDescEn:
+      "What EUDR requires of buyers sourcing from China: covered product categories, geolocation and traceability data, supplier evidence, site verification, and how the timeline affects preparation.",
+    metaDescZh:
+      "从中国采购的买家在 EUDR 下需要什么：受覆盖的产品类别、地理位置与可追溯数据、供应商证据、现场核验，以及时间表如何影响准备工作。",
+    updated: "2026-09-22",
+    tools: [
+      { href: "/tools/supplier-document-checker" },
+      { href: "/tools/supplier-verification-checklist" },
+      { href: "/tools/supplier-risk-calculator" },
+    ],
+    services: [
+      { href: "/services/china-supplier-verification" },
+      { href: "/services/china-factory-audit" },
+    ],
+    related: [
+      "eu-forced-labour-regulation-china-suppliers",
+      "digital-product-passport-supplier-data",
+      "supplier-quality-audit-checklist",
+      "china-supplier-risk-assessment-framework",
+      "esg-supplier-audit-guide",
+    ],
+    links: [
+      {
+        href: "/factory-audit/request",
+        labelEn: "Request site verification for traceability evidence",
+        labelZh: "为可追溯证据申请现场核验",
+      },
+      {
+        href: "/industrial-clusters",
+        labelEn: "Explore sourcing clusters by country",
+        labelZh: "按国家浏览采购产业带",
+      },
+    ],
+    en: {
+      quickAnswer:
+        "EUDR requires operators placing relevant products on the EU market to show that those products are deforestation-free and were produced legally in the country of production. For buyers sourcing from China, the practical requirement is traceability: identify the covered commodity in your product, obtain geolocation data for the plot of land where it was grown or produced, collect legality documentation, and keep a due diligence statement. Factory verification supports the part of the chain a buyer controls, but it does not certify EUDR compliance. Verify current requirements with official European Commission sources.",
+      definition:
+        "The EU Deforestation Regulation (EUDR) is an EU regulation that conditions market access for a defined list of commodities and derived products on due diligence showing the goods are deforestation-free and legally produced. The core evidentiary requirement is traceability to the plot of land where the commodity originated, supported by geolocation data and legality documentation. Obligations differ by operator size and role, and the regulation sets different application dates for different categories of undertaking.",
+      keyPoints: [
+        "EUDR is commodity-based: obligations attach to listed commodities and products derived from them.",
+        "The central evidence requirement is geolocation of the production plot, not a supplier declaration alone.",
+        "Legality means compliance with the producing country's applicable law, which must be documented.",
+        "Application dates differ for larger and smaller undertakings, so timing depends on your category.",
+        "Where a Chinese factory supplies derived products, the buyer still needs upstream commodity data.",
+        "Verification can establish who made what and where; it cannot certify EUDR compliance.",
+      ],
+      steps: [
+        {
+          title: "Determine whether your product is in scope",
+          body: "Check whether your product contains or is derived from a covered commodity: wood, rubber, coffee, cocoa, palm oil, soy or cattle, including common derivatives such as furniture, tyres, leather, paper and packaging. Scope is determined by the product, not by the supplier's industry label.",
+        },
+        {
+          title: "Map the product back to the commodity",
+          body: "For each in-scope product, trace the supply chain back to the commodity and its country of production. This is the step where most buyers discover that the data they have is commercial, not traceability data.",
+        },
+        {
+          title: "Request geolocation and legality data",
+          body: "Ask the supplier for geolocation coordinates of the plot of production, along with evidence of legal production in the country of origin. A letter stating compliance is not geolocation data.",
+        },
+        {
+          title: "Assess the supplier's ability to provide it",
+          body: "Many manufacturers can identify their immediate material supplier but not the plot of origin. Where the supplier cannot produce the data, that is a material supply chain gap to resolve, not a formality.",
+        },
+        {
+          title: "Verify the manufacturing site separately",
+          body: "Confirm the legal entity, production address and operations of the factory making the finished product. EUDR traceability concerns the commodity, but knowing the actual production site remains necessary for any sourcing decision.",
+        },
+        {
+          title: "Keep the due diligence record",
+          body: "Maintain the due diligence statement, the evidence collected and the risk assessment, with dates. The record is what demonstrates diligence, and it must be current rather than historical.",
+        },
+        {
+          title: "Plan for the applicable date",
+          body: "Identify which undertaking category you fall into and the corresponding application date, and work backwards to when data collection must start. Commodity data collection is slow, so it should begin well before the date.",
+        },
+      ],
+      examples: [
+        {
+          title: "Furniture with wood content",
+          body: "A buyer imports wooden furniture from China. The product is derived from a covered commodity, so the buyer needs wood species data, plot geolocation and legality evidence from upstream, not just a compliant factory.",
+        },
+        {
+          title: "Rubber components in an assembly",
+          body: "A buyer sources an assembled product with rubber parts. The rubber content puts the product in scope, and the traceability question moves upstream to the rubber supply chain the factory may not control.",
+        },
+        {
+          title: "Supplier cannot provide plot data",
+          body: "A factory provided a compliance declaration but no geolocation data for the material origin. The gap is data availability upstream, which the factory cannot resolve by asserting compliance.",
+        },
+      ],
+      checklist: [
+        "Products checked against the covered commodity list, including derivatives.",
+        "In-scope products mapped back to the commodity and country of production.",
+        "Geolocation data for the plot of production requested.",
+        "Legality documentation for the country of production requested.",
+        "Supplier's ability to provide upstream data assessed.",
+        "Manufacturing site legal entity and address verified.",
+        "Operations performed at the site identified.",
+        "Due diligence statement and evidence retained with dates.",
+        "Undertaking category identified and applicable date noted.",
+        "Current official EU sources checked before relying on this summary.",
+      ],
+      tables: [
+        {
+          title: "EUDR Covered Commodities and Common Derived Products",
+          headers: ["Commodity", "Common derived products relevant to sourcing", "Data implication"],
+          rows: [
+            ["Wood", "Furniture, paper, packaging, plywood, wooden components", "Species and plot geolocation needed upstream"],
+            ["Rubber", "Tyres, seals, footwear, industrial rubber parts", "Traceability moves to plantation or producer level"],
+            ["Coffee", "Roasted and packaged coffee products", "Origin plot data from agricultural supply chain"],
+            ["Cocoa", "Chocolate and cocoa-derived ingredients", "Origin plot data from agricultural supply chain"],
+            ["Palm oil", "Food ingredients, cosmetics, oleochemicals", "Widely dispersed; upstream data often the constraint"],
+            ["Soy", "Animal feed, food ingredients, oils", "Origin data required from feed or crop supply chain"],
+            ["Cattle", "Leather, hides, beef-derived products", "Traceability to rearing and origin locations"],
+          ],
+        },
+        {
+          title: "EUDR Data Requirements: What to Ask and From Whom",
+          headers: ["Data element", "Who typically holds it", "Why buyers struggle with it"],
+          rows: [
+            ["Product and commodity identification", "The manufacturer", "Usually available; derivatives often missed"],
+            ["Country of production", "The manufacturer or material supplier", "Available but rarely documented formally"],
+            ["Geolocation of the plot", "Upstream grower or producer", "Often not held by the immediate supplier"],
+            ["Legality documentation", "Producer in the country of origin", "Format and recognition vary by jurisdiction"],
+            ["Supplier identity and site", "The manufacturer", "Available through standard verification"],
+            ["Due diligence statement", "The operator placing on the market", "Requires the data above to be complete first"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "What is EUDR?",
+          a: "The EU Deforestation Regulation requires operators placing certain commodities and derived products on the EU market to demonstrate through due diligence that the goods are deforestation-free and were produced legally in the country of production.",
+        },
+        {
+          q: "Which products are covered by EUDR?",
+          a: "The regulation covers wood, rubber, coffee, cocoa, palm oil, soy and cattle, including products derived from them such as furniture, tyres, leather, paper and packaging. Scope follows the commodity in the product, not the supplier's sector.",
+        },
+        {
+          q: "When does EUDR apply?",
+          a: "Application dates differ by the size and category of the undertaking, with later dates for micro and small enterprises than for large and medium ones. Because dates have been adjusted by EU legislative action, confirm the current applicable date on official European Commission and EUR-Lex sources.",
+        },
+        {
+          q: "What does EUDR require from Chinese suppliers?",
+          a: "Practically: identification of any covered commodity in the product, traceability back to the country and plot of production, geolocation data, and legality documentation. Many suppliers can provide commercial data but not plot-level traceability, which is the usual gap.",
+        },
+        {
+          q: "Can a factory audit satisfy EUDR?",
+          a: "No. An audit can establish who manufactured what and where, and can verify identity, capability and site reality, which supports your sourcing records. EUDR compliance depends on commodity traceability and legality data plus your own due diligence statement.",
+        },
+        {
+          q: "Does FactoryAuditB2B certify EUDR compliance?",
+          a: "No. This platform provides supplier verification and factory assessment to support a buyer's own due diligence. It does not issue EUDR compliance certifications or make legal determinations.",
+        },
+        {
+          q: "Is this legal advice?",
+          a: "No. This is general information for sourcing preparation. Your obligations depend on your role, products and applicable rules, so confirm with official EU sources and your own legal counsel.",
+        },
+      ],
+      sources: [
+        {
+          name: "European Commission — EU Deforestation Regulation",
+          note: "Official pages covering scope, covered commodities, obligations and the current implementation timeline, including any adjustments adopted by the EU.",
+        },
+        {
+          name: "EUR-Lex",
+          note: "Official EU legal database carrying the regulation text and any amending acts affecting application dates.",
+        },
+        {
+          name: "FactoryAuditB2B Methodology",
+          note: "How supplier identity, production site and operations are verified, and the limits of what verification can establish.",
+        },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "EUDR 要求将相关产品投放欧盟市场的经营者证明这些产品无毁林、且在生产国合法生产。对从中国采购的买家而言，实际要求是可追溯性：识别你产品中的受覆盖商品、取得其种植或生产地块的地理位置数据、收集合法性文件，并保留尽职调查声明。工厂核验能支撑买家可控的那一段链条，但不构成 EUDR 合规认证。请以欧盟委员会官方来源核对当前要求。",
+      definition:
+        "欧盟毁林法规（EUDR）是一项欧盟法规，它把一份明确清单上的商品及其衍生产品进入欧盟市场的准入条件，设定为「通过尽职调查证明货物无毁林且合法生产」。核心证据要求是可追溯到商品原产的地块，并以地理位置数据与合法性文件为支撑。义务因经营者规模与角色而异，法规对不同类别的企业设定了不同的适用日期。",
+      keyPoints: [
+        "EUDR 以商品为基础：义务附着于清单商品及其衍生产品。",
+        "核心证据要求是生产地块的地理位置，而不仅是供应商声明。",
+        "合法性指符合生产国适用法律，且必须形成文件。",
+        "大中小微企业的适用日期不同，因此时间取决于你的类别。",
+        "中国工厂供应衍生产品时，买家仍需取得上游商品数据。",
+        "核验能确立谁生产了什么、在哪里生产，但不能认证 EUDR 合规。",
+      ],
+      steps: [
+        {
+          title: "判断你的产品是否在范围内",
+          body: "核查你的产品是否含有或衍生自受覆盖商品：木材、橡胶、咖啡、可可、棕榈油、大豆或牛，包括家具、轮胎、皮革、纸张与包装等常见衍生品。范围由产品决定，而不是由供应商的行业标签决定。",
+        },
+        {
+          title: "把产品回溯映射到商品",
+          body: "对每个在范围内的产品，把供应链回溯到商品及其生产国。正是在这一步，多数买家会发现自己手上的数据是商业数据，而不是可追溯数据。",
+        },
+        {
+          title: "索取地理位置与合法性数据",
+          body: "向供应商索取生产地块的地理坐标，连同在原产国合法生产的证据。一封声明合规的信函不是地理坐标数据。",
+        },
+        {
+          title: "评估供应商提供数据的能力",
+          body: "许多制造商能指出其直接材料供应商，但指不出原产地块。供应商拿不出数据时，这是必须解决的实际供应链缺口，而不是一个形式问题。",
+        },
+        {
+          title: "单独核验制造场地",
+          body: "确认生产成品工厂的法律主体、生产地址与工序。EUDR 的可追溯性针对商品，但知道实际生产场地对任何采购决策仍然必要。",
+        },
+        {
+          title: "保留尽职调查记录",
+          body: "保存尽职调查声明、已收集证据与风险评估，并带日期。能证明尽职程度的是记录，且它必须是当前的而非历史的。",
+        },
+        {
+          title: "按适用日期倒排计划",
+          body: "确定你属于哪类企业及对应适用日期，再倒推数据收集必须何时启动。商品数据收集很慢，应远早于该日期开始。",
+        },
+      ],
+      examples: [
+        {
+          title: "含木材的家具",
+          body: "买家从中国进口木制家具。该产品衍生自受覆盖商品，因此买家需要上游的木材树种数据、地块地理坐标与合法性证据，而不只需要一家合规的工厂。",
+        },
+        {
+          title: "装配件中的橡胶部件",
+          body: "买家采购含橡胶部件的组装产品。橡胶成分使该产品进入范围，可追溯问题就上移到工厂可能并不掌控的橡胶供应链。",
+        },
+        {
+          title: "供应商无法提供地块数据",
+          body: "某工厂提供了合规声明，但拿不出材料原产地的地理坐标。这个缺口是上游的数据可得性，工厂无法靠声称合规来解决。",
+        },
+      ],
+      checklist: [
+        "已对照受覆盖商品清单核查产品，含衍生品。",
+        "已把范围内产品回溯映射到商品与生产国。",
+        "已索取生产地块的地理坐标数据。",
+        "已索取生产国的合法性文件。",
+        "已评估供应商提供上游数据的能力。",
+        "已核验制造场地的法律主体与地址。",
+        "已识别该场地进行的工序。",
+        "已带日期保存尽职调查声明与证据。",
+        "已识别企业类别并记下适用日期。",
+        "依赖本摘要前已核对欧盟官方来源。",
+      ],
+      tables: [
+        {
+          title: "EUDR 受覆盖商品与常见衍生产品",
+          headers: ["商品", "与采购相关的常见衍生品", "数据含义"],
+          rows: [
+            ["木材", "家具、纸张、包装、胶合板、木制部件", "需要上游的树种与地块坐标"],
+            ["橡胶", "轮胎、密封件、鞋类、工业橡胶件", "可追溯上移至种植园或生产者层级"],
+            ["咖啡", "烘焙与包装咖啡产品", "来自农业供应链的原产地块数据"],
+            ["可可", "巧克力与可可衍生配料", "来自农业供应链的原产地块数据"],
+            ["棕榈油", "食品配料、化妆品、油脂化学品", "分布极广；上游数据常是瓶颈"],
+            ["大豆", "动物饲料、食品配料、油类", "需来自饲料或作物供应链的原产数据"],
+            ["牛", "皮革、皮张、牛肉衍生品", "需追溯到饲养与原产地"],
+          ],
+        },
+        {
+          title: "EUDR 数据要求：问什么、向谁要",
+          headers: ["数据项", "通常由谁持有", "买家为何难以取得"],
+          rows: [
+            ["产品与商品识别", "制造商", "通常可得；衍生品常被漏掉"],
+            ["生产国", "制造商或材料供应商", "可得但很少正式形成文件"],
+            ["地块地理坐标", "上游种植者或生产者", "直接供应商往往不持有"],
+            ["合法性文件", "原产国的生产者", "格式与认可度因司法辖区而异"],
+            ["供应商身份与场地", "制造商", "通过常规核验即可取得"],
+            ["尽职调查声明", "投放市场的经营者", "需以上数据先完整"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "什么是 EUDR？",
+          a: "欧盟毁林法规要求将特定商品及衍生产品投放欧盟市场的经营者，通过尽职调查证明货物无毁林、且在生产国合法生产。",
+        },
+        {
+          q: "EUDR 覆盖哪些产品？",
+          a: "法规覆盖木材、橡胶、咖啡、可可、棕榈油、大豆与牛，包括其衍生产品，如家具、轮胎、皮革、纸张与包装。范围跟随产品中的商品，而不是供应商所属行业。",
+        },
+        {
+          q: "EUDR 何时适用？",
+          a: "适用日期因企业规模与类别而异，微型与小型企业晚于大型与中型企业。由于日期曾通过欧盟立法程序调整，请以欧盟委员会与 EUR-Lex 官方来源确认当前适用日期。",
+        },
+        {
+          q: "EUDR 要求中国供应商提供什么？",
+          a: "实践中包括：识别产品中任何受覆盖商品、追溯到生产国与生产地块、地理坐标数据，以及合法性文件。许多供应商能提供商业数据，但拿不到地块级可追溯数据，这正是常见缺口。",
+        },
+        {
+          q: "做一次工厂验厂能满足 EUDR 吗？",
+          a: "不能。验厂能确立谁生产了什么、在哪里生产，并核验身份、能力与场地真实性，从而支撑你的采购记录。EUDR 合规取决于商品可追溯性与合法性数据，以及你自己的尽职调查声明。",
+        },
+        {
+          q: "FactoryAuditB2B 能认证 EUDR 合规吗？",
+          a: "不能。本平台提供支撑买家自身尽职调查的供应商核验与工厂评估，不签发 EUDR 合规认证，也不作法律判定。",
+        },
+        {
+          q: "这是法律建议吗？",
+          a: "不是。这是用于采购准备的通用信息。你的义务取决于角色、产品与适用规则，请以欧盟官方来源与你自己的法律顾问确认。",
+        },
+      ],
+      sources: [
+        { name: "欧盟委员会——欧盟毁林法规（EUDR）", note: "官方页面涵盖范围、受覆盖商品、义务与当前实施时间表，含欧盟通过的任何调整。" },
+        { name: "EUR-Lex", note: "欧盟官方法律数据库，载有法规文本及影响适用日期的任何修订法案。" },
+        { name: "FactoryAuditB2B 方法论", note: "供应商身份、生产场地与工序如何被核验，以及核验能够确立之事项的边界。" },
+      ],
+    },
+  },
+  {
+    slug: "digital-product-passport-supplier-data",
+    category: "compliance",
+    titleEn: "Digital Product Passport: What EU Buyers Should Collect From Suppliers",
+    titleZh: "数字产品护照（DPP）：欧盟买家应向供应商收集哪些数据",
+    metaDescEn:
+      "What the EU Digital Product Passport means for suppliers: the product, material, manufacturing and sustainability data buyers may need, which categories are prioritised, and how to prepare suppliers.",
+    metaDescZh:
+      "欧盟数字产品护照对供应商意味着什么：买家可能需要的产品、材料、制造与可持续数据，优先覆盖的品类，以及如何让供应商提前准备。",
+    updated: "2026-09-22",
+    tools: [
+      { href: "/tools/supplier-document-checker" },
+      { href: "/tools/supplier-verification-checklist" },
+      { href: "/tools/supplier-risk-calculator" },
+    ],
+    services: [
+      { href: "/services/china-supplier-verification" },
+      { href: "/services/china-factory-audit" },
+    ],
+    related: [
+      "eudr-supplier-due-diligence-china",
+      "eu-forced-labour-regulation-china-suppliers",
+      "esg-supplier-audit-guide",
+      "what-is-quality-management-system",
+      "china-supplier-risk-assessment-framework",
+    ],
+    links: [
+      { href: "/rfq", labelEn: "Post a buyer RFQ", labelZh: "发布采购需求" },
+      {
+        href: "/suppliers",
+        labelEn: "Find suppliers with documented profiles",
+        labelZh: "查找有档案记录的供应商",
+      },
+    ],
+    en: {
+      quickAnswer:
+        "A Digital Product Passport is a structured set of product data accessible digitally, intended to carry information about a product's identity, materials, manufacture, sustainability and end-of-life handling through its lifecycle. For buyers, the practical implication is that supplier data collection becomes a requirement rather than a nice-to-have. Start by confirming product identity and manufacturer identity, then material composition, manufacturing information and any traceability records the supplier can actually produce. This platform supports supplier information and verification; it is not a passport issuer or a certification body.",
+      definition:
+        "The Digital Product Passport (DPP) is a concept and instrument under the EU Ecodesign for Sustainable Products Regulation (ESPR) framework: a digital record carrying defined product information to support circularity, repair, recycling and regulatory checks. The European Commission has made a central registry available and is prioritising categories in waves rather than introducing every category at once. Because data requirements are set per product category through delegated acts, the specific fields a supplier must provide depend on the category and the timing adopted.",
+      keyPoints: [
+        "A DPP is product data, not a certificate: it carries information rather than certifying performance.",
+        "Data requirements are set per product category, so scope depends on which category applies to you.",
+        "Manufacturer identity and product identity are the foundation; everything else builds on them.",
+        "Material composition data is usually the hardest for suppliers to produce accurately.",
+        "Suppliers should be prepared early, because data collection takes longer than buyers expect.",
+        "Verification can confirm who made the product and where; it does not issue or validate a passport.",
+      ],
+      steps: [
+        {
+          title: "Confirm whether your category is in a prioritised wave",
+          body: "Identify whether your product falls into a category being prioritised in the current wave, such as textiles, steel, aluminium, tyres, furniture or ICT, or into a category with its own earlier implementation date such as batteries. Prioritisation determines timing, not whether preparation is worthwhile.",
+        },
+        {
+          title: "Start with manufacturer and product identity",
+          body: "Confirm the legal entity, Unified Social Credit Code and production site, and give the product a stable identifier. Without unambiguous identity, downstream data cannot be attributed to anything.",
+        },
+        {
+          title: "Collect material composition data",
+          body: "Ask for a bill of materials with material names, grades and proportions, plus any substances subject to reporting. This is usually the least complete dataset at most suppliers.",
+        },
+        {
+          title: "Collect manufacturing information",
+          body: "Record the production site, the operations performed there and the date or batch reference, so product data can be linked to a place and a process rather than to a company in the abstract.",
+        },
+        {
+          title: "Collect sustainability and traceability data",
+          body: "Where required, request recycled content, environmental footprint or origin data, together with the records that support it. Unsupported figures are the main risk in passport data.",
+        },
+        {
+          title: "Check what the supplier can actually evidence",
+          body: "Ask which data points the supplier can document today and which would need upstream input. The gap list becomes the work plan and, where needed, the reason to verify or audit a site.",
+        },
+        {
+          title: "Keep data current and attributable",
+          body: "Store the data with dates, sources and the entity that provided it. Passport data is expected to be maintained, so a one-off collection exercise is not enough.",
+        },
+      ],
+      examples: [
+        {
+          title: "Furniture supplier preparing data",
+          body: "A furniture manufacturer could provide product identity and its own production records, but its material declarations for wood and foam depended on upstream suppliers. The work plan became an upstream data request, not a factory exercise.",
+        },
+        {
+          title: "Textile supplier with incomplete composition data",
+          body: "A textile supplier provided fibre percentages for the main fabric but not for trims and linings. The passport data was incomplete because composition had never been documented at component level.",
+        },
+        {
+          title: "Battery-related category with an earlier date",
+          body: "A buyer sourcing battery-containing products noted that the battery category carries its own implementation date, earlier than the broader waves, and sequenced data collection accordingly.",
+        },
+      ],
+      checklist: [
+        "Product category checked against the prioritised waves and any category-specific dates.",
+        "Legal entity and Unified Social Credit Code confirmed for the manufacturer.",
+        "Production site confirmed and consistent across records.",
+        "Stable product identifier assigned.",
+        "Bill of materials requested with material names, grades and proportions.",
+        "Substances subject to reporting identified.",
+        "Manufacturing information recorded: site, operations, batch or date reference.",
+        "Recycled content and origin data requested where applicable.",
+        "Supporting records obtained for each data point, not just figures.",
+        "Data stored with dates, sources and the providing entity.",
+        "Current official EU sources checked before relying on this summary.",
+      ],
+      tables: [
+        {
+          title: "DPP Data: What Buyers Should Collect",
+          headers: ["Data group", "Typical fields", "Where suppliers struggle"],
+          rows: [
+            ["Supplier identity", "Legal entity name, Unified Social Credit Code, production address", "Usually available through standard verification"],
+            ["Product identity", "Product type, model, stable identifier, batch reference", "Identifiers often inconsistent across systems"],
+            ["Product materials", "Bill of materials, material grades, proportions, reportable substances", "Component-level composition rarely documented"],
+            ["Manufacturing information", "Production site, operations performed, date or batch", "Linking product data to a specific site and process"],
+            ["Sustainability data", "Recycled content, environmental footprint, durability or repair information", "Figures without supporting records"],
+            ["Traceability data", "Material origin, upstream supplier references", "Upstream suppliers not identified or not cooperating"],
+            ["Digital records", "Source documents, dates, providing entity", "Data collected once and never maintained"],
+          ],
+        },
+        {
+          title: "Prioritised Categories and What They Imply",
+          headers: ["Category", "Data implication for suppliers", "Preparation priority"],
+          rows: [
+            ["Textiles", "Fibre composition at component level, including trims and linings", "High: composition data is usually incomplete"],
+            ["Steel and aluminium", "Material grade, recycled content and origin", "High: upstream mill data required"],
+            ["Tyres", "Material composition and durability information", "Medium: composition largely known, records need formalising"],
+            ["Furniture", "Material declarations across wood, foam, textiles and hardware", "High: multi-material bills of materials"],
+            ["ICT and electronics", "Component-level composition and substance reporting", "High: complex supply chains"],
+            ["Batteries", "Category-specific requirements with an earlier implementation date", "High: earlier timeline than broader waves"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "What is a Digital Product Passport?",
+          a: "It is a structured digital record carrying defined information about a product, such as its identity, materials, manufacture, sustainability attributes and end-of-life handling. It is part of the EU Ecodesign for Sustainable Products Regulation framework and is intended to support circularity, repair, recycling and regulatory checks.",
+        },
+        {
+          q: "Which product categories are prioritised?",
+          a: "The European Commission is introducing categories in waves rather than all at once, with categories such as textiles, steel, aluminium, tyres, furniture and ICT among those prioritised, and batteries carrying their own earlier implementation date. Because waves and dates are set through EU acts, confirm the current position on official sources.",
+        },
+        {
+          q: "What data will suppliers need to provide?",
+          a: "The specific fields are set per product category, but the common groups are supplier identity, product identity, material composition, manufacturing information, sustainability attributes and traceability data, each supported by records. Unsupported figures are the main risk.",
+        },
+        {
+          q: "Is a Digital Product Passport a certificate?",
+          a: "No. It is a data record, not a certification of performance or compliance. It carries information that authorities, buyers and recyclers can use, and the responsibility for accurate data sits with the operator placing the product on the market.",
+        },
+        {
+          q: "Can FactoryAuditB2B issue a Digital Product Passport?",
+          a: "No. This platform provides supplier verification and factory assessment, helping buyers confirm manufacturer identity, production site and operations, and collect supplier information. It does not issue passports, operate the EU registry, or certify product data.",
+        },
+        {
+          q: "How should buyers prepare suppliers?",
+          a: "Start with identity and product identifiers, then request a component-level bill of materials, then sustainability and traceability data with supporting records. Identify which data points the supplier cannot evidence today and treat that list as the work plan.",
+        },
+        {
+          q: "Is this legal advice?",
+          a: "No. It is general information for sourcing preparation. Requirements depend on your product category and role, so confirm with official EU sources and your own counsel.",
+        },
+      ],
+      sources: [
+        {
+          name: "European Commission — Ecodesign for Sustainable Products Regulation (ESPR) and Digital Product Passport",
+          note: "Official source for the passport concept, the central registry, prioritised categories and category-specific requirements.",
+        },
+        {
+          name: "EUR-Lex",
+          note: "Official EU legal database carrying the ESPR text and the delegated acts that define data requirements per category.",
+        },
+        {
+          name: "FactoryAuditB2B Methodology",
+          note: "How manufacturer identity, production site and operations are verified, and the limits of what verification establishes.",
+        },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "数字产品护照（DPP）是一组可数字访问的结构化产品数据，用于承载产品身份、材料、制造、可持续性与报废处理等信息。对买家而言，实际含义是供应商数据收集从「加分项」变成「必做项」。先从确认产品身份与制造商身份开始，再收集材料成分、制造信息，以及供应商真正拿得出的可追溯记录。本平台支撑供应商信息与核验，不是护照签发机构或认证机构。",
+      definition:
+        "数字产品护照（DPP）是欧盟《可持续产品生态设计法规》（ESPR）框架下的概念与工具：一份承载既定产品信息的数字记录，用以支持循环、维修、回收与监管核查。欧盟委员会已提供中央登记系统，并按波次优先推进品类，而非一次性引入所有品类。由于数据要求按产品类别通过授权法案设定，供应商必须提供的具体字段取决于所属类别与通过的时间表。",
+      keyPoints: [
+        "DPP 是产品数据，不是证书：它承载信息，而不是认证性能。",
+        "数据要求按产品类别设定，因此范围取决于你属于哪个类别。",
+        "制造商身份与产品身份是基础，其余都建立在它们之上。",
+        "材料成分数据通常是供应商最难准确产出的部分。",
+        "供应商应尽早准备，因为数据收集耗时超出买家预期。",
+        "核验能确认谁生产了产品、在哪里生产，但不签发也不验证护照。",
+      ],
+      steps: [
+        {
+          title: "确认你的品类是否在本轮优先波次中",
+          body: "识别你的产品属于当前波次优先推进的品类（如纺织品、钢铁、铝、轮胎、家具、ICT），还是有独立更早实施日期的品类（如电池）。优先顺序决定的是时间，而不是准备是否值得。",
+        },
+        {
+          title: "从制造商与产品身份开始",
+          body: "确认法律主体、统一社会信用代码与生产场地，并给产品一个稳定的标识符。没有无歧义的身份，下游数据就无法归属到任何东西。",
+        },
+        {
+          title: "收集材料成分数据",
+          body: "索取含材料名称、牌号与比例的材料清单（BOM），以及任何需申报的物质。这通常是多数供应商处最不完整的数据集。",
+        },
+        {
+          title: "收集制造信息",
+          body: "记录生产场地、在该场地进行的工序，以及日期或批次参照，使产品数据能关联到具体地点与流程，而不是抽象地关联到一家公司。",
+        },
+        {
+          title: "收集可持续性与可追溯数据",
+          body: "在要求时索取再生成分、环境足迹或原产地数据，连同支撑它们的记录。没有支撑记录的数值，是护照数据中的主要风险。",
+        },
+        {
+          title: "核查供应商实际能拿出什么证据",
+          body: "问清哪些数据点供应商今天能形成文件、哪些需要上游输入。这份缺口清单就是工作计划，必要时也是核验或验厂某个场地的理由。",
+        },
+        {
+          title: "保持数据时效与可归属",
+          body: "带日期、来源与提供方主体保存数据。护照数据需要持续维护，因此一次性收集并不够。",
+        },
+      ],
+      examples: [
+        {
+          title: "家具供应商准备数据",
+          body: "某家具制造商能提供产品身份与自己的生产记录，但其木材与海绵的材料声明依赖上游供应商。工作计划于是变成一次上游数据索取，而不是一场工厂层面的工作。",
+        },
+        {
+          title: "纺织供应商成分数据不完整",
+          body: "某纺织供应商提供了主面料的纤维比例，但没提供辅料与衬里的。护照数据不完整，因为成分从未在部件层级被记录过。",
+        },
+        {
+          title: "电池相关品类的较早日期",
+          body: "某买家采购含电池产品，注意到电池品类有其独立的、早于更广泛波次的实施日期，于是据此安排数据收集的先后顺序。",
+        },
+      ],
+      checklist: [
+        "已对照优先波次与任何品类特定日期核查产品类别。",
+        "已确认制造商的法律主体与统一社会信用代码。",
+        "已确认生产场地，且各记录一致。",
+        "已为产品分配稳定标识符。",
+        "已索取含材料名称、牌号与比例的材料清单。",
+        "已识别需申报的物质。",
+        "已记录制造信息：场地、工序、批次或日期参照。",
+        "已在适用时索取再生成分与原产地数据。",
+        "已为每个数据点取得支撑记录，而不只是数值。",
+        "已带日期、来源与提供方保存数据。",
+        "依赖本摘要前已核对欧盟官方来源。",
+      ],
+      tables: [
+        {
+          title: "DPP 数据：买家应收集什么",
+          headers: ["数据组", "典型字段", "供应商的难点"],
+          rows: [
+            ["供应商身份", "法律主体名称、统一社会信用代码、生产地址", "通常通过常规核验即可取得"],
+            ["产品身份", "产品类型、型号、稳定标识符、批次参照", "标识符在各系统间常不一致"],
+            ["产品材料", "材料清单、牌号、比例、需申报物质", "部件级成分很少被记录"],
+            ["制造信息", "生产场地、所进行工序、日期或批次", "把产品数据关联到具体场地与流程"],
+            ["可持续性数据", "再生成分、环境足迹、耐用或可维修信息", "数值缺少支撑记录"],
+            ["可追溯数据", "材料原产地、上游供应商参照", "上游未识别或不配合"],
+            ["数字记录", "源文件、日期、提供方主体", "数据收集一次后不再维护"],
+          ],
+        },
+        {
+          title: "优先品类及其含义",
+          headers: ["品类", "对供应商的数据含义", "准备优先级"],
+          rows: [
+            ["纺织品", "部件级纤维成分，含辅料与衬里", "高：成分数据通常不完整"],
+            ["钢铁与铝", "材料牌号、再生成分与原产地", "高：需要上游工厂数据"],
+            ["轮胎", "材料成分与耐用性信息", "中：成分大致已知，记录需规范化"],
+            ["家具", "木材、海绵、纺织品与五金的材料声明", "高：多材料物料清单"],
+            ["ICT 与电子", "部件级成分与物质申报", "高：供应链复杂"],
+            ["电池", "有独立且更早实施日期的品类特定要求", "高：时间早于更广泛波次"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "什么是数字产品护照？",
+          a: "它是一份承载产品既定信息的结构化数字记录，例如身份、材料、制造、可持续属性与报废处理方式。它属于欧盟《可持续产品生态设计法规》框架，旨在支持循环、维修、回收与监管核查。",
+        },
+        {
+          q: "哪些产品品类被优先推进？",
+          a: "欧盟委员会按波次推进而非一次全覆盖，其中纺织品、钢铁、铝、轮胎、家具与 ICT 等属于优先品类，电池则有其独立更早的实施日期。由于波次与日期通过欧盟法案确定，请以官方来源确认当前情况。",
+        },
+        {
+          q: "供应商需要提供哪些数据？",
+          a: "具体字段按产品类别设定，但常见数据组包括：供应商身份、产品身份、材料成分、制造信息、可持续属性与可追溯数据，且每一项都需有记录支撑。缺少支撑的数值是主要风险。",
+        },
+        {
+          q: "数字产品护照是证书吗？",
+          a: "不是。它是数据记录，不是性能或合规的认证。它承载的是主管机关、买家与回收方可使用的信息，数据准确性的责任在于投放产品的经营者。",
+        },
+        {
+          q: "FactoryAuditB2B 能签发数字产品护照吗？",
+          a: "不能。本平台提供供应商核验与工厂评估，帮助买家确认制造商身份、生产场地与工序，并收集供应商信息；它不签发护照、不运营欧盟登记系统，也不认证产品数据。",
+        },
+        {
+          q: "买家应如何帮供应商做准备？",
+          a: "从身份与产品标识符开始，再索取部件级材料清单，然后是带支撑记录的可持续性与可追溯数据。识别供应商今天无法举证的那些数据点，把这份清单当作工作计划。",
+        },
+        {
+          q: "这是法律建议吗？",
+          a: "不是。这是用于采购准备的通用信息。要求取决于你的产品类别与角色，请以欧盟官方来源与你自己的顾问确认。",
+        },
+      ],
+      sources: [
+        { name: "欧盟委员会——ESPR 与数字产品护照", note: "护照概念、中央登记系统、优先品类与品类特定要求的官方来源。" },
+        { name: "EUR-Lex", note: "欧盟官方法律数据库，载有 ESPR 文本及按品类界定数据要求的授权法案。" },
+        { name: "FactoryAuditB2B 方法论", note: "制造商身份、生产场地与工序如何被核验，以及核验能够确立之事项的边界。" },
+      ],
+    },
+  },
+  {
+    slug: "smeta-7-supplier-audit-buyer-guide",
+    category: "compliance",
+    titleEn: "SMETA 7 for Buyers: What to Check When Qualifying a Supplier",
+    titleZh: "买家视角的 SMETA 7：审核报告该看什么",
+    metaDescEn:
+      "How buyers should read a SMETA 7 report: 2-pillar versus 4-pillar scope, the main assessment areas, corrective actions, critical findings, follow-up, and when a buyer should request one.",
+    metaDescZh:
+      "买家如何阅读 SMETA 7 报告：两支柱与四支柱范围、主要评估领域、纠正措施、关键发现、跟进，以及何时该要求做一次。",
+    updated: "2026-09-22",
+    tools: [
+      { href: "/tools/audit-checklist" },
+      { href: "/tools/supplier-risk-calculator" },
+      { href: "/tools/supplier-document-checker" },
+    ],
+    services: [
+      { href: "/services/china-factory-audit" },
+      { href: "/services/china-supplier-verification" },
+    ],
+    related: [
+      "rba-vap-vs-smeta-vs-bsci",
+      "smeta-vs-bsci-social-audit-comparison",
+      "ethical-audit-mandatory-requirements",
+      "how-to-read-a-factory-audit-report",
+      "eu-forced-labour-regulation-china-suppliers",
+    ],
+    links: [
+      {
+        href: "/factory-audit/request",
+        labelEn: "Request a supplier audit",
+        labelZh: "申请供应商审核",
+      },
+      {
+        href: "/methodology",
+        labelEn: "How evidence levels and audit scope are defined",
+        labelZh: "证据等级与审核范围如何界定",
+      },
+    ],
+    en: {
+      quickAnswer:
+        "When you receive a SMETA report, check five things before relying on it: that it is a current SMETA version, that the pillars covered match what you require, that the audited site and legal entity are the ones supplying you, that any non-compliances have corrective actions with credible closure dates, and that critical findings are either absent or being actively managed. SMETA is an audit methodology widely used for social compliance; it is not a certificate, and the report is a baseline at the time of the visit.",
+      definition:
+        "SMETA (Sedex Members Ethical Trade Audit) is an audit methodology developed by Sedex and carried out by independent audit companies. It assesses a site against labour, health and safety, environmental and business ethics criteria depending on the pillars selected. SMETA produces a report of findings and corrective actions rather than a pass or fail certificate, which is why buyers are expected to read the findings rather than accept the existence of a report.",
+      keyPoints: [
+        "SMETA produces findings and corrective actions, not a pass certificate; the value is in what you do with the findings.",
+        "Check the pillars: a 2-pillar audit does not cover the same ground as a 4-pillar audit.",
+        "Confirm the report covers the site and legal entity that actually supplies you.",
+        "Critical and major findings matter more than the count of minor observations.",
+        "Corrective action closure, evidenced with dates, is what distinguishes a managed programme from a filed report.",
+        "SMETA audits are delivered by independent audit companies; check who performed the audit.",
+      ],
+      steps: [
+        {
+          title: "Confirm the SMETA version and pillars",
+          body: "Check that the report states the SMETA version and which pillars were covered: 2-pillar typically covers labour standards and health and safety, while 4-pillar adds environment and business ethics. A buyer requirement for 4-pillar is not met by a 2-pillar report.",
+        },
+        {
+          title: "Check the site and legal entity",
+          body: "Verify that the audited site address and the legal entity named in the report are the ones supplying your product. A report for a sister company or another site does not cover your supply.",
+        },
+        {
+          title: "Read the findings by severity",
+          body: "Work through critical, major and minor findings rather than scanning the summary. Severity determines what must be fixed before you proceed, and a report with many minor findings is a different situation from one critical finding.",
+        },
+        {
+          title: "Review corrective actions and closure dates",
+          body: "For each non-compliance, check whether a corrective action is defined, who owns it, and whether the closure date is credible. Corrective actions without evidence of closure are intentions, not improvements.",
+        },
+        {
+          title: "Check who performed the audit and when",
+          body: "Note the audit company, the auditor and the date. Buyers commonly set an acceptance window for report age, and an old report says less about current conditions than a recent one.",
+        },
+        {
+          title: "Decide what the findings mean for your order",
+          body: "Map findings to your decision: proceed, proceed with conditions and a follow-up date, or escalate to a follow-up audit. The report should change what you do, not just what you file.",
+        },
+        {
+          title: "Track closure and re-check",
+          body: "Where findings are material, agree closure evidence and a re-check date. Social compliance drifts, and a single audit does not hold a site to its baseline.",
+        },
+      ],
+      examples: [
+        {
+          title: "Report accepted without checking pillars",
+          body: "A buyer accepted a SMETA report assuming it covered business ethics. It was a 2-pillar audit. The customer's requirement was 4-pillar, and the report had to be repeated at the buyer's cost.",
+        },
+        {
+          title: "Corrective actions without closure",
+          body: "A report listed ten corrective actions with dates six months past and no closure evidence. The findings had been acknowledged rather than resolved, and the site conditions were effectively unchanged.",
+        },
+        {
+          title: "Useful handling: severity-based decision",
+          body: "A buyer received a report with one critical finding on working hours. It paused volume, required a corrective action plan with monthly evidence, and scheduled a follow-up audit before resuming.",
+        },
+      ],
+      checklist: [
+        "SMETA version stated on the report.",
+        "Pillars covered match the buyer requirement (2-pillar or 4-pillar).",
+        "Audited site address confirmed as the supplying site.",
+        "Legal entity named in the report confirmed as your counterparty.",
+        "Audit company and date identified and within your acceptance window.",
+        "Findings reviewed by severity, not only by count.",
+        "Corrective actions defined with owners and closure dates.",
+        "Closure evidence requested for past-due corrective actions.",
+        "Decision recorded: proceed, conditional, or follow-up audit.",
+        "Re-check date agreed where findings are material.",
+      ],
+      tables: [
+        {
+          title: "SMETA 2-Pillar vs 4-Pillar",
+          headers: ["Aspect", "2-Pillar", "4-Pillar"],
+          rows: [
+            ["Typical coverage", "Labour standards and health and safety", "Labour standards, health and safety, environment, business ethics"],
+            ["Common use", "Buyer programmes focused on working conditions", "Buyer programmes requiring broader ESG coverage, including many EU retail requirements"],
+            ["Report length", "Shorter, narrower findings set", "Longer, with additional findings areas"],
+            ["Buyer acceptance", "Accepted where the requirement is working conditions only", "Required where the customer mandate specifies 4-pillar"],
+            ["What to check", "That the requirement is genuinely 2-pillar", "That both additional pillars were actually assessed, not just named"],
+          ],
+        },
+        {
+          title: "Reading a SMETA Report: Section by Section",
+          headers: ["Section", "What to look for", "Common mistake"],
+          rows: [
+            ["Site and entity details", "Address and legal entity match your supply", "Accepting a report for a different site or sister company"],
+            ["Audit scope and pillars", "Stated pillars match the requirement", "Assuming 4-pillar coverage from a 2-pillar report"],
+            ["Findings", "Severity and subject of each finding", "Counting findings instead of weighing severity"],
+            ["Corrective actions", "Owner, action and credible closure date", "Treating an action plan as evidence of closure"],
+            ["Critical findings", "Whether any exist and how they are managed", "Filing the report without a decision on criticals"],
+            ["Audit company and date", "Who audited and when", "Using a report beyond the buyer's acceptance window"],
+            ["Follow-up", "Whether closure was verified and how", "No re-check after material findings"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "What is SMETA 7?",
+          a: "SMETA 7 is a version of the Sedex Members Ethical Trade Audit methodology. Sedex has published figures on the number of SMETA 7 audits completed and continues to refine the methodology, including work on corrective action records and issue titles. Check Sedex for the current version details and any updates.",
+        },
+        {
+          q: "Is a SMETA report a certificate?",
+          a: "No. SMETA is an audit methodology that produces a report of findings and corrective actions, delivered by independent audit companies. It is not a certificate and does not certify that a site is compliant or will remain compliant.",
+        },
+        {
+          q: "What is the difference between 2-pillar and 4-pillar SMETA?",
+          a: "A 2-pillar audit typically covers labour standards and health and safety, while a 4-pillar audit adds environment and business ethics. If your customer requires 4-pillar, a 2-pillar report does not satisfy it.",
+        },
+        {
+          q: "How recent should a SMETA report be?",
+          a: "Buyers usually set their own acceptance window for report age. Because an audit records conditions at the time of the visit, an older report says less about current conditions; check your own or your customer's requirement.",
+        },
+        {
+          q: "What should I do about critical findings?",
+          a: "Treat them as a decision point rather than an observation: require a corrective action plan with evidence and dates, consider whether to hold or reduce volume, and schedule a follow-up audit or verification of closure before resuming normal terms.",
+        },
+        {
+          q: "Can FactoryAuditB2B perform a SMETA audit?",
+          a: "SMETA audits are carried out by independent audit companies, and FactoryAuditB2B does not claim to be Sedex or to hold any Sedex approval status. This platform provides supplier verification and factory assessment that supports a buyer's due diligence; where a customer mandates SMETA, commission it through an appropriate provider.",
+        },
+        {
+          q: "Does passing SMETA mean the supplier is ethical?",
+          a: "No. SMETA does not produce a pass result. It records findings at the time of the visit, and the meaningful signal is whether non-compliances were identified, managed and closed with evidence.",
+        },
+      ],
+      sources: [
+        {
+          name: "Sedex",
+          note: "Publishes the SMETA methodology, version details, pillar definitions and guidance on corrective action records. Check Sedex for the current version and audit figures.",
+        },
+        {
+          name: "Sedex — SMETA audit delivery",
+          note: "SMETA audits are performed by independent audit companies; Sedex is the methodology owner rather than the auditor of every report.",
+        },
+        {
+          name: "FactoryAuditB2B Methodology",
+          note: "How this site treats audit findings, evidence levels and the limits of what an audit can establish.",
+        },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "收到 SMETA 报告后，先核五件事再依赖它：是否为当前 SMETA 版本；涵盖的支柱是否符合你的要求；受审场地与法律主体是否就是向你供货的那一家；任何不符合项是否都有带可信关闭日期的纠正措施；关键发现是不存在还是正在被积极管理。SMETA 是广泛用于社会责任合规的审核方法，不是证书；报告是访问当天的基线。",
+      definition:
+        "SMETA（Sedex 会员道德贸易审核）是由 Sedex 开发、由独立审核公司执行的审核方法。它按所选支柱，依据劳工、健康与安全、环境及商业道德准则对场地进行评估。SMETA 产出的是发现与纠正措施的报告，而不是合格证书，因此买家应当阅读发现项，而不是只接受「存在一份报告」这件事。",
+      keyPoints: [
+        "SMETA 产出的是发现与纠正措施，不是合格证书；价值在于你如何处理这些发现。",
+        "核对支柱：两支柱审核与四支柱审核覆盖的范围不同。",
+        "确认报告覆盖的是实际向你供货的场地与法律主体。",
+        "关键与主要发现，比次要观察项的数量更重要。",
+        "有带日期证据的纠正措施关闭，才能把「受管项目」与「归档报告」区分开。",
+        "SMETA 由独立审核公司执行；要核查是谁做的审核。",
+      ],
+      steps: [
+        {
+          title: "确认 SMETA 版本与支柱",
+          body: "核查报告是否写明 SMETA 版本及涵盖哪些支柱：两支柱通常覆盖劳工标准与健康安全，四支柱则增加环境与商业道德。若买家要求四支柱，两支柱报告无法满足。",
+        },
+        {
+          title: "核查场地与法律主体",
+          body: "确认受审场地地址与报告中的法律主体，就是向你供货的那一方。开给兄弟公司或另一场地的报告，不覆盖你的供应。",
+        },
+        {
+          title: "按严重度阅读发现项",
+          body: "逐一审视关键、主要与次要发现，而不是只扫摘要。严重度决定推进前必须先修好什么；次要发现很多，与存在一个关键发现，是两种不同的局面。",
+        },
+        {
+          title: "审阅纠正措施与关闭日期",
+          body: "对每个不符合项，核查是否定义了纠正措施、由谁负责、关闭日期是否可信。没有关闭证据的纠正措施是意向，不是改善。",
+        },
+        {
+          title: "核查执行方与时间",
+          body: "留意审核公司、审核员与日期。买家通常设定报告时效的接受窗口；一份旧报告对当前状况的说明力弱于新报告。",
+        },
+        {
+          title: "判断发现项对你的订单意味着什么",
+          body: "把发现映射到你的决策：继续、附条件并设跟进日期，或升级为跟进审核。报告应当改变你的行动，而不只是进入档案。",
+        },
+        {
+          title: "跟踪关闭并复审",
+          body: "发现项重大时，约定关闭证据与复审日期。社会责任状况会漂移，单次审核无法把场地锁定在基线上。",
+        },
+      ],
+      examples: [
+        {
+          title: "未核支柱就接受报告",
+          body: "某买家以为 SMETA 报告涵盖商业道德，实际是两支柱审核。而客户要求是四支柱，只能由买家自费重做一次。",
+        },
+        {
+          title: "有纠正措施但无关闭",
+          body: "某报告列了十项纠正措施，日期已过六个月且无关闭证据。这些发现只是被承认，并未被解决，场地状况实际未改变。",
+        },
+        {
+          title: "有效处理：按严重度决策",
+          body: "某买家收到一份含一项工时关键发现的报告，于是暂停订单量、要求附带月度证据的纠正计划，并安排跟进审核后再恢复。",
+        },
+      ],
+      checklist: [
+        "报告上写明 SMETA 版本。",
+        "涵盖的支柱符合买家要求（两支柱或四支柱）。",
+        "已确认受审场地地址即为供货场地。",
+        "已确认报告中的法律主体即为你的交易对手。",
+        "已识别审核公司与日期，且在接受窗口内。",
+        "已按严重度（而非仅按数量）审阅发现项。",
+        "纠正措施已定义负责人与关闭日期。",
+        "已为逾期的纠正措施索取关闭证据。",
+        "已记录决策：继续、附条件，或跟进审核。",
+        "发现项重大时已约定复审日期。",
+      ],
+      tables: [
+        {
+          title: "SMETA 两支柱与四支柱",
+          headers: ["方面", "两支柱", "四支柱"],
+          rows: [
+            ["典型覆盖", "劳工标准与健康安全", "劳工标准、健康安全、环境、商业道德"],
+            ["常见用途", "聚焦工作条件的买家项目", "要求更广 ESG 覆盖的买家项目，含许多欧盟零售要求"],
+            ["报告长度", "较短，发现项集合更窄", "更长，含额外的发现领域"],
+            ["买家接受度", "要求仅针对工作条件时可接受", "客户强制规定四支柱时必须提供"],
+            ["核查要点", "确认要求确实只需两支柱", "确认两个附加支柱真的被评估过，而不只是被列名"],
+          ],
+        },
+        {
+          title: "逐节阅读 SMETA 报告",
+          headers: ["章节", "看什么", "常见错误"],
+          rows: [
+            ["场地与主体信息", "地址与法律主体是否与你的供应一致", "接受开给另一场地或兄弟公司的报告"],
+            ["审核范围与支柱", "写明的支柱是否符合要求", "把两支柱报告当作四支柱覆盖"],
+            ["发现项", "每个发现的严重度与主题", "只数发现数量而不权衡严重度"],
+            ["纠正措施", "负责人、动作与可信关闭日期", "把整改计划当成关闭证据"],
+            ["关键发现", "是否存在、如何被管理", "归档报告却未对关键项作出决策"],
+            ["审核公司与日期", "谁审的、何时审的", "使用超出买家接受窗口的报告"],
+            ["跟进", "关闭是否被验证、如何验证", "重大发现后没有复审"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "什么是 SMETA 7？",
+          a: "SMETA 7 是 Sedex 会员道德贸易审核方法的一个版本。Sedex 已公布 SMETA 7 审核完成数量的数据，并持续改进该方法，包括纠正措施记录与问题标题方面的工作。当前版本细节与更新请以 Sedex 为准。",
+        },
+        {
+          q: "SMETA 报告是证书吗？",
+          a: "不是。SMETA 是一种审核方法，产出由独立审核公司出具的发现与纠正措施报告。它不是证书，也不证明场地合规或将持续合规。",
+        },
+        {
+          q: "两支柱与四支柱 SMETA 有什么区别？",
+          a: "两支柱审核通常覆盖劳工标准与健康安全，四支柱审核另加环境与商业道德。若你的客户要求四支柱，两支柱报告不能满足。",
+        },
+        {
+          q: "SMETA 报告应该多新？",
+          a: "买家通常自行设定报告时效的接受窗口。由于审核记录的是访问当时的状况，越旧的报告对当前状况的说明力越弱；请核查你自己或客户的时限要求。",
+        },
+        {
+          q: "发现关键项该怎么办？",
+          a: "把它当作决策点而不是观察项：要求带证据与日期的纠正计划，考虑是否暂停或缩减订单量，并在恢复正常条款前安排跟进审核或关闭验证。",
+        },
+        {
+          q: "FactoryAuditB2B 能做 SMETA 审核吗？",
+          a: "SMETA 审核由独立审核公司执行，FactoryAuditB2B 不声称自己是 Sedex，也不声称持有任何 Sedex 认可资质。本平台提供支撑买家尽职调查的供应商核验与工厂评估；若客户强制要求 SMETA，请通过具备相应资质的服务方委托。",
+        },
+        {
+          q: "通过 SMETA 就等于供应商是道德的吗？",
+          a: "不等于。SMETA 不产出「通过」结果，它记录的是访问当时的发现；有意义的信号是：不符合项是否被识别、管理，并以证据关闭。",
+        },
+      ],
+      sources: [
+        { name: "Sedex", note: "发布 SMETA 方法、版本细节、支柱定义与纠正措施记录指南；当前版本与审核数量数据以 Sedex 为准。" },
+        { name: "Sedex——SMETA 审核交付", note: "SMETA 审核由独立审核公司执行；Sedex 是方法所有者，而非每份报告的审核方。" },
+        { name: "FactoryAuditB2B 方法论", note: "本站如何处理审核发现、证据等级，以及审核能够确立之事项的边界。" },
+      ],
+    },
+  },
+  {
+    slug: "rba-vap-vs-smeta-vs-bsci",
+    category: "compliance",
+    titleEn: "RBA VAP vs SMETA vs BSCI: Which Supplier Audit Does a Buyer Need?",
+    titleZh: "RBA VAP、SMETA 与 BSCI 对比：买家需要哪种供应商审核？",
+    metaDescEn:
+      "A factual comparison of RBA VAP, SMETA and amfori BSCI: what each covers, who typically requires it, how the outputs differ, and whether one can replace another.",
+    metaDescZh:
+      "客观对比 RBA VAP、SMETA 与 amfori BSCI：各自覆盖范围、通常由谁要求、产出有何不同，以及能否互相替代。",
+    updated: "2026-09-22",
+    tools: [
+      { href: "/tools/audit-checklist" },
+      { href: "/tools/supplier-risk-calculator" },
+      { href: "/tools/supplier-document-checker" },
+    ],
+    services: [
+      { href: "/services/china-factory-audit" },
+      { href: "/services/china-supplier-verification" },
+    ],
+    related: [
+      "smeta-7-supplier-audit-buyer-guide",
+      "smeta-vs-bsci-social-audit-comparison",
+      "ethical-audit-mandatory-requirements",
+      "eu-forced-labour-regulation-china-suppliers",
+      "sa8000-certification-guide",
+    ],
+    links: [
+      {
+        href: "/factory-audit/request",
+        labelEn: "Request the required supplier audit",
+        labelZh: "申请所需的供应商审核",
+      },
+      {
+        href: "/methodology",
+        labelEn: "How audit scope and evidence are defined",
+        labelZh: "审核范围与证据如何界定",
+      },
+    ],
+    en: {
+      quickAnswer:
+        "They are different programmes with different sponsors, scopes and outputs, and they are not interchangeable. RBA VAP assesses conformance to the RBA Code of Conduct and is common in electronics and technology supply chains. SMETA is a Sedex audit methodology widely used across sectors and selected in 2-pillar or 4-pillar scope. amfori BSCI is a programme used mainly by European buyers in consumer goods. Which one you need is usually decided by your customer, not by you.",
+      definition:
+        "RBA VAP is the Validated Assessment Program operated by the Responsible Business Alliance, assessing a facility against the RBA Code of Conduct. SMETA is an audit methodology developed by Sedex, delivered by independent audit companies, with pillar-based scope. amfori BSCI is the social sustainability audit programme operated by amfori for its members. All three are assessments or audits producing findings, not certificates of compliance, and each is accepted by different buyers for different reasons.",
+      keyPoints: [
+        "The three programmes have different sponsors and are not interchangeable, even though they overlap in subject matter.",
+        "Which audit you need is usually determined by your customer's requirement, not by your preference.",
+        "All three produce findings and corrective actions rather than a pass certificate.",
+        "RBA VAP is common in electronics and technology supply chains; SMETA and BSCI are broader across consumer goods.",
+        "Report age, site coverage and legal entity determine whether an existing report is usable for you.",
+        "Ask the customer which programme, which scope and which acceptance window apply before commissioning anything.",
+      ],
+      steps: [
+        {
+          title: "Ask what your customer actually requires",
+          body: "Confirm the programme name, the scope or pillars, the acceptance window for report age, and whether an existing report is accepted. This single step prevents the most common and most expensive mistake: commissioning the wrong audit.",
+        },
+        {
+          title: "Check whether an existing report is usable",
+          body: "If the supplier already has a report, check the programme, the site and legal entity covered, the date, and whether the findings were closed. A report that fails any of these is not a substitute for the audit you need.",
+        },
+        {
+          title: "Map the programme to your supply chain",
+          body: "Note which programme is dominant in your sector. Electronics buyers commonly reference RBA, while many European consumer goods buyers reference amfori BSCI or SMETA. Sector convention influences what your customers will accept.",
+        },
+        {
+          title: "Confirm site coverage and entity",
+          body: "Whichever programme applies, the audit must cover the site that makes your product and the legal entity you contract with. Programme choice does not fix a coverage mismatch.",
+        },
+        {
+          title: "Plan for findings and closure",
+          body: "Expect findings. Budget time and effort for corrective actions and closure evidence, because an audit without closure changes little on the site.",
+        },
+        {
+          title: "Do not substitute one for another without confirmation",
+          body: "Overlap in subject matter does not mean acceptance. A SMETA report is not a RBA VAP result, and neither substitutes for a BSCI requirement, unless the customer says otherwise in writing.",
+        },
+      ],
+      examples: [
+        {
+          title: "Wrong programme commissioned",
+          body: "A buyer commissioned SMETA because the supplier had experience with it, then discovered the customer's onboarding required amfori BSCI. The audit had to be repeated because the customer's requirement set the scope.",
+        },
+        {
+          title: "Existing report rejected on coverage",
+          body: "A supplier offered a valid SMETA report, but it covered a different legal entity at a different address. The programme was right and the report was current, yet it did not cover the supply in question.",
+        },
+        {
+          title: "Requirement clarified before ordering",
+          body: "A buyer asked the customer for the exact programme, pillars and acceptance window before commissioning, then ordered once. The report was accepted on submission and no re-audit was needed.",
+        },
+      ],
+      checklist: [
+        "Customer requirement confirmed in writing: programme, scope or pillars.",
+        "Acceptance window for report age confirmed.",
+        "Whether an existing report is accepted, confirmed.",
+        "Existing report checked for programme, site, entity and date.",
+        "Site coverage confirmed as the site making your product.",
+        "Legal entity coverage confirmed as your counterparty.",
+        "Findings and closure status reviewed, not just the report title.",
+        "Corrective action plan and closure evidence planned.",
+        "Any substitution of one programme for another confirmed in writing by the customer.",
+      ],
+      tables: [
+        {
+          title: "RBA VAP vs SMETA vs amfori BSCI",
+          headers: ["Aspect", "RBA VAP", "SMETA", "amfori BSCI"],
+          rows: [
+            ["Operated by", "Responsible Business Alliance", "Sedex (methodology; audits by independent audit companies)", "amfori"],
+            ["What it assesses", "Conformance to the RBA Code of Conduct", "Labour, health and safety, and depending on pillars, environment and business ethics", "Social sustainability criteria defined by amfori"],
+            ["Typical buyers", "Electronics and technology supply chains", "Cross-sector; widely accepted by many retailers", "European consumer goods buyers and amfori members"],
+            ["Scope selection", "Defined programme with assessment scope", "2-pillar or 4-pillar selected by the requester", "Programme scope defined by amfori"],
+            ["Output", "Assessment report with findings and corrective actions", "Audit report with findings and corrective actions", "Audit report with findings and corrective actions"],
+            ["Is it a certificate?", "No", "No", "No"],
+            ["Can it replace another?", "Only if the customer confirms acceptance", "Only if the customer confirms acceptance", "Only if the customer confirms acceptance"],
+          ],
+        },
+        {
+          title: "Choosing Based on Buyer Context",
+          headers: ["If your situation is...", "Start with", "Why"],
+          rows: [
+            ["Your customer names a programme", "That programme", "Customer requirements set the scope, not supplier convenience"],
+            ["Electronics or technology supply chain", "RBA VAP, if referenced by the customer", "RBA is widely referenced in electronics supply chains"],
+            ["European consumer goods retailer requirement", "amfori BSCI or SMETA, as specified", "Both are common in European consumer goods programmes"],
+            ["No customer mandate, internal due diligence", "A scope matched to your risk, not a brand name", "Without a mandate, define scope by risk rather than by convention"],
+            ["Supplier already has a report", "Check coverage and age before accepting", "The right programme at the wrong site does not cover your supply"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "Are SMETA, BSCI and RBA the same thing?",
+          a: "No. They are different programmes operated by different organisations, with different codes or methodologies, scopes and reporting formats. They overlap in subject matter but are not interchangeable, and acceptance depends on your customer's requirement.",
+        },
+        {
+          q: "Can one audit replace another?",
+          a: "Only if the customer that requires it confirms acceptance in writing. Similar coverage does not mean a buyer will accept a substitute, and substituting without confirmation is a common cause of a rejected report.",
+        },
+        {
+          q: "Which audit does my customer require?",
+          a: "Ask them, and ask for specifics: the programme name, the scope or pillars, the acceptance window for report age, and whether an existing report is acceptable. Guessing at this stage is expensive.",
+        },
+        {
+          q: "Is RBA VAP a certification?",
+          a: "No. It is an assessment programme that produces findings and corrective actions against the RBA Code of Conduct. It is not a certificate, and results are understood as a baseline at the time of the assessment.",
+        },
+        {
+          q: "What is the RBA Code of Conduct version in use?",
+          a: "The RBA Code of Conduct is versioned and updated over time, with RBA Code 8.0 in effect from 2024. Confirm the current version and any programme updates on official RBA sources before relying on it.",
+        },
+        {
+          q: "Do these audits guarantee the factory is compliant?",
+          a: "No. Each produces findings at the time of the assessment. Whether conditions improve depends on corrective action closure, monitoring and re-assessment, which is why follow-up matters more than the report itself.",
+        },
+      ],
+      sources: [
+        {
+          name: "Responsible Business Alliance (RBA)",
+          note: "Operates the VAP and publishes the RBA Code of Conduct, its current version, and the scope and limitations of assessments.",
+        },
+        {
+          name: "Sedex",
+          note: "Publishes the SMETA methodology and pillar definitions; audits are delivered by independent audit companies.",
+        },
+        {
+          name: "amfori",
+          note: "Operates the amfori BSCI programme and defines its scope, reporting and member requirements.",
+        },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "它们是不同机构主导、范围与产出各异的项目，不能互相替代。RBA VAP 评估的是对《RBA 行为准则》的符合程度，常见于电子与科技供应链；SMETA 是 Sedex 的审核方法，跨行业广泛使用，可选两支柱或四支柱范围；amfori BSCI 是主要面向欧洲买家、用于消费品领域的项目。你需要哪一个，通常由客户决定，而不是由你决定。",
+      definition:
+        "RBA VAP 是责任商业联盟（RBA）运营的验证评估计划（Validated Assessment Program），依据《RBA 行为准则》评估工厂。SMETA 是 Sedex 开发的审核方法，由独立审核公司执行，按支柱确定范围。amfori BSCI 是 amfori 为其会员运营的社会可持续性审核项目。三者都是产出发现项的评估或审核，而非合规证书，且各自被不同买家因不同原因接受。",
+      keyPoints: [
+        "三个项目由不同机构主导，即便主题重叠也不可互换。",
+        "你需要哪种审核，通常由客户要求决定，而不是由你的偏好决定。",
+        "三者产出的都是发现与纠正措施，而非合格证书。",
+        "RBA VAP 常见于电子与科技供应链；SMETA 与 BSCI 在消费品领域覆盖更广。",
+        "报告时效、场地覆盖范围与法律主体，决定了既有报告是否对你可用。",
+        "在委托任何审核前，先问清客户适用哪个项目、什么范围、什么接受窗口。",
+      ],
+      steps: [
+        {
+          title: "问清客户真正要求什么",
+          body: "确认项目名称、范围或支柱、报告时效的接受窗口，以及是否接受既有报告。仅这一步就能避免最常见、也最贵的错误：做错了审核。",
+        },
+        {
+          title: "核查既有报告是否可用",
+          body: "若供应商已有报告，核查其项目、覆盖的场地与法律主体、日期，以及发现项是否已关闭。任何一项不符合，都不能替代你需要的那次审核。",
+        },
+        {
+          title: "把项目映射到你的供应链",
+          body: "留意你所在行业哪个项目占主导。电子买家常引用 RBA，而许多欧洲消费品买家引用 amfori BSCI 或 SMETA。行业惯例会影响客户接受什么。",
+        },
+        {
+          title: "确认场地覆盖与主体",
+          body: "无论适用哪个项目，审核都必须覆盖生产你产品的场地与你签约的法律主体。选对项目并不能修复覆盖错配。",
+        },
+        {
+          title: "为发现项与关闭做计划",
+          body: "要有发现项的心理准备，并为纠正措施与关闭证据预留时间与投入，因为一次没有关闭的审核，对场地改变很少。",
+        },
+        {
+          title: "未经确认不要互相替代",
+          body: "主题重叠不等于被接受。SMETA 报告不是 RBA VAP 结果，两者也都不能替代 BSCI 要求，除非客户书面另有说明。",
+        },
+      ],
+      examples: [
+        {
+          title: "做错了项目",
+          body: "某买家因为供应商熟悉 SMETA 就做了 SMETA，后来发现客户入驻要求的是 amfori BSCI。因为客户要求决定范围，只能重做。",
+        },
+        {
+          title: "既有报告因覆盖问题被拒",
+          body: "某供应商提供了一份有效的 SMETA 报告，但它覆盖的是另一法律主体、另一地址。项目对了、报告也新，却未覆盖所涉供应。",
+        },
+        {
+          title: "下单前先澄清要求",
+          body: "某买家在委托前向客户问清了确切项目、支柱与接受窗口，然后只做了一次。报告一次提交即被接受，无需重审。",
+        },
+      ],
+      checklist: [
+        "已书面确认客户要求：项目、范围或支柱。",
+        "已确认报告时效的接受窗口。",
+        "已确认是否接受既有报告。",
+        "已核查既有报告的项目、场地、主体与日期。",
+        "已确认场地覆盖的是生产你产品的场地。",
+        "已确认法律主体覆盖的是你的交易对手。",
+        "已审阅发现项与关闭状态，而不只是报告标题。",
+        "已规划纠正措施计划与关闭证据。",
+        "任何以甲项目替代乙项目，均已取得客户书面确认。",
+      ],
+      tables: [
+        {
+          title: "RBA VAP、SMETA 与 amfori BSCI 对比",
+          headers: ["方面", "RBA VAP", "SMETA", "amfori BSCI"],
+          rows: [
+            ["运营方", "责任商业联盟（RBA）", "Sedex（方法；审核由独立审核公司执行）", "amfori"],
+            ["评估内容", "对《RBA 行为准则》的符合程度", "劳工、健康安全，并依支柱不同含环境与商业道德", "amfori 界定的社会可持续性准则"],
+            ["典型买家", "电子与科技供应链", "跨行业；被众多零售商广泛接受", "欧洲消费品买家与 amfori 会员"],
+            ["范围选择", "既定项目与评估范围", "由委托方选择两支柱或四支柱", "范围由 amfori 界定"],
+            ["产出", "含发现与纠正措施的评估报告", "含发现与纠正措施的审核报告", "含发现与纠正措施的审核报告"],
+            ["是证书吗", "不是", "不是", "不是"],
+            ["能否替代另一个", "仅在客户书面确认接受时", "仅在客户书面确认接受时", "仅在客户书面确认接受时"],
+          ],
+        },
+        {
+          title: "按买家场景选择",
+          headers: ["如果你的情况是", "从哪个开始", "原因"],
+          rows: [
+            ["客户点名了某个项目", "就是那个项目", "客户要求决定范围，而不是供应商方便与否"],
+            ["电子或科技供应链", "若客户引用则为 RBA VAP", "RBA 在电子供应链中被广泛引用"],
+            ["欧洲消费品零售商要求", "按要求选 amfori BSCI 或 SMETA", "两者在欧洲消费品项目中都很常见"],
+            ["无客户强制，内部尽职调查", "按风险匹配范围，而不是看品牌名", "无强制时，应按风险而非惯例定义范围"],
+            ["供应商已有报告", "接受前先核查覆盖与时效", "项目对但场地错，仍不覆盖你的供应"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "SMETA、BSCI 和 RBA 是一回事吗？",
+          a: "不是。它们是由不同机构运营的不同项目，准则或方法、范围与报告格式各异。主题上有重叠，但不可互换；能否被接受取决于客户要求。",
+        },
+        {
+          q: "一种审核能替代另一种吗？",
+          a: "只有在要求方书面确认接受时才可以。覆盖相似不等于买家会接受替代品；未经确认就替代，是报告被拒的常见原因。",
+        },
+        {
+          q: "我的客户需要哪种审核？",
+          a: "去问，并问具体：项目名称、范围或支柱、报告时效的接受窗口，以及既有报告是否可接受。在这个阶段靠猜代价很高。",
+        },
+        {
+          q: "RBA VAP 是认证吗？",
+          a: "不是。它是一个评估计划，产出的是针对《RBA 行为准则》的发现与纠正措施。它不是证书，结果应理解为评估时点的基线。",
+        },
+        {
+          q: "当前使用的《RBA 行为准则》是哪个版本？",
+          a: "《RBA 行为准则》按版本持续更新，RBA Code 8.0 自 2024 年起生效。依赖前请以 RBA 官方来源确认当前版本与任何项目更新。",
+        },
+        {
+          q: "这些审核能保证工厂合规吗？",
+          a: "不能。三者产出的都是评估时点的发现。状况是否改善，取决于纠正措施关闭、监控与复审，因此跟进比报告本身更重要。",
+        },
+      ],
+      sources: [
+        { name: "责任商业联盟（RBA）", note: "运营 VAP，发布《RBA 行为准则》及其当前版本，并说明评估的范围与局限。" },
+        { name: "Sedex", note: "发布 SMETA 方法与支柱定义；审核由独立审核公司执行。" },
+        { name: "amfori", note: "运营 amfori BSCI 项目，并界定其范围、报告与会员要求。" },
+      ],
+    },
+  },
+  {
+    slug: "china-plus-one-supplier-qualification",
+    category: "sea",
+    titleEn: "China Plus One Supplier Qualification: How to Vet Vietnam and Thailand Factories",
+    titleZh: "China+1 供应商资格认证：如何审核越南与泰国工厂",
+    metaDescEn:
+      "How to qualify a second supplier country: what to verify in Vietnam and Thailand factories before moving production, including capability, quality system, compliance, capacity, subcontracting and export experience.",
+    metaDescZh:
+      "如何认证第二个供应国：在把产能转到越南与泰国工厂前必须核验什么，含能力、质量体系、合规、产能、分包与出口经验。",
+    updated: "2026-09-22",
+    tools: [
+      { href: "/tools/supplier-verification-checklist" },
+      { href: "/tools/supplier-risk-calculator" },
+      { href: "/tools/supplier-scorecard" },
+    ],
+    services: [
+      { href: "/services/china-supplier-verification" },
+      { href: "/services/china-factory-audit" },
+    ],
+    related: [
+      "how-to-audit-a-factory-in-vietnam",
+      "china-supplier-risk-assessment-framework",
+      "when-to-order-china-factory-audit",
+      "supplier-quality-audit-checklist",
+      "china-factory-or-trading-company",
+    ],
+    links: [
+      {
+        href: "/industrial-clusters",
+        labelEn: "Explore industrial clusters by country",
+        labelZh: "按国家浏览产业带",
+      },
+      { href: "/rfq", labelEn: "Post a buyer RFQ", labelZh: "发布采购需求" },
+      {
+        href: "/suppliers",
+        labelEn: "Compare suppliers across countries",
+        labelZh: "跨国比较供应商",
+      },
+    ],
+    en: {
+      quickAnswer:
+        "Qualifying a second country means repeating the qualification work, not copying it. Verify the same six things you verified in China: factory capability for your product, quality management, social compliance, real capacity, subcontracting position and export experience to your market. The common failure is assuming that a supplier type proven in China behaves the same way elsewhere. Qualify the specific site, in the specific country, for your specific product, before moving volume.",
+      definition:
+        "China Plus One is a sourcing strategy in which a buyer keeps Chinese supply while adding production capacity in at least one other country, commonly Vietnam, Thailand, Indonesia or Malaysia, to reduce concentration risk. Supplier qualification in this context means the verification, assessment and audit work required before a site in the second country is trusted with volume. It is country-specific because registration systems, labour markets, infrastructure and export practice differ.",
+      keyPoints: [
+        "Qualification is site-specific and product-specific; success in China does not transfer automatically.",
+        "Verify capability for your product in the new country, not the country's general reputation.",
+        "Capacity is often tighter in a second country than buyers assume when moving volume quickly.",
+        "Subcontracting patterns differ by country and should be established explicitly.",
+        "Export experience to your market matters: experience with one destination does not imply another.",
+        "Qualify before moving volume, not during the first shipment.",
+      ],
+      steps: [
+        {
+          title: "Define what the second source must deliver",
+          body: "Decide which products, volumes and quality levels the second country must cover. A vague diversification goal produces a qualification process with no pass criteria.",
+        },
+        {
+          title: "Verify the legal entity in the local registration system",
+          body: "Confirm the registered entity, its status and its business scope under the local registration regime. Registration evidence looks different in each country, and the equivalent of a business licence is not identical to China's.",
+        },
+        {
+          title: "Confirm the production site and what is made there",
+          body: "Establish the actual production address and the operations performed at that site. In emerging sourcing destinations, a trading intermediary presenting a manufacturer's site is common.",
+        },
+        {
+          title: "Assess capability for your product specifically",
+          body: "Check equipment, process fit and whether the site has made your product type before. A country's strength in one category does not confer capability in another.",
+        },
+        {
+          title: "Assess the quality management system in practice",
+          body: "Look for evidence that quality control is applied, not just certified: incoming inspection, in-process control, final inspection records and handling of non-conformances.",
+        },
+        {
+          title: "Check social compliance for your customer's requirement",
+          body: "Establish which programme your customer requires in that country and whether the site has relevant audit history. Compliance expectations do not change because the country changed.",
+        },
+        {
+          title: "Verify real capacity and lead times",
+          body: "Confirm available capacity rather than nameplate capacity, and check where your volume would sit in the production queue. Capacity constraints are the most common surprise when volume moves quickly.",
+        },
+        {
+          title: "Establish export experience to your market",
+          body: "Ask for evidence of previous shipments to your destination, including documentation and conformity work for your market. Export experience is destination-specific.",
+        },
+      ],
+      examples: [
+        {
+          title: "Assumption transferred from China",
+          body: "A buyer qualified a Vietnam supplier on the strength of its China experience with the same product category. The site had the equipment but no documented process control, and first-shipment defects were higher than in China.",
+        },
+        {
+          title: "Capacity overstated during a rapid move",
+          body: "A supplier quoted nameplate capacity while its existing commitments filled most of it. The buyer's volume was queued behind established customers, and lead times slipped in the first two months.",
+        },
+        {
+          title: "Qualified properly before moving volume",
+          body: "A buyer audited two candidate sites in Thailand, selected one, ran a pilot order with inspection, then moved volume. The qualification cost was small relative to the disruption avoided.",
+        },
+      ],
+      checklist: [
+        "Products, volumes and quality levels for the second source defined.",
+        "Legal entity and status verified under the local registration system.",
+        "Business scope checked for manufacturing activity.",
+        "Production address confirmed and site operations identified.",
+        "Equipment and process fit assessed for your product.",
+        "Prior experience with your product type evidenced.",
+        "Quality system checked in practice: incoming, in-process and final control records.",
+        "Social compliance programme and audit history established.",
+        "Available capacity confirmed, not nameplate capacity.",
+        "Lead times and production queue position understood.",
+        "Subcontracting position disclosed in writing.",
+        "Export experience to your destination market evidenced.",
+        "Pilot order and inspection planned before volume moves.",
+      ],
+      tables: [
+        {
+          title: "China Plus One: What to Verify Before Moving Production",
+          headers: ["Area", "What to verify", "Why it differs by country"],
+          rows: [
+            ["Legal identity", "Registered entity, status and business scope under local law", "Registration systems and evidence formats differ"],
+            ["Production site", "Actual address and operations performed there", "Intermediaries presenting manufacturer sites are common"],
+            ["Capability", "Equipment and process fit for your product", "A country's strength in one category does not transfer to another"],
+            ["Quality system", "Applied control records, not just a certificate", "Certification prevalence and practice vary"],
+            ["Compliance", "The programme your customer requires, and audit history", "Audit availability and acceptance vary by destination"],
+            ["Capacity", "Available capacity and queue position", "Capacity tightens quickly when many buyers diversify at once"],
+            ["Subcontracting", "Written disclosure of outsourced operations", "Subcontracting norms differ by country and sector"],
+            ["Export experience", "Prior shipments to your destination market", "Experience with one market does not imply another"],
+          ],
+        },
+        {
+          title: "Qualification Sequence for a Second Source",
+          headers: ["Stage", "Activity", "Purpose"],
+          rows: [
+            ["1. Definition", "Define products, volumes and quality levels", "Sets pass criteria before any supplier is assessed"],
+            ["2. Verification", "Confirm entity, site, scope and export record", "Establishes who and where before spending on audits"],
+            ["3. Assessment", "Assess capability, quality and compliance", "Determines whether the site can actually do the work"],
+            ["4. Pilot", "Run a small order with inspection", "Tests real performance at low exposure"],
+            ["5. Scale", "Move volume and monitor", "Transfers volume only after the pilot passes"],
+            ["6. Maintain", "Re-check and monitor changes", "Keeps qualification current rather than historical"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "What does China Plus One mean?",
+          a: "It is a sourcing strategy of keeping Chinese supply while adding production in at least one other country, commonly Vietnam, Thailand, Indonesia or Malaysia, to reduce concentration risk. It is a diversification decision, not automatically a replacement of China.",
+        },
+        {
+          q: "Can I qualify a Vietnam supplier the same way as a Chinese supplier?",
+          a: "Use the same framework, but expect the evidence to look different. Registration documents, site verification and audit availability differ by country, so the qualification steps are the same while the specific records you can obtain are not identical.",
+        },
+        {
+          q: "What is the biggest mistake when adding a second country?",
+          a: "Moving volume before qualifying the specific site. Country-level optimism substitutes for site-level evidence, and the failure usually appears in the first shipment rather than in the qualification documents.",
+        },
+        {
+          q: "How do I check capacity in a new supplier country?",
+          a: "Ask for available capacity rather than nameplate capacity, and ask where your volume would sit in the production queue. Capacity is frequently the constraint when several buyers diversify into the same country at the same time.",
+        },
+        {
+          q: "Do compliance requirements change in the second country?",
+          a: "Your customer's requirements generally do not change. What changes is the availability of audit history and local practice, so establish which programme is required and whether the site has relevant, current evidence.",
+        },
+        {
+          q: "Should I use a pilot order?",
+          a: "Yes. A small pilot order with inspection tests real performance at low exposure, and it reveals process and capacity problems that document review and even an audit can miss.",
+        },
+      ],
+      sources: [
+        {
+          name: "FactoryAuditB2B Country Coverage",
+          note: "Country-specific sourcing, verification and audit considerations for each covered manufacturing country.",
+        },
+        {
+          name: "FactoryAuditB2B Industrial Clusters",
+          note: "Cluster-level view of where production capacity sits by country and sector.",
+        },
+        {
+          name: "FactoryAuditB2B Methodology",
+          note: "How supplier qualification evidence is assessed and the limits of what verification establishes.",
+        },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "认证第二个供应国，意味着重做一遍认证工作，而不是复制它。要像在中国那样核验同样六件事：工厂对你产品的能力、质量管理、社会责任合规、真实产能、分包状况，以及发往你目标市场的出口经验。常见失败是假定「在中国验证过的供应商类型」在别处表现相同。在转移产能之前，针对具体国家、具体场地、具体产品完成认证。",
+      definition:
+        "China+1 是一种采购策略：买家在保留中国供应的同时，在至少一个其他国家（常见为越南、泰国、印尼或马来西亚）增加产能，以降低集中度风险。此时的供应商资格认证，指的是在某个第二国场地被托付订单量之前，所需的核验、评估与审核工作。它具有国别性，因为登记制度、劳动力市场、基础设施与出口实践各不相同。",
+      keyPoints: [
+        "认证是场地特定、产品特定的；在中国的成功不会自动转移。",
+        "要核验新国家针对你产品的能力，而不是这个国家的整体声誉。",
+        "第二国的产能常常比买家快速转移时的假设更紧。",
+        "分包模式因国而异，应当明确确立。",
+        "发往你目标市场的出口经验很重要：对某一目的地的经验不等于对另一目的地。",
+        "要在转移产能之前完成认证，而不是在第一批货期间。",
+      ],
+      steps: [
+        {
+          title: "定义第二供应源必须交付什么",
+          body: "决定第二个国家必须覆盖哪些产品、多大数量、什么质量水平。模糊的多元化目标，只会产生一个没有合格标准的认证流程。",
+        },
+        {
+          title: "在当地登记制度下核验法律主体",
+          body: "按当地登记制度确认注册主体、状态与经营范围。各国的注册证据形式不同，相当于营业执照的文件并不与中国完全一致。",
+        },
+        {
+          title: "确认生产场地及其所进行的工序",
+          body: "确定实际生产地址与该场地进行的工序。在新兴采购目的地，贸易中间商呈现制造商场地的情况很常见。",
+        },
+        {
+          title: "针对你的产品具体评估能力",
+          body: "核查设备、工艺匹配度，以及该场地此前是否做过你这类产品。一国在某一品类的优势，不等于在另一品类具备能力。",
+        },
+        {
+          title: "评估质量管理体系的实际执行",
+          body: "寻找质量控制被真正执行的证据，而不只是有证书：来料检验、过程控制、最终检验记录，以及不合格品的处理。",
+        },
+        {
+          title: "按客户要求核查社会责任合规",
+          body: "确立客户在该国要求哪个项目，以及该场地是否有相关审核历史。合规预期不会因为换了国家而改变。",
+        },
+        {
+          title: "核验真实产能与交期",
+          body: "确认可用产能而非铭牌产能，并核查你的订单量会排在生产队列的什么位置。快速转移产能时，产能是最常见的意外。",
+        },
+        {
+          title: "确立发往你市场的出口经验",
+          body: "索取此前发往你目的地的出货证据，包括单证与面向该市场的符合性工作。出口经验是目的地特定的。",
+        },
+      ],
+      examples: [
+        {
+          title: "把在中国的假设照搬过去",
+          body: "某买家凭其在中国的同品类经验认证了一家越南供应商。该场地有设备，但没有文件化的过程控制，首批货的不良率高于中国。",
+        },
+        {
+          title: "快速转移中产能被高估",
+          body: "某供应商报的是铭牌产能，而既有订单已占去大部分。买家的订单排在既有客户之后，头两个月交期持续滑移。",
+        },
+        {
+          title: "转移产能前规范认证",
+          body: "某买家审核了泰国两家候选场地，选定一家，先用小订单加验货试产，再转移产能。认证成本相对避免的混乱而言很小。",
+        },
+      ],
+      checklist: [
+        "已定义第二供应源的产品、数量与质量水平。",
+        "已在当地登记制度下核验法律主体与状态。",
+        "已核查经营范围是否含生产活动。",
+        "已确认生产地址，并识别该场地的工序。",
+        "已针对你的产品评估设备与工艺匹配度。",
+        "已取得该产品类型的既往经验证据。",
+        "已核查质量体系的实际执行：来料、过程与最终检验记录。",
+        "已确立社会责任合规项目与审核历史。",
+        "已确认可用产能，而非铭牌产能。",
+        "已了解交期与生产队列位置。",
+        "已书面披露分包状况。",
+        "已取得发往目标市场的出口经验证据。",
+        "已规划转移产能前的试产订单与验货。",
+      ],
+      tables: [
+        {
+          title: "China+1：转移产能前应核验什么",
+          headers: ["领域", "核验什么", "为何因国而异"],
+          rows: [
+            ["法律身份", "当地法律下的注册主体、状态与经营范围", "登记制度与证据格式不同"],
+            ["生产场地", "实际地址与所进行工序", "中间商呈现制造商场地的情况常见"],
+            ["能力", "针对你产品的设备与工艺匹配度", "一国在某一品类的优势不会转移到另一品类"],
+            ["质量体系", "实际执行的控制记录，而不只是证书", "认证普及度与执行实践各异"],
+            ["合规", "客户要求的项目与审核历史", "审核可得性与接受度因目的地而异"],
+            ["产能", "可用产能与队列位置", "众多买家同时多元化时产能迅速变紧"],
+            ["分包", "外包工序的书面披露", "分包惯例因国家与行业而异"],
+            ["出口经验", "发往你目标市场的既往出货", "对某一市场的经验不等于对另一市场"],
+          ],
+        },
+        {
+          title: "第二供应源的认证顺序",
+          headers: ["阶段", "活动", "目的"],
+          rows: [
+            ["1. 定义", "定义产品、数量与质量水平", "在评估任何供应商前先设定合格标准"],
+            ["2. 核验", "确认主体、场地、范围与出口记录", "在花钱审核前先确立是谁、在哪里"],
+            ["3. 评估", "评估能力、质量与合规", "判断该场地是否真能做这项工作"],
+            ["4. 试产", "下小订单并验货", "在低敞口下检验真实表现"],
+            ["5. 放量", "转移产能并监控", "仅在试产通过后才转移订单量"],
+            ["6. 维持", "复审并监控变化", "让认证保持时效，而非停留在历史"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "China+1 是什么意思？",
+          a: "它是一种采购策略：在保留中国供应的同时，在至少一个其他国家（常见为越南、泰国、印尼或马来西亚）增加产能，以降低集中度风险。它是多元化决策，不必然是替代中国。",
+        },
+        {
+          q: "能像认证中国供应商那样认证越南供应商吗？",
+          a: "用同样的框架，但证据形态会不同。注册文件、场地核验与审核可得性因国而异，因此认证步骤相同，而你能取得的具体记录并不完全一致。",
+        },
+        {
+          q: "增加第二个国家时最大的错误是什么？",
+          a: "在认证具体场地之前就转移产能。国家层面的乐观替代了场地层面的证据，失败通常出现在第一批货上，而不是认证文件里。",
+        },
+        {
+          q: "在新供应国如何核查产能？",
+          a: "要问可用产能而不是铭牌产能，并问你的订单量会排在生产队列的什么位置。当多个买家同时向同一国多元化时，产能常常就是瓶颈。",
+        },
+        {
+          q: "在第二国合规要求会变吗？",
+          a: "客户的要求通常不变，变的是审核历史的可得性与当地实践，因此要确立所需项目，以及场地是否持有相关的、当前有效的证据。",
+        },
+        {
+          q: "应该用试产订单吗？",
+          a: "应该。小批量试产加验货，能在低敞口下检验真实表现，并暴露文件审阅乃至验厂都可能漏掉的流程与产能问题。",
+        },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B 国家覆盖", note: "各覆盖制造国的国别采购、核验与验厂注意事项。" },
+        { name: "FactoryAuditB2B 产业带", note: "按国家与行业展示产能分布的产业带视图。" },
+        { name: "FactoryAuditB2B 方法论", note: "供应商资格认证证据如何被评估，以及核验能够确立之事项的边界。" },
+      ],
+    },
+  },
+  {
+    slug: "buyer-ready-china-supplier",
+    category: "china",
+    titleEn: "How Chinese Factories Can Become Buyer-Ready for International Sourcing",
+    titleZh: "中国工厂如何具备面向国际采购的「买家就绪」状态",
+    metaDescEn:
+      "What international buyers need to see before engaging a factory: legal information, real production address, capability, capacity, quality system, certifications, compliance, audit history, export experience and verifiable evidence.",
+    metaDescZh:
+      "国际买家在接触工厂前需要看到什么：法律信息、真实生产地址、能力、产能、质量体系、认证、合规、审核历史、出口经验与可核验证据。",
+    updated: "2026-09-22",
+    tools: [
+      { href: "/tools/supplier-verification-checklist" },
+      { href: "/tools/supplier-risk-calculator" },
+      { href: "/tools/supplier-document-checker" },
+    ],
+    services: [
+      { href: "/services/china-supplier-verification" },
+      { href: "/services/china-factory-audit" },
+    ],
+    related: [
+      "china-factory-or-trading-company",
+      "how-to-verify-a-chinese-supplier",
+      "supplier-evaluation-checklist",
+      "supplier-quality-audit-checklist",
+      "china-plus-one-supplier-qualification",
+    ],
+    links: [
+      {
+        href: "/join-supplier-network",
+        labelEn: "Join the FactoryAuditB2B Supplier Network",
+        labelZh: "加入 FactoryAuditB2B 供应商网络",
+      },
+      {
+        href: "/suppliers",
+        labelEn: "See how published supplier profiles look",
+        labelZh: "查看已发布供应商档案的样式",
+      },
+      { href: "/rfq", labelEn: "See what buyers are requesting", labelZh: "查看买家正在求购什么" },
+    ],
+    en: {
+      quickAnswer:
+        "Buyer-ready means a buyer can understand and check your factory without a long email exchange. In practice that means ten things are documented: legal company information, a real production address, product capability, capacity, a quality system, certifications relevant to the buyer's market, social compliance position, audit history, export experience, and evidence that can actually be verified. Complete profiles get more buyer attention because they answer the buyer's questions before the buyer has to ask them.",
+      definition:
+        "Buyer-ready describes a supplier whose identity, capability and compliance position can be understood from documents and verified by a third party. It is not a marketing state; it is an evidence state. On this platform, a supplier profile goes through human review, is assigned an evidence level and a risk score, and only then appears publicly. Registration does not guarantee orders, and it does not certify anything: it makes the factory easier for international buyers to find, understand and check.",
+      keyPoints: [
+        "Buyer-ready is an evidence state, not a marketing claim.",
+        "Ten elements matter most: identity, address, capability, capacity, quality, certifications, compliance, audit history, export experience and verifiable evidence.",
+        "Buyers check whether documents are consistent with each other, not whether they exist.",
+        "An incomplete profile is usually read as unknown rather than as acceptable.",
+        "Audit history and corrective action closure are strong signals of how a factory handles problems.",
+        "Registration on this platform makes a factory easier to find and check; it does not guarantee orders or issue certification.",
+      ],
+      steps: [
+        {
+          title: "Document legal company information",
+          body: "Provide the Chinese registered name, Unified Social Credit Code, establishment date and registered capital, and make sure the English name you use is consistent everywhere. Inconsistent entity names are the first thing a buyer's document check flags.",
+        },
+        {
+          title: "Publish the real production address",
+          body: "State the address where production actually happens, separately from any registered office. Buyers and auditors need the production address to scope verification and audits.",
+        },
+        {
+          title: "Describe product capability specifically",
+          body: "Name the products and processes you perform in-house, with the equipment involved. Category-level claims are less useful than process-level detail, because buyer fit is process-specific.",
+        },
+        {
+          title: "State capacity in a checkable way",
+          body: "Give capacity in terms a buyer can test: lines, shifts and monthly output for the relevant product. Unsupported capacity numbers invite a challenge the factory cannot answer.",
+        },
+        {
+          title: "Show the quality system in operation",
+          body: "Provide your quality system certificate if you have one, and be ready to show incoming, in-process and final inspection records. Buyers increasingly ask for evidence of application, not just certification.",
+        },
+        {
+          title: "List certifications relevant to buyer markets",
+          body: "Include product and market-specific approvals with their scope and validity dates, and make sure they name the same legal entity. A certificate naming another entity does not transfer.",
+        },
+        {
+          title: "State your social compliance position",
+          body: "Note which programmes you have been audited against and the current status of any corrective actions. Disclosure of findings with closure evidence reads better than silence.",
+        },
+        {
+          title: "Provide audit history",
+          body: "List previous audits with dates and issuing bodies, and what was corrected. A factory that can show it fixed something is easier to trust than one that claims nothing was ever wrong.",
+        },
+        {
+          title: "Evidence export experience",
+          body: "State which markets you have shipped to and provide documentation where possible. Export experience is destination-specific, including conformity work for that market.",
+        },
+        {
+          title: "Make the evidence verifiable",
+          body: "Supply documents a third party can check: registration records, certificates issued to your entity, and a production address that can be visited. Verifiability is what converts a claim into evidence.",
+        },
+      ],
+      examples: [
+        {
+          title: "Incomplete profile read as unknown",
+          body: "A factory listed products and photos but no registration details, capacity or certifications. Buyers could not distinguish it from any other listing, and enquiries went to profiles that answered more questions.",
+        },
+        {
+          title: "Consistent profile shortlisted quickly",
+          body: "A factory published its registration details, production address, equipment list, capacity and a current ISO certificate naming the same entity. A buyer shortlisted it without a preliminary question round.",
+        },
+        {
+          title: "Audit history handled well",
+          body: "A factory disclosed a previous audit with two non-compliances and showed closure evidence. The buyer treated the disclosure as a positive signal about how problems are managed.",
+        },
+      ],
+      checklist: [
+        "Chinese registered name and Unified Social Credit Code published.",
+        "English company name used consistently across all materials.",
+        "Production address stated separately from the registered office.",
+        "Products and in-house processes described with equipment detail.",
+        "Capacity stated as lines, shifts and monthly output.",
+        "Quality system certificate provided where held.",
+        "Inspection records available to show the system in operation.",
+        "Product and market certifications listed with scope and validity.",
+        "Certifications checked as naming the same legal entity.",
+        "Social compliance programmes and audit status disclosed.",
+        "Previous audits listed with dates and issuing bodies.",
+        "Corrective action closure documented where applicable.",
+        "Export markets stated with documentation where possible.",
+        "Evidence supplied in a form a third party can verify.",
+      ],
+      tables: [
+        {
+          title: "The Ten Elements of a Buyer-Ready Profile",
+          headers: ["Element", "What buyers want to see", "Why it matters"],
+          rows: [
+            ["Legal company information", "Registered name, Unified Social Credit Code, status", "Establishes who the counterparty is"],
+            ["Real production address", "Address where production happens", "Determines where audits and inspections apply"],
+            ["Product capability", "In-house processes and equipment", "Fit is process-specific, not category-specific"],
+            ["Capacity", "Lines, shifts and monthly output", "Tests whether delivery promises are realistic"],
+            ["Quality system", "Certificate plus applied control records", "Certification alone does not show application"],
+            ["Certifications", "Market-specific approvals with scope and dates", "Determines market access and buyer acceptance"],
+            ["Social compliance", "Programmes audited against and current status", "Usually a customer-mandated requirement"],
+            ["Audit history", "Dates, issuing bodies and what was corrected", "Shows how problems are handled"],
+            ["Export experience", "Destination markets with documentation", "Experience is destination-specific"],
+            ["Verifiable evidence", "Documents a third party can check", "Converts claims into evidence"],
+          ],
+        },
+        {
+          title: "How a Supplier Profile Is Reviewed on This Platform",
+          headers: ["Stage", "What happens", "What it does not mean"],
+          rows: [
+            ["Submission", "The supplier submits company and factory information", "It does not mean the profile is public yet"],
+            ["Human review", "The profile is reviewed for completeness and consistency", "It does not mean every claim has been independently verified"],
+            ["Evidence level", "An evidence level is assigned to the profile", "A lower level is not a negative judgement, it is a statement of what is evidenced"],
+            ["Risk score", "A risk score is calculated for decision support", "It is not a certification and not a guarantee of orders"],
+            ["Publication", "The profile becomes visible to buyers", "It does not guarantee enquiries or orders"],
+            ["Buyer inquiry", "Buyers contact suppliers that fit their requirements", "Commercial outcomes depend on fit, price and terms"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "What does buyer-ready mean?",
+          a: "It means a buyer can understand and check your factory from your documentation without a long exchange. In practice, legal identity, production address, capability, capacity, quality system, certifications, compliance position, audit history, export experience and verifiable evidence are all documented and consistent.",
+        },
+        {
+          q: "Does joining the supplier network guarantee orders?",
+          a: "No. Registration makes your factory easier for international buyers to find, understand and check. Enquiries depend on fit, price, terms and the buyer's own process, and no platform can guarantee orders.",
+        },
+        {
+          q: "Is a published profile a certification?",
+          a: "No. A profile is a record of what has been submitted and reviewed, with an evidence level and a risk score. It does not certify compliance, quality or capability, and it is not equivalent to a third-party certificate.",
+        },
+        {
+          q: "Why does the platform review profiles manually?",
+          a: "Because consistency and completeness matter more than volume. Human review checks that documents match each other and that claims are plausible, which is what makes a profile useful to a buyer.",
+        },
+        {
+          q: "What if my certificates name a different legal entity?",
+          a: "Then they do not apply to your profile. Certificates are issued to a named entity and scope, so make sure the certificates you publish name the legal entity buyers would contract with.",
+        },
+        {
+          q: "Should I disclose previous audit findings?",
+          a: "Yes, with their closure status. Buyers generally read disclosed findings with closure evidence more positively than silence, because it shows how the factory handles problems.",
+        },
+        {
+          q: "How long does review take?",
+          a: "It depends on how complete the submission is and what needs checking. Profiles with complete, consistent documentation move faster than those requiring follow-up questions.",
+        },
+      ],
+      sources: [
+        {
+          name: "FactoryAuditB2B Supplier Network",
+          note: "How supplier profiles are submitted, reviewed, assigned an evidence level and published.",
+        },
+        {
+          name: "FactoryAuditB2B Methodology",
+          note: "How evidence levels and risk scores are defined, and what they do and do not establish.",
+        },
+        {
+          name: "State Administration for Market Regulation (SAMR), China",
+          note: "The registration authority whose records underpin company identity checks.",
+        },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "「买家就绪」意味着买家无需长篇邮件往返，就能理解并核查你的工厂。实践中就是十件事形成文件：法律公司信息、真实生产地址、产品能力、产能、质量体系、与买家市场相关的认证、社会责任合规状况、审核历史、出口经验，以及真正可被核验的证据。完整的档案会获得更多买家关注，因为它在买家开口提问之前，就已经回答了买家的问题。",
+      definition:
+        "「买家就绪」描述的是这样一种供应商：其身份、能力与合规状况可以从文件中被理解，并能被第三方核验。它是一种证据状态，而不是营销状态。在本平台，供应商档案需经人工审核、被赋予证据等级与风险评分，之后才会公开。注册不保证订单，也不构成任何认证：它只是让国际买家更容易发现、理解并核查这家工厂。",
+      keyPoints: [
+        "买家就绪是证据状态，不是营销话术。",
+        "最重要的十项：身份、地址、能力、产能、质量、认证、合规、审核历史、出口经验与可核验证据。",
+        "买家核查的是文件之间是否自洽，而不是文件是否存在。",
+        "不完整的档案通常被读作「未知」，而不是「可接受」。",
+        "审核历史与纠正措施关闭，是工厂如何处理问题的强信号。",
+        "在本平台注册让工厂更易被找到与核查；它不保证订单，也不签发认证。",
+      ],
+      steps: [
+        {
+          title: "把法律公司信息形成文件",
+          body: "提供中文注册名、统一社会信用代码、成立日期与注册资本，并确保你使用的英文名称在所有地方一致。主体名称不一致，是买家文件核查最先标记的项。",
+        },
+        {
+          title: "公布真实的生产地址",
+          body: "单独写明实际生产的地址，与任何注册办公地区分开。买家与审核员需要生产地址来界定核验与验厂的范围。",
+        },
+        {
+          title: "具体描述产品能力",
+          body: "写明你自制的工序，因为买家匹配是工序特定的。",
+        },
+        {
+          title: "以可核查的方式说明产能",
+          body: "用买家可以检验的方式给出产能：相关产品的产线、班次与月产量。没有支撑的产能数字，会招来工厂答不上来的质询。",
+        },
+        {
+          title: "展示质量体系的实际运行",
+          body: "若有质量体系证书请提供，并准备好出示来料、过程与最终检验记录。买家越来越要求看到执行证据，而不只是认证。",
+        },
+        {
+          title: "列出与买家市场相关的认证",
+          body: "列出产品与市场特定准入认证，含范围与有效期，并确保它们指向同一法律主体。证书写的是另一主体则不转移适用。",
+        },
+        {
+          title: "说明你的社会责任合规状况",
+          body: "注明你曾按哪些项目接受审核，以及任何纠正措施的当前状态。披露发现项并附关闭证据，比沉默更好。",
+        },
+        {
+          title: "提供审核历史",
+          body: "列出既往审核的日期与发证机构，以及已整改的内容。能证明自己修好过问题的工厂，比声称从未出过问题的工厂更容易被信任。",
+        },
+        {
+          title: "举证出口经验",
+          body: "说明你曾发运到哪些市场，并尽可能提供单证。出口经验是目的地特定的，包括面向该市场的符合性工作。",
+        },
+        {
+          title: "让证据可被核验",
+          body: "提供第三方可核查的文件：登记记录、开给你主体的证书，以及可被走访的生产地址。可核验性，才是把声称转化为证据的东西。",
+        },
+      ],
+      examples: [
+        {
+          title: "不完整的档案被读作未知",
+          body: "某工厂只列了产品与照片，没有注册信息、产能与认证。买家无法把它与任何其他挂牌区分开，询盘流向了回答更多问题的档案。",
+        },
+        {
+          title: "自洽的档案被快速入围",
+          body: "某工厂公布了注册信息、生产地址、设备清单、产能，以及一份指向同一主体的有效 ISO 证书。买家无需初步提问就将其入围。",
+        },
+        {
+          title: "审核历史处理得当",
+          body: "某工厂披露了一次既往审核中的两项不符合项，并出示了关闭证据。买家把这种披露视为「这家工厂如何处理问题」的正面信号。",
+        },
+      ],
+      checklist: [
+        "已公布中文注册名与统一社会信用代码。",
+        "英文公司名称在所有材料中一致使用。",
+        "生产地址已与注册办公地分开列明。",
+        "已带设备细节描述产品与自制工序。",
+        "产能已按产线、班次与月产量表述。",
+        "持有的质量体系证书已提供。",
+        "可出示检验记录以体现体系在运行。",
+        "已列明产品与市场认证，含范围与有效期。",
+        "已核查认证是否指向同一法律主体。",
+        "已披露社会责任合规项目与审核状态。",
+        "已列出既往审核的日期与发证机构。",
+        "适用时已记录纠正措施关闭情况。",
+        "已说明出口市场，并尽可能附单证。",
+        "证据以第三方可核查的形式提供。",
+      ],
+      tables: [
+        {
+          title: "买家就绪档案的十个要素",
+          headers: ["要素", "买家想看到什么", "为何重要"],
+          rows: [
+            ["法律公司信息", "注册名、统一社会信用代码、状态", "确立交易对手是谁"],
+            ["真实生产地址", "实际生产的地址", "决定验厂与验货适用于哪里"],
+            ["产品能力", "自制工序与设备", "匹配是工序特定的，而非品类特定的"],
+            ["产能", "产线、班次与月产量", "检验交付承诺是否现实"],
+            ["质量体系", "证书 + 实际执行的控制记录", "仅有认证不足以体现执行"],
+            ["认证", "含范围与日期的市场特定准入", "决定市场准入与买家接受度"],
+            ["社会责任合规", "曾按哪些项目审核及当前状态", "通常是客户强制要求"],
+            ["审核历史", "日期、发证机构与已整改内容", "体现如何处理问题"],
+            ["出口经验", "目的市场及单证", "经验是目的地特定的"],
+            ["可核验证据", "第三方可核查的文件", "把声称转化为证据"],
+          ],
+        },
+        {
+          title: "本平台如何审核供应商档案",
+          headers: ["阶段", "发生什么", "它不意味着什么"],
+          rows: [
+            ["提交", "供应商提交公司与工厂信息", "不意味着档案已公开"],
+            ["人工审核", "审核完整性与一致性", "不意味着每项声称都已独立核验"],
+            ["证据等级", "为档案赋予证据等级", "等级较低不是负面评价，而是对已举证程度的说明"],
+            ["风险评分", "计算用于决策支持的风险评分", "它不是认证，也不保证订单"],
+            ["发布", "档案对买家可见", "不保证询盘或订单"],
+            ["买家询盘", "买家联系符合其要求的供应商", "商业结果取决于匹配度、价格与条款"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "「买家就绪」是什么意思？",
+          a: "它意味着买家能从你的文件中理解并核查你的工厂，无需长篇往返。实践中即法律身份、生产地址、能力、产能、质量体系、认证、合规状况、审核历史、出口经验与可核验证据均已形成文件且彼此自洽。",
+        },
+        {
+          q: "加入供应商网络能保证拿到订单吗？",
+          a: "不能。注册只是让你的工厂更容易被国际买家发现、理解与核查。询盘取决于匹配度、价格、条款与买家自身流程，任何平台都不能保证订单。",
+        },
+        {
+          q: "已发布的档案是一种认证吗？",
+          a: "不是。档案是对已提交并经审核内容的记录，附带证据等级与风险评分。它不认证合规、质量或能力，也不等同于第三方证书。",
+        },
+        {
+          q: "为什么平台要人工审核档案？",
+          a: "因为一致性与完整性比数量更重要。人工审核检查文件是否相互吻合、声称是否合理，而这正是档案对买家有用的原因。",
+        },
+        {
+          q: "如果我的证书写的是另一法律主体怎么办？",
+          a: "那么它不适用于你的档案。证书是发给具名主体与范围的，因此请确保你公布的证书写的是买家将与之签约的法律主体。",
+        },
+        {
+          q: "应该披露既往审核发现项吗？",
+          a: "应该，并附上关闭状态。买家通常把「披露发现项 + 关闭证据」读得比沉默更正面，因为这说明工厂如何处理问题。",
+        },
+        {
+          q: "审核需要多久？",
+          a: "取决于提交内容的完整度与需核查的内容。文件完整自洽的档案，比需要追问的档案走得更快。",
+        },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B 供应商网络", note: "供应商档案如何提交、审核、赋予证据等级并发布。" },
+        { name: "FactoryAuditB2B 方法论", note: "证据等级与风险评分如何界定，以及它们确立与不确立什么。" },
+        { name: "中国国家市场监督管理总局（SAMR）", note: "其登记记录是公司身份核查基础的登记机关。" },
       ],
     },
   },
