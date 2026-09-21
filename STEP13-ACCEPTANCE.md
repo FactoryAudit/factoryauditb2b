@@ -48,8 +48,10 @@ STEP 13 只读取证发现：
 ```text
 commit:       4b60bbf46c1d0d4d68f797630fcab972015d889e   （step13: business activation，31 files）
               2934645                                            （CS-0: middleware 漂移固化，先行提交）
-HEAD:         batched 复核通过 —— `git rev-parse HEAD` 与 `git log -1 --format=%H` 逐次比对一致
-working tree: 仅剩本轮未纳入版本库的历史遗留产物（见 §Remaining）
+              07e990f528d1c0840aca5a1642670e3b32f5080f           （deploy 证据回填 + 两个断言缺陷修复，5 files）
+HEAD:         逐次复核通过 —— `git rev-parse HEAD` 与 `git log -1 --format=%H` 每次比对一致
+              （本机 Windows git 有「假成功」前科：会打印 sha 与分支却不让 ref 落盘，必须复核）
+working tree: 已跟踪文件全干净；仅剩本轮未纳入版本库的历史遗留产物（见 §9）
 ```
 
 **CS-0（先行提交）**：`middleware.ts` 的线上漂移。

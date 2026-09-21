@@ -222,7 +222,10 @@ Next.js App Router 把同一段文案输出**两份**（可见 DOM + `self.__nex
 STEP 13-B:  baefc17946f9ca95e36a56342d9d028eca4aeda5   （25 files）
 STEP 13:    4b60bbf46c1d0d4d68f797630fcab972015d889e   （31 files，同批保存）
 CS-0:       2934645                                     （middleware 漂移固化）
-HEAD 复核:  git rev-parse HEAD == git log -1 --format=%H  ✓（本机 git 有"假成功"前科，逐次比对）
+部署+修正:  07e990f528d1c0840aca5a1642670e3b32f5080f   （5 files：两份验收报告回填部署证据 +
+                                                       §10.1 的断言缺陷修复 + STEP12 报告补记 commit hash）
+HEAD 复核:  git rev-parse HEAD == git log -1 --format=%H == 07e990f5…  ✓
+            （本机 git 有"假成功"前科，逐次比对；工作区已跟踪文件全干净）
 ```
 
 ## 13. Remaining / 下一步
