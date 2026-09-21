@@ -1107,6 +1107,818 @@ export const GUIDES: Guide[] = [
       ],
     },
   },
+  {
+    slug: "what-is-a-factory-audit",
+    category: "audit",
+    titleEn: "What Is a Factory Audit? How Buyers Choose a Reliable Audit Firm",
+    titleZh: "什么是第三方验厂？海外买家如何选择靠谱的验厂机构",
+    metaDescEn:
+      "What a B2B factory audit is, why overseas buyers need one, and how to choose a reliable third-party audit firm: product experience, speed and report transparency.",
+    metaDescZh:
+      "第三方验厂（Factory Audit）是什么、跨国采购为什么必须做、以及如何选择靠谱的验厂机构：行业经验、响应速度、报告透明度。",
+    updated: "2026-09-21",
+    tools: [
+      { href: "/tools/audit-checklist" },
+      { href: "/tools/supplier-risk-calculator" },
+      { href: "/tools/supplier-verification-checklist" },
+    ],
+    services: [{ href: "/factory-audit/request" }, { href: "/services/china-factory-audit" }],
+    related: ["factory-audit-checklist", "on-site-vs-desk-audit", "supplier-evaluation-checklist"],
+    en: {
+      quickAnswer:
+        "A factory audit is an on-site check by an independent inspector who verifies that a supplier exists, can make your product, and runs a real quality and compliance system. Buyers use it to avoid phantom factories, inflated capacity claims and quality surprises. Choose a firm by product-category experience, turnaround speed and report transparency, not by price alone.",
+      definition:
+        "A third-party factory audit is an assessment performed by an organization independent of both buyer and seller. An experienced auditor visits the site and evaluates the supplier's legality, production capability, quality management system (QMS) and working conditions, then issues a report that lets a buyer thousands of miles away see the factory as it actually runs.",
+      keyPoints: [
+        "Verification, not trust: a polished online profile can be fabricated; an on-site audit exposes trading companies pretending to be factories.",
+        "Capacity reality check: suppliers may claim 100k units a month while running three old machines; an audit punctures the capacity bubble.",
+        "Quality confidence up front: reviewing incoming, in-process and final QC, material storage and equipment maintenance stops defects at the source.",
+        "Independent evidence: a good audit report is produced by a party with no stake in the order, so the buyer can rely on it.",
+        "A starting point, not a one-time fix: re-audit after corrective actions to confirm they were completed, not just promised.",
+      ],
+      steps: [
+        {
+          title: "Define scope and standard",
+          body: "Decide which legal entity and building are in scope, and which standard applies (your own checklist, ISO 9001, BSCI, SMETA or SA8000). Tell the supplier what you will check before the visit.",
+        },
+        {
+          title: "Book a qualified auditor",
+          body: "Use a firm with experience in your product category (electronics, apparel, machinery) and the certifications relevant to your market. Confirm they can reach the site and schedule the visit.",
+        },
+        {
+          title: "Review the report, not just the verdict",
+          body: "A useful report carries unedited site photos, videos and a graded list of findings (non-conformities), not a simple pass or fail. Read the findings by severity.",
+        },
+        {
+          title: "Act on the findings",
+          body: "Close critical findings before the next order ships. Request a corrective action plan with owners and dates, then re-audit to confirm.",
+        },
+      ],
+      examples: [
+        {
+          title: "Trading company uncovered",
+          body: "A large manufacturer seen at a trade show turned out to be a few-person trading company; an on-site audit of the actual production site protected the buyer from a subcontracting scam.",
+        },
+        {
+          title: "Capacity bubble punctured",
+          body: "A supplier promised 100k units a month; the auditor counted three outdated machines and a much smaller workforce, so the buyer split the order across two factories.",
+        },
+      ],
+      checklist: [
+        "Scope and standard agreed with the supplier",
+        "Auditor experienced in your product category",
+        "Site visit scheduled, not desk-only",
+        "Report includes unedited photos and graded findings",
+        "Critical findings have a corrective action plan",
+        "Re-audit planned if findings are open",
+      ],
+      faq: [
+        {
+          q: "Is a factory audit the same as an inspection?",
+          a: "No. An audit assesses the site and system (can it make your product well and compliantly); an inspection checks a finished batch. Use both: audit the factory, inspect the shipment.",
+        },
+        {
+          q: "How fast can an audit happen?",
+          a: "A capable firm can often arrange an on-site audit within 48 hours and issue a detailed report within 24 hours of the visit, depending on location and scope.",
+        },
+        {
+          q: "What makes a report trustworthy?",
+          a: "Unedited site photos and video, a graded findings list, and an auditor independent of the transaction. A one-line pass with no evidence is not a report.",
+        },
+        {
+          q: "Do I need an audit for a small trial order?",
+          a: "For a low-value, low-risk trial you can start with a desk (document) review; reserve a full on-site audit for the first large order or high-safety products.",
+        },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B audit service", note: "How we scope, conduct and report factory audits across Asia." },
+        { name: "ISO 9001 quality management", note: "The common baseline for a quality-system portion of an audit." },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "验厂是由独立审核员到工厂实地，核实供应商是否真实存在、能否生产你的产品、是否运行真正的质量与合规体系。买家用它规避皮包公司、产能虚标和质量翻车。选机构看行业经验、响应速度和报告透明度，而不是只比价格。",
+      definition:
+        "第三方验厂是指由独立于买卖双方的机构，派有经验的审核员到工厂实地，对供应商的合法性、生产能力、质量管理体系（QMS）和工作环境做全面评估，并出具报告，让远在千里之外的买家能看见工厂真实的运转状态。",
+      keyPoints: [
+        "验证而非信任：网上光鲜的图片可能是伪造的，实地审核能立刻拆穿贸易公司冒充源头工厂。",
+        "产能 reality check：供应商说月产10万件，现场可能只有3台旧机器；验厂能刺破产能泡沫。",
+        "质量信心前置：提前看进料、制程和成品 QC、原料仓储与设备维护，从源头切断劣质品。",
+        "独立证据：好报告由与订单无利益关系的第三方出具，买家可放心依赖。",
+        "起点而非一次性：整改后要做复审，确认动作真的完成，而不只是承诺。",
+      ],
+      steps: [
+        {
+          title: "确定范围与标准",
+          body: "明确哪个法律主体、哪栋厂房在范围内，以及适用哪种标准（你的自有清单、ISO 9001、BSCI、SMETA 或 SA8000）。访厂前把要查的内容告知供应商。",
+        },
+        {
+          title: "预约合格审核员",
+          body: "选择熟悉你产品类目（电子、服装、机械）且具备相关市场认证经验的机构，确认能到达现场并安排档期。",
+        },
+        {
+          title: "看报告而非只看结论",
+          body: "有价值的报告含未修音的现场实拍照片、视频，以及按严重度分级的不符合项清单，而非简单的通过或不通过。按严重度读发现项。",
+        },
+        {
+          title: "按发现项行动",
+          body: "下批订单发货前先关闭关键发现项；要求带责任人和期限的整改计划，并复审确认。",
+        },
+      ],
+      examples: [
+        {
+          title: "识破贸易公司",
+          body: "展会上看着实力雄厚的的大型制造商，实地审核发现只是几人贸易公司；对真实生产现场的验厂让买家避开了转包骗局。",
+        },
+        {
+          title: "刺破产能泡沫",
+          body: "供应商承诺月产10万件，审核员数到3台旧机器、人数远少于宣称，买家于是把订单拆分到两家工厂。",
+        },
+      ],
+      checklist: [
+        "范围与标准已和供应商约定",
+        "审核员熟悉你的产品类目",
+        "已安排实地访厂，而非仅桌面审核",
+        "报告含未修音照片与分级发现项",
+        "关键发现项有整改计划",
+        "若有未结发现项已计划复审",
+      ],
+      faq: [
+        {
+          q: "验厂和验货是一回事吗？",
+          a: "不是。验厂评估现场与体系（能否把产品做好且合规），验货查已完成的批次。两者都要：验厂审工厂，验货审 shipment。",
+        },
+        {
+          q: "验厂能多快完成？",
+          a: "靠谱机构通常能在48小时内安排实地审核，并在访厂后24小时内出具详细报告，具体取决于地点和范围。",
+        },
+        {
+          q: "什么样的报告可信？",
+          a: "含未修音现场照片与视频、分级发现项清单，且审核员与交易独立。一句无证据的通过不是报告。",
+        },
+        {
+          q: "小额试单也需要验厂吗？",
+          a: "低值低风险试单可先做桌面（文件）审核；首次大单或高安全产品（医疗、母婴、电子）再上完整实地验厂。",
+        },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B 验厂服务", note: "我们如何在亚洲范围内界定、执行并报告验厂。" },
+        { name: "ISO 9001 质量管理体系", note: "验厂中质量体系部分的常见基线。" },
+      ],
+    },
+  },
+  {
+    slug: "supplier-evaluation-checklist",
+    category: "verification",
+    titleEn: "Supplier Evaluation Checklist 2026: Cut B2B Sourcing Risk",
+    titleZh: "2026供应商评估清单(Checklist)：全面降低B2B采购风险",
+    metaDescEn:
+      "A 2026 supplier evaluation checklist covering legality, capacity, quality system, ESG and documentation, with the records auditors ask for at each step.",
+    metaDescZh:
+      "2026版供应商评估清单，覆盖资质合法性、产能、质量体系、ESG 与文件，列出每个环节审核员会索取的记录。",
+    updated: "2026-09-21",
+    tools: [
+      { href: "/tools/supplier-verification-checklist" },
+      { href: "/tools/supplier-risk-calculator" },
+      { href: "/tools/supplier-document-checker" },
+    ],
+    services: [{ href: "/services/supplier-verification" }, { href: "/services/china-supplier-verification" }],
+    related: ["supplier-risk-assessment-guide", "factory-audit-checklist", "what-is-a-factory-audit"],
+    en: {
+      quickAnswer:
+        "A supplier evaluation checklist scores a candidate across legality, production capacity, quality system, ESG basics and documentation. In 2026, with compliance and transparency demands rising, the checklist must cover beneficial ownership, recent audit evidence and subcontracting disclosure, not just certificates.",
+      definition:
+        "A supplier evaluation checklist is a standardized set of items used to judge whether a supplier is safe to order from. Unlike a risk score, the checklist is the evidence list: for each item, the buyer collects a document or observation that confirms or contradicts the supplier's claim.",
+      keyPoints: [
+        "Legality first: a valid business licence, matching registered and operating addresses, and the right import/export and industry permits.",
+        "Capacity second: machine count, model, age and maintenance records; workforce and QC ratios; whether the line is actually running your product.",
+        "Quality system in practice: incoming (IQC), in-process (IPQC) and outgoing (OQC) records, non-conformance handling, and recent calibration certificates.",
+        "ESG basics: fire safety, wage and hour compliance with local law, and no child or forced labour.",
+        "2026 additions: beneficial ownership, the most recent audit report on file, and a written statement of any subcontracting.",
+      ],
+      steps: [
+        {
+          title: "Legality and identity",
+          body: "Verify the business licence, registered capital versus actual scale, registered versus operating address, and import/export and industry permits.",
+        },
+        {
+          title: "Production and capacity",
+          body: "Collect machine inventory with model and age, maintenance logs, headcount and engineer/QC ratios, and evidence the line is currently producing your type of product.",
+        },
+        {
+          title: "Quality management",
+          body: "Request IQC, IPQC and OQC records, non-conformance logs, and calibration certificates dated within the last year.",
+        },
+        {
+          title: "ESG and compliance",
+          body: "Check fire safety, wage and hour records against local law, and confirm no child or forced labour through interviews and documents.",
+        },
+        {
+          title: "Consolidate into a decision",
+          body: "Map each checklist item to found or missing evidence, then decide: proceed, request documents, audit, or walk away.",
+        },
+      ],
+      examples: [
+        {
+          title: "Address mismatch",
+          body: "A supplier's registered address was an office while production ran at a different site; asking for the production address in writing resolved a recurring dispute before any deposit.",
+        },
+        {
+          title: "Missing calibration",
+          body: "An otherwise strong supplier had no recent torque-driver calibration; the buyer required recalibration and a recheck of the last batch before shipping.",
+        },
+      ],
+      checklist: [
+        "Business licence valid and matches the contracting entity",
+        "Registered and operating addresses reconciled",
+        "Import/export and industry permits present",
+        "Machine inventory with age and maintenance logs",
+        "IQC / IPQC / OQC records available",
+        "Recent calibration certificates (within 12 months)",
+        "Fire safety and wage/hour compliance evidenced",
+        "Subcontracting disclosed in writing",
+      ],
+      faq: [
+        {
+          q: "Checklist or risk score, which first?",
+          a: "Use the checklist to collect evidence, then feed it into a risk score. The checklist is the input; the score is the output.",
+        },
+        {
+          q: "What changed for 2026?",
+          a: "Buyers now expect beneficial-ownership clarity, a recent audit report on file, and explicit subcontracting disclosure, on top of the classic licence and quality checks.",
+        },
+        {
+          q: "Can I do this without flying out?",
+          a: "A desk review covers legality and documents; an on-site audit confirms the floor. Many buyers combine a low-cost desk check with a targeted on-site audit.",
+        },
+        {
+          q: "How many suppliers should I evaluate?",
+          a: "Screen a wide pool on the desk, then audit the top two or three on-site before committing a large order.",
+        },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B verification checklist tool", note: "A structured template that maps each item to the evidence to collect." },
+        { name: "ISO 9001 documentation requirements", note: "The quality-records baseline auditors expect to see." },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "供应商评估清单从资质合法性、产能、质量体系、ESG 基础和文件五个维度给候选供应商打分。2026年合规与透明度要求提高，清单必须覆盖实益所有人、近期审核证据和转包披露，而不只是证书。",
+      definition:
+        "供应商评估清单是用于判断供应商是否值得下单的一套标准化条目。与风险分数不同，清单是证据清单：每一项都对应一份能证实或推翻供应商说法的文件或观察。",
+      keyPoints: [
+        "资质优先：有效营业执照、注册地与经营地一致、具备进出口与相关行业许可。",
+        "产能次之：设备数量、型号、使用年限与维护记录；人数与工程师/QC 比例；产线是否真在跑你的产品。",
+        "质量体系看执行：进料(IQC)、制程(IPQC)、出货(OQC)记录，不合格品处理，以及近期的校准证书。",
+        "ESG 基础：消防安全、工资工时符合当地法律、无童工或强迫劳动。",
+        "2026新增：实益所有人、在档的最近一次审核报告、以及书面的转包声明。",
+      ],
+      steps: [
+        {
+          title: "资质与身份",
+          body: "核实营业执照、注册资本与实际规模是否匹配、注册地与经营地是否一致、以及进出口与相关行业许可。",
+        },
+        {
+          title: "生产与产能",
+          body: "收集设备清单（含型号与年限）、维护日志、人数与工程师/QC 比例，并取证产线当前在生产你这类产品。",
+        },
+        {
+          title: "质量管理",
+          body: "索取 IQC、IPQC、OQC 记录、不合格品日志，以及近一年内的校准证书。",
+        },
+        {
+          title: "ESG 与合规",
+          body: "核对消防安全、工资工时记录是否符合当地法律，并通过访谈与文件确认无童工或强迫劳动。",
+        },
+        {
+          title: "汇总成决策",
+          body: "把每个清单项映射到已找到或缺失的证据，再决定：直接推进、补文件、验厂，还是放弃。",
+        },
+      ],
+      examples: [
+        {
+          title: "地址不符",
+          body: "某供应商注册地是办公室，生产却在另一处；书面要来生产地址，在付定金前化解了反复出现的纠纷。",
+        },
+        {
+          title: "校准缺失",
+          body: "一家本不错的供应商没有近期扭矩扳手校准记录；买家要求重新校准并对上批产品全检后才发货。",
+        },
+      ],
+      checklist: [
+        "营业执照有效且与签约主体一致",
+        "注册地与经营地已核对",
+        "具备进出口与相关行业许可",
+        "设备清单含年限与维护日志",
+        "IQC / IPQC / OQC 记录可查",
+        "近期校准证书（12个月内）",
+        "消防安全与工资工时已举证",
+        "转包已书面披露",
+      ],
+      faq: [
+        {
+          q: "先用清单还是先打分？",
+          a: "先用清单收集证据，再喂给风险评分。清单是输入，分数是输出。",
+        },
+        {
+          q: "2026年有什么变化？",
+          a: "买家现在期望看清实益所有人、在档的近期审核报告，并明确披露转包，叠加传统的执照与质量检查。",
+        },
+        {
+          q: "不飞过去能做吗？",
+          a: "桌面审核覆盖资质与文件；实地审核确认现场。很多买家把低成本的桌面检查与有针对性的实地审核结合。",
+        },
+        {
+          q: "该评估多少家供应商？",
+          a: "先用桌面广筛，再对前两三名家做实地审核，然后才下大单。",
+        },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B 供应商核验清单工具", note: "把每项映射到应收集证据的结构化模板。" },
+        { name: "ISO 9001 文件要求", note: "审核员期望看到的质量记录基线。" },
+      ],
+    },
+  },
+  {
+    slug: "on-site-vs-desk-audit",
+    category: "audit",
+    titleEn: "On-Site vs Desk Audit: Which Supplier Check Should You Use?",
+    titleZh: "工厂实地审核 vs 线上文件审核：B2B采购该怎么选？",
+    metaDescEn:
+      "On-site versus desk (virtual) supplier audit: the trade-offs, when each works, and a combined approach that screens wide then audits deep.",
+    metaDescZh:
+      "实地审核与桌面（线上）审核的取舍、各自适用场景，以及先广筛再深挖的组合策略。",
+    updated: "2026-09-21",
+    tools: [
+      { href: "/tools/supplier-document-checker" },
+      { href: "/tools/supplier-verification-checklist" },
+      { href: "/tools/audit-checklist" },
+    ],
+    services: [{ href: "/factory-audit/request" }, { href: "/services/china-factory-audit" }],
+    related: ["what-is-a-factory-audit", "factory-audit-checklist", "capacity-audit-guide"],
+    en: {
+      quickAnswer:
+        "A desk audit verifies documents and databases remotely and is cheap and fast, good for early screening. An on-site audit sends an inspector to the floor and is the only way to confirm real capacity, conditions and ownership. Most buyers combine them: desk-screen 20 candidates, then on-site-audit the top 3.",
+      definition:
+        "A desk audit (or virtual audit) checks a supplier through submitted documents, business databases and interviews without a site visit. An on-site audit places an independent inspector at the factory to walk the floor, interview workers and count equipment. They answer different questions and are not substitutes.",
+      keyPoints: [
+        "Desk audit: low cost, hours to 1-2 days, but cannot confirm real production capability or spot a shell site.",
+        "On-site audit: sees what documents hide, catches a dirty floor, untrained operators or a subcontracted shell.",
+        "Documents can be forged or expired, so desk results are a screen, not a verdict.",
+        "On-site costs a few hundred dollars and needs 1-2 weeks lead time, but it is the lock-in step for a large order.",
+        "Combine: desk-screen the pool, then on-site-audit the shortlist.",
+      ],
+      steps: [
+        {
+          title: "Start with a desk audit",
+          body: "Collect the business licence, tax registration, ISO certificates and bank statements, then cross-check against public business databases to shortlist candidates.",
+        },
+        {
+          title: "Flag the must-audit cases",
+          body: "Send any high-value, strategic or high-safety (medical, infant, electronics) supplier to an on-site audit regardless of desk result.",
+        },
+        {
+          title: "Schedule the on-site visit",
+          body: "Book an independent inspector 1-2 weeks out; confirm access to the floor, not just the showroom.",
+        },
+        {
+          title: "Reconcile the two",
+          body: "If the desk file and the floor disagree, trust the floor. Investigate the gap before placing the order.",
+        },
+      ],
+      examples: [
+        {
+          title: "Cheap screen, expensive miss",
+          body: "A desk-clean supplier later failed on-site when the inspector found the factory was a showroom with production at an unlisted subcontractor.",
+        },
+        {
+          title: "Combined win",
+          body: "A buyer desk-screened 20 suppliers, on-site-audited the top 3, and found the best partner was not the one with the glossiest documents.",
+        },
+      ],
+      checklist: [
+        "Desk: licence, tax, ISO, bank statements checked",
+        "Desk: public database cross-check done",
+        "On-site: floor walk, not showroom only",
+        "On-site: worker interviews off the floor",
+        "On-site: equipment counted and condition noted",
+        "Both: results reconciled before ordering",
+      ],
+      faq: [
+        {
+          q: "Can a desk audit replace an on-site audit?",
+          a: "No. It can remove obvious risks early, but it cannot confirm the floor, the machines or the workers. Use it as a screen, not a substitute.",
+        },
+        {
+          q: "When is on-site mandatory?",
+          a: "First large order, a strategic OEM partner, or any product with safety exposure (medical, infant, electronics) should always get an on-site audit.",
+        },
+        {
+          q: "How much does on-site cost and how long?",
+          a: "Typically a few hundred dollars with 1-2 weeks lead time, versus hours to days for a desk audit.",
+        },
+        {
+          q: "What if desk and on-site disagree?",
+          a: "Trust the floor. A mismatch usually means the documents were incomplete or the site was not the one that will make your product.",
+        },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B document checker", note: "A tool that structures a desk audit from the documents suppliers provide." },
+        { name: "FactoryAuditB2B on-site audit", note: "How we scope and report a floor-level audit." },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "桌面审核远程核验文件与数据库，便宜又快，适合早期初筛。实地审核派审核员下车间，是确认真实产能、现场状况与所有权的唯一方式。多数买家组合使用：桌面筛20家，再实地审前3家。",
+      definition:
+        "桌面（线上）审核不访厂，靠提交的文件、商业数据库和访谈核查供应商。实地审核派独立审核员到工厂走车间、访谈工人、清点设备。两者回答不同问题，不能互相替代。",
+      keyPoints: [
+        "桌面审核：成本低，几小时到1-2天，但无法确认真实产能，也发现不了空壳现场。",
+        "实地审核：能看到文件看不到的问题——脏乱的车间、不规范的工人、转包的空壳。",
+        "文件可能伪造或过期，所以桌面结果只是初筛，不是结论。",
+        "实地审核花几百美元、需提前1-2周预约，但它是大单锁定的关键一步。",
+        "组合：桌面广筛候选，再对短名单实地审核。",
+      ],
+      steps: [
+        {
+          title: "先做桌面审核",
+          body: "收集营业执照、税务登记、ISO 证书和银行流水，再与公开企业数据库交叉核对，筛出候选。",
+        },
+        {
+          title: "标记必须实地审的",
+          body: "任何高价值、战略级或高安全（医疗、母婴、电子）供应商，无论桌面结果如何都送实地审核。",
+        },
+        {
+          title: "预约实地访厂",
+          body: "提前1-2周预约独立审核员；确认能进车间，而不只是样品间。",
+        },
+        {
+          title: "核对两者",
+          body: "若桌面文件与现场不符，以现场为准；下单前查清缺口。",
+        },
+      ],
+      examples: [
+        {
+          title: "便宜初筛，昂贵漏判",
+          body: "一家桌面干净的供应商后来实地失败：审核员发现工厂只是样品间，生产在未被列出的转包方处。",
+        },
+        {
+          title: "组合取胜",
+          body: "某买家桌面筛20家、实地审前3家，发现最佳伙伴并非文件最光鲜的那家。",
+        },
+      ],
+      checklist: [
+        "桌面：执照、税务、ISO、银行流水已查",
+        "桌面：公开数据库交叉核对已做",
+        "实地：走车间而非只看样品间",
+        "实地：脱离现场的工人访谈",
+        "实地：设备已清点并记录状态",
+        "两者：下单前结果已核对",
+      ],
+      faq: [
+        {
+          q: "桌面审核能替代实地吗？",
+          a: "不能。它能早期排除明显风险，但确认不了车间、设备和工人。把它当初筛，不是替代。",
+        },
+        {
+          q: "何时必须实地？",
+          a: "首次大单、战略 OEM 伙伴、或任何有安全暴露的产品（医疗、母婴、电子）都应实地审核。",
+        },
+        {
+          q: "实地多少钱、多久？",
+          a: "通常几百美元、提前1-2周；桌面则几小时到几天。",
+        },
+        {
+          q: "两者不符怎么办？",
+          a: "以现场为准。不一致通常说明文件不完整，或现场并非生产你产品的那家。",
+        },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B 文件核查工具", note: "用供应商提供的文件结构化桌面审核的工具。" },
+        { name: "FactoryAuditB2B 实地验厂", note: "我们如何界定与报告车间级审核。" },
+      ],
+    },
+  },
+  {
+    slug: "third-party-audit-pain-points",
+    category: "risk",
+    titleEn: "Supply Chain Risk: What a Third-Party Factory Audit Actually Fixes",
+    titleZh: "供应链风控必看：专业的第三方验厂能为你解决哪些痛点？",
+    metaDescEn:
+      "How a professional third-party factory audit solves the three biggest sourcing pains: fake factories, unstable quality and missed delivery dates.",
+    metaDescZh:
+      "专业第三方验厂如何解决采购三大痛点：供应商造假、质量不稳、交期延误。",
+    updated: "2026-09-21",
+    tools: [
+      { href: "/tools/supplier-risk-calculator" },
+      { href: "/tools/audit-checklist" },
+      { href: "/tools/supplier-verification-checklist" },
+    ],
+    services: [{ href: "/factory-audit/request" }, { href: "/services/supplier-improvement" }],
+    related: ["supplier-risk-assessment-guide", "factory-audit-checklist", "what-is-a-factory-audit"],
+    en: {
+      quickAnswer:
+        "A third-party factory audit directly attacks three sourcing pains: suppliers who are actually trading companies, samples that beat the bulk, and delivery dates that slip. An independent auditor confirms the real site, the real quality system and the real capacity before you pay.",
+      definition:
+        "Many B2B buyers lose money not to bad luck but to blind trust. A professional factory audit is the control that turns the supplier said into the auditor observed, closing the gaps where profit and reputation leak out of the supply chain.",
+      keyPoints: [
+        "Fake or layered suppliers: a manufacturer that is really a tiny trader who subcontracts to a poor workshop.",
+        "Schrodinger quality: perfect samples, defective bulk, because there is no real quality system.",
+        "Delivery roulette: shipping next week becomes a standing excuse and you miss the season.",
+        "The audit observes, it does not negotiate: findings are graded evidence, not opinions.",
+        "A few hundred dollars of audit can prevent tens of thousands in claims and penalties.",
+      ],
+      steps: [
+        {
+          title: "Expose the real entity",
+          body: "The auditor checks the actual address, signboard and production-line ownership, and counts workers and lines, puncturing the middleman's story.",
+        },
+        {
+          title: "Check the quality system, not the sample",
+          body: "Review IQC and IPQC, test equipment and SOPs to confirm good quality is managed, not luck.",
+        },
+        {
+          title: "Measure real capacity",
+          body: "Assess true capacity ceiling, current order backlog and key-machine status to warn of delivery risk before you commit.",
+        },
+        {
+          title: "Get a corrective plan",
+          body: "Turn findings into owners and dates, then re-audit to confirm the fix, not just the promise.",
+        },
+      ],
+      examples: [
+        {
+          title: "Subcontractor behind the logo",
+          body: "A large manufacturer collected a deposit then subcontracted to a small workshop; an audit of the real site protected the buyer.",
+        },
+        {
+          title: "Capacity mismatch",
+          body: "Promised monthly output far exceeded the line's real ceiling; the audit flagged delivery risk and the buyer split the order.",
+        },
+      ],
+      checklist: [
+        "Real site and production-line ownership confirmed",
+        "IQC / IPQC and SOPs reviewed",
+        "Equipment and calibration status checked",
+        "True capacity ceiling and backlog assessed",
+        "Findings graded with a corrective plan",
+        "Re-audit scheduled for open items",
+      ],
+      faq: [
+        {
+          q: "Will an audit stop a supplier from lying?",
+          a: "It makes lying observable. When the floor contradicts the claim, you decide before paying, not after.",
+        },
+        {
+          q: "Is it worth it for a small order?",
+          a: "For low-value, low-risk orders a desk review may suffice; reserve a full audit for orders where a failure is expensive.",
+        },
+        {
+          q: "What does an audit cost versus the risk?",
+          a: "A few hundred dollars typically, against potential claims and penalties in the tens of thousands.",
+        },
+        {
+          q: "Does the audit fix quality by itself?",
+          a: "No. It surfaces the gaps; the supplier fixes them. You verify the fix with a re-audit.",
+        },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B risk calculator", note: "Estimate the cost of a sourcing failure before you order." },
+        { name: "FactoryAuditB2B audit service", note: "How we turn observed findings into a corrective plan." },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "第三方验厂直接打击三大采购痛点：实为贸易公司的供应商、样板好大货差的薛定谔质量、以及一拖再拖的交期。独立审核员在你付款前确认真实的现场、真实的质量体系和真实的产能。",
+      definition:
+        "很多 B2B 企业吃亏不是因为运气差，而是盲目信任。专业验厂是把供应商说变成审核员观察到的控制手段，堵住利润和声誉从供应链漏出的缺口。",
+      keyPoints: [
+        "造假或层层转包：看似制造商，其实是为小作坊转包的微型贸易商。",
+        "薛定谔质量：样板完美、大货残次，因为根本没有真正的质管体系。",
+        "交期轮盘：下周一定发货成了口头禅，你错过销售季。",
+        "审核员只观察不谈判：发现项是有分级的证据，不是意见。",
+        "几百美元验厂，可能挽回数万美元的索赔与违约金。",
+      ],
+      steps: [
+        {
+          title: "拆穿真实主体",
+          body: "审核员核对实际地址、厂牌与产线所有权，并清点工人与产线，戳破中间商话术。",
+        },
+        {
+          title: "查体系而非样板",
+          body: "审阅 IQC、IPQC、检测设备与 SOP，确认好质量是被管出来的，而非碰运气。",
+        },
+        {
+          title: "测算真实产能",
+          body: "评估真实产能上限、当前订单积压与核心设备状态，在下单前预警交期风险。",
+        },
+        {
+          title: "拿到整改计划",
+          body: "把发现项转为责任人与期限，并复审确认整改已完成，而非只承诺。",
+        },
+      ],
+      examples: [
+        {
+          title: "招牌后的转包方",
+          body: "某大型制造商收定金后把订单转包小作坊；对真实现场的验厂保护了买家。",
+        },
+        {
+          title: "产能错配",
+          body: "承诺的月产远超产线真实上限；验厂标出交期风险，买家拆分了订单。",
+        },
+      ],
+      checklist: [
+        "真实现场与产线所有权已确认",
+        "IQC / IPQC 与 SOP 已审阅",
+        "设备与校准状态已查",
+        "真实产能上限与积压已评估",
+        "发现项已分级并附整改计划",
+        "未结项已安排复审",
+      ],
+      faq: [
+        {
+          q: "验厂能阻止供应商撒谎吗？",
+          a: "它让谎言可被观察。当现场与说法矛盾，你在付款前就能决定，而不是之后。",
+        },
+        {
+          q: "小单也值得做吗？",
+          a: "低值低风险单做桌面审核即可；把完整验厂留给失败代价高的订单。",
+        },
+        {
+          q: "验厂成本 vs 风险？",
+          a: "通常几百美元，对应可能数万美元的索赔与违约金。",
+        },
+        {
+          q: "验厂自己能改善质量吗？",
+          a: "不能。它暴露缺口，由供应商修复，你用复审确认。",
+        },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B 风险计算器", note: "下单前估算采购失败的代价。" },
+        { name: "FactoryAuditB2B 验厂服务", note: "我们如何把观察到的发现项转为整改计划。" },
+      ],
+    },
+  },
+  {
+    slug: "capacity-audit-guide",
+    category: "audit",
+    titleEn: "Capacity Audit: How to Prevent Supplier Delivery Delays",
+    titleZh: "产能审核(Capacity Audit)全解析：如何从源头避免交期延误？",
+    metaDescEn:
+      "What a capacity audit checks, why sales promises and certificates do not prove capacity, and the data that predicts whether your order will ship on time.",
+    metaDescZh:
+      "产能审核查什么、为什么销售承诺和证书都不能代表产能，以及能预测订单能否准时发货的关键数据。",
+    updated: "2026-09-21",
+    tools: [
+      { href: "/tools/audit-checklist" },
+      { href: "/tools/supplier-risk-calculator" },
+      { href: "/tools/supplier-verification-checklist" },
+    ],
+    services: [{ href: "/factory-audit/request" }, { href: "/services/china-factory-audit" }],
+    related: ["factory-audit-checklist", "on-site-vs-desk-audit", "supplier-evaluation-checklist"],
+    en: {
+      quickAnswer:
+        "A capacity audit confirms how many good units a factory can reliably produce in a period, by counting machines, labour and bottlenecks rather than trusting the sales pitch. It predicts delivery risk before you commit a large order.",
+      definition:
+        "A capacity audit is the branch of a factory audit that does not ask whether the factory can make your product, but how many it can make steadily. The auditor calculates the real daily and monthly capacity from cycle times, machine load and staffing, not from the brochure.",
+      keyPoints: [
+        "Certificates prove management discipline, not machine count; a quality certificate does not mean high capacity.",
+        "Salespeople routinely overstate capacity to win the order; only the floor tells the truth.",
+        "Bottleneck sets the limit: the slowest process defines real daily output, not the fastest.",
+        "Temporary labour swings capacity, so the skilled-to-temp ratio matters.",
+        "If your order takes over 80 percent of stated capacity, delay is almost certain because the factory serves other clients too.",
+      ],
+      steps: [
+        {
+          title: "Count key machines",
+          body: "List core machines (injection moulders, CNC, lines) with daily standard output per machine and standby equipment for failures.",
+        },
+        {
+          title: "Assess labour",
+          body: "Record actual headcount, and the skilled-to-temporary ratio; a high temp ratio signals unstable capacity.",
+        },
+        {
+          title: "Find the bottleneck",
+          body: "Identify the slowest process in the line; that process, not the average, sets the real daily ceiling.",
+        },
+        {
+          title: "Check material and scheduling",
+          body: "Confirm raw-material stock and supplier stability, and review the current order backlog to see if your slot is real.",
+        },
+      ],
+      examples: [
+        {
+          title: "80 percent trap",
+          body: "A buyer's order consumed 85 percent of stated capacity; with other clients queued, the factory missed the ship window. A capacity audit would have flagged it.",
+        },
+        {
+          title: "Hidden bottleneck",
+          body: "Two fast lines fed one slow curing step; the real daily output was half the sales claim. The audit reported the curing step as the limit.",
+        },
+      ],
+      checklist: [
+        "Key machines counted with per-machine output",
+        "Standby equipment identified",
+        "Headcount and skilled/temp ratio recorded",
+        "Bottleneck process located",
+        "Raw-material stock and supplier stability checked",
+        "Current backlog and your real slot reviewed",
+      ],
+      faq: [
+        {
+          q: "Does a quality certificate prove capacity?",
+          a: "No. ISO proves the system is managed; it says nothing about how many machines are running. Capacity needs a floor check.",
+        },
+        {
+          q: "What is the single best predictor of delay?",
+          a: "Your order's share of the factory's real capacity. Above roughly 80 percent, delay risk rises sharply because the plant also serves others.",
+        },
+        {
+          q: "How is real capacity calculated?",
+          a: "From cycle time per unit at the bottleneck, times machine count and effective shifts, minus downtime, not from the sales estimate.",
+        },
+        {
+          q: "When should I order a capacity audit?",
+          a: "Before any large or time-sensitive order, especially for seasonal goods where a missed window means lost sales.",
+        },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B capacity audit", note: "How we measure real, not claimed, production capacity." },
+        { name: "FactoryAuditB2B risk calculator", note: "Translate capacity findings into delivery-risk terms." },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "产能审核通过清点机器、人力和瓶颈工序，确认工厂在一段时间内能稳定产出多少合格品，而非相信销售话术。它让你下大单前预判交期风险。",
+      definition:
+        "产能审核是验厂的一个分支，不问工厂能不能做你的产品，而问能稳定做多少。审核员用节拍时间、设备负荷与人员配置算出真实的日产能与月产能，而非看宣传册。",
+      keyPoints: [
+        "证书证明管理规范，不代表机器数量；质量证书不等于高产能。",
+        "销售为拿单常夸大产能；只有车间说真话。",
+        "瓶颈决定上限：最慢的工序定义真实日产出，而非最快的。",
+        "临时工比例波动产能，所以熟练工与临时工之比很关键。",
+        "若你的订单占宣称产能 80% 以上，交期几乎必然延误，因为工厂还要服务其他客户。",
+      ],
+      steps: [
+        {
+          title: "清点核心设备",
+          body: "列出核心机器（注塑机、CNC、产线），含每台每日标准产出，以及应对故障的备用设备。",
+        },
+        {
+          title: "评估人力",
+          body: "记录实际到岗人数，以及熟练工与临时工之比；临时工占比高意味着产能不稳。",
+        },
+        {
+          title: "找瓶颈",
+          body: "定位产线最慢的工序；决定真实日上限的是它，不是平均值。",
+        },
+        {
+          title: "查物料与排期",
+          body: "确认原料库存与上游稳定性，并看当前订单积压，判断你的档期是否真实。",
+        },
+      ],
+      examples: [
+        {
+          title: "80%陷阱",
+          body: "买家订单占宣称产能 85%，其他客户排队，工厂错过船期。产能审核本可提前标出。",
+        },
+        {
+          title: "隐藏瓶颈",
+          body: "两条快线喂一条慢固化工序，真实日产只有销售宣称的一半；审核把固化工序报为上限。",
+        },
+      ],
+      checklist: [
+        "核心设备已清点并含单机产出",
+        "已识别备用设备",
+        "已记录人数与熟练/临时工比",
+        "已定位瓶颈工序",
+        "已查原料库存与供应商稳定性",
+        "已看当前积压与你的真实档期",
+      ],
+      faq: [
+        {
+          q: "质量证书能证明产能吗？",
+          a: "不能。ISO 证明体系受管理，不说有多少机器在跑。产能需要实地核查。",
+        },
+        {
+          q: "预测延误最好的单一指标？",
+          a: "你的订单占工厂真实产能的比例。超过约80%，因工厂还服务他人，延误风险急升。",
+        },
+        {
+          q: "真实产能怎么算？",
+          a: "瓶颈处单件节拍 × 机器数 × 有效班次，减去停机，而非销售估算。",
+        },
+        {
+          q: "何时该做产能审核？",
+          a: "任何大单或有时效的订单之前，尤其是季节性商品，错过窗口等于丢销售。",
+        },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B 产能审核", note: "我们如何测量真实而非宣称的产能。" },
+        { name: "FactoryAuditB2B 风险计算器", note: "把产能发现翻译成交期风险语言。" },
+      ],
+    },
+  },
 ];
 
 export const GUIDE_CATEGORY_ORDER: GuideCategory[] = [
