@@ -3945,3 +3945,77 @@ export function guidesByCategory(category: GuideCategory) {
 export function featuredGuides() {
   return GUIDES.slice(0, 3);
 }
+
+/**
+ * 内容簇 hub 落地页的 SEO 文案（en/zh）。键覆盖全部 GuideCategory，
+ * 即使某个分类当前无指南也保留，便于将来补内容而不必改类型。
+ * name = 簇名（导航/H1）；title/desc = 页面 <title> 与 meta description，locale-aware。
+ */
+export const GUIDE_CATEGORY_META: Record<
+  GuideCategory,
+  { nameEn: string; nameZh: string; titleEn: string; titleZh: string; descEn: string; descZh: string }
+> = {
+  verification: {
+    nameEn: "Supplier Verification",
+    nameZh: "供应商核验",
+    titleEn: "Supplier Verification Guides: How to Vet a Factory Before You Pay",
+    titleZh: "供应商核验指南：付款前如何核查工厂",
+    descEn:
+      "Step-by-step guides on verifying suppliers in China and Asia — business registration, background checks, document review and risk scoring.",
+    descZh: "中国及亚洲供应商核验实操指南：工商注册、背景调查、文件审查与风险评分。",
+  },
+  audit: {
+    nameEn: "Factory Audit",
+    nameZh: "工厂验厂",
+    titleEn: "Factory Audit Guides: Checklists, Reports & What Buyers Must Know",
+    titleZh: "工厂验厂指南：清单、报告与买家须知",
+    descEn:
+      "Practical factory audit guides — what auditors check, how to read a report, capacity and on-site vs desk audits, plus quality inspections (IQC/IPQC/FQC/OQC).",
+    descZh: "工厂验厂实操指南：审核看什么、如何读报告、产能与实地/文件审核，以及质量检验（IQC/IPQC/FQC/OQC）。",
+  },
+  risk: {
+    nameEn: "Supplier Risk & Scam Prevention",
+    nameZh: "供应商风险与防骗",
+    titleEn: "Supplier Risk & Scam Prevention Guides",
+    titleZh: "供应商风险与防骗指南",
+    descEn:
+      "How to spot supplier scams, check a China company registration, use Alibaba Trade Assurance, and verify a supplier before paying a deposit.",
+    descZh: "如何识别供应商诈骗、查中国公司工商注册、使用阿里 Trade Assurance，以及付定金前核验供应商。",
+  },
+  compliance: {
+    nameEn: "Social Compliance & Audit",
+    nameZh: "社会责任合规审核",
+    titleEn: "Social Compliance & Audit Guides (SA8000, SMETA, ESG)",
+    titleZh: "社会责任合规审核指南（SA8000、SMETA、ESG）",
+    descEn:
+      "Social compliance guides covering SA8000, SMETA vs BSCI, ESG supplier audits, mandatory ethical audit requirements and brand reputation risk.",
+    descZh: "社会责任合规指南：SA8000、SMETA 与 BSCI 对比、ESG 供应商审核、道德审核强制要求与品牌声誉风险。",
+  },
+  sea: {
+    nameEn: "Southeast Asia Sourcing",
+    nameZh: "东南亚采购",
+    titleEn: "Southeast Asia Factory Audit Guides (Vietnam & Beyond)",
+    titleZh: "东南亚工厂验厂指南（越南等）",
+    descEn:
+      "Factory audit and verification guides for Southeast Asia — Vietnam auditing realities, regional risk differences and what changes vs China sourcing.",
+    descZh: "东南亚工厂验厂与核验指南：越南审核实情、区域风险差异，以及与中国的不同。",
+  },
+  china: {
+    nameEn: "China Sourcing",
+    nameZh: "中国采购",
+    titleEn: "China Sourcing Guides",
+    titleZh: "中国采购指南",
+    descEn: "China-focused sourcing, verification and audit guides.",
+    descZh: "中国相关的采购、核验与验厂指南。",
+  },
+};
+
+/**
+ * 返回「实际有指南」的分类，顺序遵循 GUIDE_CATEGORY_ORDER。
+ * 用于 hub 路由 generateStaticParams、sitemap/llms 收录、索引页分类导航 ——
+ * 与页面可索引性同源：无指南的分类不生成 hub、不进 sitemap，避免 404 / noindex 错配。
+ */
+export function guideCategoriesWithGuides(): GuideCategory[] {
+  const present = new Set<GuideCategory>(GUIDES.map((g) => g.category));
+  return GUIDE_CATEGORY_ORDER.filter((c): c is GuideCategory => present.has(c as GuideCategory));
+}

@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import { GUIDES } from "@/lib/guides";
+import {
+  GUIDES,
+  GUIDE_CATEGORY_META,
+  guideCategoriesWithGuides,
+  guidesByCategory,
+} from "@/lib/guides";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
@@ -29,6 +34,7 @@ export default async function GuidesIndex({ params }: Props) {
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
   const p = (href: string) => localePath(locale, href);
+  const cats = guideCategoriesWithGuides();
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -51,6 +57,23 @@ export default async function GuidesIndex({ params }: Props) {
       <p className="text-[#64748b] mt-3 text-lg max-w-3xl">
         {t.resourcesIndex.lead}
       </p>
+
+      {/* 内容簇入口：每个分类一个 hub 着陆页，互为内链强化主题权重 */}
+      <div className="flex flex-wrap gap-2 mt-6">
+        {cats.map((c) => {
+          const cm = GUIDE_CATEGORY_META[c];
+          return (
+            <Link
+              key={c}
+              href={p(`/guides/category/${c}`)}
+              className="px-3 py-1 rounded-full text-sm bg-[#f1f5f9] text-[#0f4c81] hover:bg-[#e2e8f0]"
+            >
+              {pickZhPair(locale, cm.nameEn, cm.nameZh)}
+              <span className="ml-1 text-[#94a3b8]">{guidesByCategory(c).length}</span>
+            </Link>
+          );
+        })}
+      </div>
 
       <div className="grid md:grid-cols-2 gap-5 mt-10">
         {GUIDES.map((g) => (

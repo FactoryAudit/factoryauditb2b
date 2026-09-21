@@ -1,7 +1,7 @@
 import { listAuditTypes, listStandards, listCountries, listIndustries } from "@/lib/taxonomy";
 import { LOCALES, LOCALE_META, localePath } from "@/i18n/config";
 import { COVERAGE_COUNTRIES, COVERAGE_SERVICE_SLUGS, COVERAGE_COUNTRY_SENTENCE } from "@/lib/coverage";
-import { GUIDES } from "@/lib/guides";
+import { GUIDES, guideCategoriesWithGuides, GUIDE_CATEGORY_META } from "@/lib/guides";
 import { CASE_STUDIES } from "@/lib/caseStudies";
 import { FIELD_REPORTS } from "@/lib/fieldReports";
 import { MEMBERSHIP_PRICE_USD } from "@/lib/suppliers";
@@ -96,6 +96,13 @@ export async function GET() {
   lines.push("## Guides");
   for (const g of GUIDES) {
     lines.push(`- [${g.titleEn}](${BASE}/guides/${g.slug}): ${g.en.quickAnswer}`);
+  }
+  lines.push("");
+
+  lines.push("## Guide categories");
+  for (const c of guideCategoriesWithGuides()) {
+    const cm = GUIDE_CATEGORY_META[c];
+    lines.push(`- [${cm.nameEn}](${BASE}/guides/category/${c}): ${cm.descEn}`);
   }
   lines.push("");
 

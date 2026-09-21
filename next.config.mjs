@@ -113,6 +113,11 @@ const nextConfig = {
   // Cloudflare Workers 部署（OpenNext）
   // 已去除数据库（V2.0 轻量化）：不再需要外部化 Prisma / pg / postgres。
   serverExternalPackages: [],
+  experimental: {
+    // 防 OpenNext 二次 build 偶发 60s 静态页超时（1906 页机器负载触顶）。
+    // 失败页面是既有 supplier 页，与 hub 改动无关；提到 300s 覆盖偶发慢页。
+    staticPageGenerationTimeout: 300,
+  },
   // V2.2 §13/§41：/membership 合并进 /pricing（Founding Buyer 选项）。
   // permanent: true ⇒ Next 发出 308（永久重定向）；Google 视作永久合并，SEO 效果等同 301。
   async redirects() {

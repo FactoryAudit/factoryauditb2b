@@ -10,7 +10,7 @@ import { determineSupplierIndexability } from "@/lib/seo/supplierSeo";
 import { LOCALES, localePath } from "@/i18n/config";
 import { hreflangFor } from "@/i18n/hreflang";
 import { COVERAGE_COUNTRIES, COVERAGE_SERVICE_SLUGS } from "@/lib/coverage";
-import { GUIDES } from "@/lib/guides";
+import { GUIDES, guideCategoriesWithGuides } from "@/lib/guides";
 import { CASE_STUDIES } from "@/lib/caseStudies";
 import { FIELD_REPORTS } from "@/lib/fieldReports";
 import { topicsForIndustry } from "@/lib/industryContent";
@@ -82,6 +82,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...COVERAGE_COUNTRIES.map((c) => `/countries/${c.slug}`),
     ...COVERAGE_SERVICE_SLUGS.map((x) => `/services/${x.slug}`),
     ...GUIDES.map((g) => `/guides/${g.slug}`),
+    // 内容簇 hub 着陆页：只提交「实际有指南」的分类，与页面可索引性同源
+    ...guideCategoriesWithGuides().map((c) => `/guides/category/${c}`),
     ...CASE_STUDIES.map((c) => `/case-studies/${c.slug}`),
     ...FIELD_REPORTS.map((r) => `/field-reports/${r.slug}`),
   ];
