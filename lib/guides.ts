@@ -2875,6 +2875,1053 @@ export const GUIDES: Guide[] = [
       ],
     },
   },
+  {
+    slug: "chinese-supplier-scam-red-flags",
+    category: "risk",
+    titleEn: "12 Red Flags of a Chinese Supplier Scam (Spot Them Before You Pay)",
+    titleZh: "中国供应商诈骗的 12 个红旗信号：下单前这样识别",
+    metaDescEn:
+      "The most common warning signs that a China supplier is a scam: pressure tactics, no verifiable entity, fake certificates, and how to verify before you pay.",
+    metaDescZh:
+      "中国供应商诈骗最常见的红旗信号：催促付款、无法核实实体、假证书，以及付款前如何核验。",
+    updated: "2026-09-21",
+    tools: [
+      { href: "/tools/supplier-verification-checklist" },
+      { href: "/tools/supplier-risk-calculator" },
+      { href: "/tools/supplier-document-checker" },
+    ],
+    services: [
+      { href: "/services/china-supplier-verification" },
+      { href: "/factory-audit/request" },
+    ],
+    related: ["how-to-verify-a-chinese-supplier", "supplier-risk-assessment-guide", "verify-supplier-before-deposit"],
+    en: {
+      quickAnswer:
+        "The strongest scam signals are pressure to pay fast, refusal to share a verifiable business license, requests to move off-platform, and certificates that fail a registry check. Verify the legal entity and start small before any large deposit.",
+      definition:
+        "A supplier scam in cross-border sourcing is any pattern where a party poses as a manufacturer or trader to take payment without delivering conforming goods. Red flags are observable behaviours that let a buyer screen most bad actors before money leaves the account.",
+      keyPoints: [
+        "Pushy deposit demands and 'today only' pricing are classic pressure tactics.",
+        "No verifiable unified social credit code or business license is a hard stop.",
+        "Requests to leave Alibaba or use personal bank transfers raise risk sharply.",
+        "Fake or recycled ISO/CE certificates are common; check the issuing body.",
+        "No real factory address, no video call on site, and no traceable history are warnings.",
+      ],
+      steps: [
+        { title: "Demand the unified social credit code", body: "Ask for the 18-digit code and the exact legal entity name. A genuine supplier provides it; a scammer stalls or sends a mismatched name." },
+        { title: "Run an entity and certificate check", body: "Cross-check the credit code and any certificate number against public registries and the issuer. Mismatches or 'we lost the file' are red flags." },
+        { title: "Insist on platform or escrow payment", body: "Keep communication and payment on Alibaba Trade Assurance or a similar escrow. Off-platform wire to a personal account is the biggest single warning." },
+        { title: "Start with a small paid sample", body: "A real factory will produce a sample against your spec. A scammer avoids specifics or sends a stock photo." },
+      ],
+      examples: [
+        { title: "The 'golden supplier' with no entity", body: "A buyer was pushed to wire a 30% deposit to a personal account; the 'factory' had no credit code and vanished after payment." },
+        { title: "Recycled certificate", body: "An audit certificate was real but belonged to a different company; the issuer lookup exposed the mismatch before any order." },
+      ],
+      checklist: [
+        "Unified social credit code provided and verified",
+        "Legal entity name matches the contract and bank account",
+        "Payment stays on a platform or escrow, not personal wire",
+        "Certificate numbers check against the issuing body",
+        "Real factory address confirmed by video or third-party visit",
+        "Sample produced to your spec before bulk deposit",
+        "No 'today only' pressure or off-platform requests",
+        "trade references or verifiable export history available",
+      ],
+      faq: [
+        { q: "Is a low price alone a red flag?", a: "Not by itself, but a price far below market plus pressure to pay fast usually is. Scammers bait with impossible prices." },
+        { q: "Can a verified Alibaba supplier still scam me?", a: "Less likely, but still verify the entity and use Trade Assurance. Platform verification is a starting point, not a guarantee." },
+        { q: "What if they refuse video call?", a: "Treat refusal as a red flag. A genuine factory will show its line on a call or accept a third-party inspection." },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B supplier verification", note: "Entity, certificate and on-site checks that screen bad actors." },
+        { name: "China National Enterprise Credit Information Publicity System", note: "The official registry for unified social credit codes." },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "最强的诈骗信号是催促快速付款、拒绝提供可核实的营业执照、要求离开平台交易，以及证书在登记系统中查不到。付款前务必核实法律实体并从小单起步。",
+      definition:
+        "跨境采购中的供应商诈骗，是指某方冒充工厂或贸易商收取货款却交付不符货物的一切套路。红旗信号是可观察的行为，让买家在钱离账前筛掉多数坏人。",
+      keyPoints: [
+        "催促付定金与「仅限今天」的报价是典型的施压话术。",
+        "无法提供可核实的统一社会信用代码或营业执照是硬性红线。",
+        "要求离开阿里或用个人银行转账，风险骤升。",
+        "伪造或套用 ISO/CE 证书很常见，须查发证机构。",
+        "无真实工厂地址、拒绝现场视频、查无历史都是警告。",
+      ],
+      steps: [
+        { title: "索取统一社会信用代码", body: "要求提供 18 位代码与准确法律实体名。真实供应商会给；骗子会拖延或给不匹配的名字。" },
+        { title: "做实体与证书核查", body: "将信用代码与任何证书号对照公开登记系统与发证机构。对不上或「文件丢了」即红旗。" },
+        { title: "坚持平台或托管付款", body: "沟通与付款留在阿里 Trade Assurance 或类似托管。离开平台向个人账户电汇是最大单一警告。" },
+        { title: "从小额付费样品起步", body: "真实工厂会按你的规格打样；骗子回避细节或发库存图。" },
+      ],
+      examples: [
+        { title: "无实体的「金牌供应商」", body: "某买家被催着向个人账户电汇 30% 定金；该「工厂」无信用代码，付款后消失。" },
+        { title: "套用证书", body: "一份审核证书真实但属于另一家公司；发证机构查询在订单前揭穿了矛盾。" },
+      ],
+      checklist: [
+        "已提供并核实统一社会信用代码",
+        "法律实体名与合同及银行账户一致",
+        "付款留在平台或托管，非个人电汇",
+        "证书号在发证机构可查",
+        "真实工厂地址经视频或第三方走访确认",
+        "批量定金前已按你的规格打样",
+        "无「仅限今天」施压或离开平台要求",
+        "可提供贸易参考或可核查出口历史",
+      ],
+      faq: [
+        { q: "低价本身算红旗吗？", a: "单独不算，但远低于市场又催促付款通常就是。骗子用不可能低价做诱饵。" },
+        { q: "已核实的阿里供应商还会骗我吗？", a: "概率较低，但仍要核实实体并用 Trade Assurance。平台核实是起点，不是保证。" },
+        { q: "拒绝视频通话怎么办？", a: "视为红旗。真实工厂愿意在通话中展示产线，或接受第三方验厂。" },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B 供应商核验", note: "实体、证书与现场核查，筛掉坏人。" },
+        { name: "国家企业信用信息公示系统", note: "统一社会信用代码的官方登记系统。" },
+      ],
+    },
+  },
+  {
+    slug: "how-to-check-china-company-registration",
+    category: "risk",
+    titleEn: "How to Check a China Company Registration (License & Credit Code)",
+    titleZh: "如何查中国公司工商注册：营业执照与信用代码核验",
+    metaDescEn:
+      "Step-by-step: verify a Chinese supplier's unified social credit code, legal name and business scope using public registries, and what mismatches mean.",
+    metaDescZh:
+      "分步核验中国供应商的统一社会信用代码、法律实体名与经营范围，使用公开登记系统，以及不一致意味着什么。",
+    updated: "2026-09-21",
+    tools: [
+      { href: "/tools/supplier-document-checker" },
+      { href: "/tools/supplier-verification-checklist" },
+    ],
+    services: [
+      { href: "/services/china-supplier-verification" },
+      { href: "/factory-audit/request" },
+    ],
+    related: ["chinese-supplier-scam-red-flags", "how-to-verify-a-chinese-supplier", "supplier-risk-assessment-guide"],
+    en: {
+      quickAnswer:
+        "Every Chinese company has an 18-digit unified social credit code on its business license. Verify the code, legal name and business scope against the National Enterprise Credit Information Publicity System; any mismatch with the contract or bank account is a stop.",
+      definition:
+        "Company registration in China is recorded in the National Enterprise Credit Information Publicity System under a unified social credit code that fuses the old organisation, tax and social-security numbers. Checking it confirms a supplier is a real, registered legal entity.",
+      keyPoints: [
+        "The unified social credit code is 18 characters: a digit/letter mix unique to each entity.",
+        "The legal name on the license must match the contract, invoice and bank account exactly.",
+        "Business scope shows what the company may legally do; a 'manufacturer' with no production scope is a trader or shell.",
+        "Abnormal operation status (经营异常) or serious violations are public and must block the deal.",
+        "Foreign buyers cannot always log in to the registry; use a verification service or a local check.",
+      ],
+      steps: [
+        { title: "Get the exact legal name and code", body: "Ask the supplier for the business license (or a clear photo) and copy the 18-digit code and full legal name verbatim." },
+        { title: "Search the public registry", body: "Enter the code at the National Enterprise Credit Information Publicity System. Confirm the entity exists, its status is normal, and the scope fits." },
+        { title: "Match name, account and scope", body: "The license name must equal the contract party and the receiving bank account; the scope must cover the product made or traded." },
+        { title: "Check penalties and anomalies", body: "Read the abnormal-operation and penalty sections. Any serious violation or 'listed abnormal' status is a red flag." },
+      ],
+      examples: [
+        { title: "Trader posing as factory", body: "The license scope was 'wholesale', not manufacturing; the 'factory' was a trading shell with no production licence." },
+        { title: "Name mismatch on the account", body: "The contract party and the receiving bank account belonged to two different entities, exposing a pass-through scam." },
+      ],
+      checklist: [
+        "18-digit unified social credit code obtained",
+        "Entity found in the public registry",
+        "Status is normal, not abnormal or revoked",
+        "Legal name matches contract, invoice and bank account",
+        "Business scope covers the product",
+        "No serious violations or penalty records",
+        "Establishment date and capital look consistent with claims",
+        "Registered address is a real office or plant, not a virtual one",
+      ],
+      faq: [
+        { q: "Can I check it myself from outside China?", a: "The registry is public but sometimes needs a local number or captcha; many buyers use a verification service or ask a local agent." },
+        { q: "What if the code is 15 digits?", a: "Older organisation codes were 9-15 digits. The unified code has been mandatory since 2015; insist on the 18-digit code." },
+        { q: "Does a valid license mean they are a good factory?", a: "No. It confirms a real legal entity, not capability or quality. Pair it with an audit or sample before scaling." },
+      ],
+      sources: [
+        { name: "National Enterprise Credit Information Publicity System", note: "Official source for credit code, status and penalties." },
+        { name: "FactoryAuditB2B document check", note: "Structured verification of licenses and certificates." },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "每家中国公司在营业执照上都有 18 位统一社会信用代码。在「国家企业信用信息公示系统」核验代码、法律实体名与经营范围；任何与合同或银行账户的不一致都应叫停。",
+      definition:
+        "中国公司登记记录在「国家企业信用信息公示系统」下，以统一社会信用代码管理——它融合了旧的组织机构、税务与社保编号。核验它可确认供应商是真实注册的法律实体。",
+      keyPoints: [
+        "统一社会信用代码为 18 位，由数字与字母组成，每家企业唯一。",
+        "执照上的法律名称必须与合同、发票、银行账户完全一致。",
+        "经营范围显示公司可合法从事的业务；自称「工厂」却无生产范围的，是贸易商或空壳。",
+        "经营异常或严重违法信息对外公示，必须阻断交易。",
+        "境外买家未必能登录登记系统，可用核验服务或本地核查替代。",
+      ],
+      steps: [
+        { title: "拿到准确法律名称与代码", body: "向供应商要营业执照（或清晰照片），逐字抄下 18 位代码与完整法律名称。" },
+        { title: "检索公示系统", body: "在「国家企业信用信息公示系统」输入代码，确认实体存在、状态正常、范围相符。" },
+        { title: "比对名称、账户与范围", body: "执照名称须等于合同主体与收款银行账户；范围须覆盖所制造或贸易的产品。" },
+        { title: "查处罚与异常", body: "读「经营异常」与「行政处罚」栏目。任何严重违法或列入异常都属红旗。" },
+      ],
+      examples: [
+        { title: "冒充工厂的贸易商", body: "执照范围为「批发」而非生产；该「工厂」是无生产许可的贸易空壳。" },
+        { title: "账户名不一致", body: "合同主体与收款银行账户分属两个实体，暴露过账骗局。" },
+      ],
+      checklist: [
+        "已取得 18 位统一社会信用代码",
+        "实体在公示系统中可查",
+        "状态正常，非异常或注销",
+        "法律名称与合同、发票、银行账户一致",
+        "经营范围覆盖该产品",
+        "无严重违法或处罚记录",
+        "成立日期与注册资本与说法相符",
+        "注册地址是真实办公或厂房，非虚拟地址",
+      ],
+      faq: [
+        { q: "我在境外能自己查吗？", a: "公示系统对外公开，但有时需本地手机号或验证码；许多买家用核验服务或请本地代理。" },
+        { q: "代码是 15 位怎么办？", a: "旧组织机构代码为 9-15 位。统一代码自 2015 年起强制，须坚持 18 位。" },
+        { q: "执照有效就等于好工厂吗？", a: "不等于。它只确认是真实法律实体，不代表能力或质量。配合验厂或打样再放量。" },
+      ],
+      sources: [
+        { name: "国家企业信用信息公示系统", note: "代码、状态与处罚的官方来源。" },
+        { name: "FactoryAuditB2B 文件核查", note: "执照与证书的结构化核验。" },
+      ],
+    },
+  },
+  {
+    slug: "alibaba-trade-assurance-safe-payment",
+    category: "risk",
+    titleEn: "Alibaba Trade Assurance: How It Protects Your Sourcing Payment",
+    titleZh: "阿里 Trade Assurance 安全付款：保护你的采购资金",
+    metaDescEn:
+      "What Alibaba Trade Assurance covers, how the escrow-style protection works, its limits, and how to combine it with inspection for safe sourcing.",
+    metaDescZh:
+      "阿里 Trade Assurance 保什么、类托管保护如何运作、它的局限，以及如何与验货结合实现安全采购。",
+    updated: "2026-09-21",
+    tools: [
+      { href: "/tools/supplier-verification-checklist" },
+      { href: "/tools/compare" },
+    ],
+    services: [
+      { href: "/services/inspection" },
+      { href: "/services/china-supplier-verification" },
+    ],
+    related: ["verify-supplier-before-deposit", "chinese-supplier-scam-red-flags", "pre-shipment-inspection-checklist"],
+    en: {
+      quickAnswer:
+        "Trade Assurance is Alibaba's free order-protection programme: your payment is held and only released against agreed terms, and you can claim if the supplier fails to ship or ships non-conforming goods. It is not insurance and caps at the supplier's coverage, so pair it with inspection.",
+      definition:
+        "Trade Assurance is a built-in protection on Alibaba.com that covers orders placed and paid through the platform. It gives the buyer a contractual route to a refund or re-shipment when the supplier breaches the agreed product, quantity, delivery or quality terms.",
+      keyPoints: [
+        "Coverage applies only to orders paid through Alibaba's specified channels, not off-platform wires.",
+        "It protects against non-shipment, late delivery and goods not matching the contract.",
+        "It is not insurance; payout is capped by the supplier's available coverage and the claim evidence.",
+        "You must open the dispute with photos, inspection reports and the contract within the window.",
+        "Combine it with a pre-shipment inspection to catch quality issues before release.",
+      ],
+      steps: [
+        { title: "Place and pay on-platform", body: "Create the order through Trade Assurance and pay via Alibaba's channels so the protection attaches to the transaction." },
+        { title: "Lock the contract terms", body: "State product spec, quantity, price, delivery date and acceptance standard clearly; disputes are judged against these terms." },
+        { title: "Inspect before releasing payment", body: "Order a pre-shipment inspection; if it fails, hold payment and open a dispute with the report as evidence." },
+        { title: "Open a dispute in time", body: "If the supplier breaches, file within the allowed window with photos, the inspection report and messages as proof." },
+      ],
+      examples: [
+        { title: "Refund after failed inspection", body: "A buyer withheld release after a pre-shipment inspection found the wrong material, then won a Trade Assurance refund using the report." },
+        { title: "No cover off-platform", body: "A buyer who wired outside Alibaba had no claim when goods never arrived; the protection never attached." },
+      ],
+      checklist: [
+        "Order created under Trade Assurance",
+        "Payment through Alibaba's specified channels",
+        "Contract states spec, quantity, date and acceptance",
+        "Pre-shipment inspection booked before release",
+        "Dispute window and evidence rules noted",
+        "Supplier coverage limit checked against order value",
+        "Communication kept on the platform",
+        "Photos and reports saved from day one",
+      ],
+      faq: [
+        { q: "Is Trade Assurance the same as insurance?", a: "No. It is a platform-backed order protection with limits, not a policy. For high-value orders, add inspection and your own terms." },
+        { q: "Does it cover quality defects?", a: "Yes, if the goods do not match the contracted spec and you prove it with inspection and photos within the window." },
+        { q: "What if I paid by bank transfer directly?", a: "Then the protection does not attach. Always pay through the Alibaba channel named in the order." },
+      ],
+      sources: [
+        { name: "Alibaba Trade Assurance terms", note: "The official coverage and dispute rules." },
+        { name: "FactoryAuditB2B pre-shipment inspection", note: "Evidence that strengthens any claim." },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "Trade Assurance 是阿里免费的交易保护机制：货款被托管，仅在约定条款达成后释放；若供应商不发货或发不符货物，你可索赔。它不是保险且有额度上限，须与验货搭配。",
+      definition:
+        "Trade Assurance 是阿里国际站内置的保护，覆盖通过平台下单并付款的订单。当供应商违反约定的产品、数量、交期或质量条款时，买家可据此获得退款或补发。",
+      keyPoints: [
+        "保护只适用于经阿里指定渠道付款的订单，不适用于离开平台的电汇。",
+        "它保护不发货、迟交以及货物与合同不符。",
+        "它不是保险；赔付受供应商可用额度与索赔证据上限约束。",
+        "必须在窗口内凭照片、验货报告与合同发起纠纷。",
+        "与出货前验货结合，可在放款前拦下质量问题。",
+      ],
+      steps: [
+        { title: "在平台内下单并付款", body: "通过 Trade Assurance 建单并用阿里渠道付款，保护才附加到该交易。" },
+        { title: "锁定合同条款", body: "清楚写明产品规格、数量、价格、交期与验收标准；纠纷依这些条款判定。" },
+        { title: "放款前验货", body: "订出货前验货；不通过则扣留货款，并以报告为证据发起纠纷。" },
+        { title: "及时发起纠纷", body: "若供应商违约，在允许窗口内凭照片、验货报告与聊天记录举证。" },
+      ],
+      examples: [
+        { title: "验货不通过获退款", body: "某买家在出货前验货发现材质错误，扣留放款，凭报告赢得 Trade Assurance 退款。" },
+        { title: "离开平台无保障", body: "某买家在阿里外电汇，货未到却无索赔依据；保护从未附加。" },
+      ],
+      checklist: [
+        "订单建在 Trade Assurance 下",
+        "经阿里指定渠道付款",
+        "合同写明规格、数量、交期与验收",
+        "放款前已订出货前验货",
+        "已留意纠纷窗口与证据规则",
+        "已核对供应商额度与订单金额",
+        "沟通留在平台内",
+        "从第一天起保存照片与报告",
+      ],
+      faq: [
+        { q: "Trade Assurance 等于保险吗？", a: "不等于。它是平台托底的订单保护且有上限，非保单。高值订单请加验货与自有条款。" },
+        { q: "覆盖质量缺陷吗？", a: "覆盖，前提是货物不符合同规格，且你在窗口内用验货与照片举证。" },
+        { q: "我直接银行转账了怎么办？", a: "保护不附加。务必通过订单中指定的阿里渠道付款。" },
+      ],
+      sources: [
+        { name: "阿里 Trade Assurance 条款", note: "官方保障与纠纷规则。" },
+        { name: "FactoryAuditB2B 出货前验货", note: "强化任何索赔的证据。" },
+      ],
+    },
+  },
+  {
+    slug: "verify-supplier-before-deposit",
+    category: "risk",
+    titleEn: "Verify a Supplier Before Paying Deposit: 5-Step Checklist",
+    titleZh: "付定金前验证供应商：5 步清单避免被骗",
+    metaDescEn:
+      "A practical pre-deposit verification sequence: entity check, sample, video, references and contract terms that protect your advance payment.",
+    metaDescZh:
+      "实用的付定金前核验流程：实体核查、打样、视频、参考与合同条款，保护你的预付款。",
+    updated: "2026-09-21",
+    tools: [
+      { href: "/tools/supplier-verification-checklist" },
+      { href: "/tools/supplier-risk-calculator" },
+    ],
+    services: [
+      { href: "/services/supplier-verification" },
+      { href: "/factory-audit/request" },
+    ],
+    related: ["chinese-supplier-scam-red-flags", "how-to-check-china-company-registration", "alibaba-trade-assurance-safe-payment"],
+    en: {
+      quickAnswer:
+        "Before any deposit, confirm the legal entity, order a paid sample to your spec, verify the site by video or third-party visit, check references, and put acceptance terms in the contract. These five steps stop most advance-payment fraud.",
+      definition:
+        "Pre-deposit verification is the sequence of checks a buyer runs before releasing an advance payment. Because deposits are hard to recover, the goal is to convert trust into evidence: a real entity, real capability and a contract that lets you claw back.",
+      keyPoints: [
+        "Verify the entity (credit code, license, bank account match) before money moves.",
+        "A paid sample to your spec reveals real production ability, not just photos.",
+        "Video call on the line or a third-party visit confirms a real plant exists.",
+        "References from other buyers reduce the chance of a fresh shell company.",
+        "Contract acceptance terms and escrow make recovery possible if things go wrong.",
+      ],
+      steps: [
+        { title: "Verify the legal entity", body: "Check the unified social credit code and confirm the license name matches the contract and bank account. No match, no deposit." },
+        { title: "Order a paid sample", body: "Pay for a sample made to your specification. A real factory delivers; a scammer stalls or sends a generic item." },
+        { title: "Confirm the site", body: "Do a live video walk of the line or commission a third-party visit. A real address and equipment are hard to fake." },
+        { title: "Check references", body: "Ask for two buyer references and, if possible, verify them. A long export history is harder to invent than a website." },
+        { title: "Set contract and payment terms", body: "Write acceptance criteria, inspection rights and use escrow or staged payment so you can withhold or recover." },
+      ],
+      examples: [
+        { title: "Sample exposed a trader", body: "The 'manufacturer' could not produce the sample to spec and routed to a third party, revealing it was a pass-through." },
+        { title: "Reference check saved the deposit", body: "One reference confirmed a bad experience; the buyer walked away before wiring the deposit." },
+      ],
+      checklist: [
+        "Entity verified (code, license, account match)",
+        "Paid sample produced to spec",
+        "Site confirmed by video or visit",
+        "At least two buyer references checked",
+        "Acceptance criteria written in contract",
+        "Inspection right and escrow/staged payment agreed",
+        "No off-platform personal-wire request accepted",
+        "Deposit amount proportionate to verified trust",
+      ],
+      faq: [
+        { q: "How much deposit is safe?", a: "Lower is safer. Many buyers start at 30% with escrow, and only raise it after a proven track record." },
+        { q: "Is a sample enough on its own?", a: "It is strong evidence but pair it with entity and site checks; a sample alone can still come from a broker." },
+        { q: "What if they refuse a contract?", a: "Treat refusal as a stop. A genuine supplier expects written terms." },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B verification workflow", note: "Entity, sample and on-site steps in one flow." },
+        { name: "Supplier verification checklist tool", note: "A reusable pre-deposit checklist." },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "付任何定金前，先确认法律实体、按你的规格订付费样品、用视频或第三方走访核实现场、查参考、并把验收条款写进合同。这五步能拦下多数预付款诈骗。",
+      definition:
+        "付定金前核验是买家在放出预付款前执行的一连串检查。因为定金难追回，目标是把信任变成证据：真实实体、真实能力，以及一份能让你挽回损失的合同。",
+      keyPoints: [
+        "放款前核实实体（信用代码、执照、银行账户一致）。",
+        "按你规格的付费样品能暴露真实生产能力，而非仅照片。",
+        "产线视频或第三方走访确认真实工厂存在。",
+        "其他买家的参考降低遇到全新空壳的概率。",
+        "合同验收条款与托管让出问题时可扣留或追回。",
+      ],
+      steps: [
+        { title: "核实法律实体", body: "查统一社会信用代码，确认执照名与合同及银行账户一致。不一致就不付定金。" },
+        { title: "订付费样品", body: "为按你规格制作的样品付款。真实工厂能交付；骗子拖延或发通用货。" },
+        { title: "核实现场", body: "做产线实时视频或委托第三方走访。真实地址与设备难以伪造。" },
+        { title: "查参考", body: "要两个买家参考并尽可能核实。长期出口历史比网站更难编造。" },
+        { title: "定合同与付款条款", body: "写清验收标准、验货权，用托管或分期付款以便扣留或追回。" },
+      ],
+      examples: [
+        { title: "样品暴露贸易商", body: "该「制造商」无法按规格打样并转给第三方，暴露其为过账商。" },
+        { title: "参考核查保住定金", body: "一个参考证实不良经历，买家在电汇前退出。" },
+      ],
+      checklist: [
+        "实体已核实（代码、执照、账户一致）",
+        "已按规格交付付费样品",
+        "现场经视频或走访确认",
+        "至少两个买家参考已查",
+        "验收标准写入合同",
+        "验货权与托管/分期付款已约定",
+        "不接受离开平台的个人电汇要求",
+        "定金比例与已核实信任相称",
+      ],
+      faq: [
+        { q: "多少定金安全？", a: "越低越安全。许多买家以 30% 托管起步，有记录后再提高。" },
+        { q: "样品本身够吗？", a: "是强证据，但需配合实体与现场核查；单一样品也可能来自中间商。" },
+        { q: "拒绝合同怎么办？", a: "视为叫停。真实供应商期待书面条款。" },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B 核验流程", note: "实体、样品与现场一步到位。" },
+        { name: "供应商核验清单工具", note: "可复用的付定金前清单。" },
+      ],
+    },
+  },
+  {
+    slug: "common-b2b-procurement-fraud",
+    category: "risk",
+    titleEn: "Common B2B Procurement Fraud Tactics (with Real Cases)",
+    titleZh: "B2B 采购常见诈骗手法与真实案例解析",
+    metaDescEn:
+      "The tactics behind B2B sourcing fraud: fake factories, phantom shipments, invoice redirect and certificate reuse, with cases and how verification stops each.",
+    metaDescZh:
+      "B2B 采购诈骗的手法：假工厂、幽灵发货、发票重定向与证书套用，附案例与核验如何逐一拦截。",
+    updated: "2026-09-21",
+    tools: [
+      { href: "/tools/supplier-risk-calculator" },
+      { href: "/tools/supplier-document-checker" },
+    ],
+    services: [
+      { href: "/services/supplier-verification" },
+      { href: "/factory-audit/request" },
+    ],
+    related: ["chinese-supplier-scam-red-flags", "verify-supplier-before-deposit", "how-to-check-china-company-registration"],
+    en: {
+      quickAnswer:
+        "The four common tactics are fake-factory posing, phantom shipments (paid but never sent or sent junk), invoice-redirect to a fraudulent account, and reused certificates. Each is stopped by entity verification, sample, on-platform payment and document checks.",
+      definition:
+        "B2B procurement fraud uses the distance and trust gap in cross-border buying to take payment without delivering value. Knowing the playbook lets a buyer build checks that defeat each tactic before money moves.",
+      keyPoints: [
+        "Fake-factory scams show stock photos and refuse site visits while claiming to be the maker.",
+        "Phantom shipments take full payment then send nothing, or stuff containers with worthless goods.",
+        "Invoice redirect swaps the receiving account at the last moment, often after a hack or social engineering.",
+        "Certificate reuse puts a real certificate from another company on the bid.",
+        "All four fail against entity check, sample, escrow and document verification.",
+      ],
+      steps: [
+        { title: "Map the tactic to a control", body: "Treat each known tactic as a checklist item: entity, sample, payment channel, document check." },
+        { title: "Block fake-factory with a visit", body: "Require a video walk or third-party audit; a real maker shows the line, not a brochure." },
+        { title: "Stop phantom shipments with escrow", body: "Release payment only against inspection and shipping proof; never prepay in full to an unknown entity." },
+        { title: "Defeat invoice redirect", body: "Verify any account change by a second channel and write the account into the contract; treat last-minute swaps as fraud." },
+      ],
+      examples: [
+        { title: "The swapped account", body: "Mid-deal the 'supplier' emailed new bank details; a phone check to the verified number exposed the redirected fraud." },
+        { title: "The empty container", body: "Full payment sent, container arrived with scrap; escrow and inspection would have stopped the release." },
+      ],
+      checklist: [
+        "Entity verified before any payment",
+        "Site confirmed by video or third-party audit",
+        "Sample produced to spec",
+        "Payment on platform or escrow, not full prepay",
+        "Certificate numbers checked against issuer",
+        "Bank account matches contract and is re-verified on change",
+        "Shipping proof and inspection before release",
+        "Second-channel confirmation for any account change",
+      ],
+      faq: [
+        { q: "Which tactic is most common?", a: "Fake-factory posing and invoice redirect are frequent; both fail against basic entity and account verification." },
+        { q: "Can a big platform listing prevent this?", a: "It lowers risk but does not remove it; still verify the entity and use protected payment." },
+        { q: "What is the cheapest control?", a: "The entity and certificate check via public registries costs little and stops most bad actors." },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B risk assessment", note: "Scores and maps supplier risk before ordering." },
+        { name: "Enterprise credit registry", note: "The free control behind entity verification." },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "四种常见手法：冒充工厂、幽灵发货（收款不发货或发废料）、发票重定向到欺诈账户、套用证书。逐一靠实体核验、打样、平台付款与文件核查拦截。",
+      definition:
+        "B2B 采购诈骗利用跨境采购的距离与信任缺口，收款却交付无价值。了解套路可让买家建立在钱移动前就击败每种手法的检查。",
+      keyPoints: [
+        "冒充工厂骗局展示库存图、拒绝走访，却自称制造商。",
+        "幽灵发货收全款后不发货，或往集装箱塞 worthless 货物。",
+        "发票重定向在最后一刻换收款账户，常经黑客或社工。",
+        "证书套用把别家真实证书贴到投标上。",
+        "四种都败于实体核查、打样、托管与文件核验。",
+      ],
+      steps: [
+        { title: "把手法映射到控制", body: "将每种已知手法作为清单项：实体、样品、付款渠道、文件核查。" },
+        { title: "用走访拦冒充工厂", body: "要求产线视频或第三方审核；真实制造商展示产线而非宣传册。" },
+        { title: "用托管拦幽灵发货", body: "仅凭验货与发货证明放款；绝不对未知实体全款预付。" },
+        { title: "破解发票重定向", body: "任何账户变更用第二渠道核实并写入合同；把临门一脚换账户视为欺诈。" },
+      ],
+      examples: [
+        { title: "被替换的账户", body: "交易中段「供应商」邮件发来新银行信息；用已核实号码电话核对揭穿重定向欺诈。" },
+        { title: "空集装箱", body: "付全款，集装箱到货是废料；托管与验货本可拦下放款。" },
+      ],
+      checklist: [
+        "任何付款前实体已核实",
+        "现场经视频或第三方审核确认",
+        "已按规格打样",
+        "平台或托管付款，非全款预付",
+        "证书号在发证机构可查",
+        "银行账户与合同一致且变更时重新核实",
+        "放款前有发货证明与验货",
+        "任何账户变更经第二渠道确认",
+      ],
+      faq: [
+        { q: "哪种手法最常见？", a: "冒充工厂与发票重定向频发；两者都败于基本实体与账户核验。" },
+        { q: "大平台店铺能防吗？", a: "降低风险但不消除；仍要核实实体并用受保护付款。" },
+        { q: "最便宜的控制是什么？", a: "经公示系统做实体与证书核查几乎零成本，却能拦下多数坏人。" },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B 风险评估", note: "下单前为供应商风险打分与映射。" },
+        { name: "企业信用公示系统", note: "实体核验背后的免费控制。" },
+      ],
+    },
+  },
+  {
+    slug: "what-is-quality-management-system",
+    category: "audit",
+    titleEn: "What Is a Quality Management System (QMS): The Operating System of a Manufacturer",
+    titleZh: "质量管理体系(QMS)是什么：制造企业的底层系统",
+    metaDescEn:
+      "A plain explanation of a QMS: what it is, the plan-do-check-act cycle, the documents it produces, and why buyers should care about a supplier's system, not just a certificate.",
+    metaDescZh:
+      "通俗解释 QMS：是什么、PDCA 循环、它产出的文件，以及买家为何该关注供应商的体系而非仅一张证书。",
+    updated: "2026-09-21",
+    tools: [
+      { href: "/tools/audit-checklist" },
+      { href: "/tools/supplier-quality-checker" },
+    ],
+    services: [
+      { href: "/services/inspection" },
+      { href: "/factory-audit/request" },
+    ],
+    related: ["iso-9001-vs-iso-13485", "manufacturing-quality-control-process", "supplier-quality-audit-checklist"],
+    en: {
+      quickAnswer:
+        "A Quality Management System is the repeatable set of processes, documents and responsibilities a factory uses to make the same good product every time. Buyers should judge the system (not just a certificate) because it is what keeps quality consistent batch after batch.",
+      definition:
+        "A QMS is the documented operating system of a manufacturer: how it plans, controls, checks and improves production. Standards like ISO 9001 describe the shape; the QMS is the actual practice on the floor, in the files and in people's habits.",
+      keyPoints: [
+        "A QMS turns 'good luck' into 'repeatable process' so quality does not depend on one person.",
+        "The core loop is Plan-Do-Check-Act (PDCA), repeated for every process.",
+        "It produces real artefacts: quality manuals, procedures, work instructions, records and corrective actions.",
+        "A certificate shows intent; the system shows whether quality actually holds across batches.",
+        "Buyers use the QMS to predict consistency, not just to tick a box at audit time.",
+      ],
+      steps: [
+        { title: "Map the process flow", body: "List each step from incoming material to shipment and the control at each step. Gaps here are where defects are born." },
+        { title: "Require documented procedures", body: "Each critical process needs a written instruction and an owner, so training and execution do not drift." },
+        { title: "Demand records, not promises", body: "Ask for recent inspection records and corrective-action reports; records prove the system runs." },
+        { title: "Verify at audit", body: "During a factory audit, check that documents match the floor: instructions posted, checks done, non-conformance handled." },
+      ],
+      examples: [
+        { title: "Two certificates, one result", body: "Two suppliers held ISO 9001, but only one had records and corrective actions on the floor; only that one held spec across reorders." },
+        { title: "System beat heroics", body: "A plant without a star operator but with a real QMS outperformed a plant that relied on one experienced line leader who left." },
+      ],
+      checklist: [
+        "Process flow documented from incoming to shipment",
+        "Quality manual and procedures exist and are current",
+        "Each critical process has an owner and work instruction",
+        "Inspection and test records retained and retrievable",
+        "Non-conformance handled by corrective action, not silence",
+        "Management review evidence exists",
+        "Training records show competence",
+        "PDCA visible in how issues are closed",
+      ],
+      faq: [
+        { q: "Is a QMS the same as ISO 9001?", a: "ISO 9001 is a standard that defines what a QMS should cover; the QMS is the supplier's actual system. A certificate says they aim for it; records show if they run it." },
+        { q: "Do small factories need a formal QMS?", a: "Even a simple one helps. The point is repeatable process and records, not the size of the binder." },
+        { q: "Why should a buyer care about the system?", a: "Because consistency across batches protects your reorders. A one-off good sample means little without a system behind it." },
+      ],
+      sources: [
+        { name: "ISO 9001 quality management principles", note: "The reference shape of a QMS." },
+        { name: "FactoryAuditB2B factory audit", note: "Where the system is verified against the floor." },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "质量管理体系是工厂用来「每次都做出同样好产品」的可重复流程、文件与职责集合。买家应看体系（而非仅一张证书），因为它决定质量能否批批稳定。",
+      definition:
+        "QMS 是制造商成文的操作系统：如何计划、控制、检查并改进生产。ISO 9001 之类标准描述其形状，QMS 是车间、文件与人习惯里的真实实践。",
+      keyPoints: [
+        "QMS 把「靠运气」变成「可重复流程」，质量不再依赖某一个人。",
+        "核心循环是 PDCA（计划-执行-检查-处理），对每个流程反复进行。",
+        "它产出真实物证：质量手册、程序、作业指导书、记录与纠正措施。",
+        "证书代表意图；体系代表质量是否跨批次真正稳定。",
+        "买家用 QMS 预测一致性，而非仅在审核时打个勾。",
+      ],
+      steps: [
+        { title: "梳理流程", body: "列出从来料到出货的每一步及每步控制点。这里的缺口就是缺陷的源头。" },
+        { title: "要求成文程序", body: "每个关键流程需有书面作业指导书与负责人，避免培训与执行漂移。" },
+        { title: "要记录不要承诺", body: "索取近期检验记录与纠正措施报告；记录证明体系在运行。" },
+        { title: "审核时核实", body: "验厂时核对文件与现场一致：指导书张贴、检查执行、不合格被处理。" },
+      ],
+      examples: [
+        { title: "两证一果", body: "两家都持 ISO 9001，但只有一家有现场记录与纠正措施；只有这家在多次返单中保持规格。" },
+        { title: "体系胜过个人英雄", body: "一家无明星操作员但有真实 QMS 的厂，胜过了一家依赖一位离职产线老手的厂。" },
+      ],
+      checklist: [
+        "来料到出货的流程已成文",
+        "质量手册与程序存在且现行有效",
+        "每个关键流程有负责人与作业指导书",
+        "检验与测试记录留存可取",
+        "不合格以纠正措施处理，而非掩盖",
+        "管理层评审证据存在",
+        "培训记录证明能力",
+        "PDCA 体现在问题关闭方式中",
+      ],
+      faq: [
+        { q: "QMS 等于 ISO 9001 吗？", a: "ISO 9001 是定义 QMS 应覆盖什么的标准；QMS 是供应商的真实体系。证书说明其目标；记录说明其是否运行。" },
+        { q: "小厂需要正式 QMS 吗？", a: "简单的一套也有帮助。重点是可重复流程与记录，而非文件厚薄。" },
+        { q: "买家为何要关心体系？", a: "因为跨批次一致性保护你的返单。没有体系支撑，一次好样品意义不大。" },
+      ],
+      sources: [
+        { name: "ISO 9001 质量管理原则", note: "QMS 的参考形状。" },
+        { name: "FactoryAuditB2B 工厂审核", note: "体系与现场核对的环节。" },
+      ],
+    },
+  },
+  {
+    slug: "iso-9001-vs-iso-13485",
+    category: "audit",
+    titleEn: "ISO 9001 vs ISO 13485: Which Quality System Fits Your Supplier",
+    titleZh: "ISO 9001 与 ISO 13485 区别：质量体系怎么选",
+    metaDescEn:
+      "The real difference between ISO 9001 and ISO 13485, when a medical-device grade system is required, and how to read a supplier's certificate for sourcing decisions.",
+    metaDescZh:
+      "ISO 9001 与 ISO 13485 的真实区别、何时需要医疗器械级体系，以及如何为采购决策读懂供应商证书。",
+    updated: "2026-09-21",
+    tools: [
+      { href: "/tools/supplier-document-checker" },
+      { href: "/tools/audit-checklist" },
+    ],
+    services: [
+      { href: "/services/inspection" },
+      { href: "/services/supplier-verification" },
+    ],
+    related: ["what-is-quality-management-system", "supplier-quality-audit-checklist", "manufacturing-quality-control-process"],
+    en: {
+      quickAnswer:
+        "ISO 9001 is the general quality-management standard for any industry; ISO 13485 is ISO 9001 adapted for medical devices, with stricter control of documentation, traceability and risk. Choose 13485 only when the product is a regulated medical device; otherwise 9001 suffices.",
+      definition:
+        "Both are QMS standards. ISO 9001 sets the baseline for consistent quality in any organisation. ISO 13485 builds on it for the medical-device sector, where patient safety demands stronger records, traceability and risk controls than general manufacturing.",
+      keyPoints: [
+        "ISO 9001 fits general manufacturing, trading and service suppliers.",
+        "ISO 13485 is required for most regulated medical-device production and some components.",
+        "13485 removes the 'continuous improvement' clause and hardens documentation and traceability instead.",
+        "A 13485 certificate does not mean the factory makes any device well; scope still matters.",
+        "Read the certificate scope and accreditation body, not just the logo, before deciding.",
+      ],
+      steps: [
+        { title: "Confirm the product's regulatory class", body: "If it is a medical device under FDA, EU MDR or similar, 13485 is typically expected; otherwise 9001 is enough." },
+        { title: "Read the certificate scope", body: "Check which products and sites the certificate covers. A logo on the wall is not proof for your item." },
+        { title: "Verify the accreditation body", body: "A recognised accreditor (e.g. UKAS, ANAB, DAkkS) matters more than the certificate paper." },
+        { title: "Audit the practice, not the logo", body: "During a supplier audit, confirm traceability and records match the claimed standard." },
+      ],
+      examples: [
+        { title: "Right standard, wrong scope", body: "A 13485 certificate covered only packaging, not the device itself; the buyer needed the device scope before qualifying." },
+        { title: "9001 was enough", body: "A non-medical consumer product needed only 9001; pushing for 13485 added cost with no buyer benefit." },
+      ],
+      checklist: [
+        "Product regulatory class confirmed",
+        "Required standard mapped to the class",
+        "Certificate scope covers your product and site",
+        "Accreditation body is recognised",
+        "Certificate valid and not expired",
+        "Traceability and records present on the floor",
+        "Risk controls documented for device work",
+        "Audit confirms practice matches the certificate",
+      ],
+      faq: [
+        { q: "Is 13485 better than 9001?", a: "Not 'better' — more specific. It is the right standard for regulated medical devices and unnecessary for general goods." },
+        { q: "Can a 9001 factory make medical parts?", a: "Only if the device rules allow it and the relevant controls are in place; many regulated devices require 13485." },
+        { q: "What if the certificate is expired?", a: "Treat it as no certificate. Verify the current valid certificate with the accreditation body." },
+      ],
+      sources: [
+        { name: "ISO 13485 standard", note: "The medical-device QMS requirements." },
+        { name: "ISO 9001 standard", note: "The general QMS baseline." },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "ISO 9001 是适用于任何行业的通用质量管理标准；ISO 13485 是为其适配医疗器械的版本，对文件、可追溯性与风险的控制更严。仅当产品是受监管医疗器械时才选 13485，否则 9001 足够。",
+      definition:
+        "两者都是 QMS 标准。ISO 9001 为任何组织设定一致质量的基线。ISO 13485 在其上针对医疗器械行业，因患者安全需在记录、可追溯性与风险控制上强于普通制造。",
+      keyPoints: [
+        "ISO 9001 适用于通用制造、贸易与服务供应商。",
+        "ISO 13485 是多数受监管医疗器械生产及部分零部件所需。",
+        "13485 去掉「持续改进」条款，转而强化文件与可追溯性。",
+        "持 13485 证书不代表工厂任何器械都做得好；范围仍关键。",
+        "决策前读证书范围与认可机构，而非仅看标志。",
+      ],
+      steps: [
+        { title: "确认产品监管类别", body: "若属 FDA、欧盟 MDR 等下的医疗器械，通常期望 13485；否则 9001 足够。" },
+        { title: "读证书范围", body: "查证书覆盖哪些产品与场所。墙上标志不等于你的物料被覆盖。" },
+        { title: "核实认可机构", body: "受认可的认可机构（如 UKAS、ANAB、DAkkS）比证书纸张更重要。" },
+        { title: "审实践而非标志", body: "供应商审核时确认可追溯性与记录符合声称标准。" },
+      ],
+      examples: [
+        { title: "标准对范围错", body: "一份 13485 证书仅覆盖包装而非器械本身；买家在准入前需要器械范围。" },
+        { title: "9001 已足够", body: "非医疗消费品只需 9001；强求 13485 徒增成本无收益。" },
+      ],
+      checklist: [
+        "已确认产品监管类别",
+        "所需标准已映射到类别",
+        "证书范围覆盖你的产品与场所",
+        "认可机构受承认",
+        "证书有效未过期",
+        "现场有可追溯性与记录",
+        "器械工作有书面风险控制",
+        "审核确认实践符合证书",
+      ],
+      faq: [
+        { q: "13485 比 9001 好？", a: "不是「更好」而是更专。它是受监管医疗器械的正确标准，对普通货品不必要。" },
+        { q: "9001 工厂能做医疗零件吗？", a: "仅当器械规则允许且相关控制到位；许多受监管器械要求 13485。" },
+        { q: "证书过期怎么办？", a: "视为无证书。向认可机构核实当前有效证书。" },
+      ],
+      sources: [
+        { name: "ISO 13485 标准", note: "医疗器械 QMS 要求。" },
+        { name: "ISO 9001 标准", note: "通用 QMS 基线。" },
+      ],
+    },
+  },
+  {
+    slug: "manufacturing-quality-control-process",
+    category: "audit",
+    titleEn: "Manufacturing Quality Control Process: Incoming, IPQC, FQC and OQC",
+    titleZh: "制造质量控制流程：来料/IPQC/FQC/OQC 全解",
+    metaDescEn:
+      "How a factory controls quality across the line: incoming inspection, in-process IPQC, final FQC and outgoing OQC, with the checkpoints that protect your order.",
+    metaDescZh:
+      "工厂如何在线控制质量：来料检验、过程 IPQC、终检 FQC 与出货 OQC，以及保护你订单的关键控制点。",
+    updated: "2026-09-21",
+    tools: [
+      { href: "/tools/supplier-quality-checker" },
+      { href: "/tools/audit-checklist" },
+    ],
+    services: [
+      { href: "/services/inspection" },
+      { href: "/factory-audit/request" },
+    ],
+    related: ["what-is-quality-management-system", "supplier-quality-audit-checklist", "ppap-production-part-approval"],
+    en: {
+      quickAnswer:
+        "Quality control runs at four gates: incoming (IQC) checks materials, in-process (IPQC) watches the line, final (FQC) checks the finished unit, and outgoing (OQC) verifies before shipment. Ask which gates a supplier actually runs before you rely on them.",
+      definition:
+        "Quality control is the set of inspections along production that catch defects before they reach you. The four standard gates — IQC, IPQC, FQC, OQC — split responsibility so a problem is found at the cheapest point, not after delivery.",
+      keyPoints: [
+        "IQC checks raw materials and components on arrival; bad inputs doom the output.",
+        "IPQC samples during production to catch drift, tooling wear and setup errors early.",
+        "FQC inspects the finished product against the spec before it is packed.",
+        "OQC verifies the packed lot and the right quantity and labelling before it leaves.",
+        "A factory that skips gates saves pennies and ships your risk; verify which it runs.",
+      ],
+      steps: [
+        { title: "Define accept criteria per gate", body: "Write the AQL or spec for IQC, IPQC, FQC and OQC so checks are comparable, not casual." },
+        { title: "Ask for the QC plan", body: "Request the supplier's inspection plan and recent records; absence of a plan is a warning." },
+        { title: "Add your own inspection", body: "Book a pre-shipment (FQC/OQC) inspection so an independent check confirms the lot before it ships." },
+        { title: "Close loops with CAPA", body: "When a gate fails, require corrective and preventive action so the same defect does not repeat." },
+      ],
+      examples: [
+        { title: "IQC caught the sub", body: "Incoming check found plating thickness below spec; stopping at IQC avoided a full batch recall later." },
+        { title: "No IPQC, line drift", body: "A line drifted after a tool change with no IPQC; defects surfaced only at FQC and delayed the whole order." },
+      ],
+      checklist: [
+        "IQC plan for incoming materials",
+        "IPQC points defined along the line",
+        "FQC against the finished spec",
+        "OQC before shipment (quantity, label, packing)",
+        "AQL or spec written for each gate",
+        "Records retained per batch",
+        "Failed lots trigger CAPA",
+        "Independent pre-shipment inspection booked",
+      ],
+      faq: [
+        { q: "Is FQC the same as a pre-shipment inspection?", a: "FQC is the factory's own final check; a pre-shipment inspection is your independent verification, ideally both." },
+        { q: "Do I need all four gates?", a: "For critical or high-value items, yes. For simple goods, at least IQC and OQC protect most risk." },
+        { q: "What if the supplier has no QC plan?", a: "Treat it as a major risk and add your own inspection, or qualify a supplier that does." },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B inspection services", note: "Independent FQC/OQC verification." },
+        { name: "AQL sampling standard", note: "The common acceptance rule for each gate." },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "质量控制设在四道闸门：来料(IQC)查物料、过程(IPQC)盯产线、终检(FQC)查成品、出货(OQC)发货前核实。依赖供应商前先问它真正跑了哪些闸门。",
+      definition:
+        "质量控制是生产沿线的一系列检验，在你收到前拦下缺陷。四个标准闸门——IQC、IPQC、FQC、OQC——分摊责任，让问题在最便宜的环节被发现，而非交货后。",
+      keyPoints: [
+        "IQC 在到货时查原材料与零部件；坏输入注定坏输出。",
+        "IPQC 在生产中抽样，及早抓漂移、模具磨损与调机错误。",
+        "FQC 在打包前按规格查成品。",
+        "OQC 在发货前核实已打包批次的数量、标签与包装。",
+        "跳过闸门的工厂省小钱、发你的风险；核实它跑了哪些。",
+      ],
+      steps: [
+        { title: "为每个闸门定义接收标准", body: "为 IQC/IPQC/FQC/OQC 写明 AQL 或规格，使检查可比对而非随意。" },
+        { title: "要 QC 计划", body: "索取供应商检验计划与近期记录；无计划即警告。" },
+        { title: "加你自己的检验", body: "订出货前(FQC/OQC)验货，由独立检查在发货前确认批次。" },
+        { title: "用 CAPA 闭环", body: "闸门失败时要求纠正与预防措施，避免同类缺陷重复。" },
+      ],
+      examples: [
+        { title: "IQC 拦下次品", body: "来料检发现镀层厚度低于规格；在 IQC 叫停避免后续整批召回。" },
+        { title: "无 IPQC 产线漂移", body: "换模后产线漂移且无 IPQC；缺陷仅在 FQC 暴露并拖垮整单。" },
+      ],
+      checklist: [
+        "来料有 IQC 计划",
+        "产线定义 IPQC 点",
+        "成品按规格 FQC",
+        "出货前 OQC（数量、标签、包装）",
+        "每道闸门写明 AQL 或规格",
+        "每批留存记录",
+        "失败批次触发 CAPA",
+        "已订独立出货前验货",
+      ],
+      faq: [
+        { q: "FQC 等于出货前验货吗？", a: "FQC 是工厂自己的终检；出货前验货是你的独立核实，理想是两者都有。" },
+        { q: "四道闸门都要吗？", a: "关键或高值物料要。简单货品至少 IQC 与 OQC 覆盖多数风险。" },
+        { q: "供应商无 QC 计划怎么办？", a: "视为重大风险，加你自己的验货，或准入有计划的供应商。" },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B 验货服务", note: "独立 FQC/OQC 核实。" },
+        { name: "AQL 抽样标准", note: "各闸门的通用接收规则。" },
+      ],
+    },
+  },
+  {
+    slug: "ppap-production-part-approval",
+    category: "audit",
+    titleEn: "PPAP: Production Part Approval Process for Automotive and Precision Sourcing",
+    titleZh: "PPAP 生产件批准流程：汽车与精密制造准入",
+    metaDescEn:
+      "What PPAP is, the 18 elements it requires, when it applies (automotive, aerospace, precision), and how to use it to qualify a supplier before mass production.",
+    metaDescZh:
+      "PPAP 是什么、它要求的 18 项要素、何时适用（汽车、航天、精密），以及如何用它在大批量前准入供应商。",
+    updated: "2026-09-21",
+    tools: [
+      { href: "/tools/supplier-document-checker" },
+      { href: "/tools/audit-checklist" },
+    ],
+    services: [
+      { href: "/services/inspection" },
+      { href: "/factory-audit/request" },
+    ],
+    related: ["what-is-quality-management-system", "manufacturing-quality-control-process", "supplier-quality-audit-checklist"],
+    en: {
+      quickAnswer:
+        "PPAP is the automotive-industry process that proves a supplier can make a part to spec, repeatedly, using the real production tool, line and process. It packages 18 elements (design records, FMEA, control plan, samples, capability studies) into one approval before mass production.",
+      definition:
+        "PPAP — Production Part Approval Process — is an AIAG standard used mainly in automotive, and adopted by aerospace and precision industries, to confirm that a supplier's production process can consistently deliver the approved part. It is the gate between prototype and full production.",
+      keyPoints: [
+        "PPAP proves the part is made on the actual production tool and process, not a one-off prototype.",
+        "It bundles 18 elements: design records, DFMEA/PFMEA, control plan, capability studies, samples and more.",
+        "It is triggered by new parts, engineering changes, tool moves and process shifts.",
+        "A PPAP level defines how many elements the customer requires; level 3 is common.",
+        "Without PPAP, a 'first article' that passes can still fail at volume.",
+      ],
+      steps: [
+        { title: "Agree the PPAP level", body: "With the customer or buyer, set the required PPAP submission level and the part to be approved." },
+        { title: "Build the 18 elements", body: "Assemble design records, FMEAs, control plan, process flow, capability studies (Cpk/Ppk) and sample parts from the real run." },
+        { title: "Run a real production lot", body: "Produce the sample on the actual line and tool so the study reflects volume reality, not a demo." },
+        { title: "Review and approve", body: "The buyer reviews the package; only on approval does mass production begin. Re-PPAP on defined changes." },
+      ],
+      examples: [
+        { title: "Capability stopped a launch", body: "Cpk was below the required 1.33; PPAP caught it before volume, avoiding thousands of out-of-spec parts." },
+        { title: "Tool move needed re-PPAP", body: "Moving the die to a new shop changed results; re-PPAP confirmed the process still held." },
+      ],
+      checklist: [
+        "PPAP level agreed with the buyer",
+        "Design records and change history complete",
+        "DFMEA and PFMEA current",
+        "Control plan matches the process",
+        "Process flow documented",
+        "Capability studies (Cpk/Ppk) meet the target",
+        "Sample parts from the real production run",
+        "Dimensional and material results on file",
+        "Approval signed before mass production",
+        "Re-PPAP triggers defined for changes",
+      ],
+      faq: [
+        { q: "Is PPAP only for automotive?", a: "It originated in automotive (AIAG) but aerospace and precision sectors adopt it because the discipline transfers." },
+        { q: "What Cpk is expected?", a: "Commonly 1.33 or higher for stable processes; the buyer sets the target in the control plan." },
+        { q: "Do I need PPAP for simple parts?", a: "If the part is non-critical and the buyer does not require it, a lighter check may do; for safety or fit-critical parts, PPAP pays off." },
+      ],
+      sources: [
+        { name: "AIAG PPAP standard", note: "The 18-element approval reference." },
+        { name: "FactoryAuditB2B process audit", note: "Where the production process behind PPAP is verified." },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "PPAP 是汽车行业流程，证明供应商能用真实生产工装、产线与工艺反复做出符合规格的零件。它把 18 项要素（设计记录、FMEA、控制计划、样件、能力研究）打包成量产前的单一批准。",
+      definition:
+        "PPAP（生产件批准流程）是主要用于汽车、也被航天与精密行业采用的 AIAG 标准，确认供应商生产工艺能持续交付已批准零件。它是原型与全面生产之间的闸门。",
+      keyPoints: [
+        "PPAP 证明零件是用真实生产工装与工艺制造，而非一次性原型。",
+        "它捆绑 18 项要素：设计记录、DFMEA/PFMEA、控制计划、能力研究、样件等。",
+        "触发条件含新零件、工程变更、工装搬迁与工艺变动。",
+        "PPAP 等级定义客户要求多少要素；3 级常见。",
+        "无 PPAP，通过的「首件」仍可能在量产失败。",
+      ],
+      steps: [
+        { title: "约定 PPAP 等级", body: "与买方约定所需 PPAP 提交等级及待批准零件。" },
+        { title: "构建 18 项", body: "汇总设计记录、FMEA、控制计划、过程流程、能力研究(Cpk/Ppk)与真实试产样件。" },
+        { title: "跑真实生产批", body: "用实际产线与工装生产样件，使研究反映量产现实而非演示。" },
+        { title: "评审批准", body: "买方审包；仅批准后才量产。定义变更时重做 PPAP。" },
+      ],
+      examples: [
+        { title: "能力研究拦下上市", body: "Cpk 低于要求的 1.33；PPAP 在量产前拦下，避免数千件超差零件。" },
+        { title: "工装搬迁需重做", body: "模具搬新厂结果变化；重做 PPAP 确认工艺仍稳。" },
+      ],
+      checklist: [
+        "已与买方约定 PPAP 等级",
+        "设计记录与变更史完整",
+        "DFMEA 与 PFMEA 现行",
+        "控制计划与工艺匹配",
+        "过程流程已成文",
+        "能力研究(Cpk/Ppk)达标",
+        "样件来自真实生产批",
+        "尺寸与材料结果已存档",
+        "量产前批准已签",
+        "已定义变更触发重做 PPAP",
+      ],
+      faq: [
+        { q: "PPAP 只用于汽车？", a: "源于汽车(AIAG)，但航天与精密行业因其纪律可迁移而采用。" },
+        { q: "期望 Cpk 多少？", a: "稳定过程通常 1.33 或更高；买方在控制计划中设定目标。" },
+        { q: "简单零件需要 PPAP 吗？", a: "若零件非关键且买方不要求，轻量检查即可；安全或配合关键件，PPAP 物有所值。" },
+      ],
+      sources: [
+        { name: "AIAG PPAP 标准", note: "18 项批准参考。" },
+        { name: "FactoryAuditB2B 过程审核", note: "核实 PPAP 背后的生产工艺。" },
+      ],
+    },
+  },
+  {
+    slug: "supplier-quality-audit-checklist",
+    category: "audit",
+    titleEn: "Supplier Quality Audit Checklist: The Quality Dimension Beyond a Basic Factory Audit",
+    titleZh: "供应商质量审核清单：区别于常规验厂的质量维度",
+    metaDescEn:
+      "A quality-focused supplier audit checklist: system, incoming and in-process control, measurement and calibration, traceability and CAPA — the dimensions a basic audit misses.",
+    metaDescZh:
+      "以质量为中心的供应商审核清单：体系、来料与过程控制、量测与校准、可追溯性与 CAPA——常规验厂遗漏的维度。",
+    updated: "2026-09-21",
+    tools: [
+      { href: "/tools/supplier-quality-checker" },
+      { href: "/tools/audit-checklist" },
+    ],
+    services: [
+      { href: "/services/inspection" },
+      { href: "/factory-audit/request" },
+    ],
+    related: ["manufacturing-quality-control-process", "what-is-quality-management-system", "iso-9001-vs-iso-13485"],
+    en: {
+      quickAnswer:
+        "A supplier quality audit goes past 'is the factory real' to 'will it hold spec'. Check the QMS, incoming/IPQC controls, gauge calibration, batch traceability and CAPA discipline — the levers that keep your defect rate low across reorders.",
+      definition:
+        "A basic factory audit confirms a site exists and is safe; a supplier quality audit scores the quality system that decides whether your product is made right every time. It is the audit that protects repeat orders, not just the first one.",
+      keyPoints: [
+        "Score the QMS, not just the building: procedures, owners, records.",
+        "Check incoming and in-process control points actually run on the line.",
+        "Verify gauges and test equipment are calibrated and within date.",
+        "Confirm batch traceability from material to finished unit.",
+        "CAPA discipline shows whether defects are fixed or hidden.",
+      ],
+      steps: [
+        { title: "Review the quality system", body: "Read the quality manual and procedures; confirm they exist and match the floor." },
+        { title: "Walk the control points", body: "Observe IQC and IPQC in action; records should match what operators do." },
+        { title: "Check calibration and measuring", body: "Inspect gauge logs and calibration stickers; out-of-date equipment invalidates checks." },
+        { title: "Test traceability and CAPA", body: "Pick a batch and trace it end to end; open a past non-conformance to see if CAPA closed it." },
+      ],
+      examples: [
+        { title: "Calibration gap", body: "A line used an expired caliper; the 'passed' dimensions were untrustworthy until recalibrated." },
+        { title: "Traceability saved a recall", body: "Batch tracing isolated a bad lot to one material sub-supplier, limiting the impact." },
+      ],
+      checklist: [
+        "Quality manual and procedures current",
+        "IQC and IPQC running with records",
+        "Gauges and testers calibrated, in-date",
+        "Batch traceability material to finished unit",
+        "Non-conformance handled by CAPA",
+        "Training records for quality roles",
+        "Management review of quality metrics",
+        "Independent quality audit booked before qualification",
+      ],
+      faq: [
+        { q: "Is this different from a factory audit?", a: "Yes. A factory audit checks existence and compliance; a quality audit scores the system that holds your spec. Both matter; this one protects reorders." },
+        { q: "When do I need a quality audit?", a: "Before qualifying a supplier for recurring or critical orders, not just a one-off sample." },
+        { q: "Can inspection replace it?", a: "Inspection catches a lot; a quality audit explains why defects happen and prevents them. Use both." },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B supplier quality audit", note: "The quality-dimension on-site audit." },
+        { name: "ISO 9001 clause structure", note: "The system areas a quality audit scores." },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "供应商质量审核不止问「工厂真实吗」，更问「能否守住规格」。查 QMS、来料/过程控制、量具校准、批次可追溯性与 CAPA 纪律——这些才是跨返单压低不良率的杠杆。",
+      definition:
+        "基础验厂确认厂区存在且安全；供应商质量审核为决定「产品是否每次都做对」的质量体系打分。它是保护返单而非仅首单的审核。",
+      keyPoints: [
+        "打的是 QMS 而非厂房：程序、负责人、记录。",
+        "查来料与过程控制点是否真的在产线运行。",
+        "核实量具与测试设备已校准且在有效期内。",
+        "确认从物料到成品的批次可追溯。",
+        "CAPA 纪律显示缺陷是被修还是被藏。",
+      ],
+      steps: [
+        { title: "评审质量体系", body: "读质量手册与程序；确认存在且与现场一致。" },
+        { title: "走查控制点", body: "观察 IQC 与 IPQC 实况；记录应与操作员动作一致。" },
+        { title: "查校准与量测", body: "检量具台账与校准标签；过期设备使检查无效。" },
+        { title: "测可追溯与 CAPA", body: "抽一批端到端追溯；打开一桩过往不合格看 CAPA 是否关闭。" },
+      ],
+      examples: [
+        { title: "校准缺口", body: "产线用了过期卡尺；在校准前「通过」的尺寸不可信。" },
+        { title: "可追溯避免召回", body: "批次追溯把坏批隔离到一家材料子供应商，限制影响。" },
+      ],
+      checklist: [
+        "质量手册与程序现行有效",
+        "IQC 与 IPQC 有记录运行",
+        "量具与测试仪已校准在期",
+        "批次可追溯物料到成品",
+        "不合格以 CAPA 处理",
+        "质量岗位培训记录",
+        "质量指标管理层评审",
+        "准入前已订独立质量审核",
+      ],
+      faq: [
+        { q: "这和验厂不同吗？", a: "不同。验厂查存在与合规；质量审核为守规格的体系打分。两者都重要，后者护返单。" },
+        { q: "何时需要质量审核？", a: "在准入 recurring 或关键订单的供应商前，而非仅一次性样品。" },
+        { q: "验货能替代吗？", a: "验货拦一批；质量审核解释缺陷为何发生并预防。两者并用。" },
+      ],
+      sources: [
+        { name: "FactoryAuditB2B 供应商质量审核", note: "质量维度的现场审核。" },
+        { name: "ISO 9001 条款结构", note: "质量审核打分的体系区域。" },
+      ],
+    },
+  },
 ];
 
 export const GUIDE_CATEGORY_ORDER: GuideCategory[] = [
