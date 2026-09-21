@@ -733,6 +733,7 @@ export const GUIDES: Guide[] = [
       examples: [
         { title: "Single retailer mandate", body: "A European buyer required BSCI grade C or better; the factory booked a BSCI audit and closed major findings within 60 days." },
         { title: "Multi-customer base", body: "A supplier selling to several UK retailers ran one SMETA audit and shared the Sedex report with all of them, avoiding three separate audits." },
+        { title: "Cost of a single audit", body: "A mid-size factory paid a comparable fee for either scheme; the saving came from avoiding a second audit, not from the scheme price. SMETA's shared report delivered that saving when the buyer accepted Sedex." },
       ],
       checklist: [
         "Buyer requirement confirmed (BSCI mandate vs Sedex visibility)",
@@ -787,6 +788,8 @@ export const GUIDES: Guide[] = [
         { q: "哪个更被认可？", a: "两者都被广泛认可。BSCI 在 amfori 网络的欧洲零售商中常见；SMETA 在期望 Sedex 会员资格时常见。认可度取决于你的买家，而非体系本身。" },
         { q: "能互相替代吗？", a: "不能自动替代。SMETA 报告不会变成 BSCI 评级，BSCI 报告也不会自动上 Sedex。按采购方要求做对应体系。" },
         { q: "它们查产品质量吗？", a: "不查。两者都是关于劳工、安全、环境、道德的社责审核。产品质量需要单独的质量审核或验货。" },
+        { q: "要花多少钱、多久？", a: "典型审核现场约 1-3 天加出报告，费用随厂区规模与工人数量浮动。更大的成本变量是能否一次审核满足所有买家；为另一体系再跑一次审核才是真正累加的开销。" },
+        { q: "新供应商该从哪个体系起步？", a: "先看买家强制要求。若没人指定，Sedex 上的 SMETA 是更灵活的默认，因为一份报告可服务多家客户；只有当买家要求评级时才转 BSCI。" },
       ],
       sources: [
         { name: "Sedex SMETA 指引", note: "SMETA 背后的审核方法与报告模型。" },
@@ -2429,6 +2432,446 @@ export const GUIDES: Guide[] = [
       sources: [
         { name: "FactoryAuditB2B 验货报告", note: "分级发现与二次验货支持，作为供应商谈判的证据基础。" },
         { name: "纠正预防措施(CAP)规范", note: "供应商回答根因、即时补救与预防的标准格式。" },
+      ],
+    },
+  },
+  {
+    slug: "ethical-audit-mandatory-requirements",
+    category: "compliance",
+    titleEn: "Ethical Audit Mandatory Requirements: What Buyers Force Suppliers to Do",
+    titleZh: "道德审核强制要求：采购方逼供应商做什么",
+    metaDescEn:
+      "What an ethical audit actually mandates: the labour, health-and-safety, environmental and management-system requirements buyers enforce, and the documents a supplier must produce to pass.",
+    metaDescZh:
+      "道德审核到底强制什么：采购方对劳工、健康安全、环境与管理体系的硬性要求，以及供应商必须提供的文件证据。",
+    updated: "2026-09-21",
+    tools: [
+      { href: "/tools/supplier-document-checker" },
+      { href: "/tools/audit-checklist" },
+      { href: "/tools/supplier-verification-checklist" },
+    ],
+    services: [
+      { href: "/services/supplier-verification" },
+      { href: "/factory-audit/request" },
+    ],
+    related: ["smeta-vs-bsci-social-audit-comparison", "supplier-risk-assessment-guide", "factory-audit-checklist"],
+    en: {
+      quickAnswer:
+        "An ethical audit mandates that a supplier meets baseline labour, health-and-safety, environmental and management requirements before it can be approved. Buyers enforce this through a code of conduct, on-site verification and document checks; the supplier must prove no child or forced labour, legal working hours, safe conditions, and a functioning complaint mechanism.",
+      definition:
+        "An ethical audit (also called a social compliance audit) is a structured assessment of whether a factory respects workers' rights and basic human-rights standards. It is driven by the buyer's code of conduct, which usually mirrors the ETI Base Code or SA8000 principles, and is verified on site against documents, interviews and physical inspection.",
+      keyPoints: [
+        "No child labour and no involuntary or forced labour are zero-tolerance items in every scheme.",
+        "Working hours and wages must comply with local law and the code: legal overtime, paid leave, and no withholding of IDs or wages.",
+        "Health and safety covers fire exits, structural safety, machine guarding, chemicals and emergency preparedness.",
+        "Environmental basics: legal waste handling, no unauthorized discharges, and basic hazard controls.",
+        "A confidential worker grievance mechanism and anti-discrimination, anti-harassment policy are now expected, not optional.",
+        "Buyers usually require a signed code of conduct plus records, not just a clean site visit.",
+      ],
+      steps: [
+        { title: "Adopt and sign the buyer's code of conduct", body: "The supplier must acknowledge the buyer's code in writing; many platforms auto-append it to the purchase order. This is the contractual baseline the audit measures against." },
+        { title: "Prepare the document set", body: "Collect payroll, time cards, age verification, contracts, social insurance, fire drills, and environmental permits. Missing records are the most common cause of failing an ethical audit." },
+        { title: "Run a self-assessment against the code", body: "Before the auditor arrives, walk the code line by line with the site manager and close obvious gaps: unguarded machines, blocked exits, undocumented workers." },
+        { title: "Host the on-site audit", body: "The auditor reviews documents, tours the facility, and conducts private worker interviews. Keep production running so the visit reflects reality." },
+        { title: "Close findings within the agreed window", body: "Major and critical findings require a corrective-action plan with dates. Buyers track this through the audit platform until verified closed." },
+      ],
+      examples: [
+        { title: "Retailer onboarding gate", body: "A new apparel supplier could not ship until its ethical audit cleared child-labour and fire-safety items; it fixed blocked exits and added age records within 30 days." },
+        { title: "Subcontractor discovery", body: "An audit found undeclared subcontracting and home workers, a critical finding. The buyer required full disclosure and re-audit before renewal." },
+      ],
+      checklist: [
+        "Signed code of conduct on file",
+        "No child or forced labour (age records verified)",
+        "Legal working hours and overtime, wages paid in full",
+        "Fire exits clear, drills documented, first-aid present",
+        "Machine guarding and chemical controls in place",
+        "Confidential grievance mechanism communicated to workers",
+        "Anti-discrimination and anti-harassment policy posted",
+        "Environmental permits and waste handling evidence",
+        "Corrective-action plan with dates for any findings",
+      ],
+      faq: [
+        { q: "Is an ethical audit the same as a quality audit?", a: "No. A quality audit checks the product and process capability; an ethical audit checks how workers are treated and whether the site respects basic rights and law. Both may run at the same factory but measure different things." },
+        { q: "What is the single biggest fail reason?", a: "Missing or inconsistent records — payroll that does not match time cards, or workers without verified age files. Fix the paper trail first." },
+        { q: "Can a small factory pass?", a: "Yes, if it meets the baseline. Size is not the issue; undocumented workers, safety gaps and excessive overtime are." },
+      ],
+      sources: [
+        { name: "ETI Base Code", note: "The labour-rights standard most buyer codes are built on." },
+        { name: "SA8000 standard", note: "A certifiable social-accountability standard covering the same baseline plus a management system." },
+        { name: "FactoryAuditB2B ethical audit support", note: "On-site social compliance verification with document and interview evidence." },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "道德审核要求供应商在通过核准前满足基本的劳工、健康安全、环境与管理体系要求。采购方通过行为准则、现场核查与文件检查来执行；供应商必须证明无童工与强迫劳动、工时工资合法、条件安全，并设有可用的投诉机制。",
+      definition:
+        "道德审核（也称社会责任合规审核）是对工厂是否尊重劳动者权利与基本人权标准的结构化评估。它由买家的行为准则驱动，准则通常对标 ETI 基本准则或 SA8000 原则，并在现场以文件、访谈与实地检查核实。",
+      keyPoints: [
+        "无童工、无强迫或 involuntary 劳动是所有体系的零容忍项。",
+        "工时与工资须符合当地法律与准则：合法加班、带薪假，不扣押证件或工资。",
+        "健康安全涵盖消防出口、结构安全、机械防护、化学品与应急准备。",
+        "环境基本要求：合法废物处置、无违规排放、基本危害控制。",
+        "保密的工人申诉机制与反歧视、反骚扰政策如今是必选项，而非可选项。",
+        "买家通常要求签署行为准则加提供记录，而不只是一次干净的检查。",
+      ],
+      steps: [
+        { title: "采纳并签署买家行为准则", body: "供应商须书面确认买家准则；许多平台会自动把它附在采购订单上。这是审核衡量的合同基线。" },
+        { title: "准备文件包", body: "收集工资单、工时卡、年龄证明、合同、社保、消防演练与环境许可。缺记录是道德审核失败最常见的原因。" },
+        { title: "按准则做自评", body: "审核员到场前，与厂区主管逐条对照准则并关闭明显缺口：无防护的机械、堵塞的出口、无记录的工人。" },
+        { title: "接待现场审核", body: "审核员审阅文件、巡视厂区、进行私下工人访谈。保持生产运行，让访问反映真实情况。" },
+        { title: "在约定期限内关闭发现项", body: "严重与致命发现项需带日期的纠偏计划。买家通过审核平台跟踪直至验证关闭。" },
+      ],
+      examples: [
+        { title: "零售商准入门槛", body: "一家新服装供应商在道德审核清除童工与消防安全项前无法出货；它在 30 天内修好堵塞出口并补全年龄记录。" },
+        { title: "发现未申报外发", body: "一次审核发现未申报的外发加工与家庭工，属致命发现项。买家要求完全披露并复审后才续约。" },
+      ],
+      checklist: [
+        "行为准则已签署存档",
+        "无童工或强迫劳动（年龄记录已核实）",
+        "工时与加班合法、工资足额发放",
+        "消防出口畅通、演练有记录、急救到位",
+        "机械防护与化学品控制到位",
+        "保密申诉机制已告知工人",
+        "反歧视与反骚扰政策已张贴",
+        "环境许可与废物处置证据",
+        "任何发现项均带日期的纠偏计划",
+      ],
+      faq: [
+        { q: "道德审核等同质量审核吗？", a: "不等。质量审核查产品与过程能力；道德审核查工人待遇及是否尊重基本权利与法律。两者可能在同一工厂进行，但衡量对象不同。" },
+        { q: "失败最常见的原因是什么？", a: "缺记录或记录不一致——工资单与时卡对不上，或工人无核实的年龄档案。先补文件链。" },
+        { q: "小工厂能过吗？", a: "能，只要达到基线。规模不是问题；无记录工人、安全缺口与过度加班才是。" },
+      ],
+      sources: [
+        { name: "ETI 基本准则", note: "多数买家准则依托的劳工权利标准。" },
+        { name: "SA8000 标准", note: "可认证的社会责任标准，覆盖同样基线并加管理体系。" },
+        { name: "FactoryAuditB2B 道德审核支持", note: "带文件与访谈证据的现场社会责任合规核查。" },
+      ],
+    },
+  },
+  {
+    slug: "sa8000-certification-guide",
+    category: "compliance",
+    titleEn: "SA8000 Certification: How Hard Is It and What It Really Takes",
+    titleZh: "SA8000 认证：到底难在哪、要准备什么",
+    metaDescEn:
+      "A realistic look at SA8000 certification: what the standard demands, why it is harder than a one-off social audit, the time and system investment required, and whether it is worth it for your supply base.",
+    metaDescZh:
+      "务实看 SA8000 认证：标准要求什么、为何比一次性社会审核更难、所需时间与体系投入，以及对你的供应基是否值得。",
+    updated: "2026-09-21",
+    tools: [
+      { href: "/tools/audit-checklist" },
+      { href: "/tools/supplier-document-checker" },
+      { href: "/tools/supplier-verification-checklist" },
+    ],
+    services: [
+      { href: "/services/supplier-verification" },
+      { href: "/factory-audit/request" },
+    ],
+    related: ["ethical-audit-mandatory-requirements", "smeta-vs-bsci-social-audit-comparison", "supplier-risk-assessment-guide"],
+    en: {
+      quickAnswer:
+        "SA8000 is a certifiable social-accountability standard built on the same worker-rights baseline as other social audits, but it demands a documented management system, worker committees and annual surveillance — so it is harder and more sustained than a single SMETA or BSCI audit. Expect 6-12 months of preparation for a first certificate.",
+      definition:
+        "SA8000, managed by Social Accountability International (SAI), is a management-system standard for social accountability. Unlike an audit report that only snapshots a site, SA8000 requires the factory to embed the standard into policy, training, worker participation and continual improvement, then prove it through certification audits and yearly surveillance.",
+      keyPoints: [
+        "SA8000 covers child labour, forced labour, health and safety, freedom of association, discrimination, discipline, working hours, remuneration and management system.",
+        "The management-system element is what makes it hard: documented procedures, worker-management committees, and training, not just a clean site.",
+        "Certification requires a two-stage audit (documentary plus on-site) and then surveillance audits every year, with full re-certification on a cycle.",
+        "It is voluntary and buyer-driven; few buyers mandate it, but it signals a deeper commitment than a one-off audit.",
+        "First certificate typically takes 6-12 months of preparation; factories with weak records can take longer.",
+      ],
+      steps: [
+        { title: "Gap assessment against the standard", body: "Map current practice to the nine SA8000 elements and list gaps in policy, records and worker participation. Most factories fail here on undocumented procedures." },
+        { title: "Build the management system", body: "Write the social-performance policy, appoint a representative, form a worker-management committee, and roll out training. This is the heaviest lift and the main differentiator from a simple audit." },
+        { title: "Collect and align evidence", body: "Payroll, contracts, age files, safety records and meeting minutes must be consistent and retrievable. Inconsistency defeats the system requirement." },
+        { title: "Stage 1 and Stage 2 certification audit", body: "Stage 1 reviews documentation and readiness; Stage 2 verifies implementation on site with interviews. Both must pass before a certificate is issued." },
+        { title: "Maintain through surveillance", body: "Annual surveillance audits check that the system is alive, not just documented. Treat it as an operating system, not a one-time project." },
+      ],
+      examples: [
+        { title: "Toy exporter aiming at EU buyers", body: "A toy factory spent nine months building its committee and training before certification; the certificate later shortened several buyer onboarding reviews." },
+        { title: "Subcontractor without records", body: "A facility with no HR files needed over a year to reach certifiable status; the management system, not the site conditions, was the bottleneck." },
+      ],
+      checklist: [
+        "Gap assessment completed against all nine elements",
+        "Written social-performance policy and nominated representative",
+        "Worker-management committee established and meeting",
+        "Training delivered and documented",
+        "Consistent payroll, contracts, age and safety records",
+        "Grievance mechanism active and used",
+        "Stage 1 and Stage 2 audits passed",
+        "Surveillance audit scheduled and budgeted annually",
+      ],
+      faq: [
+        { q: "Is SA8000 harder than BSCI or SMETA?", a: "Yes for most factories, because it requires a sustained management system and yearly surveillance rather than a single audit event. The worker-rights checks themselves are similar." },
+        { q: "How long to the first certificate?", a: "Commonly 6-12 months of genuine preparation. Factories starting from weak records or no committee take longer; treat the system build as the critical path." },
+        { q: "Do I need SA8000 if my buyer accepts SMETA?", a: "Usually no. SA8000 is valuable when a buyer specifically requests it or when you want to differentiate on social accountability. For most, SMETA or BSCI satisfies the buyer's social audit." },
+      ],
+      sources: [
+        { name: "Social Accountability International — SA8000", note: "The standard owner and certification requirements." },
+        { name: "ETI Base Code", note: "The underlying worker-rights baseline shared with most social audits." },
+        { name: "FactoryAuditB2B social audit support", note: "Gap assessment and on-site verification that feeds SA8000 preparation." },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "SA8000 是可认证的社会责任标准，与多数社会审核基于同一套劳动者权利基线，但它要求成文的管理体系、工人委员会与年度监督，因此比一次性的 SMETA 或 BSCI 审核更难、更持续。首次获证通常需 6-12 个月准备。",
+      definition:
+        "SA8000 由社会责任国际(SAI)管理，是一项社会责任管理体系标准。与只给厂区拍快照的审核报告不同，SA8000 要求工厂把标准嵌入政策、培训、工人参与与持续改进，再通过认证审核与年度监督来证明。",
+      keyPoints: [
+        "SA8000 覆盖童工、强迫劳动、健康安全、结社自由、歧视、惩戒、工时、报酬与管理体系九项。",
+        "成文的「管理体系」是难点：成文程序、工人-管理层委员会与培训，而非只是干净的现场。",
+        "认证需两阶段审核（文件加现场），之后每年监督审核，并按周期完整再认证。",
+        "它属自愿、由买家驱动；极少买家强制，但比一次性审核传递更深的承诺。",
+        "首次获证通常需 6-12 个月准备；记录薄弱的工厂可能更久。",
+      ],
+      steps: [
+        { title: "对照标准做差距评估", body: "把现状映射到 SA8000 九要素，列出政策、记录与工人参与上的缺口。多数工厂卡在无成文程序。" },
+        { title: "建立管理体系", body: "撰写社会责任政策、任命代表、组建工人-管理层委员会并开展培训。这是最重的活，也是与简单审核的根本区别。" },
+        { title: "收集并校准证据", body: "工资单、合同、年龄档案、安全记录与会议纪要必须一致且可取。不一致即破坏体系要求。" },
+        { title: "第一阶段与第二阶段认证审核", body: "第一阶段审文件与就绪度；第二阶段现场核实实施并访谈。两者都通过才发证。" },
+        { title: "靠监督维持", body: "年度监督审核检查体系是否活着，而不只是写在纸上。把它当运营系统，而非一次性项目。" },
+      ],
+      examples: [
+        { title: "面向欧盟买家的玩具出口商", body: "一家玩具厂花九个月建委员会与培训才获证；该证书后来缩短了多个买家准入复核。" },
+        { title: "无记录的外发厂", body: "一家无人事档案的工厂花了一年多才达可认证状态；瓶颈是管理体系，而非现场条件。" },
+      ],
+      checklist: [
+        "已完成九要素差距评估",
+        "已写社会责任政策并任命代表",
+        "已建立工人-管理层委员会并开会",
+        "已开展并留存培训记录",
+        "工资、合同、年龄与安全记录一致",
+        "申诉机制在运行且被使用",
+        "第一阶段与第二阶段审核通过",
+        "年度监督审核已排期并预算",
+      ],
+      faq: [
+        { q: "SA8000 比 BSCI 或 SMETA 难吗？", a: "对多数工厂是，因为它要求持续的管理体系与年度监督，而非单一审核事件。劳动者权利检查本身相似。" },
+        { q: "首次获证要多久？", a: "通常 6-12 个月真实准备。从薄弱记录或无委员会起步的工厂更久；把体系建设视为关键路径。" },
+        { q: "买家接受 SMETA 还需要 SA8000 吗？", a: "通常不需要。当买家特别要求，或你想在社会责任上拉开差距时，SA8000 才有价值。多数情况下 SMETA 或 BSCI 已满足买家社审。" },
+      ],
+      sources: [
+        { name: "社会责任国际 — SA8000", note: "标准所有者与认证要求。" },
+        { name: "ETI 基本准则", note: "与多数社会审核共用的底层劳动者权利基线。" },
+        { name: "FactoryAuditB2B 社会审核支持", note: "差距评估与现场核查，为 SA8000 准备打底。" },
+      ],
+    },
+  },
+  {
+    slug: "esg-supplier-audit-guide",
+    category: "compliance",
+    titleEn: "ESG Supplier Audit: What It Covers Beyond Social Compliance",
+    titleZh: "ESG 供应商审核：超出社会责任合规的部分",
+    metaDescEn:
+      "How an ESG supplier audit differs from a traditional social audit: the environmental, governance and traceability layers added on top of labour standards, and what buyers now expect from their supply chain.",
+    metaDescZh:
+      "ESG 供应商审核与传统社会审核有何不同：在劳工标准之上新增的环境、治理与可追溯层，以及买家现在对供应链的期望。",
+    updated: "2026-09-21",
+    tools: [
+      { href: "/tools/supplier-document-checker" },
+      { href: "/tools/audit-checklist" },
+      { href: "/tools/supplier-risk-calculator" },
+    ],
+    services: [
+      { href: "/services/supplier-verification" },
+      { href: "/services/supplier-improvement" },
+    ],
+    related: ["ethical-audit-mandatory-requirements", "smeta-vs-bsci-social-audit-comparison", "supplier-risk-assessment-guide"],
+    en: {
+      quickAnswer:
+        "An ESG supplier audit adds environmental and governance scrutiny on top of the social (labour) checks of a traditional audit. Beyond no child labour and safe conditions, it examines carbon and energy use, waste and water, anti-corruption controls, traceability and whether the supplier can report data buyers now demand.",
+      definition:
+        "ESG stands for Environmental, Social and Governance. An ESG supplier audit evaluates a factory across all three pillars: the Social pillar overlaps with a standard ethical audit, while the Environmental and Governance pillars add new expectations around resource use, emissions, business integrity and supply-chain transparency.",
+      keyPoints: [
+        "The Social pillar is the familiar one: labour rights, health and safety, no forced or child labour.",
+        "The Environmental pillar adds energy, carbon, water, waste and chemical management, often with quantified targets.",
+        "The Governance pillar adds anti-corruption, conflicts of interest, subcontractor control and accurate record-keeping.",
+        "Traceability and conflict-minerals or country-of-origin disclosure are increasingly required for the E and G pillars.",
+        "Buyers increasingly want auditable data, not assurances — expect to report metrics, not just pass a visit.",
+      ],
+      steps: [
+        { title: "Map the three pillars to your operation", body: "Start from the buyer's ESG questionnaire and align each question to a function: HR for Social, facilities for Environmental, finance and compliance for Governance." },
+        { title: "Collect environmental data", body: "Meter energy and water, quantify waste streams and hazardous materials, and estimate carbon where the buyer requires it. Spreadsheets beat estimates when auditors ask for evidence." },
+        { title: "Put governance controls in writing", body: "Document an anti-corruption policy, a gift and hospitality rule, subcontractor approval, and a whistle-blower channel. Governance fails most often on missing paperwork, not bad intent." },
+        { title: "Build traceability", body: "Know where key materials come from and keep origin records; for electronics, conflict-minerals declarations are commonly requested." },
+        { title: "Report against a framework", body: "Align disclosures to a recognized framework (such as GRI or the buyer's own template) so the data is comparable and auditable year over year." },
+      ],
+      examples: [
+        { title: "Apparel brand scope-3 ask", body: "A buyer required per-factory energy and water data for its scope-3 reporting; suppliers that already metered output passed quickly, others spent a quarter installing meters." },
+        { title: "Governance red flag", body: "An audit found no anti-corruption policy and undocumented related-party transactions, a governance finding that blocked onboarding until corrected." },
+      ],
+      checklist: [
+        "Social baseline met (labour, safety, no forced/child labour)",
+        "Energy and water measured and recorded",
+        "Waste and hazardous-material handling documented",
+        "Carbon or emissions data provided where required",
+        "Anti-corruption and whistle-blower policy in place",
+        "Subcontractor approval and control documented",
+        "Material traceability and origin records kept",
+        "Disclosures aligned to a reporting framework",
+      ],
+      faq: [
+        { q: "Is an ESG audit just a social audit with a new name?", a: "Not quite. The Social part overlaps, but ESG adds Environmental metrics and Governance controls that a traditional social audit does not cover in depth." },
+        { q: "Which pillar is hardest for factories?", a: "Environmental data is usually the weakest because few factories meter energy or water. Governance paperwork is the next common gap." },
+        { q: "Do small suppliers need ESG audits?", a: "Larger buyers are pushing ESG down the chain, so even small suppliers feel it through buyer questionnaires. Start with the data buyers actually request rather than a full standard." },
+      ],
+      sources: [
+        { name: "Global Reporting Initiative (GRI)", note: "A widely used ESG disclosure framework buyers reference." },
+        { name: "ETI Base Code", note: "The Social pillar baseline shared with social audits." },
+        { name: "FactoryAuditB2B ESG readiness support", note: "On-site verification of environmental and governance evidence." },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "ESG 供应商审核在传统审核的社责（劳工）检查之上，增加了环境与治理审查。除了无童工与安全条件，它还审视碳与能耗、废弃物与用水、反腐控制、可追溯性，以及供应商能否报告买家现在要求的数据。",
+      definition:
+        "ESG 指环境、社会与治理。ESG 供应商审核从这三个支柱评估工厂：社会支柱与标准道德审核重叠，而环境与治理支柱新增了对资源使用、排放、商业诚信与供应链透明度的期望。",
+      keyPoints: [
+        "社会支柱最熟悉：劳工权利、健康安全、无强迫或童工。",
+        "环境支柱新增能源、碳、水、废弃物与化学品管理，常带量化目标。",
+        "治理支柱新增反腐、利益冲突、外发加工管控与准确记账。",
+        "可追溯性与冲突矿产或原产国披露，正越来越成为 E 与 G 支柱的硬性要求。",
+        "买家越来越要可审计的数据而非保证——准备交指标，而不只是过一次访问。",
+      ],
+      steps: [
+        { title: "把三支柱映射到运营", body: "从买家的 ESG 问卷出发，把每个问题对应到职能：HR 管社会、设施管环境、财务与合规管治理。" },
+        { title: "收集环境数据", body: "计量能源与用水、量化废物流与危化品，并在买家要求时估算碳。当审核员要证据时，表格比估算更有力。" },
+        { title: "把治理控制写成文", body: "成文反腐政策、礼品与招待规则、外发审批与举报渠道。治理多半败在缺文件，而非恶意。" },
+        { title: "建立可追溯", body: "清楚关键物料来源并保留原产地记录；对电子行业，冲突矿产声明常被要求。" },
+        { title: "按框架报告", body: "把披露对齐公认框架（如 GRI 或买家自有模板），使数据可比较、可逐年审计。" },
+      ],
+      examples: [
+        { title: "服装品牌的范畴三要求", body: "某买家要求每家工厂的能源与用水数据用于其范畴三报告；已装表的供应商很快通过，其余花了一个季度装表。" },
+        { title: "治理红旗", body: "一次审核发现无反腐政策且无关联交易的书面记录，属治理发现项，整改前阻断准入。" },
+      ],
+      checklist: [
+        "社会基线达标（劳工、安全、无强迫/童工）",
+        "能源与用水已计量并记录",
+        "废弃物与危化品处置已成文",
+        "按要求提供碳或排放数据",
+        "已设反腐与举报政策",
+        "外发审批与管控已成文",
+        "物料可追溯与原产地记录留存",
+        "披露已对齐报告框架",
+      ],
+      faq: [
+        { q: "ESG 审核只是改名的社责审核吗？", a: "不完全。社会部分重叠，但 ESG 新增了传统社责审核不深究的环境指标与治理控制。" },
+        { q: "对工厂哪根支柱最难？", a: "环境数据通常最弱，因为很少工厂计量能源或用水。治理文书是次常见的缺口。" },
+        { q: "小供应商需要 ESG 审核吗？", a: "大买家正把 ESG 沿链条下推，所以小供应商也会通过买家问卷感受到。先从买家真正要求的数据做起，而非整套标准。" },
+      ],
+      sources: [
+        { name: "全球报告倡议组织(GRI)", note: "买家常引用的 ESG 披露框架。" },
+        { name: "ETI 基本准则", note: "与社会审核共用的社会支柱基线。" },
+        { name: "FactoryAuditB2B ESG 就绪支持", note: "环境与治理证据的现场核查。" },
+      ],
+    },
+  },
+  {
+    slug: "brand-reputation-pr-crisis",
+    category: "risk",
+    titleEn: "Brand Reputation and PR Crisis: When a Supplier Scandal Hits Your Brand",
+    titleZh: "品牌声誉与公关危机：供应商丑闻牵连品牌时怎么办",
+    metaDescEn:
+      "How a supplier's social or safety scandal becomes your brand crisis, the early-warning signals to watch, and a practical response playbook to protect reputation and keep the supply chain moving.",
+    metaDescZh:
+      "供应商的社会或安全丑闻如何变成你的品牌危机、要盯哪些预警信号，以及保护声誉又不中断供应链的实操应对手册。",
+    updated: "2026-09-21",
+    tools: [
+      { href: "/tools/supplier-risk-calculator" },
+      { href: "/tools/supplier-verification-checklist" },
+      { href: "/tools/audit-checklist" },
+    ],
+    services: [
+      { href: "/services/supplier-verification" },
+      { href: "/services/supplier-improvement" },
+    ],
+    related: ["ethical-audit-mandatory-requirements", "supplier-risk-assessment-guide", "how-to-verify-a-chinese-supplier"],
+    en: {
+      quickAnswer:
+        "When a supplier is exposed for labour abuse, pollution or safety failures, the brand that sourced from it is judged by association. Protect reputation by verifying before you buy, monitoring after, and having a response playbook: acknowledge fast, show evidence of action, and fix the root cause rather than hide it.",
+      definition:
+        "A brand-reputation crisis in sourcing happens when negative attention to a supplier's conduct transfers to the buyer's brand. Because consumers and media now trace products to their makers, a single unreported subcontractor incident can become a public-relations event for the brand that hired them.",
+      keyPoints: [
+        "Guilt by association is the mechanism: buyers are judged by the conduct of suppliers they chose, even subcontractors they did not know about.",
+        "Most crises start small — a local news item, a worker post, an NGO report — and escalate through social media before the brand notices.",
+        "Prevention beats apology: verified suppliers, published standards and routine monitoring cost far less than a crisis response.",
+        "Speed and evidence win: acknowledge within hours, show the audit or corrective action, and avoid 'no comment'.",
+        "Cutting the supplier outright is rarely the first move; fixing root cause while protecting workers is usually the stronger story.",
+      ],
+      steps: [
+        { title: "Pre-qualify and publish your standard", body: "Only source from suppliers that passed a social audit, and publish your code of conduct so expectations are clear and visible." },
+        { title: "Monitor continuously, not annually", body: "Watch supplier news, worker forums and NGO trackers between audits; a yearly audit alone leaves an 11-month blind spot." },
+        { title: "Trigger the response playbook on first signal", body: "On any credible allegation, launch a fact-find within 24 hours: verify the site, scope the issue, and identify affected orders." },
+        { title: "Communicate with evidence", body: "Acknowledge the issue, state what you are doing (audit, remediation, worker protection), and share verified findings. Silence reads as guilt." },
+        { title: "Remediate and report closure", body: "Fix the root cause with the supplier, verify through re-audit, and publish the outcome. A resolved case with evidence rebuilds more trust than denial." },
+      ],
+      examples: [
+        { title: "Subcontractor blind spot", body: "A brand was named in a report about a subcontractor it had never audited. Because it had a published standard and moved to audit within days, the story shifted from 'complicit' to 'responsive'." },
+        { title: "Slow response backfire", body: "Another brand issued 'no comment' for a week; social media filled the gap with worst-case guesses, and the silence became the headline." },
+      ],
+      checklist: [
+        "Suppliers pre-qualified by social audit",
+        "Code of conduct published and shared",
+        "Continuous monitoring between audits in place",
+        "24-hour fact-find trigger defined",
+        "Spokesperson and message approved in advance",
+        "Evidence-based acknowledgement ready",
+        "Remediation plan with worker protection",
+        "Re-audit and public closure documented",
+      ],
+      faq: [
+        { q: "Am I responsible for a subcontractor I didn't know about?", a: "Publicly and legally, buyers are increasingly held accountable for their supply chain, including unknown subcontractors. The defence is demonstrable oversight, not ignorance." },
+        { q: "Should I drop the supplier immediately?", a: "Not usually as the first step. Abrupt cuts can abandon workers and look like cover-up. Investigate, protect workers, fix root cause, and decide on the relationship after evidence." },
+        { q: "How fast must we respond?", a: "The first acknowledgement should come within hours of a credible allegation; a week of silence is itself a reputational hit. Prepare the playbook before, not during, a crisis." },
+      ],
+      sources: [
+        { name: "ETI Base Code and buyer codes", note: "The conduct standard brands publish and enforce." },
+        { name: "Modern slavery and supply-chain transparency laws", note: "Legal drivers that make oversight a duty, not a choice." },
+        { name: "FactoryAuditB2B monitoring and re-audit", note: "Continuous verification and evidence for crisis response." },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "当供应商因劳工虐待、污染或安全事故被曝光，向其采购的品牌会因关联而被评判。保护声誉的方法是在采购前核验、采购后监测，并备好应对手册：快速承认、出示行动证据、修复根因而非掩盖。",
+      definition:
+        "采购中的品牌声誉危机，指对供应商行为的负面关注转移到买家品牌身上。由于消费者与媒体如今能把产品追溯到制造者，一次未被上报的外发事故也能变成雇佣它的品牌的公关事件。",
+      keyPoints: [
+        "关联定罪是机制：买家会因所选供应商（甚至不知情的外发）的行为被评判。",
+        "多数危机从小处起——一条地方新闻、工人发帖、NGO 报告——并在品牌察觉前经社媒升级。",
+        "预防胜过道歉：已核验供应商、公开标准与例行监测，成本远低于危机应对。",
+        "速度与证据制胜：数小时内承认、出示审核或纠偏、避免「不予置评」。",
+        "直接砍掉供应商很少是第一步；边保护工人边修复根因，通常更站得住脚。",
+      ],
+      steps: [
+        { title: "前置资质并公开标准", body: "只从通过社会审核的供应商采购，并公布行为准则，让期望清晰可见。" },
+        { title: "持续监测而非一年一次", body: "在两次审核之间盯供应商新闻、工人论坛与 NGO 追踪器；仅靠年审会留下 11 个月盲区。" },
+        { title: "首个信号即触发手册", body: "对任何可信指控，24 小时内启动事实核查：核实厂区、界定范围、识别受影响订单。" },
+        { title: "用证据沟通", body: "承认问题、说明你在做什么（审核、整改、保护工人）、共享核实发现。沉默会被读作有罪。" },
+        { title: "整改并公布闭环", body: "与供应商修复根因、经复审核实并公布结果。有证据的已结案例比否认更能重建信任。" },
+      ],
+      examples: [
+        { title: "外发盲区", body: "某品牌因一家从未审核的外发商被报告点名。因其有公开标准并在数日内启动审核，叙事从「共谋」转为「响应迅速」。" },
+        { title: "慢响应反噬", body: "另一品牌一周「不予置评」，社媒用最坏猜测填补空白，沉默本身成了头条。" },
+      ],
+      checklist: [
+        "供应商经社会审核前置资质",
+        "行为准则已公开并共享",
+        "两次审核间持续监测已就位",
+        "已定义 24 小时事实核查触发",
+        "发言人及口径已提前批准",
+        "基于证据的承认已备好",
+        "带工人保护的整改计划",
+        "复审核实与公开闭环已记录",
+      ],
+      faq: [
+        { q: "我没听说过的分包商也要我负责吗？", a: "在公众与法律上，买家越来越要为包括不知情分包商在内的供应链负责。抗辩理由是可证明的监管，而非不知情。" },
+        { q: "我该立刻砍掉供应商吗？", a: "通常不作为第一步。贸然切断可能抛弃工人、像在掩盖。先调查、保护工人、修复根因，证据出来后再决定关系。" },
+        { q: "必须多快响应？", a: "对可信指控，首次承认应在数小时内；一周沉默本身就是声誉打击。手册要在危机前而非危机中准备。" },
+      ],
+      sources: [
+        { name: "ETI 基本准则与买家准则", note: "品牌公布并执行的行事标准。" },
+        { name: "现代奴役与供应链透明法", note: "让监管成为义务而非选择的 legal 驱动。" },
+        { name: "FactoryAuditB2B 监测与复审", note: "用于危机响应的持续核查与证据。" },
       ],
     },
   },
