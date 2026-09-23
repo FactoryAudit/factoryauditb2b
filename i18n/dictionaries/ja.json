@@ -3818,5 +3818,37 @@
       "errorInvalidEmail": "有効な会社のメールアドレスをご入力ください。",
       "errorSupplierRequired": "サプライヤーのウェブサイトまたは会社名をご記入ください。"
     }
+  },
+  "trustProfile": {
+    "badgeTitle": "検証ステータス",
+    "statusNone": "未検証",
+    "statusSelf": "自己評価済み",
+    "statusOnline": "オンライン検証済み",
+    "statusOnSite": "現地検証済み",
+    "statusExpired": "検証の有効期限切れ",
+    "detailsTitle": "検証の詳細",
+    "labelId": "検証ID",
+    "labelMethod": "検証方法",
+    "labelScope": "範囲",
+    "labelVerifiedAt": "検証日",
+    "labelExpiresAt": "有効期限",
+    "labelStatus": "ステータス",
+    "methodOnline": "書類と証拠のリモート審査",
+    "methodOnSite": "現地訪問と実地確認",
+    "stateActive": "有効",
+    "stateExpired": "期限切れ",
+    "stateRevoked": "取消済み",
+    "disclaimer": "検証は FactoryAuditB2B が審査した情報と証拠のみを対象とします。法的な認証ではなく、サプライヤーの履行能力を保証するものでもありません。",
+    "historyTitle": "検証履歴",
+    "historyEmpty": "検証記録はまだありません。",
+    "photosTitle": "工場写真",
+    "photosEmpty": "工場写真はまだ公開されていません。",
+    "shareCta": "プロフィールを共有",
+    "shareTitle": "このサプライヤープロフィールを共有",
+    "shareLead": "リンクをコピーしてバイヤーに送ってください。リンクにサプライヤーの内部識別子は含まれません。",
+    "shareCopied": "リンクをコピーしました",
+    "shareFailed": "リンクを作成できませんでした。もう一度お試しください。",
+    "notPublicTitle": "このプロフィールは非公開です",
+    "notPublicLead": "サプライヤーはまだこのプロフィールを公開していません。"
   }
 }

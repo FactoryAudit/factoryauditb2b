@@ -6,7 +6,7 @@
 //   node scripts/run-regression.mjs cs20-supplier-report CS20_ROOT
 //
 // 分层：
-//   A 冻结层：en 字典叶子数（本 CS 不新增任何字典键 ⇒ 常量必须仍是 2940）
+//   A 冻结层：en 字典叶子数（本 CS 不新增任何字典键 ⇒ 常量必须仍是 2970）
 //   B 净化器：NULL ≠ 0 / 越界拒绝 / 截断 / 未知键丢弃 / kind 互斥
 //   C 模板  ：13 章骨架可用，且**零虚构值**（不得携带样张任何结论性数据）
 //   D 渲染器：空章节不渲染、未评分显示「—」、未标注不显示「已核验」、免责声明兜底
@@ -106,7 +106,7 @@ const HTML_OPTS = {
   generatedAt: "2026-09-18T00:00:00.000Z",
 };
 
-const EN_LEAF = 2940;
+const EN_LEAF = 2970;
 
 (async () => {
   /* ======================================================================= */
@@ -115,7 +115,7 @@ const EN_LEAF = 2940;
   {
     const en = JSON.parse(read("i18n/dictionaries/en.json"));
     const leaves = countLeaves(en);
-    check("A1 en 字典叶子数未变（仍 2940）", leaves === EN_LEAF, `实际 ${leaves}`);
+    check("A1 en 字典叶子数未变（仍 2970）", leaves === EN_LEAF, `实际 ${leaves}`);
 
     // 本 CS 是纯后台内部工具：不新增 9 语字典键，也不改任何字典文件
     const dicts = fs

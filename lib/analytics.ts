@@ -27,6 +27,11 @@ export const ANALYTICS_EVENTS = {
   profileCompare: "supplier_compare",
   claimView: "supplier_claim_view",
   claimSubmit: "supplier_claim_submit",
+  // ---- CS-22 / CS-A：公开档案页（供应商信任档案）----
+  // 命名沿用 CS-04 铁律：点击层一律 *_cta_click；浏览层 *_view。
+  // 分享按钮点击属漏斗上层意向，绝不可进 CONVERSION_EVENTS。
+  profileShareClick: "supplier_profile_share_cta_click",
+  profileVerificationView: "supplier_verification_view",
 
   // ---- STEP-05：Verify Supplier（买家请求核验某供应商）----
   // 口径与 claimSubmit 同源：`*_view` 是页面浏览，`*_submit` 是真实表单提交（转化）。
@@ -201,6 +206,8 @@ export const CLICK_LEVEL_EVENTS = [
   ANALYTICS_EVENTS.homeLiveBuyerRequestClick,
   ANALYTICS_EVENTS.profileFreeCta,
   ANALYTICS_EVENTS.profilePaidCta,
+  // CS-22 / CS-A：分享档案按钮点击（点击层，非转化）
+  ANALYTICS_EVENTS.profileShareClick,
   ANALYTICS_EVENTS.registerCta,
   // V2.2：原会员页 CTA 事件退役（/membership 已合并进 /pricing），改用 founding_buyer_* 漏斗
   ANALYTICS_EVENTS.unlockGateCta,

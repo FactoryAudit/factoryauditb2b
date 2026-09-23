@@ -3818,5 +3818,37 @@
       "errorInvalidEmail": "Introduza um e-mail empresarial válido.",
       "errorSupplierRequired": "Adicione o site ou o nome da empresa fornecedora."
     }
+  },
+  "trustProfile": {
+    "badgeTitle": "Status de verificação",
+    "statusNone": "Não verificado",
+    "statusSelf": "Autoavaliado",
+    "statusOnline": "Verificado online",
+    "statusOnSite": "Verificado in loco",
+    "statusExpired": "Verificação expirada",
+    "detailsTitle": "Detalhes da verificação",
+    "labelId": "ID de verificação",
+    "labelMethod": "Método de verificação",
+    "labelScope": "Escopo",
+    "labelVerifiedAt": "Verificado em",
+    "labelExpiresAt": "Válido até",
+    "labelStatus": "Situação",
+    "methodOnline": "Análise remota de documentos e evidências",
+    "methodOnSite": "Visita presencial e inspeção",
+    "stateActive": "Ativo",
+    "stateExpired": "Expirado",
+    "stateRevoked": "Revogado",
+    "disclaimer": "A verificação cobre apenas as informações e evidências analisadas pela FactoryAuditB2B. Não é uma certificação legal e não garante o desempenho do fornecedor.",
+    "historyTitle": "Histórico de verificação",
+    "historyEmpty": "Ainda não há registros de verificação.",
+    "photosTitle": "Fotos da fábrica",
+    "photosEmpty": "Nenhuma foto da fábrica publicada.",
+    "shareCta": "Compartilhar perfil",
+    "shareTitle": "Compartilhar este perfil de fornecedor",
+    "shareLead": "Copie o link e envie aos compradores. O link não expõe identificadores internos do fornecedor.",
+    "shareCopied": "Link copiado",
+    "shareFailed": "Não foi possível criar o link. Tente novamente.",
+    "notPublicTitle": "Este perfil não é público",
+    "notPublicLead": "O fornecedor ainda não publicou este perfil."
   }
 }

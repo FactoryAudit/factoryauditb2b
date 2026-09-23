@@ -3818,5 +3818,37 @@
       "errorInvalidEmail": "请填写有效的公司邮箱地址。",
       "errorSupplierRequired": "请填写供应商的网址或公司名。"
     }
+  },
+  "trustProfile": {
+    "badgeTitle": "核验状态",
+    "statusNone": "未核验",
+    "statusSelf": "工厂自评",
+    "statusOnline": "线上已核验",
+    "statusOnSite": "现场已核验",
+    "statusExpired": "核验已过期",
+    "detailsTitle": "核验详情",
+    "labelId": "核验编号",
+    "labelMethod": "核验方式",
+    "labelScope": "核验范围",
+    "labelVerifiedAt": "核验日期",
+    "labelExpiresAt": "有效期至",
+    "labelStatus": "状态",
+    "methodOnline": "远程资料与证据审核",
+    "methodOnSite": "现场走访与查验",
+    "stateActive": "生效中",
+    "stateExpired": "已过期",
+    "stateRevoked": "已撤销",
+    "disclaimer": "核验仅覆盖 FactoryAuditB2B 已审核的信息与证据，不等同于法定认证，也不构成对供应商履约能力的担保。",
+    "historyTitle": "核验历史",
+    "historyEmpty": "暂无核验记录。",
+    "photosTitle": "工厂照片",
+    "photosEmpty": "尚未发布工厂照片。",
+    "shareCta": "分享档案",
+    "shareTitle": "分享该供应商档案",
+    "shareLead": "复制链接发送给买家，链接不会暴露供应商内部标识。",
+    "shareCopied": "链接已复制",
+    "shareFailed": "链接生成失败，请重试。",
+    "notPublicTitle": "该档案未公开",
+    "notPublicLead": "该供应商尚未公开此档案。"
   }
 }

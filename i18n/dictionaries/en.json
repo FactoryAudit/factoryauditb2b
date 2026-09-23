@@ -3818,5 +3818,37 @@
       "errorInvalidEmail": "Enter a valid company email address.",
       "errorSupplierRequired": "Add the supplier's website or company name."
     }
+  },
+  "trustProfile": {
+    "badgeTitle": "Verification status",
+    "statusNone": "Not verified",
+    "statusSelf": "Self-assessed",
+    "statusOnline": "Online verified",
+    "statusOnSite": "On-site verified",
+    "statusExpired": "Verification expired",
+    "detailsTitle": "Verification details",
+    "labelId": "Verification ID",
+    "labelMethod": "Verification method",
+    "labelScope": "Scope",
+    "labelVerifiedAt": "Verified on",
+    "labelExpiresAt": "Valid until",
+    "labelStatus": "Status",
+    "methodOnline": "Remote review of documents and evidence",
+    "methodOnSite": "On-site visit and inspection",
+    "stateActive": "Active",
+    "stateExpired": "Expired",
+    "stateRevoked": "Revoked",
+    "disclaimer": "Verification covers only the information and evidence reviewed by FactoryAuditB2B. It is not statutory certification and does not guarantee supplier performance.",
+    "historyTitle": "Verification history",
+    "historyEmpty": "No verification records yet.",
+    "photosTitle": "Factory photos",
+    "photosEmpty": "No factory photos published yet.",
+    "shareCta": "Share profile",
+    "shareTitle": "Share this supplier profile",
+    "shareLead": "Copy the link and send it to buyers. The link does not expose internal supplier identifiers.",
+    "shareCopied": "Link copied",
+    "shareFailed": "Could not create the link. Please try again.",
+    "notPublicTitle": "This profile is not public",
+    "notPublicLead": "The supplier has not published this profile yet."
   }
 }

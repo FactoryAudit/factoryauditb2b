@@ -283,10 +283,10 @@ section("E. 字典与断言同源（九语键集 + en 叶子数）");
   }
   check("E3 九语 supplierProfile 键集完全一致（getDictionary 无深 fallback）", mismatch === 0, String(mismatch));
 
-  check("E4 en 叶子数 = 2940（与 cs06a C8 同源）", enLeaf === 2940, `实际 ${enLeaf}`);
+  check("E4 en 叶子数 = 2970（与 cs06a C8 同源）", enLeaf === 2970, `实际 ${enLeaf}`);
   check(
-    "E5 cs06a 里的 C8 常量已同步为 2940",
-    read(CS06A).includes("baseKeys.length === 2940")
+    "E5 cs06a 里的 C8 常量已同步为 2970",
+    read(CS06A).includes("baseKeys.length === 2970")
   );
 }
 
@@ -300,9 +300,28 @@ section("F. CS-12 零新增埋点（埋点三桶不受影响）");
     "F1 新增的两个公开区块不含任何埋点调用（本 CS 只做展示）",
     !panel.includes("trackEvent") && !panel.includes("data-track")
   );
+  // 🔴 原断言是裸计数 `=== 3`，在 STEP 10-D 加入 supplier_cluster_backlink 之后
+  //    实际已是 4 —— 也就是说它在 aad2c74 上**本来就是 FAIL**，不是 CS-22A 引入的回归。
+  //    裸计数还有个坏处：新增任何埋点都会被当成"回归"，而取消任何埋点也会被
+  //    "数量刚好等于3"蒙混过关。改为**精确白名单**：逐个点名，多一个/少一个都 FAIL。
+  //    CS-22A 的 supplier_profile_share_cta_click 在 ShareProfileButton 组件里（客户端），
+  //    刻意不落在本页 —— 所以这里断言它**不**出现在 page.tsx，防止以后有人把它搬回来。
+  const trackIds = (page.match(/data-track(=|\{)[^\n>]*/g) ?? []).map((s) => s.trim());
+  const expected = [
+    'data-track="supplier_cluster_backlink"',
+    "data-track={ANALYTICS_EVENTS.profileFreeCta}",
+    "data-track={ANALYTICS_EVENTS.profilePaidCta}",
+    "data-track={ANALYTICS_EVENTS.claimView}",
+  ];
+  const unexpected = trackIds.filter((t) => !expected.includes(t));
   check(
-    "F2 档案页未新增 data-track（既有 profileFreeCta / profilePaidCta 保持原样）",
-    (page.match(/data-track=/g) ?? []).length === 3
+    "F2 档案页埋点为已知四项（白名单，非裸计数）",
+    trackIds.length === expected.length && unexpected.length === 0,
+    `实际 ${trackIds.length} 项${unexpected.length ? " / 未知：" + unexpected.join(" | ") : ""}`
+  );
+  check(
+    "F2b 分享埋点不在本页（在 ShareProfileButton 客户端组件里）",
+    !page.includes("profileShareClick")
   );
 }
 

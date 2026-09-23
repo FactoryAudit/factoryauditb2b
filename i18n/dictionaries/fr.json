@@ -3818,5 +3818,37 @@
       "errorInvalidEmail": "Saisissez une adresse e-mail professionnelle valide.",
       "errorSupplierRequired": "Ajoutez le site ou le nom de l'entreprise fournisseur."
     }
+  },
+  "trustProfile": {
+    "badgeTitle": "Statut de vérification",
+    "statusNone": "Non vérifié",
+    "statusSelf": "Auto-évalué",
+    "statusOnline": "Vérifié en ligne",
+    "statusOnSite": "Vérifié sur site",
+    "statusExpired": "Vérification expirée",
+    "detailsTitle": "Détails de la vérification",
+    "labelId": "ID de vérification",
+    "labelMethod": "Méthode de vérification",
+    "labelScope": "Périmètre",
+    "labelVerifiedAt": "Vérifié le",
+    "labelExpiresAt": "Valide jusqu'au",
+    "labelStatus": "Statut",
+    "methodOnline": "Examen à distance des documents et preuves",
+    "methodOnSite": "Visite sur site et inspection",
+    "stateActive": "Actif",
+    "stateExpired": "Expiré",
+    "stateRevoked": "Révoqué",
+    "disclaimer": "La vérification couvre uniquement les informations et preuves examinées par FactoryAuditB2B. Elle ne constitue pas une certification légale et ne garantit pas la performance du fournisseur.",
+    "historyTitle": "Historique de vérification",
+    "historyEmpty": "Aucun enregistrement de vérification pour l'instant.",
+    "photosTitle": "Photos de l'usine",
+    "photosEmpty": "Aucune photo d'usine publiée.",
+    "shareCta": "Partager le profil",
+    "shareTitle": "Partager ce profil fournisseur",
+    "shareLead": "Copiez le lien et envoyez-le aux acheteurs. Le lien n'expose aucun identifiant interne du fournisseur.",
+    "shareCopied": "Lien copié",
+    "shareFailed": "Impossible de créer le lien. Veuillez réessayer.",
+    "notPublicTitle": "Ce profil n'est pas public",
+    "notPublicLead": "Le fournisseur n'a pas encore publié ce profil."
   }
 }

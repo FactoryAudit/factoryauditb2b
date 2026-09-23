@@ -3818,5 +3818,37 @@
       "errorInvalidEmail": "請填寫有效的公司信箱地址。",
       "errorSupplierRequired": "請填寫供應商的網址或公司名。"
     }
+  },
+  "trustProfile": {
+    "badgeTitle": "查核狀態",
+    "statusNone": "未查核",
+    "statusSelf": "工廠自評",
+    "statusOnline": "線上已查核",
+    "statusOnSite": "現場已查核",
+    "statusExpired": "查核已過期",
+    "detailsTitle": "查核詳情",
+    "labelId": "查核編號",
+    "labelMethod": "查核方式",
+    "labelScope": "查核範圍",
+    "labelVerifiedAt": "查核日期",
+    "labelExpiresAt": "有效期限",
+    "labelStatus": "狀態",
+    "methodOnline": "遠端資料與證據審查",
+    "methodOnSite": "現場訪查與查驗",
+    "stateActive": "生效中",
+    "stateExpired": "已過期",
+    "stateRevoked": "已撤銷",
+    "disclaimer": "查核僅涵蓋 FactoryAuditB2B 已審查的資訊與證據，不等同於法定認證，也不構成對供應商履約能力的保證。",
+    "historyTitle": "查核歷史",
+    "historyEmpty": "暫無查核記錄。",
+    "photosTitle": "工廠照片",
+    "photosEmpty": "尚未發布工廠照片。",
+    "shareCta": "分享檔案",
+    "shareTitle": "分享此供應商檔案",
+    "shareLead": "複製連結傳送給買家，連結不會揭露供應商內部識別碼。",
+    "shareCopied": "連結已複製",
+    "shareFailed": "連結產生失敗，請再試一次。",
+    "notPublicTitle": "此檔案未公開",
+    "notPublicLead": "該供應商尚未公開此檔案。"
   }
 }

@@ -13,6 +13,8 @@
 // 与清单 LOW/MED/HIGH 不同，调用方不可混用。
 
 import { createAdminClient } from "@/lib/supabaseAdmin";
+// P0-A：归属裁决统一走 lib/supplierAccess.ts，本文件不再各自手写 email 比对
+import { resolveSupplierAccess } from "@/lib/supplierAccess";
 
 export type AssessmentType = "self_assessment" | "platform_assessment" | "on_site_audit";
 export type AssessmentStatus =
@@ -170,18 +172,14 @@ export async function submitSelfAssessment(input: {
   const db = createAdminClient();
   if (!db) return { ok: false, error: "service_unavailable", status: 503 };
 
-  const { data: supplier, error: sErr } = await db
-    .from("suppliers")
-    .select("id, contact_email, legal_name")
-    .eq("id", input.supplierId)
-    .maybeSingle();
-  if (sErr || !supplier) return { ok: false, error: "supplier_not_found", status: 404 };
-
-  const supEmail = (supplier.contact_email || "").toLowerCase();
-  const givenEmail = (input.email || "").toLowerCase();
-  if (!givenEmail || supEmail !== givenEmail) {
-    return { ok: false, error: "ownership_mismatch", status: 403 };
-  }
+  // P0-A：归属由统一裁决层决定（会话优先 / 邮箱兜底 / 歧义拒绝）。
+  // 后续写入一律用 access.identity.supplierId，绝不用客户端传来的 input.supplierId。
+  const access = await resolveSupplierAccess({
+    claimedSupplierId: input.supplierId,
+    email: input.email,
+  });
+  if (!access.ok) return { ok: false, error: access.code, status: access.status };
+  const supplierId = access.identity.supplierId;
 
   // 只保留非空答案（缺失值不写入，绝不填 0/默认值）
   const clean: Record<string, string> = {};
@@ -191,7 +189,7 @@ export async function submitSelfAssessment(input: {
 
   const { error: upsertErr } = await db.from("supplier_assessments").upsert(
     {
-      supplier_id: input.supplierId,
+      supplier_id: supplierId,
       assessment_type: "self_assessment",
       status: "submitted",
       responses_json: clean,
@@ -263,24 +261,19 @@ export async function applyOnSiteAudit(input: {
   const db = createAdminClient();
   if (!db) return { ok: false, error: "service_unavailable", status: 503 };
 
-  const { data: supplier, error: sErr } = await db
-    .from("suppliers")
-    .select("id, contact_email")
-    .eq("id", input.supplierId)
-    .maybeSingle();
-  if (sErr || !supplier) return { ok: false, error: "supplier_not_found", status: 404 };
-
-  const supEmail = (supplier.contact_email || "").toLowerCase();
-  const givenEmail = (input.email || "").toLowerCase();
-  if (!givenEmail || supEmail !== givenEmail) {
-    return { ok: false, error: "ownership_mismatch", status: 403 };
-  }
+  // P0-A：同上，归属统一裁决
+  const access = await resolveSupplierAccess({
+    claimedSupplierId: input.supplierId,
+    email: input.email,
+  });
+  if (!access.ok) return { ok: false, error: access.code, status: access.status };
+  const supplierId = access.identity.supplierId;
 
   // 已发布（平台已完成并发布报告）不允许重复发起
   const { data: existing } = await db
     .from("supplier_assessments")
     .select("status")
-    .eq("supplier_id", input.supplierId)
+    .eq("supplier_id", supplierId)
     .eq("assessment_type", "on_site_audit")
     .maybeSingle();
   if (existing && existing.status === "published") {
@@ -291,7 +284,7 @@ export async function applyOnSiteAudit(input: {
   const slaDueAt = addWorkingDays(now, 7).toISOString();
   const { error: upsertErr } = await db.from("supplier_assessments").upsert(
     {
-      supplier_id: input.supplierId,
+      supplier_id: supplierId,
       assessment_type: "on_site_audit",
       status: "submitted",
       sla_due_at: slaDueAt,

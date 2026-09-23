@@ -105,10 +105,24 @@ export function sniffFileType(bytes: Uint8Array): SniffResult {
 export type ImageValidationInput = {
   bytes: Uint8Array;
   declaredMime: string;
+  /** 工厂展示图分类（仅非证据时校验） */
   category?: string;
-  /** 已上传数量（服务端查库，不信任客户端传值） */
+  /**
+   * 供应商**全部图片**数量（工厂展示图 + 审核证据图）—— 服务端查库，不信任客户端传值。
+   * 对应 MAX_TOTAL_IMAGES = 50 的总闸。
+   */
   currentCount: number;
   currentTotalBytes: number;
+  /**
+   * 工厂展示图数量（仅计 supplier_images）。
+   * 对应 MAX_FACTORY_PHOTOS = 12；与「总 50 张」是两条独立的闸，不可互相顶替。
+   */
+  factoryPhotoCount?: number;
+  /**
+   * 当前验证项已挂的证据数（仅证据上传时校验）。
+   * 对应 MAX_EVIDENCE_PER_ITEM = 5，与「总 50 张」也是两条独立的闸。
+   */
+  evidenceItemCount?: number;
   width?: number | null;
   height?: number | null;
   isEvidence?: boolean;
@@ -131,15 +145,18 @@ export function validateImageUpload(input: ImageValidationInput): ImageValidatio
 
   if (input.isEvidence) {
     if (!isAllowedEvidenceMime(sniff.mime)) return { ok: false, code: "mime_not_allowed" };
+    // 证据图 10MB / PDF 20MB —— 绝不能跟工厂展示图一样按 5MB 卡
     const limit =
       sniff.mime === "application/pdf" ? MAX_PDF_BYTES : MAX_EVIDENCE_IMAGE_BYTES;
     if (size > limit) return { ok: false, code: "file_too_large" };
+    if ((input.evidenceItemCount ?? 0) >= MAX_EVIDENCE_PER_ITEM)
+      return { ok: false, code: "evidence_item_limit_reached" };
   } else {
     if (!isAllowedImageMime(sniff.mime)) return { ok: false, code: "mime_not_allowed" };
     if (size > MAX_PHOTO_BYTES) return { ok: false, code: "file_too_large" };
     if (input.category && !isImageCategory(input.category))
       return { ok: false, code: "invalid_category" };
-    if (input.currentCount >= MAX_FACTORY_PHOTOS)
+    if ((input.factoryPhotoCount ?? 0) >= MAX_FACTORY_PHOTOS)
       return { ok: false, code: "photo_limit_reached" };
     // 最低分辨率提醒（仅展示图；证据允许更高分辨率）
     if (
@@ -162,25 +179,89 @@ export function validateImageUpload(input: ImageValidationInput): ImageValidatio
 // 配额（服务端统计，绝不信任客户端）
 // ---------------------------------------------------------------------------
 
-export type ImageQuota = { count: number; totalBytes: number };
+export type ImageQuota = {
+  /** 供应商全部图片张数（工厂展示图 + 审核证据图）→ 上限 MAX_TOTAL_IMAGES */
+  count: number;
+  totalBytes: number;
+  /** 工厂展示图张数 → 上限 MAX_FACTORY_PHOTOS */
+  factoryPhotos: number;
+  /** 审核证据图张数（PDF 不计入张数，只计字节） */
+  evidenceImages: number;
+};
 
+const EMPTY_QUOTA: ImageQuota = {
+  count: 0,
+  totalBytes: 0,
+  factoryPhotos: 0,
+  evidenceImages: 0,
+};
+
+/**
+ * 配额统计（服务端查库，绝不信任客户端）。
+ *
+ * 三条闸彼此独立，调用方必须分别取用：
+ *   factoryPhotos  → 12（工厂展示图）
+ *   evidenceItemCount → 5（单个验证项，见 countEvidenceForItem）
+ *   count/totalBytes  → 50 张 / 200MB（供应商总量，展示图与证据图**合并计**）
+ */
 export async function getImageQuota(supplierId: string): Promise<ImageQuota> {
   const db = createAdminClient();
-  if (!db) return { count: 0, totalBytes: 0 };
-  const { data, error } = await db
-    .from("supplier_images")
-    .select("original_size, display_size, thumbnail_size")
-    .eq("supplier_id", supplierId);
-  if (error) {
-    console.error("[supplierImages] 配额统计失败", error.message);
-    return { count: 0, totalBytes: 0 };
-  }
-  let totalBytes = 0;
-  for (const r of data ?? []) {
-    totalBytes +=
+  if (!db) return { ...EMPTY_QUOTA };
+
+  const [{ data: photos, error: pErr }, { data: ev, error: eErr }] = await Promise.all([
+    db
+      .from("supplier_images")
+      .select("original_size, display_size, thumbnail_size")
+      .eq("supplier_id", supplierId),
+    db
+      .from("supplier_evidence")
+      .select("file_size, mime_type")
+      .eq("supplier_id", supplierId),
+  ]);
+
+  if (pErr) console.error("[supplierImages] 展示图配额统计失败", pErr.message);
+  if (eErr) console.error("[supplierImages] 证据配额统计失败", eErr.message);
+
+  const quota: ImageQuota = { ...EMPTY_QUOTA };
+
+  for (const r of photos ?? []) {
+    quota.factoryPhotos += 1;
+    quota.totalBytes +=
       (r.display_size ?? 0) + (r.thumbnail_size ?? 0) + (r.original_size ?? 0);
   }
-  return { count: (data ?? []).length, totalBytes };
+
+  for (const r of ev ?? []) {
+    quota.totalBytes += r.file_size ?? 0;
+    if (typeof r.mime_type === "string" && r.mime_type.startsWith("image/")) {
+      quota.evidenceImages += 1;
+    }
+  }
+
+  quota.count = quota.factoryPhotos + quota.evidenceImages;
+  return quota;
+}
+
+/** 单个验证项已挂证据数（assessment_id + item_key 维度，上限 MAX_EVIDENCE_PER_ITEM） */
+export async function countEvidenceForItem(params: {
+  supplierId: string;
+  assessmentId: string | null;
+  itemKey: string;
+}): Promise<number> {
+  const db = createAdminClient();
+  if (!db) return 0;
+  // 不用 head:true —— 项目铁律：探表/计数一律走可见 select，避免"表不存在也返 204"的假象
+  let q = db
+    .from("supplier_evidence")
+    .select("id")
+    .eq("supplier_id", params.supplierId)
+    .eq("item_key", params.itemKey);
+  if (params.assessmentId) q = q.eq("assessment_id", params.assessmentId);
+  const { data, error } = await q;
+  if (error) {
+    console.error("[supplierImages] 证据计数失败", error.message);
+    return 0;
+  }
+  return (data ?? []).length;
 }
 
 /** 同一供应商是否已存在相同文件（SHA-256 去重） */
@@ -265,6 +346,105 @@ export async function removeImageObject(path: string): Promise<boolean> {
   } catch {
     return false;
   }
+}
+
+// ---------------------------------------------------------------------------
+// 公开侧读取（P0-D）：一律只给 display / thumbnail，永不返回 original_path
+// ---------------------------------------------------------------------------
+
+export type PublicFactoryImage = {
+  id: string;
+  category: string;
+  width: number | null;
+  height: number | null;
+  /** 展示图路径（服务端代理读取用，不直接暴露给浏览器） */
+  displayPath: string | null;
+  thumbnailPath: string | null;
+};
+
+/**
+ * 公开可用的工厂照片。
+ * 硬门槛：status = APPROVED 且 visibility = PUBLIC。
+ * 返回值**不含** original_path —— 私有原件在结构上就无法被公开侧读到。
+ */
+export async function listPublicFactoryImages(
+  supplierId: string,
+  limit = MAX_FACTORY_PHOTOS
+): Promise<PublicFactoryImage[]> {
+  const db = createAdminClient();
+  if (!db) return [];
+  const { data, error } = await db
+    .from("supplier_images")
+    .select("id, category, width, height, display_path, thumbnail_path")
+    .eq("supplier_id", supplierId)
+    .eq("status", "APPROVED")
+    .eq("visibility", "PUBLIC")
+    .order("created_at", { ascending: true })
+    .limit(Math.min(limit, MAX_FACTORY_PHOTOS));
+  if (error) {
+    console.error("[supplierImages] 公开图读取失败", error.message);
+    return [];
+  }
+  return (data ?? []).map((r) => ({
+    id: r.id,
+    category: r.category,
+    width: r.width ?? null,
+    height: r.height ?? null,
+    displayPath: r.display_path ?? null,
+    thumbnailPath: r.thumbnail_path ?? null,
+  }));
+}
+
+export type PublicImageVariant = "display" | "thumbnail";
+
+/**
+ * 解析一个可公开读取的图片对象路径。
+ * 只认 APPROVED + PUBLIC；variant 决定返回 display 还是 thumbnail。
+ * original 路径**没有任何入口**能从这里取到（连参数都不接受）。
+ */
+export async function resolvePublicImagePath(
+  imageId: string,
+  variant: PublicImageVariant
+): Promise<string | null> {
+  const db = createAdminClient();
+  if (!db) return null;
+  const { data, error } = await db
+    .from("supplier_images")
+    .select("display_path, thumbnail_path, status, visibility")
+    .eq("id", imageId)
+    .maybeSingle();
+  if (error || !data) return null;
+  if (data.status !== "APPROVED" || data.visibility !== "PUBLIC") return null;
+  return variant === "thumbnail"
+    ? data.thumbnail_path ?? data.display_path ?? null
+    : data.display_path ?? null;
+}
+
+/**
+ * 公开图代理入口：图片必须 APPROVED+PUBLIC **且** 所属供应商档案处于公开态。
+ * 供应商被撤下公开后，已生成的链接立即失效 —— 不靠"链接不被猜到"来保证安全。
+ */
+export async function resolvePublicImageForVisibleSupplier(
+  imageId: string,
+  variant: PublicImageVariant
+): Promise<string | null> {
+  const db = createAdminClient();
+  if (!db) return null;
+  const { data, error } = await db
+    .from("supplier_images")
+    .select("supplier_id, display_path, thumbnail_path, status, visibility")
+    .eq("id", imageId)
+    .maybeSingle();
+  if (error || !data) return null;
+  if (data.status !== "APPROVED" || data.visibility !== "PUBLIC") return null;
+
+  const { getSupplierPublicFlagsById, isProfilePublic } = await import("./trustProfile");
+  const flags = await getSupplierPublicFlagsById(data.supplier_id);
+  if (!flags || !isProfilePublic(flags)) return null;
+
+  return variant === "thumbnail"
+    ? data.thumbnail_path ?? data.display_path ?? null
+    : data.display_path ?? null;
 }
 
 /** 短时签名 URL：仅供后台审核预览，公开侧禁止调用 */

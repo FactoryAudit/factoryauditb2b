@@ -346,6 +346,93 @@ export async function writeAuditLog(entry: {
 }
 
 // ---------------------------------------------------------------------------
+// CS-A：公开可见性判定（服务端唯一裁决，页面只消费结果）
+// ---------------------------------------------------------------------------
+
+export type SupplierPublicFlags = {
+  isPublished: boolean | null;
+  publicProfileEnabled: boolean | null;
+  profileStatus: string | null;
+  searchIndexEnabled: boolean | null;
+};
+
+/**
+ * 档案是否对外公开。
+ *
+ * 三元与门：is_published ∧ public_profile_enabled ∧ profile_status='public'。
+ * 🔴 缺失值按"未公开"处理（NULL ≠ true），但**不反过来把缺失当成 private 去 noindex**
+ *    —— 那会让一批正在被收录的页面一夜掉索引。见 isProfileNoindex 的口径。
+ */
+export function isProfilePublic(f: SupplierPublicFlags): boolean {
+  return (
+    f.isPublished === true &&
+    f.publicProfileEnabled === true &&
+    f.profileStatus === "public"
+  );
+}
+
+/**
+ * 是否应 noindex。
+ *
+ * 只有在**明确**不公开时才 noindex：
+ *   · public_profile_enabled === false
+ *   · profile_status ∈ ('private','unlisted')
+ *   · is_published === false
+ * 三者都是显式取值才判定。profile_status 缺失（NULL）不算 noindex ——
+ * 那是"还没设置"，不是"不许收录"，混为一谈会误伤线上已收录页面。
+ */
+export function isProfileNoindex(f: SupplierPublicFlags): boolean {
+  if (f.publicProfileEnabled === false) return true;
+  if (f.profileStatus === "private" || f.profileStatus === "unlisted") return true;
+  if (f.isPublished === false) return true;
+  return false;
+}
+
+/** 按 slug 读公开标志位（查不到返回 null，调用方 notFound） */
+export async function getSupplierPublicFlags(
+  slug: string
+): Promise<SupplierPublicFlags | null> {
+  const db = createAdminClient();
+  if (!db) return null;
+  const { data, error } = await db
+    .from("suppliers")
+    .select(
+      "is_published, public_profile_enabled, profile_status, search_index_enabled"
+    )
+    .eq("slug", slug)
+    .maybeSingle();
+  if (error || !data) return null;
+  return {
+    isPublished: data.is_published ?? null,
+    publicProfileEnabled: data.public_profile_enabled ?? null,
+    profileStatus: data.profile_status ?? null,
+    searchIndexEnabled: data.search_index_enabled ?? null,
+  };
+}
+
+/** 按 id 读公开标志位（图片代理等只有 supplier_id 的场景用） */
+export async function getSupplierPublicFlagsById(
+  supplierId: string
+): Promise<SupplierPublicFlags | null> {
+  const db = createAdminClient();
+  if (!db) return null;
+  const { data, error } = await db
+    .from("suppliers")
+    .select(
+      "is_published, public_profile_enabled, profile_status, search_index_enabled"
+    )
+    .eq("id", supplierId)
+    .maybeSingle();
+  if (error || !data) return null;
+  return {
+    isPublished: data.is_published ?? null,
+    publicProfileEnabled: data.public_profile_enabled ?? null,
+    profileStatus: data.profile_status ?? null,
+    searchIndexEnabled: data.search_index_enabled ?? null,
+  };
+}
+
+// ---------------------------------------------------------------------------
 // 展示用文案（服务端判定，前端只渲染，不可自行判定）
 // ---------------------------------------------------------------------------
 

@@ -3818,5 +3818,37 @@
       "errorInvalidEmail": "أدخل بريدًا إلكترونيًا صحيحًا للشركة.",
       "errorSupplierRequired": "أضف موقع المورّد أو اسم الشركة."
     }
+  },
+  "trustProfile": {
+    "badgeTitle": "حالة التحقق",
+    "statusNone": "غير مُتحقَّق منه",
+    "statusSelf": "تقييم ذاتي",
+    "statusOnline": "مُتحقَّق منه عبر الإنترنت",
+    "statusOnSite": "مُتحقَّق منه ميدانيًا",
+    "statusExpired": "انتهت صلاحية التحقق",
+    "detailsTitle": "تفاصيل التحقق",
+    "labelId": "رقم التحقق",
+    "labelMethod": "طريقة التحقق",
+    "labelScope": "النطاق",
+    "labelVerifiedAt": "تاريخ التحقق",
+    "labelExpiresAt": "صالح حتى",
+    "labelStatus": "الحالة",
+    "methodOnline": "مراجعة المستندات والأدلة عن بُعد",
+    "methodOnSite": "زيارة ميدانية ومعاينة",
+    "stateActive": "سارٍ",
+    "stateExpired": "منتهٍ",
+    "stateRevoked": "ملغى",
+    "disclaimer": "يقتصر التحقق على المعلومات والأدلة التي راجعتها FactoryAuditB2B، ولا يُعد شهادة نظامية ولا يضمن أداء المورّد.",
+    "historyTitle": "سجل التحقق",
+    "historyEmpty": "لا توجد سجلات تحقق بعد.",
+    "photosTitle": "صور المصنع",
+    "photosEmpty": "لم يتم نشر صور للمصنع بعد.",
+    "shareCta": "مشاركة الملف",
+    "shareTitle": "مشاركة ملف هذا المورّد",
+    "shareLead": "انسخ الرابط وأرسله إلى المشترين. الرابط لا يكشف أي معرّفات داخلية للمورّد.",
+    "shareCopied": "تم نسخ الرابط",
+    "shareFailed": "تعذّر إنشاء الرابط. يرجى المحاولة مرة أخرى.",
+    "notPublicTitle": "هذا الملف غير عام",
+    "notPublicLead": "لم ينشر المورّد هذا الملف بعد."
   }
 }

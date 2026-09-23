@@ -17,6 +17,23 @@ import {
 // CS-21：三标签审核徽章（工厂自评估 / 平台在线评估 / 平台现场审核）
 import { getSupplierTags } from "@/lib/supplierAssessments";
 import AssessmentTags from "@/components/supplier/AssessmentTags";
+// CS-22 / CS-A：公开档案页增强 —— 验证徽章 / 详情 / 历史 / 工厂照片 / 分享
+// 状态一律由服务端推导（lib/trustProfile.ts），组件只渲染、绝不自判 Verified。
+import {
+  getTrustSnapshot,
+  getSupplierPublicFlags,
+  isProfilePublic,
+  isProfileNoindex,
+  isExpired,
+} from "@/lib/trustProfile";
+import VerificationBadge, {
+  type BadgeState,
+} from "@/components/supplier/VerificationBadge";
+import VerificationDetails from "@/components/supplier/VerificationDetails";
+import FactoryPhotoGallery from "@/components/supplier/FactoryPhotoGallery";
+import ShareProfileButton from "@/components/supplier/ShareProfileButton";
+import ProfileViewTracker from "@/components/supplier/ProfileViewTracker";
+import { listPublicFactoryImages } from "@/lib/supplierImages";
 // CS-21：采购商侧审核报告付费下载占位（标签①②③）
 import AssessmentReportPaywall from "@/components/buyer/AssessmentReportPaywall";
 import {
@@ -169,12 +186,20 @@ export async function generateMetadata({
   //   与 sitemap 的提交集合同源（app/sitemap.ts 调的是同一个函数）。
   const verdict = determineSupplierIndexability(seo);
 
+  // CS-A：叠加「公开档案」闸门。
+  //   只在**显式**不公开时才追加 noindex（public_profile_enabled=false /
+  //   profile_status ∈ private|unlisted / is_published=false）。
+  //   profile_status 缺失（NULL）不算 noindex —— 那是"还没设置"，不是"不许收录"，
+  //   混为一谈会把一批正在被收录的页面一夜掉索引。
+  const flags = await getSupplierPublicFlags(slug);
+  const blocked = flags ? isProfileNoindex(flags) : false;
+
   return buildPageMetadata({
     locale,
     path,
     title,
     description,
-    robots: verdict.indexable
+    robots: verdict.indexable && !blocked
       ? { index: true, follow: true }
       : { index: false, follow: true },
   });
@@ -214,6 +239,29 @@ export default async function SupplierProfilePage({
 
   // CS-21：三标签审核（仅展示已发布 published 的标签）
   const assessmentTags = await getSupplierTags(s.id);
+
+  // ==========================================================================
+  // CS-22 / CS-A：信任档案（徽章 / 详情 / 历史 / 工厂照片 / 分享）
+  //
+  // 所有状态在这里由服务端一次性推导完，下面只做渲染：
+  //   · badgeState  —— 三态 + EXPIRED，绝不在组件里判断谁能拿 Verified
+  //   · profileIsPublic —— 公开闸门，决定照片/分享是否渲染 + 是否 noindex
+  //   · factoryPhotos —— 只可能是 APPROVED + PUBLIC 的行（见 supplierImages）
+  // ==========================================================================
+  const tp = t.trustProfile;
+  const publicFlags = await getSupplierPublicFlags(slug);
+  const profileIsPublic = publicFlags ? isProfilePublic(publicFlags) : false;
+  const trust = await getTrustSnapshot(s.id);
+  // 过期/撤销记录仍然留在 history 里；只有"曾经核验过、但现在失效了"才显示 EXPIRED 徽章
+  const lapsedRecord = trust.history.find(
+    (r) =>
+      r.status === "EXPIRED" ||
+      r.status === "REVOKED" ||
+      (r.status === "ACTIVE" && isExpired(r))
+  );
+  const badgeState: BadgeState =
+    trust.status === "NONE" && lapsedRecord ? "EXPIRED" : (trust.status as BadgeState);
+  const factoryPhotos = profileIsPublic ? await listPublicFactoryImages(s.id) : [];
 
   // STEP 10-D §22：供应商档案「产业带」回链。仅当 cluster_slug 命中已发布 P0 集群
   // （LEGACY_CLUSTER_REDIRECTS 即 Admin 允许写入的集合）时才给可点击链接；
@@ -393,6 +441,25 @@ export default async function SupplierProfilePage({
 
             {/* CS-21：三标签审核徽章 */}
             <AssessmentTags tags={assessmentTags} />
+
+            {/* CS-22 / CS-A：三态验证徽章（状态由 trustProfile.ts 推导，组件不自判） */}
+            <div className="mt-4">
+              <div className="text-xs uppercase tracking-wide text-[#64748b]">
+                {tp.badgeTitle}
+              </div>
+              <div className="mt-1.5">
+                {/* 只有存在验证/历史记录时徽章才可点 —— 点开即跳到下方 Verification Details */}
+                <VerificationBadge
+                  state={badgeState}
+                  dict={tp}
+                  href={
+                    trust.active || trust.history.length > 0
+                      ? "#verification-details"
+                      : undefined
+                  }
+                />
+              </div>
+            </div>
 
             <div className="mt-4 text-xs uppercase tracking-wide text-[#64748b]">
               {sp.riskScore}
@@ -661,6 +728,23 @@ export default async function SupplierProfilePage({
             版本顺序本身就在传递"平台核验过什么"与"工厂自己说了什么"的可信度差异。 */}
         <SupplierSelfReportedCerts data={s} dict={sp} />
 
+        {/* CS-22 / CS-A #7：工厂照片（只渲染 APPROVED + PUBLIC，不加载 original） */}
+        {profileIsPublic && (
+          <FactoryPhotoGallery images={factoryPhotos} dict={tp} />
+        )}
+
+        {/* CS-22 / CS-A #8 #9：验证详情 + 验证历史
+            没有任何验证记录时也渲染（此时显示"暂无核验记录"），
+            但完全未核验且无历史时整段不出现，避免制造空区块。 */}
+        {(trust.active || trust.history.length > 0) && (
+          <VerificationDetails
+            active={trust.active}
+            history={trust.history}
+            dict={tp}
+            badgeState={badgeState}
+          />
+        )}
+
         {/* 付费层锁区：证据明细 / 认证明细 / 验货历史 */}
         <section className="mt-8 grid md:grid-cols-2 gap-6">
           <div className="card p-6">
@@ -876,6 +960,29 @@ export default async function SupplierProfilePage({
             </Link>
           </div>
         </section>
+
+        {/* ==================================================================
+            CS-22 / CS-A #11：Share CTA
+            只有公开档案才签发分享链接 —— 分享一个未公开的档案没有意义，
+            也会绕过可见性闸门。链接里只有 share_token，没有内部 supplier UUID。
+            ================================================================== */}
+        <section className="mt-6 card p-6">
+          {profileIsPublic ? (
+            <>
+              <h2 className="font-semibold text-[#0f172a]">{tp.shareTitle}</h2>
+              <p className="text-sm text-[#64748b] mt-1">{tp.shareLead}</p>
+              <ShareProfileButton slug={slug} dict={tp} />
+            </>
+          ) : (
+            <>
+              <h2 className="font-semibold text-[#0f172a]">{tp.notPublicTitle}</h2>
+              <p className="text-sm text-[#64748b] mt-1">{tp.notPublicLead}</p>
+            </>
+          )}
+        </section>
+
+        {/* 浏览埋点：零 UI，页面保持预渲染静态产物 */}
+        {profileIsPublic && <ProfileViewTracker slug={slug} />}
       </main>
     </GuestAccessProvider>
   );
