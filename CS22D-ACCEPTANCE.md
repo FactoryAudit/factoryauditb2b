@@ -122,6 +122,8 @@ G 边界 expires_at≈now → EXPIRED       (Verification expired, =now 边界)
 - 注：本机沙箱拦截 `spawnSync` 子进程的批量文件写入 → populate 改用 bash 循环逐批 `--worker` 填充；构建期 `.next`/`.open-next` 清理需 `CODEBUDDY_SAFE_DELETE_ENABLED=0`。
 
 ## Git
-- 待提交文件（精确 add）：`lib/trustProfile.ts`、`app/[locale]/suppliers/[slug]/page.tsx`、`app/[locale]/suppliers/page.tsx`、`lib/analytics.ts`、`components/supplier/VerificationBadge.tsx`、`components/supplier/VerificationDetails.tsx`、`lib/supplierReportHtml.ts`、`app/[locale]/admin/suppliers/[slug]/page.tsx`、`scripts/cs22c_probe.ts`（类型修复）、`_cs22d_live.mjs`、`CS22D-ACCEPTANCE.md`。
-- 不含：`.next/`、`.open-next/`、备份日志、构建日志。
-- origin/main 基线：`757dc5e7e32fcb9e27048d931c29f600307a1dcd`。
+- **本地提交**：`13e3b18` `feat(CS-22D): verification badge + expiry + history`（10 files changed, +391 / -23）。ref 已复核落盘（`git log` 与 `rev-parse HEAD` 一致）。
+- 精确 add（10 文件）：`lib/trustProfile.ts`、`app/[locale]/suppliers/[slug]/page.tsx`、`app/[locale]/suppliers/page.tsx`、`lib/analytics.ts`、`components/supplier/VerificationBadge.tsx`、`components/supplier/VerificationDetails.tsx`、`lib/supplierReportHtml.ts`、`app/[locale]/admin/suppliers/[slug]/page.tsx`、`scripts/cs22c_probe.ts`（类型修复）、`CS22D-ACCEPTANCE.md`。
+- 未入库：`_cs22d_live.mjs`（被 `.gitignore:76 /_*` 忽略，E2E 脚本惯例，与 `_cs22c_live.mjs` 一致）。
+- 已排除：`.next/`、`.open-next/`、所有 `.next.*` 垃圾目录、`.git-msg-*.txt`、`CS22C-ACCEPTANCE.md`（非本范围）。
+- **推送状态**：`git push origin HEAD` 被本机沙箱拦截（SSH 密钥权限被拒），远端 `origin/main` 尚未更新。待用户授权/手动 push。基线 `757dc5e7e32fcb9e27048d931c29f600307a1dcd` → 本地 `13e3b18`。
