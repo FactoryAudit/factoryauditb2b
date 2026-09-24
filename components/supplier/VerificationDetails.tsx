@@ -1,4 +1,5 @@
 import type { VerificationRecord, VerificationType } from "@/lib/trustProfile";
+import { ANALYTICS_EVENTS } from "@/lib/analytics";
 
 /**
  * CS-A #8 / #9：验证详情 + 验证历史。
@@ -138,7 +139,10 @@ export default function VerificationDetails({
 
       {/* 验证历史：过期/撤销的记录保留在这里，不因失效而被抹掉 */}
       <details className="mt-4 group">
-        <summary className="cursor-pointer select-none text-sm font-semibold text-[#0f4c81] hover:underline">
+        <summary
+          className="cursor-pointer select-none text-sm font-semibold text-[#0f4c81] hover:underline"
+          data-track={ANALYTICS_EVENTS.verificationDetailsView}
+        >
           {dict.historyTitle}
           {history.length > 0 ? ` (${history.length})` : ""}
         </summary>

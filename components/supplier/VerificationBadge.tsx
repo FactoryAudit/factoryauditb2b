@@ -78,6 +78,7 @@ export default function VerificationBadge({
   dict,
   href,
   className = "",
+  dataTrack,
 }: {
   /** 服务端推导结果（getTrustSnapshot + 过期判定） */
   state: BadgeState;
@@ -89,6 +90,8 @@ export default function VerificationBadge({
    */
   href?: string;
   className?: string;
+  /** 可选埋点：点开徽章即视为查看验证详情（CS-D #33） */
+  dataTrack?: string;
 }) {
   const b = BADGE[state];
   const label = labelOf(state, dict);
@@ -112,6 +115,7 @@ export default function VerificationBadge({
         // aria-label 带完整文字，屏幕阅读器不依赖颜色
         aria-label={label}
         data-verification-state={state}
+        {...(dataTrack ? { "data-track": dataTrack } : {})}
       >
         {inner}
       </a>

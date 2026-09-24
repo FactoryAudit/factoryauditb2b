@@ -50,6 +50,9 @@ export type SupplierReportInput = {
   inspectionHistory: number;
   riskScore: number | null;
   verificationLevel: string;
+  /** CS-D #19：由服务端用 resolveVerificationBadge 推导并本地化后注入；
+   *  报告不再自行判断 verification_level / is_verified，与 Public Profile 同源。 */
+  verificationBadgeLabel?: string;
   audits: SupplierReportAudit[];
   generatedAt: string;
 };
@@ -63,6 +66,7 @@ const DOC_UI = {
   print: { en: "Print / Save as PDF", zh: "打印 / 另存为 PDF" } as Bi,
   riskScore: { en: "Risk score", zh: "风险评分" } as Bi,
   verificationLevel: { en: "Verification level", zh: "核验等级" } as Bi,
+  verificationStatus: { en: "Verification status", zh: "核验状态" } as Bi,
   verificationScope: { en: "Verification scope", zh: "核验范围" } as Bi,
   auditHistory: { en: "Audit & verification history", zh: "审核与核验记录" } as Bi,
   profile: { en: "Supplier profile", zh: "供应商档案" } as Bi,
@@ -173,11 +177,16 @@ export function buildSupplierReportHtml(
     </div>`;
   }
 
-  // ---- 核验等级 + 范围 ----
+  // ---- 核验状态 + 范围 ----
+  // CS-D #19：优先用服务端注入的 resolver 状态（与 Public Profile 同源）；
+  // 未注入时回退到 legacy verificationLevel（向后兼容旧调用方）。
+  const badgeLabel = input.verificationBadgeLabel;
   let verifyHtml = `<div class="kv"><span class="k">${bi(
-    DOC_UI.verificationLevel
-  )}</span><span class="v">${bi(vlLabel)}</span></div>`;
-  if (vl > 0) {
+    badgeLabel ? DOC_UI.verificationStatus : DOC_UI.verificationLevel
+  )}</span><span class="v">${esc(
+    badgeLabel ?? vlLabel[lang] ?? input.verificationLevel
+  )}</span></div>`;
+  if (!badgeLabel && vl > 0) {
     const scope = LEVEL_SCOPE[vl as 0 | 1 | 2 | 3 | 4] ?? [];
     const chips = scope
       .map(

@@ -32,6 +32,10 @@ export const ANALYTICS_EVENTS = {
   // 分享按钮点击属漏斗上层意向，绝不可进 CONVERSION_EVENTS。
   profileShareClick: "supplier_profile_share_cta_click",
   profileVerificationView: "supplier_verification_view",
+  // ---- CS-D：验证徽章 / 详情浏览（#33）----
+  // 徽章点击 = 进入详情（浏览层 *_view）；详情展开 = 历史/范围曝光（同 *_view）。
+  verificationBadgeView: "verification_badge_view",
+  verificationDetailsView: "verification_details_view",
 
   // ---- STEP-05：Verify Supplier（买家请求核验某供应商）----
   // 口径与 claimSubmit 同源：`*_view` 是页面浏览，`*_submit` 是真实表单提交（转化）。

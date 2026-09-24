@@ -5,6 +5,13 @@ import { listSupplierDirectory, type SupplierView } from "@/lib/queries";
 import { overallLevel, LEVEL_COLOR, type RiskLevel } from "@/lib/riskEngine";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
+// CS-D：目录卡片统一展示三态验证徽章（状态由 trustProfile 服务端推导，绝不前端算）
+import {
+  getVerificationBadgesForSuppliers,
+} from "@/lib/trustProfile";
+import VerificationBadge, {
+  type BadgeState,
+} from "@/components/supplier/VerificationBadge";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { ANALYTICS_EVENTS } from "@/lib/suppliers";
 
@@ -85,6 +92,10 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
   //   ⚠️ 已发布供应商超过 ~60 家后，需要以**新的 Change Set**引入
   //      分页 / Load More / 结果排序；本轮明确不做分页。
   const displayed = filtered;
+
+  // CS-D：目录卡片徽章 —— 单次批量查询推导状态（服务端唯一权威，见 trustProfile.ts）。
+  const badgeMap = await getVerificationBadgesForSuppliers(displayed.map((x) => x.id));
+  const tp = t.trustProfile;
 
   const linkWith = (next: { country?: string | null; industry?: string | null; q?: string | null }) => {
     const params = new URLSearchParams();
@@ -309,6 +320,13 @@ export default async function SuppliersPage({ params, searchParams }: Props) {
                   data-track-value={x.slug}
                 >
                   <div className="font-semibold text-[#0f172a]">{x.legalName}</div>
+                  {/* CS-D：三态验证徽章（状态服务端推导，组件不自判） */}
+                  <div className="mt-2">
+                    <VerificationBadge
+                      state={(badgeMap.get(x.id) ?? "NONE") as BadgeState}
+                      dict={tp}
+                    />
+                  </div>
                   <div className="text-sm text-[#64748b] mt-1">
                     {x.city}, {x.countryName ?? x.country.toUpperCase()}
                   </div>

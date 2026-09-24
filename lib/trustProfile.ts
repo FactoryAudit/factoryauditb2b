@@ -18,7 +18,11 @@ export type TrustStatus =
   | "NONE"
   | "SELF_ASSESSED"
   | "ONLINE_VERIFIED"
-  | "ON_SITE_VERIFIED";
+  | "ON_SITE_VERIFIED"
+  | "EXPIRED";
+
+/** 徽章显示态（EXPIRED 现在是一等公民，与三态同源，杜绝"页面自己算 Verified"） */
+export type VerificationBadgeState = TrustStatus;
 
 export type VerificationType = "ONLINE" | "ON_SITE";
 
@@ -84,10 +88,63 @@ export function pickActiveVerification(
   return onSite ?? active[0];
 }
 
+/**
+ * 🔴 唯一权威：把一组验证记录 + 自评状态推导成"对外显示态"。
+ * 所有页面/组件都必须调用本函数，绝不在各自 UI 里重算谁能拿 Verified。
+ *
+ * 优先级（严格统一，全站只有这一处规则）：
+ *   1. 生效的 ON_SITE  → ON_SITE_VERIFIED
+ *   2. 生效的 ONLINE  → ONLINE_VERIFIED
+ *   3. 存在失效记录（自然过期 / 显式 EXPIRED / REVOKED） → EXPIRED
+ *      （#17：若同时有"已提交自评"，仍优先显示 EXPIRED——
+ *        "曾被核验但已失效"比"仅自评"信息量更大，且不掩盖失效事实）
+ *   4. 有已提交自评（无生效验证） → SELF_ASSESSED
+ *   5. 其他 → NONE
+ *
+ * "生效" 的硬定义（#13）：status = ACTIVE ∧ verified_at ≤ now ∧ expires_at > now。
+ * 前端缓存 / suppliers.verification_level / is_verified bool / report 旧状态 一律不算数。
+ */
+export function resolveVerificationBadge(
+  snap: { history: VerificationRecord[]; hasSubmittedAssessment: boolean },
+  now = Date.now()
+): {
+  state: VerificationBadgeState;
+  active: VerificationRecord | null;
+  lapsed: VerificationRecord | null;
+} {
+  const active = pickActiveVerification(snap.history, now);
+  if (active) {
+    return {
+      state: active.verification_type === "ON_SITE" ? "ON_SITE_VERIFIED" : "ONLINE_VERIFIED",
+      active,
+      lapsed: null,
+    };
+  }
+
+  const lapsed =
+    snap.history.find(
+      (r) =>
+        r.status === "EXPIRED" ||
+        r.status === "REVOKED" ||
+        (r.status === "ACTIVE" && isExpired(r, now))
+    ) ?? null;
+  if (lapsed) {
+    return { state: "EXPIRED", active: null, lapsed };
+  }
+
+  if (snap.hasSubmittedAssessment) {
+    return { state: "SELF_ASSESSED", active: null, lapsed: null };
+  }
+
+  return { state: "NONE", active: null, lapsed: null };
+}
+
 export type TrustSnapshot = {
   status: TrustStatus;
   /** 生效中的验证记录（无则 null） */
   active: VerificationRecord | null;
+  /** 失效记录（过期/撤销/自然失效），用于 EXPIRED 徽章展示；历史不删除 */
+  lapsed: VerificationRecord | null;
   /** 全部历史记录（含过期/撤销，不覆盖） */
   history: VerificationRecord[];
   /** 是否存在已提交的自评（决定 SELF_ASSESSED） */
@@ -143,14 +200,75 @@ export async function getTrustSnapshot(
     getVerificationRecords(supplierId),
     hasSubmittedSelfAssessment(supplierId),
   ]);
-  const active = pickActiveVerification(records);
-  let status: TrustStatus = "NONE";
-  if (active) {
-    status = active.verification_type === "ON_SITE" ? "ON_SITE_VERIFIED" : "ONLINE_VERIFIED";
-  } else if (hasAssessment) {
-    status = "SELF_ASSESSED";
+  const badge = resolveVerificationBadge(
+    { history: records, hasSubmittedAssessment: hasAssessment },
+    Date.now()
+  );
+  return {
+    status: badge.state,
+    active: badge.active,
+    lapsed: badge.lapsed,
+    history: records,
+    hasSubmittedAssessment: hasAssessment,
+  };
+}
+
+/**
+ * CS-D #22：对外状态唯一入口（语义同 getTrustSnapshot，命名更贴合"验证状态"）。
+ * 客户端绝不可自行推导 —— 只能传 supplierId，由服务端用 verification_records 计算。
+ */
+export async function getSupplierVerificationStatus(
+  supplierId: string
+): Promise<TrustSnapshot> {
+  return getTrustSnapshot(supplierId);
+}
+
+/**
+ * 批量解析一组供应商的徽章态（目录/列表页用，单次 2 条查询，杜绝 N+1）。
+ * 只信 verification_records + supplier_assessments，绝不读 suppliers.verification_level。
+ */
+export async function getVerificationBadgesForSuppliers(
+  ids: string[]
+): Promise<Map<string, VerificationBadgeState>> {
+  const map = new Map<string, VerificationBadgeState>();
+  if (ids.length === 0) return map;
+  const db = createAdminClient();
+  if (!db) return map;
+
+  const [{ data: recs, error: recErr }, { data: asm, error: asmErr }] = await Promise.all([
+    db
+      .from("verification_records")
+      .select("id, supplier_id, verification_id, verification_type, status, verified_at, expires_at")
+      .in("supplier_id", ids),
+    db
+      .from("supplier_assessments")
+      .select("supplier_id")
+      .eq("assessment_type", "self_assessment")
+      .in("status", ["submitted", "under_review", "approved", "published"])
+      .in("supplier_id", ids),
+  ]);
+  if (recErr || asmErr) {
+    console.error("[trustProfile] 批量徽章解析失败", recErr?.message ?? asmErr?.message);
+    return map;
   }
-  return { status, active, history: records, hasSubmittedAssessment: hasAssessment };
+
+  const bySupplier = new Map<string, VerificationRecord[]>();
+  for (const r of (recs ?? []) as VerificationRecord[]) {
+    const arr = bySupplier.get(r.supplier_id) ?? [];
+    arr.push(r);
+    bySupplier.set(r.supplier_id, arr);
+  }
+  const assessed = new Set((asm ?? []).map((a) => (a as { supplier_id: string }).supplier_id));
+
+  for (const id of ids) {
+    const rec = bySupplier.get(id) ?? [];
+    const badge = resolveVerificationBadge(
+      { history: rec, hasSubmittedAssessment: assessed.has(id) },
+      Date.now()
+    );
+    map.set(id, badge.state);
+  }
+  return map;
 }
 
 // ---------------------------------------------------------------------------
@@ -484,6 +602,7 @@ export const TRUST_STATUS_LABEL: Record<TrustStatus, string> = {
   SELF_ASSESSED: "Self-assessed",
   ONLINE_VERIFIED: "Online verified",
   ON_SITE_VERIFIED: "On-site verified",
+  EXPIRED: "Verification expired",
 };
 
 /** 徽章视觉：不只依赖颜色，必须同时带 icon + text */
@@ -495,6 +614,7 @@ export const TRUST_STATUS_BADGE: Record<
   SELF_ASSESSED: { icon: "◐", tone: "neutral", label: "Self-assessed" },
   ONLINE_VERIFIED: { icon: "✓", tone: "green", label: "Online verified" },
   ON_SITE_VERIFIED: { icon: "✓", tone: "blue", label: "On-site verified" },
+  EXPIRED: { icon: "⌛", tone: "neutral", label: "Verification expired" },
 };
 
 /** 验证方式说明（买家防误解：线上核验 ≠ 现场验厂） */

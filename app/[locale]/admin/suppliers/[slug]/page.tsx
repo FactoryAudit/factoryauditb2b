@@ -11,6 +11,8 @@ import {
 } from "@/lib/adminData";
 import { listPublishedClusters } from "@/lib/industrialClusters";
 import { COVERAGE_COUNTRIES } from "@/lib/coverage";
+// CS-D #19：报告核验状态必须与 Public Profile 同源（resolveVerificationBadge）
+import { getSupplierVerificationStatus } from "@/lib/trustProfile";
 import SupplierEditor, {
   type SupplierFormValues,
   type SupplierAuthInfo,
@@ -48,6 +50,16 @@ export default async function AdminSupplierEditPage({ params }: Props) {
   const audits = await listAdminAudits(slug);
   const consent = await getLatestSupplierConsent(slug);
 
+  // CS-D #19：报告核验状态用服务端 resolver 推导（与 Public Profile 同一函数），
+  // 绝不读 suppliers.verification_level 自行判断。结果本地化后注入报告输入。
+  const vs = await getSupplierVerificationStatus(row.id);
+  const vsLabel =
+    vs.status === "ON_SITE_VERIFIED" ? t.trustProfile.statusOnSite
+    : vs.status === "ONLINE_VERIFIED" ? t.trustProfile.statusOnline
+    : vs.status === "SELF_ASSESSED" ? t.trustProfile.statusSelf
+    : vs.status === "EXPIRED" ? t.trustProfile.statusExpired
+    : t.trustProfile.statusNone;
+
   // STEP 10-B：已发布产业带（仅这些可作为供应商关联下拉项；value=slug）。
   const publishedClusters = await listPublishedClusters();
   const clusterOptions = publishedClusters.map((c) => ({
@@ -76,6 +88,7 @@ export default async function AdminSupplierEditPage({ params }: Props) {
     inspectionHistory: row.inspection_history ?? 0,
     riskScore: row.risk_score,
     verificationLevel: row.verification_level,
+    verificationBadgeLabel: vsLabel,
     audits: audits.map((a) => ({
       auditType: a.audit_type,
       auditDate: a.audit_date,

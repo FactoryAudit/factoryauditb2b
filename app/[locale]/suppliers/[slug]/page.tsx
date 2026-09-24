@@ -24,7 +24,6 @@ import {
   getSupplierPublicFlags,
   isProfilePublic,
   isProfileNoindex,
-  isExpired,
 } from "@/lib/trustProfile";
 import VerificationBadge, {
   type BadgeState,
@@ -252,15 +251,9 @@ export default async function SupplierProfilePage({
   const publicFlags = await getSupplierPublicFlags(slug);
   const profileIsPublic = publicFlags ? isProfilePublic(publicFlags) : false;
   const trust = await getTrustSnapshot(s.id);
-  // 过期/撤销记录仍然留在 history 里；只有"曾经核验过、但现在失效了"才显示 EXPIRED 徽章
-  const lapsedRecord = trust.history.find(
-    (r) =>
-      r.status === "EXPIRED" ||
-      r.status === "REVOKED" ||
-      (r.status === "ACTIVE" && isExpired(r))
-  );
-  const badgeState: BadgeState =
-    trust.status === "NONE" && lapsedRecord ? "EXPIRED" : (trust.status as BadgeState);
+  // 状态完全由 lib/trustProfile.resolveVerificationBadge 推导（含 EXPIRED），
+  // 组件不再自行判断谁能拿 Verified（CS-D #02 / #13 / #22）。
+  const badgeState: BadgeState = trust.status as BadgeState;
   const factoryPhotos = profileIsPublic ? await listPublicFactoryImages(s.id) : [];
 
   // STEP 10-D §22：供应商档案「产业带」回链。仅当 cluster_slug 命中已发布 P0 集群
@@ -452,6 +445,7 @@ export default async function SupplierProfilePage({
                 <VerificationBadge
                   state={badgeState}
                   dict={tp}
+                  dataTrack={ANALYTICS_EVENTS.verificationBadgeView}
                   href={
                     trust.active || trust.history.length > 0
                       ? "#verification-details"
