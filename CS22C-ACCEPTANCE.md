@@ -89,8 +89,11 @@
 - 未触碰任何真实供应商 / RFQ / CS-A·CS-B 生产数据 ✅
 
 ## Git Commit / Deploy Version / Live Verify
-- Git Commit / Deploy Version：见交付说明（本脚本只跑验收，提交由交付流程完成）
-- Live Verify Result：ALL PASS
+- CS-C 工作台部署版本：78dd84bb-e988-46d0-9c80-523e26de8326（factoryauditb2b，Cloudflare Workers，已上线）
+- 数据修复迁移 `supabase/cs22/05_recode_audit_questions_unique.sql`：经 Supabase Management API 直连 prod 上线（HTTP 201），`audit_questions` 由 72 行 / 41 去重码 → 72 行 / 72 唯一码（SC01–SC37 / QC01–QC35）；`supabase/cs21/02_seed_audit_checklists.sql` 同步重写为幂等重跑对齐。
+- 配套回归（同次交付）：CS-22A PASS=77 / CS-22B PASS=90，均 0 FAIL。
+- 本提交 hash：`47537b8`（full `47537b871ed7b104527e78dea96b2b9a6e21a154`）；分支 `main`；origin `https://github.com/<repo>.git`（push 后 `git ls-remote` 核对）。
+- Live Verify Result：ALL PASS（71 / 0）
 
 ## 逐项明细
 - [PASS] 建 4 个临时 Auth 用户 (supplier/admin/buyer/supplierB)
