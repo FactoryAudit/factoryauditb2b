@@ -1,5 +1,5 @@
 // STEP 13-B —— ① 给 9 语字典加 clusters.allCountries
-//              ② 同步 en 叶子数冻结常量 2939 → 3028（2935 字符串 → 2936 字符串）
+//              ② 同步 en 叶子数冻结常量 2939 → 3114（2935 字符串 → 2936 字符串）
 //
 // 跳过含 "→" 的历史 changelog 行（避免把 "2938 → 2939" 这类历史记录改成错误数字）。
 // 不动任何 STEP1x 的历史验收脚本与报告（它们是当时的快照）。
@@ -85,7 +85,7 @@ for (const f of GATE_FILES) {
   let n = 0;
   const lines = s.split("\n").map((line) => {
     if (line.includes("→")) return line; // 历史 changelog 行：原样保留
-    const after = line.split("2939").join("3028").split("2935").join("2936");
+    const after = line.split("2939").join("3114").split("2935").join("2936");
     if (after !== line) n++;
     return after;
   });

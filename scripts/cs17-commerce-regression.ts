@@ -6,7 +6,7 @@
 //   node scripts/run-regression.mjs .env cs17-commerce-regression CS17_ROOT
 //
 // 分层：
-//   A 冻结层：en 字典叶子数 + 五处断言同源（3028）
+//   A 冻结层：en 字典叶子数 + 五处断言同源（3114）
 //   B 价目表：服务端单一事实源（金额/数量/缺失≠0）
 //   C 源码安全：前端不可传金额 + 状态机不可逆向 + 订单页不泄漏
 //   D 迁移层：supabase/cs17 两张脚本的结构（表/CHECK/RLS/授权）
@@ -87,7 +87,7 @@ function flattenKeys(obj: unknown, prefix = ""): Record<string, true> {
 //    （如 AccountMenu.tsx 的 `// /api/auth/*`），它会吞掉后面整段真实代码，
 //    导致正向断言假 FAIL、反向断言假 PASS。
 import { stripComments } from "./stripComments";
-const EN_LEAF = 3028;
+const EN_LEAF = 3114;
 
 (async () => {
   // =========================================================================
@@ -95,15 +95,15 @@ const EN_LEAF = 3028;
   // =========================================================================
   {
     const en = JSON.parse(read("i18n/dictionaries/en.json"));
-    check("A1 en 字典叶子数 = 3028", countLeaves(en) === EN_LEAF, `实际 ${countLeaves(en)}`);
-    check("A2 cs06a C8 常量 = 3028", has("scripts/cs06a-directory-regression.ts", "baseKeys.length === 3028"));
-    check("A3 cs08 G4 常量 = 3028", has("scripts/cs08-form-regression.ts", "leafCounts[0] === 3028"));
-    check("A4 cs12 E4 常量 = 3028", has("scripts/cs12-profile-regression.ts", "enLeaf === 3028"));
-    check("A5 cs13 F1i 常量 = 3028", has("scripts/cs13-supplier-seo-regression.ts", "EN_LEAF_COUNT = 3028"));
+    check("A1 en 字典叶子数 = 3114", countLeaves(en) === EN_LEAF, `实际 ${countLeaves(en)}`);
+    check("A2 cs06a C8 常量 = 3114", has("scripts/cs06a-directory-regression.ts", "baseKeys.length === 3114"));
+    check("A3 cs08 G4 常量 = 3114", has("scripts/cs08-form-regression.ts", "leafCounts[0] === 3114"));
+    check("A4 cs12 E4 常量 = 3114", has("scripts/cs12-profile-regression.ts", "enLeaf === 3114"));
+    check("A5 cs13 F1i 常量 = 3114", has("scripts/cs13-supplier-seo-regression.ts", "EN_LEAF_COUNT = 3114"));
     check(
-      "A6 verify-opennext-bundle 常量 = 3028",
-      has("scripts/verify-opennext-bundle.mjs", "cnt !== 3028") &&
-        has("scripts/verify-opennext-bundle.mjs", "(期望 3028)")
+      "A6 verify-opennext-bundle 常量 = 3114",
+      has("scripts/verify-opennext-bundle.mjs", "cnt !== 3114") &&
+        has("scripts/verify-opennext-bundle.mjs", "(期望 3114)")
     );
     const locales = ["zh", "zh-TW", "ja", "es", "de", "fr", "pt", "ar"];
     const enKeys = JSON.stringify(Object.keys(flattenKeys(en)).sort());

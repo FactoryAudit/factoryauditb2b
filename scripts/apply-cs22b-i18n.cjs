@@ -1,7 +1,7 @@
 // scripts/apply-cs22b-i18n.cjs —— CS-22 / CS-B 自评页 i18n 注入（幂等 + 9 语键集自检 + 叶子数常量同步）
 //
 // 新增顶层命名空间 `selfAssessment`（56 个字符串叶子 × 9 语）。
-// 注入后按真实 en 叶子数同步 scripts/ 下所有 `3028` 叶子数常量（与 cs06a/cs08/cs12/cs13/cs16/cs17/cs20/
+// 注入后按真实 en 叶子数同步 scripts/ 下所有 `3114` 叶子数常量（与 cs06a/cs08/cs12/cs13/cs16/cs17/cs20/
 // cs22a/step13b-i18n-gates/verify-opennext-bundle + 3 .bundle.cjs 同源）。
 
 const fs = require("fs");
@@ -594,8 +594,8 @@ for (const loc of LOCALES) {
 const en = JSON.parse(fs.readFileSync(path.join(DICT_DIR, "en.json"), "utf8"));
 const newLeaves = leaves(en);
 
-// 同步 scripts/ 下所有叶子数常量 3028 → newLeaves（与多脚本同源）
-const OLD = 3028;
+// 同步 scripts/ 下所有叶子数常量 3114 → newLeaves（与多脚本同源）
+const OLD = 3114;
 const scriptsDir = path.join(process.cwd(), "scripts");
 let replaced = 0;
 for (const f of fs.readdirSync(scriptsDir)) {

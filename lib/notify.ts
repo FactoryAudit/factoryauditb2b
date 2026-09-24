@@ -35,21 +35,33 @@ function getTransporter() {
   return transporter;
 }
 
+/** 邮件附件。content 统一为 **base64**（HTTP 通道直接透传，SMTP 通道转 Buffer）。 */
+export type MailAttachment = { filename: string; content: string };
+
 type NotifyInput = {
   to: string;
   subject: string;
   text: string;
   html?: string;
+  attachments?: MailAttachment[];
 };
 
 // 发送单封邮件。邮件通道未配置时仅打日志并返回 false（不抛错）。
-export async function sendMail({ to, subject, text, html }: NotifyInput): Promise<boolean> {
-  if (mailProvider === "http") return sendMailHttp({ to, subject, text, html });
-  return sendMailSmtp({ to, subject, text, html });
+// ⚠️ 必须整体透传 input：早期版本只解构了 to/subject/text/html，
+//    会把 attachments 丢掉（表现为「邮件收到、简历附件丢失」）。
+export async function sendMail(input: NotifyInput): Promise<boolean> {
+  if (mailProvider === "http") return sendMailHttp(input);
+  return sendMailSmtp(input);
 }
 
 // —— SMTP 通道（本地开发 / 支持 SMTP 的 Node 环境） ——
-async function sendMailSmtp({ to, subject, text, html }: NotifyInput): Promise<boolean> {
+async function sendMailSmtp({
+  to,
+  subject,
+  text,
+  html,
+  attachments,
+}: NotifyInput): Promise<boolean> {
   const t = getTransporter();
   if (!t) {
     console.log(`[notify:degraded] to=${to} subject=${subject}`);
@@ -62,6 +74,11 @@ async function sendMailSmtp({ to, subject, text, html }: NotifyInput): Promise<b
       subject,
       text,
       html,
+      // nodemailer 要 Buffer，不强转会在部分传输器上把 base64 当纯文本发出去
+      attachments: attachments?.map((a) => ({
+        filename: a.filename,
+        content: Buffer.from(a.content, "base64"),
+      })),
     });
     // Ethereal 测试账号会返回预览链接，便于本地验证；生产 SMTP 无该字段，不打印。
     const preview = (info as { preview?: string }).preview;
@@ -76,7 +93,13 @@ async function sendMailSmtp({ to, subject, text, html }: NotifyInput): Promise<b
 // —— HTTP API 通道（Cloudflare Workers 生产环境） ——
 // 兼容 Resend API 格式：POST {MAIL_HTTP_URL}，Authorization: Bearer <key>
 // 免费额度：Resend 100 封/天；SendGrid 等换 URL/格式即可（需同步改本函数）。
-async function sendMailHttp({ to, subject, text, html }: NotifyInput): Promise<boolean> {
+async function sendMailHttp({
+  to,
+  subject,
+  text,
+  html,
+  attachments,
+}: NotifyInput): Promise<boolean> {
   const apiKey = process.env.MAIL_HTTP_KEY;
   const endpoint = process.env.MAIL_HTTP_URL || "https://api.resend.com/emails";
   if (!apiKey) {
@@ -96,6 +119,8 @@ async function sendMailHttp({ to, subject, text, html }: NotifyInput): Promise<b
         subject,
         text,
         ...(html ? { html } : {}),
+        // Resend 格式：content 为 base64 字符串
+        ...(attachments?.length ? { attachments } : {}),
       }),
     });
     if (!res.ok) {
@@ -682,6 +707,100 @@ export async function notifyAdminSupplierVerificationRequest(data: {
       "",
       "Next steps: confirm the supplier identity (URL + company name), check whether a profile exists, then scope a verification or audit. This is a lead, not a verification result. Never mark the supplier verified on the basis of this submission alone.",
     ].join("\n"),
+  });
+}
+
+// ---------- Careers / 人才网络：/careers 申请（CV 直投邮箱）----------
+//
+// 设计取舍：第一版**不建招聘后台、不建简历库**。申请以邮件形式落到收件箱，
+// 靠邮箱搜索完成筛选（这正是主题行要结构化到「国家 - 专业 - 姓名」的原因）：
+//   `[Auditor Application] Vietnam - SMETA - Nguyen Van A`
+// 以后来一个 "Vietnam / Electronics / SMETA / 2-day audit" 的需求，
+// 直接在邮箱搜 `Vietnam SMETA` 就能把人捞出来。
+//
+// 收件人：NOTIFY_ADMIN_EMAIL（与其它线索同一收件箱，便于统一搜索）。
+
+/**
+ * 主题行用**申请人的国家 + 专业方向 + 姓名**，便于日后按
+ * 「国家 + 体系/专业」组合搜索。缺失片段用 "—" 占位（绝不用空串拼出畸形主题）。
+ */
+export function careerApplicationSubject(data: {
+  country: string;
+  specialization: string;
+  fullName: string;
+}): string {
+  // 主题行会进邮件头：必须压掉换行与控制字符，否则形如
+  // "Nguyen\r\nBcc: attacker@evil.com" 的姓名会往主题里塞出额外头段（头部注入）。
+  // 同时压掉连续空白，保证收件箱里标题始终是单行可读。
+  const seg = (v: string) => {
+    const s = (v || "").replace(/[\r\n\u0000-\u001f\u007f]+/g, " ").replace(/\s+/g, " ").trim();
+    return s || "—";
+  };
+  return `[Auditor Application] ${seg(data.country)} - ${seg(data.specialization)} - ${seg(data.fullName)}`;
+}
+
+export async function notifyAdminCareerApplication(data: {
+  fullName: string;
+  country: string;
+  city: string;
+  role: string;
+  specialization: string;
+  years: string;
+  languages: string;
+  email: string;
+  phone: string;
+  linkedin: string;
+  availability: string;
+  introduction: string;
+  cvFilename: string | null;
+  locale?: string | null;
+  attachments?: MailAttachment[];
+}): Promise<boolean> {
+  const adminEmail = process.env.NOTIFY_ADMIN_EMAIL;
+  if (!adminEmail) {
+    console.log("[notify] NOTIFY_ADMIN_EMAIL 未配置，跳过招聘申请通知");
+    return false;
+  }
+  const line = (label: string, val?: string) => (val ? `${label}: ${val}` : null);
+  const body = [
+    "— Applicant —",
+    line("Full name", data.fullName),
+    line("Country / Region", data.country),
+    line("City", data.city),
+    "",
+    "— Profile —",
+    line("Role", data.role),
+    line("Specialization", data.specialization),
+    line("Years of experience", data.years),
+    line("Languages", data.languages),
+    // Availability 是后续「按项目调人」的关键字段，单独成段便于扫读
+    line("Availability", data.availability),
+    "",
+    "— Contact —",
+    line("Email", data.email),
+    line("Phone / WhatsApp", data.phone),
+    line("LinkedIn", data.linkedin),
+    "",
+    "— Introduction —",
+    data.introduction || "—",
+    "",
+    "— CV / Resume —",
+    data.cvFilename ? `Attached: ${data.cvFilename}` : "Not provided",
+    line("Locale", data.locale ?? ""),
+    "",
+    "Next steps: reply to the applicant, or file them in the talent pool by country + specialization + availability.",
+  ]
+    .filter((x) => x !== null)
+    .join("\n");
+  return sendMail({
+    to: adminEmail,
+    subject: careerApplicationSubject({
+      country: data.country,
+      specialization: data.specialization,
+      fullName: data.fullName,
+    }),
+    text: body,
+    attachments: data.attachments,
   });
 }
 

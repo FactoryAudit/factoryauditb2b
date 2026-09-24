@@ -6,7 +6,7 @@
 //   node scripts/run-regression.mjs cs22b-self-assessment-regression CS22B_ROOT
 //
 // 分层：
-//   A 冻结层：en 字典叶子数（3028）+ 九语键集一致 + selfAssessment 命名空间 = 58 键
+//   A 冻结层：en 字典叶子数（3114）+ 九语键集一致 + selfAssessment 命名空间 = 58 键
 //   B 数据模型铁律：答案只存 responses_json（无 answers 表）；证据只绑一张表且不引入第二套关联字段
 //   C 状态机 + 供应商绝不自授 Verified
 //   D 上传安全复用（不写第二套 magic bytes / MIME / 去重）
@@ -92,7 +92,7 @@ function flattenKeys(obj: unknown, prefix = ""): Record<string, true> {
   return out;
 }
 
-const EN_LEAF = 3028;
+const EN_LEAF = 3114;
 
 (async () => {
   // =========================================================================
@@ -100,7 +100,7 @@ const EN_LEAF = 3028;
   // =========================================================================
   {
     const en = JSON.parse(read("i18n/dictionaries/en.json"));
-    check("A1 en 字典叶子数 = 3028", countLeaves(en) === EN_LEAF, `实际 ${countLeaves(en)}`);
+    check("A1 en 字典叶子数 = 3114", countLeaves(en) === EN_LEAF, `实际 ${countLeaves(en)}`);
     const locales = ["zh", "zh-TW", "ja", "es", "de", "fr", "pt", "ar"];
     const enKeys = JSON.stringify(Object.keys(flattenKeys(en)).sort());
     for (const loc of locales) {

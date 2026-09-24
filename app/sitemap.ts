@@ -72,6 +72,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/custom-services",
     "/privacy",
     "/terms",
+    // 人才网络入口：页脚「Work With Us」直达，承接「auditor jobs / 审核员网络」类搜索
+    "/careers",
     // 联系页：此前全站无 /contact，访客只能靠页脚邮箱找人。补上以承接
     //「品牌词 + contact」这类高意图搜索，并给询盘一个明确落点。
     "/contact",
