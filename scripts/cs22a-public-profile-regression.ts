@@ -6,7 +6,7 @@
 //   node scripts/run-regression.mjs cs22a-public-profile-regression CS22A_ROOT
 //
 // 分层：
-//   A 冻结层：en 字典叶子数 + 五处断言同源（2970）
+//   A 冻结层：en 字典叶子数 + 五处断言同源（3028）
 //   B P0-A 归属：唯一裁决层 + 旧的两处手写 email 比对已消失 + 不建 answers 表
 //   C P0-B 数据模型：verification_items.assessment_id 已就位，无 supplier_assessment_answers
 //   D P0-C 图片限额：5MB / 10MB / 20MB / 12 张 / 5 张每项 / 50 张 / 200MB / 800×600
@@ -100,7 +100,7 @@ function flattenKeys(obj: unknown, prefix = ""): Record<string, true> {
   return out;
 }
 
-const EN_LEAF = 2970;
+const EN_LEAF = 3028;
 
 (async () => {
   // =========================================================================
@@ -108,12 +108,12 @@ const EN_LEAF = 2970;
   // =========================================================================
   {
     const en = JSON.parse(read("i18n/dictionaries/en.json"));
-    check("A1 en 字典叶子数 = 2970", countLeaves(en) === EN_LEAF, `实际 ${countLeaves(en)}`);
-    check("A2 cs06a C8 常量 = 2970", has("scripts/cs06a-directory-regression.ts", "baseKeys.length === 2970"));
-    check("A3 cs08 G4 常量 = 2970", has("scripts/cs08-form-regression.ts", "leafCounts[0] === 2970"));
-    check("A4 cs12 E4 常量 = 2970", has("scripts/cs12-profile-regression.ts", "enLeaf === 2970"));
-    check("A5 cs16 A1 常量 = 2970", has("scripts/cs16-supplier-mgmt-regression.ts", "=== 2970"));
-    check("A6 verify-opennext-bundle 常量 = 2970", has("scripts/verify-opennext-bundle.mjs", "2970"));
+    check("A1 en 字典叶子数 = 3028", countLeaves(en) === EN_LEAF, `实际 ${countLeaves(en)}`);
+    check("A2 cs06a C8 常量 = 3028", has("scripts/cs06a-directory-regression.ts", "baseKeys.length === 3028"));
+    check("A3 cs08 G4 常量 = 3028", has("scripts/cs08-form-regression.ts", "leafCounts[0] === 3028"));
+    check("A4 cs12 E4 常量 = 3028", has("scripts/cs12-profile-regression.ts", "enLeaf === 3028"));
+    check("A5 cs16 A1 常量 = 3028", has("scripts/cs16-supplier-mgmt-regression.ts", "=== 3028"));
+    check("A6 verify-opennext-bundle 常量 = 3028", has("scripts/verify-opennext-bundle.mjs", "3028"));
     const locales = ["zh", "zh-TW", "ja", "es", "de", "fr", "pt", "ar"];
     const enKeys = JSON.stringify(Object.keys(flattenKeys(en)).sort());
     for (const loc of locales) {
@@ -195,7 +195,7 @@ const EN_LEAF = 2970;
     check("D1 展示图 5MB", si.includes("MAX_PHOTO_BYTES = 5 * 1024 * 1024"));
     check("D2 证据图 10MB（未被统一成 5MB）", si.includes("MAX_EVIDENCE_IMAGE_BYTES = 10 * 1024 * 1024"));
     check("D3 PDF 20MB", si.includes("MAX_PDF_BYTES = 20 * 1024 * 1024"));
-    check("D4 工厂展示图 12 张", si.includes("MAX_FACTORY_PHOTOS = 12"));
+    check("D4 工厂展示图 12 张", read("lib/imageConstants.ts").includes("MAX_FACTORY_PHOTOS = 12"));
     check("D5 每个验证项 5 份证据", si.includes("MAX_EVIDENCE_PER_ITEM = 5"));
     check("D6 供应商总图 50 张", si.includes("MAX_TOTAL_IMAGES = 50"));
     check("D7 供应商总容量 200MB", si.includes("MAX_TOTAL_BYTES = 200 * 1024 * 1024"));

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ASSESSMENT_TYPE_LABELS, type AssessmentType } from "@/lib/supplierAssessments";
+import { ASSESSMENT_TYPE_LABELS, type AssessmentType } from "@/lib/assessmentShared";
 import { PRICE_ANCHORS } from "@/lib/commercialConfig";
 import { localePath, type Locale } from "@/i18n/config";
 

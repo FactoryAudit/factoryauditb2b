@@ -5,7 +5,7 @@
  *   node scripts/run-regression.mjs cs13b-cluster-directory-regression CS13B_ROOT
  *
  * 覆盖：
- *   A 冻结层：9 语字典 clusters.allCountries 到位 + en 叶子数 2970 + 8 处门禁常量同源
+ *   A 冻结层：9 语字典 clusters.allCountries 到位 + en 叶子数 3028 + 8 处门禁常量同源
  *   B 分组层：国家 → 地区 → 卡片（用**生产库导出的 8 条真实行**当夹具，不编造产业带）
  *   C 排序层：确定性排序 / sort_order 为主、name 为次 / 输入乱序不影响输出
  *   D 边界层：缺 region / 缺 industry / 缺 country_code / 空输入 都不臆造、不崩
@@ -53,7 +53,7 @@ console.log("--- A 冻结层 ---");
     LOCALES.map((l) => [l, JSON.parse(read(`i18n/dictionaries/${l}.json`))])
   );
   const enLeaves = countLeaves(dicts.en);
-  ok("A1 en 字典叶子数 = 2970（新增 1 键）", enLeaves === 2970, `实际 ${enLeaves}`);
+  ok("A1 en 字典叶子数 = 3028（新增 1 键）", enLeaves === 3028, `实际 ${enLeaves}`);
 
   const missingLocale = LOCALES.filter((l) => !dicts[l]?.clusters?.allCountries);
   ok(
@@ -70,21 +70,21 @@ console.log("--- A 冻结层 ---");
   ok("A4 9 语 clusters 命名空间键集合一致", drift.length === 0, drift.join(","));
 
   const gates: Array<[string, string]> = [
-    ["scripts/verify-opennext-bundle.mjs", "cnt !== 2970"],
-    ["scripts/cs06a-directory-regression.ts", "baseKeys.length === 2970"],
-    ["scripts/cs08-form-regression.ts", "leafCounts[0] === 2970"],
-    ["scripts/cs12-profile-regression.ts", "enLeaf === 2970"],
-    ["scripts/cs13-supplier-seo-regression.ts", "EN_LEAF_COUNT = 2970"],
-    ["scripts/cs16-supplier-mgmt-regression.ts", "EN_LEAF = 2970"],
-    ["scripts/cs17-commerce-regression.ts", "EN_LEAF = 2970"],
-    ["scripts/cs20-supplier-report.ts", "EN_LEAF = 2970"],
-    ["RELEASE-RULES.md", "**2970**"],
+    ["scripts/verify-opennext-bundle.mjs", "cnt !== 3028"],
+    ["scripts/cs06a-directory-regression.ts", "baseKeys.length === 3028"],
+    ["scripts/cs08-form-regression.ts", "leafCounts[0] === 3028"],
+    ["scripts/cs12-profile-regression.ts", "enLeaf === 3028"],
+    ["scripts/cs13-supplier-seo-regression.ts", "EN_LEAF_COUNT = 3028"],
+    ["scripts/cs16-supplier-mgmt-regression.ts", "EN_LEAF = 3028"],
+    ["scripts/cs17-commerce-regression.ts", "EN_LEAF = 3028"],
+    ["scripts/cs20-supplier-report.ts", "EN_LEAF = 3028"],
+    ["RELEASE-RULES.md", "**3028**"],
   ];
   for (const [f, pat] of gates) {
     const src = read(f);
     // 历史 changelog 行（含 "→"）里的旧数字不算残留
     const stale = src.split("\n").some((l) => !l.includes("→") && l.includes("2939"));
-    ok(`A5 ${f} 常量 → 2970 且无残留 2939`, src.includes(pat) && !stale);
+    ok(`A5 ${f} 常量 → 3028 且无残留 2939`, src.includes(pat) && !stale);
   }
 }
 

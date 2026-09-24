@@ -10,29 +10,10 @@
 
 import { createAdminClient } from "./supabaseAdmin";
 
-/** 12 个工厂图片分类（§16） */
-export const IMAGE_CATEGORIES = [
-  "factory_exterior",
-  "workshop",
-  "production_line",
-  "equipment",
-  "qc_area",
-  "warehouse",
-  "office",
-  "finished_goods",
-  "packaging",
-  "materials",
-  "laboratory",
-  "other",
-] as const;
-export type ImageCategory = (typeof IMAGE_CATEGORIES)[number];
-
-export function isImageCategory(v: string): v is ImageCategory {
-  return (IMAGE_CATEGORIES as readonly string[]).includes(v);
-}
-
-// ---- 限制（§15 / §16 / §17 / §28） ----
-export const MAX_FACTORY_PHOTOS = 12;
+// 纯分类 / 限额常量已下沉到 imageConstants（客户端安全），此处复用并再导出。
+import { IMAGE_CATEGORIES, type ImageCategory, isImageCategory, MAX_FACTORY_PHOTOS } from "./imageConstants";
+export { IMAGE_CATEGORIES, isImageCategory, MAX_FACTORY_PHOTOS } from "./imageConstants";
+export type { ImageCategory } from "./imageConstants";
 export const MAX_PHOTO_BYTES = 5 * 1024 * 1024;           // 工厂展示图 5MB
 export const MAX_EVIDENCE_IMAGE_BYTES = 10 * 1024 * 1024; // 审核证据图 10MB
 export const MAX_PDF_BYTES = 20 * 1024 * 1024;            // PDF 20MB
@@ -459,4 +440,228 @@ export async function signImageUrl(path: string, ttl = 300): Promise<string | nu
   } catch {
     return null;
   }
+}
+
+// ---------------------------------------------------------------------------
+// CS-B：工厂展示图落库（PENDING / PRIVATE，待 Admin CS-C 在后台 APPROVED）
+// 业务对象与 supplier_evidence 完全分离（仅共用底层上传安全模块）。
+// ---------------------------------------------------------------------------
+
+export type FactoryPhotoMeta = {
+  id: string;
+  category: string;
+  mimeType: string;
+  width: number | null;
+  height: number | null;
+  status: "PENDING" | "APPROVED" | "REJECTED";
+  visibility: "PUBLIC" | "PRIVATE";
+  createdAt: string;
+};
+
+function rowToPhotoMeta(r: Record<string, any>): FactoryPhotoMeta {
+  return {
+    id: r.id,
+    category: r.category ?? "",
+    mimeType: r.mime_type ?? "",
+    width: typeof r.width === "number" ? r.width : null,
+    height: typeof r.height === "number" ? r.height : null,
+    status: (r.status as "PENDING" | "APPROVED" | "REJECTED") ?? "PENDING",
+    visibility: (r.visibility as "PUBLIC" | "PRIVATE") ?? "PRIVATE",
+    createdAt: r.created_at ?? "",
+  };
+}
+
+/** 某供应商全部工厂照（owner 本人读取，用于页面初始化与上传器渲染）。 */
+export async function listFactoryPhotosForSupplier(
+  supplierId: string
+): Promise<FactoryPhotoMeta[]> {
+  const db = createAdminClient();
+  if (!db) return [];
+  const { data, error } = await db
+    .from("supplier_images")
+    .select("id, category, mime_type, width, height, status, visibility, created_at")
+    .eq("supplier_id", supplierId)
+    .order("created_at", { ascending: true })
+    .limit(MAX_FACTORY_PHOTOS + 4);
+  if (error) {
+    console.error("[supplierImages] 工厂照列表失败", error.message);
+    return [];
+  }
+  return (data ?? []).map(rowToPhotoMeta);
+}
+
+/** 写 supplier_images（status=PENDING、visibility=PRIVATE、original=display=thumbnail 同源，
+ *  因客户端已 canvas 重编码，服务端不再 sharp）。 */
+export async function recordFactoryPhoto(input: {
+  supplierId: string;
+  category: string;
+  mimeType: string;
+  width: number | null;
+  height: number | null;
+  size: number;
+  hash: string;
+  path: string;
+}): Promise<{ ok: boolean; id?: string; error?: string }> {
+  const db = createAdminClient();
+  if (!db) return { ok: false, error: "storage_not_configured" };
+  const { data, error } = await db
+    .from("supplier_images")
+    .insert({
+      supplier_id: input.supplierId,
+      category: input.category,
+      status: "PENDING",
+      visibility: "PRIVATE",
+      mime_type: input.mimeType,
+      width: input.width,
+      height: input.height,
+      original_size: input.size,
+      display_size: input.size,
+      thumbnail_size: input.size,
+      original_path: input.path,
+      display_path: input.path,
+      thumbnail_path: input.path,
+      file_hash: input.hash,
+    })
+    .select("id")
+    .maybeSingle();
+  if (error) {
+    console.error("[supplierImages] 工厂照落库失败", error.message);
+    return { ok: false, error: "record_failed" };
+  }
+  return { ok: true, id: data?.id };
+}
+
+/**
+ * 删除工厂照（ownership + 状态校验）。
+ * 已 APPROVED 的照片默认锁定（避免破坏已发布的公开档案）；其余可删。
+ * 同时清理存储对象（best-effort）。
+ */
+export async function deleteFactoryPhoto(
+  photoId: string,
+  supplierId: string
+): Promise<{ ok: boolean; error?: string; status?: number }> {
+  const db = createAdminClient();
+  if (!db) return { ok: false, error: "storage_not_configured", status: 503 };
+  const { data: row, error: selErr } = await db
+    .from("supplier_images")
+    .select("id, supplier_id, status, display_path, original_path, thumbnail_path")
+    .eq("id", photoId)
+    .maybeSingle();
+  if (selErr || !row) return { ok: false, error: "not_found", status: 404 };
+  if (row.supplier_id !== supplierId) return { ok: false, error: "not_owner", status: 403 };
+  if (row.status === "APPROVED") return { ok: false, error: "locked", status: 409 };
+
+  const { error: delErr } = await db.from("supplier_images").delete().eq("id", photoId);
+  if (delErr) {
+    console.error("[supplierImages] 工厂照删除失败", delErr.message);
+    return { ok: false, error: "delete_failed", status: 500 };
+  }
+  for (const p of [row.display_path, row.original_path, row.thumbnail_path]) {
+    if (p) {
+      try {
+        await db.storage.from(IMAGE_BUCKET).remove([p]);
+      } catch {
+        /* best-effort */
+      }
+    }
+  }
+  return { ok: true };
+}
+
+export type StorePhotoInput = {
+  supplierId: string;
+  category: string;
+  fileName: string;
+  declaredMime: string;
+  bytes: ArrayBuffer;
+  width: number | null;
+  height: number | null;
+};
+
+export type StorePhotoResult =
+  | { ok: true; meta: FactoryPhotoMeta }
+  | { ok: false; code: string; status?: number };
+
+/** 工厂展示图全链路：校验 → 去重 → 上传 → 落库（PENDING/PRIVATE）。 */
+export async function validateAndStoreFactoryPhoto(
+  input: StorePhotoInput
+): Promise<StorePhotoResult> {
+  const db = createAdminClient();
+  if (!db) return { ok: false, code: "storage_not_configured", status: 503 };
+
+  if (!isImageCategory(input.category)) {
+    return { ok: false, code: "invalid_category", status: 400 };
+  }
+
+  const bytes = new Uint8Array(input.bytes);
+  const quota = await getImageQuota(input.supplierId);
+  const v = validateImageUpload({
+    bytes,
+    declaredMime: input.declaredMime,
+    category: input.category,
+    currentCount: quota.count,
+    currentTotalBytes: quota.totalBytes,
+    factoryPhotoCount: quota.factoryPhotos,
+    width: input.width,
+    height: input.height,
+    isEvidence: false,
+  });
+  if (!v.ok) return { ok: false, code: v.code, status: 400 };
+
+  const hash = await sha256Hex(input.bytes);
+  const dup = await findDuplicateByHash(input.supplierId, hash);
+  if (dup) return { ok: false, code: "duplicate_file", status: 409 };
+
+  let path: string;
+  try {
+    path = buildImagePath(input.supplierId, extFromMime(v.mime), "");
+  } catch {
+    return { ok: false, code: "invalid_path", status: 400 };
+  }
+  const up = await uploadImageObject({
+    supplierId: input.supplierId,
+    ext: extFromMime(v.mime),
+    mime: v.mime,
+    bytes: input.bytes,
+  });
+  if (!up.ok) return { ok: false, code: up.error, status: 500 };
+
+  const rec = await recordFactoryPhoto({
+    supplierId: input.supplierId,
+    category: input.category,
+    mimeType: v.mime,
+    width: input.width,
+    height: input.height,
+    size: bytes.byteLength,
+    hash,
+    path,
+  });
+  if (!rec.ok || !rec.id) {
+    try {
+      await db.storage.from(IMAGE_BUCKET).remove([path]);
+    } catch {
+      /* best-effort */
+    }
+    return { ok: false, code: rec.error ?? "record_failed", status: 500 };
+  }
+  return {
+    ok: true,
+    meta: {
+      id: rec.id,
+      category: input.category,
+      mimeType: v.mime,
+      width: input.width,
+      height: input.height,
+      status: "PENDING",
+      visibility: "PRIVATE",
+      createdAt: new Date().toISOString(),
+    },
+  };
+}
+
+function extFromMime(mime: string): string {
+  if (mime === "image/jpeg") return "jpg";
+  if (mime === "image/png") return "png";
+  if (mime === "image/webp") return "webp";
+  return "bin";
 }

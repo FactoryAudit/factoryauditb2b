@@ -1,4 +1,4 @@
-import { ASSESSMENT_TYPE_LABELS, type AssessmentType } from "@/lib/supplierAssessments";
+import { ASSESSMENT_TYPE_LABELS, type AssessmentType } from "@/lib/assessmentShared";
 
 const STYLE: Record<AssessmentType, string> = {
   self_assessment: "bg-[#0f4c81] text-white",
