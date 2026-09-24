@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cache } from "react";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
@@ -99,6 +100,14 @@ async function resolveClusterRoute(segments: string[]): Promise<Resolved> {
   return { kind: "aggregator", countryCode, countrySeg, parentSeg: segments[1] ?? null, clusters: scoped };
 }
 
+// 每请求去重：generateMetadata 与页面组件各调用一次 resolveClusterRoute，
+// 两次拿到的 segments 是**不同的数组实例**，直接 cache() 命中不了，
+// 所以用 join("/") 的字符串做 key —— 省掉一整轮 Supabase 往返
+// （聚合页尤其贵：listPublishedClusters() 是全表查询）。
+const resolveClusterRouteCached = cache(async (key: string): Promise<Resolved> =>
+  resolveClusterRoute(key === "" ? [] : key.split("/"))
+);
+
 // 详情页 / 聚合页的 breadcrumb 展示名（与 URL 段严格一致，不臆造层级）
 function clusterParentDisplay(cluster: IndustrialCluster): string | null {
   if (cluster.country_code === "CN") return cluster.province;
@@ -110,7 +119,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: raw, segments } = await params;
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
-  const resolved = await resolveClusterRoute(segments);
+  const resolved = await resolveClusterRouteCached(segments.join("/"));
 
   if (resolved.kind === "detail") {
     const { cluster, canonical } = resolved;
@@ -162,7 +171,7 @@ export default async function IndustrialClustersHierarchyPage({ params }: Props)
   const t = await getDictionary(locale);
   const c = t.clusters;
   const p = (href: string) => localePath(locale, href);
-  const resolved = await resolveClusterRoute(segments);
+  const resolved = await resolveClusterRouteCached(segments.join("/"));
 
   if (resolved.kind === "notfound") notFound();
   if (resolved.kind === "redirect") permanentRedirect(resolved.canonical);
