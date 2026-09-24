@@ -103,7 +103,7 @@ export async function getVerificationRecords(
   const { data, error } = await db
     .from("verification_records")
     .select(
-      "id, supplier_id, verification_id, verification_type, status, verified_at, expires_at, verified_by, scope, notes"
+      "id, supplier_id, verification_id, verification_type, status, verified_at, expires_at, verified_by, scope, notes, visit_date, verifier, location"
     )
     .eq("supplier_id", supplierId)
     .order("verified_at", { ascending: false });
@@ -213,7 +213,18 @@ export type CreateVerificationInput = {
   scope?: string[];
   notes?: string | null;
   validityDays?: number;
-  items?: { item_key: string; item_label?: string | null; supplier_answer?: string | null }[];
+  /** 现场核验元数据（仅 ON_SITE 使用；ONLINE 为 NULL，互不影响） */
+  visitDate?: string | null;
+  verifier?: string | null;
+  location?: string | null;
+  items?: {
+    item_key: string;
+    item_label?: string | null;
+    supplier_answer?: string | null;
+    /** 审核结论（来自后台逐项评审）。缺省 PENDING。 */
+    status?: "PENDING" | "APPROVED" | "REJECTED" | "NEED_MORE_INFO";
+    reviewerNote?: string | null;
+  }[];
 };
 
 export async function createVerification(
@@ -239,6 +250,9 @@ export async function createVerification(
       verified_by: input.verifiedBy,
       scope: input.scope ?? [],
       notes: input.notes ?? null,
+      visit_date: input.visitDate ?? null,
+      verifier: input.verifier ?? null,
+      location: input.location ?? null,
     })
     .select("id")
     .single();
@@ -249,14 +263,43 @@ export async function createVerification(
   }
 
   if (input.items && input.items.length > 0) {
+    // 反查自评 id（verification_items.assessment_id 锚定到这份自评估，
+    // 与 CS-22 / 03 迁移的语义一致：核的是哪份评估）。
+    const { data: asm } = await db
+      .from("supplier_assessments")
+      .select("id")
+      .eq("supplier_id", input.supplierId)
+      .eq("assessment_type", "self_assessment")
+      .maybeSingle();
+    const assessmentId = (asm?.id as string | undefined) ?? null;
+
+    // 逐项证据数（复用 supplier_evidence，按 item_key 聚合）。查不到/异常 → 0，不阻断。
+    const evidenceCounts = new Map<string, number>();
+    try {
+      const { data: ev } = await db
+        .from("supplier_evidence")
+        .select("item_key")
+        .eq("supplier_id", input.supplierId);
+      for (const r of (ev ?? []) as { item_key?: string | null }[]) {
+        if (r.item_key) evidenceCounts.set(r.item_key, (evidenceCounts.get(r.item_key) ?? 0) + 1);
+      }
+    } catch {
+      /* 忽略，证据数仅展示用 */
+    }
+
     await db.from("verification_items").insert(
       input.items.map((it) => ({
         verification_record_id: rec.id,
+        assessment_id: assessmentId,
         item_key: it.item_key,
         item_label: it.item_label ?? null,
         supplier_answer: it.supplier_answer ?? null,
-        evidence_count: 0,
-        status: "PENDING",
+        evidence_count: evidenceCounts.get(it.item_key) ?? 0,
+        status: it.status ?? "PENDING",
+        reviewer_note: it.reviewerNote ?? null,
+        reviewed_by: it.reviewerNote || it.status ? input.verifiedBy : null,
+        reviewed_at:
+          it.status && it.status !== "PENDING" ? verifiedAt.toISOString() : null,
       }))
     );
   }

@@ -60,6 +60,11 @@ export default async function AdminLayout({ children, params }: Props) {
     { href: "/admin/audits", label: locale === "zh" || locale === "zh-TW" ? "验厂工单" : "Audits" },
     { href: "/admin/members", label: a.navMembers },
     { href: "/admin/pending-review", label: t.evidenceCenter.adminNavPending },
+    // CS-22 CHANGE SET C：供应商核验工作台（后台单人、noindex，双语常量）
+    {
+      href: "/admin/verification",
+      label: locale === "zh" || locale === "zh-TW" ? "核验工作台" : "Verification",
+    },
     // 「标准报告样张」标签取双语常量，不为 1 个内部标签补 9 语翻译
     { href: "/admin/report-standard", label: REPORT_HEADER.title[locale === "zh" || locale === "zh-TW" ? "zh" : "en"] },
   ];
