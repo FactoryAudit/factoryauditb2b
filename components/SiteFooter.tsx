@@ -66,7 +66,7 @@ export default function SiteFooter({
 
   return (
     <footer className="bg-[#0f172a] text-[#cbd5e1]">
-      <div className="container py-12 grid md:grid-cols-4 gap-8 text-sm">
+      <div className="container py-12 grid md:grid-cols-5 gap-8 text-sm">
         <div>
           {/* 页脚是深色底（#0f172a），用浅色版 LOGO */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -171,6 +171,21 @@ export default function SiteFooter({
         </div>
 
         {/*
+          「Work With Us」—— 人才网络入口，与「所有服务」并排成列。
+          定位不是「招聘岗位」，而是可调用的人力网络（审核员 / 顾问 / 项目 / 采购 / IT /
+          本地合作伙伴）。
+        */}
+        <div>
+          <div className="text-white font-semibold mb-3">{dict.workWithUs}</div>
+          <Link href={p("/careers")} className="group block">
+            <div className="text-[#cbd5e1] group-hover:text-white group-hover:underline">
+              {dict.workWithUsLead}
+            </div>
+            <div className="mt-1 text-xs text-[#94a3b8]">{dict.workWithUsCountries}</div>
+          </Link>
+        </div>
+
+        {/*
           Resources 与 Coverage 同一行（桌面端两栏，移动端自动堆叠）：
           避免宽度被三列分得太窄。
         */}
@@ -237,20 +252,6 @@ export default function SiteFooter({
             </div>
           </div>
         </div>
-      </div>
-      {/*
-        「Work With Us」—— 人才网络入口。
-        定位不是「招聘岗位」，而是可调用的人力网络（审核员 / 顾问 / 项目 / 采购 / IT /
-        本地合作伙伴），所以单独成条而不是塞进 Platform 那一列。
-      */}
-      <div className="border-t border-white/10 py-8 text-center">
-        <Link href={p("/careers")} className="group inline-block">
-          <div className="text-base font-semibold text-white group-hover:underline">
-            {dict.workWithUs}
-          </div>
-          <div className="mt-1 text-sm text-[#cbd5e1]">{dict.workWithUsLead}</div>
-          <div className="mt-1 text-xs text-[#94a3b8]">{dict.workWithUsCountries}</div>
-        </Link>
       </div>
       <div className="border-t border-white/10 py-4 text-center text-xs text-[#94a3b8]">
         {/* 域名邮箱做信任背书。邮箱地址本身是标识符、不是文案，9 语通用，故不进词典。
