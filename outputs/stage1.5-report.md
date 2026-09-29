@@ -11,10 +11,10 @@
 
 ### 1.1 改动文件
 
-| 文件 | 变更 |
-|---|---|
-| `lib/guides.ts` | 47 条 `metaDescEn` 值改写（第 74–2460 行区间，逐条替换值，**未增删任何字段/键**）；`Guide.metaDescEn` 字段上方新增 9 语缺口注释（第 49–57 行） |
-| `scripts/_s15_guides_idem.ts` | 新增：源头 → 收口后 幂等断言探针（可挂回归） |
+| 文件                            | 变更                                                                                                    |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `lib/guides.ts`               | 47 条 `metaDescEn` 值改写（第 74–2460 行区间，逐条替换值，**未增删任何字段/键**）；`Guide.metaDescEn` 字段上方新增 9 语缺口注释（第 49–57 行） |
+| `scripts/_s15_guides_idem.ts` | 新增：源头 → 收口后 幂等断言探针（可挂回归）                                                                              |
 
 ### 1.2 修法
 
@@ -24,72 +24,72 @@
 
 `旧被截`/`旧结尾OK` 指改动前的状态；`新*` 为改动后。
 
-| # | slug | 旧源头 | 旧收口后 | 旧被截 | 旧结尾OK | 新源头 | 新收口后 | 新被截 | 新结尾OK |
-|---|---|---|---|---|---|---|---|---|---|
-| 1 | `how-to-verify-a-chinese-supplier` | 249 | 152 | **是** | **否** | 127 | 127 | 否 | 是 |
-| 2 | `factory-audit-checklist` | 206 | 156 | **是** | **否** | 140 | 140 | 否 | 是 |
-| 3 | `supplier-risk-assessment-guide` | 168 | 157 | **是** | **否** | 126 | 126 | 否 | 是 |
-| 4 | `smeta-vs-bsci-social-audit-comparison` | 171 | 154 | **是** | **否** | 127 | 127 | 否 | 是 |
-| 5 | `how-to-read-a-factory-audit-report` | 176 | 156 | **是** | **否** | 123 | 123 | 否 | 是 |
-| 6 | `how-to-audit-a-factory-in-vietnam` | 196 | 155 | **是** | **否** | 129 | 129 | 否 | 是 |
-| 7 | `pre-shipment-inspection-checklist` | 178 | 156 | **是** | **否** | 128 | 128 | 否 | 是 |
-| 8 | `what-is-a-factory-audit` | 162 | 148 | **是** | **否** | 126 | 126 | 否 | 是 |
-| 9 | `supplier-evaluation-checklist` | 152 | 152 | 否 | 是 | 139 | 139 | 否 | 是 |
-| 10 | `on-site-vs-desk-audit` | 138 | 138 | 否 | 是 | 125 | 125 | 否 | 是 |
-| 11 | `third-party-audit-pain-points` | 145 | 145 | 否 | 是 | 133 | 133 | 否 | 是 |
-| 12 | `capacity-audit-guide` | 153 | 153 | 否 | 是 | 135 | 135 | 否 | 是 |
-| 13 | `aql-sampling-standard-fri` | 186 | 154 | **是** | **否** | 130 | 130 | 否 | 是 |
-| 14 | `ppi-vs-dupro-inspection` | 212 | 114 | **是** | 是 | 128 | 128 | 否 | 是 |
-| 15 | `full-inspection-100-percent` | 143 | 143 | 否 | 是 | 133 | 133 | 否 | 是 |
-| 16 | `fba-rejection-inspection` | 186 | 155 | **是** | **否** | 137 | 137 | 否 | 是 |
-| 17 | `failed-inspection-dispute` | 205 | 83 | **是** | 是 | 137 | 137 | 否 | 是 |
-| 18 | `ethical-audit-mandatory-requirements` | 187 | 156 | **是** | **否** | 131 | 131 | 否 | 是 |
-| 19 | `sa8000-certification-guide` | 204 | 154 | **是** | **否** | 139 | 139 | 否 | 是 |
-| 20 | `esg-supplier-audit-guide` | 206 | 153 | **是** | **否** | 137 | 137 | 否 | 是 |
-| 21 | `brand-reputation-pr-crisis` | 194 | 149 | **是** | **否** | 131 | 131 | 否 | 是 |
-| 22 | `chinese-supplier-scam-red-flags` | 155 | 155 | 否 | 是 | 134 | 134 | 否 | 是 |
-| 23 | `how-to-check-china-company-registration` | 150 | 150 | 否 | 是 | 137 | 137 | 否 | 是 |
-| 24 | `alibaba-trade-assurance-safe-payment` | 144 | 144 | 否 | 是 | 136 | 136 | 否 | 是 |
-| 25 | `verify-supplier-before-deposit` | 140 | 140 | 否 | 是 | 142 | 142 | 否 | 是 |
-| 26 | `common-b2b-procurement-fraud` | 157 | 157 | 否 | 是 | 141 | 141 | 否 | 是 |
-| 27 | `what-is-quality-management-system` | 175 | 156 | **是** | **否** | 129 | 129 | 否 | 是 |
-| 28 | `iso-9001-vs-iso-13485` | 164 | 148 | **是** | **否** | 129 | 129 | 否 | 是 |
-| 29 | `manufacturing-quality-control-process` | 159 | 155 | **是** | **否** | 129 | 129 | 否 | 是 |
-| 30 | `ppap-production-part-approval` | 158 | 155 | 否 | 是 | 126 | 126 | 否 | 是 |
-| 31 | `supplier-quality-audit-checklist` | 174 | 157 | **是** | **否** | 141 | 141 | 否 | 是 |
-| 32 | `verify-alibaba-supplier-before-paying` | 184 | 156 | **是** | **否** | 134 | 134 | 否 | 是 |
-| 33 | `china-factory-or-trading-company` | 199 | 155 | **是** | **否** | 135 | 135 | 否 | 是 |
-| 34 | `china-supplier-risk-assessment-framework` | 191 | 155 | **是** | **否** | 128 | 128 | 否 | 是 |
-| 35 | `when-to-order-china-factory-audit` | 178 | 152 | **是** | **否** | 129 | 129 | 否 | 是 |
-| 36 | `china-factory-audit-cost` | 200 | 157 | **是** | **否** | 128 | 128 | 否 | 是 |
-| 37 | `supplier-verification-vs-factory-audit-vs-inspection` | 190 | 153 | **是** | **否** | 140 | 140 | 否 | 是 |
-| 38 | `eu-forced-labour-regulation-china-suppliers` | 212 | 157 | **是** | **否** | 131 | 131 | 否 | 是 |
-| 39 | `eudr-supplier-due-diligence-china` | 192 | 153 | **是** | **否** | 135 | 135 | 否 | 是 |
-| 40 | `digital-product-passport-supplier-data` | 199 | 157 | **是** | **否** | 133 | 133 | 否 | 是 |
-| 41 | `smeta-7-supplier-audit-buyer-guide` | 186 | 155 | **是** | **否** | 131 | 131 | 否 | 是 |
-| 42 | `rba-vap-vs-smeta-vs-bsci` | 161 | 148 | **是** | **否** | 130 | 130 | 否 | 是 |
-| 43 | `china-plus-one-supplier-qualification` | 214 | 155 | **是** | **否** | 142 | 142 | 否 | 是 |
-| 44 | `buyer-ready-china-supplier` | 232 | 157 | **是** | **否** | 134 | 134 | 否 | 是 |
-| 45 | `china-factory-audit-mid-autumn-national-day-scheduling` | 177 | 155 | **是** | **否** | 136 | 136 | 否 | 是 |
-| 46 | `china-us-trade-talks-2026-inspection-audit-planning` | 201 | 154 | **是** | **否** | 135 | 135 | 否 | 是 |
-| 47 | `q4-shipment-window-factory-audit-inspection-combination` | 191 | 157 | **是** | **否** | 138 | 138 | 否 | 是 |
+| #  | slug                                                      | 旧源头 | 旧收口后 | 旧被截   | 旧结尾OK | 新源头 | 新收口后 | 新被截 | 新结尾OK |
+| -- | --------------------------------------------------------- | --- | ---- | ----- | ----- | --- | ---- | --- | ----- |
+| 1  | `how-to-verify-a-chinese-supplier`                        | 249 | 152  | **是** | **否** | 127 | 127  | 否   | 是     |
+| 2  | `factory-audit-checklist`                                 | 206 | 156  | **是** | **否** | 140 | 140  | 否   | 是     |
+| 3  | `supplier-risk-assessment-guide`                          | 168 | 157  | **是** | **否** | 126 | 126  | 否   | 是     |
+| 4  | `smeta-vs-bsci-social-audit-comparison`                   | 171 | 154  | **是** | **否** | 127 | 127  | 否   | 是     |
+| 5  | `how-to-read-a-factory-audit-report`                      | 176 | 156  | **是** | **否** | 123 | 123  | 否   | 是     |
+| 6  | `how-to-audit-a-factory-in-vietnam`                       | 196 | 155  | **是** | **否** | 129 | 129  | 否   | 是     |
+| 7  | `pre-shipment-inspection-checklist`                       | 178 | 156  | **是** | **否** | 128 | 128  | 否   | 是     |
+| 8  | `what-is-a-factory-audit`                                 | 162 | 148  | **是** | **否** | 126 | 126  | 否   | 是     |
+| 9  | `supplier-evaluation-checklist`                           | 152 | 152  | 否     | 是     | 139 | 139  | 否   | 是     |
+| 10 | `on-site-vs-desk-audit`                                   | 138 | 138  | 否     | 是     | 125 | 125  | 否   | 是     |
+| 11 | `third-party-audit-pain-points`                           | 145 | 145  | 否     | 是     | 133 | 133  | 否   | 是     |
+| 12 | `capacity-audit-guide`                                    | 153 | 153  | 否     | 是     | 135 | 135  | 否   | 是     |
+| 13 | `aql-sampling-standard-fri`                               | 186 | 154  | **是** | **否** | 130 | 130  | 否   | 是     |
+| 14 | `ppi-vs-dupro-inspection`                                 | 212 | 114  | **是** | 是     | 128 | 128  | 否   | 是     |
+| 15 | `full-inspection-100-percent`                             | 143 | 143  | 否     | 是     | 133 | 133  | 否   | 是     |
+| 16 | `fba-rejection-inspection`                                | 186 | 155  | **是** | **否** | 137 | 137  | 否   | 是     |
+| 17 | `failed-inspection-dispute`                               | 205 | 83   | **是** | 是     | 137 | 137  | 否   | 是     |
+| 18 | `ethical-audit-mandatory-requirements`                    | 187 | 156  | **是** | **否** | 131 | 131  | 否   | 是     |
+| 19 | `sa8000-certification-guide`                              | 204 | 154  | **是** | **否** | 139 | 139  | 否   | 是     |
+| 20 | `esg-supplier-audit-guide`                                | 206 | 153  | **是** | **否** | 137 | 137  | 否   | 是     |
+| 21 | `brand-reputation-pr-crisis`                              | 194 | 149  | **是** | **否** | 131 | 131  | 否   | 是     |
+| 22 | `chinese-supplier-scam-red-flags`                         | 155 | 155  | 否     | 是     | 134 | 134  | 否   | 是     |
+| 23 | `how-to-check-china-company-registration`                 | 150 | 150  | 否     | 是     | 137 | 137  | 否   | 是     |
+| 24 | `alibaba-trade-assurance-safe-payment`                    | 144 | 144  | 否     | 是     | 136 | 136  | 否   | 是     |
+| 25 | `verify-supplier-before-deposit`                          | 140 | 140  | 否     | 是     | 142 | 142  | 否   | 是     |
+| 26 | `common-b2b-procurement-fraud`                            | 157 | 157  | 否     | 是     | 141 | 141  | 否   | 是     |
+| 27 | `what-is-quality-management-system`                       | 175 | 156  | **是** | **否** | 129 | 129  | 否   | 是     |
+| 28 | `iso-9001-vs-iso-13485`                                   | 164 | 148  | **是** | **否** | 129 | 129  | 否   | 是     |
+| 29 | `manufacturing-quality-control-process`                   | 159 | 155  | **是** | **否** | 129 | 129  | 否   | 是     |
+| 30 | `ppap-production-part-approval`                           | 158 | 155  | 否     | 是     | 126 | 126  | 否   | 是     |
+| 31 | `supplier-quality-audit-checklist`                        | 174 | 157  | **是** | **否** | 141 | 141  | 否   | 是     |
+| 32 | `verify-alibaba-supplier-before-paying`                   | 184 | 156  | **是** | **否** | 134 | 134  | 否   | 是     |
+| 33 | `china-factory-or-trading-company`                        | 199 | 155  | **是** | **否** | 135 | 135  | 否   | 是     |
+| 34 | `china-supplier-risk-assessment-framework`                | 191 | 155  | **是** | **否** | 128 | 128  | 否   | 是     |
+| 35 | `when-to-order-china-factory-audit`                       | 178 | 152  | **是** | **否** | 129 | 129  | 否   | 是     |
+| 36 | `china-factory-audit-cost`                                | 200 | 157  | **是** | **否** | 128 | 128  | 否   | 是     |
+| 37 | `supplier-verification-vs-factory-audit-vs-inspection`    | 190 | 153  | **是** | **否** | 140 | 140  | 否   | 是     |
+| 38 | `eu-forced-labour-regulation-china-suppliers`             | 212 | 157  | **是** | **否** | 131 | 131  | 否   | 是     |
+| 39 | `eudr-supplier-due-diligence-china`                       | 192 | 153  | **是** | **否** | 135 | 135  | 否   | 是     |
+| 40 | `digital-product-passport-supplier-data`                  | 199 | 157  | **是** | **否** | 133 | 133  | 否   | 是     |
+| 41 | `smeta-7-supplier-audit-buyer-guide`                      | 186 | 155  | **是** | **否** | 131 | 131  | 否   | 是     |
+| 42 | `rba-vap-vs-smeta-vs-bsci`                                | 161 | 148  | **是** | **否** | 130 | 130  | 否   | 是     |
+| 43 | `china-plus-one-supplier-qualification`                   | 214 | 155  | **是** | **否** | 142 | 142  | 否   | 是     |
+| 44 | `buyer-ready-china-supplier`                              | 232 | 157  | **是** | **否** | 134 | 134  | 否   | 是     |
+| 45 | `china-factory-audit-mid-autumn-national-day-scheduling`  | 177 | 155  | **是** | **否** | 136 | 136  | 否   | 是     |
+| 46 | `china-us-trade-talks-2026-inspection-audit-planning`     | 201 | 154  | **是** | **否** | 135 | 135  | 否   | 是     |
+| 47 | `q4-shipment-window-factory-audit-inspection-combination` | 191 | 157  | **是** | **否** | 138 | 138  | 否   | 是     |
 
 **统计**
 
-| 指标 | 旧值 | 新值 |
-|---|---|---|
-| 源头长度区间 | 138–249 | **123–142** |
-| 收口后长度区间 | 83–158 | **123–142** |
-| 被截断条数 | **36 / 47** | **0 / 47** |
-| 收口后结尾无句末标点 | **34 / 47** | **0 / 47** |
+| 指标         | 旧值          | 新值          |
+| ---------- | ----------- | ----------- |
+| 源头长度区间     | 138–249     | **123–142** |
+| 收口后长度区间    | 83–158      | **123–142** |
+| 被截断条数      | **36 / 47** | **0 / 47**  |
+| 收口后结尾无句末标点 | **34 / 47** | **0 / 47**  |
 
-> 注：#14 与 #17 旧值「被截断但结尾有标点」——收口函数取到了句内较早的标点（截到 114 / 83），
+> 注：#14 与 #17 旧值「被截断但结尾有标点」——收口函数取到了句内较早的标点（截到 114 / 83），  
 > 属另一种劣化（描述被抓去半截），本次一并修好。
 
 ### 1.4 覆盖范围（为什么 47 条 → 消除 238 项）
 
-`app/[locale]/guides/[slug]/page.tsx` 用 `pickZhPair(locale, g.metaDescEn, g.metaDescZh)` 取值：
-**只有 `zh` / `zh-TW` 用 `metaDescZh`，其余 7 个语种（en, ja, es, de, fr, pt, ar）全部回退 `metaDescEn`**。
+`app/[locale]/guides/[slug]/page.tsx` 用 `pickZhPair(locale, g.metaDescEn, g.metaDescZh)` 取值：  
+**只有 `zh` / `zh-TW` 用 `metaDescZh`，其余 7 个语种（en, ja, es, de, fr, pt, ar）全部回退 `metaDescEn`**。  
 ⇒ 修 47 条 en 源头，一次消除 7 × 34 = **238** 项（47 条中 34 条被 sweep 标记；另 13 条旧值本就未触发收口）。
 
 ### 1.5 验证
@@ -116,8 +116,8 @@ git revert --no-edit 266e0ce
 
 ### 1.7 已知缺口（未擅自补，留第 3 批）
 
-`lib/guides.ts` 只有 `metaDescEn` / `metaDescZh`。缺 `metaDescJa/Es/De/Fr/Pt/Ar`
-⇒ **`ja/es/de/fr/pt/ar` 的 47 × 6 = 282 页指南展示的是英文描述**（`ar` 同理）。
+`lib/guides.ts` 只有 `metaDescEn` / `metaDescZh`。缺 `metaDescJa/Es/De/Fr/Pt/Ar`  
+⇒ **`ja/es/de/fr/pt/ar` 的 47 × 6 = 282 页指南展示的是英文描述**（`ar` 同理）。  
 本次已在 `Guide.metaDescEn` 字段上方写明注释与补齐路径（需同时改 `pickZhPair` 的取值分支）。
 
 ---
@@ -126,38 +126,38 @@ git revert --no-edit 266e0ce
 
 ### 2.1 改动文件
 
-| 文件 | 变更 |
-|---|---|
-| `i18n/dictionaries/{en,es,de,fr,pt,ar}.json` | `compare.metaTitle` 6 语收口 |
-| `i18n/dictionaries/{en,de,ar}.json` | `serviceVerification.metaTitle` 3 语收口 |
-| `outputs/stage1-deploy-report.md` | 纯 Markdown 表格排版归一（无语义变更，顺带提交） |
+| 文件                                           | 变更                                    |
+| -------------------------------------------- | ------------------------------------- |
+| `i18n/dictionaries/{en,es,de,fr,pt,ar}.json` | `compare.metaTitle` 6 语收口             |
+| `i18n/dictionaries/{en,de,ar}.json`          | `serviceVerification.metaTitle` 3 语收口 |
+| `outputs/stage1-deploy-report.md`            | 纯 Markdown 表格排版归一（无语义变更，顺带提交）         |
 
 **只改叶子值，未增删任何键** ⇒ en 叶子数仍 **3126**。
 
 ### 2.2 `compare.metaTitle`（品牌后缀 `" | FactoryAuditB2B"` = 18 字符）
 
-| 语种 | 旧主体 | 旧合成 | 新主体 | 新合成 | 新值 |
-|---|---|---|---|---|---|
-| en | 64 | **82** | 40 | **58** | `Supplier Comparison Tool: Compare 2 to 5` |
-| es | 92 | **110** | 33 | **51** | `Comparación de proveedores: 2 a 5` |
-| de | 77 | **95** | 42 | **60** | `Lieferantenvergleich: 2 bis 5 im Vergleich` |
-| fr | 79 | **97** | 34 | **52** | `Comparateur de fournisseurs: 2 à 5` |
-| pt | 81 | **99** | 33 | **51** | `Comparador de fornecedores: 2 a 5` |
-| ar | 56 | **74** | 40 | **58** | `Supplier Comparison Tool: Compare 2 to 5` |
-| zh / zh-TW / ja | 21 / 21 / 33 | — | **不变** | — | CJK 主体已 ≤36 预算，保持 |
+| 语种              | 旧主体          | 旧合成     | 新主体    | 新合成    | 新值                                           |
+| --------------- | ------------ | ------- | ------ | ------ | -------------------------------------------- |
+| en              | 64           | **82**  | 40     | **58** | `Supplier Comparison Tool: Compare 2 to 5`   |
+| es              | 92           | **110** | 33     | **51** | `Comparación de proveedores: 2 a 5`          |
+| de              | 77           | **95**  | 42     | **60** | `Lieferantenvergleich: 2 bis 5 im Vergleich` |
+| fr              | 79           | **97**  | 34     | **52** | `Comparateur de fournisseurs: 2 à 5`         |
+| pt              | 81           | **99**  | 33     | **51** | `Comparador de fornecedores: 2 a 5`          |
+| ar              | 56           | **74**  | 40     | **58** | `Supplier Comparison Tool: Compare 2 to 5`   |
+| zh / zh-TW / ja | 21 / 21 / 33 | —       | **不变** | —      | CJK 主体已 ≤36 预算，保持                            |
 
 ### 2.3 `serviceVerification.metaTitle`
 
-| 语种 | 旧主体 | 旧合成 | 新主体 | 新合成 | 新值 |
-|---|---|---|---|---|---|
-| en | 29 | **47**（低于 50） | 38 | **56** | `Supplier Verification Service in China` |
-| de | 18 | **36**（低于 50） | 38 | **56** | `Lieferantenprüfung in China für Käufer` |
-| ar | 24 | **42**（低于 50） | 32 | **50** | `خدمة التحقق من الموردين في الصين` |
-| zh/zh-TW/ja/es/fr/pt | 7/7/12/39/39/38 | 25–57 | **不变** | — | 未越 50–60 区间 |
+| 语种                   | 旧主体             | 旧合成           | 新主体    | 新合成    | 新值                                       |
+| -------------------- | --------------- | ------------- | ------ | ------ | ---------------------------------------- |
+| en                   | 29              | **47**（低于 50） | 38     | **56** | `Supplier Verification Service in China` |
+| de                   | 18              | **36**（低于 50） | 38     | **56** | `Lieferantenprüfung in China für Käufer` |
+| ar                   | 24              | **42**（低于 50） | 32     | **50** | `خدمة التحقق من الموردين في الصين`       |
+| zh/zh-TW/ja/es/fr/pt | 7/7/12/39/39/38 | 25–57         | **不变** | —      | 未越 50–60 区间                              |
 
-> 用户明确要求的 2 项为 en（`compare` 82、`serviceVerification` 47）。执行时发现同一个键下
-> `compare` 的 es/de/fr/pt/ar 与 `serviceVerification` 的 de/ar 属**同一类越界**，
-> 一并收口以避免同类缺陷留存；均只改值、不增删键。`zh/zh-TW/ja` 为 CJK，
+> 用户明确要求的 2 项为 en（`compare` 82、`serviceVerification` 47）。执行时发现同一个键下  
+> `compare` 的 es/de/fr/pt/ar 与 `serviceVerification` 的 de/ar 属**同一类越界**，  
+> 一并收口以避免同类缺陷留存；均只改值、不增删键。`zh/zh-TW/ja` 为 CJK，  
 > 按 `trimMetaTitle` 的 CJK 预算（36）不套拉丁 50–60，故保持不变。
 
 ### 2.4 验证
@@ -183,38 +183,39 @@ git revert --no-edit a96f24c
 
 ## 3. 构建链路各步结果（七步手动）
 
-| 步 | 操作 | 结果 |
-|---|---|---|
-| ① | 隔离 `.next`（14784 文件，超 7000 护栏阈值）→ `_prune_next_3`（`renameSync` 不计删除） | OK |
-| ② | `next build`（`NODE_OPTIONS=""` + `FAB2B_DISABLE_BUILD_TRACE=1`） | **EXIT=0**；`✓ Compiled successfully in 30.4s`；静态页 **2090/2090**；总 **1m36s** |
-| ③ | `opennext build` | **EXIT=0**；**1m59s**；`OpenNext build complete`；`Worker saved in .open-next/worker.js` |
-| ④ | `populate-static-assets-cache.cjs --worker --batch 250` 循环 | 7 批 ×250 + 240 = **1990/1990** 写入；iter 8 起幂等 `copied=0 skipped=1990 remaining=0 DONE` |
-| ⑤ | 自检 `_stage1_selfcheck.cjs` | **PASS**：`buildId=5P7Sh-ZaaxzXGfFuur_zN`，pageKeys=**1890**，fetch=**100**，stray=**0**，badExt=**0** |
-| ⑥ | `scrub-next-env.mjs` + `verify-opennext-bundle.mjs` | scrub 清空 **21** 处密钥（production/development/test 各 7）；verify **ALL PASS** —— en 叶子 **3126**、page 1890/1890、fetch 100/100、assets **2176** ≤20000、单文件 **2.35 MiB** |
-| ⑦ | `wrangler deploy` | **成功**（见 §4） |
+| 步 | 操作                                                                   | 结果                                                                                                                                                              |
+| - | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ① | 隔离 `.next`（14784 文件，超 7000 护栏阈值）→ `_prune_next_3`（`renameSync` 不计删除） | OK                                                                                                                                                              |
+| ② | `next build`（`NODE_OPTIONS=""` + `FAB2B_DISABLE_BUILD_TRACE=1`）      | **EXIT=0**；`✓ Compiled successfully in 30.4s`；静态页 **2090/2090**；总 **1m36s**                                                                                     |
+| ③ | `opennext build`                                                     | **EXIT=0**；**1m59s**；`OpenNext build complete`；`Worker saved in .open-next/worker.js`                                                                           |
+| ④ | `populate-static-assets-cache.cjs --worker --batch 250` 循环           | 7 批 ×250 + 240 = **1990/1990** 写入；iter 8 起幂等 `copied=0 skipped=1990 remaining=0 DONE`                                                                           |
+| ⑤ | 自检 `_stage1_selfcheck.cjs`                                           | **PASS**：`buildId=5P7Sh-ZaaxzXGfFuur_zN`，pageKeys=**1890**，fetch=**100**，stray=**0**，badExt=**0**                                                               |
+| ⑥ | `scrub-next-env.mjs` + `verify-opennext-bundle.mjs`                  | scrub 清空 **21** 处密钥（production/development/test 各 7）；verify **ALL PASS** —— en 叶子 **3126**、page 1890/1890、fetch 100/100、assets **2176** ≤20000、单文件 **2.35 MiB** |
+| ⑦ | `wrangler deploy`                                                    | **成功**（见 §4）                                                                                                                                                    |
 
-**改动生效取证**（防 SSG 固化旧数据）：构建后直接读 `.next/server/app/<locale>/guides/*.html`，
-7 个语种的 desc 均为新双句；`en/tools/compare.html`、`en/services/supplier-verification.html`
+**改动生效取证**（防 SSG 固化旧数据）：构建后直接读 `.next/server/app/<locale>/guides/*.html`，  
+7 个语种的 desc 均为新双句；`en/tools/compare.html`、`en/services/supplier-verification.html`  
 标题均为新值 ⇒ 预渲染产物确实包含本次改动。
 
-**新旧构建 HTML 差集**：`old=1886 → new=1891`，多出的 5 个全部是
-`en/suppliers/{guangzhou-sunny-food, jiangsu-liquid-damper, nanjing-mxcomm, shandong-loyal-industrial, xiamen-jings-eyewear}.html`
-—— 这些是**数据驱动**的供应商详情页（`supabase` 源 + `is_published=true`），
+**新旧构建 HTML 差集**：`old=1886 → new=1891`，多出的 5 个全部是  
+`en/suppliers/{guangzhou-sunny-food, jiangsu-liquid-damper, nanjing-mxcomm, shandong-loyal-industrial, xiamen-jings-eyewear}.html`  
+—— 这些是**数据驱动**的供应商详情页（`supabase` 源 + `is_published=true`），  
 属数据库侧新发布的记录，**与本次代码改动无关**。
 
 ---
 
 ## 4. 部署版本 ID + 回滚锚点
 
-| 项 | 值 |
-|---|---|
-| **新版本 ID** | **`72ef374c-e83d-4d8c-aff7-8d9c1120f83d`** |
-| 部署时间 | 2026-09-29 06:06:23Z → 06:09:11Z（**2m48s**） |
-| 上传资源 | **1989** 个（187 已存在；wrangler 统计 1989 files，141.57 s） |
-| 体积 | Total Upload 19187.61 KiB / gzip 3106.83 KiB |
-| Worker Startup | **31 ms** |
-| **回滚锚点（上一版本）** | **`6facaae8-a8f1-44fd-ba93-2caaa254a23d`** |
-| 工作树 | 部署前 `git status --porcelain` 为空（锚点 `b08ae8c`） |
+| 项              | 值                                                   |
+| -------------- | --------------------------------------------------- |
+| **新版本 ID**     | **`72ef374c-e83d-4d8c-aff7-8d9c1120f83d`**          |
+| 部署时间           | 2026-09-29 06:06:23Z → 06:09:11Z（**2m48s**）         |
+| 上传资源           | **1989** 个（187 已存在；wrangler 统计 1989 files，141.57 s） |
+| 体积             | Total Upload 19187.61 KiB / gzip 3106.83 KiB        |
+| Worker Startup | **31 ms**                                           |
+| **回滚锚点（上一版本）** | **`6facaae8-a8f1-44fd-ba93-2caaa254a23d`**          |
+| 工作树            | 部署前 `git status --porcelain` 为空（锚点 `b08ae8c`）       |
+
 
 **回滚命令**
 
