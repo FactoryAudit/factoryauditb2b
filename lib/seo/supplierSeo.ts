@@ -33,6 +33,10 @@ import { localePath, type Locale } from "../../i18n/config";
 import { twText } from "../tw";
 import { overallLevel, type RiskLevel } from "../riskEngine";
 import { LEVEL_SCOPE, publicVerificationLevel } from "../verification";
+// stage1.7.1：desc 的显示预算（CJK 90 / 拉丁 158）与 lib/pageMeta.ts 的收口**同一判定**。
+// 在源头把句子集收进预算内，收口函数就永远不需要执行「取预算内最后一个句末标点」——
+// 也就不会再出现「必需句被整句砍掉」（nanjing-mxcomm 免责声明曾被砍）。
+import { metaDescriptionBudget } from "../pageMeta";
 
 export const SEO_BASE = "https://factoryauditb2b.com";
 
@@ -354,7 +358,7 @@ const EN: SupplierSeoCopy = {
   descDeclared: "{name} is a supplier-declared profile.",
   descNotVerified: "Not independently verified by FactoryAuditB2B.",
   descLevel: "Verification level: {level}.",
-  descLocatedWithType: "{type} in {city}, {country}.",
+  descLocatedWithType: "{type} based in {city}, {country}.",
   descLocated: "Based in {city}, {country}.",
   descScore: "Supplier profile score {score} out of 100.",
   descProducts: "Listed products: {products}.",
@@ -413,9 +417,9 @@ const ZH: SupplierSeoCopy = {
   descDeclared: "{name} 是供应商自述档案。",
   descNotVerified: "未经 FactoryAuditB2B 独立核验。",
   descLevel: "核验等级：{level}。",
-  descLocatedWithType: "{city}、{country}的{type}。",
+  descLocatedWithType: "{city}、{country}的{type}，为供应商自述。",
   descLocated: "位于 {city}、{country}。",
-  descScore: "供应商档案评分 {score} / 100。",
+  descScore: "供应商档案评分 {score}/100。",
   descProducts: "登记产品：{products}。",
   faq: {
     verifiedQ: "{name} 通过 FactoryAuditB2B 核验了吗？",
@@ -648,30 +652,87 @@ export function generateSupplierDescription(
   const products = joinList(data.mainProducts ?? [], locale);
 
   // 逐句拼装：空片段直接跳过，避免出现「：。」这类占位符残留。
-  // 🔴 顺序即优先级 —— 截断只吃最后一段（产品列表），核验事实与合规句一定留下。
-  const parts: string[] = [];
+  // 🔴 顺序即优先级 —— 核验事实 / 合规否定句永远在前，产品列表永远最后。
+  //    但收口**不再**依赖 trimMetaDescription 的「取预算内最后一个句末标点」兜底：
+  //    那套兜底在「必需句整体超预算」时会把它**整句删掉**（nanjing-mxcomm 就丢掉了免责声明）。
+  //    现在由 fitToDescriptionBudget 在源头把句子集收进显示预算内。
+  const mandatory: string[] = [];
   if (data.hasRealVerificationEvent && data.verificationLevel > 0) {
-    parts.push(formatTemplate(copy.descEvent, { name }));
-    parts.push(formatTemplate(copy.descLevel, { level: levelPhrase(data, locale, opts) }));
+    mandatory.push(formatTemplate(copy.descEvent, { name }));
+    mandatory.push(formatTemplate(copy.descLevel, { level: levelPhrase(data, locale, opts) }));
   } else {
-    parts.push(formatTemplate(copy.descDeclared, { name }));
-    parts.push(copy.descNotVerified);
-  }
-  if (city && country) {
-    parts.push(
-      type
-        ? formatTemplate(copy.descLocatedWithType, { type, city, country })
-        : formatTemplate(copy.descLocated, { city, country })
-    );
-  }
-  if (typeof data.profileScore === "number") {
-    parts.push(formatTemplate(copy.descScore, { score: String(data.profileScore) }));
-  }
-  if (products) {
-    parts.push(formatTemplate(copy.descProducts, { products }));
+    mandatory.push(formatTemplate(copy.descDeclared, { name }));
+    mandatory.push(copy.descNotVerified);
   }
 
-  return truncateWords(tidy(parts.filter(Boolean).join(" ")), DESC_MAX);
+  // 可选槽位：每个槽给出「偏好降序」的候选句，最多取其一；
+  // 收口时按「总长不超预算且尽量长」挑组合（放不下的槽整体弃用，不影响其它槽）。
+  const slots: DescSlot[] = [];
+  if (city && country) {
+    slots.push(
+      type
+        ? [
+            formatTemplate(copy.descLocatedWithType, { type, city, country }),
+            formatTemplate(copy.descLocated, { city, country }),
+          ]
+        : [formatTemplate(copy.descLocated, { city, country })]
+    );
+  } else {
+    slots.push([]);
+  }
+  slots.push(
+    typeof data.profileScore === "number"
+      ? [formatTemplate(copy.descScore, { score: String(data.profileScore) })]
+      : []
+  );
+  slots.push(products ? [formatTemplate(copy.descProducts, { products })] : []);
+
+  return fitToDescriptionBudget(mandatory, slots);
+}
+
+/** 可选槽位：候选句按偏好降序排列；每个槽最多取一句 */
+type DescSlot = string[];
+
+/**
+ * 把「句子集」收进 meta description 的显示预算内（stage1.7.1）。
+ *
+ * 为什么必须在源头收口：`lib/pageMeta.ts` 的 `trimMetaDescription` 超预算时取「预算内
+ * 最后一个句末标点」；一旦某个**必需句**整体落在预算之外，它会被**整句删掉**
+ * （不是半句话，所以长度断言与「半句话」扫描都抓不到）。两次实测都栽在这里：
+ *   · nanjing-mxcomm：自述句 45 + 免责句 46 = 92 > CJK 预算 90 ⇒ 免责声明整句消失。
+ *
+ * 收口规则（确定性；输出恒为完整句子 ⇒ 对 trimMetaDescription 幂等）：
+ *   ① 必需句放得下 → 以必需句为底，再在剩余预算内挑可选槽的最长可行组合；
+ *   ② 必需句自身超预算 → **主体句让位**，但合规否定句/核验等级句（末位必需句）
+ *      任何情况下都必须保留，且置于末尾（描述先讲主体、后作声明）。
+ *
+ * 预算一律按「全量候选」计算：避免「丢掉几句 CJK 后占比降到 10% 以下、预算反跳到
+ * 158」这种自指不稳定（内容一变结论就变）。收口后文本只会更短，绝不会被二次扩张。
+ */
+function fitToDescriptionBudget(mandatory: string[], slots: DescSlot[]): string {
+  const join = (arr: string[]) => tidy(arr.filter(Boolean).join(" "));
+  const len = (arr: string[]) => [...join(arr)].length;
+  const budget = metaDescriptionBudget(join([...mandatory, ...slots.map((s) => s[0] ?? "")]));
+
+  // 在每个槽里「挑一个候选 / 整槽弃用」，取不超预算且最长的组合（槽 ≤3、候选 ≤2 ⇒ 组合数极小）
+  const pick = (base: string[], reserved: string[]): string[] => {
+    let best: string[] = [];
+    const dfs = (i: number, chosen: string[]) => {
+      if (len([...base, ...chosen, ...reserved]) > budget) return;
+      if (len([...base, ...chosen]) > len([...base, ...best])) best = chosen;
+      if (i >= slots.length) return;
+      for (const cand of slots[i]) dfs(i + 1, [...chosen, cand]);
+      dfs(i + 1, chosen); // 该槽弃用
+    };
+    dfs(0, []);
+    return best;
+  };
+
+  if (len(mandatory) <= budget) {
+    return truncateWords(join([...mandatory, ...pick(mandatory, [])]), DESC_MAX);
+  }
+  const keep = mandatory.slice(-1); // = descNotVerified / descLevel
+  return truncateWords(join([...pick([], keep), ...keep]), DESC_MAX);
 }
 
 // =============================================================================

@@ -57,6 +57,10 @@ const CJK_RE = /[\u3000-\u9fff\u3040-\u30ff\uac00-\ud7af]/;
 const CJK_RE_G = new RegExp(CJK_RE.source, "g");
 const CJK_DESC_RATIO = 0.1;
 const CJK_TITLE_RATIO = 0.25;
+// description 显示预算（单一来源）。stage1.7.1：抽成常量，供 supplierSeo 在**源头**复用同一判定，
+// 避免「源头按 158 拼、收口按 90 裁」这类两处漂移。
+const DESC_CJK_BUDGET = 90;
+const DESC_LATIN_BUDGET = 158;
 
 /**
  * 该串是否以 CJK 为主（CJK 字符占比 > ratio）。
@@ -74,11 +78,25 @@ export function isCjkDominant(text: string, ratio: number = CJK_DESC_RATIO): boo
 const SENTENCE_END_RE = /[.。!！?？]/;
 const DANGLING_TAIL_RE = /[\s,;:，、；：\-–—]+$/u;
 
+/**
+ * 该串在收口时会套用的 description 显示预算（CJK 90 / 拉丁 158）。
+ *
+ * 与 `trimMetaDescription` 共用同一判定（`isCjkDominant`）与同一常量，
+ * 供 `lib/seo/supplierSeo.ts` 在**源头**把句子集收口到预算内 ——
+ * 这样「超预算时取预算内最后一个句末标点」的收尾策略永远不会把
+ * 必需的合规句整句砍掉（stage1.7.1：nanjing-mxcomm 免责声明曾被砍）。
+ */
+export function metaDescriptionBudget(text: string): number {
+  return isCjkDominant(text) ? DESC_CJK_BUDGET : DESC_LATIN_BUDGET;
+}
+
 export function trimMetaDescription(
   text: string,
   opts?: { cjkBudget?: number; latinBudget?: number }
 ): string {
-  const budget = isCjkDominant(text) ? opts?.cjkBudget ?? 90 : opts?.latinBudget ?? 158;
+  const budget = isCjkDominant(text)
+    ? opts?.cjkBudget ?? DESC_CJK_BUDGET
+    : opts?.latinBudget ?? DESC_LATIN_BUDGET;
   const chars = [...text];
   if (chars.length <= budget) return text;
   const head = chars.slice(0, budget).join("");
