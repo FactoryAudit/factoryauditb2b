@@ -30,19 +30,39 @@ export default async function CountriesPage({ params }: Props) {
   const c = t.coverage;
   const p = (href: string) => localePath(locale, href);
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: c.h1,
-    url: `${BASE}${p(PATH)}`,
-    numberOfItems: COVERAGE_COUNTRIES.length,
-    itemListElement: COVERAGE_COUNTRIES.map((x, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: x.name,
-      url: `${BASE}${p(`/countries/${x.slug}`)}`,
-    })),
-  };
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: c.h1,
+      url: `${BASE}${p(PATH)}`,
+      numberOfItems: COVERAGE_COUNTRIES.length,
+      itemListElement: COVERAGE_COUNTRIES.map((x, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: x.name,
+        url: `${BASE}${p(`/countries/${x.slug}`)}`,
+      })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: t.common.ui.home,
+          item: `${BASE}${p("/")}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: c.h1,
+          item: `${BASE}${p(PATH)}`,
+        },
+      ],
+    },
+  ];
 
   return (
     <main className="container py-12">

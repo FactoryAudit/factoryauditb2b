@@ -169,7 +169,9 @@
     "liveQuantity": "Menge",
     "liveMarket": "Zielmarkt",
     "liveIndustry": "Branche",
-    "liveCerts": "Zertifizierungen"
+    "liveCerts": "Zertifizierungen",
+            "metaTitle": "Fabrikaudit und Lieferantenprüfung",
+            "metaDesc": "Lieferanten in China und Südostasien entdecken, bewerten und verifizieren, damit gute Hersteller gefunden werden und Einkäufer sicher beschaffen können."
   },
   "toolsIndex": {
     "badge": "Kostenlose Tools",
@@ -926,8 +928,8 @@
   "suppliers": {
     "h1": "Globale Lieferanten entdecken",
     "badge": "Lieferantenverzeichnis",
-    "metaTitle": "Globale Lieferantendatenbank - China und Südostasien",
-    "metaDesc": "Entdecken Sie Lieferanten in China und Südostasien. Produkte, Zertifizierungen, Informationen und Risikosignale; dazu Verifizierungs-, Audit- und Inspektionsdienste.",
+    "metaTitle": "Globale Lieferantendatenbank China & Asien",
+    "metaDesc": "Entdecken Sie Lieferanten in China und Südostasien, prüfen Sie Produkte, Zertifizierungen und Risikosignale in jedem Profil und fordern Sie bei Bedarf Verifizierung, Audit oder Inspektion an.",
     "lead": "Entdecken Sie Lieferanten in China und Südostasien. Basisinformationen, Produkte, Zertifizierungen und Risikosignale kostenlos ansehen.",
     "featuredTag": "Ausgezeichnet",
     "exampleNote": "Verfügbare Lieferanten kostenlos ansehen. Passend? RFQ posten – wir helfen bei Sourcing und Verifizierung.",
@@ -1044,8 +1046,8 @@
       "methodTitle": "Methodik und Grenzen",
       "methodBody": "Das Ergebnis ist ein theoretisches Maximum aus einem rechteckigen Stapelmodell. Es nimmt starre, stapelbare und drehbare Kartons sowie gleichmäßige Lastverteilung an. Die reale Beladung hängt von Paletten, Füllmaterial, Kartonverformung, Stapelfestigkeit, Achslastgrenzen und der Stauungsreihenfolge ab. Betrachten Sie das Ergebnis als Planungsschätzung und stimmen Sie den endgültigen Plan mit Ihrem Spediteur ab.",
       "faqTitle": "Häufige Fragen",
-      "metaTitle": "Container-Ladungsrechner",
-      "metaDesc": "Kostenloser Ladungsrechner für 20GP-, 40GP-, 40HQ-, 45HQ- und Kühlcontainer. Berechnet Kartons pro Container, benötigte Container sowie Auslastung von Volumen und Nutzlast."
+      "metaTitle": "Container-Ladungsrechner 20GP–45HQ",
+      "metaDesc": "Kostenloser Ladungsrechner für 20GP-, 40GP-, 40HQ-, 45HQ- und Kühlcontainer: Kartons pro Container, benötigte Container sowie Auslastung von Volumen und Nutzlast."
     },
     "ui": {
       "cargoTitle": "Kartonmaße",
@@ -1302,7 +1304,7 @@
     ],
     "termsTitle": "Nutzungsbedingungen",
     "termsUpdated": "Zuletzt aktualisiert: 2026-09-03",
-    "termsIntro": "Mit der Nutzung von FactoryAuditB2B akzeptieren Sie diese Bedingungen. Unser Service hilft Käufern, Lieferanten zu verifizieren und zu auditionieren, ist aber eine Plattform, keine Garantin für Lieferantenleistung.",
+    "termsIntro": "Diese Bedingungen regeln die Nutzung der FactoryAuditB2B-Plattform, die Käufern beim Verifizieren und Prüfen von Lieferanten hilft, deren Leistung aber nicht garantiert.",
     "termsSections": [
       {
         "h": "Nutzung des Service",
@@ -1439,7 +1441,7 @@
     ]
   },
   "pricing": {
-    "metaTitle": "Leistungen & Pläne — Kostenlose Tools, Verifizierung, Audit, Monitoring",
+    "metaTitle": "Leistungen & Pläne: Preise im Überblick",
     "metaDesc": "Kostenlose Lieferanten-Tools, Lieferantenverifizierung ab 99 USD, Werksaudits ab 399 USD, Produktinspektion ab 199 USD und Lieferanten-Monitoring im Abonnement. Alle Preise in USD.",
     "h1": "Leistungen & Pläne",
     "lead": "Die Tools sind kostenlos. Sie zahlen nur, wenn jemand einen Lieferanten vor Ort prüfen soll.",
@@ -1734,7 +1736,7 @@
     "notSureTitle": "Sie sind sich nicht sicher, welche Sie benötigen?",
     "notSureLead": "Führen Sie zuerst den kostenlosen Risikorechner aus. Es dauert etwa drei Minuten und sagt Ihnen, was fehlt.",
     "notSureCta": "Lieferantenrisiko bewerten",
-    "metaTitle": "Verifizierung von Lieferanten, Fabrikaudit und Inspektion",
+    "metaTitle": "Verifizierung, Audit und Inspektion",
     "metaDesc": "Unabhängige Lieferantenverifizierung, Werksaudit, Inspektion und Beschaffungsunterstützung in China, Vietnam, Thailand, Malaysia und auf den Philippinen. Umfang und Angebot pro Projekt."
   },
   "resourcesIndex": {
@@ -2289,7 +2291,7 @@
     "badge": "Produktinspektion",
     "h1": "Produktinspektion",
     "lead": "Auftragsspezifische Qualitätskontrollen in der Produktionsphase, die von einem unabhängigen Inspektor durchgeführt und schriftlich gemeldet werden. Jede Anfrage wird individuell geprüft und pro Inspektion zitiert.",
-    "metaTitle": "Produktinspektion — PPI, DUPRO, PSI und Containerverladung",
+    "metaTitle": "Produktinspektion: PPI, DUPRO & PSI",
     "metaDesc": "Vorproduktion, während der Produktion, Vorversand und Containerladekontrolle für Käufer, die aus China, Vietnam, Thailand, Malaysia und den Philippinen beziehen. Angabe je Inspektion.",
     "quickAnswerTitle": "Schnelle Antwort",
     "quickAnswer": "Eine Produktinspektion überprüft eine bestimmte Bestellung in einer bestimmten Phase: vor Produktionsbeginn, während sie läuft, vor dem Versand oder während der Containerverladung. Der Inspektor arbeitet nach Ihren Anforderungen oder einem AQL-Probenahmeplan, meldet Ergebnisse mit Fotos und gibt eine klare Empfehlung. Es wird pro Inspektion angegeben und nach Art, Umfang, Standort und Dauer bewertet.",
@@ -2789,7 +2791,7 @@
     "reset": "Zurücksetzen"
   },
   "monitoring": {
-    "metaTitle": "Lieferantenüberwachung - Geplante erneute Überprüfungen und Risikoänderungswarnungen",
+    "metaTitle": "Lieferantenüberwachung & Warnungen",
     "metaDesc": "Verifizierte Lieferantenfakten aktuell halten. Geplante erneute Überprüfungen der Registrierung, des Standorts, der Zertifikate und der öffentlichen Aufzeichnungen mit einer Warnung, wenn sich etwas ändert. Abonnement, angegeben pro Lieferant und Jahr.",
     "badge": "Dienst",
     "h1": "Lieferanten-Monitoring",
@@ -2878,7 +2880,7 @@
     "ctaSecondary": "Sehen Sie die Preise"
   },
   "fieldReports": {
-    "metaTitle": "Feldberichte - Vor-Ort-Notizen aus Inspektion, Audit und Verifizierung",
+    "metaTitle": "Feldberichte aus Vor-Ort-Inspektionen",
     "h1": "08 Feldberichte",
     "badge": "Field Notes",
     "lead": "Kurze Notizen aus der Inspektions-, Audit- und Verifikationsarbeit: was vor Ort überprüft wurde, was gefunden wurde und wie der Befund erfasst wurde.",
@@ -2897,7 +2899,7 @@
   "caseStudies": {
     "h1": "Fallstudien",
     "lead": "Methoden-Demos zu Lieferantenverifizierung, Werksaudit, Inspektion und Sourcing.",
-    "metaTitle": "Fallstudien: Lieferantenverifizierung, Audit & Inspektion",
+    "metaTitle": "Fallstudien: Verifizierung und Audit",
     "breadcrumbHome": "Startseite",
     "breadcrumbCurrent": "Fallstudien",
     "ctaTitle": "Ähnliche Situation?",
@@ -3638,7 +3640,7 @@
     "issuedOn": "Ausgestellt"
   },
   "standardReport": {
-    "metaTitle": "Standardbericht zur Lieferantenprüfung — Vollständiges Muster",
+    "metaTitle": "Standardbericht zur Lieferantenprüfung",
     "metaDesc": "Lesen Sie den vollständigen Standardbericht kostenlos und ohne Registrierung: 13 Abschnitte, 8 bewertete Dimensionen, Kennzeichnung der Belege. Download nach kurzer Registrierung.",
     "badge": "Muster des Standardberichts",
     "h1": "Standardbericht zur Lieferantenprüfung",
@@ -3667,7 +3669,7 @@
     "ctaSecondary": "Beschaffungsanfrage veröffentlichen"
   },
   "chemicals": {
-    "metaTitle": "Chemische Rohstoffe: Anwendungen, Dokumente und Lieferanten",
+    "metaTitle": "Chemische Rohstoffe & Lieferanten",
     "detailTitleTail": "Anwendungen & Dokumente",
     "metaDesc": "Chemische Rohstoffe aus China: Verwendung, von Käufern angeforderte Dokumente und wie Sie Angebote von geprüften Lieferanten anfordern.",
     "lead": "Jede Seite behandelt einen Rohstoff: Verwendung, wie Käufer ihn spezifizieren und welche Dokumente vor der Bestellung anzufordern sind. Wenn noch kein Lieferant gelistet ist, veröffentlichen Sie eine RFQ.",

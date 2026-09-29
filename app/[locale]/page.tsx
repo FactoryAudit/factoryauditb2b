@@ -16,8 +16,8 @@ import { TOOL_ORDER } from "@/lib/nav";
 import { featuredGuides } from "@/lib/guides";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
-import { hreflangFor, canonicalFor } from "@/i18n/hreflang";
-import { OG_IMAGE } from "@/lib/pageMeta";
+import { canonicalFor } from "@/i18n/hreflang";
+import { buildPageMetadata } from "@/lib/pageMeta";
 import { pickZhCopy, pickZhPair } from "@/lib/tw";
 import { ANALYTICS_EVENTS } from "@/lib/analytics";
 
@@ -28,28 +28,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: raw } = await params;
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
-  const title = `${t.home.h1} | FactoryAuditB2B`;
-  return {
-    title,
-    description: t.home.lead,
-    alternates: {
-      canonical: canonicalFor(locale, "/"),
-      languages: hreflangFor("/"),
-    },
-    openGraph: {
-      title,
-      description: t.home.lead,
-      type: "website",
-      url: canonicalFor(locale, "/"),
-      images: [OG_IMAGE],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description: t.home.lead,
-      images: [OG_IMAGE],
-    },
-  };
+  // 首页标题与可见 hero 主标题（t.home.h1）解耦：此前二者同源，标题含品牌后达 76 字符
+  // 会被 SERP 截断。改用独立 meta 键后可见文案不变，标题回到 50–60。
+  return buildPageMetadata({
+    locale,
+    path: "/",
+    title: t.home.metaTitle,
+    description: t.home.metaDesc,
+  });
 }
 
 export default async function Home({ params }: Props) {

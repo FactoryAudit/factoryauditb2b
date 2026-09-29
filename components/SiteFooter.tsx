@@ -210,7 +210,9 @@ export default function SiteFooter({
                   </Link>
                 </li>
                 <li>
-                  <Link href={p("/about")} className="hover:text-white">
+                  {/* /about 已 308 永久合并进 /trust（阶段 1 任务 6）；
+                      文案沿用 dict.about（"About us"）不变，只改目标地址。 */}
+                  <Link href={p("/trust")} className="hover:text-white">
                     {dict.about}
                   </Link>
                 </li>

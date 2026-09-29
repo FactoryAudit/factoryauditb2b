@@ -53,11 +53,68 @@ export function trimMetaDescription(
   return (sp > 0 ? head.slice(0, sp) : head).replace(DANGLING_TAIL_RE, "").trim();
 }
 
+// ── meta title 长度闸门（2026-09-29 阶段 1，宽松安全网）───────────────────────
+// 与 trimMetaDescription 的差异是**有意为之**：
+//   · 只作兜底。预算刻意放宽（拉丁 65 / CJK 36 个字符），正常文案不会被改动；
+//     zh / zh-TW / ja 现有标题最长 36 字，因此该预算对本项目 CJK 标题是零命中。
+//   · 预算只作用于**品牌段之前的主体**，品牌段（" | FactoryAuditB2B" 及其后可能
+//     存在的产品名，如 "... | FactoryAuditB2B RiskScore™"）永远保留、永不裁掉。
+//   · CJK 不套用拉丁的 50–60 预算：汉字单字宽约为拉丁字母两倍，36 个汉字已约合
+//     72 个半角宽，接近 SERP 实用上限；对中文套 50 会把它撑到被截断。
+//   · 断裂顺序：① 分隔符断句（比词边界更自然）→ ② 词边界 → ③ 兜底保留原文。
+//   · 幂等：未超预算的 title 原样返回。
+const TITLE_BRAND_TOKEN = "FactoryAuditB2B";
+const TITLE_SEPARATOR_RE = /[|｜—–·:：/／]/;
+const TITLE_LATIN_BODY_BUDGET = 65;
+const TITLE_CJK_BODY_BUDGET = 36;
+// 分隔符断句至少保留预算的这一比例，避免退化成 "PPAP" 这类几乎无信息的标题
+const TITLE_MIN_KEEP_RATIO = 0.35;
+
+export function trimMetaTitle(
+  text: string,
+  opts?: { cjkBudget?: number; latinBudget?: number }
+): string {
+  if (!text) return text;
+  // 1) 把「品牌段及其前置分隔符」整体划为不可裁的尾巴
+  let body = text;
+  let tail = "";
+  const brandAt = text.indexOf(TITLE_BRAND_TOKEN);
+  if (brandAt > 0) {
+    const before = text.slice(0, brandAt);
+    const cands = [" | ", " — ", " – ", " · ", "|", "—", "–"]
+      .map((s) => before.lastIndexOf(s))
+      .filter((i) => i >= 0);
+    const cut = cands.length > 0 ? Math.max(...cands) : brandAt;
+    body = text.slice(0, cut);
+    tail = text.slice(cut);
+  }
+  const budget = CJK_RE.test(body)
+    ? opts?.cjkBudget ?? TITLE_CJK_BODY_BUDGET
+    : opts?.latinBudget ?? TITLE_LATIN_BODY_BUDGET;
+  const chars = [...body];
+  if (chars.length <= budget) return text;
+  const head = chars.slice(0, budget).join("");
+  const minKeep = Math.max(12, Math.floor(budget * TITLE_MIN_KEEP_RATIO));
+  // ① 分隔符断句
+  for (let i = head.length - 1; i >= 0; i--) {
+    if (TITLE_SEPARATOR_RE.test(head[i]) && i >= minKeep) {
+      return head.slice(0, i).replace(DANGLING_TAIL_RE, "").trim() + tail;
+    }
+  }
+  // ② 词边界
+  const sp = head.lastIndexOf(" ");
+  const trimmed = (sp >= minKeep ? head.slice(0, sp) : head).replace(DANGLING_TAIL_RE, "").trim();
+  // ③ 兜底：裁完几乎没有信息量，就宁可保留原文（长标题仍可被搜素引擎自行截断）
+  if ([...trimmed].length < Math.min(12, minKeep)) return text;
+  return trimmed + tail;
+}
+
 export function buildPageMetadata({ locale, path, title, description, robots, withBrand = true }: MetaInput): Metadata {
   // 去重：部分页面（如集群页 seo_title）已自带品牌名，避免 "... | FactoryAuditB2B | FactoryAuditB2B"
   const BRAND_SUFFIX = " | FactoryAuditB2B";
-  const finalTitle =
-    withBrand && !title.includes("FactoryAuditB2B") ? `${title}${BRAND_SUFFIX}` : title;
+  const finalTitle = trimMetaTitle(
+    withBrand && !title.includes("FactoryAuditB2B") ? `${title}${BRAND_SUFFIX}` : title
+  );
   // ── description 长度闸门统一收口（2026-09-29）────────────────────────────
   // 此前 `trimMetaDescription` 只在少数静态页被手动调用，而 guides / audit-guide /
   // industry 等**动态页直接输出**源码里的 metaDescEn / metaDescZh，

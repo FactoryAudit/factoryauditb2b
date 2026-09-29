@@ -31,7 +31,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return buildPageMetadata({
     locale,
     path: `/guides/${slug}`,
-    title: pickZhPair(locale, g.titleEn, g.titleZh),
+    // metaTitle 存在时优先（仅收窄 <title>；H1 与 Article.headline 仍用完整 titleEn/titleZh）
+    title: pickZhPair(locale, g.metaTitleEn ?? g.titleEn, g.metaTitleZh ?? g.titleZh),
     description: pickZhPair(locale, g.metaDescEn, g.metaDescZh),
   });
 }

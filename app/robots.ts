@@ -59,19 +59,31 @@ const DISALLOWED_BOTS = [
 //  - /*?                任何带查询字符串的 URL（搜索 / 筛选 / 表单态）—— 避免重复薄页被收录
 const DISALLOW_PATHS = ["/api", "/admin", "/staging", "/*?"];
 
+// 例外放行（阶段 1 任务 8）：`/*?` 会把「搜索框结构化数据」指向的 URL 一并屏蔽 ——
+// WebSite 的 SearchAction target 正是 /suppliers?q={search_term_string}
+// （见 app/[locale]/layout.tsx），于是出现"声明了站内搜索、却禁止抓取结果页"的自相矛盾。
+// robots 规范：同一 UA 同时命中 Allow 与 Disallow 时按**最长匹配**胜出，
+// 因此 /suppliers?q=（更长）会盖过 /*?。
+// 安全性：过滤态页自身已由 generateMetadata 输出 robots: index:false, follow:true
+// （见 app/[locale]/suppliers/page.tsx）——「允许抓取」不等于「允许收录」，
+// 反而是让爬虫读到 noindex 并把该 URL 从索引里摘掉的前提。
+// 注意：/suppliers 只支持 country / industry / q 三个参数（无 page 参数），
+// 故此处不放行 ?page=，避免为不存在的参数组合制造可抓取路径。
+const ALLOW_EXCEPTIONS = ["/suppliers?q="];
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       ...ALLOWED_BOTS.map((userAgent) => ({
         userAgent,
-        allow: "/",
+        allow: ["/", ...ALLOW_EXCEPTIONS],
         disallow: DISALLOW_PATHS,
       })),
       ...DISALLOWED_BOTS.map((userAgent) => ({
         userAgent,
         disallow: "/",
       })),
-      { userAgent: "*", allow: "/", disallow: DISALLOW_PATHS },
+      { userAgent: "*", allow: ["/", ...ALLOW_EXCEPTIONS], disallow: DISALLOW_PATHS },
     ],
     sitemap: `${BASE}/sitemap.xml`,
     host: BASE,

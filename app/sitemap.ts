@@ -28,7 +28,6 @@ const BASE = "https://factoryauditb2b.com";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const core = [
     "",
-    "/about",
     "/tools",
     "/tools/supplier-risk-calculator",
     "/tools/supplier-verification-checklist",
@@ -119,7 +118,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       return { changeFrequency: "monthly", priority: 0.7 };
     if (
       [
-        "/about",
         "/trust",
         "/training-plans",
         "/methodology",

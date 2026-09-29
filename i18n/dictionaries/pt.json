@@ -169,7 +169,9 @@
     "liveQuantity": "Quantidade",
     "liveMarket": "Mercado-alvo",
     "liveIndustry": "Setor",
-    "liveCerts": "Certificações"
+    "liveCerts": "Certificações",
+            "metaTitle": "Auditoria de fábrica e verificação",
+            "metaDesc": "Descubra, avalie e verifique fornecedores na China e no Sudeste Asiático, para que bons fabricantes sejam encontrados e os compradores comprem com confiança."
   },
   "toolsIndex": {
     "badge": "Ferramentas gratuitas",
@@ -926,8 +928,8 @@
   "suppliers": {
     "h1": "Explore fornecedores globais",
     "badge": "Diretório de fornecedores",
-    "metaTitle": "Base global de fornecedores - China e Sudeste Asiático",
-    "metaDesc": "Descubra fornecedores na China e no Sudeste Asiático. Veja produtos, certificações, informações e sinais de risco, com verificação, auditoria e inspeção disponíveis.",
+    "metaTitle": "Base global de fornecedores da Ásia",
+    "metaDesc": "Explore fornecedores na China e no Sudeste Asiático, veja produtos, certificações e sinais de risco em cada perfil e solicite verificação, auditoria ou inspeção quando precisar de mais checagens.",
     "lead": "Descubra fornecedores na China e no Sudeste Asiático. Veja gratuitamente informações básicas, produtos, certificações e sinais de risco.",
     "featuredTag": "Em destaque",
     "exampleNote": "Veja os fornecedores disponíveis gratuitamente. Não encontrou? Publique um RFQ e ajudamos a buscar e verificar.",
@@ -1044,8 +1046,8 @@
       "methodTitle": "Metodologia e limites",
       "methodBody": "O resultado é um máximo teórico de um modelo retangular de empilhamento. Ele assume caixas rígidas, empilháveis e giráveis, com carga distribuída de forma uniforme. O carregamento real depende de paletes, material de preenchimento, deformação das caixas, resistência ao empilhamento, limites de peso por eixo e ordem de estivagem. Trate o resultado como estimativa e confirme o plano final com seu despachante.",
       "faqTitle": "Perguntas frequentes",
-      "metaTitle": "Calculadora de carregamento de contêiner",
-      "metaDesc": "Calculadora grátis de carregamento para contêineres 20GP, 40GP, 40HQ, 45HQ e refrigerados. Calcule caixas por contêiner, contêineres necessários e o aproveitamento de volume e carga."
+      "metaTitle": "Calculadora de carga de contêineres",
+      "metaDesc": "Calculadora grátis de carregamento para contêineres 20GP, 40GP, 40HQ, 45HQ e refrigerados: caixas por contêiner, contêineres necessários, volume e carga útil."
     },
     "ui": {
       "cargoTitle": "Dimensões da caixa",
@@ -1302,7 +1304,7 @@
     ],
     "termsTitle": "Termos de Serviço",
     "termsUpdated": "Última atualização: 2026-09-03",
-    "termsIntro": "Ao usar a FactoryAuditB2B, você aceita estes termos. Nosso serviço ajuda compradores a verificar e auditar fornecedores, mas somos uma plataforma, não uma garantidora do desempenho do fornecedor.",
+    "termsIntro": "Estes termos regem o uso da plataforma FactoryAuditB2B, que ajuda compradores a verificar e auditar fornecedores, mas não garante o seu desempenho.",
     "termsSections": [
       {
         "h": "Uso do serviço",
@@ -1439,7 +1441,7 @@
     ]
   },
   "pricing": {
-    "metaTitle": "Serviços e planos — ferramentas gratuitas, verificação, auditoria, monitoramento",
+    "metaTitle": "Serviços e planos: preços em resumo",
     "metaDesc": "Ferramentas gratuitas de avaliação de fornecedores, verificação de fornecedores a partir de 99 USD, auditorias de fábrica a partir de 399 USD, inspeção de produto a partir de 199 USD e monitoramento de fornecedores por assinatura. Todos os preços em USD.",
     "h1": "Serviços e planos",
     "lead": "As ferramentas são gratuitas. Você só paga quando precisa de alguém para verificar o fornecedor no local.",
@@ -1734,7 +1736,7 @@
     "notSureTitle": "Não sabe de qual precisa?",
     "notSureLead": "Execute a calculadora de risco gratuita primeiro. Leva cerca de três minutos e informa o que está faltando.",
     "notSureCta": "Avaliar o risco do fornecedor",
-    "metaTitle": "Verificação de Fornecedores, Auditoria de Fábrica e Serviços de Inspeção",
+    "metaTitle": "Verificação, auditoria e inspeção",
     "metaDesc": "Verificação independente de fornecedores, auditoria de fábrica, inspeção e suporte de sourcing na China, Vietnã, Tailândia, Malásia e Filipinas. Escopo e orçamento por projeto."
   },
   "resourcesIndex": {
@@ -2289,7 +2291,7 @@
     "badge": "Inspeção de produto",
     "h1": "Inspeção de produto",
     "lead": "Verificações de qualidade específicas do pedido na fase de produção que importa, realizadas por um inspetor independente e relatadas por escrito. Cada solicitação é analisada individualmente e cotada por inspeção.",
-    "metaTitle": "Inspeção de Produto — PPI, DUPRO, psi e Carregamento de Container",
+    "metaTitle": "Inspeção de produto: PPI e DUPRO",
     "metaDesc": "Inspeção de pré-produção, durante a produção, pré-embarque e carregamento de contêineres para compradores provenientes da China, Vietnã, Tailândia, Malásia e Filipinas. Orçado por inspeção.",
     "quickAnswerTitle": "Resposta rápida",
     "quickAnswer": "Uma inspeção de produto verifica um pedido específico em um estágio específico: antes do início da produção, durante a execução, antes do envio ou durante o carregamento do contêiner. O inspetor trabalha de acordo com seus requisitos ou um plano de amostragem AQL, relata as descobertas com fotos e dá uma recomendação clara. É cotado por inspeção e precificado por tipo, escopo, localização e duração.",
@@ -2789,7 +2791,7 @@
     "reset": "Reiniciar"
   },
   "monitoring": {
-    "metaTitle": "Monitorização do fornecedor — Verificações agendadas e alertas de mudança de risco",
+    "metaTitle": "Monitorização e alertas de risco",
     "metaDesc": "Mantenha os fatos verificados do fornecedor atuais. Verificações agendadas de registro, site, certificados e registros públicos, com alerta quando algo muda. Assinatura, cotada por fornecedor por ano.",
     "badge": "Serviço",
     "h1": "Monitorização do Fornecedor",
@@ -2878,7 +2880,7 @@
     "ctaSecondary": "Ver preços"
   },
   "fieldReports": {
-    "metaTitle": "Relatórios de campo — Notas no local da inspecção, auditoria e verificação",
+    "metaTitle": "Relatórios de campo de inspeções",
     "h1": "Relatórios de Campo",
     "badge": "Notas de campo",
     "lead": "Notas curtas do trabalho de inspeção, auditoria e verificação: o que foi verificado no local, o que foi encontrado, e como o achado foi registrado.",
@@ -2897,7 +2899,7 @@
   "caseStudies": {
     "h1": "Estudos de caso",
     "lead": "Demonstrações de métodos de verificação de fornecedores, auditoria de fábrica, inspeção e sourcing.",
-    "metaTitle": "Estudos de caso: verificação de fornecedores, auditoria e inspeção",
+    "metaTitle": "Estudos de caso: verificação e auditoria",
     "breadcrumbHome": "Início",
     "breadcrumbCurrent": "Estudos de caso",
     "ctaTitle": "Tem uma situação parecida?",
@@ -3638,7 +3640,7 @@
     "issuedOn": "Emitido em"
   },
   "standardReport": {
-    "metaTitle": "Relatório padrão de diligência de fornecedores — Espécime completo",
+    "metaTitle": "Relatório padrão de diligência devida",
     "metaDesc": "Leia gratuitamente e sem cadastro o relatório padrão completo: 13 seções, 8 dimensões pontuadas e classificação de evidências. Baixe o espécime após um breve cadastro.",
     "badge": "Espécime de relatório padrão",
     "h1": "Relatório padrão de diligência de fornecedores",
@@ -3667,7 +3669,7 @@
     "ctaSecondary": "Publicar um pedido de sourcing"
   },
   "chemicals": {
-    "metaTitle": "Matérias-primas químicas: aplicações, documentos e fornecedores",
+    "metaTitle": "Matérias-primas químicas e fornecedores",
     "detailTitleTail": "Aplicações e documentos",
     "metaDesc": "Matérias-primas químicas da China: usos, documentos exigidos pelos compradores e como pedir orçamentos a fornecedores verificados.",
     "lead": "Cada página cobre uma matéria-prima: usos, como os compradores a especificam e os documentos a pedir antes de encomendar. Se ainda não houver fornecedores registados, publique uma RFQ.",

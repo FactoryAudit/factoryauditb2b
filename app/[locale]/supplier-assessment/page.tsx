@@ -11,8 +11,8 @@ import { listEvidenceForSupplier } from "@/lib/supplierEvidence";
 import { listFactoryPhotosForSupplier } from "@/lib/supplierImages";
 import { resolveSupplierAccess } from "@/lib/supplierAccess";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
-import { hreflangFor, canonicalFor } from "@/i18n/hreflang";
 import { getDictionary } from "@/i18n/getDictionary";
+import { buildPageMetadata } from "@/lib/pageMeta";
 
 const PATH = "/supplier-assessment";
 type Props = {
@@ -23,13 +23,16 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: raw } = await params;
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
-  const title = "Factory Self-Assessment | FactoryAuditB2B";
-  const desc = "Complete the social compliance and quality self-assessment checklists to earn the Factory Self-Assessment tag.";
-  return {
-    title,
-    description: desc,
-    alternates: { canonical: canonicalFor(locale, PATH), languages: hreflangFor(PATH) },
-  };
+  // 该页依赖登录态 + ?supplier= / ?email= 参数，且为动态渲染（private, no-cache）。
+  // 会话/归属相关的个体化视图不应进入索引 ⇒ noindex, nofollow。
+  return buildPageMetadata({
+    locale,
+    path: PATH,
+    title: "Factory Self-Assessment",
+    description:
+      "Complete the social compliance and quality self-assessment checklists to earn the Factory Self-Assessment tag.",
+    robots: { index: false, follow: false },
+  });
 }
 
 export default async function Page({ params, searchParams }: Props) {

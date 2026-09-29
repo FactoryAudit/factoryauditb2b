@@ -36,19 +36,39 @@ export default async function GuidesIndex({ params }: Props) {
   const p = (href: string) => localePath(locale, href);
   const cats = guideCategoriesWithGuides();
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Supplier Intelligence Guides",
-    url: `${BASE}${p(PATH)}`,
-    numberOfItems: GUIDES.length,
-    itemListElement: GUIDES.map((g, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: pickZhPair(locale, g.titleEn, g.titleZh),
-      url: `${BASE}${p(`/guides/${g.slug}`)}`,
-    })),
-  };
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: "Supplier Intelligence Guides",
+      url: `${BASE}${p(PATH)}`,
+      numberOfItems: GUIDES.length,
+      itemListElement: GUIDES.map((g, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: pickZhPair(locale, g.titleEn, g.titleZh),
+        url: `${BASE}${p(`/guides/${g.slug}`)}`,
+      })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: t.common.ui.home,
+          item: `${BASE}${p("/")}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: t.common.ui.guidesPageTitle,
+          item: `${BASE}${p(PATH)}`,
+        },
+      ],
+    },
+  ];
 
   return (
     <main className="container py-12">

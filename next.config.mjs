@@ -124,6 +124,15 @@ const nextConfig = {
     return [
       { source: "/membership", destination: "/pricing", permanent: true },
       { source: "/:locale/membership", destination: "/:locale/pricing", permanent: true },
+      // ★ 阶段 1 任务 6：/about 合并进 /trust。
+      // 两页都在回答"我们是谁"，主题互相蚕食（/about 标题 About Us — Supplier
+      // Verification…，/trust 标题 About FactoryAuditB2B）。保留 /trust 作为唯一
+      // 信任中心，把 /about 永久重定向过去，让既有排名权重转移而不是流失。
+      // permanent:true ⇒ Next 发 308，Google 视作永久合并且效果等同 301。
+      // /en/about 单独一条放在 /en/:path* 之前，避免先被送成 /about 再二次跳转（缩短链）。
+      { source: "/en/about", destination: "/trust", permanent: true },
+      { source: "/about", destination: "/trust", permanent: true },
+      { source: "/:locale/about", destination: "/:locale/trust", permanent: true },
       // ★ CS-19（工单 SEO-20260918-FAB 任务 1.3）—— 收口 /en 家族的重定向链。
       //
       // 实测（2026-09-18）：/en/ → 308 → /en → 301 → /（2 跳，爬虫记为 Redirect Chain）。

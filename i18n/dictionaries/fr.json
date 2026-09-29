@@ -169,7 +169,9 @@
     "liveQuantity": "Quantité",
     "liveMarket": "Marché cible",
     "liveIndustry": "Secteur",
-    "liveCerts": "Certifications"
+    "liveCerts": "Certifications",
+            "metaTitle": "Audit d'usine et vérification fournisseur",
+            "metaDesc": "Découvrir, évaluer et vérifier des fournisseurs en Chine et en Asie du Sud-Est, pour que les bons fabricants soient trouvés et que les acheteurs sourcent en confiance."
   },
   "toolsIndex": {
     "badge": "Outils gratuits",
@@ -926,8 +928,8 @@
   "suppliers": {
     "h1": "Explorez les fournisseurs du monde entier",
     "badge": "Annuaire de fournisseurs",
-    "metaTitle": "Base de données mondiale de fournisseurs - Chine et Asie du Sud-Est",
-    "metaDesc": "Découvrez des fournisseurs en Chine et en Asie du Sud-Est. Produits, certifications, informations et signaux de risque, avec vérification, audit et inspection disponibles.",
+    "metaTitle": "Base de données mondiale de fournisseurs",
+    "metaDesc": "Explorez des fournisseurs en Chine et en Asie du Sud-Est, consultez produits, certifications et signaux de risque sur chaque profil, et demandez une vérification, un audit ou une inspection au besoin.",
     "lead": "Découvrez des fournisseurs en Chine et en Asie du Sud-Est. Consultez gratuitement les informations de base, produits, certifications et signaux de risque.",
     "featuredTag": "En vedette",
     "exampleNote": "Consultez les fournisseurs disponibles gratuitement. Introuvable ? Publiez un RFQ : nous vous aidons à sourcer et vérifier.",
@@ -1044,8 +1046,8 @@
       "methodTitle": "Méthodologie et limites",
       "methodBody": "Le résultat est un maximum théorique issu d'un modèle d'empilement rectangulaire. Il suppose des cartons rigides, gerbables et orientables, avec une charge répartie uniformément. Le chargement réel dépend des palettes, du matériau de calage, de la déformation des cartons, de la résistance au gerbage, des limites de charge à l'essieu et de l'ordre d'arrimage. Considérez le résultat comme une estimation et validez le plan final avec votre transitaire.",
       "faqTitle": "Questions fréquentes",
-      "metaTitle": "Calculateur de chargement de conteneur",
-      "metaDesc": "Calculateur gratuit de chargement pour conteneurs 20GP, 40GP, 40HQ, 45HQ et frigorifiques. Calculez le nombre de cartons par conteneur, les conteneurs nécessaires et l'utilisation du volume et de la charge."
+      "metaTitle": "Calculateur de chargement conteneur",
+      "metaDesc": "Calculateur gratuit de chargement pour conteneurs 20GP, 40GP, 40HQ, 45HQ et frigorifiques : cartons par conteneur, conteneurs nécessaires, volume et charge utile."
     },
     "ui": {
       "cargoTitle": "Dimensions du carton",
@@ -1302,7 +1304,7 @@
     ],
     "termsTitle": "Conditions d'Utilisation",
     "termsUpdated": "Dernière mise à jour : 2026-09-03",
-    "termsIntro": "En utilisant FactoryAuditB2B, vous acceptez ces conditions. Notre service aide les acheteurs à vérifier et auditer des fournisseurs, mais nous sommes une plateforme, non un garant de la performance des fournisseurs.",
+    "termsIntro": "Ces conditions régissent l'utilisation de la plateforme FactoryAuditB2B, qui aide les acheteurs à vérifier et auditer des fournisseurs sans garantir leur performance.",
     "termsSections": [
       {
         "h": "Utilisation du service",
@@ -1439,7 +1441,7 @@
     ]
   },
   "pricing": {
-    "metaTitle": "Services et formules — outils gratuits, vérification, audit, monitoring",
+    "metaTitle": "Services et formules : tarifs",
     "metaDesc": "Outils gratuits d'évaluation des fournisseurs, vérification de fournisseur dès 99 USD, audits d'usine dès 399 USD, inspection de produit dès 199 USD et monitoring fournisseur par abonnement. Tous les prix en USD.",
     "h1": "Services et formules",
     "lead": "Les outils sont gratuits. Vous ne payez que lorsque quelqu'un doit vérifier un fournisseur sur le terrain.",
@@ -1734,7 +1736,7 @@
     "notSureTitle": "Vous ne savez pas de quel produit vous avez besoin ?",
     "notSureLead": "Exécutez d'abord le calculateur de risque gratuit. Cela prend environ trois minutes et vous indique ce qui manque.",
     "notSureCta": "Évaluer le risque fournisseur",
-    "metaTitle": "Vérification des fournisseurs, services d'audit et d'inspection en usine",
+    "metaTitle": "Vérification, audit et inspection",
     "metaDesc": "Vérification indépendante de fournisseurs, audit d'usine, inspection et appui au sourcing en Chine, au Vietnam, en Thaïlande, en Malaisie et aux Philippines. Périmètre et devis par projet."
   },
   "resourcesIndex": {
@@ -2289,7 +2291,7 @@
     "badge": "Inspection produit",
     "h1": "Inspection produit",
     "lead": "Contrôles de qualité spécifiques à la commande au stade de la production qui compte, effectués par un inspecteur indépendant et rapportés par écrit. Chaque demande est examinée individuellement et citée par inspection.",
-    "metaTitle": "Inspection du produit — PPI, DUPRO, psi et chargement du conteneur",
+    "metaTitle": "Inspection produit : PPI et DUPRO",
     "metaDesc": "Inspection de pré-production, en cours de production, de pré-expédition et de chargement de conteneurs pour les acheteurs en provenance de Chine, du Vietnam, de Thaïlande, de Malaisie et des Philippines. Devis par inspection.",
     "quickAnswerTitle": "Réponse rapide",
     "quickAnswer": "Une inspection de produit vérifie une commande spécifique à un stade spécifique : avant le début de la production, pendant son fonctionnement, avant l'expédition ou pendant le chargement du conteneur. L'inspecteur travaille selon vos exigences ou un plan d'échantillonnage AQL, rapporte les résultats avec des photos et donne une recommandation claire. Il est indiqué par inspection et tarifé par type, portée, emplacement et durée.",
@@ -2789,7 +2791,7 @@
     "reset": "Réinitialiser"
   },
   "monitoring": {
-    "metaTitle": "Surveillance des fournisseurs — Re-vérifications planifiées et alertes de changement de risque",
+    "metaTitle": "Surveillance fournisseur et alertes",
     "metaDesc": "Tenir à jour les faits vérifiés du fournisseur. Re-vérifications planifiées de l'enregistrement, du site, des certificats et des enregistrements publics, avec une alerte lorsque quelque chose change. Abonnement, coté par fournisseur et par an.",
     "badge": "Maintenance",
     "h1": "Surveillance des fournisseurs",
@@ -2878,7 +2880,7 @@
     "ctaSecondary": "Voir tarifs"
   },
   "fieldReports": {
-    "metaTitle": "Rapports de terrain — Notes sur site de l'inspection, de l'audit et de la vérification",
+    "metaTitle": "Rapports de terrain d'inspection",
     "h1": "Compte rendu de terrain",
     "badge": "Notes de terrain",
     "lead": "Courtes notes des travaux d'inspection, d'audit et de vérification : ce qui a été vérifié sur place, ce qui a été trouvé et comment la constatation a été enregistrée.",
@@ -2897,7 +2899,7 @@
   "caseStudies": {
     "h1": "Études de cas",
     "lead": "Démonstrations de méthodes pour la vérification fournisseur, l'audit d'usine, l'inspection et le sourcing.",
-    "metaTitle": "Études de cas : vérification fournisseur, audit & inspection",
+    "metaTitle": "Études de cas : vérification et audit",
     "breadcrumbHome": "Accueil",
     "breadcrumbCurrent": "Études de cas",
     "ctaTitle": "Une situation similaire ?",
@@ -3638,7 +3640,7 @@
     "issuedOn": "Délivré le"
   },
   "standardReport": {
-    "metaTitle": "Rapport standard de diligence fournisseurs — Spécimen complet",
+    "metaTitle": "Rapport standard de diligence fournisseurs",
     "metaDesc": "Lisez gratuitement et sans inscription le rapport standard complet : 13 sections, 8 dimensions notées et classement des preuves. Téléchargez le spécimen après une courte inscription.",
     "badge": "Spécimen de rapport standard",
     "h1": "Rapport standard de diligence fournisseurs",
@@ -3667,7 +3669,7 @@
     "ctaSecondary": "Publier une demande de sourcing"
   },
   "chemicals": {
-    "metaTitle": "Matières premières chimiques : applications, documents et fournisseurs",
+    "metaTitle": "Matières premières et fournisseurs",
     "detailTitleTail": "Applications & documents",
     "metaDesc": "Matières premières chimiques de Chine : usages, documents demandés par les acheteurs et comment demander des devis à des fournisseurs vérifiés.",
     "lead": "Chaque page couvre une matière première : usages, spécifications habituelles des acheteurs et documents à demander avant de commander. Si aucun fournisseur n'est référencé, publiez une RFQ.",

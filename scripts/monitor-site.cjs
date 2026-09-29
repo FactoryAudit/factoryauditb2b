@@ -6,7 +6,7 @@
  *
  *   node monitor-site.cjs
  *   node monitor-site.cjs --from-file urls.txt
- *   node monitor-site.cjs --path /services/inspection --path /about
+ *   node monitor-site.cjs --path /services/inspection --path /trust
  *
  * Env: SITE_HOST (default factoryauditb2b.com)
  * Exit code: 1 if any URL is not 2xx/3xx (so it can fail a CI health gate).
@@ -19,7 +19,7 @@ const DEFAULT_PATHS = [
   '/',
   '/sitemap.xml',
   '/robots.txt',
-  '/about',
+  '/trust',
   '/contact',
   '/services/inspection',
   '/services/supplier-verification',

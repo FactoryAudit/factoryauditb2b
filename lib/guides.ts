@@ -39,6 +39,13 @@ export interface Guide {
   /** 标题即 H1，也是搜索意图的主关键词 */
   titleEn: string;
   titleZh: string;
+  /**
+   * 仅供 <title> 使用的收窄标题（可选）。
+   * titleEn 同时是页面 H1 与 Article.headline —— 当它长到会挤掉品牌后缀时，
+   * 用本字段单独收窄 meta title，可见 H1 与结构化数据保持不变。
+   */
+  metaTitleEn?: string;
+  metaTitleZh?: string;
   metaDescEn: string;
   metaDescZh: string;
   /** 最后更新日期（ISO），AI Search 与读者都看这个 */
@@ -3415,6 +3422,7 @@ export const GUIDES: Guide[] = [
     category: "audit",
     titleEn: "What Is a Quality Management System (QMS): The Operating System of a Manufacturer",
     titleZh: "质量管理体系(QMS)是什么：制造企业的底层系统",
+    metaTitleEn: "What Is a Quality Management System (QMS)",
     metaDescEn:
       "A plain explanation of a QMS: what it is, the plan-do-check-act cycle, the documents it produces, and why buyers should care about a supplier's system, not just a certificate.",
     metaDescZh:

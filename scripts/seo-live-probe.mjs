@@ -46,7 +46,6 @@ const SAMPLES = [
   "/methodology",
   "/trust",
   "/resources",
-  "/about",
   "/ar",
   "/ar/membership",
   // 旧路径（应 308）

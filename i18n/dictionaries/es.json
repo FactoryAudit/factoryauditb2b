@@ -169,7 +169,9 @@
     "liveQuantity": "Cantidad",
     "liveMarket": "Mercado objetivo",
     "liveIndustry": "Industria",
-    "liveCerts": "Certificaciones"
+    "liveCerts": "Certificaciones",
+            "metaTitle": "Auditoría de fábrica y verificación",
+            "metaDesc": "Descubra, evalúe y verifique proveedores en China y el sudeste asiático, para que los buenos fabricantes sean visibles y los compradores puedan abastecerse con confianza."
   },
   "toolsIndex": {
     "badge": "Herramientas gratuitas",
@@ -926,8 +928,8 @@
   "suppliers": {
     "h1": "Explore proveedores globales",
     "badge": "Directorio de proveedores",
-    "metaTitle": "Base de datos global de proveedores - China y el sudeste asiático",
-    "metaDesc": "Descubra proveedores en China y el sudeste asiático. Explore productos, certificaciones, información y señales de riesgo, con servicios de verificación, auditoría e inspección disponibles.",
+    "metaTitle": "Base de datos global de proveedores",
+    "metaDesc": "Explore proveedores en China y el sudeste asiático, revise productos, certificaciones y señales de riesgo en cada perfil, y solicite verificación, auditoría o inspección cuando necesite más comprobaciones.",
     "lead": "Descubra proveedores en China y el sudeste asiático. Consulte gratis información básica, productos, certificaciones y señales de riesgo.",
     "featuredTag": "Destacado",
     "exampleNote": "Consulte los proveedores disponibles gratis. Si no encuentra el adecuado, publique un RFQ y le ayudaremos a buscarlo y verificarlo.",
@@ -1045,7 +1047,7 @@
       "methodBody": "El resultado es un máximo teórico a partir de un modelo de empaque rectangular. Asume que las cajas de cartón son rígidas, apilables y se pueden girar, y que la carga se distribuye uniformemente. La carga real se ve afectada por los palés, el estiba, la deformación de la caja de cartón, la resistencia al apilamiento, las reglas de peso del eje y el orden de estiba. Trate el resultado como una estimación de planificación y confirme el plan final con su agente o supervisor de carga.",
       "faqTitle": "Preguntas frecuentes",
       "metaTitle": "Calculadora de carga de contenedores",
-      "metaDesc": "Calculadora de carga de contenedores gratuita para contenedores 20GP, 40GP, 40HQ, 45HQ y reefer. Calcule las cajas de cartón por contenedor, los contenedores necesarios, el volumen y la utilización de la carga útil."
+      "metaDesc": "Calculadora gratuita de carga para contenedores 20GP, 40GP, 40HQ, 45HQ y reefer, que calcula cajas por contenedor, contenedores necesarios, volumen y uso de la carga útil."
     },
     "ui": {
       "cargoTitle": "Dimensiones del cartón",
@@ -1302,7 +1304,7 @@
     ],
     "termsTitle": "Términos del servicio",
     "termsUpdated": "Última actualización: 2026-09-03",
-    "termsIntro": "By using FactoryAuditB2B, you agree to these terms. Our service helps buyers verify and audit suppliers, but we are a platform, not a guarantor of supplier performance.",
+    "termsIntro": "Estos términos rigen el uso de la plataforma FactoryAuditB2B, que ayuda a los compradores a verificar y auditar proveedores, pero no garantiza su desempeño.",
     "termsSections": [
       {
         "h": "Utilización del servicio",
@@ -1439,7 +1441,7 @@
     ]
   },
   "pricing": {
-    "metaTitle": "Servicios y planes — herramientas gratuitas, verificación, auditoría, monitoreo",
+    "metaTitle": "Servicios y planes: precios",
     "metaDesc": "Herramientas gratuitas de evaluación de proveedores, verificación de proveedores desde 99 USD, auditorías de fábrica desde 399 USD, inspección de producto desde 199 USD y monitoreo de proveedores por suscripción. Todos los precios en USD.",
     "h1": "Servicios y planes",
     "lead": "Las herramientas son gratuitas. Solo pagas cuando necesitas que alguien verifique al proveedor sobre el terreno.",
@@ -1734,7 +1736,7 @@
     "notSureTitle": "¿No sabes cuál necesitas?",
     "notSureLead": "Ejecute primero la calculadora de riesgo gratuita. Tarda unos tres minutos y te dice lo que falta.",
     "notSureCta": "Evaluar el riesgo del proveedor",
-    "metaTitle": "Servicios de verificación de proveedores, auditoría de fábrica e inspección",
+    "metaTitle": "Verificación, auditoría e inspección",
     "metaDesc": "Verificación independiente de proveedores, auditoría de fábrica, inspección y soporte de abastecimiento en China, Vietnam, Tailandia, Malasia y Filipinas. Alcance y presupuesto por proyecto."
   },
   "resourcesIndex": {
@@ -2289,7 +2291,7 @@
     "badge": "Inspección de producto",
     "h1": "Inspección de producto",
     "lead": "Controles de calidad específicos del pedido en la etapa de producción que importa, realizados por un inspector independiente e informados por escrito. Cada solicitud se revisa individualmente y se cita por inspección.",
-    "metaTitle": "Inspección de productos: PPI, DUPRO, psi y carga de contenedores",
+    "metaTitle": "Inspección de producto: PPI y DUPRO",
     "metaDesc": "Inspección previa a la producción, durante la producción, previa al envío y carga de contenedores para compradores procedentes de China, Vietnam, Tailandia, Malasia y Filipinas. Presupuestado por inspección.",
     "quickAnswerTitle": "Respuesta rápida",
     "quickAnswer": "Una inspección del producto verifica un pedido específico en una etapa específica: antes de que comience la producción, mientras está en funcionamiento, antes del envío o durante la carga del contenedor. El inspector trabaja según sus requisitos o un plan de muestreo AQL, informa los hallazgos con fotos y da una recomendación clara. Se cotiza por inspección y tiene un precio por tipo, alcance, ubicación y duración.",
@@ -2789,7 +2791,7 @@
     "reset": "Restablecimiento"
   },
   "monitoring": {
-    "metaTitle": "Monitoreo de proveedores — Revisiones programadas y alertas de cambio de riesgo",
+    "metaTitle": "Monitoreo de proveedores y alertas",
     "metaDesc": "Mantenga actualizados los hechos verificados del proveedor. Revisiones programadas de registro, sitio, certificados y registros públicos, con una alerta cuando algo cambia. Suscripción, cotizada por proveedor por año.",
     "badge": "Servicio",
     "h1": "Monitoreo de Proveedores",
@@ -2878,7 +2880,7 @@
     "ctaSecondary": "Ver precios"
   },
   "fieldReports": {
-    "metaTitle": "Informes de campo: notas in situ de inspección, auditoría y verificación",
+    "metaTitle": "Informes de campo desde inspecciones",
     "h1": "Informes de campo",
     "badge": "Notas sobre el terreno",
     "lead": "Notas breves del trabajo de inspección, auditoría y verificación: qué se verificó en el sitio, qué se encontró y cómo se registró el hallazgo.",
@@ -2897,7 +2899,7 @@
   "caseStudies": {
     "h1": "Casos prácticos",
     "lead": "Demostraciones de métodos de verificación de proveedores, auditoría de fábrica, inspección y sourcing.",
-    "metaTitle": "Casos prácticos: verificación de proveedores, auditoría e inspección",
+    "metaTitle": "Casos de verificación y auditoría",
     "breadcrumbHome": "Inicio",
     "breadcrumbCurrent": "Casos prácticos",
     "ctaTitle": "¿Tienes una situación similar?",
@@ -3638,7 +3640,7 @@
     "issuedOn": "Emitido"
   },
   "standardReport": {
-    "metaTitle": "Informe estándar de diligencia debida de proveedores — Espécimen completo",
+    "metaTitle": "Informe estándar de diligencia debida",
     "metaDesc": "Lea gratis y sin registrarse el informe estándar completo: 13 secciones, 8 dimensiones puntuadas y clasificación de evidencias. Descargue el espécimen tras un breve registro.",
     "badge": "Espécimen de informe estándar",
     "h1": "Informe estándar de diligencia debida de proveedores",
@@ -3667,7 +3669,7 @@
     "ctaSecondary": "Publicar una solicitud de abastecimiento"
   },
   "chemicals": {
-    "metaTitle": "Materias primas químicas: aplicaciones, documentos y proveedores",
+    "metaTitle": "Materias primas químicas y proveedores",
     "detailTitleTail": "Usos y documentos",
     "metaDesc": "Materias primas químicas de China: usos, documentos que piden los compradores y cómo solicitar presupuestos a proveedores verificados.",
     "lead": "Cada página cubre una materia prima: usos, cómo la especifican los compradores y los documentos que hay que pedir antes de ordenar. Si aún no hay proveedores registrados, publique una RFQ.",

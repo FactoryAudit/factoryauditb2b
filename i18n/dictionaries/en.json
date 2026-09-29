@@ -286,7 +286,9 @@
     "liveQuantity": "Quantity",
     "liveMarket": "Target Market",
     "liveIndustry": "Industry",
-    "liveCerts": "Certifications"
+    "liveCerts": "Certifications",
+            "metaTitle": "Factory Audit & Supplier Verification",
+            "metaDesc": "Discover, evaluate and verify suppliers across China and Southeast Asia, so good manufacturers get found and buyers can source with confidence."
   },
   "coverage": {
     "badge": "Coverage",
@@ -386,7 +388,7 @@
     "notSureTitle": "Not sure which one you need?",
     "notSureLead": "Run the free risk calculator first. It takes about three minutes and tells you what is missing.",
     "notSureCta": "Assess a supplier",
-    "metaTitle": "Supplier Verification, Factory Audit and Inspection Services",
+    "metaTitle": "Supplier Verification, Audit & Inspection",
     "metaDesc": "Independent supplier verification, factory audit, inspection and sourcing support across China, Vietnam, Thailand, Malaysia and the Philippines. Scoped and quoted per project."
   },
   "resourcesIndex": {
@@ -1208,8 +1210,8 @@
     "claimTitle": "Are you a supplier?",
     "claimLead": "Create a free supplier profile and get discovered by international buyers. Need independent verification? Request our Supplier Verification or Factory Audit services.",
     "claimPrimary": "Join as a supplier",
-    "metaTitle": "Global Supplier Database - China & Southeast Asia Suppliers",
-    "metaDesc": "Discover suppliers across China and Southeast Asia. Explore products, certifications, supplier information and risk signals, with verification, audit and inspection services available when you need deeper due diligence.",
+    "metaTitle": "Global Supplier Database in China & Asia",
+    "metaDesc": "Explore suppliers across China and Southeast Asia, review products, certifications and risk signals on every profile, and request verification, audit or inspection when you need deeper checks.",
     "heroBadge": "Supplier Intelligence",
     "featuredTitle": "Supplier Directory",
     "featuredLead": "Browse available suppliers and explore their public profiles.",
@@ -1774,8 +1776,8 @@
       "methodTitle": "Methodology and limits",
       "methodBody": "The result is a theoretical maximum from a rectangular packing model. It assumes cartons are rigid, stackable and can be rotated, and that the load is evenly distributed. Real loading is affected by pallets, dunnage, carton deformation, stacking strength, axle weight rules and stowage order. Treat the output as a planning estimate and confirm the final plan with your forwarder or loading supervisor.",
       "faqTitle": "Frequently asked questions",
-      "metaTitle": "Container Load Calculator",
-      "metaDesc": "Free container loading calculator for 20GP, 40GP, 40HQ, 45HQ and reefer containers. Work out cartons per container, containers needed, volume and payload utilisation."
+      "metaTitle": "Container Loading Calculator for 20GP–45HQ",
+      "metaDesc": "Free container loading calculator for 20GP, 40GP, 40HQ, 45HQ and reefer containers, working out cartons per container, containers needed, volume and payload utilisation."
     },
     "ui": {
       "cargoTitle": "Carton dimensions",
@@ -1958,7 +1960,7 @@
     ],
     "termsTitle": "Terms of Service",
     "termsUpdated": "Last updated: 2026-09-03",
-    "termsIntro": "By using FactoryAuditB2B, you agree to these terms. Our service helps buyers verify and audit suppliers, but we are a platform, not a guarantor of supplier performance.",
+    "termsIntro": "These terms govern your use of the FactoryAuditB2B platform, which helps buyers verify and audit suppliers but does not guarantee supplier performance.",
     "termsSections": [
       {
         "h": "Use of the service",
@@ -2095,7 +2097,7 @@
     ]
   },
   "pricing": {
-    "metaTitle": "Services & Plans — Free Tools, Verification, Audit, Monitoring",
+    "metaTitle": "Services & Plans: Pricing Overview",
     "metaDesc": "Free supplier evaluation tools, supplier verification from USD 99, factory audits from USD 399, product inspection from USD 199 and supplier monitoring by subscription. All prices in USD.",
     "h1": "Services & Plans",
     "lead": "Use the tools free. Pay only when you need someone to check a supplier on the ground.",
@@ -2289,7 +2291,7 @@
     "badge": "Product Inspection",
     "h1": "Product Inspection",
     "lead": "Order-specific quality checks at the production stage that matters, carried out by an independent inspector and reported in writing. Every request is reviewed individually and quoted per inspection.",
-    "metaTitle": "Product Inspection — PPI, DUPRO, PSI and Container Loading",
+    "metaTitle": "Product Inspection: PPI, DUPRO & PSI",
     "metaDesc": "Pre-production, during-production, pre-shipment and container loading inspection for buyers and suppliers across China, Vietnam, Thailand, Malaysia and the Philippines. Quoted per inspection.",
     "quickAnswerTitle": "Quick answer",
     "quickAnswer": "A product inspection checks a specific order at a specific stage: before production starts, while it is running, before shipment, or during container loading. The inspector works to your requirements or an AQL sampling plan, reports findings with photos, and gives a clear recommendation. It is quoted per inspection and priced by type, scope, location and duration.",
@@ -2789,7 +2791,7 @@
     "reset": "Reset"
   },
   "monitoring": {
-    "metaTitle": "Supplier Monitoring — Scheduled Re-Checks and Risk Change Alerts",
+    "metaTitle": "Supplier Monitoring & Risk Alerts",
     "metaDesc": "Keep verified supplier facts current. Scheduled re-checks of registration, site, certificates and public records, with an alert when something changes. Subscription, quoted per supplier per year.",
     "badge": "Service",
     "h1": "Supplier Monitoring",
@@ -2878,7 +2880,7 @@
     "ctaSecondary": "See pricing"
   },
   "fieldReports": {
-    "metaTitle": "Field Reports — On-Site Notes from Inspection, Audit and Verification",
+    "metaTitle": "Field Reports from On-Site Inspections",
     "h1": "Field Reports",
     "badge": "Field notes",
     "lead": "Short notes from inspection, audit and verification work: what was checked on site, what was found, and how the finding was recorded.",
@@ -2897,7 +2899,7 @@
   "caseStudies": {
     "h1": "Case Studies",
     "lead": "Method walk-throughs for supplier verification, factory audit, inspection and sourcing.",
-    "metaTitle": "Supplier Verification, Audit & Inspection Case Studies",
+    "metaTitle": "Supplier Audit & Inspection Case Studies",
     "breadcrumbHome": "Home",
     "breadcrumbCurrent": "Case studies",
     "ctaTitle": "Have a similar situation?",
@@ -3638,7 +3640,7 @@
     "issuedOn": "Issued"
   },
   "standardReport": {
-    "metaTitle": "Standard Supplier Due Diligence Report — Full Specimen",
+    "metaTitle": "Standard Supplier Due Diligence Report",
     "metaDesc": "Read the full standard supplier due diligence report free and without registering: 13 sections, 8 scored dimensions, evidence grading. Register once to download the specimen.",
     "badge": "Standard report specimen",
     "h1": "Standard supplier due diligence report",
@@ -3667,7 +3669,7 @@
     "ctaSecondary": "Post a sourcing request"
   },
   "chemicals": {
-    "metaTitle": "Chemical raw materials: applications, documents and suppliers",
+    "metaTitle": "Chemical Raw Materials & Suppliers",
     "detailTitleTail": "Applications & documents",
     "metaDesc": "Chemical raw materials sourced from China: what each is used for, the documents buyers ask for, and how to request quotes from verified suppliers.",
     "lead": "Each page covers one raw material: what it is used for, how buyers normally specify it, and the documents to request before an order. Where no supplier is listed yet, post an RFQ.",

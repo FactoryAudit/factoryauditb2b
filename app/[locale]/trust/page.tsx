@@ -7,6 +7,7 @@ import { buildPageMetadata } from "@/lib/pageMeta";
 import { pickZhCopy } from "@/lib/tw";
 import { ABOUT, OPERATOR, operatorEmail } from "@/lib/aboutContent";
 import { COVERAGE_COUNTRIES } from "@/lib/coverage";
+import { STATIC_INDUSTRIES } from "@/lib/staticData";
 
 const PATH = "/trust";
 const BASE = "https://factoryauditb2b.com";
@@ -111,6 +112,45 @@ export default async function TrustPage({ params }: Props) {
           {pickZhCopy(locale, ABOUT.hero.whyBuilt)}
         </p>
       </section>
+
+      {/* ── 以下三节自 /about 合并而来（阶段 1 任务 6：/about 308 → /trust）─────
+          文案沿用 t.about.*（9 语齐备，无需新增字典键），可见内容不重写。 */}
+
+      {/* 我们是谁 —— 原 /about 的 story 段 */}
+      <Section title={t.about.storyTitle}>
+        <p className="text-[#475569] leading-relaxed max-w-3xl">{t.about.storyBody}</p>
+      </Section>
+
+      {/* 数字 —— 原 /about 的 4 个数字里只有 2 项在仓库中找得到事实来源：
+            "5 Countries" ✓（lib/coverage.ts）与 "Industry sectors" ✓（lib/staticData.ts）。
+            另 2 项（"20+ Audit & compliance programs" 与 "< 1 day Typical response time"）
+            全仓无数据源，按「禁无据声称」铁律**不搬运**；且保留下来的 2 项
+            不写死数字，直接由代码实时推导，避免再次与实现漂移（此前的 12 与实现不符，实为 13）。 */}
+      <Section title={t.about.statsTitle}>
+        <div className="grid grid-cols-2 gap-4">
+          {[
+            { value: String(COVERAGE_COUNTRIES.length), label: t.about.stats[0].label },
+            { value: String(STATIC_INDUSTRIES.length), label: t.about.stats[1].label },
+          ].map((s) => (
+            <div key={s.label} className="card p-4 text-center">
+              <div className="text-2xl font-extrabold text-[#0f4c81]">{s.value}</div>
+              <div className="mt-1 text-xs text-[#64748b]">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* 我们怎么工作 —— 原 /about 的 values 卡 */}
+      <Section title={t.about.valuesTitle}>
+        <div className="grid gap-4 md:grid-cols-2">
+          {t.about.values.map((v) => (
+            <div key={v.title} className="card p-5">
+              <div className="font-semibold text-[#0f172a]">{v.title}</div>
+              <p className="mt-2 text-sm leading-relaxed text-[#475569]">{v.desc}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
 
       {/* 采购商真正要回答的问题 */}
       <section className="mt-10">

@@ -5,7 +5,8 @@ import SupplierRiskCalculator, {
 } from "@/components/tools/SupplierRiskCalculator";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
-import { hreflangFor, canonicalFor } from "@/i18n/hreflang";
+import { canonicalFor } from "@/i18n/hreflang";
+import { buildPageMetadata } from "@/lib/pageMeta";
 import { TOTAL_QUESTIONS, type RiskContent } from "@/lib/riskEngine";
 
 const PATH = "/tools/supplier-risk-calculator";
@@ -15,13 +16,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: raw } = await params;
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
-  const title = `${t.risk.page.metaTitle} | FactoryAuditB2B RiskScore™`;
-  return {
-    title,
+  // 走统一收口：desc 由 trimMetaDescription 按书写系统裁剪（此前直出 218 字符）。
+  // 标题已含品牌名，收口内的去重逻辑不会重复追加 " | FactoryAuditB2B"。
+  return buildPageMetadata({
+    locale,
+    path: PATH,
+    title: `${t.risk.page.metaTitle} | FactoryAuditB2B RiskScore™`,
     description: t.risk.page.metaDesc,
-    alternates: { canonical: canonicalFor(locale, PATH), languages: hreflangFor(PATH) },
-    openGraph: { title, description: t.risk.page.metaDesc, type: "website", url: canonicalFor(locale, PATH) },
-  };
+  });
 }
 
 export default async function Page({ params }: Props) {

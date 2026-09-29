@@ -47,7 +47,7 @@ paths=(
   "/factory-audit/request"
   "/custom-services"
   "/logistics"
-  "/about"
+  "/trust"
   "/zh"
   "/zh/tools"
   "/zh/countries/china"

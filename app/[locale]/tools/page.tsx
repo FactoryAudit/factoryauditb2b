@@ -36,18 +36,38 @@ export default async function Page({ params }: Props) {
     tag: i === 0 ? t.toolsIndex.flagship : undefined,
   }));
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: t.toolsIndex.metaTitle,
-    url: canonicalFor(locale, PATH),
-    itemListElement: tools.map((tool, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: tool.title,
-      url: canonicalFor(locale, tool.href),
-    })),
-  };
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: t.toolsIndex.metaTitle,
+      url: canonicalFor(locale, PATH),
+      itemListElement: tools.map((tool, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: tool.title,
+        url: canonicalFor(locale, tool.href),
+      })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: t.common.ui.home,
+          item: canonicalFor(locale, "/"),
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: t.toolsIndex.h1,
+          item: canonicalFor(locale, PATH),
+        },
+      ],
+    },
+  ];
 
   return (
     <main className="container py-10">

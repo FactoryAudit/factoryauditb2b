@@ -3,7 +3,8 @@ import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
-import { hreflangFor, canonicalFor } from "@/i18n/hreflang";
+import { canonicalFor } from "@/i18n/hreflang";
+import { buildPageMetadata } from "@/lib/pageMeta";
 
 const PATH = "/services/supplier-verification";
 type Props = { params: Promise<{ locale: string }> };
@@ -12,18 +13,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: raw } = await params;
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
-  const title = `${t.serviceVerification.metaTitle} | FactoryAuditB2B`;
-  return {
-    title,
+  // 走统一收口：desc 由 trimMetaDescription 裁剪（此前直出 211 字符），
+  // 并补齐 OG / Twitter / robots 默认值。品牌后缀由收口统一追加。
+  return buildPageMetadata({
+    locale,
+    path: PATH,
+    title: t.serviceVerification.metaTitle,
     description: t.serviceVerification.metaDesc,
-    alternates: { canonical: canonicalFor(locale, PATH), languages: hreflangFor(PATH) },
-    openGraph: {
-      title,
-      description: t.serviceVerification.metaDesc,
-      type: "website",
-      url: canonicalFor(locale, PATH),
-    },
-  };
+  });
 }
 
 export default async function Page({ params }: Props) {

@@ -7,7 +7,8 @@ import ContainerLoadCalculator, {
 } from "@/components/tools/ContainerLoadCalculator";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
-import { hreflangFor, canonicalFor } from "@/i18n/hreflang";
+import { canonicalFor } from "@/i18n/hreflang";
+import { buildPageMetadata } from "@/lib/pageMeta";
 
 const PATH = "/logistics";
 type Props = { params: Promise<{ locale: string }> };
@@ -16,19 +17,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: raw } = await params;
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
-  const c = t.container.page;
-  const title = `${c.metaTitle} | Free Container Loading Tool | FactoryAuditB2B`;
-  return {
-    title,
-    description: c.metaDesc,
-    alternates: { canonical: canonicalFor(locale, PATH), languages: hreflangFor(PATH) },
-    openGraph: {
-      title,
-      description: c.metaDesc,
-      type: "website",
-      url: canonicalFor(locale, PATH),
-    },
-  };
+  // 走统一收口。原手写标题为 `${metaTitle} | Free Container Loading Tool | FactoryAuditB2B`
+  // 共 73 字符被 SERP 截断；现将中间段并入 metaTitle 文案，品牌后缀由收口追加。
+  return buildPageMetadata({
+    locale,
+    path: PATH,
+    title: t.container.page.metaTitle,
+    description: t.container.page.metaDesc,
+  });
 }
 
 export default async function Page({ params }: Props) {

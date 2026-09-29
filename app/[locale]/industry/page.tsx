@@ -38,19 +38,39 @@ export default async function IndustryHubPage({ params }: Props) {
     topics: topicsForIndustry(i.code),
   }));
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: p.breadcrumb,
-    url: `${BASE}${lp(PATH)}`,
-    numberOfItems: cards.length,
-    itemListElement: cards.map((x, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: x.name,
-      url: `${BASE}${lp(`/industry/${x.code}`)}`,
-    })),
-  };
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: p.breadcrumb,
+      url: `${BASE}${lp(PATH)}`,
+      numberOfItems: cards.length,
+      itemListElement: cards.map((x, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: x.name,
+        url: `${BASE}${lp(`/industry/${x.code}`)}`,
+      })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: t.common.ui.home,
+          item: `${BASE}${lp("/")}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: p.breadcrumb,
+          item: `${BASE}${lp(PATH)}`,
+        },
+      ],
+    },
+  ];
 
   return (
     <main className="container py-12">
