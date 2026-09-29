@@ -1,0 +1,145 @@
+User-Agent: Googlebot
+Allow: /
+Allow: /suppliers?q=
+Disallow: /api
+Disallow: /admin
+Disallow: /staging
+Disallow: /*?
+
+User-Agent: Bingbot
+Allow: /
+Allow: /suppliers?q=
+Disallow: /api
+Disallow: /admin
+Disallow: /staging
+Disallow: /*?
+
+User-Agent: Applebot
+Allow: /
+Allow: /suppliers?q=
+Disallow: /api
+Disallow: /admin
+Disallow: /staging
+Disallow: /*?
+
+User-Agent: YandexBot
+Allow: /
+Allow: /suppliers?q=
+Disallow: /api
+Disallow: /admin
+Disallow: /staging
+Disallow: /*?
+
+User-Agent: SeznamBot
+Allow: /
+Allow: /suppliers?q=
+Disallow: /api
+Disallow: /admin
+Disallow: /staging
+Disallow: /*?
+
+User-Agent: DuckDuckBot
+Allow: /
+Allow: /suppliers?q=
+Disallow: /api
+Disallow: /admin
+Disallow: /staging
+Disallow: /*?
+
+User-Agent: OAI-SearchBot
+Allow: /
+Allow: /suppliers?q=
+Disallow: /api
+Disallow: /admin
+Disallow: /staging
+Disallow: /*?
+
+User-Agent: ChatGPT-User
+Allow: /
+Allow: /suppliers?q=
+Disallow: /api
+Disallow: /admin
+Disallow: /staging
+Disallow: /*?
+
+User-Agent: PerplexityBot
+Allow: /
+Allow: /suppliers?q=
+Disallow: /api
+Disallow: /admin
+Disallow: /staging
+Disallow: /*?
+
+User-Agent: PerplexityBot-User
+Allow: /
+Allow: /suppliers?q=
+Disallow: /api
+Disallow: /admin
+Disallow: /staging
+Disallow: /*?
+
+User-Agent: Claude-SearchBot
+Allow: /
+Allow: /suppliers?q=
+Disallow: /api
+Disallow: /admin
+Disallow: /staging
+Disallow: /*?
+
+User-Agent: Claude-User
+Allow: /
+Allow: /suppliers?q=
+Disallow: /api
+Disallow: /admin
+Disallow: /staging
+Disallow: /*?
+
+User-Agent: GPTBot
+Disallow: /
+
+User-Agent: ClaudeBot
+Disallow: /
+
+User-Agent: anthropic-ai
+Disallow: /
+
+User-Agent: Applebot-Extended
+Disallow: /
+
+User-Agent: CCBot
+Disallow: /
+
+User-Agent: Bytespider
+Disallow: /
+
+User-Agent: Meta-ExternalAgent
+Disallow: /
+
+User-Agent: meta-externalagent
+Disallow: /
+
+User-Agent: Amazonbot
+Disallow: /
+
+User-Agent: cohere-ai
+Disallow: /
+
+User-Agent: FacebookBot
+Disallow: /
+
+User-Agent: Google-Extended
+Disallow: /
+
+User-Agent: CloudflareBrowserRenderingCrawler
+Disallow: /
+
+User-Agent: *
+Allow: /
+Allow: /suppliers?q=
+Disallow: /api
+Disallow: /admin
+Disallow: /staging
+Disallow: /*?
+
+Host: https://factoryauditb2b.com
+Sitemap: https://factoryauditb2b.com/sitemap.xml

@@ -183,7 +183,7 @@
     "ctaPrimary": "Servicio de verificación de proveedores",
     "ctaSecondary": "Solicitar una auditoría de fábrica",
     "metaTitle": "Herramientas gratuitas de auditoría de proveedores y fábricas",
-    "metaDesc": "Herramientas gratuitas para evaluar el riesgo del proveedor, verificar la preparación para la verificación, crear listas de verificación de auditoría y analizar los informes de auditoría. No se requiere cuenta."
+    "metaDesc": "Herramientas gratuitas para evaluar el riesgo del proveedor y preparar la verificación. Cree listas de auditoría y analice informes sin necesidad de cuenta."
   },
   "toolCards": {
     "riskCalculator": {
@@ -675,7 +675,7 @@
       "relatedTitle": "Herramientas Relacionadas",
       "faqTitle": "Preguntas frecuentes",
       "metaTitle": "Lista de Verificación de Proveedores",
-      "metaDesc": "Una lista de verificación paso a paso gratuita que cubre la identidad de la empresa, la capacidad de la fábrica, la calidad, el cumplimiento, los términos comerciales y el historial. Marque los elementos, realice un seguimiento del progreso e imprima su archivo de proveedor."
+      "metaDesc": "Una lista de verificación gratuita y paso a paso sobre identidad, capacidad, calidad, cumplimiento y términos comerciales. Marque ítems y siga su progreso."
     },
     "criticalItems": [
       "id_legal",

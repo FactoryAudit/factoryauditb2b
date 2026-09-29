@@ -32,6 +32,12 @@
 //   node scripts/populate-static-assets-cache.cjs            # 一次跑完
 //   node scripts/populate-static-assets-cache.cjs --batch 200 # 调整每批上限
 //   node scripts/populate-static-assets-cache.cjs --worker    # 内部用（单批）
+//   node scripts/populate-static-assets-cache.cjs --check     # 只做路径契约自检（不复制）
+//
+// ⚠️ 本机 `spawnSync` 恒 EBUSY ⇒ 主模式的「反复派生子进程」必然在第 1 批失败
+//   （`第 1 批失败（exit=null）`）。因此本机的正确姿势是：
+//     ① 手工循环 `--worker --batch 250` 直到输出 DONE；
+//     ② 再用 `--check` 单独做路径契约自检。
 //
 // ⚠️ 每次重跑 `opennext build` 之后都必须再跑本脚本
 //    （`createStaticAssets` 会重建 assets 目录，把 _next_cache 冲掉）。
@@ -102,6 +108,65 @@ if (isWorker) {
   process.exit(0);
 }
 
+// ── 路径契约自检（抽成函数，可独立调用：`--check`）──────────────────────
+// 为什么需要独立入口：本机 `spawnSync` 恒 EBUSY（见 MEMORY「本机环境」），
+// 主进程的派生子进程循环必然在第 1 批失败（exit=null）⇒ 自检跟着跑不到，
+// 于是「复制是手工分批跑完的，契约却没人复核」。拆出 `--check` 后，
+// 手工分批完成后可单独做契约复核（不派生任何子进程）。
+function selfCheck(totalCopied) {
+  const buildIdFile = path.join(ROOT, ".next", "BUILD_ID");
+  const buildId = fs.existsSync(buildIdFile) ? fs.readFileSync(buildIdFile, "utf8").trim() : null;
+  if (!buildId) {
+    console.error("[populate] 自检失败：读不到 .next/BUILD_ID");
+    process.exit(1);
+  }
+
+  const dstKeys = collect(DST, DST).map((f) => f.rel);
+  const pageKeys = dstKeys.filter((k) => k.startsWith(buildId + "/"));
+  const fetchKeys = dstKeys.filter((k) => k.startsWith("__fetch/" + buildId + "/"));
+  const strayKeys = dstKeys.filter((k) => !pageKeys.includes(k) && !fetchKeys.includes(k));
+  const badExt = pageKeys.filter((k) => !k.endsWith(".cache"));
+
+  console.log();
+  if (totalCopied !== null) console.log(`[populate] 本轮新复制 ${totalCopied} 个文件`);
+  console.log(`[populate] buildId          ${buildId}`);
+  console.log(`[populate] 页面缓存          ${pageKeys.length}`);
+  console.log(`[populate] fetch 缓存        ${fetchKeys.length}`);
+  console.log(
+    `[populate] 非预期路径        ${strayKeys.length}${strayKeys.length ? " -> " + strayKeys.slice(0, 5).join(", ") : ""}`
+  );
+  console.log(
+    `[populate] 非 .cache 结尾    ${badExt.length}${badExt.length ? " -> " + badExt.slice(0, 5).join(", ") : ""}`
+  );
+  // 完整性对照：源目录有 N 个文件，目标就该有 N 个（缺一个都说明分批没跑完）
+  const srcCount = collect(SRC).length;
+  console.log(`[populate] 源/目标文件数      ${srcCount} / ${dstKeys.length}`);
+
+  if (pageKeys.length === 0) {
+    console.error("[populate] 自检失败：页面缓存为空");
+    process.exit(1);
+  }
+  if (strayKeys.length > 0 || badExt.length > 0) {
+    console.error("[populate] 自检失败：路径契约不符");
+    process.exit(1);
+  }
+  if (srcCount !== dstKeys.length) {
+    console.error(`[populate] 自检失败：源 ${srcCount} 个文件，目标只有 ${dstKeys.length} 个（分批复制未跑完）`);
+    process.exit(1);
+  }
+  console.log("[populate] OK");
+}
+
+// 独立自检入口：本机 spawnSync EBUSY 时的唯一可用路径
+if (argv.includes("--check")) {
+  if (!fs.existsSync(DST)) {
+    console.error(`[populate] 找不到 ${DST} —— 请先跑 opennext build + 分批 populate`);
+    process.exit(1);
+  }
+  selfCheck(null);
+  process.exit(0);
+}
+
 // ── 主进程：反复派生子进程，直到没有剩余 ────────────────────────────────
 if (!fs.existsSync(SRC)) {
   console.error(`[populate] 找不到 ${SRC} —— 请先跑 opennext build`);
@@ -139,34 +204,5 @@ while (true) {
   if (remaining === 0) break;
 }
 
-// ── 路径契约自检 ────────────────────────────────────────────────────────
-const buildIdFile = path.join(ROOT, ".next", "BUILD_ID");
-const buildId = fs.existsSync(buildIdFile) ? fs.readFileSync(buildIdFile, "utf8").trim() : null;
-if (!buildId) {
-  console.error("[populate] 自检失败：读不到 .next/BUILD_ID");
-  process.exit(1);
-}
-
-const dstKeys = collect(DST, DST).map((f) => f.rel);
-const pageKeys = dstKeys.filter((k) => k.startsWith(buildId + "/"));
-const fetchKeys = dstKeys.filter((k) => k.startsWith("__fetch/" + buildId + "/"));
-const strayKeys = dstKeys.filter((k) => !pageKeys.includes(k) && !fetchKeys.includes(k));
-const badExt = pageKeys.filter((k) => !k.endsWith(".cache"));
-
-console.log();
-console.log(`[populate] 本轮新复制 ${totalCopied} 个文件`);
-console.log(`[populate] buildId          ${buildId}`);
-console.log(`[populate] 页面缓存          ${pageKeys.length}`);
-console.log(`[populate] fetch 缓存        ${fetchKeys.length}`);
-console.log(`[populate] 非预期路径        ${strayKeys.length}${strayKeys.length ? " -> " + strayKeys.slice(0, 5).join(", ") : ""}`);
-console.log(`[populate] 非 .cache 结尾    ${badExt.length}${badExt.length ? " -> " + badExt.slice(0, 5).join(", ") : ""}`);
-
-if (pageKeys.length === 0) {
-  console.error("[populate] 自检失败：页面缓存为空");
-  process.exit(1);
-}
-if (strayKeys.length > 0 || badExt.length > 0) {
-  console.error("[populate] 自检失败：路径契约不符");
-  process.exit(1);
-}
-console.log("[populate] OK");
+// ── 路径契约自检（见上方 selfCheck；此处传入本轮的复制计数）────────────
+selfCheck(totalCopied);

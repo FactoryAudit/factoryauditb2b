@@ -1,0 +1,8 @@
+[with-proxy] 已忽略环境里的代理变量 http://127.0.0.1:5701（本机已知它不转发 supabase）；如确需使用请显式设 FAB2B_PROXY=http://127.0.0.1:5701
+[with-proxy] 全局 fetch 走代理 http://127.0.0.1:7897
+线上验收：99 个 URL（供应商 81 + tools 18），BASE=https://factoryauditb2b.com
+
+静态缓存：HIT=99  非 HIT=0
+────────────────────────────────────────────────────────────────
+断言：PASS=396  FAIL=0
+ALL OK

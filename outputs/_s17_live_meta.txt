@@ -1,0 +1,125 @@
+[with-proxy] 已忽略环境里的代理变量 http://127.0.0.1:5701（本机已知它不转发 supabase）；如确需使用请显式设 FAB2B_PROXY=http://127.0.0.1:5701
+[with-proxy] 全局 fetch 走代理 http://127.0.0.1:7897
+
+================ / ================
+  HTTP 200 | cf-cache-status=null | x-opennext-cache=HIT
+  title(55) = Factory Audit & Supplier Verification | FactoryAuditB2B
+  desc(143) = Discover, evaluate and verify suppliers across China and Southeast Asia, so good manufacturers get found and buyers can source with confidence.
+  canonical = https://factoryauditb2b.com | robots = index, follow
+  hreflang = 10 条 | JSON-LD = 2 块
+  PASS  canonical 自指 (期望 https://factoryauditb2b.com/)
+  PASS  hreflang 含 9 语(BCP-47) + x-default (缺: 无)
+  PASS  JSON-LD 全部可 JSON.parse (2/2)
+  PASS  title 与本地预渲染逐字一致
+  PASS  desc 与本地预渲染逐字一致
+
+================ /suppliers ================
+  HTTP 200 | cf-cache-status=null | x-opennext-cache=null
+  title(58) = Global Supplier Database in China & Asia | FactoryAuditB2B
+  desc(148) = Explore suppliers across China and Southeast Asia. Review products, certifications and risk signals on every profile before requesting verification.
+  canonical = https://factoryauditb2b.com/suppliers | robots = index, follow
+  hreflang = 10 条 | JSON-LD = 2 块
+  PASS  canonical 自指 (期望 https://factoryauditb2b.com/suppliers)
+  PASS  hreflang 含 9 语(BCP-47) + x-default (缺: 无)
+  PASS  JSON-LD 全部可 JSON.parse (2/2)
+  (无本地预渲染产物，仅线上自洽断言)
+  PASS  title/desc 均存在
+
+================ /services/supplier-verification ================
+  HTTP 200 | cf-cache-status=null | x-opennext-cache=HIT
+  title(56) = Supplier Verification Service in China | FactoryAuditB2B
+  desc(145) = Independent supplier verification covering registration, factory existence, production capability, quality system, compliance and export history.
+  canonical = https://factoryauditb2b.com/services/supplier-verification | robots = index, follow
+  hreflang = 10 条 | JSON-LD = 2 块
+  PASS  canonical 自指 (期望 https://factoryauditb2b.com/services/supplier-verification)
+  PASS  hreflang 含 9 语(BCP-47) + x-default (缺: 无)
+  PASS  JSON-LD 全部可 JSON.parse (2/2)
+  PASS  title 与本地预渲染逐字一致
+  PASS  desc 与本地预渲染逐字一致
+
+================ /logistics ================
+  HTTP 200 | cf-cache-status=null | x-opennext-cache=HIT
+  title(60) = Container Loading Calculator for 20GP–45HQ | FactoryAuditB2B
+  desc(153) = Free container loading calculator for 20GP, 40GP, 40HQ, 45HQ and reefer containers. Get cartons per container, containers needed and payload utilisation.
+  canonical = https://factoryauditb2b.com/logistics | robots = index, follow
+  hreflang = 10 条 | JSON-LD = 2 块
+  PASS  canonical 自指 (期望 https://factoryauditb2b.com/logistics)
+  PASS  hreflang 含 9 语(BCP-47) + x-default (缺: 无)
+  PASS  JSON-LD 全部可 JSON.parse (2/2)
+  PASS  title 与本地预渲染逐字一致
+  PASS  desc 与本地预渲染逐字一致
+
+================ /trust ================
+  HTTP 200 | cf-cache-status=null | x-opennext-cache=HIT
+  title(58) = About Us: Supplier Verification & Audits | FactoryAuditB2B
+  desc(158) = FactoryAuditB2B is operated by Jiangmen Zhiyu Technology Co., Ltd. We help global buyers find, screen, verify and audit suppliers in China and Southeast Asia.
+  canonical = https://factoryauditb2b.com/trust | robots = index, follow
+  hreflang = 10 条 | JSON-LD = 2 块
+  PASS  canonical 自指 (期望 https://factoryauditb2b.com/trust)
+  PASS  hreflang 含 9 语(BCP-47) + x-default (缺: 无)
+  PASS  JSON-LD 全部可 JSON.parse (2/2)
+  PASS  title 与本地预渲染逐字一致
+  PASS  desc 与本地预渲染逐字一致
+
+================ /tools/compare ================
+  HTTP 200 | cf-cache-status=null | x-opennext-cache=HIT
+  title(58) = Supplier Comparison Tool: Compare 2 to 5 | FactoryAuditB2B
+  desc(132) = Score two to five suppliers on the same eight dimensions and compare them side by side. Self-reported inputs, decision support only.
+  canonical = https://factoryauditb2b.com/tools/compare | robots = index, follow
+  hreflang = 10 条 | JSON-LD = 2 块
+  PASS  canonical 自指 (期望 https://factoryauditb2b.com/tools/compare)
+  PASS  hreflang 含 9 语(BCP-47) + x-default (缺: 无)
+  PASS  JSON-LD 全部可 JSON.parse (2/2)
+  PASS  title 与本地预渲染逐字一致
+  PASS  desc 与本地预渲染逐字一致
+
+================ /zh ================
+  HTTP 200 | cf-cache-status=null | x-opennext-cache=HIT
+  title(28) = 验厂与供应商核查服务 | FactoryAuditB2B
+  desc(60) = 发现、评估并核验中国及东南亚的供应商，让优秀的制造商被看见，也让采购商在充分了解工厂背景、产能与合规状况之后再放心下单。
+  canonical = https://factoryauditb2b.com/zh | robots = index, follow
+  hreflang = 10 条 | JSON-LD = 2 块
+  PASS  canonical 自指 (期望 https://factoryauditb2b.com/zh)
+  PASS  hreflang 含 9 语(BCP-47) + x-default (缺: 无)
+  PASS  JSON-LD 全部可 JSON.parse (2/2)
+  PASS  title 与本地预渲染逐字一致
+  PASS  desc 与本地预渲染逐字一致
+
+================ /ar ================
+  HTTP 200 | cf-cache-status=null | x-opennext-cache=HIT
+  title(51) = تدقيق المصانع والتحقق من الموردين | FactoryAuditB2B
+  desc(140) = اكتشف الموردين في الصين وجنوب شرق آسيا وقيّمهم وتحقق منهم. يظهر المصنّعون الجيدون ويتمكن المشترون من الشراء بثقة بعد فهم كامل لخلفية المصنع.
+  canonical = https://factoryauditb2b.com/ar | robots = index, follow
+  hreflang = 10 条 | JSON-LD = 2 块
+  PASS  canonical 自指 (期望 https://factoryauditb2b.com/ar)
+  PASS  hreflang 含 9 语(BCP-47) + x-default (缺: 无)
+  PASS  JSON-LD 全部可 JSON.parse (2/2)
+  PASS  title 与本地预渲染逐字一致
+  PASS  desc 与本地预渲染逐字一致
+
+================ /pricing ================
+  HTTP 200 | cf-cache-status=null | x-opennext-cache=HIT
+  title(52) = Services & Plans: Pricing Overview | FactoryAuditB2B
+  desc(150) = Free supplier evaluation tools, supplier verification from USD 99, factory audits from USD 399 and product inspection from USD 199. All prices in USD.
+  canonical = https://factoryauditb2b.com/pricing | robots = index, follow
+  hreflang = 10 条 | JSON-LD = 2 块
+  PASS  canonical 自指 (期望 https://factoryauditb2b.com/pricing)
+  PASS  hreflang 含 9 语(BCP-47) + x-default (缺: 无)
+  PASS  JSON-LD 全部可 JSON.parse (2/2)
+  PASS  title 与本地预渲染逐字一致
+  PASS  desc 与本地预渲染逐字一致
+
+================ /monitoring ================
+  HTTP 200 | cf-cache-status=null | x-opennext-cache=HIT
+  title(51) = Supplier Monitoring & Risk Alerts | FactoryAuditB2B
+  desc(151) = Keep verified supplier facts current. Scheduled re-checks of registration, site, certificates and public records, with an alert when something changes.
+  canonical = https://factoryauditb2b.com/monitoring | robots = index, follow
+  hreflang = 10 条 | JSON-LD = 2 块
+  PASS  canonical 自指 (期望 https://factoryauditb2b.com/monitoring)
+  PASS  hreflang 含 9 语(BCP-47) + x-default (缺: 无)
+  PASS  JSON-LD 全部可 JSON.parse (2/2)
+  PASS  title 与本地预渲染逐字一致
+  PASS  desc 与本地预渲染逐字一致
+
+================ 汇总 ================
+ALL PASS

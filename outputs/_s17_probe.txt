@@ -1,0 +1,99 @@
+扫描预渲染 HTML：1891 个
+
+########## A. 供应商详情页（任务 1：阈值 10%）##########
+文件数 81（期望 81 = 9 家 × 9 语）
+  CJK 主导页（新阈值下走 90 预算）：20 / 81
+  其中 desc 发生变化：12 页
+  断言：CJK 主导页 ≤90 且结尾句末标点 ⇒ OK
+
+########## B. 行业分类页（须保持拉丁 158）##########
+文件数 117（期望 13 行业 × 9 语 = 117；其中 6 拉丁/阿语 + 3 CJK 语种）
+  新阈值下长度不变：117 / 117
+  断言：拉丁/阿语种 100–158 ⇒ OK
+
+########## C. /tools 与 checklist（任务 2：9 语）##########
+  --- /tools ---
+    loc   title(合成)  desc(收口)  descEndOk  源desc
+    en       53       138      ✓        138
+    zh       29        64      ✓        64
+    zh-TW    30        64      ✓        64
+    ja       37        71      ✓        71
+    es       79       156      ✓        156
+    de       71       149      ✓        149
+    fr       61       135      ✓        135
+    pt       67       130      ✓        130
+    ar       55       122      ✓        122
+
+  --- /tools/supplier-verification-checklist ---
+    loc   title(合成)  desc(收口)  descEndOk  源desc
+    en       60       149      ✓        149
+    zh       36        61      ✓        61
+    zh-TW    36        61      ✓        61
+    ja       44        71      ✓        71
+    es       65       155      ✓        155
+    de       54       148      ✓        148
+    fr       62       154      ✓        154
+    pt       63       151      ✓        151
+    ar       60       135      ✓        135
+
+########## D. chemicals.metaDesc（任务 3）##########
+  zh-TW 长度 60｜CJK 主导 true｜收口后 60｜endOk true
+  对照 zh：长度 61
+
+########## E. 全站 desc 普查 ##########
+    ✗ 半句话 es/tools/supplier-verification-checklist.html :: fábrica, la calidad, el cumplimiento, los términos
+    ✗ 半句话 es/tools.html :: ación, crear listas de verificación de auditoría y
+    ✗ 半句话 fr/tools/supplier-verification-checklist.html :: ité, la conformité, les conditions commerciales et
+  有 desc 的页面：1890
+  ① 由【阈值下调】引起：10 页
+      zh/suppliers/dongguan-plastic-molding.html           155 旧→155 新→ 68  cjk=21%
+      zh/suppliers/guangzhou-textile-factory.html          145 旧→145 新→ 69  cjk=23%
+      zh/suppliers/jiangsu-liquid-damper.html              113 旧→113 新→ 86  cjk=17%
+      zh/suppliers/shandong-loyal-industrial.html           94 旧→ 94 新→ 69  cjk=20%
+      zh/suppliers/shenzhen-precision-electronics.html     119 旧→119 新→ 74  cjk=23%
+      zh-TW/suppliers/dongguan-plastic-molding.html        155 旧→155 新→ 68  cjk=21%
+      zh-TW/suppliers/guangzhou-textile-factory.html       145 旧→145 新→ 69  cjk=23%
+      zh-TW/suppliers/jiangsu-liquid-damper.html           113 旧→113 新→ 86  cjk=17%
+      zh-TW/suppliers/shandong-loyal-industrial.html        94 旧→ 94 新→ 69  cjk=20%
+      zh-TW/suppliers/shenzhen-precision-electronics.html  119 旧→119 新→ 74  cjk=23%
+  ② 由【本就未收口】引起（与本批阈值无关）：23 页
+      ar/join-supplier-network.html                        164 →  51  cjk=0%
+      ar/tools/supplier-verification-checklist.html        173 → 132  cjk=0%
+      de/custom-services.html                              162 →  83  cjk=0%
+      de/join-supplier-network.html                        164 →  51  cjk=0%
+      de/tools/supplier-verification-checklist.html        186 → 139  cjk=0%
+      en/join-supplier-network.html                        164 →  51  cjk=0%
+      en/tools/supplier-verification-checklist.html        189 → 132  cjk=0%
+      es/custom-services.html                              173 →  98  cjk=0%
+      es/factory-audit/request.html                        194 → 119  cjk=0%
+      es/join-supplier-network.html                        164 →  51  cjk=0%
+      es/rfq.html                                          167 →  71  cjk=0%
+      es/tools/supplier-verification-checklist.html        275 → 154  cjk=0%
+      es/tools.html                                        210 → 151  cjk=0%
+      fr/custom-services.html                              170 →  94  cjk=0%
+      fr/join-supplier-network.html                        164 →  51  cjk=0%
+      fr/tools/supplier-verification-checklist.html        210 → 153  cjk=0%
+      ja/join-supplier-network.html                        164 →  51  cjk=0%
+      ja/tools/supplier-verification-checklist.html        106 →  70  cjk=99%
+      pt/custom-services.html                              166 →  96  cjk=0%
+      pt/join-supplier-network.html                        164 →  51  cjk=0%
+      pt/tools/supplier-verification-checklist.html        172 → 143  cjk=0%
+      zh/suppliers/guangzhou-sunny-food.html               114 →  68  cjk=26%
+      zh-TW/suppliers/guangzhou-sunny-food.html            114 →  68  cjk=26%
+  断言：无新增半句话 ⇒ FAIL
+
+########## F. title：阈值下调的额外裁剪 ##########
+  ① 由【阈值下调】引起的额外裁剪：0 页
+  ② 本就超 65/36 预算而裁剪（与阈值无关）：3 页
+
+########## SELFTEST ##########
+  ok   9% 占比 ⇒ 非 CJK 主导（期望 false／实际 false）
+  ok   11% 占比 ⇒ CJK 主导（期望 true／实际 true）
+  ok   行业页 3% ⇒ 非主导（期望 false／实际 false）
+  ok   供应商页 20% ⇒ 主导（期望 true／实际 true）
+  ok   超预算拉丁串必被收口（期望 false／实际 false）
+SELFTEST ALL OK（阈值边界 9%/11% + 行业 3% + 供应商 20% + 端到端收口）
+
+=== 汇总：断言 PASS=61 FAIL=1（明细 1）===
+失败明细（前 20）：
+  - 全站有 3 页 desc 收口后结尾无句末标点

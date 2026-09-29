@@ -183,7 +183,7 @@
     "ctaPrimary": "خدمات التحقق من الموردين",
     "ctaSecondary": "طلب مراجعة حسابات المصنع",
     "metaTitle": "Free Supplier and Factory Audit Tools",
-    "metaDesc": "Free tools to screen suppliers, check documents, build audit checklists and analyse audit reports. No account required."
+    "metaDesc": "أدوات مجانية لتقييم مخاطر الموردين والتحقق من جاهزية التدقيق وإنشاء قوائم التدقيق وتحليل تقارير التدقيق. لا حاجة إلى حساب."
   },
   "toolCards": {
     "riskCalculator": {
@@ -675,7 +675,7 @@
       "relatedTitle": "الأدوات ذات الصلة",
       "faqTitle": "الأسئلة المتكررة",
       "metaTitle": "قائمة مرجعية للتحقق من الموردين",
-      "metaDesc": "A free step-by-step checklist covering company identity, factory capability, quality, compliance, commercial terms and track record. لصق الأشياء، تتبع التقدم وطبع ملف موردك."
+      "metaDesc": "قائمة تحقق مجانية خطوة بخطوة تغطي هوية الشركة وقدرة المصنع والجودة والامتثال والشروط التجارية. حدد البنود وتابع تقدمك واطبع ملف المورد."
     },
     "criticalItems": [
       "id_legal",

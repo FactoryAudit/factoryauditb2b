@@ -4,7 +4,10 @@ import JsonLd from "@/components/JsonLd";
 import { TOOL_ORDER } from "@/lib/nav";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
-import { hreflangFor, canonicalFor } from "@/i18n/hreflang";
+import { canonicalFor } from "@/i18n/hreflang";
+// stage1.7：本页此前**绕过** buildPageMetadata 手写 metadata ⇒ desc 不收口（实测 es 210 字符）、
+// openGraph 无图、无 robots 兜底。收口到统一入口后与其他页面同源。
+import { buildPageMetadata } from "@/lib/pageMeta";
 
 const PATH = "/tools";
 type Props = { params: Promise<{ locale: string }> };
@@ -13,13 +16,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: raw } = await params;
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
-  const title = `${t.toolsIndex.metaTitle} | FactoryAuditB2B`;
-  return {
-    title,
+  // 品牌后缀由收口器统一追加（" | FactoryAuditB2B"），不再手拼。
+  return buildPageMetadata({
+    locale,
+    path: PATH,
+    title: t.toolsIndex.metaTitle,
     description: t.toolsIndex.metaDesc,
-    alternates: { canonical: canonicalFor(locale, PATH), languages: hreflangFor(PATH) },
-    openGraph: { title, description: t.toolsIndex.metaDesc, type: "website", url: canonicalFor(locale, PATH) },
-  };
+  });
 }
 
 export default async function Page({ params }: Props) {

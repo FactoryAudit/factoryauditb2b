@@ -39,19 +39,37 @@ const CJK_RE = /[\u3000-\u9fff\u3040-\u30ff\uac00-\ud7af]/;
 //   整段拉丁文案里混进 4 个汉字 ⇒ 旧的 `CJK_RE.test()` 直接把预算压到 90，
 //   实测把 13 行业 × 多语种的分类页 desc 夹在 64–90（本可写到 158）。
 //   阈值 25% 的余量很宽：纯中文/日文 ≈ 45%+；「拉丁长句 + 双语短名」≈ 3–10%。
+//
+//   stage1.7：desc 阈值由 25% 下调到 10%（title 保持 25%，理由见下）。
+//   起因：供应商详情页的公司法定名常含中文（如「南京麦克森OE科技有限公司」），
+//   整段拉丁文案的 CJK 占比落在 **16–26%** —— 按 25% 判定会**漏判**，
+//   让这些页面误走拉丁 158 预算，desc 可达 155 字符（超中文展示位）。
+//   下调到 10% 后两类页面被精确分开：
+//     · 行业分类页（双语行业名，占比 2.6–5%）→ 仍走拉丁 158；
+//     · 供应商详情页（中文公司名，占比 16–26%）→ 回落 CJK 90。
+//
+//   🔴 desc 与 title 必须用**不同**阈值 —— 这是两个常量的存在理由：
+//     同一个「含中文公司名的拉丁标题」若也按 10% 判 CJK，title 主体预算会从
+//     65 掉到 36。实测（stage1.7 离线预演）：会让 41 页 title 被额外裁剪，如
+//     `en/suppliers/nanjing-mxcomm` 68 → 30、`ja/…/claim` 77 → 32。
+//     desc 的诉求是「中文展示位，宁短勿长」；title 的诉求是「别误裁主体」
+//     （标题短了照样能被检索到）。目标不同，阈值就该不同。
 const CJK_RE_G = new RegExp(CJK_RE.source, "g");
-const CJK_DOMINANCE_RATIO = 0.25;
+const CJK_DESC_RATIO = 0.1;
+const CJK_TITLE_RATIO = 0.25;
 
 /**
- * 该串是否以 CJK 为主（CJK 字符占比 > 25%）。
- * 为 true 时用 CJK 预算（desc 90 / title 主体 36），否则用拉丁预算（158 / 65）。
+ * 该串是否以 CJK 为主（CJK 字符占比 > ratio）。
+ *
+ * @param ratio 默认 10%（desc 口径）。title 口径须显式传 25%，
+ *              否则含中文公司名的拉丁标题会被误判成 CJK 并裁掉主体。
  */
-export function isCjkDominant(text: string): boolean {
+export function isCjkDominant(text: string, ratio: number = CJK_DESC_RATIO): boolean {
   if (!text) return false;
   const total = [...text].length;
   if (total === 0) return false;
   const cjk = (text.match(CJK_RE_G) ?? []).length;
-  return cjk / total > CJK_DOMINANCE_RATIO;
+  return cjk / total > ratio;
 }
 const SENTENCE_END_RE = /[.。!！?？]/;
 const DANGLING_TAIL_RE = /[\s,;:，、；：\-–—]+$/u;
@@ -108,7 +126,9 @@ export function trimMetaTitle(
     body = text.slice(0, cut);
     tail = text.slice(cut);
   }
-  const budget = isCjkDominant(body)
+  // 🔴 显式传 title 口径（25%），不要用默认的 desc 口径（10%）——
+  //    否则含中文公司名的拉丁标题会被判成 CJK，主体预算 65 → 36，标题被砍掉一半。
+  const budget = isCjkDominant(body, CJK_TITLE_RATIO)
     ? opts?.cjkBudget ?? TITLE_CJK_BODY_BUDGET
     : opts?.latinBudget ?? TITLE_LATIN_BODY_BUDGET;
   const chars = [...body];

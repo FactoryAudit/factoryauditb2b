@@ -1,0 +1,38 @@
+产物页数：1891（新）｜基线：.\_prune_next_20260929074737\server\app
+
+########## A. 供应商详情页 desc（阈值 10%）##########
+  供应商页数：81
+  其中 CJK 占比 >10%（走 90 预算）：25
+  最长 desc：158 字符（en/suppliers/guangzhou-sunny-food.html）
+  断言（CJK 主导页 desc ≤90 且结尾句末标点）⇒ OK
+
+########## B. /tools 与 /tools/supplier-verification-checklist desc ##########
+  ar/tools/supplier-verification-checklist.html        [135] 预算 158 cjk=0.0% ✓
+  ar/tools.html                                        [122] 预算 158 cjk=0.0% ✓
+  de/tools/supplier-verification-checklist.html        [148] 预算 158 cjk=0.0% ✓
+  de/tools.html                                        [149] 预算 158 cjk=0.0% ✓
+  en/tools/supplier-verification-checklist.html        [149] 预算 158 cjk=0.0% ✓
+  en/tools.html                                        [138] 预算 158 cjk=0.0% ✓
+  es/tools/supplier-verification-checklist.html        [155] 预算 158 cjk=0.0% ✓
+  es/tools.html                                        [156] 预算 158 cjk=0.0% ✓
+  fr/tools/supplier-verification-checklist.html        [154] 预算 158 cjk=0.0% ✓
+  fr/tools.html                                        [135] 预算 158 cjk=0.0% ✓
+  ja/tools/supplier-verification-checklist.html        [ 71] 预算 90 cjk=100.0% ✓
+  ja/tools.html                                        [ 71] 预算 90 cjk=100.0% ✓
+  pt/tools/supplier-verification-checklist.html        [151] 预算 158 cjk=0.0% ✓
+  pt/tools.html                                        [130] 预算 158 cjk=0.0% ✓
+  zh/tools/supplier-verification-checklist.html        [ 61] 预算 90 cjk=96.7% ✓
+  zh/tools.html                                        [ 64] 预算 90 cjk=96.9% ✓
+  zh-TW/tools/supplier-verification-checklist.html     [ 61] 预算 90 cjk=96.7% ✓
+  zh-TW/tools.html                                     [ 64] 预算 90 cjk=96.9% ✓
+  断言（两页 9 语全落预算）⇒ OK
+
+########## C. title 与 stage1.6 基线逐页对比 ##########
+  title 有变化的页面：0
+  其中**变短**（= 被额外裁剪）的页面：0
+  其中属于供应商详情页的：0
+  断言（供应商页 title 零裁剪）⇒ OK
+
+────────────────────────────────────────────────────────────────
+断言：PASS=119  FAIL=0
+ALL OK

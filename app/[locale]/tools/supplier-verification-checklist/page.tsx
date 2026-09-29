@@ -5,22 +5,28 @@ import SupplierVerificationChecklist, {
 } from "@/components/tools/SupplierVerificationChecklist";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
-import { hreflangFor, canonicalFor } from "@/i18n/hreflang";
+import { canonicalFor } from "@/i18n/hreflang";
+// stage1.7：本页此前**绕过** buildPageMetadata 手写 metadata ⇒ desc 不收口
+// （实测 es 275 / fr 210 字符）、openGraph 无图、无 robots 兜底。
+// 收口到统一入口后与 /tools/supplier-risk-calculator 同源。
+import { buildPageMetadata } from "@/lib/pageMeta";
 
 const PATH = "/tools/supplier-verification-checklist";
+// 本工具属 RiskScore™ 产品线，品牌段保留产品名（与 /tools/supplier-risk-calculator 一致）。
+// buildPageMetadata 检测到 title 已含 "FactoryAuditB2B" ⇒ 不会再追加默认后缀。
+const BRAND = "FactoryAuditB2B RiskScore™";
 type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: raw } = await params;
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
-  const title = `${t.checklist.page.metaTitle} | FactoryAuditB2B RiskScore™`;
-  return {
-    title,
+  return buildPageMetadata({
+    locale,
+    path: PATH,
+    title: `${t.checklist.page.metaTitle} | ${BRAND}`,
     description: t.checklist.page.metaDesc,
-    alternates: { canonical: canonicalFor(locale, PATH), languages: hreflangFor(PATH) },
-    openGraph: { title, description: t.checklist.page.metaDesc, type: "website", url: canonicalFor(locale, PATH) },
-  };
+  });
 }
 
 export default async function Page({ params }: Props) {

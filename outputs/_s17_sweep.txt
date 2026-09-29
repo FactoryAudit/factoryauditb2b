@@ -1,0 +1,6 @@
+扫描预渲染 HTML: 1891 个文件
+有 description: 1890｜无 description: 0
+结尾无句末标点（半句话嫌疑）: 0
+
+
+=> ALL CLEAN
