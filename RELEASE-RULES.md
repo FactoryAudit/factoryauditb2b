@@ -29,6 +29,15 @@
 
 ⚠️ 第 3 步必须是**外层 shell 循环**：脚本自身的主模式靠 `spawnSync` 派生子进程，本机必挂。
 
+### 推荐入口
+
+推荐用 `bash scripts/release.sh` 一次性执行九步。它带 `set -e -o pipefail`，
+任一步失败即停，避免人工跳步。手工执行时请严格按九步表的顺序。
+
+（脚本已内置下方「前置动作」的四个环境变量 —— `FAB2B_PROXY` / `NODE_OPTIONS` 注入
+`with-proxy.cjs` / `FAB2B_DISABLE_BUILD_TRACE=1` / `NEXT_TELEMETRY_DISABLED=1`，
+外部显式赋值仍可覆盖。跑之前**不需要**手工 export 任何东西。）
+
 ### 第 0 步与第 1.5 步为什么不得跳过
 
 `next build` 的**数据源失败不报错**。`lib/queries.ts` 的设计是
