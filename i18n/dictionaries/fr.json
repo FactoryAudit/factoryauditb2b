@@ -2181,7 +2181,7 @@
     "badge": "Centre de confiance",
     "h1": "Centre de confiance",
     "lead": "Qui nous sommes, ce que nous vérifions, ce que nous ne vérifions pas et comment nous traitons les preuves. Publié pour que vous puissiez nous vérifier avant de nous demander de vérifier qui que ce soit d'autre.",
-    "metaTitle": "À propos de FactoryAuditB2B",
+    "metaTitle": "À propos : vérification et audit d'usine",
     "metaDesc": "FactoryAuditB2B est exploité par Jiangmen Zhiyu Technology Co., Ltd. Nous aidons les acheteurs du monde entier à trouver, filtrer, vérifier et auditer des fournisseurs en Chine et en Asie du Sud-Est.",
     "regTitle": "Enregistrement commercial",
     "regLead": "Vérification publique, pas divulgation complète. Nous publions les faits d'enregistrement dont un acheteur a besoin et masquons partiellement les identifiants personnels et sensibles.",
@@ -2788,7 +2788,29 @@
     "ctaTitle": "Vous voulez que ces réponses soient vérifiées ?",
     "ctaLead": "La vérification commence à 99 $ par fournisseur et transforme les réponses autodéclarées en preuves examinées.",
     "ctaPrimary": "Demander une vérification",
-    "reset": "Réinitialiser"
+    "reset": "Réinitialiser",
+    "faq": [
+      {
+        "q": "Comment fonctionne le comparateur de fournisseurs ?",
+        "a": "Ajoutez de deux à cinq fournisseurs, notez chacun selon les huit mêmes dimensions pondérées, et l'outil les classe côte à côte pour montrer lequel est globalement le plus solide et où chacun est le plus faible."
+      },
+      {
+        "q": "Quelles dimensions sont comparées ?",
+        "a": "Les huit mêmes dimensions que notre score de risque fournisseur : profil de l'entreprise, qualité, conformité, production, chaîne d'approvisionnement, documentation, certification et empreinte numérique, chacune pondérée selon son impact sur le risque d'achat."
+      },
+      {
+        "q": "Pourquoi certaines dimensions comptent-elles plus que d'autres ?",
+        "a": "Chaque dimension a un poids fixe selon sa capacité à révéler un risque de chaîne d'approvisionnement. Un fournisseur faible sur une dimension très pondérée perd plus de points qu'un autre faible sur une dimension mineure."
+      },
+      {
+        "q": "Comment utiliser le résultat de la comparaison ?",
+        "a": "Considérez-le comme une aide à la décision, pas un verdict. Servez-vous-en pour présélectionner les fournisseurs et repérer le point faible de chacun, puis confirmez ces points par une vérification, un audit d'usine ou une inspection avant de commander."
+      },
+      {
+        "q": "Un score plus élevé signifie-t-il que le fournisseur est vérifié ?",
+        "a": "Non. La comparaison reflète uniquement les valeurs que vous saisissez. Elle ne confirme pas que les certificats, la capacité ou l'usine du fournisseur soient authentiques : cela exige un examen des documents ou un audit sur site."
+      }
+    ]
   },
   "monitoring": {
     "metaTitle": "Surveillance fournisseur et alertes",

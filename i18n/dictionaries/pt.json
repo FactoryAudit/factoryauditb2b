@@ -2181,7 +2181,7 @@
     "badge": "Centro de confiança",
     "h1": "Centro de confiança",
     "lead": "Quem somos, o que verificamos, o que não verificamos e como tratamos as evidências. Publicado para que você possa nos verificar antes de nos pedir para verificar qualquer outra pessoa.",
-    "metaTitle": "Sobre o FactoryAuditB2B",
+    "metaTitle": "Sobre nós: verificação e auditoria",
     "metaDesc": "O FactoryAuditB2B é operado pela Jiangmen Zhiyu Technology Co., Ltd. Ajudamos compradores globais a encontrar, triar, verificar e auditar fornecedores na China e no sudeste asiático.",
     "regTitle": "Registro comercial",
     "regLead": "Verificação pública, não divulgação completa. Publicamos os fatos de registro que um comprador precisa e mantemos identificadores pessoais e sensíveis parcialmente mascarados.",
@@ -2788,7 +2788,29 @@
     "ctaTitle": "Queres ver as respostas?",
     "ctaLead": "A verificação começa em $99 por fornecedor e transforma respostas auto-referidas em evidência revisada.",
     "ctaPrimary": "Pedido de verificação",
-    "reset": "Reiniciar"
+    "reset": "Reiniciar",
+    "faq": [
+      {
+        "q": "Como funciona o comparador de fornecedores?",
+        "a": "Adicione de dois a cinco fornecedores, pontue cada um nas mesmas oito dimensões ponderadas, e a ferramenta coloca-os lado a lado para mostrar qual é mais forte no conjunto e onde cada um é mais fraco."
+      },
+      {
+        "q": "Que dimensões são comparadas?",
+        "a": "As mesmas oito dimensões da nossa pontuação de risco: perfil da empresa, qualidade, conformidade, produção, cadeia de abastecimento, documentação, certificação e pegada digital, cada uma ponderada pelo seu impacto no risco de compra."
+      },
+      {
+        "q": "Porque é que algumas dimensões pesam mais?",
+        "a": "Cada dimensão tem um peso fixo, conforme a força com que sinaliza risco na cadeia de abastecimento. Um fornecedor fraco numa dimensão de grande peso perde mais pontos do que um fraco numa dimensão menor."
+      },
+      {
+        "q": "Como devo usar o resultado da comparação?",
+        "a": "Trate-o como apoio à decisão, não como veredicto. Use-o para pré-selecionar fornecedores e ver o ponto mais fraco de cada um; confirme essas falhas com uma verificação, uma auditoria de fábrica ou uma inspeção antes de encomendar."
+      },
+      {
+        "q": "Uma pontuação mais alta significa que o fornecedor está verificado?",
+        "a": "Não. A comparação reflete apenas os valores que introduz. Não confirma que os certificados, a capacidade ou a fábrica do fornecedor sejam genuínos, e isso exige verificação de documentos ou uma auditoria no local."
+      }
+    ]
   },
   "monitoring": {
     "metaTitle": "Monitorização e alertas de risco",

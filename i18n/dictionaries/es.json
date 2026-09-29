@@ -2181,7 +2181,7 @@
     "badge": "Centro de confianza",
     "h1": "Centro de confianza",
     "lead": "Quiénes somos, qué verificamos, qué no verificamos y cómo tratamos las pruebas. Publicado para que puedas comprobarnos antes de pedirnos que comprobemos a cualquier otra persona.",
-    "metaTitle": "Acerca de FactoryAuditB2B",
+    "metaTitle": "Sobre nosotros: verificación y auditoría",
     "metaDesc": "FactoryAuditB2B es operado por Jiangmen Zhiyu Technology Co., Ltd. Ayudamos a compradores globales a encontrar, filtrar, verificar y auditar proveedores en China y el sudeste asiático.",
     "regTitle": "Registro mercantil",
     "regLead": "Verificación pública, no divulgación completa. Publicamos los datos de registro que un comprador necesita y mantenemos parcialmente ocultos los identificadores personales y sensibles.",
@@ -2788,7 +2788,29 @@
     "ctaTitle": "¿Quieres comprobar estas respuestas?",
     "ctaLead": "La verificación comienza en $ 99 por proveedor y convierte las respuestas autoinformadas en evidencia revisada.",
     "ctaPrimary": "Solicitar verificación",
-    "reset": "Restablecimiento"
+    "reset": "Restablecimiento",
+    "faq": [
+      {
+        "q": "¿Cómo funciona el comparador de proveedores?",
+        "a": "Añada de dos a cinco proveedores, puntúe cada uno con las mismas ocho dimensiones ponderadas y la herramienta los ordena en paralelo para que vea cuál es más sólido en conjunto y dónde flaquea cada uno."
+      },
+      {
+        "q": "¿Qué dimensiones se comparan?",
+        "a": "Las mismas ocho dimensiones de nuestra puntuación de riesgo: perfil de la empresa, calidad, cumplimiento, producción, cadena de suministro, documentación, certificación y huella digital, cada una ponderada según su impacto en el riesgo de compra."
+      },
+      {
+        "q": "¿Por qué unas dimensiones pesan más que otras?",
+        "a": "Cada dimensión tiene un peso fijo según cuánto indica el riesgo de la cadena de suministro. Un proveedor débil en una dimensión de mucho peso pierde más puntos que uno débil en una dimensión menor."
+      },
+      {
+        "q": "¿Cómo debo usar el resultado de la comparación?",
+        "a": "Tómelo como apoyo a la decisión, no como un veredicto. Úselo para preseleccionar proveedores y ver el punto más débil de cada uno, y confirme esas dudas con una verificación, una auditoría de fábrica o una inspección antes de hacer el pedido."
+      },
+      {
+        "q": "¿Una puntuación más alta significa que el proveedor está verificado?",
+        "a": "No. La comparación solo refleja los datos que introduce. No confirma que los certificados, la capacidad o la fábrica del proveedor sean auténticos, y eso requiere revisar documentos o una auditoría in situ."
+      }
+    ]
   },
   "monitoring": {
     "metaTitle": "Monitoreo de proveedores y alertas",

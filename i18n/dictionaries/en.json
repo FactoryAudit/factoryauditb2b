@@ -43,7 +43,7 @@
     "badge": "Trust Center",
     "h1": "Trust Center",
     "lead": "Who we are, what we verify, what we do not, and how we handle evidence. Published so you can check us before you ask us to check anyone else.",
-    "metaTitle": "About FactoryAuditB2B",
+    "metaTitle": "About Us: Supplier Verification & Audits",
     "metaDesc": "FactoryAuditB2B is operated by Jiangmen Zhiyu Technology Co., Ltd. We help global buyers find, screen, verify and audit suppliers in China and Southeast Asia.",
     "regTitle": "Business Registration",
     "regLead": "Public verification, not full disclosure. We publish the registration facts a buyer needs and keep personal and sensitive identifiers partially masked.",
@@ -2788,7 +2788,29 @@
     "ctaTitle": "Want these answers checked?",
     "ctaLead": "Verification starts at $99 per supplier and turns self-reported answers into reviewed evidence.",
     "ctaPrimary": "Request verification",
-    "reset": "Reset"
+    "reset": "Reset",
+    "faq": [
+      {
+        "q": "How does the supplier comparison work?",
+        "a": "Add two to five suppliers, score each one against the same eight weighted dimensions, and the tool ranks them side by side so you can see which supplier is stronger overall and where each one is weakest."
+      },
+      {
+        "q": "Which dimensions are compared?",
+        "a": "The same eight dimensions used in our supplier risk score: company profile, quality, compliance, production, supply chain, documentation, certification and digital footprint, each weighted by how much it affects sourcing risk."
+      },
+      {
+        "q": "Why do some dimensions carry more weight?",
+        "a": "Each dimension has a fixed weight based on how strongly it signals supply-chain risk. A supplier that scores badly on a heavily weighted dimension loses more points than one that is weak on a minor dimension."
+      },
+      {
+        "q": "How should I use the comparison result?",
+        "a": "Treat it as decision support, not a verdict. Use it to shortlist suppliers and to see the weakest area of each one, then confirm those gaps with a verification check, a factory audit or an inspection before you place an order."
+      },
+      {
+        "q": "Does a higher score mean the supplier is verified?",
+        "a": "No. The comparison only reflects the numbers you enter. It does not confirm that the supplier's certificates, capability or factory are genuine, and that requires document checks or an on-site audit."
+      }
+    ]
   },
   "monitoring": {
     "metaTitle": "Supplier Monitoring & Risk Alerts",

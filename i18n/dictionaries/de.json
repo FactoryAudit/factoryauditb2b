@@ -2181,7 +2181,7 @@
     "badge": "Vertrauenszentrum",
     "h1": "Vertrauenszentrum",
     "lead": "Wer wir sind, was wir verifizieren, was wir nicht verifizieren und wie wir mit Belegen umgehen. Veröffentlicht, damit Sie uns prüfen können, bevor Sie uns bitten, andere zu prüfen.",
-    "metaTitle": "Über FactoryAuditB2B",
+    "metaTitle": "Über uns: Verifizierung und Fabrikaudit",
     "metaDesc": "FactoryAuditB2B wird von Jiangmen Zhiyu Technology Co., Ltd. betrieben. Wir helfen globalen Käufern, Lieferanten in China und Südostasien zu finden, zu prüfen und zu auditieren.",
     "regTitle": "Handelsregistereintrag",
     "regLead": "Öffentliche Verifikation, keine vollständige Offenlegung. Wir veröffentlichen die Registrierungsdaten, die ein Käufer benötigt, und maskieren persönliche und sensible Kennungen teilweise.",
@@ -2788,7 +2788,29 @@
     "ctaTitle": "Möchten Sie, dass diese Antworten überprüft werden?",
     "ctaLead": "Die Verifizierung beginnt bei 99 $ pro Lieferant und verwandelt selbst gemeldete Antworten in überprüfte Beweise.",
     "ctaPrimary": "Anfrage anfordern",
-    "reset": "Zurücksetzen"
+    "reset": "Zurücksetzen",
+    "faq": [
+      {
+        "q": "Wie funktioniert der Lieferantenvergleich?",
+        "a": "Fügen Sie zwei bis fünf Lieferanten hinzu, bewerten Sie jeden nach denselben acht gewichteten Dimensionen, und das Tool stellt sie nebeneinander, damit Sie sehen, welcher Lieferant insgesamt stärker ist und wo jeder am schwächsten abschneidet."
+      },
+      {
+        "q": "Welche Dimensionen werden verglichen?",
+        "a": "Dieselben acht Dimensionen wie in unserem Lieferanten-Risikoscore: Unternehmen, Qualität, Compliance, Produktion, Lieferkette, Dokumentation, Zertifizierung und digitale Präsenz, jede gewichtet nach ihrem Einfluss auf das Beschaffungsrisiko."
+      },
+      {
+        "q": "Warum wiegen einige Dimensionen schwerer?",
+        "a": "Jede Dimension hat ein festes Gewicht, das davon abhängt, wie stark sie Lieferkettenrisiken anzeigt. Ein Lieferant, der bei einer stark gewichteten Dimension schlecht abschneidet, verliert mehr Punkte als bei einer gering gewichteten."
+      },
+      {
+        "q": "Wie sollte ich das Vergleichsergebnis nutzen?",
+        "a": "Betrachten Sie es als Entscheidungshilfe, nicht als Urteil. Nutzen Sie es zur Vorauswahl und um die schwächste Dimension jedes Lieferanten zu erkennen, und prüfen Sie diese Lücken vor der Bestellung durch Verifizierung, Fabrikaudit oder Inspektion."
+      },
+      {
+        "q": "Bedeutet eine höhere Punktzahl, dass der Lieferant verifiziert ist?",
+        "a": "Nein. Der Vergleich spiegelt nur die von Ihnen eingegebenen Werte wider. Er bestätigt nicht, dass Zertifikate, Kapazität oder Fabrik des Lieferanten echt sind; dafür sind Dokumentenprüfung oder ein Vor-Ort-Audit nötig."
+      }
+    ]
   },
   "monitoring": {
     "metaTitle": "Lieferantenüberwachung & Warnungen",

@@ -27,6 +27,8 @@ export default async function ComparePage({ params }: Props) {
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
   const c = t.compare;
+  // FAQ 是数组，不属于 SupplierComparison 的字符串字典；单独取出后传入。
+  const { faq, ...compareStrings } = c;
   const p = (href: string) => localePath(locale, href);
 
   // 维度标签与权重直接取自评分模型，不手工抄一份，避免文档与代码脱节
@@ -66,6 +68,15 @@ export default async function ComparePage({ params }: Props) {
         { "@type": "ListItem", position: 3, name: c.h1, item: `${BASE}${p(PATH)}` },
       ],
     },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faq.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
   ];
 
   return (
@@ -80,12 +91,24 @@ export default async function ComparePage({ params }: Props) {
 
       <div className="mt-8">
         <SupplierComparison
-          dict={c}
+          dict={compareStrings}
           dimensions={dimensions}
           defaultNames={defaultNames}
           verificationHref={p("/services/supplier-verification")}
         />
       </div>
+
+      <section className="mt-14 max-w-3xl">
+        <h2 className="text-2xl font-bold text-[#0f172a] mb-4">{t.common.faq}</h2>
+        <div className="space-y-4">
+          {faq.map((f) => (
+            <div key={f.q} className="card p-5">
+              <div className="font-semibold text-[#0f172a]">{f.q}</div>
+              <p className="text-sm text-[#475569] mt-1">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
     </main>
   );
 }
