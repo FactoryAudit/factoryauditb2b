@@ -3054,6 +3054,18 @@ export const GUIDES: Guide[] = [
       "How a supplier scandal becomes your own brand crisis, and fast. See the early-warning signals and a playbook to protect reputation.",
     metaDescZh:
       "供应商的社会或安全丑闻如何变成你的品牌危机、要盯哪些预警信号，以及保护声誉又不中断供应链的实操应对手册。",
+    metaDescJa:
+      "サプライヤーの不祥事が自社ブランドの危機になる仕組みを解説します。予兆の捉え方と、評判を守りながら供給を止めない対応手順を示します。",
+    metaDescEs:
+      "Cómo un escándalo de un proveedor se convierte en una crisis de tu propia marca. Señales de alerta temprana y un plan para proteger la reputación.",
+    metaDescDe:
+      "Wie ein Skandal beim Lieferanten zur Krise der eigenen Marke wird. Frühwarnsignale und ein Ablaufplan, der den Ruf langfristig schützt.",
+    metaDescFr:
+      "Comment un scandale chez un fournisseur devient une crise de votre propre marque. Signaux d'alerte précoces et plan pour protéger la réputation.",
+    metaDescPt:
+      "Como um escândalo num fornecedor se torna uma crise da sua própria marca. Sinais de alerta precoce e um plano para proteger a reputação.",
+    metaDescAr:
+      "كيف تتحول فضيحة المورد إلى أزمة لعلامتك التجارية. إشارات الإنذار المبكر وخطة استجابة تحمي السمعة دون قطع التوريد.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/supplier-risk-calculator" },
@@ -3163,6 +3175,18 @@ export const GUIDES: Guide[] = [
       "The most common warning signs that a China supplier is a scam. Pressure tactics, no verifiable entity, fake certificates, and the fix.",
     metaDescZh:
       "中国供应商诈骗最常见的红旗信号：催促付款、无法核实实体、假证书，以及付款前如何核验。",
+    metaDescJa:
+      "中国サプライヤー詐欺の典型的な危険信号を解説します。支払いを急かす圧力、確認できない法人、偽の証明書と、支払い前の見極め方を示します。",
+    metaDescEs:
+      "Las señales de alarma más comunes de una estafa de proveedor chino. Presión para pagar rápido, entidad no verificable y certificados falsos.",
+    metaDescDe:
+      "Die häufigsten Warnsignale eines Betrugs durch chinesische Lieferanten. Zahlungsdruck, nicht prüfbare Firma und gefälschte Zertifikate.",
+    metaDescFr:
+      "Les signaux d'alarme les plus courants d'une arnaque de fournisseur chinois. Pression au paiement, entité invérifiable et faux certificats.",
+    metaDescPt:
+      "Os sinais de alerta mais comuns de fraude de fornecedor chinês. Pressão para pagar rápido, entidade não verificável e certificados falsos.",
+    metaDescAr:
+      "أكثر إشارات التحذير شيوعاً في احتيال الموردين الصينيين. الضغط للدفع السريع، وعدم إمكانية التحقق من الكيان، والشهادات المزيفة، وكيفية كشفها قبل الدفع.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/supplier-verification-checklist" },
@@ -3268,6 +3292,18 @@ export const GUIDES: Guide[] = [
       "How to verify a Chinese supplier's registration on public registries. Check the legal name, credit code and business scope, then compare.",
     metaDescZh:
       "分步核验中国供应商的统一社会信用代码、法律实体名与经营范围，使用公开登记系统，以及不一致意味着什么。",
+    metaDescJa:
+      "中国企業の工商登記を確認する手順を解説します。統一社会信用コード、法人名、経営範囲を公開登記システムで照合し、不一致の意味を示します。",
+    metaDescEs:
+      "Cómo verificar el registro mercantil de una empresa china. Compare el código de crédito social, la razón social y el objeto social en el registro público.",
+    metaDescDe:
+      "So prüfen Sie das Handelsregister einer chinesischen Firma. Kreditcode, Firmenname und Geschäftsbereich im öffentlichen Register abgleichen.",
+    metaDescFr:
+      "Comment vérifier l'immatriculation d'une entreprise chinoise. Comparez le code de crédit social, la raison sociale et l'objet social au registre public.",
+    metaDescPt:
+      "Como verificar o registo comercial de uma empresa chinesa. Compare o código de crédito social, a razão social e o objeto social no registo público.",
+    metaDescAr:
+      "كيفية التحقق من السجل التجاري لشركة صينية. طابق رمز الائتمان الاجتماعي والاسم القانوني ونطاق النشاط في السجل العام، وما تعنيه التناقضات.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/supplier-document-checker" },
@@ -3372,6 +3408,18 @@ export const GUIDES: Guide[] = [
       "What Alibaba Trade Assurance covers and where its protection stops. See how to combine escrow payment with inspection for safe sourcing.",
     metaDescZh:
       "阿里 Trade Assurance 保什么、类托管保护如何运作、它的局限，以及如何与验货结合实现安全采购。",
+    metaDescJa:
+      "アリババ Trade Assurance が保証する範囲と限界を解説します。エスクロー決済と出荷前検査を組み合わせ、安全に調達する方法を示します。",
+    metaDescEs:
+      "Qué cubre Alibaba Trade Assurance y dónde termina su protección. Cómo combinar el pago en custodia con una inspección para comprar sin arriesgar el anticipo.",
+    metaDescDe:
+      "Was Alibaba Trade Assurance abdeckt und wo der Schutz endet. Wie Sie Treuhandzahlung und Inspektion für eine sichere Beschaffung kombinieren.",
+    metaDescFr:
+      "Ce que couvre Alibaba Trade Assurance et où sa protection s'arrête. Comment associer paiement sous séquestre et inspection pour un approvisionnement sûr.",
+    metaDescPt:
+      "O que o Alibaba Trade Assurance cobre e onde termina a proteção. Como combinar pagamento em custódia com inspeção para comprar com segurança.",
+    metaDescAr:
+      "ما يغطيه Alibaba Trade Assurance وأين تنتهي حمايته. كيفية الجمع بين الدفع عبر حساب الأمان والفحص قبل الشحن لشراء آمن.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/supplier-verification-checklist" },
@@ -3476,6 +3524,18 @@ export const GUIDES: Guide[] = [
       "A pre-deposit verification sequence that protects your advance payment. Run the entity check, sample, video call and references before paying.",
     metaDescZh:
       "实用的付定金前核验流程：实体核查、打样、视频、参考与合同条款，保护你的预付款。",
+    metaDescJa:
+      "手付金を払う前にサプライヤーを確認する手順を解説します。法人照合、試作、ビデオ通話、取引先照会で前払いを守る方法を示します。",
+    metaDescEs:
+      "Una secuencia de verificación antes de pagar el anticipo. Compruebe la entidad, la muestra, la videollamada y las referencias antes de transferir dinero.",
+    metaDescDe:
+      "Eine Prüfreihenfolge vor der Anzahlung. Firma, Muster, Videoanruf und Referenzen klären, bevor Sie Geld an einen Lieferanten überweisen.",
+    metaDescFr:
+      "Une séquence de vérification avant de verser l'acompte. Vérifiez l'entité, l'échantillon, la visioconférence et les références avant tout virement.",
+    metaDescPt:
+      "Uma sequência de verificação antes de pagar o sinal. Confirme a entidade, a amostra, a videochamada e as referências antes de transferir qualquer valor.",
+    metaDescAr:
+      "خطوات التحقق من المورد قبل دفع الدفعة المقدمة. تحقّق من الكيان والعيّنة ومكالمة الفيديو والمراجع قبل تحويل أي مبلغ.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/supplier-verification-checklist" },
@@ -3582,6 +3642,18 @@ export const GUIDES: Guide[] = [
       "The tactics behind B2B sourcing fraud and how each one is stopped. Fake factories, phantom shipments, invoice redirect and certificate reuse.",
     metaDescZh:
       "B2B 采购诈骗的手法：假工厂、幽灵发货、发票重定向与证书套用，附案例与核验如何逐一拦截。",
+    metaDescJa:
+      "B2B 調達でよくある詐欺の手口を整理します。偽工場、幽霊出荷、請求先のすり替え、証明書の使い回しと、それぞれの防ぎ方を示します。",
+    metaDescEs:
+      "Los métodos de fraude más habituales en compras B2B. Fábricas falsas, envíos fantasma, desvío de facturas y certificados reutilizados, y cómo frenar cada uno.",
+    metaDescDe:
+      "Die gängigen Betrugsmuster im B2B-Einkauf. Scheinfabriken, Phantomlieferungen, umgeleitete Rechnungen und wiederverwendete Zertifikate samt Abwehr.",
+    metaDescFr:
+      "Les procédés de fraude courants dans les achats B2B. Fausses usines, expéditions fantômes, détournement de factures et certificats réutilisés, et leur parade.",
+    metaDescPt:
+      "Os métodos de fraude mais comuns em compras B2B. Fábricas falsas, envios fantasma, desvio de faturas e certificados reutilizados, e como travá-los.",
+    metaDescAr:
+      "أساليب الاحتيال الشائعة في المشتريات بين الشركات. المصانع الوهمية، والشحنات غير الموجودة، وتحويل الفواتير، وإعادة استخدام الشهادات.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/supplier-risk-calculator" },
@@ -3687,6 +3759,18 @@ export const GUIDES: Guide[] = [
       "A plain explanation of a QMS and the plan-do-check-act cycle. See why buyers should judge a supplier's system, not a certificate.",
     metaDescZh:
       "通俗解释 QMS：是什么、PDCA 循环、它产出的文件，以及买家为何该关注供应商的体系而非仅一张证书。",
+    metaDescJa:
+      "品質マネジメントシステム（QMS）を平易に解説します。PDCA サイクルと、証明書ではなく仕組みで判断すべき理由を示します。",
+    metaDescEs:
+      "Qué es un sistema de gestión de la calidad (SGC), explicado de forma sencilla. El ciclo PDCA y por qué conviene juzgar el sistema y no solo el certificado.",
+    metaDescDe:
+      "Ein Qualitätsmanagementsystem (QMS) einfach erklärt. Der PDCA-Zyklus und warum Käufer das System bewerten sollten, nicht nur das Zertifikat.",
+    metaDescFr:
+      "Qu'est-ce qu'un système de management de la qualité (SMQ), expliqué simplement. Le cycle PDCA et pourquoi juger le système plutôt que le certificat.",
+    metaDescPt:
+      "O que é um sistema de gestão da qualidade (SGQ), explicado de forma simples. O ciclo PDCA e porque se deve avaliar o sistema, não apenas o certificado.",
+    metaDescAr:
+      "شرح مبسّط لنظام إدارة الجودة (QMS). دورة التخطيط والتنفيذ والتحقق والتصحيح، ولماذا ينبغي تقييم النظام لا الشهادة وحدها.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/audit-checklist" },
@@ -3791,6 +3875,18 @@ export const GUIDES: Guide[] = [
       "The real difference between ISO 9001 and ISO 13485 explained. See when a medical-device grade system is required before sourcing.",
     metaDescZh:
       "ISO 9001 与 ISO 13485 的真实区别、何时需要医疗器械级体系，以及如何为采购决策读懂供应商证书。",
+    metaDescJa:
+      "ISO 9001 と ISO 13485 の違いを解説します。それぞれが合う業種と、医療機器向けの体系が必要になる条件を示します。",
+    metaDescEs:
+      "La diferencia real entre ISO 9001 e ISO 13485. Cuándo hace falta un sistema de grado sanitario antes de comprar a un proveedor.",
+    metaDescDe:
+      "Der Unterschied zwischen ISO 9001 und ISO 13485. Wann ein System nach Medizinproduktestandard vor dem Einkauf nötig ist.",
+    metaDescFr:
+      "La vraie différence entre ISO 9001 et ISO 13485. Quand un système de niveau dispositif médical s'impose avant de s'approvisionner.",
+    metaDescPt:
+      "A diferença real entre ISO 9001 e ISO 13485. Quando é exigido um sistema de nível de dispositivo médico antes de comprar.",
+    metaDescAr:
+      "الفرق الفعلي بين ISO 9001 وISO 13485. متى يُشترط نظام بمعيار الأجهزة الطبية قبل الشراء، وكيف تُقرأ شهادة المورد.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/supplier-document-checker" },
@@ -3895,6 +3991,18 @@ export const GUIDES: Guide[] = [
       "How a factory controls quality across the line, stage by stage. Covers incoming IQC, in-process IPQC, final FQC and outgoing OQC.",
     metaDescZh:
       "工厂如何在线控制质量：来料检验、过程 IPQC、终检 FQC 与出货 OQC，以及保护你订单的关键控制点。",
+    metaDescJa:
+      "製造現場の品質管理工程を解説します。受入 IQC、工程内 IPQC、最終 FQC、出荷 OQC の四つの関門と、注文を守る要点を示します。",
+    metaDescEs:
+      "Cómo controla la calidad una fábrica a lo largo de la línea. Las cuatro puertas IQC, IPQC, FQC y OQC y qué protege realmente tu pedido.",
+    metaDescDe:
+      "Wie eine Fabrik Qualität entlang der Linie steuert. Die vier Kontrollstufen IQC, IPQC, FQC und OQC und was Ihr Auftrag davon braucht.",
+    metaDescFr:
+      "Comment une usine contrôle la qualité le long de la ligne. Les quatre étapes IQC, IPQC, FQC et OQC et ce qui protège vraiment votre commande.",
+    metaDescPt:
+      "Como uma fábrica controla a qualidade ao longo da linha. As quatro etapas IQC, IPQC, FQC e OQC e o que realmente protege o seu pedido.",
+    metaDescAr:
+      "كيف يضبط المصنع الجودة على طول خط الإنتاج. مراحل الفحص الأربع: استلام المواد، وأثناء التصنيع، والفحص النهائي، وفحص ما قبل الشحن.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/supplier-verification-checklist" },
@@ -3999,6 +4107,18 @@ export const GUIDES: Guide[] = [
       "What PPAP is, the 18 elements it requires and when it applies. See how to use it to qualify a supplier before mass production.",
     metaDescZh:
       "PPAP 是什么、它要求的 18 项要素、何时适用（汽车、航天、精密），以及如何用它在大批量前准入供应商。",
+    metaDescJa:
+      "PPAP（生産部品承認プロセス）を解説します。求められる 18 要素、適用される場面と、量産前にサプライヤーを承認する進め方を示します。",
+    metaDescEs:
+      "Qué es el PPAP, sus 18 elementos y cuándo se aplica. Cómo calificar a un proveedor y aprobar la pieza antes de la producción en serie.",
+    metaDescDe:
+      "Was PPAP ist, seine 18 Elemente und wann es greift. Wie Sie einen Lieferanten vor der Serienfertigung freigeben und die Serienreife belegen.",
+    metaDescFr:
+      "Qu'est-ce que le PPAP, ses 18 éléments et quand il s'applique. Comment qualifier un fournisseur et approuver la pièce avant la production de série.",
+    metaDescPt:
+      "O que é o PPAP, os seus 18 elementos e quando se aplica. Como qualificar um fornecedor e aprovar a peça antes da produção em série.",
+    metaDescAr:
+      "ما هو PPAP (عملية اعتماد أجزاء الإنتاج) وعناصره الثمانية عشر ومتى يُطبَّق. كيفية اعتماد المورد قبل الإنتاج الكمي وضمان ثبات الجودة.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/supplier-document-checker" },

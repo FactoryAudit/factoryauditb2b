@@ -1,8 +1,8 @@
 /**
  * scripts/g4-desc-idempotency-regression.ts —— 第 4 批 guides 9 语补全的**常驻回归**
  *
- * 覆盖：批 4.1（前 10 篇）+ 批 4.2（#11–20）= 20 篇 × 6 语 = 120 条已补齐的 metaDesc。
- * 每次再补一批（4.3/4.4/4.5）后，只需把 EXPECTED 同步为新的补齐条数。
+ * 覆盖：批 4.1（前 10 篇）+ 批 4.2（#11–20）+ 批 4.3（#21–30）= 30 篇 × 6 语 = 180 条已补齐的 metaDesc。
+ * 每次再补一批（4.4/4.5）后，只需把 EXPECTED 同步为新的补齐条数。
  *
  * 为什么必须用**真实收口函数**：`pickGuideDesc` 的返回值会经 `buildPageMetadata` →
  * `trimMetaDescription`。若某条超预算，收口函数会按「预算内最后一个句末标点」重写它，
@@ -28,8 +28,8 @@ const FIELD: Record<(typeof LANGS)[number], string> = {
   ar: "metaDescAr",
 };
 
-// 批 4.1（10 篇）+ 批 4.2（10 篇）= 20 篇 × 6 语
-const EXPECTED = 120;
+// 批 4.1（10 篇）+ 批 4.2（10 篇）+ 批 4.3（10 篇）= 30 篇 × 6 语
+const EXPECTED = 180;
 
 const ENDER_RE = /[.。!！?？]["'”’»)\]）]*$/;
 
