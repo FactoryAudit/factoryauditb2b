@@ -3422,7 +3422,7 @@ export const GUIDES: Guide[] = [
     updated: "2026-09-21",
     tools: [
       { href: "/tools/audit-checklist" },
-      { href: "/tools/supplier-quality-checker" },
+      { href: "/tools/supplier-verification-checklist" },
     ],
     services: [
       { href: "/services/inspection" },
@@ -3629,7 +3629,7 @@ export const GUIDES: Guide[] = [
       "工厂如何在线控制质量：来料检验、过程 IPQC、终检 FQC 与出货 OQC，以及保护你订单的关键控制点。",
     updated: "2026-09-21",
     tools: [
-      { href: "/tools/supplier-quality-checker" },
+      { href: "/tools/supplier-verification-checklist" },
       { href: "/tools/audit-checklist" },
     ],
     services: [
@@ -3841,7 +3841,7 @@ export const GUIDES: Guide[] = [
       "以质量为中心的供应商审核清单：体系、来料与过程控制、量测与校准、可追溯性与 CAPA——常规验厂遗漏的维度。",
     updated: "2026-09-21",
     tools: [
-      { href: "/tools/supplier-quality-checker" },
+      { href: "/tools/supplier-verification-checklist" },
       { href: "/tools/audit-checklist" },
     ],
     services: [
@@ -8057,6 +8057,799 @@ export const GUIDES: Guide[] = [
         { name: "FactoryAuditB2B 供应商网络", note: "供应商档案如何提交、审核、赋予证据等级并发布。" },
         { name: "FactoryAuditB2B 方法论", note: "证据等级与风险评分如何界定，以及它们确立与不确立什么。" },
         { name: "中国国家市场监督管理总局（SAMR）", note: "其登记记录是公司身份核查基础的登记机关。" },
+      ],
+    },
+  },
+
+  // ── 时效性专题：2026 中秋 / 国庆与中国工厂验厂排期 ──────────────────────────
+  // 为什么单独成篇：买家每年 9 月都会遇到同一个问题（假期前后能不能验厂、
+  // 排期怎么算），但站内此前只覆盖「何时该验厂」的一般原则，不涉排期窗口。
+  // 官方依据：国务院办公厅《关于 2026 年部分节假日安排的通知》，
+  //   中秋 9/25–9/27（周五至周日，3 天，无调休）；国庆 10/1–10/7（7 天），
+  //   调休上班 9/20（周日）、10/10（周六）。央视网 / 央广网 2026-09-13 报道。
+  // 铁律：日期写死到「2026 年」并标注来源；工厂具体停产日期属工厂级事实，
+  //   正文明确要求买家直接与供应商确认，绝不用国家日期替工厂下结论。
+  {
+    slug: "china-factory-audit-mid-autumn-national-day-scheduling",
+    category: "audit",
+    titleEn: "Factory Audit Timing Around China's 2026 Mid-Autumn and National Day Holidays",
+    titleZh: "2026 中秋与国庆假期期间，中国工厂验厂该怎么排期",
+    metaDescEn:
+      "How China's 2026 Mid-Autumn (25-27 September) and National Day (1-7 October) holidays affect factory audit and inspection scheduling, and how to plan a visit that is not wasted.",
+    metaDescZh:
+      "2026 年中秋（9 月 25-27 日）与国庆（10 月 1-7 日）假期如何影响中国工厂验厂与验货排期，以及如何安排一次不白跑的现场访问。",
+    updated: "2026-09-25",
+    tools: [
+      { href: "/tools/audit-checklist" },
+      { href: "/tools/supplier-risk-calculator" },
+      { href: "/tools/supplier-verification-checklist" },
+    ],
+    services: [
+      { href: "/services/china-factory-audit" },
+      { href: "/services/china-supplier-verification" },
+    ],
+    related: [
+      "when-to-order-china-factory-audit",
+      "what-is-a-factory-audit",
+      "supplier-verification-vs-factory-audit-vs-inspection",
+      "on-site-vs-desk-audit",
+      "q4-shipment-window-factory-audit-inspection-combination",
+    ],
+    links: [
+      { href: "/factory-audit/request", labelEn: "Request a factory audit", labelZh: "申请工厂验厂" },
+      { href: "/rfq", labelEn: "See what buyers are sourcing", labelZh: "查看买家正在采购什么" },
+    ],
+    en: {
+      quickAnswer:
+        "China's 2026 Mid-Autumn Festival runs 25-27 September (Friday to Sunday, three days, no make-up workday). National Day runs 1-7 October, with make-up workdays on 20 September and 10 October. For a factory audit the practical consequence is not that the factory is shut for three days: it is that the working days immediately around the holiday are the least representative days of the year to audit. Lines run partial shifts, supervisors are on leave, and holiday-period records are incomplete. If you need a baseline that reflects normal operations, audit either before 22 September or after 12 October, and treat a visit inside 23 September to 11 October as a scoped check rather than a full baseline.",
+      definition:
+        "A factory audit is an on-site assessment of a production facility against a defined scope: the auditor visits the site, reviews records, observes processes and interviews management and, where the scope includes social criteria, workers. It produces a report of findings at the time of the visit. Because an audit records a baseline on a specific day, the day you choose is part of the method. A visit during a holiday-adjacent period produces a baseline of a factory that is not running normally, which is a different and usually less useful question than the one most buyers are asking.",
+      keyPoints: [
+        "The Mid-Autumn holiday in 2026 is three days with no make-up workday: 25-27 September.",
+        "National Day runs 1-7 October; make-up workdays fall on 20 September and 10 October.",
+        "The week before the holiday is a push week, where compressed checks can make a factory look stronger than normal.",
+        "The first week after the holiday is a recovery week, which can make a factory look weaker than normal.",
+        "Holiday-period payroll and attendance records are not representative, so wage and hours findings carry less weight.",
+        "Whether a specific factory closes for all these days is a factory-level fact: confirm it directly with your supplier.",
+      ],
+      steps: [
+        {
+          title: "Decide what the audit is for, before you pick a date",
+          body: "A baseline audit wants the factory's normal state, so schedule outside the holiday-adjacent window. An order-specific check cares less about the calendar and more about whether your production is actually running. A compliance audit follows the customer's mandated standard, and some programmes have rules about the period reviewed.",
+        },
+        {
+          title: "Work backwards from your shipment date",
+          body: "Verification is documentary and remote and takes days. The audit is on-site and scheduled. Pre-shipment inspection is shipment-specific. For a Q4 shipment the commonly useful order is verification, then audit, then inspection. If the audit slips into the holiday window, the inspection date is usually still achievable, but reordering to 'inspect now, audit later' is the wrong trade because inspection says nothing about the factory's ongoing capability.",
+        },
+        {
+          title: "Book the auditor before the factory goes quiet",
+          body: "Audit capacity tightens around Chinese national holidays because everyone who deferred a visit wants the same two weeks afterwards. Contact the provider before the holiday, not on the first working day back, and state the production address, the scope, and whether the visit is announced or semi-announced.",
+        },
+        {
+          title: "Confirm the site will actually be producing",
+          body: "Ask explicitly whether the line for your product will be running on the visit date, whether the production supervisor for that line will be on site, and whether records for the previous full month will be available. If any answer is no, the visit will observe an empty or atypical factory, and that is worth knowing in advance.",
+        },
+        {
+          title: "If the only available date is in the holiday window, change the scope",
+          body: "A scoped visit can still be valuable. Narrow it to what the day can answer, such as site existence, equipment present, warehouse and shipping activity, and management interview, and state in the report that normal operations were not observed. A report that documents its own limitation is more useful than one that implies a baseline it did not capture.",
+        },
+      ],
+      examples: [
+        {
+          title: "Baseline audit booked for 30 September",
+          body: "The visit falls in the pre-holiday push and the early holiday window. Lines run hard for other customers' orders and the buyer's product is not scheduled that week. The report shows a busy factory but nothing about whether the buyer's product can be made to specification. Cost of the mistake is one audit fee and two weeks, plus a delayed decision.",
+        },
+        {
+          title: "Baseline audit booked for 15 October",
+          body: "The factory has returned to normal operations, the previous full month's records are available, and the line for the buyer's product is running. The report reflects a normal state and can serve as a baseline for follow-up. The trade-off is a three-week wait, which is why the decision should be made against the shipment date rather than against the calendar.",
+        },
+      ],
+      checklist: [
+        "Audit purpose identified: baseline, order-specific or compliance.",
+        "Customer-mandated standard confirmed, including any rule on the period reviewed.",
+        "Shipment date fixed and the audit date worked backwards from it.",
+        "Verification completed before the audit is booked.",
+        "Auditor capacity secured before the holiday, not after.",
+        "Production date for your product confirmed in writing.",
+        "Line supervisor availability confirmed for the visit date.",
+        "Previous full month's records confirmed as available.",
+        "Announced or semi-announced approach decided.",
+        "If the visit falls in the holiday window, scope narrowed and the limitation stated in the report.",
+        "Follow-up and corrective-action expectations agreed in advance.",
+      ],
+      tables: [
+        {
+          title: "China Public Holiday Dates, 2026",
+          headers: ["Holiday", "Dates", "Make-up workdays"],
+          rows: [
+            ["Mid-Autumn Festival", "25-27 September (Fri-Sun), 3 days", "None"],
+            ["National Day", "1-7 October (Thu-Wed), 7 days", "20 September (Sun), 10 October (Sat)"],
+          ],
+        },
+        {
+          title: "What a Holiday-Adjacent Audit Can and Cannot Tell You",
+          headers: ["Question", "Can a holiday-window audit answer it?", "Note"],
+          rows: [
+            ["Does the production site exist at the stated address?", "Yes", "Confirmed by physical presence on the day"],
+            ["Are the stated equipment and lines present?", "Yes", "Observed directly, even when idle"],
+            ["Is the factory operating at normal capacity?", "No", "Not observable during a holiday or push week"],
+            ["Are working hours and wage records consistent?", "Limited", "Holiday-period records are not representative"],
+            ["Is management present and responsive?", "Partly", "Depends on the week; supervisors are often on leave"],
+            ["Is my order physically in the factory?", "Yes, if it is", "Direct observation of your goods or line"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "Is it pointless to audit during China's National Day holiday?",
+          a: "No, but the result answers a narrower question. A visit inside the holiday window can confirm that the site exists, that stated equipment is present, and that your order is physically there. It cannot establish the factory's normal operating state, and the report should say so.",
+        },
+        {
+          q: "How far in advance should I book a factory audit around the holidays?",
+          a: "Book before the holiday begins. The two weeks after a national holiday are the most congested period of the audit calendar, because deferred visits and new Q4 orders compete for the same slots.",
+        },
+        {
+          q: "Does the Mid-Autumn Festival affect shipping as much as National Day?",
+          a: "Mid-Autumn is three days with no make-up workday, so its direct effect is smaller. Its indirect effect is larger than the day count suggests, because it sits immediately before the pre-National-Day shipping push.",
+        },
+        {
+          q: "Should I audit before or after placing the deposit?",
+          a: "An audit answers whether the site can make the product, and a deposit decision depends on that answer. For a first order of material value, auditing before releasing significant payment is the common approach. The holiday calendar does not change that logic; it only compresses the window in which you can act.",
+        },
+        {
+          q: "Do these dates apply to every factory?",
+          a: "The public holiday dates are national. Whether a specific factory closes for all of them is a factory-level fact, not a national one. Confirm your supplier's own shutdown and restart dates directly, because some factories run through part of the period and stagger leave.",
+        },
+      ],
+      sources: [
+        { name: "国务院办公厅《关于 2026 年部分节假日安排的通知》", note: "中秋 9 月 25-27 日、国庆 10 月 1-7 日及调休日的官方依据。央视网 / 央广网 2026-09-13 报道。" },
+        { name: "2026 年铁路中秋国庆假期运输方案", note: "运输期为 9 月 23 日至 10 月 8 日，反映全国出行与物流窗口。" },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "2026 年中秋节为 9 月 25 日至 27 日（周五至周日，共 3 天，无调休）。国庆节为 10 月 1 日至 7 日，调休上班日为 9 月 20 日（周日）与 10 月 10 日（周六）。对工厂验厂而言，实际影响不是「工厂停三天」，而是假期前后那几个工作日是一年中最不具代表性的验厂时点：产线只开部分班次、主管休假、假期期间的记录不完整。若你需要一份反映正常运营状态的基线，应在 9 月 22 日之前或 10 月 12 日之后安排；9 月 23 日至 10 月 11 日之间的访问，应作为限定范围的核查，而不是完整基线。",
+      definition:
+        "工厂验厂是按既定范围对生产现场进行的现场评估：审核员实地到访、查阅记录、观察流程，并在范围包含社会责任时访谈管理层与工人，产出的是到访当日发现项的记录。因为验厂记录的是「某一天」的基线，你选哪一天本身就属于方法的一部分。在假期前后访问，得到的是一家非正常运转状态下的工厂基线，这与你真正想问的问题不同，而且通常更没用。",
+      keyPoints: [
+        "2026 年中秋为 3 天且无调休：9 月 25 日至 27 日。",
+        "国庆为 10 月 1 日至 7 日；调休上班日为 9 月 20 日与 10 月 10 日。",
+        "假期前一周是赶工周，被压缩的检查可能让工厂看起来比平时更好。",
+        "假期后第一周是恢复周，可能让工厂看起来比平时更差。",
+        "假期期间的考勤与工资记录不具代表性，所以工时与工资类发现项权重更低。",
+        "某家工厂是否全部停满这些天，属工厂级事实，须直接与供应商确认。",
+      ],
+      steps: [
+        {
+          title: "先确定这次验厂是为了什么，再选日期",
+          body: "基线验厂要的是工厂的正常状态，所以应排在假期前后窗口之外。针对订单的核查对日历没那么敏感，关键是你的货是否真的在生产。合规审核则遵循客户指定的标准，部分方案对「审查期间」有明确规则。",
+        },
+        {
+          title: "从出货日期倒推",
+          body: "核验属文审、远程、数天可完成。验厂是现场、需预约。出货前验货针对具体批次。对 Q4 出货，常用顺序是核验、验厂、验货。若验厂滑入假期窗口，验货日期通常仍可达成，但改成「先验货、后验厂」是错误的取舍，因为验货无法说明工厂的持续能力。",
+        },
+        {
+          title: "在工厂安静下来之前先约审核员",
+          body: "中国法定假期前后审核产能会收紧，原因是所有把访问推迟到假期之后的人，都想约同样的那两周。应在假期之前联系服务方，而不是节后第一个工作日，并说明生产地址、范围，以及是通知式还是半通知式。",
+        },
+        {
+          title: "确认到访当天现场确实在生产",
+          body: "要明确问：到访当天你这款产品的产线是否开？该产线的生产主管是否在厂？上一个完整月的记录是否可查？任何一项答「否」，现场看到的都会是一家空置或非典型的工厂，这值得提前知道。",
+        },
+        {
+          title: "若唯一可约日期落在假期窗口，就改范围",
+          body: "限定范围的访问同样有价值。把它收窄到当天能回答的问题，例如场地是否存在、设备是否在位、仓储与出货活动、管理层访谈，并在报告中写明未观察到正常运营。一份写明自身局限的报告，比一份暗示自己拿到了基线的报告更有用。",
+        },
+      ],
+      examples: [
+        {
+          title: "基线验厂定在 9 月 30 日",
+          body: "访问落在节前赶工与假期初期窗口。产线在为其他客户的订单满负荷运转，而买家的产品那周并未排产。报告呈现的是一家忙碌的工厂，却无法说明买家的产品能否按规格生产。代价是一笔审核费、两周时间，以及一个被推迟的决策。",
+        },
+        {
+          title: "基线验厂定在 10 月 15 日",
+          body: "工厂已恢复常态运营，上一个完整月的记录可查，买家的产品产线在运转。报告反映的是正常状态，可作为后续跟进的基线。代价是等了三周，这也是为什么决策应对照出货日期，而不是对照日历。",
+        },
+      ],
+      checklist: [
+        "已确定验厂目的：基线、针对订单，还是合规。",
+        "已确认客户指定的标准，包括对「审查期间」的规则。",
+        "已确定出货日期，并从其倒推断厂日期。",
+        "在预约验厂之前已完成核验。",
+        "已在假期之前锁定审核产能，而非节后。",
+        "已书面确认你产品的生产日期。",
+        "已确认到访当天产线主管在场。",
+        "已确认上一个完整月的记录可查。",
+        "已确定通知式或半通知式。",
+        "若访问落在假期窗口，已收窄范围并在报告中写明局限。",
+        "已提前约定跟进与纠正措施的要求。",
+      ],
+      tables: [
+        {
+          title: "2026 年中国法定假期日期",
+          headers: ["假期", "日期", "调休上班日"],
+          rows: [
+            ["中秋节", "9 月 25-27 日（周五至周日），3 天", "无"],
+            ["国庆节", "10 月 1-7 日（周四至周三），7 天", "9 月 20 日（周日）、10 月 10 日（周六）"],
+          ],
+        },
+        {
+          title: "假期前后验厂能证明与不能证明什么",
+          headers: ["问题", "假期窗口内验厂能否回答", "说明"],
+          rows: [
+            ["生产场地是否存在于所述地址？", "能", "由到访当日的实地在场确认"],
+            ["所述设备与产线是否在位？", "能", "即使停产也可直接观察到"],
+            ["工厂是否在正常产能下运转？", "不能", "假期或赶工周内不可观测"],
+            ["工时与工资记录是否自洽？", "有限", "假期期间记录不具代表性"],
+            ["管理层是否在场并能回应？", "部分", "取决于具体周次，主管常休假"],
+            ["我的货是否在厂内？", "能（若在）", "对货物或产线的直接观察"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "在中国国庆假期验厂是不是没意义？",
+          a: "不是，但结论回答的问题更窄。假期窗口内的访问可以确认场地存在、所述设备在位、你的货确实在厂，但无法确立工厂的正常运营状态，报告应写明这一点。",
+        },
+        {
+          q: "假期前后验厂要提前多久预约？",
+          a: "在假期开始之前就预约。国庆之后的两周是审核日历最拥堵的时段，因为被推迟的访问与新一批 Q4 订单在争同样的档期。",
+        },
+        {
+          q: "中秋对出货的影响和国庆一样大吗？",
+          a: "中秋是 3 天且无调休，直接影响较小。但间接影响大于天数所显示的程度，因为它紧贴国庆前的出货赶工期。",
+        },
+        {
+          q: "应该在下定金之前还是之后验厂？",
+          a: "验厂回答的是工厂能否生产该产品，而定金决策取决于这个答案。对首单且金额可观的情况，在释放较大金额付款之前验厂是常见做法。假期日历不改变这个逻辑，只是压缩了你能行动的时间窗口。",
+        },
+        {
+          q: "这些日期对每家工厂都适用吗？",
+          a: "法定假期日期是国家统一的。某家工厂是否全部停满，属工厂级事实而非国家层面事实。请直接与供应商确认其停产与复工日期，因为部分工厂会在假期中部分运转并分批放假。",
+        },
+      ],
+      sources: [
+        { name: "国务院办公厅《关于 2026 年部分节假日安排的通知》", note: "中秋 9 月 25-27 日、国庆 10 月 1-7 日及调休日的官方依据。央视网 / 央广网 2026-09-13 报道。" },
+        { name: "2026 年铁路中秋国庆假期运输方案", note: "运输期为 9 月 23 日至 10 月 8 日，反映全国出行与物流窗口。" },
+      ],
+    },
+  },
+
+  // ── 时效性专题：中美第八轮经贸磋商后的验货 / 验厂排期 ──────────────────────
+  // 为什么写：2026-09-20 中美第八轮经贸磋商在纽约结束，商务部 2026-09-24
+  //   新闻发布会（发言人何亚东）说明双方就「对等降税安排」「建立贸易理事会与
+  //   投资理事会」「吉隆坡经贸磋商联合安排延期」等达成共识，并举行首次 AI 对话。
+  // 铁律（本页最关键）：**「达成共识」≠「已生效」**。具体税率与产品清单截至
+  //   2026-09-25 尚未公布，正文明确要求买家按「现行有效」而非「已宣布但未落地」
+  //   的口径做采购与定价计划，绝不用新闻标题替代实施文件。
+  // 来源：商务部例行新闻发布会（2026-09-24）；CGTN（2026-09-25）。
+  {
+    slug: "china-us-trade-talks-2026-inspection-audit-planning",
+    category: "risk",
+    titleEn: "China-US Trade Talks 2026: What They Change for Inspection and Audit Planning",
+    titleZh: "2026 中美经贸磋商后，验货与验厂该怎么排",
+    metaDescEn:
+      "What the eighth round of China-US trade consultations agreed, what is not yet public, and how buyers should plan pre-shipment inspection and factory audit work around tariff and compliance uncertainty.",
+    metaDescZh:
+      "中美第八轮经贸磋商达成了什么、哪些尚未公布，以及买家该如何在关税与合规不确定性中安排出货前验货与工厂验厂。",
+    updated: "2026-09-25",
+    tools: [
+      { href: "/tools/audit-checklist" },
+      { href: "/tools/supplier-risk-calculator" },
+      { href: "/tools/supplier-verification-checklist" },
+      { href: "/tools/supplier-document-checker" },
+    ],
+    services: [
+      { href: "/services/inspection" },
+      { href: "/services/china-factory-audit" },
+      { href: "/services/china-supplier-verification" },
+    ],
+    related: [
+      "ppi-vs-dupro-inspection",
+      "pre-shipment-inspection-checklist",
+      "supplier-verification-vs-factory-audit-vs-inspection",
+      "when-to-order-china-factory-audit",
+      "q4-shipment-window-factory-audit-inspection-combination",
+    ],
+    links: [
+      { href: "/factory-audit/request", labelEn: "Request a factory audit", labelZh: "申请工厂验厂" },
+      { href: "/rfq", labelEn: "Post a buyer RFQ", labelZh: "发布采购需求" },
+    ],
+    en: {
+      quickAnswer:
+        "On 20 September 2026 China and the United States concluded their eighth round of economic and trade consultations in New York. The Chinese Ministry of Commerce stated on 24 September that the two sides reached consensus on issues including reciprocal tariff reductions, the establishment of trade and investment councils, and the extension of the joint arrangement reached at the earlier Kuala Lumpur consultations. The two sides also held their first dialogue on artificial intelligence under the consultation mechanism. For a buyer the practical consequence is narrower than the headlines: firms do not stop making goods while negotiations continue, and an inspection does not become unnecessary because a tariff might fall. What the talks change is timing risk. If a tariff change lands between production and shipment, the cost calculation on an order can move after the goods are already built, which is a reason to inspect earlier and more granularly, not to skip inspection.",
+      definition:
+        "Pre-shipment inspection is a shipment-specific check carried out before goods leave the factory: quantity, workmanship, specification and packing of a particular order are checked against the buyer's requirements, typically using an agreed sampling standard such as AQL. It says nothing about the factory's ongoing capability, which is a factory audit's question. A factory audit is on-site and site-specific: it assesses whether the production facility can make your product and meets the standard you require. The two services answer different questions, and trade-policy news changes the timing pressure on both, not the questions themselves.",
+      keyPoints: [
+        "'Consensus reached' is not 'measures in force': plan on the rate in force today.",
+        "A tariff change is applied at import, but the goods are built earlier, so the cost lands after production.",
+        "Trade-policy uncertainty increases the value of inspecting early enough to act on the result.",
+        "Early defects are correctable while the line is still set up; late defects usually mean rework and renegotiation.",
+        "Tariff arrangements and compliance requirements are different systems: a tariff cut removes no compliance obligation.",
+        "Position is revised through the consultation mechanism, so re-check before each order rather than once.",
+      ],
+      steps: [
+        {
+          title: "Separate what is decided from what is assumed",
+          body: "Write two columns: measures in force today, and measures agreed but not yet published. Plan production and pricing on the first column. Do not let a headline about a future reduction change a purchase decision you are making now.",
+        },
+        {
+          title: "Fix the sequence, then scale it",
+          body: "For most orders the useful order is verification, then factory audit, then pre-shipment inspection. Scale each step to order value and product risk. Trade-policy uncertainty changes the urgency of the inspection step, not the order of the steps.",
+        },
+        {
+          title: "Move inspection earlier in the production cycle",
+          body: "For an order exposed to timing risk, add a during-production check at a defined milestone, commonly around 30% and 70%, rather than relying only on a final pre-shipment inspection. This converts a possible late finding into an early, correctable one.",
+        },
+        {
+          title: "Confirm the entity and the address, every time",
+          body: "A change in tariff treatment is a good moment to re-confirm which legal entity is exporting and which site is producing. Tariff and customs treatment follow the entity, not the relationship, and buyers who discovered late that the exporting entity differed from the invoicing entity have paid for that discovery.",
+        },
+        {
+          title: "Keep the audit scope on the standard, not on the tariff",
+          body: "If your customer mandates SMETA, BSCI or RBA, the audit scope is set by that requirement and is unaffected by trade talks. Do not let tariff news distract from a compliance deadline that has its own calendar.",
+        },
+        {
+          title: "Re-check before each new order, not once",
+          body: "Trade arrangements are revised through the consultation mechanism. A position that is correct in September may not be correct in December. Make the re-check a step in your order process rather than a one-off task.",
+        },
+      ],
+      examples: [
+        {
+          title: "Planned on the headline",
+          body: "A buyer reads that reciprocal tariff reductions were agreed, assumes a lower landed cost and builds that assumption into pricing. No early inspection is booked. At 90% production a workmanship issue surfaces; rework delays shipment past the window in which the assumed rate was available. Cost: rework plus a lost pricing assumption.",
+        },
+        {
+          title: "Planned on the known position",
+          body: "The same buyer plans on the rate in force, books a during-production check at 30%, catches a material substitution while the line is still flexible, and keeps the pre-shipment inspection as the final gate. When implementing documents are published, any reduction is upside. Cost: one additional inspection fee, against a corrected defect and a preserved pricing assumption.",
+        },
+      ],
+      checklist: [
+        "Measures in force separated from measures agreed but not yet published.",
+        "Pricing built on the rate in force today, not on an announced future change.",
+        "Supplier verification completed and the exporting entity confirmed.",
+        "Production address confirmed as the site to be audited.",
+        "Factory audit scoped to the required standard, if a standard is mandated.",
+        "During-production check booked at a defined milestone for timing-exposed orders.",
+        "Pre-shipment inspection retained as the final gate.",
+        "Sampling standard and defect definitions agreed in writing before inspection.",
+        "Corrective-action path agreed in advance, including who decides on rework.",
+        "Compliance requirements checked separately from tariff news.",
+        "Re-check scheduled before the next order, not treated as a one-off.",
+      ],
+      tables: [
+        {
+          title: "What the Eighth Round Agreed, and What Is Not Yet Public",
+          headers: ["Item", "Status as of 25 September 2026", "Source"],
+          rows: [
+            ["Reciprocal tariff arrangements", "Consensus reached; specific rates and product lists not yet published", "MOFCOM press conference, 24 Sep 2026"],
+            ["Trade council and investment council", "Agreement to establish", "MOFCOM, 24 Sep 2026"],
+            ["Kuala Lumpur joint arrangement", "Agreed to extend", "MOFCOM, 24 Sep 2026"],
+            ["First AI dialogue under the mechanism", "Held", "MOFCOM / CGTN, 24-25 Sep 2026"],
+            ["Implementation timetable", "Follow-up through the consultation mechanism", "MOFCOM, 24 Sep 2026"],
+          ],
+        },
+        {
+          title: "Inspection Checkpoints and What Each Can Change",
+          headers: ["Checkpoint", "Typical timing", "What it can change"],
+          rows: [
+            ["During-production (initial)", "Around 30% produced", "Materials and workmanship; line still adjustable"],
+            ["During-production (mid)", "Around 70% produced", "Pace, consistency, emerging defect trends"],
+            ["Pre-shipment inspection", "100% produced and packed", "Ship or don't-ship decision; still correctable"],
+            ["Container loading", "At loading", "Quantity, packing, seal integrity"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "Should I delay ordering until the tariff details are published?",
+          a: "Delaying production has its own cost, and the timing of publication is not something a buyer controls. The more robust approach is to plan on the position in force, inspect early enough to stay flexible, and treat later changes as upside.",
+        },
+        {
+          q: "Does a tariff reduction mean I can skip inspection?",
+          a: "No. Tariffs and product quality are unrelated. Inspection answers whether your goods match your specification, and a tariff change does not alter that question.",
+        },
+        {
+          q: "Is a factory audit still needed if I already inspect every shipment?",
+          a: "Yes, if your risk depends on the site's capability. Inspection is shipment-specific and cannot detect undisclosed subcontracting or a systemic process problem. The two cover different risks.",
+        },
+        {
+          q: "What does 'reciprocal tariff reduction' actually mean for my product?",
+          a: "As of 25 September 2026 the specific rates and product lists had not been published, so the answer depends on implementing documents that did not yet exist. Check the official publication before assuming any rate.",
+        },
+        {
+          q: "Where should I verify these developments?",
+          a: "The Chinese Ministry of Commerce publishes its regular press conferences and notices directly. Use the primary source rather than a secondary summary of a headline.",
+        },
+      ],
+      sources: [
+        { name: "商务部例行新闻发布会（2026-09-24）", note: "就中美第八轮经贸磋商达成对等降税安排、建立贸易与投资理事会、吉隆坡联合安排延期等共识，以及首次 AI 对话作出说明。" },
+        { name: "CGTN（2026-09-25）", note: "确认第八轮经贸磋商在纽约结束，议题涵盖关税、贸易与投资。" },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "2026 年 9 月 20 日，中美第八轮经贸磋商在纽约结束。中国商务部于 9 月 24 日说明，双方就「对等降税安排」「建立贸易理事会与投资理事会」「吉隆坡经贸磋商联合安排延期」等问题达成多项共识，并在磋商机制下举行首次人工智能对话。对买家而言，实际影响比新闻标题要窄：谈判进行中企业照常生产，也不会因为关税可能下调，验货就变得不必要。磋商真正改变的是**时间风险**：若关税在「生产完成」与「出货」之间发生变化，订单的成本账可能在货物已经造好之后才变动。这正是应当更早、更细地验货的理由，而不是跳过验货的理由。",
+      definition:
+        "出货前验货（PSI）是在货物离厂前进行的、针对具体批次的检查：按买家要求核对某一订单的数量、工艺、规格与包装，通常采用约定的抽样标准（如 AQL）。它不说明工厂的持续能力，那是工厂验厂要回答的问题。工厂验厂是现场且针对具体场地的：评估该生产设施能否生产你的产品、是否达到你所要求的标准。两项服务回答的是不同问题，而贸易政策新闻改变的是两者的时间压力，不是问题本身。",
+      keyPoints: [
+        "「达成共识」不等于「已生效」：应按今日生效的口径做计划。",
+        "关税在进口环节征收，但货物更早造好，所以成本变动落在生产之后。",
+        "贸易政策不确定性会提高「早验货、留出可行动时间」的价值。",
+        "早期缺陷在产线仍为你的订单设置时还可修正；后期缺陷通常意味着返工与重谈。",
+        "关税安排与合规要求是两套体系：降税不会免除任何合规义务。",
+        "立场会通过磋商机制调整，所以应在每笔订单前复查，而不是只做一次。",
+      ],
+      steps: [
+        {
+          title: "把「已定」与「假定」分开",
+          body: "写两栏：今日生效的措施，以及已达成共识但尚未公布的措施。生产与定价按第一栏做计划。不要让一条关于未来降税的标题改变你当下正在做的采购决策。",
+        },
+        {
+          title: "先固定顺序，再按风险缩放",
+          body: "多数订单的可用顺序是：核验、工厂验厂、出货前验货。每一步按订单金额与产品风险缩放。贸易政策不确定性改变的是验货这一步的紧迫度，而不是步骤顺序。",
+        },
+        {
+          title: "把验货提前到生产周期中段",
+          body: "对存在时间风险的订单，在约定的节点增加生产中期检查（常见为约 30% 与 70%），而不是只依赖最后一次出货前验货。这把可能的后段发现，转化为可修正的早期发现。",
+        },
+        {
+          title: "每一次都复核主体与地址",
+          body: "关税待遇发生变化时，正是复核「哪个法律主体在出口、哪个场地在生产」的好时机。关税与海关待遇跟随主体，而不是跟随关系；那些晚才发现出口主体与开票主体不一致的买家，为此付出了代价。",
+        },
+        {
+          title: "审核范围盯标准，不盯关税",
+          body: "若客户指定 SMETA、BSCI 或 RBA，审核范围由该要求决定，不受经贸磋商影响。不要让关税新闻分散你对有独立时间表的合规截止日的注意。",
+        },
+        {
+          title: "每笔新订单前复查一次，而不是只查一次",
+          body: "贸易安排会通过磋商机制修订。9 月正确的判断，12 月未必仍然正确。把复查做成下单流程中的一个步骤，而不是一次性任务。",
+        },
+      ],
+      examples: [
+        {
+          title: "按标题做计划",
+          body: "买家看到对等降税达成共识，假定到岸成本下降，并把这个假定写进定价。没有安排早期验货。生产到 90% 时暴露工艺问题，返工使出货推迟到假定税率可用的窗口之外。代价：返工，加上一个失效的定价假定。",
+        },
+        {
+          title: "按已知口径做计划",
+          body: "同一买家按现行税率做计划，在生产 30% 时安排中期检查，在产线仍有弹性时抓到材料替换，并把出货前验货保留为最后关口。实施文件公布后，任何降税都是额外收益。代价：多一笔验货费，换回一个被修正的缺陷与一个被保住的价格假定。",
+        },
+      ],
+      checklist: [
+        "已把「已生效」与「已共识未公布」分开。",
+        "定价按今日生效税率，而非已宣布的未来变动。",
+        "已完成供应商核验并确认出口主体。",
+        "已确认生产地址即待审场地。",
+        "若客户指定标准，验厂范围已按该标准设定。",
+        "对存在时间风险的订单，已在约定节点安排生产中期检查。",
+        "出货前验货保留为最后关口。",
+        "验货前已书面约定抽样标准与缺陷定义。",
+        "已提前约定纠正措施路径，包括谁决定返工。",
+        "合规要求已与关税新闻分开核查。",
+        "已在下一笔订单前安排复查，而非当成一次性任务。",
+      ],
+      tables: [
+        {
+          title: "第八轮磋商达成了什么、哪些尚未公布",
+          headers: ["事项", "截至 2026-09-25 的状态", "来源"],
+          rows: [
+            ["对等降税安排", "已达成共识；具体税率与产品清单尚未公布", "商务部新闻发布会，2026-09-24"],
+            ["贸易理事会与投资理事会", "同意建立", "商务部，2026-09-24"],
+            ["吉隆坡联合安排", "同意延期", "商务部，2026-09-24"],
+            ["机制下首次 AI 对话", "已举行", "商务部 / CGTN，2026-09-24 至 25"],
+            ["实施时间表", "通过磋商机制跟进", "商务部，2026-09-24"],
+          ],
+        },
+        {
+          title: "验货节点与各节点能改变什么",
+          headers: ["节点", "典型时点", "能改变什么"],
+          rows: [
+            ["生产中期（初次）", "约 30% 产出", "材料与工艺；产线仍可调整"],
+            ["生产中期（中段）", "约 70% 产出", "进度、一致性、缺陷趋势"],
+            ["出货前验货", "100% 产出并包装", "出货与否的决策；仍可修正"],
+            ["装柜", "装柜时", "数量、包装、封条完整性"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "要不要等关税细节公布后再下单？",
+          a: "推迟生产本身也有成本，且公布时间不是买家能控制的。更稳妥的做法是按现行口径做计划、把验货提前到足以保持灵活，并把后续变化视为额外收益。",
+        },
+        {
+          q: "降税了是不是可以不验货？",
+          a: "不可以。关税与产品质量无关。验货回答的是你的货是否与规格一致，关税变化不改变这个问题。",
+        },
+        {
+          q: "我每批都验货，还需要验厂吗？",
+          a: "如果风险取决于场地能力，就需要。验货针对具体批次，无法发现未披露的分包或系统性的流程问题。两者覆盖的是不同风险。",
+        },
+        {
+          q: "「对等降税」对我的产品具体意味着什么？",
+          a: "截至 2026 年 9 月 25 日，具体税率与产品清单尚未公布，答案取决于当时还不存在的实施文件。在假定任何税率之前，请先查官方发布。",
+        },
+        {
+          q: "这些进展该到哪里核实？",
+          a: "中国商务部直接发布其例行新闻发布会与公告。请使用一手来源，而不是对标题的二手转述。",
+        },
+      ],
+      sources: [
+        { name: "商务部例行新闻发布会（2026-09-24）", note: "就中美第八轮经贸磋商达成对等降税安排、建立贸易与投资理事会、吉隆坡联合安排延期等共识，以及首次 AI 对话作出说明。" },
+        { name: "CGTN（2026-09-25）", note: "确认第八轮经贸磋商在纽约结束，议题涵盖关税、贸易与投资。" },
+      ],
+    },
+  },
+
+  // ── 时效性专题：Q4 出货窗口的验厂 + 验货组合 ───────────────────────────────
+  // 为什么写：Q4 三个时钟同时走（出货截止、假期停产、验货日历），
+  //   而买家最常见的错误是把「验厂」与「验货」当成二选一来省钱。
+  //   本篇讲的是**排序与缩放**，不是叠加销售：验厂按场地一次，验货按批次重复。
+  // 与既有内容的关系：`when-to-order-china-factory-audit` 讲「何时该验厂」的
+  //   一般原则；`pre-shipment-inspection-checklist` 讲验货本身。本篇只讲
+  //   Q4 窗口下两者如何组合与排期，三者互补，不重复。
+  {
+    slug: "q4-shipment-window-factory-audit-inspection-combination",
+    category: "audit",
+    titleEn: "Factory Audit and Inspection for the Q4 Shipment Window: A Combination Guide",
+    titleZh: "Q4 出货高峰前：工厂验厂与验货的组合作法",
+    metaDescEn:
+      "How to combine a factory audit with pre-shipment inspection to survive China's Q4 shipment peak, holiday closures and a congested inspection calendar without paying twice for the same answer.",
+    metaDescZh:
+      "如何在 Q4 出货高峰、假期停产与验货排期拥堵中，把工厂验厂与出货前验货组合使用，避免为同一个问题付两次钱。",
+    updated: "2026-09-25",
+    tools: [
+      { href: "/tools/audit-checklist" },
+      { href: "/tools/supplier-risk-calculator" },
+      { href: "/tools/supplier-verification-checklist" },
+      { href: "/tools/supplier-scorecard" },
+    ],
+    services: [
+      { href: "/services/inspection" },
+      { href: "/services/china-factory-audit" },
+      { href: "/services/china-supplier-verification" },
+    ],
+    related: [
+      "when-to-order-china-factory-audit",
+      "ppi-vs-dupro-inspection",
+      "pre-shipment-inspection-checklist",
+      "supplier-verification-vs-factory-audit-vs-inspection",
+      "china-factory-audit-mid-autumn-national-day-scheduling",
+    ],
+    links: [
+      { href: "/factory-audit/request", labelEn: "Request a factory audit", labelZh: "申请工厂验厂" },
+      { href: "/rfq", labelEn: "See what buyers are sourcing", labelZh: "查看买家正在采购什么" },
+    ],
+    en: {
+      quickAnswer:
+        "Q4 is when three clocks run at once: shipping deadlines, Chinese national holidays, and an inspection calendar that fills up weeks in advance. For 2026 the holiday dates are Mid-Autumn on 25-27 September and National Day on 1-7 October, with make-up workdays on 20 September and 10 October. The mistake most buyers make is treating audit and inspection as alternatives and choosing one to save cost. They answer different questions, and in a compressed window you need both, sequenced and scaled. The practical rule is: audit the site once, before you move volume to it; inspect every shipment, early enough to still act.",
+      definition:
+        "A factory audit is an on-site assessment of the production site against a defined scope: capability, systems and compliance where the scope includes it. It produces a baseline that describes the factory, not your order. A pre-shipment inspection is a shipment-specific check of quantity, workmanship, specification and packing, typically under an agreed sampling standard such as AQL. It describes your order, not the factory. Because they describe different things, a clean result on one says nothing about the other: a well-audited factory can still ship a defective batch, and a perfectly good shipment can come from a factory whose systems are weak. In a peak-season window you have less time to recover from either failure, which is why the combination matters more, not less.",
+      keyPoints: [
+        "Q4 has three interacting constraints: shipment deadlines, holiday closures and inspection capacity.",
+        "Audit and inspection are not substitutes; they answer different questions about different things.",
+        "One audit per site, repeated on material change; one inspection per shipment, repeated every time.",
+        "The week before a holiday is a push week, and the week after is a recovery week: neither is a normal baseline.",
+        "Peak-season inspection slots fill weeks ahead, and a full calendar cannot be bought back later.",
+        "Agree the sampling standard and defect definitions in writing before inspection, because the recovery window is short.",
+      ],
+      steps: [
+        {
+          title: "Fix the shipment date first, then work backwards",
+          body: "Everything else is scheduled against the shipment date, not against convenience. Lay out the three gates below and assign a date to each before booking anything.",
+        },
+        {
+          title: "Gate 1: supplier verification",
+          body: "Confirm registration, business scope, production address, certificates and the exporting entity. This is fast and cheap and closes questions that would otherwise consume an audit slot, so do it first.",
+        },
+        {
+          title: "Gate 2: factory audit, once per site",
+          body: "Commission an audit when the site is new to you, when evidence is incomplete, when product risk is high, or before moving significant volume to a site nobody has visited. One audit per site, not per order. Schedule it outside 23 September to 11 October if you want a baseline that reflects normal operations.",
+        },
+        {
+          title: "Gate 3: inspection, scaled and repeated",
+          body: "Book a final pre-shipment inspection at 100% produced and packed as the ship-or-don't-ship gate, and add a during-production check at a defined milestone for orders where a late finding would be unrecoverable.",
+        },
+        {
+          title: "Book auditor capacity before the holiday, not after",
+          body: "The two weeks after a national holiday are the most congested period of the year, because deferred visits and new Q4 orders compete for the same slots. Secure your inspection slots in September for shipments in October and November.",
+        },
+        {
+          title: "Agree defect definitions and the corrective path in writing",
+          body: "Before inspection, fix the sampling standard, the critical, major and minor defect definitions, and who decides on rework. A disagreement about whether a defect is major costs more during peak season than at any other time, because the recovery window is shorter.",
+        },
+        {
+          title: "Hold back a contingency on the shipping date",
+          body: "Peak-season plans that assume a clean first inspection are plans with no margin. Build in a recovery buffer sized to what a rework cycle would cost in time, and decide in advance whether a failed inspection means rework, a partial shipment or a delay.",
+        },
+      ],
+      examples: [
+        {
+          title: "Inspection only",
+          body: "A buyer books a single final inspection in late November. Production slips because of a holiday closure, the goods are ready in a week when no auditor is free, and the inspection happens three days late. A major defect is found and the rework pushes the shipment past the container cut-off. Cost: air freight or a missed retail window.",
+        },
+        {
+          title: "Verification, audit, then scaled inspection",
+          body: "The same buyer verifies the supplier in August, audits the site in mid-September outside the push week, and books a during-production check plus a final inspection. Production still slips, but the during-production check caught a material substitution while the line was still adjustable. The final inspection passes and the shipment leaves on time. Cost: one audit fee and one extra inspection against a preserved delivery window.",
+        },
+      ],
+      checklist: [
+        "Shipment date fixed and the three gates dated against it.",
+        "Supplier verification completed before the audit is booked.",
+        "Factory audit scoped and scheduled outside the holiday-adjacent window where a baseline is needed.",
+        "Production address confirmed as the site to be audited.",
+        "During-production check added for tight-window or high-risk orders.",
+        "Inspection slots booked in September for October and November shipments.",
+        "Sampling standard and defect definitions agreed in writing.",
+        "Corrective-action decision path agreed before inspection.",
+        "Exporting entity and invoicing entity confirmed as consistent.",
+        "Contingency buffer sized to one rework cycle.",
+        "Customer-mandated audit standard, if any, checked against its own deadline.",
+      ],
+      tables: [
+        {
+          title: "The Three Q4 Constraints",
+          headers: ["Clock", "What it forces", "Consequence if ignored"],
+          rows: [
+            ["Shipment deadline", "Container booking, cut-off and arrival dates", "Late delivery, air-freight cost, missed retail window"],
+            ["Holiday closures", "Lines idle 25-27 September and 1-7 October", "Production pushed into an even tighter November"],
+            ["Inspection calendar", "Auditor capacity fills weeks ahead", "No slot when your goods are ready to inspect"],
+          ],
+        },
+        {
+          title: "What Each Gate Answers",
+          headers: ["Question", "Verification", "Audit", "Inspection"],
+          rows: [
+            ["Is the company real and legally who it claims to be?", "Yes", "No", "No"],
+            ["Can this site make my product to my specification?", "No", "Yes", "No"],
+            ["Does this batch match my specification?", "No", "No", "Yes"],
+            ["Is production subcontracted to another site?", "Partly", "Yes", "No"],
+            ["How often must it be repeated?", "Once, then on change", "Once per site, then on change", "Every shipment"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "Can I use a factory audit instead of an inspection to save cost?",
+          a: "No. An audit describes the factory and an inspection describes your shipment. An audit cannot tell you whether this batch matches your specification, which is the question a pre-shipment inspection exists to answer.",
+        },
+        {
+          q: "How long does inspection capacity stay tight in Q4?",
+          a: "Pressure typically builds from late September and persists through November, driven by holiday closures and the year-end shipping peak. The practical answer is to book early rather than to estimate the exact duration, because booked slots, not available capacity, are what matters.",
+        },
+        {
+          q: "Should the audit be announced or unannounced?",
+          a: "It depends on what you are testing. An announced visit makes records and management more available, while an unannounced or semi-announced visit is the method that establishes where production actually happens when subcontracting is the concern. Decide the question first, then the approach.",
+        },
+        {
+          q: "Do I need a new audit for every order?",
+          a: "No. An audit is a baseline for a site. Repeat it on material change such as a new site, new ownership, a new product category or after a compliance incident, not for every order. Inspect per shipment instead.",
+        },
+        {
+          q: "What if my production falls entirely inside the holiday window?",
+          a: "Scope the visit to what that day can genuinely answer, such as site existence, equipment present, and warehouse and shipping activity, and state the limitation in the report. A report that documents what it could not observe is more useful than one that implies a baseline it did not capture.",
+        },
+      ],
+      sources: [
+        { name: "国务院办公厅《关于 2026 年部分节假日安排的通知》", note: "中秋 9 月 25-27 日（3 天，无调休）；国庆 10 月 1-7 日，调休上班 9 月 20 日与 10 月 10 日。央视网 / 央广网 2026-09-13 报道。" },
+        { name: "2026 年铁路中秋国庆假期运输方案", note: "运输期为 9 月 23 日至 10 月 8 日，反映全国物流窗口。" },
+        { name: "商务部例行新闻发布会（2026-09-24）", note: "贸易政策时间安排可能影响 Q4 出货窗口的背景（详见中美经贸磋商相关指南）。" },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "Q4 是三个时钟同时走的时候：出货截止、中国法定假期，以及提前数周就会被排满的验货日历。2026 年的假期日期为中秋 9 月 25-27 日、国庆 10 月 1-7 日，调休上班日为 9 月 20 日与 10 月 10 日。买家最容易犯的错误，是把验厂与验货当成二选一，为了省钱只挑一个。两者回答的是不同问题，而在被压缩的窗口里，你需要两者——并且要排序、要按风险缩放。实务规则是：场地审一次，在你把量移过去之前；每批货都验，且早到发现问题还能行动。",
+      definition:
+        "工厂验厂是按既定范围对生产现场进行的现场评估：能力、体系，以及在范围包含时的合规。它产出的基线描述的是工厂，不是你的订单。出货前验货是针对具体批次的检查：按约定抽样标准（如 AQL）核对某一订单的数量、工艺、规格与包装。它描述的是你的订单，不是工厂。因为两者描述的对象不同，一个结果良好并不说明另一个也好：一家审核良好的工厂仍可能发一批不良品，一批完美的货也可能出自体系薄弱的工厂。在旺季窗口里，任一失败的恢复时间都更少，所以组合反而更重要，而不是更不重要。",
+      keyPoints: [
+        "Q4 有三个相互作用的约束：出货截止、假期停产、验货产能。",
+        "验厂与验货不是替代关系，它们对不同对象回答不同问题。",
+        "验厂按场地一次，遇重大变化再重复；验货按批次，每批都要做。",
+        "假期前一周是赶工周、后一周是恢复周，两者都不是正常基线。",
+        "旺季验货档期提前数周排满，且过期无法用钱买回。",
+        "验货前必须书面约定抽样标准与缺陷定义，因为恢复窗口很短。",
+      ],
+      steps: [
+        {
+          title: "先定出货日期，再倒推一切",
+          body: "其他所有安排都对着出货日期排，而不是对着方便排。先把下面三道关口列出来，各定一个日期，然后再去预约任何服务。",
+        },
+        {
+          title: "关口一：供应商核验",
+          body: "确认登记信息、经营范围、生产地址、证书与出口主体。这一步快且便宜，能关掉那些否则会占用验厂档期的问题，所以先做。",
+        },
+        {
+          title: "关口二：工厂验厂，按场地一次",
+          body: "当场地对你是新的、证据不完整、产品风险高，或在把可观数量移向一个没人到访过的场地之前，应安排验厂。按场地一次，不是按订单一次。若要一份反映正常运营的基线，应排在 9 月 23 日至 10 月 11 日之外。",
+        },
+        {
+          title: "关口三：验货，按风险缩放并重复",
+          body: "在 100% 产出并包装时安排出货前验货，作为出货与否的关口；对后段发现将不可挽回的订单，在约定节点增加生产中期检查。",
+        },
+        {
+          title: "在假期之前锁定审核产能，而不是之后",
+          body: "法定假期之后的两周是一年中最拥堵的时段，因为被推迟的访问与新一批 Q4 订单在争同样的档期。10 月与 11 月的出货，应在 9 月就把验货档期锁下来。",
+        },
+        {
+          title: "书面约定缺陷定义与纠正路径",
+          body: "验货之前，固定抽样标准、致命/严重/轻微缺陷的定义，以及谁来决定返工。关于某个缺陷是否属于「严重」的分歧，在旺季的代价高于其他任何时段，因为恢复窗口更短。",
+        },
+        {
+          title: "在出货日期上留出缓冲",
+          body: "旺季里假定「第一次验货就通过」的计划，是没有余量的计划。请按一个返工周期的时间成本预留缓冲，并提前决定：验货不通过时，是返工、分批出货，还是延期。",
+        },
+      ],
+      examples: [
+        {
+          title: "只验货",
+          body: "买家只在 11 月底安排一次最终验货。生产因假期停产而推迟，货物备好时那一周没有审核员有空，验货晚了三天。发现严重缺陷，返工把出货推过了截关时间。代价：空运，或错过零售窗口。",
+        },
+        {
+          title: "核验、验厂，再缩放验货",
+          body: "同一买家在 8 月完成核验，9 月中旬（赶工周之外）完成验厂，并安排了一次生产中期检查加一次最终验货。生产仍然推迟，但中期检查在产线仍有弹性时抓到了材料替换。最终验货通过，货物按时出运。代价：一笔审核费与一次额外验货，换回一个被保住的交付窗口。",
+        },
+      ],
+      checklist: [
+        "已确定出货日期，并据此为三道关口各定日期。",
+        "在预约验厂之前已完成供应商核验。",
+        "需要基线时，验厂已排在假期前后窗口之外。",
+        "已确认生产地址即待审场地。",
+        "对时间紧或高风险的订单，已增加生产中期检查。",
+        "10 月与 11 月的出货，验货档期已在 9 月锁定。",
+        "已书面约定抽样标准与缺陷定义。",
+        "已在验货前约定纠正措施的决策路径。",
+        "已确认出口主体与开票主体一致。",
+        "已按一个返工周期预留缓冲。",
+        "客户指定的审核标准（如有）已对照其自身截止日核查。",
+      ],
+      tables: [
+        {
+          title: "Q4 的三个约束",
+          headers: ["时钟", "它迫使什么", "忽略的后果"],
+          rows: [
+            ["出货截止", "订舱、截关与到港日期", "延误、空运成本、错过零售窗口"],
+            ["假期停产", "9 月 25-27 日与 10 月 1-7 日产线停工", "生产被挤进更紧的 11 月"],
+            ["验货日历", "审核产能提前数周排满", "货备好时没有档期"],
+          ],
+        },
+        {
+          title: "各关口分别回答什么",
+          headers: ["问题", "核验", "验厂", "验货"],
+          rows: [
+            ["公司是否真实且法律主体与所述一致？", "是", "否", "否"],
+            ["该场地能否按我的规格生产？", "否", "是", "否"],
+            ["本批货是否符合我的规格？", "否", "否", "是"],
+            ["生产是否分包给了其他场地？", "部分", "是", "否"],
+            ["需要多久重复一次？", "一次，遇变化再查", "按场地一次，遇变化再查", "每批都做"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "能不能用验厂替代验货来省钱？",
+          a: "不能。验厂描述工厂，验货描述你的货。验厂无法告诉你「本批货是否符合规格」，而这正是出货前验货要回答的问题。",
+        },
+        {
+          q: "Q4 验货产能会紧张多久？",
+          a: "压力通常从 9 月下旬开始并延续至 11 月，由假期停产与年末出货高峰共同驱动。实务答案是尽早预约，而不是去估准确持续多久——关键是已锁定的档期，而不是还剩下的产能。",
+        },
+        {
+          q: "验厂应该通知还是不通知？",
+          a: "取决于你要检验什么。通知式访问让记录与管理层更可及；当关切点是分包时，未通知或半通知式才是能确认真实生产地点的做法。先定问题，再定方式。",
+        },
+        {
+          q: "每笔订单都要新做一次验厂吗？",
+          a: "不需要。验厂是场地的基线。遇到重大变化再重复，例如新场地、新股权、新产品类别或合规事件之后，而不是每笔订单都做。每批货用验货来把关。",
+        },
+        {
+          q: "如果我的生产整个落在假期窗口内怎么办？",
+          a: "把访问范围收窄到当天确实能回答的问题，例如场地是否存在、设备是否在位、仓储与出货活动，并在报告中写明局限。一份写明未能观察到什么的报告，比一份暗示自己拿到了基线的报告更有用。",
+        },
+      ],
+      sources: [
+        { name: "国务院办公厅《关于 2026 年部分节假日安排的通知》", note: "中秋 9 月 25-27 日（3 天，无调休）；国庆 10 月 1-7 日，调休上班 9 月 20 日与 10 月 10 日。央视网 / 央广网 2026-09-13 报道。" },
+        { name: "2026 年铁路中秋国庆假期运输方案", note: "运输期为 9 月 23 日至 10 月 8 日，反映全国物流窗口。" },
+        { name: "商务部例行新闻发布会（2026-09-24）", note: "贸易政策时间安排可能影响 Q4 出货窗口的背景（详见中美经贸磋商相关指南）。" },
       ],
     },
   },

@@ -38,6 +38,7 @@ export default async function Page({ params, searchParams }: Props) {
   const sp = await searchParams;
   const dict = await getDictionary(locale);
   const sa = (dict.selfAssessment ?? {}) as Record<string, string>;
+  const sd = (dict.supplierDashboard ?? {}) as Record<string, string>;
 
   // 归属裁决（会话优先 / 邮箱兜底 / 歧义拒）。无会话且无邮箱 ⇒ 需登录（满足 CS-B Test13）。
   const access = await resolveSupplierAccess({
@@ -105,6 +106,15 @@ export default async function Page({ params, searchParams }: Props) {
             "填写社会责任与质量两份清单（共 72 项检查点），提交后由平台审核并发布「工厂自评估」标签。"}
         </p>
       </section>
+
+      <div className="max-w-4xl mx-auto mb-6">
+        <a
+          className="btn-secondary inline-block px-4 py-2 text-sm"
+          href={localePath(locale, "/supplier-dashboard")}
+        >
+          {sd?.pageTitle ?? "Supplier Dashboard"}
+        </a>
+      </div>
 
       {templates.length === 0 ? (
         <div className="card p-6 text-center text-[#64748b]">

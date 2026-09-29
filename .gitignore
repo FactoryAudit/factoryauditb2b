@@ -97,3 +97,19 @@ scripts/i18n_curated.json
 scripts/.cs03-post-test.bundle.mjs
 scripts/.*.bundle.mjs
 scripts/.*.bundle.cjs
+
+# 阶段 1 存档前隔离：临时探针输出（含 DB 转储 / 供应商联系人 PII / token 校验痕迹，禁止入库）
+step12-*.txt
+step12-*.json
+step12b-*.txt
+step13-*.txt
+db*.txt
+dbapply_*.txt
+dbq*.txt
+dbcols.txt
+pushout.txt
+gitstate.txt
+.git-msg-*
+.sitemap-new.txt
+.url-submit-log.txt
+tmp/

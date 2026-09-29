@@ -1,0 +1,28 @@
+
+=== CS-22E LIVE E2E: 22 PASS / 1 FAIL ===
+PASS A1 create auth user
+PASS A2 create test supplier
+PASS B1 login ok  :: status=200
+PASS B2 session cookie captured  :: sb-tcyhstswppoqwlmchsmc-…
+PASS C1 unauth dashboard 200  :: status=200
+PASS C2 unauth shows sign-in (no stats)
+PASS C3 owner dashboard 200  :: status=200
+PASS C4 owner shows dashboard UI
+PASS C5 owner dashboard no internal UUID leak
+PASS C6 owner badge state present
+PASS D1 insert share events
+PASS D2 insert active verification
+PASS D3 profileViews aggregated >=1  :: firstVal=1
+FAIL D4 visibility points >=40  :: points=undefined
+PASS D5 CS-D resolver reflected (ONLINE_VERIFIED)
+PASS D6 no reviewer/verifier/admin_note leakage
+PASS E1 found a public supplier  :: ho-chi-minh-garment
+PASS E2 share api ok  :: status=200
+PASS E3 token is sup_ external id  :: sup_qs2ubhksr4
+PASS E4 sharePath no internal UUID  :: /suppliers/ho-chi-minh-garment?ref=sup_qs2ubhksr4
+PASS F1 non-public share blocked (404)  :: status=404 err=profile_not_public
+PASS G1 anon insert rejected  :: status=401
+PASS G2 anon cannot read others' events  :: status=401
+--- cleanup ---
+ok deleted supplier + events + verification
+ok deleted auth user

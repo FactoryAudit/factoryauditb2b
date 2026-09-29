@@ -41,7 +41,10 @@ export function localeFromPath(pathname: string): Locale {
 
 /** 给路径加上语言前缀（英文不加） */
 export function localePath(locale: Locale, path: string): string {
-  const clean = path === "/" ? "" : path.startsWith("/") ? path : `/${path}`;
+  // 🔴 "" 与 "/" 必须等价：都表示"语言根"。
+  //   修正前 path="" 会走 else 分支被补成 "/"，产出 "/zh/"（**带尾斜杠**），
+  //   而 /zh/ 会 308 跳到 /zh ⇒ 该 URL 一旦进 sitemap 就是"站点地图含 3XX"错误。
+  const clean = path === "/" || path === "" ? "" : path.startsWith("/") ? path : `/${path}`;
   return locale === DEFAULT_LOCALE ? clean || "/" : `/${locale}${clean}`;
 }
 

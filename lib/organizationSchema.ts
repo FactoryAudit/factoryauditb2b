@@ -57,9 +57,11 @@ export function organizationSchema(
   const cfg = getTrustConfig();
 
   const org: Record<string, unknown> = {
-    // 双类型：Organization 提供实体识别，ProfessionalService 强化"专业服务机构"语义
-    // （LocalBusiness 子类型；无实体地址不出本地面板，但 E-E-A-T 实体识别有效）
-    "@type": ["Organization", "ProfessionalService"],
+    // 🔴 @type 在末尾按"是否真有地址"决定（见下方 assignTypes）：
+    //    ProfessionalService 是 LocalBusiness 的子类型，schema.org / Google 对
+    //    LocalBusiness 系要求 address。未配置 TRUST_* 时若仍声明 ProfessionalService，
+    //    会因缺必填 address 导致**全站每页** schema 校验报错（审计 1,844 例即此）。
+    //    故：有真实地址 → ["Organization","ProfessionalService"]；无 → 仅 "Organization"。
     // @id 让其他 Schema（WebSite / WebPage / Service）能用 publisher 引用同一个实体，
     // 避免 Google 把"品牌"和"网站"识别成两个不相关对象。
     "@id": `${ORG_URL}#organization`,
@@ -151,6 +153,13 @@ export function organizationSchema(
       };
     }
   }
+
+  // 🔴 @type 依"是否真有 address"决定：ProfessionalService(=LocalBusiness 子类型)
+  //    在无地址时会被 schema.org / Google 判为缺必填字段，导致全站每页报错。
+  const hasAddress = !!org.address;
+  org["@type"] = hasAddress
+    ? ["Organization", "ProfessionalService"]
+    : "Organization";
 
   return org;
 }

@@ -41,6 +41,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/tools/compare",
     "/rfq",
     "/factory-audit/request",
+    // STEP-05：/verify-supplier 是「买家已拿到一家工厂、付款前判断真假」的公开
+    // SEO 落地页（承接 "how to verify a supplier" / "is this factory real"）。
+    // 页面自身 robots = index,follow，此前却漏提交进 sitemap —— 属
+    // 「可索引页未含在站点地图」。此处补上，与页面可索引性同源。
+    "/verify-supplier",
     "/join-supplier-network",
     "/suppliers",
     // CS-01：/register 是账户体系页面，与 /login、/account 同类，不应进 sitemap

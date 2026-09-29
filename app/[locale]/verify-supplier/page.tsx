@@ -145,7 +145,7 @@ export default async function VerifySupplierPage({
             <h2 className="font-semibold text-[#0f172a]">{vs.servicesTitle}</h2>
             <p className="text-sm text-[#64748b] mt-1 mb-3">{vs.servicesLead}</p>
             <div className="flex flex-wrap gap-3">
-              <Link href={p("/services/verification")} className="btn btn-outline text-sm">
+              <Link href={p("/services/supplier-verification")} className="btn btn-outline text-sm">
                 {vs.serviceVerification}
               </Link>
               <Link href={p("/factory-audit/request")} className="btn btn-outline text-sm">

@@ -262,7 +262,7 @@ export default async function CountryServicePage({ params }: { params: Promise<P
             </Link>
           </li>
           <li>
-            <Link href={p(crossSlug)} className="text-[#0f4c81] hover:underline">
+            <Link href={p(`/services/${crossSlug}`)} className="text-[#0f4c81] hover:underline">
               {countryName}{" "}
               {crossService
                 ? pickZhPair(locale, crossService.nameEn, crossService.nameZh)

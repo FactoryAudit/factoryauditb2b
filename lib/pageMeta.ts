@@ -54,14 +54,24 @@ export function trimMetaDescription(
 }
 
 export function buildPageMetadata({ locale, path, title, description, robots, withBrand = true }: MetaInput): Metadata {
-  const finalTitle = withBrand ? `${title} | FactoryAuditB2B` : title;
+  // 去重：部分页面（如集群页 seo_title）已自带品牌名，避免 "... | FactoryAuditB2B | FactoryAuditB2B"
+  const BRAND_SUFFIX = " | FactoryAuditB2B";
+  const finalTitle =
+    withBrand && !title.includes("FactoryAuditB2B") ? `${title}${BRAND_SUFFIX}` : title;
+  // ── description 长度闸门统一收口（2026-09-29）────────────────────────────
+  // 此前 `trimMetaDescription` 只在少数静态页被手动调用，而 guides / audit-guide /
+  // industry 等**动态页直接输出**源码里的 metaDescEn / metaDescZh，
+  // 于是超出预算（拉丁 158 / CJK 90）的元描述原样上线 ——
+  // 这是 GSC「元描述过长」的主要来源（实测既有指南 162ch / 200ch）。
+  // 收口到统一入口后，超预算的会被裁到句末标点或词边界；合规描述原样返回（幂等）。
+  const finalDescription = trimMetaDescription(description);
   return {
     title: finalTitle,
-    description,
+    description: finalDescription,
     alternates: { canonical: canonicalFor(locale, path), languages: hreflangFor(path) },
     openGraph: {
       title: finalTitle,
-      description,
+      description: finalDescription,
       type: "website",
       url: canonicalFor(locale, path),
       images: [OG_IMAGE],
@@ -69,7 +79,7 @@ export function buildPageMetadata({ locale, path, title, description, robots, wi
     twitter: {
       card: "summary_large_image",
       title: finalTitle,
-      description,
+      description: finalDescription,
       images: [OG_IMAGE],
     },
     robots: robots ?? { index: true, follow: true },

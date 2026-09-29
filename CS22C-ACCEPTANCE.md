@@ -1,17 +1,17 @@
 # CS-C PRODUCTION ACCEPTANCE REPORT
 
 > 真实链路：Supabase Auth → Session Cookie → 生产 API (https://factoryauditb2b.com) → 生产 Database
-> 生成时间：2026-09-24T06:08:47.881Z
+> 生成时间：2026-09-24T08:39:04.032Z
 
 ## 汇总
 - **结果**：ALL PASS ✅
 - **PASS / FAIL**：71 / 0
 
 ## Test Account（不输出密码）
-- Supplier Auth: cs22c-sup-sndy4y@example.com
-- Admin Auth: cs22c-adm-sndy4y@example.com
-- Buyer Auth: cs22c-buy-sndy4y@example.com
-- Supplier ID: f5066115-071a-47e8-891f-2107455e2afc
+- Supplier Auth: cs22c-sup-8ba20p@example.com
+- Admin Auth: cs22c-adm-8ba20p@example.com
+- Buyer Auth: cs22c-buy-8ba20p@example.com
+- Supplier ID: e9c3888f-0ae5-4fa9-ae67-3f22a96987df
 - Supplier slug: cs-c-test-do-not-publish
 - 专用名：CS-C-TEST-DO-NOT-PUBLISH（is_published=false / public_profile_enabled=false / profile_status=draft / verification_level=unverified）
 
@@ -29,10 +29,10 @@
 
 ## Online Verification
 - #14 Admin 显式 Approve Online ✅
-- #15 verification_records 创建 / verification_id=FAB2B-OV-B4KVXX / status=ACTIVE / type=ONLINE / verified_at+expires_at(+365d) / 前台 ONLINE VERIFIED / 供应商自创被 RLS 拒 ✅
+- #15 verification_records 创建 / verification_id=FAB2B-OV-76H7J3 / status=ACTIVE / type=ONLINE / verified_at+expires_at(+365d) / 前台 ONLINE VERIFIED / 供应商自创被 RLS 拒 ✅
 
 ## On-site Verification
-- #16 独立 ON_SITE verification（id=FAB2B-OS-WABEDR） ✅
+- #16 独立 ON_SITE verification（id=FAB2B-OS-LHGHX5） ✅
 - #17 visit_date / verifier / location / scope / notes / verification_id 全部落库 ✅
 - #18 Admin Approve ✅
 - #19 前台 ON-SITE VERIFIED ✅
@@ -49,7 +49,7 @@
 - supplier_assessments：Supplier 仅经 resolveSupplierAccess 改自身；item_review_json 由 Admin 写
 
 ## Audit Log
-- 谁审核：actor_email = cs22c-adm-sndy4y@example.com
+- 谁审核：actor_email = cs22c-adm-8ba20p@example.com
 - 审核什么：action ∈ {ASSESSMENT_REVIEW_SAVED, ASSESSMENT_NEEDS_MORE_INFO, ONLINE_VERIFICATION_APPROVED, ON_SITE_VERIFICATION_APPROVED, ...}
 - 什么时候：created_at 非空
 - 什么结果：metadata.verification_id 等
@@ -89,16 +89,13 @@
 - 未触碰任何真实供应商 / RFQ / CS-A·CS-B 生产数据 ✅
 
 ## Git Commit / Deploy Version / Live Verify
-- CS-C 工作台部署版本：78dd84bb-e988-46d0-9c80-523e26de8326（factoryauditb2b，Cloudflare Workers，已上线）
-- 数据修复迁移 `supabase/cs22/05_recode_audit_questions_unique.sql`：经 Supabase Management API 直连 prod 上线（HTTP 201），`audit_questions` 由 72 行 / 41 去重码 → 72 行 / 72 唯一码（SC01–SC37 / QC01–QC35）；`supabase/cs21/02_seed_audit_checklists.sql` 同步重写为幂等重跑对齐。
-- 配套回归（同次交付）：CS-22A PASS=77 / CS-22B PASS=90，均 0 FAIL。
-- 本提交 hash：`47537b8`（full `47537b871ed7b104527e78dea96b2b9a6e21a154`）；分支 `main`；origin `https://github.com/<repo>.git`（push 后 `git ls-remote` 核对）。
-- Live Verify Result：ALL PASS（71 / 0）
+- Git Commit / Deploy Version：见交付说明（本脚本只跑验收，提交由交付流程完成）
+- Live Verify Result：ALL PASS
 
 ## 逐项明细
 - [PASS] 建 4 个临时 Auth 用户 (supplier/admin/buyer/supplierB)
 - [PASS] admin profiles.role=admin
-- [PASS] 建专用非公开 Supplier (legal_name=CS-C-TEST-DO-NOT-PUBLISH)  :: f5066115-071a-47e8-891f-2107455e2afc
+- [PASS] 建专用非公开 Supplier (legal_name=CS-C-TEST-DO-NOT-PUBLISH)  :: e9c3888f-0ae5-4fa9-ae67-3f22a96987df
 - [PASS] 建 Supplier B（跨账户隔离测试用）
 - [PASS] 建 supplier_evidence 测试行 + Storage 对象
 - [PASS] 登录取得 supplier / admin / buyer 会话 cookie
@@ -113,7 +110,7 @@
 - [PASS] #3c 自评状态=submitted  :: =submitted
 - [PASS] #3d 信任状态=SELF_ASSESSED（未核验）  :: =SELF_ASSESSED
 - [PASS] #5 Admin 查看 Evidence（按 item 分组）  :: count=1
-- [PASS] #5b Admin 证据签名短链返回 url  :: status=200 mime=application/pdf body={"ok":true,"url":"https://tcyhstswppoqwlmchsmc.supabase.co/storage/v1/object/sign/supplier-docs/cs22c/f5066115-071a-47e8-891f-2107455e2afc/ev1.pdf?token=eyJraWQiOiI2YzA4MDMzOS02ZjYzLTRjNTktODliMy1iZjgyMzZiMTQ4MWQiLCJhbGciOiJIUzUxMiJ9.eyJ1cmwiOiJzdXBwbGllci1kb2NzL2NzMjJjL2Y1MDY2MTE1LTA3MWEtNDdlOC04OTFmLTIxMDc0NTVlMmFmYy9ldjEucGRmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5MDIzMDAzNywiZXhwIjoxNzkwMjMwMzM3fQ.E-9sJ5uPG84LUfrxPayOHBH5cv-aeLamrpXwToIOpkf2yNr2g4pPLaj6kv2oGwX3USNEuiySQrJgc61dz_Gfqw","mime":"application/pdf"}
+- [PASS] #5b Admin 证据签名短链返回 url  :: status=200 mime=application/pdf body={"ok":true,"url":"https://tcyhstswppoqwlmchsmc.supabase.co/storage/v1/object/sign/supplier-docs/cs22c/e9c3888f-0ae5-4fa9-ae67-3f22a96987df/ev1.pdf?token=eyJraWQiOiI2YzA4MDMzOS02ZjYzLTRjNTktODliMy1iZjgyMzZiMTQ4MWQiLCJhbGciOiJIUzUxMiJ9.eyJ1cmwiOiJzdXBwbGllci1kb2NzL2NzMjJjL2U5YzM4ODhmLTBhZTUtNGZhOS1hZTY3LTNmMjJhOTY5ODdkZi9ldjEucGRmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5MDIzODk5NiwiZXhwIjoxNzkwMjM5Mjk2fQ.3ETHzS2s23z8-wHnV4vQ6bjGQ3CNK6AS9Bal4z-XjZl3ApLqalt5n0wHoB_kO3YmLQAl8HxIVBC0tIzZkRqQMQ","mime":"application/pdf"}
 - [PASS] #6/#7/#8/#9 Admin 逐项审核保存 (Approve/Reject/NeedMoreInfo/Note)  :: status=200
 - [PASS] #6 单项 Approve 已记录
 - [PASS] #7 单项 Reject 已记录
@@ -125,7 +122,7 @@
 - [PASS] #12 Supplier 真实回补/Resubmit (CS-B 端点)  :: status=resubmitted
 - [PASS] #13 Admin 再次 Review（状态已更新）  :: =resubmitted
 - [PASS] #14 Admin 显式点击 Approve Online Verification  :: status=200
-- [PASS] #14b verification_id = FAB2B-OV-*  :: =FAB2B-OV-B4KVXX
+- [PASS] #14b verification_id = FAB2B-OV-*  :: =FAB2B-OV-76H7J3
 - [PASS] #15 verification_records 已创建 (ONLINE)
 - [PASS] #15b status=ACTIVE  :: =ACTIVE
 - [PASS] #15c verification_type=ONLINE
@@ -136,7 +133,7 @@
 - [PASS] #15h 公开页 200 + 显示 Online verified 徽章  :: status=200
 - [PASS] #15i 供应商经 anon 客户端 INSERT verification_records 被 RLS 拒绝  :: err=42501
 - [PASS] #16 Admin 创建独立 ON_SITE verification  :: status=200
-- [PASS] #16b verification_id = FAB2B-OS-*  :: =FAB2B-OS-WABEDR
+- [PASS] #16b verification_id = FAB2B-OS-*  :: =FAB2B-OS-LHGHX5
 - [PASS] #17 ON_SITE 记录存在
 - [PASS] #17b verification_id 一致
 - [PASS] #17c visit_date 已存  :: =2026-09-24
@@ -149,7 +146,7 @@
 - [PASS] #20 两条独立记录均在 (互不复盖)
 - [PASS] #20b 当前生效状态=ON_SITE_VERIFIED（ON_SITE 优先）  :: =ON_SITE_VERIFIED
 - [PASS] #21 Supplier A 用自身 cookie 访问 Supplier B 后台 → 401  :: status=401
-- [PASS] #21b 非 admin 经 RLS 改 Supplier B 行被拒（数据未被篡改）  :: err=undefined legal_name=CS22C Supplier B sndy4y
+- [PASS] #21b 非 admin 经 RLS 改 Supplier B 行被拒（数据未被篡改）  :: err=undefined legal_name=CS22C Supplier B 8ba20p
 - [PASS] #22 Supplier 改 verified_at/expires_at/type/status 被 RLS 拒绝  :: err=42501
 - [PASS] #22b Supplier 创建 verification_records 被 RLS 拒绝  :: err=42501
 - [PASS] #23 Buyer 改 item_review_json 被 RLS 拒绝  :: err=42501
@@ -160,7 +157,7 @@
 - [PASS] #25 ONLINE 记录置 EXPIRED（历史保留，不删除）
 - [PASS] #25b Admin 重新核验 (Re-verification) 成功
 - [PASS] #25c 历史记录保留（EXPIRED 旧行仍在 + 新 ACTIVE 行）  :: rows=3
-- [PASS] 审计·谁审核(actor_email=admin)  :: actor=cs22c-adm-sndy4y@example.com
+- [PASS] 审计·谁审核(actor_email=admin)  :: actor=cs22c-adm-8ba20p@example.com
 - [PASS] 审计·审核什么(action 全覆盖)  :: acts=ASSESSMENT_REVIEW_SAVED,ASSESSMENT_NEEDS_MORE_INFO,ONLINE_VERIFICATION_APPROVED,ON_SITE_VERIFICATION_APPROVED,ONLINE_VERIFICATION_APPROVED
 - [PASS] 审计·什么时候(created_at 非空)
 - [PASS] 审计·什么结果(metadata 含 verification_id)

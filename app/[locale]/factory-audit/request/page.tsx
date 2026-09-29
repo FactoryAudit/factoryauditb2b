@@ -86,7 +86,7 @@ export default async function Page({ params }: Props) {
           auditScopeT={t.auditScope}
           formT={s.form}
           locale={locale}
-          calculatorHref={p("/risk-calculator")}
+          calculatorHref={p("/tools/supplier-risk-calculator")}
           levelLabels={t.risk.ui.level}
           dimensionOptions={dimensionOptions}
           auditTypeLabels={s.form.auditTypes}
