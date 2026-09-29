@@ -46,6 +46,14 @@ export interface Guide {
    */
   metaTitleEn?: string;
   metaTitleZh?: string;
+  /**
+   * 元描述（英文）。⚠️ 已知 i18n 缺口：只有 en / zh 两套。
+   * `app/[locale]/guides/[slug]/page.tsx` 用 `pickZhPair(locale, metaDescEn, metaDescZh)`
+   * 取值 ⇒ zh / zh-TW 用 metaDescZh，**其余 7 个语种（en, ja, es, de, fr, pt, ar）全部回退本字段**，
+   * 即这 7 个语种的指南页（7 × 47 = 329 页）显示的是英文描述。
+   * 本次（stage1.5）只做长度收口（双句、总长 ≤158、句号收尾，收口函数零命中）；
+   * 9 语补齐留到第 3 批，届时需新增 metaDescJa/Es/De/Fr/Pt/Ar 并同步 pickZhPair 的取值分支。
+   */
   metaDescEn: string;
   metaDescZh: string;
   /** 最后更新日期（ISO），AI Search 与读者都看这个 */
@@ -72,7 +80,7 @@ export const GUIDES: Guide[] = [
     titleEn: "How to Verify a Chinese Supplier",
     titleZh: "如何核验中国供应商",
     metaDescEn:
-      "A step-by-step process for verifying a Chinese supplier: match the Chinese registered name, check the Unified Social Credit Code, confirm the production address, review quality and compliance evidence, then decide whether an on-site audit is needed.",
+      "A step-by-step process for verifying a Chinese supplier. Match the registered name, check the credit code and confirm the site.",
     metaDescZh:
       "核验中国供应商的分步流程：核对中文注册名与统一社会信用代码、确认生产地址、审阅质量与合规证据，再判断是否需要现场验厂。",
     updated: "2026-08-31",
@@ -290,7 +298,7 @@ export const GUIDES: Guide[] = [
     titleEn: "Factory Audit Checklist: What Auditors Actually Check",
     titleZh: "工厂验厂检查表：审核员实际看什么",
     metaDescEn:
-      "A factory audit checklist covering documentation, production control, quality management, social compliance and corrective action, with the records auditors ask for and the findings that come up most often.",
+      "A factory audit checklist covering documentation and production control. Covers quality, social compliance and the records auditors ask for.",
     metaDescZh:
       "覆盖文件、生产控制、质量管理、社会责任合规与整改的验厂检查表，列出审核员会索要的记录和最常见的发现项。",
     updated: "2026-08-31",
@@ -501,7 +509,7 @@ export const GUIDES: Guide[] = [
     titleEn: "Supplier Risk Assessment: How to Score a Supplier",
     titleZh: "供应商风险评估：如何给供应商打分",
     metaDescEn:
-      "How supplier risk assessment works: the six risk dimensions, how they are weighted, what evidence moves the score, and how to act on a result instead of just filing it.",
+      "How supplier risk assessment works across six risk dimensions. See what evidence moves the score and how to act on the result.",
     metaDescZh:
       "供应商风险评估怎么运作：六个风险维度、权重如何分配、哪些证据会改变分数，以及拿到结果之后怎么行动而不是归档了事。",
     updated: "2026-08-31",
@@ -717,7 +725,7 @@ export const GUIDES: Guide[] = [
     titleEn: "SMETA vs BSCI: Social Audit Comparison",
     titleZh: "SMETA 与 BSCI 对比：社会责任审核怎么选",
     metaDescEn:
-      "SMETA vs BSCI explained: what each social audit covers, who runs them, reporting differences, recognition, and how to choose the right one for your supply base and buyers.",
+      "SMETA versus BSCI social audits explained, scope by scope. See what each covers, who runs them and how to choose the right one.",
     metaDescZh:
       "SMETA 与 BSCI 对比：各自覆盖什么、由谁执行、报告差异、认可度，以及如何为你的供应基与采购方选对审核。",
     updated: "2026-08-31",
@@ -824,7 +832,7 @@ export const GUIDES: Guide[] = [
     titleEn: "How to Read a Factory Audit Report",
     titleZh: "如何读懂工厂验厂报告",
     metaDescEn:
-      "How to read a factory audit report: separate the score from the findings, read the major and critical items first, check the evidence, and decide what to do about each finding.",
+      "How to read a factory audit report without losing the plot. Read the critical items first, check the evidence, then decide.",
     metaDescZh:
       "如何读懂工厂验厂报告：把分数与发现项分开看，先看严重与致命项，核对证据，再对每项发现决定处理方式。",
     updated: "2026-08-31",
@@ -928,7 +936,7 @@ export const GUIDES: Guide[] = [
     titleEn: "How to Audit a Factory in Vietnam",
     titleZh: "如何在越南验厂",
     metaDescEn:
-      "How to audit a factory in Vietnam: confirm investment and business registration, verify the real production site, review quality and social compliance, and order an on-site audit before a deposit.",
+      "How to audit a factory in Vietnam before placing a deposit. Confirm the registration, verify the real site and review compliance.",
     metaDescZh:
       "如何在越南验厂：确认投资与商业登记、核实真实生产场地、审阅质量与社会合规，并在付定金前安排现场审核。",
     updated: "2026-08-31",
@@ -1032,7 +1040,7 @@ export const GUIDES: Guide[] = [
     titleEn: "Pre-Shipment Inspection Checklist",
     titleZh: "出货前验货清单",
     metaDescEn:
-      "A pre-shipment inspection checklist: when to inspect, what to check (quantity, workmanship, function, packaging, labelling, loading), sampling plans and how to act on the result.",
+      "A pre-shipment inspection checklist for FRI, PSI and DUPRO orders. Check quantity, workmanship, function, packaging and loading.",
     metaDescZh:
       "出货前验货清单：何时验货，查什么（数量、做工、功能、包装、标签、装柜），抽样方案，以及如何处理结果。",
     updated: "2026-08-31",
@@ -1135,7 +1143,7 @@ export const GUIDES: Guide[] = [
     titleEn: "What Is a Factory Audit? How Buyers Choose a Reliable Audit Firm",
     titleZh: "什么是第三方验厂？海外买家如何选择靠谱的验厂机构",
     metaDescEn:
-      "What a B2B factory audit is, why overseas buyers need one, and how to choose a reliable third-party audit firm: product experience, speed and report transparency.",
+      "What a B2B factory audit is and why overseas buyers need one. See how to choose a third-party audit firm for your own product.",
     metaDescZh:
       "第三方验厂（Factory Audit）是什么、跨国采购为什么必须做、以及如何选择靠谱的验厂机构：行业经验、响应速度、报告透明度。",
     updated: "2026-09-21",
@@ -1295,7 +1303,7 @@ export const GUIDES: Guide[] = [
     titleEn: "Supplier Evaluation Checklist 2026: Cut B2B Sourcing Risk",
     titleZh: "2026供应商评估清单(Checklist)：全面降低B2B采购风险",
     metaDescEn:
-      "A 2026 supplier evaluation checklist covering legality, capacity, quality system, ESG and documentation, with the records auditors ask for at each step.",
+      "A 2026 supplier evaluation checklist for legality, capacity and ESG. Covers the quality system, documentation and records auditors ask for.",
     metaDescZh:
       "2026版供应商评估清单，覆盖资质合法性、产能、质量体系、ESG 与文件，列出每个环节审核员会索取的记录。",
     updated: "2026-09-21",
@@ -1467,7 +1475,7 @@ export const GUIDES: Guide[] = [
     titleEn: "On-Site vs Desk Audit: Which Supplier Check Should You Use?",
     titleZh: "工厂实地审核 vs 线上文件审核：B2B采购该怎么选？",
     metaDescEn:
-      "On-site versus desk (virtual) supplier audit: the trade-offs, when each works, and a combined approach that screens wide then audits deep.",
+      "On-site versus desk supplier audits, the trade-offs explained. See when each works and how to combine them for safe sourcing.",
     metaDescZh:
       "实地审核与桌面（线上）审核的取舍、各自适用场景，以及先广筛再深挖的组合策略。",
     updated: "2026-09-21",
@@ -1627,7 +1635,7 @@ export const GUIDES: Guide[] = [
     titleEn: "Supply Chain Risk: What a Third-Party Factory Audit Actually Fixes",
     titleZh: "供应链风控必看：专业的第三方验厂能为你解决哪些痛点？",
     metaDescEn:
-      "How a professional third-party factory audit solves the three biggest sourcing pains: fake factories, unstable quality and missed delivery dates.",
+      "How a third-party factory audit solves the biggest sourcing pains. Fake factories, unstable quality and missed delivery dates, fixed.",
     metaDescZh:
       "专业第三方验厂如何解决采购三大痛点：供应商造假、质量不稳、交期延误。",
     updated: "2026-09-21",
@@ -1787,7 +1795,7 @@ export const GUIDES: Guide[] = [
     titleEn: "Capacity Audit: How to Prevent Supplier Delivery Delays",
     titleZh: "产能审核(Capacity Audit)全解析：如何从源头避免交期延误？",
     metaDescEn:
-      "What a capacity audit checks, why sales promises and certificates do not prove capacity, and the data that predicts whether your order will ship on time.",
+      "What a capacity audit checks and why certificates do not prove output. See the data that predicts whether your order will ship on time.",
     metaDescZh:
       "产能审核查什么、为什么销售承诺和证书都不能代表产能，以及能预测订单能否准时发货的关键数据。",
     updated: "2026-09-21",
@@ -1946,7 +1954,7 @@ export const GUIDES: Guide[] = [
     category: "audit",
     titleEn: "How to Read the AQL Sampling Standard: A Pre-Shipment Inspection (FRI) Guide",
     titleZh: "AQL抽样标准怎么看？出货前检验(FRI)必备指南",
-    metaDescEn: "A practical guide to reading the AQL sampling standard for pre-shipment inspection (FRI): defect classes, the two-table method, how to read Ac and Re, and how to set AQL by product type.",
+    metaDescEn: "How to read the AQL sampling standard for pre-shipment inspection. Covers defect classes, the two-table method and how to set AQL.",
     metaDescZh: "出货前检验(FRI)的AQL抽样标准实用指南：缺陷分级、两张表查法、如何看接收数Ac与拒收数Re，以及按产品类型设定AQL。",
     updated: "2026-09-21",
     tools: [
@@ -2053,7 +2061,7 @@ export const GUIDES: Guide[] = [
     category: "audit",
     titleEn: "PPI vs DUPRO: Which Production Inspection Matters More?",
     titleZh: "生产初期检验(PPI) vs 生产中期检验(DUPRO)：哪个更重要？",
-    metaDescEn: "PPI (pre-production) and DUPRO (during-production) inspections move quality control earlier than final inspection. This guide compares timing, focus and cost, and explains why DUPRO usually offers the best value.",
+    metaDescEn: "PPI and DUPRO inspections move quality control earlier in the run. Compare timing, focus and cost, and see why DUPRO often wins.",
     metaDescZh: "生产初期检验(PPI)与生产中期检验(DUPRO)把质量控制前移到终检之前。本指南对比时机、重点与成本，并说明为何 DUPRO 通常性价比更高。",
     updated: "2026-09-21",
     tools: [
@@ -2154,7 +2162,7 @@ export const GUIDES: Guide[] = [
     category: "audit",
     titleEn: "Why Cross-Border Buyers Use 100% Full Inspection",
     titleZh: "为什么跨国采购一定要做全检？避免退货率飙升的关键",
-    metaDescEn: "Why 100% full inspection is replacing AQL sampling for cross-border, high-value and high-compliance goods, and when the extra cost is worth it.",
+    metaDescEn: "Why 100% full inspection is replacing AQL sampling for high-value goods. See when the extra cost is worth it for cross-border orders.",
     metaDescZh: "为何全检(100% Inspection)正在取代 AQL 抽样，成为跨境、高价值与高合规货物的标配，以及何时这笔额外成本值得花。",
     updated: "2026-09-21",
     tools: [
@@ -2251,7 +2259,7 @@ export const GUIDES: Guide[] = [
     category: "audit",
     titleEn: "Control Amazon FBA Rejection Risk with Inspection",
     titleZh: "B2B跨境电商卖家必备：如何通过验货控制亚马逊FBA拒收风险？",
-    metaDescEn: "How to build FBA inbound compliance into your inspection process: the most common rejection triggers, and a four-step checklist covering labels, drop tests, weighing and inner packaging.",
+    metaDescEn: "How to build FBA inbound compliance into your inspection process. Check labels, drop tests, weighing and inner packaging before shipping.",
     metaDescZh: "如何把 FBA 入仓合规植入验货流程：最常见的拒收雷区，以及覆盖标签、跌落测试、称重量与内部包装的四步清单。",
     updated: "2026-09-21",
     tools: [
@@ -2354,7 +2362,7 @@ export const GUIDES: Guide[] = [
     category: "audit",
     titleEn: "Failed Inspection? 5 Strategies to Negotiate with Your Supplier",
     titleZh: "产品检验不合格怎么办？与供应商谈判及处理纠纷的5个策略",
-    metaDescEn: "A failed inspection report is the start of a negotiation, not the end of the order. Five strategies to sort defects, freeze payment, demand a corrective plan, allocate rework cost and re-rate the supplier.",
+    metaDescEn: "A failed inspection is the start of a negotiation, not the end. Five strategies to sort defects, freeze payment and re-rate the supplier.",
     metaDescZh: "一份不合格验货报告是谈判的开始而非订单的终结。五个策略：区分缺陷、冻结尾款、索要纠正计划、界定返工成本、重新评估供应商。",
     updated: "2026-09-21",
     tools: [
@@ -2460,7 +2468,7 @@ export const GUIDES: Guide[] = [
     titleEn: "Ethical Audit Mandatory Requirements: What Buyers Force Suppliers to Do",
     titleZh: "道德审核强制要求：采购方逼供应商做什么",
     metaDescEn:
-      "What an ethical audit actually mandates: the labour, health-and-safety, environmental and management-system requirements buyers enforce, and the documents a supplier must produce to pass.",
+      "What an ethical audit mandates on labour, safety and environment. See the documents a supplier must produce to pass a social audit.",
     metaDescZh:
       "道德审核到底强制什么：采购方对劳工、健康安全、环境与管理体系的硬性要求，以及供应商必须提供的文件证据。",
     updated: "2026-09-21",
@@ -2573,7 +2581,7 @@ export const GUIDES: Guide[] = [
     titleEn: "SA8000 Certification: How Hard Is It and What It Really Takes",
     titleZh: "SA8000 认证：到底难在哪、要准备什么",
     metaDescEn:
-      "A realistic look at SA8000 certification: what the standard demands, why it is harder than a one-off social audit, the time and system investment required, and whether it is worth it for your supply base.",
+      "A realistic look at SA8000 certification and what the standard demands. See why it is harder than a one-off social audit before you commit.",
     metaDescZh:
       "务实看 SA8000 认证：标准要求什么、为何比一次性社会审核更难、所需时间与体系投入，以及对你的供应基是否值得。",
     updated: "2026-09-21",
@@ -2682,7 +2690,7 @@ export const GUIDES: Guide[] = [
     titleEn: "ESG Supplier Audit: What It Covers Beyond Social Compliance",
     titleZh: "ESG 供应商审核：超出社会责任合规的部分",
     metaDescEn:
-      "How an ESG supplier audit differs from a traditional social audit: the environmental, governance and traceability layers added on top of labour standards, and what buyers now expect from their supply chain.",
+      "How an ESG supplier audit differs from a traditional social audit. Covers the environment, governance and traceability layers buyers add.",
     metaDescZh:
       "ESG 供应商审核与传统社会审核有何不同：在劳工标准之上新增的环境、治理与可追溯层，以及买家现在对供应链的期望。",
     updated: "2026-09-21",
@@ -2791,7 +2799,7 @@ export const GUIDES: Guide[] = [
     titleEn: "Brand Reputation and PR Crisis: When a Supplier Scandal Hits Your Brand",
     titleZh: "品牌声誉与公关危机：供应商丑闻牵连品牌时怎么办",
     metaDescEn:
-      "How a supplier's social or safety scandal becomes your brand crisis, the early-warning signals to watch, and a practical response playbook to protect reputation and keep the supply chain moving.",
+      "How a supplier scandal becomes your own brand crisis, and fast. See the early-warning signals and a playbook to protect reputation.",
     metaDescZh:
       "供应商的社会或安全丑闻如何变成你的品牌危机、要盯哪些预警信号，以及保护声誉又不中断供应链的实操应对手册。",
     updated: "2026-09-21",
@@ -2900,7 +2908,7 @@ export const GUIDES: Guide[] = [
     titleEn: "12 Red Flags of a Chinese Supplier Scam (Spot Them Before You Pay)",
     titleZh: "中国供应商诈骗的 12 个红旗信号：下单前这样识别",
     metaDescEn:
-      "The most common warning signs that a China supplier is a scam: pressure tactics, no verifiable entity, fake certificates, and how to verify before you pay.",
+      "The most common warning signs that a China supplier is a scam. Pressure tactics, no verifiable entity, fake certificates, and the fix.",
     metaDescZh:
       "中国供应商诈骗最常见的红旗信号：催促付款、无法核实实体、假证书，以及付款前如何核验。",
     updated: "2026-09-21",
@@ -3005,7 +3013,7 @@ export const GUIDES: Guide[] = [
     titleEn: "How to Check a China Company Registration (License & Credit Code)",
     titleZh: "如何查中国公司工商注册：营业执照与信用代码核验",
     metaDescEn:
-      "Step-by-step: verify a Chinese supplier's unified social credit code, legal name and business scope using public registries, and what mismatches mean.",
+      "How to verify a Chinese supplier's registration on public registries. Check the legal name, credit code and business scope, then compare.",
     metaDescZh:
       "分步核验中国供应商的统一社会信用代码、法律实体名与经营范围，使用公开登记系统，以及不一致意味着什么。",
     updated: "2026-09-21",
@@ -3109,7 +3117,7 @@ export const GUIDES: Guide[] = [
     titleEn: "Alibaba Trade Assurance: How It Protects Your Sourcing Payment",
     titleZh: "阿里 Trade Assurance 安全付款：保护你的采购资金",
     metaDescEn:
-      "What Alibaba Trade Assurance covers, how the escrow-style protection works, its limits, and how to combine it with inspection for safe sourcing.",
+      "What Alibaba Trade Assurance covers and where its protection stops. See how to combine escrow payment with inspection for safe sourcing.",
     metaDescZh:
       "阿里 Trade Assurance 保什么、类托管保护如何运作、它的局限，以及如何与验货结合实现安全采购。",
     updated: "2026-09-21",
@@ -3213,7 +3221,7 @@ export const GUIDES: Guide[] = [
     titleEn: "Verify a Supplier Before Paying Deposit: 5-Step Checklist",
     titleZh: "付定金前验证供应商：5 步清单避免被骗",
     metaDescEn:
-      "A practical pre-deposit verification sequence: entity check, sample, video, references and contract terms that protect your advance payment.",
+      "A pre-deposit verification sequence that protects your advance payment. Run the entity check, sample, video call and references before paying.",
     metaDescZh:
       "实用的付定金前核验流程：实体核查、打样、视频、参考与合同条款，保护你的预付款。",
     updated: "2026-09-21",
@@ -3319,7 +3327,7 @@ export const GUIDES: Guide[] = [
     titleEn: "Common B2B Procurement Fraud Tactics (with Real Cases)",
     titleZh: "B2B 采购常见诈骗手法与真实案例解析",
     metaDescEn:
-      "The tactics behind B2B sourcing fraud: fake factories, phantom shipments, invoice redirect and certificate reuse, with cases and how verification stops each.",
+      "The tactics behind B2B sourcing fraud and how each one is stopped. Fake factories, phantom shipments, invoice redirect and certificate reuse.",
     metaDescZh:
       "B2B 采购诈骗的手法：假工厂、幽灵发货、发票重定向与证书套用，附案例与核验如何逐一拦截。",
     updated: "2026-09-21",
@@ -3424,7 +3432,7 @@ export const GUIDES: Guide[] = [
     titleZh: "质量管理体系(QMS)是什么：制造企业的底层系统",
     metaTitleEn: "What Is a Quality Management System (QMS)",
     metaDescEn:
-      "A plain explanation of a QMS: what it is, the plan-do-check-act cycle, the documents it produces, and why buyers should care about a supplier's system, not just a certificate.",
+      "A plain explanation of a QMS and the plan-do-check-act cycle. See why buyers should judge a supplier's system, not a certificate.",
     metaDescZh:
       "通俗解释 QMS：是什么、PDCA 循环、它产出的文件，以及买家为何该关注供应商的体系而非仅一张证书。",
     updated: "2026-09-21",
@@ -3528,7 +3536,7 @@ export const GUIDES: Guide[] = [
     titleEn: "ISO 9001 vs ISO 13485: Which Quality System Fits Your Supplier",
     titleZh: "ISO 9001 与 ISO 13485 区别：质量体系怎么选",
     metaDescEn:
-      "The real difference between ISO 9001 and ISO 13485, when a medical-device grade system is required, and how to read a supplier's certificate for sourcing decisions.",
+      "The real difference between ISO 9001 and ISO 13485 explained. See when a medical-device grade system is required before sourcing.",
     metaDescZh:
       "ISO 9001 与 ISO 13485 的真实区别、何时需要医疗器械级体系，以及如何为采购决策读懂供应商证书。",
     updated: "2026-09-21",
@@ -3632,7 +3640,7 @@ export const GUIDES: Guide[] = [
     titleEn: "Manufacturing Quality Control Process: Incoming, IPQC, FQC and OQC",
     titleZh: "制造质量控制流程：来料/IPQC/FQC/OQC 全解",
     metaDescEn:
-      "How a factory controls quality across the line: incoming inspection, in-process IPQC, final FQC and outgoing OQC, with the checkpoints that protect your order.",
+      "How a factory controls quality across the line, stage by stage. Covers incoming IQC, in-process IPQC, final FQC and outgoing OQC.",
     metaDescZh:
       "工厂如何在线控制质量：来料检验、过程 IPQC、终检 FQC 与出货 OQC，以及保护你订单的关键控制点。",
     updated: "2026-09-21",
@@ -3736,7 +3744,7 @@ export const GUIDES: Guide[] = [
     titleEn: "PPAP: Production Part Approval Process for Automotive and Precision Sourcing",
     titleZh: "PPAP 生产件批准流程：汽车与精密制造准入",
     metaDescEn:
-      "What PPAP is, the 18 elements it requires, when it applies (automotive, aerospace, precision), and how to use it to qualify a supplier before mass production.",
+      "What PPAP is, the 18 elements it requires and when it applies. See how to use it to qualify a supplier before mass production.",
     metaDescZh:
       "PPAP 是什么、它要求的 18 项要素、何时适用（汽车、航天、精密），以及如何用它在大批量前准入供应商。",
     updated: "2026-09-21",
@@ -3844,7 +3852,7 @@ export const GUIDES: Guide[] = [
     titleEn: "Supplier Quality Audit Checklist: The Quality Dimension Beyond a Basic Factory Audit",
     titleZh: "供应商质量审核清单：区别于常规验厂的质量维度",
     metaDescEn:
-      "A quality-focused supplier audit checklist: system, incoming and in-process control, measurement and calibration, traceability and CAPA — the dimensions a basic audit misses.",
+      "A quality-focused supplier audit checklist for deep due diligence. Covers system control, calibration, traceability and the gaps audits miss.",
     metaDescZh:
       "以质量为中心的供应商审核清单：体系、来料与过程控制、量测与校准、可追溯性与 CAPA——常规验厂遗漏的维度。",
     updated: "2026-09-21",
@@ -3948,7 +3956,7 @@ export const GUIDES: Guide[] = [
     titleEn: "How to Verify an Alibaba Supplier Before Paying a Deposit",
     titleZh: "付定金前如何核验阿里巴巴供应商",
     metaDescEn:
-      "Learn how to verify an Alibaba supplier before paying a deposit: confirm the legal entity, factory address, capability, certificates and payment entity with a 17-point buyer checklist.",
+      "How to verify an Alibaba supplier before paying a deposit. Confirm the legal entity, factory address, certificates and payment entity.",
     metaDescZh:
       "付定金前核验阿里巴巴供应商的17项清单：核对法律主体、工厂地址、生产能力、证书与收款主体，判断何时必须改为现场验厂。",
     updated: "2026-09-22",
@@ -4303,7 +4311,7 @@ export const GUIDES: Guide[] = [
     titleEn: "Factory or Trading Company? How to Check Your Chinese Supplier",
     titleZh: "工厂还是贸易公司？如何判断中国供应商的真实身份",
     metaDescEn:
-      "How to tell whether a Chinese supplier is a factory or a trading company: read the business scope, match addresses, check equipment evidence, export records and certificates against the legal entity.",
+      "How to tell whether a Chinese supplier is a factory or a trader. Read the business scope, match addresses and check equipment evidence.",
     metaDescZh:
       "判断中国供应商是工厂还是贸易公司：看经营范围、比对注册地址与生产地址、核验设备证据、出口记录与证书是否指向同一法律主体。",
     updated: "2026-09-22",
@@ -4607,7 +4615,7 @@ export const GUIDES: Guide[] = [
     titleEn: "How to Compare Chinese Suppliers: A Practical Supplier Risk Assessment Framework",
     titleZh: "如何比较中国供应商：一套可落地的供应商风险评估框架",
     metaDescEn:
-      "A practical supplier risk assessment framework for comparing Chinese suppliers across eight dimensions, scoring them consistently and deciding when a comparison should become a factory audit.",
+      "A risk assessment framework for comparing Chinese suppliers. Score eight dimensions consistently and see when to order an audit.",
     metaDescZh:
       "用八个维度比较中国供应商的实用风险评估框架：统一打分、横向对比三家供应商，并判断何时应从比较升级为现场验厂。",
     updated: "2026-09-22",
@@ -4923,7 +4931,7 @@ export const GUIDES: Guide[] = [
     titleEn: "When Should You Order a Factory Audit in China?",
     titleZh: "什么时候该在中国做工厂验厂？",
     metaDescEn:
-      "A risk-based guide to deciding when to order a China factory audit: order value, product risk, evidence gaps, supplier change, customer requirements and suspected subcontracting.",
+      "A risk-based guide to deciding when to order a factory audit. Weigh order value, product risk, evidence gaps and supplier change.",
     metaDescZh:
       "按风险判断何时该在中国下单验厂：订单金额、产品风险、证据缺口、更换供应商、客户要求与疑似分包，附决策表与验厂能证明与不能证明的边界。",
     updated: "2026-09-22",
@@ -5249,7 +5257,7 @@ export const GUIDES: Guide[] = [
     titleEn: "China Factory Audit Cost in 2026: What Affects the Price",
     titleZh: "2026年中国工厂验厂费用：价格由什么决定",
     metaDescEn:
-      "What determines China factory audit cost: location, audit type, duration, number of sites, required standard, auditor qualification, scope, travel and corrective action follow-up. How to read a quote.",
+      "What determines China factory audit cost, line by line. Location, audit type, duration, sites, standard and travel, plus quotes.",
     metaDescZh:
       "中国工厂验厂费用由什么决定：所在地、验厂类型、天数、场地数量、要求的标准、审核员资质、范围、差旅与整改跟进。教你读懂报价单。",
     updated: "2026-09-22",
@@ -5582,7 +5590,7 @@ export const GUIDES: Guide[] = [
     titleEn: "Supplier Verification vs Factory Audit vs Inspection: What a Buyer Needs",
     titleZh: "供应商核验、工厂验厂与验货的区别：买家到底需要哪个",
     metaDescEn:
-      "A direct comparison of supplier verification, factory audit and pre-shipment inspection: what each one answers, what it costs in time, and which to order first in common sourcing situations.",
+      "Supplier verification versus factory audit versus pre-shipment inspection. See what each answers and which to order first in each situation.",
     metaDescZh:
       "直接对比供应商核验、工厂验厂与出货前验货：各自回答什么问题、时间成本如何，以及在常见采购场景下该先做哪个。",
     updated: "2026-09-22",
@@ -5872,7 +5880,7 @@ export const GUIDES: Guide[] = [
     titleEn: "EU Forced Labour Regulation: What Importers Need From Chinese Suppliers",
     titleZh: "欧盟强迫劳动法规：进口商需要向中国供应商索取什么",
     metaDescEn:
-      "What the EU Forced Labour Regulation means for importers of Chinese goods: the official timeline, the supplier and factory evidence to collect, supply chain risk, and when an on-site audit supports due diligence.",
+      "What the EU Forced Labour Regulation means for Chinese imports. See the official timeline and the supplier evidence to collect now.",
     metaDescZh:
       "欧盟强迫劳动法规对中国商品进口商意味着什么：官方时间表、需收集的供应商与工厂证据、供应链风险，以及现场验厂如何支撑尽职调查。",
     updated: "2026-09-22",
@@ -6178,7 +6186,7 @@ export const GUIDES: Guide[] = [
     titleEn: "EUDR Supplier Due Diligence: What EU Buyers Need From China Suppliers",
     titleZh: "EUDR 供应商尽职调查：欧盟买家需要向中国供应商索取什么",
     metaDescEn:
-      "What EUDR requires of buyers sourcing from China: covered product categories, geolocation and traceability data, supplier evidence, site verification, and how the timeline affects preparation.",
+      "What EUDR requires of buyers sourcing covered goods from China. Covers geolocation, traceability data and how the timeline affects you.",
     metaDescZh:
       "从中国采购的买家在 EUDR 下需要什么：受覆盖的产品类别、地理位置与可追溯数据、供应商证据、现场核验，以及时间表如何影响准备工作。",
     updated: "2026-09-22",
@@ -6490,7 +6498,7 @@ export const GUIDES: Guide[] = [
     titleEn: "Digital Product Passport: What EU Buyers Should Collect From Suppliers",
     titleZh: "数字产品护照（DPP）：欧盟买家应向供应商收集哪些数据",
     metaDescEn:
-      "What the EU Digital Product Passport means for suppliers: the product, material, manufacturing and sustainability data buyers may need, which categories are prioritised, and how to prepare suppliers.",
+      "What the EU Digital Product Passport asks suppliers to provide. Covers product, material and sustainability data, and how to prepare.",
     metaDescZh:
       "欧盟数字产品护照对供应商意味着什么：买家可能需要的产品、材料、制造与可持续数据，优先覆盖的品类，以及如何让供应商提前准备。",
     updated: "2026-09-22",
@@ -6800,7 +6808,7 @@ export const GUIDES: Guide[] = [
     titleEn: "SMETA 7 for Buyers: What to Check When Qualifying a Supplier",
     titleZh: "买家视角的 SMETA 7：审核报告该看什么",
     metaDescEn:
-      "How buyers should read a SMETA 7 report: 2-pillar versus 4-pillar scope, the main assessment areas, corrective actions, critical findings, follow-up, and when a buyer should request one.",
+      "How buyers should read a SMETA 7 report before they act on it. See 2-pillar versus 4-pillar scope, critical findings and follow-up.",
     metaDescZh:
       "买家如何阅读 SMETA 7 报告：两支柱与四支柱范围、主要评估领域、纠正措施、关键发现、跟进，以及何时该要求做一次。",
     updated: "2026-09-22",
@@ -7110,7 +7118,7 @@ export const GUIDES: Guide[] = [
     titleEn: "RBA VAP vs SMETA vs BSCI: Which Supplier Audit Does a Buyer Need?",
     titleZh: "RBA VAP、SMETA 与 BSCI 对比：买家需要哪种供应商审核？",
     metaDescEn:
-      "A factual comparison of RBA VAP, SMETA and amfori BSCI: what each covers, who typically requires it, how the outputs differ, and whether one can replace another.",
+      "A factual comparison of RBA VAP, SMETA and amfori BSCI. See what each covers, who requires it and whether one can replace another.",
     metaDescZh:
       "客观对比 RBA VAP、SMETA 与 amfori BSCI：各自覆盖范围、通常由谁要求、产出有何不同，以及能否互相替代。",
     updated: "2026-09-22",
@@ -7402,7 +7410,7 @@ export const GUIDES: Guide[] = [
     titleEn: "China Plus One Supplier Qualification: How to Vet Vietnam and Thailand Factories",
     titleZh: "China+1 供应商资格认证：如何审核越南与泰国工厂",
     metaDescEn:
-      "How to qualify a second supplier country: what to verify in Vietnam and Thailand factories before moving production, including capability, quality system, compliance, capacity, subcontracting and export experience.",
+      "How to qualify a second supplier country before moving production. Covers Vietnam and Thailand sites, capacity, compliance and export history.",
     metaDescZh:
       "如何认证第二个供应国：在把产能转到越南与泰国工厂前必须核验什么，含能力、质量体系、合规、产能、分包与出口经验。",
     updated: "2026-09-22",
@@ -7723,7 +7731,7 @@ export const GUIDES: Guide[] = [
     titleEn: "How Chinese Factories Can Become Buyer-Ready for International Sourcing",
     titleZh: "中国工厂如何具备面向国际采购的「买家就绪」状态",
     metaDescEn:
-      "What international buyers need to see before engaging a factory: legal information, real production address, capability, capacity, quality system, certifications, compliance, audit history, export experience and verifiable evidence.",
+      "What international buyers need to see from a Chinese factory. Legal details, real address, capacity, quality system and audit history.",
     metaDescZh:
       "国际买家在接触工厂前需要看到什么：法律信息、真实生产地址、能力、产能、质量体系、认证、合规、审核历史、出口经验与可核验证据。",
     updated: "2026-09-22",
@@ -8083,7 +8091,7 @@ export const GUIDES: Guide[] = [
     titleEn: "Factory Audit Timing Around China's 2026 Mid-Autumn and National Day Holidays",
     titleZh: "2026 中秋与国庆假期期间，中国工厂验厂该怎么排期",
     metaDescEn:
-      "How China's 2026 Mid-Autumn (25-27 September) and National Day (1-7 October) holidays affect factory audit and inspection scheduling, and how to plan a visit that is not wasted.",
+      "How China's 2026 Mid-Autumn and National Day holidays affect audits. See which dates close factories and how to plan a visit that works.",
     metaDescZh:
       "2026 年中秋（9 月 25-27 日）与国庆（10 月 1-7 日）假期如何影响中国工厂验厂与验货排期，以及如何安排一次不白跑的现场访问。",
     updated: "2026-09-25",
@@ -8337,7 +8345,7 @@ export const GUIDES: Guide[] = [
     titleEn: "China-US Trade Talks 2026: What They Change for Inspection and Audit Planning",
     titleZh: "2026 中美经贸磋商后，验货与验厂该怎么排",
     metaDescEn:
-      "What the eighth round of China-US trade consultations agreed, what is not yet public, and how buyers should plan pre-shipment inspection and factory audit work around tariff and compliance uncertainty.",
+      "What the eighth round of China-US trade talks agreed, and what is not. See how to plan inspection and audits around tariff uncertainty.",
     metaDescZh:
       "中美第八轮经贸磋商达成了什么、哪些尚未公布，以及买家该如何在关税与合规不确定性中安排出货前验货与工厂验厂。",
     updated: "2026-09-25",
@@ -8602,7 +8610,7 @@ export const GUIDES: Guide[] = [
     titleEn: "Factory Audit and Inspection for the Q4 Shipment Window: A Combination Guide",
     titleZh: "Q4 出货高峰前：工厂验厂与验货的组合作法",
     metaDescEn:
-      "How to combine a factory audit with pre-shipment inspection to survive China's Q4 shipment peak, holiday closures and a congested inspection calendar without paying twice for the same answer.",
+      "How to combine a factory audit with pre-shipment inspection in Q4. Plan around the shipment peak and the congestion, without paying twice.",
     metaDescZh:
       "如何在 Q4 出货高峰、假期停产与验货排期拥堵中，把工厂验厂与出货前验货组合使用，避免为同一个问题付两次钱。",
     updated: "2026-09-25",
