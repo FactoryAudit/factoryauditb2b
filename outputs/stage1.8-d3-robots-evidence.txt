@@ -1,0 +1,55 @@
+stage1.8 — D3「过滤态 noindex」线上实测证据（2026-09-29）
+==============================================================
+部署版本：252a78c2-8a19-43f8-adac-5f9fda430704（#143）
+回滚锚点：#142 0cdbc9d5（stage1.7）→ #141 652a050b（stage1.6）→ #140 72ef374c（stage1.5）
+
+【方案】middleware.ts 注入 X-Robots-Tag: noindex, follow
+  · 判定：stripLocalePrefix(pathname) === "/suppliers" 且 (country|industry|q 至少一个为真值)
+  · 两条返回分支各注入一次：非默认语言放行分支（NextResponse.next）+ 默认语言 rewrite 分支
+
+【首轮结果】17 PASS / 2 FAIL
+  FAIL  /suppliers?country=china            X-Robots-Tag = null
+  FAIL  /suppliers?q=furniture              X-Robots-Tag = null
+  PASS  /suppliers?country=china&industry=FURNITURE&q=wood
+  PASS  /es/suppliers?country=china
+  （用例 1=/suppliers 期望无头，两版都 PASS）
+
+【定位过程】三轮对照探针 scripts/_s18_probe_robots.mjs
+  A 原样 URL × 3 轮：5 个用例全部稳定 PASS（无抖动）
+  B 同条件 + 随机 cache-buster：全部 PASS（含两条首轮 FAIL 的 URL）
+  C 原样 URL + Cache-Control: no-cache：全部 PASS
+  D 响应头快照：FAIL 样本与 PASS 样本完全同构
+      age = null / cf-cache-status = null（无边缘缓存层介入）
+      cache-control = s-maxage=3339, stale-while-revalidate=2592000
+      x-opennext-cache = HIT / x-nextjs-prerender = 1
+  ⇒ 同一 middleware 分支、同一代码路径，无缓存固化，两条 FAIL 不可复现。
+
+【根因】部署传播（propagation）窗口内的一次性瞬态。
+  脚本在 wrangler deploy 返回后立即执行，5 个用例按 1→5 顺序探测：
+  用例 2、3 落在新版本尚未在全球边缘生效的窗口内，命中上一版 #142（middleware 尚无该注入）；
+  用例 4、5 已传播完成，命中新版 #143。
+  用例 1 属「期望无头」，在新旧两版上都通过，故未暴露。
+
+【阴性对照】scripts/_s18_probe_negative.mjs —— 8 PASS / 0 FAIL
+  期望无头（全部 got=null ✓）：
+    /suppliers?utm_source=newsletter   无关参数不误伤
+    /suppliers?page=2                  无关参数不误伤
+    /suppliers?q=                      空值 == 旧逻辑 Boolean("")===false
+    /suppliers?country=                空值
+    /suppliers/guangzhou-sunny-food?country=china   非目录页
+    /industrial-clusters?country=china              非 /suppliers 路径
+  期望 noindex, follow（全部命中 ✓）：
+    /suppliers?industry=FURNITURE      单参数 industry
+    /zh/suppliers?q=wood               zh 前缀 + q
+
+【复测结果】scripts/s18-live-verify.mjs —— 19 PASS / 0 FAIL
+  1 [/suppliers]                                  无 X-Robots-Tag                    PASS
+  1 [/suppliers?country=china]                    X-Robots-Tag = noindex, follow     PASS
+  1 [/suppliers?q=furniture]                      X-Robots-Tag = noindex, follow     PASS
+  1 [?country=china&industry=FURNITURE&q=wood]    X-Robots-Tag = noindex, follow     PASS
+  1 [/es/suppliers?country=china]                 X-Robots-Tag = noindex, follow     PASS
+
+结论：D3 方案 (i) middleware 主方案**生效**，无需启用 (ii) CF Transform Rule 兜底。
+
+⚠️ 运维教训：部署后的即时验证必须「多轮取样 + cache-buster 变体」双口径，
+   否则会把传播窗口的一次性瞬态误判为功能缺陷。

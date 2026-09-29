@@ -1,0 +1,38 @@
+
+=== A. 静态化与禁令（源码级防回退） ===
+  PASS  A1 关键源文件均可读
+  PASS  A2 目录页不再读 searchParams（读它 = Next 强制动态渲染）
+  PASS  A3 目录页声明 `export const revalidate = 3600`
+  PASS  A4 目录页不得出现 force-dynamic / revalidate = 0
+  PASS  A5 产业带目录页已去 force-dynamic，改 revalidate
+  PASS  A6 产业带 catch-all 已去 force-dynamic，改 revalidate + dynamicParams
+  PASS  A7 产业带 catch-all 有 generateStaticParams（否则详情页不进静态产物）
+  PASS  A8 DirectoryGrid 是客户端组件且用 useSearchParams
+  PASS  A9 DirectoryGrid 首帧不过滤（mounted 闸门）——否则 hydration mismatch / 首屏抖动
+  PASS  A10 禁客户端取数（数据必须由服务端 props 传入，权限裁剪点不得前移）
+  PASS  A11 展示层不重新推导派生值（等级 / 风险色 / 证据文案一律由服务端算好）
+  PASS  A12 展示层不取数、不读上下文（纯组件：可由服务端与客户端共用）
+  PASS  A13 middleware 注入 X-Robots-Tag: noindex, follow
+  PASS  A14 命中条件与旧口径逐字一致（/suppliers 且 country / industry / q 任一为真；不含 utm）
+  PASS  A15 注入只加响应头，不得改动 locale 重写逻辑（rewrite 目标与 matcher 原样）
+
+=== B. 产物级 —— 预渲染覆盖与 D1 内联上限 ===
+  PASS  B1 构建产物存在（.next/server/app）
+  PASS  B2 [en] 目录 HTML 含全部 9 家供应商卡片（卡片数=9）
+  PASS  B2 [zh] 目录 HTML 含全部 9 家供应商卡片（卡片数=9）
+  PASS  B2 [zh-TW] 目录 HTML 含全部 9 家供应商卡片（卡片数=9）
+  PASS  B2 [ja] 目录 HTML 含全部 9 家供应商卡片（卡片数=9）
+  PASS  B2 [es] 目录 HTML 含全部 9 家供应商卡片（卡片数=9）
+  PASS  B2 [de] 目录 HTML 含全部 9 家供应商卡片（卡片数=9）
+  PASS  B2 [fr] 目录 HTML 含全部 9 家供应商卡片（卡片数=9）
+  PASS  B2 [pt] 目录 HTML 含全部 9 家供应商卡片（卡片数=9）
+  PASS  B2 [ar] 目录 HTML 含全部 9 家供应商卡片（卡片数=9）
+  PASS  B3 🔑 D1 内联上限：任一语种卡片数 ≤ 50（超限须改分页或动态渲染）
+  PASS  B4 JSON-LD numberOfItems == 预渲染卡片数（结构化数据描述的就是这份静态 HTML）
+  PASS  B5 产业带详情页静态化 72/72（8 产业带 × 9 语 = 72）
+  PASS  B6 产业带聚合页（国家 / 国家+省·市）亦进静态产物
+  PASS  B7 产业带目录页已预渲染（9 语）
+
+============================================================
+stage1.8 目录静态化回归：30 PASS / 0 FAIL   （ROOT=F:\AI-验厂SEO网站）
+全部通过 ✓

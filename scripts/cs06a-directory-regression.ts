@@ -82,6 +82,13 @@ function exists(rel: string): boolean {
 
 const PAGE = "app/[locale]/suppliers/page.tsx";
 const MW = "middleware.ts";
+// stage1.8：目录页改为「预渲染 + 客户端过滤」后，筛选逻辑落到 DirectoryGrid（客户端），
+// 渲染标记落到 DirectoryView（服务端预渲染与客户端过滤**共用同一份**）。
+// 本文件 A 段断言的语义不变，落点随之迁移 —— 断言未放松（并新增了
+// 「客户端组件不得重新推导派生值 / 内联上限 50 家」两条，
+// 见 scripts/s18-directory-static-regression.ts）。
+const GRID = "components/supplier/DirectoryGrid.tsx";
+const VIEW = "components/supplier/DirectoryView.tsx";
 
 // ---------------------------------------------------------------------------
 section("A. Bug B —— 筛选结果 = 实际渲染的卡片（源码级防回归）");
@@ -89,6 +96,8 @@ section("A. Bug B —— 筛选结果 = 实际渲染的卡片（源码级防回�
 
 {
   const page = readSource(PAGE);
+  const view = readSource(VIEW);
+  const gridSrc = readSource(GRID);
   check("目录页源码可读且非空", page.length > 2000, `实际 ${page.length} 字符`);
 
   // A1 缺陷形态不得复现
@@ -99,80 +108,89 @@ section("A. Bug B —— 筛选结果 = 实际渲染的卡片（源码级防回�
     legacySlice ? `命中 ${legacySlice.length} 次` : ""
   );
 
-  // A2 展示集合由筛选结果派生（这是 count == cards 恒等成立的唯一依据）
+  // A2 展示集合由筛选结果派生（这是 count == cards 恒等成立的唯一依据）。
+  // stage1.8：落点由 page.tsx 移到 DirectoryView —— 网格与计数标签必须消费
+  //   **同一个**集合 `items`（客户端传过滤结果、服务端预渲染传全量）。
   check(
-    "A2 展示集合 `const displayed = filtered;` 存在",
-    /const\s+displayed\s*=\s*filtered\s*;/.test(page)
+    "A2 展示集合由筛选结果派生（网格与计数标签消费同一集合 `items`）",
+    /\{items\.map\(\(x\)\s*=>/.test(view) &&
+      /dict\.countLabel\.replace\("\{n\}",\s*String\(items\.length\)\)/.test(view)
   );
 
-  // A3 网格消费展示集合（不是 all、不是 featured）
-  const grid = page.match(/displayed\.map\(\(x\)\s*=>/g);
+  // A3 网格消费展示集合（不是全量、不是 featured），且恰好一处
+  const grid = view.match(/items\.map\(\(x\)\s*=>/g);
   check(
-    "A3 网格 `.map` 消费 `displayed`",
+    "A3 网格 `.map` 消费 `items`（恰好一处）",
     Boolean(grid && grid.length === 1),
     `命中 ${grid ? grid.length : 0} 次`
   );
 
-  // A4 空态消费展示集合，且渲染 s.empty（此前 0 命中时提示永不出现）
+  // A4 空态消费展示集合，且渲染 empty 文案（此前 0 命中时提示永不出现）
   check(
-    "A4 空态分支绑定 `displayed.length === 0`",
-    /\{displayed\.length\s*===\s*0\s*\?\s*\(/.test(page)
+    "A4 空态分支绑定 `items.length === 0`",
+    /\{items\.length\s*===\s*0\s*\?\s*\(/.test(view)
   );
   check(
-    "A4b 空态分支仍渲染 `s.empty`",
-    /s\.empty\s*\}/.test(page)
-  );
-
-  // A5 计数标签绑 filtered.length —— 与 A2 合起来 ⇒ 计数恒等于卡片数
-  check(
-    "A5 计数标签仍绑 `String(filtered.length)`",
-    /String\(filtered\.length\)/.test(page)
+    "A4b 空态分支仍渲染 `dict.empty`",
+    /dict\.empty\s*\}/.test(view)
   );
 
-  // A5b 旧集合 `featured` 不得以任何集合身份残留（key 名 s.featuredTitle 不算）
-  const legacyRefs = page.match(/\bfeatured\.(length|map|slice|filter)|const\s+featured\b/g);
+  // A5 计数标签绑展示集合长度 —— 与 A2 合起来 ⇒ 计数恒等于卡片数
   check(
-    "A5c 旧展示集合 `featured` 已彻底移除（除字典键 s.featuredTitle / s.featuredLead 外）",
+    "A5 计数标签仍绑 `String(items.length)`",
+    /String\(items\.length\)/.test(view)
+  );
+
+  // A5b 旧集合 `featured` 不得以任何集合身份残留（字典键 featuredTitle/Lead 不算）
+  const legacyRefs = (page + view + gridSrc).match(
+    /\bfeatured\.(length|map|slice|filter)|const\s+featured\b/g
+  );
+  check(
+    "A5c 旧展示集合 `featured` 已彻底移除（除字典键 featuredTitle / featuredLead 外）",
     !legacyRefs,
     legacyRefs ? legacyRefs.join(", ") : ""
   );
 
   // A6 筛选谓词未被顺手改动（三项「与」关系）
   check(
-    "A6 `filtered` 仍同时使用 country / industry / matchQ 三项条件",
-    /\(!country\s*\|\|\s*x\.country\s*===\s*country\)/.test(page) &&
-      /\(!industry\s*\|\|\s*x\.industryCode\s*===\s*industry\)/.test(page) &&
-      /matchQ\(x\)/.test(page)
+    "A6 过滤谓词仍同时使用 country / industry / 关键词三项条件",
+    /\(!country\s*\|\|\s*x\.country\s*===\s*country\)/.test(gridSrc) &&
+      /\(!industry\s*\|\|\s*x\.industryCode\s*===\s*industry\)/.test(gridSrc) &&
+      /\(!q\s*\|\|/.test(gridSrc)
   );
 
   // A7 搜索词仍覆盖公司名 / 产品 / 城市
   check(
-    "A7 `matchQ` 仍覆盖 legalName / mainProducts / city",
-    /x\.legalName\.toLowerCase\(\)\.includes\(q\)/.test(page) &&
-      /x\.mainProducts\.some\(/.test(page) &&
-      /x\.city\.toLowerCase\(\)\.includes\(q\)/.test(page)
+    "A7 关键词匹配仍覆盖 legalName / mainProducts / city",
+    /x\.legalName\.toLowerCase\(\)\.includes\(q\)/.test(gridSrc) &&
+      /x\.mainProducts\.some\(/.test(gridSrc) &&
+      /x\.city\.toLowerCase\(\)\.includes\(q\)/.test(gridSrc)
   );
 
-  // A8 筛选 chip 的数据源仍是全量（否则筛掉一个国家后 chip 会自我消失）
+  // A8 筛选 chip 的数据源仍是全量（否则筛掉一个国家后 chip 会自我消失）。
+  // stage1.8：服务端先把**全量**派生成 items，再由 items 派生 countries / industries
+  //   交给客户端；chip 绝不允许从过滤结果派生。
   check(
-    "A8 国家 / 行业 chip 仍由全量 `all` 派生",
-    /all\.map\(\(x\)\s*=>\s*x\.country\)/.test(page) &&
-      /all\.map\(\(x\)\s*=>\s*x\.industryCode\)/.test(page)
+    "A8 国家 / 行业 chip 仍由全量派生（items 来自全量 all）",
+    /items\.map\(\(x\)\s*=>\s*x\.country\)/.test(page) &&
+      /items\.map\(\(x\)\s*=>\s*x\.industryCode\)/.test(page) &&
+      /const\s+items:\s*DirectoryItem\[\]\s*=\s*all\.map\(/.test(page)
   );
 
-  // A9 JSON-LD 仍与页面显示结果一致（同用 filtered）
+  // A9 JSON-LD 描述的是**预渲染的那份 HTML** ⇒ 恒为全量。
+  //   （不得绑过滤结果：过滤态已 noindex，给 noindex 页面发索引信号是反向错误。）
   check(
-    "A9 JSON-LD numberOfItems / itemListElement 仍绑 `filtered`",
-    /numberOfItems:\s*filtered\.length/.test(page) &&
-      /itemListElement:\s*filtered\.map\(/.test(page)
+    "A9 JSON-LD numberOfItems / itemListElement 绑全量 `all`",
+    /numberOfItems:\s*all\.length/.test(page) &&
+      /itemListElement:\s*all\.map\(/.test(page)
   );
 
   // A10 linkWith 真值守卫未被改成 `!== undefined`（空串会把筛选项"粘"死）
   check(
     "A10 `linkWith` 三类参数仍用真值守卫（if (c) / if (i) / if (query)）",
-    /if\s*\(c\)\s*params\.set\("country",\s*c\)/.test(page) &&
-      /if\s*\(i\)\s*params\.set\("industry",\s*i\)/.test(page) &&
-      /if\s*\(query\)\s*params\.set\("q",\s*query\)/.test(page)
+    /if\s*\(c\)\s*params\.set\("country",\s*c\)/.test(view) &&
+      /if\s*\(i\)\s*params\.set\("industry",\s*i\)/.test(view) &&
+      /if\s*\(query\)\s*params\.set\("q",\s*query\)/.test(view)
   );
 
   // A11 数据源与排序契约未变

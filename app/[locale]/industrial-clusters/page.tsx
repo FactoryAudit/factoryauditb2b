@@ -218,13 +218,29 @@ function ClusterCard({
   );
 }
 
-// 🔴 必须是**动态渲染**，不能是 ISR / 预渲染。
+// ── stage1.8：由「强制动态」改为「预渲染（构建期冻结）」────────────────────────
 //
-// 实测（CHANGE SET B 验收）：改成 ISR 后 Cloudflare 会把预渲染产物按
-//   `Cache-Control: s-maxage=3275, stale-while-revalidate=2592000` + `x-nextjs-prerender: 1`
-// 缓存约 55 分钟 —— 表现为「后台已经发布了产业带，前台目录页仍然是空的」，
-// 而运营自己无法判断是没保存成功还是缓存没到期。
+// 🔄 本次是**有意识地推翻**上一版结论，不是遗忘。上一版（CHANGE SET B）的取舍是：
+//   改成 ISR 后 Cloudflare 会把预渲染产物按 `Cache-Control: s-maxage=3275,
+//   stale-while-revalidate=2592000` + `x-nextjs-prerender: 1` 缓存约 55 分钟 ——
+//   表现为「后台已经发布了产业带，前台目录页仍然是空的」，而运营无法判断是没保存
+//   成功还是缓存没到期。产业带是后台增删改的内容实体，当时选择「改完即见」。
 //
-// 产业带是后台增删改的内容实体，必须「改完即见」。本页恒定 ≤ 2 次索引查找，
-// 动态渲染的成本可忽略，不值得用缓存换这个不可预期的延迟。
-export const dynamic = "force-dynamic";
+//   推翻它的新事实（stage1.8 实测，2026-09-29）：
+//     · 本页线上 TTFB **2.63–3.30s**，响应头 `private, no-cache, no-store`；
+//     · 部署形态是 Cloudflare Workers **Free（CPU 10ms/请求）**，每次请求现场
+//       RSC + 2 次 Supabase 往返正是 5xx 的主要来源；
+//     · 「改完即见」并不是本页独有的能力 —— `/suppliers/<slug>` 早已是预渲染，
+//       其发布流程就是「改库 → 重新 build/deploy」。现在两条链路的行为**对齐**，
+//       运营只需记住一条规则，而不是两条互相矛盾的规则。
+//   ⇒ 用户 2026-09-29 拍板（D2）：接受「改完即见」失效，产业带与供应商对齐到
+//     同一套发布流程（改库后必须重新 build + deploy）。
+//
+// 🔴 `revalidate = 3600` 在当前部署形态下**等价于构建期冻结**：
+//   open-next.config.ts 用 `staticAssetsIncrementalCache` + `enableCacheInterception`，
+//   其 `set()` / `delete()` 均为 no-op ⇒ 缓存只读、数据在构建时快照。
+//   因此本页**不会**每小时自更新；下架一个产业带后，前台要等下一次发布才消失。
+//
+// ⚠️ 仍然禁止：给本页加 Cache Rule 边缘缓存（那会按边缘 TTL 提供过期产物，
+//    与本页「构建期快照」形成两层互相不可见的缓存）。
+export const revalidate = 3600;

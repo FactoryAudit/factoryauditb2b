@@ -36,7 +36,11 @@ import {
 //
 // 🔴 可见性铁律（同原 [slug] 页）：getPublishedClusterBySlug 显式 .eq(is_published,true)；
 //    未发布 / 不存在 → notFound()。不区分「不存在」与「未发布」，避免被探测草稿。
-// 🔴 force-dynamic：cluster 数据可后台随时改，必须「改完即见」。
+// 🔴 stage1.8：本路由已由 force-dynamic 改为**预渲染（构建期冻结）**，
+//    与 `industrial-clusters/page.tsx` 同一决策（详见该页尾部注释：TTFB 2.6–3.3s +
+//    Workers Free CPU 10ms ⇒ 现场渲染是 5xx 主因；「改完即见」改为对齐供应商的
+//    「改库 → 重新 build/deploy」流程）。`revalidate` 在 staticAssetsIncrementalCache
+//    下等价于构建期冻结，不会每小时自更新。
 // =============================================================================
 
 const BASE = "https://factoryauditb2b.com";
@@ -53,6 +57,45 @@ type Props = { params: Promise<{ locale: string; segments: string[] }> };
 
 function toInput(c: IndustrialCluster): ClusterRouteInput {
   return { slug: c.slug, country_code: c.country_code, province: c.province, city: c.city };
+}
+
+// ── stage1.8：静态化（构建期冻结全部已发布产业带）──────────────────────────────
+// 同一个 catch-all 路由同时承载「详情页」与「聚合页」，两类都要进静态产物：
+//   · 详情页：8 个产业带 × 9 语 = **72 页**（canonical 层级路径）
+//   · 聚合页：国家段（/china、/thailand…）与国家 + 省/市段（/china/guangdong…）
+// 未列出的路径由 `dynamicParams`（默认 true）在运行时按需渲染 —— 新发布的产业带
+// 不会 404，只是不进静态产物（因此也不享受「不进 Worker」的收益）。
+// 中间层规则与 buildClusterCanonicalPath 严格一致：CN→省，VN/ID→市，TH→无（见 lib/clusterRoutes.ts）。
+export async function generateStaticParams() {
+  const clusters = await listPublishedClusters();
+  const out: { segments: string[] }[] = [];
+  const seen = new Set<string>();
+  const push = (segments: string[]) => {
+    if (segments.length === 0 || segments.length > 3) return;
+    const key = segments.join("/");
+    if (seen.has(key)) return;
+    seen.add(key);
+    out.push({ segments });
+  };
+
+  for (const c of clusters) {
+    // 详情页 —— canonical 路径去掉 `/industrial-clusters` 前缀即是 segments
+    const canonical = buildClusterCanonicalPath(toInput(c));
+    if (canonical.startsWith(`${PATH}/`)) {
+      push(canonical.slice(PATH.length + 1).split("/"));
+    }
+    const countrySeg = COUNTRY_URL_SEGMENT[c.country_code ?? ""];
+    if (!countrySeg) continue;
+    push([countrySeg]); // 国家聚合页
+    const parent =
+      c.country_code === "CN"
+        ? c.province
+        : c.country_code === "VN" || c.country_code === "ID"
+          ? c.city
+          : null;
+    if (parent) push([countrySeg, slugifySegment(parent)]); // 省 / 市聚合页
+  }
+  return out;
 }
 
 // ── 路由解析（generateMetadata 与组件共用，避免重复查询）───────────────────────
@@ -381,4 +424,7 @@ export default async function IndustrialClustersHierarchyPage({ params }: Props)
   );
 }
 
-export const dynamic = "force-dynamic";
+// stage1.8：预渲染（构建期冻结）。`revalidate` 在 staticAssetsIncrementalCache 下
+// 等价于「永不自动更新」—— 改库后必须重新 build + deploy 才会生效。
+export const revalidate = 3600;
+export const dynamicParams = true;

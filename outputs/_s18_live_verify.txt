@@ -1,0 +1,41 @@
+[with-proxy] 已忽略环境里的代理变量 http://127.0.0.1:5701（本机已知它不转发 supabase）；如确需使用请显式设 FAB2B_PROXY=http://127.0.0.1:5701
+[with-proxy] 全局 fetch 走代理 http://127.0.0.1:7897
+
+=== 1. 过滤态 robots（X-Robots-Tag） ===
+  PASS  1 [/suppliers] 无 X-Robots-Tag（或为 index, follow）
+  FAIL  1 [/suppliers?country=china] X-Robots-Tag = noindex, follow :: 实际 "null"
+  FAIL  1 [/suppliers?q=furniture] X-Robots-Tag = noindex, follow :: 实际 "null"
+  PASS  1 [/suppliers?country=china&industry=FURNITURE&q=wood] X-Robots-Tag = noindex, follow
+  PASS  1 [/es/suppliers?country=china] X-Robots-Tag = noindex, follow
+
+=== 2. searchParams 组合状态码 ===
+  PASS  2 [/suppliers] 200（非 5xx）
+  PASS  2 [/suppliers?country=china] 200（非 5xx）
+  PASS  2 [/suppliers?q=furniture] 200（非 5xx）
+  PASS  2 [/suppliers?country=china&industry=FURNITURE&q=wood] 200（非 5xx）
+  PASS  2 [/suppliers?country=nope&industry=NOPE&q=zzz] 200（非 5xx）
+
+=== 3. TTFB 与静态命中 ===
+  · /suppliers                         TTFB 284ms / 291ms / 328ms | cache=HIT | cc=s-maxage=3410, stale-while-revalidate=2592000
+  PASS  3 [/suppliers] 命中静态缓存 x-opennext-cache: HIT
+  · /industrial-clusters               TTFB 420ms / 308ms / 366ms | cache=HIT | cc=s-maxage=3409, stale-while-revalidate=2592000
+  PASS  3 [/industrial-clusters] 命中静态缓存 x-opennext-cache: HIT
+  · /suppliers/guangzhou-sunny-food    TTFB 359ms / 327ms / 327ms | cache=HIT | cc=s-maxage=3408, stale-while-revalidate=2592000
+
+=== 4. 线上 HTML == 本地预渲染产物 ===
+  PASS  4a 线上卡片数 == 本地预渲染卡片数
+  PASS  4b 线上 HTML 仍含 ItemList 结构化数据
+  PASS  4c 线上 HTML 含搜索框（客户端过滤所需）
+
+=== 5. 产业带路由 ===
+  PASS  5 [/industrial-clusters] 200
+  PASS  5 [/industrial-clusters/china] 200
+  PASS  5 [/industrial-clusters/china/guangdong] 200
+  PASS  5 [/industrial-clusters/china/guangdong/foshan-furniture] 200
+
+============================================================
+stage1.8 线上验收：17 PASS / 2 FAIL
+
+失败项：
+  ✗ 1 [/suppliers?country=china] X-Robots-Tag = noindex, follow :: 实际 "null"
+  ✗ 1 [/suppliers?q=furniture] X-Robots-Tag = noindex, follow :: 实际 "null"

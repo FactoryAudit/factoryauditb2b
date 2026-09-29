@@ -1,0 +1,65 @@
+
+=== A. Bug B —— 筛选结果 = 实际渲染的卡片（源码级防回归） ===
+  PASS  目录页源码可读且非空
+  PASS  A1 目录页不再出现 `all.slice(`（缺陷形态根除）
+  PASS  A2 展示集合由筛选结果派生（网格与计数标签消费同一集合 `items`）
+  PASS  A3 网格 `.map` 消费 `items`（恰好一处）
+  PASS  A4 空态分支绑定 `items.length === 0`
+  PASS  A4b 空态分支仍渲染 `dict.empty`
+  PASS  A5 计数标签仍绑 `String(items.length)`
+  PASS  A5c 旧展示集合 `featured` 已彻底移除（除字典键 featuredTitle / featuredLead 外）
+  PASS  A6 过滤谓词仍同时使用 country / industry / 关键词三项条件
+  PASS  A7 关键词匹配仍覆盖 legalName / mainProducts / city
+  PASS  A8 国家 / 行业 chip 仍由全量派生（items 来自全量 all）
+  PASS  A9 JSON-LD numberOfItems / itemListElement 绑全量 `all`
+  PASS  A10 `linkWith` 三类参数仍用真值守卫（if (c) / if (i) / if (query)）
+  PASS  A11 目录页数据源仍是 `listSupplierDirectory()`
+  PASS  A12 `fetchRows` 仍过滤 is_published 且按 risk_score 降序、未评分沉底
+
+=== B. Bug A —— `/en/*` 301 必须保住 query（源码级防回归） ===
+  PASS  中间件源码可读且非空
+  PASS  B1 定位到 `first === DEFAULT_LOCALE` 分支
+  PASS  B2 301 分支的 `new URL(...)` 拼接了 `req.nextUrl.search`
+  PASS  B3 仍为 `NextResponse.redirect(..., 301)`
+  PASS  B4 空路径回退逻辑 `rest === "" ? "/" : rest` 保留
+  PASS  B5 `config.matcher` 未变
+  PASS  B6 `new URL(` 恰好 3 处，且三处角色各自守恒（rewrite + 两条 redirect）
+  PASS  B7 `x-pathname` 注入仍在（消费方已于 CS-19 移除，注入保留备用，不得在 generateMetadata 中读取）
+  PASS  B8 非默认语言的放行分支仍在（8 个 locale 不受影响）
+
+=== C. 未扩张 —— 本轮不得顺手改动的部分 ===
+  PASS  C1 GUEST_PROFILE_LIMIT 仍为 5
+  PASS  C2 COMPARE_MAX_SUPPLIERS 仍为 5
+  PASS  C3 MEMBERSHIP_PRICE_USD 仍为 99
+  PASS  C4 字段分层：PUBLIC 21 / FREE 8→13（CS-16 加 5 项联系/属地）/ PAID 恒为 4
+  PASS  C4b PAID 层四项未被 CS-12 改动
+  PASS  C4c PUBLIC 含 6 项登记级字段（englishName/companyType/website/registrationNumber/address/selfReportedCertificates）
+  PASS  C4d 自述证书 ⊥ 平台核验证书（selfReportedCertificates 不得进 PAID，certifications 不得进 PUBLIC）
+  PASS  C5 DIRECTORY_PATH 仍为 /suppliers
+  PASS  C6 P3 冻结：`FEATURED_MAX` / `FEATURED_MIN` 定义仍在（本轮不清理死码）
+  PASS  C7 字典存在：en.json
+  PASS  C7 字典存在：zh.json
+  PASS  C7 字典存在：zh-TW.json
+  PASS  C7 字典存在：ja.json
+  PASS  C7 字典存在：es.json
+  PASS  C7 字典存在：de.json
+  PASS  C7 字典存在：fr.json
+  PASS  C7 字典存在：pt.json
+  PASS  C7 字典存在：ar.json
+  PASS  C8 en 字典叶子数 = 3126（未被截断/新增）
+  PASS  C9 zh 与 en 键集合一致（本轮不动 i18n）
+  PASS  C9 zh-TW 与 en 键集合一致（本轮不动 i18n）
+  PASS  C9 ja 与 en 键集合一致（本轮不动 i18n）
+  PASS  C9 es 与 en 键集合一致（本轮不动 i18n）
+  PASS  C9 de 与 en 键集合一致（本轮不动 i18n）
+  PASS  C9 fr 与 en 键集合一致（本轮不动 i18n）
+  PASS  C9 pt 与 en 键集合一致（本轮不动 i18n）
+  PASS  C9 ar 与 en 键集合一致（本轮不动 i18n）
+  PASS  C10 历史归档仍在：PROJECT_FINALIZATION_AUDIT 保留原 Bug A/B 记录
+  PASS  C11 CS-05b 报告仍写着「CS-06 Bug A 剩余部分」
+  PASS  C12 CS-05c 报告仍写着「CS-06 Bug B」
+  PASS  C13 6 个迁移文件仍在（本轮零 DB 变更）
+
+============================================================
+CS-06a 目录筛选回归：55 PASS / 0 FAIL   （ROOT=F:\AI-验厂SEO网站）
+全部通过 ✓

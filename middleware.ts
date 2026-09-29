@@ -12,12 +12,51 @@ import { LEGACY_CLUSTER_REDIRECTS } from "@/lib/clusterRoutes";
 // 生成正确的 canonical / hreflang / 差异化 title（修复 SEO-AUDIT P0-1：
 // 此前 16 个页面 canonical 全部指向首页）。
 
+/** 去掉非默认语言前缀：/es/suppliers → /suppliers；/suppliers → /suppliers。
+ *  英文（DEFAULT_LOCALE）不产生前缀，故 `/en/suppliers` 不在本函数的处理范围
+ *  —— 它在上方分支已被 301 到 `/suppliers`。 */
+function stripLocalePrefix(pathname: string): string {
+  const seg = pathname.split("/")[1] ?? "";
+  if (isLocale(seg) && seg !== DEFAULT_LOCALE) {
+    return pathname.slice(seg.length + 1) || "/";
+  }
+  return pathname;
+}
+
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const first = pathname.split("/")[1] ?? "";
 
   const requestHeaders = new Headers(req.headers);
   requestHeaders.set("x-pathname", pathname);
+
+  // ── stage1.8：/suppliers 过滤态 noindex（响应头注入）────────────────────────
+  // 目录页已由「动态渲染」改为「预渲染」：页面不再读 searchParams，
+  // generateMetadata 因此**拿不到**过滤条件，无法再输出 `robots: { index: false }`。
+  // 若不管，?country= / ?industry= / ?q= 四种过滤态会与主目录共用同一份静态 HTML
+  // 并全部落回 `index, follow` —— 且**不会报错**，只体现在搜索结果里。
+  //
+  // 命中条件与改造前的服务端口径**逐字一致**：
+  //   · 路径为 /suppliers（可带语言前缀，如 /es/suppliers）；
+  //   · country / industry / q 至少一个为真值（`Boolean("") === false`，与旧逻辑同）。
+  // 故 `?utm_source=…` 这类无关参数**不会**触发 noindex（旧逻辑也不会）。
+  //
+  // 为什么不走页面层兜底：客户端 JS 注入 <meta name="robots"> 无效 ——
+  // 爬虫读初始 HTML、不执行 JS。
+  //
+  // 已核对构建产物 `.open-next/middleware/handler.mjs`：middleware 返回的响应头
+  // 会经 `applyMiddlewareHeaders` 合并进最终响应，**包括**静态资源命中
+  // （assetResolver 短路）与缓存拦截（cacheInterceptor 短路）两条路径 ——
+  // 也就是预渲染命中时也会带上该头。⚠️ 该结论仍须部署后实测（D3），不生效即切
+  // Cloudflare Response Header Transform Rule。
+  const isFilteredDirectory =
+    stripLocalePrefix(pathname) === "/suppliers" &&
+    Boolean(
+      req.nextUrl.searchParams.get("country") ||
+        req.nextUrl.searchParams.get("industry") ||
+        req.nextUrl.searchParams.get("q")
+    );
+  const NOINDEX_FILTERED = { "X-Robots-Tag": "noindex, follow" };
 
   // ── SEO 规范化：HTTPS / www / 尾斜杠（在 locale 逻辑之前，单一 308）──
   // Cloudflare 边缘通常已做 HTTPS 跳转，这里兜底；本地 dev 跳过以免死循环。
@@ -63,7 +102,9 @@ export function middleware(req: NextRequest) {
   }
 
   if (isLocale(first) && first !== DEFAULT_LOCALE) {
-    return NextResponse.next({ request: { headers: requestHeaders } });
+    const res = NextResponse.next({ request: { headers: requestHeaders } });
+    if (isFilteredDirectory) res.headers.set("X-Robots-Tag", NOINDEX_FILTERED["X-Robots-Tag"]);
+    return res;
   }
 
   if (first === DEFAULT_LOCALE) {
@@ -89,9 +130,12 @@ export function middleware(req: NextRequest) {
   const target =
     (pathname === "/" ? `/${DEFAULT_LOCALE}` : `/${DEFAULT_LOCALE}${pathname}`) +
     req.nextUrl.search;
-  return NextResponse.rewrite(new URL(target, req.url), {
+  const res = NextResponse.rewrite(new URL(target, req.url), {
     request: { headers: requestHeaders },
   });
+  // stage1.8：过滤态 noindex 响应头（见文件上方 isFilteredDirectory 的说明）
+  if (isFilteredDirectory) res.headers.set("X-Robots-Tag", NOINDEX_FILTERED["X-Robots-Tag"]);
+  return res;
 }
 
 export const config = {
