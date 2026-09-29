@@ -1,0 +1,30 @@
+[
+  {
+    "_comment": "示例模板（占位数据，请整条替换为真实、经人工核验的公开信息后另存为 data/suppliers-intake.json）。字段口径见 scripts/suppliers-intake.mjs 顶部注释。",
+    "slug": "example-factory-demo",
+    "legal_name": "Example Manufacturing Co., Ltd.",
+    "english_name": "Example Manufacturing Co., Ltd.",
+    "display_name": "Example Manufacturing",
+    "country_code": "china",
+    "city": "Dongguan",
+    "province": "Guangdong",
+    "industry_code": "plastics",
+    "business_type": "OEM/ODM",
+    "company_type": "Limited Liability Company",
+    "established": 2008,
+    "employees": "200-500",
+    "main_products": "Injection Molded Parts|Plastic Housings|Tooling",
+    "export_markets": "North America|Western Europe",
+    "certifications": "ISO 9001",
+    "website": "https://example.com",
+    "address": "示例地址（仅填公开登记地址，不含个人住址）",
+    "registration_number": "91441900XXXXXXXXXX",
+    "production_capacity": "1200 tons/month",
+    "factory_size": "12000 sqm",
+    "company_description": "示例：一句话公司性质描述，来源于公开登记信息。",
+    "source_url": "https://example.com/public-source-page",
+    "source_type": "manual_public_registry",
+    "source_name": "示例：来源名称（如 国家企业信用信息公示系统 / 展会公开名录）",
+    "discovered_at": "2026-09-29"
+  }
+]

@@ -20,6 +20,9 @@ dist/
 .env.test.local
 .env.production.local
 
+# 写入脚本的本地备份（勿提交；translate-guides-*.cjs 写入前会生成）
+lib/*.bak
+
 # Prisma 生成的 client 与本地数据库
 generated/
 prisma/dev.db

@@ -326,7 +326,7 @@ export const GUIDES: Guide[] = [
     metaDescZh:
       "覆盖文件、生产控制、质量管理、社会责任合规与整改的验厂检查表，列出审核员会索要的记录和最常见的发现项。",
     metaDescJa:
-      "工場監査チェックリストの項目を解説します。品質、生産管理、社会コンプライアンス、監査員が求める記録を網羅します。",
+      "工場監査チェックリストの項目を解説します。品質、生産管理、社会コンプライアンス、監査員が求める記録と事前準備の要点を網羅します。",
     metaDescEs:
       "Una lista de comprobación para auditorías de fábrica. Cubre la calidad, el control de producción, el cumplimiento social y los registros exigidos.",
     metaDescDe:
@@ -777,7 +777,7 @@ export const GUIDES: Guide[] = [
     metaDescZh:
       "SMETA 与 BSCI 对比：各自覆盖什么、由谁执行、报告差异、认可度，以及如何为你的供应基与采购方选对审核。",
     metaDescJa:
-      "SMETA と BSCI の社会的監査を項目ごとに比較します。それぞれの範囲、実施主体、自社に合う選び方を解説します。",
+      "SMETA と BSCI の社会的監査を項目ごとに比較します。それぞれの範囲、実施主体、コストと期間、自社に合う選び方を解説します。",
     metaDescEs:
       "Comparación de las auditorías sociales SMETA y BSCI, ámbito por ámbito. Vea qué cubre cada una, quién las realiza y cómo elegir.",
     metaDescDe:
@@ -896,7 +896,7 @@ export const GUIDES: Guide[] = [
     metaDescZh:
       "如何读懂工厂验厂报告：把分数与发现项分开看，先看严重与致命项，核对证据，再对每项发现决定处理方式。",
     metaDescJa:
-      "工場監査報告書の読み方を解説します。重大な指摘から確認し、根拠を照合してから判断する手順を示します。",
+      "工場監査報告書の読み方を解説します。重大な指摘から確認し、根拠を照合してから判断する手順と、見落としやすい記録の確認点を示します。",
     metaDescEs:
       "Cómo leer un informe de auditoría de fábrica sin perder el hilo. Lea primero los hallazgos críticos, revise la evidencia y luego decida.",
     metaDescDe:
@@ -1012,7 +1012,7 @@ export const GUIDES: Guide[] = [
     metaDescZh:
       "如何在越南验厂：确认投资与商业登记、核实真实生产场地、审阅质量与社会合规，并在付定金前安排现场审核。",
     metaDescJa:
-      "ベトナムで工場監査を行う手順を解説します。登記の確認、実際の生産拠点の検証、コンプライアンスの確認をまとめます。",
+      "ベトナムで工場監査を行う手順を解説します。登記の確認、実際の生産拠点の検証、コンプライアンス確認と、事前に準備すべき書類をまとめます。",
     metaDescEs:
       "Cómo auditar una fábrica en Vietnam antes de pagar el anticipo. Confirme el registro, verifique la planta real y revise el cumplimiento.",
     metaDescDe:
@@ -1243,7 +1243,7 @@ export const GUIDES: Guide[] = [
     metaDescZh:
       "第三方验厂（Factory Audit）是什么、跨国采购为什么必须做、以及如何选择靠谱的验厂机构：行业经验、响应速度、报告透明度。",
     metaDescJa:
-      "B2B の工場監査とは何か、なぜ海外バイヤーに必要なのかを解説します。自社製品に合う第三者監査機関の選び方も示します。",
+      "B2B の工場監査とは何か、なぜ海外バイヤーに必要なのかを解説します。監査の種類と、自社製品に合う第三者監査機関の選び方も示します。",
     metaDescEs:
       "Qué es una auditoría de fábrica B2B y por qué la necesitan los compradores. Vea cómo elegir una firma de auditoría para su producto.",
     metaDescDe:
@@ -1415,7 +1415,7 @@ export const GUIDES: Guide[] = [
     metaDescZh:
       "2026版供应商评估清单，覆盖资质合法性、产能、质量体系、ESG 与文件，列出每个环节审核员会索取的记录。",
     metaDescJa:
-      "2026 年版のサプライヤー評価チェックリストです。合法性、生産能力、ESG、品質体制と必要な書類・記録を網羅します。",
+      "2026 年版のサプライヤー評価チェックリストです。合法性、生産能力、ESG、品質体制に加え、必要な書類と記録の確認点を網羅します。",
     metaDescEs:
       "Una lista de evaluación de proveedores 2026 sobre legalidad, capacidad y ESG. Cubre el sistema de calidad y los registros exigidos.",
     metaDescDe:
@@ -1770,6 +1770,18 @@ export const GUIDES: Guide[] = [
       "How a third-party factory audit solves the biggest sourcing pains. Fake factories, unstable quality and missed delivery dates, fixed.",
     metaDescZh:
       "专业第三方验厂如何解决采购三大痛点：供应商造假、质量不稳、交期延误。",
+    metaDescJa:
+      "第三者監査でよくある問題点を整理します。連絡の遅れ、指摘事項の不明確さ、報告後のフォロー不足への対処と事前準備を示します。",
+    metaDescEs:
+      "Los problemas más habituales en las auditorías de terceros: retrasos en la comunicación, hallazgos poco claros y falta de acciones tras el informe.",
+    metaDescDe:
+      "Typische Probleme bei Audits durch Dritte: Kommunikationsverzögerungen, unklare Feststellungen und fehlende Maßnahmen nach dem Bericht.",
+    metaDescFr:
+      "Les problèmes les plus courants des audits tiers : retards de communication, constats flous et absence d'actions après le rapport.",
+    metaDescPt:
+      "Os problemas mais comuns nas auditorias de terceiros: atrasos na comunicação, achados pouco claros e falta de ações após o relatório.",
+    metaDescAr:
+      "المشكلات الأكثر شيوعاً في تدقيق الأطراف الثالثة: تأخر التواصل، والملاحظات غير الواضحة، وغياب الإجراءات بعد التقرير، وكيفية تجنّبها مسبقاً.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/supplier-risk-calculator" },
@@ -1930,6 +1942,18 @@ export const GUIDES: Guide[] = [
       "What a capacity audit checks and why certificates do not prove output. See the data that predicts whether your order will ship on time.",
     metaDescZh:
       "产能审核查什么、为什么销售承诺和证书都不能代表产能，以及能预测订单能否准时发货的关键数据。",
+    metaDescJa:
+      "工場の生産能力を審査する手順を解説します。設備、人員、稼働率、ボトルネックを確認し、実際に供給できる数量と発注前の確認点を見極めます。",
+    metaDescEs:
+      "Cómo auditar la capacidad real de una fábrica. Revise equipos, plantilla, tasa de utilización y cuellos de botella antes de firmar un pedido.",
+    metaDescDe:
+      "So prüfen Sie die tatsächliche Kapazität einer Fabrik. Anlagen, Personal, Auslastung und Engpässe klären, bevor Sie einen Auftrag vergeben.",
+    metaDescFr:
+      "Comment auditer la capacité réelle d'une usine. Vérifiez équipements, effectifs, taux d'utilisation et goulots d'étranglement avant de commander.",
+    metaDescPt:
+      "Como auditar a capacidade real de uma fábrica. Verifique equipamentos, pessoal, taxa de utilização e gargalos antes de fazer o pedido.",
+    metaDescAr:
+      "كيفية تدقيق الطاقة الإنتاجية الفعلية للمصنع. تحقّق من المعدات والموظفين ومعدل التشغيل ومواقع الاختناق قبل إصدار أمر الشراء.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/audit-checklist" },
@@ -2088,6 +2112,18 @@ export const GUIDES: Guide[] = [
     titleZh: "AQL抽样标准怎么看？出货前检验(FRI)必备指南",
     metaDescEn: "How to read the AQL sampling standard for pre-shipment inspection. Covers defect classes, the two-table method and how to set AQL.",
     metaDescZh: "出货前检验(FRI)的AQL抽样标准实用指南：缺陷分级、两张表查法、如何看接收数Ac与拒收数Re，以及按产品类型设定AQL。",
+    metaDescJa:
+      "出荷前検査で使う AQL 抜き取り基準を解説します。欠陥クラスの分類、二表方式、ロット合格の判定と不合格時の対応を示します。",
+    metaDescEs:
+      "Cómo aplicar el estándar AQL en inspecciones previas al embarque. Clases de defectos, tabla doble y criterios de aceptación del lote.",
+    metaDescDe:
+      "So wenden Sie die AQL-Stichprobennorm bei Vorversandinspektionen an. Fehlerklassen, doppelte Tabelle und Annahmekriterien für Lose.",
+    metaDescFr:
+      "Comment appliquer la norme AQL en inspection avant expédition. Classes de défauts, table double et critères d'acceptation du lot.",
+    metaDescPt:
+      "Como aplicar a norma AQL em inspeções antes do embarque. Classes de defeitos, tabela dupla e critérios de aceitação do lote.",
+    metaDescAr:
+      "كيفية تطبيق معيار AQL في فحوص ما قبل الشحن. أصناف العيوب والجدول المزدوج ومعايير قبول الدفعة أو رفضها، وكيفية توثيق نتائج الفحص.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/audit-checklist" },
@@ -2195,6 +2231,18 @@ export const GUIDES: Guide[] = [
     titleZh: "生产初期检验(PPI) vs 生产中期检验(DUPRO)：哪个更重要？",
     metaDescEn: "PPI and DUPRO inspections move quality control earlier in the run. Compare timing, focus and cost, and see why DUPRO often wins.",
     metaDescZh: "生产初期检验(PPI)与生产中期检验(DUPRO)把质量控制前移到终检之前。本指南对比时机、重点与成本，并说明为何 DUPRO 通常性价比更高。",
+    metaDescJa:
+      "PPI（生産前検査）と DUPRO（生産中検査）の違いを比較します。目的、実施タイミング、確認項目、費用対効果を示します。",
+    metaDescEs:
+      "PPI frente a DUPRO: diferencias entre la inspección previa a la producción y la inspección durante la producción. Objetivos, momentos y coste.",
+    metaDescDe:
+      "PPI gegenüber DUPRO: Unterschiede zwischen Vorproduktions- und Währendproduktions-Inspektion. Zweck, Zeitpunkt, Umfang und Kosten-Nutzen.",
+    metaDescFr:
+      "PPI et DUPRO : différences entre l'inspection avant production et l'inspection en cours de production. Objectifs, moments et rentabilité.",
+    metaDescPt:
+      "PPI versus DUPRO: diferenças entre a inspeção antes da produção e a inspeção durante a produção. Objetivos, momentos e custo-benefício.",
+    metaDescAr:
+      "مقارنة بين PPI (فحص ما قبل الإنتاج) وDUPRO (فحص أثناء الإنتاج). الأهداف والتوقيت ونطاق الفحص والعائد على التكلفة ومتى يصلح كل منهما.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/audit-checklist" },
@@ -2296,6 +2344,18 @@ export const GUIDES: Guide[] = [
     titleZh: "为什么跨国采购一定要做全检？避免退货率飙升的关键",
     metaDescEn: "Why 100% full inspection is replacing AQL sampling for high-value goods. See when the extra cost is worth it for cross-border orders.",
     metaDescZh: "为何全检(100% Inspection)正在取代 AQL 抽样，成为跨境、高价值与高合规货物的标配，以及何时这笔额外成本值得花。",
+    metaDescJa:
+      "100% 全数検査の使いどころを解説します。抜き取り検査との違い、費用、対象となる製品、導入すべきケースと費用対効果の判断基準を示します。",
+    metaDescEs:
+      "Cuándo recurrir a la inspección 100 % de la producción. Diferencias con el muestreo, coste y casos en los que merece la pena.",
+    metaDescDe:
+      "Wann eine 100-%-Vollprüfung sinnvoll ist. Unterschiede zur Stichprobe, Kosten und Fälle, in denen sie sich lohnt, samt ihrer Grenzen.",
+    metaDescFr:
+      "Quand recourir à l'inspection à 100 % de la production. Différences avec l'échantillonnage, coût et cas où elle se justifie.",
+    metaDescPt:
+      "Quando recorrer à inspeção 100 % da produção. Diferenças face à amostragem, custo e casos em que se justifica, e os seus limites.",
+    metaDescAr:
+      "متى يُلجأ إلى الفحص الكامل 100% للإنتاج. الفروق عن أخذ العينات والتكلفة والحالات التي يستحق فيها ذلك، وحدوده العملية وبدائله.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/supplier-risk-calculator" },
@@ -2393,6 +2453,18 @@ export const GUIDES: Guide[] = [
     titleZh: "B2B跨境电商卖家必备：如何通过验货控制亚马逊FBA拒收风险？",
     metaDescEn: "How to build FBA inbound compliance into your inspection process. Check labels, drop tests, weighing and inner packaging before shipping.",
     metaDescZh: "如何把 FBA 入仓合规植入验货流程：最常见的拒收雷区，以及覆盖标签、跌落测试、称重量与内部包装的四步清单。",
+    metaDescJa:
+      "FBA で拒否された出荷を検査で挽回する方法を解説します。ラベル、包装、数量の不一致を特定し、再出荷の判断基準を示します。",
+    metaDescEs:
+      "Cómo una inspección rescata un envío rechazado por FBA. Identifique errores de etiquetado, embalaje o cantidad antes de reenviar.",
+    metaDescDe:
+      "Wie eine Inspektion eine von FBA abgelehnte Sendung rettet. Kennzeichnungs-, Verpackungs- und Mengenfehler vor dem Neuversand klären.",
+    metaDescFr:
+      "Comment une inspection sauve un envoi refusé par FBA. Identifiez les erreurs d'étiquetage, d'emballage ou de quantité avant de réexpédier.",
+    metaDescPt:
+      "Como uma inspeção salva um envio rejeitado pela FBA. Identifique erros de rotulagem, embalagem ou quantidade antes de reenviar.",
+    metaDescAr:
+      "كيفية إنقاذ شحنة مرفوضة من FBA بالفحص. حدّد أخطاء الملصقات والتغليف والكمية، وتحقّق من مطابقة الطلب ووثّق النتائج قبل إعادة الشحن.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/audit-checklist" },
@@ -2496,6 +2568,18 @@ export const GUIDES: Guide[] = [
     titleZh: "产品检验不合格怎么办？与供应商谈判及处理纠纷的5个策略",
     metaDescEn: "A failed inspection is the start of a negotiation, not the end. Five strategies to sort defects, freeze payment and re-rate the supplier.",
     metaDescZh: "一份不合格验货报告是谈判的开始而非订单的终结。五个策略：区分缺陷、冻结尾款、索要纠正计划、界定返工成本、重新评估供应商。",
+    metaDescJa:
+      "検査不合格時の係争解決手順を解説します。証拠の保全、再検査の可否、返品・修理・値引きの交渉材料と、期限内に決着させる進め方を示します。",
+    metaDescEs:
+      "Cómo resolver una disputa tras una inspección fallida. Conservación de pruebas, posibilidad de reinspección y negociación de devoluciones.",
+    metaDescDe:
+      "So lösen Sie einen Streit nach einer fehlgeschlagenen Inspektion. Beweissicherung, Nachinspektion und Verhandlung von Rückgabe oder Rabatt.",
+    metaDescFr:
+      "Comment résoudre un litige après une inspection échouée. Conservation des preuves, ré-inspection et négociation d'un retour ou d'une remise.",
+    metaDescPt:
+      "Como resolver um litígio após uma inspeção reprovada. Conservação de provas, reinspeção e negociação de devolução ou desconto.",
+    metaDescAr:
+      "كيفية حل نزاع بعد فشل الفحص. حفظ الأدلة وإمكانية إعادة الفحص، والتفاوض على الإرجاع أو الإصلاح أو الخصم، مع توثيق المراسلات.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/audit-report-analyzer" },
@@ -2603,6 +2687,18 @@ export const GUIDES: Guide[] = [
       "What an ethical audit mandates on labour, safety and environment. See the documents a supplier must produce to pass a social audit.",
     metaDescZh:
       "道德审核到底强制什么：采购方对劳工、健康安全、环境与管理体系的硬性要求，以及供应商必须提供的文件证据。",
+    metaDescJa:
+      "倫理監査（SMETA、BSCI、SA8000 など）の必須要件を整理します。児童労働、強制労働、労働時間、賃金、安全衛生の観点を示します。",
+    metaDescEs:
+      "Requisitos obligatorios en auditorías éticas (SMETA, BSCI, SA8000). Trabajo infantil, trabajo forzoso, horas, salarios y seguridad.",
+    metaDescDe:
+      "Pflichtanforderungen ethischer Audits (SMETA, BSCI, SA8000). Kinderarbeit, Zwangsarbeit, Arbeitszeiten, Löhne und Arbeitssicherheit.",
+    metaDescFr:
+      "Exigences obligatoires des audits éthiques (SMETA, BSCI, SA8000). Travail des enfants, travail forcé, heures, salaires et sécurité.",
+    metaDescPt:
+      "Requisitos obrigatórios em auditorias éticas (SMETA, BSCI, SA8000). Trabalho infantil, trabalho forçado, horas, salários e segurança.",
+    metaDescAr:
+      "المتطلبات الإلزامية في التدقيق الأخلاقي (SMETA وBSCI وSA8000). عمالة الأطفال والعمل الجبري وساعات العمل والأجور والسلامة.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/supplier-document-checker" },
@@ -2716,6 +2812,18 @@ export const GUIDES: Guide[] = [
       "A realistic look at SA8000 certification and what the standard demands. See why it is harder than a one-off social audit before you commit.",
     metaDescZh:
       "务实看 SA8000 认证：标准要求什么、为何比一次性社会审核更难、所需时间与体系投入，以及对你的供应基是否值得。",
+    metaDescJa:
+      "SA8000 認証の取得手順を解説します。対象範囲、審査項目、審査期間、維持にかかる費用と更新の要件、審査で問われる記録を示します。",
+    metaDescEs:
+      "Cómo obtener la certificación SA8000. Alcance, criterios de auditoría, duración, coste de mantenimiento y requisitos de renovación.",
+    metaDescDe:
+      "So erlangen Sie die SA8000-Zertifizierung. Geltungsbereich, Auditkriterien, Dauer, laufende Kosten und Anforderungen zur Erneuerung.",
+    metaDescFr:
+      "Comment obtenir la certification SA8000. Périmètre, critères d'audit, durée, coûts de maintien et conditions de renouvellement.",
+    metaDescPt:
+      "Como obter a certificação SA8000. Âmbito, critérios de auditoria, duração, custos de manutenção e requisitos de renovação.",
+    metaDescAr:
+      "كيفية الحصول على شهادة SA8000. النطاق ومعايير التدقيق والمدة وتكاليف الصيانة وشروط التجديد، وأبرز أسباب عدم الاجتياز وكيفية تجنّبها.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/audit-checklist" },
@@ -2825,6 +2933,18 @@ export const GUIDES: Guide[] = [
       "How an ESG supplier audit differs from a traditional social audit. Covers the environment, governance and traceability layers buyers add.",
     metaDescZh:
       "ESG 供应商审核与传统社会审核有何不同：在劳工标准之上新增的环境、治理与可追溯层，以及买家现在对供应链的期望。",
+    metaDescJa:
+      "ESG 観点でのサプライヤー監査を解説します。環境、社会、ガバナンスの評価項目と、EU 規制を踏まえた準備、求められる証拠を示します。",
+    metaDescEs:
+      "Cómo auditar a un proveedor desde la perspectiva ESG. Criterios ambientales, sociales y de gobernanza y preparación ante la normativa de la UE.",
+    metaDescDe:
+      "Lieferantenaudits aus ESG-Sicht. Kriterien für Umwelt, Soziales und Unternehmensführung sowie Vorbereitung auf EU-Vorgaben.",
+    metaDescFr:
+      "Comment auditer un fournisseur sous l'angle ESG. Critères environnementaux, sociaux et de gouvernance et préparation aux règles de l'UE.",
+    metaDescPt:
+      "Como auditar um fornecedor na perspetiva ESG. Critérios ambientais, sociais e de governação e preparação face às regras da UE.",
+    metaDescAr:
+      "كيفية تدقيق المورد من منظور ESG. معايير البيئة والمجتمع والحوكمة، والاستعداد لمتطلبات الاتحاد الأوروبي، والأدلة المطلوبة وطريقة جمعها.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/supplier-document-checker" },
