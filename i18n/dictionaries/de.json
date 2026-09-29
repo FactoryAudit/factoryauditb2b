@@ -292,7 +292,7 @@
       "relatedTitle": "Ähnliche Werkzeuge",
       "faqTitle": "Häufige Fragen",
       "metaTitle": "Lieferanten-Risikorechner",
-      "metaDesc": "Bewertet jeden Lieferanten von 0 bis 100 in acht Bereichen: Unternehmen, Qualität, Compliance, Produktion, Lieferkette, Dokumentation, Zertifizierung und digitaler Fußabdruck. Ein höherer Wert bedeutet geringeres Risiko. Kostenlos, ohne Konto."
+      "metaDesc": "Bewerten Sie jeden Lieferanten von 0 bis 100 in acht Bereichen: Unternehmen, Qualität, Compliance und Lieferkette. Höherer Wert heißt geringeres Risiko."
     },
     "dimensions": {
       "company": {
@@ -1302,7 +1302,7 @@
         "b": "Zahlungen werden von Stripe verarbeitet. Wir sehen oder speichern niemals Ihre vollständige Kartennummer. Wir speichern nur Kartenmarke, die letzten vier Stellen, den Abonnementstatus und das Verlängerungsdatum, die für den Betrieb Ihrer Mitgliedschaft erforderlich sind."
       }
     ],
-    "termsTitle": "Nutzungsbedingungen",
+    "termsTitle": "Nutzungsbedingungen und Plattformregeln",
     "termsUpdated": "Zuletzt aktualisiert: 2026-09-03",
     "termsIntro": "Diese Bedingungen regeln die Nutzung der Plattform FactoryAuditB2B. Sie hilft Käufern beim Prüfen von Lieferanten, garantiert deren Leistung aber nicht.",
     "termsSections": [
@@ -1442,7 +1442,7 @@
   },
   "pricing": {
     "metaTitle": "Leistungen & Pläne: Preise im Überblick",
-    "metaDesc": "Kostenlose Lieferanten-Tools, Lieferantenverifizierung ab 99 USD, Werksaudits ab 399 USD, Produktinspektion ab 199 USD und Lieferanten-Monitoring im Abonnement. Alle Preise in USD.",
+    "metaDesc": "Kostenlose Tools, Lieferantenverifizierung ab 99 USD, Werksaudits ab 399 USD und Produktinspektion ab 199 USD. Alle Preise in USD.",
     "h1": "Leistungen & Pläne",
     "lead": "Die Tools sind kostenlos. Sie zahlen nur, wenn jemand einen Lieferanten vor Ort prüfen soll.",
     "currencyNote": "Alle Preise in USD. Verifizierung und Audit werden pro Projekt angeboten.",
@@ -1671,7 +1671,7 @@
     "ctaSecondary": "Werksaudit in {country} anfordern",
     "suppliersTitle": "Lieferantenliste für {country}",
     "suppliersEmpty": "Es ist noch kein Lieferant in {country} aufgeführt. Das bedeutet nicht, dass wir eine nicht überprüfen können. Senden Sie uns den Namen und wir führen die Verifizierung durch.",
-    "metaDesc": "Lieferantenverifizierung und Werksaudit in {country}: Herstellungsprofil, typische Beschaffungsrisiken, Verifizierungs- und Auditüberlegungen, Branchen, Logistik und FAQs.",
+    "metaDesc": "Lieferantenverifizierung und Werksaudit in {country}. Herstellungsprofil, Beschaffungsrisiken, Auditüberlegungen und Logistik.",
     "breadcrumbHome": "Startseite",
     "h1Template": "{country}: Lieferantenverifizierung und Fabrik-Audit"
   },
@@ -2292,7 +2292,7 @@
     "h1": "Produktinspektion",
     "lead": "Auftragsspezifische Qualitätskontrollen in der Produktionsphase, die von einem unabhängigen Inspektor durchgeführt und schriftlich gemeldet werden. Jede Anfrage wird individuell geprüft und pro Inspektion zitiert.",
     "metaTitle": "Produktinspektion: PPI, DUPRO & PSI",
-    "metaDesc": "Vorproduktion, während der Produktion, Vorversand und Containerladekontrolle für Käufer, die aus China, Vietnam, Thailand, Malaysia und den Philippinen beziehen. Angabe je Inspektion.",
+    "metaDesc": "Vorproduktion, während der Produktion, Vorversand und Containerladekontrolle in China und Südostasien. Preis auf Anfrage je Inspektion.",
     "quickAnswerTitle": "Schnelle Antwort",
     "quickAnswer": "Eine Produktinspektion überprüft eine bestimmte Bestellung in einer bestimmten Phase: vor Produktionsbeginn, während sie läuft, vor dem Versand oder während der Containerverladung. Der Inspektor arbeitet nach Ihren Anforderungen oder einem AQL-Probenahmeplan, meldet Ergebnisse mit Fotos und gibt eine klare Empfehlung. Es wird pro Inspektion angegeben und nach Art, Umfang, Standort und Dauer bewertet.",
     "honestNote": "Inspektionsanfragen werden individuell geprüft. Wir antworten mit einem Angebot basierend auf Inspektionsart, Standort, Dauer und Verfügbarkeit eines qualifizierten Inspektors.",
@@ -2814,7 +2814,7 @@
   },
   "monitoring": {
     "metaTitle": "Lieferantenüberwachung & Warnungen",
-    "metaDesc": "Verifizierte Lieferantenfakten aktuell halten. Geplante erneute Überprüfungen der Registrierung, des Standorts, der Zertifikate und der öffentlichen Aufzeichnungen mit einer Warnung, wenn sich etwas ändert. Abonnement, angegeben pro Lieferant und Jahr.",
+    "metaDesc": "Verifizierte Lieferantenfakten aktuell halten. Geplante Überprüfungen von Registrierung, Standort und Zertifikaten, mit Warnung bei Änderungen.",
     "badge": "Dienst",
     "h1": "Lieferanten-Monitoring",
     "lead": "Eine Verifizierung ist eine Momentaufnahme. Die Überwachung führt die Überprüfungen nach einem Zeitplan erneut durch und informiert Sie, wenn sich eine Tatsache geändert hat, auf die Sie sich verlassen haben.",
@@ -3775,7 +3775,7 @@
     "lead": "Senden Sie uns die Fabrik, die Sie in Betracht ziehen. Wir sagen Ihnen, was bestätigt werden kann, was nicht und was es kostet – bevor Geld Ihr Konto verlässt.",
     "breadcrumb": "Lieferant prüfen",
     "metaTitle": "Lieferant prüfen, bevor Sie zahlen",
-    "metaDesc": "Senden Sie uns Website oder Firmennamen eines Lieferanten und wir prüfen Unternehmen, Standort und Kapazitätsangaben, bevor Sie bestellen oder eine Anzahlung leisten.",
+    "metaDesc": "Senden Sie uns Website oder Firmennamen eines Lieferanten. Wir prüfen Unternehmen, Standort und Kapazität, bevor Sie bestellen.",
     "checksTitle": "Was wir prüfen",
     "checksLead": "Der Umfang richtet sich nach Lieferant und Risiko. Typischerweise:",
     "checks": [
@@ -3959,7 +3959,7 @@
   },
   "careers": {
     "metaTitle": "Arbeite mit uns — FactoryAuditB2B",
-    "metaDesc": "Werde Teil des FactoryAuditB2B-Netzwerks aus Auditoren, Spezialisten für Lieferantenverifizierung, Beschaffungsprofis und Technologie-Talenten in China, Vietnam, Thailand und Asien.",
+    "metaDesc": "Werde Teil des FactoryAuditB2B-Netzwerks aus Auditoren, Spezialisten für Lieferantenverifizierung und Beschaffungsprofis in Asien.",
     "heroTitle": "Arbeite mit FactoryAuditB2B",
     "heroLead": "Werde Teil unseres wachsenden Netzwerks aus Auditoren, Spezialisten für Lieferantenverifizierung, Beschaffungsprofis und Technologie-Talenten.",
     "heroIntro": "Wir bauen kontinuierlich ein Netzwerk von Audit- und Lieferketten-Experten in China, Vietnam, Thailand und anderen asiatischen Märkten auf.",

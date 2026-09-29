@@ -291,8 +291,8 @@
       "card3Body": "El resultado enumera las respuestas que aumentaron su puntaje y qué hacer con cada una de ellas.",
       "relatedTitle": "Herramientas Relacionadas",
       "faqTitle": "Preguntas frecuentes",
-      "metaTitle": "Calculadora de riesgos del proveedor",
-      "metaDesc": "Puntúa a cualquier proveedor de 0 a 100 en ocho áreas: empresa, calidad, cumplimiento, producción, cadena de suministro, documentación, certificación y huella digital. Una puntuación más alta significa menos riesgo. Gratis, sin cuenta."
+      "metaTitle": "Calculadora de riesgo de compra",
+      "metaDesc": "Puntúa a cualquier proveedor de 0 a 100 en ocho áreas: empresa, calidad, cumplimiento, producción y cadena de suministro. Más puntuación, menos riesgo."
     },
     "dimensions": {
       "company": {
@@ -869,7 +869,7 @@
     "bottomPrimary": "Abre la calculadora gratuita",
     "bottomSecondary": "Solicitar verificación",
     "metaTitle": "Servicio de verificación de proveedores",
-    "metaDesc": "Verificación independiente de proveedores que cubre el registro, la existencia de la fábrica, la capacidad de producción, el sistema de calidad, el cumplimiento y el historial de exportación. Un informe documentado antes de realizar un pedido o liberar el pago."
+    "metaDesc": "Verificación independiente de proveedores: registro, existencia de la fábrica, capacidad, calidad y cumplimiento. Informe documentado antes de pagar."
   },
   "customServices": {
     "badge": "Servicio",
@@ -1258,7 +1258,7 @@
     "ctaDesc": "Cuéntanos el proveedor y los problemas que sigues viendo. Desarrollamos un plan de formación en torno a los resultados de su auditoría.",
     "ctaButton": "Hable con nuestro equipo:",
     "metaTitle": "Capacitación de proveedores: auditamos y capacitamos a su fábrica",
-    "metaDesc": "Verificamos proveedores en China y Asia para evitar riesgos, luego capacitamos a los equipos de su fábrica en calidad y control de calidad para que los defectos no vuelvan."
+    "metaDesc": "Verificamos proveedores en China y Asia para reducir riesgos. Después capacitamos a los equipos de su fábrica en calidad y control de calidad."
   },
   "legal": {
     "privacyTitle": "Política de privacidad",
@@ -1302,7 +1302,7 @@
         "b": "Los pagos los procesa Stripe. Nunca vemos ni almacenamos el número completo de su tarjeta. Solo guardamos la marca de la tarjeta, los últimos cuatro dígitos, el estado de la suscripción y la fecha de renovación necesarios para gestionar su membresía."
       }
     ],
-    "termsTitle": "Términos del servicio",
+    "termsTitle": "Términos del servicio y normas de uso",
     "termsUpdated": "Última actualización: 2026-09-03",
     "termsIntro": "Estos términos rigen el uso de la plataforma FactoryAuditB2B, que ayuda a los compradores a verificar y auditar proveedores, pero no garantiza su desempeño.",
     "termsSections": [
@@ -1348,7 +1348,7 @@
   },
   "industryPage": {
     "pageTitle": "Verificación y formación de proveedores",
-    "metaDesc": "Encuentre proveedores verificados de {industry} y los tipos de auditoría correctos. Verificamos fábricas y formamos a tus equipos en calidad y control de calidad.",
+    "metaDesc": "Proveedores verificados de {industry} y los tipos correctos de auditoría. Revisamos fábrica, licencias, calidad y capacidad antes de ordenar.",
     "verifiedSuppliers": "Proveedores verificados en {industry}",
     "relatedAudit": "Tipos y normas de auditoría relacionados",
     "whyTitle": "Por qué los proveedores de {industry} necesitan verificación",
@@ -1376,7 +1376,7 @@
   },
   "trainingPlans": {
     "pageTitle": "Planes de formación de proveedores",
-    "metaDesc": "Planes de capacitación de proveedores: sistemas de calidad, control de calidad, proceso de producción y capacitación de cumplimiento para sus equipos de fábrica.",
+    "metaDesc": "Planes de capacitación para proveedores: sistemas de calidad, control de calidad y proceso de producción para sus equipos de fábrica.",
     "h1": "Planes de formación de proveedores",
     "lead": "Auditamos su fábrica y capacitamos a sus equipos en calidad y control de calidad, para que los defectos no vuelvan. Elige un plan que se adapte a tu base de suministros.",
     "plansTitle": "Elige un plan de formación",
@@ -1442,7 +1442,7 @@
   },
   "pricing": {
     "metaTitle": "Servicios y planes: precios y paquetes",
-    "metaDesc": "Herramientas gratuitas de evaluación de proveedores, verificación de proveedores desde 99 USD, auditorías de fábrica desde 399 USD, inspección de producto desde 199 USD y monitoreo de proveedores por suscripción. Todos los precios en USD.",
+    "metaDesc": "Herramientas gratuitas, verificación de proveedores desde 99 USD, auditorías de fábrica desde 399 USD e inspección de producto desde 199 USD. Precios en USD.",
     "h1": "Servicios y planes",
     "lead": "Las herramientas son gratuitas. Solo pagas cuando necesitas que alguien verifique al proveedor sobre el terreno.",
     "currencyNote": "Todos los precios en USD. La verificación y la auditoría se presupuestan por proyecto.",
@@ -1671,7 +1671,7 @@
     "ctaSecondary": "Solicitar una auditoría de fábrica en {country}",
     "suppliersTitle": "Proveedores listados para {country}",
     "suppliersEmpty": "Todavía no aparece ningún proveedor en {country}. Eso no significa que no podamos marcar uno. Envíanos el nombre y ejecutaremos la verificación.",
-    "metaDesc": "Verificación de proveedores y auditoría de fábrica en {country}: perfil de fabricación, riesgos típicos de abastecimiento, consideraciones de verificación y auditoría, industrias, logística y preguntas frecuentes.",
+    "metaDesc": "Verificación de proveedores y auditoría de fábrica en {country}. Perfil de fabricación, riesgos de abastecimiento y consideraciones de auditoría.",
     "breadcrumbHome": "Inicio",
     "h1Template": "{country}: verificación de proveedores y auditoría de fábrica"
   },
@@ -1778,7 +1778,7 @@
       }
     },
     "metaTitle": "Recursos de inteligencia de proveedores",
-    "metaDesc": "Guías y herramientas sobre verificación de proveedores, auditoría de fábrica, riesgo de proveedores, abastecimiento en China y el sudeste asiático y cumplimiento.",
+    "metaDesc": "Guías y herramientas sobre verificación de proveedores, auditoría de fábrica, riesgo de proveedores y abastecimiento en China y el Sudeste Asiático.",
     "storiesTitle": "Estudios de caso y notas de campo",
     "storiesLead": "Cómo funcionan los controles en la práctica, mostrados con ejemplos no identificados."
   },
@@ -2144,7 +2144,7 @@
     "ctaPrimary": "Servicio de verificación de proveedores",
     "ctaSecondary": "Consigue un proveedor gratis",
     "metaTitle": "Cómo funciona nuestra evaluación de riesgos de proveedores",
-    "metaDesc": "El marco de puntuación, las dimensiones de riesgo, los pesos, las reglas de evidencia, las limitaciones y la política de actualización detrás de nuestras puntuaciones de riesgo del proveedor. Calculado por un motor de reglas determinista, no por IA.",
+    "metaDesc": "El marco de puntuación, las dimensiones de riesgo, los pesos y las reglas de evidencia detrás de nuestras puntuaciones. Motor de reglas determinista, no IA.",
     "scoredInputsLabel": "Controles",
     "scoredTableNote": "{n} entradas puntuadas · {d} dimensiones · peso total {w}.",
     "weightsSumLine": "— ocho dimensiones, {n} entradas, pesos que suman {w}.",
@@ -2292,7 +2292,7 @@
     "h1": "Inspección de producto",
     "lead": "Controles de calidad específicos del pedido en la etapa de producción que importa, realizados por un inspector independiente e informados por escrito. Cada solicitud se revisa individualmente y se cita por inspección.",
     "metaTitle": "Inspección de producto: PPI y DUPRO",
-    "metaDesc": "Inspección previa a la producción, durante la producción, previa al envío y carga de contenedores para compradores procedentes de China, Vietnam, Tailandia, Malasia y Filipinas. Presupuestado por inspección.",
+    "metaDesc": "Inspección previa a la producción, durante la producción, previa al envío y carga de contenedores en China y el Sudeste Asiático. Presupuesto por inspección.",
     "quickAnswerTitle": "Respuesta rápida",
     "quickAnswer": "Una inspección del producto verifica un pedido específico en una etapa específica: antes de que comience la producción, mientras está en funcionamiento, antes del envío o durante la carga del contenedor. El inspector trabaja según sus requisitos o un plan de muestreo AQL, informa los hallazgos con fotos y da una recomendación clara. Se cotiza por inspección y tiene un precio por tipo, alcance, ubicación y duración.",
     "honestNote": "Las solicitudes de inspección se revisan individualmente. Respondemos con una cotización por alcance basada en el tipo de inspección, la ubicación, la duración y la disponibilidad de inspectores calificados.",
@@ -2814,7 +2814,7 @@
   },
   "monitoring": {
     "metaTitle": "Monitoreo de proveedores y alertas",
-    "metaDesc": "Mantenga actualizados los hechos verificados del proveedor. Revisiones programadas de registro, sitio, certificados y registros públicos, con una alerta cuando algo cambia. Suscripción, cotizada por proveedor por año.",
+    "metaDesc": "Mantenga actualizados los hechos verificados del proveedor. Revisiones programadas de registro, sitio y certificados, con alerta cuando algo cambia.",
     "badge": "Servicio",
     "h1": "Monitoreo de Proveedores",
     "lead": "Una verificación es una instantánea. La supervisión vuelve a ejecutar las comprobaciones en un horario y le indica cuándo ha cambiado un hecho en el que confiaba.",
@@ -3775,7 +3775,7 @@
     "lead": "Envíanos la fábrica que estás considerando. Te decimos qué se puede confirmar, qué no y cuánto cuesta, antes de que salga dinero de tu cuenta.",
     "breadcrumb": "Verificar un proveedor",
     "metaTitle": "Verifica un Proveedor Antes de Pagar",
-    "metaDesc": "Envíanos la web o el nombre de un proveedor y comprobamos la empresa, la planta y las capacidades declaradas antes de que hagas un pedido o pagues un anticipo.",
+    "metaDesc": "Envíanos la web o el nombre de un proveedor. Comprobamos la empresa, la planta y las capacidades antes de que hagas un pedido.",
     "checksTitle": "Qué revisamos",
     "checksLead": "El alcance depende del proveedor y del riesgo. Normalmente:",
     "checks": [
@@ -3959,7 +3959,7 @@
   },
   "careers": {
     "metaTitle": "Trabaja con nosotros — FactoryAuditB2B",
-    "metaDesc": "Únete a la red de FactoryAuditB2B de auditores, especialistas en verificación de proveedores, profesionales de compras y talento tecnológico en China, Vietnam, Tailandia y Asia.",
+    "metaDesc": "Únete a la red de FactoryAuditB2B de auditores, especialistas en verificación de proveedores y profesionales de compras en Asia.",
     "heroTitle": "Trabaja con FactoryAuditB2B",
     "heroLead": "Únete a nuestra creciente red de auditores, especialistas en verificación de proveedores, profesionales de compras y talento tecnológico.",
     "heroIntro": "Estamos construyendo de forma continua una red de profesionales de auditoría y servicios de cadena de suministro en China, Vietnam, Tailandia y otros mercados asiáticos.",

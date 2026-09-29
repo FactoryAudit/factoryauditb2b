@@ -199,7 +199,7 @@ const FOOD_TOPICS: IndustryTopic[] = [
       zh: "食品工厂验厂检查表",
     },
     metaDesc: {
-      en: "A food factory audit checklist covering licences, food safety certificates, traceability, allergen control, cold chain and labelling, for buyer-side pre-order checks.",
+      en: "A food factory audit checklist covering licences, food safety certificates, traceability, allergen control, cold chain and labelling.",
       zh: "面向买家下单前的食品工厂验厂检查表：证照、食品安全证书、追溯、过敏原控制、冷链与标签。",
     },
     intro: {
@@ -240,7 +240,7 @@ const FOOD_TOPICS: IndustryTopic[] = [
       zh: "食品供应商核验",
     },
     metaDesc: {
-      en: "What supplier verification checks for a food factory: identity, licences, food safety certificate validity, traceability and cold chain, before you place an order.",
+      en: "What supplier verification checks for a food factory: identity, licences, food safety certificate validity, traceability and cold chain.",
       zh: "食品工厂的供应商核验检查什么：身份、证照、食品安全证书有效性、追溯与冷链，在你下单之前完成。",
     },
     intro: {
@@ -359,7 +359,7 @@ const CHEM_TOPICS: IndustryTopic[] = [
       zh: "化工供应商核验",
     },
     metaDesc: {
-      en: "What verification checks on a chemical manufacturer: registered identity, licence and permit scope, the site that actually produces, and the documents behind a grade claim.",
+      en: "What verification checks on a chemical manufacturer: registered identity, licence and permit scope, and the site that actually produces.",
       zh: "化工生产企业的核验检查什么：登记身份、许可范围、实际生产场地，以及支撑等级声称的文件。",
     },
     intro: {

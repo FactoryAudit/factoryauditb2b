@@ -55,7 +55,7 @@ export const FIELD_REPORTS: FieldReport[] = [
     titleEn: "Carton count short against the packing list at loading",
     titleZh: "装柜时箱数少于装箱单",
     metaDescEn:
-      "Illustrative field note: a container loading check where the carton count did not reconcile with the packing list, and what happened before the container was sealed.",
+      "Illustrative field note: a container loading check where the carton count did not reconcile with the packing list, and what happened next.",
     metaDescZh:
       "脱敏方法示例：装柜监装时发现纸箱数量与装箱单不符，以及在封柜前如何处理。",
     updated: "2026-09-01",
@@ -108,7 +108,7 @@ export const FIELD_REPORTS: FieldReport[] = [
     titleEn: "Moisture in cartons before a sea shipment",
     titleZh: "海运前纸箱受潮",
     metaDescEn:
-      "Illustrative field note: a pre-shipment inspection in a humid season where carton moisture and pallet wrapping did not match the buyer's packaging specification.",
+      "Illustrative field note: a pre-shipment inspection in a humid season where carton moisture and pallet wrapping did not match the buyer's specification.",
     metaDescZh:
       "脱敏方法示例：潮湿季节的出货前检验，发现纸箱含水率与托盘缠绕方式不符合买家的包装规范。",
     updated: "2026-09-01",
@@ -158,7 +158,7 @@ export const FIELD_REPORTS: FieldReport[] = [
     titleEn: "Fire exits in a shared factory building",
     titleZh: "共用厂房的消防通道",
     metaDescEn:
-      "Illustrative field note: a social compliance audit where the supplier occupied two floors of a shared building, and the exit routes were not under the supplier's sole control.",
+      "Illustrative field note: a social compliance audit where the supplier occupied two floors of a shared building with shared exit routes.",
     metaDescZh:
       "脱敏方法示例：社会责任审核中，供应商只占共用厂房的两层，疏散通道并非由其单独管理。",
     updated: "2026-09-01",
@@ -208,7 +208,7 @@ export const FIELD_REPORTS: FieldReport[] = [
     titleEn: "A key process was subcontracted and not disclosed",
     titleZh: "关键工序外包且未披露",
     metaDescEn:
-      "Illustrative field note: a verification where the supplier's claimed in-house surface treatment was carried out at another site the buyer had not been told about.",
+      "Illustrative field note: a verification where the claimed in-house surface treatment was actually carried out at another site.",
     metaDescZh:
       "脱敏方法示例：核验中发现供应商声称自有的表面处理工序，实际在买家未被告知的另一处场地完成。",
     updated: "2026-09-01",
@@ -267,7 +267,7 @@ export const FIELD_REPORT_DISCLOSURE = {
 /** 列表页 meta 描述 */
 export const FIELD_REPORT_LIST_META = {
   en: "Field notes from inspection, audit and verification work: anonymised illustrative examples of what gets checked on site and how findings are recorded.",
-  zh: "来自验货、验厂与核验现场的脱敏方法示例：现场查什么、发现项怎么记录。",
+  zh: "来自验货、验厂与核验现场的脱敏方法示例：每一则说明现场查什么、异常如何记录，以及订单、装运与货款因此发生的变化，供买家对照。",
 };
 
 /** 详情页分段标题。en/zh 手写，其余语言回退英文（与 CASE_SECTIONS 同模式）。 */

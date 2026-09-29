@@ -291,8 +291,8 @@
       "card3Body": "Le résultat liste les réponses qui ont fait monter votre score et la marche à suivre pour chacune.",
       "relatedTitle": "Outils liés",
       "faqTitle": "Questions fréquentes",
-      "metaTitle": "Calculateur de risque fournisseur",
-      "metaDesc": "Notez n'importe quel fournisseur de 0 à 100 sur huit domaines : société, qualité, conformité, production, chaîne d'approvisionnement, documentation, certification et empreinte numérique. Un score plus élevé signifie un risque plus faible. Gratuit, sans compte."
+      "metaTitle": "Calculateur de risque d'achat",
+      "metaDesc": "Notez n'importe quel fournisseur de 0 à 100 sur huit domaines : société, qualité, conformité et production. Un score plus élevé, un risque plus faible."
     },
     "dimensions": {
       "company": {
@@ -1258,7 +1258,7 @@
     "ctaDesc": "Dites-nous le fournisseur et les problèmes qui reviennent. Nous concevons un plan de formation à partir de vos audits.",
     "ctaButton": "Parlez à notre équipe",
     "metaTitle": "Formation fournisseurs - Nous auditons et formons votre usine",
-    "metaDesc": "Nous vérifions les fournisseurs en Chine et en Asie pour éviter les risques, puis formons leurs équipes en qualité et QC afin que les défauts ne reviennent pas."
+    "metaDesc": "Nous vérifions les fournisseurs en Chine et en Asie pour réduire les risques. Nous formons ensuite leurs équipes en qualité et QC."
   },
   "legal": {
     "privacyTitle": "Politique de Confidentialité",
@@ -1302,7 +1302,7 @@
         "b": "Les paiements sont traités par Stripe. Nous ne voyons ni ne stockons jamais votre numéro de carte complet. Nous conservons uniquement la marque de la carte, les quatre derniers chiffres, le statut de l’abonnement et la date de renouvellement nécessaires au fonctionnement de votre adhésion."
       }
     ],
-    "termsTitle": "Conditions d'Utilisation",
+    "termsTitle": "Conditions d'Utilisation et règles",
     "termsUpdated": "Dernière mise à jour : 2026-09-03",
     "termsIntro": "Ces conditions régissent l'utilisation de la plateforme FactoryAuditB2B. Elle aide les acheteurs à vérifier des fournisseurs sans garantir leur performance.",
     "termsSections": [
@@ -1348,7 +1348,7 @@
   },
   "industryPage": {
     "pageTitle": "Vérification et formation des fournisseurs",
-    "metaDesc": "Trouvez des fournisseurs vérifiés de {industry} et les bons types d'audit. Nous vérifions les usines et formons vos équipes à la qualité et au contrôle qualité.",
+    "metaDesc": "Trouvez des fournisseurs vérifiés de {industry} et les bons types d'audit. Nous vérifions les usines et formons vos équipes à la qualité.",
     "verifiedSuppliers": "Fournisseurs vérifiés dans {industry}",
     "relatedAudit": "Types d'audit et normes associés",
     "whyTitle": "Pourquoi les fournisseurs de {industry} ont besoin d'une vérification",
@@ -1442,7 +1442,7 @@
   },
   "pricing": {
     "metaTitle": "Services et formules : tarifs et forfaits",
-    "metaDesc": "Outils gratuits d'évaluation des fournisseurs, vérification de fournisseur dès 99 USD, audits d'usine dès 399 USD, inspection de produit dès 199 USD et monitoring fournisseur par abonnement. Tous les prix en USD.",
+    "metaDesc": "Outils gratuits, vérification de fournisseur dès 99 USD, audits d'usine dès 399 USD et inspection de produit dès 199 USD. Tous les prix en USD.",
     "h1": "Services et formules",
     "lead": "Les outils sont gratuits. Vous ne payez que lorsque quelqu'un doit vérifier un fournisseur sur le terrain.",
     "currencyNote": "Tous les prix sont en USD. La vérification et l'audit sont devisés par projet.",
@@ -1671,7 +1671,7 @@
     "ctaSecondary": "Demander un audit d'usine dans {country}",
     "suppliersTitle": "Fournisseurs répertoriés pour {country}",
     "suppliersEmpty": "Aucun fournisseur en {country} n'est encore répertorié. Cela ne signifie pas que nous ne pouvons pas en cocher un. Envoyez-nous le nom et nous effectuerons la vérification.",
-    "metaDesc": "Vérification des fournisseurs et audit d'usine en {country} : profil de fabrication, risques d'approvisionnement typiques, considérations de vérification et d'audit, industries, logistique et FAQ.",
+    "metaDesc": "Vérification des fournisseurs et audit d'usine en {country}. Profil de fabrication, risques d'approvisionnement et points d'audit.",
     "breadcrumbHome": "Accueil",
     "h1Template": "{country} : vérification de fournisseur et audit d'usine"
   },
@@ -1778,7 +1778,7 @@
       }
     },
     "metaTitle": "Ressources de renseignements sur les fournisseurs",
-    "metaDesc": "Guides et outils sur la vérification des fournisseurs, l'audit d'usine, le risque fournisseur, l'approvisionnement en Chine et en Asie du Sud-Est et la conformité.",
+    "metaDesc": "Guides et outils sur la vérification des fournisseurs, l'audit d'usine, le risque fournisseur et l'approvisionnement en Chine et en Asie du Sud-Est.",
     "storiesTitle": "Études de cas et notes de terrain",
     "storiesLead": "Comment les contrôles fonctionnent dans la pratique, illustrés par des exemples anonymisés."
   },
@@ -2144,7 +2144,7 @@
     "ctaPrimary": "Service de vérification des fournisseurs",
     "ctaSecondary": "Noter un fournisseur gratuitement",
     "metaTitle": "Fonctionnement de notre évaluation des risques fournisseurs",
-    "metaDesc": "Le cadre de notation, les dimensions de risque, les pondérations, les règles de preuve, les limitations et la politique de mise à jour derrière nos scores de risque fournisseur. Calculé par un moteur de règles déterministe, et non par l'IA.",
+    "metaDesc": "Le cadre de notation, les dimensions de risque, les pondérations et les règles de preuve derrière nos scores. Moteur de règles déterministe, pas d'IA.",
     "scoredInputsLabel": "Entrées",
     "scoredTableNote": "{n} entrées notées · {d} dimensions · poids total {w}.",
     "weightsSumLine": "— huit dimensions, {n} entrées, poids totalisant {w}.",
@@ -2292,7 +2292,7 @@
     "h1": "Inspection produit",
     "lead": "Contrôles de qualité spécifiques à la commande au stade de la production qui compte, effectués par un inspecteur indépendant et rapportés par écrit. Chaque demande est examinée individuellement et citée par inspection.",
     "metaTitle": "Inspection produit : PPI et DUPRO",
-    "metaDesc": "Inspection de pré-production, en cours de production, de pré-expédition et de chargement de conteneurs pour les acheteurs en provenance de Chine, du Vietnam, de Thaïlande, de Malaisie et des Philippines. Devis par inspection.",
+    "metaDesc": "Inspection de pré-production, en cours de production, de pré-expédition et de chargement de conteneurs en Chine et en Asie du Sud-Est. Devis par inspection.",
     "quickAnswerTitle": "Réponse rapide",
     "quickAnswer": "Une inspection de produit vérifie une commande spécifique à un stade spécifique : avant le début de la production, pendant son fonctionnement, avant l'expédition ou pendant le chargement du conteneur. L'inspecteur travaille selon vos exigences ou un plan d'échantillonnage AQL, rapporte les résultats avec des photos et donne une recommandation claire. Il est indiqué par inspection et tarifé par type, portée, emplacement et durée.",
     "honestNote": "Les demandes d'inspection sont examinées individuellement. Nous répondons avec un devis délimité en fonction du type d'inspection, de l'emplacement, de la durée et de la disponibilité des inspecteurs qualifiés.",
@@ -2814,7 +2814,7 @@
   },
   "monitoring": {
     "metaTitle": "Surveillance fournisseur et alertes",
-    "metaDesc": "Tenir à jour les faits vérifiés du fournisseur. Re-vérifications planifiées de l'enregistrement, du site, des certificats et des enregistrements publics, avec une alerte lorsque quelque chose change. Abonnement, coté par fournisseur et par an.",
+    "metaDesc": "Tenir à jour les faits vérifiés du fournisseur. Re-vérifications planifiées de l'enregistrement, du site et des certificats, avec alerte en cas de changement.",
     "badge": "Maintenance",
     "h1": "Surveillance des fournisseurs",
     "lead": "Une vérification est un instantané. La surveillance réexécute les vérifications selon un calendrier et vous indique quand un fait sur lequel vous vous appuyiez a changé.",
@@ -3959,7 +3959,7 @@
   },
   "careers": {
     "metaTitle": "Travailler avec nous — FactoryAuditB2B",
-    "metaDesc": "Rejoignez le réseau FactoryAuditB2B d'auditeurs, de spécialistes en vérification de fournisseurs, de professionnels du sourcing et de talents technologiques en Chine, au Vietnam, en Thaïlande et en Asie.",
+    "metaDesc": "Rejoignez le réseau FactoryAuditB2B d'auditeurs, de spécialistes en vérification de fournisseurs et de professionnels du sourcing en Asie.",
     "heroTitle": "Travailler avec FactoryAuditB2B",
     "heroLead": "Rejoignez notre réseau grandissant d'auditeurs, de spécialistes en vérification de fournisseurs, de professionnels du sourcing et de talents technologiques.",
     "heroIntro": "Nous construisons en continu un réseau de professionnels de l'audit et des services de chaîne d'approvisionnement en Chine, au Vietnam, en Thaïlande et sur d'autres marchés asiatiques.",

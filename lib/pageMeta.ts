@@ -29,10 +29,30 @@ type MetaInput = {
 //     上限（与工单口径一致）；拉丁字母均宽约 5.8px ⇒ 158 字 ≈ 920px。
 //   · 因此「把描述统一补到 120–160 字符」对 zh / zh-TW / ja 是**错的**——
 //     那会把它们撑到被截断（实测该三语当前为 43–81 字，本身合规）。
+//   · 判定「算 CJK 还是算拉丁」用**占比**（见下方 isCjkDominant），不用「含 1 个汉字」。
 // 超预算时的收尾顺序：① 句末标点 → ② 词边界 → ③ 剥掉悬空标点。
 //   背景：化工页此前对正文直接 `.slice(0, 200)`，截出的描述以「…, 」结尾（半句话），
 //   既是可见的内容缺陷，也浪费了本就有限的展示位。
 const CJK_RE = /[\u3000-\u9fff\u3040-\u30ff\uac00-\ud7af]/;
+// stage1.6：CJK 判定从「命中 1 个汉字」改为「CJK 字符占比」。
+//   起因：行业分类页把 {industry} 换成**双语行业名**（`Food & Beverage / 食品饮料`），
+//   整段拉丁文案里混进 4 个汉字 ⇒ 旧的 `CJK_RE.test()` 直接把预算压到 90，
+//   实测把 13 行业 × 多语种的分类页 desc 夹在 64–90（本可写到 158）。
+//   阈值 25% 的余量很宽：纯中文/日文 ≈ 45%+；「拉丁长句 + 双语短名」≈ 3–10%。
+const CJK_RE_G = new RegExp(CJK_RE.source, "g");
+const CJK_DOMINANCE_RATIO = 0.25;
+
+/**
+ * 该串是否以 CJK 为主（CJK 字符占比 > 25%）。
+ * 为 true 时用 CJK 预算（desc 90 / title 主体 36），否则用拉丁预算（158 / 65）。
+ */
+export function isCjkDominant(text: string): boolean {
+  if (!text) return false;
+  const total = [...text].length;
+  if (total === 0) return false;
+  const cjk = (text.match(CJK_RE_G) ?? []).length;
+  return cjk / total > CJK_DOMINANCE_RATIO;
+}
 const SENTENCE_END_RE = /[.。!！?？]/;
 const DANGLING_TAIL_RE = /[\s,;:，、；：\-–—]+$/u;
 
@@ -40,7 +60,7 @@ export function trimMetaDescription(
   text: string,
   opts?: { cjkBudget?: number; latinBudget?: number }
 ): string {
-  const budget = CJK_RE.test(text) ? opts?.cjkBudget ?? 90 : opts?.latinBudget ?? 158;
+  const budget = isCjkDominant(text) ? opts?.cjkBudget ?? 90 : opts?.latinBudget ?? 158;
   const chars = [...text];
   if (chars.length <= budget) return text;
   const head = chars.slice(0, budget).join("");
@@ -88,7 +108,7 @@ export function trimMetaTitle(
     body = text.slice(0, cut);
     tail = text.slice(cut);
   }
-  const budget = CJK_RE.test(body)
+  const budget = isCjkDominant(body)
     ? opts?.cjkBudget ?? TITLE_CJK_BODY_BUDGET
     : opts?.latinBudget ?? TITLE_LATIN_BODY_BUDGET;
   const chars = [...body];

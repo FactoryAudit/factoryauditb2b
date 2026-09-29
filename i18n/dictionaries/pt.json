@@ -291,8 +291,8 @@
       "card3Body": "O resultado lista as respostas que elevaram sua pontuação e o que fazer com cada uma.",
       "relatedTitle": "Ferramentas relacionadas",
       "faqTitle": "Perguntas frequentes",
-      "metaTitle": "Calculadora de risco do fornecedor",
-      "metaDesc": "Pontue qualquer fornecedor de 0 a 100 em oito áreas: empresa, qualidade, conformidade, produção, cadeia de suprimentos, documentação, certificação e pegada digital. Quanto maior a pontuação, menor o risco. Grátis, sem cadastro."
+      "metaTitle": "Calculadora de risco de compra",
+      "metaDesc": "Pontue qualquer fornecedor de 0 a 100 em oito áreas: empresa, qualidade, conformidade e cadeia de suprimentos. Maior pontuação, menor risco."
     },
     "dimensions": {
       "company": {
@@ -1302,7 +1302,7 @@
         "b": "Os pagamentos são processados pela Stripe. Nunca vemos ou armazenamos o número completo do seu cartão. Guardamos apenas a bandeira do cartão, os quatro últimos dígitos, o status da assinatura e a data de renovação necessários para operar sua assinatura."
       }
     ],
-    "termsTitle": "Termos de Serviço",
+    "termsTitle": "Termos de Serviço e regras da plataforma",
     "termsUpdated": "Última atualização: 2026-09-03",
     "termsIntro": "Estes termos regem o uso da plataforma FactoryAuditB2B, que ajuda compradores a verificar e auditar fornecedores, mas não garante o seu desempenho.",
     "termsSections": [
@@ -1348,7 +1348,7 @@
   },
   "industryPage": {
     "pageTitle": "Verificação e treinamento de fornecedores",
-    "metaDesc": "Encontre fornecedores verificados de {industry} e os tipos de auditoria certos. Verificamos fábricas e treinamos suas equipes em qualidade e QC.",
+    "metaDesc": "Fornecedores verificados de {industry} e os tipos certos de auditoria. Conferimos fábrica, licenças, qualidade e capacidade antes de comprar.",
     "verifiedSuppliers": "Fornecedores verificados em {industry}",
     "relatedAudit": "Tipos de auditoria e normas relacionados",
     "whyTitle": "Por que os fornecedores de {industry} precisam de verificação",
@@ -1442,7 +1442,7 @@
   },
   "pricing": {
     "metaTitle": "Serviços e planos: preços em resumo",
-    "metaDesc": "Ferramentas gratuitas de avaliação de fornecedores, verificação de fornecedores a partir de 99 USD, auditorias de fábrica a partir de 399 USD, inspeção de produto a partir de 199 USD e monitoramento de fornecedores por assinatura. Todos os preços em USD.",
+    "metaDesc": "Ferramentas gratuitas, verificação de fornecedores desde 99 USD, auditorias de fábrica desde 399 USD e inspeção desde 199 USD. Preços em USD.",
     "h1": "Serviços e planos",
     "lead": "As ferramentas são gratuitas. Você só paga quando precisa de alguém para verificar o fornecedor no local.",
     "currencyNote": "Todos os preços em USD. Verificação e auditoria são orçadas por projeto.",
@@ -1671,7 +1671,7 @@
     "ctaSecondary": "Solicitar uma auditoria de fábrica em {country}",
     "suppliersTitle": "Fornecedores listados para {country}",
     "suppliersEmpty": "Nenhum fornecedor em {country} ainda está listado. Isso não significa que não podemos verificar um. Envie-nos o nome e faremos a verificação.",
-    "metaDesc": "Verificação de fornecedores e auditoria de fábrica em {country}: perfil de fabricação, riscos típicos de fornecimento, considerações de verificação e auditoria, indústrias, logística e perguntas frequentes.",
+    "metaDesc": "Verificação de fornecedores e auditoria de fábrica em {country}. Perfil de fabricação, riscos de fornecimento e pontos de auditoria.",
     "breadcrumbHome": "Início",
     "h1Template": "{country}: verificação de fornecedores e auditoria de fábrica"
   },
@@ -2144,7 +2144,7 @@
     "ctaPrimary": "Serviço de verificação de fornecedores",
     "ctaSecondary": "Marque um fornecedor gratuitamente",
     "metaTitle": "Como funciona a avaliação de risco do nosso fornecedor",
-    "metaDesc": "A estrutura de pontuação, dimensões de risco, pesos, regras de evidência, limitações e política de atualização por trás das nossas pontuações de risco de fornecedores. Calculado por um mecanismo de regras determinísticas, não por IA.",
+    "metaDesc": "A estrutura de pontuação, as dimensões de risco, os pesos e as regras de evidência por trás das nossas pontuações. Motor de regras determinísticas, não IA.",
     "scoredInputsLabel": "Insumo",
     "scoredTableNote": "{n} entradas pontuadas · {d} dimensões · peso total {w}.",
     "weightsSumLine": "— oito dimensões, {n} entradas, pesos somando {w}.",
@@ -2292,7 +2292,7 @@
     "h1": "Inspeção de produto",
     "lead": "Verificações de qualidade específicas do pedido na fase de produção que importa, realizadas por um inspetor independente e relatadas por escrito. Cada solicitação é analisada individualmente e cotada por inspeção.",
     "metaTitle": "Inspeção de produto: PPI e DUPRO",
-    "metaDesc": "Inspeção de pré-produção, durante a produção, pré-embarque e carregamento de contêineres para compradores provenientes da China, Vietnã, Tailândia, Malásia e Filipinas. Orçado por inspeção.",
+    "metaDesc": "Inspeção de pré-produção, durante a produção, pré-embarque e carregamento de contêineres na China e no Sudeste Asiático. Orçamento por inspeção.",
     "quickAnswerTitle": "Resposta rápida",
     "quickAnswer": "Uma inspeção de produto verifica um pedido específico em um estágio específico: antes do início da produção, durante a execução, antes do envio ou durante o carregamento do contêiner. O inspetor trabalha de acordo com seus requisitos ou um plano de amostragem AQL, relata as descobertas com fotos e dá uma recomendação clara. É cotado por inspeção e precificado por tipo, escopo, localização e duração.",
     "honestNote": "As solicitações de inspeção são analisadas individualmente. Respondemos com uma cotação com escopo com base no tipo de inspeção, localização, duração e disponibilidade de inspetor qualificado.",
@@ -3959,7 +3959,7 @@
   },
   "careers": {
     "metaTitle": "Trabalhe connosco — FactoryAuditB2B",
-    "metaDesc": "Junte-se à rede FactoryAuditB2B de auditores, especialistas em verificação de fornecedores, profissionais de sourcing e talentos de tecnologia na China, Vietname, Tailândia e Ásia.",
+    "metaDesc": "Junte-se à rede FactoryAuditB2B de auditores, especialistas em verificação de fornecedores e profissionais de sourcing na Ásia e na China.",
     "heroTitle": "Trabalhe com a FactoryAuditB2B",
     "heroLead": "Junte-se à nossa rede crescente de auditores, especialistas em verificação de fornecedores, profissionais de sourcing e talentos de tecnologia.",
     "heroIntro": "Estamos a construir continuamente uma rede de profissionais de auditoria e serviços de cadeia de fornecimento na China, Vietname, Tailândia e outros mercados asiáticos.",

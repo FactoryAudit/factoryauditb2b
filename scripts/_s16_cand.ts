@@ -2,7 +2,7 @@
  * stage1.6 候选测量：逐条打印 旧 → 新（源头长度 / 收口后长度 / endOk / CUT）
  * 用法：node scripts/run-regression.mjs _s16_cand
  */
-import { trimMetaDescription, trimMetaTitle } from "../lib/pageMeta";
+import { trimMetaDescription, trimMetaTitle, isCjkDominant } from "../lib/pageMeta";
 import { CANDIDATES, TS_CANDIDATES } from "./_s16_cand_data";
 
 const SENT = /[.。!！?？]/;
@@ -37,7 +37,7 @@ function line(kind: string, key: string, loc: string, oldS: string, neuS: string
     bandOk = total >= 50 && total <= 60 && tw === full;
     if (!bandOk) fails.push(`${key}[${loc}] title total=${total} trim=${tw === full ? "unchanged" : "CHANGED"}`);
   } else {
-    const isCjkBudget = CJK.test(neuSub);
+    const isCjkBudget = isCjkDominant(neuSub);
     const w = isCjkBudget ? [...neuSub].length : width(neuSub);
     bandOk = isCjkBudget ? w >= 60 && w <= 90 : w >= 115 && w <= 158;
     if (!bandOk) fails.push(`${key}[${loc}] desc len=${[...neuSub].length} (width ${w}) budget=${isCjkBudget ? 90 : 158}`);

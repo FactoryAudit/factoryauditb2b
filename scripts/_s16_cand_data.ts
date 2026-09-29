@@ -25,7 +25,7 @@ export const CANDIDATES: C[] = [
     old: "Lieferantenverifizierung und Werksaudit in {country}: Herstellungsprofil, typische Beschaffungsrisiken, Verifizierungs- und Auditüberlegungen, Branchen, Logistik und FAQs.",
     neu: "Lieferantenverifizierung und Werksaudit in {country}. Herstellungsprofil, Beschaffungsrisiken, Auditüberlegungen und Logistik." },
   { kind: "desc", key: "countryHub.metaDesc", loc: "fr",
-    old: "Vérification des fournisseurs et audit d'usine en {country} : profil de fabrication, risques d'approvisionnement typiques, considérations de vérification et d'audit, industries, logistique et FAQ.",
+    old: "Vérification des fournisseurs et audit d'usine en {country}\u00a0: profil de fabrication, risques d'approvisionnement typiques, considérations de vérification et d'audit, industries, logistique et FAQ.",
     neu: "Vérification des fournisseurs et audit d'usine en {country}. Profil de fabrication, risques d'approvisionnement et points d'audit." },
   { kind: "desc", key: "countryHub.metaDesc", loc: "pt",
     old: "Verificação de fornecedores e auditoria de fábrica em {country}: perfil de fabricação, riscos típicos de fornecimento, considerações de verificação e auditoria, indústrias, logística e perguntas frequentes.",
@@ -34,13 +34,20 @@ export const CANDIDATES: C[] = [
     old: "Supplier verification and factory audit in {country}: manufacturing profile, typical sourcing risks, verification and audit considerations, industries, logistical and FAQs.",
     neu: "التحقق من الموردين وتدقيق المصانع في {country}. ملف التصنيع ومخاطر التوريد الشائعة واعتبارات التدقيق والخدمات اللوجستية." },
 
-  // ===== 2. industryPage.metaDesc（预算 90，含双语行业名） =====
+  // ===== 2. industryPage.metaDesc =====
+  // ⚠️ 决策 3 选了 A+B（CJK 占比判定）⇒ 预算从 90 放宽到 158，
+  //    本键**不再是 Plan A 的「收短到 ≤90」**，而是写成 100–158 的双句完整句。
+  //    · es/pt 的 old 是 stage1.6 先落地的 Plan A 短值（85/82），此处升级为 153
+  //    · fr 是新增第 54 处：其源头 170 > 158，收口只取到首句（73–86），同样不达 100–158
   { kind: "desc", key: "industryPage.metaDesc", loc: "es",
-    old: "Encuentre proveedores verificados de {industry} y los tipos de auditoría correctos. Verificamos fábricas y formamos a tus equipos en calidad y control de calidad.",
-    neu: "Proveedores verificados de {industry} y los tipos de auditoría correctos." },
+    old: "Proveedores verificados de {industry} y los tipos de auditoría correctos.",
+    neu: "Proveedores verificados de {industry} y los tipos correctos de auditoría. Revisamos fábrica, licencias, calidad y capacidad antes de ordenar." },
   { kind: "desc", key: "industryPage.metaDesc", loc: "pt",
-    old: "Encontre fornecedores verificados de {industry} e os tipos de auditoria certos. Verificamos fábricas e treinamos suas equipes em qualidade e QC.",
-    neu: "Fornecedores verificados de {industry} e os tipos de auditoria certos." },
+    old: "Fornecedores verificados de {industry} e os tipos de auditoria certos.",
+    neu: "Fornecedores verificados de {industry} e os tipos certos de auditoria. Conferimos fábrica, licenças, qualidade e capacidade antes de comprar." },
+  { kind: "desc", key: "industryPage.metaDesc", loc: "fr",
+    old: "Trouvez des fournisseurs vérifiés de {industry} et les bons types d'audit. Nous vérifions les usines et formons vos équipes à la qualité et au contrôle qualité.",
+    neu: "Trouvez des fournisseurs vérifiés de {industry} et les bons types d'audit. Nous vérifions les usines et formons vos équipes à la qualité." },
 
   // ===== 3. inspection.metaDesc =====
   { kind: "desc", key: "inspection.metaDesc", loc: "en",

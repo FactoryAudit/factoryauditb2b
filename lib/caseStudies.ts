@@ -53,7 +53,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     titleEn: "Trading company posing as a factory",
     titleZh: "贸易公司冒充工厂的核验",
     metaDescEn:
-      "Illustrative example: how supplier verification caught a trading company presenting as a factory, and how the buyer re-contracted with the licensed manufacturer before paying a deposit.",
+      "Illustrative example: how supplier verification caught a trading company presenting as a factory, and how the buyer re-contracted before paying.",
     metaDescZh:
       "方法示例：供应商核验如何识破以贸易公司冒充工厂的情况，以及买家如何在付定金前改与持证制造商签约。",
     updated: "2026-08-31",
@@ -120,7 +120,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     titleEn: "Legal entity mismatch found before a deposit",
     titleZh: "定金前发现法律主体错配",
     metaDescEn:
-      "Illustrative example: an on-site audit found the certificate belonged to a different legal entity than the one signing the contract, so the buyer re-issued the contract before releasing funds.",
+      "Illustrative example: an audit found the certificate belonged to a different legal entity than the contract signer, so the buyer re-issued it.",
     metaDescZh:
       "方法示例：现场验厂发现证书属于与签约方不同的法律主体，买家在放款前重新签署了合同。",
     updated: "2026-08-31",
@@ -186,7 +186,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     titleEn: "Label defect stopped before container loading",
     titleZh: "装柜前拦截标签缺陷",
     metaDescEn:
-      "Illustrative example: a pre-shipment inspection caught a critical labelling defect above the AQL threshold, and the batch was reworked before container loading.",
+      "Illustrative example: a pre-shipment inspection caught a critical labelling defect above the AQL threshold, and the batch was reworked.",
     metaDescZh:
       "方法示例：出货前验货发现超过 AQL 阈值的致命标签缺陷，整批在装柜前返工完成。",
     updated: "2026-08-31",
@@ -250,7 +250,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     titleEn: "Qualifying a replacement supplier in Vietnam",
     titleZh: "越南替代供应商的寻源与准入",
     metaDescEn:
-      "Illustrative example: how a buyer used an RFQ, registration checks and one on-site audit to qualify a second source in Vietnam when the China supplier hit capacity limits.",
+      "Illustrative example: how a buyer used an RFQ, registration checks and one on-site audit to qualify a second source in Vietnam.",
     metaDescZh:
       "方法示例：中国供应商产能受限时，买家如何通过 RFQ、登记核查与一次现场验厂在越南准入第二货源。",
     updated: "2026-08-31",
@@ -325,7 +325,7 @@ export const CASE_DISCLOSURE = {
 /** 列表页 meta 描述 */
 export const CASE_LIST_META = {
   en: "Supplier verification, factory audit, inspection and sourcing walk-throughs: anonymised illustrative examples that show how we work, not client testimonials.",
-  zh: "供应商核验、验厂、验货与寻源的方法示例：脱敏演示我们的工作方式，并非客户证言。",
+  zh: "供应商核验、验厂、验货与寻源的方法示例：全部脱敏，用来说明现场查什么、发现项怎么记录，以及买家在付款与放行前可以采取的动作。",
 };
 
 /**

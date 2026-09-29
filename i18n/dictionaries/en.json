@@ -323,7 +323,7 @@
     "ctaSecondary": "Request a {country} factory audit",
     "suppliersTitle": "Suppliers listed for {country}",
     "suppliersEmpty": "No supplier in {country} is listed yet. That does not mean we cannot check one. Send us the name and we will run the verification.",
-    "metaDesc": "Supplier verification and factory audit in {country}: manufacturing profile, typical sourcing risks, verification and audit considerations, industries, logistics and FAQs.",
+    "metaDesc": "Supplier verification and factory audit in {country}. Manufacturing profile, sourcing risks, audit considerations and logistics.",
     "breadcrumbHome": "Home",
     "h1Template": "{country} Supplier Verification & Factory Audit"
   },
@@ -553,7 +553,7 @@
       "relatedTitle": "Related tools",
       "faqTitle": "Frequently asked questions",
       "metaTitle": "Supplier Risk Calculator",
-      "metaDesc": "Score any supplier from 0 to 100 across eight areas: company, quality, compliance, production, supply chain, documentation, certification and digital footprint. A higher score means lower risk. Free, no account needed."
+      "metaDesc": "Score any supplier from 0 to 100 across eight areas: company, quality, compliance, production and supply chain. Higher score means lower risk."
     },
     "dimensions": {
       "company": {
@@ -1958,7 +1958,7 @@
         "b": "Payments are processed by Stripe. We never see or store your full card number. We store only the card brand, last four digits, subscription status and renewal date needed to run your membership."
       }
     ],
-    "termsTitle": "Terms of Service",
+    "termsTitle": "Terms of Service and Platform Rules",
     "termsUpdated": "Last updated: 2026-09-03",
     "termsIntro": "These terms govern your use of the FactoryAuditB2B platform, which helps buyers verify and audit suppliers but does not guarantee supplier performance.",
     "termsSections": [
@@ -2098,7 +2098,7 @@
   },
   "pricing": {
     "metaTitle": "Services & Plans: Pricing Overview",
-    "metaDesc": "Free supplier evaluation tools, supplier verification from USD 99, factory audits from USD 399, product inspection from USD 199 and supplier monitoring by subscription. All prices in USD.",
+    "metaDesc": "Free supplier evaluation tools, supplier verification from USD 99, factory audits from USD 399 and product inspection from USD 199. All prices in USD.",
     "h1": "Services & Plans",
     "lead": "Use the tools free. Pay only when you need someone to check a supplier on the ground.",
     "currencyNote": "All prices in USD. Verification and audit are quoted per project.",
@@ -2292,7 +2292,7 @@
     "h1": "Product Inspection",
     "lead": "Order-specific quality checks at the production stage that matters, carried out by an independent inspector and reported in writing. Every request is reviewed individually and quoted per inspection.",
     "metaTitle": "Product Inspection: PPI, DUPRO & PSI",
-    "metaDesc": "Pre-production, during-production, pre-shipment and container loading inspection for buyers and suppliers across China, Vietnam, Thailand, Malaysia and the Philippines. Quoted per inspection.",
+    "metaDesc": "Pre-production, during-production, pre-shipment and container loading inspection in China and Southeast Asia. Quoted per inspection.",
     "quickAnswerTitle": "Quick answer",
     "quickAnswer": "A product inspection checks a specific order at a specific stage: before production starts, while it is running, before shipment, or during container loading. The inspector works to your requirements or an AQL sampling plan, reports findings with photos, and gives a clear recommendation. It is quoted per inspection and priced by type, scope, location and duration.",
     "honestNote": "Inspection requests are reviewed individually. We respond with a scoped quote based on inspection type, location, duration and qualified inspector availability.",
@@ -3959,7 +3959,7 @@
   },
   "careers": {
     "metaTitle": "Work With Us — FactoryAuditB2B",
-    "metaDesc": "Join the FactoryAuditB2B network of auditors, supplier verification specialists, sourcing professionals and technology talent across China, Vietnam, Thailand and Asia.",
+    "metaDesc": "Join the FactoryAuditB2B network of auditors, supplier verification specialists, sourcing professionals and technology talent across Asia.",
     "heroTitle": "Work With FactoryAuditB2B",
     "heroLead": "Join our growing network of auditors, supplier verification specialists, sourcing professionals and technology talent.",
     "heroIntro": "We are continuously building a network of audit and supply chain service professionals across China, Vietnam, Thailand and other Asian markets.",
