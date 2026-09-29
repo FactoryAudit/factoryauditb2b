@@ -1,0 +1,243 @@
+===== A. 声明清单 10 项（assert 口径 50–60）=====
+（下面把 9 个语种全印出来便于核对；只有标 ⌾ 的才参与 assert）
+
+legal.termsTitle  @ /terms
+  en     ⌾ [ 34] ✗  Terms of Service | FactoryAuditB2B
+  zh       [ 22]      服务条款 | FactoryAuditB2B
+  zh-TW    [ 22]      服務條款 | FactoryAuditB2B
+  ja       [ 26]      サービス利用規約 | FactoryAuditB2B
+  es     ⌾ [ 39] ✗  Términos del servicio | FactoryAuditB2B
+  de     ⌾ [ 37] ✗  Nutzungsbedingungen | FactoryAuditB2B
+  fr     ⌾ [ 42] ✗  Conditions d'Utilisation | FactoryAuditB2B
+  pt     ⌾ [ 35] ✗  Termos de Serviço | FactoryAuditB2B
+  ar     ⌾ [ 28] ✗  مدة الخدمة | FactoryAuditB2B
+
+risk.page.metaTitle  @ /tools/supplier-risk-calculator
+  en       [ 53]      Supplier Risk Calculator | FactoryAuditB2B RiskScore™
+  zh       [ 37]      供应商风险计算器 | FactoryAuditB2B RiskScore™
+  zh-TW    [ 37]      供應商風險計算器 | FactoryAuditB2B RiskScore™
+  ja       [ 45]      サプライヤー・リスク・計算ツール | FactoryAuditB2B RiskScore™
+  es     ⌾ [ 65] ✗  Calculadora de riesgos del proveedor | FactoryAuditB2B RiskScore™
+  de       [ 54]      Lieferanten-Risikorechner | FactoryAuditB2B RiskScore™
+  fr     ⌾ [ 62] ✗  Calculateur de risque fournisseur | FactoryAuditB2B RiskScore™
+  pt     ⌾ [ 63] ✗  Calculadora de risco do fornecedor | FactoryAuditB2B RiskScore™
+  ar     ⌾ [ 49] ✗  حاسبة مخاطر الموردين | FactoryAuditB2B RiskScore™
+
+
+===== B. 全站分布（仅观察，不参与 assert）=====
+扫描 1886 个 HTML｜有 title 1885｜无 title 0
+
+语种     数量   min  中位  max   拉丁带宽越界(50–60)
+en        204    25    52    82   138
+zh        209    20    35    55   0
+zh-TW     209    20    35    55   0
+ja        209    20    45    82   0
+es        209    27    53    82   144
+de        209    26    53    88   138
+fr        209    26    52    85   136
+pt        209    24    53    83   141
+ar        209    23    52    82   0
+
+---- 拉丁语种带宽越界明细（前 40）----
+  en/about.html  [ 68]  About Us — Supplier Verification, Training & Trust | FactoryAuditB2B
+  en/account/rfqs.html  [ 25]  My RFQs | FactoryAuditB2B
+  en/account/saved.html  [ 33]  Saved suppliers | FactoryAuditB2B
+  en/account.html  [ 28]  My account | FactoryAuditB2B
+  en/audit-guide/china/BRC.html  [ 38]  BRCGS Audit in China | FactoryAuditB2B
+  en/audit-guide/china/BSCI.html  [ 37]  BSCI Audit in China | FactoryAuditB2B
+  en/audit-guide/china/FSSC22000.html  [ 43]  FSSC 22000 Audit in China | FactoryAuditB2B
+  en/audit-guide/china/HACCP.html  [ 38]  HACCP Audit in China | FactoryAuditB2B
+  en/audit-guide/china/SMETA.html  [ 38]  SMETA Audit in China | FactoryAuditB2B
+  en/audit-guide/malaysia/BRC.html  [ 41]  BRCGS Audit in Malaysia | FactoryAuditB2B
+  en/audit-guide/malaysia/BSCI.html  [ 40]  BSCI Audit in Malaysia | FactoryAuditB2B
+  en/audit-guide/malaysia/FSSC22000.html  [ 46]  FSSC 22000 Audit in Malaysia | FactoryAuditB2B
+  en/audit-guide/malaysia/HACCP.html  [ 41]  HACCP Audit in Malaysia | FactoryAuditB2B
+  en/audit-guide/malaysia/SMETA.html  [ 41]  SMETA Audit in Malaysia | FactoryAuditB2B
+  en/audit-guide/philippines/BRC.html  [ 44]  BRCGS Audit in Philippines | FactoryAuditB2B
+  en/audit-guide/philippines/BSCI.html  [ 43]  BSCI Audit in Philippines | FactoryAuditB2B
+  en/audit-guide/philippines/FSSC22000.html  [ 49]  FSSC 22000 Audit in Philippines | FactoryAuditB2B
+  en/audit-guide/philippines/HACCP.html  [ 44]  HACCP Audit in Philippines | FactoryAuditB2B
+  en/audit-guide/philippines/ICTI.html  [ 63]  ICTI Ethical Toy Program Audit in Philippines | FactoryAuditB2B
+  en/audit-guide/philippines/SMETA.html  [ 44]  SMETA Audit in Philippines | FactoryAuditB2B
+  en/audit-guide/thailand/BRC.html  [ 41]  BRCGS Audit in Thailand | FactoryAuditB2B
+  en/audit-guide/thailand/BSCI.html  [ 40]  BSCI Audit in Thailand | FactoryAuditB2B
+  en/audit-guide/thailand/FSSC22000.html  [ 46]  FSSC 22000 Audit in Thailand | FactoryAuditB2B
+  en/audit-guide/thailand/HACCP.html  [ 41]  HACCP Audit in Thailand | FactoryAuditB2B
+  en/audit-guide/thailand/SMETA.html  [ 41]  SMETA Audit in Thailand | FactoryAuditB2B
+  en/audit-guide/vietnam/BRC.html  [ 40]  BRCGS Audit in Vietnam | FactoryAuditB2B
+  en/audit-guide/vietnam/BSCI.html  [ 39]  BSCI Audit in Vietnam | FactoryAuditB2B
+  en/audit-guide/vietnam/FSSC22000.html  [ 45]  FSSC 22000 Audit in Vietnam | FactoryAuditB2B
+  en/audit-guide/vietnam/HACCP.html  [ 40]  HACCP Audit in Vietnam | FactoryAuditB2B
+  en/audit-guide/vietnam/SMETA.html  [ 40]  SMETA Audit in Vietnam | FactoryAuditB2B
+  en/careers.html  [ 30]  Work With Us — FactoryAuditB2B
+  en/case-studies/label-defect-stopped-before-loading.html  [ 63]  Label defect stopped before container loading | FactoryAuditB2B
+  en/case-studies/legal-entity-mismatch-before-deposit.html  [ 62]  Legal entity mismatch found before a deposit | FactoryAuditB2B
+  en/case-studies/qualifying-replacement-supplier-vietnam.html  [ 62]  Qualifying a replacement supplier in Vietnam | FactoryAuditB2B
+  en/contact.html  [ 63]  Contact FactoryAuditB2B — Supplier Verification & Factory Audit
+  en/countries/china.html  [ 61]  China Supplier Verification & Factory Audit | FactoryAuditB2B
+  en/countries/malaysia.html  [ 64]  Malaysia Supplier Verification & Factory Audit | FactoryAuditB2B
+  en/countries/philippines.html  [ 67]  Philippines Supplier Verification & Factory Audit | FactoryAuditB2B
+  en/countries/thailand.html  [ 64]  Thailand Supplier Verification & Factory Audit | FactoryAuditB2B
+  en/countries/vietnam.html  [ 63]  Vietnam Supplier Verification & Factory Audit | FactoryAuditB2B
+  es/about.html  [ 81]  Quiénes somos — Auditoría de fábrica y formación de proveedores | FactoryAuditB2B
+  es/account/rfqs.html  [ 33]  Mis solicitudes | FactoryAuditB2B
+  es/account/saved.html  [ 39]  Proveedores guardados | FactoryAuditB2B
+  es/account.html  [ 27]  Mi cuenta | FactoryAuditB2B
+  es/audit-guide/china/BRC.html  [ 42]  Auditoría BRCGS en China | FactoryAuditB2B
+  es/audit-guide/china/BSCI.html  [ 41]  Auditoría BSCI en China | FactoryAuditB2B
+  es/audit-guide/china/FSSC22000.html  [ 47]  Auditoría FSSC 22000 en China | FactoryAuditB2B
+  es/audit-guide/china/HACCP.html  [ 42]  Auditoría HACCP en China | FactoryAuditB2B
+  es/audit-guide/china/ICTI.html  [ 61]  Auditoría ICTI Ethical Toy Program en China | FactoryAuditB2B
+  es/audit-guide/china/SMETA.html  [ 42]  Auditoría SMETA en China | FactoryAuditB2B
+  es/audit-guide/malaysia/BRC.html  [ 44]  Auditoría BRCGS en Malasia | FactoryAuditB2B
+  es/audit-guide/malaysia/BSCI.html  [ 43]  Auditoría BSCI en Malasia | FactoryAuditB2B
+  es/audit-guide/malaysia/FSSC22000.html  [ 49]  Auditoría FSSC 22000 en Malasia | FactoryAuditB2B
+  es/audit-guide/malaysia/HACCP.html  [ 44]  Auditoría HACCP en Malasia | FactoryAuditB2B
+  es/audit-guide/malaysia/ICTI.html  [ 63]  Auditoría ICTI Ethical Toy Program en Malasia | FactoryAuditB2B
+  es/audit-guide/malaysia/SMETA.html  [ 44]  Auditoría SMETA en Malasia | FactoryAuditB2B
+  es/audit-guide/philippines/BRC.html  [ 46]  Auditoría BRCGS en Filipinas | FactoryAuditB2B
+  es/audit-guide/philippines/BSCI.html  [ 45]  Auditoría BSCI en Filipinas | FactoryAuditB2B
+  es/audit-guide/philippines/HACCP.html  [ 46]  Auditoría HACCP en Filipinas | FactoryAuditB2B
+  es/audit-guide/philippines/ICTI.html  [ 65]  Auditoría ICTI Ethical Toy Program en Filipinas | FactoryAuditB2B
+  es/audit-guide/philippines/SMETA.html  [ 46]  Auditoría SMETA en Filipinas | FactoryAuditB2B
+  es/audit-guide/thailand/BRC.html  [ 46]  Auditoría BRCGS en Tailandia | FactoryAuditB2B
+  es/audit-guide/thailand/BSCI.html  [ 45]  Auditoría BSCI en Tailandia | FactoryAuditB2B
+  es/audit-guide/thailand/HACCP.html  [ 46]  Auditoría HACCP en Tailandia | FactoryAuditB2B
+  es/audit-guide/thailand/ICTI.html  [ 65]  Auditoría ICTI Ethical Toy Program en Tailandia | FactoryAuditB2B
+  es/audit-guide/thailand/SMETA.html  [ 46]  Auditoría SMETA en Tailandia | FactoryAuditB2B
+  es/audit-guide/vietnam/BRC.html  [ 44]  Auditoría BRCGS en Vietnam | FactoryAuditB2B
+  es/audit-guide/vietnam/BSCI.html  [ 43]  Auditoría BSCI en Vietnam | FactoryAuditB2B
+  es/audit-guide/vietnam/FSSC22000.html  [ 49]  Auditoría FSSC 22000 en Vietnam | FactoryAuditB2B
+  es/audit-guide/vietnam/HACCP.html  [ 44]  Auditoría HACCP en Vietnam | FactoryAuditB2B
+  es/audit-guide/vietnam/ICTI.html  [ 63]  Auditoría ICTI Ethical Toy Program en Vietnam | FactoryAuditB2B
+  es/audit-guide/vietnam/SMETA.html  [ 44]  Auditoría SMETA en Vietnam | FactoryAuditB2B
+  es/careers.html  [ 38]  Trabaja con nosotros — FactoryAuditB2B
+  es/case-studies/label-defect-stopped-before-loading.html  [ 63]  Label defect stopped before container loading | FactoryAuditB2B
+  es/case-studies/legal-entity-mismatch-before-deposit.html  [ 62]  Legal entity mismatch found before a deposit | FactoryAuditB2B
+  es/case-studies/qualifying-replacement-supplier-vietnam.html  [ 62]  Qualifying a replacement supplier in Vietnam | FactoryAuditB2B
+  es/chemicals/citric-acid.html  [ 45]  Citric acid (CAS 77-92-9) — Usos y documentos
+  es/chemicals/melamine.html  [ 43]  Melamine (CAS 108-78-1) — Usos y documentos
+  es/chemicals/xanthan-gum.html  [ 48]  Xanthan gum (CAS 11138-66-2) — Usos y documentos
+  es/contact.html  [ 63]  Contact FactoryAuditB2B — Supplier Verification & Factory Audit
+  de/about.html  [ 63]  Über uns — Werksaudit und Lieferantenschulung | FactoryAuditB2B
+  de/account/rfqs.html  [ 32]  Meine Anfragen | FactoryAuditB2B
+  de/account/saved.html  [ 42]  Gespeicherte Lieferanten | FactoryAuditB2B
+  de/account.html  [ 28]  Mein Konto | FactoryAuditB2B
+  de/audit-guide/china/BRC.html  [ 38]  BRCGS-Audit in China | FactoryAuditB2B
+  de/audit-guide/china/BSCI.html  [ 37]  BSCI-Audit in China | FactoryAuditB2B
+  de/audit-guide/china/FSSC22000.html  [ 43]  FSSC 22000-Audit in China | FactoryAuditB2B
+  de/audit-guide/china/HACCP.html  [ 38]  HACCP-Audit in China | FactoryAuditB2B
+  de/audit-guide/china/SMETA.html  [ 38]  SMETA-Audit in China | FactoryAuditB2B
+  de/audit-guide/malaysia/BRC.html  [ 41]  BRCGS-Audit in Malaysia | FactoryAuditB2B
+  de/audit-guide/malaysia/BSCI.html  [ 40]  BSCI-Audit in Malaysia | FactoryAuditB2B
+  de/audit-guide/malaysia/FSSC22000.html  [ 46]  FSSC 22000-Audit in Malaysia | FactoryAuditB2B
+  de/audit-guide/malaysia/HACCP.html  [ 41]  HACCP-Audit in Malaysia | FactoryAuditB2B
+  de/audit-guide/malaysia/SMETA.html  [ 41]  SMETA-Audit in Malaysia | FactoryAuditB2B
+  de/audit-guide/philippines/BRC.html  [ 44]  BRCGS-Audit in Philippinen | FactoryAuditB2B
+  de/audit-guide/philippines/BSCI.html  [ 43]  BSCI-Audit in Philippinen | FactoryAuditB2B
+  de/audit-guide/philippines/FSSC22000.html  [ 49]  FSSC 22000-Audit in Philippinen | FactoryAuditB2B
+  de/audit-guide/philippines/HACCP.html  [ 44]  HACCP-Audit in Philippinen | FactoryAuditB2B
+  de/audit-guide/philippines/ICTI.html  [ 63]  ICTI Ethical Toy Program-Audit in Philippinen | FactoryAuditB2B
+  de/audit-guide/philippines/SMETA.html  [ 44]  SMETA-Audit in Philippinen | FactoryAuditB2B
+  de/audit-guide/thailand/BRC.html  [ 41]  BRCGS-Audit in Thailand | FactoryAuditB2B
+  de/audit-guide/thailand/BSCI.html  [ 40]  BSCI-Audit in Thailand | FactoryAuditB2B
+  de/audit-guide/thailand/FSSC22000.html  [ 46]  FSSC 22000-Audit in Thailand | FactoryAuditB2B
+  de/audit-guide/thailand/HACCP.html  [ 41]  HACCP-Audit in Thailand | FactoryAuditB2B
+  de/audit-guide/thailand/SMETA.html  [ 41]  SMETA-Audit in Thailand | FactoryAuditB2B
+  de/audit-guide/vietnam/BRC.html  [ 40]  BRCGS-Audit in Vietnam | FactoryAuditB2B
+  de/audit-guide/vietnam/BSCI.html  [ 39]  BSCI-Audit in Vietnam | FactoryAuditB2B
+  de/audit-guide/vietnam/FSSC22000.html  [ 45]  FSSC 22000-Audit in Vietnam | FactoryAuditB2B
+  de/audit-guide/vietnam/HACCP.html  [ 40]  HACCP-Audit in Vietnam | FactoryAuditB2B
+  de/audit-guide/vietnam/SMETA.html  [ 40]  SMETA-Audit in Vietnam | FactoryAuditB2B
+  de/careers.html  [ 33]  Arbeite mit uns — FactoryAuditB2B
+  de/case-studies/label-defect-stopped-before-loading.html  [ 63]  Label defect stopped before container loading | FactoryAuditB2B
+  de/case-studies/legal-entity-mismatch-before-deposit.html  [ 62]  Legal entity mismatch found before a deposit | FactoryAuditB2B
+  de/case-studies/qualifying-replacement-supplier-vietnam.html  [ 62]  Qualifying a replacement supplier in Vietnam | FactoryAuditB2B
+  de/chemicals/melamine.html  [ 49]  Melamine (CAS 108-78-1) — Anwendungen & Dokumente
+  de/contact.html  [ 63]  Contact FactoryAuditB2B — Supplier Verification & Factory Audit
+  de/countries/china.html  [ 66]  China: Lieferantenverifizierung und Fabrik-Audit | FactoryAuditB2B
+  de/countries/malaysia.html  [ 69]  Malaysia: Lieferantenverifizierung und Fabrik-Audit | FactoryAuditB2B
+  de/countries/philippines.html  [ 72]  Philippines: Lieferantenverifizierung und Fabrik-Audit | FactoryAuditB2B
+  de/countries/thailand.html  [ 69]  Thailand: Lieferantenverifizierung und Fabrik-Audit | FactoryAuditB2B
+  fr/about.html  [ 72]  À propos — Audit d'usine et formation des fournisseurs | FactoryAuditB2B
+  fr/account/rfqs.html  [ 30]  Mes demandes | FactoryAuditB2B
+  fr/account/saved.html  [ 42]  Fournisseurs enregistrés | FactoryAuditB2B
+  fr/account.html  [ 28]  Mon compte | FactoryAuditB2B
+  fr/audit-guide/china/BRC.html  [ 38]  Audit BRCGS en Chine | FactoryAuditB2B
+  fr/audit-guide/china/BSCI.html  [ 37]  Audit BSCI en Chine | FactoryAuditB2B
+  fr/audit-guide/china/FSSC22000.html  [ 43]  Audit FSSC 22000 en Chine | FactoryAuditB2B
+  fr/audit-guide/china/HACCP.html  [ 38]  Audit HACCP en Chine | FactoryAuditB2B
+  fr/audit-guide/china/SMETA.html  [ 38]  Audit SMETA en Chine | FactoryAuditB2B
+  fr/audit-guide/malaysia/BRC.html  [ 41]  Audit BRCGS en Malaisie | FactoryAuditB2B
+  fr/audit-guide/malaysia/BSCI.html  [ 40]  Audit BSCI en Malaisie | FactoryAuditB2B
+  fr/audit-guide/malaysia/FSSC22000.html  [ 46]  Audit FSSC 22000 en Malaisie | FactoryAuditB2B
+  fr/audit-guide/malaysia/HACCP.html  [ 41]  Audit HACCP en Malaisie | FactoryAuditB2B
+  fr/audit-guide/malaysia/SMETA.html  [ 41]  Audit SMETA en Malaisie | FactoryAuditB2B
+  fr/audit-guide/philippines/BRC.html  [ 44]  Audit BRCGS en Philippines | FactoryAuditB2B
+  fr/audit-guide/philippines/BSCI.html  [ 43]  Audit BSCI en Philippines | FactoryAuditB2B
+  fr/audit-guide/philippines/FSSC22000.html  [ 49]  Audit FSSC 22000 en Philippines | FactoryAuditB2B
+  fr/audit-guide/philippines/HACCP.html  [ 44]  Audit HACCP en Philippines | FactoryAuditB2B
+  fr/audit-guide/philippines/ICTI.html  [ 63]  Audit ICTI Ethical Toy Program en Philippines | FactoryAuditB2B
+  fr/audit-guide/philippines/SMETA.html  [ 44]  Audit SMETA en Philippines | FactoryAuditB2B
+  fr/audit-guide/thailand/BRC.html  [ 42]  Audit BRCGS en Thaïlande | FactoryAuditB2B
+  fr/audit-guide/thailand/BSCI.html  [ 41]  Audit BSCI en Thaïlande | FactoryAuditB2B
+  fr/audit-guide/thailand/FSSC22000.html  [ 47]  Audit FSSC 22000 en Thaïlande | FactoryAuditB2B
+  fr/audit-guide/thailand/HACCP.html  [ 42]  Audit HACCP en Thaïlande | FactoryAuditB2B
+  fr/audit-guide/thailand/ICTI.html  [ 61]  Audit ICTI Ethical Toy Program en Thaïlande | FactoryAuditB2B
+  fr/audit-guide/thailand/SMETA.html  [ 42]  Audit SMETA en Thaïlande | FactoryAuditB2B
+  fr/audit-guide/vietnam/BRC.html  [ 41]  Audit BRCGS en Viêt Nam | FactoryAuditB2B
+  fr/audit-guide/vietnam/BSCI.html  [ 40]  Audit BSCI en Viêt Nam | FactoryAuditB2B
+  fr/audit-guide/vietnam/FSSC22000.html  [ 46]  Audit FSSC 22000 en Viêt Nam | FactoryAuditB2B
+  fr/audit-guide/vietnam/HACCP.html  [ 41]  Audit HACCP en Viêt Nam | FactoryAuditB2B
+  fr/audit-guide/vietnam/SMETA.html  [ 41]  Audit SMETA en Viêt Nam | FactoryAuditB2B
+  fr/careers.html  [ 38]  Travailler avec nous — FactoryAuditB2B
+  fr/case-studies/label-defect-stopped-before-loading.html  [ 63]  Label defect stopped before container loading | FactoryAuditB2B
+  fr/case-studies/legal-entity-mismatch-before-deposit.html  [ 62]  Legal entity mismatch found before a deposit | FactoryAuditB2B
+  fr/case-studies/qualifying-replacement-supplier-vietnam.html  [ 62]  Qualifying a replacement supplier in Vietnam | FactoryAuditB2B
+  fr/contact.html  [ 63]  Contact FactoryAuditB2B — Supplier Verification & Factory Audit
+  fr/countries/china.html  [ 70]  China : vérification de fournisseur et audit d'usine | FactoryAuditB2B
+  fr/countries/malaysia.html  [ 73]  Malaysia : vérification de fournisseur et audit d'usine | FactoryAuditB2B
+  fr/countries/philippines.html  [ 76]  Philippines : vérification de fournisseur et audit d'usine | FactoryAuditB2B
+  fr/countries/thailand.html  [ 73]  Thailand : vérification de fournisseur et audit d'usine | FactoryAuditB2B
+  pt/about.html  [ 80]  Sobre nós — Auditoria de fábrica e treinamento de fornecedores | FactoryAuditB2B
+  pt/account/rfqs.html  [ 37]  Minhas solicitações | FactoryAuditB2B
+  pt/account/saved.html  [ 37]  Fornecedores salvos | FactoryAuditB2B
+  pt/account.html  [ 29]  Minha conta | FactoryAuditB2B
+  pt/audit-guide/china/BRC.html  [ 42]  Auditoria BRCGS em China | FactoryAuditB2B
+  pt/audit-guide/china/BSCI.html  [ 41]  Auditoria BSCI em China | FactoryAuditB2B
+  pt/audit-guide/china/FSSC22000.html  [ 47]  Auditoria FSSC 22000 em China | FactoryAuditB2B
+  pt/audit-guide/china/HACCP.html  [ 42]  Auditoria HACCP em China | FactoryAuditB2B
+  pt/audit-guide/china/ICTI.html  [ 61]  Auditoria ICTI Ethical Toy Program em China | FactoryAuditB2B
+  pt/audit-guide/china/SMETA.html  [ 42]  Auditoria SMETA em China | FactoryAuditB2B
+  pt/audit-guide/malaysia/BRC.html  [ 44]  Auditoria BRCGS em Malásia | FactoryAuditB2B
+  pt/audit-guide/malaysia/BSCI.html  [ 43]  Auditoria BSCI em Malásia | FactoryAuditB2B
+  pt/audit-guide/malaysia/FSSC22000.html  [ 49]  Auditoria FSSC 22000 em Malásia | FactoryAuditB2B
+  pt/audit-guide/malaysia/HACCP.html  [ 44]  Auditoria HACCP em Malásia | FactoryAuditB2B
+  pt/audit-guide/malaysia/ICTI.html  [ 63]  Auditoria ICTI Ethical Toy Program em Malásia | FactoryAuditB2B
+  pt/audit-guide/malaysia/SMETA.html  [ 44]  Auditoria SMETA em Malásia | FactoryAuditB2B
+  pt/audit-guide/philippines/BRC.html  [ 46]  Auditoria BRCGS em Filipinas | FactoryAuditB2B
+  pt/audit-guide/philippines/BSCI.html  [ 45]  Auditoria BSCI em Filipinas | FactoryAuditB2B
+  pt/audit-guide/philippines/HACCP.html  [ 46]  Auditoria HACCP em Filipinas | FactoryAuditB2B
+  pt/audit-guide/philippines/ICTI.html  [ 65]  Auditoria ICTI Ethical Toy Program em Filipinas | FactoryAuditB2B
+  pt/audit-guide/philippines/SMETA.html  [ 46]  Auditoria SMETA em Filipinas | FactoryAuditB2B
+  pt/audit-guide/thailand/BRC.html  [ 46]  Auditoria BRCGS em Tailândia | FactoryAuditB2B
+  pt/audit-guide/thailand/BSCI.html  [ 45]  Auditoria BSCI em Tailândia | FactoryAuditB2B
+  pt/audit-guide/thailand/HACCP.html  [ 46]  Auditoria HACCP em Tailândia | FactoryAuditB2B
+  pt/audit-guide/thailand/ICTI.html  [ 65]  Auditoria ICTI Ethical Toy Program em Tailândia | FactoryAuditB2B
+  pt/audit-guide/thailand/SMETA.html  [ 46]  Auditoria SMETA em Tailândia | FactoryAuditB2B
+  pt/audit-guide/vietnam/BRC.html  [ 45]  Auditoria BRCGS em Vietname | FactoryAuditB2B
+  pt/audit-guide/vietnam/BSCI.html  [ 44]  Auditoria BSCI em Vietname | FactoryAuditB2B
+  pt/audit-guide/vietnam/HACCP.html  [ 45]  Auditoria HACCP em Vietname | FactoryAuditB2B
+  pt/audit-guide/vietnam/ICTI.html  [ 64]  Auditoria ICTI Ethical Toy Program em Vietname | FactoryAuditB2B
+  pt/audit-guide/vietnam/SMETA.html  [ 45]  Auditoria SMETA em Vietname | FactoryAuditB2B
+  pt/careers.html  [ 35]  Trabalhe connosco — FactoryAuditB2B
+  pt/case-studies/label-defect-stopped-before-loading.html  [ 63]  Label defect stopped before container loading | FactoryAuditB2B
+  pt/case-studies/legal-entity-mismatch-before-deposit.html  [ 62]  Legal entity mismatch found before a deposit | FactoryAuditB2B
+  pt/case-studies/qualifying-replacement-supplier-vietnam.html  [ 62]  Qualifying a replacement supplier in Vietnam | FactoryAuditB2B
+  pt/chemicals/melamine.html  [ 49]  Melamine (CAS 108-78-1) — Aplicações e documentos
+  pt/contact.html  [ 63]  Contact FactoryAuditB2B — Supplier Verification & Factory Audit
+  pt/countries/china.html  [ 75]  China: verificação de fornecedores e auditoria de fábrica | FactoryAuditB2B
+  pt/countries/malaysia.html  [ 78]  Malaysia: verificação de fornecedores e auditoria de fábrica | FactoryAuditB2B
+  pt/countries/philippines.html  [ 81]  Philippines: verificação de fornecedores e auditoria de fábrica | FactoryAuditB2B
+
+=> A 段 0/10 通过（失败 10 项）｜B 段拉丁带宽越界 697 项（观察值）

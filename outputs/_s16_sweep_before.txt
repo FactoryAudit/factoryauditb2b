@@ -1,0 +1,171 @@
+扫描预渲染 HTML: 1886 个文件
+有 description: 1885｜无 description: 0
+结尾无句末标点（半句话嫌疑）: 141
+
+--- 按语种 ---
+  es       28
+  fr       23
+  pt       22
+  de       21
+  en       20
+  ar       16
+  ja       11
+
+--- 按板块 ---
+  countries              30
+  case-studies           28
+  field-reports          28
+  industry               24
+  services               8
+  careers                5
+  pricing                5
+  tools                  5
+  methodology            3
+  verify-supplier        2
+  resources              2
+  training-plans         1
+
+--- 明细 ---
+  ar/case-studies/label-defect-stopped-before-loading.html  [151]  ...t above the AQL threshold, and the batch was reworked before container
+  ar/case-studies/legal-entity-mismatch-before-deposit.html  [155]  ...legal entity than the one signing the contract, so the buyer re-issued
+  ar/case-studies/qualifying-replacement-supplier-vietnam.html  [154]  ...udit to qualify a second source in Vietnam when the China supplier hit
+  ar/case-studies/trading-company-posing-as-factory.html  [147]  ...enting as a factory, and how the buyer re-contracted with the licensed
+  ar/countries/china.html  [146]  ...ical sourcing risks, verification and audit considerations, industries
+  ar/countries/malaysia.html  [149]  ...ical sourcing risks, verification and audit considerations, industries
+  ar/countries/philippines.html  [152]  ...ical sourcing risks, verification and audit considerations, industries
+  ar/countries/thailand.html  [149]  ...ical sourcing risks, verification and audit considerations, industries
+  ar/countries/vietnam.html  [148]  ...ical sourcing risks, verification and audit considerations, industries
+  ar/field-reports/carton-count-mismatch-at-loading.html  [157]  ...cile with the packing list, and what happened before the container was
+  ar/field-reports/moisture-in-cartons-before-shipment.html  [146]  ...arton moisture and pallet wrapping did not match the buyer's packaging
+  ar/field-reports/shared-building-fire-exits.html  [150]  ...wo floors of a shared building, and the exit routes were not under the
+  ar/field-reports/undisclosed-subcontracted-process.html  [155]  ... treatment was carried out at another site the buyer had not been told
+  ar/industry/chemicals/chemical-supplier-verification.html  [157]  ...ermit scope, the site that actually produces, and the documents behind
+  ar/industry/food-beverage/food-factory-audit-checklist.html  [148]  ...aceability, allergen control, cold chain and labelling, for buyer-side
+  ar/industry/food-beverage/food-supplier-verification.html  [156]  ...certificate validity, traceability and cold chain, before you place an
+  de/careers.html  [151]  ...tenverifizierung, Beschaffungsprofis und Technologie-Talenten in China
+  de/case-studies/label-defect-stopped-before-loading.html  [151]  ...t above the AQL threshold, and the batch was reworked before container
+  de/case-studies/legal-entity-mismatch-before-deposit.html  [155]  ...legal entity than the one signing the contract, so the buyer re-issued
+  de/case-studies/qualifying-replacement-supplier-vietnam.html  [154]  ...udit to qualify a second source in Vietnam when the China supplier hit
+  de/case-studies/trading-company-posing-as-factory.html  [147]  ...enting as a factory, and how the buyer re-contracted with the licensed
+  de/countries/china.html  [157]  ...ungsrisiken, Verifizierungs- und Auditüberlegungen, Branchen, Logistik
+  de/countries/malaysia.html  [150]  ...e Beschaffungsrisiken, Verifizierungs- und Auditüberlegungen, Branchen
+  de/countries/philippines.html  [153]  ...e Beschaffungsrisiken, Verifizierungs- und Auditüberlegungen, Branchen
+  de/countries/thailand.html  [150]  ...e Beschaffungsrisiken, Verifizierungs- und Auditüberlegungen, Branchen
+  de/countries/vietnam.html  [149]  ...e Beschaffungsrisiken, Verifizierungs- und Auditüberlegungen, Branchen
+  de/field-reports/carton-count-mismatch-at-loading.html  [157]  ...cile with the packing list, and what happened before the container was
+  de/field-reports/moisture-in-cartons-before-shipment.html  [146]  ...arton moisture and pallet wrapping did not match the buyer's packaging
+  de/field-reports/shared-building-fire-exits.html  [150]  ...wo floors of a shared building, and the exit routes were not under the
+  de/field-reports/undisclosed-subcontracted-process.html  [155]  ... treatment was carried out at another site the buyer had not been told
+  de/industry/chemicals/chemical-supplier-verification.html  [157]  ...ermit scope, the site that actually produces, and the documents behind
+  de/industry/food-beverage/food-factory-audit-checklist.html  [148]  ...aceability, allergen control, cold chain and labelling, for buyer-side
+  de/industry/food-beverage/food-supplier-verification.html  [156]  ...certificate validity, traceability and cold chain, before you place an
+  de/pricing.html  [148]  ...ab 399 USD, Produktinspektion ab 199 USD und Lieferanten-Monitoring im
+  de/services/inspection.html  [151]  ...Käufer, die aus China, Vietnam, Thailand, Malaysia und den Philippinen
+  de/tools/supplier-risk-calculator.html  [153]  ...Compliance, Produktion, Lieferkette, Dokumentation, Zertifizierung und
+  de/verify-supplier.html  [157]  ...tandort und Kapazitätsangaben, bevor Sie bestellen oder eine Anzahlung
+  en/careers.html  [157]  ...ng professionals and technology talent across China, Vietnam, Thailand
+  en/case-studies/label-defect-stopped-before-loading.html  [151]  ...t above the AQL threshold, and the batch was reworked before container
+  en/case-studies/legal-entity-mismatch-before-deposit.html  [155]  ...legal entity than the one signing the contract, so the buyer re-issued
+  en/case-studies/qualifying-replacement-supplier-vietnam.html  [154]  ...udit to qualify a second source in Vietnam when the China supplier hit
+  en/case-studies/trading-company-posing-as-factory.html  [147]  ...enting as a factory, and how the buyer re-contracted with the licensed
+  en/countries/china.html  [157]  ...ng risks, verification and audit considerations, industries, logistics
+  en/countries/malaysia.html  [149]  ...ical sourcing risks, verification and audit considerations, industries
+  en/countries/philippines.html  [152]  ...ical sourcing risks, verification and audit considerations, industries
+  en/countries/thailand.html  [149]  ...ical sourcing risks, verification and audit considerations, industries
+  en/countries/vietnam.html  [148]  ...ical sourcing risks, verification and audit considerations, industries
+  en/field-reports/carton-count-mismatch-at-loading.html  [157]  ...cile with the packing list, and what happened before the container was
+  en/field-reports/moisture-in-cartons-before-shipment.html  [146]  ...arton moisture and pallet wrapping did not match the buyer's packaging
+  en/field-reports/shared-building-fire-exits.html  [150]  ...wo floors of a shared building, and the exit routes were not under the
+  en/field-reports/undisclosed-subcontracted-process.html  [155]  ... treatment was carried out at another site the buyer had not been told
+  en/industry/chemicals/chemical-supplier-verification.html  [157]  ...ermit scope, the site that actually produces, and the documents behind
+  en/industry/food-beverage/food-factory-audit-checklist.html  [148]  ...aceability, allergen control, cold chain and labelling, for buyer-side
+  en/industry/food-beverage/food-supplier-verification.html  [156]  ...certificate validity, traceability and cold chain, before you place an
+  en/pricing.html  [154]  ...om USD 399, product inspection from USD 199 and supplier monitoring by
+  en/services/inspection.html  [155]  ...buyers and suppliers across China, Vietnam, Thailand, Malaysia and the
+  en/tools/supplier-risk-calculator.html  [149]  ...ce, production, supply chain, documentation, certification and digital
+  es/careers.html  [149]  ...e proveedores, profesionales de compras y talento tecnológico en China
+  es/case-studies/label-defect-stopped-before-loading.html  [151]  ...t above the AQL threshold, and the batch was reworked before container
+  es/case-studies/legal-entity-mismatch-before-deposit.html  [155]  ...legal entity than the one signing the contract, so the buyer re-issued
+  es/case-studies/qualifying-replacement-supplier-vietnam.html  [154]  ...udit to qualify a second source in Vietnam when the China supplier hit
+  es/case-studies/trading-company-posing-as-factory.html  [147]  ...enting as a factory, and how the buyer re-contracted with the licensed
+  es/countries/china.html  [152]  ..., riesgos típicos de abastecimiento, consideraciones de verificación y
+  es/countries/malaysia.html  [155]  ..., riesgos típicos de abastecimiento, consideraciones de verificación y
+  es/countries/philippines.html  [156]  ...ón, riesgos típicos de abastecimiento, consideraciones de verificación
+  es/countries/thailand.html  [155]  ..., riesgos típicos de abastecimiento, consideraciones de verificación y
+  es/countries/vietnam.html  [154]  ..., riesgos típicos de abastecimiento, consideraciones de verificación y
+  es/field-reports/carton-count-mismatch-at-loading.html  [157]  ...cile with the packing list, and what happened before the container was
+  es/field-reports/moisture-in-cartons-before-shipment.html  [146]  ...arton moisture and pallet wrapping did not match the buyer's packaging
+  es/field-reports/shared-building-fire-exits.html  [150]  ...wo floors of a shared building, and the exit routes were not under the
+  es/field-reports/undisclosed-subcontracted-process.html  [155]  ... treatment was carried out at another site the buyer had not been told
+  es/industry/chemicals/chemical-supplier-verification.html  [157]  ...ermit scope, the site that actually produces, and the documents behind
+  es/industry/food-beverage/food-factory-audit-checklist.html  [148]  ...aceability, allergen control, cold chain and labelling, for buyer-side
+  es/industry/food-beverage/food-supplier-verification.html  [156]  ...certificate validity, traceability and cold chain, before you place an
+  es/industry/food-beverage.html  [84]  ...eedores verificados de Food & Beverage / 食品饮料 y los tipos de auditoría
+  es/industry/home-appliances.html  [82]  ...oveedores verificados de Home Appliances / 家电 y los tipos de auditoría
+  es/methodology.html  [153]  ...ia, las limitaciones y la política de actualización detrás de nuestras
+  es/pricing.html  [154]  ...de 99 USD, auditorías de fábrica desde 399 USD, inspección de producto
+  es/resources.html  [148]  ...riesgo de proveedores, abastecimiento en China y el sudeste asiático y
+  es/services/inspection.html  [155]  ...contenedores para compradores procedentes de China, Vietnam, Tailandia
+  es/services/supplier-improvement.html  [151]  ...los equipos de su fábrica en calidad y control de calidad para que los
+  es/services/supplier-verification.html  [147]  ...a de la fábrica, la capacidad de producción, el sistema de calidad, el
+  es/tools/supplier-risk-calculator.html  [151]  ...ento, producción, cadena de suministro, documentación, certificación y
+  es/training-plans.html  [152]  ...oceso de producción y capacitación de cumplimiento para sus equipos de
+  es/verify-supplier.html  [149]  ... y las capacidades declaradas antes de que hagas un pedido o pagues un
+  fr/careers.html  [156]  ...urnisseurs, de professionnels du sourcing et de talents technologiques
+  fr/case-studies/label-defect-stopped-before-loading.html  [151]  ...t above the AQL threshold, and the batch was reworked before container
+  fr/case-studies/legal-entity-mismatch-before-deposit.html  [155]  ...legal entity than the one signing the contract, so the buyer re-issued
+  fr/case-studies/qualifying-replacement-supplier-vietnam.html  [154]  ...udit to qualify a second source in Vietnam when the China supplier hit
+  fr/case-studies/trading-company-posing-as-factory.html  [147]  ...enting as a factory, and how the buyer re-contracted with the licensed
+  fr/countries/china.html  [152]  ...isques d'approvisionnement typiques, considérations de vérification et
+  fr/countries/malaysia.html  [155]  ...isques d'approvisionnement typiques, considérations de vérification et
+  fr/countries/philippines.html  [155]  ..., risques d'approvisionnement typiques, considérations de vérification
+  fr/countries/thailand.html  [155]  ...isques d'approvisionnement typiques, considérations de vérification et
+  fr/countries/vietnam.html  [154]  ...isques d'approvisionnement typiques, considérations de vérification et
+  fr/field-reports/carton-count-mismatch-at-loading.html  [157]  ...cile with the packing list, and what happened before the container was
+  fr/field-reports/moisture-in-cartons-before-shipment.html  [146]  ...arton moisture and pallet wrapping did not match the buyer's packaging
+  fr/field-reports/shared-building-fire-exits.html  [150]  ...wo floors of a shared building, and the exit routes were not under the
+  fr/field-reports/undisclosed-subcontracted-process.html  [155]  ... treatment was carried out at another site the buyer had not been told
+  fr/industry/chemicals/chemical-supplier-verification.html  [157]  ...ermit scope, the site that actually produces, and the documents behind
+  fr/industry/food-beverage/food-factory-audit-checklist.html  [148]  ...aceability, allergen control, cold chain and labelling, for buyer-side
+  fr/industry/food-beverage/food-supplier-verification.html  [156]  ...certificate validity, traceability and cold chain, before you place an
+  fr/methodology.html  [157]  ... les limitations et la politique de mise à jour derrière nos scores de
+  fr/pricing.html  [151]  ... USD, audits d'usine dès 399 USD, inspection de produit dès 199 USD et
+  fr/resources.html  [151]  ... fournisseur, l'approvisionnement en Chine et en Asie du Sud-Est et la
+  fr/services/inspection.html  [156]  ...nt de conteneurs pour les acheteurs en provenance de Chine, du Vietnam
+  fr/services/supplier-improvement.html  [155]  ...mons leurs équipes en qualité et QC afin que les défauts ne reviennent
+  fr/tools/supplier-risk-calculator.html  [147]  ...ité, conformité, production, chaîne d'approvisionnement, documentation
+  ja/case-studies/label-defect-stopped-before-loading.html  [151]  ...t above the AQL threshold, and the batch was reworked before container
+  ja/case-studies/legal-entity-mismatch-before-deposit.html  [155]  ...legal entity than the one signing the contract, so the buyer re-issued
+  ja/case-studies/qualifying-replacement-supplier-vietnam.html  [154]  ...udit to qualify a second source in Vietnam when the China supplier hit
+  ja/case-studies/trading-company-posing-as-factory.html  [147]  ...enting as a factory, and how the buyer re-contracted with the licensed
+  ja/field-reports/carton-count-mismatch-at-loading.html  [157]  ...cile with the packing list, and what happened before the container was
+  ja/field-reports/moisture-in-cartons-before-shipment.html  [146]  ...arton moisture and pallet wrapping did not match the buyer's packaging
+  ja/field-reports/shared-building-fire-exits.html  [150]  ...wo floors of a shared building, and the exit routes were not under the
+  ja/field-reports/undisclosed-subcontracted-process.html  [155]  ... treatment was carried out at another site the buyer had not been told
+  ja/industry/chemicals/chemical-supplier-verification.html  [157]  ...ermit scope, the site that actually produces, and the documents behind
+  ja/industry/food-beverage/food-factory-audit-checklist.html  [148]  ...aceability, allergen control, cold chain and labelling, for buyer-side
+  ja/industry/food-beverage/food-supplier-verification.html  [156]  ...certificate validity, traceability and cold chain, before you place an
+  pt/careers.html  [151]  ...necedores, profissionais de sourcing e talentos de tecnologia na China
+  pt/case-studies/label-defect-stopped-before-loading.html  [151]  ...t above the AQL threshold, and the batch was reworked before container
+  pt/case-studies/legal-entity-mismatch-before-deposit.html  [155]  ...legal entity than the one signing the contract, so the buyer re-issued
+  pt/case-studies/qualifying-replacement-supplier-vietnam.html  [154]  ...udit to qualify a second source in Vietnam when the China supplier hit
+  pt/case-studies/trading-company-posing-as-factory.html  [147]  ...enting as a factory, and how the buyer re-contracted with the licensed
+  pt/countries/china.html  [155]  ...scos típicos de fornecimento, considerações de verificação e auditoria
+  pt/countries/malaysia.html  [148]  ...icação, riscos típicos de fornecimento, considerações de verificação e
+  pt/countries/philippines.html  [151]  ...icação, riscos típicos de fornecimento, considerações de verificação e
+  pt/countries/thailand.html  [148]  ...icação, riscos típicos de fornecimento, considerações de verificação e
+  pt/countries/vietnam.html  [147]  ...icação, riscos típicos de fornecimento, considerações de verificação e
+  pt/field-reports/carton-count-mismatch-at-loading.html  [157]  ...cile with the packing list, and what happened before the container was
+  pt/field-reports/moisture-in-cartons-before-shipment.html  [146]  ...arton moisture and pallet wrapping did not match the buyer's packaging
+  pt/field-reports/shared-building-fire-exits.html  [150]  ...wo floors of a shared building, and the exit routes were not under the
+  pt/field-reports/undisclosed-subcontracted-process.html  [155]  ... treatment was carried out at another site the buyer had not been told
+  pt/industry/chemicals/chemical-supplier-verification.html  [157]  ...ermit scope, the site that actually produces, and the documents behind
+  pt/industry/food-beverage/food-factory-audit-checklist.html  [148]  ...aceability, allergen control, cold chain and labelling, for buyer-side
+  pt/industry/food-beverage/food-supplier-verification.html  [156]  ...certificate validity, traceability and cold chain, before you place an
+  pt/industry/food-beverage.html  [83]  ...ecedores verificados de Food & Beverage / 食品饮料 e os tipos de auditoria
+  pt/methodology.html  [153]  ...s e política de atualização por trás das nossas pontuações de risco de
+  pt/pricing.html  [154]  ...rtir de 99 USD, auditorias de fábrica a partir de 399 USD, inspeção de
+  pt/services/inspection.html  [157]  ...s para compradores provenientes da China, Vietnã, Tailândia, Malásia e
+  pt/tools/supplier-risk-calculator.html  [155]  ..., produção, cadeia de suprimentos, documentação, certificação e pegada
+
+=> 141 项需修（源头改为双句、总长 ≤ 预算）

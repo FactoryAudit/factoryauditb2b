@@ -1,0 +1,142 @@
+loc      slug                    oldLen  newLen  新落 100-158  新结尾标点
+--------------------------------------------------------------------------------------------
+en       automotive                 66     126     ✓            ✓
+en       chemicals                  65     125     ✓            ✓
+en       cosmetics                  66     126     ✓            ✓
+en       electronics                67     127     ✓            ✓
+en       food-beverage              73     133     ✓            ✓
+en       footwear                   64     124     ✓            ✓
+en       furniture                  65     125     ✓            ✓
+en       home-appliances            71     131     ✓            ✓
+en       machinery                  65     125     ✓            ✓
+en       packaging                  65     125     ✓            ✓
+en       plastics                   64     124     ✓            ✓
+en       textiles                   64     124     ✓            ✓
+en       toys                       60     120     ✓            ✓
+zh       automotive                 56      56     ✓  (CJK≤90)  ✓
+zh       chemicals                  55      55     ✓  (CJK≤90)  ✓
+zh       cosmetics                  56      56     ✓  (CJK≤90)  ✓
+zh       electronics                57      57     ✓  (CJK≤90)  ✓
+zh       food-beverage              63      63     ✓  (CJK≤90)  ✓
+zh       footwear                   54      54     ✓  (CJK≤90)  ✓
+zh       furniture                  55      55     ✓  (CJK≤90)  ✓
+zh       home-appliances            61      61     ✓  (CJK≤90)  ✓
+zh       machinery                  55      55     ✓  (CJK≤90)  ✓
+zh       packaging                  55      55     ✓  (CJK≤90)  ✓
+zh       plastics                   54      54     ✓  (CJK≤90)  ✓
+zh       textiles                   54      54     ✓  (CJK≤90)  ✓
+zh       toys                       50      50     ✓  (CJK≤90)  ✓
+ja       automotive                 79      79     ✓  (CJK≤90)  ✓
+ja       chemicals                  78      78     ✓  (CJK≤90)  ✓
+ja       cosmetics                  79      79     ✓  (CJK≤90)  ✓
+ja       electronics                80      80     ✓  (CJK≤90)  ✓
+ja       food-beverage              86      86     ✓  (CJK≤90)  ✓
+ja       footwear                   77      77     ✓  (CJK≤90)  ✓
+ja       furniture                  78      78     ✓  (CJK≤90)  ✓
+ja       home-appliances            84      84     ✓  (CJK≤90)  ✓
+ja       machinery                  78      78     ✓  (CJK≤90)  ✓
+ja       packaging                  78      78     ✓  (CJK≤90)  ✓
+ja       plastics                   77      77     ✓  (CJK≤90)  ✓
+ja       textiles                   77      77     ✓  (CJK≤90)  ✓
+ja       toys                       73      73     ✓  (CJK≤90)  ✓
+es       automotive                 88     146     ✓            ✓
+es       chemicals                  87     145     ✓            ✓
+es       cosmetics                  88     146     ✓            ✓
+es       electronics                89     147     ✓            ✓
+es       food-beverage              84     153     ✓            ✓
+es       footwear                   86     144     ✓            ✓
+es       furniture                  87     145     ✓            ✓
+es       home-appliances            82     151     ✓            ✓
+es       machinery                  87     145     ✓            ✓
+es       packaging                  87     145     ✓            ✓
+es       plastics                   86     144     ✓            ✓
+es       textiles                   86     144     ✓            ✓
+es       toys                       82     140     ✓            ✓
+de       automotive                 82     145     ✓            ✓
+de       chemicals                  81     144     ✓            ✓
+de       cosmetics                  82     145     ✓            ✓
+de       electronics                83     146     ✓            ✓
+de       food-beverage              89     152     ✓            ✓
+de       footwear                   80     143     ✓            ✓
+de       furniture                  81     144     ✓            ✓
+de       home-appliances            87     150     ✓            ✓
+de       machinery                  81     144     ✓            ✓
+de       packaging                  81     144     ✓            ✓
+de       plastics                   80     143     ✓            ✓
+de       textiles                   80     143     ✓            ✓
+de       toys                       76     139     ✓            ✓
+fr       automotive                 79     142     ✓            ✓
+fr       chemicals                  78     141     ✓            ✓
+fr       cosmetics                  79     142     ✓            ✓
+fr       electronics                80     143     ✓            ✓
+fr       food-beverage              86     149     ✓            ✓
+fr       footwear                   77     140     ✓            ✓
+fr       furniture                  78     141     ✓            ✓
+fr       home-appliances            84     147     ✓            ✓
+fr       machinery                  78     141     ✓            ✓
+fr       packaging                  78     141     ✓            ✓
+fr       plastics                   77     140     ✓            ✓
+fr       textiles                   77     140     ✓            ✓
+fr       toys                       73     136     ✓            ✓
+pt       automotive                 84     146     ✓            ✓
+pt       chemicals                  83     145     ✓            ✓
+pt       cosmetics                  84     146     ✓            ✓
+pt       electronics                85     147     ✓            ✓
+pt       food-beverage              83     153     ✓            ✓
+pt       footwear                   82     144     ✓            ✓
+pt       furniture                  83     145     ✓            ✓
+pt       home-appliances            89     151     ✓            ✓
+pt       machinery                  83     145     ✓            ✓
+pt       packaging                  83     145     ✓            ✓
+pt       plastics                   82     144     ✓            ✓
+pt       textiles                   82     144     ✓            ✓
+pt       toys                       78     140     ✓            ✓
+ar       automotive                 66     124     ✓            ✓
+ar       chemicals                  65     123     ✓            ✓
+ar       cosmetics                  66     124     ✓            ✓
+ar       electronics                67     125     ✓            ✓
+ar       food-beverage              73     131     ✓            ✓
+ar       footwear                   64     122     ✓            ✓
+ar       furniture                  65     123     ✓            ✓
+ar       home-appliances            71     129     ✓            ✓
+ar       machinery                  65     123     ✓            ✓
+ar       packaging                  65     123     ✓            ✓
+ar       plastics                   64     122     ✓            ✓
+ar       textiles                   64     122     ✓            ✓
+ar       toys                       60     118     ✓            ✓
+
+=== 行业分类页 desc 长度区间（新产物）===
+en       拉丁预算 158　120–133
+zh       CJK 预算 90　50–63
+ja       CJK 预算 90　73–86
+es       拉丁预算 158　140–153
+de       拉丁预算 158　139–152
+fr       拉丁预算 158　136–149
+pt       拉丁预算 158　140–153
+ar       拉丁预算 158　118–131
+
+结尾无句末标点: 0 项
+
+=== 声明 title 前后对照 ===
+
+legal.termsTitle @ /terms
+  en      34 ->  53   Terms of Service and Platform Rules | FactoryAuditB2B
+  zh      22 ->  22   服务条款 | FactoryAuditB2B
+  zh-TW   22 ->  22   服務條款 | FactoryAuditB2B
+  ja      26 ->  26   サービス利用規約 | FactoryAuditB2B
+  es      39 ->  55   Términos del servicio y normas de uso | FactoryAuditB2B
+  de      37 ->  57   Nutzungsbedingungen und Plattformregeln | FactoryAuditB2B
+  fr      42 ->  52   Conditions d'Utilisation et règles | FactoryAuditB2B
+  pt      35 ->  58   Termos de Serviço e regras da plataforma | FactoryAuditB2B
+  ar      28 ->  51   شروط الخدمة وقواعد استخدام المنصة | FactoryAuditB2B
+
+risk.page.metaTitle @ /tools/supplier-risk-calculator
+  en      53 ->  53   Supplier Risk Calculator | FactoryAuditB2B RiskScore™
+  zh      37 ->  37   供应商风险计算器 | FactoryAuditB2B RiskScore™
+  zh-TW   37 ->  37   供應商風險計算器 | FactoryAuditB2B RiskScore™
+  ja      45 ->  45   サプライヤー・リスク・計算ツール | FactoryAuditB2B RiskScore™
+  es      65 ->  60   Calculadora de riesgo de compra | FactoryAuditB2B RiskScore™
+  de      54 ->  54   Lieferanten-Risikorechner | FactoryAuditB2B RiskScore™
+  fr      62 ->  58   Calculateur de risque d'achat | FactoryAuditB2B RiskScore™
+  pt      63 ->  59   Calculadora de risco de compra | FactoryAuditB2B RiskScore™
+  ar      49 ->  55   حاسبة تقييم مخاطر الموردين | FactoryAuditB2B RiskScore™
