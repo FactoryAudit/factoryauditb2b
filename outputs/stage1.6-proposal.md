@@ -38,55 +38,55 @@
 
 | 源键 | 语种 | 旧（源头→收口） | 新（源头→收口） | 结尾OK | 幂等 | 覆盖页 | 属 141 |
 |---|---|---|---|---|---|---|---|
-| `countryHub.metaDesc` | en | 173 → 152 ✗ | **130 → 130** | ✓ | ✓ | 5 | ✓ |
-| `countryHub.metaDesc` | es | 215 → 156 ✗ | **147 → 147** | ✓ | ✓ | 5 | ✓ |
-| `countryHub.metaDesc` | de | 173 → 153 ✗ | **128 → 128** | ✓ | ✓ | 5 | ✓ |
-| `countryHub.metaDesc` | fr | 198 → 155 ✗ | **132 → 132** | ✓ | ✓ | 5 | ✓ |
-| `countryHub.metaDesc` | pt | 208 → 151 ✗ | **134 → 134** | ✓ | ✓ | 5 | ✓ |
-| `countryHub.metaDesc` | ar | 174 → 152 ✗ | **122 → 122** | ✓ | ✓ | 5 | ✓ |
-| `industryPage.metaDesc` | es | 174 → 84 ✗ | **85 → 85** | ✓ | ✓ | 13 | ✓ |
-| `industryPage.metaDesc` | pt | 156 → 83 ✗ | **82 → 82** | ✓ | ✓ | 13 | ✓ |
-| `inspection.metaDesc` | en | 191 → 155 ✗ | **132 → 132** | ✓ | ✓ | 1 | ✓ |
-| `inspection.metaDesc` | es | 207 → 155 ✗ | **157 → 157** | ✓ | ✓ | 1 | ✓ |
-| `inspection.metaDesc` | de | 183 → 151 ✗ | **135 → 135** | ✓ | ✓ | 1 | ✓ |
-| `inspection.metaDesc` | fr | 225 → 156 ✗ | **156 → 156** | ✓ | ✓ | 1 | ✓ |
-| `inspection.metaDesc` | pt | 189 → 157 ✗ | **144 → 144** | ✓ | ✓ | 1 | ✓ |
-| `trainingPage.metaDesc` | es | 172 → 151 ✗ | **142 → 142** | ✓ | ✓ | 1 | ✓ |
-| `trainingPage.metaDesc` | fr | 160 → 155 ✗ | **130 → 130** | ✓ | ✓ | 1 | ✓ |
-| `serviceVerification.metaDesc` | es | 261 → 147 ✗ | **149 → 149** | ✓ | ✓ | 1 | ✓ |
-| `careers.metaDesc` | en | 167 → 157 ✗ | **138 → 138** | ✓ | ✓ | 1 | ✓ |
-| `careers.metaDesc` | es | 177 → 149 ✗ | **128 → 128** | ✓ | ✓ | 1 | ✓ |
-| `careers.metaDesc` | de | 181 → 151 ✗ | **130 → 130** | ✓ | ✓ | 1 | ✓ |
-| `careers.metaDesc` | fr | 203 → 156 ✗ | **138 → 138** | ✓ | ✓ | 1 | ✓ |
-| `careers.metaDesc` | pt | 180 → 151 ✗ | **138 → 138** | ✓ | ✓ | 1 | ✓ |
-| `pricing.metaDesc` | en | 187 → 154 ✗ | **150 → 150** | ✓ | ✓ | 1 | ✓ |
-| `pricing.metaDesc` | es | 238 → 154 ✗ | **157 → 157** | ✓ | ✓ | 1 | ✓ |
-| `pricing.metaDesc` | de | 180 → 148 ✗ | **130 → 130** | ✓ | ✓ | 1 | ✓ |
-| `pricing.metaDesc` | fr | 212 → 151 ✗ | **143 → 143** | ✓ | ✓ | 1 | ✓ |
-| `pricing.metaDesc` | pt | 254 → 154 ✗ | **141 → 141** | ✓ | ✓ | 1 | ✓ |
-| `risk.page.metaDesc` | en | 218 → 149 ✗ | **142 → 142** | ✓ | ✓ | 1 | ✓ |
-| `risk.page.metaDesc` | es | 235 → 151 ✗ | **151 → 151** | ✓ | ✓ | 1 | ✓ |
-| `risk.page.metaDesc` | de | 243 → 153 ✗ | **152 → 152** | ✓ | ✓ | 1 | ✓ |
-| `risk.page.metaDesc` | fr | 260 → 147 ✗ | **151 → 151** | ✓ | ✓ | 1 | ✓ |
-| `risk.page.metaDesc` | pt | 227 → 155 ✗ | **140 → 140** | ✓ | ✓ | 1 | ✓ |
-| `risk.page.metaTitle` | es | 36 → 36 ✗ | **31 → 31** | ✗ | ✓ | 1 | — |
-| `risk.page.metaTitle` | fr | 33 → 33 ✗ | **29 → 29** | ✗ | ✓ | 1 | — |
-| `risk.page.metaTitle` | pt | 34 → 34 ✗ | **30 → 30** | ✗ | ✓ | 1 | — |
-| `risk.page.metaTitle` | ar | 20 → 20 ✗ | **26 → 26** | ✗ | ✓ | 1 | — |
-| `methodology.metaDesc` | es | 249 → 153 ✗ | **156 → 156** | ✓ | ✓ | 1 | ✓ |
-| `methodology.metaDesc` | fr | 240 → 157 ✗ | **150 → 150** | ✓ | ✓ | 1 | ✓ |
-| `methodology.metaDesc` | pt | 233 → 153 ✗ | **155 → 155** | ✓ | ✓ | 1 | ✓ |
-| `verifySupplier.metaDesc` | de | 166 → 157 ✗ | **127 → 127** | ✓ | ✓ | 1 | ✓ |
-| `verifySupplier.metaDesc` | es | 159 → 149 ✗ | **126 → 126** | ✓ | ✓ | 1 | ✓ |
-| `resourcesIndex.metaDesc` | es | 162 → 148 ✗ | **148 → 148** | ✓ | ✓ | 1 | ✓ |
-| `resourcesIndex.metaDesc` | fr | 163 → 151 ✗ | **148 → 148** | ✓ | ✓ | 1 | ✓ |
-| `trainingPlans.metaDesc` | es | 161 → 152 ✗ | **133 → 133** | ✓ | ✓ | 1 | ✓ |
-| `legal.termsTitle` | en | 16 → 16 ✗ | **35 → 35** | ✗ | ✓ | 1 | — |
-| `legal.termsTitle` | es | 21 → 21 ✗ | **37 → 37** | ✗ | ✓ | 1 | — |
-| `legal.termsTitle` | de | 19 → 19 ✗ | **39 → 39** | ✗ | ✓ | 1 | — |
-| `legal.termsTitle` | fr | 24 → 24 ✗ | **34 → 34** | ✗ | ✓ | 1 | — |
-| `legal.termsTitle` | pt | 17 → 17 ✗ | **40 → 40** | ✗ | ✓ | 1 | — |
-| `legal.termsTitle` | ar | 10 → 10 ✗ | **33 → 33** | ✗ | ✓ | 1 | — |
+| `countryHub.metaDesc` | en | 173 → 152 ✗ | **130 → 130** | ✓ | ✓ | 5 | 5 |
+| `countryHub.metaDesc` | es | 215 → 156 ✗ | **147 → 147** | ✓ | ✓ | 5 | 5 |
+| `countryHub.metaDesc` | de | 173 → 153 ✗ | **128 → 128** | ✓ | ✓ | 5 | 5 |
+| `countryHub.metaDesc` | fr | 198 → 155 ✗ | **132 → 132** | ✓ | ✓ | 5 | 5 |
+| `countryHub.metaDesc` | pt | 208 → 151 ✗ | **134 → 134** | ✓ | ✓ | 5 | 5 |
+| `countryHub.metaDesc` | ar | 174 → 152 ✗ | **122 → 122** | ✓ | ✓ | 5 | 5 |
+| `industryPage.metaDesc` | es | 174 → 84 ✗ | **85 → 85** | ✓ | ✓ | 13 | 2 |
+| `industryPage.metaDesc` | pt | 156 → 83 ✗ | **82 → 82** | ✓ | ✓ | 13 | 1 |
+| `inspection.metaDesc` | en | 191 → 155 ✗ | **132 → 132** | ✓ | ✓ | 1 | 1 |
+| `inspection.metaDesc` | es | 207 → 155 ✗ | **157 → 157** | ✓ | ✓ | 1 | 1 |
+| `inspection.metaDesc` | de | 183 → 151 ✗ | **135 → 135** | ✓ | ✓ | 1 | 1 |
+| `inspection.metaDesc` | fr | 225 → 156 ✗ | **156 → 156** | ✓ | ✓ | 1 | 1 |
+| `inspection.metaDesc` | pt | 189 → 157 ✗ | **144 → 144** | ✓ | ✓ | 1 | 1 |
+| `trainingPage.metaDesc` | es | 172 → 151 ✗ | **142 → 142** | ✓ | ✓ | 1 | 1 |
+| `trainingPage.metaDesc` | fr | 160 → 155 ✗ | **130 → 130** | ✓ | ✓ | 1 | 1 |
+| `serviceVerification.metaDesc` | es | 261 → 147 ✗ | **149 → 149** | ✓ | ✓ | 1 | 1 |
+| `careers.metaDesc` | en | 167 → 157 ✗ | **138 → 138** | ✓ | ✓ | 1 | 1 |
+| `careers.metaDesc` | es | 177 → 149 ✗ | **128 → 128** | ✓ | ✓ | 1 | 1 |
+| `careers.metaDesc` | de | 181 → 151 ✗ | **130 → 130** | ✓ | ✓ | 1 | 1 |
+| `careers.metaDesc` | fr | 203 → 156 ✗ | **138 → 138** | ✓ | ✓ | 1 | 1 |
+| `careers.metaDesc` | pt | 180 → 151 ✗ | **138 → 138** | ✓ | ✓ | 1 | 1 |
+| `pricing.metaDesc` | en | 187 → 154 ✗ | **150 → 150** | ✓ | ✓ | 1 | 1 |
+| `pricing.metaDesc` | es | 238 → 154 ✗ | **157 → 157** | ✓ | ✓ | 1 | 1 |
+| `pricing.metaDesc` | de | 180 → 148 ✗ | **130 → 130** | ✓ | ✓ | 1 | 1 |
+| `pricing.metaDesc` | fr | 212 → 151 ✗ | **143 → 143** | ✓ | ✓ | 1 | 1 |
+| `pricing.metaDesc` | pt | 254 → 154 ✗ | **141 → 141** | ✓ | ✓ | 1 | 1 |
+| `risk.page.metaDesc` | en | 218 → 149 ✗ | **142 → 142** | ✓ | ✓ | 1 | 1 |
+| `risk.page.metaDesc` | es | 235 → 151 ✗ | **151 → 151** | ✓ | ✓ | 1 | 1 |
+| `risk.page.metaDesc` | de | 243 → 153 ✗ | **152 → 152** | ✓ | ✓ | 1 | 1 |
+| `risk.page.metaDesc` | fr | 260 → 147 ✗ | **151 → 151** | ✓ | ✓ | 1 | 1 |
+| `risk.page.metaDesc` | pt | 227 → 155 ✗ | **140 → 140** | ✓ | ✓ | 1 | 1 |
+| `risk.page.metaTitle` | es | 主体 36 | **主体 31｜合成 60** | — | — | 1 | — |
+| `risk.page.metaTitle` | fr | 主体 33 | **主体 29｜合成 58** | — | — | 1 | — |
+| `risk.page.metaTitle` | pt | 主体 34 | **主体 30｜合成 59** | — | — | 1 | — |
+| `risk.page.metaTitle` | ar | 主体 20 | **主体 26｜合成 55** | — | — | 1 | — |
+| `methodology.metaDesc` | es | 249 → 153 ✗ | **156 → 156** | ✓ | ✓ | 1 | 1 |
+| `methodology.metaDesc` | fr | 240 → 157 ✗ | **150 → 150** | ✓ | ✓ | 1 | 1 |
+| `methodology.metaDesc` | pt | 233 → 153 ✗ | **155 → 155** | ✓ | ✓ | 1 | 1 |
+| `verifySupplier.metaDesc` | de | 166 → 157 ✗ | **127 → 127** | ✓ | ✓ | 1 | 1 |
+| `verifySupplier.metaDesc` | es | 159 → 149 ✗ | **126 → 126** | ✓ | ✓ | 1 | 1 |
+| `resourcesIndex.metaDesc` | es | 162 → 148 ✗ | **148 → 148** | ✓ | ✓ | 1 | 1 |
+| `resourcesIndex.metaDesc` | fr | 163 → 151 ✗ | **148 → 148** | ✓ | ✓ | 1 | 1 |
+| `trainingPlans.metaDesc` | es | 161 → 152 ✗ | **133 → 133** | ✓ | ✓ | 1 | 1 |
+| `legal.termsTitle` | en | 主体 16 | **主体 35｜合成 53** | — | — | 1 | — |
+| `legal.termsTitle` | es | 主体 21 | **主体 37｜合成 55** | — | — | 1 | — |
+| `legal.termsTitle` | de | 主体 19 | **主体 39｜合成 57** | — | — | 1 | — |
+| `legal.termsTitle` | fr | 主体 24 | **主体 34｜合成 52** | — | — | 1 | — |
+| `legal.termsTitle` | pt | 主体 17 | **主体 40｜合成 58** | — | — | 1 | — |
+| `legal.termsTitle` | ar | 主体 10 | **主体 33｜合成 51** | — | — | 1 | — |
 | `monitoring.metaDesc` | es | 217 → 59 | **148 → 148** | ✓ | ✓ | 1 | — |
 | `monitoring.metaDesc` | de | 252 → 46 | **143 → 143** | ✓ | ✓ | 1 | — |
 | `monitoring.metaDesc` | fr | 243 → 47 | **158 → 158** | ✓ | ✓ | 1 | — |

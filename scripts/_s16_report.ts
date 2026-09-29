@@ -134,10 +134,15 @@ for (const c of CANDIDATES) {
   const neuOut = trimMetaDescription(n);
   const endOk = SENT.test(neuOut.slice(-1));
   const cut = neuOut !== n;
-  const cov = c.kind === "title" ? (COVER[c.key] ?? 1) : c.loc === "" ? 1 : COVER[c.key] ?? 1;
+  const cov = c.kind === "title" ? COVER[c.key] ?? 1 : COVER[c.key] ?? 1;
   const flagged = flaggedFor(c);
+  if (c.kind === "title") {
+    const tot = [...n].length + [...(c.suffix ?? "")].length;
+    L.push(`| \`${c.key}\` | ${c.loc} | 主体 ${[...o].length} | **主体 ${[...n].length}｜合成 ${tot}** | — | — | 1 | ${flagged ? flagged : "—"} |`);
+    continue;
+  }
   L.push(
-    `| \`${c.key}\` | ${c.loc} | ${[...o].length} → ${[...oldOut].length}${SENT.test(oldOut.slice(-1)) ? "" : " ✗"} | **${[...n].length} → ${[...neuOut].length}** | ${endOk ? "✓" : "✗"} | ${cut ? "✗" : "✓"} | ${c.kind === "title" ? 1 : cov} | ${flagged ? "✓" : "—"} |`,
+    `| \`${c.key}\` | ${c.loc} | ${[...o].length} → ${[...oldOut].length}${SENT.test(oldOut.slice(-1)) ? "" : " ✗"} | **${[...n].length} → ${[...neuOut].length}** | ${endOk ? "✓" : "✗"} | ${cut ? "✗" : "✓"} | ${cov} | ${flagged ? flagged : "—"} |`,
   );
 }
 L.push("");
