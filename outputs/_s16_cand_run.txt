@@ -1,0 +1,93 @@
+########## 字典层（54 条）##########
+PASS  key                                              loc     old[src->out ] new[src->out ]  (desc 另示 CJK 占比)
+--------------------------------------------------------------------------------------------------------------------------------------------
+PASS  countryHub.metaDesc                              en      old[173->152✗] new[130->130    ] cjk= 0%
+PASS  countryHub.metaDesc                              es      old[215->156✗] new[147->147    ] cjk= 0%
+PASS  countryHub.metaDesc                              de      old[173->153✗] new[128->128    ] cjk= 0%
+PASS  countryHub.metaDesc                              fr      old[198->155✗] new[132->132    ] cjk= 0%
+PASS  countryHub.metaDesc                              pt      old[208->151✗] new[134->134    ] cjk= 0%
+PASS  countryHub.metaDesc                              ar      old[174->152✗] new[122->122    ] cjk= 0%
+PASS  industryPage.metaDesc                            es      old[ 85-> 85 ] new[153->153    ] cjk= 3%
+PASS  industryPage.metaDesc                            pt      old[ 82-> 82 ] new[153->153    ] cjk= 3%
+PASS  industryPage.metaDesc                            fr      old[172-> 86 ] new[149->149    ] cjk= 3%
+PASS  inspection.metaDesc                              en      old[191->155✗] new[132->132    ] cjk= 0%
+PASS  inspection.metaDesc                              es      old[207->155✗] new[157->157    ] cjk= 0%
+PASS  inspection.metaDesc                              de      old[183->151✗] new[135->135    ] cjk= 0%
+PASS  inspection.metaDesc                              fr      old[225->156✗] new[156->156    ] cjk= 0%
+PASS  inspection.metaDesc                              pt      old[189->157✗] new[144->144    ] cjk= 0%
+PASS  trainingPage.metaDesc                            es      old[172->151✗] new[142->142    ] cjk= 0%
+PASS  trainingPage.metaDesc                            fr      old[160->155✗] new[130->130    ] cjk= 0%
+PASS  serviceVerification.metaDesc                     es      old[261->147✗] new[149->149    ] cjk= 0%
+PASS  careers.metaDesc                                 en      old[167->157✗] new[138->138    ] cjk= 0%
+PASS  careers.metaDesc                                 es      old[177->149✗] new[128->128    ] cjk= 0%
+PASS  careers.metaDesc                                 de      old[181->151✗] new[130->130    ] cjk= 0%
+PASS  careers.metaDesc                                 fr      old[203->156✗] new[138->138    ] cjk= 0%
+PASS  careers.metaDesc                                 pt      old[180->151✗] new[138->138    ] cjk= 0%
+PASS  pricing.metaDesc                                 en      old[187->154✗] new[150->150    ] cjk= 0%
+PASS  pricing.metaDesc                                 es      old[238->154✗] new[157->157    ] cjk= 0%
+PASS  pricing.metaDesc                                 de      old[180->148✗] new[130->130    ] cjk= 0%
+PASS  pricing.metaDesc                                 fr      old[212->151✗] new[143->143    ] cjk= 0%
+PASS  pricing.metaDesc                                 pt      old[254->154✗] new[141->141    ] cjk= 0%
+PASS  risk.page.metaDesc                               en      old[218->149✗] new[142->142    ] cjk= 0%
+PASS  risk.page.metaDesc                               es      old[235->151✗] new[151->151    ] cjk= 0%
+PASS  risk.page.metaDesc                               de      old[243->153✗] new[152->152    ] cjk= 0%
+PASS  risk.page.metaDesc                               fr      old[260->147✗] new[151->151    ] cjk= 0%
+PASS  risk.page.metaDesc                               pt      old[227->155✗] new[140->140    ] cjk= 0%
+PASS  risk.page.metaTitle                              es      old[ 36-> 36✗] new[ 31-> 31✗   ] total=60
+PASS  risk.page.metaTitle                              fr      old[ 33-> 33✗] new[ 29-> 29✗   ] total=58
+PASS  risk.page.metaTitle                              pt      old[ 34-> 34✗] new[ 30-> 30✗   ] total=59
+PASS  risk.page.metaTitle                              ar      old[ 20-> 20✗] new[ 26-> 26✗   ] total=55
+PASS  methodology.metaDesc                             es      old[249->153✗] new[156->156    ] cjk= 0%
+PASS  methodology.metaDesc                             fr      old[240->157✗] new[150->150    ] cjk= 0%
+PASS  methodology.metaDesc                             pt      old[233->153✗] new[155->155    ] cjk= 0%
+PASS  verifySupplier.metaDesc                          de      old[166->157✗] new[127->127    ] cjk= 0%
+PASS  verifySupplier.metaDesc                          es      old[159->149✗] new[126->126    ] cjk= 0%
+PASS  resourcesIndex.metaDesc                          es      old[162->148✗] new[148->148    ] cjk= 0%
+PASS  resourcesIndex.metaDesc                          fr      old[163->151✗] new[148->148    ] cjk= 0%
+PASS  trainingPlans.metaDesc                           es      old[161->152✗] new[133->133    ] cjk= 0%
+PASS  legal.termsTitle                                 en      old[ 16-> 16✗] new[ 35-> 35✗   ] total=53
+PASS  legal.termsTitle                                 es      old[ 21-> 21✗] new[ 37-> 37✗   ] total=55
+PASS  legal.termsTitle                                 de      old[ 19-> 19✗] new[ 39-> 39✗   ] total=57
+PASS  legal.termsTitle                                 fr      old[ 24-> 24✗] new[ 34-> 34✗   ] total=52
+PASS  legal.termsTitle                                 pt      old[ 17-> 17✗] new[ 40-> 40✗   ] total=58
+PASS  legal.termsTitle                                 ar      old[ 10-> 10✗] new[ 33-> 33✗   ] total=51
+PASS  monitoring.metaDesc                              es      old[217-> 59 ] new[148->148    ] cjk= 0%
+PASS  monitoring.metaDesc                              de      old[252-> 46 ] new[143->143    ] cjk= 0%
+PASS  monitoring.metaDesc                              fr      old[243-> 47 ] new[158->158    ] cjk= 0%
+PASS  chemicals.metaDesc                               zh      old[ 38-> 38 ] new[ 61-> 61    ] cjk=97%
+
+########## TS 内容层（13 条）##########
+--------------------------------------------------------------------------------------------------------------------------------------------
+PASS  caseStudies/trading-company-posing-as-factory    en×7    old[185->147✗] new[144->144    ] cjk= 0%
+PASS  caseStudies/legal-entity-mismatch-before-deposit en×7    old[192->155✗] new[142->142    ] cjk= 0%
+PASS  caseStudies/label-defect-stopped-before-loading  en×7    old[160->151✗] new[135->135    ] cjk= 0%
+PASS  caseStudies/qualifying-replacement-supplier-vietnam en×7    old[171->154✗] new[127->127    ] cjk= 0%
+PASS  fieldReports/carton-count-mismatch-at-loading    en×7    old[165->157✗] new[138->138    ] cjk= 0%
+PASS  fieldReports/moisture-in-cartons-before-shipment en×7    old[161->146✗] new[151->151    ] cjk= 0%
+PASS  fieldReports/shared-building-fire-exits          en×7    old[175->150✗] new[135->135    ] cjk= 0%
+PASS  fieldReports/undisclosed-subcontracted-process   en×7    old[162->155✗] new[126->126    ] cjk= 0%
+PASS  industry/food-beverage/food-factory-audit-checklist en×7    old[166->148✗] new[133->133    ] cjk= 0%
+PASS  industry/food-beverage/food-supplier-verification en×7    old[163->156✗] new[136->136    ] cjk= 0%
+PASS  industry/chemicals/chemical-supplier-verification en×7    old[172->157✗] new[136->136    ] cjk= 0%
+PASS  CASE_LIST_META.zh                                zh/zh-TW old[ 39-> 39 ] new[ 62-> 62    ] cjk=95%
+PASS  FIELD_REPORT_LIST_META.zh                        zh/zh-TW old[ 34-> 34 ] new[ 62-> 62    ] cjk=95%
+
+########## SELFTEST（证明断言非恒真）##########
+  ok   latin 119 应不达标（期望 false／实际 false）
+  ok   latin 120 应达标（期望 true／实际 true）
+  ok   latin 158 应达标（期望 true／实际 true）
+  ok   latin 159 应不达标（期望 false／实际 false）
+  ok   cjk 59 应不达标（期望 false／实际 false）
+  ok   cjk 60 应达标（期望 true／实际 true）
+  ok   cjk 90 应达标（期望 true／实际 true）
+  ok   cjk 91 应不达标（期望 false／实际 false）
+  ok   title 49 应不达标（期望 false／实际 false）
+  ok   title 50 应达标（期望 true／实际 true）
+  ok   title 60 应达标（期望 true／实际 true）
+  ok   title 61 应不达标（期望 false／实际 false）
+  ok   首句过短被砍 ⇒ 须判不达标（期望 false／实际 false）
+  ok   拉丁+双语行业名 ⇒ 非 CJK 主导（期望 false／实际 false）
+  ok   纯中文 ⇒ CJK 主导（期望 true／实际 true）
+SELFTEST ALL OK（12 条边界 + 1 条端到端 + 2 条 CJK 判定）
+
+=== 汇总：PASS=67 FAIL=0 ===
