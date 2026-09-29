@@ -171,7 +171,7 @@
     "liveIndustry": "Secteur",
     "liveCerts": "Certifications",
             "metaTitle": "Audit d'usine et vérification fournisseur",
-            "metaDesc": "Découvrir, évaluer et vérifier des fournisseurs en Chine et en Asie du Sud-Est, pour que les bons fabricants soient trouvés et que les acheteurs sourcent en confiance."
+            "metaDesc": "Découvrez, évaluez et vérifiez des fournisseurs en Chine et en Asie du Sud-Est. Les bons fabricants se font connaître et les acheteurs sourcent en confiance."
   },
   "toolsIndex": {
     "badge": "Outils gratuits",
@@ -929,7 +929,7 @@
     "h1": "Explorez les fournisseurs du monde entier",
     "badge": "Annuaire de fournisseurs",
     "metaTitle": "Base de données mondiale de fournisseurs",
-    "metaDesc": "Explorez des fournisseurs en Chine et en Asie du Sud-Est, consultez produits, certifications et signaux de risque sur chaque profil, et demandez une vérification, un audit ou une inspection au besoin.",
+    "metaDesc": "Explorez des fournisseurs en Chine et en Asie du Sud-Est. Consultez produits, certifications et signaux de risque sur chaque profil avant de commander.",
     "lead": "Découvrez des fournisseurs en Chine et en Asie du Sud-Est. Consultez gratuitement les informations de base, produits, certifications et signaux de risque.",
     "featuredTag": "En vedette",
     "exampleNote": "Consultez les fournisseurs disponibles gratuitement. Introuvable ? Publiez un RFQ : nous vous aidons à sourcer et vérifier.",
@@ -1047,7 +1047,7 @@
       "methodBody": "Le résultat est un maximum théorique issu d'un modèle d'empilement rectangulaire. Il suppose des cartons rigides, gerbables et orientables, avec une charge répartie uniformément. Le chargement réel dépend des palettes, du matériau de calage, de la déformation des cartons, de la résistance au gerbage, des limites de charge à l'essieu et de l'ordre d'arrimage. Considérez le résultat comme une estimation et validez le plan final avec votre transitaire.",
       "faqTitle": "Questions fréquentes",
       "metaTitle": "Calculateur de chargement conteneur",
-      "metaDesc": "Calculateur gratuit de chargement pour conteneurs 20GP, 40GP, 40HQ, 45HQ et frigorifiques : cartons par conteneur, conteneurs nécessaires, volume et charge utile."
+      "metaDesc": "Calculateur gratuit de chargement pour conteneurs 20GP, 40GP, 40HQ, 45HQ et frigorifiques. Cartons par conteneur, conteneurs nécessaires et charge utile."
     },
     "ui": {
       "cargoTitle": "Dimensions du carton",
@@ -1304,7 +1304,7 @@
     ],
     "termsTitle": "Conditions d'Utilisation",
     "termsUpdated": "Dernière mise à jour : 2026-09-03",
-    "termsIntro": "Ces conditions régissent l'utilisation de la plateforme FactoryAuditB2B, qui aide les acheteurs à vérifier et auditer des fournisseurs sans garantir leur performance.",
+    "termsIntro": "Ces conditions régissent l'utilisation de la plateforme FactoryAuditB2B. Elle aide les acheteurs à vérifier des fournisseurs sans garantir leur performance.",
     "termsSections": [
       {
         "h": "Utilisation du service",

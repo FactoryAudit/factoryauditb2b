@@ -1211,7 +1211,7 @@
     "claimLead": "Create a free supplier profile and get discovered by international buyers. Need independent verification? Request our Supplier Verification or Factory Audit services.",
     "claimPrimary": "Join as a supplier",
     "metaTitle": "Global Supplier Database in China & Asia",
-    "metaDesc": "Explore suppliers across China and Southeast Asia, review products, certifications and risk signals on every profile, and request verification, audit or inspection when you need deeper checks.",
+    "metaDesc": "Explore suppliers across China and Southeast Asia. Review products, certifications and risk signals on every profile before requesting verification.",
     "heroBadge": "Supplier Intelligence",
     "featuredTitle": "Supplier Directory",
     "featuredLead": "Browse available suppliers and explore their public profiles.",
@@ -1777,7 +1777,7 @@
       "methodBody": "The result is a theoretical maximum from a rectangular packing model. It assumes cartons are rigid, stackable and can be rotated, and that the load is evenly distributed. Real loading is affected by pallets, dunnage, carton deformation, stacking strength, axle weight rules and stowage order. Treat the output as a planning estimate and confirm the final plan with your forwarder or loading supervisor.",
       "faqTitle": "Frequently asked questions",
       "metaTitle": "Container Loading Calculator for 20GP–45HQ",
-      "metaDesc": "Free container loading calculator for 20GP, 40GP, 40HQ, 45HQ and reefer containers, working out cartons per container, containers needed, volume and payload utilisation."
+      "metaDesc": "Free container loading calculator for 20GP, 40GP, 40HQ, 45HQ and reefer containers. Get cartons per container, containers needed and payload utilisation."
     },
     "ui": {
       "cargoTitle": "Carton dimensions",

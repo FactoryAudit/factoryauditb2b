@@ -171,7 +171,7 @@
     "liveIndustry": "Industria",
     "liveCerts": "Certificaciones",
             "metaTitle": "Auditoría de fábrica y verificación",
-            "metaDesc": "Descubra, evalúe y verifique proveedores en China y el sudeste asiático, para que los buenos fabricantes sean visibles y los compradores puedan abastecerse con confianza."
+            "metaDesc": "Descubra, evalúe y verifique proveedores en China y el sudeste asiático. Los buenos fabricantes se hacen visibles y los compradores abastecen con confianza."
   },
   "toolsIndex": {
     "badge": "Herramientas gratuitas",
@@ -929,7 +929,7 @@
     "h1": "Explore proveedores globales",
     "badge": "Directorio de proveedores",
     "metaTitle": "Base de datos global de proveedores",
-    "metaDesc": "Explore proveedores en China y el sudeste asiático, revise productos, certificaciones y señales de riesgo en cada perfil, y solicite verificación, auditoría o inspección cuando necesite más comprobaciones.",
+    "metaDesc": "Explore proveedores en China y el sudeste asiático. Revise productos, certificaciones y señales de riesgo en cada perfil antes de pedir una verificación.",
     "lead": "Descubra proveedores en China y el sudeste asiático. Consulte gratis información básica, productos, certificaciones y señales de riesgo.",
     "featuredTag": "Destacado",
     "exampleNote": "Consulte los proveedores disponibles gratis. Si no encuentra el adecuado, publique un RFQ y le ayudaremos a buscarlo y verificarlo.",
@@ -1047,7 +1047,7 @@
       "methodBody": "El resultado es un máximo teórico a partir de un modelo de empaque rectangular. Asume que las cajas de cartón son rígidas, apilables y se pueden girar, y que la carga se distribuye uniformemente. La carga real se ve afectada por los palés, el estiba, la deformación de la caja de cartón, la resistencia al apilamiento, las reglas de peso del eje y el orden de estiba. Trate el resultado como una estimación de planificación y confirme el plan final con su agente o supervisor de carga.",
       "faqTitle": "Preguntas frecuentes",
       "metaTitle": "Calculadora de carga de contenedores",
-      "metaDesc": "Calculadora gratuita de carga para contenedores 20GP, 40GP, 40HQ, 45HQ y reefer, que calcula cajas por contenedor, contenedores necesarios, volumen y uso de la carga útil."
+      "metaDesc": "Calculadora gratuita de carga para contenedores 20GP, 40GP, 40HQ, 45HQ y reefer. Calcula cajas por contenedor, contenedores necesarios y uso de la carga útil."
     },
     "ui": {
       "cargoTitle": "Dimensiones del cartón",

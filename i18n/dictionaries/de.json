@@ -929,7 +929,7 @@
     "h1": "Globale Lieferanten entdecken",
     "badge": "Lieferantenverzeichnis",
     "metaTitle": "Globale Lieferantendatenbank China & Asien",
-    "metaDesc": "Entdecken Sie Lieferanten in China und Südostasien, prüfen Sie Produkte, Zertifizierungen und Risikosignale in jedem Profil und fordern Sie bei Bedarf Verifizierung, Audit oder Inspektion an.",
+    "metaDesc": "Entdecken Sie Lieferanten in China und Südostasien. Prüfen Sie Produkte, Zertifizierungen und Risikosignale in jedem Profil vor einer Verifizierung.",
     "lead": "Entdecken Sie Lieferanten in China und Südostasien. Basisinformationen, Produkte, Zertifizierungen und Risikosignale kostenlos ansehen.",
     "featuredTag": "Ausgezeichnet",
     "exampleNote": "Verfügbare Lieferanten kostenlos ansehen. Passend? RFQ posten – wir helfen bei Sourcing und Verifizierung.",
@@ -1047,7 +1047,7 @@
       "methodBody": "Das Ergebnis ist ein theoretisches Maximum aus einem rechteckigen Stapelmodell. Es nimmt starre, stapelbare und drehbare Kartons sowie gleichmäßige Lastverteilung an. Die reale Beladung hängt von Paletten, Füllmaterial, Kartonverformung, Stapelfestigkeit, Achslastgrenzen und der Stauungsreihenfolge ab. Betrachten Sie das Ergebnis als Planungsschätzung und stimmen Sie den endgültigen Plan mit Ihrem Spediteur ab.",
       "faqTitle": "Häufige Fragen",
       "metaTitle": "Container-Ladungsrechner 20GP–45HQ",
-      "metaDesc": "Kostenloser Ladungsrechner für 20GP-, 40GP-, 40HQ-, 45HQ- und Kühlcontainer: Kartons pro Container, benötigte Container sowie Auslastung von Volumen und Nutzlast."
+      "metaDesc": "Kostenloser Ladungsrechner für 20GP-, 40GP-, 40HQ-, 45HQ- und Kühlcontainer. Kartons pro Container, benötigte Container und Nutzlast-Auslastung."
     },
     "ui": {
       "cargoTitle": "Kartonmaße",
@@ -1304,7 +1304,7 @@
     ],
     "termsTitle": "Nutzungsbedingungen",
     "termsUpdated": "Zuletzt aktualisiert: 2026-09-03",
-    "termsIntro": "Diese Bedingungen regeln die Nutzung der FactoryAuditB2B-Plattform, die Käufern beim Verifizieren und Prüfen von Lieferanten hilft, deren Leistung aber nicht garantiert.",
+    "termsIntro": "Diese Bedingungen regeln die Nutzung der Plattform FactoryAuditB2B. Sie hilft Käufern beim Prüfen von Lieferanten, garantiert deren Leistung aber nicht.",
     "termsSections": [
       {
         "h": "Nutzung des Service",
