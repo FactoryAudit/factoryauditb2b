@@ -249,3 +249,25 @@
 ## 三、QMS 指南（`/guides/what-is-quality-management-system`）
 
 该页 `titleEn` 同时是可见 H1，故**不改 H1**，新增仅用于 meta 的覆盖字段 `metaTitleEn/metaTitleZh`。
+
+---
+
+## 四、终验修正（v2，commit `3676735`）
+
+上表「合规」列只按**长度**判定（120–158 拉丁 / 60–90 汉字），因此把「长度达标但被收口函数在词边界截断、结尾无句末标点」的**半句话**误判为 ✓。
+终验新增 `scripts/_s1_desc_dump.ts` 探针，同时断言「是否被截断」「结尾是否有句末标点」，据此重写以下 4 个键的源头为**双句结构（总长 ≤158 且以句号收尾）**，使 `trimMetaDescription` **零命中**（幂等）：
+
+| 键 | 语言 | 旧值长度 → 收口后 | 新值长度 | 旧收口结尾 |
+|---|---|---|---|---|
+| `suppliers.metaDesc` | en / es / de / fr / pt | 192/205/191/200/195 → 152/156/150/148/151 | 148 / 153 / 148 / 151 / 146 | 半句话（无句末标点） |
+| `legal.termsIntro` | de / fr | 169/166 → 157/153 | 152 / 156 | 半句话 |
+| `container.page.metaDesc` | en / es / de / fr | 169/171/162/162 → 156/156/152/155 | 153 / 158 / 144 / 153 | 半句话 |
+| `home.metaDesc` | es / fr / ar | 170/167/160 → 155/156/150 | 156 / 157 / 140 | 半句话 |
+| `container.page.metaTitle` | ar | 30（含品牌 48，低于 50 下限） | 34（含品牌 **52**，落 50–60） | — |
+
+**仍保留「半句话收口」的 2 页**（计划已明确接受收口、未要求重写文案，留待后续批次）：
+
+- `/services/supplier-verification`：`serviceVerification.metaDesc` **es** 261 → 147（计划预期：收口达标，改走统一入口即可）
+- `/tools/supplier-risk-calculator`：`risk.page.metaDesc` **en/es/de/fr/pt** 218/235/243/260/227 → 149/151/153/147/155（计划原文：「218 → 155 ✓（无需改文案）」）
+
+**CRLF 闸门**：改后 9 个字典仍为 `crlf=4028 / bareLF=0 / 末尾 CRLF / leaf=3126`。
