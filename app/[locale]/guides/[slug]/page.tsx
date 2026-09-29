@@ -7,6 +7,7 @@ import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i1
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { pickZhCopy, pickZhPair } from "@/lib/tw";
+import { pickGuideDesc } from "@/lib/pickGuideDesc";
 
 const BASE = "https://factoryauditb2b.com";
 type Params = { locale: string; slug: string };
@@ -33,7 +34,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     path: `/guides/${slug}`,
     // metaTitle 存在时优先（仅收窄 <title>；H1 与 Article.headline 仍用完整 titleEn/titleZh）
     title: pickZhPair(locale, g.metaTitleEn ?? g.titleEn, g.metaTitleZh ?? g.titleZh),
-    description: pickZhPair(locale, g.metaDescEn, g.metaDescZh),
+    description: pickGuideDesc(locale, g),
   });
 }
 
@@ -57,7 +58,7 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
       "@context": "https://schema.org",
       "@type": "Article",
       headline: title,
-      description: pickZhPair(locale, g.metaDescEn, g.metaDescZh),
+      description: pickGuideDesc(locale, g),
       dateModified: g.updated,
       inLanguage: locale,
       url: `${BASE}${p(`/guides/${slug}`)}`,

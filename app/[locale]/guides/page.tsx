@@ -11,6 +11,7 @@ import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { pickZhPair } from "@/lib/tw";
+import { pickGuideDesc } from "@/lib/pickGuideDesc";
 
 const PATH = "/guides";
 const BASE = "https://factoryauditb2b.com";
@@ -100,7 +101,7 @@ export default async function GuidesIndex({ params }: Props) {
           <Link key={g.slug} href={p(`/guides/${g.slug}`)} className="card p-6 hover:border-[#0f4c81]">
             <h2 className="text-xl font-bold text-[#0f4c81]">{pickZhPair(locale, g.titleEn, g.titleZh)}</h2>
             <p className="text-sm text-[#475569] mt-2">
-              {pickZhPair(locale, g.metaDescEn, g.metaDescZh)}
+              {pickGuideDesc(locale, g)}
             </p>
             <div className="text-xs text-[#94a3b8] mt-3">{g.updated}</div>
           </Link>

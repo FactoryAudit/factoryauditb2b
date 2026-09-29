@@ -12,6 +12,7 @@ import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i1
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { pickZhPair } from "@/lib/tw";
+import { pickGuideDesc } from "@/lib/pickGuideDesc";
 
 const BASE = "https://factoryauditb2b.com";
 type Params = { locale: string; category: string };
@@ -155,7 +156,7 @@ export default async function GuideCategoryHub({ params }: { params: Promise<Par
               {pickZhPair(locale, g.titleEn, g.titleZh)}
             </h2>
             <p className="text-sm text-[#475569] mt-2">
-              {pickZhPair(locale, g.metaDescEn, g.metaDescZh)}
+              {pickGuideDesc(locale, g)}
             </p>
             <div className="text-xs text-[#94a3b8] mt-3">{g.updated}</div>
           </Link>

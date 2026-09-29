@@ -47,15 +47,27 @@ export interface Guide {
   metaTitleEn?: string;
   metaTitleZh?: string;
   /**
-   * 元描述（英文）。⚠️ 已知 i18n 缺口：只有 en / zh 两套。
-   * `app/[locale]/guides/[slug]/page.tsx` 用 `pickZhPair(locale, metaDescEn, metaDescZh)`
-   * 取值 ⇒ zh / zh-TW 用 metaDescZh，**其余 7 个语种（en, ja, es, de, fr, pt, ar）全部回退本字段**，
-   * 即这 7 个语种的指南页（7 × 47 = 329 页）显示的是英文描述。
-   * 本次（stage1.5）只做长度收口（双句、总长 ≤158、句号收尾，收口函数零命中）；
-   * 9 语补齐留到第 3 批，届时需新增 metaDescJa/Es/De/Fr/Pt/Ar 并同步 pickZhPair 的取值分支。
+   * 元描述（英文）。⚠️ 该字段同时是**所有未补齐语种的回退值**。
+   * 取值走 `lib/pickGuideDesc.ts` 的 `pickGuideDesc(locale, g)` ⇒
+   * zh 用 metaDescZh、zh-TW 用 metaDescZh 繁化，其余语种优先用对应的
+   * metaDescJa/Es/De/Fr/Pt/Ar，**缺失则回退本字段**。
+   * stage1.5 做过长度收口（双句、总长 ≤ 预算、句号收尾，收口函数零命中）；
+   * 第 4 批起按「批 4.1 = 前 10 篇 → …」分批补齐 6 个语种。
    */
   metaDescEn: string;
   metaDescZh: string;
+  /**
+   * 元描述（第 4 批起补充的非中英语种）。全部**可选**：取值一律经
+   * `lib/pickGuideDesc.ts` 的 `pickGuideDesc(locale, g)`，缺失即回退 `metaDescEn`
+   * ⇒ 未补齐的语种行为与补齐前完全一致（不会渲染出空描述）。
+   * 预算与收口规则同 `metaDescEn`：ja 为 CJK 主导（预算 90），其余为拉丁（158）。
+   */
+  metaDescJa?: string;
+  metaDescEs?: string;
+  metaDescDe?: string;
+  metaDescFr?: string;
+  metaDescPt?: string;
+  metaDescAr?: string;
   /** 最后更新日期（ISO），AI Search 与读者都看这个 */
   updated: string;
   /** 相关工具（至少 1 个，PRD §46） */
@@ -83,6 +95,18 @@ export const GUIDES: Guide[] = [
       "A step-by-step process for verifying a Chinese supplier. Match the registered name, check the credit code and confirm the site.",
     metaDescZh:
       "核验中国供应商的分步流程：核对中文注册名与统一社会信用代码、确认生产地址、审阅质量与合规证据，再判断是否需要现场验厂。",
+    metaDescJa:
+      "中国のサプライヤーを検証する手順を解説します。登記名の照合、統一社会信用コードの確認、実際の工場所在地の確認までを順に示します。",
+    metaDescEs:
+      "Cómo verificar a un proveedor chino paso a paso. Coteje el nombre registrado, compruebe el código de crédito y confirme la fábrica real.",
+    metaDescDe:
+      "So prüfen Sie einen chinesischen Lieferanten Schritt für Schritt. Gleichen Sie den Firmennamen ab, prüfen Sie den Kreditcode und den Standort.",
+    metaDescFr:
+      "Comment vérifier un fournisseur chinois étape par étape. Comparez le nom enregistré, vérifiez le code de crédit et confirmez le site réel.",
+    metaDescPt:
+      "Como verificar um fornecedor chinês passo a passo. Compare o nome registado, verifique o código de crédito e confirme a fábrica real.",
+    metaDescAr:
+      "كيفية التحقق من مورد صيني خطوة بخطوة. قارن الاسم المسجَّل، وتحقّق من رمز الائتمان، وأكّد موقع المصنع الفعلي.",
     updated: "2026-08-31",
     tools: [
       { href: "/tools/supplier-risk-calculator" },
@@ -301,6 +325,18 @@ export const GUIDES: Guide[] = [
       "A factory audit checklist covering documentation and production control. Covers quality, social compliance and the records auditors ask for.",
     metaDescZh:
       "覆盖文件、生产控制、质量管理、社会责任合规与整改的验厂检查表，列出审核员会索要的记录和最常见的发现项。",
+    metaDescJa:
+      "工場監査チェックリストの項目を解説します。品質、生産管理、社会コンプライアンス、監査員が求める記録を網羅します。",
+    metaDescEs:
+      "Una lista de comprobación para auditorías de fábrica. Cubre la calidad, el control de producción, el cumplimiento social y los registros exigidos.",
+    metaDescDe:
+      "Eine Checkliste für die Werksauditierung. Sie deckt Qualität, Produktionskontrolle, Sozialcompliance und die verlangten Nachweise ab.",
+    metaDescFr:
+      "Une liste de contrôle pour l'audit d'usine. Elle couvre la qualité, le contrôle de production, la conformité sociale et les documents demandés.",
+    metaDescPt:
+      "Uma lista de verificação para auditoria de fábrica. Abrange a qualidade, o controlo de produção, a conformidade social e os registos exigidos.",
+    metaDescAr:
+      "قائمة تحقق لتدقيق المصنع. تشمل الجودة وضبط الإنتاج والامتثال الاجتماعي والسجلات التي يطلبها المدققون.",
     updated: "2026-08-31",
     tools: [
       { href: "/tools/audit-checklist" },
@@ -512,6 +548,18 @@ export const GUIDES: Guide[] = [
       "How supplier risk assessment works across six risk dimensions. See what evidence moves the score and how to act on the result.",
     metaDescZh:
       "供应商风险评估怎么运作：六个风险维度、权重如何分配、哪些证据会改变分数，以及拿到结果之后怎么行动而不是归档了事。",
+    metaDescJa:
+      "サプライヤーリスク評価の仕組みを六つの次元で解説します。どの証拠がスコアを動かすのか、結果をどう行動に移すかを示します。",
+    metaDescEs:
+      "Cómo funciona la evaluación de riesgo de proveedores en seis dimensiones. Vea qué evidencia mueve la puntuación y cómo actuar según el resultado.",
+    metaDescDe:
+      "Wie die Lieferantenrisikobewertung über sechs Dimensionen funktioniert. Sehen Sie, welche Nachweise die Bewertung verändern und wie Sie handeln.",
+    metaDescFr:
+      "Comment fonctionne l'évaluation du risque fournisseur sur six dimensions. Voyez quelles preuves font bouger le score et comment agir ensuite.",
+    metaDescPt:
+      "Como funciona a avaliação de risco de fornecedores em seis dimensões. Veja que evidências alteram a pontuação e como agir com o resultado.",
+    metaDescAr:
+      "كيف يعمل تقييم مخاطر الموردين عبر ستة أبعاد. تعرّف على الأدلة التي تغيّر الدرجة وكيف تتعامل مع النتيجة.",
     updated: "2026-08-31",
     tools: [
       { href: "/tools/supplier-risk-calculator" },
@@ -728,6 +776,18 @@ export const GUIDES: Guide[] = [
       "SMETA versus BSCI social audits explained, scope by scope. See what each covers, who runs them and how to choose the right one.",
     metaDescZh:
       "SMETA 与 BSCI 对比：各自覆盖什么、由谁执行、报告差异、认可度，以及如何为你的供应基与采购方选对审核。",
+    metaDescJa:
+      "SMETA と BSCI の社会的監査を項目ごとに比較します。それぞれの範囲、実施主体、自社に合う選び方を解説します。",
+    metaDescEs:
+      "Comparación de las auditorías sociales SMETA y BSCI, ámbito por ámbito. Vea qué cubre cada una, quién las realiza y cómo elegir.",
+    metaDescDe:
+      "SMETA und BSCI im Vergleich, Bereich für Bereich. Sehen Sie, was jedes Programm abdeckt, wer es durchführt und wie Sie wählen.",
+    metaDescFr:
+      "Comparaison des audits sociaux SMETA et BSCI, domaine par domaine. Voyez ce que chacun couvre, qui les réalise et comment choisir.",
+    metaDescPt:
+      "Comparação das auditorias sociais SMETA e BSCI, âmbito por âmbito. Veja o que cada uma cobre, quem as realiza e como escolher.",
+    metaDescAr:
+      "مقارنة بين تدقيق SMETA وBSCI الاجتماعي، مجالاً بمجال. تعرّف على ما يغطيه كل منهما ومن ينفّذه وكيف تختار الأنسب.",
     updated: "2026-08-31",
     tools: [
       { href: "/tools/supplier-document-checker" },
@@ -835,6 +895,18 @@ export const GUIDES: Guide[] = [
       "How to read a factory audit report without losing the plot. Read the critical items first, check the evidence, then decide.",
     metaDescZh:
       "如何读懂工厂验厂报告：把分数与发现项分开看，先看严重与致命项，核对证据，再对每项发现决定处理方式。",
+    metaDescJa:
+      "工場監査報告書の読み方を解説します。重大な指摘から確認し、根拠を照合してから判断する手順を示します。",
+    metaDescEs:
+      "Cómo leer un informe de auditoría de fábrica sin perder el hilo. Lea primero los hallazgos críticos, revise la evidencia y luego decida.",
+    metaDescDe:
+      "So lesen Sie einen Werksauditbericht richtig. Prüfen Sie zuerst die kritischen Feststellungen, gleichen Sie die Nachweise ab und entscheiden Sie.",
+    metaDescFr:
+      "Comment lire un rapport d'audit d'usine sans perdre le fil. Lisez d'abord les constats critiques, vérifiez les preuves, puis décidez.",
+    metaDescPt:
+      "Como ler um relatório de auditoria de fábrica sem se perder. Veja primeiro os achados críticos, confirme as evidências e depois decida.",
+    metaDescAr:
+      "كيفية قراءة تقرير تدقيق المصنع دون ارتباك. اقرأ البنود الحرجة أولاً، وتحقّق من الأدلة، ثم اتخذ قرارك.",
     updated: "2026-08-31",
     tools: [
       { href: "/tools/audit-report-analyzer" },
@@ -939,6 +1011,18 @@ export const GUIDES: Guide[] = [
       "How to audit a factory in Vietnam before placing a deposit. Confirm the registration, verify the real site and review compliance.",
     metaDescZh:
       "如何在越南验厂：确认投资与商业登记、核实真实生产场地、审阅质量与社会合规，并在付定金前安排现场审核。",
+    metaDescJa:
+      "ベトナムで工場監査を行う手順を解説します。登記の確認、実際の生産拠点の検証、コンプライアンスの確認をまとめます。",
+    metaDescEs:
+      "Cómo auditar una fábrica en Vietnam antes de pagar el anticipo. Confirme el registro, verifique la planta real y revise el cumplimiento.",
+    metaDescDe:
+      "So auditieren Sie eine Fabrik in Vietnam vor der Anzahlung. Prüfen Sie die Registrierung, den tatsächlichen Standort und die Compliance.",
+    metaDescFr:
+      "Comment auditer une usine au Vietnam avant de verser l'acompte. Vérifiez l'immatriculation, le site réel et la conformité.",
+    metaDescPt:
+      "Como auditar uma fábrica no Vietname antes do sinal. Confirme o registo, verifique a unidade real e reveja a conformidade.",
+    metaDescAr:
+      "كيفية تدقيق مصنع في فيتنام قبل دفع الدفعة المقدمة. تحقّق من التسجيل والموقع الفعلي وراجع الامتثال.",
     updated: "2026-08-31",
     tools: [
       { href: "/tools/audit-checklist" },
@@ -1043,6 +1127,18 @@ export const GUIDES: Guide[] = [
       "A pre-shipment inspection checklist for FRI, PSI and DUPRO orders. Check quantity, workmanship, function, packaging and loading.",
     metaDescZh:
       "出货前验货清单：何时验货，查什么（数量、做工、功能、包装、标签、装柜），抽样方案，以及如何处理结果。",
+    metaDescJa:
+      "出荷前検査のチェックリストを解説します。数量、作り、機能、包装、ラベル、積み込みに加え、サンプルと記録の確認項目もまとめます。",
+    metaDescEs:
+      "Una lista de verificación para la inspección previa al embarque. Revise cantidad, fabricación, función, embalaje, etiquetado y carga.",
+    metaDescDe:
+      "Eine Checkliste für die Vorversandinspektion. Geprüft werden Menge, Verarbeitung, Funktion, Verpackung, Kennzeichnung und Verladung.",
+    metaDescFr:
+      "Une liste de contrôle pour l'inspection avant expédition. Vérifiez quantité, fabrication, fonction, emballage, étiquetage et chargement.",
+    metaDescPt:
+      "Uma lista de verificação para a inspeção antes do embarque. Verifique quantidade, fabrico, função, embalagem, rotulagem e carregamento.",
+    metaDescAr:
+      "قائمة تحقق لفحص ما قبل الشحن. تحقّق من الكمية والصناعة والوظيفة والتغليف والملصقات والتحميل.",
     updated: "2026-08-31",
     tools: [
       { href: "/tools/supplier-document-checker" },
@@ -1146,6 +1242,18 @@ export const GUIDES: Guide[] = [
       "What a B2B factory audit is and why overseas buyers need one. See how to choose a third-party audit firm for your own product.",
     metaDescZh:
       "第三方验厂（Factory Audit）是什么、跨国采购为什么必须做、以及如何选择靠谱的验厂机构：行业经验、响应速度、报告透明度。",
+    metaDescJa:
+      "B2B の工場監査とは何か、なぜ海外バイヤーに必要なのかを解説します。自社製品に合う第三者監査機関の選び方も示します。",
+    metaDescEs:
+      "Qué es una auditoría de fábrica B2B y por qué la necesitan los compradores. Vea cómo elegir una firma de auditoría para su producto.",
+    metaDescDe:
+      "Was ein B2B-Werksaudit ist und warum Übersee-Einkäufer ihn brauchen. So wählen Sie eine Prüfgesellschaft für Ihr Produkt.",
+    metaDescFr:
+      "Ce qu'est un audit d'usine B2B et pourquoi les acheteurs en ont besoin. Voyez comment choisir un cabinet d'audit adapté à votre produit.",
+    metaDescPt:
+      "O que é uma auditoria de fábrica B2B e porque os compradores precisam dela. Veja como escolher uma empresa de auditoria para o seu produto.",
+    metaDescAr:
+      "ما هو تدقيق المصنع في سياق B2B ولماذا يحتاجه المشترون. تعرّف على كيفية اختيار جهة تدقيق خارجية تناسب منتجك.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/audit-checklist" },
@@ -1306,6 +1414,18 @@ export const GUIDES: Guide[] = [
       "A 2026 supplier evaluation checklist for legality, capacity and ESG. Covers the quality system, documentation and records auditors ask for.",
     metaDescZh:
       "2026版供应商评估清单，覆盖资质合法性、产能、质量体系、ESG 与文件，列出每个环节审核员会索取的记录。",
+    metaDescJa:
+      "2026 年版のサプライヤー評価チェックリストです。合法性、生産能力、ESG、品質体制と必要な書類・記録を網羅します。",
+    metaDescEs:
+      "Una lista de evaluación de proveedores 2026 sobre legalidad, capacidad y ESG. Cubre el sistema de calidad y los registros exigidos.",
+    metaDescDe:
+      "Eine Lieferantenbewertungs-Checkliste 2026 zu Legalität, Kapazität und ESG. Sie deckt das Qualitätssystem und die geforderten Nachweise ab.",
+    metaDescFr:
+      "Une liste d'évaluation fournisseur 2026 sur la légalité, la capacité et l'ESG. Elle couvre le système qualité et les documents exigés.",
+    metaDescPt:
+      "Uma lista de avaliação de fornecedores 2026 sobre legalidade, capacidade e ESG. Abrange o sistema de qualidade e os registos exigidos.",
+    metaDescAr:
+      "قائمة تقييم الموردين لعام 2026 تغطّي الشرعية والقدرة الإنتاجية وESG. وتشمل نظام الجودة والسجلات المطلوبة.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/supplier-verification-checklist" },
@@ -1478,6 +1598,18 @@ export const GUIDES: Guide[] = [
       "On-site versus desk supplier audits, the trade-offs explained. See when each works and how to combine them for safe sourcing.",
     metaDescZh:
       "实地审核与桌面（线上）审核的取舍、各自适用场景，以及先广筛再深挖的组合策略。",
+    metaDescJa:
+      "現地監査とデスク監査の違いを解説します。コスト、確度、対象範囲の違いと、それぞれの使いどころ、安全な調達に向けた組み合わせ方を示します。",
+    metaDescEs:
+      "Auditoría presencial frente a auditoría documental. Vea cuándo funciona cada una y cómo combinarlas para un abastecimiento seguro.",
+    metaDescDe:
+      "Vor-Ort-Audit gegenüber Schreibtisch-Audit. Sehen Sie, wann welches Verfahren passt und wie Sie beide für eine sichere Beschaffung kombinieren.",
+    metaDescFr:
+      "Audit sur site ou audit sur dossier. Voyez quand chacun convient et comment les combiner pour un approvisionnement sûr.",
+    metaDescPt:
+      "Auditoria presencial versus auditoria documental. Veja quando cada uma funciona e como combiná-las para um aprovisionamento seguro.",
+    metaDescAr:
+      "التدقيق الميداني مقابل التدقيق المكتبي. تعرّف على متى يصلح كل منهما وكيف تجمعهما لشراء آمن.",
     updated: "2026-09-21",
     tools: [
       { href: "/tools/supplier-document-checker" },

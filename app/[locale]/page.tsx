@@ -19,6 +19,7 @@ import { getDictionary } from "@/i18n/getDictionary";
 import { canonicalFor } from "@/i18n/hreflang";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { pickZhCopy, pickZhPair } from "@/lib/tw";
+import { pickGuideDesc } from "@/lib/pickGuideDesc";
 import { ANALYTICS_EVENTS } from "@/lib/analytics";
 
 const BASE = "https://factoryauditb2b.com";
@@ -67,7 +68,7 @@ export default async function Home({ params }: Props) {
 
   const guides = featuredGuides().map((g) => ({
     title: pickZhPair(locale, g.titleEn, g.titleZh),
-    desc: pickZhPair(locale, g.metaDescEn, g.metaDescZh).slice(0, 120),
+    desc: pickGuideDesc(locale, g).slice(0, 120),
     href: `/guides/${g.slug}`,
   }));
 
