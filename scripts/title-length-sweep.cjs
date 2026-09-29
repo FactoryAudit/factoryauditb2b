@@ -20,7 +20,9 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
-const APP = path.join(ROOT, '.next', 'server', 'app');
+// 默认扫描当前构建产物；SWEEP_APP 可指向隔离出来的旧产物目录（`_prune_next_*`）
+// 以便「同一探针」做改动前后对照。
+const APP = process.env.SWEEP_APP ? path.resolve(process.env.SWEEP_APP) : path.join(ROOT, '.next', 'server', 'app');
 const ASSERT = process.argv.includes('--assert');
 const SKIP = /(_not-found|404|500|_error)/;
 const LATIN_MIN = 50;
