@@ -62,7 +62,6 @@ const ROUTES = [
   "/countries/china",
   "/industry/electronics",
   "/audit-guide/china/SMETA",
-  "/about",
   "/trust",
   "/sample-report",
   "/join-supplier-network",

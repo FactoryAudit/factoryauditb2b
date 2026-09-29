@@ -10,7 +10,7 @@
  * Usage:
  *   node submit-urls.cjs --url https://factoryauditb2b.com/services/inspection
  *   node submit-urls.cjs --from-file .sitemap-new.txt
- *   node submit-urls.cjs --dry-run --url https://factoryauditb2b.com/about   # no network, shows payloads
+ *   node submit-urls.cjs --dry-run --url https://factoryauditb2b.com/trust   # no network, shows payloads
  *
  * Credentials (env — see .env.example, NEVER hardcode):
  *   BING_INDEXNOW_KEY            e.g. "a1b2c3d4e5f6..."
