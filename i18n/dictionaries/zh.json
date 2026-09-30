@@ -37,7 +37,10 @@
       "monitoringDesc": "定期复核与变更提醒"
     },
     "homeLabel": "FactoryAuditB2B 首页",
-    "mainNav": "主导航"
+    "mainNav": "主导航",
+    "solutions": "解决方案",
+    "auditsInspections": "审核与验货",
+    "more": "更多"
   },
   "footer": {
     "workWithUs": "加入我们",
@@ -78,7 +81,9 @@
     "suppliers": "供应商目录",
     "membership": "会员",
     "standardReport": "标准版报告",
-    "contact": "联系我们"
+    "contact": "联系我们",
+    "buyer": "买家",
+    "company": "公司"
   },
   "home": {
     "badge": "供应商发现、核验与信任",
@@ -177,8 +182,47 @@
     "liveMarket": "目标市场",
     "liveIndustry": "行业",
     "liveCerts": "认证要求",
-            "metaTitle": "验厂与供应商核查服务",
-            "metaDesc": "发现、评估并核验中国及东南亚的供应商，让优秀的制造商被看见，也让采购商在充分了解工厂背景、产能与合规状况之后再放心下单。"
+    "metaTitle": "验厂与供应商核查服务",
+    "metaDesc": "发现、评估并核验中国及东南亚的供应商，让优秀的制造商被看见，也让采购商在充分了解工厂背景、产能与合规状况之后再放心下单。",
+    "sample": {
+      "eyebrow": "示例供应商档案",
+      "title": "看看一份经过核验的供应商档案长什么样。",
+      "lead": "每一份经核验的供应商都有一致的档案：身份、审核状态、证据与生产能力 —— 方便你同类比较。",
+      "tag": "示例供应商档案 —— 演示数据，仅供示意",
+      "company": "示例电子制造有限公司",
+      "status": "示例 · 审核已完成",
+      "fieldLocation": "所在地",
+      "fieldIndustry": "行业",
+      "fieldCert": "认证",
+      "fieldCapacity": "生产能力",
+      "fieldAuditType": "审核类型",
+      "fieldAuditDate": "审核日期",
+      "valLocation": "中国东莞",
+      "valIndustry": "电子 · PCB 组装",
+      "valCert": "ISO 9001",
+      "valCapacity": "4 条 SMT 产线",
+      "valAuditType": "工厂审核 —— 现场",
+      "valAuditDate": "2025 · 第一季度",
+      "stepRequested": "已申请",
+      "stepScheduled": "已排期",
+      "stepOnsite": "已到场",
+      "stepReport": "已出报告",
+      "evidence": "证据：照片 · 视频 · 文件",
+      "viewSample": "查看示例档案",
+      "demoNote": "演示数据 —— 仅供示意。真实供应商档案仅对已登录买家展示。"
+    },
+    "capabilitiesLabel": "我们提供",
+    "capVerification": "供应商核验",
+    "capAudit": "工厂审核",
+    "capInspection": "产品验货",
+    "capSourcing": "采购支持",
+    "workflowEyebrow": "一份贯通的档案",
+    "workflowTitle": "从供应商发现到经过核验的工厂证据。",
+    "workflowLead": "一切都在同一个贯通的流程里运行，证据、报告和供应商档案都留在同一处 —— 为你和你的团队。",
+    "wfCheck1": "免费工具评估并筛选供应商",
+    "wfCheck2": "带照片、视频和文件证据的现场核验",
+    "wfCheck3": "以一致、可比较的格式组织的报告",
+    "wfCheck4": "每家供应商一份档案，团队共享"
   },
   "coverage": {
     "badge": "覆盖范围",
@@ -279,7 +323,31 @@
     "notSureLead": "先跑一遍免费的风险计算器。大约三分钟，它会告诉你缺什么。",
     "notSureCta": "评估一家供应商",
     "metaTitle": "供应商核查、验厂与验货服务",
-    "metaDesc": "覆盖中国、越南、泰国、马来西亚、菲律宾的独立供应商核查、工厂验厂、验货与采购支持。按项目确定范围并报价。"
+    "metaDesc": "覆盖中国、越南、泰国、马来西亚、菲律宾的独立供应商核查、工厂验厂、验货与采购支持。按项目确定范围并报价。",
+    "processTitle": "从请求到决策的清晰路径。",
+    "processLead": "选择你的采购决策所需的保障级别。",
+    "stepRequestTitle": "提出请求",
+    "stepRequestBody": "告诉我们你需要核查的供应商、产品或工厂。",
+    "stepScopingTitle": "确定范围",
+    "stepScopingBody": "我们确认范围、时间线和合适的核验级别。",
+    "stepOnsiteTitle": "现场核查",
+    "stepOnsiteBody": "当地审核员到场检查并收集证据。",
+    "stepReportTitle": "出具报告",
+    "stepReportBody": "以一致格式交付发现、照片和文件。",
+    "stepDecisionTitle": "做出决策",
+    "stepDecisionBody": "用这份档案推进 —— 或排除某家供应商。",
+    "faqTitle": "买家通常会问什么。",
+    "faqLead": "关于核验和审核的常见问题。",
+    "faq1q": "工厂审核需要多长时间？",
+    "faq1a": "取决于范围和地点。大多数单一工厂审核在确定范围后的一段时间内完成，证据审查后即出具报告。",
+    "faq2q": "你们覆盖我的行业吗？",
+    "faq2a": "我们覆盖中国和东南亚广泛的制造品类。告诉我们你的产品，我们会在你承诺前确认覆盖范围。",
+    "faq3q": "我会收到什么证据？",
+    "faq3a": "取决于服务类型，你会收到照片、视频和文件证据，以及一份可跨供应商比较的结构化报告。",
+    "faq4q": "我可以指定某家供应商吗？",
+    "faq4a": "可以。你可以为已有意向的供应商申请核验或审核，也可以让我们先帮你筛选。",
+    "faq5q": "我需要会员吗？",
+    "faq5a": "开始无需会员。你可以直接发布 RFQ 或申请服务。"
   },
   "resourcesIndex": {
     "badge": "资源",
@@ -1778,7 +1846,7 @@
       },
       {
         "h": "支付数据",
-        "b": "付款由 Stripe 处理。我们不会看到或存储您的完整卡号，仅保存运营会员所需的卡品牌、卡号后四位、订阅状态与续费日期。"
+        "b": "开通在线支付后，付款由第三方支付服务商处理。我们不会看到或存储您的完整卡号，仅保存运营会员所需的卡品牌、卡号后四位、订阅状态与续费日期。在线支付开通前，本站不收集任何银行卡数据。"
       }
     ],
     "termsTitle": "服务条款",
@@ -1815,7 +1883,7 @@
       },
       {
         "h": "会员、账单与续费",
-        "b": "Founding Buyer 会员为年度订阅，价格 99 美元/年，由 Stripe 处理付款。除非您在续费日前取消，否则订阅每年自动续费。您可随时在账号页面查看续费日期或取消订阅。"
+        "b": "Founding Buyer 会员为年度订阅，价格 99 美元/年。付款由第三方支付服务商处理。除非您在续费日前取消，否则订阅每年自动续费。您可随时在账号页面查看续费日期或取消订阅。目前尚未开通在线支付；开通前由我们的团队为您开通订阅，并通过邮件与您确认账单安排。"
       },
       {
         "h": "退款与取消",
@@ -1867,7 +1935,7 @@
     "plans": [
       {
         "name": "入门培训",
-        "price": "$280",
+        "price": "${price}",
         "period": "/ 每家工厂",
         "features": [
           "1 天现场质量基础",
@@ -1879,7 +1947,7 @@
       },
       {
         "name": "专业培训",
-        "price": "$950",
+        "price": "${price}",
         "period": "/ 每家工厂",
         "features": [
           "3 天质量体系与 QC",
@@ -1987,12 +2055,12 @@
         "href": "/monitoring"
       }
     ],
-    "comingSoonNote": "供应商监控为订阅制，按供应商按年报价。本页其余项均为按项目付费：没有订阅，不会自动续费。",
+    "comingSoonNote": "供应商监控按供应商按年报价。Founding Buyer 会员为年度订阅，99 美元/年。二者均为订阅制，每年自动续费；您可随时在账号页面取消。本页其余项目均按项目报价。",
     "alsoTitle": "其他服务",
     "alsoItems": [
       "验货：生产中期与出货前检验，按人天报价",
       "采购：按订单金额收取 3–5% 佣金，下单前报价",
-      "供应商改进：验厂后的培训与整改支持，按工厂报价"
+      "供应商改进：培训起价 ${price}/工厂，含验厂后的整改支持"
     ],
     "alsoCta": "申请报价",
     "reportsTitle": "报告与核验：参考价格区间",
@@ -3937,8 +4005,7 @@
     "yes": "是",
     "no": "否",
     "na": "不适用"
-  }
-,
+  },
   "supplierDashboard": {
     "pageTitle": "供应商看板",
     "pageDesc": "追踪采购商如何发现并互动您的已验证供应商档案。",
@@ -4025,4 +4092,5 @@
     "errSubmit": "提交失败，请直接发送邮件至 support@factoryauditb2b.com。",
     "fileHint": "支持 PDF、DOC、DOCX，最大 5 MB。",
     "privacyNote": "提交即表示你同意 FactoryAuditB2B 仅为招聘、项目合作及人才储备目的处理你所提交的信息。"
-  }}
+  }
+}

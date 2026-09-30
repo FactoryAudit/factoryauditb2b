@@ -37,7 +37,10 @@
       "monitoringDesc": "Scheduled re-checks and change alerts"
     },
     "homeLabel": "FactoryAuditB2B home",
-    "mainNav": "Main"
+    "mainNav": "Main",
+    "solutions": "Solutions",
+    "auditsInspections": "Audits & Inspections",
+    "more": "More"
   },
   "trust": {
     "badge": "Trust Center",
@@ -188,7 +191,9 @@
     "suppliers": "Supplier Directory",
     "membership": "Founding Buyer",
     "standardReport": "Standard report",
-    "contact": "Contact"
+    "contact": "Contact",
+    "buyer": "Buyer",
+    "company": "Company"
   },
   "home": {
     "badge": "Supplier discovery, verification & trust",
@@ -287,8 +292,47 @@
     "liveMarket": "Target Market",
     "liveIndustry": "Industry",
     "liveCerts": "Certifications",
-            "metaTitle": "Factory Audit & Supplier Verification",
-            "metaDesc": "Discover, evaluate and verify suppliers across China and Southeast Asia, so good manufacturers get found and buyers can source with confidence."
+    "metaTitle": "Factory Audit & Supplier Verification",
+    "metaDesc": "Discover, evaluate and verify suppliers across China and Southeast Asia, so good manufacturers get found and buyers can source with confidence.",
+    "sample": {
+      "eyebrow": "Sample supplier profile",
+      "title": "See what a verified supplier record looks like.",
+      "lead": "Every verified supplier carries a consistent record: identity, audit status, evidence and production capability — so you can compare like with like.",
+      "tag": "Sample Supplier Profile — demo data, for illustration only",
+      "company": "Sample Electronics Manufacturer",
+      "status": "Sample · Audit complete",
+      "fieldLocation": "Location",
+      "fieldIndustry": "Industry",
+      "fieldCert": "Certification",
+      "fieldCapacity": "Production capacity",
+      "fieldAuditType": "Audit type",
+      "fieldAuditDate": "Audit date",
+      "valLocation": "Dongguan, China",
+      "valIndustry": "Electronics · PCB assembly",
+      "valCert": "ISO 9001",
+      "valCapacity": "4 SMT lines",
+      "valAuditType": "Factory Audit — On-site",
+      "valAuditDate": "2025 · Q1",
+      "stepRequested": "Requested",
+      "stepScheduled": "Scheduled",
+      "stepOnsite": "On-site",
+      "stepReport": "Report",
+      "evidence": "Evidence: photos · video · documents",
+      "viewSample": "View sample record",
+      "demoNote": "Demo data — for illustration only. Real supplier profiles are shown to signed-in buyers."
+    },
+    "capabilitiesLabel": "What we offer",
+    "capVerification": "Supplier Verification",
+    "capAudit": "Factory Audit",
+    "capInspection": "Product Inspection",
+    "capSourcing": "Sourcing Support",
+    "workflowEyebrow": "One connected record",
+    "workflowTitle": "From supplier discovery to verified factory evidence.",
+    "workflowLead": "Everything runs through one connected workflow, so evidence, reports and supplier records stay in the same place — for you and your team.",
+    "wfCheck1": "Free tools to evaluate and shortlist suppliers",
+    "wfCheck2": "On-site verification with photo, video and document evidence",
+    "wfCheck3": "Reports structured in a consistent, comparable format",
+    "wfCheck4": "One record per supplier, shared across your team"
   },
   "coverage": {
     "badge": "Coverage",
@@ -389,7 +433,31 @@
     "notSureLead": "Run the free risk calculator first. It takes about three minutes and tells you what is missing.",
     "notSureCta": "Assess a supplier",
     "metaTitle": "Supplier Verification, Audit & Inspection",
-    "metaDesc": "Independent supplier verification, factory audit, inspection and sourcing support across China, Vietnam, Thailand, Malaysia and the Philippines. Scoped and quoted per project."
+    "metaDesc": "Independent supplier verification, factory audit, inspection and sourcing support across China, Vietnam, Thailand, Malaysia and the Philippines. Scoped and quoted per project.",
+    "processTitle": "A clear path from request to decision.",
+    "processLead": "Choose the level of assurance your sourcing decision needs.",
+    "stepRequestTitle": "Request",
+    "stepRequestBody": "Tell us the supplier, product or factory you need checked.",
+    "stepScopingTitle": "Scoping",
+    "stepScopingBody": "We confirm scope, timeline and the right level of verification.",
+    "stepOnsiteTitle": "On-site",
+    "stepOnsiteBody": "Local auditors carry out the visit and collect evidence.",
+    "stepReportTitle": "Report",
+    "stepReportBody": "Findings, photos and documents are delivered in a consistent format.",
+    "stepDecisionTitle": "Decision",
+    "stepDecisionBody": "Use the record to move forward — or to rule a supplier out.",
+    "faqTitle": "What buyers usually ask.",
+    "faqLead": "Common questions about verification and audit.",
+    "faq1q": "How long does a factory audit take?",
+    "faq1a": "It depends on scope and location. Most single-factory audits are completed within a defined window after scoping, and the report follows once evidence is reviewed.",
+    "faq2q": "Do you cover my industry?",
+    "faq2a": "We work across a broad range of manufacturing categories in China and Southeast Asia. Tell us your product and we'll confirm coverage before you commit.",
+    "faq3q": "What evidence do I receive?",
+    "faq3a": "Depending on the service, you receive photo, video and document evidence, alongside a structured report designed to be compared across suppliers.",
+    "faq4q": "Can I request a specific supplier?",
+    "faq4a": "Yes. You can request verification or audit for a supplier you already have in mind, or ask us to help shortlist suppliers first.",
+    "faq5q": "Do I need a membership?",
+    "faq5a": "No membership is required to start. You can post an RFQ or request a service directly."
   },
   "resourcesIndex": {
     "badge": "Resources",
@@ -1955,7 +2023,7 @@
       },
       {
         "h": "Payment data",
-        "b": "Payments are processed by Stripe. We never see or store your full card number. We store only the card brand, last four digits, subscription status and renewal date needed to run your membership."
+        "b": "When online payment is available, payments are handled by a third-party payment provider. We never see or store your full card number. We store only the card brand, last four digits, subscription status and renewal date needed to run your membership. Until online payment opens, no card data is collected on this site."
       }
     ],
     "termsTitle": "Terms of Service and Platform Rules",
@@ -1992,7 +2060,7 @@
       },
       {
         "h": "Membership, billing and renewal",
-        "b": "Founding Buyer Membership is an annual subscription priced at USD 99 per year. Payment is processed by Stripe. Your subscription renews automatically each year unless you cancel before the renewal date. You can view your renewal date or cancel at any time from your account page."
+        "b": "Founding Buyer Membership is an annual subscription priced at USD 99 per year. Payment is handled by a third-party payment provider. Your subscription renews automatically each year unless you cancel before the renewal date. You can view your renewal date or cancel at any time from your account page. Online payment is not open yet; until it is, our team sets up your subscription and confirms the billing arrangement with you by email."
       },
       {
         "h": "Refunds and cancellation",
@@ -2044,7 +2112,7 @@
     "plans": [
       {
         "name": "Starter Training",
-        "price": "$280",
+        "price": "${price}",
         "period": "/ factory",
         "features": [
           "1-day on-site quality basics",
@@ -2056,7 +2124,7 @@
       },
       {
         "name": "Pro Training",
-        "price": "$950",
+        "price": "${price}",
         "period": "/ factory",
         "features": [
           "3-day quality system + QC",
@@ -2164,12 +2232,12 @@
         "href": "/monitoring"
       }
     ],
-    "comingSoonNote": "Supplier Monitoring is a subscription and is quoted per supplier per year. Everything else on this page is pay-per-project: no subscription, nothing renews automatically.",
+    "comingSoonNote": "Supplier Monitoring is quoted per supplier per year. Founding Buyer Membership is an annual subscription at USD 99 per year. Both renew automatically each year, and you can cancel either from your account page. Other items on this page are quoted per project.",
     "alsoTitle": "Also available",
     "alsoItems": [
       "Inspection: in-line and pre-shipment checks, quoted per man-day",
       "Sourcing: 3–5% commission on order value, quoted before the order is placed",
-      "Supplier Improvement: training and corrective action after an audit, quoted per factory"
+      "Supplier Improvement: training from ${price} per factory, plus corrective action after an audit"
     ],
     "alsoCta": "Request a quote",
     "reportsTitle": "Reports and verification: indicative ranges",
@@ -3937,8 +4005,7 @@
     "yes": "Yes",
     "no": "No",
     "na": "N/A"
-  }
-,
+  },
   "supplierDashboard": {
     "pageTitle": "Supplier Dashboard",
     "pageDesc": "Track how buyers discover and engage with your verified supplier profile.",
@@ -4025,4 +4092,5 @@
     "errSubmit": "We could not send your application. Please email us directly at support@factoryauditb2b.com.",
     "fileHint": "PDF, DOC or DOCX. Maximum 5 MB.",
     "privacyNote": "By submitting, you agree that FactoryAuditB2B may process the information you provide for recruitment, project cooperation and talent pool purposes."
-  }}
+  }
+}

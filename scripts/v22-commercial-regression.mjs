@@ -39,6 +39,25 @@ check("supplierVerification 99-129", /minUsd:\s*99\b[\s\S]*?maxUsd:\s*129\b/.tes
 check("factoryAudit starting = 399", /startingUsd:\s*399\b/.test(cc));
 check("inspection starting = 199", /inspection:\s*\{[\s\S]*?startingUsd:\s*199\b/.test(cc));
 check("sourcing commission 3-5%", /commissionMinPct:\s*3\b[\s\S]*?commissionMaxPct:\s*5\b/.test(cc));
+check("training starter = 280", /training:\s*\{[\s\S]*?starterUsd:\s*280\b/.test(cc));
+check("training pro = 950", /training:\s*\{[\s\S]*?proUsd:\s*950\b/.test(cc));
+check("reportPreview basic = 99", /reportPreview:\s*\{[\s\S]*?basicUsd:\s*99\b/.test(cc));
+check("reportPreview professional = 129", /reportPreview:\s*\{[\s\S]*?professionalUsd:\s*129\b/.test(cc));
+
+// ---------------------------------------------------------------------------
+// [1b] lib/suppliers.ts — MEMBERSHIP_PRICE_USD 必须是 COMMERCIAL 的转发绑定，
+//      不得再是独立字面量（否则出现「两个 99」的双真源）。
+console.log("[1b] lib/suppliers.ts — MEMBERSHIP_PRICE_USD forwarding binding");
+const supSrc = read("lib/suppliers.ts");
+check(
+  "MEMBERSHIP_PRICE_USD = COMMERCIAL.membershipAnnualUsd",
+  /export const MEMBERSHIP_PRICE_USD\s*=\s*COMMERCIAL\.membershipAnnualUsd\s*;/.test(supSrc),
+);
+check(
+  "MEMBERSHIP_PRICE_USD no longer a bare integer literal",
+  !/export const MEMBERSHIP_PRICE_USD\s*=\s*\d+\s*;/.test(supSrc),
+);
+check("lib/suppliers.ts imports COMMERCIAL", /from\s+["']\.\/commercialConfig["']/.test(supSrc));
 
 // ---------------------------------------------------------------------------
 console.log("[2] lib/commerce.ts — order amount truth (USD cents)");
@@ -86,6 +105,58 @@ for (const l of langs) {
   const d = JSON.parse(read("i18n/dictionaries/" + l + ".json"));
   const lead = String(d?.inspection?.pricingLead || "");
   check(l + " inspection.pricingLead shows 199", /199/.test(lead), lead.slice(0, 60));
+}
+
+// ---------------------------------------------------------------------------
+// [3c] 培训价：字典只留 {price} 占位符，数字一律由 COMMERCIAL 注入（spec §39/§70）
+// [3d] alsoItems 培训项同规则（④ 口径统一：不再写死「按工厂报价」）
+// [3e] 目录型副本（membership meta / legal / paidLockLead / AI 兜底）必须等于 COMMERCIAL
+console.log("[3c] dictionaries — training plan prices are {price} placeholders");
+const numOf = (re) => { const m = cc.match(re); return m ? m[1] : ""; };
+const C = {
+  membership: numOf(/membershipAnnualUsd:\s*(\d+)/),
+  verifMin: numOf(/minUsd:\s*(\d+)/),
+  verifMax: numOf(/maxUsd:\s*(\d+)/),
+  audit: numOf(/factoryAudit:\s*\{[\s\S]*?startingUsd:\s*(\d+)/),
+  insp: numOf(/inspection:\s*\{[\s\S]*?startingUsd:\s*(\d+)/),
+  trainStarter: numOf(/training:\s*\{[\s\S]*?starterUsd:\s*(\d+)/),
+  trainPro: numOf(/training:\s*\{[\s\S]*?proUsd:\s*(\d+)/),
+};
+// 词边界匹配：\b99\b 不会命中 "199"（避免假 PASS）
+const hasNum = (s, n) => n !== "" && new RegExp("\\b" + n + "\\b").test(String(s));
+for (const l of langs) {
+  const d = JSON.parse(read("i18n/dictionaries/" + l + ".json"));
+  const pl = d?.trainingPlans?.plans || [];
+  check(l + " trainingPlans[0].price = {price}", pl?.[0]?.price === "${price}", String(pl?.[0]?.price));
+  check(l + " trainingPlans[1].price = {price}", pl?.[1]?.price === "${price}", String(pl?.[1]?.price));
+  check(l + " trainingPlans[2] has no {price}", !/\{price\}/.test(String(pl?.[2]?.price || "")), String(pl?.[2]?.price));
+  const also = Array.isArray(d?.pricing?.alsoItems) ? d.pricing.alsoItems : [];
+  check(l + " alsoItems training row uses {price}", also.some((s) => /\{price\}/.test(String(s))), also.join(" | "));
+}
+console.log("[3e] dictionary price copies == COMMERCIAL (" + JSON.stringify(C) + ")");
+for (const l of langs) {
+  const d = JSON.parse(read("i18n/dictionaries/" + l + ".json"));
+  const plans = d?.pricing?.plans || [];
+  check(l + " plans[1].price has verification min+max",
+    hasNum(plans?.[1]?.price, C.verifMin) && hasNum(plans?.[1]?.price, C.verifMax), String(plans?.[1]?.price));
+  check(l + " plans[2].price has audit starting price",
+    hasNum(plans?.[2]?.price, C.audit), String(plans?.[2]?.price));
+  const memberKeys = {
+    "membership.metaTitle": d?.membership?.metaTitle,
+    "membership.metaDesc": d?.membership?.metaDesc,
+    "membership.faq[0].a": d?.membership?.faq?.[0]?.a,
+    "supplierProfile.paidLockLead": d?.supplierProfile?.paidLockLead,
+    "legal.termsSections[7].b": d?.legal?.termsSections?.[7]?.b,
+    "register.membershipLink": d?.register?.membershipLink,
+  };
+  const badMember = Object.entries(memberKeys).filter(([, v]) => !hasNum(v, C.membership)).map(([k]) => k);
+  check(l + " membership price copies = " + C.membership, badMember.length === 0, badMember.join(","));
+  const fb = d?.aiChat?.fallbackAnswers || {};
+  check(l + " aiChat.pricing carries verification/audit/membership prices",
+    hasNum(fb.pricing, C.verifMin) && hasNum(fb.pricing, C.verifMax) && hasNum(fb.pricing, C.audit) && hasNum(fb.pricing, C.membership),
+    String(fb.pricing).slice(0, 70));
+  check(l + " aiChat.training carries training prices",
+    hasNum(fb.training, C.trainStarter) && hasNum(fb.training, C.trainPro), String(fb.training).slice(0, 70));
 }
 
 // ---------------------------------------------------------------------------
@@ -138,6 +209,17 @@ console.log("[7] analytics — membership_page_view / membership_cta retired");
 const an = read("lib/analytics.ts");
 check("no membership_page_view event", !/membership_page_view/.test(an));
 check("no membership_cta event", !/membership_cta/.test(an));
+
+// ---------------------------------------------------------------------------
+// [8] lib/ai.ts — AI 知识库不得硬编码公开展示价（必须读 COMMERCIAL 插值）
+console.log("[8] lib/ai.ts — price facts must come from COMMERCIAL");
+const aiSrc = read("lib/ai.ts");
+check("ai.ts imports COMMERCIAL", /from\s+["']\.\/commercialConfig["']/.test(aiSrc));
+check("ai.ts injects membership price", /\$\$\{COMMERCIAL\.membershipAnnualUsd\}/.test(aiSrc));
+check("ai.ts injects training prices", /\$\$\{COMMERCIAL\.training\.starterUsd\}/.test(aiSrc));
+const HARDCODED_AI = /\$(?:99|129|199|280|399|950)\b/;
+const aiHit = aiSrc.match(HARDCODED_AI);
+check("ai.ts has no hardcoded public price literal", !aiHit, aiHit ? aiHit[0] : "");
 
 // ---------------------------------------------------------------------------
 console.log("");

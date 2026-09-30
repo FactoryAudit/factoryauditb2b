@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
 import { COVERAGE_COUNTRIES, COVERAGE_SERVICES, findCoverageCountry } from "@/lib/coverage";
+import { SERVICE_MENU } from "@/lib/nav";
+import { countryDisplayName } from "@/lib/countryNames";
 import { listSuppliersByCountry } from "@/lib/queries";
 import { overallLevel } from "@/lib/riskEngine";
 import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i18n/config";
@@ -96,9 +98,33 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
     },
   ];
 
-  const services = COVERAGE_SERVICES.map((svc) => ({
+  // 国家级服务页（verification / audit）——复用 COVERAGE_SERVICES 引擎，
+  // slug 形如 /services/thailand-factory-audit。
+  const services: { title: string; href: string; note?: string }[] = COVERAGE_SERVICES.map((svc) => ({
     title: pickZhPair(locale, svc.nameEn, svc.nameZh),
     href: `/services/${country.slug}-${svc.slugSuffix}`,
+  }));
+
+  // 非国家级服务（inspection / sourcing / monitoring / improvement）——
+  // href 直接复用主导航的单一事实来源 SERVICE_MENU，不在此第二次硬编码路径，
+  // 标签取字典 servicesIndex.items[key].title。国家页与主导航因此永远同源，不会各自漂移。
+  // inspection 额外挂上字典里既有的诚实口径（inspection.honestNote）：
+  // 排期取决于品类、地点与审核员档期，绝不包装成「已全面覆盖」。
+  const GLOBAL_SERVICE_KEYS = ["inspection", "sourcing", "monitoring", "improvement"] as const;
+  const globalServices: { title: string; href: string; note?: string }[] = SERVICE_MENU.filter((m) =>
+    (GLOBAL_SERVICE_KEYS as readonly string[]).includes(m.key)
+  ).map((m) => ({
+    title: t.servicesIndex.items[m.key].title,
+    href: m.href,
+    note: m.key === "inspection" ? t.inspection.honestNote : undefined,
+  }));
+
+  // 国家间交叉链接：China ↔ Vietnam ↔ Thailand ↔ Malaysia ↔ Philippines。
+  // 名称走 lib/countryNames.ts 的 9 语表（缺译文时回退英文，不臆造）；
+  // 锚文本 =「国家名 + Supplier Verification」，与该国页的 H1 意图一致。
+  const relatedCountries = COVERAGE_COUNTRIES.filter((c) => c.slug !== country.slug).map((c) => ({
+    href: `/countries/${c.slug}`,
+    label: `${countryDisplayName(locale, c.code, c.name)} ${t.servicesIndex.items.verification.title}`,
   }));
 
   return (
@@ -191,9 +217,12 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
       <section className="mt-8">
         <h2 className="text-2xl font-bold text-[#0f172a]">{h.servicesTitle}</h2>
         <div className="mt-3 grid md:grid-cols-2 gap-3">
-          {services.map((s) => (
+          {[...services, ...globalServices].map((s) => (
             <Link key={s.href} href={p(s.href)} className="card p-4 hover:border-[#0f4c81]">
-              {s.title}
+              <span className="font-medium text-[#0f172a]">{s.title}</span>
+              {s.note ? (
+                <span className="mt-1 block text-sm text-[#64748b]">{s.note}</span>
+              ) : null}
             </Link>
           ))}
         </div>
@@ -255,6 +284,23 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
             </div>
           ))}
         </div>
+      </section>
+
+      {/* 国家间交叉链接：形成 China ↔ Vietnam ↔ Thailand ↔ Malaysia ↔ Philippines 的完整内链网。
+          标题与导语复用字典既有键 servicesIndex.coverageTitle / coverageLead（"Coverage by country"），
+          ⚠️ 不新增字典键 —— en 字典叶子数 3192 是 20 个回归脚本共同断言的闸门，复用即可保持 3192。 */}
+      <section className="mt-8">
+        <h2 className="text-2xl font-bold text-[#0f172a]">{t.servicesIndex.coverageTitle}</h2>
+        <p className="text-[#475569] mt-1">{t.servicesIndex.coverageLead}</p>
+        <ul className="mt-3 grid md:grid-cols-2 gap-3">
+          {relatedCountries.map((r) => (
+            <li key={r.href}>
+              <Link href={p(r.href)} className="block card p-4 hover:border-[#0f4c81]">
+                <span className="font-medium text-[#0f4c81]">{r.label}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="mt-10 card p-8 bg-[#f7f9fc]">

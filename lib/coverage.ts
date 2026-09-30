@@ -1,4 +1,4 @@
-// lib/coverage.ts — Phase 1 服务覆盖内容（中国 / 越南 / 泰国）
+// lib/coverage.ts — Phase 1 服务覆盖内容（中国 / 越南 / 泰国 / 马来西亚 / 菲律宾，共五国）
 //
 // 为什么单独放数据而不是塞进字典：
 // 1. 每个国家的制造画像、风险、核查要点都是长篇差异化内容，塞进 9 份字典会失控；
@@ -6,6 +6,9 @@
 // 3. en / zh 手写保证质量，其余语言回退英文（宁可英文也不显示空翻译或机翻噪声）。
 //
 // 重要：新增国家必须写真实差异内容。禁止把 China 复制成 Vietnam 只改国名。
+//
+// 五国内容厚度对齐（2026-09-30 校对）：profile / risks(5) / verificationNotes(4) /
+// auditNotes(4) / hubs(5) / industries / standards / registry / faq(6)。
 
 export type CoverageServiceCode = "verification" | "audit";
 
@@ -123,6 +126,14 @@ export const COVERAGE_COUNTRIES: CoverageCountry[] = [
           q: "Do you cover regions outside the main manufacturing belts?",
           a: "Yes. We work in the inland hubs including Chengdu, Chongqing, Wuhan and Xi'an. Travel adds cost and a little lead time compared with the coastal belts.",
         },
+        {
+          q: "What documents should I request from a Chinese supplier?",
+          a: "Ask for the business licence, the 18-digit Unified Social Credit Code, export records for recent shipments, any quality or social compliance certificates, and product test reports for your category. Where a certificate is held by a parent or group company, ask for the document that links that entity to the one signing your contract.",
+        },
+        {
+          q: "The English trading name and the Chinese registered name do not match. Is that a problem?",
+          a: "It is common and not automatically a red flag, but it has to be resolved before you pay. Ask which Chinese registered entity will appear on the contract and on the invoice, then check that entity on the National Enterprise Credit Information Publicity System. If the supplier cannot name one registered entity, treat that as a finding.",
+        },
       ],
     },
     zh: {
@@ -192,6 +203,14 @@ export const COVERAGE_COUNTRIES: CoverageCountry[] = [
         {
           q: "主要制造带之外的地区你们覆盖吗？",
           a: "覆盖。成都、重庆、武汉、西安等内陆枢纽都可以做。相比沿海，差旅会增加一些成本和排期时间。",
+        },
+        {
+          q: "应该向中国供应商索要哪些文件？",
+          a: "营业执照、18 位统一社会信用代码、近期出货的出口记录、质量或社会责任证书，以及对应你品类的产品检测报告。如果证书挂在母公司或集团公司名下，要求提供把该主体与签约主体关联起来的文件。",
+        },
+        {
+          q: "对方给的英文名和中文注册名对不上，有问题吗？",
+          a: "很常见，本身不等于红旗，但必须在付款前解决。问清楚合同和发票上出现的是哪个中文注册实体，再拿这个实体去国家企业信用信息公示系统核对。如果对方说不出一个明确的注册主体，就应当记为一项发现。",
         },
       ],
     },
@@ -271,6 +290,14 @@ export const COVERAGE_COUNTRIES: CoverageCountry[] = [
           q: "Can you audit in the north and the south?",
           a: "Yes. Both regions are covered. Auditor capacity is tighter around Hanoi and Bac Ninh than around Ho Chi Minh City, so allow more notice for northern sites.",
         },
+        {
+          q: "What documents should I request from a Vietnamese supplier?",
+          a: "Ask for the Business Registration Certificate (ERC), the Investment Registration Certificate (IRC) where the company is foreign-invested, the factory address recorded on those documents, the entity that holds the export licence, and any quality or social compliance certificates. Foreign-invested firms often register an office address and produce somewhere else, so ask for both addresses.",
+        },
+        {
+          q: "Why is the delivery date quoted by a Vietnamese factory often optimistic?",
+          a: "Many Vietnamese plants import a high share of their components, so the schedule depends on inbound lead times the factory does not control. A new line also takes a few months to reach normal yield. Ask which components are imported, what the inbound lead time is and how the date was built, then add your own buffer.",
+        },
       ],
     },
     zh: {
@@ -332,6 +359,14 @@ export const COVERAGE_COUNTRIES: CoverageCountry[] = [
         {
           q: "南北都能审吗？",
           a: "都能。两个区域都覆盖。河内、北宁一带的审核员资源比胡志明市周边紧张，北部厂区需要更早预约。",
+        },
+        {
+          q: "应该向越南供应商索要哪些文件？",
+          a: "商业登记证（ERC）；外资企业还要投资登记证（IRC）；这两份文件上登记的工厂地址；出口资质的持有主体；以及质量或社会责任证书。外资企业常把注册地址设在办公室、在另一地址生产，两个地址都要问。",
+        },
+        {
+          q: "为什么越南工厂报的交期往往偏乐观？",
+          a: "很多越南工厂进口零部件比例高，交期取决于它们控制不了的进料前置时间；新产线也要几个月才能达到正常良率。问清楚哪些零部件靠进口、进料前置多久、交期是怎么算出来的，再自己留缓冲。",
         },
       ],
     },
@@ -411,6 +446,14 @@ export const COVERAGE_COUNTRIES: CoverageCountry[] = [
           q: "How far down the supply chain can you check?",
           a: "We audit the site you name and, where the programme requires it, the disclosed Tier 2 suppliers feeding it. We cannot chase undeclared subcontractors without names, which is why asking for the subcontractor list in writing is part of the verification scope.",
         },
+        {
+          q: "What documents should I request from a Thai supplier?",
+          a: "Ask for the company affidavit from the Department of Business Development including the shareholder list, the factory licence (Ror Ngor 4) for the production site, the certificates that apply to your product such as IATF 16949, ISO 9001, HACCP or FSSC 22000, and the entity that holds the export documentation. Check that the licensed address is the address you will ship from.",
+        },
+        {
+          q: "How do I confirm which Thai entity will actually manufacture my product?",
+          a: "A Thai group often runs a Board of Investment promoted entity alongside affiliates, and the promoted entity is not always the one that will make your order. Ask the supplier to name in writing the legal entity and the licensed site that will run production, then check that entity against the affidavit and the factory licence.",
+        },
       ],
     },
     zh: {
@@ -472,6 +515,14 @@ export const COVERAGE_COUNTRIES: CoverageCountry[] = [
         {
           q: "供应链能往下游查到几级？",
           a: "我们审核你指定的厂区；如果项目要求，一并审核已披露的二级供应商。没有名称的情况下我们无法追查未申报的外发厂，所以要求书面提供外发清单属于核查范围的一部分。",
+        },
+        {
+          q: "应该向泰国供应商索要哪些文件？",
+          a: "商业发展厅出具的公司注册证明书（含股东名单）、对应生产地址的工厂许可证（Ror Ngor 4）、适用于你产品的证书（IATF 16949、ISO 9001、HACCP 或 FSSC 22000 等），以及出口单证的持有主体。核对许可证地址就是你实际出货的地址。",
+        },
+        {
+          q: "怎么确认到底哪个泰国主体会生产我的产品？",
+          a: "泰国集团常把 BOI 优惠主体与关联公司并行运作，享受优惠的主体不一定就是生产你订单的那一个。要求对方书面写明承担生产的法律实体与持证厂区，再拿这个实体去核对公司注册证明书和工厂许可证。",
         },
       ],
     },
@@ -541,6 +592,8 @@ export const COVERAGE_COUNTRIES: CoverageCountry[] = [
       { q: "How common is FTZ subcontracting in Penang?", a: "Very common. Penang and Johor run two of the largest FTZ footprints in Southeast Asia, and many multinationals run a Tier 1 + Tier 2 structure inside the same zone. Ask directly which processes leave the audited site, and get the names of any sub-suppliers in writing." },
       { q: "Do Malaysian factories accept SMETA or BSCI audits?", a: "Yes, particularly at Penang and Selangor electronics plants supplying into the UK and EU. SMETA is the more common of the two. For automotive programmes IATF 16949 is the usual framework. For food and halal, JAKIM and HACCP matter more than the social compliance ones." },
       { q: "How long does a Penang audit take?", a: "A single-site quality audit is usually scheduled within a week for Penang and Selangor, and reported within two business days. SMETA full audits need more time. East Malaysia (Sabah/Sarawak) needs more travel lead time." },
+      { q: "What documents should I request from a Malaysian supplier?", a: "Ask for the SSM company profile with the registration number and director list, the MITI manufacturing licence where the sector requires one, the FTZ operator details where the plant sits in a free trade zone, and the certificates that apply to your product such as IATF 16949, JAKIM halal or HACCP. Where preferential origin is claimed, ask for the Customs approval as well." },
+      { q: "How do I tell a Malaysian manufacturer from a trading company?", a: "Check the registered business activity on the SSM profile, then ask which production steps are in-house and which are subcontracted. A trading company will name a third-party plant for every process. For FTZ entities, confirm separately whether the company you are dealing with is the zone operator or only the exporter of record." },
     ],
   },
   zh: {
@@ -600,6 +653,8 @@ export const COVERAGE_COUNTRIES: CoverageCountry[] = [
       { q: "槟城 FTZ 外发常见吗？", a: "非常常见。槟城与柔佛是东南亚两个最大的 FTZ 之一，许多跨国公司在同一区域跑 Tier 1 + Tier 2 结构。直接问哪些工序离开被审核厂区，并要求书面列出外发厂名称。" },
       { q: "马来西亚工厂接受 SMETA / BSCI 验厂吗？", a: "接受，尤其在面向英国与欧盟的槟城、雪兰莪电子工厂。SMETA 较常见。汽车项目一般是 IATF 16949。食品与清真体系，JAKIM 与 HACCP 比社会责任更重要。" },
       { q: "槟城验厂需要多久？", a: "单厂区质量审核通常一周内可排期，两个工作日内出报告。完整 SMETA 需要更长时间。东马（沙巴 / 砂拉越）需要更长的差旅前置期。" },
+      { q: "应该向马来西亚供应商索要哪些文件？", a: "SSM 公司资料（含注册号与董事名单）；行业需要时索取 MITI 制造许可；厂区位于自由贸易区时索取 FTZ 运营方资料；以及适用于你产品的证书，如 IATF 16949、JAKIM 清真或 HACCP。若对方主张优惠原产地，一并索取海关核准。" },
+      { q: "怎么区分马来西亚工厂和贸易公司？", a: "先看 SSM 资料里登记的经营范围，再问哪些工序自有、哪些外发。贸易公司会把每一道工序都指向第三方工厂。对 FTZ 主体，另行确认跟你接触的是园区运营方，还是仅仅是名义出口方。" },
     ],
   },
 },
@@ -666,6 +721,8 @@ export const COVERAGE_COUNTRIES: CoverageCountry[] = [
       { q: "Do Philippine factories accept BSCI or SMETA?", a: "Less commonly than China, Vietnam or Malaysia. Where the buyer is Japanese or Korean, the audit tends to follow the parent's own checklist rather than BSCI or SMETA. We can audit against either or against the buyer's standard." },
       { q: "How long does a Manila area audit take?", a: "A single-site quality audit in the Laguna or Cavite belt is normally scheduled within a week and reported within two business days. Cebu adds a day. Other provinces need extra travel time. Plan longer than China or Vietnam for the first visit." },
       { q: "What about typhoon season?", a: "June to November. Manila port and Cebu port can run on modified schedules. We avoid booking audits during the peak typhoon window when possible, and build slack into the travel plan when we cannot." },
+      { q: "What documents should I request from a Philippine supplier?", a: "Ask for the SEC registration where the supplier is a corporation, or the DTI business name registration where it is a sole proprietorship, the PEZA zone registration where the plant sits in an economic zone, the holder of the export contract, and any quality certificates. Ask early: documentation here is generally thinner than in Malaysia or Vietnam, so clarification rounds take longer." },
+      { q: "Why do so many Philippine suppliers turn out to be trading companies?", a: "A large share of Philippine manufacturing is tied to specific Japanese, American or Korean buyers, so the openly available factory pool is small and the trading layer in front of it is thick. Ask which processes are in-house, request the production address rather than the office address, and treat any lead that cannot name a plant as a trading company until it is confirmed otherwise." },
     ],
   },
   zh: {
@@ -723,6 +780,8 @@ export const COVERAGE_COUNTRIES: CoverageCountry[] = [
       { q: "菲律宾工厂接受 BSCI 或 SMETA 吗？", a: "没有中国、越南、马来西亚那么普遍。日资、韩资买家的工厂通常按母公司的自有检查表，而不是 BSCI 或 SMETA。我们可以按两种标准或买家自有标准来审。" },
       { q: "马尼拉周边验厂要多久？", a: "内湖、甲米地的单厂区质量审核通常一周内可排期，两个工作日内出报告。宿务增加一天。其他省份需要更长差旅时间。首次走访预留比中国、越南更长的窗口。" },
       { q: "台风季怎么办？", a: "6-11 月。马尼拉港与宿务港按调整后的班期运行。我们尽量避开台风高峰，必须经过时会在差旅计划里预留缓冲。" },
+      { q: "应该向菲律宾供应商索要哪些文件？", a: "企业索取 SEC 登记，独资索取 DTI 商业名称登记；厂区位于经济区时索取 PEZA 园区登记；出口合同持有主体；以及相关质量证书。要尽早要 —— 当地文件厚度普遍低于马来西亚、越南，澄清来回更耗时间。" },
+      { q: "为什么菲律宾供应商很多其实是贸易公司？", a: "菲律宾制造业很大比例挂靠在特定的日资、美资、韩资买家名下，公开可触达的工厂池很小，前面却隔着一层很厚的贸易层。问哪些工序自有；要生产地址而不是办公室地址；任何说不出工厂的线索，在证实之前一律先按贸易公司处理。" },
     ],
   },
   },

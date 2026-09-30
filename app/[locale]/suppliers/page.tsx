@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import { listSupplierDirectory } from "@/lib/queries";
+import { listSupplierDirectory, listPublicRfqs } from "@/lib/queries";
 import { overallLevel, LEVEL_COLOR, type RiskLevel } from "@/lib/riskEngine";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
@@ -88,6 +88,10 @@ export default async function SuppliersPage({ params }: Props) {
 
   // 全量已发布供应商（构建期冻结 —— 见文件顶部 revalidate 说明）。
   const all = await listSupplierDirectory();
+
+  // Live Buyer Requests（公开 RFQ，构建期冻结，与目录同源）—— 从首页移到此页顶部，
+  // 作为「决策辅助」（社交证明），不再占用首页 section。
+  const buyerRequests = await listPublicRfqs(3);
 
   // CS-D：目录卡片徽章 —— 单次批量查询推导状态（服务端唯一权威，见 trustProfile.ts）。
   // stage1.8：范围由「筛选结果」改为**全量** —— 过滤已移到客户端，
@@ -262,6 +266,38 @@ export default async function SuppliersPage({ params }: Props) {
           {s.exampleNote}
         </p>
       </section>
+
+      {/* Live Buyer Requests —— 决策辅助（社交证明），只展示公开白名单字段。 */}
+      {buyerRequests.length > 0 && (
+        <section className="mb-10">
+          <div className="flex items-center justify-between gap-4 mb-4">
+            <h2 className="text-xl font-bold text-[#111111]">{t.home.liveTitle}</h2>
+            <Link
+              href={p("/rfq")}
+              className="text-sm text-[#e94560] font-medium hover:underline whitespace-nowrap"
+            >
+              {t.home.liveViewAll} →
+            </Link>
+          </div>
+          <div className="grid md:grid-cols-3 gap-4">
+            {buyerRequests.map((r) => (
+              <div key={r.referenceId} className="card p-4 flex flex-col">
+                <div className="font-semibold text-[#111111] text-sm">{r.product}</div>
+                <div className="text-xs text-[#6b7280] mt-1">
+                  {r.quantity ? `${t.home.liveQuantity}: ${r.quantity}` : ""}
+                  {r.targetMarket ? ` · ${t.home.liveMarket}: ${r.targetMarket}` : ""}
+                </div>
+                <Link
+                  href={p(`/rfq?request=${encodeURIComponent(r.referenceId)}`)}
+                  className="text-xs text-[#e94560] font-medium hover:underline mt-2"
+                >
+                  {t.home.liveRespondCta}
+                </Link>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* 搜索 + 筛选 + 供应商目录（stage1.8：预渲染首屏 + 客户端过滤）──────────────
           数据与派生态在构建期算好并内联进 HTML（无 JS 也完整可读，SEO 等价于改造前）；

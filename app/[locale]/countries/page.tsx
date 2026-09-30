@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { COVERAGE_COUNTRIES } from "@/lib/coverage";
+import { SERVICE_MENU } from "@/lib/nav";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
@@ -29,6 +30,9 @@ export default async function CountriesPage({ params }: Props) {
   const t = await getDictionary(locale);
   const c = t.coverage;
   const p = (href: string) => localePath(locale, href);
+
+  // Inspection 是全局服务页（不做国家分页），href 复用主导航的单一事实来源 SERVICE_MENU。
+  const inspectionHref = SERVICE_MENU.find((m) => m.key === "inspection")?.href ?? "/services/inspection";
 
   const jsonLd = [
     {
@@ -110,6 +114,12 @@ export default async function CountriesPage({ params }: Props) {
                   className="block text-[#0f4c81] hover:underline"
                 >
                   {t.servicesIndex.items.factoryAudit.title} →
+                </Link>
+                <Link
+                  href={p(inspectionHref)}
+                  className="block text-[#0f4c81] hover:underline"
+                >
+                  {t.servicesIndex.items.inspection.title} →
                 </Link>
               </div>
 

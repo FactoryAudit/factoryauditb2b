@@ -30,7 +30,10 @@
       "monitoringDesc": "Geplante Nachprüfungen und Änderungswarnungen"
     },
     "homeLabel": "FactoryAuditB2B Startseite",
-    "mainNav": "Hauptnavigation"
+    "mainNav": "Hauptnavigation",
+    "solutions": "Lösungen",
+    "auditsInspections": "Audits & Inspektionen",
+    "more": "Mehr"
   },
   "footer": {
     "workWithUs": "Arbeite mit uns",
@@ -71,7 +74,9 @@
     "suppliers": "Lieferantenverzeichnis",
     "membership": "Mitgliedschaft",
     "standardReport": "Standardbericht",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "buyer": "Käufer",
+    "company": "Unternehmen"
   },
   "home": {
     "badge": "Prüfen. Beschaffen. Inspizieren. Versenden.",
@@ -170,8 +175,47 @@
     "liveMarket": "Zielmarkt",
     "liveIndustry": "Branche",
     "liveCerts": "Zertifizierungen",
-            "metaTitle": "Fabrikaudit und Lieferantenprüfung",
-            "metaDesc": "Lieferanten in China und Südostasien entdecken, bewerten und verifizieren, damit gute Hersteller gefunden werden und Einkäufer sicher beschaffen können."
+    "metaTitle": "Fabrikaudit und Lieferantenprüfung",
+    "metaDesc": "Lieferanten in China und Südostasien entdecken, bewerten und verifizieren, damit gute Hersteller gefunden werden und Einkäufer sicher beschaffen können.",
+    "sample": {
+      "eyebrow": "Beispiel-Lieferantenprofil",
+      "title": "Sehen Sie, wie ein verifizierter Lieferantendatensatz aussieht.",
+      "lead": "Jeder verifizierte Lieferant führt einen einheitlichen Datensatz: Identität, Auditstatus, Nachweise und Produktionskapazität — damit Sie Gleiches mit Gleichem vergleichen können.",
+      "tag": "Beispiel-Lieferantenprofil — Demodaten, nur zur Veranschaulichung",
+      "company": "Beispiel-Elektronikhersteller",
+      "status": "Beispiel · Audit abgeschlossen",
+      "fieldLocation": "Standort",
+      "fieldIndustry": "Branche",
+      "fieldCert": "Zertifizierung",
+      "fieldCapacity": "Produktionskapazität",
+      "fieldAuditType": "Audittyp",
+      "fieldAuditDate": "Auditdatum",
+      "valLocation": "Dongguan, China",
+      "valIndustry": "Elektronik · PCB-Montage",
+      "valCert": "ISO 9001",
+      "valCapacity": "4 SMT-Linien",
+      "valAuditType": "Werksaudit — Vor Ort",
+      "valAuditDate": "2025 · Q1",
+      "stepRequested": "Angefragt",
+      "stepScheduled": "Geplant",
+      "stepOnsite": "Vor Ort",
+      "stepReport": "Bericht",
+      "evidence": "Nachweise: Fotos · Video · Dokumente",
+      "viewSample": "Beispieldatensatz ansehen",
+      "demoNote": "Demodaten — nur zur Veranschaulichung. Echte Lieferantenprofile werden nur angemeldeten Käufern angezeigt."
+    },
+    "capabilitiesLabel": "Was wir anbieten",
+    "capVerification": "Lieferantenverifizierung",
+    "capAudit": "Werksaudit",
+    "capInspection": "Produktinspektion",
+    "capSourcing": "Beschaffungsunterstützung",
+    "workflowEyebrow": "Ein verbundener Datensatz",
+    "workflowTitle": "Von der Lieferantensuche bis zur verifizierten Werksevidenz.",
+    "workflowLead": "Alles läuft in einem verbundenen Workflow, sodass Evidenz, Berichte und Lieferantendatensätze am selben Ort bleiben.",
+    "wfCheck1": "Kostenlose Tools zur Bewertung und Vorauswahl von Lieferanten",
+    "wfCheck2": "Vor-Ort-Verifizierung mit Foto-, Video- und Dokumentevidenz",
+    "wfCheck3": "Berichte in einem konsistenten, vergleichbaren Format",
+    "wfCheck4": "Ein Datensatz pro Lieferant, mit dem Team geteilt"
   },
   "toolsIndex": {
     "badge": "Kostenlose Tools",
@@ -1299,7 +1343,7 @@
       },
       {
         "h": "Zahlungsdaten",
-        "b": "Zahlungen werden von Stripe verarbeitet. Wir sehen oder speichern niemals Ihre vollständige Kartennummer. Wir speichern nur Kartenmarke, die letzten vier Stellen, den Abonnementstatus und das Verlängerungsdatum, die für den Betrieb Ihrer Mitgliedschaft erforderlich sind."
+        "b": "Sobald der Online-Zahlungsverkehr verfügbar ist, wird die Zahlung von einem externen Zahlungsdienstleister abgewickelt. Wir sehen oder speichern niemals Ihre vollständige Kartennummer. Wir speichern nur Kartenmarke, die letzten vier Stellen, den Abonnementstatus und das Verlängerungsdatum, die für den Betrieb Ihrer Mitgliedschaft erforderlich sind. Bis der Online-Zahlungsverkehr freigeschaltet ist, werden auf dieser Website keine Kartendaten erfasst."
       }
     ],
     "termsTitle": "Nutzungsbedingungen und Plattformregeln",
@@ -1336,7 +1380,7 @@
       },
       {
         "h": "Mitgliedschaft, Abrechnung und Verlängerung",
-        "b": "Die Founding Buyer Membership ist ein Jahresabonnement für 99 USD pro Jahr. Die Zahlung wird über Stripe abgewickelt. Ihr Abonnement verlängert sich jedes Jahr automatisch, sofern Sie nicht vor dem Verlängerungsdatum kündigen. Sie können Ihr Verlängerungsdatum einsehen oder jederzeit auf Ihrer Kontoseite kündigen."
+        "b": "Die Founding Buyer Membership ist ein Jahresabonnement für 99 USD pro Jahr. Die Zahlung wird von einem externen Zahlungsdienstleister abgewickelt. Ihr Abonnement verlängert sich jedes Jahr automatisch, sofern Sie nicht vor dem Verlängerungsdatum kündigen. Sie können Ihr Verlängerungsdatum einsehen oder jederzeit auf Ihrer Kontoseite kündigen. Der Online-Zahlungsverkehr ist noch nicht freigeschaltet; bis dahin richtet unser Team Ihr Abonnement ein und bestätigt Ihnen die Abrechnung per E-Mail."
       },
       {
         "h": "Erstattungen und Kündigung",
@@ -1388,7 +1432,7 @@
     "plans": [
       {
         "name": "Starter-Training",
-        "price": "$280",
+        "price": "${price}",
         "period": "/ pro Fabrik",
         "features": [
           "1-tägige Qualitätsgrundlagen vor Ort",
@@ -1400,7 +1444,7 @@
       },
       {
         "name": "Pro-Training",
-        "price": "$950",
+        "price": "${price}",
         "period": "/ pro Fabrik",
         "features": [
           "3-tägiges Qualitätssystem und QC",
@@ -1508,12 +1552,12 @@
         "href": "/monitoring"
       }
     ],
-    "comingSoonNote": "Lieferanten-Monitoring ist ein Abonnement und wird pro Lieferant und Jahr angeboten. Alle anderen Posten auf dieser Seite werden pro Projekt abgerechnet: kein Abonnement, keine automatische Verlängerung.",
+    "comingSoonNote": "Lieferanten-Monitoring wird pro Lieferant und Jahr angeboten. Die Founding Buyer Membership ist ein Jahresabonnement für 99 USD pro Jahr. Beide verlängern sich jedes Jahr automatisch; Sie können beide auf Ihrer Kontoseite kündigen. Alle anderen Posten auf dieser Seite werden pro Projekt angeboten.",
     "alsoTitle": "Ebenfalls verfügbar",
     "alsoItems": [
       "Inspektion: Kontrollen während der Produktion und vor dem Versand, Angebot pro Personentag",
       "Sourcing: 3–5 % Provision auf den Auftragswert, Angebot vor Auftragserteilung",
-      "Lieferantenverbesserung: Schulung und Korrekturmaßnahmen nach einem Audit, Angebot pro Werk"
+      "Lieferantenverbesserung: Schulung ab ${price} pro Werk und Korrekturmaßnahmen nach einem Audit"
     ],
     "alsoCta": "Angebot anfordern",
     "reportsTitle": "Berichte und Verifizierung: Richtwerte",
@@ -1737,7 +1781,31 @@
     "notSureLead": "Führen Sie zuerst den kostenlosen Risikorechner aus. Es dauert etwa drei Minuten und sagt Ihnen, was fehlt.",
     "notSureCta": "Lieferantenrisiko bewerten",
     "metaTitle": "Verifizierung, Audit und Inspektion",
-    "metaDesc": "Unabhängige Lieferantenverifizierung, Werksaudit, Inspektion und Beschaffungsunterstützung in China, Vietnam, Thailand, Malaysia und auf den Philippinen. Umfang und Angebot pro Projekt."
+    "metaDesc": "Unabhängige Lieferantenverifizierung, Werksaudit, Inspektion und Beschaffungsunterstützung in China, Vietnam, Thailand, Malaysia und auf den Philippinen. Umfang und Angebot pro Projekt.",
+    "processTitle": "Ein klarer Weg von der Anfrage zur Entscheidung.",
+    "processLead": "Wählen Sie das Maß an Sicherheit, das Ihre Beschaffungsentscheidung braucht.",
+    "stepRequestTitle": "Anfrage",
+    "stepRequestBody": "Nennen Sie uns den Lieferanten, das Produkt oder die Fabrik, die geprüft werden soll.",
+    "stepScopingTitle": "Scoping",
+    "stepScopingBody": "Wir bestätigen Umfang, Zeitplan und das richtige Prüfniveau.",
+    "stepOnsiteTitle": "Vor Ort",
+    "stepOnsiteBody": "Lokale Auditoren führen den Besuch durch und sammeln Evidenz.",
+    "stepReportTitle": "Bericht",
+    "stepReportBody": "Befunde, Fotos und Dokumente werden in einem einheitlichen Format geliefert.",
+    "stepDecisionTitle": "Entscheidung",
+    "stepDecisionBody": "Nutzen Sie den Datensatz, um voranzukommen — oder einen Lieferanten auszuschließen.",
+    "faqTitle": "Was Käufer üblicherweise fragen.",
+    "faqLead": "Häufige Fragen zu Verifizierung und Audit.",
+    "faq1q": "Wie lange dauert ein Werksaudit?",
+    "faq1a": "Das hängt von Umfang und Standort ab. Die meisten Einzelwerks-Audits werden nach dem Scoping innerhalb eines definierten Zeitfensters abgeschlossen; der Bericht folgt nach Prüfung der Evidenz.",
+    "faq2q": "Decken Sie meine Branche ab?",
+    "faq2a": "Wir arbeiten über ein breites Spektrum an Fertigungskategorien in China und Südostasien. Nennen Sie uns Ihr Produkt, wir bestätigen die Abdeckung vor Ihrer Zusage.",
+    "faq3q": "Welche Evidenz erhalte ich?",
+    "faq3a": "Je nach Service erhalten Sie Foto-, Video- und Dokumentevidenz sowie einen strukturierten Bericht zum Lieferantenvergleich.",
+    "faq4q": "Kann ich einen bestimmten Lieferanten anfragen?",
+    "faq4a": "Ja. Sie können eine Verifizierung oder ein Audit für einen bereits bekannten Lieferanten anfragen oder uns zuerst bei der Vorauswahl helfen lassen.",
+    "faq5q": "Brauche ich eine Mitgliedschaft?",
+    "faq5a": "Zum Start ist keine Mitgliedschaft nötig. Sie können direkt eine RFQ aufgeben oder einen Service anfragen."
   },
   "resourcesIndex": {
     "badge": "Ressourcen",
@@ -3937,8 +4005,7 @@
     "yes": "Ja",
     "no": "Nein",
     "na": "N/V"
-  }
-,
+  },
   "supplierDashboard": {
     "pageTitle": "Lieferanten-Dashboard",
     "pageDesc": "Verfolge, wie Käufer dein verifiziertes Lieferantenprofil entdecken und nutzen.",
@@ -4025,4 +4092,5 @@
     "errSubmit": "Wir konnten deine Bewerbung nicht senden. Schreib uns direkt an support@factoryauditb2b.com.",
     "fileHint": "PDF, DOC oder DOCX. Maximal 5 MB.",
     "privacyNote": "Mit dem Absenden stimmst du zu, dass FactoryAuditB2B die übermittelten Daten ausschließlich für Zwecke der Personalgewinnung, Projektzusammenarbeit und Talentpool-Pflege verarbeitet."
-  }}
+  }
+}

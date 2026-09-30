@@ -3,7 +3,7 @@ import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 import { z } from "zod";
 import { computeRisk, type RiskInput, type RiskResult, type EvidenceStatus } from "./scoring";
 import { COVERAGE_COUNTRY_SENTENCE } from "./coverage";
-import { MEMBERSHIP_PRICE_USD } from "./suppliers";
+import { COMMERCIAL } from "./commercialConfig";
 
 // DeepSeek（PRD §72 真实 AI 服务）。未配置 DEEPSEEK_API_KEY 时自动回退本地规则引擎。
 const deepseek = createOpenAICompatible({
@@ -298,14 +298,14 @@ BUSINESS FACTS (use ONLY these; never invent anything):
 - Audit / compliance programs referenced: SMETA, BSCI, ISO 9001, ISO 14001, SA8000, WRAP, Sedex, CE, UL.
 - Coverage: ${COVERAGE_COUNTRY_SENTENCE}. Other countries on request.
 - Free tools: $0, no account needed.
-- Supplier verification: $99 to $129 per supplier, quoted per project.
-- Factory audit: from $399, quoted per man-day plus travel.
-- Product inspection: from $199, quoted per man-day plus travel.
+- Supplier verification: $${COMMERCIAL.supplierVerification.minUsd} to $${COMMERCIAL.supplierVerification.maxUsd} per supplier, quoted per project.
+- Factory audit: from $${COMMERCIAL.factoryAudit.startingUsd}, quoted per man-day plus travel.
+- Product inspection: from $${COMMERCIAL.inspection.startingUsd}, quoted per man-day plus travel.
 - Supplier monitoring: yearly subscription, quoted per supplier per year.
-- Buyer membership (Founding Buyer): $${MEMBERSHIP_PRICE_USD} per year.
+- Buyer membership (Founding Buyer): $${COMMERCIAL.membershipAnnualUsd} per year.
 - Supplier network registration: free. Status and evidence level are decided by human review and are not sold.
-- Training plans: Starter $280/factory, Pro $950/factory, Enterprise custom.
-- Sourcing support: 3-5% commission on order value, quoted before the order is placed.
+- Training plans: Starter $${COMMERCIAL.training.starterUsd}/factory, Pro $${COMMERCIAL.training.proUsd}/factory, Enterprise custom.
+- Sourcing support: ${COMMERCIAL.sourcing.commissionMinPct}-${COMMERCIAL.sourcing.commissionMaxPct}% commission on order value, quoted before the order is placed.
 - Quote / human handoff page: /custom-services ; training plans page: /training-plans ; pricing page: /pricing.
 - All prices in USD.
 

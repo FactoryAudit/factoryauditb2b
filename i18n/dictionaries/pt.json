@@ -30,7 +30,10 @@
       "monitoringDesc": "Revisitas programadas e alertas de mudanças"
     },
     "homeLabel": "FactoryAuditB2B início",
-    "mainNav": "Navegação principal"
+    "mainNav": "Navegação principal",
+    "solutions": "Soluções",
+    "auditsInspections": "Auditorias e inspeções",
+    "more": "Mais"
   },
   "footer": {
     "workWithUs": "Trabalhe connosco",
@@ -71,7 +74,9 @@
     "suppliers": "Diretório de fornecedores",
     "membership": "Assinatura",
     "standardReport": "Relatório padrão",
-    "contact": "Contato"
+    "contact": "Contato",
+    "buyer": "Comprador",
+    "company": "Empresa"
   },
   "home": {
     "badge": "Verificar. Comprar. Inspecionar. Enviar.",
@@ -170,8 +175,47 @@
     "liveMarket": "Mercado-alvo",
     "liveIndustry": "Setor",
     "liveCerts": "Certificações",
-            "metaTitle": "Auditoria de fábrica e verificação",
-            "metaDesc": "Descubra, avalie e verifique fornecedores na China e no Sudeste Asiático, para que bons fabricantes sejam encontrados e os compradores comprem com confiança."
+    "metaTitle": "Auditoria de fábrica e verificação",
+    "metaDesc": "Descubra, avalie e verifique fornecedores na China e no Sudeste Asiático, para que bons fabricantes sejam encontrados e os compradores comprem com confiança.",
+    "sample": {
+      "eyebrow": "Perfil de fornecedor de exemplo",
+      "title": "Veja como é um registro de fornecedor verificado.",
+      "lead": "Cada fornecedor verificado tem um registro consistente: identidade, status de auditoria, evidências e capacidade de produção — para comparar em condições iguais.",
+      "tag": "Perfil de fornecedor de exemplo — dados de demonstração, apenas para ilustração",
+      "company": "Fabricante de Eletrônicos de Exemplo",
+      "status": "Exemplo · Auditoria concluída",
+      "fieldLocation": "Localização",
+      "fieldIndustry": "Setor",
+      "fieldCert": "Certificação",
+      "fieldCapacity": "Capacidade de produção",
+      "fieldAuditType": "Tipo de auditoria",
+      "fieldAuditDate": "Data da auditoria",
+      "valLocation": "Dongguan, China",
+      "valIndustry": "Eletrônicos · Montagem de PCB",
+      "valCert": "ISO 9001",
+      "valCapacity": "4 linhas SMT",
+      "valAuditType": "Auditoria de fábrica — No local",
+      "valAuditDate": "2025 · T1",
+      "stepRequested": "Solicitado",
+      "stepScheduled": "Agendado",
+      "stepOnsite": "No local",
+      "stepReport": "Relatório",
+      "evidence": "Evidências: fotos · vídeo · documentos",
+      "viewSample": "Ver registro de exemplo",
+      "demoNote": "Dados de demonstração — apenas para ilustração. Os perfis reais de fornecedores são exibidos apenas para compradores conectados."
+    },
+    "capabilitiesLabel": "O que oferecemos",
+    "capVerification": "Verificação de fornecedores",
+    "capAudit": "Auditoria de fábrica",
+    "capInspection": "Inspeção de produto",
+    "capSourcing": "Suporte de sourcing",
+    "workflowEyebrow": "Um registro conectado",
+    "workflowTitle": "Da descoberta de fornecedores à evidência de fábrica verificada.",
+    "workflowLead": "Tudo funciona em um fluxo conectado, de modo que evidências, relatórios e registros de fornecedores permanecem no mesmo lugar.",
+    "wfCheck1": "Ferramentas gratuitas para avaliar e pré-selecionar fornecedores",
+    "wfCheck2": "Verificação no local com evidência de fotos, vídeo e documentos",
+    "wfCheck3": "Relatórios estruturados em um formato consistente e comparável",
+    "wfCheck4": "Um registro por fornecedor, compartilhado com sua equipe"
   },
   "toolsIndex": {
     "badge": "Ferramentas gratuitas",
@@ -1299,7 +1343,7 @@
       },
       {
         "h": "Dados de pagamento",
-        "b": "Os pagamentos são processados pela Stripe. Nunca vemos ou armazenamos o número completo do seu cartão. Guardamos apenas a bandeira do cartão, os quatro últimos dígitos, o status da assinatura e a data de renovação necessários para operar sua assinatura."
+        "b": "Quando o pagamento online estiver disponível, será processado por um provedor de pagamentos terceirizado. Nunca vemos ou armazenamos o número completo do seu cartão. Guardamos apenas a bandeira do cartão, os quatro últimos dígitos, o status da assinatura e a data de renovação necessários para operar sua assinatura. Enquanto o pagamento online não estiver disponível, nenhum dado de cartão é coletado neste site."
       }
     ],
     "termsTitle": "Termos de Serviço e regras da plataforma",
@@ -1336,7 +1380,7 @@
       },
       {
         "h": "Assinatura, cobrança e renovação",
-        "b": "A assinatura Founding Buyer é anual, ao preço de 99 USD por ano. O pagamento é processado pela Stripe. A assinatura renova automaticamente todos os anos, salvo se você cancelar antes da data de renovação. Você pode ver a data de renovação ou cancelar a qualquer momento na página da sua conta."
+        "b": "A assinatura Founding Buyer é uma assinatura anual de 99 USD por ano. O pagamento é processado por um provedor de pagamentos terceirizado. A assinatura renova automaticamente todos os anos, salvo se você cancelar antes da data de renovação. Você pode ver a data de renovação ou cancelar a qualquer momento na página da sua conta. O pagamento online ainda não está disponível; até lá, a nossa equipe configura a sua assinatura e confirma por e-mail como a cobrança será feita."
       },
       {
         "h": "Reembolsos e cancelamento",
@@ -1388,7 +1432,7 @@
     "plans": [
       {
         "name": "Formação Starter",
-        "price": "$280",
+        "price": "${price}",
         "period": "/ por fábrica",
         "features": [
           "Fundamentos de qualidade de 1 dia no local",
@@ -1400,7 +1444,7 @@
       },
       {
         "name": "Formação Pro",
-        "price": "$950",
+        "price": "${price}",
         "period": "/ por fábrica",
         "features": [
           "Sistema de qualidade e controle de qualidade de 3 dias",
@@ -1508,12 +1552,12 @@
         "href": "/monitoring"
       }
     ],
-    "comingSoonNote": "O monitoramento de fornecedores é uma assinatura orçada por fornecedor e por ano. Todo o resto nesta página é cobrado por projeto: sem assinatura, sem renovação automática.",
+    "comingSoonNote": "O monitoramento de fornecedores é orçado por fornecedor e por ano. A assinatura Founding Buyer é uma assinatura anual de 99 USD por ano. Ambas se renovam automaticamente todos os anos e você pode cancelar qualquer uma na página da sua conta. Os demais itens desta página são orçados por projeto.",
     "alsoTitle": "Também disponível",
     "alsoItems": [
       "Inspeção: verificações em linha e pré-embarque, orçadas por homem-dia",
       "Sourcing: comissão de 3–5% sobre o valor do pedido, orçada antes da colocação do pedido",
-      "Melhoria de fornecedores: treinamento e ação corretiva após auditoria, orçada por fábrica"
+      "Melhoria de fornecedores: treinamento a partir de ${price} por fábrica e ação corretiva após auditoria"
     ],
     "alsoCta": "Pedir orçamento",
     "reportsTitle": "Relatórios e verificação: faixas indicativas",
@@ -1737,7 +1781,31 @@
     "notSureLead": "Execute a calculadora de risco gratuita primeiro. Leva cerca de três minutos e informa o que está faltando.",
     "notSureCta": "Avaliar o risco do fornecedor",
     "metaTitle": "Verificação, auditoria e inspeção",
-    "metaDesc": "Verificação independente de fornecedores, auditoria de fábrica, inspeção e suporte de sourcing na China, Vietnã, Tailândia, Malásia e Filipinas. Escopo e orçamento por projeto."
+    "metaDesc": "Verificação independente de fornecedores, auditoria de fábrica, inspeção e suporte de sourcing na China, Vietnã, Tailândia, Malásia e Filipinas. Escopo e orçamento por projeto.",
+    "processTitle": "Um caminho claro da solicitação à decisão.",
+    "processLead": "Escolha o nível de garantia que sua decisão de sourcing exige.",
+    "stepRequestTitle": "Solicitação",
+    "stepRequestBody": "Informe o fornecedor, produto ou fábrica que precisa verificar.",
+    "stepScopingTitle": "Escopo",
+    "stepScopingBody": "Confirmamos escopo, prazo e o nível certo de verificação.",
+    "stepOnsiteTitle": "No local",
+    "stepOnsiteBody": "Auditores locais realizam a visita e coletam evidências.",
+    "stepReportTitle": "Relatório",
+    "stepReportBody": "Conclusões, fotos e documentos são entregues em formato consistente.",
+    "stepDecisionTitle": "Decisão",
+    "stepDecisionBody": "Use o registro para avançar — ou descartar um fornecedor.",
+    "faqTitle": "O que os compradores costumam perguntar.",
+    "faqLead": "Perguntas frequentes sobre verificação e auditoria.",
+    "faq1q": "Quanto tempo leva uma auditoria de fábrica?",
+    "faq1a": "Depende do escopo e da localização. A maioria das auditorias de fábrica única é concluída em uma janela definida após o escopo, e o relatório vem após a revisão das evidências.",
+    "faq2q": "Vocês cobrem meu setor?",
+    "faq2a": "Atuamos em uma ampla gama de categorias de manufatura na China e no Sudeste Asiático. Informe seu produto e confirmaremos a cobertura antes de você se comprometer.",
+    "faq3q": "Que evidências recebo?",
+    "faq3a": "Dependendo do serviço, você recebe evidências de fotos, vídeo e documentos, além de um relatório estruturado para comparação entre fornecedores.",
+    "faq4q": "Posso solicitar um fornecedor específico?",
+    "faq4a": "Sim. Você pode solicitar verificação ou auditoria para um fornecedor que já tem em mente, ou pedir ajuda para pré-selecionar primeiro.",
+    "faq5q": "Preciso de uma assinatura?",
+    "faq5a": "Nenhuma assinatura é necessária para começar. Você pode publicar uma RFQ ou solicitar um serviço diretamente."
   },
   "resourcesIndex": {
     "badge": "Recursos",
@@ -3937,8 +4005,7 @@
     "yes": "Sim",
     "no": "Não",
     "na": "N/A"
-  }
-,
+  },
   "supplierDashboard": {
     "pageTitle": "Painel do fornecedor",
     "pageDesc": "Acompanhe como os compradores descobrem e interagem com seu perfil de fornecedor verificado.",
@@ -4025,4 +4092,5 @@
     "errSubmit": "Não foi possível enviar a sua candidatura. Escreva-nos diretamente para support@factoryauditb2b.com.",
     "fileHint": "PDF, DOC ou DOCX. Máximo 5 MB.",
     "privacyNote": "Ao enviar, concorda que a FactoryAuditB2B trate as informações facultadas apenas para fins de recrutamento, cooperação em projetos e base de talentos."
-  }}
+  }
+}

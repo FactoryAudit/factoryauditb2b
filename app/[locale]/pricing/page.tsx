@@ -6,9 +6,13 @@ import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { ANALYTICS_EVENTS } from "@/lib/analytics";
 import CheckoutButton from "@/components/CheckoutButton";
-import { MEMBERSHIP_PRICE_USD } from "@/lib/suppliers";
+import { COMMERCIAL } from "@/lib/commercialConfig";
 
 const PATH = "/pricing";
+
+// alsoItems 里的培训项以 {price} 占位符表示起价，数字由 COMMERCIAL 注入（单一真源）。
+// 不含占位符的项原样返回，replace 无副作用。
+const withPrice = (raw: string) => raw.replace("{price}", String(COMMERCIAL.training.starterUsd));
 
 // 推荐套餐在 plans 数组中的位置（0=Free Tools, 1=Supplier Verification, 2=Factory Audit, 3=Supplier Monitoring）。
 // 用索引而不是套餐名做判断：套餐名在 9 种语言下不同，字符串比较会失效。
@@ -134,9 +138,12 @@ export default async function PricingPage({
       <section className="mt-14 rounded-lg bg-[#f1f5f9] p-6">
         <h2 className="font-semibold text-[#0f172a]">{p.alsoTitle}</h2>
         <ul className="mt-2 text-sm text-[#475569] space-y-1">
-          {p.alsoItems.map((c) => (
-            <li key={c}>• {c}</li>
-          ))}
+          {p.alsoItems.map((c) => {
+            // key 用「注入后」的文本：直接拿原始字典串（含 {price}）作 key 会把占位符
+            // 泄漏进 RSC flight payload（可见文本虽正确，但源码里出现未替换的 {price}）。
+            const text = withPrice(c);
+            return <li key={text}>• {text}</li>;
+          })}
         </ul>
         <Link href={lp("/custom-services")} className="btn btn-primary mt-4 inline-block">
           {p.alsoCta}
@@ -157,7 +164,7 @@ export default async function PricingPage({
         <h2 className="font-semibold text-[#0f172a]">{m.h1}</h2>
         <p className="text-sm text-[#64748b] mt-2">{m.lead}</p>
         <p className="text-2xl font-extrabold text-[#0f4c81] my-3">
-          ${MEMBERSHIP_PRICE_USD}
+          ${COMMERCIAL.membershipAnnualUsd}
           <span className="text-base font-normal text-[#64748b]">/ {m.pricePeriod}</span>
         </p>
         <ul className="text-sm text-[#475569] space-y-1 mb-4">

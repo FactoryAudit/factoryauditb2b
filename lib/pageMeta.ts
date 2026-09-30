@@ -1,14 +1,14 @@
 // 统一页面 metadata 工具：保证每个页面都有正确的 canonical / hreflang / OG / robots。
 // 修复 SEO-AUDIT P0-1：此前 16 个页面继承根 layout 的 canonicalFor(locale, "/")，全部指向首页。
 import type { Metadata } from "next";
-import type { Locale } from "@/i18n/config";
+import { LOCALES, LOCALE_META, type Locale } from "@/i18n/config";
 import { hreflangFor, canonicalFor } from "@/i18n/hreflang";
 import { COVERAGE_COUNTRY_SENTENCE } from "@/lib/coverage";
 
 // 全局品牌分享图（1200x630，供 Open Graph / Twitter Card 使用）。
 // 此前 openGraph 没有 images，社交分享与富媒体展示缺失。
 export const OG_IMAGE = {
-  url: "/og-image.png",
+  url: "/static/images/og-home.webp",
   width: 1200,
   height: 630,
   alt: `FactoryAuditB2B: supplier verification and factory audit in ${COVERAGE_COUNTRY_SENTENCE}`,
@@ -170,8 +170,12 @@ export function trimMetaTitle(
 export function buildPageMetadata({ locale, path, title, description, robots, withBrand = true }: MetaInput): Metadata {
   // 去重：部分页面（如集群页 seo_title）已自带品牌名，避免 "... | FactoryAuditB2B | FactoryAuditB2B"
   const BRAND_SUFFIX = " | FactoryAuditB2B";
+  // 去重前先清掉标题尾部的悬空分隔符（如 "Pricing |"），避免拼出 "Pricing | | FactoryAuditB2B"。
+  const cleanedTitle = title.replace(/[\s|｜—–·:：/／]+$/u, "");
   const finalTitle = trimMetaTitle(
-    withBrand && !title.includes("FactoryAuditB2B") ? `${title}${BRAND_SUFFIX}` : title
+    withBrand && !cleanedTitle.includes("FactoryAuditB2B")
+      ? `${cleanedTitle}${BRAND_SUFFIX}`
+      : cleanedTitle
   );
   // ── description 长度闸门统一收口（2026-09-29）────────────────────────────
   // 此前 `trimMetaDescription` 只在少数静态页被手动调用，而 guides / audit-guide /
@@ -189,6 +193,9 @@ export function buildPageMetadata({ locale, path, title, description, robots, wi
       description: finalDescription,
       type: "website",
       url: canonicalFor(locale, path),
+      siteName: "FactoryAuditB2B",
+      locale: LOCALE_META[locale].ogLocale,
+      alternateLocale: LOCALES.filter((l) => l !== locale).map((l) => LOCALE_META[l].ogLocale),
       images: [OG_IMAGE],
     },
     twitter: {

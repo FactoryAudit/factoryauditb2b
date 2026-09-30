@@ -4,11 +4,21 @@ import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import JsonLd from "@/components/JsonLd";
 import WhatsAppLink from "@/components/WhatsAppLink";
+import { COMMERCIAL } from "@/lib/commercialConfig";
 
 const PATH = "/training-plans";
 
 // 套餐高亮标记为 UI 状态，不随语言翻译；按索引与字典 plans 数组对应
 const HL = [false, true, false];
+
+// 培训套餐标准价（USD）。按索引与字典 plans 对齐；Enterprise 无标准价（字典为 "Custom"）。
+// 字典 `price` 只保留 "{price}" 占位符与本地货币符号/位置，数字一律由 COMMERCIAL 注入
+// —— 改价只改 lib/commercialConfig.ts 一处（spec §39/§70 单一真源）。
+const PLAN_USD: readonly (number | null)[] = [
+  COMMERCIAL.training.starterUsd,
+  COMMERCIAL.training.proUsd,
+  null,
+];
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale: raw } = await params;
@@ -70,23 +80,28 @@ export default async function TrainingPlansPage({ params }: { params: Promise<{ 
       <h2 className="text-xl font-semibold text-center mt-10 mb-1">{t.trainingPlans.plansTitle}</h2>
       <p className="text-center text-sm text-[#64748b] mb-4">{t.trainingPlans.priceNote}</p>
       <div className="grid md:grid-cols-3 gap-4">
-        {PLANS.map((p, i) => (
-          <div key={p.name} className={`card p-6 ${HL[i] ? "border-[#0f4c81] ring-2 ring-[#0f4c81]" : ""}`}>
-            <div className="font-bold text-lg">{p.name}</div>
-            <div className="text-2xl font-extrabold text-[#0f4c81] my-2">
-              {p.price}
-              {p.period && <span className="text-sm font-normal text-[#64748b]">{p.period}</span>}
+        {PLANS.map((p, i) => {
+          // 数字来自 COMMERCIAL；无标准价的套餐（Enterprise）字典里不含占位符，原样输出。
+          const usd = PLAN_USD[i];
+          const priceText = usd == null ? p.price : p.price.replace("{price}", String(usd));
+          return (
+            <div key={p.name} className={`card p-6 ${HL[i] ? "border-[#0f4c81] ring-2 ring-[#0f4c81]" : ""}`}>
+              <div className="font-bold text-lg">{p.name}</div>
+              <div className="text-2xl font-extrabold text-[#0f4c81] my-2">
+                {priceText}
+                {p.period && <span className="text-sm font-normal text-[#64748b]">{p.period}</span>}
+              </div>
+              <ul className="space-y-1 text-sm text-[#475569] mb-4">
+                {p.features.map((f) => (
+                  <li key={f}>✓ {f}</li>
+                ))}
+              </ul>
+              <a href={lp("/custom-services")} className={`btn ${HL[i] ? "btn-primary" : "btn-outline"} w-full`}>
+                {p.cta}
+              </a>
             </div>
-            <ul className="space-y-1 text-sm text-[#475569] mb-4">
-              {p.features.map((f) => (
-                <li key={f}>✓ {f}</li>
-              ))}
-            </ul>
-            <a href={lp("/custom-services")} className={`btn ${HL[i] ? "btn-primary" : "btn-outline"} w-full`}>
-              {p.cta}
-            </a>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <section className="mt-12">

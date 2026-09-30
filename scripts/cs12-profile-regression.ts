@@ -283,10 +283,10 @@ section("E. 字典与断言同源（九语键集 + en 叶子数）");
   }
   check("E3 九语 supplierProfile 键集完全一致（getDictionary 无深 fallback）", mismatch === 0, String(mismatch));
 
-  check("E4 en 叶子数 = 3126（与 cs06a C8 同源）", enLeaf === 3126, `实际 ${enLeaf}`);
+  check("E4 en 叶子数 = 3192（与 cs06a C8 同源）", enLeaf === 3192, `实际 ${enLeaf}`);
   check(
-    "E5 cs06a 里的 C8 常量已同步为 3126",
-    read(CS06A).includes("baseKeys.length === 3126")
+    "E5 cs06a 里的 C8 常量已同步为 3192",
+    read(CS06A).includes("baseKeys.length === 3192")
   );
 }
 

@@ -60,6 +60,19 @@ export const COMMERCIAL = {
   supplierImprovement: {
     billing: "custom_quoted" as const,
   },
+
+  /** 供应商培训套餐（/training-plans 标准价，USD，按工厂计；Enterprise 为 custom 报价） */
+  training: {
+    starterUsd: 280,
+    proUsd: 950,
+  },
+
+  /** 报告选项（/suppliers 报告预览区）。数值与 supplierVerification 相同，
+   *  但语义独立（报告 = 按份，核验 = 按供应商），故显式声明以便校验脚本逐项对照。 */
+  reportPreview: {
+    basicUsd: 99,
+    professionalUsd: 129,
+  },
 } as const;
 
 export type CommercialConfig = typeof COMMERCIAL;
@@ -74,4 +87,6 @@ export const PRICE_ANCHORS = {
   inspection: `USD ${COMMERCIAL.inspection.startingUsd}+`,
   membership: `USD ${COMMERCIAL.membershipAnnualUsd}/year`,
   sourcing: `${COMMERCIAL.sourcing.commissionMinPct}–${COMMERCIAL.sourcing.commissionMaxPct}%`,
+  trainingStarter: `USD ${COMMERCIAL.training.starterUsd}/factory`,
+  trainingPro: `USD ${COMMERCIAL.training.proUsd}/factory`,
 } as const;

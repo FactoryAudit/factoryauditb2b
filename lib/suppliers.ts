@@ -8,6 +8,8 @@
 // 页面/组件只消费本文件的字段清单与常量；分层逻辑不散落在页面代码里。
 // 数据本身仍在 lib/staticData.ts 的 STATIC_SUPPLIERS（单一事实来源，本文件不复制数据）。
 
+import { COMMERCIAL } from "./commercialConfig";
+
 export type AccessLayer = "public" | "free" | "paid";
 
 /** Public 层字段：目录卡片 + Profile 页 SEO 直出，任何情况下不得隐藏
@@ -114,9 +116,10 @@ export const FEATURED_MIN = 4;
 export const FEATURED_MAX = 10;
 
 /** Buyer Membership 定价（USD）
- *  单一事实来源：页面大号价格、membership 页 JSON-LD、llms.txt、注册欢迎邮件
- *  都必须读这个常量，不允许各自硬编码数字。改价只改这里。 */
-export const MEMBERSHIP_PRICE_USD = 99;
+ *  单一事实来源：**lib/commercialConfig.ts** 的 COMMERCIAL.membershipAnnualUsd。
+ *  本文件只是转发（forwarding binding），保持历史 `import { MEMBERSHIP_PRICE_USD } from "@/lib/suppliers"`
+ *  继续可用；改价只改 commercialConfig.ts 一处，全站自动跟随。 */
+export const MEMBERSHIP_PRICE_USD = COMMERCIAL.membershipAnnualUsd;
 export const MEMBERSHIP_PERIOD = "year";
 
 /** 目录页过滤态（country/industry/q）→ noindex + canonical 回目录首页（需求 §20） */

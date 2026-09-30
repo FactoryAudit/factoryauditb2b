@@ -30,7 +30,10 @@
       "monitoringDesc": "Revérifications planifiées et alertes de changement"
     },
     "homeLabel": "FactoryAuditB2B accueil",
-    "mainNav": "Navigation principale"
+    "mainNav": "Navigation principale",
+    "solutions": "Solutions",
+    "auditsInspections": "Audits et inspections",
+    "more": "Plus"
   },
   "footer": {
     "workWithUs": "Travailler avec nous",
@@ -71,7 +74,9 @@
     "suppliers": "Annuaire de fournisseurs",
     "membership": "Adhésion",
     "standardReport": "Rapport standard",
-    "contact": "Contact"
+    "contact": "Contact",
+    "buyer": "Acheteur",
+    "company": "Entreprise"
   },
   "home": {
     "badge": "Vérifier. Sourcer. Inspecter. Expédier.",
@@ -170,8 +175,47 @@
     "liveMarket": "Marché cible",
     "liveIndustry": "Secteur",
     "liveCerts": "Certifications",
-            "metaTitle": "Audit d'usine et vérification fournisseur",
-            "metaDesc": "Découvrez, évaluez et vérifiez des fournisseurs en Chine et en Asie du Sud-Est. Les bons fabricants se font connaître et les acheteurs sourcent en confiance."
+    "metaTitle": "Audit d'usine et vérification fournisseur",
+    "metaDesc": "Découvrez, évaluez et vérifiez des fournisseurs en Chine et en Asie du Sud-Est. Les bons fabricants se font connaître et les acheteurs sourcent en confiance.",
+    "sample": {
+      "eyebrow": "Profil fournisseur d'exemple",
+      "title": "Découvrez à quoi ressemble une fiche fournisseur vérifiée.",
+      "lead": "Chaque fournisseur vérifié dispose d'une fiche cohérente : identité, statut d'audit, preuves et capacité de production — pour comparer à armes égales.",
+      "tag": "Profil fournisseur d'exemple — données de démonstration, à titre indicatif uniquement",
+      "company": "Fabricant d'électronique d'exemple",
+      "status": "Exemple · Audit terminé",
+      "fieldLocation": "Localisation",
+      "fieldIndustry": "Secteur",
+      "fieldCert": "Certification",
+      "fieldCapacity": "Capacité de production",
+      "fieldAuditType": "Type d'audit",
+      "fieldAuditDate": "Date d'audit",
+      "valLocation": "Dongguan, Chine",
+      "valIndustry": "Électronique · Assemblage PCB",
+      "valCert": "ISO 9001",
+      "valCapacity": "4 lignes SMT",
+      "valAuditType": "Audit d'usine — Sur site",
+      "valAuditDate": "2025 · T1",
+      "stepRequested": "Demandé",
+      "stepScheduled": "Planifié",
+      "stepOnsite": "Sur site",
+      "stepReport": "Rapport",
+      "evidence": "Preuves : photos · vidéo · documents",
+      "viewSample": "Voir la fiche d'exemple",
+      "demoNote": "Données de démonstration — à titre indicatif uniquement. Les profils fournisseurs réels ne sont visibles que par les acheteurs connectés."
+    },
+    "capabilitiesLabel": "Ce que nous offrons",
+    "capVerification": "Vérification de fournisseurs",
+    "capAudit": "Audit d'usine",
+    "capInspection": "Inspection de produit",
+    "capSourcing": "Support d'approvisionnement",
+    "workflowEyebrow": "Un dossier connecté",
+    "workflowTitle": "De la découverte de fournisseurs à la preuve d'usine vérifiée.",
+    "workflowLead": "Tout passe par un flux connecté, de sorte que les preuves, rapports et dossiers fournisseurs restent au même endroit.",
+    "wfCheck1": "Outils gratuits pour évaluer et présélectionner les fournisseurs",
+    "wfCheck2": "Vérification sur site avec preuves photo, vidéo et documentaires",
+    "wfCheck3": "Rapports structurés dans un format cohérent et comparable",
+    "wfCheck4": "Un dossier par fournisseur, partagé avec votre équipe"
   },
   "toolsIndex": {
     "badge": "Outils gratuits",
@@ -1299,7 +1343,7 @@
       },
       {
         "h": "Données de paiement",
-        "b": "Les paiements sont traités par Stripe. Nous ne voyons ni ne stockons jamais votre numéro de carte complet. Nous conservons uniquement la marque de la carte, les quatre derniers chiffres, le statut de l’abonnement et la date de renouvellement nécessaires au fonctionnement de votre adhésion."
+        "b": "Lorsque le paiement en ligne sera disponible, il sera traité par un prestataire de paiement tiers. Nous ne voyons ni ne stockons jamais votre numéro de carte complet. Nous conservons uniquement la marque de la carte, les quatre derniers chiffres, le statut de l’abonnement et la date de renouvellement nécessaires au fonctionnement de votre adhésion. Tant que le paiement en ligne n’est pas disponible, aucune donnée de carte n’est collectée sur ce site."
       }
     ],
     "termsTitle": "Conditions d'Utilisation et règles",
@@ -1336,7 +1380,7 @@
       },
       {
         "h": "Adhésion, facturation et renouvellement",
-        "b": "L’adhésion Founding Buyer est un abonnement annuel au prix de 99 USD par an. Le paiement est traité par Stripe. Votre abonnement se renouvelle automatiquement chaque année, sauf si vous l’annulez avant la date de renouvellement. Vous pouvez consulter votre date de renouvellement ou annuler à tout moment depuis votre page de compte."
+        "b": "L’adhésion Founding Buyer est un abonnement annuel au prix de 99 USD par an. Le paiement est traité par un prestataire de paiement tiers. Votre abonnement se renouvelle automatiquement chaque année, sauf si vous l’annulez avant la date de renouvellement. Vous pouvez consulter votre date de renouvellement ou annuler à tout moment depuis votre page de compte. Le paiement en ligne n’est pas encore disponible ; d’ici là, notre équipe met en place votre abonnement et vous confirme par e-mail les modalités de facturation."
       },
       {
         "h": "Remboursements et annulation",
@@ -1388,7 +1432,7 @@
     "plans": [
       {
         "name": "Formation Starter",
-        "price": "$280",
+        "price": "${price}",
         "period": "/ par usine",
         "features": [
           "Bases qualité d'une journée sur site",
@@ -1400,7 +1444,7 @@
       },
       {
         "name": "Formation Pro",
-        "price": "$950",
+        "price": "${price}",
         "period": "/ par usine",
         "features": [
           "Système qualité et QC sur 3 jours",
@@ -1508,12 +1552,12 @@
         "href": "/monitoring"
       }
     ],
-    "comingSoonNote": "Le monitoring fournisseur est un abonnement devisé par fournisseur et par an. Tout le reste sur cette page est facturé au projet : pas d'abonnement, aucun renouvellement automatique.",
+    "comingSoonNote": "Le monitoring fournisseur est devisé par fournisseur et par an. L’adhésion Founding Buyer est un abonnement annuel au prix de 99 USD par an. Ces deux abonnements se renouvellent automatiquement chaque année et vous pouvez annuler l’un ou l’autre depuis votre page de compte. Les autres éléments de cette page sont devisés au projet.",
     "alsoTitle": "Également disponible",
     "alsoItems": [
       "Inspection : contrôles en cours de production et avant expédition, devis par jour-homme",
       "Sourcing : commission de 3–5 % sur la valeur de la commande, devis avant la commande",
-      "Amélioration fournisseur : formation et actions correctives après un audit, devis par usine"
+      "Amélioration fournisseur : formation à partir de ${price} par usine et actions correctives après un audit"
     ],
     "alsoCta": "Demander un devis",
     "reportsTitle": "Rapports et vérification : fourchettes indicatives",
@@ -1737,7 +1781,31 @@
     "notSureLead": "Exécutez d'abord le calculateur de risque gratuit. Cela prend environ trois minutes et vous indique ce qui manque.",
     "notSureCta": "Évaluer le risque fournisseur",
     "metaTitle": "Vérification, audit et inspection",
-    "metaDesc": "Vérification indépendante de fournisseurs, audit d'usine, inspection et appui au sourcing en Chine, au Vietnam, en Thaïlande, en Malaisie et aux Philippines. Périmètre et devis par projet."
+    "metaDesc": "Vérification indépendante de fournisseurs, audit d'usine, inspection et appui au sourcing en Chine, au Vietnam, en Thaïlande, en Malaisie et aux Philippines. Périmètre et devis par projet.",
+    "processTitle": "Un chemin clair de la demande à la décision.",
+    "processLead": "Choisissez le niveau d'assurance dont votre décision d'approvisionnement a besoin.",
+    "stepRequestTitle": "Demande",
+    "stepRequestBody": "Indiquez-nous le fournisseur, le produit ou l'usine à vérifier.",
+    "stepScopingTitle": "Cadrage",
+    "stepScopingBody": "Nous confirmons le périmètre, le calendrier et le bon niveau de vérification.",
+    "stepOnsiteTitle": "Sur site",
+    "stepOnsiteBody": "Les auditeurs locaux réalisent la visite et collectent les preuves.",
+    "stepReportTitle": "Rapport",
+    "stepReportBody": "Constatations, photos et documents sont livrés dans un format cohérent.",
+    "stepDecisionTitle": "Décision",
+    "stepDecisionBody": "Utilisez le dossier pour avancer, ou pour écarter un fournisseur.",
+    "faqTitle": "Ce que demandent habituellement les acheteurs.",
+    "faqLead": "Questions fréquentes sur la vérification et l'audit.",
+    "faq1q": "Combien de temps prend un audit d'usine ?",
+    "faq1a": "Cela dépend du périmètre et du lieu. La plupart des audits d'une seule usine sont terminés dans un délai défini après cadrage, et le rapport suit une fois les preuves examinées.",
+    "faq2q": "Couvrez-vous mon secteur ?",
+    "faq2a": "Nous travaillons sur un large éventail de catégories manufacturières en Chine et en Asie du Sud-Est. Indiquez votre produit, nous confirmerons la couverture avant votre engagement.",
+    "faq3q": "Quelles preuves vais-je recevoir ?",
+    "faq3a": "Selon le service, vous recevez des preuves photo, vidéo et documentaires, avec un rapport structuré conçu pour comparer les fournisseurs.",
+    "faq4q": "Puis-je demander un fournisseur précis ?",
+    "faq4a": "Oui. Vous pouvez demander une vérification ou un audit pour un fournisseur déjà en tête, ou nous demander de présélectionner d'abord.",
+    "faq5q": "Ai-je besoin d'un abonnement ?",
+    "faq5a": "Aucun abonnement n'est requis pour commencer. Vous pouvez publier une RFQ ou demander un service directement."
   },
   "resourcesIndex": {
     "badge": "Ressources",
@@ -3937,8 +4005,7 @@
     "yes": "Oui",
     "no": "Non",
     "na": "N/A"
-  }
-,
+  },
   "supplierDashboard": {
     "pageTitle": "Tableau de bord fournisseur",
     "pageDesc": "Suivez comment les acheteurs découvrent et interagissent avec votre profil fournisseur vérifié.",
@@ -4025,4 +4092,5 @@
     "errSubmit": "Nous n'avons pas pu envoyer votre candidature. Écrivez-nous directement à support@factoryauditb2b.com.",
     "fileHint": "PDF, DOC ou DOCX. Maximum 5 Mo.",
     "privacyNote": "En envoyant, vous acceptez que FactoryAuditB2B traite les informations fournies uniquement à des fins de recrutement, de coopération sur des projets et de vivier de talents."
-  }}
+  }
+}

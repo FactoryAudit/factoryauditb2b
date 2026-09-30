@@ -30,7 +30,10 @@
       "monitoringDesc": "定期複核與變更提醒"
     },
     "homeLabel": "FactoryAuditB2B 首頁",
-    "mainNav": "主導覽"
+    "mainNav": "主導覽",
+    "solutions": "解決方案",
+    "auditsInspections": "審核與驗貨",
+    "more": "更多"
   },
   "footer": {
     "workWithUs": "加入我們",
@@ -71,7 +74,9 @@
     "suppliers": "供應商目錄",
     "membership": "會員",
     "standardReport": "標準版報告",
-    "contact": "聯絡我們"
+    "contact": "聯絡我們",
+    "buyer": "買家",
+    "company": "公司"
   },
   "home": {
     "badge": "覈查 · 採購 · 驗貨 · 發運",
@@ -170,8 +175,47 @@
     "liveMarket": "目標市場",
     "liveIndustry": "行業",
     "liveCerts": "認證要求",
-            "metaTitle": "驗廠與供應商核實服務",
-            "metaDesc": "發掘、評估並核實中國及東南亞的供應商，讓優秀的製造商被看見，也讓採購商在充分了解工廠背景、產能與合規狀況之後再放心下單。"
+    "metaTitle": "驗廠與供應商核實服務",
+    "metaDesc": "發掘、評估並核實中國及東南亞的供應商，讓優秀的製造商被看見，也讓採購商在充分了解工廠背景、產能與合規狀況之後再放心下單。",
+    "sample": {
+      "eyebrow": "示例供應商檔案",
+      "title": "看看一份經過核驗的供應商檔案長什麼樣。",
+      "lead": "每一份經核驗的供應商都有一致的檔案：身份、審核狀態、證據與生產能力 —— 方便你同類比較。",
+      "tag": "示例供應商檔案 —— 演示數據，僅供示意",
+      "company": "示例電子製造有限公司",
+      "status": "示例 · 審核已完成",
+      "fieldLocation": "所在地",
+      "fieldIndustry": "行業",
+      "fieldCert": "認證",
+      "fieldCapacity": "生產能力",
+      "fieldAuditType": "審核類型",
+      "fieldAuditDate": "審核日期",
+      "valLocation": "中國東莞",
+      "valIndustry": "電子 · PCB 組裝",
+      "valCert": "ISO 9001",
+      "valCapacity": "4 條 SMT 產線",
+      "valAuditType": "工廠審核 —— 現場",
+      "valAuditDate": "2025 · 第一季",
+      "stepRequested": "已申請",
+      "stepScheduled": "已排期",
+      "stepOnsite": "已到場",
+      "stepReport": "已出報告",
+      "evidence": "證據：照片 · 影片 · 文件",
+      "viewSample": "查看示例檔案",
+      "demoNote": "演示數據 —— 僅供示意。真實供應商檔案僅對已登入買家展示。"
+    },
+    "capabilitiesLabel": "我們提供",
+    "capVerification": "供應商核驗",
+    "capAudit": "工廠審核",
+    "capInspection": "產品驗貨",
+    "capSourcing": "採購支持",
+    "workflowEyebrow": "一份貫通的檔案",
+    "workflowTitle": "從供應商發現到經過核驗的工廠證據。",
+    "workflowLead": "一切都在同一個貫通的流程裡運行，證據、報告和供應商檔案都留在同一處 —— 為你和你的團隊。",
+    "wfCheck1": "免費工具評估並篩選供應商",
+    "wfCheck2": "帶照片、影片和文件證據的現場核驗",
+    "wfCheck3": "以一致、可比較的格式組織的報告",
+    "wfCheck4": "每家供應商一份檔案，團隊共享"
   },
   "toolsIndex": {
     "badge": "免費工具",
@@ -1299,7 +1343,7 @@
       },
       {
         "h": "付款資料",
-        "b": "付款由 Stripe 處理。我們不會看到或儲存您的完整卡號，僅保存營運會員所需的卡品牌、卡號末四碼、訂閱狀態與續費日期。"
+        "b": "開通線上付款後，付款由第三方付款服務商處理。我們不會看到或儲存您的完整卡號，僅保存營運會員所需的卡品牌、卡號末四碼、訂閱狀態與續費日期。線上付款開通前，本站不收集任何信用卡資料。"
       }
     ],
     "termsTitle": "服務條款",
@@ -1336,7 +1380,7 @@
       },
       {
         "h": "會員、帳單與續費",
-        "b": "Founding Buyer 會員為年度訂閱，價格 99 美元/年，由 Stripe 處理付款。除非您在續費日前取消，否則訂閱每年自動續費。您可隨時在帳號頁面查看續費日期或取消訂閱。"
+        "b": "Founding Buyer 會員為年度訂閱，價格 99 美元/年。付款由第三方付款服務商處理。除非您在續費日前取消，否則訂閱每年自動續費。您可隨時在帳號頁面查看續費日期或取消訂閱。目前尚未開通線上付款；開通前由我們的團隊為您開通訂閱，並透過電子郵件與您確認帳單安排。"
       },
       {
         "h": "退款與取消",
@@ -1388,7 +1432,7 @@
     "plans": [
       {
         "name": "入門培訓",
-        "price": "$280",
+        "price": "${price}",
         "period": "/ 每家工廠",
         "features": [
           "1 天現場品質基礎",
@@ -1400,7 +1444,7 @@
       },
       {
         "name": "專業培訓",
-        "price": "$950",
+        "price": "${price}",
         "period": "/ 每家工廠",
         "features": [
           "3 天品質體系與 QC",
@@ -1508,12 +1552,12 @@
         "href": "/monitoring"
       }
     ],
-    "comingSoonNote": "供應商監控為訂閱制，按供應商按年報價。本頁其餘項目均為按專案付費：沒有訂閱，也不會自動續約。",
+    "comingSoonNote": "供應商監控按供應商按年報價。Founding Buyer 會員為年度訂閱，99 美元/年。兩者均為訂閱制，每年自動續約；您可隨時在帳號頁面取消。本頁其餘項目均按專案報價。",
     "alsoTitle": "其他服務",
     "alsoItems": [
       "驗貨：生產中期與出貨前檢驗，按人天報價",
       "採購尋源：按訂單金額收取 3–5% 佣金，下單前報價",
-      "供應商改善：驗廠後的培訓與矯正支持，按工廠報價"
+      "供應商改善：培訓起價 ${price}／工廠，含驗廠後的矯正支持"
     ],
     "alsoCta": "索取報價",
     "reportsTitle": "報告與查核：參考價格區間",
@@ -1737,7 +1781,31 @@
     "notSureLead": "先跑一遍免費的風險計算器。大約三分鐘，它會告訴你缺什麼。",
     "notSureCta": "評估供應商風險",
     "metaTitle": "供應商核實、驗廠與驗貨服務",
-    "metaDesc": "覆蓋中國、越南、泰國、馬來西亞、菲律賓的獨立供應商查核、工廠驗廠、驗貨與採購支援。按專案確定範圍並報價。"
+    "metaDesc": "覆蓋中國、越南、泰國、馬來西亞、菲律賓的獨立供應商查核、工廠驗廠、驗貨與採購支援。按專案確定範圍並報價。",
+    "processTitle": "從請求到決策的清晰路徑。",
+    "processLead": "選擇你的採購決策所需的保障級別。",
+    "stepRequestTitle": "提出請求",
+    "stepRequestBody": "告訴我們你需要核查的供應商、產品或工廠。",
+    "stepScopingTitle": "確定範圍",
+    "stepScopingBody": "我們確認範圍、時間線和合適的核驗級別。",
+    "stepOnsiteTitle": "現場核查",
+    "stepOnsiteBody": "當地審核員到場檢查並收集證據。",
+    "stepReportTitle": "出具報告",
+    "stepReportBody": "以一致格式交付發現、照片和文件。",
+    "stepDecisionTitle": "做出決策",
+    "stepDecisionBody": "用這份檔案推進 —— 或排除某家供應商。",
+    "faqTitle": "買家通常會問什麼。",
+    "faqLead": "關於核驗和審核的常見問題。",
+    "faq1q": "工廠審核需要多長時間？",
+    "faq1a": "取決於範圍和地點。大多數單一工廠審核在確定範圍後的一段時間內完成，證據審查後即出具報告。",
+    "faq2q": "你們覆蓋我的行業嗎？",
+    "faq2a": "我們覆蓋中國和東南亞廣泛的製造品類。告訴我們你的產品，我們會在你承諾前確認覆蓋範圍。",
+    "faq3q": "我會收到什麼證據？",
+    "faq3a": "取決於服務類型，你會收到照片、影片和文件證據，以及一份可跨供應商比較的結構化報告。",
+    "faq4q": "我可以指定某家供應商嗎？",
+    "faq4a": "可以。你可以為已有意向的供應商申請核驗或審核，也可以讓我們先幫你篩選。",
+    "faq5q": "我需要會員嗎？",
+    "faq5a": "開始無需會員。你可以直接發佈 RFQ 或申請服務。"
   },
   "resourcesIndex": {
     "badge": "資源",
@@ -3937,8 +4005,7 @@
     "yes": "是",
     "no": "否",
     "na": "不適用"
-  }
-,
+  },
   "supplierDashboard": {
     "pageTitle": "供應商看板",
     "pageDesc": "追蹤採購商如何發現並互動您的已驗證供應商檔案。",
@@ -4025,4 +4092,5 @@
     "errSubmit": "提交失敗，請直接寄信至 support@factoryauditb2b.com。",
     "fileHint": "支援 PDF、DOC、DOCX，最大 5 MB。",
     "privacyNote": "提交即表示你同意 FactoryAuditB2B 僅為招聘、專案合作及人才儲備目的處理你所提交的資訊。"
-  }}
+  }
+}

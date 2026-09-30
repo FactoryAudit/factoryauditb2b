@@ -2,12 +2,13 @@ import Link from "next/link";
 import { localePath, type Locale } from "@/i18n/config";
 import WhatsAppLink, { whatsappConfigured } from "@/components/WhatsAppLink";
 import SocialLinks from "@/components/SocialLinks";
-import { SERVICE_MENU, type ServiceMenuDict } from "@/lib/nav";
-import { COVERAGE_COUNTRIES } from "@/lib/coverage";
+import { type ServiceMenuDict } from "@/lib/nav";
 import { operatorLine } from "@/lib/trust";
 
 export type FooterDict = {
   platform: string;
+  buyer: string;
+  company: string;
   resources: string;
   coverage: string;
   logistics: string;
@@ -42,7 +43,6 @@ export type FooterDict = {
   caseStudies: string;
   suppliers: string;
   membership: string;
-  // Careers / 人才网络入口（/careers）
   workWithUs: string;
   workWithUsLead: string;
   workWithUsCountries: string;
@@ -66,7 +66,8 @@ export default function SiteFooter({
 
   return (
     <footer className="bg-[#0f172a] text-[#cbd5e1]">
-      <div className="container py-12 grid md:grid-cols-5 gap-8 text-sm">
+      <div className="container py-12 grid md:grid-cols-4 gap-10 text-sm">
+        {/* 品牌列 */}
         <div>
           {/* 页脚是深色底（#0f172a），用浅色版 LOGO */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -75,7 +76,7 @@ export default function SiteFooter({
             alt="FactoryAuditB2B"
             width={180}
             height={36}
-            className="h-9 w-auto mb-3"
+            className="h-9 w-auto mb-4"
           />
           <p className="leading-relaxed">{dict.tagline}</p>
           <p className="leading-relaxed mt-2 text-[#94a3b8]">{dict.coverageOnly}</p>
@@ -91,179 +92,68 @@ export default function SiteFooter({
           )}
         </div>
 
+        {/* Buyer 列 */}
         <div>
-          <div className="text-white font-semibold mb-3">{dict.platform}</div>
-          <ul className="space-y-2">
-            <li>
-              <Link href={p("/tools")} className="hover:text-white">
-                {dict.allTools}
-              </Link>
-            </li>
-            <li>
-              <Link href={p("/tools/supplier-risk-calculator")} className="hover:text-white">
-                {dict.riskCalculator}
-              </Link>
-            </li>
-            <li>
-              <Link href={p("/tools/supplier-verification-checklist")} className="hover:text-white">
-                {dict.verificationChecklist}
-              </Link>
-            </li>
-            <li>
-              <Link href={p("/suppliers")} className="hover:text-white">
-                {dict.suppliers}
-              </Link>
-            </li>
-            <li>
-              <Link href={p("/rfq")} className="hover:text-white">
-                RFQ
-              </Link>
-            </li>
-            <li>
-            {/* V2.2 §48/§52：Membership 已合并进 Pricing（Founding Buyer 选项）。
-                内部导航统一指向 /pricing#founding-buyer，不再单独维护 /membership。 */}
-            <Link href={p("/pricing#founding-buyer")} className="hover:text-white">
-              {dict.membership}
-            </Link>
-            </li>
-            <li>
-              <Link href={p("/join-supplier-network")} className="hover:text-white">
-                {dict.supplierNetwork}
-              </Link>
-            </li>
-            <li>
-              <Link href={p("/pricing")} className="hover:text-white">
-                {dict.pricing}
-              </Link>
-            </li>
-            <li>
-              <Link href={p("/monitoring")} className="hover:text-white">
-                {dict.monitoring}
-              </Link>
-            </li>
-            {/* CS-01：这里原本还有一个 /sample-report 链接。该页已 308 到
-                /standard-report，再留一条会变成「点进去先跳一次」，且页脚出现两条
-                指向同一目标的链接。已删除，保留下方 /standard-report 条目。 */}
-            <li>
-              <Link href={p("/standard-report")} className="hover:text-white">
-                {dict.standardReport}
-              </Link>
-            </li>
-            <li>
-              <Link href={p("/logistics")} className="hover:text-white">
-                {dict.containerCalculator}
-              </Link>
-            </li>
+          <div className="text-white font-semibold mb-4">{dict.buyer}</div>
+          <ul className="space-y-2.5">
+            <li><Link href={p("/suppliers")} className="hover:text-white">{dict.suppliers}</Link></li>
+            <li><Link href={p("/rfq")} className="hover:text-white">RFQ</Link></li>
+            <li><Link href={p("/services/supplier-verification")} className="hover:text-white">{menu.verification}</Link></li>
+            <li><Link href={p("/factory-audit/request")} className="hover:text-white">{menu.factoryAudit}</Link></li>
+            <li><Link href={p("/services/inspection")} className="hover:text-white">{menu.inspection}</Link></li>
+            <li><Link href={p("/rfq")} className="hover:text-white">{menu.sourcing}</Link></li>
+            <li><Link href={p("/monitoring")} className="hover:text-white">{dict.monitoring}</Link></li>
+            <li><Link href={p("/services/supplier-improvement")} className="hover:text-white">{menu.improvement}</Link></li>
+            <li><Link href={p("/pricing#founding-buyer")} className="hover:text-white">{dict.membership}</Link></li>
+            <li><Link href={p("/join-supplier-network")} className="hover:text-white">{dict.supplierNetwork}</Link></li>
           </ul>
         </div>
 
+        {/* Resources 列 */}
         <div>
-          <div className="text-white font-semibold mb-3">{dict.allServices}</div>
-          <ul className="space-y-2">
-            {SERVICE_MENU.map((item) => (
-              <li key={item.key}>
-                <Link href={p(item.href)} className="hover:text-white">
-                  {menu[item.key]}
-                </Link>
-              </li>
-            ))}
+          <div className="text-white font-semibold mb-4">{dict.resources}</div>
+          <ul className="space-y-2.5">
+            <li><Link href={p("/resources")} className="hover:text-white">{dict.knowledgeBase}</Link></li>
+            <li><Link href={p("/tools")} className="hover:text-white">{dict.allTools}</Link></li>
+            <li><Link href={p("/case-studies")} className="hover:text-white">{dict.caseStudies}</Link></li>
+            <li><Link href={p("/field-reports")} className="hover:text-white">{dict.fieldReports}</Link></li>
+            <li><Link href={p("/countries")} className="hover:text-white">{dict.coverage}</Link></li>
+            <li><Link href={p("/standard-report")} className="hover:text-white">{dict.standardReport}</Link></li>
+            <li><Link href={p("/logistics")} className="hover:text-white">{dict.containerCalculator}</Link></li>
           </ul>
         </div>
 
-        {/*
-          「Work With Us」—— 人才网络入口，与「所有服务」并排成列。
-          定位不是「招聘岗位」，而是可调用的人力网络（审核员 / 顾问 / 项目 / 采购 / IT /
-          本地合作伙伴）。
-        */}
+        {/* Company 列 */}
         <div>
-          <div className="text-white font-semibold mb-3">{dict.workWithUs}</div>
-          <Link href={p("/careers")} className="group block">
-            <div className="text-[#cbd5e1] group-hover:text-white group-hover:underline">
-              {dict.workWithUsLead}
-            </div>
-            <div className="mt-1 text-xs text-[#94a3b8]">{dict.workWithUsCountries}</div>
-          </Link>
-        </div>
-
-        {/*
-          Resources 与 Coverage 同一行（桌面端两栏，移动端自动堆叠）：
-          避免宽度被三列分得太窄。
-        */}
-        <div>
-          <div className="grid grid-cols-2 gap-6">
-            <div>
-              <div className="text-white font-semibold mb-3">{dict.resources}</div>
-              <ul className="space-y-2">
-                <li>
-                  <Link href={p("/resources")} className="hover:text-white">
-                    {dict.knowledgeBase}
-                  </Link>
-                </li>
-                <li>
-                  <Link href={p("/case-studies")} className="hover:text-white">
-                    {dict.caseStudies}
-                  </Link>
-                </li>
-                <li>
-                  <Link href={p("/field-reports")} className="hover:text-white">
-                    {dict.fieldReports}
-                  </Link>
-                </li>
-                <li>
-                  {/* /about 已 308 永久合并进 /trust（阶段 1 任务 6）；
-                      文案沿用 dict.about（"About us"）不变，只改目标地址。 */}
-                  <Link href={p("/trust")} className="hover:text-white">
-                    {dict.about}
-                  </Link>
-                </li>
-                <li>
-                  <Link href={p("/contact")} className="hover:text-white">
-                    {dict.contact}
-                  </Link>
-                </li>
-                <li>
-                  <Link href={p("/privacy")} className="hover:text-white">
-                    {dict.privacy}
-                  </Link>
-                </li>
-                <li>
-                  <Link href={p("/terms")} className="hover:text-white">
-                    {dict.terms}
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <div className="text-white font-semibold mb-3">{dict.coverage}</div>
-              <ul className="space-y-2">
-                {COVERAGE_COUNTRIES.map((c) => (
-                  <li key={c.code}>
-                    <Link href={p(`/countries/${c.slug}`)} className="hover:text-white">
-                      {locale === "zh" ? c.nameZh : c.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              {whatsappConfigured() && whatsappLabel && (
-                <WhatsAppLink
-                  label={whatsappLabel}
-                  message="Hi FactoryAuditB2B, I would like to ask about supplier verification."
-                  className="mt-3 inline-block rounded bg-[#25D366] px-3 py-2 text-xs font-medium text-[#0a3320] hover:opacity-90"
-                />
-              )}
-            </div>
-          </div>
+          <div className="text-white font-semibold mb-4">{dict.company}</div>
+          <ul className="space-y-2.5">
+            <li><Link href={p("/trust")} className="hover:text-white">{dict.about}</Link></li>
+            <li><Link href={p("/contact")} className="hover:text-white">{dict.contact}</Link></li>
+            <li><Link href={p("/careers")} className="hover:text-white">{dict.workWithUs}</Link></li>
+            <li><Link href={p("/terms")} className="hover:text-white">{dict.terms}</Link></li>
+            <li><Link href={p("/privacy")} className="hover:text-white">{dict.privacy}</Link></li>
+          </ul>
         </div>
       </div>
+
+      {/* 底部：邮箱 + 版权。Follow us 社媒区：三平台 URL 全空 ⇒ SocialLinks 返回 null，隐藏整个区块（禁假链接）。 */}
       <div className="border-t border-white/10 py-4 text-center text-xs text-[#94a3b8]">
-        {/* 域名邮箱做信任背书。邮箱地址本身是标识符、不是文案，9 语通用，故不进词典。
-            WhatsApp 是询盘主渠道（见 Coverage 栏），这里给不装 WhatsApp 的访客留一条路。 */}
+        {/* 域名邮箱做信任背书。邮箱地址本身是标识符、不是文案，9 语通用，故不进词典。 */}
         <a
           href="mailto:support@factoryauditb2b.com"
           className="mb-3 inline-block text-[#cbd5e1] underline decoration-[#94a3b8] hover:text-white hover:decoration-white"
         >
           support@factoryauditb2b.com
         </a>
+        {whatsappConfigured() && whatsappLabel && (
+          <div className="mb-3">
+            <WhatsAppLink
+              label={whatsappLabel}
+              message="Hi FactoryAuditB2B, I would like to ask about supplier verification."
+              className="inline-block rounded bg-[#25D366] px-3 py-2 text-xs font-medium text-[#0a3320] hover:opacity-90"
+            />
+          </div>
+        )}
         <SocialLinks className="mb-4 justify-center" />
         {dict.copyright}
       </div>
