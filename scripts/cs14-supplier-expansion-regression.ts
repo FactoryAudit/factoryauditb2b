@@ -81,6 +81,8 @@ const NEW_SLUGS = [
 // （把「已发布」换成「已下架且授权已撤回」，仍是 5 条）。
 const WITHDRAWN_SLUGS = ["shenzhen-jorigin-packaging"];
 const PUBLISHED_NEW_SLUGS = NEW_SLUGS.filter((s) => !WITHDRAWN_SLUGS.includes(s));
+// CS-14 发布时点的规模快照（10 全库 / 9 已发布）。**只作下界**用 —— 数据集只增不减，
+// 写死等值等于「每加一家供应商就假 FAIL」（2026-09-30 实测全库 22 / 已发布 11）。
 const EXPECTED_TOTAL = 10;
 const EXPECTED_PUBLISHED = 9;
 const COUNTRY_NAME: Record<string, string> = {
@@ -145,11 +147,17 @@ const run = async () => {
     for (let i = 1; i <= 14; i++) checkSkip(`A${i}（需 DB）`);
   } else {
     const published = svcRows.filter((r) => r.is_published === true);
-    check(svcRows.length === EXPECTED_TOTAL, `A1 全库供应商 == ${EXPECTED_TOTAL}（实测 ${svcRows.length}）`);
-    check(published.length === EXPECTED_PUBLISHED, `A2 is_published=true == ${EXPECTED_PUBLISHED}（实测 ${published.length}）`);
+    // A1/A2 取**下界**（规模只增不减）；A3 改为**真正的不变量**：
+    // anon 可见条数必须 == service_role 看到的已发布条数 ——
+    // 这样每加一家供应商都不再假 FAIL，却对「RLS 漏行 / 多行」这类真问题始终保持约束力。
+    check(svcRows.length >= EXPECTED_TOTAL, `A1 全库供应商 ≥ ${EXPECTED_TOTAL}（实测 ${svcRows.length}）`);
+    check(published.length >= EXPECTED_PUBLISHED, `A2 已发布 ≥ ${EXPECTED_PUBLISHED}（实测 ${published.length}）`);
 
     if (anonRows) {
-      check(anonRows.length === EXPECTED_PUBLISHED, `A3 anon 可见 == ${EXPECTED_PUBLISHED}（RLS 闸门放行，实测 ${anonRows.length}）`);
+      check(
+        anonRows.length === published.length,
+        `A3 anon 可见条数 == 已发布条数（RLS 闸门放行，anon ${anonRows.length} / published ${published.length}）`
+      );
       check(
         anonRows.every((r) => r.is_published === true),
         "A4 anon 可见行全部 is_published=true（未发布行未泄漏）"

@@ -273,12 +273,13 @@ const EN_LEAF = 3251;
         return { status: r.status, total, body: head ? null : await r.json().catch(() => null) };
       };
 
-      // G1 旧数据条数不变（迁移只加列/索引，不碰行）
-      const expect = { supplier_assessments: 9, supplier_evidence: 3, audit_questions: 72, audit_sections: 17, supplier_images: 0 };
-      for (const [tbl, want] of Object.entries(expect)) {
+      // G1 迁移的保证是「不碰行」⇒ 正确形态是**下界**（旧行不被删除）。
+      // 原为 `=== want` 快照，后台每新增一条数据就假 FAIL（已发生：supplier_assessments 9 → 10）。
+      const floor = { supplier_assessments: 9, supplier_evidence: 3, audit_questions: 72, audit_sections: 17, supplier_images: 0 };
+      for (const [tbl, min] of Object.entries(floor)) {
         const c = await rest(tbl, "select=id&limit=1", svc);
         // PostgREST 对带 limit 的查询返回 206 Partial Content（分页），200 或 206 均视为成功
-        check(`G1 ${tbl} 条数 = ${want}`, (c.status === 200 || c.status === 206) && c.total === want, `实际 ${c.status}/${c.total}`);
+        check(`G1 ${tbl} 旧行未被删除（≥ ${min}）`, (c.status === 200 || c.status === 206) && c.total >= min, `实际 ${c.status}/${c.total}`);
       }
 
       // G2 Schema re-check：item_review_json 列已就位（select 该列返回 200，非 400）

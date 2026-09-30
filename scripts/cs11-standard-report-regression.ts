@@ -150,9 +150,12 @@ section("C. 单一事实源");
     admin.includes("requireAdmin") && admin.includes("notFound()")
   );
   check("C7 后台页保留 noindex", admin.includes("index: false"));
+  // ⚠️ 本文件是 CRLF（`git ls-files --eol` = w/crlf）⇒ 断言**不能用含 `\n` 的裸字面量**，
+  //    必须用 `\s*` 容错，否则永远匹配不上（就是这里长期假 FAIL 的根因）。
   check(
     "C8 🔴 生成器默认不含 ADMIN PREVIEW 框（公开下载件不能出现）",
-    /const adminPreview = opts\.adminPreview === true/.test(lib) && lib.includes("adminPreview\n    ? `<div class=\"buyerbox\">")
+    /const adminPreview = opts\.adminPreview === true/.test(lib) &&
+      /const \w+ = adminPreview\s*\?\s*`<div class="buyerbox">/.test(lib)
   );
   check("C9 报告正文渲染器与章节数一致", doc.includes("SECTIONS.map") && SECTIONS.length === 13);
   check("C10 章节带锚点 id（供公开页目录跳转）", doc.includes("id={`s${s.no}`}"));

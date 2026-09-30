@@ -186,22 +186,38 @@ const writers = allTs.filter(
 );
 check("G1 leads 表的 insert 只出现在 lib/leads.ts（写入方唯一）", writers.length === 0, writers.join(","));
 const leadsImporters = allTs.filter((f) => /from\s+"@\/lib\/leads"/.test(read(f)));
-check("G2 只有 3 个路由 import lib/leads（lead / supplier-register / supplier-claim）",
-  leadsImporters.length === 3, leadsImporters.join(","));
+// 白名单：新增一个写入方必须在此**显式登记**。
+// 原写法写死 `length === 3`，产品扩出专用端点后必然假 FAIL（2026-09-30 实测 5 个）。
+const ALLOWED_LEAD_IMPORTERS = [
+  "app/api/audit/request/route.ts",
+  "app/api/lead/route.ts",
+  "app/api/supplier-claim/route.ts",
+  "app/api/supplier-register/route.ts",
+  "app/api/verify-supplier/request/route.ts",
+];
+const extraImporters = leadsImporters.filter((f) => !ALLOWED_LEAD_IMPORTERS.includes(f));
+const missingImporters = ALLOWED_LEAD_IMPORTERS.filter((f) => !leadsImporters.includes(f));
+check(
+  `G2 lib/leads 的 import 方与白名单完全一致（${ALLOWED_LEAD_IMPORTERS.length} 个；新增即需登记）`,
+  extraImporters.length === 0 && missingImporters.length === 0,
+  `多出:[${extraImporters.join(",")}] 缺失:[${missingImporters.join(",")}]`
+);
 
 console.log("\n=== H. 前端入口没有被删（修复 ≠ 拆功能） ===");
-const LEAD_CALLERS = [
-  "components/HeroSearch.tsx",
-  "components/AuditRequestForm.tsx",
-  "components/CustomServiceForm.tsx",
-  "components/InspectionRequestForm.tsx",
-  "components/SampleReportForm.tsx",
-  "components/StandardReportDownloadForm.tsx",
-  "components/tools/SupplierRiskCalculator.tsx",
+// 每个入口各自期望的落库端点。原写法把 7 个入口统一写死 `"/api/lead"`，
+// 而 AuditRequestForm 已改用专用端点 `/api/audit/request`（即 G2 白名单第一条）。
+const LEAD_CALLERS: Array<[string, string]> = [
+  ["components/HeroSearch.tsx", "/api/lead"],
+  ["components/AuditRequestForm.tsx", "/api/audit/request"],
+  ["components/CustomServiceForm.tsx", "/api/lead"],
+  ["components/InspectionRequestForm.tsx", "/api/lead"],
+  ["components/SampleReportForm.tsx", "/api/lead"],
+  ["components/StandardReportDownloadForm.tsx", "/api/lead"],
+  ["components/tools/SupplierRiskCalculator.tsx", "/api/lead"],
 ];
-for (const c of LEAD_CALLERS) {
-  const ok = exists(c) ? read(c).includes('"/api/lead"') : false;
-  check(`H ${c.replace("components/", "")} 仍在 POST /api/lead（现在真的会落库）`, ok);
+for (const [c, ep] of LEAD_CALLERS) {
+  const ok = exists(c) ? read(c).includes(`"${ep}"`) : false;
+  check(`H ${c.replace("components/", "")} 仍 POST ${ep}（落库入口未被拆）`, ok);
 }
 check("H8 SupplierRegistrationForm 优先展示落库短号 referenceId",
   /data\.referenceId\s*\|\|\s*data\.supplierId/.test(read("components/SupplierRegistrationForm.tsx")));

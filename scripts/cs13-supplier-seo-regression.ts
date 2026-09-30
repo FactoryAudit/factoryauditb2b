@@ -482,13 +482,14 @@ async function main() {
   check("F2c PAID_FIELDS 仍 4 项", countOf(supLib, "export const PAID_FIELDS") === 4, String(countOf(supLib, "export const PAID_FIELDS")));
   const migDir = path.join(ROOT, "supabase/migrations");
   const migs = fs.readdirSync(migDir).filter((f) => f.endsWith(".sql"));
-  // 8 → 10：STEP-02 加 023_supplier_geo_cluster_source.sql、
-  //          STEP-02B 加 024_industrial_clusters_and_public_rfq.sql（均为用户指令内的增量变更）。
-  //          CS-13 本轮零 DDL —— 这里只是把"历史上限"与真实文件数对齐。
-  const MIGRATION_COUNT = 10;
+  // 原为 CS-13 时点的快照 `=== 10`（「本轮零 DDL」）。DDL 合法增长后会假 FAIL，实际已发生 3 次
+  // （025_industrial_clusters_province / 026_step10_fields / 027_lead_rejected_status）。
+  // 「零 DDL」是某一轮的状态，不是永久不变量 ⇒ 改为**下界**：迁移只增不删；
+  // 具体文件是否仍在由紧随其后的 F2e 逐个断言。
+  const MIN_MIGRATIONS = 10;
   check(
-    `F2d supabase/migrations 仍 ${MIGRATION_COUNT} 个 .sql（CS-13 本轮零 DDL）`,
-    migs.length === MIGRATION_COUNT,
+    `F2d 迁移文件只增不删（≥ ${MIN_MIGRATIONS} 个，实测 ${migs.length}）`,
+    migs.length >= MIN_MIGRATIONS,
     migs.join(",")
   );
   for (const m of ["001_init.sql", "004_documents.sql", "006_compliance_fields.sql", "008_leads.sql", "009_supplier_profile_extras.sql"]) {

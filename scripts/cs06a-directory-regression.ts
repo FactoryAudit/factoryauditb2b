@@ -89,6 +89,8 @@ const MW = "middleware.ts";
 // 见 scripts/s18-directory-static-regression.ts）。
 const GRID = "components/supplier/DirectoryGrid.tsx";
 const VIEW = "components/supplier/DirectoryView.tsx";
+// 阶段 1（R25 登录墙）：卡片数据构造抽到 lib/directoryItems.ts，脱敏层在 lib/directoryWall.ts。
+const WALL = "lib/directoryWall.ts";
 
 // ---------------------------------------------------------------------------
 section("A. Bug B —— 筛选结果 = 实际渲染的卡片（源码级防回归）");
@@ -98,6 +100,7 @@ section("A. Bug B —— 筛选结果 = 实际渲染的卡片（源码级防回�
   const page = readSource(PAGE);
   const view = readSource(VIEW);
   const gridSrc = readSource(GRID);
+  const wall = readSource(WALL);
   check("目录页源码可读且非空", page.length > 2000, `实际 ${page.length} 字符`);
 
   // A1 缺陷形态不得复现
@@ -170,11 +173,28 @@ section("A. Bug B —— 筛选结果 = 实际渲染的卡片（源码级防回�
   // A8 筛选 chip 的数据源仍是全量（否则筛掉一个国家后 chip 会自我消失）。
   // stage1.8：服务端先把**全量**派生成 items，再由 items 派生 countries / industries
   //   交给客户端；chip 绝不允许从过滤结果派生。
+  // 阶段 1（R25）：落点变为 items = lockDirectoryItems(buildDirectoryItems(locale, all))，
+  //   旧正则 `const items: DirectoryItem[] = all.map(` 已失配（改名 + 新类型 DirectoryEntry
+  //   + 中间插入锁定层）⇒ 改为**精确锚定整条链** all → baseItems → items，
+  //   并**提取锁定层函数体**单独校验「保长」（不得 filter/slice）。
+  //   ⚠️ 两条曾经写错、被阴性对照抓出的写法（勿再犯）：
+  //     · `/items\s*=/` 匹配不上 `items: DirectoryEntry[] =` ⇒ 该子句恒真（空断言）；
+  //     · `/lockDirectoryItems[\s\S]*?return items\.map\(/` 会一路滑到
+  //       **unlockDirectoryItems** 的函数体里误命中 ⇒ 必须先把函数体切出来。
+  const lockBody =
+    (wall.match(/export function lockDirectoryItems\([\s\S]*?\n\}/) || [""])[0];
   check(
-    "A8 国家 / 行业 chip 仍由全量派生（items 来自全量 all）",
+    "A8 国家 / 行业 chip 仍由全量派生（all → baseItems → items，锁定层保长）",
     /items\.map\(\(x\)\s*=>\s*x\.country\)/.test(page) &&
       /items\.map\(\(x\)\s*=>\s*x\.industryCode\)/.test(page) &&
-      /const\s+items:\s*DirectoryItem\[\]\s*=\s*all\.map\(/.test(page)
+      // 链条起点必须是**全量 all**，两级之间不得插入 filter / slice
+      /const\s+baseItems\s*=\s*await\s+buildDirectoryItems\(\s*locale\s*,\s*all\s*\)/.test(page) &&
+      /const\s+items\s*:\s*DirectoryEntry\[\]\s*=\s*lockDirectoryItems\(\s*baseItems\b/.test(page) &&
+      // 锁定层必须**保长**：只改 legalName/href/locked/cta，不许丢项 ——
+      // 否则匿名视图的 chip 会比登录视图少，正是 A8 要防的退形。
+      lockBody.length > 0 &&
+      /return\s+items\.map\(/.test(lockBody) &&
+      !/\.(filter|slice)\(/.test(lockBody)
   );
 
   // A9 JSON-LD 描述的是**预渲染的那份 HTML** ⇒ 恒为全量。
