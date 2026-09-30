@@ -145,3 +145,14 @@ body {
     object-fit: cover;
   }
 }
+
+/* ─── .btn 文字垂直居中兜底 ────────────────────────────────────────────
+   调用处常叠加 Tailwind 的 inline-block（全站 22 处，例：/monitoring 的
+   "Ask for a quote"）。它位于 utilities 层，会覆盖 .btn 自身的
+   display:inline-flex，于是 align-items:center 失效、文字贴到按钮顶部。
+   本条刻意**不放进 @layer** —— 未分层的样式恒胜过分层的样式（CSS
+   Cascade Layers），故能稳压 utilities 层；特异性 (0,2,0) 亦高于
+   单类的 .inline-block。不改任何调用处、不删任何类名。 */
+.btn.inline-block {
+  display: inline-flex;
+}
