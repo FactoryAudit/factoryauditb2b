@@ -121,3 +121,6 @@ tmp/
 # CS-23 收尾：会话临时产物（outputs/ 已有 53 个已跟踪文件，不受影响；.tmp-verify/ 为探针截图）
 /outputs/
 /.tmp-verify/
+# 临时探针：`_` 前缀的 .ts 与既有的 _*.mjs / _*.cjs 同口径（不入库，保留在磁盘）
+# 注：index 里已有的 13 个 scripts/_*.ts **不受本行影响**（gitignore 只作用于未跟踪文件）。
+/scripts/_*.ts
