@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { isLocale, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
+import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import { RelatedPolicies, type PolicyLink } from "@/components/legal/ComplianceSections";
 
 const PATH = "/privacy";
 
@@ -22,6 +23,18 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
   const l = t.legal;
+  const p = (href: string) => localePath(locale, href);
+
+  // CS-23：与 /confidentiality、/integrity、/trust、/terms 互链。
+  // 这是**纯追加**（正文与既有段落一字未改）—— 用户要求「三页与 /privacy、/terms 互链」，
+  // 单向链接不叫互链，故隐私政策侧也要有出口。
+  const links: PolicyLink[] = [
+    { href: p("/privacy"), label: t.footer.privacy, current: true },
+    { href: p("/terms"), label: t.footer.terms },
+    { href: p("/confidentiality"), label: t.footer.confidentiality },
+    { href: p("/integrity"), label: t.footer.integrity },
+    { href: p("/trust"), label: t.trust.badge },
+  ];
 
   return (
     <div className="container py-12 max-w-3xl">
@@ -36,6 +49,7 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
           </section>
         ))}
       </div>
+      <RelatedPolicies title={t.compliance.relatedTitle} links={links} />
     </div>
   );
 }

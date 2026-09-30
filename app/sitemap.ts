@@ -76,6 +76,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/custom-services",
     "/privacy",
     "/terms",
+    // CS-23：合规三页（保密声明 / 廉洁准则）。两页产物都是 `index, follow`，
+    // 与页面可索引性同源。`/trust` 已在上方列表里，不重复提交。
+    "/confidentiality",
+    "/integrity",
     // 人才网络入口：页脚「Work With Us」直达，承接「auditor jobs / 审核员网络」类搜索
     "/careers",
     // 联系页：此前全站无 /contact，访客只能靠页脚邮箱找人。补上以承接

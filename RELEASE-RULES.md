@@ -5,19 +5,20 @@
 
 ---
 
-## 规则 0：构建必须走九步链路（第 0 步与第 1.5 步不得跳过）
+## 规则 0：构建必须走九步链路（第 0 / 1.5 / 1.6 步不得跳过）
 
 > 本规则描述**当前唯一可用的发布链路**。
 > 它同时更正本文档其它位置对 `cf-release.cjs` 的描述：本机 `spawnSync` 恒 EBUSY，
 > 该脚本在 `populate` 分批派生子进程时必然失败（`第 1 批失败（exit=null）`），**不可用**。
 
-### 九步
+### 九步 + 链内强制门 1.6
 
 | 步 | 命令 | 通过标志 |
 |---|---|---|
 | **0** | `node scripts/build-preflight-check.mjs` | `EXPECTED_SUPPLIERS=<n>, EXPECTED_GUIDES=<m>` |
 | **1** | `node node_modules/next/dist/bin/next build 2>&1 \| tee outputs/_next_$(date +%Y%m%d%H%M%S).log` | 日志 0 行 `query failed` |
 | **1.5** | `node scripts/build-postflight-check.mjs --log outputs/_next_<上一步时间戳>.log` | `POSTFLIGHT_OK` |
+| **1.6** | `node scripts/_r25_verify_wall.cjs` | `PASS 13 / FAIL 0`（`/suppliers` 登录墙产物门） |
 | 2 | `node node_modules/@opennextjs/cloudflare/dist/cli/index.js build` | — |
 | 3 | 循环 `node scripts/populate-static-assets-cache.cjs --worker --batch 250` 至输出 `DONE` | 末行 `DONE` |
 | 4 | `node scripts/populate-static-assets-cache.cjs --check` | `[populate] OK` |
@@ -27,6 +28,12 @@
 
 **任一步 exit != 0 ⇒ 立即停止，不执行后续步骤。**
 
+> 第 **1.6** 步与第 0 / 1.5 / 8 步一样是**强制门，不得跳过**。它读的是 `.next/server/app` 的
+> 预渲染产物，所以只能落在链内：`.next` 在本脚本开头就被改名隔离后重建 ⇒ 只有链内这一份
+> 才是「即将被部署的那份」；而它排在第 7 步 deploy **之前** ⇒ 门失败时站点尚未变更（fail-safe）。
+> 探针是本地未入库文件（`.gitignore` 的 `scripts/_*.cjs`），故 `release.sh` 显式检查其存在性，
+> 缺失即 `exit 1`，**不静默跳过**。
+
 > 上述九步负责**产出并部署**。部署之后还有一道**强制门**（第 8 步，`scripts/release.sh` 已内置）：
 > `node scripts/verify-live-md5.cjs` ⇒ 末行必须是 `LIVE_MD5_OK`。
 > 判据与失败处置见 **规则 5**。探针 PASS ≠ 发出去的是这份构建，两件事。
@@ -35,8 +42,8 @@
 
 ### 推荐入口
 
-推荐用 `bash scripts/release.sh` 一次性执行九步。它带 `set -e -o pipefail`，
-任一步失败即停，避免人工跳步。手工执行时请严格按九步表的顺序。
+推荐用 `bash scripts/release.sh` 一次性执行九步（含链内 1.6 强制门）。它带 `set -e -o pipefail`，
+任一步失败即停，避免人工跳步。手工执行时请严格按九步表（含 1.6）的顺序。
 
 （脚本已内置下方「前置动作」的四个环境变量 —— `FAB2B_PROXY` / `NODE_OPTIONS` 注入
 `with-proxy.cjs` / `FAB2B_DISABLE_BUILD_TRACE=1` / `NEXT_TELEMETRY_DISABLED=1`，
@@ -53,6 +60,26 @@
 
 ⇒ 没有第 0 步，坏构建照样往下走；没有第 1.5 步，
 要等 `opennext build` + `populate` + `deploy` 全部跑完、**缺页站点已经上线**才发现。
+
+### 第 1.6 步（登录墙产物门）的自证记录
+
+门自己也要被验 —— 拿一个没跑过的哨兵去守访问控制，等于没守。2026-09-30 首次自证，
+两组对照，`scripts/_r25_verify_wall.cjs` **未修改**（A/B 两组跑的是同一个文件）：
+
+| 组 | 对象 | 期望 | 实测 |
+|---|---|---|---|
+| **A 对照组（无墙）** | 线上 r24 抓下来的 `/suppliers` + `/` + `/login` | FAIL | `PASS 6 / FAIL 7`，exit 1 |
+| **B 实验组（有墙）** | 本次 `next build` 的产物 | PASS | `PASS 13 / FAIL 0`，exit 0 |
+
+复现 A 组：`curl -sS --noproxy '*' -H 'Accept-Encoding: identity'` 抓线上三份 HTML，
+按 `<dir>/server/app/{en.html,en/suppliers.html,en/login.html}` 铺开，整体换入 `.next` 再跑门。
+🔴 **不得用 `execFileSync('curl', …)`** —— 本机 `spawnSync` 恒 EBUSY（同 `cf-release.cjs` 挂掉的成因）。
+
+⛔ **自证时发现并修掉的真实缺陷（教训）**：门的首页产物候选路径只写了 `en/index.html`，
+而真实落点是 `.next/server/app/en.html`（见 `verify-live-md5.cjs` 的 `artifactFor()`），
+⇒ **D 组断言（首页 "View sample record" 已改指登录页）长期静默跳过**。
+已补上该路径，并把「三份产物定位失败」从静默跳过改为**显式 FAIL**。
+**通则：任何 `if (xxxHtml) { … }` 形态的守卫，都必须配一条「定位失败即 FAIL」** —— 否则门看着绿，其实没查。
 
 ### 前置动作（仅当第 1 步要重建时才需要）
 
@@ -218,7 +245,7 @@ node -e "const fs=require('fs');if(fs.existsSync('.next')){const t='.next.trash-
 **加/删字典键时**：先跑 `apply-*-i18n.cjs` 注入，再用配套的 `sync-*-gates.cjs` 同步常量，
 最后跑全部回归 + `verify-opennext-bundle` 验证。
 
-当前基线：**3192**（`en.json` 叶子数，单一事实源；历史：2940 → 3126 → **3192**，随 clusters / 五国 FAQ 等命名空间扩容同步）。
+当前基线：**3251**（`en.json` 叶子数，单一事实源；历史：2940 → 3126 → 3192 → 3210 → 3233 → **3251**，随 clusters / 五国 FAQ / 合规三页（CS-23）等命名空间扩容同步）。
 （上一行是 cs13b `A5` 断言的锚点：该断言要求本文档**含**当前叶子数常量，且非 changelog 行不得残留更早的值。
 ⚠️ 这个字面量在本文件中**只应出现一次**（就是上一行），别在别处重复 —— 同步脚本按唯一命中替换。）
 变更历史见 `scripts/cs06a-directory-regression.ts` 的 C7 注释 —— **历史条目不可篡改**，

@@ -9,10 +9,12 @@
 //      绝不假装登录成功。
 //   3. 埋点只发事件名，不发邮箱（lib/analytics 有 PII 二次拦截，这里也不主动给）。
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "./AuthProvider";
 import { trackEvent, ANALYTICS_EVENTS } from "@/lib/analytics";
+// 阶段 1：?next= 回流。清洗函数复用既有实现（只放行站内绝对路径，杜绝开放重定向）。
+import { sanitizeReturnPath } from "@/lib/guestAccess";
 
 export type LoginFormDict = {
   emailLabel: string;
@@ -40,6 +42,25 @@ export default function LoginForm({
   const [errMsg, setErrMsg] = useState<string | null>(null);
   const { refresh } = useAuth();
   const router = useRouter();
+
+  // 阶段 1（2026-09-30）：支持 `?next=<站内路径>` 回流。
+  //   来源：/suppliers 的登录墙（/login?next=/suppliers）、首页 "View sample record"。
+  //
+  // 🔴 为什么不用 `useSearchParams()`：
+  //    静态路由里调它必须配 Suspense 边界，而 Suspense 的 **fallback 在预渲染期
+  //    同样会被渲染** —— fallback 里还是这张表单、还是调 useSearchParams，
+  //    于是边界形同虚设，`next build` 直接失败：
+  //      useSearchParams() should be wrapped in a suspense boundary at /[locale]/login
+  //    改为在 effect 里读 `window.location.search`：登录本就是纯客户端行为，
+  //    既不需要 Suspense，也让 /login 保持 ● 静态预渲染。
+  //
+  //   安全：只放行站内绝对路径 —— `sanitizeReturnPath` 拒绝 `//evil.com`、
+  //   含 `://` 的绝对 URL、控制字符，不合法一律回落到 `redirectTo`。
+  const [returnPath, setReturnPath] = useState<string | null>(null);
+  useEffect(() => {
+    const raw = new URLSearchParams(window.location.search).get("next");
+    setReturnPath(sanitizeReturnPath(raw));
+  }, []);
 
   function messageFor(code: unknown): string {
     if (code === "invalid_credentials") return t.errorInvalidCredentials;
@@ -69,7 +90,8 @@ export default function LoginForm({
         // 先刷新会员状态，再跳转 —— 否则目标页首帧还是未登录态
         await refresh();
         trackEvent(ANALYTICS_EVENTS.login);
-        router.push(redirectTo);
+        // 阶段 1：有合法的 ?next= 就回那儿（登录墙场景），否则按页面指定目标
+        router.push(returnPath ?? redirectTo);
         return;
       }
 

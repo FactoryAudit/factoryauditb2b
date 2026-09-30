@@ -11,6 +11,8 @@ import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { pickZhCopy, pickZhPair } from "@/lib/tw";
 import { ANALYTICS_EVENTS } from "@/lib/analytics";
+// 阶段 1：登录墙链接规则（?next=<目录页>）—— 与 /suppliers 目录卡片共用同一实现
+import { lockedHref } from "@/lib/directoryWall";
 
 const BASE = "https://factoryauditb2b.com";
 type Props = { params: Promise<{ locale: string }> };
@@ -274,7 +276,14 @@ export default async function Home({ params }: Props) {
 
               <div className="flex items-center justify-between gap-2 px-1 pt-3 text-[10.5px] text-[#aaa69f]">
                 <span>{t.home.sample.evidence}</span>
-                <Link href={p("/suppliers")} className="font-semibold text-[#f0ede6] hover:text-[#e07a49]">
+                {/* 阶段 1（2026-09-30）：目录已上登录墙 ⇒ "View sample record" 不再
+                    直达 /suppliers，而是落到登录页并带 `?next=<目录页>`，登录后回到完整档。
+                    链接由 lockedHref() 生成 —— 与目录卡片锁定态**同一处规则**，
+                    避免两处各写一遍 ?next= 拼接而慢慢漂移。 */}
+                <Link
+                  href={lockedHref({ loginPath: p("/login"), directoryPath: p("/suppliers") })}
+                  className="font-semibold text-[#f0ede6] hover:text-[#e07a49]"
+                >
                   {t.home.sample.viewSample} →
                 </Link>
               </div>

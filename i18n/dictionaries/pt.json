@@ -63,7 +63,7 @@
     "improvementService": "Melhoria de fornecedores",
     "allServices": "Todos os serviços",
     "containerCalculator": "Calculadora de carga de contêiner",
-    "trustCenter": "Sobre",
+    "trustCenter": "Centro de confiança",
     "operatedBy": "A FactoryAuditB2B é uma plataforma e marca operada por {entity}.",
     "registeredBusiness": "Empresa registrada na China",
     "supplierNetwork": "Rede de Fornecedores",
@@ -76,7 +76,9 @@
     "standardReport": "Relatório padrão",
     "contact": "Contato",
     "buyer": "Comprador",
-    "company": "Empresa"
+    "company": "Empresa",
+    "confidentiality": "Confidencialidade",
+    "integrity": "Integridade"
   },
   "home": {
     "badge": "Verificar. Comprar. Inspecionar. Enviar.",
@@ -2353,7 +2355,27 @@
       "Relatórios de terceiros são revisados, nunca reemitidos ou encaminhados.",
       "O pagamento não muda o resultado. Uma verificação paga pode voltar com problemas.",
       "Amostras e estudos de caso são sempre rotulados como demonstrações."
-    ]
+    ],
+    "tcTitle": "Centro de confiança",
+    "tcLead": "As políticas, os compromissos e os controlos que sustentam o nosso trabalho de verificação, num só lugar.",
+    "tcCardConfTitle": "Declaração de Confidencialidade",
+    "tcCardConfBody": "O que tratamos como confidencial, quem está obrigado e o que acontece se essas regras forem violadas.",
+    "tcCardIntegrityTitle": "Código de Integridade e Conduta",
+    "tcCardIntegrityBody": "Sem contrapartidas, sem conflitos de interesses, sem certificados à venda, e como denunciar.",
+    "tcCardPrivacyBody": "Que dados recolhemos, como os usamos e como pedir acesso, correção ou eliminação.",
+    "tcCardTermsBody": "As regras de utilização da plataforma e o que garantimos e não garantimos sobre os fornecedores.",
+    "tcSecurityTitle": "Medidas de segurança",
+    "tcSecurityBody": "O que está em vigor hoje. Listamos apenas medidas ativas, não as que planeamos implementar.",
+    "tcSecurityItems": [
+      "Encriptação em trânsito — todas as páginas e chamadas à API são servidas por HTTPS.",
+      "Controlo de acesso — os dados dos fornecedores são filtrados no servidor por nível de adesão antes de serem devolvidos.",
+      "Permissões da base de dados — o acesso público à nossa base de dados é negado por predefinição, e as tabelas sensíveis só são legíveis por funções do servidor.",
+      "Registo de atividade — as ações administrativas são gravadas num registo de auditoria."
+    ],
+    "tcDataTitle": "Como os dados circulam num projeto",
+    "tcDataBody": "Para prestar uma verificação, auditoria ou inspeção partilhamos as informações necessárias com o fornecedor e a empresa de auditoria externa envolvidos. Não vendemos dados pessoais.",
+    "tcReportTitle": "Apresentar uma denúncia",
+    "tcReportBody": "Escreva para a nossa caixa de conformidade sobre qualquer questão de integridade, confidencialidade ou dados:"
   },
   "inspection": {
     "badge": "Inspeção de produto",
@@ -2515,7 +2537,7 @@
       "Suporte para verificação de fornecedores",
       "Serviços de auditoria de fábricas",
       "Serviços de inspecção antes da expedição",
-      "Consultoria em conformidade"
+      "Treinamento e capacitação de fornecedores"
     ],
     "noGuaranteeTitle": "O que não prometemos",
     "noGuarantee": "Não prometemos pedidos garantidos, certificação garantida ou passe de auditoria garantido. Os relatórios de verificação descrevem o que realmente encontramos.",
@@ -4092,5 +4114,78 @@
     "errSubmit": "Não foi possível enviar a sua candidatura. Escreva-nos diretamente para support@factoryauditb2b.com.",
     "fileHint": "PDF, DOC ou DOCX. Máximo 5 MB.",
     "privacyNote": "Ao enviar, concorda que a FactoryAuditB2B trate as informações facultadas apenas para fins de recrutamento, cooperação em projetos e base de talentos."
+  },
+  "confidentiality": {
+    "metaTitle": "Declaração de Confidencialidade",
+    "metaDesc": "Como tratamos as especificações de produto, os nomes de fornecedores, o conteúdo das RFQs, os contactos e os relatórios de auditoria.",
+    "h1": "Declaração de Confidencialidade",
+    "updated": "Última atualização: 2026-09-30",
+    "intro": "Esta declaração explica o que tratamos como informação confidencial, quem está obrigado a protegê-la e como a utilizamos. Abrange pedidos, RFQs, verificação e trabalhos de auditoria.",
+    "sections": [
+      {
+        "h": "O que tratamos como confidencial",
+        "b": "As especificações de produto, quantidades encomendadas, nomes de fornecedores, conteúdo das RFQs, dados de contacto e relatórios de auditoria que nos entrega. O que marcar como confidencial, ou que um leitor razoável entenderia como confidencial, recebe o mesmo tratamento."
+      },
+      {
+        "h": "Quem está obrigado",
+        "b": "Os nossos auditores, colaboradores, subcontratados e parceiros de serviço devem manter esta informação confidencial. O acesso é limitado a quem dele necessita para executar o trabalho."
+      },
+      {
+        "h": "Para que a utilizamos",
+        "b": "Apenas para prestar o serviço de RFQ, verificação, auditoria ou inspeção que solicitou. Não utilizamos a sua informação confidencial para qualquer outro fim."
+      },
+      {
+        "h": "Não a vendemos",
+        "b": "Não vendemos, alugamos nem trocamos a sua informação confidencial. Partilhamo-la com um fornecedor ou parceiro de auditoria apenas quando tal é necessário para prestar o serviço solicitado."
+      },
+      {
+        "h": "Se estas regras forem violadas",
+        "b": "Uma violação é tratada internamente: o trabalho é interrompido, o acesso é retirado e a pessoa ou o parceiro envolvido fica sujeito a ação disciplinar ou ao fim da relação de trabalho. Não lhe pedimos que renuncie a qualquer meio de defesa que a lei lhe confira."
+      }
+    ]
+  },
+  "compliance": {
+    "relatedTitle": "Políticas relacionadas"
+  },
+  "integrity": {
+    "metaTitle": "Código de Integridade e Conduta",
+    "metaDesc": "As regras que seguem os nossos auditores, colaboradores e parceiros: sem contrapartidas, sem conflitos de interesses, e como denunciar.",
+    "h1": "Código de Integridade e Conduta Empresarial",
+    "updated": "Última atualização: 2026-09-30",
+    "intro": "Estas regras aplicam-se a todos os auditores, colaboradores, subcontratados e parceiros que trabalhem num projeto da FactoryAuditB2B. Existem porque um resultado de verificação só vale algo se quem o produziu não tiver nada a ganhar com ele.",
+    "sections": [
+      {
+        "h": "Sem contrapartidas entre auditores e fábricas",
+        "b": "Um auditor não deve pedir nem aceitar pagamentos, comissões, presentes, empréstimos, refeições ou favores de uma fábrica ou de quem atue por ela. Quando um presente de cortesia não puder ser recusado sem ofensa, é declarado por escrito."
+      },
+      {
+        "h": "Sem relações não declaradas",
+        "b": "Um auditor não deve trabalhar numa fábrica com a qual tenha relação familiar, comercial ou de investimento, ou qualquer outro interesse pessoal. Essas relações devem ser declaradas antes do início do trabalho."
+      },
+      {
+        "h": "A remuneração nunca depende do resultado",
+        "b": "Ninguém na FactoryAuditB2B é pago, premiado ou penalizado em função da pontuação, do nível ou do resultado de uma verificação. As conclusões não estão à venda em nenhum sentido."
+      },
+      {
+        "h": "Não vendemos certificados",
+        "b": "A FactoryAuditB2B não vende, não emite nem intermedeia certificados, e não cobra em função do resultado da auditoria. Verificamos e formamos."
+      },
+      {
+        "h": "Declaração de conflito de interesses",
+        "b": "Auditores, colaboradores e parceiros preenchem uma declaração de conflito de interesses antes de cada projeto e atualizam-na sempre que as circunstâncias mudarem."
+      },
+      {
+        "h": "Como tratamos uma denúncia",
+        "b": "Todas as denúncias são registadas, verificadas quanto a conflitos, investigadas e respondidas a quem as apresentou. Se o motivo for válido, agimos; se não for, explicamos porquê."
+      },
+      {
+        "h": "Consequências para um auditor que viole estas regras",
+        "b": "O auditor é retirado imediatamente do projeto, o seu acesso é revogado e a relação de trabalho é reavaliada, podendo ser terminada."
+      }
+    ],
+    "docsTitle": "Os compromissos por trás destas regras",
+    "docsLead": "Estes são os modelos que usamos em cada projeto. Estão listados publicamente para que possa pedir uma cópia.",
+    "reportTitle": "Apresentar uma denúncia",
+    "reportBody": "Se considerar que um auditor, colaborador ou parceiro violou estas regras, diga-nos. As denúncias chegam à nossa caixa de conformidade, são tratadas de forma confidencial e revistas por alguém alheio ao projeto:"
   }
 }

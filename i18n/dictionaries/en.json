@@ -150,13 +150,33 @@
       "Third-party reports are reviewed, never re-issued or forwarded.",
       "Payment does not change the outcome. A paid verification can still come back with problems.",
       "Samples and case studies are always labelled as demonstrations."
-    ]
+    ],
+    "tcTitle": "Trust Center",
+    "tcLead": "The policies, commitments and controls behind our verification work, in one place.",
+    "tcCardConfTitle": "Confidentiality Statement",
+    "tcCardConfBody": "What we treat as confidential, who is bound by it, and what happens if those rules are broken.",
+    "tcCardIntegrityTitle": "Integrity & Business Conduct Code",
+    "tcCardIntegrityBody": "No inducements, no conflicts of interest, no certificates for sale, and how to report a concern.",
+    "tcCardPrivacyBody": "What data we collect, how we use it, and how to ask for access, correction or deletion.",
+    "tcCardTermsBody": "The rules for using the platform, and what we do and do not guarantee about suppliers.",
+    "tcSecurityTitle": "Security measures",
+    "tcSecurityBody": "What is in place today. We list only measures that are live, not ones we plan to build.",
+    "tcSecurityItems": [
+      "Encrypted transport — every page and API call is served over HTTPS.",
+      "Access control — supplier data is filtered per membership tier on the server before it is returned.",
+      "Database permissions — public access to our database is denied by default, and sensitive tables are readable only by server-side roles.",
+      "Activity logging — administrative actions are written to an audit log."
+    ],
+    "tcDataTitle": "How data moves through a project",
+    "tcDataBody": "To deliver a verification, audit or inspection we share the relevant details with the supplier and the third-party audit firm involved. We do not sell personal data.",
+    "tcReportTitle": "Reporting a concern",
+    "tcReportBody": "Write to our compliance mailbox about any integrity, confidentiality or data concern:"
   },
   "footer": {
     "workWithUs": "Work With Us",
     "workWithUsLead": "Join Our Auditor & Supplier Service Network",
     "workWithUsCountries": "China · Vietnam · Thailand · Asia",
-    "trustCenter": "About",
+    "trustCenter": "Trust Center",
     "operatedBy": "FactoryAuditB2B is a platform and brand operated by {entity}.",
     "registeredBusiness": "China Registered Business",
     "platform": "Platform",
@@ -193,7 +213,9 @@
     "standardReport": "Standard report",
     "contact": "Contact",
     "buyer": "Buyer",
-    "company": "Company"
+    "company": "Company",
+    "confidentiality": "Confidentiality",
+    "integrity": "Integrity"
   },
   "home": {
     "badge": "Supplier discovery, verification & trust",
@@ -2515,7 +2537,7 @@
       "Supplier verification support",
       "Factory audit services",
       "Pre-shipment inspection services",
-      "Compliance consulting"
+      "Supplier Training & Capacity Building"
     ],
     "noGuaranteeTitle": "What we do not promise",
     "noGuarantee": "We do not promise guaranteed orders, guaranteed certification, or guaranteed audit pass. Verification reports describe what we actually found.",
@@ -4092,5 +4114,78 @@
     "errSubmit": "We could not send your application. Please email us directly at support@factoryauditb2b.com.",
     "fileHint": "PDF, DOC or DOCX. Maximum 5 MB.",
     "privacyNote": "By submitting, you agree that FactoryAuditB2B may process the information you provide for recruitment, project cooperation and talent pool purposes."
+  },
+  "confidentiality": {
+    "metaTitle": "Confidentiality Statement",
+    "metaDesc": "How FactoryAuditB2B handles the product specifications, supplier names, RFQ content, contact details and audit reports you share with us.",
+    "h1": "Confidentiality Statement",
+    "updated": "Last updated: 2026-09-30",
+    "intro": "This statement explains what we treat as confidential information, who is bound by it, and how we use it. It covers enquiries, RFQs, verification and audit work.",
+    "sections": [
+      {
+        "h": "What we treat as confidential",
+        "b": "Product specifications, order quantities, supplier names, RFQ content, contact details and audit reports that you share with us. Anything you mark as confidential, or that a reasonable reader would understand to be confidential, is treated the same way."
+      },
+      {
+        "h": "Who is bound",
+        "b": "Our auditors, employees, contractors and service partners must keep this information confidential. Access is limited to the people who need it to do the work."
+      },
+      {
+        "h": "How we use it",
+        "b": "Only to deliver the RFQ, verification, audit or inspection service you asked for. We do not use your confidential information for any other purpose."
+      },
+      {
+        "h": "We do not sell it",
+        "b": "We do not sell, rent or trade your confidential information. We share it with a supplier or audit partner only where that is needed to deliver the service you requested."
+      },
+      {
+        "h": "If these rules are broken",
+        "b": "A breach is handled internally: the work stops, access is withdrawn, and the person or partner involved faces disciplinary action or termination of the working relationship. We do not ask you to give up any remedy the law gives you."
+      }
+    ]
+  },
+  "compliance": {
+    "relatedTitle": "Related policies"
+  },
+  "integrity": {
+    "metaTitle": "Integrity & Business Conduct Code",
+    "metaDesc": "The rules our auditors, staff and partners follow: no inducements, no conflicts of interest, no certificates for sale, and how to report a concern.",
+    "h1": "Integrity & Business Conduct Code",
+    "updated": "Last updated: 2026-09-30",
+    "intro": "These rules apply to every auditor, employee, contractor and partner who works on a FactoryAuditB2B project. They exist because a verification result is only worth something if the person who produced it had nothing to gain from it.",
+    "sections": [
+      {
+        "h": "No inducements between auditors and factories",
+        "b": "An auditor must not ask for or accept any payment, kickback, gift, loan, meal or favour from a factory, or from anyone acting for it. Where a courtesy gift cannot be refused without causing offence, it is declared to us in writing."
+      },
+      {
+        "h": "No undisclosed relationships",
+        "b": "An auditor must not work on a factory where they have a family, business or investment relationship, or any other personal interest. Any such relationship must be declared before the assignment starts."
+      },
+      {
+        "h": "Pay is never tied to the result",
+        "b": "Nobody at FactoryAuditB2B is paid, rewarded or penalised according to the score, level or outcome a verification produces. Findings are not for sale in either direction."
+      },
+      {
+        "h": "We do not sell certificates",
+        "b": "FactoryAuditB2B does not sell, issue or broker certificates, and does not charge by audit result. We verify, and we train."
+      },
+      {
+        "h": "Conflict of interest declaration",
+        "b": "Auditors, staff and partners complete a conflict of interest declaration before each project and update it whenever circumstances change."
+      },
+      {
+        "h": "How we handle a report",
+        "b": "Every report is logged, checked for conflicts, investigated, and answered to the person who raised it. If the concern is valid we act on it; if it is not, we explain why."
+      },
+      {
+        "h": "Consequences for an auditor who breaks these rules",
+        "b": "The auditor is removed from the project immediately, their access is withdrawn, and the working relationship is reviewed — up to and including termination."
+      }
+    ],
+    "docsTitle": "The commitments behind these rules",
+    "docsLead": "These are the templates we use on every project. They are listed publicly so you can ask for a copy.",
+    "reportTitle": "Reporting a concern",
+    "reportBody": "If you believe an auditor, employee or partner has broken these rules, tell us. Reports reach our compliance mailbox, are handled confidentially, and are reviewed by someone with no role in the project concerned:"
   }
 }

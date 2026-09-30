@@ -63,7 +63,7 @@
     "improvementService": "Amélioration fournisseur",
     "allServices": "Tous les services",
     "containerCalculator": "Calculateur de chargement de conteneur",
-    "trustCenter": "À propos",
+    "trustCenter": "Centre de confiance",
     "operatedBy": "FactoryAuditB2B est une plateforme et une marque exploitées par {entity}.",
     "registeredBusiness": "Société enregistrée en Chine",
     "supplierNetwork": "Réseau Fournisseurs",
@@ -76,7 +76,9 @@
     "standardReport": "Rapport standard",
     "contact": "Contact",
     "buyer": "Acheteur",
-    "company": "Entreprise"
+    "company": "Entreprise",
+    "confidentiality": "Confidentialité",
+    "integrity": "Intégrité"
   },
   "home": {
     "badge": "Vérifier. Sourcer. Inspecter. Expédier.",
@@ -2353,7 +2355,27 @@
       "Les rapports tiers sont examinés, jamais réédités ni transmis.",
       "Le paiement ne change pas le résultat. Une vérification payée peut quand même révéler des problèmes.",
       "Les échantillons et études de cas sont toujours étiquetés comme démonstrations."
-    ]
+    ],
+    "tcTitle": "Centre de confiance",
+    "tcLead": "Les politiques, engagements et contrôles qui sous-tendent notre travail de vérification, réunis en un seul endroit.",
+    "tcCardConfTitle": "Déclaration de confidentialité",
+    "tcCardConfBody": "Ce que nous considérons comme confidentiel, qui est tenu à la confidentialité et ce qui se passe en cas de manquement.",
+    "tcCardIntegrityTitle": "Code d'intégrité et de conduite",
+    "tcCardIntegrityBody": "Aucune contrepartie, aucun conflit d'intérêts, aucun certificat en vente, et comment signaler.",
+    "tcCardPrivacyBody": "Quelles données nous collectons, comment nous les utilisons et comment demander accès, rectification ou suppression.",
+    "tcCardTermsBody": "Les règles d'utilisation de la plateforme et ce que nous garantissons ou non au sujet des fournisseurs.",
+    "tcSecurityTitle": "Mesures de sécurité",
+    "tcSecurityBody": "Ce qui est en place aujourd'hui. Nous ne listons que les mesures actives, pas celles à venir.",
+    "tcSecurityItems": [
+      "Chiffrement en transit — chaque page et chaque appel d'API est servi en HTTPS.",
+      "Contrôle d'accès — les données fournisseurs sont filtrées côté serveur selon le niveau d'adhésion avant d'être renvoyées.",
+      "Droits sur la base de données — l'accès public à notre base est refusé par défaut, et les tables sensibles ne sont lisibles que par des rôles côté serveur.",
+      "Journalisation des activités — les actions administratives sont inscrites dans un journal d'audit."
+    ],
+    "tcDataTitle": "Le parcours des données dans un projet",
+    "tcDataBody": "Pour fournir une vérification, un audit ou une inspection, nous transmettons les informations nécessaires au fournisseur et au cabinet d'audit tiers concernés. Nous ne vendons pas de données personnelles.",
+    "tcReportTitle": "Signaler un problème",
+    "tcReportBody": "Écrivez à notre boîte de conformité pour toute question d'intégrité, de confidentialité ou de données :"
   },
   "inspection": {
     "badge": "Inspection produit",
@@ -2515,7 +2537,7 @@
       "Aide à la vérification du fournisseur",
       "Services d'audit en usine",
       "Services d ' inspection avant expédition",
-      "Consultation en matière de conformité"
+      "Formation et renforcement des capacités des fournisseurs"
     ],
     "noGuaranteeTitle": "Ce que nous ne promettons pas",
     "noGuarantee": "Nous ne promettons pas de commandes garanties, de certification garantie ou de pass d'audit garanti. Les rapports de vérification décrivent ce que nous avons réellement trouvé.",
@@ -4092,5 +4114,78 @@
     "errSubmit": "Nous n'avons pas pu envoyer votre candidature. Écrivez-nous directement à support@factoryauditb2b.com.",
     "fileHint": "PDF, DOC ou DOCX. Maximum 5 Mo.",
     "privacyNote": "En envoyant, vous acceptez que FactoryAuditB2B traite les informations fournies uniquement à des fins de recrutement, de coopération sur des projets et de vivier de talents."
+  },
+  "confidentiality": {
+    "metaTitle": "Déclaration de confidentialité",
+    "metaDesc": "Comment FactoryAuditB2B traite les spécifications produit, noms de fournisseurs, contenus de RFQ, coordonnées et rapports d'audit que vous nous transmettez.",
+    "h1": "Déclaration de confidentialité",
+    "updated": "Dernière mise à jour : 2026-09-30",
+    "intro": "Cette déclaration précise ce que nous considérons comme des informations confidentielles, qui est tenu de les protéger et comment nous les utilisons. Elle couvre les demandes, les RFQ, la vérification et les travaux d'audit.",
+    "sections": [
+      {
+        "h": "Ce que nous considérons comme confidentiel",
+        "b": "Les spécifications produit, quantités commandées, noms de fournisseurs, contenus de RFQ, coordonnées et rapports d'audit que vous nous transmettez. Tout élément que vous marquez comme confidentiel, ou qu'un lecteur raisonnable comprendrait comme tel, reçoit le même traitement."
+      },
+      {
+        "h": "Qui est tenu à la confidentialité",
+        "b": "Nos auditeurs, salariés, sous-traitants et partenaires de service doivent préserver la confidentialité de ces informations. L'accès est limité aux personnes qui en ont besoin pour réaliser le travail."
+      },
+      {
+        "h": "L'usage que nous en faisons",
+        "b": "Uniquement pour fournir le service de RFQ, de vérification, d'audit ou d'inspection que vous avez demandé. Nous n'utilisons pas vos informations confidentielles à d'autres fins."
+      },
+      {
+        "h": "Nous ne les vendons pas",
+        "b": "Nous ne vendons, ne louons ni n'échangeons vos informations confidentielles. Nous les transmettons à un fournisseur ou à un partenaire d'audit uniquement lorsque cela est nécessaire pour fournir le service demandé."
+      },
+      {
+        "h": "En cas de manquement à ces règles",
+        "b": "Un manquement est traité en interne : le travail est arrêté, l'accès est retiré et la personne ou le partenaire concerné s'expose à une sanction disciplinaire ou à la rupture de la relation de travail. Nous ne vous demandons pas de renoncer aux recours que la loi vous accorde."
+      }
+    ]
+  },
+  "compliance": {
+    "relatedTitle": "Politiques associées"
+  },
+  "integrity": {
+    "metaTitle": "Code d'intégrité et de conduite",
+    "metaDesc": "Les règles que suivent nos auditeurs, notre personnel et nos partenaires : aucune contrepartie, aucun conflit d'intérêts, comment signaler.",
+    "h1": "Code d'intégrité et de conduite professionnelle",
+    "updated": "Dernière mise à jour : 2026-09-30",
+    "intro": "Ces règles s'appliquent à tout auditeur, salarié, sous-traitant et partenaire travaillant sur un projet FactoryAuditB2B. Elles existent parce qu'un résultat de vérification n'a de valeur que si son auteur n'avait rien à y gagner.",
+    "sections": [
+      {
+        "h": "Aucune contrepartie entre auditeurs et usines",
+        "b": "Un auditeur ne doit ni solliciter ni accepter un paiement, une commission, un cadeau, un prêt, une invitation ou un avantage de la part d'une usine ou de toute personne agissant pour elle. Si un cadeau de courtoisie ne peut être refusé sans vexer, il nous est déclaré par écrit."
+      },
+      {
+        "h": "Aucune relation non déclarée",
+        "b": "Un auditeur ne doit pas travailler sur une usine avec laquelle il a une relation familiale, commerciale ou financière, ou tout autre intérêt personnel. Ces relations doivent être déclarées avant le début de la mission."
+      },
+      {
+        "h": "La rémunération n'est jamais liée au résultat",
+        "b": "Personne chez FactoryAuditB2B n'est payé, récompensé ou pénalisé selon la note, le niveau ou le résultat d'une vérification. Les constats ne sont pas à vendre, dans un sens comme dans l'autre."
+      },
+      {
+        "h": "Nous ne vendons pas de certificats",
+        "b": "FactoryAuditB2B ne vend ni ne délivre de certificats et n'agit pas comme intermédiaire pour leur vente, et ne facture pas en fonction du résultat d'audit. Nous vérifions et nous formons."
+      },
+      {
+        "h": "Déclaration de conflit d'intérêts",
+        "b": "Les auditeurs, le personnel et les partenaires remplissent une déclaration de conflit d'intérêts avant chaque projet et la mettent à jour dès que la situation change."
+      },
+      {
+        "h": "Traitement d'un signalement",
+        "b": "Chaque signalement est enregistré, examiné au regard des conflits d'intérêts, instruit, puis une réponse est apportée à son auteur. Si le signalement est fondé, nous agissons ; sinon, nous expliquons pourquoi."
+      },
+      {
+        "h": "Conséquences pour un auditeur qui enfreint ces règles",
+        "b": "L'auditeur est immédiatement retiré du projet, son accès est retiré et la relation de travail est réexaminée, jusqu'à sa rupture."
+      }
+    ],
+    "docsTitle": "Les engagements qui sous-tendent ces règles",
+    "docsLead": "Voici les modèles que nous utilisons sur chaque projet. Ils sont publiés pour que vous puissiez en demander une copie.",
+    "reportTitle": "Signaler un problème",
+    "reportBody": "Si vous pensez qu'un auditeur, un salarié ou un partenaire a enfreint ces règles, dites-le nous. Les signalements arrivent dans notre boîte de conformité, sont traités de façon confidentielle et sont examinés par une personne extérieure au projet concerné :"
   }
 }

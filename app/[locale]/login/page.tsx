@@ -58,6 +58,10 @@ export default async function LoginPage({
       <p className="text-[#6d6b66] mt-2">{l.lead}</p>
 
       <div className="mt-8">
+        {/* 阶段 1（2026-09-30）：LoginForm 读 `?next=` 的方式是 effect + window.location，
+            **不用** useSearchParams ⇒ 这里不需要 Suspense 边界，/login 保持静态预渲染。
+            （曾试过 useSearchParams + Suspense：fallback 在预渲染期也会被渲染，
+             而 fallback 里的表单同样调 useSearchParams ⇒ 边界形同虚设，构建失败。） */}
         <LoginForm t={l.form} redirectTo={p("/account")} />
       </div>
 

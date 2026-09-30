@@ -21,6 +21,9 @@ export type FooterDict = {
   pricing: string;
   privacy: string;
   terms: string;
+  /** CS-23：合规页脚入口标签（9 语，值级新增） */
+  confidentiality: string;
+  integrity: string;
   tagline: string;
   copyright: string;
   about: string;
@@ -160,6 +163,12 @@ export default function SiteFooter({
             <div className="mb-3.5 text-[10px] uppercase tracking-[.12em] text-white">{dict.company}</div>
             <ul className="grid grid-cols-1 list-none gap-2 p-0">
               <li><Link href={p("/trust")} className="text-[12.5px] text-[#a9a59c] transition hover:text-white">{dict.about}</Link></li>
+              {/* CS-23：Trust Center 区块锚点。文案复用既有的 `footer.trustCenter`
+                  （本次把它的值从 "About" 改为 "Trust Center"，0 新叶）——
+                  锚点与页内 `id="trust-center"` 对应，站内一跳直达。 */}
+              <li><Link href={`${p("/trust")}#trust-center`} className="text-[12.5px] text-[#a9a59c] transition hover:text-white">{dict.trustCenter}</Link></li>
+              <li><Link href={p("/confidentiality")} className="text-[12.5px] text-[#a9a59c] transition hover:text-white">{dict.confidentiality}</Link></li>
+              <li><Link href={p("/integrity")} className="text-[12.5px] text-[#a9a59c] transition hover:text-white">{dict.integrity}</Link></li>
               <li><Link href={p("/contact")} className="text-[12.5px] text-[#a9a59c] transition hover:text-white">{dict.contact}</Link></li>
               <li><Link href={p("/careers")} className="text-[12.5px] text-[#a9a59c] transition hover:text-white">{dict.workWithUs}</Link></li>
               <li><Link href={p("/terms")} className="text-[12.5px] text-[#a9a59c] transition hover:text-white">{dict.terms}</Link></li>

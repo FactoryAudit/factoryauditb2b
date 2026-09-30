@@ -80,6 +80,10 @@ export async function GET() {
   // 人才网络：不是「招聘岗位列表」，而是可调用的人力网络（审核员 / 顾问 / 项目 / 采购 / IT / 本地合作伙伴）
   lines.push(`- [Work With Us](${BASE}/careers): Join the FactoryAuditB2B network of auditors, supplier verification specialists, sourcing professionals and technology talent across China, Vietnam, Thailand and Asia. Applications go to the team inbox; there is no public job board.`);
   lines.push(`- [About FactoryAuditB2B](${BASE}/trust): Who operates FactoryAuditB2B (Jiangmen Zhiyu Technology Co., Ltd.), why we understand suppliers, how we verify, and how buyers can request an audit or submit an RFQ.`);
+  // CS-23：/trust 现为信任中心（About 之上叠加政策层）。下面两条是其政策层里
+  // 两页独立路由的入口，描述严格对齐各页 index 0 的小标题，不含任何未经实现的能力声称。
+  lines.push(`- [Confidentiality Statement](${BASE}/confidentiality): What FactoryAuditB2B treats as confidential — product specifications, supplier names, RFQ content, contact details and audit reports — who is bound by it, how the information is used, and the limits of that commitment.`);
+  lines.push(`- [Integrity & Business Conduct Code](${BASE}/integrity): The conduct rules our auditors, staff and partners follow — no inducements, no undisclosed relationships, pay never tied to the result, no certificates sold — and the single public channel for reporting a concern.`);
   lines.push(`- [Container Load Calculator](${BASE}/logistics): Calculates how many cartons fit in a 20GP, 40GP, 40HQ, 45HQ, reefer or open-top container, and how many containers a shipment needs, with volume and payload utilisation.`);
   lines.push("");
 

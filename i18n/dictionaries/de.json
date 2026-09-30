@@ -63,7 +63,7 @@
     "improvementService": "Lieferantenverbesserung",
     "allServices": "Alle Leistungen",
     "containerCalculator": "Containerladungsrechner",
-    "trustCenter": "Über uns",
+    "trustCenter": "Trust Center",
     "operatedBy": "FactoryAuditB2B ist eine Plattform und Marke, betrieben von {entity}.",
     "registeredBusiness": "In China registriertes Unternehmen",
     "supplierNetwork": "Lieferantennetzwerk",
@@ -76,7 +76,9 @@
     "standardReport": "Standardbericht",
     "contact": "Kontakt",
     "buyer": "Käufer",
-    "company": "Unternehmen"
+    "company": "Unternehmen",
+    "confidentiality": "Vertraulichkeit",
+    "integrity": "Integrität"
   },
   "home": {
     "badge": "Prüfen. Beschaffen. Inspizieren. Versenden.",
@@ -2353,7 +2355,27 @@
       "Drittberichte werden geprüft, nie neu ausgestellt oder weitergeleitet.",
       "Zahlung ändert das Ergebnis nicht. Eine bezahlte Verifizierung kann trotzdem Probleme aufzeigen.",
       "Stichproben und Fallstudien sind immer als Demonstrationen gekennzeichnet."
-    ]
+    ],
+    "tcTitle": "Trust Center",
+    "tcLead": "Die Richtlinien, Zusagen und Kontrollen hinter unserer Verifizierungsarbeit – an einem Ort.",
+    "tcCardConfTitle": "Vertraulichkeitserklärung",
+    "tcCardConfBody": "Was wir als vertraulich behandeln, wer verpflichtet ist und was bei einem Verstoß geschieht.",
+    "tcCardIntegrityTitle": "Integritäts- und Verhaltenskodex",
+    "tcCardIntegrityBody": "Keine Zuwendungen, keine Interessenkonflikte, keine Zertifikate zum Verkauf – und wie Sie melden.",
+    "tcCardPrivacyBody": "Welche Daten wir erheben, wie wir sie nutzen und wie Sie Auskunft, Berichtigung oder Löschung verlangen.",
+    "tcCardTermsBody": "Die Regeln für die Nutzung der Plattform und was wir in Bezug auf Lieferanten zusagen – und was nicht.",
+    "tcSecurityTitle": "Sicherheitsmaßnahmen",
+    "tcSecurityBody": "Was heute in Betrieb ist. Wir listen nur live befindliche Maßnahmen, nicht geplante.",
+    "tcSecurityItems": [
+      "Verschlüsselte Übertragung – jede Seite und jeder API-Aufruf wird über HTTPS ausgeliefert.",
+      "Zugriffskontrolle – Lieferantendaten werden serverseitig nach Mitgliedsstufe gefiltert, bevor sie zurückgegeben werden.",
+      "Datenbankrechte – der öffentliche Zugriff auf unsere Datenbank ist standardmäßig gesperrt; sensible Tabellen sind nur für serverseitige Rollen lesbar.",
+      "Aktivitätsprotokollierung – administrative Aktionen werden in einem Audit-Log erfasst."
+    ],
+    "tcDataTitle": "Wie Daten durch ein Projekt laufen",
+    "tcDataBody": "Zur Erbringung einer Verifizierung, eines Audits oder einer Inspektion geben wir die erforderlichen Angaben an den betreffenden Lieferanten und die externe Auditfirma weiter. Wir verkaufen keine personenbezogenen Daten.",
+    "tcReportTitle": "Eine Meldung abgeben",
+    "tcReportBody": "Schreiben Sie an unser Compliance-Postfach bei Fragen zu Integrität, Vertraulichkeit oder Daten:"
   },
   "inspection": {
     "badge": "Produktinspektion",
@@ -2515,7 +2537,7 @@
       "Unterstützung bei der Verifizierung von Lieferanten",
       "Betriebsaudits",
       "Inspektion vor dem Versand",
-      "Compliance-Beratung"
+      "Lieferantenschulung & Kompetenzaufbau"
     ],
     "noGuaranteeTitle": "Was wir nicht versprechen",
     "noGuarantee": "Wir versprechen keine garantierten Aufträge, garantierte Zertifizierung oder garantierten Audit-Pass. Verifizierungsberichte beschreiben, was wir tatsächlich gefunden haben.",
@@ -4092,5 +4114,78 @@
     "errSubmit": "Wir konnten deine Bewerbung nicht senden. Schreib uns direkt an support@factoryauditb2b.com.",
     "fileHint": "PDF, DOC oder DOCX. Maximal 5 MB.",
     "privacyNote": "Mit dem Absenden stimmst du zu, dass FactoryAuditB2B die übermittelten Daten ausschließlich für Zwecke der Personalgewinnung, Projektzusammenarbeit und Talentpool-Pflege verarbeitet."
+  },
+  "confidentiality": {
+    "metaTitle": "Vertraulichkeitserklärung",
+    "metaDesc": "Wie FactoryAuditB2B mit den von Ihnen übermittelten Produktspezifikationen, Lieferantennamen, RFQ-Inhalten, Kontaktdaten und Auditberichten umgeht.",
+    "h1": "Vertraulichkeitserklärung",
+    "updated": "Zuletzt aktualisiert: 2026-09-30",
+    "intro": "Diese Erklärung beschreibt, was wir als vertrauliche Informationen behandeln, wer zur Vertraulichkeit verpflichtet ist und wie wir diese Informationen verwenden. Sie gilt für Anfragen, RFQs, Verifizierungen und Auditaufträge.",
+    "sections": [
+      {
+        "h": "Was wir als vertraulich behandeln",
+        "b": "Produktspezifikationen, Bestellmengen, Lieferantennamen, RFQ-Inhalte, Kontaktdaten und Auditberichte, die Sie uns übermitteln. Alles, was Sie als vertraulich kennzeichnen oder was ein verständiger Leser als vertraulich verstehen würde, wird genauso behandelt."
+      },
+      {
+        "h": "Wer verpflichtet ist",
+        "b": "Unsere Auditoren, Mitarbeitenden, Auftragnehmer und Servicepartner müssen diese Informationen vertraulich behandeln. Der Zugriff ist auf die Personen beschränkt, die ihn für die Arbeit benötigen."
+      },
+      {
+        "h": "Wofür wir sie verwenden",
+        "b": "Ausschließlich zur Erbringung der von Ihnen angefragten RFQ-, Verifizierungs-, Audit- oder Inspektionsleistung. Wir verwenden Ihre vertraulichen Informationen für keinen anderen Zweck."
+      },
+      {
+        "h": "Wir verkaufen sie nicht",
+        "b": "Wir verkaufen, vermieten oder tauschen Ihre vertraulichen Informationen nicht. Wir geben sie nur dann an einen Lieferanten oder Auditpartner weiter, wenn dies zur Erbringung der angefragten Leistung erforderlich ist."
+      },
+      {
+        "h": "Wenn diese Regeln verletzt werden",
+        "b": "Ein Verstoß wird intern bearbeitet: Die Arbeit wird gestoppt, der Zugriff entzogen und die betroffene Person oder der Partner muss mit arbeitsrechtlichen Konsequenzen oder der Beendigung der Zusammenarbeit rechnen. Wir verlangen nicht, dass Sie auf gesetzliche Ansprüche verzichten."
+      }
+    ]
+  },
+  "compliance": {
+    "relatedTitle": "Verwandte Richtlinien"
+  },
+  "integrity": {
+    "metaTitle": "Integritäts- und Verhaltenskodex",
+    "metaDesc": "Die Regeln für unsere Auditoren, Mitarbeitenden und Partner: keine Zuwendungen, keine Interessenkonflikte, keine Zertifikate zum Verkauf, und wie Sie melden.",
+    "h1": "Integritäts- und Verhaltenskodex",
+    "updated": "Zuletzt aktualisiert: 2026-09-30",
+    "intro": "Diese Regeln gelten für jeden Auditor, jede Mitarbeiterin, jeden Auftragnehmer und jeden Partner, der an einem Projekt von FactoryAuditB2B mitwirkt. Sie bestehen, weil ein Verifizierungsergebnis nur dann etwas wert ist, wenn die Person, die es erstellt hat, nichts davon hatte.",
+    "sections": [
+      {
+        "h": "Keine Zuwendungen zwischen Auditoren und Fabriken",
+        "b": "Ein Auditor darf von einer Fabrik oder von Personen, die für sie handeln, keine Zahlungen, Kickbacks, Geschenke, Darlehen, Bewirtungen oder Vorteile verlangen oder annehmen. Lässt sich ein Höflichkeitsgeschenk nicht ohne Kränkung ablehnen, wird es uns schriftlich gemeldet."
+      },
+      {
+        "h": "Keine verschwiegenen Beziehungen",
+        "b": "Ein Auditor darf keine Fabrik prüfen, zu der eine familiäre, geschäftliche oder finanzielle Beziehung oder ein sonstiges persönliches Interesse besteht. Solche Beziehungen sind vor Auftragsbeginn offenzulegen."
+      },
+      {
+        "h": "Vergütung ist nie an das Ergebnis gekoppelt",
+        "b": "Niemand bei FactoryAuditB2B wird nach Punkten, Stufe oder Ergebnis einer Verifizierung bezahlt, belohnt oder benachteiligt. Feststellungen sind in keiner Richtung käuflich."
+      },
+      {
+        "h": "Wir verkaufen keine Zertifikate",
+        "b": "FactoryAuditB2B verkauft, erteilt und vermittelt keine Zertifikate und rechnet nicht nach Prüfergebnis ab. Wir verifizieren und schulen."
+      },
+      {
+        "h": "Offenlegung von Interessenkonflikten",
+        "b": "Auditoren, Mitarbeitende und Partner füllen vor jedem Projekt eine Erklärung zu Interessenkonflikten aus und aktualisieren sie, wenn sich die Umstände ändern."
+      },
+      {
+        "h": "Wie wir eine Meldung bearbeiten",
+        "b": "Jede Meldung wird erfasst, auf Interessenkonflikte geprüft, untersucht und der meldenden Person beantwortet. Ist der Hinweis berechtigt, handeln wir; wenn nicht, erklären wir warum."
+      },
+      {
+        "h": "Folgen für Auditoren, die diese Regeln verletzen",
+        "b": "Der Auditor wird sofort vom Projekt abgezogen, sein Zugriff entzogen und die Zusammenarbeit überprüft – bis hin zu deren Beendigung."
+      }
+    ],
+    "docsTitle": "Die Zusagen hinter diesen Regeln",
+    "docsLead": "Dies sind die Vorlagen, die wir in jedem Projekt verwenden. Sie sind öffentlich gelistet, damit Sie eine Kopie anfordern können.",
+    "reportTitle": "Eine Meldung abgeben",
+    "reportBody": "Wenn Sie glauben, dass ein Auditor, eine Mitarbeiterin oder ein Partner gegen diese Regeln verstoßen hat, sagen Sie es uns. Meldungen erreichen unser Compliance-Postfach, werden vertraulich behandelt und von einer am Projekt unbeteiligten Person geprüft:"
   }
 }

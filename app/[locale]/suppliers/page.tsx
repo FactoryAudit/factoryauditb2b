@@ -3,19 +3,19 @@ import { Suspense } from "react";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { listSupplierDirectory, listPublicRfqs } from "@/lib/queries";
-import { overallLevel, LEVEL_COLOR, type RiskLevel } from "@/lib/riskEngine";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
-// CS-D：目录卡片统一展示三态验证徽章（状态由 trustProfile 服务端推导，绝不前端算）
-import {
-  getVerificationBadgesForSuppliers,
-} from "@/lib/trustProfile";
-import type { BadgeState } from "@/components/supplier/VerificationBadge";
 import DirectoryView, {
   type DirectoryDict,
-  type DirectoryItem,
+  type DirectoryEntry,
 } from "@/components/supplier/DirectoryView";
 import DirectoryGrid from "@/components/supplier/DirectoryGrid";
+import DirectoryWallBanner from "@/components/supplier/DirectoryWallBanner";
+// 阶段 1：卡片数据的**唯一构造点**。页面与 /api/suppliers/directory 共用它，
+// 免得两处各写一份派生逻辑、日后静默漂移（详见 lib/directoryItems.ts 顶部注释）。
+import { buildDirectoryItems } from "@/lib/directoryItems";
+// 阶段 1：登录墙脱敏层。锁定/解锁规则只实现一次（lib/directoryWall.ts）。
+import { lockDirectoryItems, lockedHref } from "@/lib/directoryWall";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { ANALYTICS_EVENTS } from "@/lib/suppliers";
 
@@ -67,21 +67,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-/** 分数 + 等级：等级由 overallLevel 推导，文案取字典，不出现 LOW/MODERATE 原始 token */
-function riskLabel(score?: number, labels?: Record<RiskLevel, string>) {
-  if (typeof score !== "number" || !labels) return "—";
-  return `${score} / 100 · ${labels[overallLevel(score)]}`;
-}
-
 export default async function SuppliersPage({ params }: Props) {
   const { locale: raw } = await params;
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
   const s = t.suppliers;
-  const sp = t.supplierProfile;
-  // PHASE 03（P0）：卡片核验状态与档案页共用同一套等级文案（verification.levelsShort），
-  // 不再在目录里另造一份「等级 → 文案」映射。
-  const v = t.verification;
   // 服务名复用既有 taxonomy（含 9 语译文），不重复造词
   const si = t.servicesIndex.items;
   const p = (href: string) => localePath(locale, href);
@@ -93,45 +83,28 @@ export default async function SuppliersPage({ params }: Props) {
   // 作为「决策辅助」（社交证明），不再占用首页 section。
   const buyerRequests = await listPublicRfqs(3);
 
-  // CS-D：目录卡片徽章 —— 单次批量查询推导状态（服务端唯一权威，见 trustProfile.ts）。
-  // stage1.8：范围由「筛选结果」改为**全量** —— 过滤已移到客户端，
-  //   服务端必须把全量徽章一次性交给客户端，否则客户端过滤会漏掉状态。
-  const badgeMap = await getVerificationBadgesForSuppliers(all.map((x) => x.id));
+  // ── 阶段 1（2026-09-30）：登录墙 ──────────────────────────────────────────
+  // 派生值仍在服务端算好（唯一构造点 = lib/directoryItems.ts，与授权接口共用），
+  // 但**公开 HTML 里下发的恒为「锁定视图」**：真实公司名被置为空串、
+  // 卡片 href 指向登录页而非档案页。已登录用户由客户端从
+  // /api/suppliers/directory 取完整档后替换（见 components/supplier/DirectoryGrid.tsx）。
+  //
+  // 🔴 这里**绝不读 cookie 判定登录** —— 一读页面就退化成 ƒ Dynamic，
+  //    而 CF Workers Free（CPU 10ms/req）下的 5xx 主因正是这种动态渲染。
+  const directoryPath = p(PATH);
+  const supplierPathPrefix = p("/suppliers/");
+  const loginPath = p("/login");
 
-  // ── stage1.8：派生值全部在服务端算好，客户端只做「按 URL 过滤 + 渲染」──────────
-  //   铁律不变：公开核验等级只由 publicVerificationLevel 决定（?? 0 兜底），
-  //   绝不采信 legacy verification_status，也绝不因「有 N 条证据」而升档；
-  //   风险色只由真实分数决定 —— 无分数 ⇒ 中性灰，绝不用 `?? 0` 涂成 CRITICAL 红
-  //   （那等于给一家「尚未评分」的企业涂上最高风险色）。
-  const items: DirectoryItem[] = all.map((x) => {
-    const hasEvidence = (x.evidenceVerified ?? 0) > 0;
-    const level = x.publicVerificationLevel ?? 0;
-    return {
-      slug: x.slug,
-      legalName: x.legalName,
-      country: x.country,
-      countryLabel: x.countryName ?? x.country.toUpperCase(),
-      city: x.city,
-      industryCode: x.industryCode ?? "",
-      mainProducts: x.mainProducts,
-      businessType: x.businessType || "—",
-      evidenceText: hasEvidence
-        ? s.evidenceDocs.replace("{n}", String(x.evidenceVerified))
-        : s.evidenceNone,
-      // PHASE 03（P0 修复，2026-09-13）：核验状态必须来自真实数据。
-      //   修复前 guangzhou-sunny-food 已有 1 条 VERIFIED 现场审核记录
-      //   （verification_level='on_site_audit'、公开等级 Level 3），
-      //   在目录卡上却仍显示「未核验」，与它自己的档案页直接矛盾。
-      //   level ≥ 1 → levelsShort[level]（与档案页同一字典）；level = 0 → verificationNotYet。
-      verificationText: level === 0 ? s.verificationNotYet : v.levelsShort[level],
-      riskText: riskLabel(x.riskScore, t.risk.ui.level),
-      riskColor:
-        typeof x.riskScore === "number"
-          ? LEVEL_COLOR[overallLevel(x.riskScore)]
-          : "#6d6b66",
-      lastCheckedText: x.lastChecked ?? sp.noCheckRecord,
-      badgeState: (badgeMap.get(x.id) ?? "NONE") as BadgeState,
-    };
+  const baseItems = await buildDirectoryItems(locale, all);
+  const items: DirectoryEntry[] = lockDirectoryItems(baseItems, {
+    loginPath,
+    directoryPath,
+    supplierPathPrefix,
+    // CTA 文案复用既有键（阶段 1 零新增叶）：
+    //   locked   → login.form.submit   （"Sign in"）
+    //   unlocked → suppliers.cardCta   （"View Supplier"）
+    lockedCta: t.login.form.submit,
+    unlockedCta: s.cardCta,
   });
 
   // 筛选 chip 的数据源是**全量**（否则筛掉一个国家后该 chip 会自我消失）。
@@ -173,7 +146,6 @@ export default async function SuppliersPage({ params }: Props) {
     riskLabel: s.riskLabel,
     riskNote: s.riskNote,
     lastEvidence: s.lastEvidence,
-    cardCta: s.cardCta,
   };
 
   // 埋点事件名从 lib/analytics.ts 取，不在客户端组件里硬编码字符串（CS-04 口径铁律）。
@@ -183,9 +155,8 @@ export default async function SuppliersPage({ params }: Props) {
     profileView: ANALYTICS_EVENTS.profileView,
   };
 
-  // 已带语言前缀的路径，避免把 locale 逻辑复制到客户端
-  const directoryPath = p(PATH);
-  const supplierPathPrefix = p("/suppliers/");
+  // 路径（directoryPath / supplierPathPrefix / loginPath）已在上方定义 ——
+  // 它们要在构造锁定视图时就用到，所以不能再留在这里。
   const tp = t.trustProfile;
 
   const faqs = [
@@ -206,10 +177,15 @@ export default async function SuppliersPage({ params }: Props) {
       name: s.h1,
       url: `${BASE}${p(PATH)}`,
       numberOfItems: all.length,
+      // 🔴 阶段 1：ItemList 的 `name` **已移除**。
+      //   结构化数据必须描述页面**实际呈现**的内容 —— 而锁定视图里真实公司名
+      //   已不在页面上（卡片只画骨架条）。继续输出 name 就构成
+      //   「结构化数据与可见内容不符」，那是 Google 明确会惩罚的一类问题。
+      //   `url` 保留：档案页（/suppliers/<slug>）本轮未上墙、仍在 sitemap 中公开，
+      //   其地址不属于本页新增的泄漏面。
       itemListElement: all.map((x, i) => ({
         "@type": "ListItem",
         position: i + 1,
-        name: x.legalName,
         url: `${BASE}${p(`/suppliers/${x.slug}`)}`,
       })),
     },
@@ -237,7 +213,11 @@ export default async function SuppliersPage({ params }: Props) {
         </span>
         <h1 className="text-3xl font-bold text-[#171717] mt-2">{s.h1}</h1>
         <p className="text-[#6d6b66] mt-2 max-w-3xl">{s.lead}</p>
-        <p className="mt-2 text-sm font-medium text-[#3f4650]">{s.freeNote}</p>
+        {/* 阶段 1（2026-09-30）：原 `s.freeNote`（"Basic supplier information is
+            free to browse."）已**撤下渲染** —— 目录上墙后，"免费浏览"就不再是完整
+            的表述（现在是"登录后免费"，且未登录看不到公司名）。留着它等于暗示
+            "没有门槛"，与页面实际行为不符。下方 DirectoryWallBanner 明确交代门槛。
+            键本身保留在 9 语字典里（未删除），只是不再有渲染出口。 */}
 
         <div className="mt-5 flex flex-wrap items-center gap-3">
           {/* 页内锚点：落到下方供应商目录，不产生新页面也不伪造转化事件 */}
@@ -262,9 +242,21 @@ export default async function SuppliersPage({ params }: Props) {
           </Link>
         </div>
 
-        <p className="mt-3 text-sm text-[#8a5410] bg-[#fff4e0] rounded-md px-3 py-2 max-w-3xl">
-          {s.exampleNote}
-        </p>
+        {/* 阶段 1（2026-09-30）：原 `s.exampleNote`（"Browse available suppliers
+            for free. …"）已由**登录墙提示条**取代 —— 同一位置、同一浅橙底调，
+            但明确交代"完整记录需登录后查看"。文案全部复用 login.* 既有键
+            （阶段 1 零新增翻译叶）。 */}
+        <div className="mt-4">
+          <DirectoryWallBanner
+            loginHref={lockedHref({ loginPath, directoryPath })}
+            registerHref={p("/register")}
+            title={t.login.h1}
+            note={t.login.metaDesc}
+            cta={t.login.form.submit}
+            noAccount={t.login.noAccount}
+            registerCta={t.login.registerLink}
+          />
+        </div>
       </section>
 
       {/* Live Buyer Requests —— 决策辅助（社交证明），只展示公开白名单字段。 */}
@@ -314,7 +306,6 @@ export default async function SuppliersPage({ params }: Props) {
             industries={industries}
             active={{ country: "", industry: "", q: "" }}
             directoryPath={directoryPath}
-            supplierPathPrefix={supplierPathPrefix}
             dict={directoryDict}
             events={directoryEvents}
             trustProfileDict={tp}
@@ -326,7 +317,7 @@ export default async function SuppliersPage({ params }: Props) {
           countries={countries}
           industries={industries}
           directoryPath={directoryPath}
-          supplierPathPrefix={supplierPathPrefix}
+          locale={locale}
           dict={directoryDict}
           events={directoryEvents}
           trustProfileDict={tp}

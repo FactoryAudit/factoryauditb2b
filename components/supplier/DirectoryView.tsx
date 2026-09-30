@@ -20,6 +20,16 @@ import VerificationBadge, {
  *    等级文案、风险文案与颜色、证据文案、最后核验日期、徽章状态
  *    全部由服务端算好放进 `items`（见 page.tsx 的 `items` 构造处）。
  *    客户端只做「按 URL 过滤 + 渲染」，不做任何判断。
+ *
+ * ── 阶段 1（2026-09-30）：供应商登录墙 ──────────────────────────────────────
+ *   本组件现在同时承担**两种访问视图**，由 `items[].locked` 区分：
+ *     · locked = true  —— 未登录。真实公司名不渲染（只画骨架条），
+ *                         卡片 href 指向登录页，CTA 文案为登录。
+ *     · locked = false —— 已登录。渲染真实名称，href 指向档案页。
+ *   🔴 但注意：预渲染的公开 HTML **恒为 locked 视图**（服务端不读 cookie，
+ *      否则页面退化成 ƒ Dynamic ⇒ CF Workers Free CPU 超限 5xx）。
+ *      已登录视图由客户端在 hydration 后从 /api/suppliers/directory 取得。
+ *      脱敏/解锁规则唯一实现在 `lib/directoryWall.ts`，本组件不复制该逻辑。
  */
 
 /** 单张目录卡片所需的**已收口**数据（派生值全部由服务端算好）。 */
@@ -50,6 +60,33 @@ export type DirectoryItem = {
   badgeState: BadgeState;
 };
 
+/**
+ * 渲染用的目录条目 = **已收口数据**（DirectoryItem）+ 服务端决定的可见性。
+ *
+ * 为什么把这两层拆开（阶段 1）：
+ *   `DirectoryItem` 是"卡片表达什么内容"（与访问者无关，可缓存、可复用）；
+ *   `DirectoryEntry` 是"这个访问者能看什么、点了去哪"（随登录态变化）。
+ *   构造逻辑只写一次（lib/directoryItems.ts），可见性只由 lib/directoryWall.ts 决定。
+ *   两处若混在一起，就很容易出现「页面按 A 规则渲染、接口按 B 规则下发」的静默漂移。
+ */
+export type DirectoryEntry = DirectoryItem & {
+  /**
+   * 卡片跳转目标（**服务端算好**，客户端不做任何拼接）。
+   *
+   * 锁定态（未登录）→ 登录页 `?next=<目录页>`，**刻意不带档案地址**：
+   *   档案地址含 slug，slug 含公司名，写进 href 等于公开 HTML 里泄漏真实名称。
+   * 解锁态（已登录）→ 真实档案地址 `/suppliers/<slug>`。
+   */
+  href: string;
+  /**
+   * 名称是否被登录墙遮蔽（阶段 1）。
+   * true ⇒ 渲染层**只画骨架条**，绝不渲染 legalName（此时它已被置为空串）。
+   */
+  locked: boolean;
+  /** 卡片 CTA 文案（服务端算好：锁定 → 登录；解锁 → View Supplier） */
+  cta: string;
+};
+
 /** 目录区块用到的字典片段（只取需要的键，避免把整本字典推进客户端）。 */
 export type DirectoryDict = {
   searchPlaceholder: string;
@@ -69,7 +106,8 @@ export type DirectoryDict = {
   riskLabel: string;
   riskNote: string;
   lastEvidence: string;
-  cardCta: string;
+  // 阶段 1 移除 `cardCta`：卡片 CTA 现有两种可见性（锁定 → 登录 / 解锁 → View Supplier），
+  // 由服务端算好放进 `items[].cta`。这里再留一个"看起来能改卡片文案"的字段只会误导。
 };
 
 /** 埋点事件名（值直接取自 lib/analytics.ts，不在本组件里硬编码字符串）。 */
@@ -88,20 +126,20 @@ export default function DirectoryView({
   industries,
   active,
   directoryPath,
-  supplierPathPrefix,
   dict,
   events,
   trustProfileDict,
 }: {
   /** 已按当前过滤条件筛过的集合（无过滤时即全量） */
-  items: DirectoryItem[];
+  items: DirectoryEntry[];
   countries: string[];
   industries: string[];
   active: DirectoryActive;
   /** 已带语言前缀的目录页路径，如 /suppliers、/es/suppliers */
   directoryPath: string;
-  /** 已带语言前缀的档案页前缀，如 /suppliers/、/es/suppliers/ */
-  supplierPathPrefix: string;
+  // 阶段 1：`supplierPathPrefix` 已移除 —— 卡片的 href 由服务端算好放进
+  //   `items[].href`（锁定态指登录页、解锁态指档案页）。组件不再自己拼 URL，
+  //   这样「哪些链接能出现在公开 HTML 里」只有一处决策点（见 lib/directoryWall.ts）。
   dict: DirectoryDict;
   events: DirectoryEvents;
   trustProfileDict: TrustProfileDict;
@@ -251,12 +289,29 @@ export default function DirectoryView({
               // ⚠️ 等级不因「有 N 条证据」升档（有证据 ≠ 已核验，§8 / §9）。
               <Link
                 key={x.slug}
-                href={`${supplierPathPrefix}${x.slug}`}
+                href={x.href}
                 className="card p-5 hover:border-[#171717] transition"
                 data-track={events.profileView}
-                data-track-value={x.slug}
+                data-track-value={x.locked ? "locked" : x.slug}
               >
-                <div className="font-semibold text-[#171717]">{x.legalName}</div>
+                {x.locked ? (
+                  // 阶段 1 登录墙：真实公司名**不进公开 HTML**（legalName 此时已置空串，
+                  // 渲染层只画骨架条）。骨架条用行内样式 —— 不引入新的 Tailwind 实用类，
+                  // 避开「改了 className 但生成的 CSS 仍是旧的」那一类扫描缓存陷阱。
+                  <span
+                    aria-hidden="true"
+                    className="inline-block rounded"
+                    style={{
+                      width: "10.5rem",
+                      maxWidth: "100%",
+                      height: "1rem",
+                      background: "#e4dfd6",
+                      verticalAlign: "-2px",
+                    }}
+                  />
+                ) : (
+                  <div className="font-semibold text-[#171717]">{x.legalName}</div>
+                )}
                 {/* CS-D：三态验证徽章（状态服务端推导，组件不自判） */}
                 <div className="mt-2">
                   <VerificationBadge state={x.badgeState} dict={trustProfileDict} />
@@ -321,7 +376,7 @@ export default function DirectoryView({
                 <p className="mt-2 text-xs text-[#6d6b66]">{dict.riskNote}</p>
 
                 <span className="inline-block mt-4 text-sm text-[#171717] font-medium">
-                  {dict.cardCta} →
+                  {x.cta} →
                 </span>
               </Link>
             ))}

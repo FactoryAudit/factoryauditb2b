@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # scripts/release.sh —— 发布链路的唯一入口
 #
-# 与 RELEASE-RULES.md 一一对应：第 0~7 步 = 规则 0（九步），第 8 步 = 规则 5（落地对拍）。
+# 与 RELEASE-RULES.md 一一对应：第 0~7 步（含链内 1.6）= 规则 0（九步），第 8 步 = 规则 5（落地对拍）。
 # 任何一步失败即停（set -e -o pipefail）。
 #
 # 用法：
@@ -9,7 +9,8 @@
 #
 # 注意：
 #   - 本脚本是 bash，不是 JS。cf-release.cjs 挂在 spawnSync 恒 EBUSY，不可用。
-#   - 三道闸门不得跳过：第 0 步（数据源门）、第 1.5 步（产物门）、第 8 步（落地门）。
+#   - 四道闸门不得跳过：第 0 步（数据源门）、第 1.5 步（产物门）、
+#     第 1.6 步（R25 登录墙产物门）、第 8 步（落地门）。
 #   - 第 8 步失败 ⇒ 退出码 1，但**站点其实已经部署了**：那是「未通过验收」，不是「发布失败」。
 set -e -o pipefail
 cd "$(dirname "$0")/.."
@@ -46,6 +47,16 @@ node node_modules/next/dist/bin/next build 2>&1 | tee "$LOG"
 echo ""
 echo "=== 第 1.5 步：postflight（产物门）==="
 node scripts/build-postflight-check.mjs --log "$LOG"
+echo ""
+echo "=== 第 1.6 步：R25 登录墙产物门（访问控制）==="
+# 为什么必须在链内、且必须在 deploy 之前：
+#   本门读的是 `.next/server/app` 的**预渲染产物**，而 `.next` 在本脚本开头就被改名隔离后重建
+#   ⇒ 只有链内这一份才是「即将被部署的那份」；而它排在第 7 步之前 ⇒ 门失败时站点尚未变更。
+# 为什么显式检查存在性：探针是本地未入库文件（.gitignore 的 scripts/_*.cjs），
+#   缺失时绝不能静默跳过 —— 访问控制门不可省。
+# 判据与自证记录见 RELEASE-RULES.md 规则 0「第 1.6 步的自证记录」。
+[ -f scripts/_r25_verify_wall.cjs ] || { echo "缺少 scripts/_r25_verify_wall.cjs —— 访问控制门不可省，中止"; exit 1; }
+node scripts/_r25_verify_wall.cjs
 echo ""
 echo "=== 第 2 步：opennext build ==="
 node node_modules/@opennextjs/cloudflare/dist/cli/index.js build

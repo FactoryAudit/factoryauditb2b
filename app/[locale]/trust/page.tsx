@@ -8,6 +8,9 @@ import { pickZhCopy } from "@/lib/tw";
 import { ABOUT, OPERATOR, operatorEmail } from "@/lib/aboutContent";
 import { COVERAGE_COUNTRIES } from "@/lib/coverage";
 import { STATIC_INDUSTRIES } from "@/lib/staticData";
+// CS-23：Trust Center 区块的互链件与合规邮箱（邮箱是标识符，不进 i18n 字典）
+import { RelatedPolicies } from "@/components/legal/ComplianceSections";
+import { COMPLIANCE_EMAIL } from "@/lib/compliance";
 
 const PATH = "/trust";
 const BASE = "https://factoryauditb2b.com";
@@ -30,6 +33,8 @@ export default async function TrustPage({ params }: Props) {
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
   const p = (href: string) => localePath(locale, href);
+  /** CS-23：`trust.tc*` 是追加区块的键，与既有 94 个 trust 键同命名空间、不同前缀 */
+  const tc = t.trust;
 
   // 品牌与法律主体始终展示，不隐藏在「未配置」之后
   const operatorName = pickZhCopy(locale, {
@@ -111,6 +116,96 @@ export default async function TrustPage({ params }: Props) {
         <p className="text-[#2b2b2b] leading-relaxed">
           {pickZhCopy(locale, ABOUT.hero.whyBuilt)}
         </p>
+      </section>
+
+      {/* ══ CS-23：Trust Center 区块（**追加**，既有内容一字未改）══════════════════
+          插入位置：紧跟在「为什么做这件事」之后、自 /about 合并而来的三节之前。
+          理由：
+            ① 合规入口必须在首屏可见范围内 —— 沉到页尾等于没有入口；
+            ② 不打断 hero（标题 + 导语）与 whyBuilt 的成对关系；
+            ③ 放在所有「自 /about 合并而来」的内容**之上**，不切割那三节的连贯性。
+          ⚠️ 本区块只做加法：不删除、不改写、不重排页面上任何既有元素。
+             （/about 的 308 目标仍是本页，About 语义必须完整保留。）
+
+          安全措施只列仓库里**真实落地**的四项，各自实现位置：
+            · HTTPS —— `middleware.ts` 强制 http→https 308 + Cloudflare 边缘
+            · 服务端字段裁剪 —— `lib/access.ts`（按 visitor/free/founding_buyer 逐字段裁剪后才出网）
+            · 数据库权限 —— Supabase RLS：anon 零权限、authenticated 仅 admin-select
+            · 审计日志 —— `lib/adminData.ts` 写 audit log
+          禁写：ISO 认证、渗透测试报告、加密算法细节、具体数据处理方名称。 */}
+      <section
+        id="trust-center"
+        className="mt-10 scroll-mt-24 rounded-xl border border-[#ebe8e1] bg-[#fbfaf7] p-6"
+      >
+        <span className="text-[11px] font-bold uppercase tracking-[.12em] text-[#e07a49]">
+          {tc.badge}
+        </span>
+        <h2 className="mt-1 text-2xl font-bold text-[#171717]">{tc.tcTitle}</h2>
+        <p className="mt-2 max-w-3xl text-[#6d6b66]">{tc.tcLead}</p>
+
+        {/* 四份政策摘要（卡片本身即链接；隐私 / 条款的标题复用 legal.* 同一字符串） */}
+        <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2">
+          {[
+            { href: "/confidentiality", title: tc.tcCardConfTitle, body: tc.tcCardConfBody },
+            { href: "/integrity", title: tc.tcCardIntegrityTitle, body: tc.tcCardIntegrityBody },
+            { href: "/privacy", title: t.legal.privacyTitle, body: tc.tcCardPrivacyBody },
+            { href: "/terms", title: t.legal.termsTitle, body: tc.tcCardTermsBody },
+          ].map((card) => (
+            <Link
+              key={card.href}
+              href={p(card.href)}
+              className="card p-5 transition hover:border-[#e07a49]"
+            >
+              <h3 className="font-bold text-[#171717]">{card.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[#3f4650]">{card.body}</p>
+            </Link>
+          ))}
+        </div>
+
+        {/* 安全措施：只列已上线 */}
+        <div className="mt-5 rounded-lg border border-[#ebe8e1] bg-white p-5">
+          <h3 className="font-bold text-[#171717]">{tc.tcSecurityTitle}</h3>
+          <p className="mt-1 text-sm text-[#6d6b66]">{tc.tcSecurityBody}</p>
+          <ul className="mt-3 grid list-none grid-cols-1 gap-2 p-0 sm:grid-cols-2">
+            {tc.tcSecurityItems.map((item) => (
+              <li
+                key={item}
+                className="rounded-md bg-[#f5f3ee] px-3 py-2 text-sm leading-relaxed text-[#3f4650]"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* 数据流转 + 举报渠道 */}
+        <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="card p-5">
+            <h3 className="font-bold text-[#171717]">{tc.tcDataTitle}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[#3f4650]">{tc.tcDataBody}</p>
+          </div>
+          <div className="card p-5">
+            <h3 className="font-bold text-[#171717]">{tc.tcReportTitle}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[#3f4650]">{tc.tcReportBody}</p>
+            <a
+              href={`mailto:${COMPLIANCE_EMAIL}`}
+              className="mt-2 inline-block font-semibold text-[#1b1b19] underline decoration-[#e07a49] hover:decoration-2"
+            >
+              {COMPLIANCE_EMAIL}
+            </a>
+          </div>
+        </div>
+
+        <RelatedPolicies
+          title={t.compliance.relatedTitle}
+          links={[
+            { href: p("/confidentiality"), label: t.footer.confidentiality },
+            { href: p("/integrity"), label: t.footer.integrity },
+            { href: p("/trust"), label: tc.badge, current: true },
+            { href: p("/privacy"), label: t.footer.privacy },
+            { href: p("/terms"), label: t.footer.terms },
+          ]}
+        />
       </section>
 
       {/* ── 以下三节自 /about 合并而来（阶段 1 任务 6：/about 308 → /trust）─────

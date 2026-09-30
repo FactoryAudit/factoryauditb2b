@@ -59,7 +59,7 @@ function leaves(obj: unknown, prefix = "", out: Leaf[] = []): Leaf[] {
 
 const LOCALES = ["en", "zh", "zh-TW", "ja", "es", "de", "fr", "pt", "ar"];
 /** 单一事实源：与 cs06a C8 / cs08 G4,G5 / cs12 E4,E5 / verify-opennext-bundle 同源 */
-const EN_LEAF_COUNT = 3192;
+const EN_LEAF_COUNT = 3251;
 
 async function main() {
   console.log("=".repeat(60));
@@ -71,22 +71,42 @@ async function main() {
   // ===========================================================================
   console.log("\n=== A. P0 —— 目录卡片核验态必须按真实等级（§三） ===");
   const dirPage = read("app/[locale]/suppliers/page.tsx");
+  // 🔴 2026-09-30（R25 登录墙）：卡片数据的构造逻辑已从 `suppliers/page.tsx` **抽出**到
+  //    `lib/directoryItems.ts` —— 同一批卡片数据现在有**两个**消费方（服务端预渲染锁定视图 +
+  //    `/api/suppliers/directory` 解锁视图），派生算法只允许存在于那一个文件（防静默漂移）。
+  //    抽取时语义**逐字未改**，只是换了位置 ⇒ 本组断言改指新的**唯一数据构造点**，
+  //    并把「① 数据算得对」与「② 真的渲染出来」拆成两处断言（后半段原本无人守）。
+  const dirItems = read("lib/directoryItems.ts"); // ① 数据构造（唯一）
+  const dirView = read("components/supplier/DirectoryView.tsx"); // ② 渲染
   check("A1 目录页源码可读且非空", dirPage.length > 1000);
+  check("A1b 数据构造点（lib/directoryItems.ts）可读且非空", dirItems.length > 1000);
   check(
     "A2 卡片用 `x.publicVerificationLevel ?? 0`（消费方必须兜底 0）",
-    /publicVerificationLevel\s*\?\?\s*0/.test(dirPage)
+    /publicVerificationLevel\s*\?\?\s*0/.test(dirItems)
   );
   check(
     "A3 卡片按 level 分支渲染核验态文案",
-    /level\s*===\s*0\s*\?\s*s\.verificationNotYet\s*:\s*v\.levelsShort\[level\]/.test(dirPage)
+    /level\s*===\s*0\s*\?\s*s\.verificationNotYet\s*:\s*v\.levelsShort\[level\]/.test(dirItems)
   );
-  check("A4 旧的「无条件 verificationNotYet」形态已根除", !/>\s*\{\s*s\.verificationNotYet\s*\}\s*</.test(dirPage));
-  check("A5 已取出 `const v = t.verification`", /const\s+v\s*=\s*t\.verification/.test(dirPage));
-  // ⚠️ 不能用 `publicVerificationLevel\(` 判代码：目录页注释里就写着这个函数名（曾造成假 FAIL）。
-  //    改为断言「目录页没有 import / 调用它」。
   check(
-    "A6 目录页不自行推导核验等级（必须来自 listSupplierDirectory 的 CS-02 结果）",
-    !/from\s+"@\/lib\/verification"/.test(dirPage) && !/import[^;\n]*\bpublicVerificationLevel\b/.test(dirPage)
+    "A4 旧的「无条件 verificationNotYet」形态已根除（查真正的渲染件）",
+    !/>\s*\{\s*s\.verificationNotYet\s*\}\s*</.test(dirView)
+  );
+  check("A5 已取出 `const v = t.verification`", /const\s+v\s*=\s*t\.verification/.test(dirItems));
+  // 🔴 A7：堵住「算出来了但没人渲染」这一沉默失效面 —— 原 A2/A3/A5 只看数据侧。
+  check(
+    "A7 DirectoryView 真的渲染了 verificationText（算出来 ≠ 显示出来）",
+    /\{\s*x\.verificationText\s*\}/.test(dirView)
+  );
+  // ⚠️ 不能用 `publicVerificationLevel\(` 判代码：注释里就写着这个函数名（曾造成假 FAIL）。
+  //    改为断言「不自行推导核验等级」—— 两个消费方与数据构造点都不得 import 它。
+  check(
+    "A6 不自行推导核验等级（必须来自 listSupplierDirectory 的 CS-02 结果）",
+    [dirPage, dirItems].every(
+      (src) =>
+        !/from\s+"@\/lib\/verification"/.test(src) &&
+        !/import[^;\n]*\bpublicVerificationLevel\b/.test(src)
+    )
   );
 
   // ===========================================================================
@@ -436,16 +456,16 @@ async function main() {
   const badScoreLabel = LOCALES.filter((l) => /risk[\s-]?score/i.test(JSON.parse(read(`i18n/dictionaries/${l}.json`)).suppliers.riskLabel));
   check("F1h 九语 riskLabel 均不再表述为「risk score」", badScoreLabel.length === 0, badScoreLabel.join(","));
   for (const [f, pat] of [
-    ["scripts/cs06a-directory-regression.ts", "baseKeys.length === 3192"],
-    ["scripts/cs08-form-regression.ts", "leafCounts[0] === 3192"],
-    ["scripts/cs12-profile-regression.ts", "enLeaf === 3192"],
-    ["scripts/verify-opennext-bundle.mjs", "cnt !== 3192"],
+    ["scripts/cs06a-directory-regression.ts", "baseKeys.length === 3251"],
+    ["scripts/cs08-form-regression.ts", "leafCounts[0] === 3251"],
+    ["scripts/cs12-profile-regression.ts", "enLeaf === 3251"],
+    ["scripts/verify-opennext-bundle.mjs", "cnt !== 3251"],
   ] as const) {
-    check(`F1i ${f} 的叶子数常量仍为 3192（五处同源）`, read(f).includes(pat));
+    check(`F1i ${f} 的叶子数常量仍为 3251（五处同源）`, read(f).includes(pat));
   }
   check(
     "F1j verify-opennext-bundle 的期望值文本未被弱化",
-    read("scripts/verify-opennext-bundle.mjs").includes("(期望 3192)")
+    read("scripts/verify-opennext-bundle.mjs").includes("(期望 3251)")
   );
 
   console.log("\n=== F2. 字段分层 / 迁移 / 历史（本轮零越界） ===");
