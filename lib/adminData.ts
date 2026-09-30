@@ -136,6 +136,9 @@ export type AdminSupplierRow = {
   profile_authorized: boolean | null;
   created_at: string | null;
   province: string | null;
+  // ---- 029：公开来源放行（与供应商本人授权是两条独立通道）----
+  //   任一为 true 即满足发布闸门；列表页需要据此显示放行状态。
+  public_source_cleared: boolean | null;
 };
 
 export type ListSuppliersFilter = {
@@ -153,7 +156,7 @@ export async function listAdminSuppliers(
     let q = db
       .from("suppliers")
       .select(
-        "id, slug, legal_name, country_code, city, industry_code, risk_score, verification_status, access_tier, is_published, updated_at, english_name, website, contact_email, profile_authorized, created_at, province"
+        "id, slug, legal_name, country_code, city, industry_code, risk_score, verification_status, access_tier, is_published, updated_at, english_name, website, contact_email, profile_authorized, created_at, province, public_source_cleared"
       )
       .order("updated_at", { ascending: false })
       .limit(500);
@@ -180,6 +183,110 @@ export async function listAdminSuppliers(
   }
 }
 
+// ---- 029：公开来源放行的批量通道 ----
+//
+// 单条放行在供应商详情页（勾选框）；名录类数据动辄上千条，必须另开批量入口。
+// 服务端强制的安全边界（与管理员在界面上怎么筛无关）：
+//   1. 只动 profile_authorized 为 **null** 的行（供应商从未表态授权）。
+//      已授权的行放行标记没有意义；而**明确拒绝**的（false）绝不可代放行 ——
+//      那是供应商在入驻表单里的明确意愿，管理员无权覆盖。
+//      ⚠️ 别把它和 listAdminSuppliers 的 authorized=not_authorized 混为一谈：
+//      那里的「未授权」是列表口径（含 null 与 false），这里是写入口径（只含 null）。
+//   2. 只动 public_source_cleared 与目标值不同的行 —— 幂等，重复跑无副作用；
+//   3. 单批条数上限 PUBLIC_SOURCE_BULK_LIMIT —— 避免一次误操作把整库标记掉。
+// 时间戳与操作人由调用方（API 路由）传入服务端值，绝不来自客户端。
+
+/** 单批最多放行的条数。超过则要求管理员收窄筛选后分批执行。 */
+export const PUBLIC_SOURCE_BULK_LIMIT = 2000;
+
+/**
+ * 统计「当前筛选下、可被批量放行 / 撤销」的条数。
+ * 候选定义：profile_authorized 为 null（供应商从未表态授权），
+ * 且 public_source_cleared 与目标值不同。
+ */
+export async function countPublicSourceCandidates(
+  filter: ListSuppliersFilter = {},
+  cleared = true
+): Promise<number> {
+  const db = createAdminClient();
+  if (!db) return 0;
+  try {
+    let q = db
+      .from("suppliers")
+      .select("slug", { count: "exact", head: true })
+      .eq("public_source_cleared", !cleared)
+      .is("profile_authorized", null);
+
+    if (filter.search && filter.search.trim()) {
+      const s = `%${filter.search.trim()}%`;
+      q = q.or(`legal_name.ilike.${s},contact_email.ilike.${s},website.ilike.${s}`);
+    }
+    if (filter.published === "published") q = q.eq("is_published", true);
+    else if (filter.published === "unpublished") q = q.eq("is_published", false);
+
+    const { count, error } = await q;
+    if (error) {
+      console.error("[adminData] count public-source candidates failed", error.message);
+      return 0;
+    }
+    return count ?? 0;
+  } catch (e) {
+    console.error("[adminData] count public-source candidates exception", e);
+    return 0;
+  }
+}
+
+/**
+ * 批量写入 / 撤销「公开来源放行」标记。
+ * ok=false 的两种情形：条数超上限（total > PUBLIC_SOURCE_BULK_LIMIT）、写库失败。
+ */
+export async function bulkSetPublicSourceClearance(
+  filter: ListSuppliersFilter,
+  cleared: boolean,
+  byEmail: string
+): Promise<{ ok: boolean; count: number; total: number; slugs: string[] }> {
+  const db = createAdminClient();
+  if (!db) return { ok: false, count: 0, total: 0, slugs: [] };
+  try {
+    const total = await countPublicSourceCandidates(filter, cleared);
+    if (total > PUBLIC_SOURCE_BULK_LIMIT) {
+      return { ok: false, count: 0, total, slugs: [] };
+    }
+    if (total === 0) return { ok: true, count: 0, total: 0, slugs: [] };
+
+    const now = new Date().toISOString();
+    let q = db
+      .from("suppliers")
+      .update({
+        public_source_cleared: cleared,
+        public_source_cleared_at: cleared ? now : null,
+        public_source_cleared_by: cleared ? byEmail : null,
+        updated_at: now,
+        updated_by: byEmail,
+      })
+      .eq("public_source_cleared", !cleared)
+      .is("profile_authorized", null);
+
+    if (filter.search && filter.search.trim()) {
+      const s = `%${filter.search.trim()}%`;
+      q = q.or(`legal_name.ilike.${s},contact_email.ilike.${s},website.ilike.${s}`);
+    }
+    if (filter.published === "published") q = q.eq("is_published", true);
+    else if (filter.published === "unpublished") q = q.eq("is_published", false);
+
+    const { data, error } = await q.select("slug");
+    if (error) {
+      console.error("[adminData] bulk public-source clearance failed", error.message);
+      return { ok: false, count: 0, total, slugs: [] };
+    }
+    const slugs = ((data ?? []) as { slug: string }[]).map((r) => r.slug);
+    return { ok: true, count: slugs.length, total, slugs };
+  } catch (e) {
+    console.error("[adminData] bulk public-source clearance exception", e);
+    return { ok: false, count: 0, total: 0, slugs: [] };
+  }
+}
+
 export type AdminSupplierDetail = AdminSupplierRow & {
   business_type: string | null;
   company_type: string | null;
@@ -192,6 +299,11 @@ export type AdminSupplierDetail = AdminSupplierRow & {
   authorized_at: string | null;
   authorized_by: string | null;
   consent_version: string | null;
+  // 029_public_source_clearance.sql：管理员确认「档案来源为公开信息」的放行标记。
+  // 与 profile_authorized（供应商本人授权）是两条独立通道，任一为 true 即满足发布闸门。
+  public_source_cleared: boolean;
+  public_source_cleared_at: string | null;
+  public_source_cleared_by: string | null;
   consent_ip: string | null;
   consent_user_agent: string | null;
   unpublished_at: string | null;
@@ -279,6 +391,10 @@ export async function updateAdminSupplier(
     authorized_at: string | null;
     authorized_by: string | null;
     updated_by: string;
+    // 029：公开来源放行通道（与 profile_authorized 语义独立，见 029 迁移）
+    public_source_cleared: boolean;
+    public_source_cleared_at: string | null;
+    public_source_cleared_by: string | null;
     unpublished_at: string | null;
     unpublished_by: string | null;
   }>

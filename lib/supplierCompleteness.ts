@@ -74,6 +74,18 @@ export type CompletenessInput = {
   hasConsentRecord?: boolean;
   profileAuthorized?: boolean | null;
   /**
+   * 平台自采公开信息档案的管理员放行标记（见 supabase/migrations/029_public_source_clearance.sql）。
+   *
+   * 🔴 与 profileAuthorized 是**两条语义独立**的通道：
+   *    profileAuthorized  记录「供应商本人在入驻表单里勾选授权」（唯一写入通道是注册接口）
+   *    publicSourceCleared 记录「管理员确认该档案来源为公开信息、不含个人数据」
+   * 二者任一为 true 即可满足发布闸门的授权项。
+   *
+   * 为什么必须分列：管理员代写 profileAuthorized 等于在库里留下一句
+   * 「供应商授权过」的虚假事实；将来供应商主张未授权时，那不是抗辩依据而是加重情节。
+   */
+  publicSourceCleared?: boolean | null;
+  /**
    * 当前是否已发布。
    * 只影响一处：历史上有若干供应商「已发布但 profile_authorized 为 null」
    * （早于授权机制建立），这是被接受的既有状态；对**已在架上**的行继续报
@@ -166,8 +178,17 @@ export function supplierCompleteness(input: CompletenessInput): SupplierComplete
   // —— 发布闸门（服务端与 UI 共用同一份判定，前端隐藏按钮不等于拦住写入）——
   const blockers: string[] = [];
   if (rejected) blockers.push("dirty or incomplete record (slug not usable)");
-  // 已在架上的历史行不再追索授权（见 CompletenessInput.isPublished 注释）
-  if (input.isPublished !== true && input.profileAuthorized !== true) {
+  // 已在架上的历史行不再追索授权（见 CompletenessInput.isPublished 注释）。
+  // 🔴 授权项有两条**独立**通道，任一满足即可：供应商本人授权（profileAuthorized）
+  //    或管理员确认公开来源（publicSourceCleared，见 029 迁移）。
+  // 🔴 阻断文案刻意保持原样：它现在只在 profileAuthorized !== true 时才出现，
+  //    仍是对事实的准确描述。若改这句字符串，scripts/step13-completeness-regression.mjs
+  //    的 A6.3 断言（字符串 includes 匹配）会静默变成恒真 —— 即假 PASS。
+  if (
+    input.isPublished !== true &&
+    input.profileAuthorized !== true &&
+    input.publicSourceCleared !== true
+  ) {
     blockers.push("not authorized (profile_authorized is not true)");
   }
   if (tri(input.city) !== "PASS") blockers.push("missing city");

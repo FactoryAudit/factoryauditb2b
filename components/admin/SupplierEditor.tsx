@@ -21,6 +21,9 @@ export type SupplierEditorDict = {
   publishBlocked: string;
   consentHistoryNote: string;
   authorizedTitle: string;
+  /** 029：公开来源放行（后台专用双语文案，由服务端组装，不新增 9 语字典键） */
+  sourceClearLabel: string;
+  sourceClearHint: string;
   labels: {
     legalName: string;
     englishName: string;
@@ -101,6 +104,8 @@ export type ClusterOption = { slug: string; label: string };
 /** 只读授权信息（来自 suppliers 行 + supplier_consents 最新一条）。 */
 export type SupplierAuthInfo = {
   profileAuthorized: boolean | null;
+  /** 029：管理员确认「档案来源为公开信息」的放行标记（与 profileAuthorized 语义独立） */
+  publicSourceCleared: boolean;
   authorizedBy: string | null;
   authorizedAt: string | null;
   consentVersion: string | null;
@@ -128,6 +133,8 @@ export type PublishGate = {
   blockers: string[];
   /** 当前是否已在架上 */
   isPublished: boolean;
+  /** 029：服务端当前的公开来源放行状态 */
+  publicSourceCleared: boolean;
 };
 
 type Props = {
@@ -155,6 +162,8 @@ export default function SupplierEditor({
   const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const [pubStatus, setPubStatus] = useState<"idle" | "working" | "done" | "error">("idle");
   const [pubError, setPubError] = useState<string | null>(null);
+  // 029：公开来源放行（本地勾选，随「发布」一起提交）
+  const [sourceCleared, setSourceCleared] = useState(auth.publicSourceCleared);
 
   const set = <K extends keyof SupplierFormValues>(k: K, val: SupplierFormValues[K]) =>
     setV((prev) => ({ ...prev, [k]: val }));
@@ -184,7 +193,13 @@ export default function SupplierEditor({
       const res = await fetch("/api/admin/suppliers", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ slug, is_published: published }),
+        // 029：把本地勾选的「公开来源放行」与发布动作一次提交；
+        // 否则服务端会因「未授权」把这次发布 422 拦下。
+        body: JSON.stringify({
+          slug,
+          is_published: published,
+          ...(published && sourceCleared ? { public_source_cleared: true } : {}),
+        }),
         cache: "no-store",
       });
       const data = (await res.json()) as { ok?: boolean; error?: string; message?: string };
@@ -210,10 +225,18 @@ export default function SupplierEditor({
   // 发布闸门：优先用服务端算好的完整度快照（同一份 lib/supplierCompleteness 口径）；
   // 没有快照时退回旧行为（只看是否已授权）。
   // 「已在架上」的行不再追索授权（历史 legacy 行 profile_authorized=null），与 API 一致。
+  // 029：授权项有两条通道 —— 供应商本人授权，或「以公开来源放行」本地勾选。
   const alreadyPublished = v.is_published || Boolean(publishGate?.isPublished);
-  const gatePublishable = publishGate ? publishGate.publishable || alreadyPublished : true;
-  const canPublish = (alreadyPublished || auth.profileAuthorized === true) && gatePublishable;
-  const publishBlockers = publishGate?.blockers ?? [];
+  // 「未授权」这条阻断可由勾选解除；其它阻断项（缺 city / industry / products）不可。
+  const GATE_AUTH_BLOCKER = "not authorized (profile_authorized is not true)";
+  const effectiveBlockers = (publishGate?.blockers ?? []).filter(
+    (b) => !(sourceCleared && auth.profileAuthorized !== true && b === GATE_AUTH_BLOCKER)
+  );
+  const gatePublishable = publishGate ? effectiveBlockers.length === 0 : true;
+  const canPublish =
+    alreadyPublished ||
+    (publishGate ? gatePublishable : auth.profileAuthorized === true || sourceCleared);
+  const publishBlockers = effectiveBlockers;
 
   const authText = (val: string | null | boolean) =>
     val === null || val === ""
@@ -425,6 +448,25 @@ export default function SupplierEditor({
           {pubStatus === "done" && <span className="text-sm text-[#171717]">{dict.saved}</span>}
           {pubStatus === "error" && pubError && <span className="text-sm text-[#d4232a]">{pubError}</span>}
         </div>
+
+        {/* 029：公开来源放行 —— 与「供应商本人授权」是两条独立通道。
+            勾选后「发布」按钮启用；服务端会记下放行时间与操作人。 */}
+        {!alreadyPublished && auth.profileAuthorized !== true && (
+          <label className="flex cursor-pointer items-start gap-2 rounded-md border border-[#ebe8e1] bg-[#faf9f6] p-3">
+            <input
+              type="checkbox"
+              className="mt-0.5"
+              checked={sourceCleared}
+              onChange={(e) => setSourceCleared(e.target.checked)}
+            />
+            <span className="space-y-0.5">
+              <span className="block text-xs font-semibold text-[#171717]">
+                {dict.sourceClearLabel}
+              </span>
+              <span className="block text-xs text-[#6d6b66]">{dict.sourceClearHint}</span>
+            </span>
+          </label>
+        )}
 
         {!canPublish && (
           <div className="rounded-md border border-[#f2d5a0] bg-[#fdf3d8] p-3">

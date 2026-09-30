@@ -139,6 +139,7 @@ export default async function AdminSupplierEditPage({ params }: Props) {
 
   const auth: SupplierAuthInfo = {
     profileAuthorized: row.profile_authorized,
+    publicSourceCleared: row.public_source_cleared === true,
     authorizedBy: row.authorized_by ?? null,
     authorizedAt: row.authorized_at ?? null,
     consentVersion: row.consent_version ?? null,
@@ -162,6 +163,7 @@ export default async function AdminSupplierEditPage({ params }: Props) {
     consentVersion: row.consent_version,
     hasConsentRecord: Boolean(consent),
     profileAuthorized: row.profile_authorized,
+    publicSourceCleared: row.public_source_cleared === true,
     isPublished: row.is_published,
   });
 
@@ -255,6 +257,7 @@ export default async function AdminSupplierEditPage({ params }: Props) {
           publishGate={{
             publishable: completeness.publishable,
             blockers: completeness.blockers,
+            publicSourceCleared: row.public_source_cleared === true,
             isPublished: row.is_published,
           }}
           dict={{
@@ -267,6 +270,16 @@ export default async function AdminSupplierEditPage({ params }: Props) {
             publishBlocked: a.publishBlocked,
             consentHistoryNote: a.consentHistoryNote,
             authorizedTitle: a.authorizedTitle,
+            // 029：后台专用双语文案（与 completenessStateLabel 同模式）。
+            // 刻意不新增 9 语字典键 —— en 叶子数是冻结真源，加键会触发多道闸门。
+            sourceClearLabel:
+              locale === "zh" || locale === "zh-TW"
+                ? "以公开来源放行"
+                : "Clear as public-source record",
+            sourceClearHint:
+              locale === "zh" || locale === "zh-TW"
+                ? "勾选表示：该档案来源为公开信息（展会名录 / 工商公示等），不含个人数据。可与「发布」一起提交；服务端会记录放行时间与操作人。"
+                : "Confirms this profile comes from public sources (trade-show directory, public registry) and holds no personal data. Submit together with Publish; the server records who cleared it and when.",
             tierPublic: a.tier?.public ?? "Public",
             tierFree: a.tier?.free ?? "Free",
             tierPaid: a.tier?.paid ?? "Paid",

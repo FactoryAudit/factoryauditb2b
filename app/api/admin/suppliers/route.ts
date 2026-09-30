@@ -204,6 +204,15 @@ export async function PATCH(req: Request) {
       body.verification_level as Parameters<typeof updateAdminSupplier>[1]["verification_level"];
   }
 
+  // ---- 029：公开来源放行（与「供应商本人授权」是两条独立通道）----
+  //   仅接受 boolean。时间戳与操作人一律由服务端写，绝不接受客户端传值 ——
+  //   否则「谁在什么时候放行」这条留痕可以被前端伪造。
+  if (typeof body.public_source_cleared === "boolean") {
+    patch.public_source_cleared = body.public_source_cleared;
+    patch.public_source_cleared_at = body.public_source_cleared ? new Date().toISOString() : null;
+    patch.public_source_cleared_by = body.public_source_cleared ? (admin.email ?? "system") : null;
+  }
+
   // ---- 发布闸门 ----
   //   1) 既有规则（规格七）：发布前必须已授权，未授权 → 422
   //   2) STEP 13 A5：发布前还必须满足关键字段完整度，缺失 → 422 并回传明确原因
@@ -221,7 +230,14 @@ export async function PATCH(req: Request) {
       //    会在任何一次保存时被 422 拦住 —— 那是本轮凭空造出来的回归。
       const transitioning = existing.is_published !== true;
       if (transitioning) {
-        if (existing.profile_authorized !== true) {
+        // 029：授权项有两条独立通道 —— 供应商本人授权，或管理员确认公开来源。
+        // 取「本次 patch 生效后」的值：否则「勾选放行 + 点发布」一次提交
+        // 会被判成未放行 —— 那是假阻断。
+        const cleared =
+          typeof patch.public_source_cleared === "boolean"
+            ? patch.public_source_cleared
+            : existing.public_source_cleared === true;
+        if (existing.profile_authorized !== true && !cleared) {
           return NextResponse.json(
             { ok: false, error: "not_authorized", message: "profile not authorized" },
             { status: 422, headers: NO_STORE }
@@ -238,6 +254,7 @@ export async function PATCH(req: Request) {
           verificationStatus: existing.verification_status,
           consentVersion: existing.consent_version,
           profileAuthorized: existing.profile_authorized,
+          publicSourceCleared: cleared,
           isPublished: existing.is_published,
         });
         if (!eff.publishable) {
@@ -277,6 +294,19 @@ export async function PATCH(req: Request) {
   }
 
   // ---- 审计日志（尽力而为，含操作 IP）----
+  // 029：公开来源放行的变更单独留痕（与发布动作是两件事，各自可审计）
+  if (typeof body.public_source_cleared === "boolean") {
+    await logAdminAction(
+      admin,
+      body.public_source_cleared
+        ? "supplier.public_source_cleared"
+        : "supplier.public_source_clearance_revoked",
+      "supplier",
+      slugRaw,
+      { public_source_cleared: body.public_source_cleared },
+      { ipAddress: ip }
+    );
+  }
   if (publishAction) {
     await logAdminAction(
       admin,

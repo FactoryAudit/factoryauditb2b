@@ -2,7 +2,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { isLocale, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
-import { listAdminSuppliers, requireAdmin, type ListSuppliersFilter } from "@/lib/adminData";
+import {
+  listAdminSuppliers,
+  requireAdmin,
+  countPublicSourceCandidates,
+  PUBLIC_SOURCE_BULK_LIMIT,
+  type ListSuppliersFilter,
+} from "@/lib/adminData";
+import BulkClearPanel from "@/components/admin/BulkClearPanel";
 
 export const dynamic = "force-dynamic";
 export const metadata = { robots: { index: false, follow: false } };
@@ -31,6 +38,18 @@ export default async function AdminSuppliersPage({ params, searchParams }: Props
   const a = t.admin;
   const p = (href: string) => localePath(locale, href);
   const rows = await listAdminSuppliers({ search, published, authorized });
+
+  // ---- 029：批量「公开来源放行」的作用范围 ----
+  // 🔴 候选刻意**不受** authorized 筛选影响：候选定义固定为
+  //    「profile_authorized 为 null（从未表态）且尚未放行」。若跟着 authorized=authorized 走，
+  //    就会出现「只处理已授权的行」这种自相矛盾的组合。
+  //    搜索与发布状态照常生效 —— 管理员靠它们收窄批次。
+  const clearable = await countPublicSourceCandidates({ search, published }, true);
+  const unclearable = await countPublicSourceCandidates({ search, published }, false);
+
+  // 后台是内部 noindex 工具，按 admin 既有约定用双语常量，不补 9 语字典键
+  // （9 语字典的叶子数有闸门守着）。
+  const zh = locale === "zh" || locale === "zh-TW";
 
   const tierLabel: Record<string, string> = a.tier;
 
@@ -78,6 +97,37 @@ export default async function AdminSuppliersPage({ params, searchParams }: Props
           {a.viewAll}
         </button>
       </form>
+
+      {/* 029：批量放行入口。两步确认（先取条数 → 看到数字 → 再确认才写库）。
+          批量写库不可逆，这里的数字是管理员最后的刹车。 */}
+      <BulkClearPanel
+        filter={{ search, published: published ?? "all" }}
+        clearable={clearable}
+        unclearable={unclearable}
+        limit={PUBLIC_SOURCE_BULK_LIMIT}
+        dict={{
+          title: zh ? "公开来源批量放行" : "Bulk public-source clearance",
+          lead: zh
+            ? "对当前筛选下、从未表态授权、也尚未放行的档案，批量标记「已确认来源为公开信息」。已授权的、以及明确拒绝公开的档案都不会被改动。此标记会写入操作人与时间戳，可在审计日志中查询。"
+            : "Marks every currently filtered profile whose supplier has never stated an authorization preference and that has not been cleared yet as confirmed to come from public information. Profiles that were authorized — or explicitly declined — are never touched. Each change records your account and a timestamp in the audit log.",
+          clear: zh ? "放行 {n} 家" : "Clear {n}",
+          unclear: zh ? "撤销放行 {n} 家" : "Revoke {n}",
+          confirmClear: zh
+            ? "将放行 {n} 家 —— 写入操作人与当前时间，可在审计日志查询。确认继续？"
+            : "This will clear {n} profiles and record your account plus the current time in the audit log. Continue?",
+          confirmUnclear: zh
+            ? "将撤销 {n} 家的放行标记。确认继续？"
+            : "This will revoke clearance for {n} profiles. Continue?",
+          confirm: zh ? "确认执行" : "Confirm",
+          cancel: zh ? "取消" : "Cancel",
+          working: zh ? "处理中…" : "Working…",
+          error: zh ? "操作失败，请重试。" : "Request failed, please retry.",
+          limit: zh
+            ? "当前筛选下有 {count} 家，超过单批上限 {limit} 家。请用搜索或发布状态收窄筛选后分批执行。"
+            : "The current filter matches {count} profiles, above the per-batch limit of {limit}. Narrow the filter (search or published state) and run in batches.",
+          empty: zh ? "当前筛选下没有可处理的档案。" : "Nothing to process under the current filter.",
+        }}
+      />
 
       {rows.length === 0 ? (
         <div className="card mt-6 p-6">
@@ -132,15 +182,24 @@ export default async function AdminSuppliersPage({ params, searchParams }: Props
                     {r.is_published ? a.yes : a.no}
                   </td>
                   <td className="px-4 py-3">
-                    {r.profile_authorized ? (
-                      <span className="rounded-full bg-[#e6f4ea] px-2 py-0.5 text-xs text-[#1a7f37]">
-                        {a.colAuthorized}
-                      </span>
-                    ) : (
-                      <span className="rounded-full bg-[#fdeaea] px-2 py-0.5 text-xs text-[#d4232a]">
-                        {a.filterNotAuthorized}
-                      </span>
-                    )}
+                    <span className="inline-flex flex-wrap items-center gap-1">
+                      {r.profile_authorized ? (
+                        <span className="rounded-full bg-[#e6f4ea] px-2 py-0.5 text-xs text-[#1a7f37]">
+                          {a.colAuthorized}
+                        </span>
+                      ) : (
+                        <span className="rounded-full bg-[#fdeaea] px-2 py-0.5 text-xs text-[#d4232a]">
+                          {a.filterNotAuthorized}
+                        </span>
+                      )}
+                      {/* 029：未授权，但已被管理员以「公开来源」放行。
+                          两条通道必须分别可见 —— 否则管理员会误以为这家过不了发布闸门。 */}
+                      {r.public_source_cleared === true && (
+                        <span className="rounded-full bg-[#eef2fb] px-2 py-0.5 text-xs text-[#2a4d9b]">
+                          {zh ? "已放行" : "Cleared"}
+                        </span>
+                      )}
+                    </span>
                   </td>
                   <td className="px-4 py-3 text-[#3f4650]">
                     {r.created_at ? new Date(r.created_at).toISOString().slice(0, 10) : "—"}
