@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# scripts/release.sh —— 九步发布链路的唯一入口
+# scripts/release.sh —— 发布链路的唯一入口
 #
-# 与 RELEASE-RULES.md 规则 0 一一对应。
+# 与 RELEASE-RULES.md 一一对应：第 0~7 步 = 规则 0（九步），第 8 步 = 规则 5（落地对拍）。
 # 任何一步失败即停（set -e -o pipefail）。
 #
 # 用法：
@@ -9,7 +9,8 @@
 #
 # 注意：
 #   - 本脚本是 bash，不是 JS。cf-release.cjs 挂在 spawnSync 恒 EBUSY，不可用。
-#   - 第 0 步和第 1.5 步是闸门，不得跳过。
+#   - 三道闸门不得跳过：第 0 步（数据源门）、第 1.5 步（产物门）、第 8 步（落地门）。
+#   - 第 8 步失败 ⇒ 退出码 1，但**站点其实已经部署了**：那是「未通过验收」，不是「发布失败」。
 set -e -o pipefail
 cd "$(dirname "$0")/.."
 
@@ -68,5 +69,21 @@ echo ""
 echo "=== 第 7 步：wrangler deploy ==="
 OPEN_NEXT_DEPLOY=true node node_modules/wrangler/bin/wrangler.js deploy
 echo ""
-echo "✅ 发布完成"
+echo "=== 第 8 步：落地对拍（RELEASE-RULES.md 规则 5）==="
+# 判据：md5(线上响应体) 必须 == md5(.next/server/app 下的预渲染产物)。
+# 为什么不能只看内容探针：预渲染产物带 s-maxage=31536000（边缘理论可缓存一年），
+# 而改文案/加区块/加 FAQ 都是「在旧内容上加东西」（超集）⇒ 旧版页面对新断言照样命中，
+# 探针会在旧版本上假绿。md5 逐字节相等才排除这种可能。
+# 刚 deploy 返回时边缘可能仍命中上一版 ⇒ 留 6 次 × 20s 的传播窗口。
+if node scripts/verify-live-md5.cjs --retries=6 --delay=20000; then
+  :
+else
+  echo ""
+  echo "⚠️ 部署已执行，但**落地对拍未通过**（不是「没部署」，是「部署的内容没被证实」）。"
+  echo "   按上方诊断顺序排查；若判定为传播窗口，直接复跑："
+  echo "     node scripts/verify-live-md5.cjs --retries=10 --delay=20000"
+  exit 1
+fi
+echo ""
+echo "✅ 发布完成（已含落地对拍 LIVE_MD5_OK）"
 echo "   日志：$LOG"

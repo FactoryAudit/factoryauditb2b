@@ -27,6 +27,10 @@
 
 **任一步 exit != 0 ⇒ 立即停止，不执行后续步骤。**
 
+> 上述九步负责**产出并部署**。部署之后还有一道**强制门**（第 8 步，`scripts/release.sh` 已内置）：
+> `node scripts/verify-live-md5.cjs` ⇒ 末行必须是 `LIVE_MD5_OK`。
+> 判据与失败处置见 **规则 5**。探针 PASS ≠ 发出去的是这份构建，两件事。
+
 ⚠️ 第 3 步必须是**外层 shell 循环**：脚本自身的主模式靠 `spawnSync` 派生子进程，本机必挂。
 
 ### 推荐入口
@@ -111,22 +115,41 @@ open-next.config.ts
 ⇒ 页面数据在**构建时冻结**，运行时无法写回
 ```
 
-后果是两条路由的**时效不一致**：
+后果是：**前台页面在构建时冻结**，运行时无法写回。
 
 | 路由类型 | 实例 | Cache-Control | 数据时效 |
 |---|---|---|---|
-| `force-dynamic` | `/industrial-clusters` | `private, no-cache, no-store, max-age=0, must-revalidate` | **即时**读库 |
-| 预渲染 / ISR | `/suppliers/[slug]`、`/verify-supplier`、首页等 | `s-maxage=3xxx, stale-while-revalidate=2592000` + `x-nextjs-prerender: 1` | **冻结到下次构建** |
+| 预渲染 / ISR（**当前全部前台路由**） | `/industrial-clusters`、`/industrial-clusters/**`、`/suppliers`、`/suppliers/[slug]`、首页、`/countries` 等 | `s-maxage=3xxx, stale-while-revalidate=2592000` + `x-nextjs-prerender: 1` | **冻结到下次构建** |
 
 ⚠️ 特别注意：**`export const revalidate = 3600` 当前不生效**。
 它不是「每小时自更新」，而是「构建时快照，直到下次 build + deploy 才变」。
 
+### 🔴 订正（2026-09-30 实测）：`/industrial-clusters` 已**不是** `force-dynamic`
+
+本文档此前把 `/industrial-clusters` 列为 `force-dynamic`（`private, no-cache, no-store`，即时读库），
+据此推出「产业带页立刻可见、只有详情页是快照」的诊断。**该前提已失效。**
+
+实测证据（两条独立）：
+
+1. `curl -sSI https://factoryauditb2b.com/industrial-clusters` ⇒
+   `Cache-Control: s-maxage=2930, stale-while-revalidate=2592000` + `x-nextjs-prerender: 1`（**预渲染**特征，
+   非 `private, no-cache`）。
+2. `node scripts/verify-live-md5.cjs /industrial-clusters` ⇒ **`LIVE_MD5_OK`**
+   （线上响应体与 `.next/server/app/en/industrial-clusters.html` 逐字节相同 ⇒ 是静态产物）。
+
+源码侧同样如此：`app/[locale]/industrial-clusters/page.tsx` 与
+`app/[locale]/industrial-clusters/[...segments]/page.tsx` **都是** `export const revalidate = 3600`，
+且两个文件的注释自己就写着「**stage1.8：本路由已由 force-dynamic 改为预渲染（构建期冻结）**」。
+
+⇒ **结论：现在没有任何前台路由是「即时读库」的。改库之后要线上可见，一律必须重新发布。**
+
 ### 具体症状（会误判为 bug）
 
-- 后台把某供应商的 `cluster_slug` / `region` 填好 → **产业带页立刻可见**（force-dynamic），
-  但**该供应商详情页看不到**（预渲染快照）。
-- 后台把 `is_published` 改为 true → 目录页立刻出现，详情页可能还是 404 或旧内容。
+- 后台把某供应商的 `cluster_slug` / `region` 填好 → **产业带页和该供应商详情页都不会变**
+  （两者同为构建期快照）。别再把「产业带页也没变」当成 bug 去查库。
+- 后台把 `is_published` 改为 true → 目录页与详情页**都不变**，需重新发布。
 - 首页新增的入口区块、新页面文案，改完库不重新发布就不变。
+- 唯一例外是**后台自己的管理界面**：它读的是实时数据，**不要**拿它当「线上已经更新」的依据。
 
 ### 规则
 
@@ -134,9 +157,14 @@ open-next.config.ts
 要让变化出现在线上，必须重新跑一次完整发布。**
 
 ```bash
-# 唯一发布入口（五步全在内：populate 缓存 → scrub env → verify bundle → deploy → IndexNow）
-node scripts/cf-release.cjs
+# 唯一发布入口 = 规则 0 的九步链路（含部署后的第 8 步落地对拍）
+bash scripts/release.sh
 ```
+
+> 🔴 订正：此前这里写的是 `node scripts/cf-release.cjs`，**已不可用**。
+> 本机 `spawnSync` 恒 EBUSY，该脚本在派生子进程时必挂（规则 0 开头已声明）。以 `release.sh` 为准。
+> 另：IndexNow 增量提交**不在** `release.sh` 内，是独立一步
+> （`post-publish-submit.cjs`，只提 sitemap 差量；要全量先清 `scripts/.sitemap-cache.txt`）。
 
 ### 配套动作：发布前必须清 `.next/cache`
 
@@ -190,9 +218,17 @@ node -e "const fs=require('fs');if(fs.existsSync('.next')){const t='.next.trash-
 **加/删字典键时**：先跑 `apply-*-i18n.cjs` 注入，再用配套的 `sync-*-gates.cjs` 同步常量，
 最后跑全部回归 + `verify-opennext-bundle` 验证。
 
-当前基线：**3126**（`en.json` 叶子数，单一事实源；历史：2940 → **3126**，随 clusters 等命名空间扩容同步）。
+当前基线：**3192**（`en.json` 叶子数，单一事实源；历史：2940 → 3126 → **3192**，随 clusters / 五国 FAQ 等命名空间扩容同步）。
+（本行是 cs13b `A5` 断言的锚点：该断言要求本文档**含** `**3192**`，且非 changelog 行不得残留旧值。）
 变更历史见 `scripts/cs06a-directory-regression.ts` 的 C7 注释 —— **历史条目不可篡改**，
 同步脚本必须保护 `A → B` 这类既成事实的标记。
+
+> ⚠️ **`scripts/step13b-i18n-gates.cjs` 名字像闸门，其实是迁移脚本**（内含两处 `writeFileSync`）。
+> 当字典缺 `clusters.allCountries` 或门禁常量未同步时，它会用
+> `JSON.stringify(d, null, 2) + "\n"` **重写整个字典**（行尾变 LF、全文重排、CRLF 纪律被破坏）。
+> **不要随手跑它。** 跑之前先 `git status --porcelain i18n/` 判据。
+> 另：`scripts/step13b-leaf-count.cjs` **不存在** —— 想独立核验叶子数，用自写的
+> 8 行递归计数器（数组递归口径：`Object.values` 递归，非对象即计 1），或直接看规则 5 的脚本。
 
 ---
 
@@ -205,3 +241,90 @@ node -e "const fs=require('fs');if(fs.existsSync('.next')){const t='.next.trash-
 
 两轮流程：`setup → build → deploy → accept → teardown → build → deploy`。
 第二轮不可省，否则探针文案会永久留在生产 HTML 里。
+
+---
+
+## 规则 5（强制）：部署后必须做「落地对拍」—— md5(线上响应体) == md5(预渲染产物)
+
+> **部署后、宣布完成前，必须跑一次 `node scripts/verify-live-md5.cjs`，末行必须是 `LIVE_MD5_OK`。**
+> `scripts/release.sh` 已把它接为**第 8 步**；手工发布时不得省略。
+> 这条与「改首页 / 改 pricing / 改条款」无关地适用于**每一次**发布。
+
+### 它证明的事，内容探针证不了
+
+| 层 | 判据 | 回答的问题 |
+|---|---|---|
+| 内容层 | 探针断言线上 HTML 含 / 不含某些串（`_live-*.cjs`） | 「**内容**对不对」 |
+| 落地层 | `verify-live-md5.cjs`：`md5(线上响应体) == md5(.next/server/app/<loc>/<path>.html)` | 「**发出去的到底是不是这份构建**」 |
+
+为什么第二层不可省：预渲染产物带 `s-maxage=31536000`（边缘理论可缓存**一年**），链路上还有 CDN 与回源。
+而**改文案、加区块、加 FAQ 全是在旧内容上加东西**（新内容是旧内容的**超集**）——
+旧版页面对新断言**照样命中**，于是**内容探针可以在旧版本上全绿**。
+md5 逐字节相等一次性排除这种假绿灯。
+
+> 实证价值：2026-09-30 那轮 `/terms` 的对拍结果
+> `md5(线上) == md5(.next/server/app/en/terms.html) == 812913281ecdf39804a21bbbc8c68f4b`（48444 B），
+> 才让「线上就是这份构建」从推测变成事实。
+
+### 命令
+
+```bash
+node scripts/verify-live-md5.cjs                      # 默认关键路由集
+node scripts/verify-live-md5.cjs /pricing /terms      # 本次改动涉及的路由（不带前导斜杠亦可）
+node scripts/verify-live-md5.cjs --all-locales /terms # 展开为 9 语
+node scripts/verify-live-md5.cjs --retries=6 --delay=20000   # 刚部署完 / 疑似传播延迟
+```
+
+输出契约：末行 `LIVE_MD5_OK`（exit 0）或 `LIVE_MD5_MISMATCH`（exit 1）。
+
+⚠️ **默认关键路由集不只是「对拍清单」，还是一条不变量**：这些路由**应当始终是预渲染产物**
+（当前 13 条，真源 = `scripts/verify-live-md5.cjs` 的 `DEFAULT_TARGETS`，勿在文档里再抄一份）。
+若其中某条报 `FAIL 无预渲染产物`，说明它被人改成了动态渲染 —— 这是**真回归**
+（本站在 CF Workers 免费额度下，动态渲染每请求现算，是 5xx / 1102 CPU 超限的主因）。
+
+### 三个前提（任一条不成立，本判据即无意义）
+
+1. **`.next/server/app` 必须是本次部署的那份构建。**
+   `release.sh` 开头会把 `.next` / `.open-next` 整体改名隔离后重建 ⇒ **部署后立即跑**才对得上。
+   若在 deploy 之后又跑过 `next build` 或清理，对拍失去意义（先重发布）。
+2. **目标路由必须是预渲染产物。** 动态路由（后台、`/api/*`、任何 `force-dynamic`）每请求现渲染，
+   字节天然不同 ⇒ **不适用**本判据，改用内容探针。
+   注：规则 1 已订正 —— 当前**公开前台路由全部为预渲染**。
+3. **基准只能取 `.next/server/app` 下的静态 `*.html`。**
+   `.open-next/cache` 里是增量缓存的 **JSON 包装**（`*.cache`），不是裸 HTML，不能直接对拍。
+
+### 路径映射（实测自 `.next/server/app` 布局）
+
+| 线上路径 | 预渲染产物 |
+|---|---|
+| `/` | `.next/server/app/en.html` |
+| `/ar` | `.next/server/app/ar.html` |
+| `/terms` | `.next/server/app/en/terms.html` ← en 走**无前缀规范址** |
+| `/ar/terms` | `.next/server/app/ar/terms.html` |
+| `/zh-TW/pricing` | `.next/server/app/zh-TW/pricing.html` |
+
+⚠️ **不存在** `.next/server/app/terms.html` —— en 也在 locale 子目录里。凭印象写路径会得到「产物不存在」的假结论。
+⚠️ 线上探测路径用**无前缀**形式：`/en/countries/thailand` 会 **308** 到 `/countries/thailand`。
+
+### 失败怎么判（从便宜到昂贵）
+
+| 现象 | 先查什么 |
+|---|---|
+| 全部 MISMATCH，稍等复跑通过 | **传播窗口**：deploy 返回后数秒内边缘仍可能命中上一版 ⇒ 加大 `--retries` / `--delay` |
+| 个别路由 MISMATCH 但 HTTP 200 | 该路由并非预渲染（看响应头 `x-nextjs-prerender`）；或 `.next` 与本次部署不是同一批 |
+| 某路由 `FAIL 无预渲染产物` | 它被改成动态渲染了（见上「不变量」） |
+| 全部 SKIP | **不构成任何证据** —— 脚本按失败处理（exit 1，防「全跳过 = 假绿」）|
+| 改了库内容但对拍不过 | 库内容变更必须**重新构建**才会进产物（规则 1）|
+
+### 写 / 改这条判据时必须做阴性对照
+
+「能 PASS」不等于「会 FAIL」。本判据已用三组对照证明有效（可复现）：
+
+| 对照 | 做法 | 期望 |
+|---|---|---|
+| A 篡改产物 | 备份 → 给 `.next/server/app/en/trust.html` 追加 1 字节 → 跑 `/trust` | `MISMATCH` + exit 1；还原后 md5 回原值 |
+| B 不存在的路由 | `node scripts/verify-live-md5.cjs no-such-route` | `SKIP`，并触发「全 SKIP 不算通过」守卫 |
+| C 传播窗口 | 部署后**立刻**跑 | 允许 MISMATCH，加大重试后须转 `LIVE_MD5_OK` |
+
+⚠️ **不要**把「本轮临时校验」写成长期断言（见规则 4 的同类教训）。
+
