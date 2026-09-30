@@ -84,8 +84,12 @@ export default function SiteFooter({
   industriesLabel: string;
 }) {
   const p = (href: string) => localePath(locale, href);
-  /** 未配置运营主体时不显示这一段，也不显示空的 Trust Center 入口 */
-  const operator = operatorLine();
+  /**
+   * 运营主体名（恒有值：lib/trust.ts 已用 OPERATOR 真实主体兜底）。
+   * 品牌名 ≠ 法律主体 —— 这一段是「海外访客 30 秒内明白你是谁」的落点，
+   * 不能因为 TRUST_* 环境变量没配就整段消失（会连带丢掉 Trust Center 入口）。
+   */
+  const operator = operatorLine(locale);
 
   return (
     <footer className="bg-[#1b1b19] pt-14 pb-7 text-[#bdb9b0]">

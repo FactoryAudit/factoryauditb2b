@@ -7,8 +7,8 @@
 //
 // 设计铁律（与 lib/trust.ts 完全一致，不可绕过）：
 //   1. **不编造**。营业执照号、法定代表人、注册地址、新加坡实体这些，
-//      一律从 TRUST_* 环境变量读取；没配置就**不输出该字段**，绝不填占位值。
-//      写假的企业信息进结构化数据 = 向 Google 提交虚假主体，风险比不写更大。
+//      登记细节一律从 TRUST_* 环境变量读取；没配置就**不输出该字段**，绝不填占位值；
+//      法律主体名（legalName）除外 —— 它有 OPERATOR 真实兜底，恒输出。写假的企业信息进结构化数据 = 向 Google 提交虚假主体，风险比不写更大。
 //   2. **品牌名 ≠ 法律主体**。FactoryAuditB2B 是平台名，法律主体是另一家公司，
 //      两者分开用 name 与 legalName 表达，不让客户误认。
 //   3. **脱敏后再公开**。注册号/法人名/地址走 lib/trust.ts 的 mask* 函数。
@@ -116,15 +116,23 @@ export function organizationSchema(
   }
   org.contactPoint = contactPoints;
 
-  // ---- 以下全部依赖真实配置，未配置则整个字段不出现（不编造） ----
+  // ---- 法律主体：品牌名 ≠ 法律主体 ----
+  //   cfg.legalEntity 含 OPERATOR 真实兜底（lib/trust.ts），故无条件输出：
+  //   全站每一页都必须能回答「你是谁」，不能因为 TRUST_* 没配就只剩一个品牌名。
+  if (cfg.legalEntity) {
+    org.legalName = cfg.legalEntity;
+  }
+
+  // ---- 以下为登记细节，仅在有真实配置时逐项输出（不编造） ----
   if (cfg.configured) {
-    if (cfg.legalEntity) {
-      org.legalName = cfg.legalEntity;
-    }
     if (cfg.registrationYear) {
       org.foundingDate = cfg.registrationYear;
     }
-    if (cfg.city || cfg.country || cfg.registeredAddress) {
+    // 🔴 地址只在有真实登记地址或城市时输出。
+    //    cfg.country 默认值 "China" 恒非空，若把它计入条件，会输出一个只含国家的
+    //    残缺 address —— 而 ProfessionalService(=LocalBusiness 子类型) 的 address
+    //    是必填语义，残缺值比不输出更容易被判失败。
+    if (cfg.city || cfg.registeredAddress) {
       org.address = {
         "@type": "PostalAddress",
         // registeredAddress 已过 maskAddress 脱敏；未配置则为空串，此时只给到城市/国家
