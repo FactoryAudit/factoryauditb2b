@@ -41,13 +41,13 @@ export default async function AdminSupplierDocumentsPage({ params }: Props) {
     <div>
       <Link
         href={p("/admin/suppliers")}
-        className="text-sm text-[#0f4c81] hover:underline"
+        className="text-sm text-[#171717] hover:underline"
       >
         ← {a.backToList}
       </Link>
 
-      <h1 className="mt-2 text-2xl font-bold text-[#0f172a]">{row.legal_name}</h1>
-      <p className="mt-1 font-mono text-xs text-[#94a3b8]">{row.slug}</p>
+      <h1 className="mt-2 text-2xl font-bold text-[#171717]">{row.legal_name}</h1>
+      <p className="mt-1 font-mono text-xs text-[#8c8982]">{row.slug}</p>
 
       <div className="mt-6">
         <SupplierEvidencePanel

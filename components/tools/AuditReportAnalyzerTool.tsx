@@ -23,7 +23,7 @@ export default function AuditReportAnalyzerTool({ ui }: { ui: ReportAnalyzerUi }
   }
 
   return (
-    <div className="grid md:grid-cols-2 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div className="card p-6 space-y-3">
         <label className="text-sm font-medium">{ui.inputLabel}</label>
         <textarea
@@ -38,18 +38,18 @@ export default function AuditReportAnalyzerTool({ ui }: { ui: ReportAnalyzerUi }
       </div>
       <div className="card p-6">
         {!report ? (
-          <div className="text-[#94a3b8] text-sm">{ui.empty}</div>
+          <div className="text-[#8c8982] text-sm">{ui.empty}</div>
         ) : (
           <>
             <div className="flex items-center gap-3 mb-2 flex-wrap">
-              <div className="text-4xl font-extrabold text-[#0f4c81]">
+              <div className="text-4xl font-extrabold text-[#171717]">
                 {ui.qualityLabel} {report.score}{ui.scoreSuffix}
               </div>
               <span className={`badge ${report.source === "ai" ? "badge-verified" : "badge-estimated"}`}>
                 {report.source === "ai" ? "AI" : "LOCAL"}
               </span>
             </div>
-            <div className="text-xs text-[#64748b] mb-4">
+            <div className="text-xs text-[#6d6b66] mb-4">
               {report.source === "ai" ? ui.sourceAi : ui.sourceLocal}
             </div>
             <div className="text-sm font-semibold mb-2">{ui.issuesTitle}</div>

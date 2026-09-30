@@ -42,11 +42,11 @@ export default async function AdminVerificationWorkbenchPage({ params }: Props) 
       <div className="flex items-center justify-between gap-3">
         <Link
           href={p("/admin/verification")}
-          className="text-sm text-[#0f4c81] hover:underline"
+          className="text-sm text-[#171717] hover:underline"
         >
           ← {a.backToList}
         </Link>
-        <span className="font-mono text-xs text-[#94a3b8]">{supplierId}</span>
+        <span className="font-mono text-xs text-[#8c8982]">{supplierId}</span>
       </div>
       <div className="mt-2">
         <VerificationWorkbench supplierId={supplierId} supplierName={name} />

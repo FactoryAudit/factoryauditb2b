@@ -51,7 +51,7 @@ type Props = {
 /* -------------------------------------------------------------------------- */
 
 function Label({ children }: { children: React.ReactNode }) {
-  return <span className="mb-1 block text-xs font-medium text-[#64748b]">{children}</span>;
+  return <span className="mb-1 block text-xs font-medium text-[#6d6b66]">{children}</span>;
 }
 
 function Box({
@@ -64,9 +64,9 @@ function Box({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-lg border border-[#e2e8f0] bg-white p-5">
+    <section className="rounded-lg border border-[#ebe8e1] bg-white p-5">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-        <h2 className="text-base font-bold text-[#0f172a]">{title}</h2>
+        <h2 className="text-base font-bold text-[#171717]">{title}</h2>
         {right}
       </div>
       {children}
@@ -294,13 +294,13 @@ export default function SupplierReportEditor({
   return (
     <div className="space-y-5">
       {/* ===== 动作条 ===== */}
-      <div className="rounded-lg border border-[#e2e8f0] bg-white p-5">
+      <div className="rounded-lg border border-[#ebe8e1] bg-white p-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h2 className="text-base font-bold text-[#0f172a]">
+            <h2 className="text-base font-bold text-[#171717]">
               报告正文 · Report body
             </h2>
-            <p className="mt-1 text-xs text-[#64748b]">
+            <p className="mt-1 text-xs text-[#6d6b66]">
               {isNew
                 ? "该工厂尚无报告记录，已下发空白模板（13 章骨架，内容全空）。"
                 : `已填 ${progress.filled} / ${progress.total} 章。`}
@@ -324,7 +324,7 @@ export default function SupplierReportEditor({
         {/* ===== 报告模板家族选择器（按类型生成空白骨架） ===== */}
         <div className="mt-4 flex flex-wrap items-end gap-3 border-t border-[#eef2f7] pt-4">
           <label className="block">
-            <span className="mb-1 block text-xs font-medium text-[#64748b]">
+            <span className="mb-1 block text-xs font-medium text-[#6d6b66]">
               报告模板家族
             </span>
             <select
@@ -339,7 +339,7 @@ export default function SupplierReportEditor({
               ))}
             </select>
           </label>
-          <span className="text-xs text-[#94a3b8]">
+          <span className="text-xs text-[#8c8982]">
             切换类型载入对应空白骨架，<strong className="text-[#854f0b]">替换当前未保存内容</strong>。
           </span>
         </div>
@@ -355,7 +355,7 @@ export default function SupplierReportEditor({
 
       {/* ===== 报告头 ===== */}
       <Box title="报告头">
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <label>
             <Label>报告编号</Label>
             <input
@@ -387,7 +387,7 @@ export default function SupplierReportEditor({
           </label>
         </div>
 
-        <div className="mt-4 grid gap-4 sm:grid-cols-[160px_1fr]">
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-[160px_1fr]">
           <label>
             <Label>总分（0–100，留空 = 未评分）</Label>
             <input
@@ -403,7 +403,7 @@ export default function SupplierReportEditor({
                 patch({ overallScore: n });
               }}
             />
-            <span className="mt-1 block text-xs text-[#94a3b8]">
+            <span className="mt-1 block text-xs text-[#8c8982]">
               {doc.overallScore === null ? "当前：未评分（导出显示「—」）" : "当前：已评分"}
             </span>
           </label>
@@ -423,7 +423,7 @@ export default function SupplierReportEditor({
       <Box
         title={`正文章节（${doc.sections.length}）`}
         right={
-          <span className="text-xs text-[#64748b]">
+          <span className="text-xs text-[#6d6b66]">
             已填 {progress.filled} / {progress.total}
           </span>
         }
@@ -433,15 +433,15 @@ export default function SupplierReportEditor({
             const filled = sectionHasContent(s);
             const open = openNo === s.no;
             return (
-              <div key={`${s.no}-${i}`} className="rounded-md border border-[#e2e8f0]">
+              <div key={`${s.no}-${i}`} className="rounded-md border border-[#ebe8e1]">
                 <button
                   type="button"
                   onClick={() => setOpenNo(open ? null : s.no)}
                   className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left"
                 >
                   <span className="flex items-center gap-2">
-                    <span className="font-mono text-xs text-[#94a3b8]">{s.no}</span>
-                    <span className="text-sm font-medium text-[#0f172a]">
+                    <span className="font-mono text-xs text-[#8c8982]">{s.no}</span>
+                    <span className="text-sm font-medium text-[#171717]">
                       {s.titleZh || s.titleEn || "（未命名章节）"}
                     </span>
                     <span
@@ -455,12 +455,12 @@ export default function SupplierReportEditor({
                       {s.kind}
                     </span>
                   </span>
-                  <span className="text-xs text-[#64748b]">{open ? "收起 ▲" : "展开 ▼"}</span>
+                  <span className="text-xs text-[#6d6b66]">{open ? "收起 ▲" : "展开 ▼"}</span>
                 </button>
 
                 {open && (
-                  <div className="space-y-4 border-t border-[#e2e8f0] px-4 py-4">
-                    <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="space-y-4 border-t border-[#ebe8e1] px-4 py-4">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       <label>
                         <Label>章节标题（中文）</Label>
                         <input
@@ -481,7 +481,7 @@ export default function SupplierReportEditor({
                       </label>
                     </div>
 
-                    <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       <label>
                         <Label>引言（中文）</Label>
                         <textarea
@@ -530,7 +530,7 @@ export default function SupplierReportEditor({
             );
           })}
           {doc.sections.length === 0 && (
-            <p className="text-sm text-[#64748b]">无章节（模板未下发）。</p>
+            <p className="text-sm text-[#6d6b66]">无章节（模板未下发）。</p>
           )}
         </div>
       </Box>
@@ -550,7 +550,7 @@ export default function SupplierReportEditor({
       >
         <div className="space-y-3">
           {doc.actions.map((a, i) => (
-            <div key={i} className="grid gap-3 sm:grid-cols-2">
+            <div key={i} className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <label>
                 <Label>中文</Label>
                 <textarea
@@ -588,14 +588,14 @@ export default function SupplierReportEditor({
             </div>
           ))}
           {doc.actions.length === 0 && (
-            <p className="text-sm text-[#64748b]">暂无。留空则导出件不出现该区块。</p>
+            <p className="text-sm text-[#6d6b66]">暂无。留空则导出件不出现该区块。</p>
           )}
         </div>
       </Box>
 
       {/* ===== 免责声明 + 状态 ===== */}
       <Box title="免责声明与状态">
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <label>
             <Label>免责声明（中文）</Label>
             <textarea
@@ -615,12 +615,12 @@ export default function SupplierReportEditor({
             />
           </label>
         </div>
-        <p className="mt-2 text-xs text-[#94a3b8]">
+        <p className="mt-2 text-xs text-[#8c8982]">
           留空时导出件使用平台标准免责声明，绝不留空。
         </p>
 
         <div className="mt-4 flex flex-wrap items-center gap-4">
-          <label className="flex items-center gap-2 text-sm text-[#0f172a]">
+          <label className="flex items-center gap-2 text-sm text-[#171717]">
             <input
               type="radio"
               name="report-status"
@@ -629,7 +629,7 @@ export default function SupplierReportEditor({
             />
             草稿
           </label>
-          <label className="flex items-center gap-2 text-sm text-[#0f172a]">
+          <label className="flex items-center gap-2 text-sm text-[#171717]">
             <input
               type="radio"
               name="report-status"
@@ -638,7 +638,7 @@ export default function SupplierReportEditor({
             />
             定稿
           </label>
-          <span className="text-xs text-[#94a3b8]">
+          <span className="text-xs text-[#8c8982]">
             「定稿」仅标记内容已定，<strong>不等于签发</strong>，也不对采购商构成承诺。
           </span>
         </div>
@@ -678,7 +678,7 @@ function SectionBody({
     return (
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <span className="text-xs font-medium text-[#64748b]">
+          <span className="text-xs font-medium text-[#6d6b66]">
             键值行（只填「值」的行才会出现在导出件里）
           </span>
           <IconBtn
@@ -696,7 +696,7 @@ function SectionBody({
         </div>
         <div className="space-y-2">
           {rows.map((f, k) => (
-            <div key={k} className="grid gap-2 sm:grid-cols-[1fr_1fr_1.4fr_130px_auto]">
+            <div key={k} className="grid grid-cols-1 gap-2 sm:grid-cols-[1fr_1fr_1.4fr_130px_auto]">
               <input
                 className="input"
                 placeholder="标签（中）"
@@ -727,7 +727,7 @@ function SectionBody({
               </IconBtn>
             </div>
           ))}
-          {rows.length === 0 && <p className="text-xs text-[#94a3b8]">暂无行。</p>}
+          {rows.length === 0 && <p className="text-xs text-[#8c8982]">暂无行。</p>}
         </div>
       </div>
     );
@@ -768,7 +768,7 @@ function SectionBody({
     return (
       <div className="space-y-3">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-medium text-[#64748b]">
+          <span className="text-xs font-medium text-[#6d6b66]">
             列 {t.headers.length} · 行 {t.rows.length}
           </span>
           <IconBtn onClick={addCol}>+ 列</IconBtn>
@@ -776,7 +776,7 @@ function SectionBody({
             − 列
           </IconBtn>
           <IconBtn onClick={addRow}>+ 行</IconBtn>
-          <label className="flex items-center gap-2 text-xs text-[#64748b]">
+          <label className="flex items-center gap-2 text-xs text-[#6d6b66]">
             状态列
             <select
               className="input max-w-[180px]"
@@ -797,7 +797,7 @@ function SectionBody({
 
         <div className="space-y-2">
           {t.headers.map((h, c) => (
-            <div key={`h${c}`} className="grid gap-2 sm:grid-cols-2">
+            <div key={`h${c}`} className="grid grid-cols-1 gap-2 sm:grid-cols-2">
               <input
                 className="input"
                 placeholder={`列 ${c + 1} 表头（中）`}
@@ -828,7 +828,7 @@ function SectionBody({
           {t.rows.map((row, k) => (
             <div
               key={`r${k}`}
-              className="grid items-start gap-2"
+              className="grid grid-cols-1 items-start gap-2"
               style={{ gridTemplateColumns: `repeat(${t.headers.length}, minmax(0,1fr)) auto` }}
             >
               {row.map((cell, c) => (
@@ -847,7 +847,7 @@ function SectionBody({
             </div>
           ))}
           {t.rows.length === 0 && (
-            <p className="text-xs text-[#94a3b8]">暂无数据行 —— 空表格不会出现在导出件里。</p>
+            <p className="text-xs text-[#8c8982]">暂无数据行 —— 空表格不会出现在导出件里。</p>
           )}
         </div>
       </div>
@@ -864,7 +864,7 @@ function SectionBody({
     return (
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <span className="text-xs font-medium text-[#64748b]">时间轴条目</span>
+          <span className="text-xs font-medium text-[#6d6b66]">时间轴条目</span>
           <IconBtn
             onClick={() =>
               patchSection(index, {
@@ -881,7 +881,7 @@ function SectionBody({
         <div className="space-y-3">
           {items.map((it, k) => (
             <div key={k} className="rounded border border-[#eef2f7] p-3">
-              <div className="grid gap-2 sm:grid-cols-[90px_1fr_1fr_130px_auto]">
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-[90px_1fr_1fr_130px_auto]">
                 <input
                   className="input"
                   placeholder="时间"
@@ -923,7 +923,7 @@ function SectionBody({
                   删
                 </IconBtn>
               </div>
-              <div className="mt-2 grid gap-2 sm:grid-cols-2">
+              <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
                 <textarea
                   className="input min-h-[52px]"
                   placeholder="说明（中）"
@@ -941,7 +941,7 @@ function SectionBody({
               </div>
             </div>
           ))}
-          {items.length === 0 && <p className="text-xs text-[#94a3b8]">暂无条目。</p>}
+          {items.length === 0 && <p className="text-xs text-[#8c8982]">暂无条目。</p>}
         </div>
       </div>
     );
@@ -957,7 +957,7 @@ function SectionBody({
   return (
     <div>
       <div className="mb-2 flex items-center justify-between">
-        <span className="text-xs font-medium text-[#64748b]">列表条目</span>
+        <span className="text-xs font-medium text-[#6d6b66]">列表条目</span>
         <IconBtn
           onClick={() =>
             patchSection(index, {
@@ -970,7 +970,7 @@ function SectionBody({
       </div>
       <div className="space-y-3">
         {bullets.map((b, k) => (
-          <div key={k} className="grid gap-2 sm:grid-cols-2">
+          <div key={k} className="grid grid-cols-1 gap-2 sm:grid-cols-2">
             <textarea
               className="input min-h-[56px]"
               placeholder="中文"
@@ -992,7 +992,7 @@ function SectionBody({
             </span>
           </div>
         ))}
-        {bullets.length === 0 && <p className="text-xs text-[#94a3b8]">暂无条目。</p>}
+        {bullets.length === 0 && <p className="text-xs text-[#8c8982]">暂无条目。</p>}
       </div>
     </div>
   );

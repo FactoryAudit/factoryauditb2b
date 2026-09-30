@@ -23,7 +23,7 @@ type Props = { params: Promise<{ locale: string; ref: string }> };
 const STATUS_STYLE: Record<string, string> = {
   pending_payment: "bg-[#fef3c7] text-[#92400e]",
   paid: "bg-[#dcfce7] text-[#166534]",
-  cancelled: "bg-[#e2e8f0] text-[#475569]",
+  cancelled: "bg-[#ebe8e1] text-[#3f4650]",
   refunded: "bg-[#e0e7ff] text-[#3730a3]",
 };
 
@@ -40,8 +40,8 @@ export default async function CheckoutPage({ params }: Props) {
   if (!order) {
     return (
       <div className="mx-auto max-w-2xl px-4 py-16">
-        <h1 className="text-2xl font-bold text-[#0f172a]">{c.notFoundTitle}</h1>
-        <p className="mt-2 text-sm text-[#64748b]">{c.notFoundBody}</p>
+        <h1 className="text-2xl font-bold text-[#171717]">{c.notFoundTitle}</h1>
+        <p className="mt-2 text-sm text-[#6d6b66]">{c.notFoundBody}</p>
         <Link
           href={localePath(locale, "/custom-services")}
           className="btn btn-primary mt-6 inline-block"
@@ -67,36 +67,36 @@ export default async function CheckoutPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-12">
-      <h1 className="text-2xl font-bold text-[#0f172a]">{c.title}</h1>
-      <p className="mt-2 text-sm text-[#64748b]">{c.lead}</p>
+      <h1 className="text-2xl font-bold text-[#171717]">{c.title}</h1>
+      <p className="mt-2 text-sm text-[#6d6b66]">{c.lead}</p>
 
-      <dl className="mt-6 divide-y divide-[#e2e8f0] rounded-lg border border-[#e2e8f0]">
+      <dl className="mt-6 divide-y divide-[#ebe8e1] rounded-lg border border-[#ebe8e1]">
         <div className="flex items-center justify-between px-4 py-3">
-          <dt className="text-xs font-medium text-[#64748b]">{c.orderRef}</dt>
-          <dd className="font-mono text-sm font-semibold text-[#0f172a]">
+          <dt className="text-xs font-medium text-[#6d6b66]">{c.orderRef}</dt>
+          <dd className="font-mono text-sm font-semibold text-[#171717]">
             {order.reference_id}
           </dd>
         </div>
         <div className="flex items-center justify-between px-4 py-3">
-          <dt className="text-xs font-medium text-[#64748b]">{c.colService}</dt>
-          <dd className="text-sm text-[#0f172a]">{serviceLabel(t, order.service_code)}</dd>
+          <dt className="text-xs font-medium text-[#6d6b66]">{c.colService}</dt>
+          <dd className="text-sm text-[#171717]">{serviceLabel(t, order.service_code)}</dd>
         </div>
         <div className="flex items-center justify-between px-4 py-3">
-          <dt className="text-xs font-medium text-[#64748b]">{c.colQuantity}</dt>
-          <dd className="text-sm text-[#0f172a]">{order.quantity}</dd>
+          <dt className="text-xs font-medium text-[#6d6b66]">{c.colQuantity}</dt>
+          <dd className="text-sm text-[#171717]">{order.quantity}</dd>
         </div>
         <div className="flex items-center justify-between px-4 py-3">
-          <dt className="text-xs font-medium text-[#64748b]">{c.colAmount}</dt>
-          <dd className="text-sm font-semibold text-[#0f172a]">
+          <dt className="text-xs font-medium text-[#6d6b66]">{c.colAmount}</dt>
+          <dd className="text-sm font-semibold text-[#171717]">
             {amountText ?? c.quoted}
           </dd>
         </div>
         <div className="flex items-center justify-between px-4 py-3">
-          <dt className="text-xs font-medium text-[#64748b]">{c.colStatus}</dt>
+          <dt className="text-xs font-medium text-[#6d6b66]">{c.colStatus}</dt>
           <dd>
             <span
               className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
-                STATUS_STYLE[order.status] ?? "bg-[#e2e8f0] text-[#475569]"
+                STATUS_STYLE[order.status] ?? "bg-[#ebe8e1] text-[#3f4650]"
               }`}
             >
               {statusLabel}
@@ -105,14 +105,14 @@ export default async function CheckoutPage({ params }: Props) {
         </div>
       </dl>
 
-      <p className="mt-3 text-xs text-[#64748b]">{c.referenceNote}</p>
+      <p className="mt-3 text-xs text-[#6d6b66]">{c.referenceNote}</p>
 
       {canPay && (
         <section className="mt-8">
-          <h2 className="font-semibold text-[#0f172a]">{c.payTitle}</h2>
+          <h2 className="font-semibold text-[#171717]">{c.payTitle}</h2>
           <a
             href={order.pay_url as string}
-            className="btn btn-primary mt-3 inline-block bg-[#0f4c81] text-white"
+            className="btn btn-primary mt-3 inline-block bg-[#171717] text-white"
           >
             {c.payPaypal}
           </a>
@@ -121,12 +121,12 @@ export default async function CheckoutPage({ params }: Props) {
 
       {order.status === "pending_payment" && !canPay && (
         <section className="mt-8">
-          <h2 className="font-semibold text-[#0f172a]">{c.payManualTitle}</h2>
-          <p className="mt-2 text-sm text-[#475569]">{c.payManualBody}</p>
+          <h2 className="font-semibold text-[#171717]">{c.payManualTitle}</h2>
+          <p className="mt-2 text-sm text-[#3f4650]">{c.payManualBody}</p>
           {bankDetails && (
             <div className="mt-4">
-              <h3 className="text-xs font-medium text-[#64748b]">{c.bankTitle}</h3>
-              <pre className="mt-1 whitespace-pre-wrap rounded-md bg-[#f8fafc] p-3 text-sm text-[#0f172a]">
+              <h3 className="text-xs font-medium text-[#6d6b66]">{c.bankTitle}</h3>
+              <pre className="mt-1 whitespace-pre-wrap rounded-md bg-[#fbfaf7] p-3 text-sm text-[#171717]">
                 {bankDetails}
               </pre>
             </div>
@@ -135,8 +135,8 @@ export default async function CheckoutPage({ params }: Props) {
       )}
 
       <section className="mt-8">
-        <h2 className="font-semibold text-[#0f172a]">{c.nextTitle}</h2>
-        <p className="mt-2 text-sm text-[#475569]">{c.nextBody}</p>
+        <h2 className="font-semibold text-[#171717]">{c.nextTitle}</h2>
+        <p className="mt-2 text-sm text-[#3f4650]">{c.nextBody}</p>
       </section>
     </div>
   );

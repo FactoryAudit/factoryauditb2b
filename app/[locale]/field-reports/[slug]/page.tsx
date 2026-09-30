@@ -124,7 +124,7 @@ export default async function FieldReportPage({ params }: { params: Promise<Para
         {title}
       </nav>
 
-      <span className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">
+      <span className="text-sm font-semibold text-[#171717] uppercase tracking-wide">
         {f.serviceLabels[r.service]}
       </span>
       <h1 className="text-3xl font-bold mt-1">{title}</h1>
@@ -163,7 +163,7 @@ export default async function FieldReportPage({ params }: { params: Promise<Para
         <p className="mt-2 text-gray-700">{x.outcome}</p>
       </section>
 
-      <section className="mt-8 rounded-lg bg-[#f1f5f9] p-5">
+      <section className="mt-8 rounded-lg bg-[#f5f3ee] p-5">
         <h2 className="text-lg font-semibold">{sec.takeaway}</h2>
         <p className="mt-2 text-gray-700">{x.takeaway}</p>
       </section>
@@ -174,7 +174,7 @@ export default async function FieldReportPage({ params }: { params: Promise<Para
           <ul className="mt-2 space-y-1">
             {relatedGuides.map((g) => (
               <li key={g.slug}>
-                <Link href={p(`/guides/${g.slug}`)} className="text-[#0f4c81] hover:underline">
+                <Link href={p(`/guides/${g.slug}`)} className="text-[#171717] hover:underline">
                   {pickZhPair(locale, g.titleEn, g.titleZh)}
                 </Link>
               </li>
@@ -198,7 +198,7 @@ export default async function FieldReportPage({ params }: { params: Promise<Para
         </section>
       )}
 
-      <section className="mt-10 card p-6 bg-[#0f4c81]">
+      <section className="mt-10 card p-6 bg-[#171717]">
         <h2 className="text-lg font-semibold text-white">{f.ctaTitle}</h2>
         <p className="mt-1 text-sm text-white/80">{f.ctaLead}</p>
         <div className="mt-3 flex flex-wrap gap-3">

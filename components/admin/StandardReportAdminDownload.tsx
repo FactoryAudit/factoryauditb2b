@@ -48,7 +48,7 @@ export default function StandardReportAdminDownload({ labels, defaultLang }: Pro
 
   return (
     <div className="mt-3 flex flex-wrap items-center gap-3">
-      <label className="text-sm font-medium text-[#0f172a]" htmlFor="report-lang">
+      <label className="text-sm font-medium text-[#171717]" htmlFor="report-lang">
         {labels.langLabel}
       </label>
       <select

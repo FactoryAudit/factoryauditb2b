@@ -52,7 +52,7 @@ export default function SupplierRiskAssessmentTool({ ui }: { ui: RiskAssessmentU
   ];
 
   return (
-    <div className="grid md:grid-cols-2 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div className="card p-6 space-y-4">
         <div className="grid grid-cols-2 gap-3">
           <div><label className="text-sm font-medium">{ui.supplierName}</label><input className="input" value={form.supplierName} onChange={(e) => update("supplierName", e.target.value)} /></div>
@@ -96,16 +96,16 @@ export default function SupplierRiskAssessmentTool({ ui }: { ui: RiskAssessmentU
 
       <div className="card p-6">
         {!result ? (
-          <div className="text-[#94a3b8] text-sm">{ui.empty}</div>
+          <div className="text-[#8c8982] text-sm">{ui.empty}</div>
         ) : (
           <>
             <div className="flex items-center gap-4 mb-4">
-              <div className="text-5xl font-extrabold text-[#0f4c81]">{result.overall}<span className="text-xl text-[#64748b]">/100</span></div>
+              <div className="text-5xl font-extrabold text-[#171717]">{result.overall}<span className="text-xl text-[#6d6b66]">/100</span></div>
               <div>
                 <div className="text-lg font-bold">
                   {ui.levels[result.level as keyof RiskAssessmentUi["levels"]] ?? result.level} {ui.levelSuffix}
                 </div>
-                <div className="text-xs text-[#64748b]">
+                <div className="text-xs text-[#6d6b66]">
                   {source === "ai" ? ui.sourceAi : ui.sourceLocal}
                 </div>
               </div>
@@ -124,8 +124,8 @@ export default function SupplierRiskAssessmentTool({ ui }: { ui: RiskAssessmentU
                       {ui.status[d.status as keyof RiskAssessmentUi["status"]] ?? d.status}
                     </span>
                   </div>
-                  <div className="h-2 bg-[#eef2f7] rounded-full"><div className="h-2 rounded-full bg-[#0f4c81]" style={{ width: `${d.score}%` }} /></div>
-                  <div className="text-right text-xs text-[#64748b]">{d.score}</div>
+                  <div className="h-2 bg-[#eef2f7] rounded-full"><div className="h-2 rounded-full bg-[#171717]" style={{ width: `${d.score}%` }} /></div>
+                  <div className="text-right text-xs text-[#6d6b66]">{d.score}</div>
                 </div>
               ))}
             </div>

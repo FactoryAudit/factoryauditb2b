@@ -49,8 +49,8 @@ export default async function AccountPage({
     <main className="container py-12 max-w-2xl">
       <JsonLd data={jsonLd} />
 
-      <h1 className="text-3xl font-bold text-[#0f172a]">{a.h1}</h1>
-      <p className="text-[#64748b] mt-2">{a.lead}</p>
+      <h1 className="text-3xl font-bold text-[#171717]">{a.h1}</h1>
+      <p className="text-[#6d6b66] mt-2">{a.lead}</p>
 
       <div className="mt-8">
         <AccountPanel

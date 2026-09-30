@@ -83,11 +83,11 @@ export default async function ComparePage({ params }: Props) {
     <main className="container py-12" data-track-page="tool_compare">
       <JsonLd data={jsonLd} />
 
-      <span className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">
+      <span className="text-sm font-semibold text-[#171717] uppercase tracking-wide">
         {c.badge}
       </span>
-      <h1 className="text-4xl font-extrabold text-[#0f172a] mt-2">{c.h1}</h1>
-      <p className="text-[#64748b] mt-3 text-lg max-w-3xl">{c.lead}</p>
+      <h1 className="text-4xl font-extrabold text-[#171717] mt-2">{c.h1}</h1>
+      <p className="text-[#6d6b66] mt-3 text-lg max-w-3xl">{c.lead}</p>
 
       <div className="mt-8">
         <SupplierComparison
@@ -99,12 +99,12 @@ export default async function ComparePage({ params }: Props) {
       </div>
 
       <section className="mt-14 max-w-3xl">
-        <h2 className="text-2xl font-bold text-[#0f172a] mb-4">{t.common.faq}</h2>
+        <h2 className="text-2xl font-bold text-[#171717] mb-4">{t.common.faq}</h2>
         <div className="space-y-4">
           {faq.map((f) => (
             <div key={f.q} className="card p-5">
-              <div className="font-semibold text-[#0f172a]">{f.q}</div>
-              <p className="text-sm text-[#475569] mt-1">{f.a}</p>
+              <div className="font-semibold text-[#171717]">{f.q}</div>
+              <p className="text-sm text-[#3f4650] mt-1">{f.a}</p>
             </div>
           ))}
         </div>

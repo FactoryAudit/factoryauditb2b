@@ -68,7 +68,7 @@ export default function AiChatWidget({
           type="button"
           onClick={() => setOpen(true)}
           aria-label={dict.title}
-          className={`fixed bottom-6 ${side} z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#0f4c81] text-white shadow-lg hover:bg-[#0d3f6b]`}
+          className={`fixed bottom-6 ${side} z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#171717] text-white shadow-lg hover:bg-[#0d3f6b]`}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
@@ -78,9 +78,9 @@ export default function AiChatWidget({
 
       {open && (
         <div
-          className={`fixed bottom-6 ${side} z-50 flex h-[30rem] w-[calc(100vw-3rem)] max-w-sm flex-col overflow-hidden rounded-lg border border-[#e2e8f0] bg-white shadow-xl`}
+          className={`fixed bottom-6 ${side} z-50 flex h-[30rem] w-[calc(100vw-3rem)] max-w-sm flex-col overflow-hidden rounded-lg border border-[#ebe8e1] bg-white shadow-xl`}
         >
-          <div className="flex items-center justify-between bg-[#0f4c81] px-4 py-3 text-white">
+          <div className="flex items-center justify-between bg-[#171717] px-4 py-3 text-white">
             <div>
               <div className="text-sm font-medium">{dict.title}</div>
               <div className="text-[11px] text-white/80">{dict.subtitle}</div>
@@ -97,7 +97,7 @@ export default function AiChatWidget({
               <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
                 <div
                   className={`max-w-[85%] rounded-lg px-3 py-2 text-sm ${
-                    m.role === "user" ? "bg-[#0f4c81] text-white" : "bg-[#f1f5f9] text-[#0f172a]"
+                    m.role === "user" ? "bg-[#171717] text-white" : "bg-[#f5f3ee] text-[#171717]"
                   }`}
                 >
                   {m.content}
@@ -106,7 +106,7 @@ export default function AiChatWidget({
             ))}
             {loading && (
               <div className="flex justify-start">
-                <div className="rounded-lg bg-[#f1f5f9] px-3 py-2 text-sm text-[#64748b]">{dict.thinking}</div>
+                <div className="rounded-lg bg-[#f5f3ee] px-3 py-2 text-sm text-[#6d6b66]">{dict.thinking}</div>
               </div>
             )}
             {messages.length === 1 && !loading && (
@@ -116,7 +116,7 @@ export default function AiChatWidget({
                     key={q}
                     type="button"
                     onClick={() => send(q)}
-                    className="block w-full rounded border border-[#e2e8f0] px-3 py-2 text-start text-xs text-[#0f4c81] hover:bg-[#f1f5f9]"
+                    className="block w-full rounded border border-[#ebe8e1] px-3 py-2 text-start text-xs text-[#171717] hover:bg-[#f5f3ee]"
                   >
                     {q}
                   </button>
@@ -125,10 +125,10 @@ export default function AiChatWidget({
             )}
           </div>
 
-          <div className="border-t border-[#e2e8f0] p-3">
-            <div className="mb-2 text-[11px] text-[#64748b]">
+          <div className="border-t border-[#ebe8e1] p-3">
+            <div className="mb-2 text-[11px] text-[#6d6b66]">
               {dict.ctaText}{" "}
-              <Link href={localePath(locale, "/custom-services")} className="text-[#0f4c81] underline">
+              <Link href={localePath(locale, "/custom-services")} className="text-[#171717] underline">
                 {dict.ctaButton}
               </Link>
               {whatsappLabel && (
@@ -137,7 +137,7 @@ export default function AiChatWidget({
                   <WhatsAppLink
                     label={whatsappLabel}
                     message="Hi FactoryAuditB2B, I have a question."
-                    className="text-[#0f4c81] underline"
+                    className="text-[#171717] underline"
                   />
                 </>
               )}

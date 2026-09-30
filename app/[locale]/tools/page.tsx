@@ -77,32 +77,32 @@ export default async function Page({ params }: Props) {
       <JsonLd data={jsonLd} />
 
       <section className="max-w-3xl mx-auto text-center mb-12">
-        <span className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">
+        <span className="text-sm font-semibold text-[#171717] uppercase tracking-wide">
           {t.common.freeTool}
         </span>
-        <h1 className="text-4xl font-extrabold text-[#0f172a] mt-2">{t.toolsIndex.h1}</h1>
-        <p className="text-[#64748b] mt-3 text-lg">{t.toolsIndex.lead}</p>
+        <h1 className="text-4xl font-extrabold text-[#171717] mt-2">{t.toolsIndex.h1}</h1>
+        <p className="text-[#6d6b66] mt-3 text-lg">{t.toolsIndex.lead}</p>
       </section>
 
-      <section className="grid md:grid-cols-2 gap-5 mb-14">
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-14">
         {tools.map((tool) => (
-          <Link key={tool.href} href={p(tool.href)} className="card p-6 hover:border-[#0f4c81] transition">
+          <Link key={tool.href} href={p(tool.href)} className="card p-6 hover:border-[#171717] transition">
             <div className="flex items-center gap-2 mb-2">
-              <span className="font-semibold text-[#0f4c81]">{tool.title}</span>
+              <span className="font-semibold text-[#171717]">{tool.title}</span>
               {"tag" in tool && tool.tag && (
                 <span className="px-2 py-0.5 rounded text-xs font-semibold bg-[#fff4e0] text-[#8a5410]">
                   {tool.tag}
                 </span>
               )}
             </div>
-            <p className="text-sm text-[#475569]">{tool.desc}</p>
+            <p className="text-sm text-[#3f4650]">{tool.desc}</p>
           </Link>
         ))}
       </section>
 
-      <section className="card p-8 text-center bg-[#f7f9fc]">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{t.toolsIndex.ctaTitle}</h2>
-        <p className="text-[#64748b] mt-2 max-w-2xl mx-auto">{t.toolsIndex.ctaLead}</p>
+      <section className="card p-8 text-center bg-[#fbfaf7]">
+        <h2 className="text-2xl font-bold text-[#171717]">{t.toolsIndex.ctaTitle}</h2>
+        <p className="text-[#6d6b66] mt-2 max-w-2xl mx-auto">{t.toolsIndex.ctaLead}</p>
         <div className="mt-6 flex gap-3 flex-wrap justify-center">
           <Link href={p("/services/supplier-verification")} className="btn btn-primary">
             {t.toolsIndex.ctaPrimary}

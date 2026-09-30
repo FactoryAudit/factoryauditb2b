@@ -175,7 +175,7 @@ export default async function IndustryTopicPage({ params }: { params: Promise<Pa
               {tp.slug === topicSlug ? (
                 <span className="text-gray-500">{pickZhPair(locale, tp.title.en, tp.title.zh)}</span>
               ) : (
-                <Link href={lp(`/industry/${slug}/${tp.slug}`)} className="text-[#0f4c81] hover:underline">
+                <Link href={lp(`/industry/${slug}/${tp.slug}`)} className="text-[#171717] hover:underline">
                   {pickZhPair(locale, tp.title.en, tp.title.zh)}
                 </Link>
               )}
@@ -185,9 +185,9 @@ export default async function IndustryTopicPage({ params }: { params: Promise<Pa
       </section>
 
       {/* CTA：与 Master 页一致，注入行业上下文 + 具体来源路径（子主题级别）。 */}
-      <section className="mt-10 rounded-lg bg-[#f1f5f9] p-6">
-        <h2 className="font-semibold text-[#0f172a]">{p.ctaTitle.replaceAll("{industry}", industry.name)}</h2>
-        <p className="mt-1 text-sm text-[#475569]">{p.ctaDesc.replaceAll("{industry}", industry.name)}</p>
+      <section className="mt-10 rounded-lg bg-[#f5f3ee] p-6">
+        <h2 className="font-semibold text-[#171717]">{p.ctaTitle.replaceAll("{industry}", industry.name)}</h2>
+        <p className="mt-1 text-sm text-[#3f4650]">{p.ctaDesc.replaceAll("{industry}", industry.name)}</p>
         <div className="mt-4">
           <RfqForm
             t={t.rfq.form}

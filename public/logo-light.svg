@@ -2,21 +2,21 @@
   <defs>
     <linearGradient id="lightShield" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#FFFFFF"/>
-      <stop offset="100%" stop-color="#DBEAFE"/>
+      <stop offset="100%" stop-color="#f7e7de"/>
     </linearGradient>
   </defs>
 
-  <!-- 图标：浅色底 + 深蓝线条，适配深色背景 -->
+  <!-- 图标：浅色盾面 + 陶土橙线条，适配深色底（#1b1b19） -->
   <g transform="translate(2 4) scale(0.28)">
     <path d="M 14 0 L 186 0 L 186 78 Q 186 178 100 200 Q 14 178 14 78 Z"
-          fill="url(#lightShield)" stroke="#60A5FA" stroke-width="3"/>
-    <g fill="#0B2D5B" stroke="#0B2D5B" stroke-width="4" stroke-linejoin="round">
+          fill="url(#lightShield)" stroke="#e07a49" stroke-width="3"/>
+    <g fill="#c96235" stroke="#c96235" stroke-width="4" stroke-linejoin="round">
       <rect x="50" y="80" width="44" height="62"/>
       <rect x="94" y="56" width="26" height="86"/>
       <rect x="120" y="98" width="36" height="44"/>
       <rect x="140" y="40" width="12" height="28"/>
     </g>
-    <g fill="#38BDF8">
+    <g fill="#f0b795">
       <rect x="58" y="90" width="8" height="8"/>
       <rect x="78" y="90" width="8" height="8"/>
       <rect x="58" y="110" width="8" height="8"/>
@@ -28,20 +28,20 @@
       <rect x="128" y="122" width="6" height="6"/>
     </g>
     <g transform="translate(95 100)">
-      <circle cx="0" cy="0" r="36" fill="#0F172A"
-              stroke="#60A5FA" stroke-width="7"/>
+      <circle cx="0" cy="0" r="36" fill="#1b1b19"
+              stroke="#e07a49" stroke-width="7"/>
       <path d="M -14 2 L -4 12 L 14 -8" fill="none"
-            stroke="#4ADE80" stroke-width="7"
+            stroke="#7fc9a8" stroke-width="7"
             stroke-linecap="round" stroke-linejoin="round"/>
       <line x1="25" y1="25" x2="52" y2="52"
-            stroke="#60A5FA" stroke-width="9" stroke-linecap="round"/>
+            stroke="#e07a49" stroke-width="9" stroke-linecap="round"/>
     </g>
   </g>
 
-  <!-- 文字：整体白色，B2B 用亮蓝区分 -->
+  <!-- 文字：整体白色，B2B 用 accent 橙区分（浅色版与深色版口径一致） -->
   <text x="72" y="43"
         font-family="Poppins, Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
         font-size="30" font-weight="700" letter-spacing="-0.8">
-    <tspan fill="#FFFFFF">FactoryAudit</tspan><tspan fill="#60A5FA">B2B</tspan>
+    <tspan fill="#FFFFFF">FactoryAudit</tspan><tspan fill="#e07a49">B2B</tspan>
   </text>
 </svg>

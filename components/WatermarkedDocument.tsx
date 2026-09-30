@@ -39,7 +39,7 @@ export default function WatermarkedDocument({
         style={{ transform: "rotate(-30deg) scale(1.6)" }}
       >
         {Array.from({ length: 9 }).map((_, i) => (
-          <div key={i} className="text-center text-[#0f4c81] opacity-[0.16]">
+          <div key={i} className="text-center text-[#171717] opacity-[0.16]">
             <div className="text-sm font-extrabold tracking-wider">{watermark.line1}</div>
             <div className="text-[10px] font-bold tracking-widest">{watermark.line2}</div>
             <div className="text-[10px] mt-1">
@@ -53,7 +53,7 @@ export default function WatermarkedDocument({
   );
 
   return (
-    <figure className="relative rounded-lg border border-[#e2e8f0] bg-white p-3">
+    <figure className="relative rounded-lg border border-[#ebe8e1] bg-white p-3">
       <div className="relative">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -65,8 +65,8 @@ export default function WatermarkedDocument({
         />
         {block}
       </div>
-      <figcaption className="mt-3 text-xs text-[#64748b] space-y-0.5">
-        <div className="font-semibold text-[#0f172a]">{watermark.line1}</div>
+      <figcaption className="mt-3 text-xs text-[#6d6b66] space-y-0.5">
+        <div className="font-semibold text-[#171717]">{watermark.line1}</div>
         <div>{watermark.line2}</div>
         <div>{watermark.verified}</div>
         {watermark.documentId && <div>{watermark.documentId}</div>}

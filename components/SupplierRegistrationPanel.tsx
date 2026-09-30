@@ -41,8 +41,8 @@ function Row({ label, value }: { label: string; value?: string }) {
   if (!value) return null;
   return (
     <div className="flex flex-col gap-0.5">
-      <dt className="text-xs text-[#64748b]">{label}</dt>
-      <dd className="text-sm font-medium text-[#0f172a] break-words">{value}</dd>
+      <dt className="text-xs text-[#6d6b66]">{label}</dt>
+      <dd className="text-sm font-medium text-[#171717] break-words">{value}</dd>
     </div>
   );
 }
@@ -75,14 +75,14 @@ export function SupplierRegistrationPanel({
     <section className="mt-8">
       <div className="card p-6" id="profile-registration">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h2 className="text-xl font-bold text-[#0f172a]">{d.registrationTitle}</h2>
+          <h2 className="text-xl font-bold text-[#171717]">{d.registrationTitle}</h2>
           {/* CS-16G：来源标签 —— 中性灰，绝不用平台蓝/绿（颜色本身就是一种信任断言） */}
-          <span className="rounded-full border border-[#cbd5e1] bg-[#f1f5f9] px-3 py-1 text-xs font-medium text-[#475569]">
+          <span className="rounded-full border border-[#ddd9d0] bg-[#f5f3ee] px-3 py-1 text-xs font-medium text-[#3f4650]">
             {d.provProvided}
           </span>
         </div>
-        <p className="mt-1 text-sm text-[#64748b]">{d.registrationLead}</p>
-        <dl className="mt-4 grid gap-x-6 gap-y-3 sm:grid-cols-2">
+        <p className="mt-1 text-sm text-[#6d6b66]">{d.registrationLead}</p>
+        <dl className="mt-4 grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-2">
           <Row label={d.regEnglishName} value={data.englishName} />
           <Row label={d.regCompanyType} value={data.companyType} />
           <Row label={d.regRegistrationNo} value={data.registrationNumber} />
@@ -114,28 +114,28 @@ export function SupplierSelfReportedCerts({
     <section className="mt-8">
       <div className="card p-6" id="profile-self-certs">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h2 className="text-xl font-bold text-[#0f172a]">{d.selfCertTitle}</h2>
+          <h2 className="text-xl font-bold text-[#171717]">{d.selfCertTitle}</h2>
           {/* 自述标记：中性灰色，绝不用平台蓝/绿色徽章 —— 颜色本身就是一种断言 */}
-          <span className="rounded-full border border-[#cbd5e1] bg-[#f1f5f9] px-3 py-1 text-xs font-medium text-[#475569]">
+          <span className="rounded-full border border-[#ddd9d0] bg-[#f5f3ee] px-3 py-1 text-xs font-medium text-[#3f4650]">
             {d.selfCertLead}
           </span>
         </div>
 
         {certs.length === 0 ? (
-          <p className="mt-3 text-sm text-[#475569]">{d.selfCertNone}</p>
+          <p className="mt-3 text-sm text-[#3f4650]">{d.selfCertNone}</p>
         ) : (
           <ul className="mt-4 space-y-3">
             {certs.map((c) => (
               <li
                 key={certLine(c)}
-                className="rounded-lg border border-[#e2e8f0] bg-[#f8fafc] p-4"
+                className="rounded-lg border border-[#ebe8e1] bg-[#fbfaf7] p-4"
               >
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-semibold text-[#0f172a]">
+                  <span className="font-semibold text-[#171717]">
                     {c.name || d.selfCertName}
                   </span>
                   {c.number ? (
-                    <span className="font-mono text-xs text-[#475569]">
+                    <span className="font-mono text-xs text-[#3f4650]">
                       {d.selfCertNumber} {c.number}
                     </span>
                   ) : null}
@@ -145,14 +145,14 @@ export function SupplierSelfReportedCerts({
                 <dl className="mt-2 flex flex-wrap gap-x-6 gap-y-1 text-sm">
                   {c.issued ? (
                     <div className="flex gap-2">
-                      <dt className="text-[#64748b]">{d.selfCertIssued}</dt>
-                      <dd className="text-[#0f172a]">{c.issued}</dd>
+                      <dt className="text-[#6d6b66]">{d.selfCertIssued}</dt>
+                      <dd className="text-[#171717]">{c.issued}</dd>
                     </div>
                   ) : null}
                   {c.expires ? (
                     <div className="flex gap-2">
-                      <dt className="text-[#64748b]">{d.selfCertExpires}</dt>
-                      <dd className="text-[#0f172a]">{c.expires}</dd>
+                      <dt className="text-[#6d6b66]">{d.selfCertExpires}</dt>
+                      <dd className="text-[#171717]">{c.expires}</dd>
                     </div>
                   ) : null}
                 </dl>
@@ -161,7 +161,7 @@ export function SupplierSelfReportedCerts({
           </ul>
         )}
 
-        <p className="mt-4 border-t border-[#e2e8f0] pt-3 text-xs text-[#64748b]">
+        <p className="mt-4 border-t border-[#ebe8e1] pt-3 text-xs text-[#6d6b66]">
           {d.selfCertDisclaimer}
         </p>
       </div>

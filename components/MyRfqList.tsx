@@ -58,10 +58,10 @@ type Labels = {
 
 // 状态色：与后台列表保持一致，让买家和运营看到的语义是同一套
 const STATUS_STYLE: Record<string, { bg: string; fg: string }> = {
-  new: { bg: "#e6eef6", fg: "#0f4c81" },
+  new: { bg: "#f5f3ee", fg: "#171717" },
   reviewing: { bg: "#fef3c7", fg: "#92400e" },
   matched: { bg: "#dcfce7", fg: "#166534" },
-  closed: { bg: "#f1f5f9", fg: "#475569" },
+  closed: { bg: "#f5f3ee", fg: "#3f4650" },
 };
 
 function statusStyle(status: string) {
@@ -122,7 +122,7 @@ export default function MyRfqList({
   }, []);
 
   if (items === null) {
-    return <p className="mt-6 text-sm text-[#64748b]">{labels.loading}</p>;
+    return <p className="mt-6 text-sm text-[#6d6b66]">{labels.loading}</p>;
   }
 
   if (err) {
@@ -132,7 +132,7 @@ export default function MyRfqList({
   if (items.length === 0) {
     return (
       <div className="card mt-6 p-8">
-        <p className="text-sm text-[#475569]">{labels.empty}</p>
+        <p className="text-sm text-[#3f4650]">{labels.empty}</p>
         <Link href={rfqHref} className="btn btn-primary mt-4 inline-block">
           {labels.emptyCta}
         </Link>
@@ -141,7 +141,7 @@ export default function MyRfqList({
   }
 
   return (
-    <ul className="mt-6 grid gap-4">
+    <ul className="mt-6 grid grid-cols-1 gap-4">
       {items.map((r) => {
         const st = statusStyle(r.status);
         const matches = (r.rfq_matches ?? [])
@@ -152,7 +152,7 @@ export default function MyRfqList({
           <li key={r.reference_id} className="card p-5">
             <div className="flex flex-wrap items-center justify-between gap-3">
               {/* 参考号用等宽字体：用户要拿它来跟我们沟通，必须好读好抄 */}
-              <span className="font-mono text-sm font-semibold text-[#0f172a]">
+              <span className="font-mono text-sm font-semibold text-[#171717]">
                 {r.reference_id}
               </span>
               <span
@@ -163,42 +163,42 @@ export default function MyRfqList({
               </span>
             </div>
 
-            <dl className="mt-4 grid gap-2 text-sm sm:grid-cols-2">
+            <dl className="mt-4 grid grid-cols-1 gap-2 text-sm sm:grid-cols-2">
               <div>
-                <dt className="text-xs text-[#64748b]">{labels.productLabel}</dt>
-                <dd className="font-medium text-[#0f172a]">{r.product}</dd>
+                <dt className="text-xs text-[#6d6b66]">{labels.productLabel}</dt>
+                <dd className="font-medium text-[#171717]">{r.product}</dd>
               </div>
               {r.quantity && (
                 <div>
-                  <dt className="text-xs text-[#64748b]">{labels.quantityLabel}</dt>
-                  <dd className="font-medium text-[#0f172a]">{r.quantity}</dd>
+                  <dt className="text-xs text-[#6d6b66]">{labels.quantityLabel}</dt>
+                  <dd className="font-medium text-[#171717]">{r.quantity}</dd>
                 </div>
               )}
               {r.country && (
                 <div>
-                  <dt className="text-xs text-[#64748b]">{labels.countryLabel}</dt>
-                  <dd className="font-medium text-[#0f172a]">{r.country}</dd>
+                  <dt className="text-xs text-[#6d6b66]">{labels.countryLabel}</dt>
+                  <dd className="font-medium text-[#171717]">{r.country}</dd>
                 </div>
               )}
               <div>
-                <dt className="text-xs text-[#64748b]">{labels.submittedLabel}</dt>
-                <dd className="font-medium text-[#0f172a]">
+                <dt className="text-xs text-[#6d6b66]">{labels.submittedLabel}</dt>
+                <dd className="font-medium text-[#171717]">
                   {new Date(r.created_at).toLocaleDateString(locale)}
                 </dd>
               </div>
             </dl>
 
-            <div className="mt-4 border-t border-[#e2e8f0] pt-3">
-              <div className="text-xs text-[#64748b]">{labels.matchesLabel}</div>
+            <div className="mt-4 border-t border-[#ebe8e1] pt-3">
+              <div className="text-xs text-[#6d6b66]">{labels.matchesLabel}</div>
               {matches.length === 0 ? (
-                <p className="mt-1 text-sm text-[#475569]">{labels.noMatches}</p>
+                <p className="mt-1 text-sm text-[#3f4650]">{labels.noMatches}</p>
               ) : (
                 <ul className="mt-1 flex flex-wrap gap-x-4 gap-y-1">
                   {matches.map((m) => (
                     <li key={m.slug}>
                       <Link
                         href={profileHref(m.slug)}
-                        className="text-sm text-[#0f4c81] hover:underline"
+                        className="text-sm text-[#171717] hover:underline"
                       >
                         {m.name}
                       </Link>

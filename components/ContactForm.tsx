@@ -105,13 +105,13 @@ export default function ContactForm({ copy }: { copy: ContactFormCopy }) {
     );
   }
 
-  const labelCls = "block text-sm font-medium text-[#334155] mb-1";
+  const labelCls = "block text-sm font-medium text-[#2b2b2b] mb-1";
   const inputCls =
-    "w-full rounded-md border border-[#cbd5e1] px-3 py-2 text-sm text-[#0f172a] outline-none focus:border-[#0f4c81] focus:ring-1 focus:ring-[#0f4c81]";
+    "w-full rounded-md border border-[#ddd9d0] px-3 py-2 text-sm text-[#171717] outline-none focus:border-[#171717] focus:ring-1 focus:ring-[#171717]";
 
   return (
     <form onSubmit={onSubmit} className="card p-6">
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label className={labelCls} htmlFor="c-name">
             {copy.name}
@@ -168,7 +168,7 @@ export default function ContactForm({ copy }: { copy: ContactFormCopy }) {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="mt-6 inline-flex items-center justify-center rounded-md bg-[#0f4c81] px-5 py-3 text-sm font-semibold text-white hover:bg-[#0d3f6b] disabled:opacity-60"
+        className="mt-6 inline-flex items-center justify-center rounded-md bg-[#171717] px-5 py-3 text-sm font-semibold text-white hover:bg-[#0d3f6b] disabled:opacity-60"
       >
         {status === "sending" ? copy.sending : copy.submit}
       </button>

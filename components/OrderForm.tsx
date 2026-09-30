@@ -95,12 +95,12 @@ export default function OrderForm({ locale, dict, services }: Props) {
   }
 
   const input =
-    "mt-1 w-full rounded-md border border-[#e2e8f0] px-3 py-2 text-sm text-[#0f172a] focus:border-[#0f4c81] focus:outline-none";
+    "mt-1 w-full rounded-md border border-[#ebe8e1] px-3 py-2 text-sm text-[#171717] focus:border-[#171717] focus:outline-none";
 
   return (
     <form onSubmit={handleSubmit} className="mt-6 max-w-xl space-y-4">
       <label className="block">
-        <span className="text-xs font-medium text-[#64748b]">{dict.serviceLabel}</span>
+        <span className="text-xs font-medium text-[#6d6b66]">{dict.serviceLabel}</span>
         <select
           value={serviceCode}
           onChange={(e) => setServiceCode(e.target.value)}
@@ -116,7 +116,7 @@ export default function OrderForm({ locale, dict, services }: Props) {
 
       {selected?.quantifiable && (
         <label className="block">
-          <span className="text-xs font-medium text-[#64748b]">
+          <span className="text-xs font-medium text-[#6d6b66]">
             {dict.quantityLabel} ({selected.unit})
           </span>
           <input
@@ -131,7 +131,7 @@ export default function OrderForm({ locale, dict, services }: Props) {
       )}
 
       <label className="block">
-        <span className="text-xs font-medium text-[#64748b]">{dict.emailLabel} *</span>
+        <span className="text-xs font-medium text-[#6d6b66]">{dict.emailLabel} *</span>
         <input
           type="email"
           required
@@ -142,7 +142,7 @@ export default function OrderForm({ locale, dict, services }: Props) {
       </label>
 
       <label className="block">
-        <span className="text-xs font-medium text-[#64748b]">{dict.companyLabel}</span>
+        <span className="text-xs font-medium text-[#6d6b66]">{dict.companyLabel}</span>
         <input
           type="text"
           value={company}
@@ -152,7 +152,7 @@ export default function OrderForm({ locale, dict, services }: Props) {
       </label>
 
       <label className="block">
-        <span className="text-xs font-medium text-[#64748b]">{dict.countryLabel}</span>
+        <span className="text-xs font-medium text-[#6d6b66]">{dict.countryLabel}</span>
         <input
           type="text"
           value={country}
@@ -162,7 +162,7 @@ export default function OrderForm({ locale, dict, services }: Props) {
       </label>
 
       <label className="block">
-        <span className="text-xs font-medium text-[#64748b]">{dict.notesLabel}</span>
+        <span className="text-xs font-medium text-[#6d6b66]">{dict.notesLabel}</span>
         <textarea
           rows={3}
           value={notes}
@@ -172,12 +172,12 @@ export default function OrderForm({ locale, dict, services }: Props) {
         />
       </label>
 
-      <p className="text-xs text-[#64748b]">{dict.amountHint}</p>
+      <p className="text-xs text-[#6d6b66]">{dict.amountHint}</p>
 
       <button
         type="submit"
         disabled={busy}
-        className="rounded-md bg-[#0f4c81] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#0d3f6c] disabled:opacity-60"
+        className="rounded-md bg-[#171717] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#0d3f6c] disabled:opacity-60"
       >
         {busy ? dict.submitting : dict.submit}
       </button>

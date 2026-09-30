@@ -214,12 +214,12 @@ export default function IndustrialClusterManager({
   }
 
   const inputCls =
-    "w-full rounded-md border border-[#e2e8f0] bg-white px-3 py-2 text-sm text-[#0f172a]";
+    "w-full rounded-md border border-[#ebe8e1] bg-white px-3 py-2 text-sm text-[#171717]";
 
   return (
     <div>
       <div className="mt-6 flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-[#0f172a]">{dict.title}</h2>
+        <h2 className="text-lg font-semibold text-[#171717]">{dict.title}</h2>
         <button
           type="button"
           className="btn btn-primary"
@@ -228,7 +228,7 @@ export default function IndustrialClusterManager({
           {draft ? dict.cancel : dict.addNew}
         </button>
       </div>
-      <p className="mt-1 text-sm text-[#64748b]">{dict.lead}</p>
+      <p className="mt-1 text-sm text-[#6d6b66]">{dict.lead}</p>
 
       {msg && (
         <p
@@ -240,9 +240,9 @@ export default function IndustrialClusterManager({
 
       {draft && (
         <div className="card mt-4 space-y-3 p-5">
-          <div className="grid gap-3 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             <label className="block">
-              <span className="text-xs font-medium text-[#475569]">{dict.fName} *</span>
+              <span className="text-xs font-medium text-[#3f4650]">{dict.fName} *</span>
               <input
                 className={inputCls}
                 value={draft.name}
@@ -251,17 +251,17 @@ export default function IndustrialClusterManager({
               />
             </label>
             <label className="block">
-              <span className="text-xs font-medium text-[#475569]">{dict.fSlug} *</span>
+              <span className="text-xs font-medium text-[#3f4650]">{dict.fSlug} *</span>
               <input
                 className={inputCls}
                 value={draft.slug}
                 onChange={(e) => set("slug", e.target.value)}
                 placeholder="foshan-furniture"
               />
-              <span className="mt-1 block text-xs text-[#94a3b8]">{dict.slugHint}</span>
+              <span className="mt-1 block text-xs text-[#8c8982]">{dict.slugHint}</span>
             </label>
             <label className="block">
-              <span className="text-xs font-medium text-[#475569]">{dict.fCountry}</span>
+              <span className="text-xs font-medium text-[#3f4650]">{dict.fCountry}</span>
               <input
                 className={inputCls}
                 value={draft.country}
@@ -270,7 +270,7 @@ export default function IndustrialClusterManager({
               />
             </label>
             <label className="block">
-              <span className="text-xs font-medium text-[#475569]">{dict.fCountryCode}</span>
+              <span className="text-xs font-medium text-[#3f4650]">{dict.fCountryCode}</span>
               <input
                 className={inputCls}
                 value={draft.countryCode}
@@ -279,7 +279,7 @@ export default function IndustrialClusterManager({
               />
             </label>
             <label className="block">
-              <span className="text-xs font-medium text-[#475569]">{dict.fRegion}</span>
+              <span className="text-xs font-medium text-[#3f4650]">{dict.fRegion}</span>
               <input
                 className={inputCls}
                 value={draft.region}
@@ -288,7 +288,7 @@ export default function IndustrialClusterManager({
               />
             </label>
             <label className="block">
-              <span className="text-xs font-medium text-[#475569]">{dict.fCity}</span>
+              <span className="text-xs font-medium text-[#3f4650]">{dict.fCity}</span>
               <input
                 className={inputCls}
                 value={draft.city}
@@ -297,7 +297,7 @@ export default function IndustrialClusterManager({
               />
             </label>
             <label className="block">
-              <span className="text-xs font-medium text-[#475569]">{dict.fProvince}</span>
+              <span className="text-xs font-medium text-[#3f4650]">{dict.fProvince}</span>
               <input
                 className={inputCls}
                 value={draft.province}
@@ -306,7 +306,7 @@ export default function IndustrialClusterManager({
               />
             </label>
             <label className="block">
-              <span className="text-xs font-medium text-[#475569]">{dict.fIndustry}</span>
+              <span className="text-xs font-medium text-[#3f4650]">{dict.fIndustry}</span>
               <input
                 className={inputCls}
                 value={draft.industry}
@@ -315,7 +315,7 @@ export default function IndustrialClusterManager({
               />
             </label>
             <label className="block">
-              <span className="text-xs font-medium text-[#475569]">{dict.fTags}</span>
+              <span className="text-xs font-medium text-[#3f4650]">{dict.fTags}</span>
               <input
                 className={inputCls}
                 value={draft.industryTags}
@@ -326,7 +326,7 @@ export default function IndustrialClusterManager({
           </div>
 
           <label className="block">
-            <span className="text-xs font-medium text-[#475569]">{dict.fDesc}</span>
+            <span className="text-xs font-medium text-[#3f4650]">{dict.fDesc}</span>
             <textarea
               className={inputCls}
               rows={3}
@@ -335,9 +335,9 @@ export default function IndustrialClusterManager({
             />
           </label>
 
-          <div className="grid gap-3 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             <label className="block">
-              <span className="text-xs font-medium text-[#475569]">{dict.fSeoTitle}</span>
+              <span className="text-xs font-medium text-[#3f4650]">{dict.fSeoTitle}</span>
               <input
                 className={inputCls}
                 value={draft.seoTitle}
@@ -345,7 +345,7 @@ export default function IndustrialClusterManager({
               />
             </label>
             <label className="block">
-              <span className="text-xs font-medium text-[#475569]">{dict.fSort}</span>
+              <span className="text-xs font-medium text-[#3f4650]">{dict.fSort}</span>
               <input
                 className={inputCls}
                 type="number"
@@ -356,7 +356,7 @@ export default function IndustrialClusterManager({
           </div>
 
           <label className="block">
-            <span className="text-xs font-medium text-[#475569]">{dict.fSeoDesc}</span>
+            <span className="text-xs font-medium text-[#3f4650]">{dict.fSeoDesc}</span>
             <textarea
               className={inputCls}
               rows={2}
@@ -365,7 +365,7 @@ export default function IndustrialClusterManager({
             />
           </label>
 
-          <label className="flex items-center gap-2 text-sm text-[#0f172a]">
+          <label className="flex items-center gap-2 text-sm text-[#171717]">
             <input
               type="checkbox"
               checked={draft.isPublished}
@@ -374,7 +374,7 @@ export default function IndustrialClusterManager({
             {dict.fPublished}
           </label>
 
-          <label className="flex items-center gap-2 text-sm text-[#0f172a]">
+          <label className="flex items-center gap-2 text-sm text-[#171717]">
             <input
               type="checkbox"
               checked={draft.featured}
@@ -401,12 +401,12 @@ export default function IndustrialClusterManager({
 
       {rows.length === 0 ? (
         <div className="card mt-6 p-6">
-          <p className="text-sm text-[#475569]">{dict.empty}</p>
+          <p className="text-sm text-[#3f4650]">{dict.empty}</p>
         </div>
       ) : (
-        <div className="mt-6 overflow-x-auto rounded-lg border border-[#e2e8f0] bg-white">
+        <div className="mt-6 overflow-x-auto rounded-lg border border-[#ebe8e1] bg-white">
           <table className="w-full text-left text-sm">
-            <thead className="border-b border-[#e2e8f0] bg-[#f7f9fc] text-xs uppercase text-[#64748b]">
+            <thead className="border-b border-[#ebe8e1] bg-[#fbfaf7] text-xs uppercase text-[#6d6b66]">
               <tr>
                 <th className="px-4 py-3">Name / Slug</th>
                 <th className="px-4 py-3">Geo</th>
@@ -416,29 +416,29 @@ export default function IndustrialClusterManager({
                 <th className="px-4 py-3">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#e2e8f0]">
+            <tbody className="divide-y divide-[#ebe8e1]">
               {rows.map((r) => (
-                <tr key={r.id} className="align-top hover:bg-[#f7f9fc]">
+                <tr key={r.id} className="align-top hover:bg-[#fbfaf7]">
                   <td className="px-4 py-3">
-                    <div className="font-medium text-[#0f172a]">{r.name}</div>
-                    <div className="font-mono text-xs text-[#64748b]">{r.slug}</div>
+                    <div className="font-medium text-[#171717]">{r.name}</div>
+                    <div className="font-mono text-xs text-[#6d6b66]">{r.slug}</div>
                   </td>
-                  <td className="px-4 py-3 text-xs text-[#475569]">
+                  <td className="px-4 py-3 text-xs text-[#3f4650]">
                     {[r.country, r.region, r.city].filter(Boolean).join(" / ") || "—"}
                   </td>
-                  <td className="px-4 py-3 text-xs text-[#475569]">
+                  <td className="px-4 py-3 text-xs text-[#3f4650]">
                     {r.industry ?? "—"}
                     {r.industry_tags?.length ? (
-                      <div className="mt-0.5 text-[#94a3b8]">{r.industry_tags.join(", ")}</div>
+                      <div className="mt-0.5 text-[#8c8982]">{r.industry_tags.join(", ")}</div>
                     ) : null}
                   </td>
-                  <td className="px-4 py-3 text-xs text-[#94a3b8]">{r.sort_order}</td>
+                  <td className="px-4 py-3 text-xs text-[#8c8982]">{r.sort_order}</td>
                   <td className="px-4 py-3">
                     <span
                       className={`rounded-full px-2 py-0.5 text-xs ${
                         r.is_published
                           ? "bg-[#e6f4ec] text-[#14804a]"
-                          : "bg-[#f1f5f9] text-[#64748b]"
+                          : "bg-[#f5f3ee] text-[#6d6b66]"
                       }`}
                     >
                       {r.is_published ? dict.published : dict.draft}
@@ -448,14 +448,14 @@ export default function IndustrialClusterManager({
                     <div className="flex flex-wrap items-center gap-2">
                       <button
                         type="button"
-                        className="text-xs text-[#0f4c81] hover:underline"
+                        className="text-xs text-[#171717] hover:underline"
                         onClick={() => setDraft(toDraft(r))}
                       >
                         {dict.edit}
                       </button>
                       <button
                         type="button"
-                        className="text-xs text-[#0f4c81] hover:underline"
+                        className="text-xs text-[#171717] hover:underline"
                         disabled={busy}
                         onClick={() => togglePublish(r.id, !r.is_published)}
                       >

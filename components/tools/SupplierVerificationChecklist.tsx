@@ -156,13 +156,13 @@ export default function SupplierVerificationChecklist({ stages, criticalItems, u
     <div id="checklist" className="max-w-4xl mx-auto">
       <div className="card p-5 mb-6">
         <div className="flex items-center justify-between mb-2">
-          <span className="font-semibold text-[#0f172a]">{ui.progressTitle}</span>
-          <span className="text-sm text-[#64748b]">
+          <span className="font-semibold text-[#171717]">{ui.progressTitle}</span>
+          <span className="text-sm text-[#6d6b66]">
             {ui.complete.replace("{done}", String(doneCount)).replace("{total}", String(TOTAL))}
           </span>
         </div>
-        <div className="w-full h-2 rounded-full bg-[#e2e8f0] overflow-hidden">
-          <div className="h-full rounded-full bg-[#0f4c81] transition-all" style={{ width: `${pct}%` }} />
+        <div className="w-full h-2 rounded-full bg-[#ebe8e1] overflow-hidden">
+          <div className="h-full rounded-full bg-[#171717] transition-all" style={{ width: `${pct}%` }} />
         </div>
         <div className="mt-4 flex flex-wrap items-center gap-3">
           <span
@@ -211,12 +211,12 @@ export default function SupplierVerificationChecklist({ stages, criticalItems, u
           className={`card p-6 mb-6 border ${recommendationTone}`}
           aria-label={ui.reportTitle}
         >
-          <h2 className="text-2xl font-bold text-[#0f172a]">{ui.reportTitle}</h2>
-          <p className="text-sm text-[#475569] mt-2">{ui.reportIntro}</p>
+          <h2 className="text-2xl font-bold text-[#171717]">{ui.reportTitle}</h2>
+          <p className="text-sm text-[#3f4650] mt-2">{ui.reportIntro}</p>
 
-          <dl className="mt-5 grid md:grid-cols-2 gap-4 text-sm">
+          <dl className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             <div>
-              <dt className="text-[#64748b]">
+              <dt className="text-[#6d6b66]">
                 {ui.completionLine
                   .replace("{done}", String(doneCount))
                   .replace("{total}", String(TOTAL))
@@ -224,7 +224,7 @@ export default function SupplierVerificationChecklist({ stages, criticalItems, u
               </dt>
             </div>
             <div>
-              <dt className="text-[#64748b]">
+              <dt className="text-[#6d6b66]">
                 {criticalOpen > 0
                   ? ui.criticalStatus
                       .replace("{open}", String(criticalOpen))
@@ -236,10 +236,10 @@ export default function SupplierVerificationChecklist({ stages, criticalItems, u
 
           {missingCriticalItems.length > 0 && (
             <div className="mt-5">
-              <div className="font-semibold text-[#0f172a]">
+              <div className="font-semibold text-[#171717]">
                 {ui.missingItemsTitle}（{missingCriticalItems.length}）
               </div>
-              <ul className="mt-2 space-y-1 text-sm text-[#475569] list-disc pl-5">
+              <ul className="mt-2 space-y-1 text-sm text-[#3f4650] list-disc pl-5">
                 {missingCriticalItems.map((i) => (
                   <li key={i.id}>
                     <span className="text-[#9b1c1c] font-medium">{"\u25CF"}</span>{" "}
@@ -250,17 +250,17 @@ export default function SupplierVerificationChecklist({ stages, criticalItems, u
             </div>
           )}
 
-          <div className="mt-6 p-4 rounded-md border border-[#e2e8f0] bg-white">
-            <div className="text-xs font-semibold uppercase tracking-wide text-[#64748b]">
+          <div className="mt-6 p-4 rounded-md border border-[#ebe8e1] bg-white">
+            <div className="text-xs font-semibold uppercase tracking-wide text-[#6d6b66]">
               {ui.recommendationTitle}
             </div>
-            <p className="text-sm text-[#0f172a] mt-1.5">{recommendation}</p>
+            <p className="text-sm text-[#171717] mt-1.5">{recommendation}</p>
           </div>
 
-          <div className="mt-5 flex flex-col sm:flex-row sm:items-center gap-3 justify-between p-4 rounded-md border border-[#cbd5e1] bg-[#f7f9fc]">
+          <div className="mt-5 flex flex-col sm:flex-row sm:items-center gap-3 justify-between p-4 rounded-md border border-[#ddd9d0] bg-[#fbfaf7]">
             <div>
-              <div className="font-semibold text-[#0f172a]">{ui.ctaOutsourceTitle}</div>
-              <p className="text-sm text-[#475569] mt-1">{ui.ctaOutsourceBody}</p>
+              <div className="font-semibold text-[#171717]">{ui.ctaOutsourceTitle}</div>
+              <p className="text-sm text-[#3f4650] mt-1">{ui.ctaOutsourceBody}</p>
             </div>
             <a
               href={linkToVerification(locale, "/services/supplier-verification")}
@@ -273,8 +273,8 @@ export default function SupplierVerificationChecklist({ stages, criticalItems, u
       )}
 
       <div className={`card p-5 mb-6 border ${toneClass}`}>
-        <div className="font-semibold text-[#0f172a]">{verdictTitle}</div>
-        <p className="text-sm text-[#475569] mt-1">{verdictBody}</p>
+        <div className="font-semibold text-[#171717]">{verdictTitle}</div>
+        <p className="text-sm text-[#3f4650] mt-1">{verdictBody}</p>
         {criticalOpen > 0 && !submitted && (
           <a
             href={linkToVerification(locale, "/services/supplier-verification")}
@@ -292,23 +292,23 @@ export default function SupplierVerificationChecklist({ stages, criticalItems, u
           return (
             <section key={stage.key} className="card p-5">
               <div className="flex items-baseline justify-between gap-3 mb-1">
-                <h2 className="font-semibold text-[#0f172a]">{stage.title}</h2>
-                <span className="text-xs text-[#94a3b8] whitespace-nowrap">
+                <h2 className="font-semibold text-[#171717]">{stage.title}</h2>
+                <span className="text-xs text-[#8c8982] whitespace-nowrap">
                   {stageDone}/{entries.length}
                 </span>
               </div>
-              <p className="text-sm text-[#64748b] mb-3">{stage.desc}</p>
+              <p className="text-sm text-[#6d6b66] mb-3">{stage.desc}</p>
               <ul className="space-y-2">
                 {entries.map(([id, text]) => (
                   <li key={id}>
                     <label className="flex items-start gap-3 cursor-pointer select-none">
                       <input
                         type="checkbox"
-                        className="mt-1 h-4 w-4 accent-[#0f4c81]"
+                        className="mt-1 h-4 w-4 accent-[#171717]"
                         checked={!!checked[id]}
                         onChange={() => toggle(id)}
                       />
-                      <span className="text-sm text-[#334155]">
+                      <span className="text-sm text-[#2b2b2b]">
                         {text}
                         {criticalItems.includes(id) && (
                           <span className="ml-2 inline-block px-2 py-0.5 rounded text-xs font-semibold bg-[#fde8e8] text-[#9b1c1c]">
@@ -325,7 +325,7 @@ export default function SupplierVerificationChecklist({ stages, criticalItems, u
         })}
       </div>
 
-      <p className="text-xs text-[#94a3b8] mt-8 text-center">{ui.disclaimer}</p>
+      <p className="text-xs text-[#8c8982] mt-8 text-center">{ui.disclaimer}</p>
     </div>
   );
 }

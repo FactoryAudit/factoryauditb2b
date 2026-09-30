@@ -56,20 +56,20 @@ export default function RfqMatchPanel({
   if (recommendations.length === 0) {
     return (
       <div className="card p-4 mt-4">
-        <h2 className="font-semibold text-[#0f172a]">{dict.title}</h2>
-        <p className="mt-2 text-sm text-[#64748b]">{dict.empty}</p>
+        <h2 className="font-semibold text-[#171717]">{dict.title}</h2>
+        <p className="mt-2 text-sm text-[#6d6b66]">{dict.empty}</p>
       </div>
     );
   }
 
   return (
     <div className="card p-4 mt-4">
-      <h2 className="font-semibold text-[#0f172a]">{dict.title}</h2>
+      <h2 className="font-semibold text-[#171717]">{dict.title}</h2>
       <div className="mt-3 space-y-2">
         {recommendations.map((r) => (
           <label
             key={r.supplierId}
-            className="flex items-start gap-3 rounded border border-[#e2e8f0] p-3 hover:bg-[#f7f9fc]"
+            className="flex items-start gap-3 rounded border border-[#ebe8e1] p-3 hover:bg-[#fbfaf7]"
           >
             <input
               type="checkbox"
@@ -78,14 +78,14 @@ export default function RfqMatchPanel({
               onChange={() => toggle(r.supplierId)}
             />
             <div className="text-sm">
-              <div className="font-medium text-[#0f172a]">{r.legalName}</div>
-              <div className="text-xs text-[#64748b]">
+              <div className="font-medium text-[#171717]">{r.legalName}</div>
+              <div className="text-xs text-[#6d6b66]">
                 {[r.city, r.province, r.countryCode, r.industryCode].filter(Boolean).join(" · ")}
               </div>
               {r.mainProducts.length > 0 && (
-                <div className="text-xs text-[#94a3b8]">{r.mainProducts.slice(0, 4).join(", ")}</div>
+                <div className="text-xs text-[#8c8982]">{r.mainProducts.slice(0, 4).join(", ")}</div>
               )}
-              <div className="text-xs text-[#0f4c81]">
+              <div className="text-xs text-[#171717]">
                 {dict.score}: {r.score} · {dict.reasons}: {r.reasons.join("; ")}
               </div>
             </div>

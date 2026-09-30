@@ -128,7 +128,7 @@ export default async function SuppliersPage({ params }: Props) {
       riskColor:
         typeof x.riskScore === "number"
           ? LEVEL_COLOR[overallLevel(x.riskScore)]
-          : "#64748b",
+          : "#6d6b66",
       lastCheckedText: x.lastChecked ?? sp.noCheckRecord,
       badgeState: (badgeMap.get(x.id) ?? "NONE") as BadgeState,
     };
@@ -232,12 +232,12 @@ export default async function SuppliersPage({ params }: Props) {
           定位从「付费供应商目录」改为「免费发现 + 付费情报 + 服务」。
           第一 CTA 是 Find Suppliers（发现），Membership 降级为文字链（指令 §8）。 */}
       <section className="mb-6">
-        <span className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">
+        <span className="text-sm font-semibold text-[#171717] uppercase tracking-wide">
           {s.heroBadge}
         </span>
-        <h1 className="text-3xl font-bold text-[#0f172a] mt-2">{s.h1}</h1>
-        <p className="text-[#64748b] mt-2 max-w-3xl">{s.lead}</p>
-        <p className="mt-2 text-sm font-medium text-[#475569]">{s.freeNote}</p>
+        <h1 className="text-3xl font-bold text-[#171717] mt-2">{s.h1}</h1>
+        <p className="text-[#6d6b66] mt-2 max-w-3xl">{s.lead}</p>
+        <p className="mt-2 text-sm font-medium text-[#3f4650]">{s.freeNote}</p>
 
         <div className="mt-5 flex flex-wrap items-center gap-3">
           {/* 页内锚点：落到下方供应商目录，不产生新页面也不伪造转化事件 */}
@@ -254,7 +254,7 @@ export default async function SuppliersPage({ params }: Props) {
           </Link>
           <Link
             href={p("/pricing#founding-buyer")}
-            className="text-sm text-[#0f4c81] hover:underline"
+            className="text-sm text-[#171717] hover:underline"
             data-track={ANALYTICS_EVENTS.profilePaidCta}
             data-track-value="directory_hero"
           >
@@ -271,25 +271,25 @@ export default async function SuppliersPage({ params }: Props) {
       {buyerRequests.length > 0 && (
         <section className="mb-10">
           <div className="flex items-center justify-between gap-4 mb-4">
-            <h2 className="text-xl font-bold text-[#111111]">{t.home.liveTitle}</h2>
+            <h2 className="text-xl font-bold text-[#171717]">{t.home.liveTitle}</h2>
             <Link
               href={p("/rfq")}
-              className="text-sm text-[#e94560] font-medium hover:underline whitespace-nowrap"
+              className="text-sm text-[#e07a49] font-medium hover:underline whitespace-nowrap"
             >
               {t.home.liveViewAll} →
             </Link>
           </div>
-          <div className="grid md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {buyerRequests.map((r) => (
               <div key={r.referenceId} className="card p-4 flex flex-col">
-                <div className="font-semibold text-[#111111] text-sm">{r.product}</div>
-                <div className="text-xs text-[#6b7280] mt-1">
+                <div className="font-semibold text-[#171717] text-sm">{r.product}</div>
+                <div className="text-xs text-[#6d6b66] mt-1">
                   {r.quantity ? `${t.home.liveQuantity}: ${r.quantity}` : ""}
                   {r.targetMarket ? ` · ${t.home.liveMarket}: ${r.targetMarket}` : ""}
                 </div>
                 <Link
                   href={p(`/rfq?request=${encodeURIComponent(r.referenceId)}`)}
-                  className="text-xs text-[#e94560] font-medium hover:underline mt-2"
+                  className="text-xs text-[#e07a49] font-medium hover:underline mt-2"
                 >
                   {t.home.liveRespondCta}
                 </Link>
@@ -335,12 +335,12 @@ export default async function SuppliersPage({ params }: Props) {
 
       {/* 服务转化：Supplier Discovery 免费，核验 / 验厂 / 验货 / 寻源为付费服务（§16 / §23） */}
       <section className="card p-8 mb-10">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{s.svcTitle}</h2>
-        <p className="text-[#475569] mt-2 max-w-2xl">{s.svcLead}</p>
-        <ul className="mt-3 grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm text-[#0f172a]">
+        <h2 className="text-2xl font-bold text-[#171717]">{s.svcTitle}</h2>
+        <p className="text-[#3f4650] mt-2 max-w-2xl">{s.svcLead}</p>
+        <ul className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-sm text-[#171717]">
           {[si.verification, si.factoryAudit, si.inspection, si.sourcing].map((item) => (
             <li key={item.title} className="flex items-start gap-2">
-              <span aria-hidden="true" className="text-[#0f4c81]">
+              <span aria-hidden="true" className="text-[#171717]">
                 •
               </span>
               <span>{item.title}</span>
@@ -348,7 +348,7 @@ export default async function SuppliersPage({ params }: Props) {
           ))}
         </ul>
         {/* 免费发现 ≠ 免费核验，必须显式写清（§23） */}
-        <p className="mt-4 text-sm text-[#475569]">{s.svcNote}</p>
+        <p className="mt-4 text-sm text-[#3f4650]">{s.svcNote}</p>
         <Link
           href={p("/custom-services")}
           className="btn btn-primary mt-5 inline-block"
@@ -360,14 +360,14 @@ export default async function SuppliersPage({ params }: Props) {
       </section>
 
       {/* Founder Buyer —— 排在服务之后（§38 视觉层级：Discovery 优先于 Membership） */}
-      <section className="card p-8 bg-gradient-to-br from-[#0f4c81] to-[#163a5f] text-white mb-10">
+      <section className="card p-8 bg-gradient-to-br from-[#171717] to-[#163a5f] text-white mb-10">
         <h2 className="text-2xl font-bold text-white">{s.unlockTitle}</h2>
         <p className="mt-2 max-w-2xl text-white/90">{s.unlockLead}</p>
         <p className="mt-2 text-sm text-white/75">{s.unlockNote}</p>
         <div className="mt-5 flex flex-wrap gap-3">
           <Link
             href={p("/register")}
-            className="btn bg-white text-[#0f4c81] hover:bg-[#e6eef6] font-semibold"
+            className="btn bg-white text-[#171717] hover:bg-[#f5f3ee] font-semibold"
             data-track={ANALYTICS_EVENTS.profileFreeCta}
             data-track-value="directory_founder_block"
           >
@@ -385,9 +385,9 @@ export default async function SuppliersPage({ params }: Props) {
       </section>
 
       {/* 找不到 → RFQ */}
-      <section className="card p-8 bg-gradient-to-br from-[#e6eef6] to-[#f7f9fc] mb-10">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{s.notListedTitle}</h2>
-        <p className="text-[#475569] mt-2 max-w-2xl">{s.notListedLead}</p>
+      <section className="card p-8 bg-gradient-to-br from-[#f5f3ee] to-[#fbfaf7] mb-10">
+        <h2 className="text-2xl font-bold text-[#171717]">{s.notListedTitle}</h2>
+        <p className="text-[#3f4650] mt-2 max-w-2xl">{s.notListedLead}</p>
         <Link
           href={p("/rfq")}
           className="btn btn-primary mt-5 inline-block"
@@ -400,8 +400,8 @@ export default async function SuppliersPage({ params }: Props) {
 
       {/* 供应商侧入口（Claim 入口在各 profile 页） */}
       <section className="card p-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{s.claimTitle}</h2>
-        <p className="text-[#475569] mt-2 max-w-2xl">{s.claimLead}</p>
+        <h2 className="text-2xl font-bold text-[#171717]">{s.claimTitle}</h2>
+        <p className="text-[#3f4650] mt-2 max-w-2xl">{s.claimLead}</p>
         <Link
           href={p("/join-supplier-network")}
           className="btn btn-outline mt-5 inline-block"
@@ -412,19 +412,19 @@ export default async function SuppliersPage({ params }: Props) {
 
       {/* FAQ（指令 §21：只写真实、对 Buyer 有帮助的问题） */}
       <section className="mb-4">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{t.common.faq}</h2>
+        <h2 className="text-2xl font-bold text-[#171717]">{t.common.faq}</h2>
         <div className="mt-4 space-y-4">
           {faqs.map((f) => (
             <div key={f.q} className="card p-5">
-              <h3 className="font-semibold text-[#0f172a]">{f.q}</h3>
-              <p className="text-[#475569] mt-2 text-sm">{f.a}</p>
+              <h3 className="font-semibold text-[#171717]">{f.q}</h3>
+              <p className="text-[#3f4650] mt-2 text-sm">{f.a}</p>
             </div>
           ))}
         </div>
         <p className="mt-4 text-sm">
           <Link
             href={p("/custom-services")}
-            className="text-[#0f4c81] font-medium hover:underline"
+            className="text-[#171717] font-medium hover:underline"
             data-track={ANALYTICS_EVENTS.verificationCtaClick}
             data-track-value="directory_faq"
           >

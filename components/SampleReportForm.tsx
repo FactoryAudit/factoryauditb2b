@@ -79,7 +79,7 @@ export default function SampleReportForm({
           {status === "loading" ? "…" : cta}
         </button>
       </form>
-      <p className="mt-2 text-xs text-[#64748b]">{privacyNote}</p>
+      <p className="mt-2 text-xs text-[#6d6b66]">{privacyNote}</p>
       {status === "error" && (
         <p className="mt-2 rounded-md bg-[#fdeaea] px-3 py-2 text-sm text-[#c0392b]">
           {error}

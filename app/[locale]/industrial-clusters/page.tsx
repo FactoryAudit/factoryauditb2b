@@ -100,15 +100,15 @@ export default async function IndustrialClustersPage({ params }: Props) {
   };
 
   const chip =
-    "inline-flex items-center gap-2 rounded-full border border-[#e2e8f0] bg-white px-4 py-2 text-sm font-medium text-[#0f172a] hover:border-[#0f4c81] hover:text-[#0f4c81]";
-  const chipCount = "text-xs font-semibold text-[#64748b]";
+    "inline-flex items-center gap-2 rounded-full border border-[#ebe8e1] bg-white px-4 py-2 text-sm font-medium text-[#171717] hover:border-[#171717] hover:text-[#171717]";
+  const chipCount = "text-xs font-semibold text-[#6d6b66]";
 
   return (
     <main className="container py-12">
       {/* 空目录时不输出空 ItemList —— 0 条结构化数据对搜索引擎没有价值 */}
       {all.length > 0 && <JsonLd data={jsonLd} />}
 
-      <nav className="mb-4 text-sm text-[#64748b]">
+      <nav className="mb-4 text-sm text-[#6d6b66]">
         <Link href={p("/")} className="hover:underline">
           {c.breadcrumbHome}
         </Link>
@@ -117,15 +117,15 @@ export default async function IndustrialClustersPage({ params }: Props) {
       </nav>
 
       <section className="max-w-3xl mb-10">
-        <h1 className="text-4xl font-extrabold text-[#0f172a]">{c.h1}</h1>
-        <p className="text-[#64748b] mt-3 text-lg">{c.lead}</p>
+        <h1 className="text-4xl font-extrabold text-[#171717]">{c.h1}</h1>
+        <p className="text-[#6d6b66] mt-3 text-lg">{c.lead}</p>
       </section>
 
       {all.length === 0 ? (
         /* Empty State —— 不报错、不白屏、不渲染空卡片、不泄漏未发布数据。 */
-        <section className="rounded-lg border border-dashed border-[#cbd5e1] p-10 text-center">
-          <h2 className="text-xl font-bold text-[#0f172a]">{c.emptyTitle}</h2>
-          <p className="text-[#475569] mt-2">{c.emptyLead}</p>
+        <section className="rounded-lg border border-dashed border-[#ddd9d0] p-10 text-center">
+          <h2 className="text-xl font-bold text-[#171717]">{c.emptyTitle}</h2>
+          <p className="text-[#3f4650] mt-2">{c.emptyLead}</p>
         </section>
       ) : (
         <>
@@ -150,7 +150,7 @@ export default async function IndustrialClustersPage({ params }: Props) {
               <section key={co.key} className={ci === 0 ? "" : "mt-16"}>
                 <h2
                   id={co.anchor}
-                  className="scroll-mt-24 text-3xl font-extrabold text-[#0f172a]"
+                  className="scroll-mt-24 text-3xl font-extrabold text-[#171717]"
                 >
                   {co.name}
                 </h2>
@@ -159,7 +159,7 @@ export default async function IndustrialClustersPage({ params }: Props) {
                   /* LEVEL 3 —— Region。比 Country 小一级；数据缺 region 时不渲染 H3。 */
                   <div key={rg.key} className="mt-8">
                     {rg.name && (
-                      <h3 className="border-b border-[#e2e8f0] pb-2 text-xl font-bold text-[#0f172a]">
+                      <h3 className="border-b border-[#ebe8e1] pb-2 text-xl font-bold text-[#171717]">
                         {rg.name}
                       </h3>
                     )}
@@ -203,14 +203,14 @@ function ClusterCard({
   return (
     <article className="card flex flex-col p-6">
       {x.industry && (
-        <span className="self-start rounded bg-[#f1f5f9] px-2 py-1 text-xs font-semibold uppercase tracking-wide text-[#0f4c81]">
+        <span className="self-start rounded bg-[#f5f3ee] px-2 py-1 text-xs font-semibold uppercase tracking-wide text-[#171717]">
           {x.industry}
         </span>
       )}
-      <h4 className="mt-3 text-xl font-bold text-[#0f172a]">{x.name}</h4>
-      {x.location && <div className="mt-1 text-sm text-[#64748b]">{x.location}</div>}
-      {x.description && <p className="mt-3 flex-1 text-sm text-[#475569]">{x.description}</p>}
-      <div className="mt-4 text-sm text-[#64748b]">{supplierText}</div>
+      <h4 className="mt-3 text-xl font-bold text-[#171717]">{x.name}</h4>
+      {x.location && <div className="mt-1 text-sm text-[#6d6b66]">{x.location}</div>}
+      {x.description && <p className="mt-3 flex-1 text-sm text-[#3f4650]">{x.description}</p>}
+      <div className="mt-4 text-sm text-[#6d6b66]">{supplierText}</div>
       <Link href={href} className="btn btn-outline mt-4 self-start">
         {cta}
       </Link>

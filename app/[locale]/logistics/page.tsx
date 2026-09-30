@@ -78,18 +78,18 @@ export default async function Page({ params }: Props) {
       <JsonLd data={jsonLd} />
 
       <section className="text-center max-w-3xl mx-auto mb-10">
-        <span className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">
+        <span className="text-sm font-semibold text-[#171717] uppercase tracking-wide">
           {c.page.badge}
         </span>
-        <h1 className="text-4xl font-extrabold text-[#0f172a] mt-2">{c.page.h1}</h1>
-        <p className="text-[#64748b] mt-3 text-lg">{c.page.lead}</p>
+        <h1 className="text-4xl font-extrabold text-[#171717] mt-2">{c.page.h1}</h1>
+        <p className="text-[#6d6b66] mt-3 text-lg">{c.page.lead}</p>
       </section>
 
       {/* 直接答案：让搜索引擎与 AI 快速提取本页核心答案 */}
       <section className="max-w-3xl mx-auto mb-10">
-        <div className="card p-6 bg-[#f7f9fc] border-l-4 border-[#0f4c81]">
-          <h2 className="font-semibold text-[#0f172a] mb-2">{c.page.quickAnswerTitle}</h2>
-          <p className="text-[#475569] leading-relaxed">{c.page.quickAnswer}</p>
+        <div className="card p-6 bg-[#fbfaf7] border-l-4 border-[#171717]">
+          <h2 className="font-semibold text-[#171717] mb-2">{c.page.quickAnswerTitle}</h2>
+          <p className="text-[#3f4650] leading-relaxed">{c.page.quickAnswer}</p>
         </div>
       </section>
 
@@ -105,57 +105,57 @@ export default async function Page({ params }: Props) {
       </section>
 
       <section className="mt-14 max-w-3xl mx-auto">
-        <h2 className="text-2xl font-bold text-[#0f172a] mb-4">{c.page.howTitle}</h2>
+        <h2 className="text-2xl font-bold text-[#171717] mb-4">{c.page.howTitle}</h2>
         <ol className="space-y-3">
           {howSteps.map((step, i) => (
             <li key={i} className="flex gap-3">
-              <span className="shrink-0 w-6 h-6 rounded-full bg-[#0f4c81] text-white grid place-items-center text-xs font-bold">
+              <span className="shrink-0 w-6 h-6 rounded-full bg-[#171717] text-white grid grid-cols-1 place-items-center text-xs font-bold">
                 {i + 1}
               </span>
-              <span className="text-[#475569]">{step}</span>
+              <span className="text-[#3f4650]">{step}</span>
             </li>
           ))}
         </ol>
       </section>
 
       <section className="mt-14 max-w-3xl mx-auto">
-        <h2 className="text-2xl font-bold text-[#0f172a] mb-1">{c.page.specsTitle}</h2>
-        <p className="text-[#64748b] mb-4">{c.page.specsLead}</p>
-        <p className="text-sm text-[#475569]">
+        <h2 className="text-2xl font-bold text-[#171717] mb-1">{c.page.specsTitle}</h2>
+        <p className="text-[#6d6b66] mb-4">{c.page.specsLead}</p>
+        <p className="text-sm text-[#3f4650]">
           {c.specs.internal} · {c.specs.capacity} · {c.specs.payload} · {c.specs.door}
         </p>
       </section>
 
       <section className="mt-14 max-w-3xl mx-auto">
-        <h2 className="text-2xl font-bold text-[#0f172a] mb-4">{c.page.methodTitle}</h2>
-        <p className="text-[#475569] leading-relaxed">{c.page.methodBody}</p>
+        <h2 className="text-2xl font-bold text-[#171717] mb-4">{c.page.methodTitle}</h2>
+        <p className="text-[#3f4650] leading-relaxed">{c.page.methodBody}</p>
       </section>
 
       <section className="mt-14 max-w-3xl mx-auto">
-        <h2 className="text-2xl font-bold text-[#0f172a] mb-4">{c.page.faqTitle}</h2>
+        <h2 className="text-2xl font-bold text-[#171717] mb-4">{c.page.faqTitle}</h2>
         <div className="space-y-4">
           {c.faq.map((f) => (
             <div key={f.q} className="card p-5">
-              <h3 className="font-semibold text-[#0f172a]">{f.q}</h3>
-              <p className="text-sm text-[#475569] mt-1">{f.a}</p>
+              <h3 className="font-semibold text-[#171717]">{f.q}</h3>
+              <p className="text-sm text-[#3f4650] mt-1">{f.a}</p>
             </div>
           ))}
         </div>
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-bold text-[#0f172a] mb-4">{t.common.relatedTools}</h2>
-        <div className="grid md:grid-cols-3 gap-4">
+        <h2 className="text-2xl font-bold text-[#171717] mb-4">{t.common.relatedTools}</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {related.map(([title, href, desc]) => (
-            <a key={href} href={p(href)} className="card p-5 hover:border-[#0f4c81] transition">
-              <div className="font-semibold text-[#0f172a]">{title}</div>
-              <p className="text-sm text-[#64748b] mt-1">{desc}</p>
+            <a key={href} href={p(href)} className="card p-5 hover:border-[#171717] transition">
+              <div className="font-semibold text-[#171717]">{title}</div>
+              <p className="text-sm text-[#6d6b66] mt-1">{desc}</p>
             </a>
           ))}
         </div>
       </section>
 
-      <p className="text-xs text-[#94a3b8] mt-12 max-w-3xl mx-auto text-center">
+      <p className="text-xs text-[#8c8982] mt-12 max-w-3xl mx-auto text-center">
         {t.common.disclaimer}
       </p>
     </main>

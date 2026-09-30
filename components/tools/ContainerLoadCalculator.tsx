@@ -215,7 +215,7 @@ export default function ContainerLoadCalculator({
   const spec = CONTAINERS.find((c) => c.code === recommended?.code);
 
   return (
-    <div className="grid lg:grid-cols-[380px_1fr] gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-6">
       {/* 输入区 */}
       <form
         className="card p-6 space-y-5"
@@ -224,7 +224,7 @@ export default function ContainerLoadCalculator({
       >
         <div>
           <div className="flex items-center justify-between mb-3">
-            <h2 className="font-semibold text-[#0f172a]">{t.cargoTitle}</h2>
+            <h2 className="font-semibold text-[#171717]">{t.cargoTitle}</h2>
             <div className="flex gap-1" role="group" aria-label={t.unit}>
               {(["cm", "in"] as Unit[]).map((u) => (
                 <button
@@ -234,8 +234,8 @@ export default function ContainerLoadCalculator({
                   aria-pressed={unit === u}
                   className={`px-2 py-1 text-xs rounded border ${
                     unit === u
-                      ? "border-[#0f4c81] bg-[#0f4c81] text-white"
-                      : "border-[#e2e8f0] text-[#475569]"
+                      ? "border-[#171717] bg-[#171717] text-white"
+                      : "border-[#ebe8e1] text-[#3f4650]"
                   }`}
                 >
                   {u === "cm" ? "cm" : "in"}
@@ -252,7 +252,7 @@ export default function ContainerLoadCalculator({
 
         <div>
           <div className="flex items-center justify-between mb-3">
-            <label className="font-semibold text-[#0f172a]" htmlFor="cargoWeight">
+            <label className="font-semibold text-[#171717]" htmlFor="cargoWeight">
               {t.weight}
             </label>
             <div className="flex gap-1" role="group" aria-label={t.massUnit}>
@@ -264,8 +264,8 @@ export default function ContainerLoadCalculator({
                   aria-pressed={massUnit === u}
                   className={`px-2 py-1 text-xs rounded border ${
                     massUnit === u
-                      ? "border-[#0f4c81] bg-[#0f4c81] text-white"
-                      : "border-[#e2e8f0] text-[#475569]"
+                      ? "border-[#171717] bg-[#171717] text-white"
+                      : "border-[#ebe8e1] text-[#3f4650]"
                   }`}
                 >
                   {u === "kg" ? "kg" : "lb"}
@@ -279,8 +279,8 @@ export default function ContainerLoadCalculator({
           </div>
         </div>
 
-        <fieldset className="border-t border-[#e2e8f0] pt-4">
-          <legend className="font-semibold text-[#0f172a] mb-2">{t.optionsTitle}</legend>
+        <fieldset className="border-t border-[#ebe8e1] pt-4">
+          <legend className="font-semibold text-[#171717] mb-2">{t.optionsTitle}</legend>
           <Field
             id="cargoClearance"
             label={`${t.clearance} (${unitLabel})`}
@@ -291,14 +291,14 @@ export default function ContainerLoadCalculator({
           <label className="flex items-start gap-2 mt-3 cursor-pointer">
             <input
               type="checkbox"
-              className="mt-1 h-4 w-4 accent-[#0f4c81]"
+              className="mt-1 h-4 w-4 accent-[#171717]"
               checked={allowRotate}
               onChange={(e) => setAllowRotate(e.target.checked)}
               aria-describedby="rotateHelp"
             />
-            <span className="text-sm text-[#334155]">
+            <span className="text-sm text-[#2b2b2b]">
               {t.allowRotate}
-              <span id="rotateHelp" className="block text-xs text-[#94a3b8]">
+              <span id="rotateHelp" className="block text-xs text-[#8c8982]">
                 {t.allowRotateHelp}
               </span>
             </span>
@@ -315,44 +315,44 @@ export default function ContainerLoadCalculator({
       {/* 结果区 */}
       <div className="space-y-6">
         {!valid ? (
-          <div className="card p-8 text-center text-[#64748b]">{t.empty}</div>
+          <div className="card p-8 text-center text-[#6d6b66]">{t.empty}</div>
         ) : recommended && spec ? (
           <>
-            <section className="card p-6 border-[#0f4c81] border" aria-labelledby="resultHeading">
+            <section className="card p-6 border-[#171717] border" aria-labelledby="resultHeading">
               <h2 id="resultHeading" className="sr-only">
                 {t.resultsTitle}
               </h2>
-              <div className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">
+              <div className="text-sm font-semibold text-[#171717] uppercase tracking-wide">
                 {t.bestFit}
               </div>
-              <div className="text-4xl font-extrabold text-[#0f172a] mt-1">
+              <div className="text-4xl font-extrabold text-[#171717] mt-1">
                 {recommended.code}
-                <span className="ml-2 text-base font-medium text-[#64748b]">
+                <span className="ml-2 text-base font-medium text-[#6d6b66]">
                   {types[recommended.typeKey]}
                 </span>
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-4 mt-5">
-                <div className="rounded-lg bg-[#f1f5f9] p-4">
-                  <div className="text-xs text-[#64748b]">{t.perContainer}</div>
-                  <div className="text-3xl font-bold text-[#0f172a]">{recommended.fits}</div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
+                <div className="rounded-lg bg-[#f5f3ee] p-4">
+                  <div className="text-xs text-[#6d6b66]">{t.perContainer}</div>
+                  <div className="text-3xl font-bold text-[#171717]">{recommended.fits}</div>
                 </div>
-                <div className="rounded-lg bg-[#f1f5f9] p-4">
-                  <div className="text-xs text-[#64748b]">{t.containersNeeded}</div>
-                  <div className="text-3xl font-bold text-[#0f172a]">{recommended.needed}</div>
+                <div className="rounded-lg bg-[#f5f3ee] p-4">
+                  <div className="text-xs text-[#6d6b66]">{t.containersNeeded}</div>
+                  <div className="text-3xl font-bold text-[#171717]">{recommended.needed}</div>
                 </div>
               </div>
 
               <dl className="mt-5 space-y-3 text-sm">
                 <div>
-                  <dt className="text-[#64748b]">{t.arrangement}</dt>
-                  <dd className="font-medium text-[#0f172a]">
+                  <dt className="text-[#6d6b66]">{t.arrangement}</dt>
+                  <dd className="font-medium text-[#171717]">
                     {recommended.along} {t.along} × {recommended.across} {t.across} ×{" "}
                     {recommended.layers} {t.layers}
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-[#64748b]">
+                  <dt className="text-[#6d6b66]">
                     {t.volumeUsed} — {Math.round(recommended.volumeUsed)}%
                   </dt>
                   <dd>
@@ -360,7 +360,7 @@ export default function ContainerLoadCalculator({
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-[#64748b]">
+                  <dt className="text-[#6d6b66]">
                     {t.payloadUsed} — {Math.round(recommended.payloadUsed)}%
                   </dt>
                   <dd>
@@ -369,12 +369,12 @@ export default function ContainerLoadCalculator({
                 </div>
                 <div className="flex gap-6 pt-1">
                   <div>
-                    <dt className="text-[#64748b]">{t.totalVolume}</dt>
-                    <dd className="font-medium text-[#0f172a]">{totalVolume.toFixed(2)} m³</dd>
+                    <dt className="text-[#6d6b66]">{t.totalVolume}</dt>
+                    <dd className="font-medium text-[#171717]">{totalVolume.toFixed(2)} m³</dd>
                   </div>
                   <div>
-                    <dt className="text-[#64748b]">{t.totalWeight}</dt>
-                    <dd className="font-medium text-[#0f172a]">
+                    <dt className="text-[#6d6b66]">{t.totalWeight}</dt>
+                    <dd className="font-medium text-[#171717]">
                       {totalWeight.toFixed(0)} {massLabel}
                     </dd>
                   </div>
@@ -396,7 +396,7 @@ export default function ContainerLoadCalculator({
             {/* 俯视示意图 */}
             {recommended.along > 0 && recommended.across > 0 && (
               <section className="card p-6">
-                <h3 className="font-semibold text-[#0f172a] mb-3">{t.topView}</h3>
+                <h3 className="font-semibold text-[#171717] mb-3">{t.topView}</h3>
                 <TopView
                   along={recommended.along}
                   across={recommended.across}
@@ -412,10 +412,10 @@ export default function ContainerLoadCalculator({
         {/* 全柜型对比 */}
         {valid && (
           <section className="card p-6 overflow-x-auto">
-            <h3 className="font-semibold text-[#0f172a] mb-3">{t.comparisonTitle}</h3>
+            <h3 className="font-semibold text-[#171717] mb-3">{t.comparisonTitle}</h3>
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-left text-[#64748b] border-b border-[#e2e8f0]">
+                <tr className="text-left text-[#6d6b66] border-b border-[#ebe8e1]">
                   <th scope="col" className="py-2 pr-3">{t.containerCol}</th>
                   <th scope="col" className="py-2 pr-3">{specs.internal}</th>
                   <th scope="col" className="py-2 pr-3">{specs.capacity}</th>
@@ -431,19 +431,19 @@ export default function ContainerLoadCalculator({
                   return (
                     <tr
                       key={p.code}
-                      className={`border-b border-[#f1f5f9] ${isBest ? "bg-[#f1f7fb]" : ""}`}
+                      className={`border-b border-[#f5f3ee] ${isBest ? "bg-[#f1f7fb]" : ""}`}
                     >
-                      <td className="py-2 pr-3 font-medium text-[#0f172a]">
+                      <td className="py-2 pr-3 font-medium text-[#171717]">
                         {p.code}
-                        {isBest && <span className="ml-1 text-[#0f4c81]">★</span>}
+                        {isBest && <span className="ml-1 text-[#171717]">★</span>}
                       </td>
-                      <td className="py-2 pr-3 text-[#475569]">
+                      <td className="py-2 pr-3 text-[#3f4650]">
                         {(c.l / 10).toFixed(0)}×{(c.w / 10).toFixed(0)}×{(c.h / 10).toFixed(0)}
                       </td>
-                      <td className="py-2 pr-3 text-[#475569]">{c.volume} m³</td>
-                      <td className="py-2 pr-3 text-[#475569]">{(c.payload / 1000).toFixed(1)} t</td>
-                      <td className="py-2 pr-3 text-[#475569]">{p.tooLarge ? "—" : p.fits}</td>
-                      <td className="py-2 text-[#475569]">{p.needed || "—"}</td>
+                      <td className="py-2 pr-3 text-[#3f4650]">{c.volume} m³</td>
+                      <td className="py-2 pr-3 text-[#3f4650]">{(c.payload / 1000).toFixed(1)} t</td>
+                      <td className="py-2 pr-3 text-[#3f4650]">{p.tooLarge ? "—" : p.fits}</td>
+                      <td className="py-2 text-[#3f4650]">{p.needed || "—"}</td>
                     </tr>
                   );
                 })}
@@ -452,7 +452,7 @@ export default function ContainerLoadCalculator({
           </section>
         )}
 
-        <p className="text-xs text-[#94a3b8] text-center">{t.disclaimer}</p>
+        <p className="text-xs text-[#8c8982] text-center">{t.disclaimer}</p>
       </div>
     </div>
   );
@@ -472,8 +472,11 @@ function Field({
   help?: string;
 }) {
   return (
-    <div>
-      <label htmlFor={id} className="block text-xs font-medium text-[#475569] mb-1">
+    // min-w-0 是必需的：本组件被放进 `grid grid-cols-3`，而 <input> 的 min-content 宽度
+    // 来自 size 属性（约 131px），w-full 压不下去 ⇒ 三列合计把 390px 视口顶出 93px
+    // （实测 /logistics 在 390px 溢出）。让栅格项允许收缩即可。
+    <div className="min-w-0">
+      <label htmlFor={id} className="block text-xs font-medium text-[#3f4650] mb-1">
         {label}
       </label>
       <input
@@ -489,7 +492,7 @@ function Field({
         className="input w-full"
       />
       {help && (
-        <span id={`${id}-help`} className="block text-xs text-[#94a3b8] mt-1">
+        <span id={`${id}-help`} className="block text-xs text-[#8c8982] mt-1">
           {help}
         </span>
       )}
@@ -499,7 +502,7 @@ function Field({
 
 function Bar({ pct }: { pct: number }) {
   const capped = Math.min(100, Math.max(0, pct));
-  const color = capped >= 95 ? "#d4232a" : capped >= 75 ? "#8a5410" : "#0f4c81";
+  const color = capped >= 95 ? "#d4232a" : capped >= 75 ? "#8a5410" : "#171717";
   return (
     <div
       className="h-2.5 w-full rounded-full bg-[#eef2f7] mt-1"
@@ -539,7 +542,7 @@ function TopView({
         aria-label={`${along} by ${across} arrangement`}
         className="max-w-full"
       >
-        <rect x="0" y="0" width={gridW + 4} height={gridH + 4} fill="#f1f5f9" rx="4" />
+        <rect x="0" y="0" width={gridW + 4} height={gridH + 4} fill="#f5f3ee" rx="4" />
         {Array.from({ length: along * across }).map((_, i) => {
           const cx = i % along;
           const cy = Math.floor(i / along);
@@ -550,7 +553,7 @@ function TopView({
               y={2 + cy * (cell + gap)}
               width={cell}
               height={cell}
-              fill="#0f4c81"
+              fill="#171717"
               opacity="0.75"
               rx="2"
             />

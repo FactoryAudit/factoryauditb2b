@@ -280,7 +280,7 @@ export default async function SupplierProfilePage({
   const riskBand =
     typeof s.riskScore === "number" ? overallLevel(s.riskScore) : null;
   // 无分数时用中性灰，绝不借用 CRITICAL 的红 —— 颜色本身也是一种风险断言。
-  const riskColor = riskBand ? LEVEL_COLOR[riskBand] : "#64748b";
+  const riskColor = riskBand ? LEVEL_COLOR[riskBand] : "#6d6b66";
 
   // 证据状态标签不再在本页拼装：核验状态属 paid 层，
   // 由 /api/suppliers/[slug]/unlocked 校验档位后本地化返回（避免真值进 RSC payload）。
@@ -294,10 +294,10 @@ export default async function SupplierProfilePage({
     onsite: sp.provOnsite,
   };
   const provenanceStyle: Record<EvidenceProvenance, string> = {
-    provided: "border-[#cbd5e1] text-[#475569]",
-    reviewed: "border-[#0f4c81] text-[#0f4c81]",
-    independent: "border-[#0f4c81] text-[#0f4c81] bg-[#e6eef6]",
-    onsite: "border-[#0f4c81] text-white bg-[#0f4c81]",
+    provided: "border-[#ddd9d0] text-[#3f4650]",
+    reviewed: "border-[#171717] text-[#171717]",
+    independent: "border-[#171717] text-[#171717] bg-[#f5f3ee]",
+    onsite: "border-[#171717] text-white bg-[#171717]",
   };
   /* 最近一次核验日期：取自证据记录，没有记录就显示「暂无核验记录」。
      绝不用 new Date() 顶替 —— 那会把「今天」伪装成核验日期。 */
@@ -378,27 +378,27 @@ export default async function SupplierProfilePage({
         <JsonLd data={jsonLd} />
 
         {/* 面包屑（可见 + JSON-LD 一致） */}
-        <nav aria-label={t.supplierProfile.directoryBreadcrumb} className="text-sm text-[#64748b]">
-          <Link href={p("/")} className="hover:text-[#0f4c81]">
+        <nav aria-label={t.supplierProfile.directoryBreadcrumb} className="text-sm text-[#6d6b66]">
+          <Link href={p("/")} className="hover:text-[#171717]">
             {t.countryHub.breadcrumbHome}
           </Link>
           <span className="mx-2">/</span>
-          <Link href={p(DIRECTORY_PATH)} className="hover:text-[#0f4c81]">
+          <Link href={p(DIRECTORY_PATH)} className="hover:text-[#171717]">
             {sp.directoryBreadcrumb}
           </Link>
           <span className="mx-2">/</span>
-          <span className="text-[#0f172a]">{s.legalName}</span>
+          <span className="text-[#171717]">{s.legalName}</span>
         </nav>
 
         {/* 公开摘要：核心价值直出，会员墙不放在顶部 */}
-        <section className="mt-6 grid md:grid-cols-3 gap-6">
+        <section className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="md:col-span-2">
-            <h1 className="text-3xl font-bold text-[#0f172a]">{s.legalName}</h1>
-            <p className="text-[#64748b] mt-1">
+            <h1 className="text-3xl font-bold text-[#171717]">{s.legalName}</h1>
+            <p className="text-[#6d6b66] mt-1">
               {s.city}, {s.countryName ?? s.country.toUpperCase()} ·{" "}
               {s.businessType === "Manufacturer" ? sp.manufacturer : sp.tradingCompany}
             </p>
-            <p className="mt-3 text-sm text-[#475569]">{s.mainProducts.join(" · ")}</p>
+            <p className="mt-3 text-sm text-[#3f4650]">{s.mainProducts.join(" · ")}</p>
 
             <div className="mt-4 flex flex-wrap gap-2">
               {s.capabilities.map((c) => (
@@ -407,8 +407,8 @@ export default async function SupplierProfilePage({
                   title={`${c.refType} · ${c.source}`}
                   className={`rounded-full px-3 py-1 text-sm border ${
                     c.verified
-                      ? "border-[#0f4c81] text-[#0f4c81] bg-[#e6eef6]"
-                      : "border-[#cbd5e1] text-[#475569]"
+                      ? "border-[#171717] text-[#171717] bg-[#f5f3ee]"
+                      : "border-[#ddd9d0] text-[#3f4650]"
                   }`}
                 >
                   {c.verified ? "✓ " : "○ "}
@@ -424,20 +424,20 @@ export default async function SupplierProfilePage({
 
           {/* 信任摘要卡（公开） */}
           <div className="card p-5">
-            <div className="text-xs uppercase tracking-wide text-[#64748b]">
+            <div className="text-xs uppercase tracking-wide text-[#6d6b66]">
               {sp.verificationLevel}
             </div>
-            <div className="text-2xl font-extrabold text-[#0f4c81] mt-1">
+            <div className="text-2xl font-extrabold text-[#171717] mt-1">
               {v.levelLabel} {level}
             </div>
-            <div className="font-medium text-[#0f172a]">{v.levelsShort[level]}</div>
+            <div className="font-medium text-[#171717]">{v.levelsShort[level]}</div>
 
             {/* CS-21：三标签审核徽章 */}
             <AssessmentTags tags={assessmentTags} />
 
             {/* CS-22 / CS-A：三态验证徽章（状态由 trustProfile.ts 推导，组件不自判） */}
             <div className="mt-4">
-              <div className="text-xs uppercase tracking-wide text-[#64748b]">
+              <div className="text-xs uppercase tracking-wide text-[#6d6b66]">
                 {tp.badgeTitle}
               </div>
               <div className="mt-1.5">
@@ -455,7 +455,7 @@ export default async function SupplierProfilePage({
               </div>
             </div>
 
-            <div className="mt-4 text-xs uppercase tracking-wide text-[#64748b]">
+            <div className="mt-4 text-xs uppercase tracking-wide text-[#6d6b66]">
               {sp.riskScore}
             </div>
             {typeof s.riskScore === "number" ? (
@@ -466,7 +466,7 @@ export default async function SupplierProfilePage({
                 <div className="text-sm font-medium" style={{ color: riskColor }}>
                   {t.risk.ui.level[overallLevel(s.riskScore)]}
                 </div>
-                <div className="mt-2 h-2 overflow-hidden rounded-full bg-[#e2e8f0]">
+                <div className="mt-2 h-2 overflow-hidden rounded-full bg-[#ebe8e1]">
                   <div
                     className="h-full rounded-full"
                     style={{ width: `${s.riskScore}%`, background: riskColor }}
@@ -474,9 +474,9 @@ export default async function SupplierProfilePage({
                 </div>
               </>
             ) : (
-              <div className="text-2xl font-extrabold text-[#64748b]">—</div>
+              <div className="text-2xl font-extrabold text-[#6d6b66]">—</div>
             )}
-            <p className="mt-1 text-xs text-[#64748b]">{sp.scoreDirection}</p>
+            <p className="mt-1 text-xs text-[#6d6b66]">{sp.scoreDirection}</p>
 
             {/* PHASE 03 §一：评分是「档案信号」而非独立风险判定，必须在分数**紧邻处**说明。
                 这句免责声明比分数本身更重要 —— 一个未核验的供应商也可以有高分，
@@ -485,19 +485,19 @@ export default async function SupplierProfilePage({
               {seoCopy.scoreDisclaimer}
             </p>
 
-            <div className="mt-4 text-xs uppercase tracking-wide text-[#64748b]">
+            <div className="mt-4 text-xs uppercase tracking-wide text-[#6d6b66]">
               {sp.lastChecked}
             </div>
-            <div className="text-sm font-medium text-[#0f172a]">
+            <div className="text-sm font-medium text-[#171717]">
               {lastVerifiedDate ?? sp.noCheckRecord}
             </div>
 
             {/* PHASE 03 §一：档案更新时间与「最近核验日期」是两个不同的事实。
                 前者是记录被修改的时间，后者是证据的核验日期，不得互相顶替。 */}
-            <div className="mt-3 text-xs uppercase tracking-wide text-[#64748b]">
+            <div className="mt-3 text-xs uppercase tracking-wide text-[#6d6b66]">
               {sp.lastUpdated}
             </div>
-            <div className="text-sm font-medium text-[#0f172a]">
+            <div className="text-sm font-medium text-[#171717]">
               {dateOnly(s.updatedAt) ?? sp.noCheckRecord}
             </div>
 
@@ -506,8 +506,8 @@ export default async function SupplierProfilePage({
                 不等于「平台已复核」。存在证据 ≠ 已核验 —— 二者是两条轴。
                 旧代码用 v.evidence（"Evidence reviewed"）是错误暗示。 */}
             <div className="mt-3 flex justify-between text-sm">
-              <span className="text-[#64748b]">{v.evidenceOnFile}</span>
-              <span className="font-medium text-[#0f172a]">{s.evidenceCount ?? 0}</span>
+              <span className="text-[#6d6b66]">{v.evidenceOnFile}</span>
+              <span className="font-medium text-[#171717]">{s.evidenceCount ?? 0}</span>
             </div>
           </div>
         </section>
@@ -523,8 +523,8 @@ export default async function SupplierProfilePage({
             行标签来自既有字典键 ⇒ 九种语言全部本地化。
             ================================================================== */}
         <section className="mt-8 card p-6">
-          <h2 className="text-xl font-bold text-[#0f172a]">{seoCopy.snapshotTitle}</h2>
-          <dl className="mt-4 grid sm:grid-cols-2 gap-x-8 gap-y-2 text-sm">
+          <h2 className="text-xl font-bold text-[#171717]">{seoCopy.snapshotTitle}</h2>
+          <dl className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-sm">
             {snapshot.map((row) =>
               row.note ? (
                 <div key={row.id} className="sm:col-span-2">
@@ -534,14 +534,14 @@ export default async function SupplierProfilePage({
                 </div>
               ) : (
                 <div key={row.id} className="flex justify-between gap-3 border-b border-[#eef2f7] py-1.5">
-                  <dt className="text-[#64748b]">{row.label}</dt>
+                  <dt className="text-[#6d6b66]">{row.label}</dt>
                   <dd
-                    className={`text-right ${row.unknown ? "text-[#94a3b8] italic" : "font-medium text-[#0f172a]"}`}
+                    className={`text-right ${row.unknown ? "text-[#8c8982] italic" : "font-medium text-[#171717]"}`}
                   >
                     {row.id === "industrialCluster" && clusterHref ? (
                       <Link
                         href={p(clusterHref)}
-                        className="text-[#0f4c81] hover:underline"
+                        className="text-[#171717] hover:underline"
                         data-track="supplier_cluster_backlink"
                       >
                         {row.value}
@@ -554,19 +554,19 @@ export default async function SupplierProfilePage({
               )
             )}
           </dl>
-          <p className="mt-3 text-xs text-[#64748b]">{t.suppliers.trustNote}</p>
+          <p className="mt-3 text-xs text-[#6d6b66]">{t.suppliers.trustNote}</p>
         </section>
 
         {/* Overview：公开字段 + 免费层锁区 */}
         <section className="mt-8">
-          <h2 className="text-xl font-bold text-[#0f172a] mb-3">{sp.overviewTitle}</h2>
+          <h2 className="text-xl font-bold text-[#171717] mb-3">{sp.overviewTitle}</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="card p-4">
-              <div className="text-xs text-[#64748b]">{sp.businessTypeLabel}</div>
+              <div className="text-xs text-[#6d6b66]">{sp.businessTypeLabel}</div>
               <div className="font-semibold">{s.businessType}</div>
             </div>
             <div className="card p-4">
-              <div className="text-xs text-[#64748b]">{sp.industryLabel}</div>
+              <div className="text-xs text-[#6d6b66]">{sp.industryLabel}</div>
               <div className="font-semibold">{s.industryCode ?? "—"}</div>
             </div>
             {/* 员工规模（free 层）—— 服务端只输出锁态，真值由客户端解锁后填入 */}
@@ -577,10 +577,10 @@ export default async function SupplierProfilePage({
               membershipHref={p("/pricing#founding-buyer")}
               locked={
                 <div className="card p-4 opacity-80">
-                  <div className="text-xs text-[#64748b]">{sp.employeesLabel}</div>
-                  <div className="font-semibold text-[#94a3b8]">
+                  <div className="text-xs text-[#6d6b66]">{sp.employeesLabel}</div>
+                  <div className="font-semibold text-[#8c8982]">
                     🔒{" "}
-                    <Link href={registerHref} className="text-[#0f4c81] underline">
+                    <Link href={registerHref} className="text-[#171717] underline">
                       {sp.freeLockCta}
                     </Link>
                   </div>
@@ -588,7 +588,7 @@ export default async function SupplierProfilePage({
               }
             >
               <div className="card p-4">
-                <div className="text-xs text-[#64748b]">{sp.employeesLabel}</div>
+                <div className="text-xs text-[#6d6b66]">{sp.employeesLabel}</div>
                 <div className="font-semibold">
                   <UnlockedValue slug={s.slug} locale={uiLocale} field="employees" />
                 </div>
@@ -603,10 +603,10 @@ export default async function SupplierProfilePage({
               membershipHref={p("/pricing#founding-buyer")}
               locked={
                 <div className="card p-4 opacity-80">
-                  <div className="text-xs text-[#64748b]">{sp.exportMarketsLabel}</div>
-                  <div className="font-semibold text-[#94a3b8]">
+                  <div className="text-xs text-[#6d6b66]">{sp.exportMarketsLabel}</div>
+                  <div className="font-semibold text-[#8c8982]">
                     🔒{" "}
-                    <Link href={registerHref} className="text-[#0f4c81] underline">
+                    <Link href={registerHref} className="text-[#171717] underline">
                       {sp.freeLockCta}
                     </Link>
                   </div>
@@ -614,7 +614,7 @@ export default async function SupplierProfilePage({
               }
             >
               <div className="card p-4">
-                <div className="text-xs text-[#64748b]">{sp.exportMarketsLabel}</div>
+                <div className="text-xs text-[#6d6b66]">{sp.exportMarketsLabel}</div>
                 <div className="font-semibold">
                   <UnlockedValue slug={s.slug} locale={uiLocale} field="exportMarkets" />
                 </div>
@@ -640,10 +640,10 @@ export default async function SupplierProfilePage({
                 membershipHref={p("/pricing#founding-buyer")}
                 locked={
                   <div className="card p-4 opacity-80">
-                    <div className="text-xs text-[#64748b]">{label}</div>
-                    <div className="font-semibold text-[#94a3b8]">
+                    <div className="text-xs text-[#6d6b66]">{label}</div>
+                    <div className="font-semibold text-[#8c8982]">
                       🔒{" "}
-                      <Link href={registerHref} className="text-[#0f4c81] underline">
+                      <Link href={registerHref} className="text-[#171717] underline">
                         {sp.freeLockCta}
                       </Link>
                     </div>
@@ -651,7 +651,7 @@ export default async function SupplierProfilePage({
                 }
               >
                 <div className="card p-4">
-                  <div className="text-xs text-[#64748b]">{label}</div>
+                  <div className="text-xs text-[#6d6b66]">{label}</div>
                   <div className="font-semibold">
                     <UnlockedValue slug={s.slug} locale={uiLocale} field={field} />
                   </div>
@@ -667,9 +667,9 @@ export default async function SupplierProfilePage({
             registerHref={registerHref}
             membershipHref={p("/pricing#founding-buyer")}
             locked={
-              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#cbd5e1] bg-[#f8fafc] px-4 py-3">
-                <div className="text-sm text-[#475569]">
-                  <span className="font-semibold text-[#0f172a]">{sp.freeLockTitle}.</span>{" "}
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#ddd9d0] bg-[#fbfaf7] px-4 py-3">
+                <div className="text-sm text-[#3f4650]">
+                  <span className="font-semibold text-[#171717]">{sp.freeLockTitle}.</span>{" "}
                   {sp.freeLockLead}
                 </div>
                 <Link
@@ -692,23 +692,23 @@ export default async function SupplierProfilePage({
         <SupplierRegistrationPanel data={s} dict={sp} />
 
         {/* 平台核验范围（方法论级，公开） */}
-        <section className="mt-8 card p-6 bg-[#f7f9fc]">
-          <h2 className="text-xl font-bold text-[#0f172a]">{sp.verifiedByTitle}</h2>
-          <p className="text-sm text-[#64748b] mt-1 mb-4">{sp.verifiedByLead}</p>
-          <ul className="space-y-1 text-sm text-[#475569]">
+        <section className="mt-8 card p-6 bg-[#fbfaf7]">
+          <h2 className="text-xl font-bold text-[#171717]">{sp.verifiedByTitle}</h2>
+          <p className="text-sm text-[#6d6b66] mt-1 mb-4">{sp.verifiedByLead}</p>
+          <ul className="space-y-1 text-sm text-[#3f4650]">
             {scope.length === 0 ? (
               <li>{v.noRecord}</li>
             ) : (
               scope.map((x) => <li key={x}>✓ {x}</li>)
             )}
           </ul>
-          <div className="mt-4 text-sm text-[#0f172a]">
-            <span className="text-[#64748b]">{sp.lastChecked}: </span>
+          <div className="mt-4 text-sm text-[#171717]">
+            <span className="text-[#6d6b66]">{sp.lastChecked}: </span>
             <span className="font-medium">{lastVerifiedDate ?? sp.noCheckRecord}</span>
           </div>
-          <div className="mt-4 border-t border-[#e2e8f0] pt-3">
-            <h3 className="font-semibold text-[#0f172a] text-sm">{sp.neverClaimedTitle}</h3>
-            <p className="text-xs text-[#64748b] mt-1">{sp.neverClaimed}</p>
+          <div className="mt-4 border-t border-[#ebe8e1] pt-3">
+            <h3 className="font-semibold text-[#171717] text-sm">{sp.neverClaimedTitle}</h3>
+            <p className="text-xs text-[#6d6b66] mt-1">{sp.neverClaimed}</p>
           </div>
         </section>
 
@@ -740,11 +740,11 @@ export default async function SupplierProfilePage({
         )}
 
         {/* 付费层锁区：证据明细 / 认证明细 / 验货历史 */}
-        <section className="mt-8 grid md:grid-cols-2 gap-6">
+        <section className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="card p-6">
-            <h2 className="text-lg font-bold text-[#0f172a]">{ev.title}</h2>
-            <p className="text-sm text-[#64748b] mt-1 mb-3">{sp.paidLockLead}</p>
-            <ul className="space-y-2 text-sm text-[#475569]">
+            <h2 className="text-lg font-bold text-[#171717]">{ev.title}</h2>
+            <p className="text-sm text-[#6d6b66] mt-1 mb-3">{sp.paidLockLead}</p>
+            <ul className="space-y-2 text-sm text-[#3f4650]">
               {s.evidence.slice(0, 2).map((e) => (
                 <li key={e.id} className="flex justify-between gap-3">
                   <span>{evidenceLabel(e.type, uiLocale)}</span>
@@ -753,7 +753,7 @@ export default async function SupplierProfilePage({
                     layer="paid"
                     registerHref={registerHref}
                     membershipHref={p("/pricing#founding-buyer")}
-                    locked={<span className="text-[#94a3b8]">🔒</span>}
+                    locked={<span className="text-[#8c8982]">🔒</span>}
                   >
                     <UnlockedEvidenceStatus
                       slug={s.slug}
@@ -766,28 +766,28 @@ export default async function SupplierProfilePage({
                 </li>
               ))}
               {s.evidence.length === 0 && (
-                <li className="text-[#94a3b8]">{sp.evidenceEmpty}</li>
+                <li className="text-[#8c8982]">{sp.evidenceEmpty}</li>
               )}
             </ul>
-            <p className="text-xs text-[#64748b] mt-3">{ev.statusNote}</p>
+            <p className="text-xs text-[#6d6b66] mt-3">{ev.statusNote}</p>
           </div>
           <div className="card p-6">
-            <h2 className="text-lg font-bold text-[#0f172a]">{sp.auditHistory ?? sp.auditStatusLabel}</h2>
-            <p className="text-sm text-[#64748b] mt-1 mb-3">{sp.paidLockLead}</p>
-            <ul className="space-y-2 text-sm text-[#475569]">
+            <h2 className="text-lg font-bold text-[#171717]">{sp.auditHistory ?? sp.auditStatusLabel}</h2>
+            <p className="text-sm text-[#6d6b66] mt-1 mb-3">{sp.paidLockLead}</p>
+            <ul className="space-y-2 text-sm text-[#3f4650]">
               <li className="flex justify-between gap-3">
                 <span>{sp.inspectionHistoryLabel}</span>
                 <UnlockGate
                   layer="paid"
                   registerHref={registerHref}
                   membershipHref={p("/pricing#founding-buyer")}
-                  locked={<span className="text-[#94a3b8]">🔒</span>}
+                  locked={<span className="text-[#8c8982]">🔒</span>}
                 >
                   <UnlockedValue
                     slug={s.slug}
                     locale={uiLocale}
                     field="inspectionHistory"
-                    className="font-medium text-[#0f172a]"
+                    className="font-medium text-[#171717]"
                   />
                 </UnlockGate>
               </li>
@@ -801,18 +801,18 @@ export default async function SupplierProfilePage({
                   layer="paid"
                   registerHref={registerHref}
                   membershipHref={p("/pricing#founding-buyer")}
-                  locked={<span className="text-[#94a3b8]">🔒</span>}
+                  locked={<span className="text-[#8c8982]">🔒</span>}
                 >
                   <UnlockedValue
                     slug={s.slug}
                     locale={uiLocale}
                     field="certifications"
-                    className="font-medium text-[#0f172a]"
+                    className="font-medium text-[#171717]"
                   />
                 </UnlockGate>
               </li>
             </ul>
-            <p className="text-xs text-[#64748b] mt-3">{sp.paidLockNote}</p>
+            <p className="text-xs text-[#6d6b66] mt-3">{sp.paidLockNote}</p>
           </div>
         </section>
 
@@ -823,9 +823,9 @@ export default async function SupplierProfilePage({
           registerHref={registerHref}
           membershipHref={p("/pricing#founding-buyer")}
           locked={
-            <section className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#0f4c81] bg-[#e6eef6] px-4 py-3">
-              <div className="text-sm text-[#475569]">
-                <span className="font-semibold text-[#0f172a]">{sp.paidLockTitle}.</span>{" "}
+            <section className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#171717] bg-[#f5f3ee] px-4 py-3">
+              <div className="text-sm text-[#3f4650]">
+                <span className="font-semibold text-[#171717]">{sp.paidLockTitle}.</span>{" "}
                 {sp.paidLockLead}
               </div>
               <Link
@@ -844,41 +844,41 @@ export default async function SupplierProfilePage({
 
         {/* Report preview（风险分公开，报告为服务产品） */}
         <section className="mt-10 card p-8">
-          <span className="text-xs font-semibold uppercase tracking-wide text-[#0f4c81]">
+          <span className="text-xs font-semibold uppercase tracking-wide text-[#171717]">
             {rp.badge}
           </span>
-          <h2 className="text-2xl font-bold text-[#0f172a] mt-1">{rp.title}</h2>
-          <p className="text-sm text-[#64748b] mt-1">{rp.lead}</p>
+          <h2 className="text-2xl font-bold text-[#171717] mt-1">{rp.title}</h2>
+          <p className="text-sm text-[#6d6b66] mt-1">{rp.lead}</p>
 
-          <div className="grid md:grid-cols-2 gap-6 mt-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
             <div>
-              <h3 className="font-semibold text-[#0f172a]">{rp.execTitle}</h3>
-              <p className="text-sm text-[#475569] mt-1">
+              <h3 className="font-semibold text-[#171717]">{rp.execTitle}</h3>
+              <p className="text-sm text-[#3f4650] mt-1">
                 {rp.riskLevel}: {riskBand ? t.risk.ui.level[riskBand] : "—"}
               </p>
-              <p className="text-sm text-[#475569]">
+              <p className="text-sm text-[#3f4650]">
                 {rp.score}: {typeof s.riskScore === "number" ? `${s.riskScore} / 100` : "—"}
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-[#0f172a]">{rp.verificationTitle}</h3>
-              <ul className="text-sm text-[#475569] mt-1 space-y-1">
+              <h3 className="font-semibold text-[#171717]">{rp.verificationTitle}</h3>
+              <ul className="text-sm text-[#3f4650] mt-1 space-y-1">
                 {scope.length === 0 ? (
                   <li>{v.noRecord}</li>
                 ) : (
                   scope.map((x) => <li key={x}>✓ {x}</li>)
                 )}
               </ul>
-              <h3 className="font-semibold text-[#0f172a] mt-4">{rp.recommendationTitle}</h3>
-              <p className="text-sm text-[#475569] mt-1">
+              <h3 className="font-semibold text-[#171717] mt-4">{rp.recommendationTitle}</h3>
+              <p className="text-sm text-[#3f4650] mt-1">
                 {level >= 3 ? sp.recVerified : sp.recUnverified}
               </p>
             </div>
           </div>
 
-          <div className="mt-6 border-t border-[#e2e8f0] pt-5">
-            <h3 className="font-semibold text-[#0f172a]">{rp.unlockTitle}</h3>
-            <p className="text-sm text-[#475569] mt-1">{rp.unlockLead}</p>
+          <div className="mt-6 border-t border-[#ebe8e1] pt-5">
+            <h3 className="font-semibold text-[#171717]">{rp.unlockTitle}</h3>
+            <p className="text-sm text-[#3f4650] mt-1">{rp.unlockLead}</p>
           </div>
           <div className="mt-4 flex flex-wrap gap-3">
             <Link href={p("/custom-services")} className="btn btn-primary">
@@ -901,9 +901,9 @@ export default async function SupplierProfilePage({
               {sp.verifyThisSupplier}
             </Link>
           </div>
-          <p className="text-xs text-[#64748b] mt-3">
+          <p className="text-xs text-[#6d6b66] mt-3">
             {rp.methodologyLead}{" "}
-            <Link href={p("/methodology")} className="text-[#0f4c81] underline">
+            <Link href={p("/methodology")} className="text-[#171717] underline">
               {rp.methodologyLink}
             </Link>
           </p>
@@ -921,22 +921,22 @@ export default async function SupplierProfilePage({
                  不存在「Schema 声称有 FAQ、页面上却看不到」的结构化数据造假。
             ================================================================== */}
         <section className="mt-10">
-          <h2 className="text-2xl font-bold text-[#0f172a]">{t.common.faq}</h2>
+          <h2 className="text-2xl font-bold text-[#171717]">{t.common.faq}</h2>
           <div className="mt-4 space-y-4">
             {faq.map((f) => (
               <div key={f.id} className="card p-5">
-                <h3 className="font-semibold text-[#0f172a]">{f.q}</h3>
-                <p className="text-[#475569] mt-2 text-sm">{f.a}</p>
+                <h3 className="font-semibold text-[#171717]">{f.q}</h3>
+                <p className="text-[#3f4650] mt-2 text-sm">{f.a}</p>
               </div>
             ))}
           </div>
         </section>
 
         {/* Claim / RFQ */}
-        <section className="mt-10 grid md:grid-cols-2 gap-6">
+        <section className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="card p-6">
-            <h2 className="font-semibold text-[#0f172a]">{sp.claimTitle}</h2>
-            <p className="text-sm text-[#475569] mt-1">{sp.claimLead}</p>
+            <h2 className="font-semibold text-[#171717]">{sp.claimTitle}</h2>
+            <p className="text-sm text-[#3f4650] mt-1">{sp.claimLead}</p>
             <Link
               href={p(`${DIRECTORY_PATH}/${slug}/claim`)}
               className="btn btn-outline mt-4 inline-block"
@@ -947,8 +947,8 @@ export default async function SupplierProfilePage({
             </Link>
           </div>
           <div className="card p-6">
-            <h2 className="font-semibold text-[#0f172a]">{sp.notSatisfiedTitle}</h2>
-            <p className="text-sm text-[#475569] mt-1">{sp.notSatisfiedLead}</p>
+            <h2 className="font-semibold text-[#171717]">{sp.notSatisfiedTitle}</h2>
+            <p className="text-sm text-[#3f4650] mt-1">{sp.notSatisfiedLead}</p>
             <Link href={p("/rfq")} className="btn btn-outline mt-4 inline-block">
               {sp.notSatisfiedCta}
             </Link>
@@ -963,14 +963,14 @@ export default async function SupplierProfilePage({
         <section className="mt-6 card p-6">
           {profileIsPublic ? (
             <>
-              <h2 className="font-semibold text-[#0f172a]">{tp.shareTitle}</h2>
-              <p className="text-sm text-[#64748b] mt-1">{tp.shareLead}</p>
+              <h2 className="font-semibold text-[#171717]">{tp.shareTitle}</h2>
+              <p className="text-sm text-[#6d6b66] mt-1">{tp.shareLead}</p>
               <ShareProfileButton slug={slug} dict={tp} />
             </>
           ) : (
             <>
-              <h2 className="font-semibold text-[#0f172a]">{tp.notPublicTitle}</h2>
-              <p className="text-sm text-[#64748b] mt-1">{tp.notPublicLead}</p>
+              <h2 className="font-semibold text-[#171717]">{tp.notPublicTitle}</h2>
+              <p className="text-sm text-[#6d6b66] mt-1">{tp.notPublicLead}</p>
             </>
           )}
         </section>

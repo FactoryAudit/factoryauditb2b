@@ -149,20 +149,20 @@ export default async function ContactPage({ params }: Props) {
       />
 
       <header>
-        <span className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">
+        <span className="text-sm font-semibold text-[#171717] uppercase tracking-wide">
           {c.eyebrow}
         </span>
-        <h1 className="text-4xl font-extrabold text-[#0f172a] mt-2 leading-tight">{c.title}</h1>
-        <p className="text-[#64748b] mt-4 text-lg max-w-3xl">{c.lead}</p>
+        <h1 className="text-4xl font-extrabold text-[#171717] mt-2 leading-tight">{c.title}</h1>
+        <p className="text-[#6d6b66] mt-4 text-lg max-w-3xl">{c.lead}</p>
       </header>
 
       {/* 直接联系方式：不装 WhatsApp 的访客也能走邮箱，两条路都给 */}
-      <section className="mt-8 rounded-lg bg-[#f1f5f9] p-6">
-        <h2 className="text-lg font-semibold text-[#0f172a]">{c.directTitle}</h2>
+      <section className="mt-8 rounded-lg bg-[#f5f3ee] p-6">
+        <h2 className="text-lg font-semibold text-[#171717]">{c.directTitle}</h2>
         <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
-          <span className="text-[#334155]">
+          <span className="text-[#2b2b2b]">
             {c.emailLabel}:{" "}
-            <a href={`mailto:${email}`} className="text-[#0f4c81] underline">
+            <a href={`mailto:${email}`} className="text-[#171717] underline">
               {email}
             </a>
           </span>
@@ -174,7 +174,7 @@ export default async function ContactPage({ params }: Props) {
             />
           )}
         </div>
-        <p className="mt-3 text-sm text-[#64748b]">{c.responseNote}</p>
+        <p className="mt-3 text-sm text-[#6d6b66]">{c.responseNote}</p>
       </section>
 
       {/* 表单 */}
@@ -184,15 +184,15 @@ export default async function ContactPage({ params }: Props) {
 
       {/* 其他入口 */}
       <section className="mt-12">
-        <h2 className="text-xl font-semibold text-[#0f172a]">{c.altTitle}</h2>
-        <div className="mt-4 grid gap-4 md:grid-cols-2">
-          <Link href={p("/rfq")} className="card p-5 hover:border-[#0f4c81]">
-            <h3 className="font-bold text-[#0f172a]">{c.rfqTitle}</h3>
-            <p className="mt-2 text-sm text-[#475569] leading-relaxed">{c.rfqBody}</p>
+        <h2 className="text-xl font-semibold text-[#171717]">{c.altTitle}</h2>
+        <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+          <Link href={p("/rfq")} className="card p-5 hover:border-[#171717]">
+            <h3 className="font-bold text-[#171717]">{c.rfqTitle}</h3>
+            <p className="mt-2 text-sm text-[#3f4650] leading-relaxed">{c.rfqBody}</p>
           </Link>
-          <Link href={p("/join-supplier-network")} className="card p-5 hover:border-[#0f4c81]">
-            <h3 className="font-bold text-[#0f172a]">{c.supplierTitle}</h3>
-            <p className="mt-2 text-sm text-[#475569] leading-relaxed">{c.supplierBody}</p>
+          <Link href={p("/join-supplier-network")} className="card p-5 hover:border-[#171717]">
+            <h3 className="font-bold text-[#171717]">{c.supplierTitle}</h3>
+            <p className="mt-2 text-sm text-[#3f4650] leading-relaxed">{c.supplierBody}</p>
           </Link>
         </div>
       </section>

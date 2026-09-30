@@ -54,7 +54,7 @@ export default async function Page({ params, searchParams }: Props) {
     return (
       <main className="container py-10" data-track-page="supplier_self_assessment">
         <section className="max-w-3xl mx-auto text-center mb-8">
-          <h1 className="text-4xl font-extrabold text-[#0f172a] mt-2">
+          <h1 className="text-4xl font-extrabold text-[#171717] mt-2">
             {sa["pageTitle"] ?? "工厂自评估 / Factory Self-Assessment"}
           </h1>
         </section>
@@ -62,7 +62,7 @@ export default async function Page({ params, searchParams }: Props) {
           {reason === "not_owner" ? (
             <p className="text-[#b45309]">{sa["notOwner"] ?? "This account is not linked to a supplier."}</p>
           ) : (
-            <p className="text-[#334155]">{sa["signInRequired"] ?? "Please sign in to your supplier account to continue."}</p>
+            <p className="text-[#2b2b2b]">{sa["signInRequired"] ?? "Please sign in to your supplier account to continue."}</p>
           )}
           <a
             className="btn-primary inline-block mt-4 px-6 py-3"
@@ -100,11 +100,11 @@ export default async function Page({ params, searchParams }: Props) {
   return (
     <main className="container py-10" data-track-page="supplier_self_assessment">
       <section className="max-w-3xl mx-auto text-center mb-8">
-        <span className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">Supplier Portal</span>
-        <h1 className="text-4xl font-extrabold text-[#0f172a] mt-2">
+        <span className="text-sm font-semibold text-[#171717] uppercase tracking-wide">Supplier Portal</span>
+        <h1 className="text-4xl font-extrabold text-[#171717] mt-2">
           {sa["pageTitle"] ?? "工厂自评估 / Factory Self-Assessment"}
         </h1>
-        <p className="text-[#64748b] mt-3 text-lg">
+        <p className="text-[#6d6b66] mt-3 text-lg">
           {sa["pageDesc"] ??
             "填写社会责任与质量两份清单（共 72 项检查点），提交后由平台审核并发布「工厂自评估」标签。"}
         </p>
@@ -120,7 +120,7 @@ export default async function Page({ params, searchParams }: Props) {
       </div>
 
       {templates.length === 0 ? (
-        <div className="card p-6 text-center text-[#64748b]">
+        <div className="card p-6 text-center text-[#6d6b66]">
           The self-assessment service is not configured yet. Please check back shortly.
         </div>
       ) : (
@@ -140,7 +140,7 @@ export default async function Page({ params, searchParams }: Props) {
         </div>
       )}
 
-      <p className="text-center text-xs text-[#94a3b8] mt-8">
+      <p className="text-center text-xs text-[#8c8982] mt-8">
         <a className="underline" href={localePath(locale, "/join-supplier-network")}>
           {sa["becomeSupplier"] ?? "Become a supplier"}
         </a>{" "}

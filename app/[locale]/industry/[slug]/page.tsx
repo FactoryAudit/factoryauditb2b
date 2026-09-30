@@ -169,7 +169,7 @@ export default async function IndustryPage({ params }: { params: Promise<Params>
               <li key={tp.slug}>
                 <Link
                   href={lp(`/industry/${slug}/${tp.slug}`)}
-                  className="text-[#0f4c81] hover:underline"
+                  className="text-[#171717] hover:underline"
                 >
                   {pickZhPair(locale, tp.title.en, tp.title.zh)}
                 </Link>
@@ -221,7 +221,7 @@ export default async function IndustryPage({ params }: { params: Promise<Params>
                       <Link
                         key={c.refCode}
                         href={lp(`/audit-guide/${s.countryCode}/${c.refCode}`)}
-                        className="rounded bg-[#eef2f7] px-2 py-0.5 text-xs text-[#0f4c81] hover:underline"
+                        className="rounded bg-[#eef2f7] px-2 py-0.5 text-xs text-[#171717] hover:underline"
                       >
                         {c.label}
                       </Link>
@@ -236,9 +236,9 @@ export default async function IndustryPage({ params }: { params: Promise<Params>
       {/* CTA：CS-02A 起改为内嵌 RFQ 表单（CS-02C G3 落库通道），
           并注入行业上下文 + 来源路径，用于 CS-02 ROI 归因。
           certifications_req 一律不注入 —— 买家还没说要什么证书，绝不替他编。 */}
-      <section className="mt-8 rounded-lg bg-[#f1f5f9] p-6">
-        <h2 className="font-semibold text-[#0f172a]">{p.ctaTitle.replaceAll("{industry}", industry.name)}</h2>
-        <p className="mt-1 text-sm text-[#475569]">{p.ctaDesc.replaceAll("{industry}", industry.name)}</p>
+      <section className="mt-8 rounded-lg bg-[#f5f3ee] p-6">
+        <h2 className="font-semibold text-[#171717]">{p.ctaTitle.replaceAll("{industry}", industry.name)}</h2>
+        <p className="mt-1 text-sm text-[#3f4650]">{p.ctaDesc.replaceAll("{industry}", industry.name)}</p>
         <div className="mt-4">
           <RfqForm
             t={t.rfq.form}

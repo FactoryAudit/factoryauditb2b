@@ -101,7 +101,7 @@ export default async function GuideCategoryHub({ params }: { params: Promise<Par
     <main className="container py-12">
       <JsonLd data={jsonLd} />
 
-      <nav className="mb-4 text-sm text-[#64748b]">
+      <nav className="mb-4 text-sm text-[#6d6b66]">
         <Link href={p("/")} className="hover:underline">
           {t.common.ui.home}
         </Link>
@@ -117,8 +117,8 @@ export default async function GuideCategoryHub({ params }: { params: Promise<Par
         {title}
       </nav>
 
-      <h1 className="text-4xl font-extrabold text-[#0f172a]">{title}</h1>
-      <p className="text-[#64748b] mt-3 text-lg max-w-3xl">
+      <h1 className="text-4xl font-extrabold text-[#171717]">{title}</h1>
+      <p className="text-[#6d6b66] mt-3 text-lg max-w-3xl">
         {pickZhPair(locale, meta.descEn, meta.descZh)}
       </p>
 
@@ -134,36 +134,36 @@ export default async function GuideCategoryHub({ params }: { params: Promise<Par
               href={p(`/guides/category/${c}`)}
               className={
                 active
-                  ? "px-3 py-1 rounded-full text-sm bg-[#0f4c81] text-white"
-                  : "px-3 py-1 rounded-full text-sm bg-[#f1f5f9] text-[#0f4c81] hover:bg-[#e2e8f0]"
+                  ? "px-3 py-1 rounded-full text-sm bg-[#171717] text-white"
+                  : "px-3 py-1 rounded-full text-sm bg-[#f5f3ee] text-[#171717] hover:bg-[#ebe8e1]"
               }
             >
               {label}
-              <span className="ml-1 text-[#94a3b8]">{guidesByCategory(c).length}</span>
+              <span className="ml-1 text-[#8c8982]">{guidesByCategory(c).length}</span>
             </Link>
           );
         })}
       </div>
 
-      <div className="grid md:grid-cols-2 gap-5 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-10">
         {guides.map((g) => (
           <Link
             key={g.slug}
             href={p(`/guides/${g.slug}`)}
-            className="card p-6 hover:border-[#0f4c81]"
+            className="card p-6 hover:border-[#171717]"
           >
-            <h2 className="text-xl font-bold text-[#0f4c81]">
+            <h2 className="text-xl font-bold text-[#171717]">
               {pickZhPair(locale, g.titleEn, g.titleZh)}
             </h2>
-            <p className="text-sm text-[#475569] mt-2">
+            <p className="text-sm text-[#3f4650] mt-2">
               {pickGuideDesc(locale, g)}
             </p>
-            <div className="text-xs text-[#94a3b8] mt-3">{g.updated}</div>
+            <div className="text-xs text-[#8c8982] mt-3">{g.updated}</div>
           </Link>
         ))}
       </div>
 
-      <section className="mt-10 card p-8 bg-[#0f4c81]">
+      <section className="mt-10 card p-8 bg-[#171717]">
         <h2 className="text-2xl font-bold text-white">{t.home.bottomTitle}</h2>
         <p className="mt-2 text-white/80">{t.home.bottomLead}</p>
         <div className="mt-5 flex flex-wrap gap-3">

@@ -76,36 +76,36 @@ export default function SupplierDashboard({
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       <section className="card p-6">
-        <h2 className="text-lg font-bold text-[#0f172a]">{sd.statsTitle}</h2>
+        <h2 className="text-lg font-bold text-[#171717]">{sd.statsTitle}</h2>
         <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
           {cards.map((c) => (
             <div
               key={c.label}
-              className="rounded-lg border border-[#e2e8f0] bg-white p-4 text-center"
+              className="rounded-lg border border-[#ebe8e1] bg-white p-4 text-center"
             >
-              <div className="text-2xl font-extrabold text-[#0f4c81]">
+              <div className="text-2xl font-extrabold text-[#171717]">
                 {c.value}
               </div>
-              <div className="mt-1 text-xs text-[#64748b]">{c.label}</div>
+              <div className="mt-1 text-xs text-[#6d6b66]">{c.label}</div>
             </div>
           ))}
         </div>
       </section>
 
       <section className="card p-6">
-        <h2 className="text-lg font-bold text-[#0f172a]">{sd.visibilityTitle}</h2>
+        <h2 className="text-lg font-bold text-[#171717]">{sd.visibilityTitle}</h2>
         <div className="mt-3 flex items-baseline gap-3">
           <span className="text-3xl font-extrabold text-[#16a34a]">
             {visibilityPoints === null ? "—" : visibilityPoints}
           </span>
-          <span className="text-sm text-[#64748b]">/ 100+</span>
+          <span className="text-sm text-[#6d6b66]">/ 100+</span>
         </div>
-        <p className="mt-2 text-sm text-[#64748b]">{sd.visibilityDesc}</p>
+        <p className="mt-2 text-sm text-[#6d6b66]">{sd.visibilityDesc}</p>
       </section>
 
       <section className="card p-6">
-        <h2 className="text-lg font-bold text-[#0f172a]">{sd.shareTitle}</h2>
-        <p className="mt-2 text-sm text-[#64748b]">{sd.shareLead}</p>
+        <h2 className="text-lg font-bold text-[#171717]">{sd.shareTitle}</h2>
+        <p className="mt-2 text-sm text-[#6d6b66]">{sd.shareLead}</p>
         <div className="mt-4 flex flex-wrap items-center gap-3">
           <button
             type="button"
@@ -121,7 +121,7 @@ export default function SupplierDashboard({
               : (sd.copyLink ?? "Copy link")}
           </button>
           {link && (
-            <code className="block max-w-full truncate rounded bg-[#f1f5f9] px-3 py-2 text-xs text-[#334155]">
+            <code className="block max-w-full truncate rounded bg-[#f5f3ee] px-3 py-2 text-xs text-[#2b2b2b]">
               {link}
             </code>
           )}

@@ -74,51 +74,51 @@ export default async function InspectionPage({ params }: Props) {
     <main className="container py-12 max-w-4xl">
       <JsonLd data={jsonLd} />
 
-      <nav className="mb-4 text-sm text-[#64748b]">
+      <nav className="mb-4 text-sm text-[#6d6b66]">
         <Link href={p("/")} className="hover:underline">{t.common.ui.home}</Link>
         {" / "}
         <Link href={p("/services")} className="hover:underline">{t.servicesIndex.badge}</Link>
         {" / "}{i.h1}
       </nav>
 
-      <span className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">
+      <span className="text-sm font-semibold text-[#171717] uppercase tracking-wide">
         {i.badge}
       </span>
-      <h1 className="text-4xl font-extrabold text-[#0f172a] mt-2">{i.h1}</h1>
-      <p className="text-[#64748b] mt-3 text-lg">{i.lead}</p>
+      <h1 className="text-4xl font-extrabold text-[#171717] mt-2">{i.h1}</h1>
+      <p className="text-[#6d6b66] mt-3 text-lg">{i.lead}</p>
 
       {/* Quick answer */}
-      <section className="mt-8 rounded-lg bg-[#f1f5f9] p-6">
-        <h2 className="font-bold text-[#0f172a]">{i.quickAnswerTitle}</h2>
-        <p className="text-[#475569] mt-2">{i.quickAnswer}</p>
-        <p className="text-xs text-[#64748b] mt-3">{i.honestNote}</p>
+      <section className="mt-8 rounded-lg bg-[#f5f3ee] p-6">
+        <h2 className="font-bold text-[#171717]">{i.quickAnswerTitle}</h2>
+        <p className="text-[#3f4650] mt-2">{i.quickAnswer}</p>
+        <p className="text-xs text-[#6d6b66] mt-3">{i.honestNote}</p>
       </section>
 
       {/* 4 nodes */}
       <section className="mt-12">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{i.nodesTitle}</h2>
-        <p className="text-[#64748b] mt-1 mb-5">{i.nodesLead}</p>
-        <div className="grid md:grid-cols-2 gap-5">
+        <h2 className="text-2xl font-bold text-[#171717]">{i.nodesTitle}</h2>
+        <p className="text-[#6d6b66] mt-1 mb-5">{i.nodesLead}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {i.nodes.map((n) => (
             <div key={n.key} className="card p-6">
               <div className="flex items-center gap-3">
-                <span className="rounded bg-[#0f4c81] px-2 py-1 text-xs font-bold text-white">
+                <span className="rounded bg-[#171717] px-2 py-1 text-xs font-bold text-white">
                   {n.key}
                 </span>
-                <h3 className="font-bold text-[#0f172a]">{n.name}</h3>
+                <h3 className="font-bold text-[#171717]">{n.name}</h3>
               </div>
               <dl className="mt-4 space-y-3 text-sm">
                 <div>
-                  <dt className="font-semibold text-[#0f4c81]">{i.when}</dt>
-                  <dd className="text-[#475569] mt-0.5">{n.when}</dd>
+                  <dt className="font-semibold text-[#171717]">{i.when}</dt>
+                  <dd className="text-[#3f4650] mt-0.5">{n.when}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#0f4c81]">{i.what}</dt>
-                  <dd className="text-[#475569] mt-0.5">{n.what}</dd>
+                  <dt className="font-semibold text-[#171717]">{i.what}</dt>
+                  <dd className="text-[#3f4650] mt-0.5">{n.what}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#0f4c81]">{i.why}</dt>
-                  <dd className="text-[#475569] mt-0.5">{n.why}</dd>
+                  <dt className="font-semibold text-[#171717]">{i.why}</dt>
+                  <dd className="text-[#3f4650] mt-0.5">{n.why}</dd>
                 </div>
               </dl>
             </div>
@@ -128,16 +128,16 @@ export default async function InspectionPage({ params }: Props) {
 
       {/* How it works */}
       <section className="mt-12">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{i.howTitle}</h2>
-        <p className="text-[#64748b] mt-1 mb-5">{i.howLead}</p>
-        <ol className="grid md:grid-cols-4 gap-4">
+        <h2 className="text-2xl font-bold text-[#171717]">{i.howTitle}</h2>
+        <p className="text-[#6d6b66] mt-1 mb-5">{i.howLead}</p>
+        <ol className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {i.how.map((s, idx) => (
             <li key={s.title} className="card p-5">
-              <div className="w-8 h-8 rounded-full bg-[#0f4c81] text-white grid place-items-center font-bold text-sm">
+              <div className="w-8 h-8 rounded-full bg-[#171717] text-white grid grid-cols-1 place-items-center font-bold text-sm">
                 {idx + 1}
               </div>
-              <h3 className="font-semibold text-[#0f172a] mt-3">{s.title}</h3>
-              <p className="text-sm text-[#475569] mt-1">{s.body}</p>
+              <h3 className="font-semibold text-[#171717] mt-3">{s.title}</h3>
+              <p className="text-sm text-[#3f4650] mt-1">{s.body}</p>
             </li>
           ))}
         </ol>
@@ -145,11 +145,11 @@ export default async function InspectionPage({ params }: Props) {
 
       {/* Report */}
       <section className="mt-12">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{i.reportTitle}</h2>
-        <p className="text-[#64748b] mt-1 mb-4">{i.reportLead}</p>
-        <ul className="grid md:grid-cols-2 gap-2">
+        <h2 className="text-2xl font-bold text-[#171717]">{i.reportTitle}</h2>
+        <p className="text-[#6d6b66] mt-1 mb-4">{i.reportLead}</p>
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {i.report.map((r) => (
-            <li key={r} className="card p-3 text-[#475569]">
+            <li key={r} className="card p-3 text-[#3f4650]">
               ✓ {r}
             </li>
           ))}
@@ -157,27 +157,27 @@ export default async function InspectionPage({ params }: Props) {
       </section>
 
       {/* Pricing */}
-      <section className="mt-12 rounded-lg bg-[#f1f5f9] p-6">
-        <h2 className="font-bold text-[#0f172a]">{i.pricingTitle}</h2>
-        <p className="text-[#475569] mt-2">{i.pricingLead}</p>
-        <p className="text-sm text-[#64748b] mt-2">{i.pricingNote}</p>
+      <section className="mt-12 rounded-lg bg-[#f5f3ee] p-6">
+        <h2 className="font-bold text-[#171717]">{i.pricingTitle}</h2>
+        <p className="text-[#3f4650] mt-2">{i.pricingLead}</p>
+        <p className="text-sm text-[#6d6b66] mt-2">{i.pricingNote}</p>
       </section>
 
       {/* Request form */}
       <section className="mt-12">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{i.ctaTitle}</h2>
-        <p className="text-[#64748b] mt-1 mb-5">{i.ctaLead}</p>
+        <h2 className="text-2xl font-bold text-[#171717]">{i.ctaTitle}</h2>
+        <p className="text-[#6d6b66] mt-1 mb-5">{i.ctaLead}</p>
         <InspectionRequestForm t={i.form} />
       </section>
 
       {/* FAQ */}
       <section className="mt-12">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{i.faqTitle}</h2>
+        <h2 className="text-2xl font-bold text-[#171717]">{i.faqTitle}</h2>
         <div className="mt-3 space-y-4">
           {i.faq.map((f) => (
             <div key={f.q}>
-              <h3 className="font-semibold text-[#0f172a]">{f.q}</h3>
-              <p className="text-[#475569] mt-1">{f.a}</p>
+              <h3 className="font-semibold text-[#171717]">{f.q}</h3>
+              <p className="text-[#3f4650] mt-1">{f.a}</p>
             </div>
           ))}
         </div>

@@ -71,10 +71,10 @@ export function AuditHistoryPanel({
 }) {
   return (
     <section className="mt-8 card p-6" id="audit-history">
-      <h2 className="text-xl font-bold text-[#0f172a]">{d.sectionAudits}</h2>
+      <h2 className="text-xl font-bold text-[#171717]">{d.sectionAudits}</h2>
 
       {items.length === 0 ? (
-        <p className="mt-3 text-sm text-[#475569]">{d.noneAudits}</p>
+        <p className="mt-3 text-sm text-[#3f4650]">{d.noneAudits}</p>
       ) : (
         <ul className="mt-4 space-y-3">
           {items.map((a) => {
@@ -83,13 +83,13 @@ export function AuditHistoryPanel({
             return (
               <li
                 key={a.id}
-                className="rounded-lg border border-[#e2e8f0] bg-[#f7f9fc] p-4"
+                className="rounded-lg border border-[#ebe8e1] bg-[#fbfaf7] p-4"
               >
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="font-semibold text-[#0f172a]">
+                  <span className="font-semibold text-[#171717]">
                     {auditTypeLabel(a.auditType, d)}
                     {a.standardCode ? (
-                      <span className="ml-2 font-mono text-xs text-[#475569]">
+                      <span className="ml-2 font-mono text-xs text-[#3f4650]">
                         {a.standardCode}
                       </span>
                     ) : null}
@@ -97,15 +97,15 @@ export function AuditHistoryPanel({
                   {b ? <Badge variant={b.v}>{b.t}</Badge> : null}
                 </div>
 
-                <dl className="mt-3 grid gap-x-6 gap-y-1 text-sm sm:grid-cols-2">
+                <dl className="mt-3 grid grid-cols-1 gap-x-6 gap-y-1 text-sm sm:grid-cols-2">
                   <div className="flex gap-2">
-                    <dt className="text-[#64748b]">{d.auditDate}</dt>
-                    <dd className="text-[#0f172a]">{a.auditDate}</dd>
+                    <dt className="text-[#6d6b66]">{d.auditDate}</dt>
+                    <dd className="text-[#171717]">{a.auditDate}</dd>
                   </div>
                   {by ? (
                     <div className="flex gap-2">
-                      <dt className="text-[#64748b]">{d.auditBy}</dt>
-                      <dd className="text-[#0f172a]">{by}</dd>
+                      <dt className="text-[#6d6b66]">{d.auditBy}</dt>
+                      <dd className="text-[#171717]">{by}</dd>
                     </div>
                   ) : null}
                 </dl>
@@ -115,7 +115,7 @@ export function AuditHistoryPanel({
         </ul>
       )}
 
-      <p className="mt-4 border-t border-[#e2e8f0] pt-3 text-xs text-[#64748b]">
+      <p className="mt-4 border-t border-[#ebe8e1] pt-3 text-xs text-[#6d6b66]">
         {d.disclaimer}
       </p>
     </section>

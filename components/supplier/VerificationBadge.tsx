@@ -30,13 +30,13 @@ const BADGE: Record<
   NONE: {
     icon: "○",
     text: "—",
-    className: "border-[#cbd5e1] text-[#475569] bg-white",
+    className: "border-[#ddd9d0] text-[#3f4650] bg-white",
   },
   // 工厂自评：中性灰 + 半实心（绝不用绿色，避免被读成"已核验"）
   SELF_ASSESSED: {
     icon: "◐",
     text: "—",
-    className: "border-[#94a3b8] text-[#475569] bg-[#f8fafc]",
+    className: "border-[#8c8982] text-[#3f4650] bg-[#fbfaf7]",
   },
   // 线上核验：绿色 + 单勾
   ONLINE_VERIFIED: {
@@ -48,7 +48,7 @@ const BADGE: Record<
   ON_SITE_VERIFIED: {
     icon: "✓✓",
     text: "",
-    className: "border-[#0f4c81] text-[#0f4c81] bg-[#e6eef6]",
+    className: "border-[#171717] text-[#171717] bg-[#f5f3ee]",
   },
   // 已过期：琥珀色 + 时钟 + 虚线边框
   EXPIRED: {

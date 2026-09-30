@@ -79,10 +79,10 @@ export default function AuditConsole({ auditId, supplierId, currentStatus, allow
 
       {/* §47 状态机推进 */}
       <div className="card p-4">
-        <h3 className="text-sm font-semibold text-[#0f172a]">Status · {currentStatus}</h3>
+        <h3 className="text-sm font-semibold text-[#171717]">Status · {currentStatus}</h3>
         {allowedNext.length > 0 ? (
           <div className="mt-3 flex flex-wrap items-end gap-3">
-            <label className="text-xs text-[#64748b]">
+            <label className="text-xs text-[#6d6b66]">
               Advance to
               <select className="select mt-1 block" value={next} onChange={(e) => setNext(e.target.value)}>
                 {allowedNext.map((s) => (
@@ -102,25 +102,25 @@ export default function AuditConsole({ auditId, supplierId, currentStatus, allow
             </button>
           </div>
         ) : (
-          <p className="mt-2 text-xs text-[#64748b]">No transitions available (terminal state).</p>
+          <p className="mt-2 text-xs text-[#6d6b66]">No transitions available (terminal state).</p>
         )}
       </div>
 
       {/* §29 发现项 + §30 整改 */}
       <div className="card p-4">
-        <h3 className="text-sm font-semibold text-[#0f172a]">Findings ({initialView.findings.length})</h3>
+        <h3 className="text-sm font-semibold text-[#171717]">Findings ({initialView.findings.length})</h3>
         <div className="mt-3 space-y-3">
           {initialView.findings.map((f) => (
-            <div key={f.id} className="rounded-md border border-[#e2e8f0] p-3">
+            <div key={f.id} className="rounded-md border border-[#ebe8e1] p-3">
               <div className="flex items-center gap-2 text-xs">
                 <span className="rounded bg-[#fef3c7] px-2 py-0.5 font-semibold text-[#92400e]">{f.severity}</span>
-                <span className="text-[#64748b]">{f.status}</span>
+                <span className="text-[#6d6b66]">{f.status}</span>
               </div>
-              <p className="mt-1 text-sm text-[#0f172a]">{f.description}</p>
+              <p className="mt-1 text-sm text-[#171717]">{f.description}</p>
               {f.correctiveActions.length > 0 && (
                 <ul className="mt-2 space-y-1">
                   {f.correctiveActions.map((c) => (
-                    <li key={c.id} className="text-xs text-[#475569]">
+                    <li key={c.id} className="text-xs text-[#3f4650]">
                       ↳ CAP [{c.status}]: {c.description}
                     </li>
                   ))}
@@ -150,14 +150,14 @@ export default function AuditConsole({ auditId, supplierId, currentStatus, allow
             </div>
           ))}
           {initialView.findings.length === 0 && (
-            <p className="text-xs text-[#64748b]">No findings yet.</p>
+            <p className="text-xs text-[#6d6b66]">No findings yet.</p>
           )}
         </div>
 
-        <div className="mt-4 border-t border-[#e2e8f0] pt-3">
-          <h4 className="text-xs font-semibold text-[#475569]">Add finding</h4>
+        <div className="mt-4 border-t border-[#ebe8e1] pt-3">
+          <h4 className="text-xs font-semibold text-[#3f4650]">Add finding</h4>
           <div className="mt-2 flex flex-wrap items-end gap-2">
-            <label className="text-xs text-[#64748b]">
+            <label className="text-xs text-[#6d6b66]">
               Severity
               <select className="select mt-1 block" value={sev} onChange={(e) => setSev(e.target.value)}>
                 {SEVERITIES.map((s) => (
@@ -193,24 +193,24 @@ export default function AuditConsole({ auditId, supplierId, currentStatus, allow
 
       {/* §25-§28 证据 */}
       <div className="card p-4">
-        <h3 className="text-sm font-semibold text-[#0f172a]">Evidence ({initialView.evidence.length})</h3>
+        <h3 className="text-sm font-semibold text-[#171717]">Evidence ({initialView.evidence.length})</h3>
         <div className="mt-3 space-y-2">
           {initialView.evidence.map((e) => (
-            <div key={e.id} className="text-xs text-[#475569]">
+            <div key={e.id} className="text-xs text-[#3f4650]">
               {e.filename ? <span className="font-medium">{e.filename}</span> : <span className="italic">untitled</span>}
               {e.source && <span className="ml-2 rounded bg-[#eef2ff] px-2 py-0.5 text-[#3730a3]">{e.source}</span>}
-              {e.verificationStatus && <span className="ml-2 text-[#64748b]">{e.verificationStatus}</span>}
+              {e.verificationStatus && <span className="ml-2 text-[#6d6b66]">{e.verificationStatus}</span>}
             </div>
           ))}
-          {initialView.evidence.length === 0 && <p className="text-xs text-[#64748b]">No evidence yet.</p>}
+          {initialView.evidence.length === 0 && <p className="text-xs text-[#6d6b66]">No evidence yet.</p>}
         </div>
 
-        <div className="mt-4 border-t border-[#e2e8f0] pt-3">
-          <h4 className="text-xs font-semibold text-[#475569]">Add evidence</h4>
+        <div className="mt-4 border-t border-[#ebe8e1] pt-3">
+          <h4 className="text-xs font-semibold text-[#3f4650]">Add evidence</h4>
           {supplierId ? (
             <div className="mt-2 space-y-2">
               <div className="flex flex-wrap items-end gap-2">
-                <label className="text-xs text-[#64748b]">
+                <label className="text-xs text-[#6d6b66]">
                   Source
                   <select className="select mt-1 block" value={src} onChange={(e) => setSrc(e.target.value)}>
                     {SOURCES.map((s) => (

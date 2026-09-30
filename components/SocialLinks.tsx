@@ -32,7 +32,7 @@ export default function SocialLinks({ className = "" }: { className?: string }) 
           target="_blank"
           rel="noopener noreferrer"
           aria-label={ICONS[s.platform].label}
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#e6eef6] text-[#0f4c81] transition hover:bg-[#0f4c81] hover:text-white"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f5f3ee] text-[#171717] transition hover:bg-[#171717] hover:text-white"
         >
           <svg viewBox="0 0 24 24" className="h-4.5 w-4.5 fill-current" aria-hidden>
             <path d={ICONS[s.platform].path} />

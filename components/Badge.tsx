@@ -8,8 +8,8 @@
 //        pending    #8a5410 on #fff4e0 = 5.74:1
 //        expiring   #8a5410 on #fff4e0 = 5.74:1
 //        rejected   #9b1c1c on #fdeaea = 7.04:1
-//        expired    #475569 on #f1f5f9 = 6.92:1
-//        neutral    #0f4c81 on #e6eef6 = 7.56:1
+//        expired    #3f4650 on #f5f3ee = 6.92:1
+//        neutral    #171717 on #f5f3ee = 7.56:1
 //   3. 语义与实际数据绑定：没有记录不得渲染 verified 徽章（调用方负责判断）。
 
 import type { ReactNode } from "react";
@@ -27,8 +27,8 @@ const STYLES: Record<BadgeVariant, string> = {
   pending: "bg-[#fff4e0] text-[#8a5410]",
   expiring: "bg-[#fff4e0] text-[#8a5410]",
   rejected: "bg-[#fdeaea] text-[#9b1c1c]",
-  expired: "bg-[#f1f5f9] text-[#475569]",
-  neutral: "bg-[#e6eef6] text-[#0f4c81]",
+  expired: "bg-[#f5f3ee] text-[#3f4650]",
+  neutral: "bg-[#f5f3ee] text-[#171717]",
 };
 
 export function Badge({

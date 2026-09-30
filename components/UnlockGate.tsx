@@ -195,8 +195,8 @@ function BlockLocked({
   const cta = useCta(labels, registerHref, membershipHref);
   return (
     <div className={className}>
-      <div className="text-sm text-[#475569]">
-        <span className="font-semibold text-[#0f172a]">{title}</span> {lead}
+      <div className="text-sm text-[#3f4650]">
+        <span className="font-semibold text-[#171717]">{title}</span> {lead}
       </div>
       <Link
         href={cta.href}
@@ -216,7 +216,7 @@ function BlockLocked({
  */
 export function LockIcon({ label = "Locked" }: { label?: string }) {
   return (
-    <span className="text-[#94a3b8]" role="img" aria-label={label}>
+    <span className="text-[#8c8982]" role="img" aria-label={label}>
       🔒
     </span>
   );

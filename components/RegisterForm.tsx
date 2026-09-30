@@ -181,7 +181,7 @@ export default function RegisterForm({ t, nextHref }: Props) {
         <p className="font-semibold text-[#1f7a36]">
           {instant ? t.successTitleInstant : t.successTitle}
         </p>
-        <p className="text-sm text-[#64748b] mt-2">
+        <p className="text-sm text-[#6d6b66] mt-2">
           {instant ? t.successLeadInstant : t.successLead}
         </p>
       </div>
@@ -226,7 +226,7 @@ export default function RegisterForm({ t, nextHref }: Props) {
             placeholder={t.passwordPlaceholder}
             className="input"
           />
-          <p className="text-xs text-[#64748b] mt-1">{t.passwordHint}</p>
+          <p className="text-xs text-[#6d6b66] mt-1">{t.passwordHint}</p>
         </div>
       )}
 
@@ -256,7 +256,7 @@ export default function RegisterForm({ t, nextHref }: Props) {
         />
       </div>
 
-      <p className="text-xs text-[#64748b]">{t.privacyNote}</p>
+      <p className="text-xs text-[#6d6b66]">{t.privacyNote}</p>
 
       <button type="submit" disabled={status === "loading"} className="btn btn-primary w-full">
         {status === "loading" ? t.submitting : t.submit}

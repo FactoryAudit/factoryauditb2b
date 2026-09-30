@@ -97,7 +97,7 @@ export default function ClaimForm({ t, slug, legalName }: Props) {
       <div className="card p-6 text-center bg-[#f0fdf4]">
         <div className="text-2xl mb-2">✓</div>
         <p className="font-semibold text-[#1f7a36]">{t.successTitle}</p>
-        <p className="text-sm text-[#64748b] mt-2">{t.successLead}</p>
+        <p className="text-sm text-[#6d6b66] mt-2">{t.successLead}</p>
       </div>
     );
   }
@@ -118,7 +118,7 @@ export default function ClaimForm({ t, slug, legalName }: Props) {
           placeholder={t.emailPlaceholder}
           className="input"
         />
-        <p className="text-xs text-[#64748b] mt-1">{t.emailHint}</p>
+        <p className="text-xs text-[#6d6b66] mt-1">{t.emailHint}</p>
       </div>
 
       <div>
@@ -177,7 +177,7 @@ export default function ClaimForm({ t, slug, legalName }: Props) {
         />
       </div>
 
-      <p className="text-xs text-[#64748b]">{t.privacyNote}</p>
+      <p className="text-xs text-[#6d6b66]">{t.privacyNote}</p>
 
       <button type="submit" disabled={status === "loading"} className="btn btn-primary w-full">
         {status === "loading" ? t.submitting : t.submit}

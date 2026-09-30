@@ -169,13 +169,13 @@ export default async function AdminSupplierEditPage({ params }: Props) {
     <div>
       <Link
         href={p("/admin/suppliers")}
-        className="text-sm text-[#0f4c81] hover:underline"
+        className="text-sm text-[#171717] hover:underline"
       >
         ← {a.backToList}
       </Link>
 
-      <h1 className="mt-2 text-2xl font-bold text-[#0f172a]">{row.legal_name}</h1>
-      <p className="mt-1 font-mono text-xs text-[#94a3b8]">{row.slug}</p>
+      <h1 className="mt-2 text-2xl font-bold text-[#171717]">{row.legal_name}</h1>
+      <p className="mt-1 font-mono text-xs text-[#8c8982]">{row.slug}</p>
 
       {/* STEP 12 Change Set B → STEP 13 A2：审核入口要能一眼看到「数据完整度 / 授权 / 核验」。
           完整度判定统一走 lib/supplierCompleteness.ts（与 Lead 列表、发布闸门同一份口径），
@@ -186,9 +186,9 @@ export default async function AdminSupplierEditPage({ params }: Props) {
         const zh = locale === "zh" || locale === "zh-TW";
         const c = completeness;
         return (
-          <div className="mt-3 rounded-lg border border-[#e2e8f0] bg-white p-3">
+          <div className="mt-3 rounded-lg border border-[#ebe8e1] bg-white p-3">
             <div className="flex flex-wrap items-center gap-3">
-              <span className="text-xs font-semibold uppercase text-[#64748b]">
+              <span className="text-xs font-semibold uppercase text-[#6d6b66]">
                 {zh ? `数据完整度 ${c.score}/${c.total}` : `Data completeness ${c.score}/${c.total}`}
               </span>
               <span
@@ -196,7 +196,7 @@ export default async function AdminSupplierEditPage({ params }: Props) {
                   c.rejected
                     ? "bg-[#fdeaea] text-[#d4232a]"
                     : c.publishable
-                      ? "bg-[#e6eef6] text-[#0f4c81]"
+                      ? "bg-[#f5f3ee] text-[#171717]"
                       : "bg-[#fdf3d8] text-[#8a5a00]"
                 }`}
               >
@@ -311,7 +311,7 @@ export default async function AdminSupplierEditPage({ params }: Props) {
         />
       </div>
 
-      <p className="mt-4 text-xs text-[#64748b]">{a.editorNote}</p>
+      <p className="mt-4 text-xs text-[#6d6b66]">{a.editorNote}</p>
 
       {/* CS-20：报告正文编辑器（人工录入；导出为自包含 HTML） */}
       <div className="mt-10">

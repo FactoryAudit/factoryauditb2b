@@ -56,23 +56,23 @@ export default function OnSiteAuditApply({ supplierId, email, initial }: Props) 
   const done = state?.status === "published";
 
   return (
-    <section className="max-w-4xl mx-auto mt-10 rounded-xl border border-[#e2e8f0] bg-[#f7f9fc] p-6">
-      <h2 className="text-xl font-bold text-[#0f172a]">平台现场审核 / Platform On-site Audit</h2>
-      <p className="mt-2 text-sm text-[#475569]">
+    <section className="max-w-4xl mx-auto mt-10 rounded-xl border border-[#ebe8e1] bg-[#fbfaf7] p-6">
+      <h2 className="text-xl font-bold text-[#171717]">平台现场审核 / Platform On-site Audit</h2>
+      <p className="mt-2 text-sm text-[#3f4650]">
         供应商可发起申请，由 FactoryAuditB2B 安排线下现场审核。平台承诺
         <span className="font-semibold text-[#b45309]"> 7 个工作日 </span>
         SLA 内完成并上传报告，发布后该供应商显示「平台现场审核」标签。
       </p>
 
       {state ? (
-        <div className="mt-4 rounded-lg border border-[#e2e8f0] bg-white p-4 text-sm">
+        <div className="mt-4 rounded-lg border border-[#ebe8e1] bg-white p-4 text-sm">
           <div className="flex justify-between gap-3">
-            <span className="text-[#64748b]">当前状态</span>
-            <span className="font-medium text-[#0f172a]">{STATUS_LABEL[state.status] ?? state.status}</span>
+            <span className="text-[#6d6b66]">当前状态</span>
+            <span className="font-medium text-[#171717]">{STATUS_LABEL[state.status] ?? state.status}</span>
           </div>
           {state.slaDueAt ? (
             <div className="mt-2 flex justify-between gap-3">
-              <span className="text-[#64748b]">预计完成（SLA）</span>
+              <span className="text-[#6d6b66]">预计完成（SLA）</span>
               <span className="font-medium text-[#b45309]">{fmtDate(state.slaDueAt)}</span>
             </div>
           ) : null}
@@ -93,7 +93,7 @@ export default function OnSiteAuditApply({ supplierId, email, initial }: Props) 
       )}
 
       {!supplierId || !email ? (
-        <p className="mt-3 text-xs text-[#94a3b8]">
+        <p className="mt-3 text-xs text-[#8c8982]">
           需先通过「成为供应商」登记并携带 supplier / email 参数访问本页，方可发起申请。
         </p>
       ) : null}

@@ -132,11 +132,11 @@ export default function AccountMenu({
         aria-haspopup="menu"
         aria-expanded={open}
         aria-label={dict.menuLabel}
-        className="flex items-center gap-1.5 text-sm font-medium text-[#0f172a] hover:text-[#0f4c81] whitespace-nowrap"
+        className="flex items-center gap-1.5 text-sm font-medium text-[#171717] hover:text-[#171717] whitespace-nowrap"
       >
         <span
           aria-hidden="true"
-          className="w-6 h-6 rounded-full bg-[#e6eef6] text-[#0f4c81] text-xs flex items-center justify-center font-bold"
+          className="w-6 h-6 rounded-full bg-[#f5f3ee] text-[#171717] text-xs flex items-center justify-center font-bold"
         >
           {shortName.slice(0, 1).toUpperCase()}
         </span>
@@ -151,15 +151,15 @@ export default function AccountMenu({
           role="menu"
           className="absolute right-0 top-full w-60 pt-2 z-40"
         >
-          <div className="rounded-lg border border-[#e2e8f0] bg-white p-2 shadow-lg">
-            <div className="px-3 py-2 border-b border-[#e2e8f0] mb-1">
-              <div className="text-xs text-[#64748b] truncate">{me.email}</div>
+          <div className="rounded-lg border border-[#ebe8e1] bg-white p-2 shadow-lg">
+            <div className="px-3 py-2 border-b border-[#ebe8e1] mb-1">
+              <div className="text-xs text-[#6d6b66] truncate">{me.email}</div>
               <div className="mt-1 flex items-center gap-2">
                 <span
                   className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
                     isPayingPlan
-                      ? "bg-[#0f4c81] text-white"
-                      : "bg-[#e6eef6] text-[#0f4c81]"
+                      ? "bg-[#171717] text-white"
+                      : "bg-[#f5f3ee] text-[#171717]"
                   }`}
                 >
                   {isPayingPlan ? dict.planFounding : dict.planFree}
@@ -170,7 +170,7 @@ export default function AccountMenu({
             <Link
               href={p("/account")}
               role="menuitem"
-              className="block rounded-md px-3 py-2 text-sm hover:bg-[#f1f5f9]"
+              className="block rounded-md px-3 py-2 text-sm hover:bg-[#f5f3ee]"
               onClick={() => setOpen(false)}
             >
               {dict.myAccount}
@@ -184,7 +184,7 @@ export default function AccountMenu({
             <Link
               href={p("/account/saved")}
               role="menuitem"
-              className="block rounded-md px-3 py-2 text-sm hover:bg-[#f1f5f9]"
+              className="block rounded-md px-3 py-2 text-sm hover:bg-[#f5f3ee]"
               onClick={() => setOpen(false)}
             >
               {dict.saved}
@@ -192,7 +192,7 @@ export default function AccountMenu({
             <Link
               href={p("/account/rfqs")}
               role="menuitem"
-              className="block rounded-md px-3 py-2 text-sm hover:bg-[#f1f5f9]"
+              className="block rounded-md px-3 py-2 text-sm hover:bg-[#f5f3ee]"
               onClick={() => setOpen(false)}
             >
               {dict.rfqs}
@@ -209,7 +209,7 @@ export default function AccountMenu({
               <Link
                 href={p("/admin")}
                 role="menuitem"
-                className="block rounded-md px-3 py-2 text-sm hover:bg-[#f1f5f9]"
+                className="block rounded-md px-3 py-2 text-sm hover:bg-[#f5f3ee]"
                 onClick={() => setOpen(false)}
               >
                 {dict.adminConsole}
@@ -219,7 +219,7 @@ export default function AccountMenu({
               <Link
                 href={p("/pricing#founding-buyer")}
                 role="menuitem"
-                className="block rounded-md px-3 py-2 text-sm font-medium text-[#0f4c81] hover:bg-[#e6eef6]"
+                className="block rounded-md px-3 py-2 text-sm font-medium text-[#171717] hover:bg-[#f5f3ee]"
                 onClick={() => setOpen(false)}
               >
                 {dict.upgrade}
@@ -230,7 +230,7 @@ export default function AccountMenu({
               type="button"
               role="menuitem"
               onClick={handleSignOut}
-              className="w-full text-left rounded-md px-3 py-2 text-sm text-[#475569] hover:bg-[#f1f5f9]"
+              className="w-full text-left rounded-md px-3 py-2 text-sm text-[#3f4650] hover:bg-[#f5f3ee]"
             >
               {dict.signOut}
             </button>

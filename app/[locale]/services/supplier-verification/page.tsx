@@ -73,9 +73,9 @@ export default async function Page({ params }: Props) {
       <JsonLd data={jsonLd} />
 
       <section className="max-w-3xl mx-auto text-center mb-12">
-        <span className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">{s.badge}</span>
-        <h1 className="text-4xl font-extrabold text-[#0f172a] mt-2">{s.h1}</h1>
-        <p className="text-[#64748b] mt-3 text-lg">{s.lead}</p>
+        <span className="text-sm font-semibold text-[#171717] uppercase tracking-wide">{s.badge}</span>
+        <h1 className="text-4xl font-extrabold text-[#171717] mt-2">{s.h1}</h1>
+        <p className="text-[#6d6b66] mt-3 text-lg">{s.lead}</p>
         <div className="mt-6 flex gap-3 flex-wrap justify-center">
           <Link href={p("/factory-audit/request")} className="btn btn-primary">
             {s.ctaPrimary}
@@ -87,41 +87,41 @@ export default async function Page({ params }: Props) {
       </section>
 
       <section className="mb-14">
-        <h2 className="text-2xl font-bold text-[#0f172a] mb-1">{s.checksTitle}</h2>
-        <p className="text-[#64748b] mb-6">{s.checksLead}</p>
-        <div className="grid md:grid-cols-3 gap-5">
+        <h2 className="text-2xl font-bold text-[#171717] mb-1">{s.checksTitle}</h2>
+        <p className="text-[#6d6b66] mb-6">{s.checksLead}</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {checks.map((c) => (
             <div key={c.title} className="card p-5">
-              <div className="font-semibold text-[#0f4c81] mb-2">{c.title}</div>
-              <p className="text-sm text-[#475569]">{c.body}</p>
+              <div className="font-semibold text-[#171717] mb-2">{c.title}</div>
+              <p className="text-sm text-[#3f4650]">{c.body}</p>
             </div>
           ))}
         </div>
       </section>
 
       <section className="mb-14">
-        <h2 className="text-2xl font-bold text-[#0f172a] mb-1">{s.stepsTitle}</h2>
-        <p className="text-[#64748b] mb-6">{s.stepsLead}</p>
-        <div className="grid md:grid-cols-4 gap-5">
+        <h2 className="text-2xl font-bold text-[#171717] mb-1">{s.stepsTitle}</h2>
+        <p className="text-[#6d6b66] mb-6">{s.stepsLead}</p>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
           {s.steps.map((step, i) => (
             <div key={step.title} className="card p-5">
-              <div className="w-8 h-8 rounded-full bg-[#0f4c81] text-white grid place-items-center font-bold mb-3">
+              <div className="w-8 h-8 rounded-full bg-[#171717] text-white grid grid-cols-1 place-items-center font-bold mb-3">
                 {i + 1}
               </div>
-              <div className="font-semibold text-[#0f172a] mb-1">{step.title}</div>
-              <p className="text-sm text-[#64748b]">{step.body}</p>
+              <div className="font-semibold text-[#171717] mb-1">{step.title}</div>
+              <p className="text-sm text-[#6d6b66]">{step.body}</p>
             </div>
           ))}
         </div>
       </section>
 
       <section className="mb-14">
-        <h2 className="text-2xl font-bold text-[#0f172a] mb-1">{s.deliverablesTitle}</h2>
+        <h2 className="text-2xl font-bold text-[#171717] mb-1">{s.deliverablesTitle}</h2>
         <div className="card p-6 mt-4">
-          <ul className="grid md:grid-cols-2 gap-3 text-sm text-[#475569]">
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-[#3f4650]">
             {s.deliverables.map((x) => (
               <li key={x} className="flex gap-2">
-                <span className="text-[#0f4c81] font-bold">✓</span>
+                <span className="text-[#171717] font-bold">✓</span>
                 <span>{x}</span>
               </li>
             ))}
@@ -130,20 +130,20 @@ export default async function Page({ params }: Props) {
       </section>
 
       <section className="max-w-3xl mx-auto mb-14">
-        <h2 className="text-2xl font-bold text-[#0f172a] mb-4">{s.faqTitle}</h2>
+        <h2 className="text-2xl font-bold text-[#171717] mb-4">{s.faqTitle}</h2>
         <div className="space-y-4">
           {s.faq.map((f) => (
             <div key={f.q} className="card p-5">
-              <div className="font-semibold text-[#0f172a]">{f.q}</div>
-              <p className="text-sm text-[#475569] mt-1">{f.a}</p>
+              <div className="font-semibold text-[#171717]">{f.q}</div>
+              <p className="text-sm text-[#3f4650] mt-1">{f.a}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="card p-8 text-center bg-[#f7f9fc]">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{s.bottomTitle}</h2>
-        <p className="text-[#64748b] mt-2 max-w-2xl mx-auto">{s.bottomLead}</p>
+      <section className="card p-8 text-center bg-[#fbfaf7]">
+        <h2 className="text-2xl font-bold text-[#171717]">{s.bottomTitle}</h2>
+        <p className="text-[#6d6b66] mt-2 max-w-2xl mx-auto">{s.bottomLead}</p>
         <div className="mt-6 flex gap-3 flex-wrap justify-center">
           <Link href={p("/tools/supplier-risk-calculator")} className="btn btn-primary">
             {s.bottomPrimary}

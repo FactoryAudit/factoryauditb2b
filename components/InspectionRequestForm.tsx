@@ -98,11 +98,11 @@ export default function InspectionRequestForm({ t }: { t: InspectionFormDict }) 
       className="card p-6 sm:p-8 max-w-3xl space-y-6"
     >
       {/* 联系字段：/api/lead 强制要求 email，缺少会导致提交永远 400（此前是写死空串，表单必败） */}
-      <div className="grid md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         <div>
           <label
             htmlFor="inspection-name"
-            className="block text-sm font-medium text-[#0f172a] mb-1.5"
+            className="block text-sm font-medium text-[#171717] mb-1.5"
           >
             {t.firstName}
           </label>
@@ -117,7 +117,7 @@ export default function InspectionRequestForm({ t }: { t: InspectionFormDict }) 
         <div>
           <label
             htmlFor="inspection-company"
-            className="block text-sm font-medium text-[#0f172a] mb-1.5"
+            className="block text-sm font-medium text-[#171717] mb-1.5"
           >
             {t.company}
           </label>
@@ -132,7 +132,7 @@ export default function InspectionRequestForm({ t }: { t: InspectionFormDict }) 
         <div>
           <label
             htmlFor="inspection-email"
-            className="block text-sm font-medium text-[#0f172a] mb-1.5"
+            className="block text-sm font-medium text-[#171717] mb-1.5"
           >
             {t.email}
           </label>
@@ -151,8 +151,8 @@ export default function InspectionRequestForm({ t }: { t: InspectionFormDict }) 
 
       {/* 阶段单选：5 个选项排成 2-3 列的按钮组，窄屏自动换行，比 5 个 radio 挤一行清晰 */}
       <fieldset>
-        <legend className="text-sm font-medium text-[#0f172a]">{t.stageLabel}</legend>
-        <p className="text-xs text-[#64748b] mt-1 mb-3">{t.stageHint}</p>
+        <legend className="text-sm font-medium text-[#171717]">{t.stageLabel}</legend>
+        <p className="text-xs text-[#6d6b66] mt-1 mb-3">{t.stageHint}</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {t.stages.map((s) => {
             const active = form.stage === s;
@@ -161,8 +161,8 @@ export default function InspectionRequestForm({ t }: { t: InspectionFormDict }) 
                 key={s}
                 className={`flex items-center gap-2 cursor-pointer rounded-md border px-4 py-3 transition ${
                   active
-                    ? "border-[#0f4c81] bg-[#e6eef6] text-[#0f4c81]"
-                    : "border-[#e2e8f0] hover:border-[#0f4c81] hover:bg-[#f7f9fc]"
+                    ? "border-[#171717] bg-[#f5f3ee] text-[#171717]"
+                    : "border-[#ebe8e1] hover:border-[#171717] hover:bg-[#fbfaf7]"
                 }`}
               >
                 <input
@@ -171,7 +171,7 @@ export default function InspectionRequestForm({ t }: { t: InspectionFormDict }) 
                   value={s}
                   checked={active}
                   onChange={(e) => set("stage", e.target.value)}
-                  className="accent-[#0f4c81]"
+                  className="accent-[#171717]"
                 />
                 <span className="text-sm font-medium">{s}</span>
               </label>
@@ -183,7 +183,7 @@ export default function InspectionRequestForm({ t }: { t: InspectionFormDict }) 
       <div>
         <label
           htmlFor="inspection-factory"
-          className="block text-sm font-medium text-[#0f172a] mb-1.5"
+          className="block text-sm font-medium text-[#171717] mb-1.5"
         >
           {t.factoryLocation}
         </label>
@@ -197,11 +197,11 @@ export default function InspectionRequestForm({ t }: { t: InspectionFormDict }) 
         />
       </div>
 
-      <div className="grid md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         <div>
           <label
             htmlFor="inspection-product"
-            className="block text-sm font-medium text-[#0f172a] mb-1.5"
+            className="block text-sm font-medium text-[#171717] mb-1.5"
           >
             {t.product}
           </label>
@@ -216,7 +216,7 @@ export default function InspectionRequestForm({ t }: { t: InspectionFormDict }) 
         <div>
           <label
             htmlFor="inspection-qty"
-            className="block text-sm font-medium text-[#0f172a] mb-1.5"
+            className="block text-sm font-medium text-[#171717] mb-1.5"
           >
             {t.quantity}
           </label>
@@ -230,7 +230,7 @@ export default function InspectionRequestForm({ t }: { t: InspectionFormDict }) 
         <div>
           <label
             htmlFor="inspection-date"
-            className="block text-sm font-medium text-[#0f172a] mb-1.5"
+            className="block text-sm font-medium text-[#171717] mb-1.5"
           >
             {t.inspectionDate}
           </label>
@@ -247,7 +247,7 @@ export default function InspectionRequestForm({ t }: { t: InspectionFormDict }) 
       <div>
         <label
           htmlFor="inspection-req"
-          className="block text-sm font-medium text-[#0f172a] mb-1.5"
+          className="block text-sm font-medium text-[#171717] mb-1.5"
         >
           {t.requirements}
         </label>

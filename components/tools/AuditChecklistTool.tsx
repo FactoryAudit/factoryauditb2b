@@ -41,14 +41,14 @@ export default function AuditChecklistTool({ ui }: { ui: AuditChecklistUi }) {
           </div>
           <div className="space-y-2">
             {items.map((q, i) => (
-              <div key={i} className="border border-[#e2e8f0] rounded-lg p-3">
+              <div key={i} className="border border-[#ebe8e1] rounded-lg p-3">
                 <div className="flex justify-between gap-3">
                   <span className="font-medium text-sm">{ui.questions?.[q.key]?.q ?? q.question}</span>
                   <span className="text-xs font-semibold whitespace-nowrap" style={{ color: riskColor[q.riskLevel] }}>
                     {RISK_LABEL[q.riskLevel] ?? q.riskLevel} {ui.riskSuffix}
                   </span>
                 </div>
-                <div className="text-xs text-[#64748b]">
+                <div className="text-xs text-[#6d6b66]">
                   {ui.categoryLabel}: {ui.questions?.[q.key]?.cat ?? q.category} · {ui.evidenceLabel}: {ui.questions?.[q.key]?.ev ?? q.evidenceRequired}
                 </div>
               </div>

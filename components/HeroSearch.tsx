@@ -109,14 +109,14 @@ export default function HeroSearch({
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg border border-[#e2e8f0] p-5 max-w-2xl">
+    <div className="bg-white rounded-2xl shadow-lg border border-[#ebe8e1] p-5 max-w-2xl">
       <div className="flex gap-2 mb-3 flex-wrap">
         {(["tabSupplier", "tabProduct", "tabAudit", "tabInspector"] as const).map((k) => (
           <button
             key={k}
             onClick={() => setTab(k)}
             className={`px-3 py-1.5 rounded-lg text-sm font-medium ${
-              tab === k ? "bg-[#0f4c81] text-white" : "bg-[#f1f5f9] text-[#475569]"
+              tab === k ? "bg-[#171717] text-white" : "bg-[#f5f3ee] text-[#3f4650]"
             }`}
           >
             {t[k]}
@@ -137,34 +137,34 @@ export default function HeroSearch({
       </div>
       {results && (
         <div className="mt-4 space-y-2 text-sm">
-          <div className="text-xs font-semibold text-[#64748b] uppercase">
+          <div className="text-xs font-semibold text-[#6d6b66] uppercase">
             {t.combinedHint}
           </div>
           {results.map((r, i) => (
-            <div key={i} className="card p-3 text-[#0f172a]">
+            <div key={i} className="card p-3 text-[#171717]">
               {r}
             </div>
           ))}
         </div>
       )}
       {noHit && assessStatus !== "ok" && (
-        <div className="mt-4 rounded-lg border border-[#0f4c81]/20 bg-[#f7f9fc] p-4">
-          <p className="text-sm font-semibold text-[#0f172a]">{t.urlDetected}</p>
-          <p className="text-xs text-[#64748b] mt-1">{t.assessHint}</p>
+        <div className="mt-4 rounded-lg border border-[#171717]/20 bg-[#fbfaf7] p-4">
+          <p className="text-sm font-semibold text-[#171717]">{t.urlDetected}</p>
+          <p className="text-xs text-[#6d6b66] mt-1">{t.assessHint}</p>
           {assessStatus === "error" && (
             <p className="text-sm text-[#d4232a] mt-2">{t.assessError}</p>
           )}
-          <form onSubmit={submitAssess} className="mt-3 grid md:grid-cols-3 gap-2 items-end">
+          <form onSubmit={submitAssess} className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-2 items-end">
             <div>
-              <label className="text-xs font-medium text-[#475569]">{t.formName}</label>
+              <label className="text-xs font-medium text-[#3f4650]">{t.formName}</label>
               <input className="input" name="name" placeholder={t.formName} />
             </div>
             <div>
-              <label className="text-xs font-medium text-[#475569]">{t.formEmail}</label>
+              <label className="text-xs font-medium text-[#3f4650]">{t.formEmail}</label>
               <input className="input" name="email" type="email" required placeholder={t.formEmail} />
             </div>
             <div>
-              <label className="text-xs font-medium text-[#475569]">{t.formCompany}</label>
+              <label className="text-xs font-medium text-[#3f4650]">{t.formCompany}</label>
               <input className="input" name="company" placeholder={t.formCompany} />
             </div>
             <button

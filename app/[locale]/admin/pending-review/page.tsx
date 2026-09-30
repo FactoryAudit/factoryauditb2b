@@ -54,22 +54,22 @@ export default async function AdminPendingReviewPage({ params }: Props) {
     <div>
       <Link
         href={p("/admin/suppliers")}
-        className="text-sm text-[#0f4c81] hover:underline"
+        className="text-sm text-[#171717] hover:underline"
       >
         ← {a.backToList}
       </Link>
 
-      <h1 className="mt-2 text-2xl font-bold text-[#0f172a]">{d.adminPendingTitle}</h1>
-      <p className="mt-1 text-sm text-[#475569]">{d.adminPendingLead}</p>
+      <h1 className="mt-2 text-2xl font-bold text-[#171717]">{d.adminPendingTitle}</h1>
+      <p className="mt-1 text-sm text-[#3f4650]">{d.adminPendingLead}</p>
 
       {/* ---- 待审核 ---- */}
       <section className="mt-6">
         {pending.length === 0 ? (
-          <p className="text-sm text-[#475569]">{d.adminPendingEmpty}</p>
+          <p className="text-sm text-[#3f4650]">{d.adminPendingEmpty}</p>
         ) : (
           <div className="card overflow-x-auto p-0">
             <table className="w-full text-sm">
-              <thead className="bg-[#f7f9fc] text-left text-xs text-[#475569]">
+              <thead className="bg-[#fbfaf7] text-left text-xs text-[#3f4650]">
                 <tr>
                   <th className="px-3 py-2">Type</th>
                   <th className="px-3 py-2">{d.sectionEvidence}</th>
@@ -79,17 +79,17 @@ export default async function AdminPendingReviewPage({ params }: Props) {
               </thead>
               <tbody>
                 {pending.map((it) => (
-                  <tr key={`${it.kind}-${it.id}`} className="border-t border-[#e2e8f0]">
-                    <td className="px-3 py-2 text-xs text-[#475569]">{it.kind}</td>
+                  <tr key={`${it.kind}-${it.id}`} className="border-t border-[#ebe8e1]">
+                    <td className="px-3 py-2 text-xs text-[#3f4650]">{it.kind}</td>
                     <td className="px-3 py-2">
                       <Link
                         href={p(`/admin/suppliers/${it.supplierSlug}/${KIND_PATH[it.kind]}`)}
-                        className="font-medium text-[#0f4c81] hover:underline"
+                        className="font-medium text-[#171717] hover:underline"
                       >
                         {it.label}
                       </Link>
                     </td>
-                    <td className="px-3 py-2 text-xs text-[#475569]">
+                    <td className="px-3 py-2 text-xs text-[#3f4650]">
                       {it.supplierName || it.supplierSlug}
                     </td>
                     <td className="px-3 py-2">
@@ -105,13 +105,13 @@ export default async function AdminPendingReviewPage({ params }: Props) {
 
       {/* ---- 即将到期 ---- */}
       <section className="mt-8">
-        <h2 className="text-lg font-bold text-[#0f172a]">{d.adminExpiringTitle}</h2>
+        <h2 className="text-lg font-bold text-[#171717]">{d.adminExpiringTitle}</h2>
         {expiring.length === 0 ? (
-          <p className="mt-2 text-sm text-[#475569]">{d.adminExpiringEmpty}</p>
+          <p className="mt-2 text-sm text-[#3f4650]">{d.adminExpiringEmpty}</p>
         ) : (
           <div className="card mt-3 overflow-x-auto p-0">
             <table className="w-full text-sm">
-              <thead className="bg-[#f7f9fc] text-left text-xs text-[#475569]">
+              <thead className="bg-[#fbfaf7] text-left text-xs text-[#3f4650]">
                 <tr>
                   <th className="px-3 py-2">Program</th>
                   <th className="px-3 py-2">Supplier</th>
@@ -121,17 +121,17 @@ export default async function AdminPendingReviewPage({ params }: Props) {
               </thead>
               <tbody>
                 {expiring.map((c) => (
-                  <tr key={c.id} className="border-t border-[#e2e8f0]">
-                    <td className="px-3 py-2 font-medium text-[#0f172a]">{c.programCode}</td>
+                  <tr key={c.id} className="border-t border-[#ebe8e1]">
+                    <td className="px-3 py-2 font-medium text-[#171717]">{c.programCode}</td>
                     <td className="px-3 py-2">
                       <Link
                         href={p(`/admin/suppliers/${c.supplierSlug}/certifications`)}
-                        className="text-[#0f4c81] hover:underline"
+                        className="text-[#171717] hover:underline"
                       >
                         {c.supplierName || c.supplierSlug}
                       </Link>
                     </td>
-                    <td className="px-3 py-2 text-xs text-[#475569]">
+                    <td className="px-3 py-2 text-xs text-[#3f4650]">
                       {c.expiryDate ?? "—"}
                       {c.daysLeft !== null ? (
                         <div>

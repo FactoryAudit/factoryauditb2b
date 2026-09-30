@@ -78,17 +78,17 @@ export default async function AdminRfqsPage({ params }: Props) {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-[#0f172a]">{a.rfqsTitle}</h1>
-      <p className="mt-1 text-sm text-[#64748b]">{a.rfqsLead}</p>
+      <h1 className="text-2xl font-bold text-[#171717]">{a.rfqsTitle}</h1>
+      <p className="mt-1 text-sm text-[#6d6b66]">{a.rfqsLead}</p>
 
       {rows.length === 0 ? (
         <div className="card mt-6 p-6">
-          <p className="text-sm text-[#475569]">{a.rfqsEmpty}</p>
+          <p className="text-sm text-[#3f4650]">{a.rfqsEmpty}</p>
         </div>
       ) : (
-        <div className="mt-6 overflow-x-auto rounded-lg border border-[#e2e8f0] bg-white">
+        <div className="mt-6 overflow-x-auto rounded-lg border border-[#ebe8e1] bg-white">
           <table className="w-full text-left text-sm">
-            <thead className="border-b border-[#e2e8f0] bg-[#f7f9fc] text-xs uppercase text-[#64748b]">
+            <thead className="border-b border-[#ebe8e1] bg-[#fbfaf7] text-xs uppercase text-[#6d6b66]">
               <tr>
                 <th className="px-4 py-3">{a.colReference}</th>
                 <th className="px-4 py-3">{a.colProduct}</th>
@@ -101,27 +101,27 @@ export default async function AdminRfqsPage({ params }: Props) {
                 <th className="px-4 py-3">{colMatch}</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#e2e8f0]">
+            <tbody className="divide-y divide-[#ebe8e1]">
               {rowsTagged.map(({ r, isTest }) => (
-                <tr key={r.id} className="align-top hover:bg-[#f7f9fc]">
+                <tr key={r.id} className="align-top hover:bg-[#fbfaf7]">
                   <td className="px-4 py-3">
-                    <span className="font-mono text-xs text-[#64748b]">{r.reference_id}</span>
+                    <span className="font-mono text-xs text-[#6d6b66]">{r.reference_id}</span>
                     {isTest && (
                       <span className="ml-2 rounded bg-[#fdf3d8] px-1.5 py-0.5 text-[10px] font-semibold text-[#8a5a00]">
                         {testBadge}
                       </span>
                     )}
                     {r.company && (
-                      <div className="mt-0.5 text-xs text-[#94a3b8]">{r.company}</div>
+                      <div className="mt-0.5 text-xs text-[#8c8982]">{r.company}</div>
                     )}
                   </td>
                   <td className="px-4 py-3">
-                    <div className="font-medium text-[#0f172a]">{r.product}</div>
+                    <div className="font-medium text-[#171717]">{r.product}</div>
                     {r.quantity && (
-                      <div className="mt-0.5 text-xs text-[#94a3b8]">{r.quantity}</div>
+                      <div className="mt-0.5 text-xs text-[#8c8982]">{r.quantity}</div>
                     )}
                     {r.message && (
-                      <p className="mt-1 max-w-md whitespace-pre-wrap text-xs text-[#64748b]">
+                      <p className="mt-1 max-w-md whitespace-pre-wrap text-xs text-[#6d6b66]">
                         {r.message}
                       </p>
                     )}
@@ -129,21 +129,21 @@ export default async function AdminRfqsPage({ params }: Props) {
                   <td className="px-4 py-3">
                     <a
                       href={`mailto:${r.email}`}
-                      className="text-[#0f4c81] hover:underline"
+                      className="text-[#171717] hover:underline"
                     >
                       {r.email}
                     </a>
                   </td>
-                  <td className="px-4 py-3 text-[#475569]">{r.country ?? "—"}</td>
+                  <td className="px-4 py-3 text-[#3f4650]">{r.country ?? "—"}</td>
                   <td className="px-4 py-3 text-xs">
-                    <span className="text-[#475569]">{r.source_type ?? "—"}</span>
+                    <span className="text-[#3f4650]">{r.source_type ?? "—"}</span>
                     {r.source_path && (
-                      <div className="mt-0.5 max-w-[220px] truncate text-[#94a3b8]" title={r.source_path}>
+                      <div className="mt-0.5 max-w-[220px] truncate text-[#8c8982]" title={r.source_path}>
                         {r.source_path}
                       </div>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-xs text-[#94a3b8]">
+                  <td className="px-4 py-3 text-xs text-[#8c8982]">
                     {new Date(r.created_at).toISOString().slice(0, 10)}
                   </td>
                   <td className="px-4 py-3">
@@ -163,7 +163,7 @@ export default async function AdminRfqsPage({ params }: Props) {
                   <td className="px-4 py-3">
                     <Link
                       href={p(`/admin/rfqs/${r.reference_id}`)}
-                      className="text-xs text-[#0f4c81] hover:underline"
+                      className="text-xs text-[#171717] hover:underline"
                     >
                       {colMatch} →
                     </Link>
@@ -175,8 +175,8 @@ export default async function AdminRfqsPage({ params }: Props) {
         </div>
       )}
 
-      <p className="mt-4 text-xs text-[#64748b]">
-        <a href={p("/admin")} className="text-[#0f4c81] hover:underline">
+      <p className="mt-4 text-xs text-[#6d6b66]">
+        <a href={p("/admin")} className="text-[#171717] hover:underline">
           ← {a.navOverview}
         </a>
       </p>

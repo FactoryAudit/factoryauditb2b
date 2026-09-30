@@ -32,27 +32,27 @@ export default async function AdminAuditDetailPage({ params }: Props) {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl font-bold text-[#0f172a]">{view.audit.auditCode}</h1>
-        <div className="mt-2 flex flex-wrap gap-x-6 gap-y-1 text-sm text-[#475569]">
+        <h1 className="text-xl font-bold text-[#171717]">{view.audit.auditCode}</h1>
+        <div className="mt-2 flex flex-wrap gap-x-6 gap-y-1 text-sm text-[#3f4650]">
           <span>
-            <span className="text-[#64748b]">Supplier:</span> {view.audit.supplierName ?? "—"}
+            <span className="text-[#6d6b66]">Supplier:</span> {view.audit.supplierName ?? "—"}
           </span>
           <span>
-            <span className="text-[#64748b]">Type:</span> {view.audit.auditType}
+            <span className="text-[#6d6b66]">Type:</span> {view.audit.auditType}
           </span>
           <span>
-            <span className="text-[#64748b]">Product:</span> {view.audit.product ?? "—"}
+            <span className="text-[#6d6b66]">Product:</span> {view.audit.product ?? "—"}
           </span>
           {view.audit.standardProtocol && (
             <span>
-              <span className="text-[#64748b]">Standard:</span> {view.audit.standardProtocol}
+              <span className="text-[#6d6b66]">Standard:</span> {view.audit.standardProtocol}
             </span>
           )}
         </div>
         <span
           className={`mt-2 inline-block rounded px-2 py-0.5 text-xs font-medium ${
             current === "closed"
-              ? "bg-[#e2e8f0] text-[#475569]"
+              ? "bg-[#ebe8e1] text-[#3f4650]"
               : current === "report_issued" || current === "report_draft"
                 ? "bg-[#dcfce7] text-[#166534]"
                 : "bg-[#dbeafe] text-[#1e40af]"

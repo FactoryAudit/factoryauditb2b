@@ -57,9 +57,9 @@ export default async function Page({ params }: Props) {
       <RfqEnterTracker locale={locale} />
       <JsonLd data={jsonLd} />
       <section className="max-w-3xl mx-auto text-center mb-10">
-        <span className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">{s.badge}</span>
-        <h1 className="text-4xl font-extrabold text-[#0f172a] mt-2">{s.h1}</h1>
-        <p className="text-[#64748b] mt-3 text-lg">{s.lead}</p>
+        <span className="text-sm font-semibold text-[#171717] uppercase tracking-wide">{s.badge}</span>
+        <h1 className="text-4xl font-extrabold text-[#171717] mt-2">{s.h1}</h1>
+        <p className="text-[#6d6b66] mt-3 text-lg">{s.lead}</p>
       </section>
       <section className="max-w-3xl mx-auto">
         {/* CS-02C G3：带上提交语言落 rfqs.locale；行业上下文由 CS-02A 的

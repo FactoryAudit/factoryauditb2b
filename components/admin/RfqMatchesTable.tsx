@@ -68,14 +68,14 @@ export default function RfqMatchesTable({
       : s === "lost"
         ? "bg-[#fdeaea] text-[#d4232a]"
         : s === "contacted"
-          ? "bg-[#e6eef6] text-[#0f4c81]"
+          ? "bg-[#f5f3ee] text-[#171717]"
           : "bg-[#fdf3d8] text-[#8a5a00]";
 
   return (
     <div className="card mt-4 p-4">
-      <h2 className="font-semibold text-[#0f172a]">{dict.title}</h2>
+      <h2 className="font-semibold text-[#171717]">{dict.title}</h2>
       {matches.length === 0 ? (
-        <p className="mt-2 text-sm text-[#64748b]">{dict.empty}</p>
+        <p className="mt-2 text-sm text-[#6d6b66]">{dict.empty}</p>
       ) : (
         <div className="mt-3 space-y-2">
           {matches.map((m) => {
@@ -83,16 +83,16 @@ export default function RfqMatchesTable({
               ACTION_ORDER.includes(s)
             );
             return (
-              <div key={m.matchId} className="flex flex-wrap items-start gap-3 rounded border border-[#e2e8f0] p-3">
+              <div key={m.matchId} className="flex flex-wrap items-start gap-3 rounded border border-[#ebe8e1] p-3">
                 <div className="min-w-[220px] flex-1 text-sm">
-                  <div className="font-medium text-[#0f172a]">{m.legalName}</div>
-                  <div className="text-xs text-[#64748b]">
+                  <div className="font-medium text-[#171717]">{m.legalName}</div>
+                  <div className="text-xs text-[#6d6b66]">
                     {[m.city, m.province, m.countryCode, m.industryCode].filter(Boolean).join(" · ") || "—"}
                   </div>
                   {m.mainProducts.length > 0 && (
-                    <div className="text-xs text-[#94a3b8]">{m.mainProducts.slice(0, 4).join(", ")}</div>
+                    <div className="text-xs text-[#8c8982]">{m.mainProducts.slice(0, 4).join(", ")}</div>
                   )}
-                  <div className="mt-0.5 text-[11px] text-[#94a3b8]">
+                  <div className="mt-0.5 text-[11px] text-[#8c8982]">
                     {dict.createdAt}: {m.createdAt ? m.createdAt.slice(0, 10) : "—"}
                     {m.note ? ` · ${dict.note}: ${m.note}` : ""}
                   </div>
@@ -108,7 +108,7 @@ export default function RfqMatchesTable({
                       type="button"
                       onClick={() => advance(m.supplierId, s)}
                       disabled={busy !== ""}
-                      className="rounded border border-[#cbd5e1] px-2.5 py-1 text-xs text-[#0f4c81] hover:bg-[#f0f5fb] disabled:opacity-50"
+                      className="rounded border border-[#ddd9d0] px-2.5 py-1 text-xs text-[#171717] hover:bg-[#f0f5fb] disabled:opacity-50"
                     >
                       {busy === m.supplierId + ":" + s ? dict.saving : dict.actionLabel[s]}
                     </button>

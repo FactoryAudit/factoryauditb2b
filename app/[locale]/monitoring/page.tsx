@@ -68,7 +68,7 @@ export default async function MonitoringPage({ params }: Props) {
     <main className="container py-12 max-w-4xl">
       <JsonLd data={jsonLd} />
 
-      <nav className="mb-4 text-sm text-[#64748b]">
+      <nav className="mb-4 text-sm text-[#6d6b66]">
         <Link href={p("/")} className="hover:underline">
           {t.common.ui.home}
         </Link>
@@ -80,26 +80,26 @@ export default async function MonitoringPage({ params }: Props) {
         {m.h1}
       </nav>
 
-      <span className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">
+      <span className="text-sm font-semibold text-[#171717] uppercase tracking-wide">
         {m.badge}
       </span>
-      <h1 className="text-4xl font-extrabold text-[#0f172a] mt-2">{m.h1}</h1>
-      <p className="text-[#64748b] mt-3 text-lg">{m.lead}</p>
+      <h1 className="text-4xl font-extrabold text-[#171717] mt-2">{m.h1}</h1>
+      <p className="text-[#6d6b66] mt-3 text-lg">{m.lead}</p>
 
       {/* Quick answer */}
-      <section className="mt-8 rounded-lg bg-[#f1f5f9] p-6">
-        <h2 className="font-bold text-[#0f172a]">{m.quickAnswerTitle}</h2>
-        <p className="text-[#475569] mt-2">{m.quickAnswer}</p>
-        <p className="text-xs text-[#64748b] mt-3">{m.honestNote}</p>
+      <section className="mt-8 rounded-lg bg-[#f5f3ee] p-6">
+        <h2 className="font-bold text-[#171717]">{m.quickAnswerTitle}</h2>
+        <p className="text-[#3f4650] mt-2">{m.quickAnswer}</p>
+        <p className="text-xs text-[#6d6b66] mt-3">{m.honestNote}</p>
       </section>
 
       {/* What we re-check */}
       <section className="mt-12">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{m.recheckTitle}</h2>
-        <p className="text-[#64748b] mt-1 mb-5">{m.recheckLead}</p>
-        <ul className="grid md:grid-cols-2 gap-2">
+        <h2 className="text-2xl font-bold text-[#171717]">{m.recheckTitle}</h2>
+        <p className="text-[#6d6b66] mt-1 mb-5">{m.recheckLead}</p>
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {m.recheckItems.map((x) => (
-            <li key={x} className="card p-3 text-[#475569]">
+            <li key={x} className="card p-3 text-[#3f4650]">
               ✓ {x}
             </li>
           ))}
@@ -108,14 +108,14 @@ export default async function MonitoringPage({ params }: Props) {
 
       {/* Cadence */}
       <section className="mt-12">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{m.cadenceTitle}</h2>
-        <p className="text-[#64748b] mt-1 mb-5">{m.cadenceLead}</p>
-        <div className="grid md:grid-cols-3 gap-5">
+        <h2 className="text-2xl font-bold text-[#171717]">{m.cadenceTitle}</h2>
+        <p className="text-[#6d6b66] mt-1 mb-5">{m.cadenceLead}</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {m.cadenceItems.map((c) => (
             <div key={c.name} className="card p-5">
-              <h3 className="font-bold text-[#0f172a]">{c.name}</h3>
-              <p className="text-sm font-medium text-[#0f4c81] mt-1">{c.when}</p>
-              <p className="text-sm text-[#475569] mt-2">{c.note}</p>
+              <h3 className="font-bold text-[#171717]">{c.name}</h3>
+              <p className="text-sm font-medium text-[#171717] mt-1">{c.when}</p>
+              <p className="text-sm text-[#3f4650] mt-2">{c.note}</p>
             </div>
           ))}
         </div>
@@ -123,11 +123,11 @@ export default async function MonitoringPage({ params }: Props) {
 
       {/* Alerts */}
       <section className="mt-12">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{m.alertTitle}</h2>
-        <p className="text-[#64748b] mt-1 mb-5">{m.alertLead}</p>
+        <h2 className="text-2xl font-bold text-[#171717]">{m.alertTitle}</h2>
+        <p className="text-[#6d6b66] mt-1 mb-5">{m.alertLead}</p>
         <ul className="space-y-2">
           {m.alertItems.map((x) => (
-            <li key={x} className="card p-4 text-[#475569]">
+            <li key={x} className="card p-4 text-[#3f4650]">
               · {x}
             </li>
           ))}
@@ -136,11 +136,11 @@ export default async function MonitoringPage({ params }: Props) {
 
       {/* What you receive */}
       <section className="mt-12">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{m.deliverTitle}</h2>
-        <p className="text-[#64748b] mt-1 mb-5">{m.deliverLead}</p>
-        <ul className="grid md:grid-cols-2 gap-2">
+        <h2 className="text-2xl font-bold text-[#171717]">{m.deliverTitle}</h2>
+        <p className="text-[#6d6b66] mt-1 mb-5">{m.deliverLead}</p>
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {m.deliverItems.map((x) => (
-            <li key={x} className="card p-3 text-[#475569]">
+            <li key={x} className="card p-3 text-[#3f4650]">
               ✓ {x}
             </li>
           ))}
@@ -149,9 +149,9 @@ export default async function MonitoringPage({ params }: Props) {
 
       {/* Not covered —— 复用核验清单的同一份文案（字典 verification.notCovered），不另写一份 */}
       <section className="mt-12">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{m.notCoveredTitle}</h2>
-        <p className="text-[#64748b] mt-1 mb-4">{m.notCoveredLead}</p>
-        <ul className="space-y-1 text-sm text-[#475569]">
+        <h2 className="text-2xl font-bold text-[#171717]">{m.notCoveredTitle}</h2>
+        <p className="text-[#6d6b66] mt-1 mb-4">{m.notCoveredLead}</p>
+        <ul className="space-y-1 text-sm text-[#3f4650]">
           {t.verification.notCovered.map((x) => (
             <li key={x}>✕ {x}</li>
           ))}
@@ -159,10 +159,10 @@ export default async function MonitoringPage({ params }: Props) {
       </section>
 
       {/* Pricing */}
-      <section className="mt-12 rounded-lg bg-[#f1f5f9] p-6">
-        <h2 className="font-bold text-[#0f172a]">{m.pricingTitle}</h2>
-        <p className="text-[#475569] mt-2">{m.pricingLead}</p>
-        <p className="text-sm text-[#64748b] mt-2">{m.pricingNote}</p>
+      <section className="mt-12 rounded-lg bg-[#f5f3ee] p-6">
+        <h2 className="font-bold text-[#171717]">{m.pricingTitle}</h2>
+        <p className="text-[#3f4650] mt-2">{m.pricingLead}</p>
+        <p className="text-sm text-[#6d6b66] mt-2">{m.pricingNote}</p>
         <Link href={p("/custom-services")} className="btn btn-primary mt-5 inline-block">
           {m.pricingCta}
         </Link>
@@ -170,19 +170,19 @@ export default async function MonitoringPage({ params }: Props) {
 
       {/* FAQ */}
       <section className="mt-12">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{m.faqTitle}</h2>
+        <h2 className="text-2xl font-bold text-[#171717]">{m.faqTitle}</h2>
         <div className="mt-3 space-y-4">
           {m.faq.map((f) => (
             <div key={f.q}>
-              <h3 className="font-semibold text-[#0f172a]">{f.q}</h3>
-              <p className="text-[#475569] mt-1">{f.a}</p>
+              <h3 className="font-semibold text-[#171717]">{f.q}</h3>
+              <p className="text-[#3f4650] mt-1">{f.a}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* CTA */}
-      <section className="mt-12 card p-8 bg-[#0f4c81]">
+      <section className="mt-12 card p-8 bg-[#171717]">
         <h2 className="text-xl font-bold text-white">{m.ctaTitle}</h2>
         <p className="mt-2 text-white/80">{m.ctaLead}</p>
         <div className="mt-5 flex flex-wrap gap-3">

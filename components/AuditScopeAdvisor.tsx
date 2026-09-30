@@ -156,13 +156,13 @@ export default function AuditScopeAdvisor({
 
   return (
     <section className="card p-6">
-      <h2 className="text-xl font-bold text-[#0f172a]">{t.title}</h2>
-      <p className="text-sm text-[#64748b] mt-1">{t.lead}</p>
+      <h2 className="text-xl font-bold text-[#171717]">{t.title}</h2>
+      <p className="text-sm text-[#6d6b66] mt-1">{t.lead}</p>
 
-      <div className="grid md:grid-cols-2 gap-5 mt-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
         <div>
           <label className="text-sm font-medium" htmlFor="scope-score">
-            {t.scoreLabel}: <span className="text-[#0f4c81] font-bold">{score}</span>
+            {t.scoreLabel}: <span className="text-[#171717] font-bold">{score}</span>
           </label>
           <input
             id="scope-score"
@@ -176,8 +176,8 @@ export default function AuditScopeAdvisor({
             }}
             className="w-full mt-2"
           />
-          <p className="text-xs text-[#64748b] mt-1">{t.scoreHint}</p>
-          <Link href={calculatorHref} className="text-xs text-[#0f4c81] font-medium hover:underline">
+          <p className="text-xs text-[#6d6b66] mt-1">{t.scoreHint}</p>
+          <Link href={calculatorHref} className="text-xs text-[#171717] font-medium hover:underline">
             {t.scoreCta} →
           </Link>
         </div>
@@ -255,7 +255,7 @@ export default function AuditScopeAdvisor({
 
       <fieldset className="mt-5">
         <legend className="text-sm font-medium">{t.weakLabel}</legend>
-        <p className="text-xs text-[#64748b] mt-1 mb-2">{t.weakHint}</p>
+        <p className="text-xs text-[#6d6b66] mt-1 mb-2">{t.weakHint}</p>
         <div className="flex flex-wrap gap-2">
           {dimensionOptions.map((d) => {
             const on = weak.includes(d.key);
@@ -266,8 +266,8 @@ export default function AuditScopeAdvisor({
                 onClick={() => toggleWeak(d.key)}
                 className={
                   on
-                    ? "px-3 py-1.5 text-xs rounded-full border border-[#0f4c81] bg-[#0f4c81] text-white"
-                    : "px-3 py-1.5 text-xs rounded-full border border-[#cbd5e1] text-[#475569] hover:border-[#0f4c81]"
+                    ? "px-3 py-1.5 text-xs rounded-full border border-[#171717] bg-[#171717] text-white"
+                    : "px-3 py-1.5 text-xs rounded-full border border-[#ddd9d0] text-[#3f4650] hover:border-[#171717]"
                 }
               >
                 {d.label}
@@ -277,35 +277,35 @@ export default function AuditScopeAdvisor({
         </div>
       </fieldset>
 
-      <div className="mt-6 rounded-lg border border-[#e2e8f0] bg-[#f8fafc] p-5">
+      <div className="mt-6 rounded-lg border border-[#ebe8e1] bg-[#fbfaf7] p-5">
         <div className="flex items-center justify-between gap-3 flex-wrap">
-          <h3 className="font-semibold text-[#0f172a]">{t.resultTitle}</h3>
-          <span className="text-xs px-2 py-1 rounded-full border border-[#cbd5e1] text-[#475569]">
+          <h3 className="font-semibold text-[#171717]">{t.resultTitle}</h3>
+          <span className="text-xs px-2 py-1 rounded-full border border-[#ddd9d0] text-[#3f4650]">
             {aiSource === "ai" ? t.aiBadge : t.ruleBadge}
           </span>
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-4 mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
           <div>
-            <div className="text-xs uppercase tracking-wide text-[#64748b]">{t.auditTypeLabel}</div>
-            <div className="font-semibold text-[#0f4c81]">{auditTypeLabel}</div>
+            <div className="text-xs uppercase tracking-wide text-[#6d6b66]">{t.auditTypeLabel}</div>
+            <div className="font-semibold text-[#171717]">{auditTypeLabel}</div>
           </div>
           <div>
-            <div className="text-xs uppercase tracking-wide text-[#64748b]">{t.manDaysLabel}</div>
-            <div className="font-semibold text-[#0f172a]">
+            <div className="text-xs uppercase tracking-wide text-[#6d6b66]">{t.manDaysLabel}</div>
+            <div className="font-semibold text-[#171717]">
               {rec.manDays} {t.manDaysUnit}
             </div>
           </div>
         </div>
 
         <div className="mt-4">
-          <div className="text-xs uppercase tracking-wide text-[#64748b]">{t.modulesLabel}</div>
+          <div className="text-xs uppercase tracking-wide text-[#6d6b66]">{t.modulesLabel}</div>
           <ul className="mt-2 space-y-1.5">
             {rec.modules.map((m) => (
-              <li key={m.key} className="text-sm text-[#0f172a]">
+              <li key={m.key} className="text-sm text-[#171717]">
                 • {t.modules[m.key]}
                 {m.reasons.length > 0 && (
-                  <span className="text-xs text-[#64748b]">
+                  <span className="text-xs text-[#6d6b66]">
                     {" "}
                     ({m.reasons.map((r) => t.reasons[r]).join("; ")})
                   </span>
@@ -315,7 +315,7 @@ export default function AuditScopeAdvisor({
           </ul>
         </div>
 
-        {aiText && <p className="mt-4 text-sm text-[#334155] whitespace-pre-line">{aiText}</p>}
+        {aiText && <p className="mt-4 text-sm text-[#2b2b2b] whitespace-pre-line">{aiText}</p>}
 
         <button
           type="button"
@@ -328,7 +328,7 @@ export default function AuditScopeAdvisor({
           {applied ? t.applied : t.apply}
         </button>
 
-        <p className="text-xs text-[#64748b] mt-3">{t.disclaimer}</p>
+        <p className="text-xs text-[#6d6b66] mt-3">{t.disclaimer}</p>
       </div>
     </section>
   );

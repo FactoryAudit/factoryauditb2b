@@ -70,7 +70,7 @@ export default function OrderStatusActions({ referenceId, current, labels }: Pro
             type="button"
             disabled={busy || pending}
             onClick={() => setStatus("cancelled")}
-            className="rounded-md border border-[#e2e8f0] px-2.5 py-1 text-xs text-[#475569] hover:bg-[#f1f5f9] disabled:opacity-60"
+            className="rounded-md border border-[#ebe8e1] px-2.5 py-1 text-xs text-[#3f4650] hover:bg-[#f5f3ee] disabled:opacity-60"
           >
             {labels.cancel}
           </button>
@@ -81,7 +81,7 @@ export default function OrderStatusActions({ referenceId, current, labels }: Pro
           type="button"
           disabled={busy || pending}
           onClick={() => setStatus("refunded")}
-          className="rounded-md border border-[#e2e8f0] px-2.5 py-1 text-xs text-[#475569] hover:bg-[#f1f5f9] disabled:opacity-60"
+          className="rounded-md border border-[#ebe8e1] px-2.5 py-1 text-xs text-[#3f4650] hover:bg-[#f5f3ee] disabled:opacity-60"
         >
           {labels.refund}
         </button>

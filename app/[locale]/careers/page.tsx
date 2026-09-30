@@ -53,28 +53,28 @@ export default async function Page({ params }: Props) {
   return (
     <main className="container py-12">
       <section className="max-w-3xl">
-        <h1 className="text-4xl font-extrabold text-[#0f172a]">{c.heroTitle}</h1>
-        <p className="mt-4 text-lg leading-relaxed text-[#334155]">{c.heroLead}</p>
-        <p className="mt-3 leading-relaxed text-[#64748b]">{c.heroIntro}</p>
-        <p className="mt-4 text-sm font-semibold uppercase tracking-wide text-[#0f4c81]">
+        <h1 className="text-4xl font-extrabold text-[#171717]">{c.heroTitle}</h1>
+        <p className="mt-4 text-lg leading-relaxed text-[#2b2b2b]">{c.heroLead}</p>
+        <p className="mt-3 leading-relaxed text-[#6d6b66]">{c.heroIntro}</p>
+        <p className="mt-4 text-sm font-semibold uppercase tracking-wide text-[#171717]">
           {c.heroRegions}
         </p>
       </section>
 
       <section className="mt-12">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{c.focusTitle}</h2>
-        <div className="mt-6 grid gap-6 sm:grid-cols-2">
+        <h2 className="text-2xl font-bold text-[#171717]">{c.focusTitle}</h2>
+        <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div className="card p-6">
-            <h3 className="text-lg font-semibold text-[#0f172a]">{c.groupAuditors}</h3>
-            <ul className="mt-3 space-y-2 text-sm text-[#334155]">
+            <h3 className="text-lg font-semibold text-[#171717]">{c.groupAuditors}</h3>
+            <ul className="mt-3 space-y-2 text-sm text-[#2b2b2b]">
               {auditorRoles.map((r) => (
                 <li key={r}>· {r}</li>
               ))}
             </ul>
           </div>
           <div className="card p-6">
-            <h3 className="text-lg font-semibold text-[#0f172a]">{c.groupOther}</h3>
-            <ul className="mt-3 space-y-2 text-sm text-[#334155]">
+            <h3 className="text-lg font-semibold text-[#171717]">{c.groupOther}</h3>
+            <ul className="mt-3 space-y-2 text-sm text-[#2b2b2b]">
               {otherRoles.map((r) => (
                 <li key={r}>· {r}</li>
               ))}

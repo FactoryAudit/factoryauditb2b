@@ -135,8 +135,8 @@ export default function FactoryPhotoUploader({ supplierId, value, onChange, dict
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between text-sm">
-        <span className="font-medium text-[#0f172a]">{t("factoryPhotosTitle")}</span>
-        <span className="text-[#64748b]">
+        <span className="font-medium text-[#171717]">{t("factoryPhotosTitle")}</span>
+        <span className="text-[#6d6b66]">
           {usedCount} / {MAX_FACTORY_PHOTOS}
         </span>
       </div>
@@ -158,14 +158,14 @@ export default function FactoryPhotoUploader({ supplierId, value, onChange, dict
           const photo = value.find((p) => p.category === cat);
           return (
             <div key={cat} className="border rounded-lg p-2 bg-white">
-              <p className="text-xs font-medium text-[#334155] mb-1">{humanize(cat)}</p>
+              <p className="text-xs font-medium text-[#2b2b2b] mb-1">{humanize(cat)}</p>
               {photo ? (
                 <div className="relative">
                   {previews[photo.id] ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={previews[photo.id]} alt={cat} className="w-full h-24 object-cover rounded" loading="lazy" />
                   ) : (
-                    <div className="w-full h-24 bg-[#e2e8f0] rounded flex items-center justify-center text-[#64748b] text-xs">
+                    <div className="w-full h-24 bg-[#ebe8e1] rounded flex items-center justify-center text-[#6d6b66] text-xs">
                       {photo.status === "APPROVED" ? t("status_approved") : t("status_pending")}
                     </div>
                   )}
@@ -183,7 +183,7 @@ export default function FactoryPhotoUploader({ supplierId, value, onChange, dict
                   type="button"
                   disabled={busy}
                   onClick={() => pickCategory(cat)}
-                  className="w-full h-24 rounded border border-dashed border-[#cbd5e1] text-[#64748b] text-xs hover:border-[#0f4c81] hover:text-[#0f4c81]"
+                  className="w-full h-24 rounded border border-dashed border-[#ddd9d0] text-[#6d6b66] text-xs hover:border-[#171717] hover:text-[#171717]"
                   data-track="self_assessment_photo_upload_click"
                 >
                   + {t("uploadPhoto")}

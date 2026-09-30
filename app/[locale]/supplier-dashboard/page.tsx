@@ -60,7 +60,7 @@ export default async function Page({ params, searchParams }: Props) {
     return (
       <main className="container py-10" data-track-page="supplier_dashboard">
         <section className="max-w-3xl mx-auto text-center mb-8">
-          <h1 className="text-4xl font-extrabold text-[#0f172a] mt-2">
+          <h1 className="text-4xl font-extrabold text-[#171717] mt-2">
             {sd.pageTitle ?? "Supplier Dashboard"}
           </h1>
         </section>
@@ -71,7 +71,7 @@ export default async function Page({ params, searchParams }: Props) {
                 "This account is not linked to a supplier."}
             </p>
           ) : (
-            <p className="text-[#334155]">
+            <p className="text-[#2b2b2b]">
               {dict.selfAssessment?.signInRequired ??
                 "Please sign in to your supplier account to continue."}
             </p>
@@ -142,16 +142,16 @@ export default async function Page({ params, searchParams }: Props) {
   return (
     <main className="container py-10" data-track-page="supplier_dashboard">
       <section className="max-w-4xl mx-auto mb-8">
-        <span className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">
+        <span className="text-sm font-semibold text-[#171717] uppercase tracking-wide">
           Supplier Portal
         </span>
         <div className="mt-2 flex flex-wrap items-center gap-3">
-          <h1 className="text-4xl font-extrabold text-[#0f172a]">
+          <h1 className="text-4xl font-extrabold text-[#171717]">
             {sd.pageTitle ?? "Supplier Dashboard"}
           </h1>
           <VerificationBadge state={badgeState} dict={tp} href="#verification-details" />
         </div>
-        <p className="text-[#64748b] mt-3 text-lg">
+        <p className="text-[#6d6b66] mt-3 text-lg">
           {sd.pageDesc ??
             "Track how buyers discover and engage with your verified supplier profile."}
         </p>
@@ -164,7 +164,7 @@ export default async function Page({ params, searchParams }: Props) {
         visibilityPoints={visibilityPoints}
       />
 
-      <p className="text-center text-xs text-[#94a3b8] mt-10">
+      <p className="text-center text-xs text-[#8c8982] mt-10">
         <a className="underline" href={localePath(locale, "/supplier-assessment")}>
           {sd.backToAssessment ?? "Edit self-assessment"}
         </a>{" "}

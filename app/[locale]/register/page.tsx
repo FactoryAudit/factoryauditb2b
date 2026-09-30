@@ -90,19 +90,19 @@ export default async function RegisterPage({
       <JsonLd data={jsonLd} />
 
       <section className="mb-8">
-        <span className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">
+        <span className="text-sm font-semibold text-[#171717] uppercase tracking-wide">
           {r.badge}
         </span>
-        <h1 className="text-3xl font-bold text-[#0f172a] mt-2">
+        <h1 className="text-3xl font-bold text-[#171717] mt-2">
           {pick(r.h1, r.instant?.h1)}
         </h1>
-        <p className="text-[#64748b] mt-2 max-w-3xl">{pick(r.lead, r.instant?.lead)}</p>
+        <p className="text-[#6d6b66] mt-2 max-w-3xl">{pick(r.lead, r.instant?.lead)}</p>
       </section>
 
-      <div className="grid md:grid-cols-2 gap-8 items-start">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         {/* 权益说明（先价值后表单） */}
         <section>
-          <h2 className="text-xl font-bold text-[#0f172a] mb-3">{r.benefitsTitle}</h2>
+          <h2 className="text-xl font-bold text-[#171717] mb-3">{r.benefitsTitle}</h2>
           <ul className="space-y-3">
             {r.benefits.map((b: string) => {
               // CS-05c：先替换、再拿替换后的文本当 key。
@@ -112,8 +112,8 @@ export default async function RegisterPage({
               //      任何"渲染产物不含 {n} 这类占位符"的检查都会因此失效。
               const text = b.replace("{n}", String(COMPARE_MAX_SUPPLIERS));
               return (
-                <li key={text} className="flex gap-3 text-sm text-[#475569]">
-                  <span className="shrink-0 w-5 h-5 rounded-full bg-[#e6eef6] text-[#0f4c81] text-xs flex items-center justify-center font-bold">
+                <li key={text} className="flex gap-3 text-sm text-[#3f4650]">
+                  <span className="shrink-0 w-5 h-5 rounded-full bg-[#f5f3ee] text-[#171717] text-xs flex items-center justify-center font-bold">
                     ✓
                   </span>
                   {text}
@@ -122,25 +122,25 @@ export default async function RegisterPage({
             })}
           </ul>
 
-          <div className="card p-5 mt-6 bg-[#f7f9fc]">
-            <h3 className="font-semibold text-[#0f172a]">
+          <div className="card p-5 mt-6 bg-[#fbfaf7]">
+            <h3 className="font-semibold text-[#171717]">
               {pick(r.nextTitle, r.instant?.nextTitle)}
             </h3>
-            <p className="text-sm text-[#475569] mt-1">
+            <p className="text-sm text-[#3f4650] mt-1">
               {pick(r.nextLead, r.instant?.nextLead)}
             </p>
           </div>
 
-          <p className="text-xs text-[#64748b] mt-4">
+          <p className="text-xs text-[#6d6b66] mt-4">
             {r.noCard}{" "}
-            <Link href={p("/pricing#founding-buyer")} className="text-[#0f4c81] underline">
+            <Link href={p("/pricing#founding-buyer")} className="text-[#171717] underline">
               {r.membershipLink}
             </Link>
           </p>
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-[#0f172a] mb-3">{r.formTitle}</h2>
+          <h2 className="text-xl font-bold text-[#171717] mb-3">{r.formTitle}</h2>
           <RegisterForm t={r.form} nextHref={nextHref ?? undefined} />
         </section>
       </div>

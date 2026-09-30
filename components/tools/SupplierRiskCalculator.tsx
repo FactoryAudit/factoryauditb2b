@@ -177,9 +177,9 @@ export default function SupplierRiskCalculator({ content, ui, locale }: Props) {
 
         {showLead && !submitted && (
           <div className="card p-6" id="lead-form">
-            <h3 className="font-semibold text-[#0f172a] mb-1">{ui.form.title}</h3>
+            <h3 className="font-semibold text-[#171717] mb-1">{ui.form.title}</h3>
             {saveMsg && <p className="text-[#c0392b] text-sm mb-3">{saveMsg}</p>}
-            <form onSubmit={submitLead} className="grid md:grid-cols-2 gap-3">
+            <form onSubmit={submitLead} className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <input className="input" name="firstName" placeholder={ui.form.firstName} required />
               <input className="input" name="company" placeholder={ui.form.company} required />
               <input
@@ -211,24 +211,24 @@ export default function SupplierRiskCalculator({ content, ui, locale }: Props) {
         {submitted && (
           <div className="card p-6" id="full-report">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-[#0f172a]">{ui.reportTitle}</h3>
+              <h3 className="font-semibold text-[#171717]">{ui.reportTitle}</h3>
               <button className="btn btn-outline" onClick={() => window.print()}>
                 {ui.print}
               </button>
             </div>
-            <p className="text-sm text-[#64748b]">
+            <p className="text-sm text-[#6d6b66]">
               {ui.form.done}
             </p>
-            <p className="text-sm text-[#64748b] mt-3">
+            <p className="text-sm text-[#6d6b66] mt-3">
               {ui.scoreSuffix}: <strong>{result.overall}/100</strong> — {result.levelLabel}
             </p>
             <div className="mt-4 space-y-4">
               {result.dimensions.map((d) => (
-                <div key={d.key} className="border-b border-[#e2e8f0] pb-3">
-                  <div className="font-medium text-[#0f172a]">
+                <div key={d.key} className="border-b border-[#ebe8e1] pb-3">
+                  <div className="font-medium text-[#171717]">
                     {d.label} — {d.score}/100 ({d.levelLabel})
                   </div>
-                  <ul className="text-sm text-[#475569] mt-1 pl-4">
+                  <ul className="text-sm text-[#3f4650] mt-1 pl-4">
                     {d.answers.map((a) => (
                       <li key={a.questionId}>
                         {a.text}: <span className="font-medium">{a.optionLabel}</span>
@@ -239,14 +239,14 @@ export default function SupplierRiskCalculator({ content, ui, locale }: Props) {
               ))}
             </div>
             <div className="mt-4">
-              <div className="font-medium text-[#0f172a]">{ui.actionsTitle}</div>
-              <ol className="list-decimal pl-5 text-sm text-[#475569] mt-1">
+              <div className="font-medium text-[#171717]">{ui.actionsTitle}</div>
+              <ol className="list-decimal pl-5 text-sm text-[#3f4650] mt-1">
                 {result.recommendations.map((r, i) => (
                   <li key={i}>{r}</li>
                 ))}
               </ol>
             </div>
-            <p className="text-xs text-[#94a3b8] mt-6">{ui.disclaimer}</p>
+            <p className="text-xs text-[#8c8982] mt-6">{ui.disclaimer}</p>
           </div>
         )}
       </div>
@@ -257,26 +257,26 @@ export default function SupplierRiskCalculator({ content, ui, locale }: Props) {
   return (
     <div className="card p-6 md:p-8">
       <div className="mb-6">
-        <div className="flex justify-between text-sm text-[#64748b] mb-2">
+        <div className="flex justify-between text-sm text-[#6d6b66] mb-2">
           <span>{ui.stepOf.replace("{n}", String(step + 1))}</span>
           <span>{dim.label}</span>
         </div>
         <div className="h-2 bg-[#eef2f7] rounded-full">
           <div
-            className="h-2 rounded-full bg-[#0f4c81] transition-all"
+            className="h-2 rounded-full bg-[#171717] transition-all"
             style={{ width: `${((step + 1) / totalSteps) * 100}%` }}
           />
         </div>
       </div>
 
-      <h2 className="text-xl font-bold text-[#0f172a]">{dim.label}</h2>
-      <p className="text-sm text-[#64748b] mb-5">{dim.description}</p>
+      <h2 className="text-xl font-bold text-[#171717]">{dim.label}</h2>
+      <p className="text-sm text-[#6d6b66] mb-5">{dim.description}</p>
 
       <div className="space-y-5">
         {dim.questions.map((q) => (
           <div key={q.id}>
-            <div className="font-medium text-[#0f172a] mb-2">{q.text}</div>
-            <div className="grid sm:grid-cols-2 gap-2">
+            <div className="font-medium text-[#171717] mb-2">{q.text}</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {q.options.map((o) => {
                 const active = answers[q.id] === o.value;
                 return (
@@ -284,14 +284,14 @@ export default function SupplierRiskCalculator({ content, ui, locale }: Props) {
                     key={o.value}
                     className={`flex items-center gap-2 rounded-lg border px-3 py-2 cursor-pointer text-sm transition ${
                       active
-                        ? "border-[#0f4c81] bg-brand-100 text-[#0f4c81] font-medium"
-                        : "border-[#e2e8f0] hover:border-[#0f4c81]"
+                        ? "border-[#171717] bg-brand-100 text-[#171717] font-medium"
+                        : "border-[#ebe8e1] hover:border-[#171717]"
                     }`}
                   >
                     <input
                       type="radio"
                       name={q.id}
-                      className="accent-[#0f4c81]"
+                      className="accent-[#171717]"
                       checked={active}
                       onChange={() => choose(q.id, o.value)}
                     />
@@ -312,7 +312,7 @@ export default function SupplierRiskCalculator({ content, ui, locale }: Props) {
         >
           {ui.back}
         </button>
-        <span className="text-xs text-[#94a3b8]">
+        <span className="text-xs text-[#8c8982]">
           {ui.answeredInStep
             .replace("{done}", String(answeredInStep))
             .replace("{total}", String(dim.questions.length))}

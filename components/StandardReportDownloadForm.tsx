@@ -130,9 +130,9 @@ export default function StandardReportDownloadForm({ labels, defaultLang }: Prop
     return (
       <div className="rounded-md border border-[#1f7a36] bg-[#e8f5ea] p-5">
         <p className="text-sm font-semibold text-[#1f7a36]">{labels.unlockedTitle}</p>
-        <p className="mt-1 text-sm text-[#475569]">{labels.unlockedNote}</p>
+        <p className="mt-1 text-sm text-[#3f4650]">{labels.unlockedNote}</p>
         <div className="mt-4 flex flex-wrap items-center gap-3">
-          <label className="text-sm font-medium text-[#0f172a]" htmlFor="std-report-lang">
+          <label className="text-sm font-medium text-[#171717]" htmlFor="std-report-lang">
             {labels.formLang}
           </label>
           <select
@@ -159,9 +159,9 @@ export default function StandardReportDownloadForm({ labels, defaultLang }: Prop
 
   // ---------- 未解锁：留资 ----------
   return (
-    <form onSubmit={onSubmit} className="grid gap-3 sm:grid-cols-2">
+    <form onSubmit={onSubmit} className="grid grid-cols-1 gap-3 sm:grid-cols-2">
       <div>
-        <label className="mb-1 block text-sm font-medium text-[#0f172a]" htmlFor="std-name">
+        <label className="mb-1 block text-sm font-medium text-[#171717]" htmlFor="std-name">
           {labels.formName}
         </label>
         <input
@@ -174,7 +174,7 @@ export default function StandardReportDownloadForm({ labels, defaultLang }: Prop
         />
       </div>
       <div>
-        <label className="mb-1 block text-sm font-medium text-[#0f172a]" htmlFor="std-email">
+        <label className="mb-1 block text-sm font-medium text-[#171717]" htmlFor="std-email">
           {labels.formEmail}
         </label>
         <input
@@ -188,7 +188,7 @@ export default function StandardReportDownloadForm({ labels, defaultLang }: Prop
         />
       </div>
       <div>
-        <label className="mb-1 block text-sm font-medium text-[#0f172a]" htmlFor="std-company">
+        <label className="mb-1 block text-sm font-medium text-[#171717]" htmlFor="std-company">
           {labels.formCompany}
         </label>
         <input
@@ -201,7 +201,7 @@ export default function StandardReportDownloadForm({ labels, defaultLang }: Prop
         />
       </div>
       <div>
-        <label className="mb-1 block text-sm font-medium text-[#0f172a]" htmlFor="std-country">
+        <label className="mb-1 block text-sm font-medium text-[#171717]" htmlFor="std-country">
           {labels.formCountry}
         </label>
         <input
@@ -213,7 +213,7 @@ export default function StandardReportDownloadForm({ labels, defaultLang }: Prop
         />
       </div>
       <div className="sm:col-span-2">
-        <label className="mb-1 block text-sm font-medium text-[#0f172a]" htmlFor="std-sourcing">
+        <label className="mb-1 block text-sm font-medium text-[#171717]" htmlFor="std-sourcing">
           {labels.formSourcing}
         </label>
         <input
@@ -225,7 +225,7 @@ export default function StandardReportDownloadForm({ labels, defaultLang }: Prop
         />
       </div>
       <div>
-        <label className="mb-1 block text-sm font-medium text-[#0f172a]" htmlFor="std-form-lang">
+        <label className="mb-1 block text-sm font-medium text-[#171717]" htmlFor="std-form-lang">
           {labels.formLang}
         </label>
         <select
@@ -248,7 +248,7 @@ export default function StandardReportDownloadForm({ labels, defaultLang }: Prop
           {status === "loading" ? "…" : labels.formCta}
         </button>
       </div>
-      <p className="text-xs text-[#64748b] sm:col-span-2">{labels.formPrivacy}</p>
+      <p className="text-xs text-[#6d6b66] sm:col-span-2">{labels.formPrivacy}</p>
       {status === "error" && (
         <p className="rounded-md bg-[#fdeaea] px-3 py-2 text-sm text-[#c0392b] sm:col-span-2">
           {labels.formError}

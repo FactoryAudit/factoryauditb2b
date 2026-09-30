@@ -202,7 +202,7 @@ export default function VerificationWorkbench({
     }
   }
 
-  if (loading) return <div className="card p-4 text-sm text-[#64748b]">加载核验工作台…</div>;
+  if (loading) return <div className="card p-4 text-sm text-[#6d6b66]">加载核验工作台…</div>;
   if (error) return <div className="card p-4 text-sm text-[#b91c1c]">加载失败：{error}</div>;
 
   const qLabel = (q: Question) => (ZH && q.titleZh ? q.titleZh : q.title) || q.code;
@@ -213,16 +213,16 @@ export default function VerificationWorkbench({
       <div className="card p-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h2 className="text-xl font-bold text-[#0f172a]">供应商核验工作台 · Verification Workbench</h2>
-            <p className="text-xs text-[#64748b] mt-1">
+            <h2 className="text-xl font-bold text-[#171717]">供应商核验工作台 · Verification Workbench</h2>
+            <p className="text-xs text-[#6d6b66] mt-1">
               {supplierName} · self-assessment status:{" "}
               <span className="font-mono">{assessmentStatus ?? "—"}</span> · trust:{" "}
               <span className="font-mono">{trustStatus ?? "NONE"}</span>
             </p>
           </div>
-          <div className="text-right text-xs text-[#475569]">
+          <div className="text-right text-xs text-[#3f4650]">
             <div>Review progress</div>
-            <div className="font-semibold text-[#0f172a]">
+            <div className="font-semibold text-[#171717]">
               {progress.decided}/{progress.total} 已审 · {progress.flagged} 标记
             </div>
           </div>
@@ -230,16 +230,16 @@ export default function VerificationWorkbench({
 
         {/* 验证历史 */}
         {records.length > 0 ? (
-          <div className="mt-4 rounded-md border border-[#e2e8f0] bg-[#f8fafc] p-3">
-            <div className="text-xs font-semibold text-[#334155] mb-2">验证记录 · Verification History</div>
+          <div className="mt-4 rounded-md border border-[#ebe8e1] bg-[#fbfaf7] p-3">
+            <div className="text-xs font-semibold text-[#2b2b2b] mb-2">验证记录 · Verification History</div>
             <ul className="space-y-1 text-xs">
               {records.map((r) => (
-                <li key={r.id} className="flex flex-wrap gap-2 text-[#475569]">
-                  <span className="font-mono font-semibold text-[#0f172a]">{r.verification_id}</span>
+                <li key={r.id} className="flex flex-wrap gap-2 text-[#3f4650]">
+                  <span className="font-mono font-semibold text-[#171717]">{r.verification_id}</span>
                   <span
                     className={`rounded px-1.5 py-0.5 ${
                       r.verification_type === "ON_SITE"
-                        ? "bg-[#e6eef6] text-[#0f4c81]"
+                        ? "bg-[#f5f3ee] text-[#171717]"
                         : "bg-[#f0fdf4] text-[#15803d]"
                     }`}
                   >
@@ -282,7 +282,7 @@ export default function VerificationWorkbench({
           </button>
           <button
             type="button"
-            className="btn btn-sm bg-[#0f4c81] text-white hover:bg-[#0c3f6b]"
+            className="btn btn-sm bg-[#171717] text-white hover:bg-[#0c3f6b]"
             disabled={busy !== null}
             onClick={() => act("approve_onsite")}
           >
@@ -300,12 +300,12 @@ export default function VerificationWorkbench({
       <div className="space-y-6">
         {templates.map((tpl) => (
           <div key={tpl.code}>
-            <h3 className="text-lg font-bold text-[#0f172a]">{tpl.name || tpl.nameZh}</h3>
+            <h3 className="text-lg font-bold text-[#171717]">{tpl.name || tpl.nameZh}</h3>
             {tpl.sections.map((sec) => (
               <div key={sec.code} className="mt-4">
-                <h4 className="font-semibold text-[#334155]">
+                <h4 className="font-semibold text-[#2b2b2b]">
                   {sec.title || sec.titleZh}{" "}
-                  <span className="text-xs text-[#94a3b8]">({sec.questions.length})</span>
+                  <span className="text-xs text-[#8c8982]">({sec.questions.length})</span>
                 </h4>
                 <div className="mt-2 space-y-2">
                   {sec.questions.map((q) => {
@@ -313,16 +313,16 @@ export default function VerificationWorkbench({
                     const evs = evidence[q.code] ?? [];
                     const ans = responses?.[q.code];
                     return (
-                      <div key={q.code} className="rounded-lg border border-[#e2e8f0] bg-white p-3">
+                      <div key={q.code} className="rounded-lg border border-[#ebe8e1] bg-white p-3">
                         <div className="flex flex-wrap items-start justify-between gap-2">
                           <div className="min-w-0 flex-1">
-                            <div className="text-sm font-medium text-[#0f172a]">
+                            <div className="text-sm font-medium text-[#171717]">
                               {qLabel(q)}{" "}
-                              <span className="font-mono text-[11px] text-[#94a3b8]">{q.code}</span>
+                              <span className="font-mono text-[11px] text-[#8c8982]">{q.code}</span>
                               {q.mandatory ? <span className="text-[#b91c1c]"> *</span> : null}
                             </div>
-                            <div className="mt-1 text-sm text-[#334155]">
-                              <span className="text-[#64748b]">答：</span>
+                            <div className="mt-1 text-sm text-[#2b2b2b]">
+                              <span className="text-[#6d6b66]">答：</span>
                               {ans != null && ans !== "" ? String(ans) : "—"}
                             </div>
                             {evs.length > 0 ? (
@@ -330,7 +330,7 @@ export default function VerificationWorkbench({
                                 {evs.map((e) => (
                                   <span
                                     key={e.id}
-                                    className="inline-flex items-center gap-1 rounded bg-[#f1f5f9] px-2 py-0.5 text-xs text-[#475569]"
+                                    className="inline-flex items-center gap-1 rounded bg-[#f5f3ee] px-2 py-0.5 text-xs text-[#3f4650]"
                                   >
                                     <button
                                       type="button"
@@ -339,7 +339,7 @@ export default function VerificationWorkbench({
                                     >
                                       {e.file_name ?? "evidence"}
                                     </button>
-                                    <span className="text-[#94a3b8]">
+                                    <span className="text-[#8c8982]">
                                       {e.status ?? "—"}
                                       {e.file_size ? ` · ${Math.round(e.file_size / 1024)}KB` : ""}
                                     </span>
@@ -365,7 +365,7 @@ export default function VerificationWorkbench({
                                   disabled={busy !== null}
                                   onClick={() => setDecision(q.code, st as ReviewStatus)}
                                   className={`rounded border px-2 py-1 text-xs ${
-                                    d.status === st ? `${cls} font-semibold ring-2 ring-offset-1 ring-[#0f4c81]` : "border-[#e2e8f0] bg-white text-[#475569]"
+                                    d.status === st ? `${cls} font-semibold ring-2 ring-offset-1 ring-[#171717]` : "border-[#ebe8e1] bg-white text-[#3f4650]"
                                   }`}
                                 >
                                   {label}
@@ -373,7 +373,7 @@ export default function VerificationWorkbench({
                               ))}
                             </div>
                             <textarea
-                              className="w-48 rounded border border-[#e2e8f0] px-2 py-1 text-xs text-[#0f172a] focus:border-[#0f4c81] focus:outline-none"
+                              className="w-48 rounded border border-[#ebe8e1] px-2 py-1 text-xs text-[#171717] focus:border-[#171717] focus:outline-none"
                               placeholder="Reviewer note（可选）"
                               value={d.note}
                               onChange={(e) => setNote(q.code, e.target.value)}
@@ -389,7 +389,7 @@ export default function VerificationWorkbench({
           </div>
         ))}
         {templates.length === 0 ? (
-          <p className="text-sm text-[#64748b]">尚未配置自评清单（audit_questions 为空）。</p>
+          <p className="text-sm text-[#6d6b66]">尚未配置自评清单（audit_questions 为空）。</p>
         ) : null}
       </div>
     </div>

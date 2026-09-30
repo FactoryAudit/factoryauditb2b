@@ -37,8 +37,8 @@ export default async function ReportStandardPage({ params }: Props) {
     <div className="max-w-4xl">
       {/* 顶部动作条 */}
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-        <h1 className="text-2xl font-bold text-[#0f172a]">{tr(REPORT_HEADER.title)}</h1>
-        <span className="rounded-full bg-[#e6eef6] px-3 py-1 text-xs font-semibold text-[#0f4c81]">
+        <h1 className="text-2xl font-bold text-[#171717]">{tr(REPORT_HEADER.title)}</h1>
+        <span className="rounded-full bg-[#f5f3ee] px-3 py-1 text-xs font-semibold text-[#171717]">
           {tr(REPORT_HEADER.subtitle)}
         </span>
       </div>
@@ -47,14 +47,14 @@ export default async function ReportStandardPage({ params }: Props) {
       <StandardReportDocument lang={lang} />
 
       {/* ===== 买家侧下载（工厂不可见） ===== */}
-      <div className="mt-6 rounded-lg border-2 border-dashed border-[#0f4c81] bg-[#f7f9fc] p-5">
+      <div className="mt-6 rounded-lg border-2 border-dashed border-[#171717] bg-[#fbfaf7] p-5">
         <div className="flex items-center gap-2">
-          <span className="rounded bg-[#0f4c81] px-2 py-0.5 text-xs font-semibold text-white">
+          <span className="rounded bg-[#171717] px-2 py-0.5 text-xs font-semibold text-white">
             ADMIN PREVIEW
           </span>
-          <h2 className="text-base font-bold text-[#0f172a]">{tr(BUYER_DOWNLOAD.title)}</h2>
+          <h2 className="text-base font-bold text-[#171717]">{tr(BUYER_DOWNLOAD.title)}</h2>
         </div>
-        <p className="mt-1 text-xs text-[#64748b]">{tr(BUYER_DOWNLOAD.note)}</p>
+        <p className="mt-1 text-xs text-[#6d6b66]">{tr(BUYER_DOWNLOAD.note)}</p>
 
         {/* 管理员预览：直接下载样张（客户端生成，无服务端端点）。
             买家侧付费/手动解锁流程在公开页 /standard-report 门禁表单，与本按钮无关。 */}

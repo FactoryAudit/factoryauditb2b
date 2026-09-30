@@ -50,15 +50,15 @@ export default function SupplierReportDownloadButton({
   }
 
   return (
-    <div className="rounded-lg border border-[#e2e8f0] bg-white p-5">
-      <h2 className="text-base font-bold text-[#0f172a]">
+    <div className="rounded-lg border border-[#ebe8e1] bg-white p-5">
+      <h2 className="text-base font-bold text-[#171717]">
         供应商核验报告 · Supplier Verification Report
       </h2>
-      <p className="mt-1 text-xs text-[#64748b]">
+      <p className="mt-1 text-xs text-[#6d6b66]">
         基于数据库中的真实核验记录生成（自包含 HTML，可离线打开 / 打印为 PDF）。
       </p>
       <div className="mt-4 flex flex-wrap items-center gap-3">
-        <label className="text-sm font-medium text-[#0f172a]" htmlFor="sup-report-lang">
+        <label className="text-sm font-medium text-[#171717]" htmlFor="sup-report-lang">
           语言
         </label>
         <select

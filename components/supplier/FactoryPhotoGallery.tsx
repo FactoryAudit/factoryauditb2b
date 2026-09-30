@@ -27,13 +27,13 @@ export default function FactoryPhotoGallery({
 }) {
   return (
     <section className="mt-8 card p-6">
-      <h2 className="text-xl font-bold text-[#0f172a]">{dict.photosTitle}</h2>
+      <h2 className="text-xl font-bold text-[#171717]">{dict.photosTitle}</h2>
       {images.length === 0 ? (
-        <p className="mt-3 text-sm text-[#94a3b8]">{dict.photosEmpty}</p>
+        <p className="mt-3 text-sm text-[#8c8982]">{dict.photosEmpty}</p>
       ) : (
         <ul className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-4">
           {images.map((img) => (
-            <li key={img.id} className="overflow-hidden rounded-lg border border-[#e2e8f0]">
+            <li key={img.id} className="overflow-hidden rounded-lg border border-[#ebe8e1]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={`/api/supplier-image/${img.id}?v=display`}

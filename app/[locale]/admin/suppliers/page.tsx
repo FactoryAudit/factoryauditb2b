@@ -36,26 +36,26 @@ export default async function AdminSuppliersPage({ params, searchParams }: Props
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-[#0f172a]">{a.suppliersTitle}</h1>
-      <p className="mt-1 text-sm text-[#64748b]">{a.suppliersLead}</p>
+      <h1 className="text-2xl font-bold text-[#171717]">{a.suppliersTitle}</h1>
+      <p className="mt-1 text-sm text-[#6d6b66]">{a.suppliersLead}</p>
 
       {/* 搜索 + 筛选（GET 表单，提交回本页） */}
       <form method="get" className="mt-4 flex flex-wrap items-end gap-3">
         <label className="block">
-          <span className="text-xs font-medium text-[#64748b]">{a.searchPlaceholder}</span>
+          <span className="text-xs font-medium text-[#6d6b66]">{a.searchPlaceholder}</span>
           <input
             name="search"
             defaultValue={search}
             placeholder={a.searchPlaceholder}
-            className="mt-1 w-72 rounded-md border border-[#e2e8f0] px-3 py-2 text-sm text-[#0f172a] focus:border-[#0f4c81] focus:outline-none"
+            className="mt-1 w-72 rounded-md border border-[#ebe8e1] px-3 py-2 text-sm text-[#171717] focus:border-[#171717] focus:outline-none"
           />
         </label>
         <label className="block">
-          <span className="text-xs font-medium text-[#64748b]">{a.colPublished}</span>
+          <span className="text-xs font-medium text-[#6d6b66]">{a.colPublished}</span>
           <select
             name="published"
             defaultValue={published}
-            className="mt-1 rounded-md border border-[#e2e8f0] px-3 py-2 text-sm text-[#0f172a] focus:border-[#0f4c81] focus:outline-none"
+            className="mt-1 rounded-md border border-[#ebe8e1] px-3 py-2 text-sm text-[#171717] focus:border-[#171717] focus:outline-none"
           >
             <option value="all">{a.filterAll}</option>
             <option value="published">{a.colPublished}</option>
@@ -63,11 +63,11 @@ export default async function AdminSuppliersPage({ params, searchParams }: Props
           </select>
         </label>
         <label className="block">
-          <span className="text-xs font-medium text-[#64748b]">{a.colAuthorized}</span>
+          <span className="text-xs font-medium text-[#6d6b66]">{a.colAuthorized}</span>
           <select
             name="authorized"
             defaultValue={authorized}
-            className="mt-1 rounded-md border border-[#e2e8f0] px-3 py-2 text-sm text-[#0f172a] focus:border-[#0f4c81] focus:outline-none"
+            className="mt-1 rounded-md border border-[#ebe8e1] px-3 py-2 text-sm text-[#171717] focus:border-[#171717] focus:outline-none"
           >
             <option value="all">{a.filterAll}</option>
             <option value="authorized">{a.colAuthorized}</option>
@@ -81,13 +81,13 @@ export default async function AdminSuppliersPage({ params, searchParams }: Props
 
       {rows.length === 0 ? (
         <div className="card mt-6 p-6">
-          <p className="text-sm text-[#475569]">{a.suppliersEmpty}</p>
-          <p className="mt-2 text-xs text-[#64748b]">{a.suppliersEmptyHint}</p>
+          <p className="text-sm text-[#3f4650]">{a.suppliersEmpty}</p>
+          <p className="mt-2 text-xs text-[#6d6b66]">{a.suppliersEmptyHint}</p>
         </div>
       ) : (
-        <div className="mt-6 overflow-x-auto rounded-lg border border-[#e2e8f0] bg-white">
+        <div className="mt-6 overflow-x-auto rounded-lg border border-[#ebe8e1] bg-white">
           <table className="w-full text-left text-sm">
-            <thead className="border-b border-[#e2e8f0] bg-[#f7f9fc] text-xs uppercase text-[#64748b]">
+            <thead className="border-b border-[#ebe8e1] bg-[#fbfaf7] text-xs uppercase text-[#6d6b66]">
               <tr>
                 <th className="px-4 py-3">{a.colName}</th>
                 <th className="px-4 py-3">{a.fieldEnglishName}</th>
@@ -101,25 +101,25 @@ export default async function AdminSuppliersPage({ params, searchParams }: Props
                 <th className="px-4 py-3" />
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#e2e8f0]">
+            <tbody className="divide-y divide-[#ebe8e1]">
               {rows.map((r) => (
-                <tr key={r.id} className="hover:bg-[#f7f9fc]">
+                <tr key={r.id} className="hover:bg-[#fbfaf7]">
                   <td className="px-4 py-3">
-                    <div className="font-medium text-[#0f172a]">{r.legal_name}</div>
-                    <div className="font-mono text-xs text-[#94a3b8]">{r.slug}</div>
+                    <div className="font-medium text-[#171717]">{r.legal_name}</div>
+                    <div className="font-mono text-xs text-[#8c8982]">{r.slug}</div>
                   </td>
-                  <td className="px-4 py-3 text-[#475569]">{r.english_name ?? "—"}</td>
-                  <td className="px-4 py-3 text-[#475569]">
+                  <td className="px-4 py-3 text-[#3f4650]">{r.english_name ?? "—"}</td>
+                  <td className="px-4 py-3 text-[#3f4650]">
                     {r.country_code} · {r.city}
                     {r.province ? ` · ${r.province}` : ""}
                   </td>
-                  <td className="px-4 py-3 text-[#475569]">
+                  <td className="px-4 py-3 text-[#3f4650]">
                     {r.website ? (
                       <a
                         href={r.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#0f4c81] hover:underline"
+                        className="text-[#171717] hover:underline"
                       >
                         {r.website}
                       </a>
@@ -127,8 +127,8 @@ export default async function AdminSuppliersPage({ params, searchParams }: Props
                       "—"
                     )}
                   </td>
-                  <td className="px-4 py-3 text-[#475569]">{r.contact_email ?? "—"}</td>
-                  <td className="px-4 py-3 text-[#475569]">
+                  <td className="px-4 py-3 text-[#3f4650]">{r.contact_email ?? "—"}</td>
+                  <td className="px-4 py-3 text-[#3f4650]">
                     {r.is_published ? a.yes : a.no}
                   </td>
                   <td className="px-4 py-3">
@@ -142,16 +142,16 @@ export default async function AdminSuppliersPage({ params, searchParams }: Props
                       </span>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-[#475569]">
+                  <td className="px-4 py-3 text-[#3f4650]">
                     {r.created_at ? new Date(r.created_at).toISOString().slice(0, 10) : "—"}
                   </td>
-                  <td className="px-4 py-3 text-[#475569]">
+                  <td className="px-4 py-3 text-[#3f4650]">
                     {r.updated_at ? new Date(r.updated_at).toISOString().slice(0, 10) : "—"}
                   </td>
                   <td className="px-4 py-3 text-right">
                     <Link
                       href={p(`/admin/suppliers/${r.slug}`)}
-                      className="text-[#0f4c81] hover:underline"
+                      className="text-[#171717] hover:underline"
                     >
                       {a.edit}
                     </Link>

@@ -56,7 +56,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#0f4c81",
+  themeColor: "#171717",
 };
 
 
@@ -188,9 +188,16 @@ export default async function RootLayout({
               adminConsole: t.admin.title,
             }}
             whatsappLabel={t.common.whatsappChat}
+            industriesLabel={t.industryPage.breadcrumb}
           />
           <main>{children}</main>
-          <SiteFooter locale={locale} dict={t.footer} menu={t.nav.menu} whatsappLabel={t.common.whatsappChat} />
+          <SiteFooter
+            locale={locale}
+            dict={t.footer}
+            menu={t.nav.menu}
+            whatsappLabel={t.common.whatsappChat}
+            industriesLabel={t.industryPage.breadcrumb}
+          />
           <AiChatWidget locale={locale} dict={t.aiChat} whatsappLabel={t.common.whatsappChat} />
         </AuthProvider>
       </body>

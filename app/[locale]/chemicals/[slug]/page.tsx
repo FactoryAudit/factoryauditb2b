@@ -166,11 +166,11 @@ export default async function ChemicalPage({ params }: { params: Promise<Params>
       {/* CTA：把「化学品」作为合法 context 带进 RFQ ——
           industry_code=chemicals（已有列）+ source_path（已有列）+ product 预填。
           不新增任何数据库列，也不注入 certifications_req（买家还没说要什么证书）。 */}
-      <section className="mt-10 rounded-lg bg-[#f1f5f9] p-6">
-        <h2 className="font-semibold text-[#0f172a]">
+      <section className="mt-10 rounded-lg bg-[#f5f3ee] p-6">
+        <h2 className="font-semibold text-[#171717]">
           {t.industryPage.ctaTitle.replaceAll("{industry}", name)}
         </h2>
-        <p className="mt-1 text-sm text-[#475569]">
+        <p className="mt-1 text-sm text-[#3f4650]">
           {t.industryPage.ctaDesc.replaceAll("{industry}", name)}
         </p>
         <div className="mt-4">

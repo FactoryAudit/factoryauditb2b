@@ -264,7 +264,7 @@ export default async function IndustrialClustersHierarchyPage({ params }: Props)
       <main className="container py-12 max-w-4xl">
         <JsonLd data={jsonLd} />
 
-        <nav className="mb-4 text-sm text-[#64748b]" aria-label="Breadcrumb">
+        <nav className="mb-4 text-sm text-[#6d6b66]" aria-label="Breadcrumb">
           {crumbs.map((cr, i) => (
             <span key={cr.href}>
               {i > 0 && " / "}
@@ -279,44 +279,44 @@ export default async function IndustrialClustersHierarchyPage({ params }: Props)
           ))}
         </nav>
 
-        <h1 className="text-4xl font-extrabold text-[#0f172a]">{cluster.name}</h1>
+        <h1 className="text-4xl font-extrabold text-[#171717]">{cluster.name}</h1>
 
         {cluster.description && (
-          <p className="mt-3 text-lg text-[#475569]">{cluster.description}</p>
+          <p className="mt-3 text-lg text-[#3f4650]">{cluster.description}</p>
         )}
 
         {facts.length > 0 && (
           <dl className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
             {facts.map((f) => (
               <div key={f.label} className="card p-4">
-                <dt className="text-xs font-semibold uppercase tracking-wide text-[#64748b]">
+                <dt className="text-xs font-semibold uppercase tracking-wide text-[#6d6b66]">
                   {f.label}
                 </dt>
-                <dd className="text-[#0f172a] font-medium mt-1">{f.value}</dd>
+                <dd className="text-[#171717] font-medium mt-1">{f.value}</dd>
               </div>
             ))}
           </dl>
         )}
 
-        <p className="mt-4 text-sm text-[#64748b]">
+        <p className="mt-4 text-sm text-[#6d6b66]">
           {c.supplierCount.replace("{count}", String(suppliers.length))}
         </p>
 
         <section className="mt-10">
-          <h2 className="text-2xl font-bold text-[#0f172a]">{c.suppliersTitle}</h2>
+          <h2 className="text-2xl font-bold text-[#171717]">{c.suppliersTitle}</h2>
           {suppliers.length === 0 ? (
-            <p className="mt-2 text-[#475569]">{c.suppliersEmpty}</p>
+            <p className="mt-2 text-[#3f4650]">{c.suppliersEmpty}</p>
           ) : (
-            <ul className="mt-3 divide-y rounded-lg border border-[#e2e8f0]">
+            <ul className="mt-3 divide-y rounded-lg border border-[#ebe8e1]">
               {suppliers.map((s) => (
                 <li key={s.slug} className="flex items-center justify-between p-3">
                   <Link
                     href={p(`/suppliers/${s.slug}`)}
-                    className="font-medium text-[#0f4c81] hover:underline"
+                    className="font-medium text-[#171717] hover:underline"
                   >
                     {s.legalName}
                   </Link>
-                  <span className="text-sm text-[#64748b]">
+                  <span className="text-sm text-[#6d6b66]">
                     {s.city} · {t.supplierProfile.riskScore}{" "}
                     {typeof s.riskScore === "number"
                       ? `${s.riskScore} / 100 · ${t.risk.ui.level[overallLevel(s.riskScore)]}`
@@ -368,7 +368,7 @@ export default async function IndustrialClustersHierarchyPage({ params }: Props)
     <main className="container py-12">
       <JsonLd data={aggJsonLd} />
 
-      <nav className="mb-4 text-sm text-[#64748b]" aria-label="Breadcrumb">
+      <nav className="mb-4 text-sm text-[#6d6b66]" aria-label="Breadcrumb">
         {aggCrumbs.map((cr, i) => (
           <span key={cr.href}>
             {i > 0 && " / "}
@@ -384,11 +384,11 @@ export default async function IndustrialClustersHierarchyPage({ params }: Props)
       </nav>
 
       <section className="max-w-3xl mb-10">
-        <h1 className="text-4xl font-extrabold text-[#0f172a]">{heading}</h1>
-        <p className="text-[#64748b] mt-3 text-lg">{c.lead}</p>
+        <h1 className="text-4xl font-extrabold text-[#171717]">{heading}</h1>
+        <p className="text-[#6d6b66] mt-3 text-lg">{c.lead}</p>
       </section>
 
-      <section className="grid md:grid-cols-3 gap-5">
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {clusters.map((x) => {
           const place = [x.country, x.region, x.province, x.city].filter(
             (v): v is string => typeof v === "string" && v.trim().length > 0
@@ -400,14 +400,14 @@ export default async function IndustrialClustersHierarchyPage({ params }: Props)
                   {place.join(" · ")}
                 </div>
               )}
-              <h2 className="text-2xl font-bold text-[#0f172a] mt-1">{x.name}</h2>
+              <h2 className="text-2xl font-bold text-[#171717] mt-1">{x.name}</h2>
               {x.industry && (
-                <p className="text-sm font-medium text-[#0f4c81] mt-2">{x.industry}</p>
+                <p className="text-sm font-medium text-[#171717] mt-2">{x.industry}</p>
               )}
               {x.description && (
-                <p className="text-sm text-[#475569] mt-2 flex-1">{x.description}</p>
+                <p className="text-sm text-[#3f4650] mt-2 flex-1">{x.description}</p>
               )}
-              <div className="mt-4 text-sm text-[#64748b]">
+              <div className="mt-4 text-sm text-[#6d6b66]">
                 {c.supplierCount.replace("{count}", String(counts.get(x.slug) ?? 0))}
               </div>
               <Link

@@ -86,14 +86,14 @@ export default function CareersApplyForm({
   if (done) {
     return (
       <section id="apply" className="card p-6 text-center">
-        <p className="text-lg font-semibold text-[#0f172a]">{dict.thankYou}</p>
+        <p className="text-lg font-semibold text-[#171717]">{dict.thankYou}</p>
       </section>
     );
   }
 
   const inputCls =
-    "mt-1 w-full rounded border border-[#cbd5e1] bg-white px-3 py-2 text-sm text-[#0f172a]";
-  const labelCls = "text-sm font-medium text-[#334155]";
+    "mt-1 w-full rounded border border-[#ddd9d0] bg-white px-3 py-2 text-sm text-[#171717]";
+  const labelCls = "text-sm font-medium text-[#2b2b2b]";
   const selectPlaceholder = phSelect || dict.phCountry;
 
   return (
@@ -108,8 +108,8 @@ export default function CareersApplyForm({
             className={
               "rounded-full border px-4 py-2 text-sm font-medium transition " +
               (role === c.value
-                ? "border-[#0f4c81] bg-[#0f4c81] text-white"
-                : "border-[#cbd5e1] bg-white text-[#0f4c81] hover:border-[#0f4c81]")
+                ? "border-[#171717] bg-[#171717] text-white"
+                : "border-[#ddd9d0] bg-white text-[#171717] hover:border-[#171717]")
             }
           >
             {c.label}
@@ -118,8 +118,8 @@ export default function CareersApplyForm({
       </div>
 
       <section className="card p-6">
-        <h2 className="text-xl font-bold text-[#0f172a]">{dict.formTitle}</h2>
-        <form ref={formRef} onSubmit={onSubmit} className="mt-5 grid gap-4 sm:grid-cols-2">
+        <h2 className="text-xl font-bold text-[#171717]">{dict.formTitle}</h2>
+        <form ref={formRef} onSubmit={onSubmit} className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <label className={labelCls} htmlFor="fullName">
               {dict.labelFullName}
@@ -264,9 +264,9 @@ export default function CareersApplyForm({
               type="file"
               required
               accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-              className="mt-1 w-full text-sm text-[#334155]"
+              className="mt-1 w-full text-sm text-[#2b2b2b]"
             />
-            <p className="mt-1 text-xs text-[#64748b]">{dict.fileHint}</p>
+            <p className="mt-1 text-xs text-[#6d6b66]">{dict.fileHint}</p>
           </div>
 
           <div className="sm:col-span-2">
@@ -296,7 +296,7 @@ export default function CareersApplyForm({
             >
               {busy ? dict.submitting : dict.submit}
             </button>
-            <p className="mt-3 text-xs leading-relaxed text-[#64748b]">{dict.privacyNote}</p>
+            <p className="mt-3 text-xs leading-relaxed text-[#6d6b66]">{dict.privacyNote}</p>
           </div>
         </form>
       </section>

@@ -1,7 +1,7 @@
 import { ASSESSMENT_TYPE_LABELS, type AssessmentType } from "@/lib/assessmentShared";
 
 const STYLE: Record<AssessmentType, string> = {
-  self_assessment: "bg-[#0f4c81] text-white",
+  self_assessment: "bg-[#171717] text-white",
   platform_assessment: "bg-[#16a34a] text-white",
   on_site_audit: "bg-[#b45309] text-white",
 };

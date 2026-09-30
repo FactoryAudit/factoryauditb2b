@@ -87,28 +87,28 @@ export default async function AdminVerificationQueuePage({
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-[#0f172a]">待核验队列 · Verification Queue</h1>
-      <p className="mt-1 text-sm text-[#64748b]">
+      <h1 className="text-2xl font-bold text-[#171717]">待核验队列 · Verification Queue</h1>
+      <p className="mt-1 text-sm text-[#6d6b66]">
         供应商自评提交后在此审核。点击进入逐项核验工作台。
       </p>
 
       <div className="mt-4">
         <Link
           href={p("/admin/suppliers")}
-          className="text-sm text-[#0f4c81] hover:underline"
+          className="text-sm text-[#171717] hover:underline"
         >
           ← {a.backToList}
         </Link>
       </div>
 
       {rows.length === 0 ? (
-        <div className="card mt-4 p-6 text-center text-sm text-[#64748b]">
+        <div className="card mt-4 p-6 text-center text-sm text-[#6d6b66]">
           队列为空：暂无待核验的自评提交。
         </div>
       ) : (
         <div className="card mt-4 overflow-x-auto p-0">
           <table className="w-full text-sm">
-            <thead className="bg-[#f7f9fc] text-left text-xs text-[#475569]">
+            <thead className="bg-[#fbfaf7] text-left text-xs text-[#3f4650]">
               <tr>
                 <th className="px-3 py-2">供应商 Supplier</th>
                 <th className="px-3 py-2">Slug</th>
@@ -120,28 +120,28 @@ export default async function AdminVerificationQueuePage({
             </thead>
             <tbody>
               {rows.map((r) => (
-                <tr key={r.supplierId} className="border-t border-[#e2e8f0]">
-                  <td className="px-3 py-2 font-medium text-[#0f172a]">{r.name}</td>
-                  <td className="px-3 py-2 font-mono text-xs text-[#64748b]">{r.slug}</td>
+                <tr key={r.supplierId} className="border-t border-[#ebe8e1]">
+                  <td className="px-3 py-2 font-medium text-[#171717]">{r.name}</td>
+                  <td className="px-3 py-2 font-mono text-xs text-[#6d6b66]">{r.slug}</td>
                   <td className="px-3 py-2">
                     <span className="rounded-full bg-[#dbeafe] px-2 py-0.5 text-xs font-medium text-[#1d4ed8]">
                       {r.status}
                     </span>
                   </td>
-                  <td className="px-3 py-2 text-xs text-[#64748b]">
+                  <td className="px-3 py-2 text-xs text-[#6d6b66]">
                     {r.submittedAt ? r.submittedAt.slice(0, 10) : "—"}
                   </td>
                   <td className="px-3 py-2 text-xs">
                     {r.hasVerification ? (
                       <span className="rounded bg-[#f0fdf4] px-2 py-0.5 text-[#15803d]">已核验</span>
                     ) : (
-                      <span className="text-[#94a3b8]">未核验</span>
+                      <span className="text-[#8c8982]">未核验</span>
                     )}
                   </td>
                   <td className="px-3 py-2">
                     <Link
                       href={p(`/admin/verification/${r.supplierId}`)}
-                      className="text-xs text-[#0f4c81] hover:underline"
+                      className="text-xs text-[#171717] hover:underline"
                     >
                       进入工作台 →
                     </Link>

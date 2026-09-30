@@ -28,13 +28,13 @@ export default async function Page({ params }: Props) {
 
   return (
     <main className="container py-12" data-track-page="tool_scorecard">
-      <span className="inline-block px-3 py-1 rounded-full bg-[#e6eef6] text-[#0f4c81] text-sm font-semibold mb-4">
+      <span className="inline-block px-3 py-1 rounded-full bg-[#f5f3ee] text-[#171717] text-sm font-semibold mb-4">
         FactoryAuditB2B RiskScore™
       </span>
-      <h1 className="text-3xl font-bold text-[#0f172a]">{ui.h1}</h1>
-      <p className="text-[#64748b] mt-2 mb-6 max-w-3xl">{ui.lead}</p>
+      <h1 className="text-3xl font-bold text-[#171717]">{ui.h1}</h1>
+      <p className="text-[#6d6b66] mt-2 mb-6 max-w-3xl">{ui.lead}</p>
       <SupplierScorecardTool ui={ui as unknown as ScorecardUi} />
-      <p className="text-xs text-[#94a3b8] mt-10 max-w-3xl text-center">{t.common.disclaimer}</p>
+      <p className="text-xs text-[#8c8982] mt-10 max-w-3xl text-center">{t.common.disclaimer}</p>
     </main>
   );
 }

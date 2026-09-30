@@ -101,7 +101,7 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
   );
 
   const inputClass =
-    "w-full rounded-md border border-[#e2e8f0] px-3 py-2 text-sm text-[#0f172a] focus:border-[#0f4c81] focus:outline-none";
+    "w-full rounded-md border border-[#ebe8e1] px-3 py-2 text-sm text-[#171717] focus:border-[#171717] focus:outline-none";
 
   function autoSlug() {
     if (!slugTouched && (legalName || city)) {
@@ -171,8 +171,8 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
   return (
     <div className="space-y-5">
       <div>
-        <h1 className="text-2xl font-bold text-[#0f172a]">{dict.title}</h1>
-        <p className="mt-1 text-sm text-[#64748b]">{dict.lead}</p>
+        <h1 className="text-2xl font-bold text-[#171717]">{dict.title}</h1>
+        <p className="mt-1 text-sm text-[#6d6b66]">{dict.lead}</p>
         <div className="mt-3 flex gap-2">
           <span className="rounded-full bg-[#fef3c7] px-2 py-0.5 text-xs text-[#92400e]">
             {dict.statusUnpublished}
@@ -184,9 +184,9 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
       </div>
 
       <form onSubmit={handleSubmit} className="card space-y-5 p-6">
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{dict.legalNameLabel}</span>
+            <span className="text-sm font-medium text-[#171717]">{dict.legalNameLabel}</span>
             <input
               className={`mt-1 ${inputClass}`}
               value={legalName}
@@ -198,7 +198,7 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
           </label>
 
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{dict.cityLabel}</span>
+            <span className="text-sm font-medium text-[#171717]">{dict.cityLabel}</span>
             <input
               className={`mt-1 ${inputClass}`}
               value={city}
@@ -210,7 +210,7 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
           </label>
 
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{dict.slugLabel}</span>
+            <span className="text-sm font-medium text-[#171717]">{dict.slugLabel}</span>
             <input
               className={`mt-1 ${inputClass}`}
               value={slug}
@@ -219,32 +219,32 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
                 setSlugTouched(true);
               }}
             />
-            <span className="mt-1 block text-xs text-[#94a3b8]">{dict.slugHint}</span>
+            <span className="mt-1 block text-xs text-[#8c8982]">{dict.slugHint}</span>
           </label>
 
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{dict.countryLabel}</span>
+            <span className="text-sm font-medium text-[#171717]">{dict.countryLabel}</span>
             <input
               className={`mt-1 ${inputClass}`}
               value={country}
               onChange={(e) => setCountry(e.target.value.toLowerCase())}
               placeholder="china / vietnam"
             />
-            <span className="mt-1 block text-xs text-[#94a3b8]">{dict.countryHint}</span>
+            <span className="mt-1 block text-xs text-[#8c8982]">{dict.countryHint}</span>
           </label>
 
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{dict.displayNameLabel}</span>
+            <span className="text-sm font-medium text-[#171717]">{dict.displayNameLabel}</span>
             <input
               className={`mt-1 ${inputClass}`}
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
             />
-            <span className="mt-1 block text-xs text-[#94a3b8]">{dict.displayNameHint}</span>
+            <span className="mt-1 block text-xs text-[#8c8982]">{dict.displayNameHint}</span>
           </label>
 
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{dict.industryLabel}</span>
+            <span className="text-sm font-medium text-[#171717]">{dict.industryLabel}</span>
             <input
               className={`mt-1 ${inputClass}`}
               value={industry}
@@ -253,7 +253,7 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
           </label>
 
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{dict.businessTypeLabel}</span>
+            <span className="text-sm font-medium text-[#171717]">{dict.businessTypeLabel}</span>
             <input
               className={`mt-1 ${inputClass}`}
               value={businessType}
@@ -262,7 +262,7 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
           </label>
 
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{dict.establishedLabel}</span>
+            <span className="text-sm font-medium text-[#171717]">{dict.establishedLabel}</span>
             <input
               type="number"
               className={`mt-1 ${inputClass}`}
@@ -272,7 +272,7 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
           </label>
 
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{dict.employeesLabel}</span>
+            <span className="text-sm font-medium text-[#171717]">{dict.employeesLabel}</span>
             <input
               className={`mt-1 ${inputClass}`}
               value={employees}
@@ -281,18 +281,18 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
           </label>
 
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{dict.websiteLabel}</span>
+            <span className="text-sm font-medium text-[#171717]">{dict.websiteLabel}</span>
             <input
               className={`mt-1 ${inputClass}`}
               value={website}
               onChange={(e) => setWebsite(e.target.value)}
               placeholder="https://"
             />
-            <span className="mt-1 block text-xs text-[#94a3b8]">{dict.websiteHint}</span>
+            <span className="mt-1 block text-xs text-[#8c8982]">{dict.websiteHint}</span>
           </label>
 
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{dict.phoneLabel}</span>
+            <span className="text-sm font-medium text-[#171717]">{dict.phoneLabel}</span>
             <input
               className={`mt-1 ${inputClass}`}
               value={phone}
@@ -301,7 +301,7 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
           </label>
 
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{dict.regNoLabel}</span>
+            <span className="text-sm font-medium text-[#171717]">{dict.regNoLabel}</span>
             <input
               className={`mt-1 ${inputClass}`}
               value={regNo}
@@ -310,7 +310,7 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
           </label>
 
           <label className="block md:col-span-2">
-            <span className="text-sm font-medium text-[#0f172a]">{dict.addressLabel}</span>
+            <span className="text-sm font-medium text-[#171717]">{dict.addressLabel}</span>
             <input
               className={`mt-1 ${inputClass}`}
               value={address}
@@ -319,23 +319,23 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
           </label>
 
           <label className="block md:col-span-2">
-            <span className="text-sm font-medium text-[#0f172a]">{dict.mainProductsLabel}</span>
+            <span className="text-sm font-medium text-[#171717]">{dict.mainProductsLabel}</span>
             <textarea
               className={`mt-1 ${inputClass}`}
               rows={2}
               value={mainProducts}
               onChange={(e) => setMainProducts(e.target.value)}
             />
-            <span className="mt-1 block text-xs text-[#94a3b8]">{dict.mainProductsHint}</span>
+            <span className="mt-1 block text-xs text-[#8c8982]">{dict.mainProductsHint}</span>
           </label>
         </div>
 
-        <fieldset className="rounded-lg border border-[#e2e8f0] p-4">
-          <legend className="px-1 text-sm font-semibold text-[#0f172a]">{dict.sourceTitle}</legend>
-          <p className="mb-3 text-xs text-[#64748b]">{dict.sourceHint}</p>
-          <div className="grid gap-4 md:grid-cols-3">
+        <fieldset className="rounded-lg border border-[#ebe8e1] p-4">
+          <legend className="px-1 text-sm font-semibold text-[#171717]">{dict.sourceTitle}</legend>
+          <p className="mb-3 text-xs text-[#6d6b66]">{dict.sourceHint}</p>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             <label className="block">
-              <span className="text-sm font-medium text-[#0f172a]">{dict.sourceUrlLabel}</span>
+              <span className="text-sm font-medium text-[#171717]">{dict.sourceUrlLabel}</span>
               <input
                 className={`mt-1 ${inputClass}`}
                 value={sourceUrl}
@@ -343,7 +343,7 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
               />
             </label>
             <label className="block">
-              <span className="text-sm font-medium text-[#0f172a]">{dict.sourceTypeLabel}</span>
+              <span className="text-sm font-medium text-[#171717]">{dict.sourceTypeLabel}</span>
               <input
                 className={`mt-1 ${inputClass}`}
                 value={sourceType}
@@ -351,7 +351,7 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
               />
             </label>
             <label className="block">
-              <span className="text-sm font-medium text-[#0f172a]">{dict.sourceNameLabel}</span>
+              <span className="text-sm font-medium text-[#171717]">{dict.sourceNameLabel}</span>
               <input
                 className={`mt-1 ${inputClass}`}
                 value={sourceName}
@@ -361,9 +361,9 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
           </div>
         </fieldset>
 
-        <fieldset className="rounded-lg border border-[#e2e8f0] p-4">
-          <legend className="px-1 text-sm font-semibold text-[#0f172a]">{dict.certTitle}</legend>
-          <p className="mb-3 text-xs text-[#64748b]">{dict.certHint}</p>
+        <fieldset className="rounded-lg border border-[#ebe8e1] p-4">
+          <legend className="px-1 text-sm font-semibold text-[#171717]">{dict.certTitle}</legend>
+          <p className="mb-3 text-xs text-[#6d6b66]">{dict.certHint}</p>
           <div className="space-y-2">
             {certs.map((c, i) => (
               <div key={i} className="flex items-center gap-2">
@@ -391,14 +391,14 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
           </div>
           <button
             type="button"
-            className="mt-2 text-xs text-[#0f4c81] hover:underline"
+            className="mt-2 text-xs text-[#171717] hover:underline"
             onClick={() => setCerts([...certs, ""])}
           >
             + {dict.addCert}
           </button>
         </fieldset>
 
-        <div className="flex items-center gap-4 border-t border-[#e2e8f0] pt-4">
+        <div className="flex items-center gap-4 border-t border-[#ebe8e1] pt-4">
           <button
             type="submit"
             disabled={status === "saving"}
@@ -407,7 +407,7 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
             {status === "saving" ? dict.submitting : dict.submit}
           </button>
           {status === "saved" && (
-            <span className="text-sm text-[#0f4c81]">{dict.success}</span>
+            <span className="text-sm text-[#171717]">{dict.success}</span>
           )}
           {status === "error" && (
             <span className="text-sm text-[#d4232a]">
@@ -419,13 +419,13 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
       </form>
 
       {status === "saved" && msg.id && (
-        <div className="card border-[#0f4c81] p-4">
-          <p className="text-sm text-[#0f172a]">
+        <div className="card border-[#171717] p-4">
+          <p className="text-sm text-[#171717]">
             <span className="font-medium">{dict.newId}:</span>{" "}
-            <code className="rounded bg-[#f1f5f9] px-1">{msg.id}</code>
+            <code className="rounded bg-[#f5f3ee] px-1">{msg.id}</code>
           </p>
           {editHref && (
-            <a href={editHref} className="mt-2 inline-block text-sm text-[#0f4c81] hover:underline">
+            <a href={editHref} className="mt-2 inline-block text-sm text-[#171717] hover:underline">
               {dict.viewLink} →
             </a>
           )}
@@ -434,14 +434,14 @@ export default function SupplierCreateForm({ locale, dict }: Props) {
 
       {status === "dup" && msg.slug && (
         <div className="card border-[#d4232a] p-4">
-          <p className="text-sm font-medium text-[#0f172a]">{dict.dupTitle}</p>
-          <p className="mt-1 text-sm text-[#475569]">
+          <p className="text-sm font-medium text-[#171717]">{dict.dupTitle}</p>
+          <p className="mt-1 text-sm text-[#3f4650]">
             {dict.dupFound.replace("{slug}", msg.slug)}
             {msg.field ? ` (${dict.dupField.replace("{field}", msg.field)})` : ""}
           </p>
           <a
             href={`/${locale}/admin/suppliers/${encodeURIComponent(msg.slug)}`}
-            className="mt-2 inline-block text-sm text-[#0f4c81] hover:underline"
+            className="mt-2 inline-block text-sm text-[#171717] hover:underline"
           >
             {dict.viewLink} →
           </a>

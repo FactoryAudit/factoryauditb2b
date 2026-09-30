@@ -83,7 +83,7 @@ export default async function FieldReportsPage({ params }: Props) {
         {f.h1}
       </nav>
 
-      <span className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">
+      <span className="text-sm font-semibold text-[#171717] uppercase tracking-wide">
         {f.badge}
       </span>
       <h1 className="text-3xl font-bold mt-1">{f.h1}</h1>
@@ -101,12 +101,12 @@ export default async function FieldReportsPage({ params }: Props) {
           return (
             <section key={svc}>
               <h2 className="text-xl font-semibold">{f.serviceLabels[svc]}</h2>
-              <ul className="mt-3 grid gap-4 md:grid-cols-2">
+              <ul className="mt-3 grid grid-cols-1 gap-4 md:grid-cols-2">
                 {items.map((r) => (
                   <li key={r.slug} className="card p-5">
                     <Link
                       href={p(`/field-reports/${r.slug}`)}
-                      className="font-semibold text-[#0f4c81] hover:underline"
+                      className="font-semibold text-[#171717] hover:underline"
                     >
                       {pickZhPair(locale, r.titleEn, r.titleZh)}
                     </Link>
@@ -115,7 +115,7 @@ export default async function FieldReportsPage({ params }: Props) {
                     </p>
                     <p className="mt-3 text-xs text-gray-500">
                       {f.updatedLabel} {r.updated} ·{" "}
-                      <span className="text-[#0f4c81]">{f.readMore} →</span>
+                      <span className="text-[#171717]">{f.readMore} →</span>
                     </p>
                   </li>
                 ))}
@@ -125,7 +125,7 @@ export default async function FieldReportsPage({ params }: Props) {
         })}
       </div>
 
-      <section className="mt-10 card p-6 bg-[#0f4c81]">
+      <section className="mt-10 card p-6 bg-[#171717]">
         <h2 className="text-lg font-semibold text-white">{f.ctaTitle}</h2>
         <p className="mt-1 text-sm text-white/80">{f.ctaLead}</p>
         <div className="mt-3 flex flex-wrap gap-3">

@@ -96,7 +96,7 @@ export default function SavedSuppliersList({ labels, locale }: Props) {
   }
 
   if (items === null) {
-    return <p className="mt-6 text-sm text-[#64748b]">{labels.loading}</p>;
+    return <p className="mt-6 text-sm text-[#6d6b66]">{labels.loading}</p>;
   }
 
   if (err) {
@@ -106,7 +106,7 @@ export default function SavedSuppliersList({ labels, locale }: Props) {
   if (items.length === 0) {
     return (
       <div className="card mt-6 p-8">
-        <p className="text-sm text-[#475569]">{labels.empty}</p>
+        <p className="text-sm text-[#3f4650]">{labels.empty}</p>
         <Link href={directoryHref} className="btn btn-primary mt-4 inline-block">
           {labels.emptyCta}
         </Link>
@@ -115,7 +115,7 @@ export default function SavedSuppliersList({ labels, locale }: Props) {
   }
 
   return (
-    <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+    <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
       {items.map((x) => {
         const level =
           typeof x.riskScore === "number"
@@ -126,7 +126,7 @@ export default function SavedSuppliersList({ labels, locale }: Props) {
             <div className="flex items-start justify-between gap-3">
               <Link
                 href={profileHref(x.slug)}
-                className="font-semibold text-[#0f172a] hover:text-[#0f4c81]"
+                className="font-semibold text-[#171717] hover:text-[#171717]"
               >
                 {x.legalName}
               </Link>
@@ -139,14 +139,14 @@ export default function SavedSuppliersList({ labels, locale }: Props) {
                 </span>
               )}
             </div>
-            <p className="mt-1 text-xs text-[#64748b]">
+            <p className="mt-1 text-xs text-[#6d6b66]">
               {x.city}, {x.country} · {x.verificationStatus ?? labels.noCheckRecord}
             </p>
             <button
               type="button"
               onClick={() => remove(x.slug)}
               disabled={busy === x.slug}
-              className="mt-3 text-xs text-[#64748b] underline hover:text-[#b42318] disabled:opacity-50"
+              className="mt-3 text-xs text-[#6d6b66] underline hover:text-[#b42318] disabled:opacity-50"
             >
               {busy === x.slug ? "…" : labels.remove}
             </button>

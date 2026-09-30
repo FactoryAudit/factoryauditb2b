@@ -105,18 +105,18 @@ export default async function AdminRfqMatchPage({ params }: Props) {
     : "";
 
   const row = (k: string, v: string | null) => (
-    <tr className="border-b border-[#e2e8f0]">
-      <td className="w-56 px-3 py-2 align-top text-xs uppercase text-[#64748b]">{k}</td>
-      <td className="px-3 py-2 text-sm text-[#0f172a]">{v || "—"}</td>
+    <tr className="border-b border-[#ebe8e1]">
+      <td className="w-56 px-3 py-2 align-top text-xs uppercase text-[#6d6b66]">{k}</td>
+      <td className="px-3 py-2 text-sm text-[#171717]">{v || "—"}</td>
     </tr>
   );
 
   return (
     <div>
-      <Link href={p("/admin/rfqs")} className="text-sm text-[#0f4c81] hover:underline">
+      <Link href={p("/admin/rfqs")} className="text-sm text-[#171717] hover:underline">
         {t.back}
       </Link>
-      <h1 className="mt-2 flex flex-wrap items-center gap-3 text-2xl font-bold text-[#0f172a]">
+      <h1 className="mt-2 flex flex-wrap items-center gap-3 text-2xl font-bold text-[#171717]">
         <span className="font-mono">{String(rfq.reference_id)}</span>
         {isTest && (
           <span className="rounded bg-[#fdf3d8] px-2 py-0.5 text-xs font-semibold text-[#8a5a00]">
@@ -125,7 +125,7 @@ export default async function AdminRfqMatchPage({ params }: Props) {
         )}
       </h1>
 
-      <div className="mt-4 overflow-hidden rounded-lg border border-[#e2e8f0] bg-white">
+      <div className="mt-4 overflow-hidden rounded-lg border border-[#ebe8e1] bg-white">
         <table className="w-full text-left">
           <tbody>
             {row(t.product, rfq.product == null ? null : String(rfq.product))}

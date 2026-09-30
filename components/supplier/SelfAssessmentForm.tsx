@@ -32,7 +32,7 @@ type Props = {
 };
 
 const STATUS_BADGE: Record<string, { cls: string; key: string }> = {
-  draft: { cls: "bg-[#f1f5f9] text-[#475569]", key: "status_draft" },
+  draft: { cls: "bg-[#f5f3ee] text-[#3f4650]", key: "status_draft" },
   submitted: { cls: "bg-[#dbeafe] text-[#1d4ed8]", key: "status_submitted" },
   under_review: { cls: "bg-[#fef9c3] text-[#a16207]", key: "status_under_review" },
   published: { cls: "bg-[#dcfce7] text-[#15803d]", key: "status_published" },
@@ -235,7 +235,7 @@ export default function SelfAssessmentForm({
               <label
                 key={o}
                 className={`px-3 py-1 rounded-full border text-sm cursor-pointer select-none ${
-                  checked ? "bg-[#0f4c81] text-white border-[#0f4c81]" : "bg-[#f8fafc] text-[#334155] border-[#e2e8f0]"
+                  checked ? "bg-[#171717] text-white border-[#171717]" : "bg-[#fbfaf7] text-[#2b2b2b] border-[#ebe8e1]"
                 }`}
               >
                 <input
@@ -267,7 +267,7 @@ export default function SelfAssessmentForm({
             <label
               key={o}
               className={`px-3 py-1 rounded-full border text-sm cursor-pointer select-none ${
-                checked ? "bg-[#0f4c81] text-white border-[#0f4c81]" : "bg-[#f8fafc] text-[#334155] border-[#e2e8f0]"
+                checked ? "bg-[#171717] text-white border-[#171717]" : "bg-[#fbfaf7] text-[#2b2b2b] border-[#ebe8e1]"
               }`}
             >
               <input
@@ -294,23 +294,23 @@ export default function SelfAssessmentForm({
       <div className="card p-4 text-sm">
         <div className="flex items-center justify-between flex-wrap gap-3">
           <div className="flex items-center gap-3">
-            <span className="text-[#334155]">
-              {t("progressLabel")}: <strong className="text-[#0f172a]">{progress.answered}</strong> / {progress.total}
+            <span className="text-[#2b2b2b]">
+              {t("progressLabel")}: <strong className="text-[#171717]">{progress.answered}</strong> / {progress.total}
             </span>
             {badge && (
               <span className={`px-2 py-0.5 rounded-full text-xs ${badge.cls}`}>{t(badge.key)}</span>
             )}
           </div>
-          <div className="text-xs text-[#64748b]">
+          <div className="text-xs text-[#6d6b66]">
             {t("mandatoryLabel")} {progress.mandatoryAnswered}/{progress.mandatoryTotal} · {t("evidenceLabel")}{" "}
             {progress.fileItemsWithEvidence}/{progress.fileItemsTotal}
             {saving && ` · ${t("saving")}`}
             {savedAt && !saving && ` · ${t("savedAtPrefix")} ${savedAt}`}
           </div>
         </div>
-        <div className="mt-2 h-2 bg-[#e2e8f0] rounded-full overflow-hidden">
+        <div className="mt-2 h-2 bg-[#ebe8e1] rounded-full overflow-hidden">
           <div
-            className="h-full bg-[#0f4c81]"
+            className="h-full bg-[#171717]"
             style={{ width: `${progress.total ? (progress.answered / progress.total) * 100 : 0}%` }}
           />
         </div>
@@ -333,8 +333,8 @@ export default function SelfAssessmentForm({
 
       {/* 已提交 / 审核中：只读提示 */}
       {isLocked && (
-        <div className="card p-4 bg-[#f8fafc] border border-[#e2e8f0]">
-          <p className="text-sm text-[#334155]">{t("submittedReadOnly")}</p>
+        <div className="card p-4 bg-[#fbfaf7] border border-[#ebe8e1]">
+          <p className="text-sm text-[#2b2b2b]">{t("submittedReadOnly")}</p>
         </div>
       )}
 
@@ -347,23 +347,23 @@ export default function SelfAssessmentForm({
       >
         {templates.map((tpl) => (
           <section key={tpl.code} className="card p-6">
-            <h2 className="text-2xl font-bold text-[#0f172a]">{tpl.nameZh || tpl.name}</h2>
-            {tpl.description && <p className="text-sm text-[#94a3b8] mt-1">{tpl.description}</p>}
+            <h2 className="text-2xl font-bold text-[#171717]">{tpl.nameZh || tpl.name}</h2>
+            {tpl.description && <p className="text-sm text-[#8c8982] mt-1">{tpl.description}</p>}
             {tpl.sections.map((sec) => (
               <div key={sec.code} className="mt-6">
-                <h3 className="text-lg font-semibold text-[#0f4c81] border-l-4 border-[#0f4c81] pl-3">
+                <h3 className="text-lg font-semibold text-[#171717] border-l-4 border-[#171717] pl-3">
                   {sec.code}. {sec.titleZh || sec.title}
                 </h3>
                 <div className="mt-3 space-y-4">
                   {sec.questions.map((q) => (
                     <div key={q.code} className="border rounded-lg p-3 bg-white">
                       <div className="flex items-start justify-between gap-3">
-                        <p className="font-medium text-[#0f172a]">
-                          <span className="text-[#64748b]">{q.code}</span> {q.titleZh || q.title}
+                        <p className="font-medium text-[#171717]">
+                          <span className="text-[#6d6b66]">{q.code}</span> {q.titleZh || q.title}
                           {q.mandatory && <span className="text-[#b45309] ml-1">*</span>}
                         </p>
                       </div>
-                      {q.requirementZh && <p className="text-xs text-[#64748b] mt-1">{q.requirementZh}</p>}
+                      {q.requirementZh && <p className="text-xs text-[#6d6b66] mt-1">{q.requirementZh}</p>}
                       {renderAnswer(q)}
                     </div>
                   ))}
@@ -380,7 +380,7 @@ export default function SelfAssessmentForm({
 
         {/* 自评说明 */}
         <section className="card p-6">
-          <h3 className="text-lg font-semibold text-[#0f172a]">{t("selfSummaryLabel")}</h3>
+          <h3 className="text-lg font-semibold text-[#171717]">{t("selfSummaryLabel")}</h3>
           <textarea
             value={summary}
             onChange={(e) => setSummary(e.target.value)}
@@ -407,7 +407,7 @@ export default function SelfAssessmentForm({
               type="button"
               onClick={() => void doSave(false)}
               disabled={saving}
-              className="px-5 py-3 rounded-lg border border-[#0f4c81] text-[#0f4c81] disabled:opacity-60"
+              className="px-5 py-3 rounded-lg border border-[#171717] text-[#171717] disabled:opacity-60"
               data-track="self_assessment_save_draft_click"
             >
               {saving ? t("saving") : t("saveDraft")}

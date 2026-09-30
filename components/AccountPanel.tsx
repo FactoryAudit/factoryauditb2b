@@ -77,8 +77,8 @@ export default function AccountPanel({
   if (loading) {
     return (
       <div className="card p-6" aria-busy="true">
-        <div className="h-4 w-32 bg-[#e2e8f0] rounded animate-pulse" />
-        <div className="h-4 w-56 bg-[#e2e8f0] rounded animate-pulse mt-3" />
+        <div className="h-4 w-32 bg-[#ebe8e1] rounded animate-pulse" />
+        <div className="h-4 w-56 bg-[#ebe8e1] rounded animate-pulse mt-3" />
       </div>
     );
   }
@@ -86,15 +86,15 @@ export default function AccountPanel({
   if (!me.authenticated) {
     return (
       <div className="card p-6">
-        <h2 className="font-semibold text-[#0f172a]">{t.signedOutTitle}</h2>
-        <p className="text-sm text-[#475569] mt-1">{t.signedOutLead}</p>
+        <h2 className="font-semibold text-[#171717]">{t.signedOutTitle}</h2>
+        <p className="text-sm text-[#3f4650] mt-1">{t.signedOutLead}</p>
         <div className="mt-4 flex flex-wrap gap-3">
           <Link href={signInHref} className="btn btn-primary text-sm">
             {t.signInCta}
           </Link>
-          <span className="text-sm text-[#64748b] self-center">
+          <span className="text-sm text-[#6d6b66] self-center">
             {t.noAccount}{" "}
-            <Link href={registerHref} className="text-[#0f4c81] underline">
+            <Link href={registerHref} className="text-[#171717] underline">
               {t.registerCta}
             </Link>
           </span>
@@ -118,30 +118,30 @@ export default function AccountPanel({
   return (
     <div className="space-y-6">
       <div className="card p-6">
-        <h2 className="font-semibold text-[#0f172a]">{t.emailLabel}</h2>
-        <p className="text-sm text-[#475569] mt-1">{me.email ?? "—"}</p>
+        <h2 className="font-semibold text-[#171717]">{t.emailLabel}</h2>
+        <p className="text-sm text-[#3f4650] mt-1">{me.email ?? "—"}</p>
 
-        <div className="mt-5 grid sm:grid-cols-2 gap-4">
+        <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <div className="text-xs uppercase tracking-wide text-[#64748b]">
+            <div className="text-xs uppercase tracking-wide text-[#6d6b66]">
               {t.planLabel}
             </div>
-            <div className="font-semibold text-[#0f172a] mt-1">
+            <div className="font-semibold text-[#171717] mt-1">
               {isPayingPlan ? t.planFounding : t.planFree}
             </div>
           </div>
           <div>
-            <div className="text-xs uppercase tracking-wide text-[#64748b]">
+            <div className="text-xs uppercase tracking-wide text-[#6d6b66]">
               {t.quotaLabel}
             </div>
-            <div className="font-semibold text-[#0f172a] mt-1">{quotaText}</div>
+            <div className="font-semibold text-[#171717] mt-1">{quotaText}</div>
           </div>
         </div>
 
         {isPayingPlan && me.currentPeriodEnd && (
-          <p className="text-sm text-[#475569] mt-4">
+          <p className="text-sm text-[#3f4650] mt-4">
             {t.renewsLabel}{" "}
-            <span className="font-medium text-[#0f172a]">
+            <span className="font-medium text-[#171717]">
               {new Date(me.currentPeriodEnd).toLocaleDateString(locale)}
             </span>
           </p>
@@ -157,24 +157,24 @@ export default function AccountPanel({
         摆出入口只会让游客点进另一个登录闸门。
       */}
       <section className="card p-6">
-        <h2 className="text-xs uppercase tracking-wide text-[#64748b]">
+        <h2 className="text-xs uppercase tracking-wide text-[#6d6b66]">
           {t.linksTitle}
         </h2>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Link
             href={p("/account/saved")}
-            className="rounded-lg border border-[#e2e8f0] p-4 transition-colors hover:border-[#0f4c81] hover:bg-[#f8fafc]"
+            className="rounded-lg border border-[#ebe8e1] p-4 transition-colors hover:border-[#171717] hover:bg-[#fbfaf7]"
           >
-            <div className="font-semibold text-[#0f172a]">{t.savedLinkTitle}</div>
-            <p className="text-sm text-[#475569] mt-1">{t.savedLinkLead}</p>
+            <div className="font-semibold text-[#171717]">{t.savedLinkTitle}</div>
+            <p className="text-sm text-[#3f4650] mt-1">{t.savedLinkLead}</p>
           </Link>
 
           <Link
             href={p("/account/rfqs")}
-            className="rounded-lg border border-[#e2e8f0] p-4 transition-colors hover:border-[#0f4c81] hover:bg-[#f8fafc]"
+            className="rounded-lg border border-[#ebe8e1] p-4 transition-colors hover:border-[#171717] hover:bg-[#fbfaf7]"
           >
-            <div className="font-semibold text-[#0f172a]">{t.rfqsLinkTitle}</div>
-            <p className="text-sm text-[#475569] mt-1">{t.rfqsLinkLead}</p>
+            <div className="font-semibold text-[#171717]">{t.rfqsLinkTitle}</div>
+            <p className="text-sm text-[#3f4650] mt-1">{t.rfqsLinkLead}</p>
           </Link>
 
           {/*
@@ -186,19 +186,19 @@ export default function AccountPanel({
           {me.isAdmin && (
             <Link
               href={p("/admin")}
-              className="rounded-lg border border-[#e2e8f0] p-4 transition-colors hover:border-[#0f4c81] hover:bg-[#f8fafc]"
+              className="rounded-lg border border-[#ebe8e1] p-4 transition-colors hover:border-[#171717] hover:bg-[#fbfaf7]"
             >
-              <div className="font-semibold text-[#0f172a]">{t.adminLinkTitle}</div>
-              <p className="text-sm text-[#475569] mt-1">{t.adminLinkLead}</p>
+              <div className="font-semibold text-[#171717]">{t.adminLinkTitle}</div>
+              <p className="text-sm text-[#3f4650] mt-1">{t.adminLinkLead}</p>
             </Link>
           )}
         </div>
       </section>
 
       {!hasPaidAccess && (
-        <div className="card p-6 border-l-4 border-[#0f4c81]">
-          <h2 className="font-semibold text-[#0f172a]">{t.upgradeTitle}</h2>
-          <p className="text-sm text-[#475569] mt-1">
+        <div className="card p-6 border-l-4 border-[#171717]">
+          <h2 className="font-semibold text-[#171717]">{t.upgradeTitle}</h2>
+          <p className="text-sm text-[#3f4650] mt-1">
             {/* 只替换数字：货币符号与位置由各语言文案自己决定
                 （en/zh/ja "$99"、es/de/fr/ar "99 $"、pt "US$ 99"） */}
             {t.upgradeLead.replace("{price}", String(MEMBERSHIP_PRICE_USD))}

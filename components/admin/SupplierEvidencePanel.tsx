@@ -82,7 +82,7 @@ type Props = {
 };
 
 const inputClass =
-  "w-full rounded-md border border-[#e2e8f0] px-3 py-2 text-sm text-[#0f172a] focus:border-[#0f4c81] focus:outline-none";
+  "w-full rounded-md border border-[#ebe8e1] px-3 py-2 text-sm text-[#171717] focus:border-[#171717] focus:outline-none";
 
 const LEVELS = [
   "unverified",
@@ -354,8 +354,8 @@ export default function SupplierEvidencePanel({
       onClick={() => setTab(key)}
       className={`rounded-md px-3 py-1.5 text-sm font-medium ${
         tab === key
-          ? "bg-[#0f4c81] text-white"
-          : "bg-[#f1f5f9] text-[#475569] hover:bg-[#e2e8f0]"
+          ? "bg-[#171717] text-white"
+          : "bg-[#f5f3ee] text-[#3f4650] hover:bg-[#ebe8e1]"
       }`}
     >
       {label}
@@ -366,7 +366,7 @@ export default function SupplierEvidencePanel({
     <div className="space-y-6">
       {/* 核验等级 */}
       <section className="card p-5">
-        <h2 className="text-lg font-bold text-[#0f172a]">{d.sectionVerification}</h2>
+        <h2 className="text-lg font-bold text-[#171717]">{d.sectionVerification}</h2>
         <p className="mt-2">
           <Badge variant="neutral">{levelLabel[level] ?? level}</Badge>
         </p>
@@ -379,8 +379,8 @@ export default function SupplierEvidencePanel({
               onClick={() => saveLevel(lv)}
               className={`rounded-md border px-3 py-1.5 text-sm ${
                 level === lv
-                  ? "border-[#0f4c81] bg-[#e6eef6] font-semibold text-[#0f4c81]"
-                  : "border-[#e2e8f0] bg-white text-[#475569]"
+                  ? "border-[#171717] bg-[#f5f3ee] font-semibold text-[#171717]"
+                  : "border-[#ebe8e1] bg-white text-[#3f4650]"
               }`}
             >
               {levelLabel[lv] ?? lv}
@@ -397,10 +397,10 @@ export default function SupplierEvidencePanel({
       </div>
 
       {msg ? (
-        <p className="rounded-md bg-[#f1f5f9] px-3 py-2 text-sm text-[#0f172a]">{msg}</p>
+        <p className="rounded-md bg-[#f5f3ee] px-3 py-2 text-sm text-[#171717]">{msg}</p>
       ) : null}
 
-      {busy ? <p className="text-xs text-[#475569]">{d.adminSaving}</p> : null}
+      {busy ? <p className="text-xs text-[#3f4650]">{d.adminSaving}</p> : null}
 
       {/* ---- 文件 ---- */}
       {tab === "docs" && loaded ? (
@@ -412,10 +412,10 @@ export default function SupplierEvidencePanel({
               void upload(e.currentTarget);
             }}
           >
-            <h3 className="font-semibold text-[#0f172a]">{d.adminUpload}</h3>
-            <div className="grid gap-3 md:grid-cols-2">
+            <h3 className="font-semibold text-[#171717]">{d.adminUpload}</h3>
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               <label className="block text-sm">
-                <span className="font-medium text-[#0f172a]">Type</span>
+                <span className="font-medium text-[#171717]">Type</span>
                 <select name="documentType" className={`mt-1 ${inputClass}`} defaultValue="iso_certificate">
                   <option value="business_license">business_license</option>
                   <option value="factory_license">factory_license</option>
@@ -427,11 +427,11 @@ export default function SupplierEvidencePanel({
                 </select>
               </label>
               <label className="block text-sm">
-                <span className="font-medium text-[#0f172a]">Name</span>
+                <span className="font-medium text-[#171717]">Name</span>
                 <input name="documentName" className={`mt-1 ${inputClass}`} />
               </label>
               <label className="block text-sm">
-                <span className="font-medium text-[#0f172a]">Program code</span>
+                <span className="font-medium text-[#171717]">Program code</span>
                 <input
                   name="programCode"
                   list="ec-programs"
@@ -447,11 +447,11 @@ export default function SupplierEvidencePanel({
                 </datalist>
               </label>
               <label className="block text-sm">
-                <span className="font-medium text-[#0f172a]">{d.validUntil}</span>
+                <span className="font-medium text-[#171717]">{d.validUntil}</span>
                 <input name="expiryDate" type="date" className={`mt-1 ${inputClass}`} />
               </label>
               <label className="block text-sm">
-                <span className="font-medium text-[#0f172a]">Visibility</span>
+                <span className="font-medium text-[#171717]">Visibility</span>
                 <select name="visibility" className={`mt-1 ${inputClass}`} defaultValue="admin">
                   <option value="admin">admin</option>
                   <option value="paid">paid</option>
@@ -459,7 +459,7 @@ export default function SupplierEvidencePanel({
                 </select>
               </label>
               <label className="block text-sm">
-                <span className="font-medium text-[#0f172a]">{d.adminChooseFile}</span>
+                <span className="font-medium text-[#171717]">{d.adminChooseFile}</span>
                 <input
                   name="file"
                   type="file"
@@ -467,7 +467,7 @@ export default function SupplierEvidencePanel({
                   className={`mt-1 ${inputClass}`}
                   required
                 />
-                <span className="mt-1 block text-xs text-[#475569]">{d.adminFileHint}</span>
+                <span className="mt-1 block text-xs text-[#3f4650]">{d.adminFileHint}</span>
               </label>
             </div>
             <button type="submit" disabled={busy} className="btn btn-primary disabled:opacity-70">
@@ -476,11 +476,11 @@ export default function SupplierEvidencePanel({
           </form>
 
           {docs.length === 0 ? (
-            <p className="text-sm text-[#475569]">{d.adminDocsEmpty}</p>
+            <p className="text-sm text-[#3f4650]">{d.adminDocsEmpty}</p>
           ) : (
             <div className="card overflow-x-auto p-0">
               <table className="w-full text-sm">
-                <thead className="bg-[#f7f9fc] text-left text-xs text-[#475569]">
+                <thead className="bg-[#fbfaf7] text-left text-xs text-[#3f4650]">
                   <tr>
                     <th className="px-3 py-2">Name</th>
                     <th className="px-3 py-2">Type</th>
@@ -495,23 +495,23 @@ export default function SupplierEvidencePanel({
                     const b = docBadge(r.verification_status, d);
                     const dl = daysUntilDate(r.expiry_date);
                     return (
-                      <tr key={r.id} className="border-t border-[#e2e8f0]">
+                      <tr key={r.id} className="border-t border-[#ebe8e1]">
                         <td className="px-3 py-2">
-                          <div className="font-medium text-[#0f172a]">{r.document_name}</div>
-                          <div className="text-xs text-[#475569]">
+                          <div className="font-medium text-[#171717]">{r.document_name}</div>
+                          <div className="text-xs text-[#3f4650]">
                             {Math.round(r.size_bytes / 1024)} KB
                           </div>
                         </td>
-                        <td className="px-3 py-2 text-xs text-[#475569]">{r.document_type}</td>
-                        <td className="px-3 py-2 text-xs text-[#475569]">
+                        <td className="px-3 py-2 text-xs text-[#3f4650]">{r.document_type}</td>
+                        <td className="px-3 py-2 text-xs text-[#3f4650]">
                           {r.expiry_date ?? "—"}
                           {dl !== null ? (
-                            <div className="text-[#475569]">
+                            <div className="text-[#3f4650]">
                               {dl < 0 ? fmt(d.expiredAgo, -dl) : fmt(d.daysRemaining, dl)}
                             </div>
                           ) : null}
                         </td>
-                        <td className="px-3 py-2 text-xs text-[#475569]">{r.visibility}</td>
+                        <td className="px-3 py-2 text-xs text-[#3f4650]">{r.visibility}</td>
                         <td className="px-3 py-2">
                           <Badge variant={b.v}>{b.t}</Badge>
                         </td>
@@ -522,7 +522,7 @@ export default function SupplierEvidencePanel({
                                 href={r.previewUrl}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="text-xs text-[#0f4c81] hover:underline"
+                                className="text-xs text-[#171717] hover:underline"
                               >
                                 View
                               </a>
@@ -573,11 +573,11 @@ export default function SupplierEvidencePanel({
               void saveCert(e.currentTarget);
             }}
           >
-            <h3 className="font-semibold text-[#0f172a]">{d.sectionCertifications}</h3>
+            <h3 className="font-semibold text-[#171717]">{d.sectionCertifications}</h3>
             <input type="hidden" name="id" />
-            <div className="grid gap-3 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               <label className="block text-sm">
-                <span className="font-medium text-[#0f172a]">Program code *</span>
+                <span className="font-medium text-[#171717]">Program code *</span>
                 <input
                   name="programCode"
                   list="ec-programs2"
@@ -594,23 +594,23 @@ export default function SupplierEvidencePanel({
                 </datalist>
               </label>
               <label className="block text-sm">
-                <span className="font-medium text-[#0f172a]">{d.certificateNo}</span>
+                <span className="font-medium text-[#171717]">{d.certificateNo}</span>
                 <input name="certificateNo" className={`mt-1 ${inputClass}`} />
               </label>
               <label className="block text-sm">
-                <span className="font-medium text-[#0f172a]">{d.issuer}</span>
+                <span className="font-medium text-[#171717]">{d.issuer}</span>
                 <input name="issuingBody" className={`mt-1 ${inputClass}`} />
               </label>
               <label className="block text-sm">
-                <span className="font-medium text-[#0f172a]">{d.auditDate}</span>
+                <span className="font-medium text-[#171717]">{d.auditDate}</span>
                 <input name="issueDate" type="date" className={`mt-1 ${inputClass}`} />
               </label>
               <label className="block text-sm">
-                <span className="font-medium text-[#0f172a]">{d.validUntil}</span>
+                <span className="font-medium text-[#171717]">{d.validUntil}</span>
                 <input name="expiryDate" type="date" className={`mt-1 ${inputClass}`} />
               </label>
               <label className="block text-sm">
-                <span className="font-medium text-[#0f172a]">Evidence file</span>
+                <span className="font-medium text-[#171717]">Evidence file</span>
                 <select name="evidenceDocId" className={`mt-1 ${inputClass}`} defaultValue="">
                   <option value="">—</option>
                   {docs.map((doc) => (
@@ -621,7 +621,7 @@ export default function SupplierEvidencePanel({
                 </select>
               </label>
               <label className="block text-sm md:col-span-2">
-                <span className="font-medium text-[#0f172a]">Scope</span>
+                <span className="font-medium text-[#171717]">Scope</span>
                 <input name="scope" className={`mt-1 ${inputClass}`} />
               </label>
             </div>
@@ -631,11 +631,11 @@ export default function SupplierEvidencePanel({
           </form>
 
           {certs.length === 0 ? (
-            <p className="text-sm text-[#475569]">{d.adminCertsEmpty}</p>
+            <p className="text-sm text-[#3f4650]">{d.adminCertsEmpty}</p>
           ) : (
             <div className="card overflow-x-auto p-0">
               <table className="w-full text-sm">
-                <thead className="bg-[#f7f9fc] text-left text-xs text-[#475569]">
+                <thead className="bg-[#fbfaf7] text-left text-xs text-[#3f4650]">
                   <tr>
                     <th className="px-3 py-2">Program</th>
                     <th className="px-3 py-2">{d.certificateNo}</th>
@@ -663,15 +663,15 @@ export default function SupplierEvidencePanel({
                               ? { v: "rejected", t: d.statusRejected }
                               : { v: "pending", t: d.statusPending };
                     return (
-                      <tr key={c.id} className="border-t border-[#e2e8f0]">
-                        <td className="px-3 py-2 font-medium text-[#0f172a]">{c.program_code}</td>
-                        <td className="px-3 py-2 text-xs text-[#475569]">
+                      <tr key={c.id} className="border-t border-[#ebe8e1]">
+                        <td className="px-3 py-2 font-medium text-[#171717]">{c.program_code}</td>
+                        <td className="px-3 py-2 text-xs text-[#3f4650]">
                           {c.certificate_no ?? "—"}
                         </td>
-                        <td className="px-3 py-2 text-xs text-[#475569]">
+                        <td className="px-3 py-2 text-xs text-[#3f4650]">
                           {c.issuing_body ?? "—"}
                         </td>
-                        <td className="px-3 py-2 text-xs text-[#475569]">
+                        <td className="px-3 py-2 text-xs text-[#3f4650]">
                           {c.expiry_date ?? "—"}
                           {dl !== null ? (
                             <div>{dl < 0 ? fmt(d.expiredAgo, -dl) : fmt(d.daysRemaining, dl)}</div>
@@ -728,11 +728,11 @@ export default function SupplierEvidencePanel({
               void saveAudit(e.currentTarget);
             }}
           >
-            <h3 className="font-semibold text-[#0f172a]">{d.sectionAudits}</h3>
+            <h3 className="font-semibold text-[#171717]">{d.sectionAudits}</h3>
             <input type="hidden" name="id" />
-            <div className="grid gap-3 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               <label className="block text-sm">
-                <span className="font-medium text-[#0f172a]">Audit type *</span>
+                <span className="font-medium text-[#171717]">Audit type *</span>
                 <select name="auditType" required className={`mt-1 ${inputClass}`} defaultValue="on_site_audit">
                   <option value="self_assessment">{d.levelSelf}</option>
                   <option value="platform_assessment">{d.levelPlatform}</option>
@@ -741,11 +741,11 @@ export default function SupplierEvidencePanel({
                 </select>
               </label>
               <label className="block text-sm">
-                <span className="font-medium text-[#0f172a]">{d.auditDate} *</span>
+                <span className="font-medium text-[#171717]">{d.auditDate} *</span>
                 <input name="auditDate" type="date" required className={`mt-1 ${inputClass}`} />
               </label>
               <label className="block text-sm">
-                <span className="font-medium text-[#0f172a]">Standard code</span>
+                <span className="font-medium text-[#171717]">Standard code</span>
                 <input name="standardCode" list="ec-programs3" className={`mt-1 ${inputClass}`} />
                 <datalist id="ec-programs3">
                   {programs.map((p) => (
@@ -756,15 +756,15 @@ export default function SupplierEvidencePanel({
                 </datalist>
               </label>
               <label className="block text-sm">
-                <span className="font-medium text-[#0f172a]">{d.auditBy} (name)</span>
+                <span className="font-medium text-[#171717]">{d.auditBy} (name)</span>
                 <input name="auditorName" className={`mt-1 ${inputClass}`} />
               </label>
               <label className="block text-sm">
-                <span className="font-medium text-[#0f172a]">{d.auditBy} (org)</span>
+                <span className="font-medium text-[#171717]">{d.auditBy} (org)</span>
                 <input name="auditorOrg" className={`mt-1 ${inputClass}`} />
               </label>
               <label className="block text-sm">
-                <span className="font-medium text-[#0f172a]">{d.auditResult}</span>
+                <span className="font-medium text-[#171717]">{d.auditResult}</span>
                 <select name="result" className={`mt-1 ${inputClass}`} defaultValue="">
                   <option value="">—</option>
                   <option value="pass">{d.resultPass}</option>
@@ -774,19 +774,19 @@ export default function SupplierEvidencePanel({
                 </select>
               </label>
               <label className="block text-sm">
-                <span className="font-medium text-[#0f172a]">Critical findings</span>
+                <span className="font-medium text-[#171717]">Critical findings</span>
                 <input name="findingsCritical" type="number" min={0} defaultValue={0} className={`mt-1 ${inputClass}`} />
               </label>
               <label className="block text-sm">
-                <span className="font-medium text-[#0f172a]">Major findings</span>
+                <span className="font-medium text-[#171717]">Major findings</span>
                 <input name="findingsMajor" type="number" min={0} defaultValue={0} className={`mt-1 ${inputClass}`} />
               </label>
               <label className="block text-sm">
-                <span className="font-medium text-[#0f172a]">Minor findings</span>
+                <span className="font-medium text-[#171717]">Minor findings</span>
                 <input name="findingsMinor" type="number" min={0} defaultValue={0} className={`mt-1 ${inputClass}`} />
               </label>
               <label className="block text-sm">
-                <span className="font-medium text-[#0f172a]">Report file</span>
+                <span className="font-medium text-[#171717]">Report file</span>
                 <select name="reportDocId" className={`mt-1 ${inputClass}`} defaultValue="">
                   <option value="">—</option>
                   {docs.map((doc) => (
@@ -803,11 +803,11 @@ export default function SupplierEvidencePanel({
           </form>
 
           {audits.length === 0 ? (
-            <p className="text-sm text-[#475569]">{d.adminAuditsEmpty}</p>
+            <p className="text-sm text-[#3f4650]">{d.adminAuditsEmpty}</p>
           ) : (
             <div className="card overflow-x-auto p-0">
               <table className="w-full text-sm">
-                <thead className="bg-[#f7f9fc] text-left text-xs text-[#475569]">
+                <thead className="bg-[#fbfaf7] text-left text-xs text-[#3f4650]">
                   <tr>
                     <th className="px-3 py-2">Type</th>
                     <th className="px-3 py-2">{d.auditDate}</th>
@@ -821,13 +821,13 @@ export default function SupplierEvidencePanel({
                   {audits.map((a) => {
                     const b = docBadge(a.verification_status, d);
                     return (
-                      <tr key={a.id} className="border-t border-[#e2e8f0]">
-                        <td className="px-3 py-2 font-medium text-[#0f172a]">{a.audit_type}</td>
-                        <td className="px-3 py-2 text-xs text-[#475569]">{a.audit_date}</td>
-                        <td className="px-3 py-2 text-xs text-[#475569]">
+                      <tr key={a.id} className="border-t border-[#ebe8e1]">
+                        <td className="px-3 py-2 font-medium text-[#171717]">{a.audit_type}</td>
+                        <td className="px-3 py-2 text-xs text-[#3f4650]">{a.audit_date}</td>
+                        <td className="px-3 py-2 text-xs text-[#3f4650]">
                           {[a.auditor_name, a.auditor_org].filter(Boolean).join(", ") || "—"}
                         </td>
-                        <td className="px-3 py-2 text-xs text-[#475569]">{a.result ?? "—"}</td>
+                        <td className="px-3 py-2 text-xs text-[#3f4650]">{a.result ?? "—"}</td>
                         <td className="px-3 py-2">
                           <Badge variant={b.v}>{b.t}</Badge>
                         </td>
@@ -861,7 +861,7 @@ export default function SupplierEvidencePanel({
         </div>
       ) : null}
 
-      <p className="text-xs text-[#475569]">
+      <p className="text-xs text-[#3f4650]">
         {locale.toUpperCase()} · {slug}
       </p>
     </div>

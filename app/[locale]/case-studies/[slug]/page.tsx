@@ -123,20 +123,20 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
         <ol className="mt-3 space-y-3">
           {x.approach.map((step, i) => (
             <li key={i} className="card p-4">
-              <span className="font-semibold text-[#0f4c81]">{i + 1}.</span>{" "}
+              <span className="font-semibold text-[#171717]">{i + 1}.</span>{" "}
               <span className="text-gray-700">{step}</span>
             </li>
           ))}
         </ol>
       </section>
 
-      <section className="mt-8 rounded-lg bg-[#f1f5f9] p-6">
-        <h2 className="font-semibold text-[#0f172a]">{sec.findings}</h2>
+      <section className="mt-8 rounded-lg bg-[#f5f3ee] p-6">
+        <h2 className="font-semibold text-[#171717]">{sec.findings}</h2>
         <p className="mt-2 text-gray-700">{x.result}</p>
         <ul className="mt-3 space-y-2">
           {x.findings.map((f) => (
             <li key={f} className="flex gap-2 text-sm text-gray-700">
-              <span className="text-[#0f4c81]">·</span>
+              <span className="text-[#171717]">·</span>
               <span>{f}</span>
             </li>
           ))}
@@ -146,16 +146,16 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
       {/* 风险分：等级由 riskEngine 的 overallLevel 计算，不在此重复定义阈值 */}
       <section className="mt-8">
         <h2 className="text-xl font-semibold">{sec.riskScore}</h2>
-        <div className="mt-3 rounded-lg border border-[#e2e8f0] p-5">
+        <div className="mt-3 rounded-lg border border-[#ebe8e1] p-5">
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-extrabold text-[#0f4c81]">{c.riskScore}</span>
+            <span className="text-3xl font-extrabold text-[#171717]">{c.riskScore}</span>
             <span className="text-sm text-gray-500">
               {sec.scoreUnit} · {overallLevel(c.riskScore)}
             </span>
           </div>
-          <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#e2e8f0]">
+          <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#ebe8e1]">
             <div
-              className="h-full rounded-full bg-[#0f4c81]"
+              className="h-full rounded-full bg-[#171717]"
               style={{ width: `${c.riskScore}%` }}
             />
           </div>
@@ -169,9 +169,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
       </section>
 
       {/* 内链：工具 / 服务 / 相关指南（与指南页同模式，禁止死链） */}
-      <section className="mt-8 grid gap-5 md:grid-cols-2">
+      <section className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
         <div className="card p-6">
-          <h2 className="font-bold text-[#0f172a]">{dict.nav.tools}</h2>
+          <h2 className="font-bold text-[#171717]">{dict.nav.tools}</h2>
           <ul className="mt-3 space-y-2">
             {c.tools.map((t) => {
               const key =
@@ -197,7 +197,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
               };
               return (
                 <li key={t.href}>
-                  <Link href={p(t.href)} className="text-[#0f4c81] hover:underline">
+                  <Link href={p(t.href)} className="text-[#171717] hover:underline">
                     {toolNames[key]}
                   </Link>
                 </li>
@@ -206,11 +206,11 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
           </ul>
         </div>
         <div className="card p-6">
-          <h2 className="font-bold text-[#0f172a]">{dict.nav.services}</h2>
+          <h2 className="font-bold text-[#171717]">{dict.nav.services}</h2>
           <ul className="mt-3 space-y-2">
             {c.services.map((s) => (
               <li key={s.href}>
-                <Link href={p(s.href)} className="text-[#0f4c81] hover:underline">
+                <Link href={p(s.href)} className="text-[#171717] hover:underline">
                   {s.href.includes("inspection")
                     ? dict.servicesIndex.items.inspection.title
                     : s.href.includes("rfq")
@@ -231,7 +231,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
           <ul className="mt-3 space-y-2">
             {relatedGuides.map((g) => (
               <li key={g.slug}>
-                <Link href={p(`/guides/${g.slug}`)} className="text-[#0f4c81] hover:underline">
+                <Link href={p(`/guides/${g.slug}`)} className="text-[#171717] hover:underline">
                   {pickZhPair(locale, g.titleEn, g.titleZh)}
                 </Link>
               </li>
@@ -240,7 +240,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
         </section>
       )}
 
-      <section className="mt-10 card p-8 bg-[#0f4c81]">
+      <section className="mt-10 card p-8 bg-[#171717]">
         <h2 className="text-xl font-bold text-white">{dict.caseStudies.detailCtaTitle}</h2>
         <p className="mt-2 text-white/80">{dict.caseStudies.detailCtaDesc}</p>
         <div className="mt-5 flex flex-wrap gap-3">

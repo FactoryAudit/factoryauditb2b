@@ -1,34 +1,53 @@
 @import "tailwindcss";
 
+/* 令牌口径 = 设计稿 V2（暖纸感 + 陶土橙）。
+   来源：用户定稿 preview (1).html / preview (2).html，令牌值逐字取自其 :root。
+   品牌层（deep blue）保留给 LOGO / themeColor —— 见 logo-header.svg / logo-light.svg，
+   与站内既有决定一致（「深蓝退回品牌层，强调色接管行动层」）。 */
 @theme {
   --color-brand: #0f4c81;
   --color-brand-600: #0d406e;
-  --color-brand-100: #e6eef6;
-  --color-accent: #e94560;
-  --color-accent-dark: #d63851;
-  --color-success: #0a7a44;
+  --color-brand-100: #f7e7de;
+  --color-accent: #e07a49;
+  --color-accent-dark: #c96235;
+  --color-accent-soft: #f7e7de;
+  --color-success: #1f7a5a;
   --color-warning: #e8a33d;
   --color-danger: #d4232a;
   --color-surface: #ffffff;
-  --color-panel: #f7f7f8;
-  --color-border: #e8e8e8;
-  --color-muted: #6b7280;
-  --color-ink: #111111;
-  --color-green-soft: #eafaf1;
+  --color-panel: #f5f3ee;
+  --color-paper: #f5f3ee;
+  --color-paper-2: #fbfaf7;
+  --color-border: #ebe8e1;
+  --color-line: #ddd9d0;
+  --color-muted: #6d6b66;
+  --color-muted-2: #8c8982;
+  --color-ink: #171717;
+  --color-ink-2: #2b2b2b;
+  --color-body: #3f4650;
+  --color-dark: #1d1d1b;
+  --color-green-soft: #e9f4ef;
+  --radius-card: 14px;
+  --radius-ctl: 9px;
 }
 
 :root {
-  background: #ffffff;
-  color: #111111;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #fbfaf7;
+  color: #171717;
+  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  background: #ffffff;
-  color: #111111;
+  background: #fbfaf7;
+  color: #171717;
+  /* 德语式复合词（如「Vor-Ort-Lieferantenverifizierung」32 字符）在 390px 会把内容
+     顶出视口。break-word 只在「整词放不下」时断行，正常文本形态零影响。
+     另一半修法在网格侧：隐式 auto 轨道会被 min-content 撑宽，故各页网格容器补
+     grid-cols-1（= minmax(0,1fr)），见 app/[locale]/page.tsx。 */
+  overflow-wrap: break-word;
 }
 
 /* a 默认继承父级颜色；放 base 层（低于 utilities），让 text-[#xxx] 工具类生效。
@@ -38,27 +57,32 @@ body {
 }
 
 @layer components {
-  .container { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+  .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 
   .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.15s;
-    padding: 10px 18px; border: 1px solid transparent; font-size: 14px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+    border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.18s ease;
+    min-height: 48px; padding: 0 20px; border: 1px solid transparent; font-size: 14px;
   }
   .btn-primary { background: var(--color-accent); color: #fff; }
-  .btn-primary:hover { background: var(--color-accent-dark); }
-  .btn-accent { background: #fff; border-color: #d7d7d7; color: var(--color-ink); }
+  .btn-primary:hover { background: var(--color-accent-dark); transform: translateY(-1px); }
+  .btn-accent { background: #fff; border-color: #cfcac0; color: var(--color-ink); }
   .btn-accent:hover { border-color: var(--color-ink); }
-  .btn-outline { background: #fff; border-color: var(--color-border); color: var(--color-ink); }
-  .btn-outline:hover { border-color: var(--color-brand); color: var(--color-brand); }
+  .btn-outline { background: transparent; border-color: #cfcac0; color: var(--color-ink); }
+  .btn-outline:hover { border-color: var(--color-ink); background: #fff; }
   /* Dark-section outline button (transparent bg, white border/text, inverts on hover).
-     Used inside brand-blue CTA sections where .btn-outline's white bg would cause
-     white-on-white. Contrast: white on #0f4c81 ≈ 6.9:1; hover brand on white ≈ 7:1. */
+     Used inside dark bands where .btn-outline's transparent bg would lose the border.
+     Contrast: white on #1d1d1b ≈ 16:1; hover ink on white ≈ 18:1. */
   .btn-outline-dark { background: transparent; border-color: #fff; color: #fff; }
-  .btn-outline-dark:hover { background: #fff; color: var(--color-brand); border-color: var(--color-brand); }
-  .btn:focus-visible { outline: 2px solid var(--color-brand); outline-offset: 2px; }
+  .btn-outline-dark:hover { background: #fff; color: var(--color-ink); border-color: var(--color-ink); }
+  .btn-light { background: #fff; color: var(--color-ink); }
+  .btn-light:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08); }
+  .btn-dark { background: var(--color-ink); color: #fff; }
+  .btn-dark:hover { background: #30302d; transform: translateY(-1px); }
+  .btn-sm { min-height: 40px; padding: 0 15px; font-size: 13px; }
+  .btn:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 
-  .card { background: #fff; border: 1px solid var(--color-border); border-radius: 6px; }
+  .card { background: #fff; border: 1px solid var(--color-border); border-radius: 14px; }
   .badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
   .badge-verified { background: #e8f5ea; color: #1f7a36; }
   .badge-self { background: #fff4e0; color: #8a5410; }
@@ -66,13 +90,33 @@ body {
   .badge-notverified { background: #fdeaea; color: #c0392b; }
 
   .input, .select, .textarea {
-    width: 100%; border: 1px solid var(--color-border); border-radius: 6px;
-    padding: 10px 12px; background: #fff; color: #111111; font-size: 14px;
+    width: 100%; border: 1px solid var(--color-border); border-radius: 9px;
+    padding: 10px 12px; background: #fff; color: var(--color-ink); font-size: 14px;
   }
-  .input:focus, .select:focus, .textarea:focus { outline: 2px solid var(--color-brand); border-color: var(--color-brand); }
-  .input::placeholder, .select::placeholder, .textarea::placeholder { color: #475569; opacity: 1; }
+  .input:focus, .select:focus, .textarea:focus { outline: 2px solid var(--color-accent); border-color: var(--color-accent); }
+  .input::placeholder, .select::placeholder, .textarea::placeholder { color: var(--color-muted-2); opacity: 1; }
 
-  .section-pad { padding: 64px 0; }
+  /* 区块间距 = 设计稿 py 92（compact 68） */
+  .section-pad { padding: 92px 0; }
+  .section-pad-compact { padding: 68px 0; }
+
+  /* 小标题：设计稿 kicker = 橙色小字 + 前置 25×2px 橙短横 */
+  .kicker {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-size: 11px; line-height: 1; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.16em; color: var(--color-accent);
+  }
+  .kicker::before { content: ""; width: 25px; height: 2px; border-radius: 2px; background: currentColor; }
+  .kicker-light { color: #efae90; }
+
+  /* 卡片悬停：设计稿 translateY(-3px) + shadow-soft */
+  .lift { transition: 0.18s ease; }
+  .lift:hover { transform: translateY(-3px); border-color: #cfc8bc; box-shadow: 0 10px 28px rgba(28, 26, 23, 0.06); }
+
+  .muted-link { display: inline-flex; align-items: center; gap: 7px; font-weight: 700; font-size: 13px; color: var(--color-ink); transition: 0.18s ease; }
+  .muted-link:hover { color: var(--color-accent); }
+  .muted-link span { transition: 0.18s ease; }
+  .muted-link:hover span { transform: translateX(3px); }
 
   /* Hero / Workflow 视觉图容器：aspect-ratio 控比例，max-height 限高，
      图片 object-fit: cover 在高度受控时自动裁切、不变形。 */

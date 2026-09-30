@@ -30,7 +30,7 @@ const STATUS_LABEL: Record<string, string> = {
   rejected: "已拒绝",
 };
 const STATUS_COLOR: Record<string, string> = {
-  draft: "bg-[#e2e8f0] text-[#475569]",
+  draft: "bg-[#ebe8e1] text-[#3f4650]",
   submitted: "bg-[#dbeafe] text-[#1d4ed8]",
   under_review: "bg-[#fef3c7] text-[#b45309]",
   published: "bg-[#dcfce7] text-[#16a34a]",
@@ -137,26 +137,26 @@ export default function AssessmentAdminPanel({ supplierId, labels }: Props) {
   }
 
   if (rows === null) {
-    return <div className="card p-4 text-sm text-[#64748b]">加载三标签审核状态…</div>;
+    return <div className="card p-4 text-sm text-[#6d6b66]">加载三标签审核状态…</div>;
   }
 
   return (
     <div className="mt-8">
-      <h2 className="text-xl font-bold text-[#0f172a]">三标签审核 · Three-Tag Assessment</h2>
-      <p className="text-xs text-[#64748b] mt-1">
+      <h2 className="text-xl font-bold text-[#171717]">三标签审核 · Three-Tag Assessment</h2>
+      <p className="text-xs text-[#6d6b66] mt-1">
         标签①工厂自评估（供应商自填）②平台在线评估（平台背调出报告）③平台现场审核（供应商申请→7 工作日 SLA）。
       </p>
 
-      <div className="mt-4 grid gap-4">
+      <div className="mt-4 grid grid-cols-1 gap-4">
         {ORDER.map((type) => {
           const r = rowOf(type);
           const disabled = busy !== null;
           return (
-            <div key={type} className="rounded-lg border border-[#e2e8f0] bg-white p-4">
+            <div key={type} className="rounded-lg border border-[#ebe8e1] bg-white p-4">
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <div className="font-semibold text-[#0f172a]">{labels[type].zh}</div>
-                  <div className="text-xs text-[#94a3b8]">{labels[type].en}</div>
+                  <div className="font-semibold text-[#171717]">{labels[type].zh}</div>
+                  <div className="text-xs text-[#8c8982]">{labels[type].en}</div>
                 </div>
                 <span className={`rounded-full px-3 py-1 text-xs font-semibold ${STATUS_COLOR[r?.status ?? "draft"]}`}>
                   {STATUS_LABEL[r?.status ?? "draft"]}
@@ -171,7 +171,7 @@ export default function AssessmentAdminPanel({ supplierId, labels }: Props) {
 
               {type === "platform_assessment" ? (
                 <div className="mt-3 space-y-2">
-                  <div className="grid sm:grid-cols-2 gap-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     <input
                       className="input"
                       placeholder="报告编号 Report No."
@@ -201,28 +201,28 @@ export default function AssessmentAdminPanel({ supplierId, labels }: Props) {
               ) : null}
 
               {/* 标签②③：上传审核报告文件（PDF 等） */}
-              <div className="mt-3 rounded-md border border-[#eef2f7] bg-[#f8fafc] p-3">
-                <div className="text-xs font-semibold text-[#334155] mb-2">
+              <div className="mt-3 rounded-md border border-[#eef2f7] bg-[#fbfaf7] p-3">
+                <div className="text-xs font-semibold text-[#2b2b2b] mb-2">
                   审核报告文件 · Report file（PDF/JPG/PNG，≤10MB）
                 </div>
                 {r?.report_file_path ? (
-                  <div className="flex flex-wrap items-center gap-2 text-xs text-[#0f172a]">
+                  <div className="flex flex-wrap items-center gap-2 text-xs text-[#171717]">
                     <span className="rounded bg-[#dcfce7] px-2 py-0.5 font-medium text-[#16a34a]">
                       已上传
                     </span>
                     <span className="truncate max-w-[220px]">{r.report_file_name ?? r.report_file_path}</span>
                     {r.report_file_size ? (
-                      <span className="text-[#94a3b8]">{Math.round(r.report_file_size / 1024)} KB</span>
+                      <span className="text-[#8c8982]">{Math.round(r.report_file_size / 1024)} KB</span>
                     ) : null}
                   </div>
                 ) : (
-                  <p className="text-xs text-[#94a3b8]">尚未上传报告文件。</p>
+                  <p className="text-xs text-[#8c8982]">尚未上传报告文件。</p>
                 )}
                 <div className="mt-2 flex flex-wrap items-center gap-2">
                   <input
                     type="file"
                     accept="application/pdf,image/jpeg,image/png"
-                    className="block text-xs text-[#475569] file:mr-2 file:rounded file:border-0 file:bg-[#0f4c81] file:px-2 file:py-1 file:text-white"
+                    className="block text-xs text-[#3f4650] file:mr-2 file:rounded file:border-0 file:bg-[#171717] file:px-2 file:py-1 file:text-white"
                     onChange={(e) => {
                       const f = e.target.files?.[0] ?? null;
                       setUploadFile(f);

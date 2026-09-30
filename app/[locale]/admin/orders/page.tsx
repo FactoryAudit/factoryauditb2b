@@ -28,7 +28,7 @@ function str(v: string | string[] | undefined): string {
 const STATUS_STYLE: Record<string, string> = {
   pending_payment: "bg-[#fef3c7] text-[#92400e]",
   paid: "bg-[#dcfce7] text-[#166534]",
-  cancelled: "bg-[#e2e8f0] text-[#475569]",
+  cancelled: "bg-[#ebe8e1] text-[#3f4650]",
   refunded: "bg-[#e0e7ff] text-[#3730a3]",
 };
 
@@ -63,25 +63,25 @@ export default async function AdminOrdersPage({ params, searchParams }: Props) {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-[#0f172a]">{o.ordersTitle}</h1>
-      <p className="mt-1 text-sm text-[#64748b]">{o.ordersLead}</p>
+      <h1 className="text-2xl font-bold text-[#171717]">{o.ordersTitle}</h1>
+      <p className="mt-1 text-sm text-[#6d6b66]">{o.ordersLead}</p>
 
       <form method="get" className="mt-4 flex flex-wrap items-end gap-3">
         <label className="block">
-          <span className="text-xs font-medium text-[#64748b]">{o.ordersSearch}</span>
+          <span className="text-xs font-medium text-[#6d6b66]">{o.ordersSearch}</span>
           <input
             name="search"
             defaultValue={search}
             placeholder={o.ordersSearch}
-            className="mt-1 w-72 rounded-md border border-[#e2e8f0] px-3 py-2 text-sm text-[#0f172a] focus:border-[#0f4c81] focus:outline-none"
+            className="mt-1 w-72 rounded-md border border-[#ebe8e1] px-3 py-2 text-sm text-[#171717] focus:border-[#171717] focus:outline-none"
           />
         </label>
         <label className="block">
-          <span className="text-xs font-medium text-[#64748b]">{c.colStatus}</span>
+          <span className="text-xs font-medium text-[#6d6b66]">{c.colStatus}</span>
           <select
             name="status"
             defaultValue={status}
-            className="mt-1 rounded-md border border-[#e2e8f0] px-3 py-2 text-sm text-[#0f172a] focus:border-[#0f4c81] focus:outline-none"
+            className="mt-1 rounded-md border border-[#ebe8e1] px-3 py-2 text-sm text-[#171717] focus:border-[#171717] focus:outline-none"
           >
             <option value="all">{t.admin.filterAll}</option>
             <option value="pending_payment">{c.statusPending}</option>
@@ -92,19 +92,19 @@ export default async function AdminOrdersPage({ params, searchParams }: Props) {
         </label>
         <button
           type="submit"
-          className="rounded-md bg-[#0f4c81] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0d3f6c]"
+          className="rounded-md bg-[#171717] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0d3f6c]"
         >
           {t.suppliers.filterSubmit}
         </button>
       </form>
 
       {rows.length === 0 ? (
-        <p className="mt-8 text-sm text-[#64748b]">{o.empty}</p>
+        <p className="mt-8 text-sm text-[#6d6b66]">{o.empty}</p>
       ) : (
         <div className="mt-6 overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-[#e2e8f0] text-xs text-[#64748b]">
+              <tr className="border-b border-[#ebe8e1] text-xs text-[#6d6b66]">
                 <th className="py-2 pr-4">{o.colRef}</th>
                 <th className="py-2 pr-4">{c.colService}</th>
                 <th className="py-2 pr-4">{c.colAmount}</th>
@@ -116,30 +116,30 @@ export default async function AdminOrdersPage({ params, searchParams }: Props) {
             </thead>
             <tbody>
               {rows.map((r) => (
-                <tr key={r.reference_id} className="border-b border-[#f1f5f9]">
-                  <td className="py-2 pr-4 font-mono text-xs text-[#0f172a]">
+                <tr key={r.reference_id} className="border-b border-[#f5f3ee]">
+                  <td className="py-2 pr-4 font-mono text-xs text-[#171717]">
                     <Link
                       href={p(`/checkout/${r.reference_id}`)}
-                      className="text-[#0f4c81] hover:underline"
+                      className="text-[#171717] hover:underline"
                     >
                       {r.reference_id}
                     </Link>
                   </td>
-                  <td className="py-2 pr-4 text-[#0f172a]">{serviceLabel(t, r.service_code)}</td>
-                  <td className="py-2 pr-4 text-[#0f172a]">
+                  <td className="py-2 pr-4 text-[#171717]">{serviceLabel(t, r.service_code)}</td>
+                  <td className="py-2 pr-4 text-[#171717]">
                     {formatUsdMinor(r.amount_minor) ?? c.quoted}
                   </td>
                   <td className="py-2 pr-4">
                     <span
                       className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
-                        STATUS_STYLE[r.status] ?? "bg-[#e2e8f0] text-[#475569]"
+                        STATUS_STYLE[r.status] ?? "bg-[#ebe8e1] text-[#3f4650]"
                       }`}
                     >
                       {statusLabel(r.status)}
                     </span>
                   </td>
-                  <td className="py-2 pr-4 text-[#475569]">{r.email}</td>
-                  <td className="py-2 pr-4 text-[#475569]">
+                  <td className="py-2 pr-4 text-[#3f4650]">{r.email}</td>
+                  <td className="py-2 pr-4 text-[#3f4650]">
                     {r.created_at.slice(0, 16).replace("T", " ")}
                   </td>
                   <td className="py-2 pr-4">

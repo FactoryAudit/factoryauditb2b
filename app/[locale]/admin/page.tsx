@@ -125,13 +125,13 @@ export default async function AdminOverviewPage({ params }: Props) {
   ];
 
   const funnelCard = (title: string, rows: Array<[string, string | number, boolean?]>) => (
-    <div className="rounded-lg border border-[#e2e8f0] bg-white p-4">
-      <h3 className="text-sm font-bold text-[#0f172a]">{title}</h3>
+    <div className="rounded-lg border border-[#ebe8e1] bg-white p-4">
+      <h3 className="text-sm font-bold text-[#171717]">{title}</h3>
       <dl className="mt-2 space-y-1">
         {rows.map(([label, value, muted]) => (
           <div key={label} className="flex items-baseline justify-between gap-3 text-sm">
-            <dt className="text-[#475569]">{label}</dt>
-            <dd className={muted ? "text-xs text-[#94a3b8]" : "font-semibold text-[#0f4c81]"}>{value}</dd>
+            <dt className="text-[#3f4650]">{label}</dt>
+            <dd className={muted ? "text-xs text-[#8c8982]" : "font-semibold text-[#171717]"}>{value}</dd>
           </div>
         ))}
       </dl>
@@ -154,24 +154,24 @@ export default async function AdminOverviewPage({ params }: Props) {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-[#0f172a]">{a.overviewTitle}</h1>
-      <p className="mt-1 text-sm text-[#64748b]">{a.overviewLead}</p>
+      <h1 className="text-2xl font-bold text-[#171717]">{a.overviewTitle}</h1>
+      <p className="mt-1 text-sm text-[#6d6b66]">{a.overviewLead}</p>
 
-      <section className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {cards.map((c) => (
           <Link key={c.label} href={p(c.href)} className="card p-5 hover:shadow-md">
-            <div className="text-3xl font-bold text-[#0f4c81]">{c.value}</div>
-            <div className="mt-1 text-sm text-[#475569]">{c.label}</div>
+            <div className="text-3xl font-bold text-[#171717]">{c.value}</div>
+            <div className="mt-1 text-sm text-[#3f4650]">{c.label}</div>
           </Link>
         ))}
       </section>
 
       <section className="mt-8">
         <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h2 className="text-lg font-bold text-[#0f172a]">{F.bizTitle}</h2>
-          <span className="text-xs text-[#94a3b8]">{F.bizHint}</span>
+          <h2 className="text-lg font-bold text-[#171717]">{F.bizTitle}</h2>
+          <span className="text-xs text-[#8c8982]">{F.bizHint}</span>
         </div>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {funnelCard(F.bizTitle + " · RFQ → Match", bizRows)}
           {funnelCard(F.supTitle, supRows)}
           {funnelCard(F.leadTitle, leadRows)}
@@ -180,25 +180,25 @@ export default async function AdminOverviewPage({ params }: Props) {
 
       <section className="mt-8">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-bold text-[#0f172a]">{a.recentRfqs}</h2>
-          <Link href={p("/admin/rfqs")} className="text-sm text-[#0f4c81] hover:underline">
+          <h2 className="text-lg font-bold text-[#171717]">{a.recentRfqs}</h2>
+          <Link href={p("/admin/rfqs")} className="text-sm text-[#171717] hover:underline">
             {a.viewAll}
           </Link>
         </div>
 
         {rfqs.length === 0 ? (
-          <p className="mt-4 text-sm text-[#64748b]">{a.empty}</p>
+          <p className="mt-4 text-sm text-[#6d6b66]">{a.empty}</p>
         ) : (
-          <div className="mt-4 divide-y divide-[#e2e8f0] overflow-hidden rounded-lg border border-[#e2e8f0] bg-white">
+          <div className="mt-4 divide-y divide-[#ebe8e1] overflow-hidden rounded-lg border border-[#ebe8e1] bg-white">
             {rfqs.map((r) => (
               <div key={r.id} className="flex flex-wrap items-center gap-3 px-4 py-3 text-sm">
-                <span className="font-mono text-xs text-[#64748b]">{r.reference_id}</span>
-                <span className="font-medium text-[#0f172a]">{r.product}</span>
-                <span className="text-[#64748b]">{r.email}</span>
-                <span className="ml-auto rounded-full bg-[#e6eef6] px-2 py-0.5 text-xs text-[#0f4c81]">
+                <span className="font-mono text-xs text-[#6d6b66]">{r.reference_id}</span>
+                <span className="font-medium text-[#171717]">{r.product}</span>
+                <span className="text-[#6d6b66]">{r.email}</span>
+                <span className="ml-auto rounded-full bg-[#f5f3ee] px-2 py-0.5 text-xs text-[#171717]">
                   {statusLabel[r.status] ?? r.status}
                 </span>
-                <span className="text-xs text-[#94a3b8]">
+                <span className="text-xs text-[#8c8982]">
                   {new Date(r.created_at).toISOString().slice(0, 10)}
                 </span>
               </div>
@@ -209,25 +209,25 @@ export default async function AdminOverviewPage({ params }: Props) {
       {/* CS-02D：线索入库后，概览页必须能看到最近线索 —— 否则"落库"对运营等于不存在 */}
       <section className="mt-8">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-bold text-[#0f172a]">{a.recentLeads}</h2>
-          <Link href={p("/admin/leads")} className="text-sm text-[#0f4c81] hover:underline">
+          <h2 className="text-lg font-bold text-[#171717]">{a.recentLeads}</h2>
+          <Link href={p("/admin/leads")} className="text-sm text-[#171717] hover:underline">
             {a.viewAll}
           </Link>
         </div>
 
         {leads.length === 0 ? (
-          <p className="mt-4 text-sm text-[#64748b]">{a.leadsEmpty}</p>
+          <p className="mt-4 text-sm text-[#6d6b66]">{a.leadsEmpty}</p>
         ) : (
-          <div className="mt-4 divide-y divide-[#e2e8f0] overflow-hidden rounded-lg border border-[#e2e8f0] bg-white">
+          <div className="mt-4 divide-y divide-[#ebe8e1] overflow-hidden rounded-lg border border-[#ebe8e1] bg-white">
             {leads.map((l) => (
               <div key={l.id} className="flex flex-wrap items-center gap-3 px-4 py-3 text-sm">
-                <span className="font-mono text-xs text-[#64748b]">{l.reference_id}</span>
-                <span className="text-[#64748b]">{l.tool}</span>
-                <span className="text-[#64748b]">{l.email}</span>
-                <span className="ml-auto rounded-full bg-[#e6eef6] px-2 py-0.5 text-xs text-[#0f4c81]">
+                <span className="font-mono text-xs text-[#6d6b66]">{l.reference_id}</span>
+                <span className="text-[#6d6b66]">{l.tool}</span>
+                <span className="text-[#6d6b66]">{l.email}</span>
+                <span className="ml-auto rounded-full bg-[#f5f3ee] px-2 py-0.5 text-xs text-[#171717]">
                   {l.kind}
                 </span>
-                <span className="text-xs text-[#94a3b8]">
+                <span className="text-xs text-[#8c8982]">
                   {new Date(l.created_at).toISOString().slice(0, 10)}
                 </span>
               </div>

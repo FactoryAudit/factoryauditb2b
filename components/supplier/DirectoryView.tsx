@@ -42,7 +42,7 @@ export type DirectoryItem = {
   verificationText: string;
   /** 已收口：riskLabel(score, levelLabels) */
   riskText: string;
-  /** 已收口：有分数 → LEVEL_COLOR[overallLevel]，无分数 → 中性灰 #64748b */
+  /** 已收口：有分数 → LEVEL_COLOR[overallLevel]，无分数 → 中性灰 #6d6b66 */
   riskColor: string;
   /** 已收口：lastChecked ?? noCheckRecord */
   lastCheckedText: string;
@@ -146,7 +146,7 @@ export default function DirectoryView({
             defaultValue={q}
             placeholder={dict.searchPlaceholder}
             aria-label={dict.searchPlaceholder}
-            className="flex-1 min-w-[240px] rounded-lg border border-[#cbd5e1] px-3 py-2 text-sm text-[#0f172a] focus:border-[#0f4c81] focus:outline-none"
+            className="flex-1 min-w-[240px] rounded-lg border border-[#ddd9d0] px-3 py-2 text-sm text-[#171717] focus:border-[#171717] focus:outline-none"
           />
           <button type="submit" className="btn btn-primary">
             {dict.searchButton}
@@ -154,7 +154,7 @@ export default function DirectoryView({
           {q && (
             <Link
               href={linkWith({ q: null })}
-              className="text-sm text-[#0f4c81] hover:underline"
+              className="text-sm text-[#171717] hover:underline"
             >
               {dict.searchClear}
             </Link>
@@ -163,13 +163,13 @@ export default function DirectoryView({
 
         <div className="flex flex-wrap gap-6 items-start">
           <div>
-            <div className="text-xs font-semibold text-[#64748b] uppercase mb-2">
+            <div className="text-xs font-semibold text-[#6d6b66] uppercase mb-2">
               {dict.filterCountry}
             </div>
             <div className="flex flex-wrap gap-2">
               <Link
                 href={linkWith({ country: null })}
-                className={`rounded-full px-3 py-1 text-sm border ${!country ? "bg-[#0f4c81] text-white border-[#0f4c81]" : "border-[#cbd5e1] text-[#475569] hover:border-[#0f4c81]"}`}
+                className={`rounded-full px-3 py-1 text-sm border ${!country ? "bg-[#171717] text-white border-[#171717]" : "border-[#ddd9d0] text-[#3f4650] hover:border-[#171717]"}`}
                 data-track={events.directoryFilter}
                 data-track-value="all-countries"
               >
@@ -179,7 +179,7 @@ export default function DirectoryView({
                 <Link
                   key={c}
                   href={linkWith({ country: c })}
-                  className={`rounded-full px-3 py-1 text-sm border ${country === c ? "bg-[#0f4c81] text-white border-[#0f4c81]" : "border-[#cbd5e1] text-[#475569] hover:border-[#0f4c81]"}`}
+                  className={`rounded-full px-3 py-1 text-sm border ${country === c ? "bg-[#171717] text-white border-[#171717]" : "border-[#ddd9d0] text-[#3f4650] hover:border-[#171717]"}`}
                   data-track={events.directoryFilter}
                   data-track-value={c}
                 >
@@ -190,13 +190,13 @@ export default function DirectoryView({
           </div>
           {industries.length > 0 && (
             <div>
-              <div className="text-xs font-semibold text-[#64748b] uppercase mb-2">
+              <div className="text-xs font-semibold text-[#6d6b66] uppercase mb-2">
                 {dict.filterIndustry}
               </div>
               <div className="flex flex-wrap gap-2">
                 <Link
                   href={linkWith({ industry: null })}
-                  className={`rounded-full px-3 py-1 text-sm border ${!industry ? "bg-[#0f4c81] text-white border-[#0f4c81]" : "border-[#cbd5e1] text-[#475569] hover:border-[#0f4c81]"}`}
+                  className={`rounded-full px-3 py-1 text-sm border ${!industry ? "bg-[#171717] text-white border-[#171717]" : "border-[#ddd9d0] text-[#3f4650] hover:border-[#171717]"}`}
                   data-track={events.directoryFilter}
                   data-track-value="all-industries"
                 >
@@ -206,7 +206,7 @@ export default function DirectoryView({
                   <Link
                     key={i}
                     href={linkWith({ industry: i })}
-                    className={`rounded-full px-3 py-1 text-sm border ${industry === i ? "bg-[#0f4c81] text-white border-[#0f4c81]" : "border-[#cbd5e1] text-[#475569] hover:border-[#0f4c81]"}`}
+                    className={`rounded-full px-3 py-1 text-sm border ${industry === i ? "bg-[#171717] text-white border-[#171717]" : "border-[#ddd9d0] text-[#3f4650] hover:border-[#171717]"}`}
                     data-track={events.directoryFilter}
                     data-track-value={i}
                   >
@@ -221,26 +221,28 @@ export default function DirectoryView({
 
       {/* 供应商目录（Hero 的 Find Suppliers 锚点落在这里） */}
       <section id="supplier-directory" className="mb-8 scroll-mt-6">
-        <div className="flex items-baseline justify-between gap-4 mb-4">
+        {/* justify-between 的右侧计数标签。原先写死 shrink-0 ⇒ 德语长计数文案
+            （de 实测 55px）在 390px 顶出视口。改为可换行 + 允许收缩。 */}
+        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mb-4">
           <div>
-            <h2 className="text-2xl font-bold text-[#0f172a]">{dict.featuredTitle}</h2>
-            <p className="text-sm text-[#64748b] mt-1">{dict.featuredLead}</p>
+            <h2 className="text-2xl font-bold text-[#171717]">{dict.featuredTitle}</h2>
+            <p className="text-sm text-[#6d6b66] mt-1">{dict.featuredLead}</p>
           </div>
-          <p className="text-sm text-[#64748b] shrink-0">
+          <p className="text-sm text-[#6d6b66] min-w-0 text-right">
             {dict.countLabel.replace("{n}", String(items.length))}
           </p>
         </div>
 
         {/* 信任说明（§29）：自述信息 / 证据等级 / 独立核验必须分开表达，
             不能让 Buyer 把「能看到档案」误解成「已被 FactoryAuditB2B 核验」 */}
-        <p className="mb-4 text-sm text-[#475569] bg-[#f1f5f9] rounded-md px-3 py-2">
+        <p className="mb-4 text-sm text-[#3f4650] bg-[#f5f3ee] rounded-md px-3 py-2">
           {dict.trustNote}
         </p>
 
         {items.length === 0 ? (
-          <p className="text-[#475569] mb-10">{dict.empty}</p>
+          <p className="text-[#3f4650] mb-10">{dict.empty}</p>
         ) : (
-          <section className="grid md:grid-cols-3 gap-5 mb-14">
+          <section className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">
             {items.map((x) => (
               // ★ 等级只由「真实证据」决定，绝不采信 legacy verification_status。
               //   详情与原始理由见 page.tsx 的 `items` 构造处（服务端唯一权威）。
@@ -250,30 +252,30 @@ export default function DirectoryView({
               <Link
                 key={x.slug}
                 href={`${supplierPathPrefix}${x.slug}`}
-                className="card p-5 hover:border-[#0f4c81] transition"
+                className="card p-5 hover:border-[#171717] transition"
                 data-track={events.profileView}
                 data-track-value={x.slug}
               >
-                <div className="font-semibold text-[#0f172a]">{x.legalName}</div>
+                <div className="font-semibold text-[#171717]">{x.legalName}</div>
                 {/* CS-D：三态验证徽章（状态服务端推导，组件不自判） */}
                 <div className="mt-2">
                   <VerificationBadge state={x.badgeState} dict={trustProfileDict} />
                 </div>
-                <div className="text-sm text-[#64748b] mt-1">
+                <div className="text-sm text-[#6d6b66] mt-1">
                   {x.city}, {x.countryLabel}
                 </div>
                 <div className="text-sm mt-3">{x.mainProducts.join(" · ")}</div>
 
                 <dl className="mt-4 space-y-1 text-sm">
                   <div className="flex justify-between gap-2">
-                    <dt className="text-[#64748b]">{dict.businessTypeLabel}</dt>
-                    <dd className="font-medium text-[#0f172a] text-right">
+                    <dt className="text-[#6d6b66]">{dict.businessTypeLabel}</dt>
+                    <dd className="font-medium text-[#171717] text-right">
                       {x.businessType}
                     </dd>
                   </div>
                   <div className="flex justify-between gap-2">
-                    <dt className="text-[#64748b]">{dict.evidenceLevel}</dt>
-                    <dd className="font-medium text-[#0f172a] text-right">
+                    <dt className="text-[#6d6b66]">{dict.evidenceLevel}</dt>
+                    <dd className="font-medium text-[#171717] text-right">
                       {x.evidenceText}
                     </dd>
                   </div>
@@ -285,15 +287,15 @@ export default function DirectoryView({
                       现在按真实等级显示（level ≥ 1 → levelsShort[level]，与档案页同一字典）；
                       level = 0 → 继续用 verificationNotYet，措辞与修复前逐字一致。 */}
                   <div className="flex justify-between gap-2">
-                    <dt className="text-[#64748b]">{dict.verificationLabel}</dt>
-                    <dd className="font-medium text-[#0f172a] text-right">
+                    <dt className="text-[#6d6b66]">{dict.verificationLabel}</dt>
+                    <dd className="font-medium text-[#171717] text-right">
                       {x.verificationText}
                     </dd>
                   </div>
                   <div className="flex justify-between gap-2">
-                    <dt className="text-[#64748b]" title={dict.riskNote}>
+                    <dt className="text-[#6d6b66]" title={dict.riskNote}>
                       {dict.riskLabel}
-                      <span aria-hidden="true" className="ml-1 text-[#94a3b8]">
+                      <span aria-hidden="true" className="ml-1 text-[#8c8982]">
                         (?)
                       </span>
                     </dt>
@@ -310,15 +312,15 @@ export default function DirectoryView({
                     </dd>
                   </div>
                   <div className="flex justify-between gap-2">
-                    <dt className="text-[#64748b]">{dict.lastEvidence}</dt>
-                    <dd className="font-medium text-[#0f172a] text-right">
+                    <dt className="text-[#6d6b66]">{dict.lastEvidence}</dt>
+                    <dd className="font-medium text-[#171717] text-right">
                       {x.lastCheckedText}
                     </dd>
                   </div>
                 </dl>
-                <p className="mt-2 text-xs text-[#64748b]">{dict.riskNote}</p>
+                <p className="mt-2 text-xs text-[#6d6b66]">{dict.riskNote}</p>
 
-                <span className="inline-block mt-4 text-sm text-[#0f4c81] font-medium">
+                <span className="inline-block mt-4 text-sm text-[#171717] font-medium">
                   {dict.cardCta} →
                 </span>
               </Link>

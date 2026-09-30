@@ -77,7 +77,7 @@ export default function CustomServiceForm({ t }: { t: CustomServiceFormDict }) {
 
   return (
     <form onSubmit={handleSubmit} onFocus={handleFirstTouch} className="card p-6 max-w-2xl space-y-4">
-      <div className="grid md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="text-sm font-medium">{t.labels.firstName}</label>
           <input

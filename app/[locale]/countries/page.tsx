@@ -73,14 +73,14 @@ export default async function CountriesPage({ params }: Props) {
       <JsonLd data={jsonLd} />
 
       <section className="max-w-3xl mb-10">
-        <span className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">
+        <span className="text-sm font-semibold text-[#171717] uppercase tracking-wide">
           {c.badge}
         </span>
-        <h1 className="text-4xl font-extrabold text-[#0f172a] mt-2">{c.h1}</h1>
-        <p className="text-[#64748b] mt-3 text-lg">{c.lead}</p>
+        <h1 className="text-4xl font-extrabold text-[#171717] mt-2">{c.h1}</h1>
+        <p className="text-[#6d6b66] mt-3 text-lg">{c.lead}</p>
       </section>
 
-      <section className="grid md:grid-cols-3 gap-5 mb-12">
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
         {COVERAGE_COUNTRIES.map((x) => {
           const copy = pickZhCopy(locale, x);
           return (
@@ -88,16 +88,16 @@ export default async function CountriesPage({ params }: Props) {
               <div className="text-xs font-semibold uppercase tracking-wide text-[#8a5410]">
                 {c.phase1}
               </div>
-              <h2 className="text-2xl font-bold text-[#0f172a] mt-1">
+              <h2 className="text-2xl font-bold text-[#171717] mt-1">
                 {pickZhPair(locale, x.name, x.nameZh)}
               </h2>
-              <p className="text-sm text-[#475569] mt-2 flex-1">{copy.hook}</p>
+              <p className="text-sm text-[#3f4650] mt-2 flex-1">{copy.hook}</p>
 
               <div className="mt-4">
-                <div className="text-xs font-semibold uppercase text-[#64748b]">
+                <div className="text-xs font-semibold uppercase text-[#6d6b66]">
                   {t.countryHub.industriesTitle}
                 </div>
-                <div className="text-sm text-[#475569] mt-1">
+                <div className="text-sm text-[#3f4650] mt-1">
                   {copy.industries.slice(0, 4).join(" · ")}
                 </div>
               </div>
@@ -105,19 +105,19 @@ export default async function CountriesPage({ params }: Props) {
               <div className="mt-4 space-y-1 text-sm">
                 <Link
                   href={p(`/services/${x.slug}-supplier-verification`)}
-                  className="block text-[#0f4c81] hover:underline"
+                  className="block text-[#171717] hover:underline"
                 >
                   {t.servicesIndex.items.verification.title} →
                 </Link>
                 <Link
                   href={p(`/services/${x.slug}-factory-audit`)}
-                  className="block text-[#0f4c81] hover:underline"
+                  className="block text-[#171717] hover:underline"
                 >
                   {t.servicesIndex.items.factoryAudit.title} →
                 </Link>
                 <Link
                   href={p(inspectionHref)}
-                  className="block text-[#0f4c81] hover:underline"
+                  className="block text-[#171717] hover:underline"
                 >
                   {t.servicesIndex.items.inspection.title} →
                 </Link>
@@ -131,10 +131,10 @@ export default async function CountriesPage({ params }: Props) {
         })}
       </section>
 
-      <section className="rounded-lg border border-dashed border-[#cbd5e1] p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <section className="rounded-lg border border-dashed border-[#ddd9d0] p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <div className="font-semibold text-[#0f172a]">{c.anotherCountryTitle}</div>
-          <p className="text-sm text-[#475569] mt-1">{c.anotherCountryLead}</p>
+          <div className="font-semibold text-[#171717]">{c.anotherCountryTitle}</div>
+          <p className="text-sm text-[#3f4650] mt-1">{c.anotherCountryLead}</p>
         </div>
         <Link href={p("/custom-services")} className="btn btn-primary whitespace-nowrap">
           {c.anotherCountryCta}

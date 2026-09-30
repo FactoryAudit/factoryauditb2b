@@ -98,13 +98,13 @@ export default function EvidenceUploader({ itemKey, supplierId, email, value, on
   }
 
   return (
-    <div className="mt-2 border-t border-dashed border-[#e2e8f0] pt-2">
+    <div className="mt-2 border-t border-dashed border-[#ebe8e1] pt-2">
       <div className="flex items-center gap-2 flex-wrap">
         <button
           type="button"
           disabled={busy || value.length >= maxPerItem}
           onClick={() => inputRef.current?.click()}
-          className="text-xs px-3 py-1.5 rounded-md bg-[#0f4c81] text-white disabled:opacity-50"
+          className="text-xs px-3 py-1.5 rounded-md bg-[#171717] text-white disabled:opacity-50"
           data-track="self_assessment_evidence_upload_click"
         >
           {busy ? t("uploading") : `${t("uploadEvidence")} (${value.length}/${maxPerItem})`}
@@ -127,18 +127,18 @@ export default function EvidenceUploader({ itemKey, supplierId, email, value, on
           {value.map((m) => {
             void fetchSigned(m);
             return (
-              <li key={m.id} className="flex items-center gap-3 text-xs bg-[#f8fafc] rounded p-2">
+              <li key={m.id} className="flex items-center gap-3 text-xs bg-[#fbfaf7] rounded p-2">
                 {m.type === "image" && previews[m.id] ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={previews[m.id]} alt={m.fileName} className="w-10 h-10 object-cover rounded" loading="lazy" />
                 ) : (
-                  <span className="w-10 h-10 flex items-center justify-center rounded bg-[#e2e8f0] text-[#64748b]">
+                  <span className="w-10 h-10 flex items-center justify-center rounded bg-[#ebe8e1] text-[#6d6b66]">
                     {m.type === "document" ? "PDF" : "IMG"}
                   </span>
                 )}
                 <div className="flex-1 min-w-0">
-                  <p className="truncate text-[#0f172a]">{m.fileName}</p>
-                  <p className="text-[#94a3b8]">
+                  <p className="truncate text-[#171717]">{m.fileName}</p>
+                  <p className="text-[#8c8982]">
                     {formatBytes(m.fileSize)} · {t(STATUS_KEY[m.status] ?? "status_uploaded")}
                   </p>
                 </div>

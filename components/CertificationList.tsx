@@ -67,10 +67,10 @@ export function CertificationList({
 }) {
   return (
     <section className="mt-8 card p-6" id="certifications">
-      <h2 className="text-xl font-bold text-[#0f172a]">{d.sectionCertifications}</h2>
+      <h2 className="text-xl font-bold text-[#171717]">{d.sectionCertifications}</h2>
 
       {items.length === 0 ? (
-        <p className="mt-3 text-sm text-[#475569]">{d.noneCertifications}</p>
+        <p className="mt-3 text-sm text-[#3f4650]">{d.noneCertifications}</p>
       ) : (
         <ul className="mt-4 space-y-3">
           {items.map((c) => {
@@ -79,41 +79,41 @@ export function CertificationList({
             return (
               <li
                 key={c.id}
-                className="rounded-lg border border-[#e2e8f0] bg-[#f7f9fc] p-4"
+                className="rounded-lg border border-[#ebe8e1] bg-[#fbfaf7] p-4"
               >
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="font-semibold text-[#0f172a]">{c.programCode}</span>
+                  <span className="font-semibold text-[#171717]">{c.programCode}</span>
                   {b ? <Badge variant={b.v}>{b.t}</Badge> : null}
                 </div>
 
-                <dl className="mt-3 grid gap-x-6 gap-y-1 text-sm sm:grid-cols-2">
+                <dl className="mt-3 grid grid-cols-1 gap-x-6 gap-y-1 text-sm sm:grid-cols-2">
                   {c.issuingBody ? (
                     <div className="flex gap-2">
-                      <dt className="text-[#64748b]">{d.issuer}</dt>
-                      <dd className="text-[#0f172a]">{c.issuingBody}</dd>
+                      <dt className="text-[#6d6b66]">{d.issuer}</dt>
+                      <dd className="text-[#171717]">{c.issuingBody}</dd>
                     </div>
                   ) : null}
                   {c.certificateNo ? (
                     <div className="flex gap-2">
-                      <dt className="text-[#64748b]">{d.certificateNo}</dt>
-                      <dd className="font-mono text-xs text-[#0f172a]">
+                      <dt className="text-[#6d6b66]">{d.certificateNo}</dt>
+                      <dd className="font-mono text-xs text-[#171717]">
                         {c.certificateNo}
                       </dd>
                     </div>
                   ) : null}
                   {c.issueDate ? (
                     <div className="flex gap-2">
-                      <dt className="text-[#64748b]">{d.issuedOn}</dt>
-                      <dd className="text-[#0f172a]">{c.issueDate}</dd>
+                      <dt className="text-[#6d6b66]">{d.issuedOn}</dt>
+                      <dd className="text-[#171717]">{c.issueDate}</dd>
                     </div>
                   ) : null}
                   {c.expiryDate ? (
                     <div className="flex gap-2">
-                      <dt className="text-[#64748b]">{d.validUntil}</dt>
-                      <dd className="text-[#0f172a]">
+                      <dt className="text-[#6d6b66]">{d.validUntil}</dt>
+                      <dd className="text-[#171717]">
                         {c.expiryDate}
                         {dl !== null ? (
-                          <span className="ml-2 text-xs text-[#475569]">
+                          <span className="ml-2 text-xs text-[#3f4650]">
                             {dl < 0 ? fmt(d.expiredAgo, -dl) : fmt(d.daysRemaining, dl)}
                           </span>
                         ) : null}
@@ -123,7 +123,7 @@ export function CertificationList({
                 </dl>
 
                 {c.scope ? (
-                  <p className="mt-2 text-xs text-[#475569]">{c.scope}</p>
+                  <p className="mt-2 text-xs text-[#3f4650]">{c.scope}</p>
                 ) : null}
               </li>
             );
@@ -131,7 +131,7 @@ export function CertificationList({
         </ul>
       )}
 
-      <p className="mt-4 border-t border-[#e2e8f0] pt-3 text-xs text-[#64748b]">
+      <p className="mt-4 border-t border-[#ebe8e1] pt-3 text-xs text-[#6d6b66]">
         {d.disclaimer}
       </p>
     </section>

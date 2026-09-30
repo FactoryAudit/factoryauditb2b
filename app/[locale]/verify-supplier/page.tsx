@@ -95,32 +95,32 @@ export default async function VerifySupplierPage({
     >
       <JsonLd data={jsonLd} />
 
-      <nav aria-label={vs.breadcrumb} className="text-sm text-[#64748b]">
-        <Link href={p("/")} className="hover:text-[#0f4c81]">
+      <nav aria-label={vs.breadcrumb} className="text-sm text-[#6d6b66]">
+        <Link href={p("/")} className="hover:text-[#171717]">
           {t.countryHub.breadcrumbHome}
         </Link>
         <span className="mx-2">/</span>
-        <span className="text-[#0f172a]">{vs.breadcrumb}</span>
+        <span className="text-[#171717]">{vs.breadcrumb}</span>
       </nav>
 
       <section className="mt-6 mb-8">
-        <span className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">
+        <span className="text-sm font-semibold text-[#171717] uppercase tracking-wide">
           {vs.badge}
         </span>
-        <h1 className="text-3xl font-bold text-[#0f172a] mt-2">{vs.h1}</h1>
-        <p className="text-[#64748b] mt-2 max-w-3xl">{vs.lead}</p>
+        <h1 className="text-3xl font-bold text-[#171717] mt-2">{vs.h1}</h1>
+        <p className="text-[#6d6b66] mt-2 max-w-3xl">{vs.lead}</p>
       </section>
 
-      <div className="grid md:grid-cols-2 gap-8 items-start">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         <section>
           {/* 我们会查什么 —— 说清楚范围，避免用户以为「提交了就一定得出结论」 */}
           <div className="card p-5 mb-6">
-            <h2 className="font-semibold text-[#0f172a]">{vs.checksTitle}</h2>
-            <p className="text-sm text-[#64748b] mt-1 mb-3">{vs.checksLead}</p>
-            <ul className="space-y-2 text-sm text-[#475569]">
+            <h2 className="font-semibold text-[#171717]">{vs.checksTitle}</h2>
+            <p className="text-sm text-[#6d6b66] mt-1 mb-3">{vs.checksLead}</p>
+            <ul className="space-y-2 text-sm text-[#3f4650]">
               {vs.checks.map((c: string) => (
                 <li key={c} className="flex gap-2">
-                  <span className="text-[#0f4c81]">✓</span>
+                  <span className="text-[#171717]">✓</span>
                   {c}
                 </li>
               ))}
@@ -129,8 +129,8 @@ export default async function VerifySupplierPage({
 
           {/* 规则：不保证结果、不出售核验结论（与 claim 页同口径的信任基石） */}
           <div className="card p-5 bg-[#fff8f0] border-[#f0d9b8]">
-            <h2 className="font-semibold text-[#0f172a]">{vs.rulesTitle}</h2>
-            <ul className="mt-2 space-y-2 text-sm text-[#475569]">
+            <h2 className="font-semibold text-[#171717]">{vs.rulesTitle}</h2>
+            <ul className="mt-2 space-y-2 text-sm text-[#3f4650]">
               {vs.rules.map((r: string) => (
                 <li key={r} className="flex gap-2">
                   <span className="text-[#a86a13]">•</span>
@@ -142,8 +142,8 @@ export default async function VerifySupplierPage({
 
           {/* 指向既有服务：本页是入口，真正的交付物是这两项 */}
           <div className="card p-5 mt-6">
-            <h2 className="font-semibold text-[#0f172a]">{vs.servicesTitle}</h2>
-            <p className="text-sm text-[#64748b] mt-1 mb-3">{vs.servicesLead}</p>
+            <h2 className="font-semibold text-[#171717]">{vs.servicesTitle}</h2>
+            <p className="text-sm text-[#6d6b66] mt-1 mb-3">{vs.servicesLead}</p>
             <div className="flex flex-wrap gap-3">
               <Link href={p("/services/supplier-verification")} className="btn btn-outline text-sm">
                 {vs.serviceVerification}
@@ -152,20 +152,20 @@ export default async function VerifySupplierPage({
                 {vs.serviceAudit}
               </Link>
             </div>
-            <p className="text-xs text-[#64748b] mt-3">{vs.servicesNote}</p>
+            <p className="text-xs text-[#6d6b66] mt-3">{vs.servicesNote}</p>
           </div>
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-[#0f172a] mb-3">{vs.formTitle}</h2>
+          <h2 className="text-xl font-bold text-[#171717] mb-3">{vs.formTitle}</h2>
           <VerifySupplierForm t={vs.form} />
         </section>
       </div>
 
       {/* 已在我们目录里？直接看档案比提交请求更快 */}
       <section className="mt-10 card p-6">
-        <h2 className="font-semibold text-[#0f172a]">{vs.directoryTitle}</h2>
-        <p className="text-sm text-[#64748b] mt-1 mb-3">{vs.directoryLead}</p>
+        <h2 className="font-semibold text-[#171717]">{vs.directoryTitle}</h2>
+        <p className="text-sm text-[#6d6b66] mt-1 mb-3">{vs.directoryLead}</p>
         <Link href={p("/suppliers")} className="btn btn-outline text-sm">
           {vs.directoryCta}
         </Link>

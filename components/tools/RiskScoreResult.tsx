@@ -50,7 +50,7 @@ export default function RiskScoreResult({
             <span className="text-xs opacity-90">/ 100</span>
           </div>
           <div className="flex-1">
-            <div className="text-sm uppercase tracking-wide text-[#64748b]">
+            <div className="text-sm uppercase tracking-wide text-[#6d6b66]">
               {ui.scoreSuffix}
             </div>
             <div className="text-2xl font-bold mt-1" style={{ color }}>
@@ -59,13 +59,13 @@ export default function RiskScoreResult({
             <p className="text-xs text-[#b45309] bg-amber-50 border border-amber-200 rounded-md px-3 py-2 mt-3 inline-block">
               {ui.selfReported}
             </p>
-            <p className="text-sm text-[#64748b] mt-2">{ui.disclaimer}</p>
+            <p className="text-sm text-[#6d6b66] mt-2">{ui.disclaimer}</p>
           </div>
         </div>
 
         {/* 得分刻度：分数 → 等级 的可解释映射 */}
         <div className="mt-8">
-          <div className="text-sm font-semibold text-[#0f172a] mb-2">
+          <div className="text-sm font-semibold text-[#171717] mb-2">
             {ui.scoreScaleTitle}
           </div>
           <div className="flex w-full h-3 rounded-full overflow-hidden">
@@ -81,7 +81,7 @@ export default function RiskScoreResult({
               />
             ))}
           </div>
-          <div className="flex w-full mt-1 text-[11px] text-[#64748b]">
+          <div className="flex w-full mt-1 text-[11px] text-[#6d6b66]">
             {LEVEL_BANDS.map((b, i) => (
               <span key={b.level} style={{ width: `${bandWidth(b.min, i)}%` }}>
                 {b.min}
@@ -92,14 +92,14 @@ export default function RiskScoreResult({
         </div>
 
         {/* Key Findings：亮点 / 风险信号 / 未知缺口 */}
-        <h3 className="font-semibold text-[#0f172a] mt-8 mb-3">{ui.findingsTitle}</h3>
-        <div className="grid md:grid-cols-3 gap-3">
+        <h3 className="font-semibold text-[#171717] mt-8 mb-3">{ui.findingsTitle}</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {result.strengths.length > 0 && (
             <div className="rounded-lg border border-[#d1e7d8] bg-[#f3faf5] p-3">
               <div className="text-sm font-semibold text-[#1f7a36] mb-1">
                 {ui.strengthsTitle}
               </div>
-              <ul className="space-y-1 text-sm text-[#475569]">
+              <ul className="space-y-1 text-sm text-[#3f4650]">
                 {result.strengths.map((s, i) => (
                   <li key={i} className="flex gap-1.5">
                     <span className="text-[#1f7a36] shrink-0">✓</span>
@@ -113,7 +113,7 @@ export default function RiskScoreResult({
           {result.keyRiskFactors.length > 0 && (
             <div className="rounded-lg border border-[#f0c4c4] bg-[#fdf5f5] p-3">
               <div className="text-sm font-semibold text-[#d4232a] mb-1">{ui.risksTitle}</div>
-              <ul className="space-y-1 text-sm text-[#475569]">
+              <ul className="space-y-1 text-sm text-[#3f4650]">
                 {result.keyRiskFactors.map((f, i) => (
                   <li key={i} className="flex gap-1.5">
                     <span className="text-[#d4232a] shrink-0">▲</span>
@@ -127,7 +127,7 @@ export default function RiskScoreResult({
           {result.dataGaps.length > 0 && (
             <div className="rounded-lg border border-[#f0e0b8] bg-[#fdf9ef] p-3">
               <div className="text-sm font-semibold text-[#8a5410] mb-1">{ui.gapsTitle}</div>
-              <ul className="space-y-1 text-sm text-[#475569]">
+              <ul className="space-y-1 text-sm text-[#3f4650]">
                 {result.dataGaps.map((g, i) => (
                   <li key={i} className="flex gap-1.5">
                     <span className="text-[#8a5410] shrink-0">?</span>
@@ -140,14 +140,14 @@ export default function RiskScoreResult({
           )}
         </div>
 
-        <h3 className="font-semibold text-[#0f172a] mt-8 mb-3">{ui.breakdownTitle}</h3>
+        <h3 className="font-semibold text-[#171717] mt-8 mb-3">{ui.breakdownTitle}</h3>
         <div className="space-y-3">
           {result.dimensions.map((d) => (
             <div key={d.key}>
               <div className="flex justify-between text-sm mb-1">
-                <span className="font-medium text-[#0f172a]">
+                <span className="font-medium text-[#171717]">
                   {d.label}{" "}
-                  <span className="text-[#94a3b8] font-normal">
+                  <span className="text-[#8c8982] font-normal">
                     {ui.weightNote.replace("{weight}", String(d.weight))}
                   </span>
                 </span>
@@ -166,8 +166,8 @@ export default function RiskScoreResult({
         </div>
 
         <div className="mt-6">
-          <h3 className="font-semibold text-[#0f172a] mb-2">{ui.actionsTitle}</h3>
-          <ol className="list-decimal pl-5 space-y-1 text-sm text-[#475569]">
+          <h3 className="font-semibold text-[#171717] mb-2">{ui.actionsTitle}</h3>
+          <ol className="list-decimal pl-5 space-y-1 text-sm text-[#3f4650]">
             {result.recommendations.map((r, i) => (
               <li key={i}>{r}</li>
             ))}
@@ -177,9 +177,9 @@ export default function RiskScoreResult({
         {/* 动态 CTA：按风险等级切换主次按钮 */}
         <div
           className="mt-6 rounded-xl p-5 border"
-          style={{ background: "#f7f9fc", borderColor: color }}
+          style={{ background: "#fbfaf7", borderColor: color }}
         >
-          <p className="font-semibold text-[#0f172a] mb-3">{result.cta.headline}</p>
+          <p className="font-semibold text-[#171717] mb-3">{result.cta.headline}</p>
           <div className="flex flex-wrap gap-3">
             {primaryIsReport ? (
               <button className="btn btn-primary" onClick={onLeadRequest}>

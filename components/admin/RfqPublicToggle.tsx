@@ -68,7 +68,7 @@ export default function RfqPublicToggle({
         disabled={saving}
         aria-label={referenceId}
         className={`rounded-full px-2 py-0.5 text-xs disabled:opacity-60 ${
-          value ? "bg-[#e6f4ec] text-[#14804a]" : "bg-[#f1f5f9] text-[#64748b]"
+          value ? "bg-[#e6f4ec] text-[#14804a]" : "bg-[#f5f3ee] text-[#6d6b66]"
         }`}
       >
         {value ? dict.shown : dict.hidden}
@@ -77,11 +77,11 @@ export default function RfqPublicToggle({
         type="button"
         onClick={toggle}
         disabled={saving}
-        className="text-xs text-[#0f4c81] hover:underline disabled:opacity-60"
+        className="text-xs text-[#171717] hover:underline disabled:opacity-60"
       >
         {value ? dict.publicOff : dict.publicOn}
       </button>
-      {saving && <span className="text-xs text-[#64748b]">{dict.saving}</span>}
+      {saving && <span className="text-xs text-[#6d6b66]">{dict.saving}</span>}
       {failed && !saving && <span className="text-xs text-[#d4232a]">{dict.error}</span>}
     </span>
   );

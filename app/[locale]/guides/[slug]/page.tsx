@@ -93,30 +93,30 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
     <article className="container py-12 max-w-3xl">
       <JsonLd data={jsonLd} />
 
-      <nav className="mb-4 text-sm text-[#64748b]">
+      <nav className="mb-4 text-sm text-[#6d6b66]">
         <Link href={p("/")} className="hover:underline">{t.common.ui.home}</Link>
         {" / "}
         <Link href={p("/resources")} className="hover:underline">{t.resourcesIndex.h1}</Link>
         {" / "}{title}
       </nav>
 
-      <h1 className="text-4xl font-extrabold text-[#0f172a]">{title}</h1>
-      <p className="text-sm text-[#64748b] mt-2">{t.supplierProfile.lastUpdated}: {g.updated}</p>
+      <h1 className="text-4xl font-extrabold text-[#171717]">{title}</h1>
+      <p className="text-sm text-[#6d6b66] mt-2">{t.supplierProfile.lastUpdated}: {g.updated}</p>
 
       {/* Quick Answer：AI Search 与 Google 摘要优先抓取这一段 */}
-      <section className="mt-6 rounded-lg bg-[#f1f5f9] p-6">
-        <h2 className="font-bold text-[#0f172a]">{t.common.ui.quickAnswer}</h2>
-        <p className="text-[#475569] mt-2">{c.quickAnswer}</p>
+      <section className="mt-6 rounded-lg bg-[#f5f3ee] p-6">
+        <h2 className="font-bold text-[#171717]">{t.common.ui.quickAnswer}</h2>
+        <p className="text-[#3f4650] mt-2">{c.quickAnswer}</p>
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{t.common.ui.definition}</h2>
-        <p className="text-[#475569] mt-2">{c.definition}</p>
+        <h2 className="text-2xl font-bold text-[#171717]">{t.common.ui.definition}</h2>
+        <p className="text-[#3f4650] mt-2">{c.definition}</p>
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{t.common.ui.keyPoints}</h2>
-        <ul className="mt-3 space-y-2 text-[#475569]">
+        <h2 className="text-2xl font-bold text-[#171717]">{t.common.ui.keyPoints}</h2>
+        <ul className="mt-3 space-y-2 text-[#3f4650]">
           {c.keyPoints.map((x) => (
             <li key={x}>· {x}</li>
           ))}
@@ -124,26 +124,26 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{t.common.ui.stepByStep}</h2>
+        <h2 className="text-2xl font-bold text-[#171717]">{t.common.ui.stepByStep}</h2>
         <ol className="mt-3 space-y-3">
           {c.steps.map((s, i) => (
             <li key={s.title} className="card p-4">
-              <div className="font-semibold text-[#0f172a]">
+              <div className="font-semibold text-[#171717]">
                 {i + 1}. {s.title}
               </div>
-              <p className="text-sm text-[#475569] mt-1">{s.body}</p>
+              <p className="text-sm text-[#3f4650] mt-1">{s.body}</p>
             </li>
           ))}
         </ol>
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{t.common.ui.examples}</h2>
+        <h2 className="text-2xl font-bold text-[#171717]">{t.common.ui.examples}</h2>
         <div className="mt-3 space-y-3">
           {c.examples.map((x) => (
             <div key={x.title} className="card p-4">
-              <div className="font-semibold text-[#0f172a]">{x.title}</div>
-              <p className="text-sm text-[#475569] mt-1">{x.body}</p>
+              <div className="font-semibold text-[#171717]">{x.title}</div>
+              <p className="text-sm text-[#3f4650] mt-1">{x.body}</p>
             </div>
           ))}
         </div>
@@ -155,16 +155,16 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
         <>
           {c.tables.map((tb) => (
             <section key={tb.title} className="mt-8">
-              <h2 className="text-2xl font-bold text-[#0f172a]">{tb.title}</h2>
+              <h2 className="text-2xl font-bold text-[#171717]">{tb.title}</h2>
               <div className="mt-3 overflow-x-auto">
                 <table className="w-full border-collapse text-sm">
                   <thead>
-                    <tr className="bg-[#f1f5f9]">
+                    <tr className="bg-[#f5f3ee]">
                       {tb.headers.map((h) => (
                         <th
                           key={h}
                           scope="col"
-                          className="border border-[#cbd5e1] px-3 py-2 text-left font-semibold text-[#0f172a]"
+                          className="border border-[#ddd9d0] px-3 py-2 text-left font-semibold text-[#171717]"
                         >
                           {h}
                         </th>
@@ -177,7 +177,7 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
                         {row.map((cell, j) => (
                           <td
                             key={`${tb.title}-cell-${i}-${j}`}
-                            className="border border-[#cbd5e1] px-3 py-2 align-top text-[#475569]"
+                            className="border border-[#ddd9d0] px-3 py-2 align-top text-[#3f4650]"
                           >
                             {cell}
                           </td>
@@ -193,8 +193,8 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
       )}
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{t.common.ui.checklist}</h2>
-        <ul className="mt-3 space-y-1 text-[#475569]">
+        <h2 className="text-2xl font-bold text-[#171717]">{t.common.ui.checklist}</h2>
+        <ul className="mt-3 space-y-1 text-[#3f4650]">
           {c.checklist.map((x) => (
             <li key={x}>☐ {x}</li>
           ))}
@@ -202,9 +202,9 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
       </section>
 
       {/* Tool / Service：每篇指南至少链 1 个工具 + 1 个服务（PRD §46） */}
-      <section className="mt-8 grid md:grid-cols-2 gap-5">
+      <section className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-5">
         <div className="card p-6">
-          <h2 className="font-bold text-[#0f172a]">{t.toolsIndex.badge}</h2>
+          <h2 className="font-bold text-[#171717]">{t.toolsIndex.badge}</h2>
           <ul className="mt-3 space-y-2">
             {g.tools.map((x) => {
               const key =
@@ -221,7 +221,7 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
                           : "auditReportAnalyzer";
               return (
                 <li key={x.href}>
-                  <Link href={p(x.href)} className="text-[#0f4c81] hover:underline">
+                  <Link href={p(x.href)} className="text-[#171717] hover:underline">
                     {t.toolCards[key].title}
                   </Link>
                 </li>
@@ -230,11 +230,11 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
           </ul>
         </div>
         <div className="card p-6">
-          <h2 className="font-bold text-[#0f172a]">{t.servicesIndex.badge}</h2>
+          <h2 className="font-bold text-[#171717]">{t.servicesIndex.badge}</h2>
           <ul className="mt-3 space-y-2">
             {g.services.map((x) => (
               <li key={x.href}>
-                <Link href={p(x.href)} className="text-[#0f4c81] hover:underline">
+                <Link href={p(x.href)} className="text-[#171717] hover:underline">
                   {x.href.includes("factory-audit")
                     ? t.servicesIndex.items.factoryAudit.title
                     : t.servicesIndex.items.verification.title}
@@ -242,7 +242,7 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
               </li>
             ))}
             <li>
-              <Link href={p("/factory-audit/request")} className="text-[#0f4c81] hover:underline">
+              <Link href={p("/factory-audit/request")} className="text-[#171717] hover:underline">
                 {t.servicesIndex.items.factoryAudit.title}
               </Link>
             </li>
@@ -251,29 +251,29 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{t.countryHub.faqTitle}</h2>
+        <h2 className="text-2xl font-bold text-[#171717]">{t.countryHub.faqTitle}</h2>
         <div className="mt-3 space-y-4">
           {c.faq.map((f) => (
             <div key={f.q}>
-              <h3 className="font-semibold text-[#0f172a]">{f.q}</h3>
-              <p className="text-[#475569] mt-1">{f.a}</p>
+              <h3 className="font-semibold text-[#171717]">{f.q}</h3>
+              <p className="text-[#3f4650] mt-1">{f.a}</p>
             </div>
           ))}
         </div>
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{t.common.ui.sources}</h2>
-        <ul className="mt-3 space-y-2 text-sm text-[#475569]">
+        <h2 className="text-2xl font-bold text-[#171717]">{t.common.ui.sources}</h2>
+        <ul className="mt-3 space-y-2 text-sm text-[#3f4650]">
           {c.sources.map((s) => (
             <li key={s.name}>
-              <span className="font-medium text-[#0f172a]">{s.name}</span>
-              <span className="block text-[#64748b]">{s.note}</span>
+              <span className="font-medium text-[#171717]">{s.name}</span>
+              <span className="block text-[#6d6b66]">{s.note}</span>
             </li>
           ))}
         </ul>
         <p className="mt-3 text-sm">
-          <Link href={p("/methodology")} className="text-[#0f4c81] underline">
+          <Link href={p("/methodology")} className="text-[#171717] underline">
             {t.reportPreview.methodologyTitle}
           </Link>
         </p>
@@ -281,11 +281,11 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
 
       {relatedGuides.length > 0 && (
         <section className="mt-8">
-          <h2 className="text-2xl font-bold text-[#0f172a]">{t.common.ui.relatedGuides}</h2>
+          <h2 className="text-2xl font-bold text-[#171717]">{t.common.ui.relatedGuides}</h2>
           <ul className="mt-3 space-y-2">
             {relatedGuides.map((x) => (
               <li key={x.slug}>
-                <Link href={p(`/guides/${x.slug}`)} className="text-[#0f4c81] hover:underline">
+                <Link href={p(`/guides/${x.slug}`)} className="text-[#171717] hover:underline">
                   {pickZhPair(locale, x.titleEn, x.titleZh)}
                 </Link>
               </li>
@@ -294,7 +294,7 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
         </section>
       )}
 
-      <section className="mt-10 card p-8 bg-[#0f4c81]">
+      <section className="mt-10 card p-8 bg-[#171717]">
         <h2 className="text-2xl font-bold text-white">{t.home.bottomTitle}</h2>
         <p className="mt-2 text-white/80">{t.home.bottomLead}</p>
         <div className="mt-5 flex flex-wrap gap-3">

@@ -16,7 +16,7 @@ const PRICE: Record<AssessmentType, string> = {
 };
 
 const TAG_COLOR: Record<AssessmentType, string> = {
-  self_assessment: "border-[#0f4c81] text-[#0f4c81]",
+  self_assessment: "border-[#171717] text-[#171717]",
   platform_assessment: "border-[#16a34a] text-[#16a34a]",
   on_site_audit: "border-[#b45309] text-[#b45309]",
 };
@@ -34,13 +34,13 @@ export default function AssessmentReportPaywall({
   const p = (href: string) => localePath(locale, href);
 
   return (
-    <section className="mt-10 rounded-xl border border-[#e2e8f0] bg-white p-6">
-      <h2 className="text-xl font-bold text-[#0f172a]">审核报告下载 · Assessment Reports</h2>
-      <p className="mt-1 text-sm text-[#64748b]">
+    <section className="mt-10 rounded-xl border border-[#ebe8e1] bg-white p-6">
+      <h2 className="text-xl font-bold text-[#171717]">审核报告下载 · Assessment Reports</h2>
+      <p className="mt-1 text-sm text-[#6d6b66]">
         采购商可付费下载以下已发布的审核报告（单份报告，PDF / 自包含 HTML）。
       </p>
 
-      <div className="mt-4 grid gap-3">
+      <div className="mt-4 grid grid-cols-1 gap-3">
         {ORDER.map((type) => {
           const label = ASSESSMENT_TYPE_LABELS[type];
           const isPublished = published.has(type);
@@ -54,9 +54,9 @@ export default function AssessmentReportPaywall({
                   <span className={`rounded-full border px-2 py-0.5 text-xs font-semibold ${TAG_COLOR[type]}`}>
                     {label.zh}
                   </span>
-                  <span className="text-sm font-medium text-[#0f172a]">{label.en}</span>
+                  <span className="text-sm font-medium text-[#171717]">{label.en}</span>
                 </div>
-                <div className="mt-1 text-xs text-[#64748b]">
+                <div className="mt-1 text-xs text-[#6d6b66]">
                   {isPublished ? `价格 ${PRICE[type]} · 报告已生成` : "该标签尚未发布，暂无可下载报告"}
                 </div>
               </div>
@@ -72,7 +72,7 @@ export default function AssessmentReportPaywall({
                   下载报告 / Download
                 </a>
               ) : (
-                <span className="rounded-md bg-[#f1f5f9] px-3 py-1.5 text-xs text-[#94a3b8]">
+                <span className="rounded-md bg-[#f5f3ee] px-3 py-1.5 text-xs text-[#8c8982]">
                   未发布 / Unavailable
                 </span>
               )}
@@ -81,7 +81,7 @@ export default function AssessmentReportPaywall({
         })}
       </div>
 
-      <p className="mt-4 text-xs text-[#94a3b8]">
+      <p className="mt-4 text-xs text-[#8c8982]">
         付费下载功能即将上线；当前点击「付费下载」将转至定制服务咨询。价格以 {PRICE_ANCHORS.verification} 等公开价单为准。
       </p>
     </section>

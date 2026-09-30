@@ -206,7 +206,7 @@ export default function SupplierEditor({
 
   const L = dict.labels;
   const inputClass =
-    "w-full rounded-md border border-[#e2e8f0] px-3 py-2 text-sm text-[#0f172a] focus:border-[#0f4c81] focus:outline-none";
+    "w-full rounded-md border border-[#ebe8e1] px-3 py-2 text-sm text-[#171717] focus:border-[#171717] focus:outline-none";
   // 发布闸门：优先用服务端算好的完整度快照（同一份 lib/supplierCompleteness 口径）；
   // 没有快照时退回旧行为（只看是否已授权）。
   // 「已在架上」的行不再追索授权（历史 legacy 行 profile_authorized=null），与 API 一致。
@@ -228,37 +228,37 @@ export default function SupplierEditor({
     <div className="space-y-6">
       <form onSubmit={handleSubmit} className="card space-y-5 p-6">
         {/* 公司信息 */}
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.legalName}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.legalName}</span>
             <input className={`mt-1 ${inputClass}`} value={v.legal_name} onChange={(e) => set("legal_name", e.target.value)} />
           </label>
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.englishName}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.englishName}</span>
             <input className={`mt-1 ${inputClass}`} value={v.english_name} onChange={(e) => set("english_name", e.target.value)} />
           </label>
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.companyType}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.companyType}</span>
             <input className={`mt-1 ${inputClass}`} value={v.company_type} onChange={(e) => set("company_type", e.target.value)} />
           </label>
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.registrationNumber}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.registrationNumber}</span>
             <input className={`mt-1 ${inputClass}`} value={v.registration_number} onChange={(e) => set("registration_number", e.target.value)} />
           </label>
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.website}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.website}</span>
             <input className={`mt-1 ${inputClass}`} value={v.website} onChange={(e) => set("website", e.target.value)} />
           </label>
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.industry}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.industry}</span>
             <input className={`mt-1 ${inputClass}`} value={v.industry_code} onChange={(e) => set("industry_code", e.target.value)} />
           </label>
         </div>
 
         {/* 地址 */}
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.country}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.country}</span>
             <select className={`mt-1 ${inputClass}`} value={v.country_code} onChange={(e) => set("country_code", e.target.value)}>
               <option value="">—</option>
               {countryOptions.map((c) => (
@@ -269,19 +269,19 @@ export default function SupplierEditor({
             </select>
           </label>
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.province}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.province}</span>
             <input className={`mt-1 ${inputClass}`} value={v.province} onChange={(e) => set("province", e.target.value)} />
           </label>
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.city}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.city}</span>
             <input className={`mt-1 ${inputClass}`} value={v.city} onChange={(e) => set("city", e.target.value)} />
           </label>
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.address}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.address}</span>
             <input className={`mt-1 ${inputClass}`} value={v.address} onChange={(e) => set("address", e.target.value)} />
           </label>
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">
+            <span className="text-sm font-medium text-[#171717]">
               {L.cluster ?? "Manufacturing Cluster / 产业带"}
             </span>
             <select
@@ -300,102 +300,102 @@ export default function SupplierEditor({
         </div>
 
         {/* 经营信息 */}
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.businessType}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.businessType}</span>
             <input className={`mt-1 ${inputClass}`} value={v.business_type} onChange={(e) => set("business_type", e.target.value)} />
           </label>
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.established}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.established}</span>
             <input type="number" className={`mt-1 ${inputClass}`} value={v.established} onChange={(e) => set("established", e.target.value)} />
           </label>
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.employees}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.employees}</span>
             <input className={`mt-1 ${inputClass}`} value={v.employees} onChange={(e) => set("employees", e.target.value)} />
           </label>
         </div>
 
         {/* 产品 / 出口 */}
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.products}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.products}</span>
             <input className={`mt-1 ${inputClass}`} value={v.main_products} onChange={(e) => set("main_products", e.target.value)} placeholder="Comma separated" />
           </label>
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.exportMarkets}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.exportMarkets}</span>
             <input className={`mt-1 ${inputClass}`} value={v.export_markets} onChange={(e) => set("export_markets", e.target.value)} placeholder="Comma separated" />
           </label>
         </div>
 
         {/* 联系方式（FREE 层，注册买家可见） */}
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.contactPerson}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.contactPerson}</span>
             <input className={`mt-1 ${inputClass}`} value={v.contact_person} onChange={(e) => set("contact_person", e.target.value)} />
           </label>
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.contactEmail}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.contactEmail}</span>
             <input className={`mt-1 ${inputClass}`} value={v.contact_email} onChange={(e) => set("contact_email", e.target.value)} />
           </label>
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.phone}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.phone}</span>
             <input className={`mt-1 ${inputClass}`} value={v.phone} onChange={(e) => set("phone", e.target.value)} />
           </label>
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.whatsapp}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.whatsapp}</span>
             <input className={`mt-1 ${inputClass}`} value={v.whatsapp} onChange={(e) => set("whatsapp", e.target.value)} />
           </label>
         </div>
 
         {/* 公司描述 */}
         <label className="block">
-          <span className="text-sm font-medium text-[#0f172a]">{L.companyDescription}</span>
+          <span className="text-sm font-medium text-[#171717]">{L.companyDescription}</span>
           <textarea className={`mt-1 ${inputClass}`} rows={3} value={v.company_description} onChange={(e) => set("company_description", e.target.value)} />
         </label>
 
         {/* 核验 / 风险（高信任字段，谨慎填写） */}
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.verification}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.verification}</span>
             <input className={`mt-1 ${inputClass}`} value={v.verification_status} onChange={(e) => set("verification_status", e.target.value)} />
           </label>
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.auditStatus}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.auditStatus}</span>
             <input className={`mt-1 ${inputClass}`} value={v.audit_status} onChange={(e) => set("audit_status", e.target.value)} />
           </label>
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.riskScore}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.riskScore}</span>
             <input type="number" min={0} max={100} className={`mt-1 ${inputClass}`} value={v.risk_score} onChange={(e) => set("risk_score", e.target.value)} />
-            <span className="mt-1 block text-xs text-[#94a3b8]">{dict.riskHint}</span>
+            <span className="mt-1 block text-xs text-[#8c8982]">{dict.riskHint}</span>
           </label>
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.inspectionHistory}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.inspectionHistory}</span>
             <input type="number" min={0} className={`mt-1 ${inputClass}`} value={v.inspection_history} onChange={(e) => set("inspection_history", e.target.value)} />
           </label>
         </div>
 
         {/* 访问层 + 发布 */}
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <label className="block">
-            <span className="text-sm font-medium text-[#0f172a]">{L.accessTier}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.accessTier}</span>
             <select className={`mt-1 ${inputClass}`} value={v.access_tier} onChange={(e) => set("access_tier", e.target.value as "public" | "free" | "paid")}>
               <option value="public">{dict.tierPublic}</option>
               <option value="free">{dict.tierFree}</option>
               <option value="paid">{dict.tierPaid}</option>
             </select>
-            <span className="mt-1 block text-xs text-[#94a3b8]">{dict.tierHint}</span>
+            <span className="mt-1 block text-xs text-[#8c8982]">{dict.tierHint}</span>
           </label>
           <label className="flex items-center gap-2 pt-6">
             <input type="checkbox" className="h-4 w-4" checked={v.is_published} onChange={(e) => set("is_published", e.target.checked)} />
-            <span className="text-sm font-medium text-[#0f172a]">{L.published}</span>
+            <span className="text-sm font-medium text-[#171717]">{L.published}</span>
           </label>
         </div>
 
-        <div className="flex items-center gap-4 border-t border-[#e2e8f0] pt-4">
+        <div className="flex items-center gap-4 border-t border-[#ebe8e1] pt-4">
           <button type="submit" disabled={status === "saving"} className="btn btn-primary disabled:opacity-70">
             {status === "saving" ? dict.saving : dict.save}
           </button>
-          {status === "saved" && <span className="text-sm text-[#0f4c81]">{dict.saved}</span>}
+          {status === "saved" && <span className="text-sm text-[#171717]">{dict.saved}</span>}
           {status === "error" && <span className="text-sm text-[#d4232a]">{dict.error}</span>}
         </div>
       </form>
@@ -422,7 +422,7 @@ export default function SupplierEditor({
           >
             {dict.unpublish}
           </button>
-          {pubStatus === "done" && <span className="text-sm text-[#0f4c81]">{dict.saved}</span>}
+          {pubStatus === "done" && <span className="text-sm text-[#171717]">{dict.saved}</span>}
           {pubStatus === "error" && pubError && <span className="text-sm text-[#d4232a]">{pubError}</span>}
         </div>
 
@@ -443,42 +443,42 @@ export default function SupplierEditor({
 
       {/* Authorization 区块（只读历史元数据） */}
       <div className="card space-y-3 p-6">
-        <h2 className="text-lg font-bold text-[#0f172a]">{dict.authorizedTitle}</h2>
-        <dl className="grid gap-x-8 gap-y-2 text-sm sm:grid-cols-2">
+        <h2 className="text-lg font-bold text-[#171717]">{dict.authorizedTitle}</h2>
+        <dl className="grid grid-cols-1 gap-x-8 gap-y-2 text-sm sm:grid-cols-2">
           <div className="flex justify-between gap-3 border-b border-[#eef2f7] py-1.5">
-            <dt className="text-[#64748b]">{L.authorized}</dt>
-            <dd className="font-medium text-[#0f172a]">
+            <dt className="text-[#6d6b66]">{L.authorized}</dt>
+            <dd className="font-medium text-[#171717]">
               {auth.profileAuthorized === true ? L.authorized : auth.profileAuthorized === false ? "No" : "—"}
             </dd>
           </div>
           <div className="flex justify-between gap-3 border-b border-[#eef2f7] py-1.5">
-            <dt className="text-[#64748b]">{L.authorizedBy}</dt>
-            <dd className="font-medium text-[#0f172a]">{authText(auth.authorizedBy)}</dd>
+            <dt className="text-[#6d6b66]">{L.authorizedBy}</dt>
+            <dd className="font-medium text-[#171717]">{authText(auth.authorizedBy)}</dd>
           </div>
           <div className="flex justify-between gap-3 border-b border-[#eef2f7] py-1.5">
-            <dt className="text-[#64748b]">{L.authorizedAt}</dt>
-            <dd className="font-medium text-[#0f172a]">{authText(auth.authorizedAt)}</dd>
+            <dt className="text-[#6d6b66]">{L.authorizedAt}</dt>
+            <dd className="font-medium text-[#171717]">{authText(auth.authorizedAt)}</dd>
           </div>
           <div className="flex justify-between gap-3 border-b border-[#eef2f7] py-1.5">
-            <dt className="text-[#64748b]">{L.consentVersion}</dt>
-            <dd className="font-medium text-[#0f172a]">{authText(auth.consentVersion)}</dd>
+            <dt className="text-[#6d6b66]">{L.consentVersion}</dt>
+            <dd className="font-medium text-[#171717]">{authText(auth.consentVersion)}</dd>
           </div>
           <div className="flex justify-between gap-3 border-b border-[#eef2f7] py-1.5">
-            <dt className="text-[#64748b]">{L.consentAt}</dt>
-            <dd className="font-medium text-[#0f172a]">{authText(auth.consentAt)}</dd>
+            <dt className="text-[#6d6b66]">{L.consentAt}</dt>
+            <dd className="font-medium text-[#171717]">{authText(auth.consentAt)}</dd>
           </div>
           <div className="flex justify-between gap-3 border-b border-[#eef2f7] py-1.5">
-            <dt className="text-[#64748b]">{L.consentIp}</dt>
-            <dd className="font-mono text-xs font-medium text-[#0f172a]">{authText(auth.consentIp)}</dd>
+            <dt className="text-[#6d6b66]">{L.consentIp}</dt>
+            <dd className="font-mono text-xs font-medium text-[#171717]">{authText(auth.consentIp)}</dd>
           </div>
           <div className="sm:col-span-2 flex justify-between gap-3 border-b border-[#eef2f7] py-1.5">
-            <dt className="text-[#64748b]">{L.consentUserAgent}</dt>
-            <dd className="max-w-[60%] truncate text-xs font-medium text-[#0f172a]" title={auth.consentUserAgent ?? ""}>
+            <dt className="text-[#6d6b66]">{L.consentUserAgent}</dt>
+            <dd className="max-w-[60%] truncate text-xs font-medium text-[#171717]" title={auth.consentUserAgent ?? ""}>
               {authText(auth.consentUserAgent)}
             </dd>
           </div>
         </dl>
-        <p className="text-xs text-[#64748b]">{dict.consentHistoryNote}</p>
+        <p className="text-xs text-[#6d6b66]">{dict.consentHistoryNote}</p>
       </div>
     </div>
   );

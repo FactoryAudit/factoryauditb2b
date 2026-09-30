@@ -56,40 +56,40 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         ]}
       />
 
-      <nav className="mb-6 text-sm text-[#64748b]">
+      <nav className="mb-6 text-sm text-[#6d6b66]">
         <Link href={lp("/")} className="hover:underline">
           {t.common.ui.home}
         </Link>{" "}
         / {a.h1}
       </nav>
 
-      <h1 className="text-3xl font-bold text-[#0f172a]">{a.h1}</h1>
-      <p className="mt-3 max-w-2xl text-lg text-[#475569]">{a.lead}</p>
+      <h1 className="text-3xl font-bold text-[#171717]">{a.h1}</h1>
+      <p className="mt-3 max-w-2xl text-lg text-[#3f4650]">{a.lead}</p>
 
       <section className="mt-10">
-        <h2 className="text-xl font-semibold text-[#0f172a]">{a.statsTitle}</h2>
+        <h2 className="text-xl font-semibold text-[#171717]">{a.statsTitle}</h2>
         <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-4">
           {a.stats.map((s) => (
             <div key={s.label} className="card p-4 text-center">
-              <div className="text-2xl font-extrabold text-[#0f4c81]">{s.value}</div>
-              <div className="mt-1 text-xs text-[#64748b]">{s.label}</div>
+              <div className="text-2xl font-extrabold text-[#171717]">{s.value}</div>
+              <div className="mt-1 text-xs text-[#6d6b66]">{s.label}</div>
             </div>
           ))}
         </div>
       </section>
 
       <section className="mt-12">
-        <h2 className="text-xl font-semibold text-[#0f172a]">{a.storyTitle}</h2>
-        <p className="mt-3 max-w-3xl leading-relaxed text-[#475569]">{a.storyBody}</p>
+        <h2 className="text-xl font-semibold text-[#171717]">{a.storyTitle}</h2>
+        <p className="mt-3 max-w-3xl leading-relaxed text-[#3f4650]">{a.storyBody}</p>
       </section>
 
       <section className="mt-12">
-        <h2 className="text-xl font-semibold text-[#0f172a]">{a.valuesTitle}</h2>
-        <div className="mt-4 grid gap-4 md:grid-cols-2">
+        <h2 className="text-xl font-semibold text-[#171717]">{a.valuesTitle}</h2>
+        <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
           {a.values.map((v) => (
             <div key={v.title} className="card p-5">
-              <div className="font-semibold text-[#0f172a]">{v.title}</div>
-              <p className="mt-2 text-sm leading-relaxed text-[#475569]">{v.desc}</p>
+              <div className="font-semibold text-[#171717]">{v.title}</div>
+              <p className="mt-2 text-sm leading-relaxed text-[#3f4650]">{v.desc}</p>
             </div>
           ))}
         </div>
@@ -97,13 +97,13 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
       {/* 公司身份：品牌名 ≠ 法律主体，且未配置时不渲染任何公司信息 */}
       <section className="mt-12">
-        <h2 className="text-xl font-semibold text-[#0f172a]">{t.trust.operatesTitle}</h2>
-        <p className="mt-3 max-w-3xl leading-relaxed text-[#475569]">
+        <h2 className="text-xl font-semibold text-[#171717]">{t.trust.operatesTitle}</h2>
+        <p className="mt-3 max-w-3xl leading-relaxed text-[#3f4650]">
           {trustConfigured
             ? t.trust.operatesBody.replace("{entity}", trustEntity)
             : t.trust.operatesNotConfigured}
         </p>
-        <p className="mt-2 max-w-3xl text-sm text-[#64748b]">{t.trust.scopeBody}</p>
+        <p className="mt-2 max-w-3xl text-sm text-[#6d6b66]">{t.trust.scopeBody}</p>
         <div className="mt-4 flex flex-wrap items-center gap-3">
           <Link href={lp("/trust")} className="btn btn-outline">
             {t.footer.trustCenter}
@@ -111,9 +111,9 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         </div>
       </section>
 
-      <section className="mt-12 rounded-lg bg-[#f1f5f9] p-6">
-        <h2 className="font-semibold text-[#0f172a]">{a.ctaTitle}</h2>
-        <p className="mt-1 text-sm text-[#475569]">{a.ctaDesc}</p>
+      <section className="mt-12 rounded-lg bg-[#f5f3ee] p-6">
+        <h2 className="font-semibold text-[#171717]">{a.ctaTitle}</h2>
+        <p className="mt-1 text-sm text-[#3f4650]">{a.ctaDesc}</p>
         <Link href={lp("/custom-services")} className="btn btn-primary mt-4 inline-block">
           {a.ctaButton}
         </Link>

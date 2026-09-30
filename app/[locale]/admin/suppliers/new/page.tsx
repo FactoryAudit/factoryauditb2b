@@ -27,7 +27,7 @@ export default async function AdminSupplierNewPage({ params }: Props) {
     <div>
       <Link
         href={p("/admin/suppliers")}
-        className="text-sm text-[#0f4c81] hover:underline"
+        className="text-sm text-[#171717] hover:underline"
       >
         ← {a.backToList}
       </Link>

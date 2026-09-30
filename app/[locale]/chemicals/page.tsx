@@ -55,7 +55,7 @@ export default async function ChemicalsIndexPage({ params }: Props) {
     <main className="container py-12">
       <JsonLd data={jsonLd} />
 
-      <nav className="mb-4 text-sm text-[#64748b]">
+      <nav className="mb-4 text-sm text-[#6d6b66]">
         <Link href={lp("/")} className="hover:underline">
           {t.common.ui.home}
         </Link>{" "}
@@ -63,26 +63,26 @@ export default async function ChemicalsIndexPage({ params }: Props) {
       </nav>
 
       <section className="max-w-3xl mb-10">
-        <h1 className="text-4xl font-extrabold text-[#0f172a]">{c.metaTitle}</h1>
-        <p className="text-[#64748b] mt-3 text-lg">{c.lead}</p>
+        <h1 className="text-4xl font-extrabold text-[#171717]">{c.metaTitle}</h1>
+        <p className="text-[#6d6b66] mt-3 text-lg">{c.lead}</p>
       </section>
 
-      <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {CHEMICALS.map((x) => (
           <div key={x.slug} className="card p-6 flex flex-col">
-            <h2 className="text-xl font-bold text-[#0f172a]">
+            <h2 className="text-xl font-bold text-[#171717]">
               <Link href={lp(`/chemicals/${x.slug}`)} className="hover:underline">
                 {pickZhPair(locale, x.nameEn, x.nameZh)}
               </Link>
             </h2>
-            <div className="mt-1 text-sm text-[#64748b]">
+            <div className="mt-1 text-sm text-[#6d6b66]">
               {c.casLabel} {x.cas}
             </div>
-            <p className="mt-3 text-sm text-[#475569] flex-1">
+            <p className="mt-3 text-sm text-[#3f4650] flex-1">
               {pickZhPair(locale, x.application.en, x.application.zh)}
             </p>
             <div className="mt-4">
-              <div className="text-xs font-semibold uppercase text-[#64748b]">
+              <div className="text-xs font-semibold uppercase text-[#6d6b66]">
                 {c.downstreamLabel}
               </div>
               <div className="mt-1 flex flex-wrap gap-2">
@@ -90,7 +90,7 @@ export default async function ChemicalsIndexPage({ params }: Props) {
                   <Link
                     key={code}
                     href={lp(`/industry/${code}`)}
-                    className="rounded bg-[#eef2f7] px-2 py-0.5 text-xs text-[#0f4c81] hover:underline"
+                    className="rounded bg-[#eef2f7] px-2 py-0.5 text-xs text-[#171717] hover:underline"
                   >
                     {industryName(code)}
                   </Link>

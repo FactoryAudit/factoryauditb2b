@@ -73,11 +73,11 @@ export default async function StandardReportPage({ params }: Props) {
     <main className="container max-w-4xl py-12" data-track-page="standard_report">
       <JsonLd data={jsonLd} />
 
-      <span className="text-sm font-semibold uppercase tracking-wide text-[#0f4c81]">
+      <span className="text-sm font-semibold uppercase tracking-wide text-[#171717]">
         {s.badge}
       </span>
-      <h1 className="mt-2 text-4xl font-extrabold text-[#0f172a]">{s.h1}</h1>
-      <p className="mt-3 text-lg text-[#64748b]">{s.lead}</p>
+      <h1 className="mt-2 text-4xl font-extrabold text-[#171717]">{s.h1}</h1>
+      <p className="mt-3 text-lg text-[#6d6b66]">{s.lead}</p>
 
       {/* 免注册声明：先把「不用注册也能读完」说清楚，再谈下载 */}
       <div className="mt-6 rounded-md border border-[#1f7a36] bg-[#e8f5ea] px-4 py-3 text-sm font-medium text-[#1f7a36]">
@@ -85,13 +85,13 @@ export default async function StandardReportPage({ params }: Props) {
       </div>
 
       {/* 目录（锚点跳转到正文各章节） */}
-      <nav className="mt-6 rounded-lg border border-[#e2e8f0] bg-[#f7f9fc] p-5">
-        <div className="text-sm font-bold text-[#0f172a]">{s.tocTitle}</div>
-        <ol className="mt-3 grid gap-x-6 gap-y-1 text-sm sm:grid-cols-2">
+      <nav className="mt-6 rounded-lg border border-[#ebe8e1] bg-[#fbfaf7] p-5">
+        <div className="text-sm font-bold text-[#171717]">{s.tocTitle}</div>
+        <ol className="mt-3 grid grid-cols-1 gap-x-6 gap-y-1 text-sm sm:grid-cols-2">
           {SECTIONS.map((sec) => (
             <li key={sec.no}>
-              <a href={`#s${sec.no}`} className="text-[#0f4c81] hover:underline">
-                <span className="text-[#94a3b8]">{sec.no}</span> {tr(sec.title)}
+              <a href={`#s${sec.no}`} className="text-[#171717] hover:underline">
+                <span className="text-[#8c8982]">{sec.no}</span> {tr(sec.title)}
               </a>
             </li>
           ))}
@@ -104,9 +104,9 @@ export default async function StandardReportPage({ params }: Props) {
       </div>
 
       {/* ===== 下载门禁 ===== */}
-      <section id="download" className="mt-10 card bg-[#f7f9fc] p-6 md:p-8">
-        <h2 className="text-xl font-bold text-[#0f172a]">{s.downloadTitle}</h2>
-        <p className="mt-1 text-sm text-[#475569]">{s.downloadLead}</p>
+      <section id="download" className="mt-10 card bg-[#fbfaf7] p-6 md:p-8">
+        <h2 className="text-xl font-bold text-[#171717]">{s.downloadTitle}</h2>
+        <p className="mt-1 text-sm text-[#3f4650]">{s.downloadLead}</p>
         <div className="mt-4">
           <StandardReportDownloadForm
             defaultLang={lang}
@@ -132,8 +132,8 @@ export default async function StandardReportPage({ params }: Props) {
 
       {/* CTA */}
       <section className="mt-10 card p-8">
-        <h2 className="text-xl font-bold text-[#0f172a]">{s.ctaTitle}</h2>
-        <p className="mt-2 text-[#475569]">{s.ctaLead}</p>
+        <h2 className="text-xl font-bold text-[#171717]">{s.ctaTitle}</h2>
+        <p className="mt-2 text-[#3f4650]">{s.ctaLead}</p>
         <div className="mt-5 flex flex-wrap gap-3">
           <Link href={p("/services/supplier-verification")} className="btn btn-primary">
             {s.ctaPrimary}

@@ -51,16 +51,16 @@ export default async function AccountSavedPage({
   return (
     <main className="container max-w-4xl py-12">
       {/* 返回账号总览。子页面之间也要能互相跳，否则用户只能靠浏览器后退 */}
-      <nav aria-label="Breadcrumb" className="text-sm text-[#64748b]">
-        <Link href={p("/account")} className="hover:text-[#0f4c81]">
+      <nav aria-label="Breadcrumb" className="text-sm text-[#6d6b66]">
+        <Link href={p("/account")} className="hover:text-[#171717]">
           {a.navOverview}
         </Link>
         <span className="mx-2">/</span>
-        <span className="text-[#0f172a]">{a.navSaved}</span>
+        <span className="text-[#171717]">{a.navSaved}</span>
       </nav>
 
-      <h1 className="mt-3 text-3xl font-bold text-[#0f172a]">{a.savedTitle}</h1>
-      <p className="mt-2 text-[#64748b]">{a.savedLead}</p>
+      <h1 className="mt-3 text-3xl font-bold text-[#171717]">{a.savedTitle}</h1>
+      <p className="mt-2 text-[#6d6b66]">{a.savedLead}</p>
 
       <div className="mt-8">
         <AccountGate

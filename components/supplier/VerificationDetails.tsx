@@ -74,53 +74,53 @@ export default function VerificationDetails({
 
   return (
     <section className="mt-8 card p-6" id="verification-details" data-verification-panel={badgeState}>
-      <h2 className="text-xl font-bold text-[#0f172a]">{dict.detailsTitle}</h2>
+      <h2 className="text-xl font-bold text-[#171717]">{dict.detailsTitle}</h2>
 
       {!active ? (
-        <p className="mt-3 text-sm text-[#64748b]">
+        <p className="mt-3 text-sm text-[#6d6b66]">
           {history.length === 0 ? dict.historyEmpty : dict.statusExpired}
         </p>
       ) : (
-        <dl className="mt-4 grid sm:grid-cols-2 gap-x-8 gap-y-2 text-sm">
+        <dl className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-sm">
           <div className="flex justify-between gap-3 border-b border-[#eef2f7] py-1.5">
-            <dt className="text-[#64748b]">{dict.labelId}</dt>
-            <dd className="font-mono font-medium text-[#0f172a]">
+            <dt className="text-[#6d6b66]">{dict.labelId}</dt>
+            <dd className="font-mono font-medium text-[#171717]">
               {active.verification_id}
             </dd>
           </div>
           <div className="flex justify-between gap-3 border-b border-[#eef2f7] py-1.5">
-            <dt className="text-[#64748b]">{dict.labelMethod}</dt>
-            <dd className="text-right font-medium text-[#0f172a]">
+            <dt className="text-[#6d6b66]">{dict.labelMethod}</dt>
+            <dd className="text-right font-medium text-[#171717]">
               {methodText(active.verification_type, dict)}
             </dd>
           </div>
           <div className="flex justify-between gap-3 border-b border-[#eef2f7] py-1.5">
-            <dt className="text-[#64748b]">{dict.labelVerifiedAt}</dt>
-            <dd className="font-medium text-[#0f172a]">
+            <dt className="text-[#6d6b66]">{dict.labelVerifiedAt}</dt>
+            <dd className="font-medium text-[#171717]">
               {dateOnly(active.verified_at) ?? "—"}
             </dd>
           </div>
           <div className="flex justify-between gap-3 border-b border-[#eef2f7] py-1.5">
-            <dt className="text-[#64748b]">{dict.labelExpiresAt}</dt>
-            <dd className={`font-medium ${expired ? "text-[#b45309]" : "text-[#0f172a]"}`}>
+            <dt className="text-[#6d6b66]">{dict.labelExpiresAt}</dt>
+            <dd className={`font-medium ${expired ? "text-[#b45309]" : "text-[#171717]"}`}>
               {dateOnly(active.expires_at) ?? "—"}
             </dd>
           </div>
           <div className="flex justify-between gap-3 border-b border-[#eef2f7] py-1.5">
-            <dt className="text-[#64748b]">{dict.labelStatus}</dt>
-            <dd className="font-medium text-[#0f172a]">
+            <dt className="text-[#6d6b66]">{dict.labelStatus}</dt>
+            <dd className="font-medium text-[#171717]">
               {expired ? dict.stateExpired : stateText(active.status, dict)}
             </dd>
           </div>
           {scope.length > 0 && (
             <div className="sm:col-span-2 py-1.5">
-              <dt className="text-[#64748b] mb-1">{dict.labelScope}</dt>
+              <dt className="text-[#6d6b66] mb-1">{dict.labelScope}</dt>
               <dd>
                 <ul className="flex flex-wrap gap-2">
                   {scope.map((s) => (
                     <li
                       key={s}
-                      className="rounded-full border border-[#cbd5e1] px-2.5 py-0.5 text-xs text-[#475569]"
+                      className="rounded-full border border-[#ddd9d0] px-2.5 py-0.5 text-xs text-[#3f4650]"
                     >
                       {s}
                     </li>
@@ -140,14 +140,14 @@ export default function VerificationDetails({
       {/* 验证历史：过期/撤销的记录保留在这里，不因失效而被抹掉 */}
       <details className="mt-4 group">
         <summary
-          className="cursor-pointer select-none text-sm font-semibold text-[#0f4c81] hover:underline"
+          className="cursor-pointer select-none text-sm font-semibold text-[#171717] hover:underline"
           data-track={ANALYTICS_EVENTS.verificationDetailsView}
         >
           {dict.historyTitle}
           {history.length > 0 ? ` (${history.length})` : ""}
         </summary>
         {history.length === 0 ? (
-          <p className="mt-2 text-sm text-[#94a3b8]">{dict.historyEmpty}</p>
+          <p className="mt-2 text-sm text-[#8c8982]">{dict.historyEmpty}</p>
         ) : (
           <ul className="mt-3 space-y-2 text-sm">
             {history.map((r) => (
@@ -155,14 +155,14 @@ export default function VerificationDetails({
                 key={r.id}
                 className="flex flex-wrap items-baseline justify-between gap-2 border-b border-[#eef2f7] pb-2"
               >
-                <span className="font-mono text-[#0f172a]">{r.verification_id}</span>
-                <span className="text-[#475569]">{methodText(r.verification_type, dict)}</span>
-                <span className="text-[#64748b]">
+                <span className="font-mono text-[#171717]">{r.verification_id}</span>
+                <span className="text-[#3f4650]">{methodText(r.verification_type, dict)}</span>
+                <span className="text-[#6d6b66]">
                   {dateOnly(r.verified_at) ?? "—"} → {dateOnly(r.expires_at) ?? "—"}
                 </span>
                 <span
                   className={
-                    r.status === "ACTIVE" ? "text-[#15803d]" : "text-[#94a3b8]"
+                    r.status === "ACTIVE" ? "text-[#15803d]" : "text-[#8c8982]"
                   }
                 >
                   {stateText(r.status, dict)}

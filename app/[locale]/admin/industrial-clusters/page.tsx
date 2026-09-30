@@ -111,14 +111,14 @@ export default async function AdminIndustrialClustersPage({ params }: Props) {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-[#0f172a]">
+      <h1 className="text-2xl font-bold text-[#171717]">
         {locale === "zh" || locale === "zh-TW" ? "产业带管理" : "Industrial Clusters"}
       </h1>
 
       <IndustrialClusterManager rows={rows} dict={dict} />
 
-      <p className="mt-4 text-xs text-[#64748b]">
-        <a href={p("/admin")} className="text-[#0f4c81] hover:underline">
+      <p className="mt-4 text-xs text-[#6d6b66]">
+        <a href={p("/admin")} className="text-[#171717] hover:underline">
           ← {a.navOverview}
         </a>
       </p>

@@ -24,19 +24,19 @@ export default function SupplierScorecardTool({ ui }: { ui: ScorecardUi }) {
   return (
     <div className="card p-6 max-w-3xl">
       <div className="flex items-center justify-between mb-4">
-        <span className="text-3xl font-extrabold text-[#0f4c81]">{ui.overallLabel}: {overall}</span>
-        <span className="text-xs text-[#64748b]">{ui.totalWeightLabel}: {totalWeight}%</span>
+        <span className="text-3xl font-extrabold text-[#171717]">{ui.overallLabel}: {overall}</span>
+        <span className="text-xs text-[#6d6b66]">{ui.totalWeightLabel}: {totalWeight}%</span>
       </div>
       <div className="space-y-3">
         {KEYS.map((k) => (
           <div key={k} className="grid grid-cols-3 gap-3 items-center">
             <label className="text-sm font-medium">{ui.criteria[k]}</label>
             <div className="flex items-center gap-2">
-              <span className="text-xs text-[#64748b] w-12">{ui.weightLabel}</span>
+              <span className="text-xs text-[#6d6b66] w-12">{ui.weightLabel}</span>
               <input className="input" type="number" value={weights[k]} onChange={(e) => setWeights((w) => ({ ...w, [k]: Number(e.target.value) || 0 }))} />
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-xs text-[#64748b] w-10">{ui.scoreLabel}</span>
+              <span className="text-xs text-[#6d6b66] w-10">{ui.scoreLabel}</span>
               <input className="input" type="number" value={scores[k]} onChange={(e) => setScores((s) => ({ ...s, [k]: Number(e.target.value) || 0 }))} />
             </div>
           </div>

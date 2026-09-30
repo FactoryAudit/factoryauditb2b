@@ -25,14 +25,14 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
 
   return (
     <div className="container py-12 max-w-3xl">
-      <h1 className="text-3xl font-extrabold text-[#0f172a]">{l.privacyTitle}</h1>
-      <p className="text-sm text-[#94a3b8] mt-1 mb-6">{l.privacyUpdated}</p>
-      <p className="text-[#475569] leading-relaxed mb-8">{l.privacyIntro}</p>
+      <h1 className="text-3xl font-extrabold text-[#171717]">{l.privacyTitle}</h1>
+      <p className="text-sm text-[#8c8982] mt-1 mb-6">{l.privacyUpdated}</p>
+      <p className="text-[#3f4650] leading-relaxed mb-8">{l.privacyIntro}</p>
       <div className="space-y-6">
         {l.privacySections.map((s, i) => (
           <section key={i}>
-            <h2 className="text-lg font-bold text-[#0f4c81] mb-1">{s.h}</h2>
-            <p className="text-[#475569] leading-relaxed">{s.b}</p>
+            <h2 className="text-lg font-bold text-[#171717] mb-1">{s.h}</h2>
+            <p className="text-[#3f4650] leading-relaxed">{s.b}</p>
           </section>
         ))}
       </div>

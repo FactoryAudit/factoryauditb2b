@@ -34,8 +34,8 @@ export default async function OrderPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12">
-      <h1 className="text-2xl font-bold text-[#0f172a]">{t.order.title}</h1>
-      <p className="mt-2 text-sm text-[#64748b]">{t.order.lead}</p>
+      <h1 className="text-2xl font-bold text-[#171717]">{t.order.title}</h1>
+      <p className="mt-2 text-sm text-[#6d6b66]">{t.order.lead}</p>
 
       <OrderForm
         locale={locale}

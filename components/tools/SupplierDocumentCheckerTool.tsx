@@ -29,17 +29,17 @@ export default function SupplierDocumentCheckerTool({ ui }: { ui: DocumentChecke
   }
 
   return (
-    <div className="grid md:grid-cols-2 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div className="card p-6 space-y-3">
         <label className="text-sm font-medium">{ui.inputLabel}</label>
         <textarea className="textarea h-64" value={text} onChange={(e) => setText(e.target.value)} />
         <button className="btn btn-primary w-full" onClick={check}>{ui.cta}</button>
       </div>
       <div className="card p-6">
-        {!checks ? <div className="text-[#94a3b8] text-sm">{ui.empty}</div> : (
+        {!checks ? <div className="text-[#8c8982] text-sm">{ui.empty}</div> : (
           <div className="space-y-2">
             {checks.map((c, i) => (
-              <div key={i} className="flex justify-between border-b border-[#e2e8f0] py-2 text-sm">
+              <div key={i} className="flex justify-between border-b border-[#ebe8e1] py-2 text-sm">
                 <span className="font-medium">{c.name}</span>
                 <span className={c.status === MISSING ? "text-[#c0392b]" : c.status === REVIEW ? "text-[#8a5410]" : "text-[#1f7a36]"}>{c.status || c.note}</span>
               </div>

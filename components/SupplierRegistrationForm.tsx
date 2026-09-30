@@ -184,7 +184,7 @@ export default function SupplierRegistrationForm({ t, success, error }: Props) {
         <div className="text-2xl mb-2">✓</div>
         <p className="font-semibold text-[#1f7a36]">{success}</p>
         {referenceId && (
-          <p className="text-xs text-[#64748b] mt-2 break-all">Reference: {referenceId}</p>
+          <p className="text-xs text-[#6d6b66] mt-2 break-all">Reference: {referenceId}</p>
         )}
       </div>
     );
@@ -216,17 +216,17 @@ export default function SupplierRegistrationForm({ t, success, error }: Props) {
           const keys = SECTION_FIELDS[section];
           return (
             <fieldset key={section} className="space-y-4">
-              <legend className="text-lg font-bold text-[#0f4c81] pb-2 border-b border-[#e2e8f0] w-full">
+              <legend className="text-lg font-bold text-[#171717] pb-2 border-b border-[#ebe8e1] w-full">
                 {t.sections[section]}
               </legend>
-              {keys && <div className="grid md:grid-cols-2 gap-4">{keys.map(renderField)}</div>}
+              {keys && <div className="grid grid-cols-1 md:grid-cols-2 gap-4">{keys.map(renderField)}</div>}
 
               {section === "certificates" && (
                 <div className="space-y-4">
                   {certs.map((row, i) => (
                     <div
                       key={i}
-                      className="grid md:grid-cols-2 gap-3 p-3 rounded-lg border border-[#e2e8f0] bg-[#f8fafc]"
+                      className="grid grid-cols-1 md:grid-cols-2 gap-3 p-3 rounded-lg border border-[#ebe8e1] bg-[#fbfaf7]"
                     >
                       <div>
                         <label className="text-sm font-medium" htmlFor={`cert-name-${i}`}>
@@ -312,7 +312,7 @@ export default function SupplierRegistrationForm({ t, success, error }: Props) {
               )}
 
               {section === "availability" && (
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <label className="flex items-center gap-2 text-sm">
                     <input type="checkbox" name="auditAvailability" value="yes" className="h-4 w-4" />
                     {t.labels.auditAvailability}
@@ -361,7 +361,7 @@ export default function SupplierRegistrationForm({ t, success, error }: Props) {
           );
         })}
 
-        <p className="text-xs text-[#64748b]">{t.privacyNote}</p>
+        <p className="text-xs text-[#6d6b66]">{t.privacyNote}</p>
 
         <button type="submit" disabled={status === "loading"} className="btn btn-primary w-full">
           {status === "loading" ? t.submitting : t.submit}
@@ -379,10 +379,10 @@ export default function SupplierRegistrationForm({ t, success, error }: Props) {
         >
           <div className="card w-full max-w-lg my-8 p-6" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-start justify-between gap-4 mb-3">
-              <h3 className="text-lg font-bold text-[#0f172a]">{t.labels.certHelpTitle}</h3>
+              <h3 className="text-lg font-bold text-[#171717]">{t.labels.certHelpTitle}</h3>
               <button
                 type="button"
-                className="text-[#64748b] text-2xl leading-none"
+                className="text-[#6d6b66] text-2xl leading-none"
                 onClick={() => setHelpOpen(false)}
                 aria-label="Close"
               >
@@ -394,7 +394,7 @@ export default function SupplierRegistrationForm({ t, success, error }: Props) {
               <p className="text-sm text-[#1f7a36]">{t.labels.certHelpSuccess}</p>
             ) : (
               <form onSubmit={handleHelpSubmit} className="space-y-4">
-                <p className="text-sm text-[#64748b]">{t.labels.certHelpLead}</p>
+                <p className="text-sm text-[#6d6b66]">{t.labels.certHelpLead}</p>
                 <div>
                   <label className="text-sm font-medium" htmlFor="certHelpWanted">
                     {t.labels.certHelpWanted}
@@ -420,7 +420,7 @@ export default function SupplierRegistrationForm({ t, success, error }: Props) {
                     onChange={(e) => setHelp({ ...help, company: e.target.value })}
                   />
                 </div>
-                <div className="grid md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div>
                     <label className="text-sm font-medium" htmlFor="certHelpContactName">
                       {t.labels.certHelpContactName}

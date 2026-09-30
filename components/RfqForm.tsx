@@ -150,7 +150,7 @@ export default function RfqForm({
       onFocus={handleFirstTouch}
       className="card p-6 max-w-2xl space-y-4"
     >
-      <div className="grid md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="text-sm font-medium">{t.labels.firstName}</label>
           <input className="input" name="firstName" placeholder={t.labels.firstName} />
@@ -195,7 +195,7 @@ export default function RfqForm({
         />
       </div>
       {/* STEP 12 C2：公开授权勾选项（默认不勾选 —— 未获明确同意绝不公开） */}
-      <label className="flex items-start gap-2 text-sm text-[#475569]">
+      <label className="flex items-start gap-2 text-sm text-[#3f4650]">
         <input
           type="checkbox"
           name="allowPublic"

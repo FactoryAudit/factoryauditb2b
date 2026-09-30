@@ -44,8 +44,8 @@ export default function AccountGate({
   if (loading) {
     return (
       <div className="card p-6" aria-busy="true">
-        <div className="h-4 w-32 bg-[#e2e8f0] rounded animate-pulse" />
-        <div className="h-4 w-56 bg-[#e2e8f0] rounded animate-pulse mt-3" />
+        <div className="h-4 w-32 bg-[#ebe8e1] rounded animate-pulse" />
+        <div className="h-4 w-56 bg-[#ebe8e1] rounded animate-pulse mt-3" />
       </div>
     );
   }
@@ -53,15 +53,15 @@ export default function AccountGate({
   if (!me.authenticated) {
     return (
       <div className="card p-6">
-        <h2 className="font-semibold text-[#0f172a]">{t.signInTitle}</h2>
-        <p className="text-sm text-[#475569] mt-1">{t.signInLead}</p>
+        <h2 className="font-semibold text-[#171717]">{t.signInTitle}</h2>
+        <p className="text-sm text-[#3f4650] mt-1">{t.signInLead}</p>
         <div className="mt-4 flex flex-wrap gap-3">
           <Link href={signInHref} className="btn btn-primary text-sm">
             {t.signInCta}
           </Link>
-          <span className="text-sm text-[#64748b] self-center">
+          <span className="text-sm text-[#6d6b66] self-center">
             {t.noAccount}{" "}
-            <Link href={registerHref} className="text-[#0f4c81] underline">
+            <Link href={registerHref} className="text-[#171717] underline">
               {t.registerCta}
             </Link>
           </span>

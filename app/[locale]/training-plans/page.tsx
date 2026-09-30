@@ -73,25 +73,25 @@ export default async function TrainingPlansPage({ params }: { params: Promise<{ 
       />
 
       <header className="text-center">
-        <h1 className="text-3xl font-bold text-[#0f172a]">{t.trainingPlans.h1}</h1>
-        <p className="text-[#64748b] mt-2 max-w-2xl mx-auto">{t.trainingPlans.lead}</p>
+        <h1 className="text-3xl font-bold text-[#171717]">{t.trainingPlans.h1}</h1>
+        <p className="text-[#6d6b66] mt-2 max-w-2xl mx-auto">{t.trainingPlans.lead}</p>
       </header>
 
       <h2 className="text-xl font-semibold text-center mt-10 mb-1">{t.trainingPlans.plansTitle}</h2>
-      <p className="text-center text-sm text-[#64748b] mb-4">{t.trainingPlans.priceNote}</p>
-      <div className="grid md:grid-cols-3 gap-4">
+      <p className="text-center text-sm text-[#6d6b66] mb-4">{t.trainingPlans.priceNote}</p>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {PLANS.map((p, i) => {
           // 数字来自 COMMERCIAL；无标准价的套餐（Enterprise）字典里不含占位符，原样输出。
           const usd = PLAN_USD[i];
           const priceText = usd == null ? p.price : p.price.replace("{price}", String(usd));
           return (
-            <div key={p.name} className={`card p-6 ${HL[i] ? "border-[#0f4c81] ring-2 ring-[#0f4c81]" : ""}`}>
+            <div key={p.name} className={`card p-6 ${HL[i] ? "border-[#171717] ring-2 ring-[#171717]" : ""}`}>
               <div className="font-bold text-lg">{p.name}</div>
-              <div className="text-2xl font-extrabold text-[#0f4c81] my-2">
+              <div className="text-2xl font-extrabold text-[#171717] my-2">
                 {priceText}
-                {p.period && <span className="text-sm font-normal text-[#64748b]">{p.period}</span>}
+                {p.period && <span className="text-sm font-normal text-[#6d6b66]">{p.period}</span>}
               </div>
-              <ul className="space-y-1 text-sm text-[#475569] mb-4">
+              <ul className="space-y-1 text-sm text-[#3f4650] mb-4">
                 {p.features.map((f) => (
                   <li key={f}>✓ {f}</li>
                 ))}
@@ -109,16 +109,16 @@ export default async function TrainingPlansPage({ params }: { params: Promise<{ 
         <div className="mt-4 max-w-3xl mx-auto divide-y rounded-lg border">
           {FAQ.map((f) => (
             <div key={f.q} className="p-4">
-              <div className="font-medium text-[#0f172a]">{f.q}</div>
-              <p className="text-sm text-[#475569] mt-1">{f.a}</p>
+              <div className="font-medium text-[#171717]">{f.q}</div>
+              <p className="text-sm text-[#3f4650] mt-1">{f.a}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="mt-12 rounded-lg bg-[#f1f5f9] p-6 text-center">
-        <h2 className="font-semibold text-[#0f172a]">{t.trainingPlans.ctaTitle}</h2>
-        <p className="mt-1 text-sm text-[#475569]">{t.trainingPlans.ctaDesc}</p>
+      <section className="mt-12 rounded-lg bg-[#f5f3ee] p-6 text-center">
+        <h2 className="font-semibold text-[#171717]">{t.trainingPlans.ctaTitle}</h2>
+        <p className="mt-1 text-sm text-[#3f4650]">{t.trainingPlans.ctaDesc}</p>
         <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
           <a href={lp("/custom-services")} className="btn btn-primary inline-block">
             {t.trainingPlans.ctaButton}

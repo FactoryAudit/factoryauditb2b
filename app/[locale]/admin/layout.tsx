@@ -70,27 +70,27 @@ export default async function AdminLayout({ children, params }: Props) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#f7f9fc]">
+    <div className="min-h-screen bg-[#fbfaf7]">
       {/* 顶部：返回前台 + 当前管理员 */}
-      <div className="border-b border-[#e2e8f0] bg-white">
+      <div className="border-b border-[#ebe8e1] bg-white">
         <div className="container flex items-center justify-between py-3 text-sm">
-          <span className="font-semibold text-[#0f172a]">{a.title}</span>
+          <span className="font-semibold text-[#171717]">{a.title}</span>
           <div className="flex items-center gap-4">
-            <span className="text-[#64748b]">{admin.email ?? ""}</span>
-            <Link href={p("/")} className="text-[#0f4c81] hover:underline">
+            <span className="text-[#6d6b66]">{admin.email ?? ""}</span>
+            <Link href={p("/")} className="text-[#171717] hover:underline">
               {a.backToSite}
             </Link>
           </div>
         </div>
       </div>
 
-      <div className="container grid gap-8 py-8 lg:grid-cols-[200px_1fr]">
+      <div className="container grid grid-cols-1 gap-8 py-8 lg:grid-cols-[200px_1fr]">
         <nav aria-label={a.navLabel} className="space-y-1">
           {NAV.map((item) => (
             <Link
               key={item.href}
               href={p(item.href)}
-              className="block rounded-md px-3 py-2 text-sm font-medium text-[#0f172a] hover:bg-white"
+              className="block rounded-md px-3 py-2 text-sm font-medium text-[#171717] hover:bg-white"
             >
               {item.label}
             </Link>

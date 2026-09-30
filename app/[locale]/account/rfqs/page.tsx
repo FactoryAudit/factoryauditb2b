@@ -48,16 +48,16 @@ export default async function AccountRfqsPage({
 
   return (
     <main className="container max-w-4xl py-12">
-      <nav aria-label="Breadcrumb" className="text-sm text-[#64748b]">
-        <Link href={p("/account")} className="hover:text-[#0f4c81]">
+      <nav aria-label="Breadcrumb" className="text-sm text-[#6d6b66]">
+        <Link href={p("/account")} className="hover:text-[#171717]">
           {a.navOverview}
         </Link>
         <span className="mx-2">/</span>
-        <span className="text-[#0f172a]">{a.navRfqs}</span>
+        <span className="text-[#171717]">{a.navRfqs}</span>
       </nav>
 
-      <h1 className="mt-3 text-3xl font-bold text-[#0f172a]">{a.rfqsTitle}</h1>
-      <p className="mt-2 text-[#64748b]">{a.rfqsLead}</p>
+      <h1 className="mt-3 text-3xl font-bold text-[#171717]">{a.rfqsTitle}</h1>
+      <p className="mt-2 text-[#6d6b66]">{a.rfqsLead}</p>
 
       <div className="mt-8">
         <AccountGate

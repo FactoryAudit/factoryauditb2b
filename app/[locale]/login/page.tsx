@@ -54,16 +54,16 @@ export default async function LoginPage({
     >
       <JsonLd data={jsonLd} />
 
-      <h1 className="text-3xl font-bold text-[#0f172a]">{l.h1}</h1>
-      <p className="text-[#64748b] mt-2">{l.lead}</p>
+      <h1 className="text-3xl font-bold text-[#171717]">{l.h1}</h1>
+      <p className="text-[#6d6b66] mt-2">{l.lead}</p>
 
       <div className="mt-8">
         <LoginForm t={l.form} redirectTo={p("/account")} />
       </div>
 
-      <p className="text-sm text-[#64748b] mt-6">
+      <p className="text-sm text-[#6d6b66] mt-6">
         {l.noAccount}{" "}
-        <Link href={p("/register")} className="text-[#0f4c81] underline">
+        <Link href={p("/register")} className="text-[#171717] underline">
           {l.registerLink}
         </Link>
       </p>

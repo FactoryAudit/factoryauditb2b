@@ -64,28 +64,28 @@ export default async function ResourcesPage({ params }: Props) {
       <JsonLd data={jsonLd} />
 
       <section className="max-w-3xl mb-10">
-        <span className="text-sm font-semibold text-[#0f4c81] uppercase tracking-wide">
+        <span className="text-sm font-semibold text-[#171717] uppercase tracking-wide">
           {r.badge}
         </span>
-        <h1 className="text-4xl font-extrabold text-[#0f172a] mt-2">{r.h1}</h1>
-        <p className="text-[#64748b] mt-3 text-lg">{r.lead}</p>
+        <h1 className="text-4xl font-extrabold text-[#171717] mt-2">{r.h1}</h1>
+        <p className="text-[#6d6b66] mt-3 text-lg">{r.lead}</p>
       </section>
 
       <section className="mb-12">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{r.categoriesTitle}</h2>
-        <p className="text-[#64748b] mt-1 mb-5">{r.categoriesLead}</p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <h2 className="text-2xl font-bold text-[#171717]">{r.categoriesTitle}</h2>
+        <p className="text-[#6d6b66] mt-1 mb-5">{r.categoriesLead}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {categories.map((c) => (
             <div key={c.key} className="card p-6">
-              <h3 className="font-bold text-[#0f4c81]">{c.title}</h3>
-              <p className="text-sm text-[#475569] mt-1">{c.desc}</p>
+              <h3 className="font-bold text-[#171717]">{c.title}</h3>
+              <p className="text-sm text-[#3f4650] mt-1">{c.desc}</p>
               <ul className="mt-4 space-y-2">
                 {c.guides.map((g) => (
                   <li key={g.href}>
-                    <Link href={p(g.href)} className="text-sm text-[#0f172a] hover:text-[#0f4c81]">
+                    <Link href={p(g.href)} className="text-sm text-[#171717] hover:text-[#171717]">
                       {g.title}
                     </Link>
-                    <span className="block text-xs text-[#94a3b8]">{g.updated}</span>
+                    <span className="block text-xs text-[#8c8982]">{g.updated}</span>
                   </li>
                 ))}
               </ul>
@@ -95,41 +95,41 @@ export default async function ResourcesPage({ params }: Props) {
       </section>
 
       <section className="mb-12">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{r.toolsTitle}</h2>
-        <p className="text-[#64748b] mt-1 mb-5">{r.toolsLead}</p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <h2 className="text-2xl font-bold text-[#171717]">{r.toolsTitle}</h2>
+        <p className="text-[#6d6b66] mt-1 mb-5">{r.toolsLead}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {tools.map((tool) => (
-            <Link key={tool.href} href={p(tool.href)} className="card p-5 hover:border-[#0f4c81]">
-              <div className="font-semibold text-[#0f4c81]">{tool.title}</div>
-              <p className="text-sm text-[#475569] mt-1">{tool.desc}</p>
+            <Link key={tool.href} href={p(tool.href)} className="card p-5 hover:border-[#171717]">
+              <div className="font-semibold text-[#171717]">{tool.title}</div>
+              <p className="text-sm text-[#3f4650] mt-1">{tool.desc}</p>
             </Link>
           ))}
         </div>
       </section>
 
       <section className="mb-12">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{r.storiesTitle}</h2>
-        <p className="text-[#64748b] mt-1 mb-5">{r.storiesLead}</p>
-        <div className="grid md:grid-cols-2 gap-5">
-          <Link href={p("/case-studies")} className="card p-6 hover:border-[#0f4c81]">
-            <div className="font-semibold text-[#0f4c81]">{t.caseStudies.h1}</div>
-            <p className="text-sm text-[#475569] mt-1">{t.caseStudies.lead}</p>
+        <h2 className="text-2xl font-bold text-[#171717]">{r.storiesTitle}</h2>
+        <p className="text-[#6d6b66] mt-1 mb-5">{r.storiesLead}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <Link href={p("/case-studies")} className="card p-6 hover:border-[#171717]">
+            <div className="font-semibold text-[#171717]">{t.caseStudies.h1}</div>
+            <p className="text-sm text-[#3f4650] mt-1">{t.caseStudies.lead}</p>
           </Link>
-          <Link href={p("/field-reports")} className="card p-6 hover:border-[#0f4c81]">
-            <div className="font-semibold text-[#0f4c81]">{t.fieldReports.h1}</div>
-            <p className="text-sm text-[#475569] mt-1">{t.fieldReports.lead}</p>
+          <Link href={p("/field-reports")} className="card p-6 hover:border-[#171717]">
+            <div className="font-semibold text-[#171717]">{t.fieldReports.h1}</div>
+            <p className="text-sm text-[#3f4650] mt-1">{t.fieldReports.lead}</p>
           </Link>
         </div>
       </section>
 
-      <section className="grid md:grid-cols-2 gap-5">
-        <Link href={p("/methodology")} className="card p-6 hover:border-[#0f4c81]">
-          <div className="font-semibold text-[#0f4c81]">{t.methodology.h1}</div>
-          <p className="text-sm text-[#475569] mt-1">{t.methodology.lead}</p>
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <Link href={p("/methodology")} className="card p-6 hover:border-[#171717]">
+          <div className="font-semibold text-[#171717]">{t.methodology.h1}</div>
+          <p className="text-sm text-[#3f4650] mt-1">{t.methodology.lead}</p>
         </Link>
-        <Link href={p("/services")} className="card p-6 hover:border-[#0f4c81]">
-          <div className="font-semibold text-[#0f4c81]">{t.servicesIndex.metaTitle}</div>
-          <p className="text-sm text-[#475569] mt-1">{t.servicesIndex.lead}</p>
+        <Link href={p("/services")} className="card p-6 hover:border-[#171717]">
+          <div className="font-semibold text-[#171717]">{t.servicesIndex.metaTitle}</div>
+          <p className="text-sm text-[#3f4650] mt-1">{t.servicesIndex.lead}</p>
         </Link>
       </section>
     </main>

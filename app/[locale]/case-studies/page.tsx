@@ -95,12 +95,12 @@ export default async function CaseStudiesPage({ params }: Props) {
           return (
             <section key={svc}>
               <h2 className="text-xl font-semibold">{label}</h2>
-              <ul className="mt-3 grid gap-4 md:grid-cols-2">
+              <ul className="mt-3 grid grid-cols-1 gap-4 md:grid-cols-2">
                 {items.map((c) => (
                   <li key={c.slug} className="card p-5">
                     <Link
                       href={p(`/case-studies/${c.slug}`)}
-                      className="font-semibold text-[#0f4c81] hover:underline"
+                      className="font-semibold text-[#171717] hover:underline"
                     >
                       {pickZhPair(locale, c.titleEn, c.titleZh)}
                     </Link>
@@ -117,7 +117,7 @@ export default async function CaseStudiesPage({ params }: Props) {
         })}
       </div>
 
-      <section className="mt-10 card p-6 bg-[#0f4c81]">
+      <section className="mt-10 card p-6 bg-[#171717]">
         <h2 className="text-lg font-semibold text-white">{t.caseStudies.ctaTitle}</h2>
         <p className="mt-1 text-sm text-white/80">
           {t.caseStudies.ctaDesc}

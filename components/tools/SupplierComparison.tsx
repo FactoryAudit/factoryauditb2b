@@ -123,7 +123,7 @@ export default function SupplierComparison({
 
   return (
     <div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {scored.map((s, i) => (
           <div key={s.id} className="card p-4">
             <div className="flex items-center gap-2">
@@ -133,13 +133,13 @@ export default function SupplierComparison({
                 onChange={(e) => setName(s.id, e.target.value)}
                 placeholder={dict.namePlaceholder}
                 aria-label={`${dict.supplierLabel} ${i + 1}`}
-                className="w-full rounded-md border border-[#e2e8f0] px-3 py-2 text-sm font-semibold text-[#0f172a]"
+                className="w-full rounded-md border border-[#ebe8e1] px-3 py-2 text-sm font-semibold text-[#171717]"
               />
               {suppliers.length > 2 && (
                 <button
                   type="button"
                   onClick={() => remove(s.id)}
-                  className="shrink-0 text-xs text-[#64748b] hover:text-[#d4232a]"
+                  className="shrink-0 text-xs text-[#6d6b66] hover:text-[#d4232a]"
                 >
                   {dict.remove}
                 </button>
@@ -149,14 +149,14 @@ export default function SupplierComparison({
             <div className="mt-3 space-y-2">
               {dimensions.map((d) => (
                 <div key={d.key}>
-                  <label className="block text-xs text-[#64748b]" htmlFor={`${s.id}-${d.key}`}>
+                  <label className="block text-xs text-[#6d6b66]" htmlFor={`${s.id}-${d.key}`}>
                     {d.label}
                   </label>
                   <select
                     id={`${s.id}-${d.key}`}
                     value={s.ratings[d.key] ?? "unknown"}
                     onChange={(e) => setRating(s.id, d.key, e.target.value as CompareLevel)}
-                    className="mt-1 w-full rounded-md border border-[#e2e8f0] px-2 py-1.5 text-sm text-[#0f172a]"
+                    className="mt-1 w-full rounded-md border border-[#ebe8e1] px-2 py-1.5 text-sm text-[#171717]"
                   >
                     {LEVEL_KEYS.map((k) => (
                       <option key={k} value={k}>
@@ -168,20 +168,20 @@ export default function SupplierComparison({
               ))}
             </div>
 
-            <div className="mt-4 border-t border-[#e2e8f0] pt-3">
+            <div className="mt-4 border-t border-[#ebe8e1] pt-3">
               <div className="flex items-baseline justify-between">
-                <span className="text-xs uppercase tracking-wide text-[#64748b]">
+                <span className="text-xs uppercase tracking-wide text-[#6d6b66]">
                   {dict.scoreCol}
                 </span>
-                <span className="text-2xl font-extrabold text-[#0f4c81]">{s.score}</span>
+                <span className="text-2xl font-extrabold text-[#171717]">{s.score}</span>
               </div>
-              <div className="mt-2 h-2 overflow-hidden rounded-full bg-[#e2e8f0]">
+              <div className="mt-2 h-2 overflow-hidden rounded-full bg-[#ebe8e1]">
                 <div
-                  className="h-full rounded-full bg-[#0f4c81]"
+                  className="h-full rounded-full bg-[#171717]"
                   style={{ width: `${s.score}%` }}
                 />
               </div>
-              <div className="mt-1 text-xs font-semibold text-[#0f172a]">
+              <div className="mt-1 text-xs font-semibold text-[#171717]">
                 {overallLevel(s.score)}
               </div>
             </div>
@@ -198,31 +198,31 @@ export default function SupplierComparison({
         >
           {dict.addSupplier}
         </button>
-        <button type="button" onClick={reset} className="text-sm text-[#64748b] underline">
+        <button type="button" onClick={reset} className="text-sm text-[#6d6b66] underline">
           {dict.reset}
         </button>
-        <span className="text-xs text-[#64748b]">
+        <span className="text-xs text-[#6d6b66]">
           {suppliers.length >= MAX_SUPPLIERS ? dict.maxNote : `${suppliers.length}/${MAX_SUPPLIERS}`}
         </span>
       </div>
 
-      <section className="mt-10 rounded-lg bg-[#f1f5f9] p-6">
-        <h2 className="text-xl font-bold text-[#0f172a]">{dict.summaryTitle}</h2>
-        <div className="mt-3 space-y-2 text-sm text-[#475569]">
+      <section className="mt-10 rounded-lg bg-[#f5f3ee] p-6">
+        <h2 className="text-xl font-bold text-[#171717]">{dict.summaryTitle}</h2>
+        <div className="mt-3 space-y-2 text-sm text-[#3f4650]">
           <p>
-            <span className="font-semibold text-[#0f172a]">{best?.name}</span> · {best?.score}
+            <span className="font-semibold text-[#171717]">{best?.name}</span> · {best?.score}
             {" · "}
             {best ? overallLevel(best.score) : ""} — {dict.bestNote}
           </p>
           <p>
-            <span className="font-semibold text-[#0f172a]">{dict.biggestGapTitle}: </span>
+            <span className="font-semibold text-[#171717]">{dict.biggestGapTitle}: </span>
             {gap && gap.spread > 0 ? `${gap.label} — ${dict.biggestGapNote}` : dict.noGapNote}
           </p>
         </div>
-        <p className="mt-4 text-xs text-[#64748b]">{dict.disclaimer}</p>
+        <p className="mt-4 text-xs text-[#6d6b66]">{dict.disclaimer}</p>
       </section>
 
-      <section className="mt-8 card p-8 bg-[#0f4c81]">
+      <section className="mt-8 card p-8 bg-[#171717]">
         <h2 className="text-xl font-bold text-white">{dict.ctaTitle}</h2>
         <p className="mt-2 text-white/80">{dict.ctaLead}</p>
         <a href={verificationHref} className="btn btn-accent mt-5 inline-block">

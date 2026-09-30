@@ -77,17 +77,17 @@ export default async function AdminLeadsPage({ params }: Props) {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-[#0f172a]">{a.leadsTitle}</h1>
-      <p className="mt-1 text-sm text-[#64748b]">{a.leadsLead}</p>
+      <h1 className="text-2xl font-bold text-[#171717]">{a.leadsTitle}</h1>
+      <p className="mt-1 text-sm text-[#6d6b66]">{a.leadsLead}</p>
 
       {rows.length === 0 ? (
         <div className="card mt-6 p-6">
-          <p className="text-sm text-[#475569]">{a.leadsEmpty}</p>
+          <p className="text-sm text-[#3f4650]">{a.leadsEmpty}</p>
         </div>
       ) : (
-        <div className="mt-6 overflow-x-auto rounded-lg border border-[#e2e8f0] bg-white">
+        <div className="mt-6 overflow-x-auto rounded-lg border border-[#ebe8e1] bg-white">
           <table className="w-full text-left text-sm">
-            <thead className="border-b border-[#e2e8f0] bg-[#f7f9fc] text-xs uppercase text-[#64748b]">
+            <thead className="border-b border-[#ebe8e1] bg-[#fbfaf7] text-xs uppercase text-[#6d6b66]">
               <tr>
                 <th className="px-4 py-3">{a.colReference}</th>
                 <th className="px-4 py-3">{a.colKind}</th>
@@ -100,43 +100,43 @@ export default async function AdminLeadsPage({ params }: Props) {
                 <th className="px-4 py-3">{L.colAction}</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#e2e8f0]">
+            <tbody className="divide-y divide-[#ebe8e1]">
               {rows.map((r) => {
                 const c = r.supplier?.completeness ?? null;
                 return (
-                  <tr key={r.id} className="align-top hover:bg-[#f7f9fc]">
+                  <tr key={r.id} className="align-top hover:bg-[#fbfaf7]">
                     <td className="px-4 py-3">
-                      <span className="font-mono text-xs text-[#64748b]">{r.referenceId}</span>
+                      <span className="font-mono text-xs text-[#6d6b66]">{r.referenceId}</span>
                       {r.isTest && (
                         <span className="ml-2 rounded bg-[#fdf3d8] px-1.5 py-0.5 text-[10px] font-semibold text-[#8a5a00]">
                           {L.test}
                         </span>
                       )}
-                      <div className="mt-0.5 text-xs text-[#94a3b8]">{r.email}</div>
+                      <div className="mt-0.5 text-xs text-[#8c8982]">{r.email}</div>
                     </td>
                     <td className="px-4 py-3">
-                      <span className="rounded-full bg-[#e6eef6] px-2 py-0.5 text-xs text-[#0f4c81]">
+                      <span className="rounded-full bg-[#f5f3ee] px-2 py-0.5 text-xs text-[#171717]">
                         {KIND_LABEL[r.kind] ?? r.kind}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-sm text-[#0f172a]">{r.company || r.supplierName || "—"}</td>
-                    <td className="px-4 py-3 text-xs text-[#475569]">{r.country || "—"}</td>
+                    <td className="px-4 py-3 text-sm text-[#171717]">{r.company || r.supplierName || "—"}</td>
+                    <td className="px-4 py-3 text-xs text-[#3f4650]">{r.country || "—"}</td>
                     <td className="px-4 py-3 text-xs">
                       {r.supplier ? (
                         <>
-                          <span className="font-mono text-[#0f4c81]">{r.supplier.slug}</span>
-                          <div className="mt-0.5 text-[#94a3b8]">
+                          <span className="font-mono text-[#171717]">{r.supplier.slug}</span>
+                          <div className="mt-0.5 text-[#8c8982]">
                             {[r.supplier.city, r.supplier.industryCode].filter(Boolean).join(" · ") || "—"}
                           </div>
                         </>
                       ) : (
-                        <span className="text-[#94a3b8]">{L.noSupplier}</span>
+                        <span className="text-[#8c8982]">{L.noSupplier}</span>
                       )}
                     </td>
                     <td className="px-4 py-3">
                       {c ? (
                         <div className="flex flex-wrap items-center gap-1.5">
-                          <span className="text-xs font-semibold text-[#0f172a]">
+                          <span className="text-xs font-semibold text-[#171717]">
                             {c.score}/{c.total}
                           </span>
                           <span
@@ -144,7 +144,7 @@ export default async function AdminLeadsPage({ params }: Props) {
                               r.supplier?.isPublished
                                 ? "bg-[#e7f6ec] text-[#1f7a36]"
                                 : c.publishable
-                                  ? "bg-[#e6eef6] text-[#0f4c81]"
+                                  ? "bg-[#f5f3ee] text-[#171717]"
                                   : c.rejected
                                     ? "bg-[#fdeaea] text-[#d4232a]"
                                     : "bg-[#fdf3d8] text-[#8a5a00]"
@@ -163,10 +163,10 @@ export default async function AdminLeadsPage({ params }: Props) {
                           )}
                         </div>
                       ) : (
-                        <span className="text-xs text-[#94a3b8]">—</span>
+                        <span className="text-xs text-[#8c8982]">—</span>
                       )}
                     </td>
-                    <td className="px-4 py-3 text-xs text-[#94a3b8]">
+                    <td className="px-4 py-3 text-xs text-[#8c8982]">
                       {r.createdAt ? new Date(r.createdAt).toISOString().slice(0, 10) : "—"}
                     </td>
                     <td className="px-4 py-3">
@@ -180,12 +180,12 @@ export default async function AdminLeadsPage({ params }: Props) {
                       {r.supplier ? (
                         <Link
                           href={p(`/admin/suppliers/${r.supplier.slug}`)}
-                          className="text-[#0f4c81] hover:underline"
+                          className="text-[#171717] hover:underline"
                         >
                           {L.open} →
                         </Link>
                       ) : (
-                        <span className="text-[#94a3b8]">—</span>
+                        <span className="text-[#8c8982]">—</span>
                       )}
                     </td>
                   </tr>
@@ -196,8 +196,8 @@ export default async function AdminLeadsPage({ params }: Props) {
         </div>
       )}
 
-      <p className="mt-4 text-xs text-[#64748b]">
-        <Link href={p("/admin")} className="text-[#0f4c81] hover:underline">
+      <p className="mt-4 text-xs text-[#6d6b66]">
+        <Link href={p("/admin")} className="text-[#171717] hover:underline">
           ← {a.navOverview}
         </Link>
       </p>

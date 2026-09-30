@@ -149,49 +149,49 @@ export default async function CountryServicePage({ params }: { params: Promise<P
     <main className="container py-12 max-w-4xl">
       <JsonLd data={jsonLd} />
 
-      <nav className="mb-4 text-sm text-[#64748b]">
+      <nav className="mb-4 text-sm text-[#6d6b66]">
         <Link href={p("/")} className="hover:underline">{t.common.ui.home}</Link>
         {" / "}
         <Link href={p("/services")} className="hover:underline">{sc.breadcrumb}</Link>
         {" / "}{countryName} {serviceName}
       </nav>
 
-      <h1 className="text-4xl font-extrabold text-[#0f172a]">
+      <h1 className="text-4xl font-extrabold text-[#171717]">
         {countryName} {serviceName}
       </h1>
-      <p className="mt-3 text-lg text-[#475569]">{svc.intro}</p>
+      <p className="mt-3 text-lg text-[#3f4650]">{svc.intro}</p>
 
-      <section className="mt-8 rounded-lg bg-[#f1f5f9] p-6">
-        <h2 className="font-bold text-[#0f172a]">{sc.quickAnswerTitle}</h2>
-        <p className="text-[#475569] mt-2">{svc.quickAnswer}</p>
+      <section className="mt-8 rounded-lg bg-[#f5f3ee] p-6">
+        <h2 className="font-bold text-[#171717]">{sc.quickAnswerTitle}</h2>
+        <p className="text-[#3f4650] mt-2">{svc.quickAnswer}</p>
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">
+        <h2 className="text-2xl font-bold text-[#171717]">
           {sc.contextTitle
             .replace("{service}", serviceName)
             .replace("{country}", countryName)}
         </h2>
-        <p className="text-[#475569] mt-2">{countryCopy.profile}</p>
-        <ul className="mt-4 space-y-2 text-[#475569]">
+        <p className="text-[#3f4650] mt-2">{countryCopy.profile}</p>
+        <ul className="mt-4 space-y-2 text-[#3f4650]">
           {countrySpecific.map((x) => (
             <li key={x}>· {x}</li>
           ))}
         </ul>
       </section>
 
-      <section className="mt-8 grid md:grid-cols-2 gap-6">
+      <section className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <h2 className="text-2xl font-bold text-[#0f172a]">{sc.scopeTitle}</h2>
-          <ul className="mt-3 space-y-2 text-[#475569]">
+          <h2 className="text-2xl font-bold text-[#171717]">{sc.scopeTitle}</h2>
+          <ul className="mt-3 space-y-2 text-[#3f4650]">
             {svc.includes.map((x) => (
               <li key={x}>✓ {x}</li>
             ))}
           </ul>
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-[#0f172a]">{sc.deliverablesTitle}</h2>
-          <ul className="mt-3 space-y-2 text-[#475569]">
+          <h2 className="text-2xl font-bold text-[#171717]">{sc.deliverablesTitle}</h2>
+          <ul className="mt-3 space-y-2 text-[#3f4650]">
             {svc.deliverables.map((x) => (
               <li key={x}>· {x}</li>
             ))}
@@ -200,39 +200,39 @@ export default async function CountryServicePage({ params }: { params: Promise<P
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{sc.processTitle}</h2>
+        <h2 className="text-2xl font-bold text-[#171717]">{sc.processTitle}</h2>
         <ol className="mt-3 space-y-3">
           {svc.process.map((s, i) => (
             <li key={s.title} className="card p-4">
-              <div className="font-semibold text-[#0f172a]">
+              <div className="font-semibold text-[#171717]">
                 {i + 1}. {s.title}
               </div>
-              <p className="text-sm text-[#475569] mt-1">{s.body}</p>
+              <p className="text-sm text-[#3f4650] mt-1">{s.body}</p>
             </li>
           ))}
         </ol>
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{sc.pricingTitle}</h2>
-        <p className="text-[#475569] mt-2">{svc.pricingBasis}</p>
-        <p className="text-sm text-[#64748b] mt-2">{t.pricing.reportsNote}</p>
+        <h2 className="text-2xl font-bold text-[#171717]">{sc.pricingTitle}</h2>
+        <p className="text-[#3f4650] mt-2">{svc.pricingBasis}</p>
+        <p className="text-sm text-[#6d6b66] mt-2">{t.pricing.reportsNote}</p>
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{t.countryHub.faqTitle}</h2>
+        <h2 className="text-2xl font-bold text-[#171717]">{t.countryHub.faqTitle}</h2>
         <div className="mt-3 space-y-4">
           {faq.map((f) => (
             <div key={f.q}>
-              <h3 className="font-semibold text-[#0f172a]">{f.q}</h3>
-              <p className="text-[#475569] mt-1">{f.a}</p>
+              <h3 className="font-semibold text-[#171717]">{f.q}</h3>
+              <p className="text-[#3f4650] mt-1">{f.a}</p>
             </div>
           ))}
         </div>
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{t.countryHub.toolsTitle}</h2>
+        <h2 className="text-2xl font-bold text-[#171717]">{t.countryHub.toolsTitle}</h2>
         <div className="mt-3 flex flex-wrap gap-3">
           <Link href={p("/tools/supplier-risk-calculator")} className="btn btn-outline">
             {t.toolCards.riskCalculator.title}
@@ -247,22 +247,22 @@ export default async function CountryServicePage({ params }: { params: Promise<P
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{sc.relatedTitle}</h2>
+        <h2 className="text-2xl font-bold text-[#171717]">{sc.relatedTitle}</h2>
         <ul className="mt-3 space-y-2">
           {related.map((r) => (
             <li key={r.href}>
-              <Link href={p(r.href)} className="text-[#0f4c81] hover:underline">
+              <Link href={p(r.href)} className="text-[#171717] hover:underline">
                 {r.label}
               </Link>
             </li>
           ))}
           <li>
-            <Link href={p(`/countries/${entry.country.slug}`)} className="text-[#0f4c81] hover:underline">
+            <Link href={p(`/countries/${entry.country.slug}`)} className="text-[#171717] hover:underline">
               {countryName} {t.home.coverageCta}
             </Link>
           </li>
           <li>
-            <Link href={p(`/services/${crossSlug}`)} className="text-[#0f4c81] hover:underline">
+            <Link href={p(`/services/${crossSlug}`)} className="text-[#171717] hover:underline">
               {countryName}{" "}
               {crossService
                 ? pickZhPair(locale, crossService.nameEn, crossService.nameZh)
@@ -272,7 +272,7 @@ export default async function CountryServicePage({ params }: { params: Promise<P
         </ul>
       </section>
 
-      <section className="mt-10 card p-8 bg-[#0f4c81]">
+      <section className="mt-10 card p-8 bg-[#171717]">
         <h2 className="text-2xl font-bold text-white">
           {sc.ctaTitle.replace("{service}", serviceName).replace("{country}", countryName)}
         </h2>

@@ -131,44 +131,44 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
     <main className="container py-12 max-w-4xl">
       <JsonLd data={jsonLd} />
 
-      <nav className="mb-4 text-sm text-[#64748b]">
+      <nav className="mb-4 text-sm text-[#6d6b66]">
         <Link href={p("/")} className="hover:underline">{h.breadcrumbHome}</Link>
         {" / "}
         <Link href={p("/countries")} className="hover:underline">{h.breadcrumb}</Link>
         {" / "}{name}
       </nav>
 
-      <h1 className="text-4xl font-extrabold text-[#0f172a]">
+      <h1 className="text-4xl font-extrabold text-[#171717]">
         {h.h1Template.replaceAll("{country}", name)}
       </h1>
-      <p className="mt-3 text-lg text-[#475569]">{copy.hook}</p>
+      <p className="mt-3 text-lg text-[#3f4650]">{copy.hook}</p>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{h.profileTitle}</h2>
-        <p className="text-[#475569] mt-2">{copy.profile}</p>
+        <h2 className="text-2xl font-bold text-[#171717]">{h.profileTitle}</h2>
+        <p className="text-[#3f4650] mt-2">{copy.profile}</p>
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{h.risksTitle}</h2>
-        <ul className="mt-3 space-y-2 text-[#475569]">
+        <h2 className="text-2xl font-bold text-[#171717]">{h.risksTitle}</h2>
+        <ul className="mt-3 space-y-2 text-[#3f4650]">
           {copy.risks.map((r) => (
             <li key={r}>· {r}</li>
           ))}
         </ul>
       </section>
 
-      <section className="mt-8 grid md:grid-cols-2 gap-6">
+      <section className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <h2 className="text-2xl font-bold text-[#0f172a]">{h.verificationTitle}</h2>
-          <ul className="mt-3 space-y-2 text-[#475569]">
+          <h2 className="text-2xl font-bold text-[#171717]">{h.verificationTitle}</h2>
+          <ul className="mt-3 space-y-2 text-[#3f4650]">
             {copy.verificationNotes.map((r) => (
               <li key={r}>· {r}</li>
             ))}
           </ul>
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-[#0f172a]">{h.auditTitle}</h2>
-          <ul className="mt-3 space-y-2 text-[#475569]">
+          <h2 className="text-2xl font-bold text-[#171717]">{h.auditTitle}</h2>
+          <ul className="mt-3 space-y-2 text-[#3f4650]">
             {copy.auditNotes.map((r) => (
               <li key={r}>· {r}</li>
             ))}
@@ -177,26 +177,26 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{h.hubsTitle}</h2>
-        <ul className="mt-3 space-y-1 text-[#475569]">
+        <h2 className="text-2xl font-bold text-[#171717]">{h.hubsTitle}</h2>
+        <ul className="mt-3 space-y-1 text-[#3f4650]">
           {copy.hubs.map((x) => (
             <li key={x}>· {x}</li>
           ))}
         </ul>
       </section>
 
-      <section className="mt-8 grid md:grid-cols-2 gap-6">
+      <section className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <h2 className="text-2xl font-bold text-[#0f172a]">{h.industriesTitle}</h2>
-          <ul className="mt-3 space-y-1 text-[#475569]">
+          <h2 className="text-2xl font-bold text-[#171717]">{h.industriesTitle}</h2>
+          <ul className="mt-3 space-y-1 text-[#3f4650]">
             {copy.industries.map((x) => (
               <li key={x}>· {x}</li>
             ))}
           </ul>
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-[#0f172a]">{h.standardsTitle}</h2>
-          <ul className="mt-3 space-y-1 text-[#475569]">
+          <h2 className="text-2xl font-bold text-[#171717]">{h.standardsTitle}</h2>
+          <ul className="mt-3 space-y-1 text-[#3f4650]">
             {copy.standards.map((x) => (
               <li key={x}>· {x}</li>
             ))}
@@ -205,23 +205,23 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{h.logisticsTitle}</h2>
-        <p className="text-[#475569] mt-2">{copy.logistics}</p>
+        <h2 className="text-2xl font-bold text-[#171717]">{h.logisticsTitle}</h2>
+        <p className="text-[#3f4650] mt-2">{copy.logistics}</p>
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{h.registryTitle}</h2>
-        <p className="text-[#475569] mt-2">{copy.registry}</p>
+        <h2 className="text-2xl font-bold text-[#171717]">{h.registryTitle}</h2>
+        <p className="text-[#3f4650] mt-2">{copy.registry}</p>
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{h.servicesTitle}</h2>
-        <div className="mt-3 grid md:grid-cols-2 gap-3">
+        <h2 className="text-2xl font-bold text-[#171717]">{h.servicesTitle}</h2>
+        <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
           {[...services, ...globalServices].map((s) => (
-            <Link key={s.href} href={p(s.href)} className="card p-4 hover:border-[#0f4c81]">
-              <span className="font-medium text-[#0f172a]">{s.title}</span>
+            <Link key={s.href} href={p(s.href)} className="card p-4 hover:border-[#171717]">
+              <span className="font-medium text-[#171717]">{s.title}</span>
               {s.note ? (
-                <span className="mt-1 block text-sm text-[#64748b]">{s.note}</span>
+                <span className="mt-1 block text-sm text-[#6d6b66]">{s.note}</span>
               ) : null}
             </Link>
           ))}
@@ -229,7 +229,7 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{h.toolsTitle}</h2>
+        <h2 className="text-2xl font-bold text-[#171717]">{h.toolsTitle}</h2>
         <div className="mt-3 flex flex-wrap gap-3">
           <Link href={p("/tools/supplier-risk-calculator")} className="btn btn-outline">
             {t.toolCards.riskCalculator.title}
@@ -244,24 +244,24 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
       </section>
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">
+        <h2 className="text-2xl font-bold text-[#171717]">
           {h.suppliersTitle.replace("{country}", name)}
         </h2>
         {suppliers.length === 0 ? (
-          <p className="mt-2 text-[#475569]">
+          <p className="mt-2 text-[#3f4650]">
             {h.suppliersEmpty.replace("{country}", name)}
           </p>
         ) : (
-          <ul className="mt-3 divide-y rounded-lg border border-[#e2e8f0]">
+          <ul className="mt-3 divide-y rounded-lg border border-[#ebe8e1]">
             {suppliers.map((s) => (
               <li key={s.slug} className="flex items-center justify-between p-3">
                 <Link
                   href={p(`/suppliers/${s.slug}`)}
-                  className="font-medium text-[#0f4c81] hover:underline"
+                  className="font-medium text-[#171717] hover:underline"
                 >
                   {s.legalName}
                 </Link>
-                <span className="text-sm text-[#64748b]">
+                <span className="text-sm text-[#6d6b66]">
                   {s.city} · {t.supplierProfile.riskScore}{" "}
                   {typeof s.riskScore === "number"
                     ? `${s.riskScore} / 100 · ${t.risk.ui.level[overallLevel(s.riskScore)]}`
@@ -275,12 +275,12 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
       {/* 注意：此处不再出现中文「风险」硬编码，口径统一走字典（P0 语言一致性） */}
 
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{h.faqTitle}</h2>
+        <h2 className="text-2xl font-bold text-[#171717]">{h.faqTitle}</h2>
         <div className="mt-3 space-y-4">
           {copy.faq.map((f) => (
             <div key={f.q}>
-              <h3 className="font-semibold text-[#0f172a]">{f.q}</h3>
-              <p className="text-[#475569] mt-1">{f.a}</p>
+              <h3 className="font-semibold text-[#171717]">{f.q}</h3>
+              <p className="text-[#3f4650] mt-1">{f.a}</p>
             </div>
           ))}
         </div>
@@ -290,24 +290,24 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
           标题与导语复用字典既有键 servicesIndex.coverageTitle / coverageLead（"Coverage by country"），
           ⚠️ 不新增字典键 —— en 字典叶子数 3192 是 20 个回归脚本共同断言的闸门，复用即可保持 3192。 */}
       <section className="mt-8">
-        <h2 className="text-2xl font-bold text-[#0f172a]">{t.servicesIndex.coverageTitle}</h2>
-        <p className="text-[#475569] mt-1">{t.servicesIndex.coverageLead}</p>
-        <ul className="mt-3 grid md:grid-cols-2 gap-3">
+        <h2 className="text-2xl font-bold text-[#171717]">{t.servicesIndex.coverageTitle}</h2>
+        <p className="text-[#3f4650] mt-1">{t.servicesIndex.coverageLead}</p>
+        <ul className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
           {relatedCountries.map((r) => (
             <li key={r.href}>
-              <Link href={p(r.href)} className="block card p-4 hover:border-[#0f4c81]">
-                <span className="font-medium text-[#0f4c81]">{r.label}</span>
+              <Link href={p(r.href)} className="block card p-4 hover:border-[#171717]">
+                <span className="font-medium text-[#171717]">{r.label}</span>
               </Link>
             </li>
           ))}
         </ul>
       </section>
 
-      <section className="mt-10 card p-8 bg-[#f7f9fc]">
-        <h2 className="text-xl font-bold text-[#0f172a]">
+      <section className="mt-10 card p-8 bg-[#fbfaf7]">
+        <h2 className="text-xl font-bold text-[#171717]">
           {h.ctaTitle.replace("{country}", name)}
         </h2>
-        <p className="text-[#475569] mt-2">{h.ctaLead.replace("{country}", name)}</p>
+        <p className="text-[#3f4650] mt-2">{h.ctaLead.replace("{country}", name)}</p>
         <div className="mt-5 flex flex-wrap gap-3">
           <Link href={p(`/services/${country.slug}-supplier-verification`)} className="btn btn-primary">
             {h.ctaPrimary.replace("{country}", name)}

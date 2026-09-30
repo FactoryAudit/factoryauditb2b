@@ -165,9 +165,9 @@ export default function VerifySupplierForm({ t, localePrefix = "" }: Props) {
       <div className="card p-6 text-center bg-[#f0fdf4]">
         <div className="text-2xl mb-2">✓</div>
         <p className="font-semibold text-[#1f7a36]">{t.successTitle}</p>
-        <p className="text-sm text-[#64748b] mt-2">{t.successLead}</p>
+        <p className="text-sm text-[#6d6b66] mt-2">{t.successLead}</p>
         {referenceId && (
-          <p className="text-sm font-mono font-semibold text-[#0f172a] mt-3">{referenceId}</p>
+          <p className="text-sm font-mono font-semibold text-[#171717] mt-3">{referenceId}</p>
         )}
       </div>
     );
@@ -187,7 +187,7 @@ export default function VerifySupplierForm({ t, localePrefix = "" }: Props) {
           placeholder={t.supplierUrlPlaceholder}
           className="input"
         />
-        <p className="text-xs text-[#64748b] mt-1">{t.supplierUrlHint}</p>
+        <p className="text-xs text-[#6d6b66] mt-1">{t.supplierUrlHint}</p>
       </div>
 
       <div>
@@ -202,7 +202,7 @@ export default function VerifySupplierForm({ t, localePrefix = "" }: Props) {
           placeholder={t.supplierNamePlaceholder}
           className="input"
         />
-        <p className="text-xs text-[#64748b] mt-1">{t.supplierNameHint}</p>
+        <p className="text-xs text-[#6d6b66] mt-1">{t.supplierNameHint}</p>
       </div>
 
       <p className="text-xs text-[#8a5410] bg-[#fff4e0] rounded-md px-2 py-1.5">
@@ -222,10 +222,10 @@ export default function VerifySupplierForm({ t, localePrefix = "" }: Props) {
           placeholder={t.emailPlaceholder}
           className="input"
         />
-        <p className="text-xs text-[#64748b] mt-1">{t.emailHint}</p>
+        <p className="text-xs text-[#6d6b66] mt-1">{t.emailHint}</p>
       </div>
 
-      <div className="grid sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="vs-contact" className="text-sm font-medium">
             {t.nameLabel}
@@ -240,7 +240,7 @@ export default function VerifySupplierForm({ t, localePrefix = "" }: Props) {
         </div>
       </div>
 
-      <div className="grid sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="vs-country" className="text-sm font-medium">
             {t.countryLabel}
@@ -273,7 +273,7 @@ export default function VerifySupplierForm({ t, localePrefix = "" }: Props) {
           <option value="gt100k">{t.valueOptions.gt100k}</option>
           <option value="unknown">{t.valueOptions.unknown}</option>
         </select>
-        <p className="text-xs text-[#64748b] mt-1">{t.valueHint}</p>
+        <p className="text-xs text-[#6d6b66] mt-1">{t.valueHint}</p>
       </div>
 
       <div>
@@ -300,7 +300,7 @@ export default function VerifySupplierForm({ t, localePrefix = "" }: Props) {
         />
       </div>
 
-      <p className="text-xs text-[#64748b]">{t.privacyNote}</p>
+      <p className="text-xs text-[#6d6b66]">{t.privacyNote}</p>
       <p className="text-xs text-[#8a5410] bg-[#fff4e0] rounded-md px-2 py-1.5">{t.notAVerdict}</p>
 
       <button type="submit" disabled={status === "loading"} className="btn btn-primary w-full">

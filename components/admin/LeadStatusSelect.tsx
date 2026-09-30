@@ -64,7 +64,7 @@ export default function LeadStatusSelect({
         onChange={handleChange}
         disabled={saving}
         aria-label={referenceId}
-        className="rounded-md border border-[#e2e8f0] bg-white px-2 py-1 text-xs text-[#0f172a] disabled:opacity-60"
+        className="rounded-md border border-[#ebe8e1] bg-white px-2 py-1 text-xs text-[#171717] disabled:opacity-60"
       >
         {OPTIONS.map((o) => (
           <option key={o} value={o}>
@@ -72,7 +72,7 @@ export default function LeadStatusSelect({
           </option>
         ))}
       </select>
-      {saving && <span className="text-xs text-[#64748b]">{dict.saving}</span>}
+      {saving && <span className="text-xs text-[#6d6b66]">{dict.saving}</span>}
       {failed && !saving && <span className="text-xs text-[#d4232a]">{dict.error}</span>}
     </span>
   );
