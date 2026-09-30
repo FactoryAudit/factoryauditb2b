@@ -97,6 +97,12 @@ const HTML_LIMITED_BOTS = new RegExp(
 );
 
 const nextConfig = {
+  // ---- 自托管产物开关（宝塔 / 任意 Node 主机）---------------------------------
+  // 🔴 默认 **undefined** —— 与 Cloudflare / OpenNext 构建保持完全一致。
+  //    OpenNext 不使用 standalone 产物，打开只会多出一个无用目录并改变构建图。
+  //    自托管构建：FAB2B_OUTPUT=standalone node node_modules/next/dist/bin/next build
+  //    （deploy/build-standalone.mjs 会调用它并把产物整理成可直接上传的目录）
+  output: process.env.FAB2B_OUTPUT === "standalone" ? "standalone" : undefined,
   reactStrictMode: true,
   htmlLimitedBots: HTML_LIMITED_BOTS,
   async headers() {
