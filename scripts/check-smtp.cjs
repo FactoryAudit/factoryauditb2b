@@ -58,7 +58,7 @@ if (!PASS) missing.push("SMTP_PASS");
 if (!TO) missing.push("NOTIFY_ADMIN_EMAIL");
 if (missing.length) {
   console.log("\n[FAIL] 缺少配置:", missing.join(", "));
-  console.log("      → 复制 .env.example 为 .env 并补全邮件段（见 DEPLOY.md §4）\n");
+  console.log("      → 复制 .env.example 为 .env 并补全邮件段\n");
   process.exit(1);
 }
 
