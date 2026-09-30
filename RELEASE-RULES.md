@@ -306,7 +306,8 @@ node scripts/verify-live-md5.cjs --retries=6 --delay=20000   # 刚部署完 / �
 输出契约：末行 `LIVE_MD5_OK`（exit 0）或 `LIVE_MD5_MISMATCH`（exit 1）。
 
 ⚠️ **默认关键路由集不只是「对拍清单」，还是一条不变量**：这些路由**应当始终是预渲染产物**
-（当前 13 条，真源 = `scripts/verify-live-md5.cjs` 的 `DEFAULT_TARGETS`，勿在文档里再抄一份）。
+（当前 15 条，真源 = `scripts/verify-live-md5.cjs` 的 `DEFAULT_TARGETS`，勿在文档里再抄一份）。
+**变更史**：12 → 13（补 `/trust` 等）→ **15**（2026-09-30 CS-23 把 `/confidentiality`、`/integrity` 由「发布日显式补跑」提为默认集）。
 若其中某条报 `FAIL 无预渲染产物`，说明它被人改成了动态渲染 —— 这是**真回归**
 （本站在 CF Workers 免费额度下，动态渲染每请求现算，是 5xx / 1102 CPU 超限的主因）。
 

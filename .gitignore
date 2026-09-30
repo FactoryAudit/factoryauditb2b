@@ -117,3 +117,7 @@ gitstate.txt
 .sitemap-new.txt
 .url-submit-log.txt
 tmp/
+
+# CS-23 收尾：会话临时产物（outputs/ 已有 53 个已跟踪文件，不受影响；.tmp-verify/ 为探针截图）
+/outputs/
+/.tmp-verify/

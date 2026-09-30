@@ -24,7 +24,7 @@
  *   它会提前闭合注释导致 SyntaxError。因此注释里一律写作「`.../app` 下的 `*.html`」。
  *
  * 用法：
- *   node scripts/verify-live-md5.cjs                          # 默认关键路由集（12 条）
+ *   node scripts/verify-live-md5.cjs                          # 默认关键路由集（15 条）
  *   node scripts/verify-live-md5.cjs /terms /pricing          # 指定路由（不带前导斜杠亦可：terms）
  *   node scripts/verify-live-md5.cjs --all-locales /terms     # 展开为 9 语
  *   node scripts/verify-live-md5.cjs --retries=6 --delay=20000
@@ -72,6 +72,10 @@ const DEFAULT_TARGETS = [
   '/suppliers',
   '/industrial-clusters',
   '/trust',
+  // CS-23：合规三页里的两页（`/trust` 已在上面，是第三页）。
+  // 二者均为预渲染产物 ⇒ 满足本判据前提，纳入默认集后可当不变量长期守着。
+  '/confidentiality',
+  '/integrity',
   '/monitoring',
   '/rfq',
   '/custom-services',
