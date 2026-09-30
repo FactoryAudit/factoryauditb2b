@@ -1,5 +1,45 @@
 const nodemailer = require("nodemailer");
 const fs = require("fs");
+// ─────────────────────────────────────────────────────────────────────────────
+// ⚠️ 生产守卫（2026-09-30 加）
+// 本脚本第 2 步会删掉 .env 里的 NOTIFY_ADMIN_EMAIL / FROM_EMAIL 真值，并写入一次性
+// Ethereal 假账号 ⇒ **生产邮件配置会被冲掉**。现在生产通道是 Resend HTTP API
+// （Workers 禁 SMTP），已不需要 SMTP 假账号，因此：检测到 Resend 已配置就拒跑。
+// 确实要做纯 SMTP 实验：先备份 .env，再加 --force。
+// ─────────────────────────────────────────────────────────────────────────────
+function readEnvFile(p) {
+  if (!fs.existsSync(p)) return {};
+  const out = {};
+  for (const line of fs.readFileSync(p, "utf8").split(/\r?\n/)) {
+    const s = line.trim();
+    if (!s || s.startsWith("#")) continue;
+    const i = s.indexOf("=");
+    if (i === -1) continue;
+    out[s.slice(0, i).trim()] = s.slice(i + 1).trim();
+  }
+  return out;
+}
+
+if (!process.argv.includes("--force")) {
+  const _env = readEnvFile(".env");
+  const _httpMail = (_env.MAIL_PROVIDER || "").toLowerCase() === "http" || !!_env.MAIL_HTTP_KEY;
+  if (_httpMail) {
+    console.error("");
+    console.error("⛔ 已中止：检测到生产邮件通道（Resend HTTP）已配置。");
+    console.error("   本脚本会删掉 .env 的 NOTIFY_ADMIN_EMAIL / FROM_EMAIL 真值，");
+    console.error("   并换成一次性 Ethereal 假账号 —— 生产配置会被冲掉。");
+    console.error("");
+    console.error("   生产通道请改用（不需要 SMTP）：");
+    console.error("     · 端点/Key：GET https://api.resend.com/domains  → 200 + status=verified");
+    console.error("     · 投递回执：GET https://api.resend.com/emails   → 看 last_event");
+    console.error("     · 真发一封：POST https://api.resend.com/emails");
+    console.error("   详见技能 mail-channel-live-verification。");
+    console.error("");
+    console.error("   确实要做纯 SMTP 实验：先备份 .env，再加 --force 重跑。");
+    console.error("");
+    process.exit(1);
+  }
+}
 
 (async () => {
   // 1) 创建 Ethereal 测试账号（仅用于本地验证 SMTP 发送链路）

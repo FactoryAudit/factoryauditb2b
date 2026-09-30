@@ -50,6 +50,26 @@ console.log(line);
 console.log("  SMTP 自检 — 客户询盘能不能真的进你邮箱");
 console.log(line);
 
+// ---- 0) 通道判定（2026-09-30 加）----
+// 现在「SMTP_* 全空」是**正常状态**：Workers 禁 SMTP，生产走 Resend HTTP API。
+// 若仍按下面的必填项检查判 FAIL/exit 1，就会把「正常」误报成「坏了」。
+{
+  const httpMail = (env.MAIL_PROVIDER || "").toLowerCase() === "http";
+  const hasSmtp = !!(HOST || USER || PASS);
+  if (httpMail && !hasSmtp) {
+    console.log("");
+    console.log("[SKIP] 当前邮件通道 = HTTP API（Resend），未配置 SMTP —— 这是预期状态。");
+    console.log("       本脚本只排查 SMTP；本项目生产已不使用 SMTP。");
+    console.log("");
+    console.log("       验证生产邮件通道（不需要 SMTP）：");
+    console.log("         · 端点/Key：GET https://api.resend.com/domains → 200 + status=verified");
+    console.log("         · 投递回执：GET https://api.resend.com/emails  → 看 last_event");
+    console.log("         · 真发一封：POST https://api.resend.com/emails");
+    console.log("       详见技能 mail-channel-live-verification。");
+    console.log("");
+    process.exit(0);
+  }
+}
 // ---- 0) 必填项检查 ----
 const missing = [];
 if (!HOST) missing.push("SMTP_HOST");
