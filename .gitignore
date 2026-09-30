@@ -22,6 +22,10 @@ dist/
 
 # 写入脚本的本地备份（勿提交；translate-guides-*.cjs 写入前会生成）
 lib/*.bak
+# 会话期「整文件快照」备份：由整行 splice 脚本写盘前生成，名为 <file>.bak_r<NN>
+# （散落在 app/、components/、lib/ 下。原 lib/*.bak 规则只匹配以 .bak 结尾的文件，
+#   被 _rNN 后缀绕过，故此处按后缀统一收口。）
+*.bak_r*
 
 # Prisma 生成的 client 与本地数据库
 generated/
