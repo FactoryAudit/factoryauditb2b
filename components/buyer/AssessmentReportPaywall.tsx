@@ -6,6 +6,20 @@ import { localePath, type Locale } from "@/i18n/config";
 // 采购商侧「审核报告付费下载」占位（标签①②③）。
 // 当前不接真实支付：展示已发布标签对应的报告与价格，锁定态 CTA 引导至联系/定制服务页。
 // 真支付上线时，只需把 CTA 换成下单/解锁流程，本组件结构不变。
+//
+// 文案一律走字典：由服务端（供应商详情页）按 locale 预解析后经 dict 传入，
+// 本组件内不再出现任何硬编码文案（项目铁律：永不硬编码文案，一律用 dict key）。
+
+/** 本区块 7 条文案；由服务端从 dict.supplierProfile.assessmentReport* 取好后传入。 */
+export type AssessmentReportPaywallDict = {
+  title: string;
+  lead: string;
+  priceReady: string;
+  notPublished: string;
+  download: string;
+  unavailable: string;
+  note: string;
+};
 
 const ORDER: AssessmentType[] = ["self_assessment", "platform_assessment", "on_site_audit"];
 
@@ -21,24 +35,30 @@ const TAG_COLOR: Record<AssessmentType, string> = {
   on_site_audit: "border-[#b45309] text-[#b45309]",
 };
 
+/** 只替换 {price} 占位符；金额来自公开价单真源，不在文案里硬编码。 */
+function fill(template: string, price: string): string {
+  return template.replace(/\{price\}/g, price);
+}
+
 export default function AssessmentReportPaywall({
   supplierId,
   tags,
   locale,
+  dict,
 }: {
   supplierId: string;
   tags: AssessmentType[];
   locale: Locale;
+  dict: AssessmentReportPaywallDict;
 }) {
   const published = new Set(tags);
   const p = (href: string) => localePath(locale, href);
+  const zhLike = locale === "zh" || locale === "zh-TW";
 
   return (
     <section className="mt-10 rounded-xl border border-[#ebe8e1] bg-white p-6">
-      <h2 className="text-xl font-bold text-[#171717]">审核报告下载 · Assessment Reports</h2>
-      <p className="mt-1 text-sm text-[#6d6b66]">
-        采购商可付费下载以下已发布的审核报告（单份报告，PDF / 自包含 HTML）。
-      </p>
+      <h2 className="text-xl font-bold text-[#171717]">{dict.title}</h2>
+      <p className="mt-1 text-sm text-[#6d6b66]">{dict.lead}</p>
 
       <div className="mt-4 grid grid-cols-1 gap-3">
         {ORDER.map((type) => {
@@ -52,12 +72,14 @@ export default function AssessmentReportPaywall({
               <div>
                 <div className="flex items-center gap-2">
                   <span className={`rounded-full border px-2 py-0.5 text-xs font-semibold ${TAG_COLOR[type]}`}>
-                    {label.zh}
+                    {zhLike ? label.zh : label.en}
                   </span>
-                  <span className="text-sm font-medium text-[#171717]">{label.en}</span>
+                  {zhLike && (
+                    <span className="text-sm font-medium text-[#171717]">{label.en}</span>
+                  )}
                 </div>
                 <div className="mt-1 text-xs text-[#6d6b66]">
-                  {isPublished ? `价格 ${PRICE[type]} · 报告已生成` : "该标签尚未发布，暂无可下载报告"}
+                  {isPublished ? fill(dict.priceReady, PRICE[type]) : dict.notPublished}
                 </div>
               </div>
 
@@ -69,11 +91,11 @@ export default function AssessmentReportPaywall({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  下载报告 / Download
+                  {dict.download}
                 </a>
               ) : (
                 <span className="rounded-md bg-[#f5f3ee] px-3 py-1.5 text-xs text-[#8c8982]">
-                  未发布 / Unavailable
+                  {dict.unavailable}
                 </span>
               )}
             </div>
@@ -81,9 +103,7 @@ export default function AssessmentReportPaywall({
         })}
       </div>
 
-      <p className="mt-4 text-xs text-[#8c8982]">
-        付费下载功能即将上线；当前点击「付费下载」将转至定制服务咨询。价格以 {PRICE_ANCHORS.verification} 等公开价单为准。
-      </p>
+      <p className="mt-4 text-xs text-[#8c8982]">{fill(dict.note, PRICE_ANCHORS.verification)}</p>
     </section>
   );
 }

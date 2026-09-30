@@ -1998,7 +1998,14 @@
     "capacityExportSince": "يصدّر منذ",
     "regionLabel": "المنطقة",
     "industrialClusterLabel": "التجمع الصناعي",
-    "verifyThisSupplier": "التحقق من هذا المورّد"
+    "verifyThisSupplier": "التحقق من هذا المورّد",
+    "assessmentReportTitle": "تنزيل تقارير التدقيق",
+    "assessmentReportLead": "يمكن للمشترين شراء وتنزيل تقارير التدقيق المنشورة المدرجة أدناه (تقرير فردي، PDF أو HTML مكتفٍ ذاتيًا).",
+    "assessmentReportPriceReady": "{price} · التقرير جاهز",
+    "assessmentReportNotPublished": "لم يتم نشر هذا التقرير بعد. لا يوجد شيء لتنزيله.",
+    "assessmentReportDownload": "تنزيل التقرير",
+    "assessmentReportUnavailable": "غير متاح",
+    "assessmentReportNote": "سيتوفر التنزيل المدفوع قريبًا. في الوقت الحالي، يؤدي النقر على رابط تقرير إلى فتح استفسار خدمة مخصصة. تتبع الأسعار قائمة الأسعار المنشورة لدينا."
   },
   "reportPreview": {
     "badge": "عرض مجاني",

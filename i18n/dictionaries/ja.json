@@ -1998,7 +1998,14 @@
     "capacityExportSince": "輸出開始年",
     "regionLabel": "地域",
     "industrialClusterLabel": "産業クラスター",
-    "verifyThisSupplier": "このサプライヤーを検証"
+    "verifyThisSupplier": "このサプライヤーを検証",
+    "assessmentReportTitle": "審査レポートのダウンロード",
+    "assessmentReportLead": "購入者は以下に掲載された公開済みの審査レポートを有料で購入・ダウンロードできます（単体レポート、PDF または単一ファイル HTML）。",
+    "assessmentReportPriceReady": "{price} · レポート作成済み",
+    "assessmentReportNotPublished": "このレポートはまだ公開されていません。ダウンロードできるものはありません。",
+    "assessmentReportDownload": "レポートをダウンロード",
+    "assessmentReportUnavailable": "未公開",
+    "assessmentReportNote": "有料ダウンロードは近日公開予定です。現在、レポートのリンクをクリックするとカスタムサービスへのお問い合わせに移動します。価格は公表している価格表に準じます。"
   },
   "reportPreview": {
     "badge": "無料プレビュー",

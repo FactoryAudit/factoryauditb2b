@@ -1998,7 +1998,14 @@
     "capacityExportSince": "出口起始年份",
     "regionLabel": "地區",
     "industrialClusterLabel": "產業帶",
-    "verifyThisSupplier": "核驗這家供應商"
+    "verifyThisSupplier": "核驗這家供應商",
+    "assessmentReportTitle": "審核報告下載",
+    "assessmentReportLead": "採購商可付費下載以下已發布的審核報告（單份報告，PDF / 自包含 HTML）。",
+    "assessmentReportPriceReady": "{price} · 報告已生成",
+    "assessmentReportNotPublished": "該報告尚未發布，暫無可下載內容。",
+    "assessmentReportDownload": "下載報告",
+    "assessmentReportUnavailable": "未發布",
+    "assessmentReportNote": "付費下載功能即將上線；目前點擊報告連結將轉至客製服務諮詢。價格以我們公布的價目表為準。"
   },
   "reportPreview": {
     "badge": "免費預覽",

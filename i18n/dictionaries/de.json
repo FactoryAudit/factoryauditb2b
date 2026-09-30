@@ -1998,7 +1998,14 @@
     "capacityExportSince": "Exportiert seit",
     "regionLabel": "Region",
     "industrialClusterLabel": "Industriecluster",
-    "verifyThisSupplier": "Diesen Lieferanten prüfen"
+    "verifyThisSupplier": "Diesen Lieferanten prüfen",
+    "assessmentReportTitle": "Prüfbericht-Download",
+    "assessmentReportLead": "Einkäufer können die unten aufgeführten veröffentlichten Prüfberichte kostenpflichtig erwerben und herunterladen (Einzelbericht, PDF oder eigenständiges HTML).",
+    "assessmentReportPriceReady": "{price} · Bericht erstellt",
+    "assessmentReportNotPublished": "Dieser Bericht ist noch nicht veröffentlicht. Es gibt nichts zum Herunterladen.",
+    "assessmentReportDownload": "Bericht herunterladen",
+    "assessmentReportUnavailable": "Nicht verfügbar",
+    "assessmentReportNote": "Der kostenpflichtige Download startet in Kürze. Derzeit öffnet ein Berichtslink eine Anfrage für individuelle Leistungen. Die Preise richten sich nach unserer veröffentlichten Preisliste."
   },
   "reportPreview": {
     "badge": "Kostenlose Preview",

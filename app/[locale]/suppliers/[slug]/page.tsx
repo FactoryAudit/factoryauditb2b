@@ -433,7 +433,7 @@ export default async function SupplierProfilePage({
             <div className="font-medium text-[#171717]">{v.levelsShort[level]}</div>
 
             {/* CS-21：三标签审核徽章 */}
-            <AssessmentTags tags={assessmentTags} />
+            <AssessmentTags tags={assessmentTags} locale={locale} />
 
             {/* CS-22 / CS-A：三态验证徽章（状态由 trustProfile.ts 推导，组件不自判） */}
             <div className="mt-4">
@@ -910,7 +910,20 @@ export default async function SupplierProfilePage({
         </section>
 
         {/* CS-21：采购商审核报告付费下载（占位，不接真实支付） */}
-        <AssessmentReportPaywall supplierId={s.id} tags={assessmentTags} locale={locale} />
+        <AssessmentReportPaywall
+          supplierId={s.id}
+          tags={assessmentTags}
+          locale={locale}
+          dict={{
+            title: sp.assessmentReportTitle,
+            lead: sp.assessmentReportLead,
+            priceReady: sp.assessmentReportPriceReady,
+            notPublished: sp.assessmentReportNotPublished,
+            download: sp.assessmentReportDownload,
+            unavailable: sp.assessmentReportUnavailable,
+            note: sp.assessmentReportNote,
+          }}
+        />
 
         {/* ==================================================================
             FAQ（PHASE 03 §七 / §九）

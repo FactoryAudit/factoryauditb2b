@@ -1353,7 +1353,14 @@
     "capacityExportSince": "出口起始年份",
     "regionLabel": "地区",
     "industrialClusterLabel": "产业带",
-    "verifyThisSupplier": "核验这家供应商"
+    "verifyThisSupplier": "核验这家供应商",
+    "assessmentReportTitle": "审核报告下载",
+    "assessmentReportLead": "采购商可付费下载以下已发布的审核报告（单份报告，PDF / 自包含 HTML）。",
+    "assessmentReportPriceReady": "{price} · 报告已生成",
+    "assessmentReportNotPublished": "该报告尚未发布，暂无可下载内容。",
+    "assessmentReportDownload": "下载报告",
+    "assessmentReportUnavailable": "未发布",
+    "assessmentReportNote": "付费下载功能即将上线；当前点击报告链接将转至定制服务咨询。价格以我们公布的价目表为准。"
   },
   "reportPreview": {
     "badge": "免费预览",

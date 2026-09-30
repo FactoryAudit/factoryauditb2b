@@ -1998,7 +1998,14 @@
     "capacityExportSince": "Exporta desde",
     "regionLabel": "Região",
     "industrialClusterLabel": "Clúster industrial",
-    "verifyThisSupplier": "Verificar este fornecedor"
+    "verifyThisSupplier": "Verificar este fornecedor",
+    "assessmentReportTitle": "Download de relatórios de auditoria",
+    "assessmentReportLead": "Compradores podem adquirir e baixar os relatórios de auditoria publicados listados abaixo (relatório individual, PDF ou HTML autônomo).",
+    "assessmentReportPriceReady": "{price} · Relatório pronto",
+    "assessmentReportNotPublished": "Este relatório ainda não foi publicado. Não há nada para baixar.",
+    "assessmentReportDownload": "Baixar relatório",
+    "assessmentReportUnavailable": "Indisponível",
+    "assessmentReportNote": "O download pago será lançado em breve. Por enquanto, um link de relatório abre uma solicitação de serviço personalizado. Os preços seguem nossa tabela de preços publicada."
   },
   "reportPreview": {
     "badge": "Pré-visualização gratuita",

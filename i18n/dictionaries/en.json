@@ -1483,7 +1483,14 @@
     "capacityExportSince": "Exporting since",
     "regionLabel": "Region",
     "industrialClusterLabel": "Industrial cluster",
-    "verifyThisSupplier": "Verify this supplier"
+    "verifyThisSupplier": "Verify this supplier",
+    "assessmentReportTitle": "Assessment Report Downloads",
+    "assessmentReportLead": "Buyers can purchase and download the published assessment reports listed below (single report, PDF or self-contained HTML).",
+    "assessmentReportPriceReady": "{price} · Report ready",
+    "assessmentReportNotPublished": "This report is not published yet. There is nothing to download.",
+    "assessmentReportDownload": "Download report",
+    "assessmentReportUnavailable": "Unavailable",
+    "assessmentReportNote": "Paid downloads are launching soon. For now a report link opens a custom-service enquiry. Prices follow our published price list."
   },
   "methodology": {
     "badge": "Methodology",
