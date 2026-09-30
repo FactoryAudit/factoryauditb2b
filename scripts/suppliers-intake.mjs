@@ -28,8 +28,33 @@ import { readFileSync, existsSync } from "node:fs";
 const BASE = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
 const KEY = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim();
 const APPLY = process.argv.includes("--apply");
+const SHOW_PAYLOAD = process.argv.includes("--show-payload");
 const fileIdx = process.argv.indexOf("--file");
 const FILE = fileIdx > -1 ? process.argv[fileIdx + 1] : "data/suppliers-intake.json";
+
+/**
+ * 产品词英文化映射表（2026-10-01 起）────────────────────────────────────
+ *
+ * 站点约定（docs/SUPPLIER-SEO-V1.0-AUDIT.md:71）：`main_products` 是**英文**自由文本数组。
+ * 2026-10-01 的 200 家广交会名录批量录入写成了中文，其中 21 家已发布
+ * ⇒ 英文站的产品词是中文、搜索 `?q=shoe` 命中 0 家（本条闸门就是为此立的）。
+ *
+ * 为什么在这里「自动英文化」而不是直接拒绝中文：
+ *   data/suppliers-intake-*.json 是**历史溯源记录**，里面保留的是当初抓到的中文原文；
+ *   直接报错会让这些文件无法再跑。这里查表替换，既让历史文件可用，又保证落库一定是英文。
+ * 🔴 表里没有的词一律**报错**（不猜测）—— 守「不编造」红线。
+ */
+const PRODUCT_TERMS_FILE = "data/product-terms-zh-en.json";
+const PRODUCT_TERMS = (() => {
+  try {
+    return JSON.parse(readFileSync(PRODUCT_TERMS_FILE, "utf8")).terms ?? {};
+  } catch {
+    console.error(`⚠ 读不到 ${PRODUCT_TERMS_FILE}，产品词英文化闸门将把所有中文词判为未映射`);
+    return {};
+  }
+})();
+/** 中日韩统一表意文字 + 日文假名 + 韩文谚文（与 data 侧一致） */
+const CJK_RE = /[\u4e00-\u9fff\u3040-\u30ff\uac00-\ud7af]/;
 
 if (!BASE || !KEY) {
   console.error("❌ 缺少环境变量 NEXT_PUBLIC_SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY（用 --env-file=.env 运行）");
@@ -38,10 +63,16 @@ if (!BASE || !KEY) {
 
 // ── 允许值域（与线上数据 + lib 口径对齐）────────────────────────────────
 const COUNTRIES = new Set(["china", "vietnam", "thailand", "malaysia", "indonesia"]);
-/** 已知行业（不在集合内 → 警告，不阻断；以 /industry 页面实际配置为准） */
+/**
+ * 已知行业（不在集合内 → 警告，不阻断）。
+ * 🔴 真源 = lib/staticData.ts 的 STATIC_INDUSTRIES —— 改那份必须同步这里。
+ *    2026-10-01 修正：原清单漏了 toys/footwear/home-appliances/automotive/furniture/cosmetics，
+ *    且含一个并不存在的 eyewear（历史遗留），导致整批刷误导性警告。
+ */
 const KNOWN_INDUSTRIES = new Set([
-  "electronics", "textiles", "machinery", "eyewear", "food-beverage",
-  "plastics", "packaging", "chemicals",
+  "electronics", "textiles", "toys", "footwear", "machinery", "plastics",
+  "home-appliances", "food-beverage", "chemicals", "automotive",
+  "furniture", "packaging", "cosmetics",
 ]);
 /** 明令禁止出现的列（个人数据 / 越界字段） */
 const FORBIDDEN_KEYS = ["phone", "contact_person", "contact_email", "whatsapp", "consent_ip"];
@@ -145,6 +176,28 @@ function normalize(row, idx) {
   if (!out.main_products?.length) errs.push("main_products 为空");
   if (!out.source_url) errs.push("source_url 为空");
 
+  // ── 产品词英文化闸门 ────────────────────────────────────────────────────
+  // 逐词查表替换（已英文的原样保留）；查不到的**报错**，绝不猜测。
+  if (out.main_products?.length) {
+    const mapped = [];
+    const unmapped = [];
+    for (const t of out.main_products) {
+      if (!CJK_RE.test(t)) {
+        mapped.push(t);
+        continue;
+      }
+      const en = PRODUCT_TERMS[t];
+      if (typeof en === "string" && en.trim()) mapped.push(en.trim());
+      else unmapped.push(t);
+    }
+    out.main_products = mapped;
+    if (unmapped.length) {
+      errs.push(
+        `main_products 含无法英文化的词（须先补进 ${PRODUCT_TERMS_FILE} 再跑）：${unmapped.join(" / ")}`
+      );
+    }
+  }
+
   // 强制覆盖：第一批一律未发布、未核验
   out.is_published = false;
   out.verification_level = "unverified";
@@ -219,6 +272,11 @@ function nullOnlyPatch(existing, payload) {
       console.log(`  ✗ ${r.label} ${r.errs.join("; ")}`);
     } else {
       ready.push(r);
+      // 英文化闸门的结果必须**可见**：dry-run 时把最终 main_products 打出来，
+      // 否则「闸门跑过了」和「闸门真的替换了」在输出上无法区分。
+      if (SHOW_PAYLOAD) {
+        console.log(`  · ${r.slug}  main_products = ${JSON.stringify(r.payload.main_products)}`);
+      }
     }
   }
   console.log(`\n校验：通过 ${ready.length}｜不通过 ${bad}\n`);
