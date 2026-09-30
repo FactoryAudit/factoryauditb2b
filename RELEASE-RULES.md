@@ -219,7 +219,8 @@ node -e "const fs=require('fs');if(fs.existsSync('.next')){const t='.next.trash-
 最后跑全部回归 + `verify-opennext-bundle` 验证。
 
 当前基线：**3192**（`en.json` 叶子数，单一事实源；历史：2940 → 3126 → **3192**，随 clusters / 五国 FAQ 等命名空间扩容同步）。
-（本行是 cs13b `A5` 断言的锚点：该断言要求本文档**含** `**3192**`，且非 changelog 行不得残留旧值。）
+（上一行是 cs13b `A5` 断言的锚点：该断言要求本文档**含**当前叶子数常量，且非 changelog 行不得残留更早的值。
+⚠️ 这个字面量在本文件中**只应出现一次**（就是上一行），别在别处重复 —— 同步脚本按唯一命中替换。）
 变更历史见 `scripts/cs06a-directory-regression.ts` 的 C7 注释 —— **历史条目不可篡改**，
 同步脚本必须保护 `A → B` 这类既成事实的标记。
 
