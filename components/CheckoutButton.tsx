@@ -4,8 +4,13 @@
 //
 // 三种状态，一律诚实呈现，绝不"点了才发现付不了款"：
 //   1. 未登录          → 跳 /login?next=<当前页>，登录后能直接回来接着付
-//   2. 已登录 + Stripe 已配置 → 调 /api/stripe/checkout 拿 URL 后跳转
-//   3. 已登录 + Stripe 未配置 → 降级跳 /custom-services（人工对接）
+//   2. 已登录 + 任一渠道已配置 → 调 /api/membership/checkout 拿 URL 后跳转
+//   3. 已登录 + 两条线都没配   → 降级跳 /custom-services（人工对接）
+//
+// 为什么调 /api/membership/checkout 而不是 /api/stripe/checkout：
+//   本项目主渠道是 **PayPal**（Stripe 不支持中国大陆主体）。原先直连 Stripe 路由
+//   等于把 PayPal 整条渠道挡在 UI 之外 —— 密钥配好了按钮依然是死路。
+//   现在由服务端按**实际已配置的密钥**选渠道，前端不关心走哪条线。
 //
 // 为什么第 3 种不隐藏按钮：
 //   隐藏 = 用户永远不知道有付费这回事；报错 = 用户体验崩。
@@ -61,7 +66,7 @@ export default function CheckoutButton({
     trackEvent(ANALYTICS_EVENTS.foundingBuyerCheckoutStart);
 
     try {
-      const res = await fetch("/api/stripe/checkout", {
+      const res = await fetch("/api/membership/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ locale }),

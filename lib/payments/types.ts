@@ -54,7 +54,8 @@ export type PaymentErrorCode =
   | "provider_network_error" // 网络异常
   | "invalid_signature" // webhook 验签失败
   | "missing_user_reference" // webhook 里找不到 user_id，无法关联
-  | "unsupported_mode"; // 该渠道不支持这种计费形态
+  | "unsupported_mode" // 该渠道不支持这种计费形态
+  | "unsupported_currency"; // 该渠道（或该产品线）不支持这种币种
 
 /** 各渠道实现的统一接口 */
 export interface PaymentChannel {

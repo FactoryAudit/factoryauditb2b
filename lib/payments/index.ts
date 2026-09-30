@@ -104,6 +104,40 @@ export async function claimEvent(
   }
 }
 
+/**
+ * 释放一次事件占位（幂等回滚）。
+ *
+ * 为什么必须有：
+ *   claimEvent() 是「先占位、后处理」。若占了位但业务处理失败，渠道重投时会
+ *   命中主键冲突被判为「已处理过」而永久跳过 —— 占位记录本身变成了
+ *   「这件事永远做不成」的证据。所以**失败路径必须把占位删掉**，
+ *   否则重投机制形同虚设。
+ *
+ * 调用策略：
+ *   · 暂时性失败（db_error）           → 释放占位，让渠道重投走完整流程
+ *   · 永久性失败（no_user_reference）  → **保留占位**（重投结果一样，白耗配额）
+ */
+export async function releaseEvent(
+  provider: PaymentProvider,
+  eventId: string
+): Promise<void> {
+  const db = createAdminClient();
+  if (!db) return;
+  try {
+    const { error } = await db
+      .from("payment_events")
+      .delete()
+      .eq("provider", provider)
+      .eq("event_id", eventId);
+    if (error) {
+      // 删不掉不是致命问题（后果=这次事件永不再重试），但必须留痕
+      console.error("[payments] 释放幂等占位失败", provider, eventId, error.message);
+    }
+  } catch (e) {
+    console.error("[payments] 释放幂等占位异常", e);
+  }
+}
+
 // ---------- 3. 会员开通（唯一实现） ----------
 
 export type ApplyResult =
@@ -220,7 +254,7 @@ export async function handleWebhook(
   provider: PaymentProvider,
   rawBody: string,
   headers: Headers
-): Promise<{ status: 200 | 400; reason: string }> {
+): Promise<{ status: 200 | 400 | 500; reason: string }> {
   const channel = getChannel(provider);
   if (!channel) return { status: 400, reason: "unsupported_provider" };
 
@@ -244,7 +278,31 @@ export async function handleWebhook(
   }
 
   // 4) 落到 memberships
-  await applyMembershipEvent(ev);
+  //
+  // 🔴 失败绝不能被吞掉。原实现是 `await applyMembershipEvent(ev);` 之后
+  //    无条件返回 200，一旦写库失败（列缺失 / service_role 失效 / 网络抖动）：
+  //      · 事件已在第 2 步 claimEvent() 占位 ⇒ 渠道重投命中「已处理过」被永久跳过；
+  //      · 调用方却收到 200 ⇒ 渠道不再重试、也没有任何告警。
+  //    净结果：钱收了、会员永远开不出来、没人知道。这是本次修复的核心。
+  //
+  //    两类失败分开处理：
+  //      · no_user_reference —— 永久性。重投多少次都一样，故**保留占位**并回 200
+  //        （防渠道无谓重试），但打 ERROR 日志待人工介入。
+  //      · db_error —— 暂时性。**释放占位**并回 500，让渠道重投重新走完整流程。
+  const applied = await applyMembershipEvent(ev);
+  if (!applied.ok) {
+    if (applied.error === "no_user_reference") {
+      console.error(
+        `[payments] 事件无法关联用户，已放弃（保留占位防重投）：provider=${provider} event=${ev.eventId} type=${ev.rawType}`
+      );
+      return { status: 200, reason: "no_user_reference" };
+    }
+    await releaseEvent(provider, ev.eventId);
+    console.error(
+      `[payments] 会员开通写库失败，已释放幂等占位等待重投：provider=${provider} event=${ev.eventId} type=${ev.rawType}`
+    );
+    return { status: 500, reason: "db_error" };
+  }
   return { status: 200, reason: "ok" };
 }
 

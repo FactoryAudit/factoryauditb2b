@@ -936,15 +936,36 @@ export async function updateLeadStatus(
 // ---------- 会员 ----------
 
 export type AdminMemberRow = {
+  /** profiles.id —— 后台写操作的唯一定位键。email 可重名，绝不当主键用。 */
+  user_id: string;
   email: string;
+  /** 用户自填（注册时录入）。**不是核验过的资质**，仅作运营识别用。 */
+  full_name: string | null;
+  /** 用户自填公司名。同上，未经核验，不可当作已认证主体。 */
+  company: string | null;
+  locale: string | null;
   role: string;
   plan: string;
   status: string;
   current_period_end: string | null;
+  /** 支付渠道：stripe / paypal / alipay / manual（manual = 后台手动开通） */
+  provider: string | null;
   stripe_customer_id: string | null;
   created_at: string;
 };
 
+/**
+ * 会员列表（profiles 主表 + memberships 内联）。
+ *
+ * ⚠️ 口径说明（有意为之，不是 bug）：
+ *   本列表的「已付费」判定**只按 plan**，不叠加 status=active。
+ *   后台必须能看见「已取消 / 已过期 / 扣款失败」的人，否则运营发现不了
+ *   需要跟进的对象。首页统计（getAdminStats）用「plan 且 status=active」
+ *   的严格口径 —— 两处口径不同是设计。
+ *
+ * 安全：绝不返回支付凭据。stripe_customer_id 只作「是否已绑定渠道」的标记，
+ *       页面不渲染其完整值。
+ */
 export async function listAdminMembers(limit = 200): Promise<AdminMemberRow[]> {
   const db = createAdminClient();
   if (!db) return [];
@@ -953,7 +974,7 @@ export async function listAdminMembers(limit = 200): Promise<AdminMemberRow[]> {
     const { data, error } = await db
       .from("profiles")
       .select(
-        "email, role, created_at, memberships(plan, status, current_period_end, stripe_customer_id)"
+        "id, email, full_name, company, locale, role, created_at, memberships(plan, status, current_period_end, provider, stripe_customer_id)"
       )
       .order("created_at", { ascending: false })
       .limit(limit);
@@ -961,23 +982,36 @@ export async function listAdminMembers(limit = 200): Promise<AdminMemberRow[]> {
       console.error("[adminData] list members failed", error.message);
       return [];
     }
+    type MembershipPart = {
+      plan: string;
+      status: string;
+      current_period_end: string | null;
+      provider: string | null;
+      stripe_customer_id: string | null;
+    };
     type Row = {
-      email: string;
-      role: string;
+      id: string;
+      email: string | null;
+      full_name: string | null;
+      company: string | null;
+      locale: string | null;
+      role: string | null;
       created_at: string;
-      memberships:
-        | { plan: string; status: string; current_period_end: string | null; stripe_customer_id: string | null }
-        | Array<{ plan: string; status: string; current_period_end: string | null; stripe_customer_id: string | null }>
-        | null;
+      memberships: MembershipPart | MembershipPart[] | null;
     };
     return ((data ?? []) as unknown as Row[]).map((r) => {
       const m = Array.isArray(r.memberships) ? r.memberships[0] : r.memberships;
       return {
+        user_id: r.id,
         email: r.email ?? "",
+        full_name: r.full_name ?? null,
+        company: r.company ?? null,
+        locale: r.locale ?? null,
         role: r.role ?? "buyer",
         plan: m?.plan ?? "free",
         status: m?.status ?? "active",
         current_period_end: m?.current_period_end ?? null,
+        provider: m?.provider ?? null,
         stripe_customer_id: m?.stripe_customer_id ?? null,
         created_at: r.created_at,
       };
@@ -985,6 +1019,75 @@ export async function listAdminMembers(limit = 200): Promise<AdminMemberRow[]> {
   } catch (e) {
     console.error("[adminData] list members exception", e);
     return [];
+  }
+}
+
+/** 后台对会员可执行的动作。三选一，映射到 memberships 的三个字段组合。 */
+export type AdminMembershipAction = "revoke" | "grant_yearly" | "grant_lifetime";
+
+/**
+ * 后台手动开通 / 撤销会员（线下成交路径）。
+ *
+ * 为什么必须有：本项目实际成交不走在线支付 —— 买家谈定后由运营手动开通。
+ *   在此之前 memberships.plan 只有支付 webhook 一条写入路径，
+ *   等于「没有支付密钥 = 没有任何办法产生一个付费会员」。
+ *
+ * 与 webhook 路径的分工（避免两条写路径互相踩）：
+ *   两者都写 memberships，但**各管各的字段**：
+ *     · webhook 路径写 provider 渠道 id / amount_minor / currency（对账信息）
+ *     · 手动路径只写 plan / status / period_* / provider='manual'
+ *   手动路径**刻意不写** stripe_customer_id / provider_order_id / amount_minor ——
+ *   线下成交没有这些数据：写 null 会冲掉已有渠道绑定，写假值等于伪造对账依据。
+ *   （Supabase upsert 只更新 payload 里出现的列，未出现的列保持原值。）
+ *
+ * 安全：本函数只负责写入，**不做鉴权** —— 调用方必须先过 requireAdmin()。
+ *       写操作须由调用方记入 admin_audit_log。
+ */
+export async function updateAdminMembership(
+  userId: string,
+  action: AdminMembershipAction
+): Promise<boolean> {
+  const db = createAdminClient();
+  if (!db) return false;
+  try {
+    const now = new Date();
+    const row: Record<string, unknown> = {
+      user_id: userId,
+      provider: "manual",
+      billing_mode: "one_time",
+      updated_at: now.toISOString(),
+    };
+
+    if (action === "revoke") {
+      // 撤销：回落 free。保留 current_period_start 便于事后查开通时间点。
+      row.plan = "free";
+      row.status = "canceled";
+      row.current_period_end = null;
+    } else if (action === "grant_yearly") {
+      const end = new Date(now);
+      end.setFullYear(end.getFullYear() + 1);
+      row.plan = "founding_buyer";
+      row.status = "active";
+      row.current_period_start = now.toISOString();
+      row.current_period_end = end.toISOString();
+    } else {
+      // 终身：current_period_end = NULL ⇒ resolveTier() 跳过过期校验（lib/access.ts）
+      row.plan = "founding_buyer";
+      row.status = "active";
+      row.current_period_start = now.toISOString();
+      row.current_period_end = null;
+    }
+
+    // memberships_user_unique 唯一索引 ⇒ 一人一条
+    const { error } = await db.from("memberships").upsert(row, { onConflict: "user_id" });
+    if (error) {
+      console.error("[adminData] update membership failed", error.message);
+      return false;
+    }
+    return true;
+  } catch (e) {
+    console.error("[adminData] update membership exception", e);
+    return false;
   }
 }
 
@@ -1021,7 +1124,10 @@ const supplierIdBySlug = getAdminSupplierIdBySlug;
 export async function logAdminAction(
   ctx: AdminContext,
   action: string,
-  targetType: "document" | "certification" | "audit" | "supplier" | "report",
+  // ⚠️ 加新取值必须同步：member 由「后台手动开通会员」写入（见 updateAdminMembership）。
+  //    该列在库里是纯 text 无 CHECK —— 漏加类型不会报错，只会让审计静默写不进去，
+  //    因此这个联合类型就是事实上的白名单。
+  targetType: "document" | "certification" | "audit" | "supplier" | "report" | "member",
   targetId: string,
   diff?: Record<string, unknown>,
   opts?: { ipAddress?: string | null; notes?: string | null }

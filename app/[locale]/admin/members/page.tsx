@@ -1,17 +1,46 @@
 import { notFound } from "next/navigation";
 import { isLocale, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
-import { listAdminMembers, requireAdmin } from "@/lib/adminData";
+import { listAdminMembers, requireAdmin, type AdminMemberRow } from "@/lib/adminData";
+import MemberPlanSelect, { type MemberAction } from "@/components/admin/MemberPlanSelect";
 
 // Admin · 会员列表
 //
-// 展示每个账号的套餐与订阅状态。不展示任何支付凭据
-// （stripe_customer_id 只在列表里作为"已绑定"标记，不渲染完整值）。
+// 能力（2026-09-30 补全）：
+//   1. 展示每个账号的身份（姓名 / 公司）与会员档位、状态、到期时间
+//   2. **手动开通 / 撤销会员** —— 线下成交路径的唯一入口。
+//      在此之前 memberships.plan 只有支付 webhook 一条写入路径，
+//      等于"没有支付密钥 = 没有任何办法产生一个付费会员"。
+//
+// 安全：
+//   · 整页 requireAdmin()，非 admin 直接 notFound()（不暴露后台存在）
+//   · force-dynamic：绝不预渲染（后台数据不冻结、不进构建产物）
+//   · 不展示任何支付凭据：stripe_customer_id 只作为"已绑定渠道"的标记，
+//     页面不渲染它的值
+//
+// 关于硬编码的英文小标签（admin badge / manual badge / —）：
+//   与 LeadStatusSelect 同一约定 —— 后台是单人内部工具，不补 9 语翻译。
+//   新增字典键会触发 i18n 叶子数闸门（22 文件白名单），代价远大于收益。
 
 export const dynamic = "force-dynamic";
 export const metadata = { robots: { index: false, follow: false } };
 
 type Props = { params: Promise<{ locale: string }> };
+
+/**
+ * 由 plan + status + 到期时间反推"当前档位"，用于给下拉选默认项。
+ *
+ * 规则必须与 lib/access.ts:resolveTier() 一致，否则会出现
+ * "界面显示付费、实际拿不到权限"的错位：
+ *   · plan !== founding_buyer                → free
+ *   · plan === founding_buyer 且无到期时间    → 终身（resolveTier 跳过过期校验）
+ *   · 其余                                    → 一年期
+ */
+function currentActionOf(r: AdminMemberRow): MemberAction {
+  if (r.plan !== "founding_buyer") return "revoke";
+  if (!r.current_period_end) return "grant_lifetime";
+  return "grant_yearly";
+}
 
 export default async function AdminMembersPage({ params }: Props) {
   const { locale: raw } = await params;
@@ -34,6 +63,13 @@ export default async function AdminMembersPage({ params }: Props) {
     canceled: a.statusCanceled,
     past_due: a.statusPastDue,
     expired: a.statusExpired,
+  };
+
+  // 三个动作的展示标签：复用既有 admin 键 + 内部工具后缀（不新增字典键）
+  const actionLabels: Record<MemberAction, string> = {
+    revoke: a.planFree,
+    grant_yearly: `${a.planFounding} · 1y`,
+    grant_lifetime: `${a.planFounding} · lifetime`,
   };
 
   const paidCount = rows.filter((r) => r.plan === "founding_buyer").length;
@@ -59,18 +95,26 @@ export default async function AdminMembersPage({ params }: Props) {
             <table className="w-full text-left text-sm">
               <thead className="border-b border-[#ebe8e1] bg-[#fbfaf7] text-xs uppercase text-[#6d6b66]">
                 <tr>
+                  <th className="px-4 py-3">{a.colName}</th>
                   <th className="px-4 py-3">{a.colEmail}</th>
                   <th className="px-4 py-3">{a.colPlan}</th>
                   <th className="px-4 py-3">{a.colStatus}</th>
                   <th className="px-4 py-3">{a.colPeriodEnd}</th>
-                  <th className="px-4 py-3">{a.colCreated}</th>
+                  <th className="px-4 py-3">{a.colCreatedAt}</th>
+                  <th className="px-4 py-3">{a.edit}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#ebe8e1]">
                 {rows.map((r) => {
                   const paid = r.plan === "founding_buyer";
                   return (
-                    <tr key={r.email} className="hover:bg-[#fbfaf7]">
+                    <tr key={r.user_id} className="hover:bg-[#fbfaf7]">
+                      <td className="px-4 py-3">
+                        <div className="text-[#171717]">{r.full_name || "—"}</div>
+                        {r.company && (
+                          <div className="text-xs text-[#8c8982]">{r.company}</div>
+                        )}
+                      </td>
                       <td className="px-4 py-3">
                         <a
                           href={`mailto:${r.email}`}
@@ -94,6 +138,9 @@ export default async function AdminMembersPage({ params }: Props) {
                         >
                           {planLabel[r.plan] ?? r.plan}
                         </span>
+                        {r.provider === "manual" && (
+                          <span className="ml-2 text-xs text-[#8c8982]">manual</span>
+                        )}
                       </td>
                       <td className="px-4 py-3 text-[#3f4650]">
                         {statusLabel[r.status] ?? r.status}
@@ -105,6 +152,18 @@ export default async function AdminMembersPage({ params }: Props) {
                       </td>
                       <td className="px-4 py-3 text-xs text-[#8c8982]">
                         {new Date(r.created_at).toISOString().slice(0, 10)}
+                      </td>
+                      <td className="px-4 py-3">
+                        <MemberPlanSelect
+                          userId={r.user_id}
+                          action={currentActionOf(r)}
+                          email={r.email}
+                          dict={{
+                            labels: actionLabels,
+                            saving: a.saving,
+                            error: a.error,
+                          }}
+                        />
                       </td>
                     </tr>
                   );

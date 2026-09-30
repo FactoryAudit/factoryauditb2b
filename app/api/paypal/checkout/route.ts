@@ -67,9 +67,16 @@ export async function POST(req: NextRequest) {
   });
 
   if (!result.ok) {
-    // payment_not_configured（如 Plan 未配）→ 让前端降级到人工服务；
+    // payment_not_configured（如 Plan 未配）→ 让前端降级到人工服务
+    // unsupported_currency → 请求了无定价真源的币种，属客户端参数问题（400），
+    //                        不是渠道故障，不该按 502 报
     // 其余为渠道临时故障 → 502
-    const status = result.error === "payment_not_configured" ? 503 : 502;
+    const status =
+      result.error === "payment_not_configured"
+        ? 503
+        : result.error === "unsupported_currency"
+          ? 400
+          : 502;
     return NextResponse.json({ ok: false, error: result.error }, { status });
   }
 

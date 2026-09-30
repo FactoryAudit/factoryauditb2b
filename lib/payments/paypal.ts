@@ -25,6 +25,7 @@
 //   PAYPAL_WEBHOOK_ID                         （webhook 验签必填）
 //   PAYPAL_MODE                               （"sandbox" | "live"，默认 live）
 
+import { COMMERCIAL } from "../commercialConfig";
 import {
   env,
   oneYearFromNow,
@@ -227,8 +228,21 @@ export const paypalChannel: PaymentChannel = {
     }
 
     // ---- 一次性付款：创建 Order ----
-    const amount =
-      req.currency === "CNY" ? { currency_code: "CNY", value: "699.00" } : { currency_code: "USD", value: "99.00" };
+    //
+    // 🔴 金额必须取自**定价单一真源** lib/commercialConfig.ts。
+    //    原先这里是硬编码字面量（USD 与 CNY 两个裸数字），而站点展示价走 COMMERCIAL
+    //    ⇒ 一旦调价就会出现「页面显示新价、PayPal 仍扣旧价」——
+    //    既收错钱，又无法对用户解释。这是典型的资损 + 信任双失场景。
+    if (req.currency !== "USD") {
+      // 一期只有 USD 定价（COMMERCIAL.currency === "USD"）。
+      // 人民币价格**没有任何真源**：绝不为了"支持 CNY"而凭空编一个收款数字。
+      // 宁可明确报错让运营去补定价，也不要在用户卡上扣一个拍脑袋的金额。
+      return { ok: false, error: "unsupported_currency" };
+    }
+    const amount = {
+      currency_code: "USD",
+      value: COMMERCIAL.membershipAnnualUsd.toFixed(2),
+    };
 
     const r = await paypalFetch<{
       id: string;
