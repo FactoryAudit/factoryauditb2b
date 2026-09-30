@@ -1380,11 +1380,11 @@
       },
       {
         "h": "Mitgliedschaft, Abrechnung und Verlängerung",
-        "b": "Die Founding Buyer Membership ist ein Jahresabonnement für 99 USD pro Jahr. Die Zahlung wird von einem externen Zahlungsdienstleister abgewickelt. Ihr Abonnement verlängert sich jedes Jahr automatisch, sofern Sie nicht vor dem Verlängerungsdatum kündigen. Sie können Ihr Verlängerungsdatum einsehen oder jederzeit auf Ihrer Kontoseite kündigen. Der Online-Zahlungsverkehr ist noch nicht freigeschaltet; bis dahin richtet unser Team Ihr Abonnement ein und bestätigt Ihnen die Abrechnung per E-Mail."
+        "b": "Die Founding Buyer Membership ist ein Jahresabonnement für 99 USD pro Jahr. Die Zahlung wird von einem externen Zahlungsdienstleister abgewickelt. Ihr Abonnement verlängert sich jedes Jahr automatisch, sofern Sie nicht vor dem Verlängerungsdatum kündigen. Wir schreiben Ihnen vor jedem Verlängerungsdatum, sodass Sie vorher kündigen können, wenn Sie nicht fortfahren möchten. Sie können kündigen, indem Sie auf diese E-Mail antworten oder an support@factoryauditb2b.com schreiben. Der Online-Zahlungsverkehr ist noch nicht freigeschaltet; bis dahin richtet unser Team Ihr Abonnement ein und bestätigt Ihnen die Abrechnung per E-Mail."
       },
       {
         "h": "Erstattungen und Kündigung",
-        "b": "Sie können jederzeit auf Ihrer Kontoseite kündigen. Die Kündigung wirkt zum Ende des laufenden Abrechnungszeitraums; es fallen keine Kündigungsgebühren an. Wenn Sie innerhalb von 14 Tagen nach Ihrer ersten Zahlung kündigen, kontaktieren Sie uns für eine vollständige Erstattung. Nach 14 Tagen bieten wir keine anteiligen Erstattungen an, da die Mitgliedschaft sofortigen Zugriff auf kostenpflichtige Inhalte gewährt."
+        "b": "Die Kündigung wirkt zum Ende des laufenden Abrechnungszeitraums; es fallen keine Kündigungsgebühren an. Wenn Sie uns um Kündigung bitten, bestätigen wir dies innerhalb eines Werktags schriftlich. Wenn Sie innerhalb von 14 Tagen nach Ihrer ersten Zahlung kündigen, kontaktieren Sie uns für eine vollständige Erstattung. Nach 14 Tagen bieten wir keine anteiligen Erstattungen an, da die Mitgliedschaft sofortigen Zugriff auf kostenpflichtige Inhalte gewährt."
       }
     ],
     "privacyNav": "Datenschutz",
@@ -1552,7 +1552,7 @@
         "href": "/monitoring"
       }
     ],
-    "comingSoonNote": "Lieferanten-Monitoring wird pro Lieferant und Jahr angeboten. Die Founding Buyer Membership ist ein Jahresabonnement für 99 USD pro Jahr. Beide verlängern sich jedes Jahr automatisch; Sie können beide auf Ihrer Kontoseite kündigen. Alle anderen Posten auf dieser Seite werden pro Projekt angeboten.",
+    "comingSoonNote": "Lieferanten-Monitoring wird pro Lieferant und Jahr angeboten. Die Founding Buyer Membership ist ein Jahresabonnement für 99 USD pro Jahr. Beide verlängern sich jedes Jahr automatisch; kündigen können Sie beide jederzeit per E-Mail an support@factoryauditb2b.com. Alle anderen Posten auf dieser Seite werden pro Projekt angeboten.",
     "alsoTitle": "Ebenfalls verfügbar",
     "alsoItems": [
       "Inspektion: Kontrollen während der Produktion und vor dem Versand, Angebot pro Personentag",
@@ -1758,7 +1758,7 @@
       "inspection": {
         "title": "Inspektion",
         "desc": "Inline- und Vorversandkontrollen Ihrer Produktion, angegeben pro Personentag.",
-        "href": "/custom-services"
+        "href": "/services/inspection"
       },
       "sourcing": {
         "title": "Beschaffung",

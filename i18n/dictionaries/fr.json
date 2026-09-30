@@ -1380,11 +1380,11 @@
       },
       {
         "h": "Adhésion, facturation et renouvellement",
-        "b": "L’adhésion Founding Buyer est un abonnement annuel au prix de 99 USD par an. Le paiement est traité par un prestataire de paiement tiers. Votre abonnement se renouvelle automatiquement chaque année, sauf si vous l’annulez avant la date de renouvellement. Vous pouvez consulter votre date de renouvellement ou annuler à tout moment depuis votre page de compte. Le paiement en ligne n’est pas encore disponible ; d’ici là, notre équipe met en place votre abonnement et vous confirme par e-mail les modalités de facturation."
+        "b": "L’adhésion Founding Buyer est un abonnement annuel au prix de 99 USD par an. Le paiement est traité par un prestataire de paiement tiers. Votre abonnement se renouvelle automatiquement chaque année, sauf si vous l’annulez avant la date de renouvellement. Nous vous écrivons avant chaque date de renouvellement, afin que vous puissiez annuler par avance si vous ne souhaitez pas continuer. Vous pouvez annuler en répondant à cet e-mail ou en écrivant à support@factoryauditb2b.com. Le paiement en ligne n’est pas encore disponible ; d’ici là, notre équipe met en place votre abonnement et vous confirme par e-mail les modalités de facturation."
       },
       {
         "h": "Remboursements et annulation",
-        "b": "Vous pouvez annuler à tout moment depuis votre page de compte. L’annulation prend effet à la fin de la période de facturation en cours et aucuns frais d’annulation ne sont appliqués. Si vous annulez dans les 14 jours suivant votre premier paiement, contactez-nous pour un remboursement intégral. Après 14 jours, nous n’accordons pas de remboursement au prorata, car l’adhésion donne un accès immédiat au contenu payant."
+        "b": "L’annulation prend effet à la fin de la période de facturation en cours et aucuns frais d’annulation ne sont appliqués. Lorsque vous nous demandez d’annuler, nous le confirmons par écrit dans un délai d’un jour ouvré. Si vous annulez dans les 14 jours suivant votre premier paiement, contactez-nous pour un remboursement intégral. Après 14 jours, nous n’accordons pas de remboursement au prorata, car l’adhésion donne un accès immédiat au contenu payant."
       }
     ],
     "privacyNav": "Confidentialité",
@@ -1552,7 +1552,7 @@
         "href": "/monitoring"
       }
     ],
-    "comingSoonNote": "Le monitoring fournisseur est devisé par fournisseur et par an. L’adhésion Founding Buyer est un abonnement annuel au prix de 99 USD par an. Ces deux abonnements se renouvellent automatiquement chaque année et vous pouvez annuler l’un ou l’autre depuis votre page de compte. Les autres éléments de cette page sont devisés au projet.",
+    "comingSoonNote": "Le monitoring fournisseur est devisé par fournisseur et par an. L’adhésion Founding Buyer est un abonnement annuel au prix de 99 USD par an. Ces deux abonnements se renouvellent automatiquement chaque année et vous pouvez annuler l’un ou l’autre à tout moment en écrivant à support@factoryauditb2b.com. Les autres éléments de cette page sont devisés au projet.",
     "alsoTitle": "Également disponible",
     "alsoItems": [
       "Inspection : contrôles en cours de production et avant expédition, devis par jour-homme",
@@ -1758,7 +1758,7 @@
       "inspection": {
         "title": "Contrôle",
         "desc": "Vérifications en ligne et avant expédition de votre production, par jour-homme.",
-        "href": "/custom-services"
+        "href": "/services/inspection"
       },
       "sourcing": {
         "title": "Sourcing",

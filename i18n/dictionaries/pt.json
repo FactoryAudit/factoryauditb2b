@@ -1380,11 +1380,11 @@
       },
       {
         "h": "Assinatura, cobrança e renovação",
-        "b": "A assinatura Founding Buyer é uma assinatura anual de 99 USD por ano. O pagamento é processado por um provedor de pagamentos terceirizado. A assinatura renova automaticamente todos os anos, salvo se você cancelar antes da data de renovação. Você pode ver a data de renovação ou cancelar a qualquer momento na página da sua conta. O pagamento online ainda não está disponível; até lá, a nossa equipe configura a sua assinatura e confirma por e-mail como a cobrança será feita."
+        "b": "A assinatura Founding Buyer é uma assinatura anual de 99 USD por ano. O pagamento é processado por um provedor de pagamentos terceirizado. A assinatura renova automaticamente todos os anos, salvo se você cancelar antes da data de renovação. Enviamos um e-mail antes de cada data de renovação, para que você possa cancelar com antecedência caso não queira continuar. Você pode cancelar respondendo a esse e-mail ou escrevendo para support@factoryauditb2b.com. O pagamento online ainda não está disponível; até lá, a nossa equipe configura a sua assinatura e confirma por e-mail como a cobrança será feita."
       },
       {
         "h": "Reembolsos e cancelamento",
-        "b": "Você pode cancelar a qualquer momento na página da sua conta. O cancelamento passa a valer no fim do ciclo de cobrança atual e não há taxa de cancelamento. Se cancelar em até 14 dias após o primeiro pagamento, fale conosco para obter o reembolso integral. Após 14 dias não oferecemos reembolso proporcional, pois a assinatura dá acesso imediato ao conteúdo pago."
+        "b": "O cancelamento passa a valer no fim do ciclo de cobrança atual e não há taxa de cancelamento. Quando você nos pedir para cancelar, confirmamos por escrito em até um dia útil. Se cancelar em até 14 dias após o primeiro pagamento, fale conosco para obter o reembolso integral. Após 14 dias não oferecemos reembolso proporcional, pois a assinatura dá acesso imediato ao conteúdo pago."
       }
     ],
     "privacyNav": "Privacidade",
@@ -1552,7 +1552,7 @@
         "href": "/monitoring"
       }
     ],
-    "comingSoonNote": "O monitoramento de fornecedores é orçado por fornecedor e por ano. A assinatura Founding Buyer é uma assinatura anual de 99 USD por ano. Ambas se renovam automaticamente todos os anos e você pode cancelar qualquer uma na página da sua conta. Os demais itens desta página são orçados por projeto.",
+    "comingSoonNote": "O monitoramento de fornecedores é orçado por fornecedor e por ano. A assinatura Founding Buyer é uma assinatura anual de 99 USD por ano. Ambas se renovam automaticamente todos os anos e você pode cancelar qualquer uma a qualquer momento escrevendo para support@factoryauditb2b.com. Os demais itens desta página são orçados por projeto.",
     "alsoTitle": "Também disponível",
     "alsoItems": [
       "Inspeção: verificações em linha e pré-embarque, orçadas por homem-dia",
@@ -1758,7 +1758,7 @@
       "inspection": {
         "title": "Inspeção",
         "desc": "Verificações em linha e pré-embarque da sua produção, cotadas por homem-dia.",
-        "href": "/custom-services"
+        "href": "/services/inspection"
       },
       "sourcing": {
         "title": "Aquisição",

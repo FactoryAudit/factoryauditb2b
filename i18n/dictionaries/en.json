@@ -410,7 +410,7 @@
       "inspection": {
         "title": "Inspection",
         "desc": "In-line and pre-shipment checks on your production, quoted per man-day.",
-        "href": "/custom-services"
+        "href": "/services/inspection"
       },
       "sourcing": {
         "title": "Sourcing",
@@ -2060,11 +2060,11 @@
       },
       {
         "h": "Membership, billing and renewal",
-        "b": "Founding Buyer Membership is an annual subscription priced at USD 99 per year. Payment is handled by a third-party payment provider. Your subscription renews automatically each year unless you cancel before the renewal date. You can view your renewal date or cancel at any time from your account page. Online payment is not open yet; until it is, our team sets up your subscription and confirms the billing arrangement with you by email."
+        "b": "Founding Buyer Membership is an annual subscription priced at USD 99 per year. Payment is handled by a third-party payment provider. Your subscription renews automatically each year unless you cancel before the renewal date. We email you before each renewal date, so you can cancel in advance if you do not want to continue. You can cancel by replying to that email or by writing to support@factoryauditb2b.com. Online payment is not open yet; until it is, our team sets up your subscription and confirms the billing arrangement with you by email."
       },
       {
         "h": "Refunds and cancellation",
-        "b": "You can cancel at any time from your account page. Cancellation takes effect at the end of the current billing period, and there is no cancellation fee. If you cancel within 14 days of your first payment, contact us for a full refund. After 14 days we do not offer pro-rated refunds, because membership grants immediate access to paid content."
+        "b": "Cancellation takes effect at the end of the current billing period, and there is no cancellation fee. When you ask us to cancel, we confirm in writing within one business day. If you cancel within 14 days of your first payment, contact us for a full refund. After 14 days we do not offer pro-rated refunds, because membership grants immediate access to paid content."
       }
     ],
     "privacyNav": "Privacy",
@@ -2232,7 +2232,7 @@
         "href": "/monitoring"
       }
     ],
-    "comingSoonNote": "Supplier Monitoring is quoted per supplier per year. Founding Buyer Membership is an annual subscription at USD 99 per year. Both renew automatically each year, and you can cancel either from your account page. Other items on this page are quoted per project.",
+    "comingSoonNote": "Supplier Monitoring is quoted per supplier per year. Founding Buyer Membership is an annual subscription at USD 99 per year. Both renew automatically each year, and you can cancel either at any time by emailing support@factoryauditb2b.com. Other items on this page are quoted per project.",
     "alsoTitle": "Also available",
     "alsoItems": [
       "Inspection: in-line and pre-shipment checks, quoted per man-day",
