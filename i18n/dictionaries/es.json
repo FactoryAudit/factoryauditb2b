@@ -2274,7 +2274,7 @@
     "operatesTitle": "¿Quién opera FactoryAuditB2B?",
     "operatesBody": "FactoryAuditB2B es una plataforma y marca operada por {entity}. El nombre de la marca no es el nombre de la entidad legal, y no los presentamos como lo mismo.",
     "operatesLead": "FactoryAuditB2B está operado por una empresa registrada en China y ofrece verificación de proveedores, auditoría de fábrica y apoyo de abastecimiento para compradores globales.",
-    "operatesNotConfigured": "FactoryAuditB2B está operado por una empresa registrada. Publicamos el nombre de la entidad legal en cuanto se configure en el Centro de confianza.",
+    "operatesNotConfigured": "FactoryAuditB2B es operado por Jiangmen Zhiyu Technology Co., Ltd., una empresa registrada en China.",
     "scopeTitle": "Ámbito de negocio",
     "scopeBody": "Verificación de proveedores, auditoría de fábrica, inspección y apoyo de abastecimiento para compradores que importan de China y el Sudeste Asiático. La fase 1 cubre China, Vietnam, Tailandia, Malasia y Filipinas.",
     "verifyTitle": "Qué verificamos",

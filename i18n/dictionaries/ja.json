@@ -2274,7 +2274,7 @@
     "operatesTitle": "FactoryAuditB2B を運営しているのは誰か？",
     "operatesBody": "FactoryAuditB2B は {entity} が運営するプラットフォーム兼ブランドです。ブランド名は法人名ではなく、両者を同一と扱うことはありません。",
     "operatesLead": "FactoryAuditB2B は中国に登記された企業が運営し、世界中の買い手にサプライヤー検証、工場監査、調達支援を提供しています。",
-    "operatesNotConfigured": "FactoryAuditB2B は登記済みの企業が運営しています。法人名はトラストセンターに設定され次第、公開します。",
+    "operatesNotConfigured": "FactoryAuditB2B は、中国に登記された企業である江門智煜科技有限公司（Jiangmen Zhiyu Technology Co., Ltd.）が運営しています。",
     "scopeTitle": "事業範囲",
     "scopeBody": "中国および東南アジアから輸入するバイヤー向けのサプライヤー核查、工場監査、検品、調達支援。第1フェーズの対象は中国、ベトナム、タイ、マレーシア、フィリピンです。",
     "verifyTitle": "検証する内容",
