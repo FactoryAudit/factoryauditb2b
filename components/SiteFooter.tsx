@@ -181,32 +181,51 @@ export default function SiteFooter({
           </div>
         </div>
 
-        {/* 底栏：左版权 / 右联系（对齐设计稿 `.footer-bottom` 的左右分栏；窄屏转纵向）。
-            Follow us 社媒区：三平台 URL 全空 ⇒ SocialLinks 返回 null，隐藏整个区块（禁假链接）。 */}
-        <div className="flex flex-col gap-5 pt-[22px] text-[11px] text-[#77736c] lg:flex-row lg:items-start lg:justify-between">
-          <div className="max-w-[620px] leading-relaxed">{dict.copyright}</div>
-          <div className="leading-relaxed lg:max-w-[420px] lg:text-right">
-            {/* 域名邮箱做信任背书。邮箱地址本身是标识符、不是文案，9 语通用，故不进词典。 */}
-            <a
-              href="mailto:support@factoryauditb2b.com"
-              className="text-[#a4a098] underline decoration-[#5c584f] hover:text-white hover:decoration-white"
-            >
-              support@factoryauditb2b.com
-            </a>
-            {whatsappConfigured() && whatsappLabel && (
-              <span className="mt-2 block">
-                {/* 设计稿 .footer-bottom 只有两行小字（左版权 / 右邮箱），没有彩色按钮。
-                    这里保留 WhatsApp 通道但降为与邮箱同级的文字链接，避免底栏出现
-                    全站唯一的饱和绿药丸、抢掉 accent 橙的主色位。
-                    （页头那个绿色圆形图标保留：那是 WhatsApp 品牌标识，且是主要联系入口。） */}
+        {/* 联系块（CS-24）：把「联系我们」从 Company 列的一条普通链接提升为页脚显眼入口。
+            参考口径 = factorychecker.com 的 #contact 区块，但**只取「让访客一眼看到怎么联系」这一层**：
+            参考站那是带表单的独立区块（Name/Email/Phone/Message），本站已有 /contact 页承接表单，
+            页脚再放一份表单会重复写入路径、且当前 Worker 内存已近上限，故此处只做**指路**：
+            标题 + 邮箱（直接可用，零跳转）+ 主按钮（进 /contact 完整表单）+ WhatsApp（已配置时）。
+            🔴 0 新字典键：标题与按钮复用 `footer.contact`（9 语已有），
+               邮箱是标识符不是文案（与底栏原实现同一先例），故不触碰 en 叶子数常量。 */}
+        <div className="border-b border-white/[.08] pb-9">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 className="text-[10px] uppercase tracking-[.12em] text-white">{dict.contact}</h2>
+              {/* 邮箱与 /contact 页同源（lib/aboutContent.operatorEmail 兜底 support@），
+                  此处直接写字面量：与底栏既有实现一致，且邮箱非本地化文案。 */}
+              <a
+                href="mailto:support@factoryauditb2b.com"
+                className="mt-2 block text-[19px] font-medium text-white underline decoration-[#5c584f] underline-offset-4 transition hover:decoration-white"
+              >
+                support@factoryauditb2b.com
+              </a>
+            </div>
+            <div className="flex flex-wrap items-center gap-3 sm:justify-end">
+              <Link
+                href={p("/contact")}
+                className="inline-block rounded-md bg-[#e67635] px-4 py-2 text-[13px] font-semibold text-white transition hover:bg-[#cf6529]"
+              >
+                {dict.contact}
+              </Link>
+              {whatsappConfigured() && whatsappLabel && (
                 <WhatsAppLink
                   label={whatsappLabel}
                   message="Hi FactoryAuditB2B, I would like to ask about supplier verification."
-                  className="text-[#a4a098] underline decoration-[#5c584f] hover:text-white hover:decoration-white"
+                  className="inline-block rounded-md border border-white/20 px-4 py-2 text-[13px] font-medium text-[#d6d2ca] transition hover:border-white/40 hover:text-white"
                 />
-              </span>
-            )}
-            <SocialLinks className="mt-3 justify-start lg:justify-end" />
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* 底栏：左版权 / 右社媒（对齐设计稿 `.footer-bottom` 的左右分栏；窄屏转纵向）。
+            Follow us 社媒区：三平台 URL 全空 ⇒ SocialLinks 返回 null，隐藏整个区块（禁假链接）。
+            邮箱与 WhatsApp 已上移到上面的联系块，此处不再重复渲染（同一页不出现两遍同一通道）。 */}
+        <div className="flex flex-col gap-5 pt-[22px] text-[11px] text-[#77736c] lg:flex-row lg:items-start lg:justify-between">
+          <div className="max-w-[620px] leading-relaxed">{dict.copyright}</div>
+          <div className="leading-relaxed lg:max-w-[420px] lg:text-right">
+            <SocialLinks className="mt-0 justify-start lg:justify-end" />
           </div>
         </div>
       </div>

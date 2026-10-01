@@ -142,7 +142,15 @@ export function trimMetaTitle(
       .filter((i) => i >= 0);
     const cut = cands.length > 0 ? Math.max(...cands) : brandAt;
     body = text.slice(0, cut);
-    tail = text.slice(cut);
+    // 🔴 尾巴必须归一化为「空格 + | + 空格 + 品牌段」，且**主体尾部的空白要先剥掉**。
+    //    原实现直接 tail = text.slice(cut)：当品牌段前没有空格（"…Train Your| FactoryAuditB2B"）
+    //    或分隔符本身带空格时，裁完主体再拼回去就会缺少分隔空格 —— 线上曾产出
+    //    "Supplier Training - Verify Your Supplier, Then Train Your| FactoryAuditB2B"
+    //    （品牌名前无空格，中文站同样会中招）。
+    //    这里统一补回 " | "，与 buildPageMetadata 的 BRAND_SUFFIX 保持同一形状；
+    //    同时把 body 尾部空白清掉，避免 "Pricing " + " | " 拼出双空格。
+    tail = " | " + text.slice(brandAt);
+    body = body.replace(/\s+$/u, "");
   }
   // 🔴 显式传 title 口径（25%），不要用默认的 desc 口径（10%）——
   //    否则含中文公司名的拉丁标题会被判成 CJK，主体预算 65 → 36，标题被砍掉一半。
@@ -150,7 +158,10 @@ export function trimMetaTitle(
     ? opts?.cjkBudget ?? TITLE_CJK_BODY_BUDGET
     : opts?.latinBudget ?? TITLE_LATIN_BODY_BUDGET;
   const chars = [...body];
-  if (chars.length <= budget) return text;
+  // 🔴 即使主体未超预算也要走「body + 归一化 tail」，不能直接 `return text`。
+  //    text 里品牌段前的分隔符可能是坏的（"…Train Your| FactoryAuditB2B" 无空格，
+  //    或 " | " 与 "|" 混用）—— 直接返回原串就把坏分隔符原样放行了。
+  if (chars.length <= budget) return body + tail;
   const head = chars.slice(0, budget).join("");
   const minKeep = Math.max(12, Math.floor(budget * TITLE_MIN_KEEP_RATIO));
   // ① 分隔符断句
@@ -166,7 +177,6 @@ export function trimMetaTitle(
   if ([...trimmed].length < Math.min(12, minKeep)) return text;
   return trimmed + tail;
 }
-
 export function buildPageMetadata({ locale, path, title, description, robots, withBrand = true }: MetaInput): Metadata {
   // 去重：部分页面（如集群页 seo_title）已自带品牌名，避免 "... | FactoryAuditB2B | FactoryAuditB2B"
   const BRAND_SUFFIX = " | FactoryAuditB2B";
