@@ -299,6 +299,10 @@ export type AdminSupplierDetail = AdminSupplierRow & {
   authorized_at: string | null;
   authorized_by: string | null;
   consent_version: string | null;
+  // CS-A（029-fix）：公开可见性三与门的第三项。列 DEFAULT 'draft'，
+  //   CHECK 约束限定 NULL | 'draft' | 'public' | 'unlisted' | 'private'。
+  //   发布路径必须显式写 'public'，否则档案即便 is_published=true 也不对外可见。
+  profile_status: "draft" | "public" | "unlisted" | "private" | null;
   // 029_public_source_clearance.sql：管理员确认「档案来源为公开信息」的放行标记。
   // 与 profile_authorized（供应商本人授权）是两条独立通道，任一为 true 即满足发布闸门。
   public_source_cleared: boolean;
@@ -380,6 +384,11 @@ export async function updateAdminSupplier(
     inspection_history: number;
     access_tier: "public" | "free" | "paid";
     is_published: boolean;
+    // CS-A：公开可见性三与门的第三项（lib/trustProfile.ts:isProfilePublic）。
+    //   🔴 029-fix 之前本白名单**漏了这一列**，导致 /api/admin/suppliers 的发布分支
+    //   即使想写 profile_status 也到不了库 ⇒ 发布后档案永不公开。
+    //   取值受 DB CHECK 约束：NULL | 'draft' | 'public' | 'unlisted' | 'private'。
+    profile_status: "draft" | "public" | "unlisted" | "private";
     verification_level:
       | "unverified"
       | "self_assessment"

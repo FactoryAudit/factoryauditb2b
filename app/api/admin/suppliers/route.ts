@@ -273,11 +273,36 @@ export async function PATCH(req: Request) {
       patch.is_published = true;
       patch.unpublished_at = null;
       patch.unpublished_by = null;
+      // 🔴 029-fix：发布必须**同步**写 profile_status。
+      //   公开可见性由 lib/trustProfile.ts:isProfilePublic 的**三元与门**裁决：
+      //     is_published ∧ public_profile_enabled ∧ profile_status === 'public'
+      //   本路由此前只写 is_published，profile_status 停在列默认值 'draft'
+      //   ⇒ 与门第三项恒 false ⇒ 审核通过、点了发布的档案**永远不会公开**。
+      //   （线上 2026-10-02 实测：31 条 is_published=true 里 20 条 profile_status 仍是 draft，
+      //     可见的 11 条全部来自 2026-09-24 的一次性 SQL backfill，不是代码写的。）
+      //   修法：只在**未发布 → 已发布**这次跃迁上补写，不改动管理员对已发布档案的
+      //   private/unlisted 人工设置（例如主动下架但保留收录的那类状态）。
+      if (transitioning) {
+        patch.profile_status = "public";
+      }
       publishAction = "supplier.published";
     } else {
       patch.is_published = false;
       patch.unpublished_at = new Date().toISOString();
       patch.unpublished_by = admin.email ?? "system";
+      // 🔴 029-fix：取消发布同步把档案置为 private。
+      //   只写 is_published=false 时，isProfilePublic 因第一项已 false 而恒 false（结果正确），
+      //   但 profile_status 会停在 'public' —— 状态字段与实际可见性不一致，
+      //   后台与审计看到的是一份"自称公开、实际已下架"的记录。
+      //   取 'private' 而非 'unlisted'：这是"管理者主动下架"，不是"仅不收录仍可直达"。
+      //   人工设过 private/unlisted 的行，取消发布时保持原值不动（不做无谓覆盖）。
+      if (
+        typeof existing.profile_status !== "string" ||
+        existing.profile_status === "draft" ||
+        existing.profile_status === "public"
+      ) {
+        patch.profile_status = "private";
+      }
       publishAction = "supplier.unpublished";
     }
   }
