@@ -120,6 +120,11 @@ export default async function SupplierImprovementPage({
           </Link>
         </div>
       </section>
+
+      {/* 该页以深色 CTA 卡收尾，最后一屏是 #fbfaf7 浅底。
+          页脚本轮改为深蓝黑 #0b0f19：两块深色之间若没有浅色隔断，
+          交界会被读成"渲染断层"而不是"换段"。故此处补一道 24px 浅色收尾。 */}
+      <div className="h-6" aria-hidden="true" />
     </div>
   );
 }

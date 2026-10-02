@@ -19,6 +19,9 @@ const ICONS: Record<SocialPlatform, { label: string; path: string }> = {
 /**
  * 社媒入口图标行。仅渲染 lib/social.ts 中已配置真实 URL 的平台，
  * 未开通的平台不出现（禁假链接）。aria-label 用平台名（品牌名不翻译）。
+ *
+ * 配色跟随站点强调色（`--color-accent` 橙系）：默认半透明白描边，
+ * hover 转实心橙 —— 与页脚 `#0b0f19` 深底一致。
  */
 export default function SocialLinks({ className = "" }: { className?: string }) {
   const links = activeSocialLinks();
@@ -32,7 +35,7 @@ export default function SocialLinks({ className = "" }: { className?: string }) 
           target="_blank"
           rel="noopener noreferrer"
           aria-label={ICONS[s.platform].label}
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f5f3ee] text-[#171717] transition hover:bg-[#171717] hover:text-white"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[.06] text-white transition hover:border-[#f97316] hover:bg-[#f97316] hover:text-white"
         >
           <svg viewBox="0 0 24 24" className="h-4.5 w-4.5 fill-current" aria-hidden>
             <path d={ICONS[s.platform].path} />
