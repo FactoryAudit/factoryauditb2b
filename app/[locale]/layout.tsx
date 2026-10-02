@@ -195,7 +195,6 @@ export default async function RootLayout({
             locale={locale}
             dict={t.footer}
             menu={t.nav.menu}
-            whatsappLabel={t.common.whatsappChat}
             industriesLabel={t.industryPage.breadcrumb}
           />
           <AiChatWidget locale={locale} dict={t.aiChat} whatsappLabel={t.common.whatsappChat} />

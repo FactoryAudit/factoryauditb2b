@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { localePath, type Locale } from "@/i18n/config";
-import WhatsAppLink, { whatsappConfigured } from "@/components/WhatsAppLink";
 import SocialLinks from "@/components/SocialLinks";
 import { type ServiceMenuDict } from "@/lib/nav";
 import { operatorLine } from "@/lib/trust";
@@ -62,21 +61,23 @@ export type FooterDict = {
  *   1) 设计稿页脚链接指向本站不存在的路由（`/services/verification`、
  *      `/resources/case-studies`、`/resources/reports`、`/signin` 均为别名或不存在），
  *      照抄会造出死链 ⇒ 一律落到本站真实路由。
- *   2) 设计稿页脚没有运营主体 / 信任中心 / WhatsApp / 社媒位。这些是合规与信任要件，
+ *   2) 设计稿页脚没有运营主体 / 信任中心 / 社媒位。这些是合规与信任要件，
  *      删掉即功能倒退 ⇒ 保留，只换配色与排版。
+ *
+ * 结构现状（2026-10-02）：四列链接区 → 底栏（版权 + 社媒）。
+ *   中间的 CS-24 联系块（CONTACT 标题 + 邮箱 + 双按钮）已按用户要求隐藏，
+ *   原实现留档在下方注释里，可随时取回。
  */
 export default function SiteFooter({
   locale,
   dict,
   menu,
-  whatsappLabel,
   industriesLabel,
 }: {
   locale: Locale;
   dict: FooterDict;
   /** 服务菜单文案复用 nav.menu，避免页脚与导航各存一份 */
   menu: ServiceMenuDict;
-  whatsappLabel?: string;
   /**
    * 「行业」入口文案 —— 复用 t.industryPage.breadcrumb（9 语已有该键）。
    * /industry 此前全站零入链，页脚补一个稳定入口。
@@ -181,47 +182,27 @@ export default function SiteFooter({
           </div>
         </div>
 
-        {/* 联系块（CS-24）：把「联系我们」从 Company 列的一条普通链接提升为页脚显眼入口。
-            参考口径 = factorychecker.com 的 #contact 区块，但**只取「让访客一眼看到怎么联系」这一层**：
-            参考站那是带表单的独立区块（Name/Email/Phone/Message），本站已有 /contact 页承接表单，
-            页脚再放一份表单会重复写入路径、且当前 Worker 内存已近上限，故此处只做**指路**：
-            标题 + 邮箱（直接可用，零跳转）+ 主按钮（进 /contact 完整表单）+ WhatsApp（已配置时）。
-            🔴 0 新字典键：标题与按钮复用 `footer.contact`（9 语已有），
-               邮箱是标识符不是文案（与底栏原实现同一先例），故不触碰 en 叶子数常量。 */}
-        <div className="border-b border-white/[.08] pb-9">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h2 className="text-[10px] uppercase tracking-[.12em] text-white">{dict.contact}</h2>
-              {/* 邮箱与 /contact 页同源（lib/aboutContent.operatorEmail 兜底 support@），
-                  此处直接写字面量：与底栏既有实现一致，且邮箱非本地化文案。 */}
-              <a
-                href="mailto:support@factoryauditb2b.com"
-                className="mt-2 block text-[19px] font-medium text-white underline decoration-[#5c584f] underline-offset-4 transition hover:decoration-white"
-              >
-                support@factoryauditb2b.com
-              </a>
-            </div>
-            <div className="flex flex-wrap items-center gap-3 sm:justify-end">
-              <Link
-                href={p("/contact")}
-                className="inline-block rounded-md bg-[#e67635] px-4 py-2 text-[13px] font-semibold text-white transition hover:bg-[#cf6529]"
-              >
-                {dict.contact}
-              </Link>
-              {whatsappConfigured() && whatsappLabel && (
-                <WhatsAppLink
-                  label={whatsappLabel}
-                  message="Hi FactoryAuditB2B, I would like to ask about supplier verification."
-                  className="inline-block rounded-md border border-white/20 px-4 py-2 text-[13px] font-medium text-[#d6d2ca] transition hover:border-white/40 hover:text-white"
-                />
-              )}
-            </div>
-          </div>
-        </div>
+        {/* ── 联系块（CS-24）已隐藏（2026-10-02，用户要求）──────────────────────
+            原实现：CONTACT 标题 + 邮箱 + Contact 主按钮 + WhatsApp 按钮，
+            紧跟在四列链接区之后、底栏之前。
+
+            隐藏理由（用户原话）：「感觉是多余的」。判断成立 —— 页脚四列里
+            Company 列本来就有 Contact 链接，底栏也承载了收口信息，
+            这块等于把同一个出口又放大了一遍。
+
+            🔑 隐藏 ≠ 删除：下方底栏仍保留版权 + 社媒，`footer.contact` 键仍被
+               Company 列使用 ⇒ 无孤儿字典键、en 叶子数 3258 不变。
+            🔑 联系通道未丢失：`/contact` 页、AiChatWidget、trainings 页、
+               industry 详情页各自都有独立的 WhatsAppLink 入口。
+            🔑 如需恢复：从 git 历史取回 `73048f2^:components/SiteFooter.tsx`
+               的 184–220 行整块，并把 import 第 3 行的
+               `WhatsAppLink, { whatsappConfigured }` 与 props 里的
+               `whatsappLabel` 一起还原（这三者专供本块，已同步移除）。
+            🔴 若恢复，`app/[locale]/layout.tsx` 的 `<SiteFooter>` 也要补回
+               `whatsappLabel={t.common.whatsappChat}`。                        */}
 
         {/* 底栏：左版权 / 右社媒（对齐设计稿 `.footer-bottom` 的左右分栏；窄屏转纵向）。
-            Follow us 社媒区：三平台 URL 全空 ⇒ SocialLinks 返回 null，隐藏整个区块（禁假链接）。
-            邮箱与 WhatsApp 已上移到上面的联系块，此处不再重复渲染（同一页不出现两遍同一通道）。 */}
+            Follow us 社媒区：三平台 URL 全空 ⇒ SocialLinks 返回 null，隐藏整个区块（禁假链接）。 */}
         <div className="flex flex-col gap-5 pt-[22px] text-[11px] text-[#77736c] lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-[620px] leading-relaxed">{dict.copyright}</div>
           <div className="leading-relaxed lg:max-w-[420px] lg:text-right">
