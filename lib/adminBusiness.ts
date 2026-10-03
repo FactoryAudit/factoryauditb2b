@@ -40,6 +40,11 @@ export type LeadActivationRow = {
   country: string | null;
   email: string;
   createdAt: string;
+  /**
+   * 内部运营备注。用户主动撤回 / 申请下架的留痕写在这里（migration 031 的 withdrawn 档），
+   * 后台是单人工具，直接展示原文，不补 9 语翻译。
+   */
+  internalNotes: string | null;
   /** 按公司名匹配到的草稿供应商（无外键，只能名称匹配） */
   supplier: SupplierActivationRow | null;
   isTest: boolean;
@@ -177,7 +182,7 @@ export async function listLeadActivation(limit = 200): Promise<LeadActivationRow
     const [{ data, error }, suppliers] = await Promise.all([
       db
         .from("leads")
-        .select("id, reference_id, kind, status, company, supplier_name, country, email, created_at")
+        .select("id, reference_id, kind, status, company, supplier_name, country, email, internal_notes, created_at")
         .order("created_at", { ascending: false })
         .limit(limit),
       listSupplierActivation(),
@@ -207,6 +212,7 @@ export async function listLeadActivation(limit = 200): Promise<LeadActivationRow
         country: r.country == null ? null : String(r.country),
         email: String(r.email ?? ""),
         createdAt: String(r.created_at ?? ""),
+        internalNotes: r.internal_notes == null ? null : String(r.internal_notes),
         supplier,
         isTest: isTestLead({ company, supplierName, email: r.email }),
       };

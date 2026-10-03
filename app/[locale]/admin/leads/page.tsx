@@ -60,6 +60,7 @@ export default async function AdminLeadsPage({ params }: Props) {
         publishable: "可发布",
         blocked: "不可发布",
         published: "已发布",
+        withdrawn: "已撤回",
       }
     : {
         colCompany: "Company",
@@ -73,6 +74,7 @@ export default async function AdminLeadsPage({ params }: Props) {
         publishable: "publishable",
         blocked: "not publishable",
         published: "published",
+        withdrawn: "WITHDRAWN",
       };
 
   return (
@@ -110,6 +112,13 @@ export default async function AdminLeadsPage({ params }: Props) {
                       {r.isTest && (
                         <span className="ml-2 rounded bg-[#fdf3d8] px-1.5 py-0.5 text-[10px] font-semibold text-[#8a5a00]">
                           {L.test}
+                        </span>
+                      )}
+                      {/* 用户主动撤回 / 申请下架（migration 031 的 withdrawn 档）：
+                          与 TEST 徽章同构，做成醒目的一眼可见标记 —— 数据保留未删除。 */}
+                      {r.status === "withdrawn" && (
+                        <span className="ml-2 rounded bg-[#eef2f7] px-1.5 py-0.5 text-[10px] font-semibold text-[#33475b]">
+                          {L.withdrawn}
                         </span>
                       )}
                       <div className="mt-0.5 text-xs text-[#8c8982]">{r.email}</div>
@@ -175,6 +184,11 @@ export default async function AdminLeadsPage({ params }: Props) {
                         status={r.status}
                         dict={{ saving: a.saving, error: a.error }}
                       />
+                      {r.internalNotes && (
+                        <div className="mt-1 max-w-[22rem] whitespace-pre-line text-[10px] leading-snug text-[#8a5a00]">
+                          {r.internalNotes}
+                        </div>
+                      )}
                     </td>
                     <td className="px-4 py-3 text-xs">
                       {r.supplier ? (

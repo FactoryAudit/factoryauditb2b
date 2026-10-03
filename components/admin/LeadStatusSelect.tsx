@@ -15,7 +15,9 @@ export type LeadStatusSelectDict = {
   error: string;
 };
 
-const OPTIONS = ["new", "contacted", "quoted", "won", "lost", "rejected"];
+// migration 031 新增 withdrawn（申请人主动撤回 / 下架）——必须与 lib/adminData.ts 的
+// LEAD_STATUSES 及 DB 的 leads_status_check 三者同源，否则库的 CHECK 会拒绝写入。
+const OPTIONS = ["new", "contacted", "quoted", "won", "lost", "rejected", "withdrawn"];
 
 export default function LeadStatusSelect({
   referenceId,

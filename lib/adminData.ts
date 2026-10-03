@@ -920,8 +920,14 @@ export async function listAdminLeads(limit = 100): Promise<AdminLeadRow[]> {
  *   之前五档里没有任何一档能表达"审核不通过"，而 spec B3 要求
  *   Reject 必须落 status='rejected'（保留审计轨迹，不得 DELETE）。
  *   新增后必须同步三处：本常量 + /api/admin/leads 的 STATUSES + LeadStatusSelect 的 OPTIONS。
+ *
+ * migration 031 新增 `withdrawn`：
+ *   027 的 `rejected` 语义是「**我方**审核不通过」，无法表达「申请人主动撤回 / 下架」。
+ *   后台概览按 status='rejected' 计数，若把客户撤回记进 rejected 会误导统计，故独立成档。
+ *   语义：申请已终止、档案不予展示，但**数据保留不删除**（撤回 ≠ 删除）。
+ *   新增后同样必须同步三处（本常量 + API 白名单 + 下拉 OPTIONS）+ DB CHECK 约束。
  */
-export const LEAD_STATUSES = ["new", "contacted", "quoted", "won", "lost", "rejected"] as const;
+export const LEAD_STATUSES = ["new", "contacted", "quoted", "won", "lost", "rejected", "withdrawn"] as const;
 export type LeadStatus = (typeof LEAD_STATUSES)[number];
 
 export async function updateLeadStatus(
