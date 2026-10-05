@@ -20,6 +20,9 @@ type SA = Record<string, string>;
 
 type Props = {
   templates: AssessmentTemplate[];
+  /** 当前 locale：清单模板的 nameZh / titleZh / requirementZh 仅在 zh / zh-TW 下渲染，
+   *  其余 7 语一律走英文源（避免英文页夹中文）。 */
+  locale: string;
   dict: SA;
   supplierId: string;
   email: string;
@@ -43,6 +46,7 @@ const STATUS_BADGE: Record<string, { cls: string; key: string }> = {
 
 export default function SelfAssessmentForm({
   templates,
+  locale,
   dict,
   supplierId,
   email,
@@ -54,6 +58,9 @@ export default function SelfAssessmentForm({
   initialPhotos,
 }: Props) {
   const t = (k: string) => dict[k] ?? k;
+  // 清单模板只有 en / zh 两套源文（lib/supplierAssessments 的 nameZh/titleZh/requirementZh）。
+  // 非中文 locale 必须回退英文，否则英文页会夹中文（P0 修复）。
+  const showZh = locale === "zh" || locale === "zh-TW";
   const [responses, setResponses] = useState<AssessmentResponses>(initialResponses ?? {});
   const [summary, setSummary] = useState<string>(initialSummary ?? "");
   const [status, setStatus] = useState<AssessmentStatus | null>(initialStatus);
@@ -347,23 +354,23 @@ export default function SelfAssessmentForm({
       >
         {templates.map((tpl) => (
           <section key={tpl.code} className="card p-6">
-            <h2 className="text-2xl font-bold text-[#171717]">{tpl.nameZh || tpl.name}</h2>
+            <h2 className="text-2xl font-bold text-[#171717]">{showZh && tpl.nameZh ? tpl.nameZh : tpl.name}</h2>
             {tpl.description && <p className="text-sm text-[#8c8982] mt-1">{tpl.description}</p>}
             {tpl.sections.map((sec) => (
               <div key={sec.code} className="mt-6">
                 <h3 className="text-lg font-semibold text-[#171717] border-l-4 border-[#171717] pl-3">
-                  {sec.code}. {sec.titleZh || sec.title}
+                  {sec.code}. {showZh && sec.titleZh ? sec.titleZh : sec.title}
                 </h3>
                 <div className="mt-3 space-y-4">
                   {sec.questions.map((q) => (
                     <div key={q.code} className="border rounded-lg p-3 bg-white">
                       <div className="flex items-start justify-between gap-3">
                         <p className="font-medium text-[#171717]">
-                          <span className="text-[#6d6b66]">{q.code}</span> {q.titleZh || q.title}
+                          <span className="text-[#6d6b66]">{q.code}</span> {showZh && q.titleZh ? q.titleZh : q.title}
                           {q.mandatory && <span className="text-[#b45309] ml-1">*</span>}
                         </p>
                       </div>
-                      {q.requirementZh && <p className="text-xs text-[#6d6b66] mt-1">{q.requirementZh}</p>}
+                      {showZh && q.requirementZh && <p className="text-xs text-[#6d6b66] mt-1">{q.requirementZh}</p>}
                       {renderAnswer(q)}
                     </div>
                   ))}

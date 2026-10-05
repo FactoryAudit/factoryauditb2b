@@ -94,7 +94,7 @@ export const SECTIONS: Section[] = [
     bullets: [
       L("Genuine manufacturer with 11 years of operating history; registration consistent across registry, export records and site evidence.", "真实制造企业，经营 11 年；工商登记、出口记录与现场证据三者一致。"),
       L("Quality system certified (ISO 9001:2015) and social-compliance audited (BSCI), both currently within validity.", "质量体系已认证（ISO 9001:2015），社会责任已审核（BSCI），两者均在有效期内。"),
-      L("Clean litigation record: no enforcement actions (被执行人) and no open judgment-debt cases.", "涉诉记录干净：无被执行人记录，无未结执行案件。"),
+      L("Clean litigation record: no enforcement actions and no open judgment-debt cases.", "涉诉记录干净：无被执行人记录，无未结执行案件。"),
       L("Concern: production capacity figures are self-reported; no third-party throughput verification on file yet.", "关注项：产能数字为企业自报，尚无第三方产能核验记录。"),
       L("Concern: two certifications have lapsed and are shown as expired, not valid.", "关注项：两项认证已过期，报告中如实标注为「已过期」，而非「有效」。"),
     ],
@@ -147,7 +147,7 @@ export const SECTIONS: Section[] = [
       { label: L("Total cases (2019–2026)", "案件总数（2019–2026）"), value: "4", level: "verified" },
       { label: L("Open cases", "在审案件"), value: "1", level: "verified" },
       { label: L("As defendant", "作为被告"), value: "3", level: "verified" },
-      { label: L("Enforcement (被执行人)", "被执行人"), value: "0", note: L("No enforcement record — a positive indicator.", "无被执行记录 —— 正面指标。"), level: "verified" },
+      { label: L("Enforcement actions", "被执行人"), value: "0", note: L("No enforcement record — a positive indicator.", "无被执行记录 —— 正面指标。"), level: "verified" },
     ],
   },
   {

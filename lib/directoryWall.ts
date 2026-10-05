@@ -54,7 +54,9 @@ export function lockedHref(o: Pick<MaskOptions, "loginPath" | "directoryPath">):
 /**
  * 把一组目录项套上登录墙（未登录视图）。
  *
- * 只动四个字段：legalName（清空）、href（改指登录页）、locked（true）、cta（登录文案）。
+ * 只动五个字段：legalName / englishName（清空）、href（改指登录页）、locked（true）、
+ * cta（登录文案）。两个名称字段**必须同时清空** —— 展示名 `supplierDisplayName(locale, x)`
+ * 在任何语种下都可能取到 englishName，只清 legalName 会让企业自述英文名漏进公开 HTML。
  * 其余公开维度（国家 / 城市 / 行业 / 产品 / 证据计数 / 核验等级 / 风险分数）**保持不变** ——
  * 这些是"脱敏样本"里仍然可看的公开信息，也是目录筛选与 SEO 的成立基础。
  */
@@ -66,6 +68,7 @@ export function lockDirectoryItems(
   return items.map((x) => ({
     ...x,
     legalName: "",
+    englishName: "",
     href,
     locked: true,
     cta: o.lockedCta,

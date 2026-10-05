@@ -118,10 +118,12 @@ export async function generateMetadata({
 // Organization 用 lib/organizationSchema 作为全站唯一事实源（含 areaServed / knowsAbout /
 // contactPoint / sameAs），避免每页重复或字段不一致。@id 统一用无斜杠形式
 // （https://factoryauditb2b.com#organization），与 organizationSchema() 内部保持一致。
-const siteGraph = [
+// 入参 locale：供 organizationSchema 把固定英文串（serviceType/slogan/description）
+// 查 lib/contentI18n 映射表本地化；未命中的语种原样回退英文。
+const buildSiteGraph = (locale: Locale) => [
   {
     "@context": "https://schema.org",
-    ...organizationSchema(),
+    ...organizationSchema({ locale }),
   },
   {
     "@context": "https://schema.org",
@@ -158,7 +160,7 @@ export default async function RootLayout({
           : locale === "zh-TW"
           ? "zh-Hant"
           : locale === "pt"
-          ? "pt-BR"
+          ? "pt-PT"
           : locale
       }
       dir={locale === "ar" ? "rtl" : "ltr"}
@@ -168,7 +170,7 @@ export default async function RootLayout({
           也不是任何爬虫约定）⇒ 无效标签，已随 <head> 一起移除。
           Next 会自行渲染 <head> 并注入 generateMetadata 的产出，无需手写。 */}
       <body>
-        <JsonLd data={siteGraph} />
+        <JsonLd data={buildSiteGraph(locale)} />
         <AnalyticsScripts />
         {/* AuthProvider 包裹全站：会员状态在 hydration 后由客户端拉 /api/me 获得。
             放在这里而不是页面内部，是为了让 UnlockGate 在任何页面都能取到状态。

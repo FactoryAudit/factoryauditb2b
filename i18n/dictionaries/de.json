@@ -63,7 +63,7 @@
     "improvementService": "Lieferantenverbesserung",
     "allServices": "Alle Leistungen",
     "containerCalculator": "Containerladungsrechner",
-    "trustCenter": "Trust Center",
+    "trustCenter": "Vertrauenszentrum",
     "operatedBy": "FactoryAuditB2B ist eine Plattform und Marke, betrieben von {entity}.",
     "registeredBusiness": "In China registriertes Unternehmen",
     "supplierNetwork": "Lieferantennetzwerk",
@@ -1062,7 +1062,7 @@
       "assessError": "Irgendetwas ging schief. Bitte versuchen Sie es noch einmal."
     },
     "ui": {
-      "home": "Zuhause",
+      "home": "Startseite",
       "relatedGuides": "zugehörige Leitfäden",
       "quickAnswer": "Schnelle Antwort",
       "definition": "Definition",
@@ -1788,7 +1788,7 @@
     "processLead": "Wählen Sie das Maß an Sicherheit, das Ihre Beschaffungsentscheidung braucht.",
     "stepRequestTitle": "Anfrage",
     "stepRequestBody": "Nennen Sie uns den Lieferanten, das Produkt oder die Fabrik, die geprüft werden soll.",
-    "stepScopingTitle": "Scoping",
+    "stepScopingTitle": "Umfangsklärung",
     "stepScopingBody": "Wir bestätigen Umfang, Zeitplan und das richtige Prüfniveau.",
     "stepOnsiteTitle": "Vor Ort",
     "stepOnsiteBody": "Lokale Auditoren führen den Besuch durch und sammeln Evidenz.",
@@ -1908,7 +1908,7 @@
     "riskScore": "Lieferantenprofil-Punktzahl",
     "verificationStatus": "Prüfstatus",
     "evidenceSummary": "Evidenzzusammenfassung",
-    "auditHistory": "Audit history",
+    "auditHistory": "Audit-Verlauf",
     "notCoveredTitle": "Nicht abgedeckt",
     "notCoveredLead": "Überprüfungen außerhalb des aktuellen Überprüfungsumfangs. Wir listen sie auf, damit Sie wissen, was nicht angeschaut wurde.",
     "whatVerifiedTitle": "Was wir überprüft haben",
@@ -1949,7 +1949,7 @@
     "selfReported": "Selbst gemeldet",
     "auditStatusLabel": "Prüfungsstatus",
     "businessTypeLabel": "Unternehmenstyp",
-    "verifiedByTitle": "Verification by FactoryAuditB2B",
+    "verifiedByTitle": "Verifizierung durch FactoryAuditB2B",
     "verifiedByLead": "Das hat unser Team überprüft. Es ist getrennt von dem, was der Lieferant uns gesagt hat, und beide sind gekennzeichnet.",
     "provenanceLead": "Jede Zeile wird von dem gekennzeichnet, der dahinter steht: was der Lieferant zur Verfügung gestellt hat, was wir überprüft haben, was wir unabhängig verifiziert haben und was vor Ort bestätigt wurde.",
     "provProvided": "Lieferanten bereitgestellt",
@@ -2005,7 +2005,8 @@
     "assessmentReportNotPublished": "Dieser Bericht ist noch nicht veröffentlicht. Es gibt nichts zum Herunterladen.",
     "assessmentReportDownload": "Bericht herunterladen",
     "assessmentReportUnavailable": "Nicht verfügbar",
-    "assessmentReportNote": "Der kostenpflichtige Download startet in Kürze. Derzeit öffnet ein Berichtslink eine Anfrage für individuelle Leistungen. Die Preise richten sich nach unserer veröffentlichten Preisliste."
+    "assessmentReportNote": "Der kostenpflichtige Download startet in Kürze. Derzeit öffnet ein Berichtslink eine Anfrage für individuelle Leistungen. Die Preise richten sich nach unserer veröffentlichten Preisliste.",
+    "regLegalName": "Eingetragener Name"
   },
   "reportPreview": {
     "badge": "Kostenlose Preview",
@@ -2016,7 +2017,7 @@
     "keyRisksTitle": "Hauptrisiken",
     "recommendationTitle": "Empfehlung",
     "riskLevel": "Risikograd",
-    "score": "Score",
+    "score": "Bewertung",
     "unlockTitle": "Erhalten Sie den vollständigen Due Diligence Report",
     "unlockLead": "Der vollständige Bericht umfasst Unternehmensunterlagen, Evidenzprüfung, Risikoanalyse und den empfohlenen nächsten Schritt. Originaldokumente von Drittanbietern bleiben eingeschränkt.",
     "unlockCta": "Berichtsoptionen anzeigen",
@@ -2031,8 +2032,8 @@
           "Lieferantenübersicht",
           "Risiko-Score mit Dimension-Aufgliederung",
           "Prüfstatus",
-          "Resumen de evidencia",
-          "Principales factores de riesgo",
+          "Zusammenfassung der Nachweise",
+          "Zentrale Risikofaktoren",
           "Empfohlene Maßnahmen",
           "PDF"
         ]
@@ -2041,8 +2042,8 @@
         "name": "Professional Due Diligence",
         "price": "$129",
         "items": [
-          "Todo en el informe básico",
-          "Revisión detallada de la evidencia",
+          "Alles aus dem Basisbericht",
+          "Detaillierte Prüfung der Nachweise",
           "Überprüfung zusätzlicher Unterlagen",
           "Risikoanalyse mit käuferspezifischen Prioritäten",
           "Prüfvermerke",
@@ -2103,7 +2104,7 @@
         "Prioritäre Platzierung bei der Suche",
         "Featured auf relevanten Branchenseiten",
         "Käufereinführungen",
-        "Visibilidad del producto"
+        "Produktsichtbarkeit"
       ]
     },
     "badge": "Profil beanspruchen",
@@ -2145,9 +2146,9 @@
   },
   "consent": {
     "title": "Wie Ihre Informationen verwendet werden",
-    "body": "Information submitted by suppliers is used to create and maintain their FactoryAuditB2B supplier profile and support buyer due diligence.",
+    "body": "Von Lieferanten übermittelte Informationen werden verwendet, um ihr FactoryAuditB2B-Lieferantenprofil zu erstellen und zu pflegen sowie die Sorgfaltspflicht der Käufer zu unterstützen.",
     "privacy": "Wir geben vertrauliche Dokumente nicht ohne Genehmigung öffentlich bekannt.",
-    "authorize": "I authorize FactoryAuditB2B to use the information and documents I provide for supplier verification and buyer due diligence, subject to the platform's privacy and document-sharing rules.",
+    "authorize": "Ich ermächtige FactoryAuditB2B, die von mir bereitgestellten Informationen und Dokumente für die Lieferantenverifizierung und die Sorgfaltspflicht der Käufer zu verwenden, vorbehaltlich der Datenschutz- und Dokumentenfreigaberegeln der Plattform.",
     "prefsTitle": "Präferenzen für den Informationsaustausch",
     "public": {
       "title": "öffentlich",
@@ -2155,7 +2156,7 @@
       "items": [
         "Firmenname",
         "Standort",
-        "Productos",
+        "Produkte",
         "Prüfstatus"
       ]
     },
@@ -2163,9 +2164,9 @@
       "title": "Käuferansicht",
       "lead": "Sichtbar für verifizierte Käufer.",
       "items": [
-        "Evidencia seleccionada",
-        "Detalles del certificado",
-        "Programa de Auditoria"
+        "Ausgewählte Nachweise",
+        "Zertifikatsdetails",
+        "Audit-Zusammenfassung"
       ]
     },
     "restricted": {
@@ -2173,8 +2174,8 @@
       "lead": "Nur mit Ihrer ausdrücklichen Genehmigung.",
       "items": [
         "Original-Prüfungsberichte",
-        "Documentos confidenciales",
-        "Fotos internas del PFDC."
+        "Vertrauliche Dokumente",
+        "Interne Fotos"
       ]
     },
     "private": {
@@ -2212,7 +2213,7 @@
     ],
     "updateTitle": "Aktualisierungsrichtlinie",
     "updateBody": "Wir überprüfen Gewichte, wenn wir eine wesentliche Änderung am Modell vornehmen, und wir zeichnen die verwendete Version auf, wenn eine Punktzahl erstellt wird. Methodische Änderungen sind hier mit ihrem Datum aufgeführt.",
-    "changelogTitle": "Changelog",
+    "changelogTitle": "Änderungsprotokoll",
     "versionTitle": "Aktuelle Fassung",
     "aiTitle": "Wo KI eingesetzt wird und wo nicht",
     "aiBody": "Noten kommen allein von der Regelmaschine. Ein Sprachmodell kann ein Ergebnis in einfacher Sprache zusammenfassen oder erklären, und es kann die empfohlenen Aktionen entwerfen. Es entscheidet nicht über die Punktzahl, und es kann die Gewichte nicht als Variable sehen, die es anpassen kann.",
@@ -2222,7 +2223,7 @@
     "ctaSecondary": "Einen Lieferanten frei punkten",
     "metaTitle": "Wie unsere Risikobewertung für Lieferanten funktioniert",
     "metaDesc": "Das Scoring-Framework, Risikodimensionen, Gewichte, Beweisregeln, Einschränkungen und Aktualisierungsrichtlinien hinter unseren Lieferantenrisiko-Scores. Berechnet durch eine deterministische Regelmaschine, nicht durch KI.",
-    "scoredInputsLabel": "Inputs",
+    "scoredInputsLabel": "Eingaben",
     "scoredTableNote": "{n} erzielte Inputs · {d} Dimensionen · Gesamtgewicht {w}.",
     "weightsSumLine": "- acht Dimensionen, {n} Inputs, Gewichte summieren sich zu {w}.",
     "howWeVerifyTitle": "Wie wir überprüfen: sechs Schritte",
@@ -2241,7 +2242,7 @@
         "body": "Jedes Dokument wird von einer Person auf Gültigkeit, Konsistenz und Kontext überprüft."
       },
       {
-        "title": "Score",
+        "title": "Bewertung",
         "body": "Die Regelmaschine verwandelt die überprüften Eingaben in den achtdimensionalen Risiko-Score."
       },
       {
@@ -2363,7 +2364,7 @@
       "Zahlung ändert das Ergebnis nicht. Eine bezahlte Verifizierung kann trotzdem Probleme aufzeigen.",
       "Stichproben und Fallstudien sind immer als Demonstrationen gekennzeichnet."
     ],
-    "tcTitle": "Trust Center",
+    "tcTitle": "Vertrauenszentrum",
     "tcLead": "Die Richtlinien, Zusagen und Kontrollen hinter unserer Verifizierungsarbeit – an einem Ort.",
     "tcCardConfTitle": "Vertraulichkeitserklärung",
     "tcCardConfBody": "Was wir als vertraulich behandeln, wer verpflichtet ist und was bei einem Verstoß geschieht.",
@@ -2533,9 +2534,9 @@
   },
   "supplierNetwork": {
     "metaTitle": "Treten Sie dem Lieferantennetzwerk bei | Kostenloses Lieferantenprofil",
-    "metaDesc": "Join the FactoryAuditB2B Supplier Network for free. Get an international buyer-facing profile, supplier verification support, factory audit and inspection services.",
+    "metaDesc": "Treten Sie dem FactoryAuditB2B-Lieferantennetzwerk kostenlos bei. Erhalten Sie ein auf internationale Käufer ausgerichtetes Profil sowie Unterstützung bei Lieferantenverifizierung, Fabrikaudit und Inspektion.",
     "badge": "Lieferantennetzwerk",
-    "h1": "Join the FactoryAuditB2B Supplier Network",
+    "h1": "Treten Sie dem FactoryAuditB2B-Lieferantennetzwerk bei",
     "lead": "Ein kostenloses Profil, das internationale Käufer finden können, mit Verifizierungsunterstützung dahinter. Keine garantierten Bestellungen, keine garantierten Zertifikate, kein versprochener Audit-Pass.",
     "benefitsTitle": "Was du bekommst",
     "benefits": [
@@ -2548,7 +2549,7 @@
     ],
     "noGuaranteeTitle": "Was wir nicht versprechen",
     "noGuarantee": "Wir versprechen keine garantierten Aufträge, garantierte Zertifizierung oder garantierten Audit-Pass. Verifizierungsberichte beschreiben, was wir tatsächlich gefunden haben.",
-    "certStatement": "FactoryAuditB2B does not sell or issue certificates.",
+    "certStatement": "FactoryAuditB2B verkauft oder stellt keine Zertifikate aus.",
     "howTitle": "Wie das Verbinden funktioniert",
     "howSteps": [
       "Beantragen Sie unten (kostenlos)",
@@ -2615,13 +2616,13 @@
         "contactWhatsapp": "WhatsApp",
         "auditAvailability": "Verfügbar für Factory Audit",
         "inspectionAvailability": "Für die Vorversandkontrolle verfügbar",
-        "authorizeCompanyProfile": "I authorize FactoryAuditB2B to display my company profile to international buyers *",
+        "authorizeCompanyProfile": "Ich ermächtige FactoryAuditB2B, mein Firmenprofil internationalen Käufern anzuzeigen *",
         "authorizeCompanyProfileYes": "Ja, Firmenprofil anzeigen",
         "authorizeCompanyProfileNo": "Nein, halte es privat",
         "contactVisibility": "Sichtbarkeit der Kontaktdaten",
         "contactVisibilityPublic": "Öffentlichkeit im Profil",
         "contactVisibilityPlatform": "Nur mit interessierten Käufern geteilt",
-        "contactVisibilityPrivate": "Private (contact via FactoryAuditB2B only)",
+        "contactVisibilityPrivate": "Privat (Kontakt nur über FactoryAuditB2B)",
         "message": "Erzählen Sie uns von Ihrer Fabrik (optional)",
         "certName": "Zertifizierung",
         "certNumber": "Zertifikatsnummer",
@@ -3337,7 +3338,7 @@
       "overallLabel": "Insgesamt",
       "totalWeightLabel": "Gesamtgewicht",
       "weightLabel": "Gewicht",
-      "scoreLabel": "Score",
+      "scoreLabel": "Bewertung",
       "criteria": {
         "quality": "Qualität",
         "price": "Preis",
@@ -3444,8 +3445,8 @@
       "signOut": "Abmelden",
       "myAccount": "Mein Konto",
       "upgrade": "Auf Founding Buyer upgraden",
-      "planFree": "Free",
-      "planFounding": "Founding Buyer",
+      "planFree": "Kostenlos",
+      "planFounding": "Gründungskäufer",
       "menuLabel": "Kontomenü"
     }
   },
@@ -3482,8 +3483,8 @@
       "noAccount": "Noch kein Konto?",
       "emailLabel": "E-Mail",
       "planLabel": "Tarif",
-      "planFree": "Free",
-      "planFounding": "Founding Buyer",
+      "planFree": "Kostenlos",
+      "planFounding": "Gründungskäufer",
       "quotaLabel": "Zugriff auf Basisprofile",
       "quotaUnlimited": "Unbegrenzt",
       "renewsLabel": "Verlängerung am",
@@ -3593,7 +3594,7 @@
     "membersLead": "Konten und ihr Mitgliedsstatus.",
     "membersEmpty": "Noch keine Mitglieder",
     "planFree": "Kostenlos",
-    "planFounding": "Founding Buyer",
+    "planFounding": "Gründungskäufer",
     "statusActive": "Aktiv",
     "statusCanceled": "Gekündigt",
     "statusPastDue": "Überfällig",
@@ -3647,8 +3648,8 @@
       "statusUnpublished": "Beginnt unveröffentlicht",
       "statusUnverified": "Beginnt unverifiziert"
     },
-    "navLeads": "Leads",
-    "leadsTitle": "Leads",
+    "navLeads": "Anfragen",
+    "leadsTitle": "Anfragen",
     "leadsLead": "Käuferanfragen, Lieferantenbewerbungen und Profil-Ansprüche. Jede Einsendung wird hier mit Referenznummer gespeichert, nicht nur per E-Mail versandt.",
     "leadsEmpty": "Noch keine Leads. Sobald ein Käufer ein Formular sendet oder ein Lieferant sich bewirbt, erscheint der Eintrag hier mit Referenznummer.",
     "statNewLeads": "Neue Leads (7 Tage)",
@@ -3689,17 +3690,17 @@
     "unpublishButton": "Zurückziehen",
     "publishBlocked": "Veröffentlichung nicht möglich: Der Lieferant hat sein Profil nicht autorisiert.",
     "orders": {
-      "ordersTitle": "Orders",
-      "ordersLead": "Service orders and their payment status.",
-      "colRef": "Order",
-      "colCreated": "Created",
-      "colEmail": "Email",
-      "ordersSearch": "Search reference, email or company",
-      "actionPaid": "Mark paid",
-      "actionCancel": "Cancel",
-      "actionRefund": "Refund",
-      "empty": "No orders yet.",
-      "updated": "Updated"
+      "ordersTitle": "Bestellungen",
+      "ordersLead": "Serviceaufträge und ihr Zahlungsstatus.",
+      "colRef": "Bestellung",
+      "colCreated": "Erstellt",
+      "colEmail": "E-Mail",
+      "ordersSearch": "Referenz, E-Mail oder Unternehmen suchen",
+      "actionPaid": "Als bezahlt markieren",
+      "actionCancel": "Abbrechen",
+      "actionRefund": "Erstatten",
+      "empty": "Noch keine Aufträge.",
+      "updated": "Aktualisiert"
     }
   },
   "evidenceCenter": {
@@ -3800,52 +3801,52 @@
     "relatedIndustries": "Verwandte Branchen"
   },
   "checkout": {
-    "title": "Order received",
-    "lead": "Your service order has been recorded. Keep the reference below for payment and follow-up.",
-    "orderRef": "Order reference",
-    "colService": "Service",
-    "colQuantity": "Quantity",
-    "colAmount": "Amount",
+    "title": "Bestellung erhalten",
+    "lead": "Ihre Servicebestellung wurde erfasst. Bewahren Sie die unten stehende Referenz für Zahlung und Nachverfolgung auf.",
+    "orderRef": "Bestellreferenz",
+    "colService": "Leistung",
+    "colQuantity": "Menge",
+    "colAmount": "Betrag",
     "colStatus": "Status",
-    "statusPending": "Awaiting payment",
-    "statusPaid": "Paid",
-    "statusCancelled": "Cancelled",
-    "statusRefunded": "Refunded",
-    "quoted": "To be quoted",
-    "payTitle": "How to pay",
-    "payPaypal": "Pay now with PayPal",
-    "payManualTitle": "Payment instructions",
-    "payManualBody": "Our team will email your order reference and payment instructions within one business day.",
-    "bankTitle": "Bank transfer details",
-    "referenceNote": "Quote this reference in your payment and in any follow-up.",
-    "nextTitle": "What happens next",
-    "nextBody": "We confirm the scope and price with you, then schedule the work once payment is received.",
-    "notFoundTitle": "Order not found",
-    "notFoundBody": "Check the reference in your confirmation email, or contact us and we will look it up.",
-    "svcVerificationBasic": "Supplier verification — basic report",
-    "svcVerificationPro": "Supplier verification — professional due diligence",
-    "svcFactoryAudit": "On-site factory audit",
-    "svcInspection": "Product inspection",
-    "svcMonitoring": "Supplier monitoring",
-    "svcCustom": "Custom scope",
-    "unitPerSupplier": "per supplier",
-    "unitManDay": "per man-day plus travel",
-    "unitQuoted": "quoted per project"
+    "statusPending": "Zahlung ausstehend",
+    "statusPaid": "Bezahlt",
+    "statusCancelled": "Storniert",
+    "statusRefunded": "Erstattet",
+    "quoted": "Auf Anfrage",
+    "payTitle": "Zahlungsweise",
+    "payPaypal": "Jetzt mit PayPal bezahlen",
+    "payManualTitle": "Zahlungshinweise",
+    "payManualBody": "Unser Team sendet Ihnen Ihre Bestellreferenz und die Zahlungsanweisungen innerhalb eines Werktags per E-Mail zu.",
+    "bankTitle": "Bankverbindung",
+    "referenceNote": "Geben Sie diese Referenz bei Ihrer Zahlung und bei jeder weiteren Korrespondenz an.",
+    "nextTitle": "Wie es weitergeht",
+    "nextBody": "Wir bestätigen mit Ihnen Umfang und Preis und planen die Arbeit, sobald die Zahlung eingegangen ist.",
+    "notFoundTitle": "Bestellung nicht gefunden",
+    "notFoundBody": "Prüfen Sie die Referenz in Ihrer Bestätigungs-E-Mail, oder kontaktieren Sie uns – wir suchen sie heraus.",
+    "svcVerificationBasic": "Lieferantenverifizierung – Basisbericht",
+    "svcVerificationPro": "Lieferantenverifizierung – professionelle Sorgfaltsprüfung",
+    "svcFactoryAudit": "Fabrikaudit vor Ort",
+    "svcInspection": "Produktinspektion",
+    "svcMonitoring": "Lieferantenüberwachung",
+    "svcCustom": "Individueller Umfang",
+    "unitPerSupplier": "pro Lieferant",
+    "unitManDay": "pro Personentag zzgl. Reisekosten",
+    "unitQuoted": "pro Projekt angeboten"
   },
   "order": {
-    "title": "Place an order",
-    "lead": "Choose the service and quantity. We confirm the scope and price with you before payment.",
-    "serviceLabel": "Service",
-    "quantityLabel": "Quantity",
-    "emailLabel": "Email",
-    "companyLabel": "Company",
-    "countryLabel": "Country",
-    "notesLabel": "Notes",
-    "notesHint": "Supplier name, factory country and your deadline.",
-    "amountHint": "Prices are indicative. The final price is confirmed by our team before payment.",
-    "submit": "Place order",
-    "submitting": "Placing order…",
-    "errorGeneric": "We could not place the order. Please try again or contact us."
+    "title": "Bestellung aufgeben",
+    "lead": "Wählen Sie Leistung und Menge. Wir bestätigen Umfang und Preis mit Ihnen vor der Zahlung.",
+    "serviceLabel": "Leistung",
+    "quantityLabel": "Menge",
+    "emailLabel": "E-Mail",
+    "companyLabel": "Unternehmen",
+    "countryLabel": "Land",
+    "notesLabel": "Hinweise",
+    "notesHint": "Name des Lieferanten, Land der Fabrik und Ihre Frist.",
+    "amountHint": "Die Preise sind Richtwerte. Der endgültige Preis wird von unserem Team vor der Zahlung bestätigt.",
+    "submit": "Bestellung aufgeben",
+    "submitting": "Bestellung wird aufgegeben…",
+    "errorGeneric": "Die Bestellung konnte nicht aufgegeben werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns."
   },
   "clusters": {
     "h1": "Industriecluster",
@@ -3864,7 +3865,9 @@
     "viewSuppliers": "Lieferanten anzeigen →",
     "suppliersTitle": "Lieferanten in diesem Industriecluster",
     "suppliersEmpty": "In diesem Industriecluster sind noch keine veröffentlichten Lieferanten gelistet.",
-    "detailMetaDesc": "Lieferanten, Region und Branche des Industrieclusters {cluster}."
+    "detailMetaDesc": "Lieferanten, Region und Branche des Industrieclusters {cluster}.",
+    "provinceLabel": "Provinz",
+    "cityLabel": "Stadt"
   },
   "verifySupplier": {
     "badge": "Lieferantenprüfung",
@@ -4194,5 +4197,39 @@
     "docsLead": "Dies sind die Vorlagen, die wir in jedem Projekt verwenden. Sie sind öffentlich gelistet, damit Sie eine Kopie anfordern können.",
     "reportTitle": "Eine Meldung abgeben",
     "reportBody": "Wenn Sie glauben, dass ein Auditor, eine Mitarbeiterin oder ein Partner gegen diese Regeln verstoßen hat, sagen Sie es uns. Meldungen erreichen unser Compliance-Postfach, werden vertraulich behandelt und von einer am Projekt unbeteiligten Person geprüft:"
+  },
+  "contact": {
+    "metaTitle": "Kontaktieren Sie FactoryAuditB2B — Lieferantenverifizierung & Werksaudit",
+    "metaDesc": "Sagen Sie uns, was Sie beschaffen, oder welchen Lieferanten wir prüfen sollen. Wir antworten innerhalb eines Werktags.",
+    "eyebrow": "Kontakt",
+    "title": "Sprechen Sie mit uns über Ihre Lieferanten",
+    "lead": "Senden Sie uns, was Sie beschaffen, oder die Fabrik, die geprüft werden soll. Wir sagen Ihnen, was wir verifizieren können, was nicht und was dafür nötig ist.",
+    "directTitle": "Oder erreichen Sie uns direkt",
+    "emailLabel": "E-Mail",
+    "responseNote": "Wir antworten innerhalb eines Werktags. Wir verkaufen oder teilen Ihre Daten nicht.",
+    "altTitle": "Weitere Wege zum Start",
+    "rfqTitle": "RFQ einreichen",
+    "rfqBody": "Sie haben ein konkretes Produkt? Senden Sie die Details, und wir leiten sie an prüfenswerte Lieferanten weiter.",
+    "supplierTitle": "Dem Lieferantennetzwerk beitreten",
+    "supplierBody": "Sie sind eine Fabrik? Lassen Sie sich eintragen und öffnen Sie sich für käuferseitig angeforderte Audits und Inspektionen.",
+    "form": {
+      "name": "Ihr Name",
+      "namePlaceholder": "Anna Müller",
+      "email": "Geschäftliche E-Mail",
+      "emailPlaceholder": "anna@firma.de",
+      "company": "Unternehmen",
+      "companyPlaceholder": "Firmenname",
+      "country": "Land / Markt",
+      "countryPlaceholder": "z. B. Deutschland",
+      "message": "Was benötigen Sie?",
+      "messagePlaceholder": "Sagen Sie uns, was Sie beschaffen, oder welchen Lieferanten wir prüfen sollen.",
+      "submit": "Nachricht senden",
+      "sending": "Wird gesendet…",
+      "successTitle": "Nachricht erhalten",
+      "successBody": "Vielen Dank. Unser Team antwortet innerhalb eines Werktags.",
+      "errorTitle": "Senden fehlgeschlagen",
+      "errorBody": "Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.",
+      "required": "Bitte geben Sie eine gültige E-Mail-Adresse ein."
+    }
   }
 }

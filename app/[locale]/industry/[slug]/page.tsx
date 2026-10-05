@@ -9,6 +9,7 @@ import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i1
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { pickZhPair } from "@/lib/tw";
+import { supplierDisplayName } from "@/lib/supplierDisplayName";
 import JsonLd from "@/components/JsonLd";
 import WhatsAppLink from "@/components/WhatsAppLink";
 import RfqForm from "@/components/RfqForm";
@@ -110,7 +111,7 @@ export default async function IndustryPage({ params }: { params: Promise<Params>
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: `${BASE}/` },
+              { "@type": "ListItem", position: 1, name: t.common.ui.home, item: `${BASE}/` },
               // CS-02A：/industry 索引页已建成，面包屑回到真实存在的行业索引，
               // 不再借用 /suppliers 凑数（结构化数据里不得出现降级死链）。
               { "@type": "ListItem", position: 2, name: p.breadcrumb, item: `${BASE}/industry` },
@@ -203,7 +204,7 @@ export default async function IndustryPage({ params }: { params: Promise<Params>
             {capsBySupplier.map(({ s, caps }) => (
               <li key={s.slug} className="p-3">
                 <a href={lp(`/suppliers/${s.slug}`)} className="font-medium hover:underline">
-                  {s.legalName}
+                  {supplierDisplayName(locale, s)}
                 </a>
                 <span className="ml-2 text-sm text-gray-500">
                   {s.city} · {s.countryCode} · {p.riskLabel}{" "}

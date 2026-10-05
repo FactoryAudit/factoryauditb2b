@@ -11,6 +11,7 @@ import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { twText } from "@/lib/tw";
 import { countryDisplayName } from "@/lib/countryNames";
+import { supplierDisplayName } from "@/lib/supplierDisplayName";
 
 export const dynamic = "force-static";
 
@@ -64,7 +65,10 @@ export default async function AuditGuidePage({ params }: { params: Promise<Param
   // CS-01：正文里所有国名显示同样走本地化（面包屑 / H1 / 供应商标题 / 结构化数据）
   const country = countryDisplayName(locale, c.code, c.name);
   const isZhTW = locale === "zh-TW";
-  const zhName = (v: string | null) => (v ? (isZhTW ? twText(v) : v) : null);
+  // 中文标准名只在中文语境渲染（zh / zh-TW）。旧实现无条件渲染，
+  // 导致 es/de/fr/pt/ja/ar 的 /audit-guide 页 H1 下挂着中文标准名（跨语种串味）。
+  const showZhName = locale === "zh" || locale === "zh-TW";
+  const zhName = (v: string | null) => (showZhName && v ? (isZhTW ? twText(v) : v) : null);
 
   const suppliers = await listSuppliersByAuditType(c.code, a.code);
 
@@ -127,7 +131,7 @@ export default async function AuditGuidePage({ params }: { params: Promise<Param
         {g.h1.replaceAll("{type}", a.nameEn).replaceAll("{country}", country)}
       </h1>
       <p className="mt-2 max-w-3xl text-gray-600">
-        {a.nameZh && <span className="block">{zhName(a.nameZh)}</span>}
+        {zhName(a.nameZh) && <span className="block">{zhName(a.nameZh)}</span>}
         {a.owner && (
           <span className="block text-sm">
             {g.ownerLabel} {a.owner}
@@ -168,7 +172,7 @@ export default async function AuditGuidePage({ params }: { params: Promise<Param
                   href={lp(`/suppliers/${s.slug}`)}
                   className="font-medium hover:underline"
                 >
-                  {s.legalName}
+                  {supplierDisplayName(locale, s)}
                 </Link>
                 <span className="text-sm text-gray-500">
                   {s.city} · {g.riskLabel}{" "}

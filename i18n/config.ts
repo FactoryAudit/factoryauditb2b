@@ -23,7 +23,7 @@ export const LOCALE_META: Record<
   es: { name: "Español", english: "Spanish", htmlLang: "es", ogLocale: "es_ES" },
   de: { name: "Deutsch", english: "German", htmlLang: "de", ogLocale: "de_DE" },
   fr: { name: "Français", english: "French", htmlLang: "fr", ogLocale: "fr_FR" },
-  pt: { name: "Português", english: "Portuguese", htmlLang: "pt-BR", ogLocale: "pt_BR" },
+  pt: { name: "Português", english: "Portuguese", htmlLang: "pt-PT", ogLocale: "pt_PT" },
   ja: { name: "日本語", english: "Japanese", htmlLang: "ja", ogLocale: "ja_JP" },
   "zh-TW": { name: "繁體中文", english: "Chinese (Traditional)", htmlLang: "zh-Hant", ogLocale: "zh_TW" },
   ar: { name: "العربية", english: "Arabic", htmlLang: "ar", ogLocale: "ar_AR" },

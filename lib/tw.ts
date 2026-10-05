@@ -12,6 +12,7 @@
 // 正文中文变更后需重跑生成脚本。
 
 import { TW_MAP } from "./twData.generated";
+import { trDeep, trLookup } from "./contentI18n";
 
 const CHAR = TW_MAP.char;
 const STR = TW_MAP.str;
@@ -60,13 +61,15 @@ export function pickZhCopy<E, Z>(
   content: { en: E; zh: Z }
 ): E | Z {
   if (locale === "zh-TW") return twDeep(content.zh) as unknown as E | Z;
-  return locale === "zh" ? (content.zh as unknown as E | Z) : content.en;
+  if (locale === "zh") return content.zh as unknown as E | Z;
+  // 非中文语种：查内容映射表（未命中回退英文原文）
+  return trDeep(locale, content.en);
 }
 
 /** 成对文案取数（titleEn/titleZh、metaDescEn/metaDescZh 之类）：zh 原样、zh-TW 繁化、其余 en。 */
 export function pickZhPair(locale: string, en: string, zh: string): string {
   if (locale === "zh") return zh;
   if (locale === "zh-TW") return twText(zh);
-  return en;
+  return trLookup(locale, en) ?? en;
 }
 

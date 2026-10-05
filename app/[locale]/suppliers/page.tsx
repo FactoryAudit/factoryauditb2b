@@ -306,6 +306,7 @@ export default async function SuppliersPage({ params }: Props) {
             industries={industries}
             active={{ country: "", industry: "", q: "" }}
             directoryPath={directoryPath}
+            locale={locale}
             dict={directoryDict}
             events={directoryEvents}
             trustProfileDict={tp}

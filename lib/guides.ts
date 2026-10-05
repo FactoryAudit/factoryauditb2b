@@ -9330,6 +9330,18 @@ export const GUIDE_CATEGORY_META: Record<
 };
 
 /**
+ * 指南索引页（/guides）的 meta 文案。与 GUIDE_CATEGORY_META 同模式：
+ * en/zh 手写，en 为唯一源串（其余 6 语在 lib/contentI18n 里以该英文串为键查表）。
+ */
+export const GUIDE_LIST_META = {
+  titleEn: "Supplier Intelligence Guides",
+  titleZh: "供应商情报指南",
+  descEn:
+    "Practical guides on verifying suppliers, running factory audits and assessing supplier risk in China and Southeast Asia.",
+  descZh: "供应商核验、验厂与风险判断的实操指南：覆盖中国及东南亚的付款前核查、现场审核与风险评估方法。",
+};
+
+/**
  * 返回「实际有指南」的分类，顺序遵循 GUIDE_CATEGORY_ORDER。
  * 用于 hub 路由 generateStaticParams、sitemap/llms 收录、索引页分类导航 ——
  * 与页面可索引性同源：无指南的分类不生成 hub、不进 sitemap，避免 404 / noindex 错配。

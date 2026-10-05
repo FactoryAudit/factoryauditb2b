@@ -80,7 +80,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: `${BASE}${p("/")}` },
+        { "@type": "ListItem", position: 1, name: dict.common.ui.home, item: `${BASE}${p("/")}` },
         {
           "@type": "ListItem",
           position: 2,

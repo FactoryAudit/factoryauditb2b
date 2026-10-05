@@ -23,6 +23,8 @@
 import { COVERAGE_COUNTRIES } from "@/lib/coverage";
 import { getTrustConfig } from "@/lib/trust";
 import { activeSocialLinks } from "@/lib/social";
+import { trLookup } from "@/lib/contentI18n";
+import { LOCALES } from "@/i18n/config";
 
 export const ORG_NAME = "FactoryAuditB2B";
 export const ORG_URL = "https://factoryauditb2b.com";
@@ -43,7 +45,16 @@ const KNOWS_ABOUT = [
 export type OrganizationOptions = {
   /** 覆盖默认描述（各页可按语境微调，但不得夸大） */
   description?: string;
+  /** 目标语种：把下方固定英文串查内容映射表（lib/contentI18n）本地化；未命中回退英文 */
+  locale?: string;
 };
+
+// 默认描述（英文原文，逐字）。组织级 schema 的本地化以「英文源串 → 译文」查表进行，
+// 故必须先把模板里 `+` 拼接的片段合成一个完整常量，键才能与 lib/contentI18n/*.json 对上。
+const DEFAULT_ORG_DESCRIPTION =
+  "FactoryAuditB2B helps global buyers discover and verify reliable " +
+  "manufacturers across Asia, and helps suppliers demonstrate their " +
+  "real capabilities with verified evidence.";
 
 /**
  * 生成 Organization Schema。
@@ -55,6 +66,8 @@ export function organizationSchema(
   options: OrganizationOptions = {},
 ): Record<string, unknown> {
   const cfg = getTrustConfig();
+  // 组织级固定英文串的本地化出口：命中 lib/contentI18n 映射表则取译文，否则原样回退英文。
+  const l10n = (s: string) => (options.locale ? trLookup(options.locale, s) ?? s : s);
 
   const org: Record<string, unknown> = {
     // 🔴 @type 在末尾按"是否真有地址"决定（见下方 assignTypes）：
@@ -75,13 +88,9 @@ export function organizationSchema(
     // 视觉标识（与 OG/Twitter 同款），供 ProfessionalService 富结果/知识图谱引用
     image: `${ORG_URL}/logo.svg`,
     // 专业服务类型（模板 1：Organization + ProfessionalService 双类型）
-    serviceType: "Third-Party B2B Factory Audit & Quality Inspection Services",
-    slogan: "Verify before you pay.",
-    description:
-      options.description ??
-      "FactoryAuditB2B helps global buyers discover and verify reliable " +
-        "manufacturers across Asia, and helps suppliers demonstrate their " +
-        "real capabilities with verified evidence.",
+    serviceType: l10n("Third-Party B2B Factory Audit & Quality Inspection Services"),
+    slogan: l10n("Verify before you pay."),
+    description: options.description ?? l10n(DEFAULT_ORG_DESCRIPTION),
     // 覆盖国家取自 lib/coverage.ts —— 唯一事实源，新增国家会自动同步，无需改这里
     areaServed: COVERAGE_COUNTRIES.map((c) => ({
       "@type": "Country",
@@ -102,7 +111,7 @@ export function organizationSchema(
       "@type": "ContactPoint",
       contactType: "customer support",
       email,
-      availableLanguage: ["en", "zh"],
+      availableLanguage: [...LOCALES],
     },
   ];
   if (whatsapp) {
@@ -111,7 +120,7 @@ export function organizationSchema(
       contactType: "customer support",
       telephone: `+${whatsapp}`,
       contactOption: "TollFree",
-      availableLanguage: ["en", "zh"],
+      availableLanguage: [...LOCALES],
     });
   }
   org.contactPoint = contactPoints;

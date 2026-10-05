@@ -63,6 +63,7 @@ import {
   type SnapshotLabels,
 } from "@/lib/seo/supplierSeo";
 import { ORG_URL } from "@/lib/organizationSchema";
+import { supplierDisplayName, supplierNameDiffersFromLegal } from "@/lib/supplierDisplayName";
 // STEP 10-D §22：供应商档案的「产业带」回链 —— 用正式层级 canonical URL（不得手写）。
 // LEGACY_CLUSTER_REDIRECTS 仅含 8 个 P0 slug→canonical，恰好等于 Admin 允许写入的已发布集群集合。
 import { LEGACY_CLUSTER_REDIRECTS } from "@/lib/clusterRoutes";
@@ -387,13 +388,13 @@ export default async function SupplierProfilePage({
             {sp.directoryBreadcrumb}
           </Link>
           <span className="mx-2">/</span>
-          <span className="text-[#171717]">{s.legalName}</span>
+          <span className="text-[#171717]">{supplierDisplayName(locale, s)}</span>
         </nav>
 
         {/* 公开摘要：核心价值直出，会员墙不放在顶部 */}
         <section className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="md:col-span-2">
-            <h1 className="text-3xl font-bold text-[#171717]">{s.legalName}</h1>
+            <h1 className="text-3xl font-bold text-[#171717]">{supplierDisplayName(locale, s)}</h1>
             <p className="text-[#6d6b66] mt-1">
               {s.city}, {s.countryName ?? s.country.toUpperCase()} ·{" "}
               {s.businessType === "Manufacturer" ? sp.manufacturer : sp.tradingCompany}
@@ -689,7 +690,7 @@ export default async function SupplierProfilePage({
 
         {/* CS-12：工商登记信息（公开层）。排在"平台核验范围"之前 ——
             这几行是档案的事实底座，读者应先看到"这家是谁"，再看"平台核验了什么"。 */}
-        <SupplierRegistrationPanel data={s} dict={sp} />
+        <SupplierRegistrationPanel data={s} dict={sp} showLegalName={supplierNameDiffersFromLegal(locale, s)} />
 
         {/* 平台核验范围（方法论级，公开） */}
         <section className="mt-8 card p-6 bg-[#fbfaf7]">

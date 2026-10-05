@@ -1062,7 +1062,7 @@
       "assessError": "Un problème est survenu. Veuillez réessayer."
     },
     "ui": {
-      "home": "Sommaire",
+      "home": "Accueil",
       "relatedGuides": "Guides connexes",
       "quickAnswer": "Réponse rapide",
       "definition": "Définition",
@@ -1763,7 +1763,7 @@
         "href": "/services/inspection"
       },
       "sourcing": {
-        "title": "Sourcing",
+        "title": "Approvisionnement",
         "desc": "Publiez une demande de devis, obtenez un jumelage avec des fournisseurs que nous pouvons vérifier et payez une commission uniquement sur les commandes que vous passez.",
         "href": "/rfq"
       },
@@ -1908,7 +1908,7 @@
     "riskScore": "Score du profil fournisseur",
     "verificationStatus": "Statut de la vérification",
     "evidenceSummary": "SOMMAIRE DES DONNÉES",
-    "auditHistory": "Audit history",
+    "auditHistory": "Historique des audits",
     "notCoveredTitle": "Ce qui n'est pas couvert",
     "notCoveredLead": "Vérifications en dehors du périmètre de vérification actuel. Nous les listons afin que vous sachiez ce qui n'a pas été examiné.",
     "whatVerifiedTitle": "Ce que nous avons vérifié",
@@ -1949,7 +1949,7 @@
     "selfReported": "Autodéclaré",
     "auditStatusLabel": "Statut d'audit",
     "businessTypeLabel": "Type d'Entreprise",
-    "verifiedByTitle": "Verification by FactoryAuditB2B",
+    "verifiedByTitle": "Vérification par FactoryAuditB2B",
     "verifiedByLead": "C'est ce que notre équipe a vérifié. Il est distinct de ce que le fournisseur nous a dit, et les deux sont étiquetés.",
     "provenanceLead": "Chaque ligne est étiquetée par qui la soutient : ce que le fournisseur a fourni, ce que nous avons examiné, ce que nous avons vérifié de manière indépendante et ce qui a été confirmé sur place.",
     "provProvided": "Fournisseur fourni",
@@ -2005,7 +2005,8 @@
     "assessmentReportNotPublished": "Ce rapport n'est pas encore publié. Il n'y a rien à télécharger.",
     "assessmentReportDownload": "Télécharger le rapport",
     "assessmentReportUnavailable": "Indisponible",
-    "assessmentReportNote": "Le téléchargement payant sera bientôt disponible. Pour l'instant, un lien de rapport ouvre une demande de service personnalisé. Les prix suivent notre grille tarifaire publiée."
+    "assessmentReportNote": "Le téléchargement payant sera bientôt disponible. Pour l'instant, un lien de rapport ouvre une demande de service personnalisé. Les prix suivent notre grille tarifaire publiée.",
+    "regLegalName": "Nom enregistré"
   },
   "reportPreview": {
     "badge": "(Aperçu gratuit)",
@@ -2031,8 +2032,8 @@
           "Aperçu du fournisseur",
           "Score de risque avec ventilation des dimensions",
           "État de la vérification",
-          "Resumen de evidencia",
-          "Principales factores de riesgo",
+          "Résumé des preuves",
+          "Principaux facteurs de risque",
           "Mesures recommandées",
           "PDF"
         ]
@@ -2041,8 +2042,8 @@
         "name": "Diligence raisonnable professionnelle",
         "price": "$129",
         "items": [
-          "Todo en el informe básico",
-          "Revisión detallada de la evidencia",
+          "Tout le contenu du rapport de base",
+          "Examen détaillé des preuves",
           "Vérifications supplémentaires des documents",
           "Analyse des risques avec priorités spécifiques à l'acheteur",
           "Notes de vérification",
@@ -2103,7 +2104,7 @@
         "Placement prioritaire à la recherche",
         "En vedette sur les pages pertinentes de l'industrie",
         "Présentations des acheteurs",
-        "Visibilidad del producto"
+        "Visibilité du produit"
       ]
     },
     "badge": "Revendiquer le profil",
@@ -2145,9 +2146,9 @@
   },
   "consent": {
     "title": "Comment vos informations sont utilisées",
-    "body": "Information submitted by suppliers is used to create and maintain their FactoryAuditB2B supplier profile and support buyer due diligence.",
+    "body": "Les informations soumises par les fournisseurs servent à créer et à tenir à jour leur profil fournisseur FactoryAuditB2B et à appuyer la diligence raisonnable des acheteurs.",
     "privacy": "Nous ne divulguons pas publiquement de documents confidentiels sans autorisation.",
-    "authorize": "I authorize FactoryAuditB2B to use the information and documents I provide for supplier verification and buyer due diligence, subject to the platform's privacy and document-sharing rules.",
+    "authorize": "J'autorise FactoryAuditB2B à utiliser les informations et les documents que je fournis aux fins de la vérification des fournisseurs et de la diligence raisonnable des acheteurs, dans le respect des règles de confidentialité et de partage de documents de la plateforme.",
     "prefsTitle": "Préférences de partage d'informations",
     "public": {
       "title": "Partenariat public-privé",
@@ -2155,7 +2156,7 @@
       "items": [
         "Nom de l'entreprise",
         "Lieu",
-        "Productos",
+        "Produits",
         "État de la vérification"
       ]
     },
@@ -2163,9 +2164,9 @@
       "title": "Vue acheteur",
       "lead": "Visible par les acheteurs vérifiés.",
       "items": [
-        "Evidencia seleccionada",
-        "Detalles del certificado",
-        "Programa de Auditoria"
+        "Éléments de preuve sélectionnés",
+        "Détails du certificat",
+        "Résumé de l'audit"
       ]
     },
     "restricted": {
@@ -2173,8 +2174,8 @@
       "lead": "Seulement avec votre autorisation explicite.",
       "items": [
         "Rapports d ' audit originaux",
-        "Documentos confidenciales",
-        "Fotos internas del PFDC."
+        "Documents confidentiels",
+        "Photos internes"
       ]
     },
     "private": {
@@ -2533,9 +2534,9 @@
   },
   "supplierNetwork": {
     "metaTitle": "Rejoindre le réseau de fournisseurs | Profil de fournisseur gratuit",
-    "metaDesc": "Join the FactoryAuditB2B Supplier Network for free. Get an international buyer-facing profile, supplier verification support, factory audit and inspection services.",
+    "metaDesc": "Rejoignez gratuitement le réseau de fournisseurs FactoryAuditB2B. Bénéficiez d'un profil visible par les acheteurs internationaux et d'un accompagnement en vérification de fournisseurs, audit d'usine et inspection.",
     "badge": "le réseau de fournisseurs,",
-    "h1": "Join the FactoryAuditB2B Supplier Network",
+    "h1": "Rejoignez le réseau de fournisseurs FactoryAuditB2B",
     "lead": "Un profil gratuit que les acheteurs internationaux peuvent trouver, avec un support de vérification derrière. Pas de commandes garanties, pas de certificats garantis, pas de pass d'audit promis.",
     "benefitsTitle": "Ce dont vous bénéficiez",
     "benefits": [
@@ -2548,7 +2549,7 @@
     ],
     "noGuaranteeTitle": "Ce que nous ne promettons pas",
     "noGuarantee": "Nous ne promettons pas de commandes garanties, de certification garantie ou de pass d'audit garanti. Les rapports de vérification décrivent ce que nous avons réellement trouvé.",
-    "certStatement": "FactoryAuditB2B does not sell or issue certificates.",
+    "certStatement": "FactoryAuditB2B ne vend ni ne délivre de certificats.",
     "howTitle": "Fonctionnement de l'adhésion",
     "howSteps": [
       "Soumettre la demande ci-dessous (gratuit)",
@@ -2615,13 +2616,13 @@
         "contactWhatsapp": "WhatsApp",
         "auditAvailability": "Disponible pour audit d'usine",
         "inspectionAvailability": "Disponible pour l'inspection avant expédition",
-        "authorizeCompanyProfile": "I authorize FactoryAuditB2B to display my company profile to international buyers *",
+        "authorizeCompanyProfile": "J'autorise FactoryAuditB2B à afficher le profil de mon entreprise auprès d'acheteurs internationaux *",
         "authorizeCompanyProfileYes": "Oui, afficher le profil de l'entreprise",
         "authorizeCompanyProfileNo": "Non, gardez-le privé",
         "contactVisibility": "Visibilité des coordonnées",
         "contactVisibilityPublic": "Public sur le profil",
         "contactVisibilityPlatform": "Partagé uniquement avec les acheteurs intéressés",
-        "contactVisibilityPrivate": "Private (contact via FactoryAuditB2B only)",
+        "contactVisibilityPrivate": "Privé (contact uniquement via FactoryAuditB2B)",
         "message": "Parlez-nous de votre usine (facultatif)",
         "certName": "Certification",
         "certNumber": "N° de certificat",
@@ -3444,8 +3445,8 @@
       "signOut": "Se déconnecter",
       "myAccount": "Mon compte",
       "upgrade": "Passer à Founding Buyer",
-      "planFree": "Free",
-      "planFounding": "Founding Buyer",
+      "planFree": "Gratuit",
+      "planFounding": "Acquéreur fondateur",
       "menuLabel": "Menu du compte"
     }
   },
@@ -3482,8 +3483,8 @@
       "noAccount": "Pas encore de compte ?",
       "emailLabel": "E-mail",
       "planLabel": "Formule",
-      "planFree": "Free",
-      "planFounding": "Founding Buyer",
+      "planFree": "Gratuit",
+      "planFounding": "Acquéreur fondateur",
       "quotaLabel": "Accès aux profils de base",
       "quotaUnlimited": "Illimité",
       "renewsLabel": "Renouvellement le",
@@ -3593,8 +3594,8 @@
     "membersLead": "Comptes et statut d'adhésion.",
     "membersEmpty": "Aucun membre pour l'instant",
     "planFree": "Gratuit",
-    "planFounding": "Founding Buyer",
-    "statusActive": "Active",
+    "planFounding": "Acquéreur fondateur",
+    "statusActive": "Actif",
     "statusCanceled": "Annulée",
     "statusPastDue": "Impayé",
     "statusExpired": "Expirée",
@@ -3647,8 +3648,8 @@
       "statusUnpublished": "Commence non publié",
       "statusUnverified": "Commence non vérifié"
     },
-    "navLeads": "Leads",
-    "leadsTitle": "Leads",
+    "navLeads": "Prospects",
+    "leadsTitle": "Prospects",
     "leadsLead": "Demandes d'acheteurs, candidatures de fournisseurs et revendications de fiche. Chaque envoi est consigné ici avec un numéro de référence, pas seulement envoyé par e-mail.",
     "leadsEmpty": "Aucun lead pour l'instant. Dès qu'un acheteur envoie un formulaire ou qu'un fournisseur dépose une candidature, il apparaît ici avec un numéro de référence.",
     "statNewLeads": "Nouveaux leads (7 jours)",
@@ -3689,17 +3690,17 @@
     "unpublishButton": "Dépublier",
     "publishBlocked": "Impossible de publier : le fournisseur n'a pas autorisé son profil.",
     "orders": {
-      "ordersTitle": "Orders",
-      "ordersLead": "Service orders and their payment status.",
-      "colRef": "Order",
-      "colCreated": "Created",
-      "colEmail": "Email",
-      "ordersSearch": "Search reference, email or company",
-      "actionPaid": "Mark paid",
-      "actionCancel": "Cancel",
-      "actionRefund": "Refund",
-      "empty": "No orders yet.",
-      "updated": "Updated"
+      "ordersTitle": "Commandes",
+      "ordersLead": "Commandes de service et leur statut de paiement.",
+      "colRef": "Commande",
+      "colCreated": "Créé",
+      "colEmail": "E-mail",
+      "ordersSearch": "Rechercher une référence, un e-mail ou une entreprise",
+      "actionPaid": "Marquer comme payé",
+      "actionCancel": "Annuler",
+      "actionRefund": "Rembourser",
+      "empty": "Aucune commande pour le moment.",
+      "updated": "Mis à jour"
     }
   },
   "evidenceCenter": {
@@ -3789,7 +3790,7 @@
   },
   "chemicals": {
     "metaTitle": "Matières premières et fournisseurs",
-    "detailTitleTail": "Applications & documents",
+    "detailTitleTail": "Applications et documents",
     "metaDesc": "Matières premières chimiques de Chine : usages, documents demandés par les acheteurs et comment demander des devis à des fournisseurs vérifiés.",
     "lead": "Chaque page couvre une matière première : usages, spécifications habituelles des acheteurs et documents à demander avant de commander. Si aucun fournisseur n'est référencé, publiez une RFQ.",
     "casLabel": "CAS RN",
@@ -3800,52 +3801,52 @@
     "relatedIndustries": "Secteurs liés"
   },
   "checkout": {
-    "title": "Order received",
-    "lead": "Your service order has been recorded. Keep the reference below for payment and follow-up.",
-    "orderRef": "Order reference",
+    "title": "Commande reçue",
+    "lead": "Votre commande de service a été enregistrée. Conservez la référence ci-dessous pour le paiement et le suivi.",
+    "orderRef": "Référence de commande",
     "colService": "Service",
-    "colQuantity": "Quantity",
-    "colAmount": "Amount",
-    "colStatus": "Status",
-    "statusPending": "Awaiting payment",
-    "statusPaid": "Paid",
-    "statusCancelled": "Cancelled",
-    "statusRefunded": "Refunded",
-    "quoted": "To be quoted",
-    "payTitle": "How to pay",
-    "payPaypal": "Pay now with PayPal",
-    "payManualTitle": "Payment instructions",
-    "payManualBody": "Our team will email your order reference and payment instructions within one business day.",
-    "bankTitle": "Bank transfer details",
-    "referenceNote": "Quote this reference in your payment and in any follow-up.",
-    "nextTitle": "What happens next",
-    "nextBody": "We confirm the scope and price with you, then schedule the work once payment is received.",
-    "notFoundTitle": "Order not found",
-    "notFoundBody": "Check the reference in your confirmation email, or contact us and we will look it up.",
-    "svcVerificationBasic": "Supplier verification — basic report",
-    "svcVerificationPro": "Supplier verification — professional due diligence",
-    "svcFactoryAudit": "On-site factory audit",
-    "svcInspection": "Product inspection",
-    "svcMonitoring": "Supplier monitoring",
-    "svcCustom": "Custom scope",
-    "unitPerSupplier": "per supplier",
-    "unitManDay": "per man-day plus travel",
-    "unitQuoted": "quoted per project"
+    "colQuantity": "Quantité",
+    "colAmount": "Montant",
+    "colStatus": "Statut",
+    "statusPending": "En attente de paiement",
+    "statusPaid": "Payé",
+    "statusCancelled": "Annulé",
+    "statusRefunded": "Remboursé",
+    "quoted": "Sur devis",
+    "payTitle": "Comment payer",
+    "payPaypal": "Payer maintenant avec PayPal",
+    "payManualTitle": "Instructions de paiement",
+    "payManualBody": "Notre équipe vous enverra par e-mail la référence de votre commande et les instructions de paiement dans un délai d'un jour ouvré.",
+    "bankTitle": "Coordonnées de virement bancaire",
+    "referenceNote": "Mentionnez cette référence lors de votre paiement et dans tout échange ultérieur.",
+    "nextTitle": "Prochaines étapes",
+    "nextBody": "Nous confirmons avec vous le périmètre et le prix, puis planifions les travaux dès réception du paiement.",
+    "notFoundTitle": "Commande introuvable",
+    "notFoundBody": "Vérifiez la référence dans votre e-mail de confirmation, ou contactez-nous et nous la retrouverons.",
+    "svcVerificationBasic": "Vérification de fournisseurs : rapport de base",
+    "svcVerificationPro": "Vérification de fournisseurs : diligence raisonnable approfondie",
+    "svcFactoryAudit": "Audit d'usine sur site",
+    "svcInspection": "Inspection de produit",
+    "svcMonitoring": "Suivi des fournisseurs",
+    "svcCustom": "Périmètre personnalisé",
+    "unitPerSupplier": "par fournisseur",
+    "unitManDay": "par jour-homme, hors déplacement",
+    "unitQuoted": "devis par projet"
   },
   "order": {
-    "title": "Place an order",
-    "lead": "Choose the service and quantity. We confirm the scope and price with you before payment.",
+    "title": "Passer une commande",
+    "lead": "Choisissez la prestation et la quantité. Nous confirmons avec vous le périmètre et le prix avant le paiement.",
     "serviceLabel": "Service",
-    "quantityLabel": "Quantity",
-    "emailLabel": "Email",
-    "companyLabel": "Company",
-    "countryLabel": "Country",
+    "quantityLabel": "Quantité",
+    "emailLabel": "E-mail",
+    "companyLabel": "Entreprise",
+    "countryLabel": "Pays",
     "notesLabel": "Notes",
-    "notesHint": "Supplier name, factory country and your deadline.",
-    "amountHint": "Prices are indicative. The final price is confirmed by our team before payment.",
-    "submit": "Place order",
-    "submitting": "Placing order…",
-    "errorGeneric": "We could not place the order. Please try again or contact us."
+    "notesHint": "Nom du fournisseur, pays de l'usine et votre échéance.",
+    "amountHint": "Les prix sont indicatifs. Le prix final est confirmé par notre équipe avant le paiement.",
+    "submit": "Passer la commande",
+    "submitting": "Envoi de la commande…",
+    "errorGeneric": "Nous n'avons pas pu passer la commande. Veuillez réessayer ou nous contacter."
   },
   "clusters": {
     "h1": "Clusters industriels",
@@ -3864,7 +3865,9 @@
     "viewSuppliers": "Voir les fournisseurs →",
     "suppliersTitle": "Fournisseurs de ce cluster industriel",
     "suppliersEmpty": "Aucun fournisseur publié n'est encore répertorié dans ce cluster industriel.",
-    "detailMetaDesc": "Fournisseurs, région et secteur du cluster industriel {cluster}."
+    "detailMetaDesc": "Fournisseurs, région et secteur du cluster industriel {cluster}.",
+    "provinceLabel": "Province",
+    "cityLabel": "Ville"
   },
   "verifySupplier": {
     "badge": "Vérification de fournisseur",
@@ -4103,7 +4106,7 @@
     "optOther": "Autre",
     "optRoleAuditor": "Auditeur",
     "optRoleIt": "IT",
-    "optRoleSourcing": "Sourcing",
+    "optRoleSourcing": "Approvisionnement",
     "optRoleSales": "Commercial",
     "optRoleOther": "Autre",
     "avFullTime": "Temps plein",
@@ -4194,5 +4197,39 @@
     "docsLead": "Voici les modèles que nous utilisons sur chaque projet. Ils sont publiés pour que vous puissiez en demander une copie.",
     "reportTitle": "Signaler un problème",
     "reportBody": "Si vous pensez qu'un auditeur, un salarié ou un partenaire a enfreint ces règles, dites-le nous. Les signalements arrivent dans notre boîte de conformité, sont traités de façon confidentielle et sont examinés par une personne extérieure au projet concerné :"
+  },
+  "contact": {
+    "metaTitle": "Contactez FactoryAuditB2B — Vérification de fournisseurs et audit d'usine",
+    "metaDesc": "Dites-nous ce que vous sourcez ou quel fournisseur vous souhaitez faire vérifier. Nous répondons sous un jour ouvré.",
+    "eyebrow": "Contact",
+    "title": "Parlons de vos fournisseurs",
+    "lead": "Envoyez-nous ce que vous sourcez, ou l'usine que vous souhaitez faire vérifier. Nous vous dirons ce que nous pouvons vérifier, ce que nous ne pouvons pas, et ce qu'il faut pour le savoir.",
+    "directTitle": "Ou contactez-nous directement",
+    "emailLabel": "E-mail",
+    "responseNote": "Nous répondons sous un jour ouvré. Nous ne vendons ni ne partageons vos données.",
+    "altTitle": "Autres façons de commencer",
+    "rfqTitle": "Soumettre une RFQ",
+    "rfqBody": "Vous avez un produit précis ? Envoyez les détails et nous l'orienterons vers des fournisseurs qui valent la peine d'être vérifiés.",
+    "supplierTitle": "Rejoindre le réseau de fournisseurs",
+    "supplierBody": "Vous êtes une usine ? Faites-vous référencer et ouvrez-vous aux audits et inspections demandés par les acheteurs.",
+    "form": {
+      "name": "Votre nom",
+      "namePlaceholder": "Marie Dupont",
+      "email": "E-mail professionnel",
+      "emailPlaceholder": "marie@entreprise.fr",
+      "company": "Société",
+      "companyPlaceholder": "Nom de la société",
+      "country": "Pays / marché",
+      "countryPlaceholder": "ex. Allemagne",
+      "message": "De quoi avez-vous besoin ?",
+      "messagePlaceholder": "Dites-nous ce que vous sourcez ou quel fournisseur vous souhaitez faire vérifier.",
+      "submit": "Envoyer le message",
+      "sending": "Envoi…",
+      "successTitle": "Message reçu",
+      "successBody": "Merci. Notre équipe vous répondra sous un jour ouvré.",
+      "errorTitle": "Échec de l'envoi",
+      "errorBody": "Veuillez réessayer ou nous écrire directement.",
+      "required": "Veuillez saisir une adresse e-mail valide."
+    }
   }
 }

@@ -1908,7 +1908,7 @@
     "riskScore": "供應商檔案評分",
     "verificationStatus": "核驗狀態",
     "evidenceSummary": "證據摘要",
-    "auditHistory": "Audit history",
+    "auditHistory": "驗廠記錄",
     "notCoveredTitle": "未覆蓋範圍",
     "notCoveredLead": "當前核驗範圍之外的檢查項。列出來，讓你知道哪些還沒看過。",
     "whatVerifiedTitle": "我們核驗了什麼",
@@ -1949,7 +1949,7 @@
     "selfReported": "供應商自述",
     "auditStatusLabel": "驗廠狀態",
     "businessTypeLabel": "企業型別",
-    "verifiedByTitle": "Verification by FactoryAuditB2B",
+    "verifiedByTitle": "由 FactoryAuditB2B 核驗",
     "verifiedByLead": "以下是我們團隊實際核查過的內容。它與供應商自述分開列出，兩者都有標註。",
     "provenanceLead": "每一行都標註了它由誰負責：供應商提供的、我們審閱過的、我們獨立核驗過的，以及現場確認過的。",
     "provProvided": "供應商提供",
@@ -2005,7 +2005,8 @@
     "assessmentReportNotPublished": "該報告尚未發布，暫無可下載內容。",
     "assessmentReportDownload": "下載報告",
     "assessmentReportUnavailable": "未發布",
-    "assessmentReportNote": "付費下載功能即將上線；目前點擊報告連結將轉至客製服務諮詢。價格以我們公布的價目表為準。"
+    "assessmentReportNote": "付費下載功能即將上線；目前點擊報告連結將轉至客製服務諮詢。價格以我們公布的價目表為準。",
+    "regLegalName": "登記名稱"
   },
   "reportPreview": {
     "badge": "免費預覽",
@@ -2031,8 +2032,8 @@
           "供應商概況",
           "含維度拆解的風險分數",
           "核驗狀態",
-          "Resumen de evidencia",
-          "Principales factores de riesgo",
+          "證據摘要",
+          "主要風險因素",
           "建議行動",
           "PDF"
         ]
@@ -2041,8 +2042,8 @@
         "name": "專業盡職調查",
         "price": "$129",
         "items": [
-          "Todo en el informe básico",
-          "Revisión detallada de la evidencia",
+          "基礎報告的全部內容",
+          "詳細證據審閱",
           "補充檔案核查",
           "按買家優先級定製的風險分析",
           "核驗記錄",
@@ -2103,7 +2104,7 @@
         "搜尋優先展示",
         "在相關行業頁面推薦",
         "買家引薦",
-        "Visibilidad del producto"
+        "產品曝光度"
       ]
     },
     "badge": "認領檔案",
@@ -2145,9 +2146,9 @@
   },
   "consent": {
     "title": "你的資訊會被如何使用",
-    "body": "Information submitted by suppliers is used to create and maintain their FactoryAuditB2B supplier profile and support buyer due diligence.",
+    "body": "供應商提交的資料用於建立並維護其在 FactoryAuditB2B 的供應商檔案，並支援買方的盡職調查。",
     "privacy": "未經授權，我們不會公開披露保密檔案。",
-    "authorize": "I authorize FactoryAuditB2B to use the information and documents I provide for supplier verification and buyer due diligence, subject to the platform's privacy and document-sharing rules.",
+    "authorize": "我授權 FactoryAuditB2B 將我所提供的資料與文件用於供應商核驗與買方盡職調查，並受本平台的隱私與文件分享規則約束。",
     "prefsTitle": "資訊共享偏好",
     "public": {
       "title": "公開",
@@ -2155,7 +2156,7 @@
       "items": [
         "公司名稱",
         "所在地",
-        "Productos",
+        "產品",
         "核驗狀態"
       ]
     },
@@ -2163,9 +2164,9 @@
       "title": "買家可見",
       "lead": "已驗證買家可見。",
       "items": [
-        "Evidencia seleccionada",
-        "Detalles del certificado",
-        "Programa de Auditoria"
+        "選定證據",
+        "證書詳情",
+        "驗廠摘要"
       ]
     },
     "restricted": {
@@ -2173,8 +2174,8 @@
       "lead": "僅在你的明確授權下可見。",
       "items": [
         "原始驗廠報告",
-        "Documentos confidenciales",
-        "Fotos internas del PFDC."
+        "敏感文件",
+        "內部照片"
       ]
     },
     "private": {
@@ -3445,7 +3446,7 @@
       "myAccount": "我的帳號",
       "upgrade": "升級為 Founding Buyer",
       "planFree": "免費版",
-      "planFounding": "Founding Buyer",
+      "planFounding": "創始買家",
       "menuLabel": "帳號選單"
     }
   },
@@ -3483,7 +3484,7 @@
       "emailLabel": "電子信箱",
       "planLabel": "目前方案",
       "planFree": "免費版",
-      "planFounding": "Founding Buyer",
+      "planFounding": "創始買家",
       "quotaLabel": "基礎檔案存取",
       "quotaUnlimited": "不限次數",
       "renewsLabel": "續費日期",
@@ -3593,7 +3594,7 @@
     "membersLead": "帳號及其會員狀態。",
     "membersEmpty": "暫無會員",
     "planFree": "免費",
-    "planFounding": "Founding Buyer",
+    "planFounding": "創始買家",
     "statusActive": "生效中",
     "statusCanceled": "已取消",
     "statusPastDue": "扣款失敗",
@@ -3864,7 +3865,9 @@
     "viewSuppliers": "查看供應商 →",
     "suppliersTitle": "該產業帶的供應商",
     "suppliersEmpty": "該產業帶暫未收錄已發布的供應商。",
-    "detailMetaDesc": "「{cluster}」產業帶的供應商、地區與產業概覽。"
+    "detailMetaDesc": "「{cluster}」產業帶的供應商、地區與產業概覽。",
+    "provinceLabel": "省份",
+    "cityLabel": "城市"
   },
   "verifySupplier": {
     "badge": "供應商核驗",
@@ -4194,5 +4197,39 @@
     "docsLead": "這些是我們在每個專案中使用的範本。在此公開列出，方便你索取。",
     "reportTitle": "檢舉管道",
     "reportBody": "如果你認為稽核員、員工或夥伴違反了本準則，請告知我們。檢舉將寄至我們的合規信箱，以保密方式處理，並由與該專案無關的人員查核："
+  },
+  "contact": {
+    "metaTitle": "聯絡我們 — FactoryAuditB2B 供應商驗證與工廠稽核",
+    "metaDesc": "告訴我們您在採購什麼，或想驗證哪家工廠。我們將在一個工作日內回覆。",
+    "eyebrow": "聯絡我們",
+    "title": "和我們聊聊您的供應商",
+    "lead": "告訴我們您在採購什麼，或想驗證哪家工廠。我們會說明哪些能核實、哪些不能，以及需要走哪些步驟。",
+    "directTitle": "也可以直接聯絡我們",
+    "emailLabel": "電子郵件",
+    "responseNote": "我們將在一個工作日內回覆。我們不會出售或分享您的資訊。",
+    "altTitle": "其他開始方式",
+    "rfqTitle": "提交詢價單（RFQ）",
+    "rfqBody": "有具體產品？請把詳情發來，我們幫您對接值得查核的供應商。",
+    "supplierTitle": "加入供應商網絡",
+    "supplierBody": "您是工廠？可以免費登記，並開放接受買家發起的驗廠與驗貨。",
+    "form": {
+      "name": "您的姓名",
+      "namePlaceholder": "王小明",
+      "email": "工作電子郵件",
+      "emailPlaceholder": "you@company.com",
+      "company": "公司",
+      "companyPlaceholder": "公司名稱",
+      "country": "國家 / 市場",
+      "countryPlaceholder": "例如：德國",
+      "message": "您的需求",
+      "messagePlaceholder": "請說明您在採購什麼，或想驗證哪家供應商。",
+      "submit": "送出",
+      "sending": "傳送中…",
+      "successTitle": "已收到您的留言",
+      "successBody": "謝謝。我們將在一個工作日內回覆。",
+      "errorTitle": "傳送失敗",
+      "errorBody": "請稍後重試，或直接寄電子郵件給我們。",
+      "required": "請填寫有效的電子郵件地址。"
+    }
   }
 }

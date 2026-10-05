@@ -163,7 +163,16 @@ export async function listIndustries() {
  * 避免改动任何非 zh-TW 语种的既有显示。
  */
 export function industryDisplayName(locale: string, name: string): string {
-  return locale === "zh-TW" ? twText(name) : name;
+  // STATIC_INDUSTRIES.name 形如 "Electronics / 电子"（前半英文、后半中文）。
+  // 旧实现只对 zh-TW 做繁化、其余语种原样返回 ⇒ 等于把中文当成所有语种的通用回退，
+  // 结果连英文页的行业卡都渲染成 "Electronics / 电子"。
+  // 现按 locale 只取半边：zh / zh-TW 取中文（zh-TW 繁化），en 及其余 6 语取英文。
+  const m = /^(.*?)\s*\/\s*([\u3400-\u4DBF\u4E00-\u9FFF][\s\S]*)$/.exec(name);
+  const en = m ? m[1].trim() : name;
+  const zh = m ? m[2].trim() : name;
+  if (locale === "zh") return zh;
+  if (locale === "zh-TW") return twText(zh);
+  return en;
 }
 
 // 风险权重模型（§58 可配置）

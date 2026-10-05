@@ -110,7 +110,7 @@ export default async function IndustryTopicPage({ params }: { params: Promise<Pa
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: `${BASE}/` },
+              { "@type": "ListItem", position: 1, name: t.common.ui.home, item: `${BASE}/` },
               { "@type": "ListItem", position: 2, name: p.breadcrumb, item: `${BASE}/industry` },
               { "@type": "ListItem", position: 3, name: industry.name, item: `${BASE}/industry/${slug}` },
               { "@type": "ListItem", position: 4, name: title, item: `${BASE}/industry/${slug}/${topicSlug}` },

@@ -14,10 +14,14 @@
 //    = Foshan Furniture Cluster。禁止用行政区直接冒充产业带。
 
 import { createAdminClient } from "./supabaseAdmin";
+import { twText } from "./tw";
+import { trLookup } from "./contentI18n";
 
 export type IndustrialCluster = {
   id: string;
   name: string;
+  /** P1-15：英文内容名（内容层）。zh/zh-TW 读 name，en 读本列，其余 6 语以本列为键查内容映射表。 */
+  name_en: string | null;
   slug: string;
   country: string | null;
   country_code: string | null;
@@ -27,6 +31,8 @@ export type IndustrialCluster = {
   industry: string | null;
   industry_tags: string[] | null;
   description: string | null;
+  /** P1-15：英文内容简介（内容层）。与 name_en 同一取值链路。 */
+  description_en: string | null;
   seo_title: string | null;
   seo_description: string | null;
   is_published: boolean;
@@ -41,7 +47,44 @@ const ORDER = "sort_order.asc,name.asc";
 
 /** 稳定的列白名单。**不返回**任何来源追踪字段（产业带是内容实体，无来源归因）。 */
 const COLS =
-  "id,name,slug,country,country_code,region,province,city,industry,industry_tags,description,seo_title,seo_description,is_published,featured,sort_order,created_at,updated_at";
+  "id,name,name_en,slug,country,country_code,region,province,city,industry,industry_tags,description,description_en,seo_title,seo_description,is_published,featured,sort_order,created_at,updated_at";
+
+/**
+ * P1-15：产业带「按语种取值」的两个纯函数 —— 9 个语种共用同一套数据源，不引入第二套。
+ *
+ * 取值规则（与 lib/tw.ts 的 pickZhPair 同构）：
+ *   · zh     → 中文原值（name / description）
+ *   · zh-TW  → 中文原值经 twText() 繁化
+ *   · 其余 6 语 → 先以英文源串（name_en / description_en）查内容映射表，
+ *                 未命中回退英文原文，英文也缺则回退中文原值（保守，不显示空白标题）
+ *
+ * 为什么放在数据层而不是页面：目录页与详情页（含聚合页卡片 / breadcrumb / meta）都要用，
+ * 放这里保证「一处规则、九处渲染」不出现口径分叉。
+ * 注意：seo_title / seo_description **不经过**本函数（它们是 SEO 专用字段，另有一条通道）。
+ */
+export function clusterDisplayName(
+  locale: string,
+  c: { name: string; name_en: string | null }
+): string {
+  const zh = (c.name ?? "").trim();
+  if (locale === "zh") return zh;
+  if (locale === "zh-TW") return twText(zh);
+  const en = (c.name_en ?? "").trim();
+  if (!en) return zh;
+  return trLookup(locale, en) ?? en;
+}
+
+export function clusterDisplayDescription(
+  locale: string,
+  c: { description: string | null; description_en: string | null }
+): string {
+  const zh = (c.description ?? "").trim();
+  if (locale === "zh") return zh;
+  if (locale === "zh-TW") return twText(zh);
+  const en = (c.description_en ?? "").trim();
+  if (!en) return zh;
+  return trLookup(locale, en) ?? en;
+}
 
 /**
  * 统一国家归一（spec 10-B Decision A §4）。
@@ -166,9 +209,14 @@ export async function getPublishedClusterBySlug(
  * 查不到 / 未发布 / 出错 ⇒ 该 slug **不出现在 Map 里**。调用方据此渲染成
  * 「不显示这一行」——不报错、不写 "Unknown"、更不产出指向不存在产业带的链接。
  * 失败方向保守：宁可少显示一行，也不显示一条未经确认的产业带。
+ *
+ * P1-15：新增可选 `locale`。给了 ⇒ 复用 clusterDisplayName() 按语种取名（非中文语种
+ *   优先 name_en，缺内容映射则回退英文、再回退中文）；**不给 ⇒ 保持旧行为（中文名）**，
+ *   故本变更是向后兼容的。供应商档案页的 SEO JSON-LD（industrialCluster）走这条路。
  */
 export async function resolvePublishedClusterNames(
-  slugs: (string | null | undefined)[]
+  slugs: (string | null | undefined)[],
+  locale?: string
 ): Promise<Map<string, string>> {
   const out = new Map<string, string>();
   const unique = Array.from(
@@ -181,17 +229,23 @@ export async function resolvePublishedClusterNames(
   try {
     const { data, error } = await db
       .from(TABLE)
-      .select("slug,name")
+      .select("slug,name,name_en")
       .in("slug", unique)
       .eq("is_published", true);
     if (error) {
       console.error("[industrialClusters] resolve names failed", error.message);
       return out;
     }
-    for (const r of (data ?? []) as { slug: string; name: string }[]) {
+    for (const r of (data ?? []) as {
+      slug: string;
+      name: string;
+      name_en: string | null;
+    }[]) {
       const slug = (r?.slug ?? "").trim();
       const name = (r?.name ?? "").trim();
-      if (slug && name) out.set(slug, name);
+      if (!slug || !name) continue;
+      // locale 缺省 = "zh" ⇒ 与改动前逐字一致（向后兼容）
+      out.set(slug, clusterDisplayName(locale ?? "zh", { name, name_en: r?.name_en ?? null }));
     }
     return out;
   } catch (e) {

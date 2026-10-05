@@ -21,6 +21,7 @@ export type RegistrationPanelDict = {
   // CS-16G：来源标签（"Supplier provided"）—— 明确工商登记信息为工厂自述、平台未核验，
   // 与 selfReportedCerts 的 selfCertLead 徽章保持同一视觉语言。复用 supplierProfile.provProvided（9 语已齐）。
   provProvided: string;
+  regLegalName: string;
   regEnglishName: string;
   regCompanyType: string;
   regRegistrationNo: string;
@@ -54,12 +55,15 @@ function certLine(c: SelfReportedCertificate): string {
 export function SupplierRegistrationPanel({
   data,
   dict: d,
+  showLegalName = false,
 }: {
   data: Pick<
     SupplierView,
-    "englishName" | "companyType" | "registrationNumber" | "website" | "address"
+    "legalName" | "englishName" | "companyType" | "registrationNumber" | "website" | "address"
   >;
   dict: RegistrationPanelDict;
+  /** 非中文语种且 englishName 非空时为 true —— 展示名已用英文名，登记名仍需显式列出 */
+  showLegalName?: boolean;
 }) {
   const hasRegistration =
     Boolean(data.englishName) ||
@@ -83,6 +87,9 @@ export function SupplierRegistrationPanel({
         </div>
         <p className="mt-1 text-sm text-[#6d6b66]">{d.registrationLead}</p>
         <dl className="mt-4 grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-2">
+          {/* 登记名称：仅当「展示名 ≠ 登记名」时出现（其余 8 语用企业自述英文名，
+              登记中文名不能就此消失 —— 用户口径「两边都不丢」）。中文页展示名即登记名，故不重复。 */}
+          <Row label={d.regLegalName} value={showLegalName ? data.legalName : ""} />
           <Row label={d.regEnglishName} value={data.englishName} />
           <Row label={d.regCompanyType} value={data.companyType} />
           <Row label={d.regRegistrationNo} value={data.registrationNumber} />

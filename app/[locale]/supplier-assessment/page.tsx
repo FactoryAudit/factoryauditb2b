@@ -127,6 +127,7 @@ export default async function Page({ params, searchParams }: Props) {
         <div className="max-w-4xl mx-auto">
           <SelfAssessmentForm
             templates={templates}
+            locale={locale}
             dict={sa}
             supplierId={supplierId}
             email={email}

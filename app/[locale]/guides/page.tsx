@@ -3,6 +3,7 @@ import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import {
   GUIDES,
+  GUIDE_LIST_META,
   GUIDE_CATEGORY_META,
   guideCategoriesWithGuides,
   guidesByCategory,
@@ -24,9 +25,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildPageMetadata({
     locale,
     path: PATH,
-    title: "Supplier Intelligence Guides",
-    description:
-      "Practical guides on verifying suppliers, running factory audits and assessing supplier risk in China and Southeast Asia.",
+    title: pickZhPair(locale, GUIDE_LIST_META.titleEn, GUIDE_LIST_META.titleZh),
+    description: pickZhPair(locale, GUIDE_LIST_META.descEn, GUIDE_LIST_META.descZh),
   });
 }
 
@@ -41,7 +41,7 @@ export default async function GuidesIndex({ params }: Props) {
     {
       "@context": "https://schema.org",
       "@type": "ItemList",
-      name: "Supplier Intelligence Guides",
+      name: pickZhPair(locale, GUIDE_LIST_META.titleEn, GUIDE_LIST_META.titleZh),
       url: `${BASE}${p(PATH)}`,
       numberOfItems: GUIDES.length,
       itemListElement: GUIDES.map((g, i) => ({

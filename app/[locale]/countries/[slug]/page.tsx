@@ -11,6 +11,8 @@ import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i1
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { pickZhCopy, pickZhPair } from "@/lib/tw";
+import { trLookup } from "@/lib/contentI18n";
+import { supplierDisplayName } from "@/lib/supplierDisplayName";
 
 const BASE = "https://factoryauditb2b.com";
 type Params = { locale: string; slug: string };
@@ -67,9 +69,9 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
       "@context": "https://schema.org",
       "@type": "Service",
       name: `${name} Supplier Verification`,
-      serviceType: "Supplier verification",
+      serviceType: trLookup(locale, "Supplier verification") ?? "Supplier verification",
       areaServed: name,
-      description: country.metaDesc,
+      description: trLookup(locale, country.metaDesc) ?? country.metaDesc,
       provider: { "@type": "Organization", name: "FactoryAuditB2B", url: BASE },
       url: `${BASE}${p(`/countries/${slug}`)}`,
     },
@@ -259,7 +261,7 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
                   href={p(`/suppliers/${s.slug}`)}
                   className="font-medium text-[#171717] hover:underline"
                 >
-                  {s.legalName}
+                  {supplierDisplayName(locale, s)}
                 </Link>
                 <span className="text-sm text-[#6d6b66]">
                   {s.city} · {t.supplierProfile.riskScore}{" "}

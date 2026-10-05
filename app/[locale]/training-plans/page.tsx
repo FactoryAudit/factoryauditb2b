@@ -56,7 +56,7 @@ export default async function TrainingPlansPage({ params }: { params: Promise<{ 
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://factoryauditb2b.com/" },
+              { "@type": "ListItem", position: 1, name: t.common.ui.home, item: "https://factoryauditb2b.com/" },
               { "@type": "ListItem", position: 2, name: t.trainingPlans.h1, item: "https://factoryauditb2b.com/training-plans" },
             ],
           },

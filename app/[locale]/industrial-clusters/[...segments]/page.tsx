@@ -6,10 +6,13 @@ import JsonLd from "@/components/JsonLd";
 import {
   getPublishedClusterBySlug,
   listPublishedClusters,
+  clusterDisplayName,
+  clusterDisplayDescription,
   type IndustrialCluster,
 } from "@/lib/industrialClusters";
 import { listSuppliersByClusterSlug, countSuppliersByClusterSlugs } from "@/lib/queries";
 import { overallLevel } from "@/lib/riskEngine";
+import { supplierDisplayName } from "@/lib/supplierDisplayName";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
@@ -166,15 +169,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (resolved.kind === "detail") {
     const { cluster, canonical } = resolved;
+    // P1-15/P1-19：`seo_title`/`seo_description` 是**只有英文**的列，只能给 en 用。
+    //   非 en 语种若仍让 seo_* 优先 ⇒ 8 个语种的 meta 全变英文（门禁① 128 条）。
+    //   故按 locale 分流：en 用 seo_*（英文 SEO 专用字段）；其余 8 语本地化值优先，
+    //   最终兜底是**已本地化**的字典模板，绝不回落到英文列。
+    const isEn = locale === "en";
+    const displayName = clusterDisplayName(locale, cluster);
+    const displayDescription = clusterDisplayDescription(locale, cluster);
+    const title = (
+      isEn
+        ? cluster.seo_title || displayName
+        : displayName || cluster.seo_title || ""
+    ).trim();
     const description = (
-      cluster.seo_description ||
-      cluster.description ||
-      t.clusters.detailMetaDesc.replace("{cluster}", cluster.name)
+      isEn
+        ? cluster.seo_description ||
+          displayDescription ||
+          t.clusters.detailMetaDesc.replace("{cluster}", displayName)
+        : displayDescription || t.clusters.detailMetaDesc.replace("{cluster}", displayName)
     ).trim();
     return buildPageMetadata({
       locale,
       path: canonical,
-      title: (cluster.seo_title || cluster.name).trim(),
+      title,
       description,
     });
   }
@@ -222,6 +239,9 @@ export default async function IndustrialClustersHierarchyPage({ params }: Props)
   // ── 详情 ──
   if (resolved.kind === "detail") {
     const { cluster, canonical } = resolved;
+    // P1-15：H1 / 导语 / breadcrumb 一律走本地化取值。
+    const displayName = clusterDisplayName(locale, cluster);
+    const displayDescription = clusterDisplayDescription(locale, cluster);
     const suppliers = await listSuppliersByClusterSlug(cluster.slug);
 
     // breadcrumb：与 canonical URL 段严格对应
@@ -240,7 +260,7 @@ export default async function IndustrialClustersHierarchyPage({ params }: Props)
         : slugifySegment(cluster.city ?? "");
       if (parentSeg) crumbs.push({ name: parentName, href: `${PATH}/${COUNTRY_URL_SEGMENT[cluster.country_code ?? ""]}/${parentSeg}` });
     }
-    crumbs.push({ name: cluster.name, href: canonical });
+    crumbs.push({ name: displayName, href: canonical });
 
     const jsonLd = {
       "@context": "https://schema.org",
@@ -256,8 +276,8 @@ export default async function IndustrialClustersHierarchyPage({ params }: Props)
     const facts: { label: string; value: string }[] = [];
     if (cluster.country) facts.push({ label: c.countryLabel, value: cluster.country });
     if (cluster.region) facts.push({ label: c.regionLabel, value: cluster.region });
-    if (cluster.province) facts.push({ label: "Province", value: cluster.province });
-    if (cluster.city) facts.push({ label: "City", value: cluster.city });
+    if (cluster.province) facts.push({ label: c.provinceLabel, value: cluster.province });
+    if (cluster.city) facts.push({ label: c.cityLabel, value: cluster.city });
     if (cluster.industry) facts.push({ label: c.industryLabel, value: cluster.industry });
 
     return (
@@ -279,10 +299,10 @@ export default async function IndustrialClustersHierarchyPage({ params }: Props)
           ))}
         </nav>
 
-        <h1 className="text-4xl font-extrabold text-[#171717]">{cluster.name}</h1>
+        <h1 className="text-4xl font-extrabold text-[#171717]">{displayName}</h1>
 
-        {cluster.description && (
-          <p className="mt-3 text-lg text-[#3f4650]">{cluster.description}</p>
+        {displayDescription && (
+          <p className="mt-3 text-lg text-[#3f4650]">{displayDescription}</p>
         )}
 
         {facts.length > 0 && (
@@ -314,7 +334,7 @@ export default async function IndustrialClustersHierarchyPage({ params }: Props)
                     href={p(`/suppliers/${s.slug}`)}
                     className="font-medium text-[#171717] hover:underline"
                   >
-                    {s.legalName}
+                    {supplierDisplayName(locale, s)}
                   </Link>
                   <span className="text-sm text-[#6d6b66]">
                     {s.city} · {t.supplierProfile.riskScore}{" "}
@@ -354,7 +374,7 @@ export default async function IndustrialClustersHierarchyPage({ params }: Props)
     itemListElement: clusters.map((x, i) => ({
       "@type": "ListItem",
       position: i + 1,
-      name: x.name,
+      name: clusterDisplayName(locale, x),
       url: `${BASE}${p(buildClusterCanonicalPath(toInput(x)))}`,
     })),
   };
@@ -390,6 +410,8 @@ export default async function IndustrialClustersHierarchyPage({ params }: Props)
 
       <section className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {clusters.map((x) => {
+          const xName = clusterDisplayName(locale, x);
+          const xDesc = clusterDisplayDescription(locale, x);
           const place = [x.country, x.region, x.province, x.city].filter(
             (v): v is string => typeof v === "string" && v.trim().length > 0
           );
@@ -400,12 +422,12 @@ export default async function IndustrialClustersHierarchyPage({ params }: Props)
                   {place.join(" · ")}
                 </div>
               )}
-              <h2 className="text-2xl font-bold text-[#171717] mt-1">{x.name}</h2>
+              <h2 className="text-2xl font-bold text-[#171717] mt-1">{xName}</h2>
               {x.industry && (
                 <p className="text-sm font-medium text-[#171717] mt-2">{x.industry}</p>
               )}
-              {x.description && (
-                <p className="text-sm text-[#3f4650] mt-2 flex-1">{x.description}</p>
+              {xDesc && (
+                <p className="text-sm text-[#3f4650] mt-2 flex-1">{xDesc}</p>
               )}
               <div className="mt-4 text-sm text-[#6d6b66]">
                 {c.supplierCount.replace("{count}", String(counts.get(x.slug) ?? 0))}

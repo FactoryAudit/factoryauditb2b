@@ -3,6 +3,7 @@ import VerificationBadge, {
   type BadgeState,
   type TrustProfileDict,
 } from "./VerificationBadge";
+import { supplierDisplayName } from "@/lib/supplierDisplayName";
 
 /**
  * stage1.8：/suppliers 目录的**展示层**（纯组件 —— 无 state、无 hooks、无副作用）。
@@ -36,6 +37,12 @@ import VerificationBadge, {
 export type DirectoryItem = {
   slug: string;
   legalName: string;
+  /**
+   * CS-12 / P1-16：企业对外自称的英文名（DB suppliers.english_name）。
+   * 与 `legalName`（工商登记名）并列；展示请用 `supplierDisplayName(locale, x)`，
+   * **不要**直读本字段 —— 语种回退规则只有一处（lib/supplierDisplayName.ts）。
+   */
+  englishName: string;
   /** 原始国家值（筛选口径；展示请用 countryLabel） */
   country: string;
   /** 展示用国家名：countryName ?? country.toUpperCase() */
@@ -126,6 +133,7 @@ export default function DirectoryView({
   industries,
   active,
   directoryPath,
+  locale,
   dict,
   events,
   trustProfileDict,
@@ -137,6 +145,8 @@ export default function DirectoryView({
   active: DirectoryActive;
   /** 已带语言前缀的目录页路径，如 /suppliers、/es/suppliers */
   directoryPath: string;
+  /** 当前语言 —— 只用于 `supplierDisplayName` 决定卡片展示用登记名还是企业自述英文名 */
+  locale: string;
   // 阶段 1：`supplierPathPrefix` 已移除 —— 卡片的 href 由服务端算好放进
   //   `items[].href`（锁定态指登录页、解锁态指档案页）。组件不再自己拼 URL，
   //   这样「哪些链接能出现在公开 HTML 里」只有一处决策点（见 lib/directoryWall.ts）。
@@ -310,7 +320,7 @@ export default function DirectoryView({
                     }}
                   />
                 ) : (
-                  <div className="font-semibold text-[#171717]">{x.legalName}</div>
+                  <div className="font-semibold text-[#171717]">{supplierDisplayName(locale, x)}</div>
                 )}
                 {/* CS-D：三态验证徽章（状态服务端推导，组件不自判） */}
                 <div className="mt-2">

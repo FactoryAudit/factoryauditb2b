@@ -63,6 +63,7 @@ export async function buildDirectoryItems(
     return {
       slug: x.slug,
       legalName: x.legalName,
+      englishName: x.englishName ?? "",
       country: x.country,
       countryLabel: x.countryName ?? x.country.toUpperCase(),
       city: x.city,

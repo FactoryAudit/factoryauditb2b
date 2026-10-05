@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import { listPublishedClusters } from "@/lib/industrialClusters";
+import {
+  listPublishedClusters,
+  clusterDisplayName,
+  clusterDisplayDescription,
+} from "@/lib/industrialClusters";
 import {
   buildClusterDirectory,
   flattenClusterDirectory,
@@ -81,8 +85,13 @@ export default async function IndustrialClustersPage({ params }: Props) {
   const clusters = await listPublishedClusters();
   // ② 批量计数（一次查询；不随产业带数量增长）
   const counts = await countSuppliersByClusterSlugs(clusters.map((x) => x.slug));
-  // ③ 国家 → 地区 分组（纯函数，顺序确定）
-  const directory = buildClusterDirectory(clusters);
+  // ③ 本地化 name / description（P1-15）后交给纯函数分组 —— 分组/排序仍只吃数据、不碰语言。
+  const localized = clusters.map((x) => ({
+    ...x,
+    name: clusterDisplayName(locale, x),
+    description: clusterDisplayDescription(locale, x),
+  }));
+  const directory = buildClusterDirectory(localized);
   const all = flattenClusterDirectory(directory);
 
   const jsonLd = {

@@ -29,6 +29,7 @@ const WINDOW_MS = 60 * 60 * 1000;
 export type SavedSupplierItem = {
   slug: string;
   legalName: string;
+  englishName: string;
   country: string;
   city: string;
   riskScore: number | null;
@@ -53,7 +54,7 @@ export async function GET(req: Request) {
     const { data, error } = await db
       .from("saved_suppliers")
       .select(
-        "created_at, suppliers!inner(slug, legal_name, country_code, city, risk_score, verification_status, is_published)"
+        "created_at, suppliers!inner(slug, legal_name, english_name, country_code, city, risk_score, verification_status, is_published)"
       )
       .eq("user_id", user.id)
       .order("created_at", { ascending: false })
@@ -69,6 +70,7 @@ export async function GET(req: Request) {
       suppliers: {
         slug: string;
         legal_name: string;
+        english_name: string | null;
         country_code: string;
         city: string;
         risk_score: number | null;
@@ -83,6 +85,7 @@ export async function GET(req: Request) {
       .map((r) => ({
         slug: r.suppliers.slug,
         legalName: r.suppliers.legal_name,
+        englishName: r.suppliers.english_name ?? "",
         country: r.suppliers.country_code,
         city: r.suppliers.city,
         riskScore: r.suppliers.risk_score,

@@ -129,6 +129,7 @@ export default function DirectoryGrid({
       industries={industries}
       active={active}
       directoryPath={directoryPath}
+      locale={locale}
       dict={dict}
       events={events}
       trustProfileDict={trustProfileDict}

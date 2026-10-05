@@ -158,6 +158,7 @@ export type StaticSupplier = {
   id: string;
   slug: string;
   legalName: string;
+  englishName?: string;
   countryCode: string;
   city: string;
   industryCode: string;

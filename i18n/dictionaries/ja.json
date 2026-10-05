@@ -86,13 +86,13 @@
     "lead": "中国と東南アジアにおける現地サプライヤー検証と工場監査サポート。稼働中の対象：中国、ベトナム、タイ、マレーシア、フィリピン。",
     "toolsTitle": "サプライヤー評価の無料ツール",
     "toolsLead": "サプライヤーを確認し、監査を準備し、出荷を計画するための8つのツール。アカウントは不要で、基本的な結果にメールの壁はありません。",
-    "sub": "サプライヤーリスクを評価するための無料のツールを使用して、検証の信頼性を確認し、工場監査の準備を行います。 地面の要求、独立した確認または工場の監査が必要な場合。",
+    "sub": "無料ツールでサプライヤーのリスクを評価し、検証の確かさを確認して、工場監査の計画を立てられます。",
     "ctaPrimary": "サプライヤーを確認する",
     "ctaSecondary": "サプライヤーを検証",
     "ctaHighIntent": "工場監査を依頼する",
     "evaTitle": "評価。 確認します。 監査。",
     "evaLead": "あなたがオンラインで見つけたサプライヤーとあなたが支払うことができるサプライヤー間の3つのステップ。",
-    "evaluateTitle": "評価評価",
+    "evaluateTitle": "評価する",
     "evaluateBody": "注文する前にサプライヤーのリスクを評価します。",
     "evaluateCta": "サプライヤーの評価",
     "verifyTitle": "検証",
@@ -101,7 +101,7 @@
     "auditTitle": "監査",
     "auditBody": "所見、証拠、および書面によるレポートを使用して独立した現場の工場監査を入手してください。",
     "auditCta": "監査請求",
-    "howTitle": "作品紹介",
+    "howTitle": "ご利用の流れ",
     "howLead": "会社名から社内を守ることができる決定まで。",
     "howSteps": [
       {
@@ -1136,7 +1136,7 @@
       "assessError": "何かが間違っていた。 お問い合わせ."
     },
     "ui": {
-      "home": "ホーム >",
+      "home": "ホーム",
       "relatedGuides": "関連ガイド",
       "quickAnswer": "迅速な回答",
       "definition": "定義定義",
@@ -1309,7 +1309,7 @@
   "legal": {
     "privacyTitle": "プライバシーポリシー",
     "privacyUpdated": "最終更新日：2026-09-03",
-    "privacyIntro": "FactoryAuditB2B (\"we\", \"us\") respects your privacy. This policy explains what data we collect when you use our website and services, and how we use it.",
+    "privacyIntro": "FactoryAuditB2B（以下「当社」）はお客様のプライバシーを尊重します。本ポリシーでは、お客様が当社のウェブサイトおよびサービスをご利用になる際に当社が収集するデータと、その利用方法について説明します。",
     "privacySections": [
       {
         "h": "収集する情報",
@@ -1366,11 +1366,11 @@
       },
       {
         "h": "知的財産権",
-        "b": "All site content, trademarks and tools are owned by FactoryAuditB2B or its licensors. You may not reuse them without permission."
+        "b": "本サイトのすべてのコンテンツ、商標およびツールは FactoryAuditB2B またはそのライセンサーに帰属します。許可なく再利用することはできません。"
       },
       {
         "h": "責任の制限",
-        "b": "To the maximum extent permitted by law, FactoryAuditB2B is not liable for indirect or consequential losses arising from use of the site."
+        "b": "法律で認められる最大限の範囲において、FactoryAuditB2B は本サイトの利用に起因する間接的または結果的な損失について責任を負いません。"
       },
       {
         "h": "変更点",
@@ -1491,9 +1491,9 @@
     "metaDesc": "無料のサプライヤー評価ツール、99米ドルからのサプライヤー検証、399米ドルからの工場監査、199米ドルからの製品検査、サブスクリプション型のサプライヤーモニタリング。すべての価格は米ドル表示です。",
     "h1": "サービスと料金プラン",
     "lead": "ツールは無料です。現地でサプライヤーを確認する必要があるときだけお支払いください。",
-    "currencyNote": "すべて米ドル建てです。核查と監査は案件ごとに見積もります。",
+    "currencyNote": "すべて米ドル建てです。検証と監査は案件ごとに見積もります。",
     "plansTitle": "今すぐ利用できるサービス",
-    "plansLead": "4 つすべて利用可能です。核查・監査・検品は案件ごとの見積もり、モニタリングは年額のサブスクリプションです。",
+    "plansLead": "4 つすべて利用可能です。検証・監査・検品は案件ごとの見積もり、モニタリングは年額のサブスクリプションです。",
     "plans": [
       {
         "name": "無料ツール",
@@ -1502,7 +1502,7 @@
         "available": true,
         "features": [
           "サプライヤーのリスク評価（8 つの観点で分析）",
-          "サプライヤー核查チェックリスト",
+          "サプライヤー検証チェックリスト",
           "工場監査チェックリストとスコアカード",
           "リスクスコアと推奨される次のステップ"
         ],
@@ -1510,7 +1510,7 @@
         "href": "/tools"
       },
       {
-        "name": "サプライヤー核查",
+        "name": "サプライヤー検証",
         "price": "$99 – $129",
         "note": "サプライヤーごとに案件単位で見積もり",
         "available": true,
@@ -1521,7 +1521,7 @@
           "品質・コンプライアンス書類の審査",
           "リスク要約付きの書面報告書"
         ],
-        "cta": "核查を依頼する",
+        "cta": "検証を依頼する",
         "href": "/services/supplier-verification"
       },
       {
@@ -1548,7 +1548,7 @@
           "確認済み事項の定期的な再確認",
           "サプライヤーのリスク変化に関するアラート",
           "事実が変わった時点での報告書の更新",
-          "単発の核查と同じ証拠ポリシー"
+          "単発の検証と同じ証拠ポリシー"
         ],
         "cta": "見積もりを依頼する",
         "href": "/monitoring"
@@ -1562,7 +1562,7 @@
       "サプライヤー改善：研修は 1 工場 ${price} から。監査後の是正措置も支援"
     ],
     "alsoCta": "見積もりを依頼する",
-    "reportsTitle": "報告書と核查：参考価格帯",
+    "reportsTitle": "報告書と検証：参考価格帯",
     "reportsLead": "以下の金額はすべて参考値で、案件ごとに見積もります。価格帯を公開しているのは、問い合わせる前にその確認に価値があるかを判断していただくためです。",
     "reports": [
       {
@@ -1586,10 +1586,10 @@
     "faq": [
       {
         "q": "ツールを使うのにお金はかかりますか？",
-        "a": "かかりません。リスク計算機、チェックリスト、スコアカードはすべて無料で、アカウント登録も不要です。料金が発生するのは、サプライヤーの核查や監査をご依頼いただいたときだけです。"
+        "a": "かかりません。リスク計算機、チェックリスト、スコアカードはすべて無料で、アカウント登録も不要です。料金が発生するのは、サプライヤーの検証や監査をご依頼いただいたときだけです。"
       },
       {
-        "q": "サプライヤー核查の費用はいくらですか？",
+        "q": "サプライヤー検証の費用はいくらですか？",
         "a": "サプライヤーごとに見積もります。価格は国、現場訪問を含むかどうか、レビューが必要な書類の数によって変わります。会社名をお送りください。すぐに見積もりします。"
       },
       {
@@ -1598,7 +1598,7 @@
       },
       {
         "q": "サプライヤーモニタリングはどのように機能しますか？",
-        "a": "モニタリングはサブスクリプションで、サプライヤーごとに年額で見積もります。ご指定の周期で確認済み事項を再確認し、変化があったときに短い更新をお送りします。まず単発の核查から始めて、後からモニタリングを追加することもできます。"
+        "a": "モニタリングはサブスクリプションで、サプライヤーごとに年額で見積もります。ご指定の周期で確認済み事項を再確認し、変化があったときに短い更新をお送りします。まず単発の検証から始めて、後からモニタリングを追加することもできます。"
       }
     ],
     "recommendedTag": "おすすめ"
@@ -1620,7 +1620,7 @@
     "ctaText": "お見積もりや担当者が必要ですか？",
     "ctaButton": "チームに相談する",
     "fallbackAnswers": {
-      "pricing": "無料ツールは $0 です。サプライヤー核查は 1 社あたり $99 – $129、工場監査は 399 米ドルから（人日単位、別途出張費）、サプライヤーモニタリングは 1 社あたり年額で見積もります。Founding Buyer 会員は年間 $99 で、全サプライヤーデータベースを閲覧できます。調達支援は発注金額の 3〜5% の手数料で、発注前に見積もります。価格はすべて米ドルです。製品と国を教えていただければ、適したプランをご案内します。",
+      "pricing": "無料ツールは $0 です。サプライヤー検証は 1 社あたり $99 – $129、工場監査は 399 米ドルから（人日単位、別途出張費）、サプライヤーモニタリングは 1 社あたり年額で見積もります。Founding Buyer 会員は年間 $99 で、全サプライヤーデータベースを閲覧できます。調達支援は発注金額の 3〜5% の手数料で、発注前に見積もります。価格はすべて米ドルです。製品と国を教えていただければ、適したプランをご案内します。",
       "audit": "サプライヤー検証、工場監査、出荷前検品に対応しています。SMETA、BSCI、ISO 9001、ISO 14001、SA8000、WRAP、Sedex などに対応します。当社は証明書を販売しません。検証と研修を行います。製品と対象市場をお知らせください。",
       "coverage": "現在の対応国は中国、ベトナム、タイ、マレーシア、フィリピンです。調達先の国を教えていただければ、現地で何を確認できるかご案内します。",
       "training": "はい。工場を監査した上で、品質マネジメント、QC、生産プロセスについてチームを研修します。Starter $280/工場、Pro $950/工場、および Enterprise のカスタム対応があります。どのプランもギャップ監査から始まります。",
@@ -1687,7 +1687,7 @@
   "coverage": {
     "badge": "カバレッジ",
     "h1": "サプライヤーの確認",
-    "lead": "中国および東南アジアでのサプライヤー核查と工場監査の現地支援。第1フェーズの対象は中国、ベトナム、タイ、マレーシア、フィリピンの5か国です。監査員の体制が確認できた国から順次追加します。",
+    "lead": "中国および東南アジアでのサプライヤー検証と工場監査の現地支援。第1フェーズの対象は中国、ベトナム、タイ、マレーシア、フィリピンの5か国です。監査員の体制が確認できた国から順次追加します。",
     "phase1": "フェーズ1",
     "phaseNext": "次回予定",
     "countryCta": "{country}のカバレッジ",
@@ -1695,7 +1695,7 @@
     "anotherCountryLead": "あなたが調達している場所を教えてください。 まだ監査員の能力が確認されていない場合は、その代わりに推測すると言う。",
     "anotherCountryCta": "リクエスト検証",
     "metaTitle": "サプライヤーの確認",
-    "metaDesc": "中国、ベトナム、タイ、マレーシア、フィリピンでのサプライヤー核查と工場監査。国ごとの調達リスク、核查のポイント、監査の注意点をまとめています。"
+    "metaDesc": "中国、ベトナム、タイ、マレーシア、フィリピンでのサプライヤー検証と工場監査。国ごとの調達リスク、検証のポイント、監査の注意点をまとめています。"
   },
   "countryHub": {
     "profileTitle": "製造プロファイル",
@@ -1783,7 +1783,7 @@
     "notSureLead": "無料リスク計算機を最初に実行します。 約3分かかりますし、欠けているものを教えてくれます。",
     "notSureCta": "サプライヤーリスクを評価する",
     "metaTitle": "サプライヤー検証・工場監査・検査",
-    "metaDesc": "中国、ベトナム、タイ、マレーシア、フィリピンでの独立したサプライヤー核查、工場監査、検品、調達支援。案件ごとに範囲を決めて見積もります。",
+    "metaDesc": "中国、ベトナム、タイ、マレーシア、フィリピンでの独立したサプライヤー検証、工場監査、検品、調達支援。案件ごとに範囲を決めて見積もります。",
     "processTitle": "リクエストから意思決定までの明確な道筋。",
     "processLead": "調達判断に必要な保証レベルを選べます。",
     "stepRequestTitle": "依頼",
@@ -1874,7 +1874,7 @@
     "whatVerified": "検証されたもの",
     "whatNotVerified": "検証されていないもの",
     "evidence": "証拠レビュー",
-    "expiry": "プロモーション",
+    "expiry": "有効期限",
     "noRecord": "検証記録はまだありません。",
     "notIndependentlyVerified": "独自に検証されていない",
     "noRecentAudit": "最近の第三者監査が見つかりません",
@@ -1908,7 +1908,7 @@
     "riskScore": "サプライヤープロフィールスコア",
     "verificationStatus": "検証ステータス",
     "evidenceSummary": "証拠の要約",
-    "auditHistory": "Audit history",
+    "auditHistory": "監査履歴",
     "notCoveredTitle": "カバーされていない",
     "notCoveredLead": "現在の検証範囲外のチェックを行います。 見ていないことを知っているので、それらをリストします。",
     "whatVerifiedTitle": "検証した内容",
@@ -1949,7 +1949,7 @@
     "selfReported": "自己報告される",
     "auditStatusLabel": "監査状況",
     "businessTypeLabel": "ビジネスタイプ",
-    "verifiedByTitle": "Verification by FactoryAuditB2B",
+    "verifiedByTitle": "FactoryAuditB2B による検証",
     "verifiedByLead": "私たちのチームがチェックした内容です。 サプライヤーが私たちに語ったものと分離され、両方がラベリングされます。",
     "provenanceLead": "各行は、その背後にある人によってラベル付けされます。サプライヤーは、私たちがレビューしたもの、私たちは独立して検証するもの、そしてサイト上で確認されたもの。",
     "provProvided": "サプライヤー提供",
@@ -2005,13 +2005,14 @@
     "assessmentReportNotPublished": "このレポートはまだ公開されていません。ダウンロードできるものはありません。",
     "assessmentReportDownload": "レポートをダウンロード",
     "assessmentReportUnavailable": "未公開",
-    "assessmentReportNote": "有料ダウンロードは近日公開予定です。現在、レポートのリンクをクリックするとカスタムサービスへのお問い合わせに移動します。価格は公表している価格表に準じます。"
+    "assessmentReportNote": "有料ダウンロードは近日公開予定です。現在、レポートのリンクをクリックするとカスタムサービスへのお問い合わせに移動します。価格は公表している価格表に準じます。",
+    "regLegalName": "登記名"
   },
   "reportPreview": {
     "badge": "無料プレビュー",
     "title": "サプライヤーデューデリジェンスレポート",
     "lead": "サプライヤー情報、利用可能なエビデンス、リスク要因、検証状況の構成されたレビュー。",
-    "execTitle": "執行役員",
+    "execTitle": "エグゼクティブサマリー",
     "verificationTitle": "検証",
     "keyRisksTitle": "主なリスク",
     "recommendationTitle": "推奨事項",
@@ -2029,10 +2030,10 @@
         "price": "$99",
         "items": [
           "サプライヤーの概要",
-          "次元の故障によるリスクスコア",
+          "次元別の内訳付きリスクスコア",
           "検証ステータス",
-          "Resumen de evidencia",
-          "Principales factores de riesgo",
+          "証拠の要約",
+          "主要なリスク要因",
           "推奨アクション",
           "PDF"
         ]
@@ -2041,8 +2042,8 @@
         "name": "専門のデューデリジェンス",
         "price": "$129",
         "items": [
-          "Todo en el informe básico",
-          "Revisión detallada de la evidencia",
+          "基本レポートの全内容",
+          "証拠の詳細レビュー",
           "追加文書チェック",
           "買い手の優先事項に合わせたリスク分析",
           "検証ノート",
@@ -2103,7 +2104,7 @@
         "検索における優先順位の配置",
         "関連する業界ページ",
         "バイヤー紹介",
-        "Visibilidad del producto"
+        "製品の可視性"
       ]
     },
     "badge": "プロフィール認証",
@@ -2145,9 +2146,9 @@
   },
   "consent": {
     "title": "情報の使用方法",
-    "body": "Information submitted by suppliers is used to create and maintain their FactoryAuditB2B supplier profile and support buyer due diligence.",
+    "body": "サプライヤーが提出した情報は、FactoryAuditB2B のサプライヤープロフィールの作成・維持、および購買側のデューデリジェンスの支援に使用されます。",
     "privacy": "機密文書を無断で公開することはいたしません。",
-    "authorize": "I authorize FactoryAuditB2B to use the information and documents I provide for supplier verification and buyer due diligence, subject to the platform's privacy and document-sharing rules.",
+    "authorize": "私は FactoryAuditB2B に対し、提供した情報および書類をサプライヤー検証および購買側のデューデリジェンスのために利用することを、本プラットフォームのプライバシーおよび書類共有規則に従うことを条件に、許諾します。",
     "prefsTitle": "情報共有の好み",
     "public": {
       "title": "パブリック",
@@ -2155,7 +2156,7 @@
       "items": [
         "会社名",
         "アクセス",
-        "Productos",
+        "製品",
         "検証ステータス"
       ]
     },
@@ -2163,9 +2164,9 @@
       "title": "バイヤービュー",
       "lead": "バイヤーを検証する可視性。",
       "items": [
-        "Evidencia seleccionada",
-        "Detalles del certificado",
-        "Programa de Auditoria"
+        "選定した証拠",
+        "証明書の詳細",
+        "監査概要"
       ]
     },
     "restricted": {
@@ -2173,8 +2174,8 @@
       "lead": "明示的な承認のみ。",
       "items": [
         "元の監査レポート",
-        "Documentos confidenciales",
-        "Fotos internas del PFDC."
+        "機密文書",
+        "内部写真"
       ]
     },
     "private": {
@@ -2283,7 +2284,7 @@
     "operatesLead": "FactoryAuditB2B は中国に登記された企業が運営し、世界中の買い手にサプライヤー検証、工場監査、調達支援を提供しています。",
     "operatesNotConfigured": "FactoryAuditB2B は、中国に登記された企業である江門智煜科技有限公司（Jiangmen Zhiyu Technology Co., Ltd.）が運営しています。",
     "scopeTitle": "事業範囲",
-    "scopeBody": "中国および東南アジアから輸入するバイヤー向けのサプライヤー核查、工場監査、検品、調達支援。第1フェーズの対象は中国、ベトナム、タイ、マレーシア、フィリピンです。",
+    "scopeBody": "中国および東南アジアから輸入するバイヤー向けのサプライヤー検証、工場監査、検品、調達支援。第1フェーズの対象は中国、ベトナム、タイ、マレーシア、フィリピンです。",
     "verifyTitle": "検証する内容",
     "verifyLead": "検証サービスでカバーするチェック項目は以下の通りです。",
     "verify": [
@@ -2533,9 +2534,9 @@
   },
   "supplierNetwork": {
     "metaTitle": "サプライヤネットワークに参加|無料サプライヤープロフィール",
-    "metaDesc": "Join the FactoryAuditB2B Supplier Network for free. Get an international buyer-facing profile, supplier verification support, factory audit and inspection services.",
+    "metaDesc": "FactoryAuditB2B サプライヤーネットワークに無料でご参加ください。海外バイヤー向けのプロフィールを掲載でき、サプライヤー検証、工場監査、検査のサポートを利用できます。",
     "badge": "サプライヤーネットワーク",
-    "h1": "Join the FactoryAuditB2B Supplier Network",
+    "h1": "FactoryAuditB2B サプライヤーネットワークに参加する",
     "lead": "国際的なバイヤーがそれの後ろの証明サポートと見つけることができる自由なプロフィール。 保証された順序、保証された証明書無し、約束される監査のパス無し。",
     "benefitsTitle": "あなたが得るもの",
     "benefits": [
@@ -2548,7 +2549,7 @@
     ],
     "noGuaranteeTitle": "約束しないもの",
     "noGuarantee": "保証された注文、保証された証明、または保証された監査パスを約束しません。 検証レポートは実際に見つけたものを記述します。",
-    "certStatement": "FactoryAuditB2B does not sell or issue certificates.",
+    "certStatement": "FactoryAuditB2B は証明書の販売も発行も行いません。",
     "howTitle": "参加作品",
     "howSteps": [
       "下記の申請書を提出(無料)",
@@ -2615,13 +2616,13 @@
         "contactWhatsapp": "WhatsApp",
         "auditAvailability": "工場監査のために利用できる",
         "inspectionAvailability": "出荷前の点検のために利用できる",
-        "authorizeCompanyProfile": "I authorize FactoryAuditB2B to display my company profile to international buyers *",
+        "authorizeCompanyProfile": "私は FactoryAuditB2B に対し、自社プロフィールを海外バイヤーに表示することを許諾します *",
         "authorizeCompanyProfileYes": "はい、表示会社のプロフィール",
         "authorizeCompanyProfileNo": "いいえ、それをプライベートに保ちます",
         "contactVisibility": "連絡先の詳細 可視性",
         "contactVisibilityPublic": "プロフィール公開",
         "contactVisibilityPlatform": "関心のあるバイヤーとだけ共有",
-        "contactVisibilityPrivate": "Private (contact via FactoryAuditB2B only)",
+        "contactVisibilityPrivate": "非公開（お問い合わせは FactoryAuditB2B 経由のみ）",
         "message": "あなたの工場について教えて下さい(任意)",
         "certName": "認証項目",
         "certNumber": "証明書番号",
@@ -3444,8 +3445,8 @@
       "signOut": "ログアウト",
       "myAccount": "マイアカウント",
       "upgrade": "Founding Buyer にアップグレード",
-      "planFree": "Free",
-      "planFounding": "Founding Buyer",
+      "planFree": "無料",
+      "planFounding": "創業バイヤー",
       "menuLabel": "アカウントメニュー"
     }
   },
@@ -3482,8 +3483,8 @@
       "noAccount": "アカウントをお持ちでない場合",
       "emailLabel": "メールアドレス",
       "planLabel": "プラン",
-      "planFree": "Free",
-      "planFounding": "Founding Buyer",
+      "planFree": "無料",
+      "planFounding": "創業バイヤー",
       "quotaLabel": "基本プロフィール閲覧",
       "quotaUnlimited": "無制限",
       "renewsLabel": "更新日",
@@ -3593,7 +3594,7 @@
     "membersLead": "アカウントと会員ステータス。",
     "membersEmpty": "メンバーはまだいません",
     "planFree": "無料",
-    "planFounding": "Founding Buyer",
+    "planFounding": "創業バイヤー",
     "statusActive": "有効",
     "statusCanceled": "解約済み",
     "statusPastDue": "支払い期限超過",
@@ -3689,17 +3690,17 @@
     "unpublishButton": "非公開にする",
     "publishBlocked": "公開できません：このサプライヤーはプロフィールの公開を認可していません。",
     "orders": {
-      "ordersTitle": "Orders",
-      "ordersLead": "Service orders and their payment status.",
-      "colRef": "Order",
-      "colCreated": "Created",
-      "colEmail": "Email",
-      "ordersSearch": "Search reference, email or company",
-      "actionPaid": "Mark paid",
-      "actionCancel": "Cancel",
-      "actionRefund": "Refund",
-      "empty": "No orders yet.",
-      "updated": "Updated"
+      "ordersTitle": "注文",
+      "ordersLead": "サービス注文とその支払状況。",
+      "colRef": "注文番号",
+      "colCreated": "作成日",
+      "colEmail": "メール",
+      "ordersSearch": "参照番号、メールアドレス、会社名で検索",
+      "actionPaid": "支払い済みにする",
+      "actionCancel": "キャンセル",
+      "actionRefund": "返金",
+      "empty": "注文はまだありません。",
+      "updated": "更新日"
     }
   },
   "evidenceCenter": {
@@ -3800,52 +3801,52 @@
     "relatedIndustries": "関連業界"
   },
   "checkout": {
-    "title": "Order received",
-    "lead": "Your service order has been recorded. Keep the reference below for payment and follow-up.",
-    "orderRef": "Order reference",
-    "colService": "Service",
-    "colQuantity": "Quantity",
-    "colAmount": "Amount",
-    "colStatus": "Status",
-    "statusPending": "Awaiting payment",
-    "statusPaid": "Paid",
-    "statusCancelled": "Cancelled",
-    "statusRefunded": "Refunded",
-    "quoted": "To be quoted",
-    "payTitle": "How to pay",
-    "payPaypal": "Pay now with PayPal",
-    "payManualTitle": "Payment instructions",
-    "payManualBody": "Our team will email your order reference and payment instructions within one business day.",
-    "bankTitle": "Bank transfer details",
-    "referenceNote": "Quote this reference in your payment and in any follow-up.",
-    "nextTitle": "What happens next",
-    "nextBody": "We confirm the scope and price with you, then schedule the work once payment is received.",
-    "notFoundTitle": "Order not found",
-    "notFoundBody": "Check the reference in your confirmation email, or contact us and we will look it up.",
-    "svcVerificationBasic": "Supplier verification — basic report",
-    "svcVerificationPro": "Supplier verification — professional due diligence",
-    "svcFactoryAudit": "On-site factory audit",
-    "svcInspection": "Product inspection",
-    "svcMonitoring": "Supplier monitoring",
-    "svcCustom": "Custom scope",
-    "unitPerSupplier": "per supplier",
-    "unitManDay": "per man-day plus travel",
-    "unitQuoted": "quoted per project"
+    "title": "ご注文を承りました",
+    "lead": "サービス注文を承りました。お支払いとお問い合わせの際に必要ですので、下記の参照番号をお控えください。",
+    "orderRef": "注文番号",
+    "colService": "サービス",
+    "colQuantity": "数量",
+    "colAmount": "金額",
+    "colStatus": "ステータス",
+    "statusPending": "お支払い待ち",
+    "statusPaid": "支払い済み",
+    "statusCancelled": "キャンセル済み",
+    "statusRefunded": "返金済み",
+    "quoted": "別途お見積り",
+    "payTitle": "お支払い方法",
+    "payPaypal": "PayPal で今すぐ支払う",
+    "payManualTitle": "お支払い方法",
+    "payManualBody": "ご注文の参照番号とお支払い方法を、1 営業日以内にメールでお送りします。",
+    "bankTitle": "銀行振込先",
+    "referenceNote": "お支払いおよびその後のご連絡の際は、この参照番号をお知らせください。",
+    "nextTitle": "今後の流れ",
+    "nextBody": "作業範囲と価格をご確認いただいたうえで、お支払いの受領後に作業を手配します。",
+    "notFoundTitle": "注文が見つかりません",
+    "notFoundBody": "確認メールに記載された参照番号をご確認いただくか、お問い合わせいただければ弊社で照会いたします。",
+    "svcVerificationBasic": "サプライヤー検証 — ベーシックレポート",
+    "svcVerificationPro": "サプライヤー検証 — プロフェッショナル・デューデリジェンス",
+    "svcFactoryAudit": "オンサイト工場監査",
+    "svcInspection": "製品検査",
+    "svcMonitoring": "サプライヤー監視",
+    "svcCustom": "個別対応範囲",
+    "unitPerSupplier": "サプライヤーごと",
+    "unitManDay": "1 人日あたり（交通費別）",
+    "unitQuoted": "プロジェクトごとのお見積り"
   },
   "order": {
-    "title": "Place an order",
-    "lead": "Choose the service and quantity. We confirm the scope and price with you before payment.",
-    "serviceLabel": "Service",
-    "quantityLabel": "Quantity",
-    "emailLabel": "Email",
-    "companyLabel": "Company",
-    "countryLabel": "Country",
-    "notesLabel": "Notes",
-    "notesHint": "Supplier name, factory country and your deadline.",
-    "amountHint": "Prices are indicative. The final price is confirmed by our team before payment.",
-    "submit": "Place order",
-    "submitting": "Placing order…",
-    "errorGeneric": "We could not place the order. Please try again or contact us."
+    "title": "ご注文",
+    "lead": "サービスと数量をお選びください。お支払い前に、作業範囲と価格を確認いたします。",
+    "serviceLabel": "サービス",
+    "quantityLabel": "数量",
+    "emailLabel": "メールアドレス",
+    "companyLabel": "会社名",
+    "countryLabel": "国",
+    "notesLabel": "備考",
+    "notesHint": "サプライヤー名、工場のある国、ご希望の期限をご記入ください。",
+    "amountHint": "価格は目安です。最終価格はお支払い前に弊社が確定いたします。",
+    "submit": "注文する",
+    "submitting": "注文を送信中…",
+    "errorGeneric": "注文を承ることができませんでした。もう一度お試しいただくか、お問い合わせください。"
   },
   "clusters": {
     "h1": "産業クラスター",
@@ -3864,7 +3865,9 @@
     "viewSuppliers": "サプライヤーを見る →",
     "suppliersTitle": "この産業クラスターのサプライヤー",
     "suppliersEmpty": "この産業クラスターには、まだ公開サプライヤーが登録されていません。",
-    "detailMetaDesc": "{cluster} 産業クラスターのサプライヤー・地域・業種の概要。"
+    "detailMetaDesc": "{cluster} 産業クラスターのサプライヤー・地域・業種の概要。",
+    "provinceLabel": "省",
+    "cityLabel": "市"
   },
   "verifySupplier": {
     "badge": "サプライヤー検証",
@@ -4119,7 +4122,7 @@
     "errFileType": "PDF、DOC、DOCX のいずれかをアップロードしてください。",
     "errFileSize": "ファイルサイズは 5 MB 未満にしてください。",
     "errSubmit": "送信できませんでした。support@factoryauditb2b.com まで直接ご連絡ください。",
-    "fileHint": "PDF・DOC・DOCX 对应。最大 5 MB。",
+    "fileHint": "PDF・DOC・DOCX。最大 5 MB。",
     "privacyNote": "送信をもって、採用・プロジェクト協力・人材プールの目的に限り、FactoryAuditB2B がご提供いただいた情報を取り扱うことに同意したものとみなされます。"
   },
   "confidentiality": {
@@ -4194,5 +4197,39 @@
     "docsLead": "これらは当社がすべてのプロジェクトで使用するテンプレートです。ご請求いただけるよう公開しています。",
     "reportTitle": "通報窓口",
     "reportBody": "監査員、従業員またはパートナーが本規範に違反したと思われる場合はお知らせください。通報はコンプライアンス窓口に送られ、機密として扱い、当該プロジェクトに無関係な担当者が確認します："
+  },
+  "contact": {
+    "metaTitle": "FactoryAuditB2B にお問い合わせ — サプライヤー検証と工場監査",
+    "metaDesc": "調達したい製品、または検証したいサプライヤーをお知らせください。1 営業日以内に返信いたします。",
+    "eyebrow": "お問い合わせ",
+    "title": "サプライヤーについてご相談ください",
+    "lead": "調達したい製品、または検証したい工場をお知らせください。検証できること、できないこと、確認に必要なことをご説明します。",
+    "directTitle": "直接お問い合わせいただくこともできます",
+    "emailLabel": "メールアドレス",
+    "responseNote": "1 営業日以内に返信いたします。お客様の情報を販売・共有することはありません。",
+    "altTitle": "その他の始め方",
+    "rfqTitle": "RFQ を送信する",
+    "rfqBody": "具体的な製品がおありですか？詳細をお送りいただければ、確認する価値のあるサプライヤーにおつなぎします。",
+    "supplierTitle": "サプライヤーネットワークに参加する",
+    "supplierBody": "工場をお持ちですか？登録して、バイヤーによる監査や検査を受け入れましょう。",
+    "form": {
+      "name": "お名前",
+      "namePlaceholder": "山田 太郎",
+      "email": "仕事用メールアドレス",
+      "emailPlaceholder": "taro@company.co.jp",
+      "company": "会社名",
+      "companyPlaceholder": "会社名",
+      "country": "国 / 市場",
+      "countryPlaceholder": "例：ドイツ",
+      "message": "ご要望",
+      "messagePlaceholder": "調達したい製品、または検証したいサプライヤーをご記入ください。",
+      "submit": "メッセージを送信",
+      "sending": "送信中…",
+      "successTitle": "メッセージを受け付けました",
+      "successBody": "ありがとうございます。当社チームが 1 営業日以内に返信いたします。",
+      "errorTitle": "送信できませんでした",
+      "errorBody": "もう一度お試しいただくか、直接メールでご連絡ください。",
+      "required": "有効なメールアドレスを入力してください。"
+    }
   }
 }

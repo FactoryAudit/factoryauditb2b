@@ -8,6 +8,7 @@ import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { ANALYTICS_EVENTS } from "@/lib/suppliers";
+import { supplierDisplayName } from "@/lib/supplierDisplayName";
 
 const DIRECTORY_PATH = "/suppliers";
 const BASE = "https://factoryauditb2b.com";
@@ -40,7 +41,7 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale,
     path,
-    title: `${t.claim.metaTitle} — ${s.legalName}`,
+    title: `${t.claim.metaTitle} — ${supplierDisplayName(locale, s)}`,
     description: t.claim.metaDesc,
     robots: { index: false, follow: true },
   });
@@ -64,7 +65,7 @@ export default async function SupplierClaimPage({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: `${cl.metaTitle} — ${s.legalName}`,
+    name: `${cl.metaTitle} — ${supplierDisplayName(locale, s)}`,
     url: `${BASE}${p(`${DIRECTORY_PATH}/${slug}/claim`)}`,
   };
 
@@ -85,7 +86,7 @@ export default async function SupplierClaimPage({
         </Link>
         <span className="mx-2">/</span>
         <Link href={p(`${DIRECTORY_PATH}/${slug}`)} className="hover:text-[#171717]">
-          {s.legalName}
+          {supplierDisplayName(locale, s)}
         </Link>
         <span className="mx-2">/</span>
         <span className="text-[#171717]">{cl.h1}</span>
@@ -96,7 +97,7 @@ export default async function SupplierClaimPage({
           {cl.badge}
         </span>
         <h1 className="text-3xl font-bold text-[#171717] mt-2">
-          {cl.h1} — {s.legalName}
+          {cl.h1} — {supplierDisplayName(locale, s)}
         </h1>
         <p className="text-[#6d6b66] mt-2 max-w-3xl">{cl.lead}</p>
       </section>
@@ -110,7 +111,7 @@ export default async function SupplierClaimPage({
             <dl className="space-y-1 text-sm">
               <div className="flex justify-between gap-3">
                 <dt className="text-[#6d6b66]">{cl.companyNameLabel}</dt>
-                <dd className="font-medium text-[#171717] text-right">{s.legalName}</dd>
+                <dd className="font-medium text-[#171717] text-right">{supplierDisplayName(locale, s)}</dd>
               </div>
               <div className="flex justify-between gap-3">
                 <dt className="text-[#6d6b66]">{sp.riskScore}</dt>
@@ -153,7 +154,7 @@ export default async function SupplierClaimPage({
 
         <section>
           <h2 className="text-xl font-bold text-[#171717] mb-3">{cl.formTitle}</h2>
-          <ClaimForm t={cl.form} slug={slug} legalName={s.legalName} />
+          <ClaimForm t={cl.form} slug={slug} legalName={supplierDisplayName(locale, s)} />
         </section>
       </div>
     </main>

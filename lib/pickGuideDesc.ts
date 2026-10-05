@@ -16,6 +16,7 @@
 import type { Guide } from "./guides";
 import type { Locale } from "@/i18n/config";
 import { twText } from "./tw";
+import { trLookup } from "./contentI18n";
 
 export function pickGuideDesc(locale: Locale, g: Guide): string {
   switch (locale) {
@@ -25,17 +26,17 @@ export function pickGuideDesc(locale: Locale, g: Guide): string {
     case "zh-TW":
       return twText(g.metaDescZh);
     case "ja":
-      return g.metaDescJa ?? g.metaDescEn;
+      return g.metaDescJa ?? trLookup("ja", g.metaDescEn) ?? g.metaDescEn;
     case "es":
-      return g.metaDescEs ?? g.metaDescEn;
+      return g.metaDescEs ?? trLookup("es", g.metaDescEn) ?? g.metaDescEn;
     case "de":
-      return g.metaDescDe ?? g.metaDescEn;
+      return g.metaDescDe ?? trLookup("de", g.metaDescEn) ?? g.metaDescEn;
     case "fr":
-      return g.metaDescFr ?? g.metaDescEn;
+      return g.metaDescFr ?? trLookup("fr", g.metaDescEn) ?? g.metaDescEn;
     case "pt":
-      return g.metaDescPt ?? g.metaDescEn;
+      return g.metaDescPt ?? trLookup("pt", g.metaDescEn) ?? g.metaDescEn;
     case "ar":
-      return g.metaDescAr ?? g.metaDescEn;
+      return g.metaDescAr ?? trLookup("ar", g.metaDescEn) ?? g.metaDescEn;
     default:
       return g.metaDescEn;
   }

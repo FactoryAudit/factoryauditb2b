@@ -203,6 +203,8 @@ function toView(s: (typeof STATIC_SUPPLIERS)[number]): SupplierView {
     id: s.id,
     slug: s.slug,
     legalName: s.legalName,
+    // P1-16：英文名（企业对外使用名）。静态兜底数据不填 ⇒ 回退 legalName（缺值不编造）。
+    englishName: s.englishName,
     country: s.countryCode,
     countryName: countryNameOf(s.countryCode),
     city: s.city,
@@ -752,7 +754,8 @@ export async function getSupplierDetail(
 
           // STEP-04：详情页只有 1 家供应商 ⇒ 传 1 个 slug 给**同一个**批量函数
           // （不另写单条查询路径，避免两条路径行为漂移）。无 slug 时仍是零查询。
-          const clusterNames = await resolvePublishedClusterNames([row.cluster_slug]);
+          // P1-15：带上 locale，供应商档案的 SEO JSON-LD(industrialCluster) 才能按语种取名。
+          const clusterNames = await resolvePublishedClusterNames([row.cluster_slug], locale);
           const base = redactViews([row], tier, clusterNames)[0] ?? view;
           return {
             ...base,
@@ -957,6 +960,7 @@ function rowToMatrix(row: SupplierRow): StaticSupplier {
     id: row.id,
     slug: row.slug,
     legalName: row.legal_name,
+    englishName: nz(row.english_name),
     countryCode: row.country_code,
     city: row.city,
     industryCode: row.industry_code ?? "",

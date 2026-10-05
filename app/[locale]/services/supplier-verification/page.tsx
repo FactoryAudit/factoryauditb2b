@@ -51,7 +51,7 @@ export default async function Page({ params }: Props) {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: `https://factoryauditb2b.com${p("/")}` },
+        { "@type": "ListItem", position: 1, name: t.common.ui.home, item: `https://factoryauditb2b.com${p("/")}` },
         { "@type": "ListItem", position: 2, name: s.h1, item: canonicalFor(locale, PATH) },
       ],
     },

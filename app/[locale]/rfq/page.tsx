@@ -4,7 +4,8 @@ import RfqForm from "@/components/RfqForm";
 import RfqEnterTracker from "@/components/RfqEnterTracker";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
-import { hreflangFor, canonicalFor } from "@/i18n/hreflang";
+import { canonicalFor } from "@/i18n/hreflang";
+import { buildPageMetadata } from "@/lib/pageMeta";
 
 const PATH = "/rfq";
 type Props = { params: Promise<{ locale: string }> };
@@ -13,13 +14,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: raw } = await params;
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
-  const title = `${t.rfq.metaTitle} | FactoryAuditB2B`;
-  return {
-    title,
+  return buildPageMetadata({
+    locale,
+    path: PATH,
+    title: t.rfq.metaTitle,
     description: t.rfq.metaDesc,
-    alternates: { canonical: canonicalFor(locale, PATH), languages: hreflangFor(PATH) },
-    openGraph: { title, description: t.rfq.metaDesc, type: "website", url: canonicalFor(locale, PATH) },
-  };
+  });
 }
 
 export default async function Page({ params }: Props) {
@@ -45,7 +45,7 @@ export default async function Page({ params }: Props) {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: `https://factoryauditb2b.com${p("/")}` },
+        { "@type": "ListItem", position: 1, name: t.common.ui.home, item: `https://factoryauditb2b.com${p("/")}` },
         { "@type": "ListItem", position: 2, name: s.h1, item: canonicalFor(locale, PATH) },
       ],
     },

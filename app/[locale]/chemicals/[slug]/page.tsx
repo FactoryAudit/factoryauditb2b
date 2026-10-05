@@ -103,7 +103,7 @@ export default async function ChemicalPage({ params }: { params: Promise<Params>
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: `${BASE}/` },
+              { "@type": "ListItem", position: 1, name: t.common.ui.home, item: `${BASE}/` },
               { "@type": "ListItem", position: 2, name: c.metaTitle, item: `${BASE}/chemicals` },
               { "@type": "ListItem", position: 3, name, item: `${BASE}/chemicals/${slug}` },
             ],

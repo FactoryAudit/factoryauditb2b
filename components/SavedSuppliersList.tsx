@@ -14,10 +14,13 @@ import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { overallLevel, LEVEL_COLOR } from "@/lib/riskEngine";
 import { localePath, type Locale } from "@/i18n/config";
+import { supplierDisplayName } from "@/lib/supplierDisplayName";
 
 export type SavedItem = {
   slug: string;
   legalName: string;
+  /** CS-12：企业自述英文名。展示请走 `supplierDisplayName`，缺值回退 legalName。 */
+  englishName?: string;
   country: string;
   city: string;
   riskScore: number | null;
@@ -128,7 +131,7 @@ export default function SavedSuppliersList({ labels, locale }: Props) {
                 href={profileHref(x.slug)}
                 className="font-semibold text-[#171717] hover:text-[#171717]"
               >
-                {x.legalName}
+                {supplierDisplayName(locale, x)}
               </Link>
               {typeof x.riskScore === "number" && (
                 <span

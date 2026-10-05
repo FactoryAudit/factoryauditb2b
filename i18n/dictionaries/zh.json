@@ -1360,7 +1360,8 @@
     "assessmentReportNotPublished": "该报告尚未发布，暂无可下载内容。",
     "assessmentReportDownload": "下载报告",
     "assessmentReportUnavailable": "未发布",
-    "assessmentReportNote": "付费下载功能即将上线；当前点击报告链接将转至定制服务咨询。价格以我们公布的价目表为准。"
+    "assessmentReportNote": "付费下载功能即将上线；当前点击报告链接将转至定制服务咨询。价格以我们公布的价目表为准。",
+    "regLegalName": "登记名称"
   },
   "reportPreview": {
     "badge": "免费预览",
@@ -3445,7 +3446,7 @@
       "myAccount": "我的账号",
       "upgrade": "升级为 Founding Buyer",
       "planFree": "免费版",
-      "planFounding": "Founding Buyer",
+      "planFounding": "创始买家",
       "menuLabel": "账号菜单"
     }
   },
@@ -3483,7 +3484,7 @@
       "emailLabel": "邮箱",
       "planLabel": "当前套餐",
       "planFree": "免费版",
-      "planFounding": "Founding Buyer",
+      "planFounding": "创始买家",
       "quotaLabel": "基础档案访问",
       "quotaUnlimited": "不限次数",
       "renewsLabel": "续费日期",
@@ -3593,7 +3594,7 @@
     "membersLead": "账号及其会员状态。",
     "membersEmpty": "暂无会员",
     "planFree": "免费",
-    "planFounding": "Founding Buyer",
+    "planFounding": "创始买家",
     "statusActive": "生效中",
     "statusCanceled": "已取消",
     "statusPastDue": "扣款失败",
@@ -3864,7 +3865,9 @@
     "viewSuppliers": "查看供应商 →",
     "suppliersTitle": "该产业带的供应商",
     "suppliersEmpty": "该产业带暂未收录已发布的供应商。",
-    "detailMetaDesc": "「{cluster}」产业带的供应商、地区与行业概览。"
+    "detailMetaDesc": "「{cluster}」产业带的供应商、地区与行业概览。",
+    "provinceLabel": "省份",
+    "cityLabel": "城市"
   },
   "verifySupplier": {
     "badge": "供应商核验",
@@ -4194,5 +4197,39 @@
     "docsLead": "这些是我们在每个项目中使用的模板。在此公开列出，便于你索取。",
     "reportTitle": "举报渠道",
     "reportBody": "如果你认为审核员、员工或合作方违反了本准则，请告知我们。举报将发送至我们的合规邮箱，按保密方式处理，并由与该项目无关的人员核查："
+  },
+  "contact": {
+    "metaTitle": "联系我们 — FactoryAuditB2B 供应商核验与工厂审核",
+    "metaDesc": "告诉我们您在采购什么，或想核验哪家工厂。我们将在一个工作日内回复。",
+    "eyebrow": "联系我们",
+    "title": "和我们聊聊您的供应商",
+    "lead": "告诉我们您在采购什么，或想核验哪家工厂。我们会说明哪些能核实、哪些不能，以及需要走哪些步骤。",
+    "directTitle": "也可以直接联系我们",
+    "emailLabel": "邮箱",
+    "responseNote": "我们将在一个工作日内回复。我们不会出售或分享您的信息。",
+    "altTitle": "其他开始方式",
+    "rfqTitle": "提交询价单（RFQ）",
+    "rfqBody": "有具体产品？发来详情，我们帮您对接值得核查的供应商。",
+    "supplierTitle": "加入供应商网络",
+    "supplierBody": "您是工厂？可以免费登记，并开放接受买家发起的验厂与验货。",
+    "form": {
+      "name": "您的姓名",
+      "namePlaceholder": "张三",
+      "email": "工作邮箱",
+      "emailPlaceholder": "you@company.com",
+      "company": "公司",
+      "companyPlaceholder": "公司名称",
+      "country": "国家 / 市场",
+      "countryPlaceholder": "例如：德国",
+      "message": "您的需求",
+      "messagePlaceholder": "请说明您在采购什么，或想核验哪家供应商。",
+      "submit": "发送",
+      "sending": "发送中…",
+      "successTitle": "已收到您的留言",
+      "successBody": "谢谢。我们将在一个工作日内回复。",
+      "errorTitle": "发送失败",
+      "errorBody": "请稍后重试，或直接发邮件给我们。",
+      "required": "请填写有效的邮箱地址。"
+    }
   }
 }

@@ -11,6 +11,7 @@ import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i1
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { twDeep, pickZhCopy, pickZhPair } from "@/lib/tw";
+import { trDeep } from "@/lib/contentI18n";
 
 const BASE = "https://factoryauditb2b.com";
 type Params = { locale: string; slug: string };
@@ -58,8 +59,16 @@ export default async function CountryServicePage({ params }: { params: Promise<P
   const p = (href: string) => localePath(locale, href);
   const countryName = pickZhPair(locale, entry.country.name, entry.country.nameZh);
   const serviceName = pickZhPair(locale, entry.service.nameEn, entry.service.nameZh);
+  // P1-19：非中文语种必须过内容层（lib/contentI18n）。
+  //   否则 svc.*（intro / quickAnswer / includes / deliverables / process / pricingBasis / faq）
+  //   在 es/de/fr/pt/ja/ar 下全是英文 —— 而这段内容**同时**进 JSON-LD（Service.description
+  //   与 FAQPage.mainEntity）与可见正文。trDeep 未命中即回退原文 ⇒ 纯增量，不会改坏已正确的语种。
   const svc =
-    locale === "zh" ? entry.service.zh : locale === "zh-TW" ? twDeep(entry.service.zh) : entry.service;
+    locale === "zh"
+      ? entry.service.zh
+      : locale === "zh-TW"
+        ? twDeep(entry.service.zh)
+        : trDeep(locale, entry.service);
   const countryCopy = pickZhCopy(locale, entry.country);
 
   // 国家层面与该服务直接相关的要点：核查页用 verificationNotes，验厂页用 auditNotes。
@@ -106,7 +115,7 @@ export default async function CountryServicePage({ params }: { params: Promise<P
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: `${BASE}${p("/")}` },
+        { "@type": "ListItem", position: 1, name: t.common.ui.home, item: `${BASE}${p("/")}` },
         {
           "@type": "ListItem",
           position: 2,

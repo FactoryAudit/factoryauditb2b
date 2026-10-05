@@ -31,6 +31,7 @@
 import { canonicalFor } from "../../i18n/hreflang";
 import { localePath, type Locale } from "../../i18n/config";
 import { twText } from "../tw";
+import { supplierDisplayName } from "../supplierDisplayName";
 import { overallLevel, type RiskLevel } from "../riskEngine";
 import { LEVEL_SCOPE, publicVerificationLevel } from "../verification";
 // stage1.7.1：desc 的显示预算（CJK 90 / 拉丁 158）与 lib/pageMeta.ts 的收口**同一判定**。
@@ -447,9 +448,364 @@ const ZH: SupplierSeoCopy = {
   },
 };
 
+const JA: SupplierSeoCopy = {
+  snapshotTitle: "バイヤー向け概要",
+  scoreLabel: "サプライヤー評価スコア",
+  scoreDisclaimer:
+    "このスコアは入手可能なサプライヤー情報およびデータ指標を反映したものであり、サプライヤーのリスクに対する独立した評価ではありません。",
+  scoreMethodologyLabel: "スコアの算出方法",
+  scoreMethodologyValue:
+    "このスコアはサプライヤー情報に記録されたものであり、独立したリスク評価ではなく、検証や現地監査の代替にもなりません。",
+  scoreBreakdownAbsent:
+    "このサプライヤーには項目別の内訳が記録されていないため、スコアを個々のリスク要因に帰属させることはできません。",
+  scoreBreakdownPresent: "このサプライヤーには項目別の内訳が記録されており、会員が閲覧できます。",
+  dataCoverageLabel: "データ充足度",
+  dataCoverageValue: "プロフィール{total}項目のうち{filled}項目が入力済み",
+  dataCoverageNone: "プロフィール項目はまだ何も入力されていません。",
+  lastUpdatedLabel: "最終更新",
+  scopeLabel: "検証範囲",
+  scopeNone: "このサプライヤーには検証イベントの記録がありません。",
+  unknownVerified: "この情報は独立した検証を受けていません。",
+  unknownUnavailable: "現在のサプライヤープロフィールにはこの情報がありません。",
+  titleVerified: "{name}｜{city}、{country}の{level}サプライヤー",
+  titleVerifiedShort: "{name}｜{level}サプライヤー",
+  titleUnverified: "{name}｜{city}、{country}のサプライヤープロフィール",
+  titleFallback: "{name}｜サプライヤープロフィール",
+  descEvent: "{name} は FactoryAuditB2B に検証イベントの記録があります。",
+  descDeclared: "{name} はサプライヤーの自己申告によるプロフィールです。",
+  descNotVerified: "FactoryAuditB2B による独立した検証は受けていません。",
+  descLevel: "検証レベル：{level}。",
+  descLocatedWithType: "{city}、{country}に所在する{type}です（サプライヤーの自己申告）。",
+  descLocated: "{city}、{country}に所在。",
+  descScore: "サプライヤープロフィールスコアは100点満点中{score}点。",
+  descProducts: "登録製品：{products}。",
+  faq: {
+    verifiedQ: "{name} は FactoryAuditB2B による検証を受けていますか？",
+    verifiedA:
+      "はい。FactoryAuditB2B は {name} の検証イベントの記録を保有しています。検証レベルは{level}で、確認した範囲は本プロフィールに記載されています。検証は財務諸表、製品の使用時性能、非開示の外注先までは対象に含みません。",
+    unverifiedQ: "{name} は FactoryAuditB2B による検証を受けていますか？",
+    unverifiedA:
+      "まだ受けていません。{name} には検証イベントの記録がありません。本プロフィールのすべての内容はサプライヤーの自己申告情報または公開情報であり、独立した検証を受けていません。",
+    productsQ: "{name} は何を製造していますか？",
+    productsA:
+      "{name} は以下の製品を登録しています：{products}。この情報はサプライヤープロフィールに基づくもので、独立した確認はされていません。",
+    locationQ: "{name} はどこに拠点を置いていますか？",
+    locationA:
+      "{name} は {city}、{country} に所在すると登録されています。登記上の住所と生産拠点が異なる場合があるため、実際に注文を生産する工場を確認してください。",
+    typeQ: "{name} は工場ですか、それとも商社ですか？",
+    typeA:
+      "{name} は次のように登録されています：{type}。工場と称する商社は最も多い調達リスクの一つであるため、手付金を支払う前に生産拠点を確認してください。",
+    certsQ: "{name} はどのような認証を取得していますか？",
+    certsReportedA:
+      "工場は以下の証明書を保有すると自己申告しています：{list}。これらはサプライヤーが提供したもので、FactoryAuditB2B による審査・検証は受けていません。",
+    certsVerifiedA:
+      "FactoryAuditB2B は {name} の認証記録を審査しました：{list}。本プロフィールには検証を通過した記録のみを表示しています。",
+    certsNoneA: "{name} には認証記録がありません。提出されていないか、まだ検証を通過していないかのいずれかです。",
+    checkQ: "買い手は発注前に {name} をどのように確認すべきですか？",
+    checkA:
+      "法的実体と登記情報を確認し、生産拠点を提示された住所と照合し、直近の品質・監査記録を請求してください。FactoryAuditB2B は手付金を支払う前にこれらの確認を代行できます。",
+  },
+};
+
+const ES: SupplierSeoCopy = {
+  snapshotTitle: "Resumen para compradores",
+  scoreLabel: "Puntuación del perfil del proveedor",
+  scoreDisclaimer:
+    "Esta puntuación refleja la información y los indicadores de datos disponibles del proveedor y no constituye una evaluación independiente del riesgo del proveedor.",
+  scoreMethodologyLabel: "Metodología de la puntuación",
+  scoreMethodologyValue:
+    "La puntuación se registra en el perfil del proveedor. No es una evaluación de riesgo independiente ni sustituye la verificación o una auditoría in situ.",
+  scoreBreakdownAbsent:
+    "No hay un desglose por dimensiones registrado para este proveedor, por lo que la puntuación no puede atribuirse a factores de riesgo concretos.",
+  scoreBreakdownPresent: "Hay un desglose por dimensiones registrado para este proveedor y está disponible para los miembros.",
+  dataCoverageLabel: "Cobertura de datos",
+  dataCoverageValue: "{filled} de {total} atributos del perfil completados",
+  dataCoverageNone: "Aún no se ha completado ningún atributo del perfil.",
+  lastUpdatedLabel: "Última actualización",
+  scopeLabel: "Alcance de la verificación",
+  scopeNone: "No hay ningún evento de verificación registrado para este proveedor.",
+  unknownVerified: "Información no verificada de forma independiente.",
+  unknownUnavailable: "No disponible en el perfil actual del proveedor.",
+  titleVerified: "{name} | {level} en {city}, {country}",
+  titleVerifiedShort: "{name} | {level}",
+  titleUnverified: "{name} | Perfil de proveedor en {city}, {country}",
+  titleFallback: "{name} | Perfil de proveedor",
+  descEvent: "{name} tiene un evento de verificación registrado con FactoryAuditB2B.",
+  descDeclared: "{name} es un perfil declarado por el proveedor.",
+  descNotVerified: "No verificado de forma independiente por FactoryAuditB2B.",
+  descLevel: "Nivel de verificación: {level}.",
+  descLocatedWithType: "{type} con sede en {city}, {country}.",
+  descLocated: "Con sede en {city}, {country}.",
+  descScore: "Puntuación del perfil del proveedor: {score} sobre 100.",
+  descProducts: "Productos listados: {products}.",
+  faq: {
+    verifiedQ: "¿Ha sido {name} verificado por FactoryAuditB2B?",
+    verifiedA:
+      "Sí. FactoryAuditB2B tiene registrado un evento de verificación de {name}. El nivel de verificación es {level} y el alcance comprobado figura en este perfil. La verificación no cubre estados financieros, el rendimiento del producto en uso ni subcontratistas no revelados.",
+    unverifiedQ: "¿Ha sido {name} verificado por FactoryAuditB2B?",
+    unverifiedA:
+      "Todavía no. No hay ningún evento de verificación registrado para {name}. Todo lo que figura en este perfil es información declarada por el proveedor o datos de acceso público y no ha sido verificado de forma independiente.",
+    productsQ: "¿Qué fabrica {name}?",
+    productsA:
+      "{name} incluye los siguientes productos: {products}. Esta información procede del perfil del proveedor y no ha sido confirmada de forma independiente.",
+    locationQ: "¿Dónde tiene su sede {name}?",
+    locationA:
+      "{name} figura en {city}, {country}. El domicilio registrado y la dirección de producción pueden diferir, así que confirme en qué planta se fabricará su pedido.",
+    typeQ: "¿Es {name} un fabricante o una empresa comercial?",
+    typeA:
+      "{name} figura como: {type}. Las empresas comerciales que se presentan como fábricas son uno de los riesgos de aprovisionamiento más comunes, así que confirme la planta de producción antes de pagar un anticipo.",
+    certsQ: "¿Qué certificaciones tiene {name}?",
+    certsReportedA:
+      "La fábrica declara los siguientes certificados: {list}. Fueron aportados por el proveedor y no han sido revisados ni verificados por FactoryAuditB2B.",
+    certsVerifiedA:
+      "FactoryAuditB2B ha revisado los registros de certificación de {name}: {list}. En este perfil solo se muestran los registros que superaron la verificación.",
+    certsNoneA: "No hay ninguna certificación registrada para {name}. O no se aportó ninguna, o ninguna ha sido verificada.",
+    checkQ: "¿Cómo debería un comprador verificar a {name} antes de hacer un pedido?",
+    checkA:
+      "Confirme la entidad legal y los datos de registro, coteje la planta de producción con la dirección que le facilitaron y solicite registros recientes de calidad y auditoría. FactoryAuditB2B puede realizar estas comprobaciones antes de que pague un anticipo.",
+  },
+};
+
+const DE: SupplierSeoCopy = {
+  snapshotTitle: "Käufer-Überblick",
+  scoreLabel: "Lieferantenprofil-Bewertung",
+  scoreDisclaimer:
+    "Diese Bewertung spiegelt die verfügbaren Lieferanten- und Dateninformationen wider und stellt keine unabhängige Bewertung des Lieferantenrisikos dar.",
+  scoreMethodologyLabel: "Bewertungsmethodik",
+  scoreMethodologyValue:
+    "Die Bewertung ist im Lieferantenprofil hinterlegt. Sie ist keine unabhängige Risikobewertung und ersetzt weder eine Verifizierung noch ein Vor-Ort-Audit.",
+  scoreBreakdownAbsent:
+    "Für diesen Lieferanten ist keine dimensionale Aufschlüsselung hinterlegt, daher lässt sich die Bewertung keinen einzelnen Risikofaktoren zuordnen.",
+  scoreBreakdownPresent: "Für diesen Lieferanten ist eine dimensionale Aufschlüsselung hinterlegt, die Mitgliedern zur Verfügung steht.",
+  dataCoverageLabel: "Datenabdeckung",
+  dataCoverageValue: "{filled} von {total} Profilmerkmalen ausgefüllt",
+  dataCoverageNone: "Es sind noch keine Profilmerkmale ausgefüllt.",
+  lastUpdatedLabel: "Zuletzt aktualisiert",
+  scopeLabel: "Verifizierungsumfang",
+  scopeNone: "Für diesen Lieferanten ist kein Verifizierungsereignis hinterlegt.",
+  unknownVerified: "Angabe nicht unabhängig verifiziert.",
+  unknownUnavailable: "Im aktuellen Lieferantenprofil nicht verfügbar.",
+  titleVerified: "{name} | {level} in {city}, {country}",
+  titleVerifiedShort: "{name} | {level}",
+  titleUnverified: "{name} | Lieferantenprofil in {city}, {country}",
+  titleFallback: "{name} | Lieferantenprofil",
+  descEvent: "{name} hat ein erfasstes Verifizierungsereignis bei FactoryAuditB2B.",
+  descDeclared: "{name} ist ein vom Lieferanten selbst deklariertes Profil.",
+  descNotVerified: "Nicht unabhängig von FactoryAuditB2B verifiziert.",
+  descLevel: "Verifizierungsstufe: {level}.",
+  descLocatedWithType: "{type} mit Sitz in {city}, {country}.",
+  descLocated: "Mit Sitz in {city}, {country}.",
+  descScore: "Lieferantenprofil-Bewertung: {score} von 100.",
+  descProducts: "Gelistete Produkte: {products}.",
+  faq: {
+    verifiedQ: "Wurde {name} von FactoryAuditB2B verifiziert?",
+    verifiedA:
+      "Ja. FactoryAuditB2B führt ein erfasstes Verifizierungsereignis für {name}. Die Verifizierungsstufe ist {level}, und der geprüfte Umfang ist in diesem Profil aufgeführt. Die Verifizierung deckt keine Finanzberichte, die Produktleistung im Einsatz oder nicht offengelegte Unterauftragnehmer ab.",
+    unverifiedQ: "Wurde {name} von FactoryAuditB2B verifiziert?",
+    unverifiedA:
+      "Noch nicht. Für {name} ist kein Verifizierungsereignis erfasst. Alle Angaben in diesem Profil sind vom Lieferanten deklariert oder öffentlich zugänglich und wurden nicht unabhängig verifiziert.",
+    productsQ: "Was stellt {name} her?",
+    productsA:
+      "{name} listet folgende Produkte: {products}. Diese Angabe stammt aus dem Lieferantenprofil und wurde nicht unabhängig bestätigt.",
+    locationQ: "Wo hat {name} seinen Sitz?",
+    locationA:
+      "{name} ist in {city}, {country} gelistet. Eingetragener Sitz und Produktionsstandort können voneinander abweichen; klären Sie daher, an welchem Standort Ihre Bestellung gefertigt wird.",
+    typeQ: "Ist {name} ein Hersteller oder ein Handelsunternehmen?",
+    typeA:
+      "{name} ist gelistet als: {type}. Handelsunternehmen, die sich als Fabrik ausgeben, gehören zu den häufigsten Beschaffungsrisiken; klären Sie den Produktionsstandort, bevor Sie eine Anzahlung leisten.",
+    certsQ: "Über welche Zertifizierungen verfügt {name}?",
+    certsReportedA:
+      "Die Fabrik gibt folgende Zertifikate an: {list}. Sie wurden vom Lieferanten vorgelegt und nicht von FactoryAuditB2B geprüft oder verifiziert.",
+    certsVerifiedA:
+      "FactoryAuditB2B hat die Zertifizierungsnachweise von {name} geprüft: {list}. In diesem Profil werden nur Nachweise angezeigt, die die Verifizierung bestanden haben.",
+    certsNoneA: "Für {name} ist keine Zertifizierung erfasst. Entweder wurde keine vorgelegt oder keine wurde verifiziert.",
+    checkQ: "Wie sollte ein Käufer {name} vor der Bestellung prüfen?",
+    checkA:
+      "Bestätigen Sie die Rechtsperson und die Registerangaben, gleichen Sie den Produktionsstandort mit der angegebenen Adresse ab und fordern Sie aktuelle Qualitäts- und Auditnachweise an. FactoryAuditB2B kann diese Prüfungen übernehmen, bevor Sie eine Anzahlung leisten.",
+  },
+};
+
+const FR: SupplierSeoCopy = {
+  snapshotTitle: "Aperçu acheteur",
+  scoreLabel: "Score du profil fournisseur",
+  scoreDisclaimer:
+    "Ce score reflète les informations et les indicateurs de données disponibles sur le fournisseur et ne constitue pas une évaluation indépendante du risque fournisseur.",
+  scoreMethodologyLabel: "Méthodologie du score",
+  scoreMethodologyValue:
+    "Le score est enregistré dans le profil du fournisseur. Il ne s'agit pas d'une évaluation indépendante du risque et il ne remplace ni la vérification ni un audit sur site.",
+  scoreBreakdownAbsent:
+    "Aucune ventilation par dimension n'est enregistrée pour ce fournisseur ; le score ne peut donc pas être attribué à des facteurs de risque précis.",
+  scoreBreakdownPresent: "Une ventilation par dimension est enregistrée pour ce fournisseur et est accessible aux membres.",
+  dataCoverageLabel: "Couverture des données",
+  dataCoverageValue: "{filled} attributs sur {total} renseignés",
+  dataCoverageNone: "Aucun attribut de profil n'est encore renseigné.",
+  lastUpdatedLabel: "Dernière mise à jour",
+  scopeLabel: "Périmètre de vérification",
+  scopeNone: "Aucun événement de vérification n'est enregistré pour ce fournisseur.",
+  unknownVerified: "Information non vérifiée de manière indépendante.",
+  unknownUnavailable: "Non disponible dans le profil fournisseur actuel.",
+  titleVerified: "{name} | {level} à {city}, {country}",
+  titleVerifiedShort: "{name} | {level}",
+  titleUnverified: "{name} | Profil fournisseur à {city}, {country}",
+  titleFallback: "{name} | Profil fournisseur",
+  descEvent: "{name} dispose d'un événement de vérification enregistré auprès de FactoryAuditB2B.",
+  descDeclared: "{name} est un profil déclaré par le fournisseur.",
+  descNotVerified: "Non vérifié de manière indépendante par FactoryAuditB2B.",
+  descLevel: "Niveau de vérification : {level}.",
+  descLocatedWithType: "{type} basé à {city}, {country}.",
+  descLocated: "Basé à {city}, {country}.",
+  descScore: "Score du profil fournisseur : {score} sur 100.",
+  descProducts: "Produits référencés : {products}.",
+  faq: {
+    verifiedQ: "{name} a-t-il été vérifié par FactoryAuditB2B ?",
+    verifiedA:
+      "Oui. FactoryAuditB2B dispose d'un événement de vérification enregistré pour {name}. Le niveau de vérification est {level} et le périmètre contrôlé figure sur ce profil. La vérification ne couvre pas les états financiers, la performance des produits en usage ni les sous-traitants non déclarés.",
+    unverifiedQ: "{name} a-t-il été vérifié par FactoryAuditB2B ?",
+    unverifiedA:
+      "Pas encore. Aucun événement de vérification n'est enregistré pour {name}. Tout le contenu de ce profil provient de déclarations du fournisseur ou de données publiques et n'a pas été vérifié de manière indépendante.",
+    productsQ: "Que fabrique {name} ?",
+    productsA:
+      "{name} référence les produits suivants : {products}. Cette information provient du profil fournisseur et n'a pas été confirmée de manière indépendante.",
+    locationQ: "Où {name} est-il établi ?",
+    locationA:
+      "{name} est référencé à {city}, {country}. L'adresse enregistrée et l'adresse de production peuvent différer ; confirmez donc le site qui produira votre commande.",
+    typeQ: "{name} est-il un fabricant ou une société de négoce ?",
+    typeA:
+      "{name} est référencé comme : {type}. Les sociétés de négoce qui se présentent comme des usines figurent parmi les risques d'approvisionnement les plus courants ; confirmez le site de production avant de verser un acompte.",
+    certsQ: "Quelles certifications {name} détient-il ?",
+    certsReportedA:
+      "L'usine déclare détenir les certificats suivants : {list}. Ils ont été fournis par le fournisseur et n'ont pas été examinés ni vérifiés par FactoryAuditB2B.",
+    certsVerifiedA:
+      "FactoryAuditB2B a examiné les enregistrements de certification de {name} : {list}. Seuls les enregistrements ayant passé la vérification sont affichés sur ce profil.",
+    certsNoneA: "Aucune certification n'est enregistrée pour {name}. Soit aucune n'a été fournie, soit aucune n'a été vérifiée.",
+    checkQ: "Comment un acheteur doit-il vérifier {name} avant de commander ?",
+    checkA:
+      "Confirmez l'entité juridique et les informations d'enregistrement, recoupez le site de production avec l'adresse qui vous a été communiquée et demandez les enregistrements récents de qualité et d'audit. FactoryAuditB2B peut effectuer ces vérifications avant que vous ne versiez un acompte.",
+  },
+};
+
+const PT: SupplierSeoCopy = {
+  snapshotTitle: "Resumo para compradores",
+  scoreLabel: "Pontuação do perfil do fornecedor",
+  scoreDisclaimer:
+    "Esta pontuação reflete as informações e os indicadores de dados disponíveis do fornecedor e não constitui uma avaliação independente do risco do fornecedor.",
+  scoreMethodologyLabel: "Metodologia da pontuação",
+  scoreMethodologyValue:
+    "A pontuação é registada no perfil do fornecedor. Não é uma avaliação de risco independente nem substitui a verificação ou uma auditoria no local.",
+  scoreBreakdownAbsent:
+    "Não existe um detalhe por dimensões registado para este fornecedor, pelo que a pontuação não pode ser atribuída a fatores de risco específicos.",
+  scoreBreakdownPresent: "Existe um detalhe por dimensões registado para este fornecedor e está disponível para os membros.",
+  dataCoverageLabel: "Cobertura de dados",
+  dataCoverageValue: "{filled} de {total} atributos do perfil preenchidos",
+  dataCoverageNone: "Ainda não está preenchido nenhum atributo do perfil.",
+  lastUpdatedLabel: "Última atualização",
+  scopeLabel: "Âmbito da verificação",
+  scopeNone: "Não existe nenhum evento de verificação registado para este fornecedor.",
+  unknownVerified: "Informação não verificada de forma independente.",
+  unknownUnavailable: "Não disponível no perfil atual do fornecedor.",
+  titleVerified: "{name} | {level} em {city}, {country}",
+  titleVerifiedShort: "{name} | {level}",
+  titleUnverified: "{name} | Perfil de fornecedor em {city}, {country}",
+  titleFallback: "{name} | Perfil de fornecedor",
+  descEvent: "{name} tem um evento de verificação registado na FactoryAuditB2B.",
+  descDeclared: "{name} é um perfil declarado pelo fornecedor.",
+  descNotVerified: "Não verificado de forma independente pela FactoryAuditB2B.",
+  descLevel: "Nível de verificação: {level}.",
+  descLocatedWithType: "{type} com sede em {city}, {country}.",
+  descLocated: "Com sede em {city}, {country}.",
+  descScore: "Pontuação do perfil do fornecedor: {score} em 100.",
+  descProducts: "Produtos listados: {products}.",
+  faq: {
+    verifiedQ: "O {name} foi verificado pela FactoryAuditB2B?",
+    verifiedA:
+      "Sim. A FactoryAuditB2B tem um evento de verificação registado para {name}. O nível de verificação é {level} e o âmbito verificado está indicado neste perfil. A verificação não abrange demonstrações financeiras, o desempenho do produto em utilização nem subcontratados não divulgados.",
+    unverifiedQ: "O {name} foi verificado pela FactoryAuditB2B?",
+    unverifiedA:
+      "Ainda não. Não existe nenhum evento de verificação registado para {name}. Tudo o que consta neste perfil é informação declarada pelo fornecedor ou dados de acesso público e não foi verificado de forma independente.",
+    productsQ: "O que fabrica o {name}?",
+    productsA:
+      "O {name} lista os seguintes produtos: {products}. Esta informação vem do perfil do fornecedor e não foi confirmada de forma independente.",
+    locationQ: "Onde está sediado o {name}?",
+    locationA:
+      "O {name} está listado em {city}, {country}. O endereço registado e o endereço de produção podem ser diferentes, por isso confirme em que unidade será produzida a sua encomenda.",
+    typeQ: "O {name} é um fabricante ou uma empresa comercial?",
+    typeA:
+      "O {name} está listado como: {type}. As empresas comerciais que se apresentam como fábricas são um dos riscos de aprovisionamento mais comuns, por isso confirme a unidade de produção antes de pagar um sinal.",
+    certsQ: "Que certificações tem o {name}?",
+    certsReportedA:
+      "A fábrica declara os seguintes certificados: {list}. Foram fornecidos pelo fornecedor e não foram analisados nem verificados pela FactoryAuditB2B.",
+    certsVerifiedA:
+      "A FactoryAuditB2B analisou os registos de certificação de {name}: {list}. Neste perfil só são apresentados os registos que passaram na verificação.",
+    certsNoneA: "Não existe nenhuma certificação registada para {name}. Ou não foi fornecida nenhuma, ou nenhuma foi verificada.",
+    checkQ: "Como deve um comprador verificar o {name} antes de encomendar?",
+    checkA:
+      "Confirme a entidade legal e os dados de registo, compare a unidade de produção com o endereço que lhe foi indicado e solicite registos recentes de qualidade e auditoria. A FactoryAuditB2B pode realizar estas verificações antes de pagar um sinal.",
+  },
+};
+
+const AR: SupplierSeoCopy = {
+  snapshotTitle: "لمحة عن المشتري",
+  scoreLabel: "درجة ملف المورّد",
+  scoreDisclaimer:
+    "تعكس هذه الدرجة المعلومات ومؤشرات البيانات المتاحة عن المورّد، وهي ليست تقييماً مستقلاً لمخاطر المورّد.",
+  scoreMethodologyLabel: "منهجية الدرجة",
+  scoreMethodologyValue:
+    "تُسجَّل الدرجة في ملف المورّد. وهي ليست تقييماً مستقلاً للمخاطر ولا بديلاً عن التحقق أو التدقيق الميداني.",
+  scoreBreakdownAbsent:
+    "لا يوجد تفصيل حسب الأبعاد مسجَّل لهذا المورّد، لذلك لا يمكن إسناد الدرجة إلى عوامل خطر محددة.",
+  scoreBreakdownPresent: "يوجد تفصيل حسب الأبعاد مسجَّل لهذا المورّد ومتاح للأعضاء.",
+  dataCoverageLabel: "تغطية البيانات",
+  dataCoverageValue: "تم تعبئة {filled} من أصل {total} من سمات الملف",
+  dataCoverageNone: "لم تُعبَّأ أي من سمات الملف بعد.",
+  lastUpdatedLabel: "آخر تحديث",
+  scopeLabel: "نطاق التحقق",
+  scopeNone: "لا يوجد أي حدث تحقق مسجَّل لهذا المورّد.",
+  unknownVerified: "معلومة غير مُتحقَّق منها بشكل مستقل.",
+  unknownUnavailable: "غير متاحة في ملف المورّد الحالي.",
+  titleVerified: "{name} | {level} في {city}، {country}",
+  titleVerifiedShort: "{name} | {level}",
+  titleUnverified: "{name} | ملف مورّد في {city}، {country}",
+  titleFallback: "{name} | ملف مورّد",
+  descEvent: "{name} لديه حدث تحقق مسجَّل لدى FactoryAuditB2B.",
+  descDeclared: "{name} ملف مُصرَّح به من المورّد نفسه.",
+  descNotVerified: "غير مُتحقَّق منه بشكل مستقل من FactoryAuditB2B.",
+  descLevel: "مستوى التحقق: {level}.",
+  descLocatedWithType: "{type} مقرّه في {city}، {country}.",
+  descLocated: "مقرّه في {city}، {country}.",
+  descScore: "درجة ملف المورّد: {score} من 100.",
+  descProducts: "المنتجات المُدرجة: {products}.",
+  faq: {
+    verifiedQ: "هل تم التحقق من {name} بواسطة FactoryAuditB2B؟",
+    verifiedA:
+      "نعم. لدى FactoryAuditB2B حدث تحقق مسجَّل لـ {name}. مستوى التحقق هو {level}، والنطاق الذي فحصناه مُدرج في هذا الملف. لا يغطي التحقق البيانات المالية ولا أداء المنتج أثناء الاستخدام ولا المتعاقدين من الباطن غير المعلَنين.",
+    unverifiedQ: "هل تم التحقق من {name} بواسطة FactoryAuditB2B؟",
+    unverifiedA:
+      "ليس بعد. لا يوجد أي حدث تحقق مسجَّل لـ {name}. كل ما في هذا الملف هو معلومات مُصرَّح بها من المورّد أو بيانات متاحة للعموم، ولم يتم التحقق منها بشكل مستقل.",
+    productsQ: "ما الذي يصنعه {name}؟",
+    productsA:
+      "{name} يُدرج المنتجات التالية: {products}. هذه المعلومة مصدرها ملف المورّد ولم تُؤكَّد بشكل مستقل.",
+    locationQ: "أين يقع {name}؟",
+    locationA:
+      "{name} مُدرج في {city}، {country}. قد يختلف العنوان المسجَّل عن عنوان الإنتاج، لذا تأكّد من الموقع الذي سيُنفَّذ فيه طلبك.",
+    typeQ: "هل {name} مصنع أم شركة تجارية؟",
+    typeA:
+      "{name} مُدرج كـ: {type}. الشركات التجارية التي تقدّم نفسها كمصانع من أكثر مخاطر التوريد شيوعاً، لذا تأكّد من موقع الإنتاج قبل دفع العربون.",
+    certsQ: "ما الشهادات التي يحملها {name}؟",
+    certsReportedA:
+      "يُصرّح المصنع بحيازة الشهادات التالية: {list}. قدّمها المورّد ولم تخضع للمراجعة أو التحقق من FactoryAuditB2B.",
+    certsVerifiedA:
+      "راجعت FactoryAuditB2B سجلات شهادات {name}: {list}. لا يُعرض في هذا الملف سوى السجلات التي اجتازت التحقق.",
+    certsNoneA: "لا توجد أي شهادة مسجَّلة لـ {name}. إما لم يُقدَّم أي منها أو لم يتم التحقق من أي منها.",
+    checkQ: "كيف ينبغي للمشتري التحقق من {name} قبل الطلب؟",
+    checkA:
+      "تأكّد من الكيان القانوني وتفاصيل التسجيل، وطابق موقع الإنتاج مع العنوان الذي حصلت عليه، واطلب سجلات الجودة والتدقيق الحديثة. يمكن لـ FactoryAuditB2B إجراء هذه الفحوصات قبل أن تدفع العربون.",
+  },
+};
+
 /**
  * 解析某个 locale 的 SEO 文案。
- * en → EN；zh → ZH；zh-TW → ZH 就地繁化；其余语言 → EN（见文件头「文案策略」）。
+ * en → EN；zh → ZH；zh-TW → ZH 就地繁化；ja/es/de/fr/pt/ar → 各自的本地化文案包。
+ * 九种站点语言**全部手写**，因此不再有「其余语言回退英文」的缺口。
  *
  * ⚠️ 传入的应当是**站点 locale**（"zh"），不是 htmlLang（"zh-CN"）。
  *    两者混用会让中文页面静默回退英文 —— 这是最容易踩的一个坑。
@@ -457,6 +813,12 @@ const ZH: SupplierSeoCopy = {
 export function resolveSupplierSeoCopy(locale: string): SupplierSeoCopy {
   if (locale === "zh") return ZH;
   if (locale === "zh-TW") return twSupplierSeoCopy(ZH);
+  if (locale === "ja") return JA;
+  if (locale === "es") return ES;
+  if (locale === "de") return DE;
+  if (locale === "fr") return FR;
+  if (locale === "pt") return PT;
+  if (locale === "ar") return AR;
   return EN;
 }
 
@@ -609,7 +971,7 @@ export function generateSupplierTitle(
   opts: GenerateOpts = {}
 ): string {
   const copy = opts.copy ?? resolveSupplierSeoCopy(locale);
-  const name = (data.legalName ?? "").trim();
+  const name = supplierDisplayName(locale, data);
   if (!name) return "";
   const city = (data.city ?? "").trim();
   const country = (data.countryName ?? "").trim();
@@ -644,7 +1006,7 @@ export function generateSupplierDescription(
   opts: GenerateOpts = {}
 ): string {
   const copy = opts.copy ?? resolveSupplierSeoCopy(locale);
-  const name = (data.legalName ?? "").trim();
+  const name = supplierDisplayName(locale, data);
   if (!name) return "";
   const city = (data.city ?? "").trim();
   const country = (data.countryName ?? "").trim();
@@ -985,7 +1347,7 @@ export function generateSupplierFaq(
   opts: GenerateOpts = {}
 ): FaqItem[] {
   const copy = opts.copy ?? resolveSupplierSeoCopy(locale);
-  const name = (data.legalName ?? "").trim();
+  const name = supplierDisplayName(locale, data);
   if (!name) return [];
   const f = copy.faq;
   const items: FaqItem[] = [];
@@ -1139,7 +1501,7 @@ export function generateSupplierSchema(
 
   const org: Record<string, unknown> = {
     "@type": "Organization",
-    name: data.legalName,
+    name: supplierDisplayName(ctx.locale, data),
     url: ctx.profileUrl,
     ...(data.city?.trim() || data.countryName?.trim()
       ? {
@@ -1187,7 +1549,7 @@ export function generateSupplierSchema(
     url: ctx.profileUrl,
     inLanguage: ctx.htmlLang,
     isPartOf: { "@id": ctx.publisherId },
-    about: { "@type": "Organization", name: data.legalName, url: ctx.profileUrl },
+    about: { "@type": "Organization", name: supplierDisplayName(ctx.locale, data), url: ctx.profileUrl },
     ...(faq.length > 0 ? { mainEntity: { "@id": `${ctx.profileUrl}#faq` } } : {}),
   });
 
@@ -1196,7 +1558,7 @@ export function generateSupplierSchema(
     itemListElement: [
       { "@type": "ListItem", position: 1, name: ctx.breadcrumbHome, item: ctx.homeUrl },
       { "@type": "ListItem", position: 2, name: ctx.breadcrumbDirectory, item: ctx.directoryUrl },
-      { "@type": "ListItem", position: 3, name: data.legalName, item: ctx.profileUrl },
+      { "@type": "ListItem", position: 3, name: supplierDisplayName(ctx.locale, data), item: ctx.profileUrl },
     ],
   });
 

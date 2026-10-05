@@ -1490,7 +1490,8 @@
     "assessmentReportNotPublished": "This report is not published yet. There is nothing to download.",
     "assessmentReportDownload": "Download report",
     "assessmentReportUnavailable": "Unavailable",
-    "assessmentReportNote": "Paid downloads are launching soon. For now a report link opens a custom-service enquiry. Prices follow our published price list."
+    "assessmentReportNote": "Paid downloads are launching soon. For now a report link opens a custom-service enquiry. Prices follow our published price list.",
+    "regLegalName": "Registered name"
   },
   "methodology": {
     "badge": "Methodology",
@@ -3864,7 +3865,9 @@
     "viewSuppliers": "View Suppliers →",
     "suppliersTitle": "Suppliers in this Industrial Cluster",
     "suppliersEmpty": "No published suppliers are listed in this industrial cluster yet.",
-    "detailMetaDesc": "Suppliers, region and industry overview for the {cluster} industrial cluster."
+    "detailMetaDesc": "Suppliers, region and industry overview for the {cluster} industrial cluster.",
+    "provinceLabel": "Province",
+    "cityLabel": "City"
   },
   "verifySupplier": {
     "badge": "Supplier verification",
@@ -4194,5 +4197,39 @@
     "docsLead": "These are the templates we use on every project. They are listed publicly so you can ask for a copy.",
     "reportTitle": "Reporting a concern",
     "reportBody": "If you believe an auditor, employee or partner has broken these rules, tell us. Reports reach our compliance mailbox, are handled confidentially, and are reviewed by someone with no role in the project concerned:"
+  },
+  "contact": {
+    "metaTitle": "Contact FactoryAuditB2B — Supplier Verification & Factory Audit",
+    "metaDesc": "Tell us what you are sourcing, or which supplier you want checked. We reply within one business day.",
+    "eyebrow": "Contact",
+    "title": "Talk to us about your suppliers",
+    "lead": "Send us what you are sourcing, or the factory you want checked. We will tell you what we can verify, what we cannot, and what it takes to find out.",
+    "directTitle": "Or reach us directly",
+    "emailLabel": "Email",
+    "responseNote": "We reply within one business day. We do not sell or share your details.",
+    "altTitle": "Other ways to start",
+    "rfqTitle": "Submit an RFQ",
+    "rfqBody": "Have a specific product? Send the details and we will route it to suppliers worth checking.",
+    "supplierTitle": "Join the supplier network",
+    "supplierBody": "Are you a factory? Get listed and open yourself up to buyer-requested audits and inspections.",
+    "form": {
+      "name": "Your name",
+      "namePlaceholder": "Jane Doe",
+      "email": "Work email",
+      "emailPlaceholder": "jane@company.com",
+      "company": "Company",
+      "companyPlaceholder": "Company name",
+      "country": "Country / market",
+      "countryPlaceholder": "e.g. Germany",
+      "message": "What do you need?",
+      "messagePlaceholder": "Tell us what you are sourcing, or which supplier you would like us to check.",
+      "submit": "Send message",
+      "sending": "Sending…",
+      "successTitle": "Message received",
+      "successBody": "Thank you. Our team will reply within one business day.",
+      "errorTitle": "Could not send",
+      "errorBody": "Please try again, or email us directly.",
+      "required": "Please enter a valid email address."
+    }
   }
 }
