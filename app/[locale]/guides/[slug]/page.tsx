@@ -8,6 +8,7 @@ import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { pickZhCopy, pickZhPair } from "@/lib/tw";
 import { pickGuideDesc } from "@/lib/pickGuideDesc";
+import { serviceKeyByHref } from "@/lib/nav";
 
 const BASE = "https://factoryauditb2b.com";
 type Params = { locale: string; slug: string };
@@ -232,15 +233,26 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
         <div className="card p-6">
           <h2 className="font-bold text-[#171717]">{t.servicesIndex.badge}</h2>
           <ul className="mt-3 space-y-2">
-            {g.services.map((x) => (
-              <li key={x.href}>
-                <Link href={p(x.href)} className="text-[#171717] hover:underline">
-                  {x.href.includes("factory-audit")
-                    ? t.servicesIndex.items.factoryAudit.title
-                    : t.servicesIndex.items.verification.title}
-                </Link>
-              </li>
-            ))}
+            {g.services.map((x) => {
+              // 🔴 按 href 反查 SERVICE_MENU 的 key，取该服务自己的本地化标题。
+              //    不得再用 href.includes("factory-audit") 二选一（2026-10-07 修）：
+              //    那样只会用两种标题覆盖所有服务，把 /services/inspection（检验）
+              //    错标成「供应商验证 / Supplier Verification」，内链锚文本错误，
+              //    9 个语种全线受影响（en/zh/es/de/fr/pt/ja/zh-TW/ar）。
+              const sKey = serviceKeyByHref(x.href);
+              const sLabel = sKey
+                ? t.nav.menu[sKey]
+                : x.href.includes("factory-audit")
+                  ? t.servicesIndex.items.factoryAudit.title
+                  : t.servicesIndex.items.verification.title;
+              return (
+                <li key={x.href}>
+                  <Link href={p(x.href)} className="text-[#171717] hover:underline">
+                    {sLabel}
+                  </Link>
+                </li>
+              );
+            })}
             <li>
               <Link href={p("/factory-audit/request")} className="text-[#171717] hover:underline">
                 {t.servicesIndex.items.factoryAudit.title}
