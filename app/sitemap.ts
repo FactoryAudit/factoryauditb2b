@@ -152,7 +152,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const { changeFrequency, priority } = seoFor(path);
     return LOCALES.map((l) => ({
       url: `${BASE}${localePath(l, path)}`,
-      lastModified: lastModified ?? new Date(),
+      // 缺失即不输出，绝不回落到 new Date()。
+      // 旧写法 `?? new Date()` 让每次构建都把全站 1611 / 1971 条 URL 的 lastmod 刷成同一秒。
+      // Google 判定该字段不可信后会整体忽略，连带把 supplier 页真实的 updated_at 一起淹没。
+      // 静态页内容长期稳定，给不出真实值就不给 —— 缺失是合法的，Google 明确接受。
+      ...(lastModified ? { lastModified } : {}),
       changeFrequency,
       priority,
       alternates: { languages: hreflangFor(path) },

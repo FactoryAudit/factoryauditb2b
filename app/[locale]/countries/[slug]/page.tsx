@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
 import { COVERAGE_COUNTRIES, COVERAGE_SERVICES, findCoverageCountry } from "@/lib/coverage";
+import { getSeoMatrix } from "@/lib/taxonomy";
 import { SERVICE_MENU } from "@/lib/nav";
 import { countryDisplayName } from "@/lib/countryNames";
 import { listSuppliersByCountry } from "@/lib/queries";
@@ -62,6 +63,9 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
   const name = pickZhPair(locale, country.name, country.nameZh);
   const copy = pickZhCopy(locale, country);
 
+  // 与 /audit-guide/[country]/[auditType] 的 generateStaticParams 同源，
+  // 保证下方 chip 链接指向真实存在的页面，绝不产生死链。
+  const { auditTypes } = await getSeoMatrix();
   const suppliers = (await listSuppliersByCountry(country.code)).slice(0, 12);
 
   const jsonLd = [
@@ -203,6 +207,24 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
               <li key={x}>· {x}</li>
             ))}
           </ul>
+
+          {/* 该国审核指南入口。
+              此前 /audit-guide/{country}/{code} 只有 china 全量 + vietnam/SMETA 被 /industry 页链到，
+              马来西亚 / 菲律宾 / 泰国 / 越南 共 27 个页面零入链（孤岛），Google 只能靠 sitemap 发现，
+              抓取优先级垫底 —— 直接对应 Search Console「已发现 - 尚未编入索引」。
+              这里复用 getSeoMatrix().auditTypes，与页面 generateStaticParams 及 sitemap 同源，
+              保证每个链接都指向真实存在的页面，不产生死链。 */}
+          <div className="mt-4 flex flex-wrap gap-2">
+            {auditTypes.map((a) => (
+              <Link
+                key={a.code}
+                href={p(`/audit-guide/${country.code}/${a.code}`)}
+                className="rounded-full bg-gray-100 px-3 py-1 text-sm text-[#171717] hover:bg-gray-200"
+              >
+                {a.nameEn}
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
