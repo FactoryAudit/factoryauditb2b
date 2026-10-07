@@ -47,7 +47,7 @@ type Props = {
 //   `scripts/s18-directory-static-regression.ts` 断言，不是口头约定。
 //   ⚠️ 50 家（内联体积）与 60 家（卡片渲染量 → 需分页/Load More，见下方原注释）
 //      是两条**独立**的阈值，互不替代。
-export const revalidate = 3600;
+// 🔴 不得声明 revalidate（2026-10-07 实测钉死）：OpenNext 的 cache interception 会**绕开**声明了 revalidate 的路由，改交给 Worker 运行时 SSR ⇒ prerender-manifest 里 initialRevalidateSeconds=3600 ⇒ 每请求现场渲染 ⇒ 撞 Workers 128MB 内存上限 ⇒ `error code: 1102` / HTTP 503 ⇒ Google 抓取失败、crawl budget 崩。只读 staticAssetsIncrementalCache 下 revalidate 本就永不生效（set() 是 no-op），删掉零功能损失；要真 ISR 请改 r2IncrementalCache（见 open-next.config.ts 注释）。
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: raw } = await params;

@@ -252,4 +252,4 @@ function ClusterCard({
 //
 // ⚠️ 仍然禁止：给本页加 Cache Rule 边缘缓存（那会按边缘 TTL 提供过期产物，
 //    与本页「构建期快照」形成两层互相不可见的缓存）。
-export const revalidate = 3600;
+// 🔴 不得声明 revalidate（2026-10-07 实测钉死）：OpenNext 的 cache interception 会**绕开**声明了 revalidate 的路由，改交给 Worker 运行时 SSR ⇒ prerender-manifest 里 initialRevalidateSeconds=3600 ⇒ 每请求现场渲染 ⇒ 撞 Workers 128MB 内存上限 ⇒ `error code: 1102` / HTTP 503 ⇒ Google 抓取失败、crawl budget 崩。只读 staticAssetsIncrementalCache 下 revalidate 本就永不生效（set() 是 no-op），删掉零功能损失；要真 ISR 请改 r2IncrementalCache（见 open-next.config.ts 注释）。
