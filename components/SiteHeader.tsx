@@ -56,13 +56,19 @@ export default function SiteHeader({
   // 移动端导航：hamburger 开关 + 外部点击/Esc 关闭。
   const [mobileOpen, setMobileOpen] = useState(false);
   const mobileRef = useRef<HTMLDivElement>(null);
+  // 🔴 抽屉必须单独记一份 ref：抽屉是顶栏那一行的**兄弟节点**，不在 mobileRef 里。
+  //   改前只判 mobileRef.contains ⇒ 点抽屉内任何元素都被当成「点击外部」⇒ 抽屉立刻关闭。
+  //   后果（实测）：抽屉里的语言切换器一 mousedown 就把抽屉关掉，整个语言切换在移动端失效
+  //   —— 用原生 select 时表现为系统选择器刚弹出就被卸载；改用自绘面板后更是完全点不开。
+  const drawerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (!mobileOpen) return;
     const onDocClick = (e: MouseEvent) => {
-      if (mobileRef.current && !mobileRef.current.contains(e.target as Node)) {
-        setMobileOpen(false);
-      }
+      const t = e.target as Node;
+      if (mobileRef.current?.contains(t)) return;
+      if (drawerRef.current?.contains(t)) return;
+      setMobileOpen(false);
     };
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setMobileOpen(false);
@@ -276,6 +282,7 @@ export default function SiteHeader({
       {mobileOpen && (
         <nav
           id="mobile-nav"
+          ref={drawerRef}
           aria-label={dict.mainNav}
           className="xl:hidden max-h-[calc(100dvh-74px)] overflow-y-auto overscroll-contain border-t border-[#ddd9d0] bg-[#fbfaf7]"
         >
@@ -353,9 +360,12 @@ export default function SiteHeader({
                 否则抽屉里会出现两条指向 /trust 的重复项。 */}
 
             {/* 窄屏专属：语言切换 + 账号入口。桌面端它们在顶栏，1280 以下顶栏放不下，
-                收进抽屉（p1 设计稿把 Sign in 放进移动菜单，同一个思路）。 */}
-            <div className="flex items-center gap-3 border-t border-[#f5f3ee] pt-3 pb-1">
-              <LocaleSwitcher current={locale} languageLabel={dict.language} />
+                收进抽屉（p1 设计稿把 Sign in 放进移动菜单，同一个思路）。
+                2026-10-08（顶栏控件统一）：改为纵向 —— 语言切换器在抽屉里用 inline 就地展开
+                语言列表，该列表要占满抽屉整宽；横排会被挤成一条窄列。
+                items-start 是必需的：flex-col 默认 stretch，会把 WhatsApp 胶囊拉成整行。 */}
+            <div className="flex flex-col items-start gap-2 border-t border-[#f5f3ee] pt-3 pb-1">
+              <LocaleSwitcher current={locale} languageLabel={dict.language} variant="inline" />
               <AccountMenu locale={locale} dict={accountDict} whatsappLabel={whatsappLabel} />
             </div>
 

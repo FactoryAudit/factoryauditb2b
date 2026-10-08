@@ -93,6 +93,12 @@ export default function AccountMenu({
       "Hi FactoryAuditB2B, I would like to ask about supplier verification."
     );
     if (!url) return null;
+    // 2026-10-08 改版（顶栏控件统一 · 方案 A）：32×32 实心绿圆 → 40px 描边胶囊。
+    // 改版原因：满饱和 #25D366 实心圆是顶栏里面积与饱和度都最高的元素，
+    //   视觉权重压过了橙色 RFQ 主 CTA；且它 32px、圆角 999px，与站点控件体系
+    //   （40px / 圆角 9px / 描边 #ddd9d0）不同源。改后绿色只保留在 17px 字形上，
+    //   容器回到描边体系 —— 「橙色接管行动层，其他颜色退到语义层」。
+    // 文案用字典 t.common.whatsappChat（9 语齐全）；未配置时整块返回 null（不在上一步）。
     return (
       <Link
         href={url}
@@ -100,18 +106,26 @@ export default function AccountMenu({
         rel="noopener noreferrer"
         aria-label={whatsappLabel ?? "WhatsApp"}
         title={whatsappLabel ?? "WhatsApp"}
-        className="inline-flex items-center justify-center w-8 h-8 shrink-0 rounded-full bg-[#25D366] hover:opacity-90 transition-opacity"
+        className="inline-flex h-10 shrink-0 items-center gap-2 whitespace-nowrap rounded-[9px] border border-[#ddd9d0] bg-white ps-2.5 pe-3 text-[13px] font-semibold text-[#171717] transition-colors hover:border-[#171717] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e07a49]"
       >
         <svg
           aria-hidden="true"
           viewBox="0 0 24 24"
-          width={18}
-          height={18}
-          fill="#ffffff"
+          width={17}
+          height={17}
+          fill="#25D366"
           focusable="false"
         >
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884a9.82 9.82 0 016.988 2.896 9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
         </svg>
+        {/* 可见文案固定为品牌名 "WhatsApp"，另有两点原因，不是偷懒：
+            1) WhatsApp 是专有名词，9 份字典里本来就是同一个字符串（已核：9/9 均为 "WhatsApp"）；
+            2) 字典里的 t.common.whatsappChat 是**句子式**文案（德语 "Per WhatsApp schreiben"
+               23 字符），实测会把 1280px 顶栏顶出容器 **20px** —— 站点既有先例是遇到德语过长
+               就改结构而不是压字号（见本文件上方 About 收进 More 的注释）。
+            改回句子式文案需要先把顶栏预算腾出来，故此处保留品牌名。
+            完整语义文案仍通过 aria-label / title 提供给读屏与悬停提示。 */}
+        <span>WhatsApp</span>
       </Link>
     );
   }
@@ -126,24 +140,36 @@ export default function AccountMenu({
 
   return (
     <div className="relative" ref={wrapRef}>
+      {/* 2026-10-08：与同排的 WhatsApp 胶囊 / 语言胶囊统一成 40px 描边控件
+          （原为裸文字按钮，高度约 24px，在 40px 控件之间会显得高低不齐）。 */}
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="menu"
         aria-expanded={open}
         aria-label={dict.menuLabel}
-        className="flex items-center gap-1.5 text-sm font-medium text-[#171717] hover:text-[#171717] whitespace-nowrap"
+        className="inline-flex h-10 items-center gap-2 whitespace-nowrap rounded-[9px] border border-[#ddd9d0] bg-white ps-1.5 pe-2 text-[13px] font-semibold text-[#171717] transition-colors hover:border-[#171717] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e07a49]"
       >
         <span
           aria-hidden="true"
-          className="w-6 h-6 rounded-full bg-[#f5f3ee] text-[#171717] text-xs flex items-center justify-center font-bold"
+          className="flex h-6 w-6 items-center justify-center rounded-full bg-[#f5f3ee] text-xs font-bold text-[#171717]"
         >
           {shortName.slice(0, 1).toUpperCase()}
         </span>
         <span className="max-w-[120px] truncate">{shortName}</span>
-        <span aria-hidden="true" className="text-[10px] leading-none">
-          ▼
-        </span>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          width={13}
+          height={13}
+          fill="none"
+          stroke="#6d6b66"
+          strokeWidth={2.4}
+          strokeLinecap="round"
+          focusable="false"
+        >
+          <path d="M6 9l6 6 6-6" />
+        </svg>
       </button>
 
       {open && (
