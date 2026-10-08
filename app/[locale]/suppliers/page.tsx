@@ -81,7 +81,7 @@ export default async function SuppliersPage({ params }: Props) {
 
   // Live Buyer Requests（公开 RFQ，构建期冻结，与目录同源）—— 从首页移到此页顶部，
   // 作为「决策辅助」（社交证明），不再占用首页 section。
-  const buyerRequests = await listPublicRfqs(3);
+  const buyerRequests = await listPublicRfqs(6);
 
   // ── 阶段 1（2026-09-30）：登录墙 ──────────────────────────────────────────
   // 派生值仍在服务端算好（唯一构造点 = lib/directoryItems.ts，与授权接口共用），
@@ -279,6 +279,18 @@ export default async function SuppliersPage({ params }: Props) {
                   {r.quantity ? `${t.home.liveQuantity}: ${r.quantity}` : ""}
                   {r.targetMarket ? ` · ${t.home.liveMarket}: ${r.targetMarket}` : ""}
                 </div>
+                {r.sourceName && (
+                  <div className="text-xs text-[#6d6b66] mt-1">
+                    {t.home.liveSource}:{" "}
+                    {r.sourceUrl ? (
+                      <a href={r.sourceUrl} target="_blank" rel="noopener noreferrer nofollow" className="text-[#e07a49] hover:underline">
+                        {r.sourceName} ↗
+                      </a>
+                    ) : (
+                      r.sourceName
+                    )}
+                  </div>
+                )}
                 <Link
                   href={p(`/rfq?request=${encodeURIComponent(r.referenceId)}`)}
                   className="text-xs text-[#e07a49] font-medium hover:underline mt-2"

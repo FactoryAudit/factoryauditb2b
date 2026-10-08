@@ -646,6 +646,10 @@ export type PublicRfq = {
   certificationsReq: string[] | null;
   /** STEP 10-B：关联产业带 slug（仅当该 RFQ 从集群入口提交时非空；隐私安全，不含任何私密字段） */
   clusterSlug?: string | null;
+  /** STEP-LEAD-01：平台从公开采购渠道（UNGM / SAM.gov 等）整理发布时标注的来源机构名。买家自行提交的 RFQ 为 null —— 不伪造来源。 */
+  sourceName?: string | null;
+  /** STEP-LEAD-01：原公告 URL，供访客核对原文。买家自行提交的 RFQ 为 null。 */
+  sourceUrl?: string | null;
   createdAt: string;
 };
 
@@ -671,7 +675,7 @@ export async function listPublicRfqs(
     let q = db
       .from("rfqs")
       .select(
-        "reference_id, product, quantity, target_market, industry_code, certifications_req, industrial_cluster_slug, created_at"
+        "reference_id, product, quantity, target_market, industry_code, certifications_req, industrial_cluster_slug, source_name, source_url, created_at"
       )
       .eq("is_public", true)
       .neq("status", "closed")
@@ -698,6 +702,8 @@ export async function listPublicRfqs(
         : null,
       clusterSlug:
         typeof r.industrial_cluster_slug === "string" ? r.industrial_cluster_slug : null,
+      sourceName: typeof r.source_name === "string" ? r.source_name : null,
+      sourceUrl: typeof r.source_url === "string" ? r.source_url : null,
       createdAt: String(r.created_at ?? ""),
     }));
   } catch (e) {
