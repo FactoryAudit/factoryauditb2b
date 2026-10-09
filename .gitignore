@@ -119,6 +119,9 @@ pushout.txt
 gitstate.txt
 .git-msg-*
 .sitemap-new.txt
+# scripts/ 下两个「上次提交过的 sitemap」状态文件：每次运行都会变，属本机状态、不入库。
+# （此前它们已被误提交 ⇒ 那条 .sitemap-new.txt 规则对它失效，需先 untrack 才生效。）
+/scripts/.sitemap-cache.txt
 .url-submit-log.txt
 tmp/
 

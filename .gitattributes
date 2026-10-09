@@ -1,0 +1,15 @@
+# .gitattributes —— 只做一件事：保证 bash 脚本始终是 LF
+#
+# 背景：本机 core.autocrlf=true，会把检出后的工作副本统一转成 CRLF。
+# 对 .ts/.tsx/.mjs 这正是我们要的（全仓 CRLF 约定），但对 **bash 脚本是致命的**：
+# shebang `#!/usr/bin/env bash` 尾部一旦带上 \r，执行时会直接报
+#   bash: ./scripts/release.sh: /usr/bin/env: bad interpreter: No such file or directory
+# —— 而 release.sh 是本项目唯一的发布入口，它一坏，整条发布链就废了。
+#
+# 现状核实（2026-10-10）：仓库里只有 3 个 .sh（deploy/pack.sh、scripts/release.sh、
+# scripts/smoke-routes.sh），且三者在 git blob 里都已是 LF（CRLF 计数为 0）
+# ⇒ 加这条规则**不产生任何重规范化 diff**，只是把「工作副本也保持 LF」固定下来。
+#
+# 刻意只加这一条：本仓库大量文件依赖 autocrlf 的 CRLF 行为，
+# 贸然写 `* text=auto` 之类会触发全仓重规范化，制造巨大且无意义的 diff。
+*.sh text eol=lf

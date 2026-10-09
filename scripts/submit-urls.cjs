@@ -5,7 +5,7 @@
  *
  *   Bing IndexNow API          -> https://api.indexnow.org/indexnow  (works for Bing + Yandex)
  *   Google Indexing API        -> https://indexing.googleapis.com/v3/urlNotifications:publish
- *   Google sitemap ping        -> https://www.google.com/ping?sitemap=...
+ *   Google sitemap ping        -> (Google 已于 2023-06 废弃该端点，本脚本不再请求)
  *
  * Usage:
  *   node submit-urls.cjs --url https://factoryauditb2b.com/services/inspection
@@ -165,15 +165,21 @@ async function submitGoogleIndexing(urls, token, dryRun) {
 }
 
 // ----------------------------------------------------------------------------
-// Google sitemap ping (official general-submission path)
+// Google sitemap ping —— 端点已被 Google 废弃，这里改为显式空操作
 // ----------------------------------------------------------------------------
-async function pingGscSitemap(dryRun) {
-  const u = `https://www.google.com/ping?sitemap=${encodeURIComponent(BASE + '/sitemap.xml')}`;
-  if (dryRun) { console.log('  [DRY] GSC sitemap ping: ' + u); return; }
-  try {
-    const res = await fetch(u);
-    console.log(`  ${res.ok ? '✓' : '✗'} GSC sitemap ping -> ${res.status}`);
-  } catch (e) { console.error(`  ✗ GSC sitemap ping -> ${e.message}`); }
+// 2026-10-10 实测复核：Google 于 2023 年 6 月停用 `https://www.google.com/ping?sitemap=`，
+// 实测返回 **404**。继续照原样调用，只会让每次发布都打印一个 ✗ 404，
+// 把真实故障淹没在噪声里（运维上比不打印更糟）。
+//
+// 现在通知 Google 的正确做法（都不需要这个端点）：
+//   · 在 Search Console 里提交一次 sitemap，之后 Google 会自行按 sitemap 重抓；
+//   · 或改用 GSC 的 Sitemaps API（需 OAuth 服务账号，属可选配置）。
+// 因此保留本函数为**空操作**，只打印一行事实说明。
+async function pingGscSitemap() {
+  console.log(
+    '  · Google sitemap ping: 端点已于 2023-06 废弃（实测 404），已跳过 —— ' +
+      '请在 Search Console 中提交 sitemap。'
+  );
 }
 
 // ----------------------------------------------------------------------------
@@ -201,10 +207,13 @@ async function main() {
     const token = await googleToken(sa, args.dryRun);
     await submitGoogleIndexing(urls, token, args.dryRun);
   } else if (!args.dryRun) {
-    console.log('  · Google Indexing API: GOOGLE_SERVICE_ACCOUNT_JSON not set — skipped (rely on sitemap ping)');
+    console.log(
+      '  · Google Indexing API: 未配置服务账号，已跳过（Google 官方限定该 API 仅用于招聘/直播类页面，' +
+        '一般站点无需配置）。'
+    );
   }
 
-  await pingGscSitemap(args.dryRun);
+  await pingGscSitemap();
   console.log('== done ==\n');
 }
 main().catch((e) => { console.error(e); process.exit(1); });

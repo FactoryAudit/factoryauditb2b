@@ -96,5 +96,12 @@ else
   exit 1
 fi
 echo ""
+echo "=== 第 9 步：通知搜索引擎（IndexNow，非致命）==="
+# 为什么排在第 8 步之后：只把**已通过落地对拍**的 URL 通知给 Bing，避免推没上线的页面。
+# 为什么非致命（末尾 `|| echo` 兜底）：收录通知是尽力而为，失败不该阻断一次已经成功且已验证的发布。
+# 原理：sitemap-diff 对比本地缓存算出**新增** URL，再把增量推给 IndexNow。
+# IndexNow 覆盖 Bing + Yandex；Bing 索引又是 ChatGPT 搜索的来源之一，故对 AI 检索亦有价值。
+node scripts/post-publish-submit.cjs || echo "⚠️ IndexNow 提交失败（非致命，发布仍然有效）"
+echo ""
 echo "✅ 发布完成（已含落地对拍 LIVE_MD5_OK）"
 echo "   日志：$LOG"
