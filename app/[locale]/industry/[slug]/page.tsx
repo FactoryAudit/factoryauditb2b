@@ -13,6 +13,7 @@ import { supplierDisplayName } from "@/lib/supplierDisplayName";
 import JsonLd from "@/components/JsonLd";
 import WhatsAppLink from "@/components/WhatsAppLink";
 import RfqForm from "@/components/RfqForm";
+import RelatedGuides from "@/components/RelatedGuides";
 
 const BASE = "https://factoryauditb2b.com";
 
@@ -254,6 +255,7 @@ export default async function IndustryPage({ params }: { params: Promise<Params>
           />
         </div>
       </section>
+      <RelatedGuides locale={locale} hub={`industry:${slug}`} />
     </main>
   );
 }

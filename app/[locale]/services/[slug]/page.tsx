@@ -12,6 +12,7 @@ import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { twDeep, pickZhCopy, pickZhPair } from "@/lib/tw";
 import { trDeep } from "@/lib/contentI18n";
+import RelatedGuides from "@/components/RelatedGuides";
 
 const BASE = "https://factoryauditb2b.com";
 type Params = { locale: string; slug: string };
@@ -295,6 +296,7 @@ export default async function CountryServicePage({ params }: { params: Promise<P
           </Link>
         </div>
       </section>
+      <RelatedGuides locale={locale} hub={`service-country:${slug}`} />
     </main>
   );
 }

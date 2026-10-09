@@ -10,6 +10,7 @@ import { buildPageMetadata } from "@/lib/pageMeta";
 import { pickZhPair } from "@/lib/tw";
 import JsonLd from "@/components/JsonLd";
 import RfqForm from "@/components/RfqForm";
+import RelatedGuides from "@/components/RelatedGuides";
 
 const BASE = "https://factoryauditb2b.com";
 
@@ -195,6 +196,7 @@ export default async function IndustryTopicPage({ params }: { params: Promise<Pa
           />
         </div>
       </section>
+      <RelatedGuides locale={locale} hub={`industry:${slug}`} />
     </main>
   );
 }

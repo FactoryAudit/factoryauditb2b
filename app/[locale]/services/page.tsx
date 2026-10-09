@@ -6,6 +6,7 @@ import { SERVICE_EVENT_BY_KEY } from "@/lib/analytics";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import RelatedGuides from "@/components/RelatedGuides";
 
 const PATH = "/services";
 const BASE = "https://factoryauditb2b.com";
@@ -181,6 +182,7 @@ export default async function ServicesPage({ params }: Props) {
           </div>
         </div>
       </section>
+      <RelatedGuides locale={locale} hub="services-hub" />
     </main>
   );
 }

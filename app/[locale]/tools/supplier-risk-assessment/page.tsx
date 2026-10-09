@@ -4,6 +4,7 @@ import type { RiskAssessmentUi } from "@/lib/toolUiTypes";
 import { isLocale, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import RelatedGuides from "@/components/RelatedGuides";
 
 const PATH = "/tools/supplier-risk-assessment";
 type Props = { params: Promise<{ locale: string }> };
@@ -38,6 +39,7 @@ export default async function Page({ params }: Props) {
       <p className="text-[#6d6b66] mt-2 mb-6 max-w-3xl">{ui.lead}</p>
       <SupplierRiskAssessmentTool ui={ui as unknown as RiskAssessmentUi} />
       <p className="text-xs text-[#8c8982] mt-10 max-w-3xl text-center">{t.common.disclaimer}</p>
+      <RelatedGuides locale={locale} hub="tool:supplier-risk-assessment" />
     </main>
   );
 }

@@ -8,6 +8,7 @@ import { getDictionary } from "@/i18n/getDictionary";
 import { canonicalFor } from "@/i18n/hreflang";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { TOTAL_QUESTIONS, type RiskContent } from "@/lib/riskEngine";
+import RelatedGuides from "@/components/RelatedGuides";
 
 const PATH = "/tools/supplier-risk-calculator";
 type Props = { params: Promise<{ locale: string }> };
@@ -132,6 +133,7 @@ export default async function Page({ params }: Props) {
       <p className="text-xs text-[#8c8982] mt-12 max-w-3xl mx-auto text-center">
         {t.common.disclaimer}
       </p>
+      <RelatedGuides locale={locale} hub="tool:supplier-risk-calculator" />
     </main>
   );
 }

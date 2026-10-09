@@ -5,6 +5,7 @@ import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config
 import { getDictionary } from "@/i18n/getDictionary";
 import { canonicalFor } from "@/i18n/hreflang";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import RelatedGuides from "@/components/RelatedGuides";
 
 const PATH = "/services/supplier-verification";
 type Props = { params: Promise<{ locale: string }> };
@@ -153,6 +154,7 @@ export default async function Page({ params }: Props) {
           </Link>
         </div>
       </section>
+      <RelatedGuides locale={locale} hub="service:verification" />
     </main>
   );
 }

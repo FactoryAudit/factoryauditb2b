@@ -96,17 +96,30 @@ export default async function GuidesIndex({ params }: Props) {
         })}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-10">
-        {GUIDES.map((g) => (
-          <Link key={g.slug} href={p(`/guides/${g.slug}`)} className="card p-6 hover:border-[#171717]">
-            <h2 className="text-xl font-bold text-[#171717]">{pickZhPair(locale, g.titleEn, g.titleZh)}</h2>
-            <p className="text-sm text-[#3f4650] mt-2">
-              {pickGuideDesc(locale, g)}
-            </p>
-            <div className="text-xs text-[#8c8982] mt-3">{g.updated}</div>
-          </Link>
-        ))}
-      </div>
+      {/* 按分类分组：分类为 H2、卡片标题为 H3。
+          此前 47 张卡片全是平铺 <h2>（实测 47×H2 / 0×H3），层级过平，
+          既不利于搜索引擎理解内容结构，也让「内容簇 → 单篇」的从属关系丢失。 */}
+      {cats.map((c) => {
+        const cm = GUIDE_CATEGORY_META[c];
+        return (
+          <section key={c} className="mt-10">
+            <h2 className="text-2xl font-bold text-[#171717]">
+              {pickZhPair(locale, cm.nameEn, cm.nameZh)}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-4">
+              {guidesByCategory(c).map((g) => (
+                <Link key={g.slug} href={p(`/guides/${g.slug}`)} className="card p-6 hover:border-[#171717]">
+                  <h3 className="text-xl font-bold text-[#171717]">{pickZhPair(locale, g.titleEn, g.titleZh)}</h3>
+                  <p className="text-sm text-[#3f4650] mt-2">
+                    {pickGuideDesc(locale, g)}
+                  </p>
+                  <div className="text-xs text-[#8c8982] mt-3">{g.updated}</div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        );
+      })}
     </main>
   );
 }

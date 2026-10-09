@@ -14,6 +14,7 @@ import { buildPageMetadata } from "@/lib/pageMeta";
 import { pickZhCopy, pickZhPair } from "@/lib/tw";
 import { trLookup } from "@/lib/contentI18n";
 import { supplierDisplayName } from "@/lib/supplierDisplayName";
+import RelatedGuides from "@/components/RelatedGuides";
 
 const BASE = "https://factoryauditb2b.com";
 type Params = { locale: string; slug: string };
@@ -341,6 +342,7 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
           </Link>
         </div>
       </section>
+      <RelatedGuides locale={locale} hub={`country:${slug}`} />
     </main>
   );
 }

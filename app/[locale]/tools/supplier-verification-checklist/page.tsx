@@ -10,6 +10,7 @@ import { canonicalFor } from "@/i18n/hreflang";
 // （实测 es 275 / fr 210 字符）、openGraph 无图、无 robots 兜底。
 // 收口到统一入口后与 /tools/supplier-risk-calculator 同源。
 import { buildPageMetadata } from "@/lib/pageMeta";
+import RelatedGuides from "@/components/RelatedGuides";
 
 const PATH = "/tools/supplier-verification-checklist";
 // 本工具属 RiskScore™ 产品线，品牌段保留产品名（与 /tools/supplier-risk-calculator 一致）。
@@ -124,6 +125,7 @@ export default async function Page({ params }: Props) {
       <p className="text-xs text-[#8c8982] mt-12 max-w-3xl mx-auto text-center">
         {t.common.disclaimer}
       </p>
+      <RelatedGuides locale={locale} hub="tool:supplier-verification-checklist" />
     </main>
   );
 }

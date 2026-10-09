@@ -4,6 +4,7 @@ import JsonLd from "@/components/JsonLd";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import RelatedGuides from "@/components/RelatedGuides";
 
 const PATH = "/services/supplier-improvement";
 const BASE = "https://factoryauditb2b.com";
@@ -120,6 +121,7 @@ export default async function SupplierImprovementPage({
           </Link>
         </div>
       </section>
+      <RelatedGuides locale={locale} hub="service:improvement" />
     </div>
   );
 }

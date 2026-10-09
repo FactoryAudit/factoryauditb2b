@@ -5,6 +5,7 @@ import { DIMENSION_STRUCTURE } from "@/lib/riskEngine";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import RelatedGuides from "@/components/RelatedGuides";
 
 const PATH = "/tools/compare";
 const BASE = "https://factoryauditb2b.com";
@@ -109,6 +110,7 @@ export default async function ComparePage({ params }: Props) {
           ))}
         </div>
       </section>
+      <RelatedGuides locale={locale} hub="tool:compare" />
     </main>
   );
 }

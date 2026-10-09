@@ -13,6 +13,7 @@ import { twText } from "@/lib/tw";
 import { countryDisplayName } from "@/lib/countryNames";
 import { supplierDisplayName } from "@/lib/supplierDisplayName";
 import { listIndexableAuditGuideCombos } from "@/lib/auditGuideIndexability";
+import RelatedGuides from "@/components/RelatedGuides";
 
 export const dynamic = "force-static";
 
@@ -209,6 +210,7 @@ export default async function AuditGuidePage({ params }: { params: Promise<Param
           </Link>
         </div>
       </section>
+      <RelatedGuides locale={locale} hub={`audit-type:${a.code}`} />
     </main>
   );
 }

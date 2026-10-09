@@ -5,6 +5,7 @@ import InspectionRequestForm from "@/components/InspectionRequestForm";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import RelatedGuides from "@/components/RelatedGuides";
 
 const PATH = "/services/inspection";
 const BASE = "https://factoryauditb2b.com";
@@ -195,6 +196,7 @@ export default async function InspectionPage({ params }: Props) {
           {t.servicesIndex.items.verification.title}
         </Link>
       </section>
+      <RelatedGuides locale={locale} hub="service:inspection" />
     </main>
   );
 }
