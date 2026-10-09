@@ -8,7 +8,12 @@ import { COVERAGE_COUNTRY_SENTENCE } from "@/lib/coverage";
 // 全局品牌分享图（1200x630，供 Open Graph / Twitter Card 使用）。
 // 此前 openGraph 没有 images，社交分享与富媒体展示缺失。
 export const OG_IMAGE = {
-  url: "/static/images/og-home.webp",
+  // 🔴 必须是 JPEG（不是 WebP）：社交平台抓取器对 WebP 支持不一致 ——
+  //    Facebook 可渲染，LinkedIn 历史上不渲染，WhatsApp / iMessage 等亦不可靠。
+  //    本站是 B2B，客户会把链接贴到 LinkedIn / WhatsApp，封面不渲染等于白丢点击。
+  //    该图为工厂航拍实景（无文字叠加）⇒ 按规范用 JPEG；216 KB，在 WhatsApp 的 300 KB 限制内。
+  url: "/static/images/og-home.jpg",
+  type: "image/jpeg",
   width: 1200,
   height: 630,
   alt: `FactoryAuditB2B: supplier verification and factory audit in ${COVERAGE_COUNTRY_SENTENCE}`,
