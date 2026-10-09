@@ -1102,6 +1102,50 @@ export async function listSuppliersByAuditType(
   );
 }
 
+/**
+ * 一次批量统计「(国家, 审核类型) → 已发布供应商数」。
+ *
+ * 用途：audit-guide 页面的可索引判定（见 lib/auditGuideIndexability.ts）。
+ * 判据与 listSuppliersByAuditType() 完全同口径（含 staticCaps 合并）——
+ * 两处若不同源，就会出现「sitemap 收录但页面 noindex」的错配。
+ *
+ * 🔴 返回 null 表示**数据源不可达**（查询异常 ⇒ fetchRows() 返回 null）。
+ *    调用方必须据此 fail-open（一律按「有数据」处理）：
+ *    否则一次构建期网络抖动会把 35 个组合 × 9 语言 = 315 条 URL 全部
+ *    误判为零供应商并被踢出索引 —— 那是一次静默的 SEO 事故。
+ */
+export async function countSuppliersByAuditType(): Promise<Map<string, number> | null> {
+  const out = new Map<string, number>();
+  const bump = (country: string, ref: string) => {
+    const key = `${country}/${ref}`;
+    out.set(key, (out.get(key) ?? 0) + 1);
+  };
+
+  if (useSupabase()) {
+    const rows = await fetchRows();
+    // 空数组是合法结论（确实没有已发布行）；null 不是 —— 它意味着「没问到」。
+    if (rows === null) return null;
+    const caps = await fetchAuditTypeCaps();
+    const staticCaps = new Map(STATIC_SUPPLIERS.map((s) => [s.slug, s.capabilities]));
+    for (const r of rows) {
+      const refs = new Set<string>(caps.get(r.id) ?? []);
+      for (const c of staticCaps.get(r.slug) ?? []) {
+        if (c.refType === "AUDIT_TYPE") refs.add(c.refCode);
+      }
+      for (const ref of refs) bump(r.country_code, ref);
+    }
+    return out;
+  }
+
+  // 未配置数据库：静态常量就是完整数据源，结论同样可信。
+  for (const s of STATIC_SUPPLIERS) {
+    for (const c of s.capabilities) {
+      if (c.refType === "AUDIT_TYPE") bump(s.countryCode, c.refCode);
+    }
+  }
+  return out;
+}
+
 /** supplier_capabilities 里 ref_type=AUDIT_TYPE 的行，按 supplier_id 分组。出错返回空表。 */
 async function fetchAuditTypeCaps(): Promise<Map<string, Set<string>>> {
   const { createAdminClient } = await import("./supabaseAdmin");

@@ -18,6 +18,7 @@ import { CHEMICALS } from "@/lib/chemicals";
 // CHANGE SET B：产业带目录/详情。与 suppliers 同样走「只提交已发布行」——
 // 提交集合必须与页面可索引性同源，否则 Search Console 报 "Submitted URL marked noindex"。
 import { listPublishedClusters } from "@/lib/industrialClusters";
+import { listIndexableAuditGuideCombos } from "@/lib/auditGuideIndexability";
 // STEP 09 ROUTE-05：sitemap 只输出正式层级 canonical URL（不再是扁平 slug URL）。
 import { buildClusterCanonicalPath } from "@/lib/clusterRoutes";
 
@@ -88,14 +89,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   // Phase 1 国家覆盖页与国家 × 服务商业页（内容差异化后才提交，PRD §8）
-  const coverage = [
-    ...COVERAGE_COUNTRIES.map((c) => `/countries/${c.slug}`),
-    ...COVERAGE_SERVICE_SLUGS.map((x) => `/services/${x.slug}`),
-    ...GUIDES.map((g) => `/guides/${g.slug}`),
+  // 🔴 lastModified 只透传**数据模型里真实存在的编辑日期**（guides / case-studies /
+  //    field-reports 的 updated —— 也就是页面 Article.dateModified 用的同一个值）。
+  //    拿不到真实值就**不传**，绝不回落构建时间（见下方 emit() 注释）。
+  const contentDate = (s?: string): Date | undefined => {
+    if (!s) return undefined;
+    const d = new Date(`${s}T00:00:00.000Z`);
+    return Number.isNaN(d.getTime()) ? undefined : d;
+  };
+  const coverage: { path: string; lastModified?: Date }[] = [
+    ...COVERAGE_COUNTRIES.map((c) => ({ path: `/countries/${c.slug}` })),
+    ...COVERAGE_SERVICE_SLUGS.map((x) => ({ path: `/services/${x.slug}` })),
+    ...GUIDES.map((g) => ({
+      path: `/guides/${g.slug}`,
+      lastModified: contentDate(g.updated),
+    })),
     // 内容簇 hub 着陆页：只提交「实际有指南」的分类，与页面可索引性同源
-    ...guideCategoriesWithGuides().map((c) => `/guides/category/${c}`),
-    ...CASE_STUDIES.map((c) => `/case-studies/${c.slug}`),
-    ...FIELD_REPORTS.map((r) => `/field-reports/${r.slug}`),
+    ...guideCategoriesWithGuides().map((c) => ({ path: `/guides/category/${c}` })),
+    ...CASE_STUDIES.map((c) => ({
+      path: `/case-studies/${c.slug}`,
+      lastModified: contentDate(c.updated),
+    })),
+    ...FIELD_REPORTS.map((r) => ({
+      path: `/field-reports/${r.slug}`,
+      lastModified: contentDate(r.updated),
+    })),
   ];
 
   // 已 308 到新地址的旧路径，不进站点地图
@@ -163,7 +181,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
   };
 
-  const pages: MetadataRoute.Sitemap = [...core, ...coverage].flatMap((p) => emit(p));
+  const pages: MetadataRoute.Sitemap = [
+    ...core.map((path): { path: string; lastModified?: Date } => ({ path })),
+    ...coverage,
+  ].flatMap((e) => emit(e.path, e.lastModified));
 
   const [countries, industries, standards, supplierRows, seo, clusterRows] = await Promise.all([
     listCountries(),
@@ -188,10 +209,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Country × AuditType 指南页。国家清单来自 listCountries()（已派生自 COVERAGE_COUNTRIES），
   // 这里的 coverageCodes 只作为第二道保险：确保 roadmap 国家永远不会漏进站点地图（PRD §8）。
   const coverageCodes = new Set(COVERAGE_COUNTRIES.map((c) => c.code));
+  // 只提交「确实挂有供应商档案」的组合。零供应商的组合页面只剩模板骨架
+  //（实测约 250 词、组合间正文相似度 96.2%）⇒ 页面侧同步 noindex，
+  // 两边必须同源，否则 Search Console 会报 "Submitted URL marked noindex"。
+  // 返回 null = 数据源不可达 ⇒ fail-open，保持原提交集合不变。
+  const indexableCombos = await listIndexableAuditGuideCombos();
   seo.auditTypes.forEach((a) => {
     countries
       .filter((c) => coverageCodes.has(c.code))
-      .forEach((c) => pages.push(...emit(`/audit-guide/${c.code}/${a.code}`)));
+      .forEach((c) => {
+        if (indexableCombos && !indexableCombos.has(`${c.code}/${a.code}`)) return;
+        pages.push(...emit(`/audit-guide/${c.code}/${a.code}`));
+      });
   });
 
   // 供应商详情页（Supplier Directory V2 独立 SEO URL；旧 /supplier/{country}/{slug} 已 308 到此处，不再单独提交）

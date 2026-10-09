@@ -12,6 +12,7 @@ import { buildPageMetadata } from "@/lib/pageMeta";
 import { twText } from "@/lib/tw";
 import { countryDisplayName } from "@/lib/countryNames";
 import { supplierDisplayName } from "@/lib/supplierDisplayName";
+import { listIndexableAuditGuideCombos } from "@/lib/auditGuideIndexability";
 
 export const dynamic = "force-static";
 
@@ -49,11 +50,17 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const country = countryDisplayName(locale, c.code, c.name);
   const title = g.metaTitle.replaceAll("{type}", a.nameEn).replaceAll("{country}", country);
   const description = g.metaDesc.replaceAll("{type}", a.nameEn).replaceAll("{country}", country);
+  // 可索引性判据见 lib/auditGuideIndexability.ts：零供应商的组合只剩模板骨架 ⇒ noindex, follow
+  //（保留 follow：面包屑与 CTA 仍把权重传给 /countries/<slug>、/rfq、/services）。
+  // 与 sitemap 共用同一函数，杜绝「sitemap 收录但页面 noindex」的错配。
+  const indexable = await listIndexableAuditGuideCombos();
+  const isIndexable = indexable === null || indexable.has(`${c.code}/${a.code}`);
   return buildPageMetadata({
     locale,
     path: `/audit-guide/${c.code}/${a.code}`,
     title,
     description,
+    robots: isIndexable ? { index: true, follow: true } : { index: false, follow: true },
   });
 }
 
