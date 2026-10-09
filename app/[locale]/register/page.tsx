@@ -142,6 +142,12 @@ export default async function RegisterPage({
         <section>
           <h2 className="text-xl font-bold text-[#171717] mb-3">{r.formTitle}</h2>
           <RegisterForm t={r.form} nextHref={nextHref ?? undefined} />
+          <p className="text-sm text-[#6d6b66] mt-4">
+            {r.haveAccount}{" "}
+            <Link href={p("/login")} className="text-[#171717] underline">
+              {t.auth.accountMenu.signIn}
+            </Link>
+          </p>
         </section>
       </div>
     </main>

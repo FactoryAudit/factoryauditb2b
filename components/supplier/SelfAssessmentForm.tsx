@@ -105,19 +105,27 @@ export default function SelfAssessmentForm({
   }, []);
 
   // 自动保存（草稿态，停止输入 1000ms 后；避免高频写库）
+  //
+  // 🔴 去抖逻辑必须留在本 effect 内，**不要**再抽回 useCallback 形式的 scheduleAutoSave：
+  //    只要它的依赖里没有 responses / summary（例如旧版只写 [isLocked]），React 会在首次
+  //    渲染后永久复用同一个函数实例，它闭包里的 doSave 也就永久停在首屏那一刻的 responses
+  //    ⇒ 自动保存每次都提交**首屏快照**（首次进入即空 {}）：既存不下任何答案，
+  //    又会在手动保存之后把已存草稿覆盖回空（数据丢失）。
+  //    2026-10-09 线上取证（拦截并 abort 写请求，只读抓包）：点选 QC01 后自动保存
+  //    responses={}；同一渲染内的手动保存 responses={"QC01":"C"}。
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const scheduleAutoSave = useCallback(() => {
+  useEffect(() => {
+    if (status !== "draft" && status !== null) return;
     if (isLocked) return;
     if (saveTimer.current) clearTimeout(saveTimer.current);
     saveTimer.current = setTimeout(() => {
       void doSave(true);
     }, 1000);
-  }, [isLocked]);
-
-  useEffect(() => {
-    if (status === "draft" || status === null) scheduleAutoSave();
+    return () => {
+      if (saveTimer.current) clearTimeout(saveTimer.current);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [responses, summary]);
+  }, [responses, summary, status, isLocked]);
 
   async function doSave(isAuto: boolean): Promise<boolean> {
     if (isLocked) return false;

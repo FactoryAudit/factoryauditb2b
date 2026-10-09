@@ -3109,6 +3109,7 @@
     "nextLead": "送信後、弊チームがリクエストを手動で確認し、翌営業日までにご返信します。",
     "noCard": "クレジットカードは不要です。",
     "membershipLink": "Founding Buyer 会員について（年間 $99）",
+    "haveAccount": "すでにアカウントをお持ちの場合",
     "formTitle": "登録",
     "form": {
       "emailLabel": "メール",
