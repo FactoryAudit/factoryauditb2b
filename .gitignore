@@ -20,6 +20,14 @@ dist/
 .env.test.local
 .env.production.local
 
+# Google 服务账号密钥（GSC / GA4 只读分析用）—— 等同于密码，绝不入库。
+# 约定路径见 .env.example 的 GOOGLE_SERVICE_ACCOUNT_JSON（推荐 secrets/google-sa.json）。
+# 此前 .gitignore 只保护了 .env*，**没有任何规则覆盖密钥文件本身** —— 一旦按路径引用就会裸奔。
+/secrets/
+*service-account*.json
+*service_account*.json
+google-sa.json
+
 # 写入脚本的本地备份（勿提交；translate-guides-*.cjs 写入前会生成）
 lib/*.bak
 # 会话期「整文件快照」备份：由整行 splice 脚本写盘前生成，名为 <file>.bak_r<NN>
