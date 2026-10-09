@@ -78,7 +78,15 @@ export default function SelfAssessmentForm({
   const [result, setResult] = useState<{ ok: boolean; message: string } | null>(null);
   const [submitBlocked, setSubmitBlocked] = useState<string | null>(null);
 
-  const isLocked = status === "submitted" || status === "under_review" || status === "published";
+  // 🔴 R67（2026-10-09）：resubmitted 与 submitted 语义相同（都已交出去、都在后台待审队列
+  //    QUEUE_STATUSES = [submitted, under_review, action_required, resubmitted] 里），
+  //    但此前漏在名单外 ⇒ 供应商补件重交后表单仍可编辑、还能再次提交，
+  //    后台可能在「还在改的答卷」上做审核。与 submitted 对齐（复用 submittedReadOnly 提示）。
+  const isLocked =
+    status === "submitted" ||
+    status === "under_review" ||
+    status === "resubmitted" ||
+    status === "published";
   const isActionRequired = status === "action_required";
 
   const evidenceCounts = useMemo(() => {
@@ -115,7 +123,12 @@ export default function SelfAssessmentForm({
   //    responses={}；同一渲染内的手动保存 responses={"QC01":"C"}。
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => {
-    if (status !== "draft" && status !== null) return;
+    // 🔴 R67：闸门只认 isLocked —— 与下方「Save Draft」按钮同源（同一把闸门，不会漂移）。
+    //    此前多了一层 `status !== "draft" && status !== null` ⇒ 退回补件态（action_required）
+    //    自动保存完全不触发：那一档输入框全部可编辑、主按钮写着 Resubmit，供应商改完不点保存
+    //    直接关页就是全部改动丢失。
+    //    服务端本就支持：saveSelfAssessmentDraft 对非 draft 行「保留原状态、只更新答案」，
+    //    action_required 行存完仍是 action_required（lib/supplierAssessments.ts:241-242）。
     if (isLocked) return;
     if (saveTimer.current) clearTimeout(saveTimer.current);
     saveTimer.current = setTimeout(() => {
