@@ -20,6 +20,7 @@
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { trackEvent, trackPageView } from "@/lib/analytics";
+import { ATTR_COOKIE, ATTR_MAX_AGE, buildAttributionCookie } from "@/lib/attribution-parse";
 
 /** 读取当前页面类型标记（路由切换后 DOM 已更新，延后一帧更稳） */
 function readPageType(): string | undefined {
@@ -132,6 +133,38 @@ export default function AnalyticsTracker() {
       document.removeEventListener("click", onClick);
       document.removeEventListener("submit", onSubmit, true);
     };
+  }, []);
+
+  // ---- 首次触达归因（R74）----
+  // 只在访客**首次落地**时写一次 fab_ft cookie，供服务端 lib/attribution.ts 读取。
+  // 为什么必须在这里、而不是提交表单时再取：跨页面跳转后 URL 上的 utm 就没了，
+  // 只有首次落地那一刻能同时拿到「落地页 + 外部来源 + UTM」。
+  //
+  // 🔴 刻意**不用 useSearchParams**：它会要求 Suspense 边界、可能让静态页面退化
+  //    （见本文件顶部注释的硬要求）。在 effect 里直接读 window.location 即可，
+  //    且此时一定跑在客户端，没有 SSR 顾虑。
+  // 归因失败一律静默吞掉 —— 附加信息绝不能影响页面或业务。
+  //
+  // 🔴 cookie 名、键名、存活期一律从 lib/attribution-parse.ts 取，**不在这里硬编码**：
+  //    客户端与服务端必须共用同一套契约，否则「写 us / 读 utm_source」这类
+  //    键名错配在类型系统里根本看不见。该模块是纯逻辑、零框架依赖，可安全进客户端包。
+  useEffect(() => {
+    try {
+      if (document.cookie.split("; ").some((c) => c.startsWith(ATTR_COOKIE + "="))) return;
+      const q = new URLSearchParams(window.location.search);
+      const value = buildAttributionCookie({
+        landingPage: window.location.pathname + window.location.search,
+        referrer: document.referrer || "",
+        utmSource: q.get("utm_source") || "",
+        utmMedium: q.get("utm_medium") || "",
+        utmCampaign: q.get("utm_campaign") || "",
+        firstTouchAt: new Date().toISOString(),
+      });
+      document.cookie =
+        ATTR_COOKIE + "=" + value + "; path=/; max-age=" + ATTR_MAX_AGE + "; SameSite=Lax";
+    } catch {
+      /* 归因失败绝不影响业务 */
+    }
   }, []);
 
   // ---- 页面浏览 ----

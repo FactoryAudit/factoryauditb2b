@@ -24,6 +24,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { createAdminClient } from "@/lib/supabaseAdmin";
+import { readAttribution } from "@/lib/attribution";
 
 /** 三类来源，严格区分、不混用（与 leads_kind_check 一致） */
 export type LeadKind =
@@ -152,6 +153,10 @@ export async function insertLead(input: LeadInsertInput): Promise<LeadInsertResu
   const db = createAdminClient();
   if (!db) return { stored: false, reason: "not_configured" };
 
+  // R74：归因兜底 —— 调用方没传就从请求上下文取（首次触达 cookie → Referer → NULL）。
+  // 放在这一层而不是逐个改 6 个 API 调用点：既覆盖现有入口，也覆盖以后新增的入口。
+  const attr = await readAttribution();
+
   const base = {
     kind: input.kind,
     tool: String(input.tool || "").slice(0, 64) || "unknown",
@@ -169,12 +174,13 @@ export async function insertLead(input: LeadInsertInput): Promise<LeadInsertResu
     payload: fitPayload(input.payload),
     user_id: input.userId ?? null,
     // ---- STEP-02：来源追踪（缺则写 NULL，绝不编造来源）----
-    utm_source: input.utmSource ?? null,
-    utm_medium: input.utmMedium ?? null,
-    utm_campaign: input.utmCampaign ?? null,
-    referrer: input.referrer ?? null,
-    landing_page: input.landingPage ?? null,
-    first_touch_at: input.firstTouchAt ?? null,
+    // R74：调用方显式传入优先；没传则用 readAttribution() 的兜底值。
+    utm_source: input.utmSource ?? attr.utmSource,
+    utm_medium: input.utmMedium ?? attr.utmMedium,
+    utm_campaign: input.utmCampaign ?? attr.utmCampaign,
+    referrer: input.referrer ?? attr.referrer,
+    landing_page: input.landingPage ?? attr.landingPage,
+    first_touch_at: input.firstTouchAt ?? attr.firstTouchAt,
   };
 
   let lastCollision = "";
