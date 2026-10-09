@@ -13,6 +13,11 @@ import { twText } from "@/lib/tw";
 import { countryDisplayName } from "@/lib/countryNames";
 import { supplierDisplayName } from "@/lib/supplierDisplayName";
 import { listIndexableAuditGuideCombos } from "@/lib/auditGuideIndexability";
+import {
+  AUDIT_GUIDE_HEADINGS,
+  hasAuditGuideContent,
+  standardGuideContent,
+} from "@/lib/auditGuideContent";
 import RelatedGuides from "@/components/RelatedGuides";
 
 export const dynamic = "force-static";
@@ -55,7 +60,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   //（保留 follow：面包屑与 CTA 仍把权重传给 /countries/<slug>、/rfq、/services）。
   // 与 sitemap 共用同一函数，杜绝「sitemap 收录但页面 noindex」的错配。
   const indexable = await listIndexableAuditGuideCombos();
-  const isIndexable = indexable === null || indexable.has(`${c.code}/${a.code}`);
+  const isIndexable = indexable.has(`${c.code}/${a.code}`);
   return buildPageMetadata({
     locale,
     path: `/audit-guide/${c.code}/${a.code}`,
@@ -84,6 +89,16 @@ export default async function AuditGuidePage({ params }: { params: Promise<Param
   const relatedStandards = standards
     .filter((s) => s.category === (a.taxonomyCode ?? undefined))
     .slice(0, 8);
+
+  // ── 已核证编辑内容（仅 lib/auditGuideContent.ts 白名单内的组合才渲染）──
+  // 渲染条件与可索引条件同源：能渲染内容的组合才允许被索引，反之亦然。
+  const H = AUDIT_GUIDE_HEADINGS;
+  const gc = hasAuditGuideContent(c.code, a.code)
+    ? standardGuideContent(a.code) ?? null
+    : null;
+  const coverageCountry = COVERAGE_COUNTRIES.find((x) => x.code === c.code) ?? null;
+  const countryAuditNotes = coverageCountry ? coverageCountry.en.auditNotes : [];
+  const countryRegistry = coverageCountry ? coverageCountry.en.registry : "";
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10">
@@ -147,6 +162,113 @@ export default async function AuditGuidePage({ params }: { params: Promise<Param
         )}
         {a.description && <span className="block mt-1">{a.description}</span>}
       </p>
+
+      {gc && (
+        <>
+          <section className="mt-8">
+            <h2 className="text-xl font-semibold">{H.whatItIs}</h2>
+            <p className="mt-2 max-w-3xl text-gray-600">{gc.whatItIs}</p>
+          </section>
+
+          <section className="mt-8">
+            <h2 className="text-xl font-semibold">{H.covers}</h2>
+            {gc.scopeGroups.map((sg) => (
+              <div key={sg.label} className="mt-3">
+                <h3 className="font-medium text-gray-800">{sg.label}</h3>
+                <ul className="mt-1 list-disc pl-6 text-gray-600">
+                  {sg.items.map((it) => (
+                    <li key={it}>{it}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </section>
+
+          <section className="mt-8">
+            <h2 className="text-xl font-semibold">{H.outcome}</h2>
+            <ul className="mt-2 list-disc pl-6 text-gray-600 max-w-3xl">
+              {gc.outcome.map((it) => (
+                <li key={it} className="mt-1">{it}</li>
+              ))}
+            </ul>
+          </section>
+
+          {countryAuditNotes.length > 0 && (
+            <section className="mt-8">
+              <h2 className="text-xl font-semibold">{H.country.replace("{country}", country)}</h2>
+              <ul className="mt-2 list-disc pl-6 text-gray-600 max-w-3xl">
+                {countryAuditNotes.map((it) => (
+                  <li key={it} className="mt-1">{it}</li>
+                ))}
+              </ul>
+              {countryRegistry && (
+                <p className="mt-2 text-sm text-gray-500">
+                  {H.registry} {countryRegistry}
+                </p>
+              )}
+              <p className="mt-2 text-sm">
+                <Link href={lp(`/countries/${c.code}`)} className="underline">
+                  {H.seeCountry.replace("{country}", country)}
+                </Link>
+              </p>
+            </section>
+          )}
+
+          <section className="mt-8">
+            <h2 className="text-xl font-semibold">{H.ask}</h2>
+            <ul className="mt-2 list-disc pl-6 text-gray-600 max-w-3xl">
+              {gc.buyerQuestions.map((q) => (
+                <li key={q} className="mt-1">{q}</li>
+              ))}
+            </ul>
+          </section>
+
+          <section className="mt-8">
+            <h2 className="text-xl font-semibold">{H.faq}</h2>
+            <div className="mt-3 space-y-3">
+              {gc.faq.map((f) => (
+                <details key={f.q} className="rounded-lg border p-4">
+                  <summary className="font-medium cursor-pointer">{f.q}</summary>
+                  <p className="mt-2 text-gray-600">{f.a}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-8">
+            <h2 className="text-xl font-semibold">{H.sources}</h2>
+            <ul className="mt-2 text-sm text-gray-500 max-w-3xl">
+              {gc.sources.map((s) => (
+                <li key={s.name} className="mt-1">
+                  {s.url ? (
+                    <a href={s.url} target="_blank" rel="noopener noreferrer nofollow" className="underline">
+                      {s.name}
+                    </a>
+                  ) : (
+                    s.name
+                  )}{" — "}
+                  {s.note}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-2 text-xs text-gray-400">
+              {H.verifiedOn.replace("{date}", gc.verifiedOn)}
+            </p>
+          </section>
+
+          <JsonLd
+            data={{
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: gc.faq.map((f) => ({
+                "@type": "Question",
+                name: f.q,
+                acceptedAnswer: { "@type": "Answer", text: f.a },
+              })),
+            }}
+          />
+        </>
+      )}
 
       <section className="mt-8">
         <h2 className="text-xl font-semibold">{g.standardsTitle}</h2>

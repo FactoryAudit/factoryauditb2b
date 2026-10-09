@@ -212,13 +212,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 只提交「确实挂有供应商档案」的组合。零供应商的组合页面只剩模板骨架
   //（实测约 250 词、组合间正文相似度 96.2%）⇒ 页面侧同步 noindex，
   // 两边必须同源，否则 Search Console 会报 "Submitted URL marked noindex"。
-  // 返回 null = 数据源不可达 ⇒ fail-open，保持原提交集合不变。
+  // 数据源不可达时该函数返回「全部覆盖组合」⇒ fail-open，保持原提交集合不变。
   const indexableCombos = await listIndexableAuditGuideCombos();
   seo.auditTypes.forEach((a) => {
     countries
       .filter((c) => coverageCodes.has(c.code))
       .forEach((c) => {
-        if (indexableCombos && !indexableCombos.has(`${c.code}/${a.code}`)) return;
+        if (!indexableCombos.has(`${c.code}/${a.code}`)) return;
         pages.push(...emit(`/audit-guide/${c.code}/${a.code}`));
       });
   });
