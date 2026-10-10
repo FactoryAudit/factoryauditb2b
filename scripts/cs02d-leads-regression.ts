@@ -211,7 +211,6 @@ const LEAD_CALLERS: Array<[string, string]> = [
   ["components/AuditRequestForm.tsx", "/api/audit/request"],
   ["components/CustomServiceForm.tsx", "/api/lead"],
   ["components/InspectionRequestForm.tsx", "/api/lead"],
-  ["components/SampleReportForm.tsx", "/api/lead"],
   ["components/StandardReportDownloadForm.tsx", "/api/lead"],
   ["components/tools/SupplierRiskCalculator.tsx", "/api/lead"],
 ];

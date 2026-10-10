@@ -38,7 +38,6 @@ export type FooterDict = {
   allServices: string;
   containerCalculator: string;
   supplierNetwork: string;
-  sampleReport: string;
   standardReport: string;
   monitoring: string;
   fieldReports: string;
