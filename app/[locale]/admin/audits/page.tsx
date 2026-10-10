@@ -51,6 +51,7 @@ export default async function AdminAuditsPage({ params }: Props) {
             <tr>
               <th className="px-4 py-2">Code</th>
               <th className="px-4 py-2">Supplier</th>
+              <th className="px-4 py-2">Source</th>
               <th className="px-4 py-2">Type</th>
               <th className="px-4 py-2">Status</th>
               <th className="px-4 py-2">Product</th>
@@ -66,6 +67,17 @@ export default async function AdminAuditsPage({ params }: Props) {
                   </Link>
                 </td>
                 <td className="px-4 py-2">{a.supplierName ?? "—"}</td>
+                <td className="px-4 py-2">
+                  {/* R85：external 用琥珀色标出 —— 这类对象未经我方核验，
+                      后续动作（先确认工厂身份）与目录内完全不同，扫一眼表格就该能分辨。 */}
+                  {a.supplierSource === "external" ? (
+                    <span className="rounded bg-[#fef3c7] px-2 py-0.5 text-xs font-medium text-[#92400e]">
+                      buyer-specified
+                    </span>
+                  ) : (
+                    <span className="rounded bg-[#ebe8e1] px-2 py-0.5 text-xs text-[#3f4650]">platform</span>
+                  )}
+                </td>
                 <td className="px-4 py-2">{a.auditType}</td>
                 <td className="px-4 py-2">
                   <span className={`rounded px-2 py-0.5 text-xs font-medium ${STATUS_COLOR[a.status] ?? "bg-[#ebe8e1] text-[#3f4650]"}`}>
@@ -78,7 +90,7 @@ export default async function AdminAuditsPage({ params }: Props) {
             ))}
             {rows.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-4 py-6 text-center text-[#6d6b66]">
+                <td colSpan={7} className="px-4 py-6 text-center text-[#6d6b66]">
                   No audits yet.
                 </td>
               </tr>

@@ -93,7 +93,18 @@ export default function AuditRequestForm({
   const [auditType, setAuditType] = useState(0);
   const [message, setMessage] = useState("");
   // 真实审核请求字段
+  // R85：supplierSource —— 'platform' 走目录下拉，'external' 走客户自填的工厂信息。
+  //   默认 'platform'（与改造前一致，老用户无感）；没有可选供应商时默认 'external'。
+  const [supplierSource, setSupplierSource] = useState<"platform" | "external">(
+    suppliers.length > 0 ? "platform" : "external"
+  );
   const [supplierId, setSupplierId] = useState("");
+  // R85：外部供应商（客户自述，未核验）
+  const [extName, setExtName] = useState("");
+  const [extContact, setExtContact] = useState("");
+  const [extEmail, setExtEmail] = useState("");
+  const [extPhone, setExtPhone] = useState("");
+  const [extAddress, setExtAddress] = useState("");
   const [executionMethod, setExecutionMethod] = useState<"announced" | "semi-announced" | "unannounced">("announced");
   const [product, setProduct] = useState("");
   const [productCategory, setProductCategory] = useState("");
@@ -113,10 +124,25 @@ export default function AuditRequestForm({
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!supplierId) {
-      setStatus("error");
-      setErrMsg(reqT.supplierPlaceholder);
-      return;
+    // R85：先按来源分别校验 —— 两条路径的必填项完全不同，不能用同一套判断。
+    if (supplierSource === "platform") {
+      if (!supplierId) {
+        setStatus("error");
+        setErrMsg(reqT.supplierPlaceholder);
+        return;
+      }
+    } else {
+      if (!extName.trim()) {
+        setStatus("error");
+        setErrMsg(reqT.externalNameRequired);
+        return;
+      }
+      // 邮箱与电话至少要有一项：没有联系方式，运营无法联系工厂安排审核。
+      if (!extEmail.trim() && !extPhone.trim()) {
+        setStatus("error");
+        setErrMsg(reqT.externalContactRequired);
+        return;
+      }
     }
     // 埋点：发起验厂请求（带验厂类型，用于统计哪种审核最受欢迎；不含任何表单内容）
     trackEvent(ANALYTICS_EVENTS.auditRequest, {
@@ -131,7 +157,19 @@ export default function AuditRequestForm({
     const form = new FormData(e.currentTarget);
     const email = String(form.get("email") || "");
     const payload = {
-      supplierId,
+      supplierSource,
+      // 平台内路径才带 supplierId；external 时传 null（服务端 CHECK 要求二选一自洽）
+      supplierId: supplierSource === "platform" ? supplierId : null,
+      externalSupplier:
+        supplierSource === "external"
+          ? {
+              name: extName.trim(),
+              contact: extContact.trim() || null,
+              email: extEmail.trim() || null,
+              phone: extPhone.trim() || null,
+              address: extAddress.trim() || null,
+            }
+          : null,
       buyerEmail: email,
       buyerCompany: String(form.get("company") || ""),
       buyerCountry: String(form.get("country") || ""),
@@ -168,6 +206,13 @@ export default function AuditRequestForm({
         setMessage("");
         setAuditType(0);
         setSupplierId("");
+        // R85：外部供应商字段一并清掉，并把来源复位到默认（有目录就回平台内）
+        setSupplierSource(suppliers.length > 0 ? "platform" : "external");
+        setExtName("");
+        setExtContact("");
+        setExtEmail("");
+        setExtPhone("");
+        setExtAddress("");
         setExecutionMethod("announced");
         setProduct("");
         setProductCategory("");
@@ -184,6 +229,10 @@ export default function AuditRequestForm({
         setErrMsg(t.rateLimited);
       } else if (data?.error === "invalid_supplier") {
         setErrMsg(reqT.supplierPlaceholder);
+      } else if (data?.error === "invalid_external_supplier") {
+        // R85：服务端回传具体缺哪个字段（与前端校验同源，避免前后端口径不一）
+        const f = Array.isArray(data?.fields) ? String(data.fields[0]) : "";
+        setErrMsg(f === "externalSupplier.name" ? reqT.externalNameRequired : reqT.externalContactRequired);
       } else if (data?.error === "invalid_input" && Array.isArray(data?.fields) && data.fields.length > 0) {
         // R76 起 API 会回传出错字段名（path），让用户知道该改哪里，
         // 而不是笼统的「出错了」。字段名走本地化映射，缺失则回退原字段名。
@@ -244,17 +293,117 @@ export default function AuditRequestForm({
         </div>
         <div className="md:col-span-2">
           <label className="text-sm font-medium">
-            {reqT.supplier} <span className="text-[#d4232a]">*</span>
+            {reqT.sourceLabel} <span className="text-[#d4232a]">*</span>
           </label>
-          <select className="select" value={supplierId} onChange={(e) => setSupplierId(e.target.value)} required>
-            <option value="">{reqT.supplierPlaceholder}</option>
-            {suppliers.map((s) => (
-              <option key={s.id} value={s.id}>
-                {s.name}
-              </option>
-            ))}
-          </select>
+          {/* R85：来源二选一。用 radio 而不是下拉 —— 这是一个「先去哪条路」的分叉，
+              选中后展开的字段完全不同，radio 能让两条路同时可见。 */}
+          <div className="mt-2 flex flex-wrap gap-x-6 gap-y-2">
+            <label className="flex items-center gap-2 text-sm">
+              <input
+                type="radio"
+                name="supplierSource"
+                value="platform"
+                checked={supplierSource === "platform"}
+                onChange={() => setSupplierSource("platform")}
+                disabled={suppliers.length === 0}
+              />
+              {reqT.sourcePlatform}
+            </label>
+            <label className="flex items-center gap-2 text-sm">
+              <input
+                type="radio"
+                name="supplierSource"
+                value="external"
+                checked={supplierSource === "external"}
+                onChange={() => setSupplierSource("external")}
+              />
+              {reqT.sourceExternal}
+            </label>
+          </div>
+          {/* 目录里一家都没有时，平台内选项不可选，必须明说原因，
+              否则用户看到的是「一个点不动的选项」，不知道发生了什么。 */}
+          {suppliers.length === 0 && (
+            <p className="mt-1 text-xs text-[#6d6b66]">{reqT.supplierPlaceholder}</p>
+          )}
         </div>
+
+        {supplierSource === "platform" ? (
+          <div className="md:col-span-2">
+            <label className="text-sm font-medium">
+              {reqT.supplier} <span className="text-[#d4232a]">*</span>
+            </label>
+            <select className="select" value={supplierId} onChange={(e) => setSupplierId(e.target.value)} required>
+              <option value="">{reqT.supplierPlaceholder}</option>
+              {suppliers.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        ) : (
+          <div className="md:col-span-2 space-y-3 rounded-md border border-[#ebe8e1] bg-[#fbfaf7] p-3">
+            {/* 讲清楚「为什么必须给联系方式」：没有它我们就触达不了工厂，审核无从安排。 */}
+            <p className="text-xs text-[#6d6b66]">{reqT.externalHint}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="md:col-span-2">
+                <label className="text-sm font-medium">
+                  {reqT.externalName} <span className="text-[#d4232a]">*</span>
+                </label>
+                <input
+                  className="input"
+                  value={extName}
+                  onChange={(e) => setExtName(e.target.value)}
+                  placeholder={reqT.externalName}
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium">{reqT.externalContact}</label>
+                <input
+                  className="input"
+                  value={extContact}
+                  onChange={(e) => setExtContact(e.target.value)}
+                  placeholder={reqT.externalContact}
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium">
+                  {reqT.externalEmail} <span className="text-[#d4232a]">*</span>
+                </label>
+                <input
+                  className="input"
+                  type="email"
+                  value={extEmail}
+                  onChange={(e) => setExtEmail(e.target.value)}
+                  placeholder={reqT.externalEmail}
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium">
+                  {reqT.externalPhone} <span className="text-[#d4232a]">*</span>
+                </label>
+                <input
+                  className="input"
+                  value={extPhone}
+                  onChange={(e) => setExtPhone(e.target.value)}
+                  placeholder={reqT.externalPhone}
+                />
+              </div>
+              <div className="md:col-span-2">
+                <label className="text-sm font-medium">{reqT.externalAddress}</label>
+                <input
+                  className="input"
+                  value={extAddress}
+                  onChange={(e) => setExtAddress(e.target.value)}
+                  placeholder={reqT.externalAddress}
+                />
+              </div>
+              {/* 邮箱与电话二选一：两个框都标了 *，但实际是「至少一项」，
+                  这里用一行小字说明真实规则，避免用户以为必须两个都填。 */}
+              <p className="md:col-span-2 text-xs text-[#6d6b66]">{reqT.externalContactRequired}</p>
+            </div>
+          </div>
+        )}
         <div>
           <label className="text-sm font-medium">{reqT.executionMethod}</label>
           <select

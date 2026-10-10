@@ -18,7 +18,22 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const bodySchema = z.object({
-  supplierId: z.string().uuid(),
+  // R85：审核对象来源。缺省 'platform'（老客户端不传即平台内，零回归）。
+  supplierSource: z.enum(["platform", "external"]).optional(),
+  // 平台内路径必填；external 路径必须为空。这里放宽为 optional，
+  // 由 lib/audits.ts 按 supplierSource 做「二选一」裁决（唯一写入层收口）。
+  supplierId: z.string().uuid().optional().nullable(),
+  // R85：external 时客户自述的工厂信息
+  externalSupplier: z
+    .object({
+      name: z.string().max(300),
+      contact: z.string().max(200).optional().nullable(),
+      email: z.string().max(200).optional().nullable(),
+      phone: z.string().max(80).optional().nullable(),
+      address: z.string().max(400).optional().nullable(),
+    })
+    .optional()
+    .nullable(),
   buyerEmail: z.string().email(),
   buyerCompany: z.string().max(200).optional().nullable(),
   buyerCountry: z.string().max(120).optional().nullable(),
@@ -77,7 +92,17 @@ export async function POST(req: NextRequest) {
     .join(" · ");
 
   const input: CreateAuditRequestInput = {
-    supplierId: b.supplierId,
+    supplierSource: b.supplierSource === "external" ? "external" : "platform",
+    supplierId: blankToNull(b.supplierId),
+    externalSupplier: b.externalSupplier
+      ? {
+          name: String(b.externalSupplier.name ?? ""),
+          contact: blankToNull(b.externalSupplier.contact),
+          email: blankToNull(b.externalSupplier.email),
+          phone: blankToNull(b.externalSupplier.phone),
+          address: blankToNull(b.externalSupplier.address),
+        }
+      : null,
     buyerEmail: b.buyerEmail,
     buyerCompany: blankToNull(b.buyerCompany),
     buyerCountry: blankToNull(b.buyerCountry),
@@ -101,6 +126,12 @@ export async function POST(req: NextRequest) {
     if (result.reason === "invalid_supplier") {
       return NextResponse.json({ ok: false, error: "invalid_supplier" }, { status: 400 });
     }
+    // R85：外部供应商信息不完整（缺名称 / 缺邮箱与电话）。
+    // 回传 fields 让前端定位到具体该补哪个框，而不是笼统报错。
+    if (result.reason === "invalid_external_supplier") {
+      const field = result.message === "name_required" ? "externalSupplier.name" : "externalSupplier.contact";
+      return NextResponse.json({ ok: false, error: "invalid_external_supplier", fields: [field] }, { status: 400 });
+    }
     if (result.reason === "not_configured") {
       return NextResponse.json({ ok: false, error: "service_unavailable" }, { status: 503 });
     }
@@ -121,6 +152,8 @@ export async function POST(req: NextRequest) {
       sourcing: b.productCategory ?? null,
       message: [
         `Audit code: ${result.auditCode}`,
+        `Supplier source: ${result.supplierSource}`,
+        result.supplierName ? `Supplier: ${result.supplierName}` : "",
         `Execution: ${b.auditType ?? "announced"}`,
         `Category: ${b.category ?? ""}`,
         `Standard: ${b.standard ?? ""}`,
@@ -151,8 +184,10 @@ export async function POST(req: NextRequest) {
   runAfterResponse(
     notifyAdminNewAuditRequest({
       auditCode: result.auditCode,
+      supplierSource: result.supplierSource,
       supplierName: result.supplierName ?? null,
       supplierSlug: result.supplierSlug ?? null,
+      externalSupplier: result.supplierSource === "external" ? input.externalSupplier ?? null : null,
       auditType: b.auditType ?? "announced",
       product: input.product,
       productCategory: input.productCategory,
@@ -175,6 +210,7 @@ export async function POST(req: NextRequest) {
     notifyAuditRequestReceived({
       email: b.buyerEmail,
       auditCode: result.auditCode,
+      supplierSource: result.supplierSource,
       supplierName: result.supplierName ?? null,
       standardProtocol: standardProtocol || null,
       locale: input.locale,

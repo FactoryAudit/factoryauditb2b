@@ -234,8 +234,34 @@ export function canonicalReportText(input: {
 }
 
 // ── 审核请求创建（指令 §18-§21；P0 #3 入口）───────────────────────────────────
+
+/**
+ * R85：审核对象来源。
+ *   · `platform` —— 客户从平台已发布目录里选的供应商（supplierId 必填）。
+ *   · `external` —— 客户指定的、不在平台目录里的工厂（supplierId 为 null，
+ *                  由 externalSupplier* 承载客户提供的名称与联系方式）。
+ *
+ * 为什么不是「让客户随便选个平台内供应商」：
+ *   该页是真实验厂需求的入口。若客户要验的工厂不在目录里就没法提交，
+ *   他只能随便挑一家凑数 ⇒ 审核对象与仓库记录**对不上账**，运营拿到的是脏数据。
+ */
+export type SupplierSource = "platform" | "external";
+
+export type ExternalSupplierInput = {
+  name: string;
+  contact?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  address?: string | null;
+};
+
 export type CreateAuditRequestInput = {
-  supplierId: string;
+  /** 平台内供应商 ID。supplierSource='platform' 时必填；'external' 时必须为空。 */
+  supplierId?: string | null;
+  /** R85：来源；缺省 'platform'（保持既有调用方零改动）。 */
+  supplierSource?: SupplierSource;
+  /** R85：external 时的客户自述工厂信息（name 必填，email/phone 至少一项）。 */
+  externalSupplier?: ExternalSupplierInput | null;
   buyerEmail?: string | null;
   buyerCompany?: string | null;
   buyerCountry?: string | null;
@@ -259,12 +285,18 @@ export type CreateAuditRequestResult =
       stored: true;
       auditCode: string;
       attempts: number;
+      /** 审核对象来源（R85）。调用方据此决定邮件/后台的呈现措辞。 */
+      supplierSource: SupplierSource;
       /** 供应商展示名（R79 管理员通知邮件用）；无法确定时为 null，绝不回落空串 */
       supplierName?: string | null;
-      /** 供应商档案 slug（用于在邮件里给出可点击的档案链接） */
+      /** 供应商档案 slug（用于在邮件里给出可点击的档案链接）。external 时恒为 null。 */
       supplierSlug?: string | null;
     }
-  | { stored: false; reason: "not_configured" | "invalid_supplier" | "insert_failed"; message?: string };
+  | {
+      stored: false;
+      reason: "not_configured" | "invalid_supplier" | "invalid_external_supplier" | "insert_failed";
+      message?: string;
+    };
 
 function isUniqueViolation(e: unknown): boolean {
   if (!e || typeof e !== "object") return false;
@@ -313,25 +345,65 @@ export async function createAuditRequest(input: CreateAuditRequestInput): Promis
   const db = createAdminClient();
   if (!db) return { stored: false, reason: "not_configured" };
 
-  // 供应商必须存在（FK 引用；不存在直接报错，不静默）
-  // 同时取显示名与 slug：R79 管理员通知邮件要展示「客户申请的是哪一家」，
-  // 不额外再查一次库（这里已经查了，顺手带出）。
-  const { data: sup } = await db
-    .from("suppliers")
-    .select("id, display_name, english_name, legal_name, slug")
-    .eq("id", input.supplierId)
-    .maybeSingle();
-  if (!sup) return { stored: false, reason: "invalid_supplier" };
+  // R85：来源缺省 'platform'（既有调用方不传就是平台内，行为与改造前完全一致）
+  const source: SupplierSource = input.supplierSource === "external" ? "external" : "platform";
 
-  // 供应商名的兜底顺序：display_name → english_name → legal_name → slug。
-  // 绝不回落空串（NULL≠空串），全空时用 slug 保证邮件里有个可辨识的标识。
-  const supplierName =
-    [sup.display_name, sup.english_name, sup.legal_name].find(
-      (v) => typeof v === "string" && v.trim().length > 0
-    ) ?? sup.slug ?? null;
+  // 外部供应商：名称必填，且邮箱/电话至少要有一项 —— 没有联系方式就无法触及工厂去安排审核，
+  // 收下这种申请等于给运营埋一条无法执行的任务。这条规则 DB CHECK 也有一份（双层）。
+  const extName = blankToNull(input.externalSupplier?.name);
+  const extContact = blankToNull(input.externalSupplier?.contact);
+  const extEmail = blankToNull(input.externalSupplier?.email);
+  const extPhone = blankToNull(input.externalSupplier?.phone);
+  const extAddress = blankToNull(input.externalSupplier?.address);
+  if (source === "external") {
+    if (!extName) return { stored: false, reason: "invalid_external_supplier", message: "name_required" };
+    if (!extEmail && !extPhone) {
+      return { stored: false, reason: "invalid_external_supplier", message: "contact_required" };
+    }
+  }
+
+  // 平台内路径才查 FK。external 路径**不查** suppliers（客户要验的工厂本来就不在目录里）。
+  let supplierName: string | null = null;
+  let supplierSlug: string | null = null;
+  if (source === "platform") {
+    const sid = blankToNull(input.supplierId);
+    if (!sid) return { stored: false, reason: "invalid_supplier", message: "supplier_id_required" };
+
+    // 供应商必须存在（FK 引用；不存在直接报错，不静默）
+    // 同时取显示名与 slug：R79 管理员通知邮件要展示「客户申请的是哪一家」，
+    // 不额外再查一次库（这里已经查了，顺手带出）。
+    const { data: sup } = await db
+      .from("suppliers")
+      .select("id, display_name, english_name, legal_name, slug")
+      .eq("id", sid)
+      .maybeSingle();
+    if (!sup) return { stored: false, reason: "invalid_supplier" };
+
+    // 供应商名的兜底顺序：display_name → english_name → legal_name → slug。
+    // 绝不回落空串（NULL≠空串），全空时用 slug 保证邮件里有个可辨识的标识。
+    supplierName =
+      [sup.display_name, sup.english_name, sup.legal_name].find(
+        (v) => typeof v === "string" && v.trim().length > 0
+      ) ?? sup.slug ?? null;
+    supplierSlug = sup.slug ?? null;
+    // 平台内路径下把 FK 记下来，供下面组 base 用
+    input = { ...input, supplierId: sid };
+  } else {
+    // external：审核对象就是客户自述的工厂名。emit 出去的名字用客户填的原值，
+    // 不加工、不改写 —— 我们不能替客户给一家没核验过的工厂起名字。
+    supplierName = extName;
+    supplierSlug = null;
+  }
 
   const base = {
-    supplier_id: input.supplierId,
+    // R85：external 时为 null（DB 已放开 NOT NULL；CHECK 保证与 source 自洽）
+    supplier_id: source === "platform" ? blankToNull(input.supplierId) : null,
+    supplier_source: source,
+    external_supplier_name: source === "external" ? extName : null,
+    external_supplier_contact: source === "external" ? extContact : null,
+    external_supplier_email: source === "external" ? extEmail : null,
+    external_supplier_phone: source === "external" ? extPhone : null,
+    external_supplier_address: source === "external" ? extAddress : null,
     buyer_id: input.userId ?? null,
     audit_type: input.auditType ?? "announced",
     product: blankToNull(input.product),
@@ -356,8 +428,9 @@ export async function createAuditRequest(input: CreateAuditRequestInput): Promis
           stored: true,
           auditCode,
           attempts: attempt,
+          supplierSource: source,
           supplierName: typeof supplierName === "string" ? supplierName : null,
-          supplierSlug: sup.slug ?? null,
+          supplierSlug,
         };
       }
       if (isUniqueViolation(error)) continue;

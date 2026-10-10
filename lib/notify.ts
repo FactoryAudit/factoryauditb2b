@@ -861,8 +861,18 @@ function auditLine(label: string, val?: string | number | boolean | null): strin
  */
 export async function notifyAdminNewAuditRequest(data: {
   auditCode: string;
+  /** R85：审核对象来源。缺省视为 'platform'（老调用方不传即平台内）。 */
+  supplierSource?: "platform" | "external" | null;
   supplierName?: string | null;
   supplierSlug?: string | null;
+  /** R85：external 时客户自述的工厂信息（名称已在 supplierName 里，这里补联系人/邮箱/电话/地址） */
+  externalSupplier?: {
+    name?: string | null;
+    contact?: string | null;
+    email?: string | null;
+    phone?: string | null;
+    address?: string | null;
+  } | null;
   auditType?: string | null;
   product?: string | null;
   productCategory?: string | null;
@@ -883,12 +893,23 @@ export async function notifyAdminNewAuditRequest(data: {
     console.log("[notify] NOTIFY_ADMIN_EMAIL 未配置，跳过验厂申请通知");
     return false;
   }
+  const isExternal = data.supplierSource === "external";
   const body = [
     `Audit code: ${data.auditCode}`,
     "",
     "— Supplier —",
+    // R85：先讲清「这是我方目录里的，还是客户指定的外部工厂」——
+    //   两者后续动作完全不同：目录内的可直接开工，外部的要先确认工厂身份与联系人。
+    `Source: ${isExternal ? "BUYER-SPECIFIED (outside platform directory)" : "platform directory"}`,
     auditLine("Supplier", data.supplierName ?? (data.supplierSlug ? data.supplierSlug : null)),
     data.supplierName && data.supplierSlug ? `Profile: ${data.supplierSlug}` : null,
+    // 外部供应商的联系方式由**客户**提供，尚未核验 —— 标题里点明，避免被当成已确认信息。
+    isExternal ? "" : null,
+    isExternal ? "— Supplier contact (provided by buyer, not yet verified) —" : null,
+    isExternal ? auditLine("Contact person", data.externalSupplier?.contact ?? null) : null,
+    isExternal ? auditLine("Email", data.externalSupplier?.email ?? null) : null,
+    isExternal ? auditLine("Phone", data.externalSupplier?.phone ?? null) : null,
+    isExternal ? auditLine("Address", data.externalSupplier?.address ?? null) : null,
     "",
     "— Request —",
     auditLine("Audit type", data.auditType),
@@ -932,6 +953,8 @@ export async function notifyAdminNewAuditRequest(data: {
 export async function notifyAuditRequestReceived(data: {
   email: string;
   auditCode: string;
+  /** R85：审核对象来源。external 时回执措辞不能让客户以为我们已认识这家工厂。 */
+  supplierSource?: "platform" | "external" | null;
   supplierName?: string | null;
   standardProtocol?: string | null;
   locale?: string | null;
@@ -946,6 +969,11 @@ export async function notifyAuditRequestReceived(data: {
       "",
       `Audit reference : ${data.auditCode}`,
       auditLine("Supplier", data.supplierName),
+      // R85：外部供应商要显式说明下一步 —— 客户提供的联系方式是我们联系工厂的唯一凭据，
+      // 若信息有误需要他补正；这一句让客户知道我们接下来会去联系谁。
+      data.supplierSource === "external"
+        ? "Supplier source : specified by you (not in our directory). We will contact the factory using the details you provided; please tell us promptly if any of them are incorrect."
+        : null,
       auditLine("Standard", data.standardProtocol),
       "",
       "Our team will review the details and reply within one business day with the scope, the audit company we match you with, and a scoped proposal.",

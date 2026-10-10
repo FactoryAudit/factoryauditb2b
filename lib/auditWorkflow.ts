@@ -353,6 +353,10 @@ export type AuditListItem = {
   auditCode: string;
   supplierId: string | null;
   supplierName: string | null;
+  /** R85：审核对象来源。后台据此区分「目录内」与「客户指定的外部工厂」。 */
+  supplierSource: "platform" | "external";
+  /** R85：external 时的工厂名称（客户自述）；platform 时恒为 null */
+  externalSupplierName: string | null;
   auditType: string;
   status: AuditStatus;
   product: string | null;
@@ -368,7 +372,9 @@ export async function listAudits(opts?: {
   if (!db) return [];
   let q = db
     .from("audits")
-    .select("id, audit_code, supplier_id, audit_type, status, product, created_at, suppliers(legal_name)")
+    .select(
+      "id, audit_code, supplier_id, supplier_source, external_supplier_name, audit_type, status, product, created_at, suppliers(legal_name)"
+    )
     .order("created_at", { ascending: false });
   if (opts?.status) q = q.eq("status", opts.status);
   if (opts?.limit) q = q.limit(opts.limit);
@@ -376,11 +382,17 @@ export async function listAudits(opts?: {
   if (error || !data) return [];
   return (data as Array<Record<string, unknown>>).map((r) => {
     const sup = r.suppliers as { legal_name?: string } | null;
+    const source = r.supplier_source === "external" ? "external" : "platform";
+    const externalSupplierName = r.external_supplier_name ? String(r.external_supplier_name) : null;
     return {
       id: String(r.id),
       auditCode: String(r.audit_code),
       supplierId: r.supplier_id ? String(r.supplier_id) : null,
-      supplierName: sup?.legal_name ?? null,
+      // R85：external 时 `suppliers` join 恒为 null（supplier_id 为 NULL）——
+      //   这里回落外部工厂名，否则后台列表这一列会整片显示 "—"，看不出客户要验谁。
+      supplierName: source === "external" ? externalSupplierName : sup?.legal_name ?? null,
+      supplierSource: source,
+      externalSupplierName: source === "external" ? externalSupplierName : null,
       auditType: String(r.audit_type ?? ""),
       status: (r.status as AuditStatus) ?? "requested",
       product: r.product ? String(r.product) : null,
@@ -390,7 +402,16 @@ export async function listAudits(opts?: {
 }
 
 export type AuditWorkflowView = {
-  audit: AuditListItem & { standardProtocol: string | null };
+  audit: AuditListItem & {
+    standardProtocol: string | null;
+    /** R85：external 时客户提供的工厂联系方式（后台据此联系工厂）。platform 时恒为 null。 */
+    externalContact: {
+      contact: string | null;
+      email: string | null;
+      phone: string | null;
+      address: string | null;
+    } | null;
+  };
   responses: Array<{ id: string; questionId: string; responseValue: string | null; responseText: string | null }>;
   findings: Array<{
     id: string;
@@ -409,12 +430,16 @@ export async function getAuditWorkflow(auditId: string): Promise<AuditWorkflowVi
 
   const { data: a } = await db
     .from("audits")
-    .select("id, audit_code, supplier_id, audit_type, status, product, standard_protocol, created_at, suppliers(legal_name)")
+    .select(
+      "id, audit_code, supplier_id, supplier_source, external_supplier_name, external_supplier_contact, external_supplier_email, external_supplier_phone, external_supplier_address, audit_type, status, product, standard_protocol, created_at, suppliers(legal_name)"
+    )
     .eq("id", auditId)
     .maybeSingle();
   if (!a) return null;
   const ar = a as Record<string, unknown>;
   const sup = ar.suppliers as { legal_name?: string } | null;
+  const source: "platform" | "external" = ar.supplier_source === "external" ? "external" : "platform";
+  const externalSupplierName = ar.external_supplier_name ? String(ar.external_supplier_name) : null;
 
   const [{ data: responses }, { data: findings }, { data: evidence }] = await Promise.all([
     db.from("audit_responses").select("id, question_id, response_value, response_text").eq("audit_id", auditId),
@@ -445,12 +470,24 @@ export async function getAuditWorkflow(auditId: string): Promise<AuditWorkflowVi
       id: String(ar.id),
       auditCode: String(ar.audit_code),
       supplierId: ar.supplier_id ? String(ar.supplier_id) : null,
-      supplierName: sup?.legal_name ?? null,
+      supplierName: source === "external" ? externalSupplierName : sup?.legal_name ?? null,
+      supplierSource: source,
+      externalSupplierName: source === "external" ? externalSupplierName : null,
       auditType: String(ar.audit_type ?? ""),
       status: (ar.status as AuditStatus) ?? "requested",
       product: ar.product ? String(ar.product) : null,
       createdAt: ar.created_at ? String(ar.created_at) : null,
       standardProtocol: ar.standard_protocol ? String(ar.standard_protocol) : null,
+      // platform 路径下恒为 null —— 平台内供应商的联系方式不属于该审核请求，不在这里暴露。
+      externalContact:
+        source === "external"
+          ? {
+              contact: ar.external_supplier_contact ? String(ar.external_supplier_contact) : null,
+              email: ar.external_supplier_email ? String(ar.external_supplier_email) : null,
+              phone: ar.external_supplier_phone ? String(ar.external_supplier_phone) : null,
+              address: ar.external_supplier_address ? String(ar.external_supplier_address) : null,
+            }
+          : null,
     },
     responses: ((responses as Array<Record<string, unknown>>) ?? []).map((r) => ({
       id: String(r.id),

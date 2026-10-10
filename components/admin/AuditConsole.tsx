@@ -251,7 +251,13 @@ export default function AuditConsole({ auditId, supplierId, currentStatus, allow
               </button>
             </div>
           ) : (
-            <p className="mt-2 text-xs text-[#d4232a]">Missing supplier_id — cannot attach evidence.</p>
+            <p className="mt-2 text-xs text-[#6d6b66]">
+              {/* R85：外部供应商的审核没有 supplier_id（audit_evidence.supplier_id 是 NOT NULL FK）。
+                  这不是故障 —— 是把「客户指定的工厂」接进系统后必然出现的情形。
+                  在后台能做的处置：先按上面的联系方式确认工厂身份并建档，再挂证据。 */}
+              No platform supplier linked — this audit targets a buyer-specified supplier. Confirm the
+              factory and create a supplier record first, then evidence can be attached.
+            </p>
           )}
         </div>
       </div>

@@ -296,6 +296,29 @@ export type AuditRequestFormPhrases = {
   requestReceived: string;
   yourCode: string;
   copyCode: string;
+  // ── R85：审核对象来源二选一（平台内 / 客户指定外部供应商）──────────────────
+  /** 单选组标题 */
+  sourceLabel: string;
+  /** 选项一：从平台目录选 */
+  sourcePlatform: string;
+  /** 选项二：客户指定的其他供应商 */
+  sourceExternal: string;
+  /** 外部路径的说明：为什么要填联系方式 */
+  externalHint: string;
+  /** 外部供应商名称 */
+  externalName: string;
+  /** 外部供应商联系人 */
+  externalContact: string;
+  /** 外部供应商工作邮箱 */
+  externalEmail: string;
+  /** 外部供应商电话/WhatsApp */
+  externalPhone: string;
+  /** 外部供应商工厂地址（选填） */
+  externalAddress: string;
+  /** 邮箱与电话至少填一项的提示 */
+  externalContactRequired: string;
+  /** 外部供应商名称必填提示 */
+  externalNameRequired: string;
 };
 
 const RQ_EN: AuditRequestFormPhrases = {
@@ -315,6 +338,18 @@ const RQ_EN: AuditRequestFormPhrases = {
   requestReceived: "Audit request received. Our team will respond within one business day.",
   yourCode: "Your audit code",
   copyCode: "Copy code",
+  sourceLabel: "Supplier to be audited",
+  sourcePlatform: "A supplier listed on our platform",
+  sourceExternal: "Another supplier I specify",
+  externalHint:
+    "We do not have this factory in our directory. Please give us a contact at the factory — we will reach out to them to arrange the audit.",
+  externalName: "Supplier / factory name",
+  externalContact: "Contact person",
+  externalEmail: "Contact work email",
+  externalPhone: "Contact phone / WhatsApp",
+  externalAddress: "Factory address (optional)",
+  externalContactRequired: "Please provide either an email or a phone number so we can reach the factory.",
+  externalNameRequired: "Please enter the supplier or factory name.",
 };
 
 const RQ_ZH: AuditRequestFormPhrases = {
@@ -334,6 +369,17 @@ const RQ_ZH: AuditRequestFormPhrases = {
   requestReceived: "已收到验厂申请，我们的团队将在一个工作日内与您联系。",
   yourCode: "您的验厂编号",
   copyCode: "复制编号",
+  sourceLabel: "需要验厂的供应商",
+  sourcePlatform: "平台内的供应商",
+  sourceExternal: "我要指定的其他供应商",
+  externalHint: "该工厂不在我们的目录中。请提供工厂的联系方式，我们将主动联系以安排验厂。",
+  externalName: "供应商 / 工厂名称",
+  externalContact: "联系人",
+  externalEmail: "联系人工作邮箱",
+  externalPhone: "联系电话 / WhatsApp",
+  externalAddress: "工厂地址（选填）",
+  externalContactRequired: "请至少填写邮箱或电话，以便我们联系到工厂。",
+  externalNameRequired: "请填写供应商或工厂名称。",
 };
 
 const RQ_ZHTW: AuditRequestFormPhrases = {
@@ -353,6 +399,17 @@ const RQ_ZHTW: AuditRequestFormPhrases = {
   requestReceived: "已收到驗廠申請，我們的團隊將在一個工作日內與您聯繫。",
   yourCode: "您的驗廠編號",
   copyCode: "複製編號",
+  sourceLabel: "需要驗廠的供應商",
+  sourcePlatform: "平台內的供應商",
+  sourceExternal: "我要指定的其他供應商",
+  externalHint: "該工廠不在我們的目錄中。請提供工廠的聯絡方式，我們將主動聯繫以安排驗廠。",
+  externalName: "供應商 / 工廠名稱",
+  externalContact: "聯絡人",
+  externalEmail: "聯絡人工作郵箱",
+  externalPhone: "聯絡電話 / WhatsApp",
+  externalAddress: "工廠地址（選填）",
+  externalContactRequired: "請至少填寫郵箱或電話，以便我們聯繫到工廠。",
+  externalNameRequired: "請填寫供應商或工廠名稱。",
 };
 
 const RQ_JA: AuditRequestFormPhrases = {
@@ -372,6 +429,18 @@ const RQ_JA: AuditRequestFormPhrases = {
   requestReceived: "監査のお申し込みを受け付けました。担当チームが1営業日以内にご連絡します。",
   yourCode: "お客様の監査コード",
   copyCode: "コードをコピー",
+  sourceLabel: "監査対象のサプライヤー",
+  sourcePlatform: "プラットフォーム掲載のサプライヤー",
+  sourceExternal: "指定したい別のサプライヤー",
+  externalHint:
+    "この工場は当社ディレクトリにありません。監査を手配するため、工場の連絡先をご提供ください。当社から連絡いたします。",
+  externalName: "サプライヤー / 工場名",
+  externalContact: "担当者",
+  externalEmail: "担当者の業務用メール",
+  externalPhone: "担当者の電話 / WhatsApp",
+  externalAddress: "工場住所（任意）",
+  externalContactRequired: "工場に連絡できるよう、メールまたは電話のいずれかをご記入ください。",
+  externalNameRequired: "サプライヤーまたは工場名をご記入ください。",
 };
 
 const RQ_ES: AuditRequestFormPhrases = {
@@ -391,6 +460,18 @@ const RQ_ES: AuditRequestFormPhrases = {
   requestReceived: "Solicitud de auditoría recibida. Nuestro equipo responderá en un día laborable.",
   yourCode: "Su código de auditoría",
   copyCode: "Copiar código",
+  sourceLabel: "Proveedor a auditar",
+  sourcePlatform: "Un proveedor de nuestra plataforma",
+  sourceExternal: "Otro proveedor que yo indique",
+  externalHint:
+    "Esta fábrica no está en nuestro directorio. Facilítenos un contacto de la fábrica; nos pondremos en contacto para organizar la auditoría.",
+  externalName: "Nombre del proveedor / fábrica",
+  externalContact: "Persona de contacto",
+  externalEmail: "Correo laboral de contacto",
+  externalPhone: "Teléfono de contacto / WhatsApp",
+  externalAddress: "Dirección de la fábrica (opcional)",
+  externalContactRequired: "Indique un correo o un teléfono para que podamos contactar con la fábrica.",
+  externalNameRequired: "Introduzca el nombre del proveedor o de la fábrica.",
 };
 
 const RQ_DE: AuditRequestFormPhrases = {
@@ -410,6 +491,18 @@ const RQ_DE: AuditRequestFormPhrases = {
   requestReceived: "Auditanfrage eingegangen. Unser Team meldet sich innerhalb eines Werktags.",
   yourCode: "Ihr Audit-Code",
   copyCode: "Code kopieren",
+  sourceLabel: "Zu prüfender Lieferant",
+  sourcePlatform: "Ein Lieferant aus unserem Verzeichnis",
+  sourceExternal: "Ein anderer, von mir benannter Lieferant",
+  externalHint:
+    "Diese Fabrik ist nicht in unserem Verzeichnis. Bitte nennen Sie uns einen Ansprechpartner in der Fabrik — wir kontaktieren sie, um das Audit zu organisieren.",
+  externalName: "Name des Lieferanten / der Fabrik",
+  externalContact: "Ansprechpartner",
+  externalEmail: "Geschäftliche E-Mail des Ansprechpartners",
+  externalPhone: "Telefon / WhatsApp des Ansprechpartners",
+  externalAddress: "Fabrikadresse (optional)",
+  externalContactRequired: "Bitte geben Sie eine E-Mail oder Telefonnummer an, damit wir die Fabrik erreichen können.",
+  externalNameRequired: "Bitte geben Sie den Namen des Lieferanten oder der Fabrik an.",
 };
 
 const RQ_FR: AuditRequestFormPhrases = {
@@ -429,6 +522,18 @@ const RQ_FR: AuditRequestFormPhrases = {
   requestReceived: "Demande d'audit reçue. Notre équipe vous répondra dans un jour ouvré.",
   yourCode: "Votre code d'audit",
   copyCode: "Copier le code",
+  sourceLabel: "Fournisseur à auditer",
+  sourcePlatform: "Un fournisseur de notre plateforme",
+  sourceExternal: "Un autre fournisseur que je désigne",
+  externalHint:
+    "Cette usine n'est pas dans notre annuaire. Indiquez-nous un contact dans l'usine ; nous le contacterons pour organiser l'audit.",
+  externalName: "Nom du fournisseur / de l'usine",
+  externalContact: "Personne à contacter",
+  externalEmail: "E-mail professionnel du contact",
+  externalPhone: "Téléphone du contact / WhatsApp",
+  externalAddress: "Adresse de l'usine (facultatif)",
+  externalContactRequired: "Indiquez un e-mail ou un téléphone afin que nous puissions joindre l'usine.",
+  externalNameRequired: "Veuillez saisir le nom du fournisseur ou de l'usine.",
 };
 
 const RQ_PT: AuditRequestFormPhrases = {
@@ -448,6 +553,18 @@ const RQ_PT: AuditRequestFormPhrases = {
   requestReceived: "Pedido de auditoria recebido. A nossa equipa responderá no prazo de um dia útil.",
   yourCode: "O seu código de auditoria",
   copyCode: "Copiar código",
+  sourceLabel: "Fornecedor a auditar",
+  sourcePlatform: "Um fornecedor da nossa plataforma",
+  sourceExternal: "Outro fornecedor que eu indicar",
+  externalHint:
+    "Esta fábrica não consta do nosso diretório. Indique-nos um contacto na fábrica; entraremos em contacto para agendar a auditoria.",
+  externalName: "Nome do fornecedor / da fábrica",
+  externalContact: "Pessoa de contacto",
+  externalEmail: "E-mail profissional do contacto",
+  externalPhone: "Telefone do contacto / WhatsApp",
+  externalAddress: "Endereço da fábrica (opcional)",
+  externalContactRequired: "Indique um e-mail ou um telefone para conseguirmos contactar a fábrica.",
+  externalNameRequired: "Introduza o nome do fornecedor ou da fábrica.",
 };
 
 const RQ_AR: AuditRequestFormPhrases = {
@@ -467,6 +584,18 @@ const RQ_AR: AuditRequestFormPhrases = {
   requestReceived: "تم استلام طلب التدقيق. سيتواصل فريقنا معك خلال يوم عمل واحد.",
   yourCode: "رمز التدقيق الخاص بك",
   copyCode: "نسخ الرمز",
+  sourceLabel: "المورّد المطلوب تدقيقه",
+  sourcePlatform: "مورّد مُدرج على منصتنا",
+  sourceExternal: "مورّد آخر أحدّده بنفسي",
+  externalHint:
+    "هذا المصنع غير مُدرج في دليلنا. يرجى تزويدنا بجهة اتصال في المصنع؛ وسنتواصل معها لترتيب التدقيق.",
+  externalName: "اسم المورّد / المصنع",
+  externalContact: "الشخص المسؤول",
+  externalEmail: "البريد الإلكتروني للعمل",
+  externalPhone: "هاتف التواصل / واتساب",
+  externalAddress: "عنوان المصنع (اختياري)",
+  externalContactRequired: "يرجى إدخال البريد الإلكتروني أو رقم الهاتف حتى نتمكن من التواصل مع المصنع.",
+  externalNameRequired: "يرجى إدخال اسم المورّد أو المصنع.",
 };
 
 const RQ_MAP: Record<string, AuditRequestFormPhrases> = { en: RQ_EN, zh: RQ_ZH, "zh-TW": RQ_ZHTW, ja: RQ_JA, es: RQ_ES, de: RQ_DE, fr: RQ_FR, pt: RQ_PT, ar: RQ_AR };

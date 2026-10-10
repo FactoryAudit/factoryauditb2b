@@ -19,6 +19,7 @@
 | **0.5** | `node --env-file=.env scripts/_r76_verify_preferred_date.cjs` | `10 PASS / 0 FAIL`（写入层空串→NULL 门） |
 | **0.6** | `node --env-file=.env scripts/_r79_verify_audit_mail.cjs` | `14 PASS / 0 FAIL`（验厂申请邮件门，真打 Resend） |
 | **0.7** | `node scripts/_r84_verify_fire_and_forget.cjs --selftest && node scripts/_r84_verify_fire_and_forget.cjs` | `SELF_TEST_OK` + `PASS 1 / FAIL 0`（禁裸 fire-and-forget） |
+| **0.8** | `node --env-file=.env scripts/_r85_verify_external_supplier.cjs` | `27 PASS / 0 FAIL`（外部供应商审核请求门） |
 | **1** | `node node_modules/next/dist/bin/next build 2>&1 \| tee outputs/_next_$(date +%Y%m%d%H%M%S).log` | 日志 0 行 `query failed` |
 | **1.5** | `node scripts/build-postflight-check.mjs --log outputs/_next_<上一步时间戳>.log` | `POSTFLIGHT_OK` |
 | **1.6** | `node scripts/_r25_verify_wall.cjs` | `PASS 13 / FAIL 0`（`/suppliers` 登录墙产物门） |
@@ -31,10 +32,11 @@
 
 **任一步 exit != 0 ⇒ 立即停止，不执行后续步骤。**
 
-> 第 **0.5 / 0.6 / 0.7 / 1.6** 步与第 0 / 1.5 / 8 步一样是**强制门，不得跳过**。
+> 第 **0.5 / 0.6 / 0.7 / 0.8 / 1.6** 步与第 0 / 1.5 / 8 步一样是**强制门，不得跳过**。
 > - **0.5（R76）**：`<input type="date">` 未填时前端传 `""`，穿透 `?? null` 直达 Postgres `date` 列 ⇒ 500。门跑真实库 + 真实写入层。
 > - **0.6（R79）**：验厂申请落库后必须发管理员通知 + 买家回执；门真打 Resend 拿 2xx（本地门只证接线，线上 tail 才证部署生效）。
 > - **0.7（R84）**：Cloudflare Workers 在 Response 返回后**取消**未注册到 `ctx.waitUntil` 的 pending Promise ⇒ 裸 `void notifyXxx()` 的副作用线上永不执行。本门静态扫描 `app/api/**/route.ts`，禁裸 fire-and-forget；副作用统一走 `runAfterResponse()`（`lib/afterResponse.ts` → Next `after()` → OpenNext 注入的 `ctx.waitUntil`）。⚠️ **本地门测不出**（Node 不取消 Promise）⇒ 必须线上 `wrangler tail` + 收件箱复核。
+> - **0.8（R85）**：`/factory-audit/request` 原先把审核对象**锁死在平台目录内**（`audits.supplier_id` NOT NULL）⇒ 客户想验一家不在平台上的工厂时**根本无法提交**，只能随便挑一家凑数，审核对象与仓库记录对不上账。R85 开第二条路（`supplier_source='external'` + 客户提供工厂联系方式）。本门真打真实库：external 落库逐列核验、缺名称/缺联系方式必须被拒、**平台内路径未回归**、**旧调用方（不传 supplierSource）缺省仍是 platform** 的控制组。已做 A/B 自证：换回旧 `lib/audits.ts` 时 CASE 1 立即 FAIL（`invalid_supplier`）。
 > 第 **1.6** 步读的是 `.next/server/app` 的预渲染产物，所以只能落在链内：`.next` 在本脚本开头就被改名隔离后重建 ⇒ 只有链内这一份才是「即将被部署的那份」；而它排在第 7 步 deploy **之前** ⇒ 门失败时站点尚未变更（fail-safe）。
 > 探针是本地未入库文件（`.gitignore` 的 `scripts/_*.cjs`），故 `release.sh` 显式检查其存在性，缺失即 `exit 1`，**不静默跳过**。
 
