@@ -9,8 +9,8 @@
 #
 # 注意：
 #   - 本脚本是 bash，不是 JS。cf-release.cjs 挂在 spawnSync 恒 EBUSY，不可用。
-#   - 四道闸门不得跳过：第 0 步（数据源门）、第 1.5 步（产物门）、
-#     第 1.6 步（R25 登录墙产物门）、第 8 步（落地门）。
+#   - 五道闸门不得跳过：第 0 步（数据源门）、第 0.5 步（R76 写入层空值门）、
+#     第 1.5 步（产物门）、第 1.6 步（R25 登录墙产物门）、第 8 步（落地门）。
 #   - 第 8 步失败 ⇒ 退出码 1，但**站点其实已经部署了**：那是「未通过验收」，不是「发布失败」。
 set -e -o pipefail
 cd "$(dirname "$0")/.."
@@ -37,6 +37,22 @@ esac
 
 echo "=== 第 0 步：preflight（数据源门）==="
 node scripts/build-preflight-check.mjs
+echo ""
+echo "=== 第 0.5 步：R76 写入层空值门（审计申请可提交性）==="
+# 为什么必须有这一门：
+#   2026-10-10 线上必现事故 —— 前台 /factory-audit/request 不填「期望日期」时，
+#   `<input type="date">` 的空串 "" 穿透所有 `?? null`，直达 Postgres 的 date 列：
+#       invalid input syntax for type date: ""
+#   ⇒ API 500 ⇒ 前台「出错了。请重试」。**真实买家彻底无法提交验厂申请**。
+#   空串穿透是"静默"的：tsc 绿、build 绿、既有门全绿，只有真人点击才暴露。
+# 为什么排在这里：
+#   它直接打库（只读+写测试行后立即清理），不依赖构建产物 ⇒ 放在构建前，
+#   失败时站点尚未变更，代价最低。
+# 为什么非它不可：
+#   `?? null` / `|| null` 这类兜底在代码里有 3 处，任何新增字段都可能再犯。
+#   本门从「唯一写入层」正向验证「空串 ⇒ NULL」，是唯一能拦住这类回流的判据。
+[ -f scripts/_r76_verify_preferred_date.cjs ] || { echo "缺少 scripts/_r76_verify_preferred_date.cjs —— 写入层空值门不可省，中止"; exit 1; }
+node --env-file=.env scripts/_r76_verify_preferred_date.cjs
 echo ""
 echo "=== 隔离旧产物 ==="
 node -e "const fs=require('fs');if(fs.existsSync('.next'))fs.renameSync('.next','_prune_next_'+Date.now());if(fs.existsSync('.open-next'))fs.renameSync('.open-next','_prune_opennext_'+Date.now())"

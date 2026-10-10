@@ -53,9 +53,21 @@ export async function POST(req: NextRequest) {
 
   const parsed = bodySchema.safeParse(json);
   if (!parsed.success) {
-    return NextResponse.json({ ok: false, error: "invalid_input" }, { status: 400 });
+    // 带上出错字段路径：生产排障时不必再猜是哪个字段导致 400。
+    // 只暴露 path（字段名），不回显用户输入值（避免 PII 出现在日志/响应里）。
+    const fields = parsed.error.issues.map((i) => i.path.join(".") || "(root)");
+    return NextResponse.json({ ok: false, error: "invalid_input", fields }, { status: 400 });
   }
   const b = parsed.data;
+
+  // 空串归一：`<input type="date">` 未填写时前端传的是 `""` 而不是 undefined，
+  // 空串会穿透 `?? null` 直达 Postgres date 列并抛 invalid input syntax（R76）。
+  // 写入层 lib/audits.ts 已收口，这里再兜一次，保证「进 input 的就是干净的」。
+  const blankToNull = (v: string | null | undefined): string | null => {
+    if (v === null || v === undefined) return null;
+    const s = String(v).trim();
+    return s.length === 0 ? null : s;
+  };
 
   // 组合「类别 + 标准」进 standard_protocol（schema 单字段），避免丢信息
   const standardProtocol = [b.category, b.standard && b.standard !== "None / Custom" ? b.standard : null]
@@ -65,20 +77,21 @@ export async function POST(req: NextRequest) {
   const input: CreateAuditRequestInput = {
     supplierId: b.supplierId,
     buyerEmail: b.buyerEmail,
-    buyerCompany: b.buyerCompany ?? null,
-    buyerCountry: b.buyerCountry ?? null,
+    buyerCompany: blankToNull(b.buyerCompany),
+    buyerCountry: blankToNull(b.buyerCountry),
     auditType: b.auditType ?? "announced",
-    product: b.product ?? null,
-    productCategory: b.productCategory ?? null,
+    product: blankToNull(b.product),
+    productCategory: blankToNull(b.productCategory),
     standardProtocol: standardProtocol || null,
-    preferredDate: b.preferredDate ?? null,
-    preferredWindow: b.preferredWindow ?? null,
-    specialRequirements: b.specialRequirements ?? null,
+    // 只接受 YYYY-MM-DD（input[type=date] 原生格式）；空串/非法值一律 NULL
+    preferredDate: /^\d{4}-\d{2}-\d{2}$/.test(blankToNull(b.preferredDate) ?? "") ? b.preferredDate : null,
+    preferredWindow: blankToNull(b.preferredWindow),
+    specialRequirements: blankToNull(b.specialRequirements),
     previousAuditAvailable: Boolean(b.previousAuditAvailable),
     documentsAvailable: Boolean(b.documentsAvailable),
-    additionalComments: b.additionalComments ?? null,
+    additionalComments: blankToNull(b.additionalComments),
     locale: b.locale ?? "en",
-    sourcePath: b.sourcePath ?? null,
+    sourcePath: blankToNull(b.sourcePath),
   };
 
   const result = await createAuditRequest(input);

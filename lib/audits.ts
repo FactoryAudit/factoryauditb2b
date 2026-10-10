@@ -265,6 +265,41 @@ function isUniqueViolation(e: unknown): boolean {
   return /duplicate key value violates unique constraint/i.test(String((e as { message?: unknown }).message ?? ""));
 }
 
+/**
+ * 写库前把「空串」归一为 NULL。
+ *
+ * 为什么必须做（R76 事故，2026-10-10，线上必现）：
+ *   前端 `<input type="date" value="">` 未填写时 state 是空字符串 `""`，
+ *   它**不是** null/undefined ⇒ 下游 `?? null` 兜底全部失效，空串原样到达
+ *   Postgres。而 `audits.preferred_date` 是 `date` 类型，`""` 会抛
+ *   `invalid input syntax for type date: ""` ⇒ API 返回 500 insert_failed
+ *   ⇒ 前台显示「出错了。请重试」。真实买家因此**永远无法提交验厂申请**。
+ *
+ * 为什么不只改前端：这条链路上 `?? null` 出现了 3 次（route.ts 两处 + 本文件），
+ *   任何一处新增字段都可能再犯。收口在**唯一写入层**，一次覆盖全部调用方。
+ *
+ * 语义：空串 = 未填写 = 缺失 ⇒ 必须写成 NULL（铁律：缺失值绝不用 0 或空串顶替）。
+ * 注意不能顺手把 "0" / "false" 之类当空 —— 只裁空白后判断长度。
+ */
+function blankToNull(v: string | null | undefined): string | null {
+  if (v === null || v === undefined) return null;
+  const s = String(v).trim();
+  return s.length === 0 ? null : s;
+}
+
+/**
+ * 归一「可为空的日期字符串」。除空串外，还要挡住前端偶发的非法值，
+ * 避免整条插入因一个坏字段而 500。无法解析为合法日期的输入一律视为未填写。
+ *
+ * 接受：`YYYY-MM-DD`（input[type=date] 的原生格式）；其余一律 NULL。
+ * 不在这里做时区换算 —— 存的是「买家期望的日历日」，不是时间点。
+ */
+function normalizeDate(v: string | null | undefined): string | null {
+  const s = blankToNull(v);
+  if (!s) return null;
+  return /^\d{4}-\d{2}-\d{2}$/.test(s) ? s : null;
+}
+
 /** 创建一条审核请求（status=requested）。撞号重试，绝不取消 UNIQUE。 */
 export async function createAuditRequest(input: CreateAuditRequestInput): Promise<CreateAuditRequestResult> {
   const db = createAdminClient();
@@ -278,16 +313,16 @@ export async function createAuditRequest(input: CreateAuditRequestInput): Promis
     supplier_id: input.supplierId,
     buyer_id: input.userId ?? null,
     audit_type: input.auditType ?? "announced",
-    product: input.product ?? null,
-    product_category: input.productCategory ?? null,
-    standard_protocol: input.standardProtocol ?? null,
-    preferred_date: input.preferredDate ?? null,
-    preferred_window: input.preferredWindow ?? null,
-    special_requirements: input.specialRequirements ?? null,
+    product: blankToNull(input.product),
+    product_category: blankToNull(input.productCategory),
+    standard_protocol: blankToNull(input.standardProtocol),
+    preferred_date: normalizeDate(input.preferredDate),
+    preferred_window: blankToNull(input.preferredWindow),
+    special_requirements: blankToNull(input.specialRequirements),
     previous_audit_available: Boolean(input.previousAuditAvailable),
     documents_available: Boolean(input.documentsAvailable),
-    additional_comments: input.additionalComments ?? null,
-    created_by: input.userId ?? input.buyerEmail ?? "web",
+    additional_comments: blankToNull(input.additionalComments),
+    created_by: input.userId ?? blankToNull(input.buyerEmail) ?? "web",
     status: "requested" as AuditStatus,
   };
 

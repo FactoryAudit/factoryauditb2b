@@ -184,6 +184,19 @@ export default function AuditRequestForm({
         setErrMsg(t.rateLimited);
       } else if (data?.error === "invalid_supplier") {
         setErrMsg(reqT.supplierPlaceholder);
+      } else if (data?.error === "invalid_input" && Array.isArray(data?.fields) && data.fields.length > 0) {
+        // R76 起 API 会回传出错字段名（path），让用户知道该改哪里，
+        // 而不是笼统的「出错了」。字段名走本地化映射，缺失则回退原字段名。
+        const labels: Record<string, string> = {
+          supplierId: reqT.supplier,
+          buyerEmail: t.labels.email,
+          buyerCompany: t.labels.company,
+          buyerCountry: t.labels.country,
+          auditType: t.labels.auditType,
+          standard: t.labels.standard,
+        };
+        const named = (data.fields as string[]).map((f) => labels[f] ?? f).join("、");
+        setErrMsg(`${t.error} (${named})`);
       } else {
         setErrMsg(t.error);
       }
