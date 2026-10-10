@@ -58,6 +58,11 @@ const BUILD_OR_UNUSED = [
   "SMTP_PORT",
   "SMTP_USER",
   "SMTP_PASS",
+  // 🔴 IMAP_PASS 是 support@factoryauditb2b.com 的**邮箱授权码**（imap.exmail.qq.com:993）。
+  //    2026-10-10 R76 部署后复核发现：白名单只列了 SMTP_*，漏了 IMAP_*，
+  //    导致 IMAP_PASS 明文随 next-env.mjs 打进 Worker bundle 上传（已线上泄漏一轮）。
+  //    与 SMTP_PASS 同性质 ⇒ 一并清空。其余 IMAP_* 非敏感，保留以便排障。
+  "IMAP_PASS",
   "GOOGLE_SHEETS_REGISTER_WEBHOOK",
   // 🔴 Supabase Management API 个人访问令牌（可执行任意 SQL，含 DDL）。
   //    只在本地跑迁移脚本时用，**运行时 Worker 完全不需要它**。
