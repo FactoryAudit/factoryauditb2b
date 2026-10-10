@@ -10,6 +10,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { createAuditRequest, type CreateAuditRequestInput } from "@/lib/audits";
 import { insertLead } from "@/lib/leads";
+import { notifyAdminNewAuditRequest, notifyAuditRequestReceived } from "@/lib/notify";
+import { runAfterResponse } from "@/lib/afterResponse";
 import { checkRateLimit, clientIp } from "@/lib/rateLimit";
 
 export const runtime = "nodejs";
@@ -106,26 +108,79 @@ export async function POST(req: NextRequest) {
   }
 
   // 团队通知：复用 leads 通道（fail-open，不影响主流程）
-  void insertLead({
-    kind: "buyer_lead",
-    tool: "audit-request",
-    email: b.buyerEmail,
-    company: b.buyerCompany ?? null,
-    country: b.buyerCountry ?? null,
-    supplierName: null,
-    sourcing: b.productCategory ?? null,
-    message: [
-      `Audit code: ${result.auditCode}`,
-      `Execution: ${b.auditType ?? "announced"}`,
-      `Category: ${b.category ?? ""}`,
-      `Standard: ${b.standard ?? ""}`,
-      `Product: ${b.product ?? ""}`,
-      b.additionalComments ?? "",
-    ]
-      .filter(Boolean)
-      .join("\n"),
-    payload: { auditCode: result.auditCode, ...input },
-  });
+  // 🔴 必须走 runAfterResponse（R84）：Cloudflare Workers 在 Response 返回后会**取消**
+  //    未被 ctx.waitUntil 注册的 pending Promise ⇒ 裸 `void ...()` 在生产根本跑不完。
+  runAfterResponse(
+    insertLead({
+      kind: "buyer_lead",
+      tool: "audit-request",
+      email: b.buyerEmail,
+      company: b.buyerCompany ?? null,
+      country: b.buyerCountry ?? null,
+      supplierName: null,
+      sourcing: b.productCategory ?? null,
+      message: [
+        `Audit code: ${result.auditCode}`,
+        `Execution: ${b.auditType ?? "announced"}`,
+        `Category: ${b.category ?? ""}`,
+        `Standard: ${b.standard ?? ""}`,
+        `Product: ${b.product ?? ""}`,
+        b.additionalComments ?? "",
+      ]
+        .filter(Boolean)
+        .join("\n"),
+      payload: { auditCode: result.auditCode, ...input },
+    }),
+    "audit/request insertLead"
+  ).catch((e) => console.error("[audit/request] insertLead failed", e));
+
+  // R79：邮件通知（管理员 + 买家回执）。
+  //
+  // 为什么放在**落库成功之后**：
+  //   必须先有 audit_code 才有可对账的通知；反过来（先发信后入库）一旦入库失败，
+  //   运营收到一封"有申请"但库里有没记录的邮件，对不上账。
+  //
+  // 为什么 fail-open（不 await、不因失败改响应）：
+  //   客户提交已经成功落库，绝不能因为 Resend 抖动就把 201 改成 500 ——
+  //   那会让客户以为没提交成功而重复提交。与既有线索/订单通道口径一致。
+  //
+  // 🔴 为什么必须用 runAfterResponse 而不是裸 `void ...()`（R84，2026-10-11）：
+  //   Cloudflare Workers 在响应返回后会**取消**未注册到 ctx.waitUntil 的 Promise。
+  //   实测：线上提交返回 201，但 wrangler tail 里**一条 [notify] 日志都没有**
+  //   ⇒ 邮件从未发出（管理员收不到通知、买家收不到回执）。本地门测不出（Node 不取消）。
+  runAfterResponse(
+    notifyAdminNewAuditRequest({
+      auditCode: result.auditCode,
+      supplierName: result.supplierName ?? null,
+      supplierSlug: result.supplierSlug ?? null,
+      auditType: b.auditType ?? "announced",
+      product: input.product,
+      productCategory: input.productCategory,
+      standardProtocol: standardProtocol || null,
+      preferredDate: input.preferredDate,
+      preferredWindow: input.preferredWindow,
+      specialRequirements: input.specialRequirements,
+      previousAuditAvailable: input.previousAuditAvailable,
+      documentsAvailable: input.documentsAvailable,
+      additionalComments: input.additionalComments,
+      buyerEmail: b.buyerEmail,
+      buyerCompany: input.buyerCompany,
+      buyerCountry: input.buyerCountry,
+      locale: input.locale,
+    }),
+    "audit/request admin notify"
+  ).catch((e) => console.error("[audit/request] admin notify failed", e));
+
+  runAfterResponse(
+    notifyAuditRequestReceived({
+      email: b.buyerEmail,
+      auditCode: result.auditCode,
+      supplierName: result.supplierName ?? null,
+      standardProtocol: standardProtocol || null,
+      locale: input.locale,
+    }),
+    "audit/request buyer receipt"
+  ).catch((e) => console.error("[audit/request] buyer receipt failed", e));
 
   return NextResponse.json({ ok: true, auditCode: result.auditCode }, { status: 201 });
 }

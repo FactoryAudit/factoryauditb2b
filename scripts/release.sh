@@ -9,7 +9,8 @@
 #
 # 注意：
 #   - 本脚本是 bash，不是 JS。cf-release.cjs 挂在 spawnSync 恒 EBUSY，不可用。
-#   - 五道闸门不得跳过：第 0 步（数据源门）、第 0.5 步（R76 写入层空值门）、
+#   - 七道闸门不得跳过：第 0 步（数据源门）、第 0.5 步（R76 写入层空值门）、
+#     第 0.6 步（R79 验厂邮件通知门）、第 0.7 步（R84 fire-and-forget 门）、
 #     第 1.5 步（产物门）、第 1.6 步（R25 登录墙产物门）、第 8 步（落地门）。
 #   - 第 8 步失败 ⇒ 退出码 1，但**站点其实已经部署了**：那是「未通过验收」，不是「发布失败」。
 set -e -o pipefail
@@ -53,6 +54,33 @@ echo "=== 第 0.5 步：R76 写入层空值门（审计申请可提交性）==="
 #   本门从「唯一写入层」正向验证「空串 ⇒ NULL」，是唯一能拦住这类回流的判据。
 [ -f scripts/_r76_verify_preferred_date.cjs ] || { echo "缺少 scripts/_r76_verify_preferred_date.cjs —— 写入层空值门不可省，中止"; exit 1; }
 node --env-file=.env scripts/_r76_verify_preferred_date.cjs
+echo ""
+echo "=== 第 0.6 步：R79 验厂申请邮件通知门 ==="
+# 为什么必须有这一门：
+#   2026-10-11 发现 `/api/audit/request` 落库后**不发任何邮件**（只 insertLead 写库）
+#   ⇒ 除非人工刷 /admin/audits，没人知道有人提交过；而表单页明文承诺
+#   「我们的团队将在一个工作日内回复您」⇒ 承诺无法兑现。真实询盘会静默流失。
+# 为什么排在构建前：
+#   它直接打库 + 直调 Resend，不依赖构建产物 ⇒ 失败时站点尚未变更，代价最低。
+# 为什么非它不可：
+#   「有没有发信」在代码层看不出来（sendMail 是 fail-open 的，失败只打日志），
+#   只有真打 Resend 拿到 2xx 才能证明接线正确。本门正向验证 2 封邮件均被接受。
+#   ⚠️ 会真发 1 封到 NOTIFY_ADMIN_EMAIL（无收件人副作用，属预期）。
+# 自证记录：把 notify 函数改成 return false 后同门 FAIL 2 项（CASE 3/4）⇒ 门可信。
+[ -f scripts/_r79_verify_audit_mail.cjs ] || { echo "缺少 scripts/_r79_verify_audit_mail.cjs —— 邮件通知门不可省，中止"; exit 1; }
+node --env-file=.env scripts/_r79_verify_audit_mail.cjs
+echo ""
+echo "=== 第 0.7 步：R84 fire-and-forget 门（副作用必须 waitUntil）==="
+# 为什么必须有这一门：
+#   2026-10-11 发现 `/api/audit/request` 用裸 `void notifyXxx()`（fire-and-forget）⇒
+#   Cloudflare Workers 在 Response 返回后**取消**未注册到 ctx.waitUntil 的 Promise
+#   ⇒ 邮件线上从未发出（wrangler tail 一条 [notify] 日志都没有，但本地门全绿）。
+#   本门静态扫描 app/api/**/route.ts，禁止裸 `void <notify|insertLead|createOrder>`。
+# 为什么排在构建前：纯静态扫描、零依赖，失败时站点尚未变更，代价最低。
+# 自证：--selftest 对坏样本须命中≥1、好样本命中 0；另在真实目录放入旧写法须 FAIL 1。
+[ -f scripts/_r84_verify_fire_and_forget.cjs ] || { echo "缺少 scripts/_r84_verify_fire_and_forget.cjs —— fire-and-forget 门不可省，中止"; exit 1; }
+node scripts/_r84_verify_fire_and_forget.cjs --selftest
+node scripts/_r84_verify_fire_and_forget.cjs
 echo ""
 echo "=== 隔离旧产物 ==="
 node -e "const fs=require('fs');if(fs.existsSync('.next'))fs.renameSync('.next','_prune_next_'+Date.now());if(fs.existsSync('.open-next'))fs.renameSync('.open-next','_prune_opennext_'+Date.now())"

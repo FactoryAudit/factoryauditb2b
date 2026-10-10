@@ -829,3 +829,131 @@ export async function notifyVerificationRequestReceived(data: {
     ].join("\n"),
   });
 }
+
+// ---------- R79：验厂申请（/factory-audit/request）管理员通知 ----------
+//
+// 为什么必须有这一段（2026-10-11 补）：
+//   该表单页面明文承诺「我们的团队将在**一个工作日内**回复您」，但原实现
+//   `POST /api/audit/request` 只写库、**不发任何邮件** ⇒ 除非人工去刷
+//   `/admin/audits`，否则完全不知道有人提交过 ⇒ 承诺无法兑现。
+//   与供应商入驻 / RFQ / 订单一样，必须给管理员一个主动推送。
+//
+// 为什么单独写而不是复用 notifyAdminNewLead：
+//   验厂申请带 **audit_code**（客户手上唯一的对账号）、供应商实体、审核类型、
+//   标准体系 —— 是「工单口径」，不是「线索口径」。运营要拿 audit_code 去对账，
+//   必须一眼看到。
+//
+// 文案铁律：只陈述收到的事实与下一步，不承诺交付时效以外的任何东西。
+
+/** 把可空字段渲染成 `—`（NULL ≠ 0 ≠ 空串；缺失绝不用空串顶替）。 */
+function auditLine(label: string, val?: string | number | boolean | null): string | null {
+  if (val === null || val === undefined || val === "") return `${label}: —`;
+  if (typeof val === "boolean") return `${label}: ${val ? "Yes" : "No"}`;
+  return `${label}: ${val}`;
+}
+
+/**
+ * 管理员通知：新的验厂申请。
+ *
+ * 由 `POST /api/audit/request` 在**落库成功之后**调用（绝不前置 —— 邮件发出
+ * 但库里没有记录，会让运营对不上账）。
+ * 发送失败不影响客户提交（route 里 catch，绝不因邮件问题回滚已入库的申请）。
+ */
+export async function notifyAdminNewAuditRequest(data: {
+  auditCode: string;
+  supplierName?: string | null;
+  supplierSlug?: string | null;
+  auditType?: string | null;
+  product?: string | null;
+  productCategory?: string | null;
+  standardProtocol?: string | null;
+  preferredDate?: string | null;
+  preferredWindow?: string | null;
+  specialRequirements?: string | null;
+  previousAuditAvailable?: boolean;
+  documentsAvailable?: boolean;
+  additionalComments?: string | null;
+  buyerEmail?: string | null;
+  buyerCompany?: string | null;
+  buyerCountry?: string | null;
+  locale?: string | null;
+}): Promise<boolean> {
+  const adminEmail = process.env.NOTIFY_ADMIN_EMAIL;
+  if (!adminEmail) {
+    console.log("[notify] NOTIFY_ADMIN_EMAIL 未配置，跳过验厂申请通知");
+    return false;
+  }
+  const body = [
+    `Audit code: ${data.auditCode}`,
+    "",
+    "— Supplier —",
+    auditLine("Supplier", data.supplierName ?? (data.supplierSlug ? data.supplierSlug : null)),
+    data.supplierName && data.supplierSlug ? `Profile: ${data.supplierSlug}` : null,
+    "",
+    "— Request —",
+    auditLine("Audit type", data.auditType),
+    auditLine("Standard", data.standardProtocol),
+    auditLine("Product / Scope", data.product),
+    auditLine("Product category", data.productCategory),
+    auditLine("Preferred date", data.preferredDate),
+    auditLine("Preferred window", data.preferredWindow),
+    auditLine("Previous audit available", data.previousAuditAvailable ?? false),
+    auditLine("Documents available", data.documentsAvailable ?? false),
+    "",
+    "— Notes —",
+    auditLine("Special requirements", data.specialRequirements),
+    auditLine("Additional comments", data.additionalComments),
+    "",
+    "— Buyer —",
+    auditLine("Email", data.buyerEmail),
+    auditLine("Company", data.buyerCompany),
+    auditLine("Country", data.buyerCountry),
+    auditLine("Locale", data.locale),
+    "",
+    `Next steps: reply to the buyer within one business day (the form promises this), scope the audit, and assign an auditor. View the request: https://factoryauditb2b.com/admin/audits`,
+  ]
+    .filter((x): x is string => x !== null)
+    .join("\n");
+  return sendMail({
+    to: adminEmail,
+    subject: `[FactoryAuditB2B] New Audit Request ${data.auditCode}`,
+    text: body,
+  });
+}
+
+/**
+ * 买家回执：确认已收到验厂申请，回显 **audit_code**。
+ *
+ * 为什么要回显 audit_code：客户在成功页上看到的就是这个编号（可一键复制），
+ * 邮件里再给一次，他后续追问/对账时直接引用 —— 与我们 RFQ / 订单口径一致。
+ *
+ * 措辞与表单承诺一致（「一个工作日内回复」），不额外承诺交付物或时效保证。
+ */
+export async function notifyAuditRequestReceived(data: {
+  email: string;
+  auditCode: string;
+  supplierName?: string | null;
+  standardProtocol?: string | null;
+  locale?: string | null;
+}): Promise<boolean> {
+  if (!data.email) return false;
+  const lang = data.locale && data.locale !== "en" ? `/${data.locale}` : "";
+  return sendMail({
+    to: data.email,
+    subject: `We received your audit request ${data.auditCode} — FactoryAuditB2B`,
+    text: [
+      "Thank you. We have received your factory audit request.",
+      "",
+      `Audit reference : ${data.auditCode}`,
+      auditLine("Supplier", data.supplierName),
+      auditLine("Standard", data.standardProtocol),
+      "",
+      "Our team will review the details and reply within one business day with the scope, the audit company we match you with, and a scoped proposal.",
+      "Please quote the audit reference above if you need to follow up.",
+      "",
+      `Track or continue on the site: https://factoryauditb2b.com${lang}/factory-audit/request`,
+      "",
+      "FactoryAuditB2B",
+    ].join("\n"),
+  });
+}

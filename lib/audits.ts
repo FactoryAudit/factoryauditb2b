@@ -255,7 +255,15 @@ export type CreateAuditRequestInput = {
 };
 
 export type CreateAuditRequestResult =
-  | { stored: true; auditCode: string; attempts: number }
+  | {
+      stored: true;
+      auditCode: string;
+      attempts: number;
+      /** 供应商展示名（R79 管理员通知邮件用）；无法确定时为 null，绝不回落空串 */
+      supplierName?: string | null;
+      /** 供应商档案 slug（用于在邮件里给出可点击的档案链接） */
+      supplierSlug?: string | null;
+    }
   | { stored: false; reason: "not_configured" | "invalid_supplier" | "insert_failed"; message?: string };
 
 function isUniqueViolation(e: unknown): boolean {
@@ -306,8 +314,21 @@ export async function createAuditRequest(input: CreateAuditRequestInput): Promis
   if (!db) return { stored: false, reason: "not_configured" };
 
   // 供应商必须存在（FK 引用；不存在直接报错，不静默）
-  const { data: sup } = await db.from("suppliers").select("id").eq("id", input.supplierId).maybeSingle();
+  // 同时取显示名与 slug：R79 管理员通知邮件要展示「客户申请的是哪一家」，
+  // 不额外再查一次库（这里已经查了，顺手带出）。
+  const { data: sup } = await db
+    .from("suppliers")
+    .select("id, display_name, english_name, legal_name, slug")
+    .eq("id", input.supplierId)
+    .maybeSingle();
   if (!sup) return { stored: false, reason: "invalid_supplier" };
+
+  // 供应商名的兜底顺序：display_name → english_name → legal_name → slug。
+  // 绝不回落空串（NULL≠空串），全空时用 slug 保证邮件里有个可辨识的标识。
+  const supplierName =
+    [sup.display_name, sup.english_name, sup.legal_name].find(
+      (v) => typeof v === "string" && v.trim().length > 0
+    ) ?? sup.slug ?? null;
 
   const base = {
     supplier_id: input.supplierId,
@@ -330,7 +351,15 @@ export async function createAuditRequest(input: CreateAuditRequestInput): Promis
     const auditCode = makeAuditCode();
     try {
       const { error } = await db.from("audits").insert({ ...base, audit_code: auditCode });
-      if (!error) return { stored: true, auditCode, attempts: attempt };
+      if (!error) {
+        return {
+          stored: true,
+          auditCode,
+          attempts: attempt,
+          supplierName: typeof supplierName === "string" ? supplierName : null,
+          supplierSlug: sup.slug ?? null,
+        };
+      }
       if (isUniqueViolation(error)) continue;
       console.error("[audits] insert failed", error.message);
       return { stored: false, reason: "insert_failed", message: error.message };

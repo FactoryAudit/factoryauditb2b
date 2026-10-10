@@ -16,6 +16,9 @@
 | 步 | 命令 | 通过标志 |
 |---|---|---|
 | **0** | `node scripts/build-preflight-check.mjs` | `EXPECTED_SUPPLIERS=<n>, EXPECTED_GUIDES=<m>` |
+| **0.5** | `node --env-file=.env scripts/_r76_verify_preferred_date.cjs` | `10 PASS / 0 FAIL`（写入层空串→NULL 门） |
+| **0.6** | `node --env-file=.env scripts/_r79_verify_audit_mail.cjs` | `14 PASS / 0 FAIL`（验厂申请邮件门，真打 Resend） |
+| **0.7** | `node scripts/_r84_verify_fire_and_forget.cjs --selftest && node scripts/_r84_verify_fire_and_forget.cjs` | `SELF_TEST_OK` + `PASS 1 / FAIL 0`（禁裸 fire-and-forget） |
 | **1** | `node node_modules/next/dist/bin/next build 2>&1 \| tee outputs/_next_$(date +%Y%m%d%H%M%S).log` | 日志 0 行 `query failed` |
 | **1.5** | `node scripts/build-postflight-check.mjs --log outputs/_next_<上一步时间戳>.log` | `POSTFLIGHT_OK` |
 | **1.6** | `node scripts/_r25_verify_wall.cjs` | `PASS 13 / FAIL 0`（`/suppliers` 登录墙产物门） |
@@ -28,11 +31,12 @@
 
 **任一步 exit != 0 ⇒ 立即停止，不执行后续步骤。**
 
-> 第 **1.6** 步与第 0 / 1.5 / 8 步一样是**强制门，不得跳过**。它读的是 `.next/server/app` 的
-> 预渲染产物，所以只能落在链内：`.next` 在本脚本开头就被改名隔离后重建 ⇒ 只有链内这一份
-> 才是「即将被部署的那份」；而它排在第 7 步 deploy **之前** ⇒ 门失败时站点尚未变更（fail-safe）。
-> 探针是本地未入库文件（`.gitignore` 的 `scripts/_*.cjs`），故 `release.sh` 显式检查其存在性，
-> 缺失即 `exit 1`，**不静默跳过**。
+> 第 **0.5 / 0.6 / 0.7 / 1.6** 步与第 0 / 1.5 / 8 步一样是**强制门，不得跳过**。
+> - **0.5（R76）**：`<input type="date">` 未填时前端传 `""`，穿透 `?? null` 直达 Postgres `date` 列 ⇒ 500。门跑真实库 + 真实写入层。
+> - **0.6（R79）**：验厂申请落库后必须发管理员通知 + 买家回执；门真打 Resend 拿 2xx（本地门只证接线，线上 tail 才证部署生效）。
+> - **0.7（R84）**：Cloudflare Workers 在 Response 返回后**取消**未注册到 `ctx.waitUntil` 的 pending Promise ⇒ 裸 `void notifyXxx()` 的副作用线上永不执行。本门静态扫描 `app/api/**/route.ts`，禁裸 fire-and-forget；副作用统一走 `runAfterResponse()`（`lib/afterResponse.ts` → Next `after()` → OpenNext 注入的 `ctx.waitUntil`）。⚠️ **本地门测不出**（Node 不取消 Promise）⇒ 必须线上 `wrangler tail` + 收件箱复核。
+> 第 **1.6** 步读的是 `.next/server/app` 的预渲染产物，所以只能落在链内：`.next` 在本脚本开头就被改名隔离后重建 ⇒ 只有链内这一份才是「即将被部署的那份」；而它排在第 7 步 deploy **之前** ⇒ 门失败时站点尚未变更（fail-safe）。
+> 探针是本地未入库文件（`.gitignore` 的 `scripts/_*.cjs`），故 `release.sh` 显式检查其存在性，缺失即 `exit 1`，**不静默跳过**。
 
 > 上述九步负责**产出并部署**。部署之后还有一道**强制门**（第 8 步，`scripts/release.sh` 已内置）：
 > `node scripts/verify-live-md5.cjs` ⇒ 末行必须是 `LIVE_MD5_OK`。
