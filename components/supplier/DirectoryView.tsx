@@ -25,7 +25,7 @@ import { supplierDisplayName } from "@/lib/supplierDisplayName";
  * ── 阶段 1（2026-09-30）：供应商登录墙 ──────────────────────────────────────
  *   本组件现在同时承担**两种访问视图**，由 `items[].locked` 区分：
  *     · locked = true  —— 未登录。真实公司名不渲染（只画骨架条），
- *                         卡片 href 指向登录页，CTA 文案为登录。
+ *                         卡片 href 指向档案页（🔴 2026-10-12 起；原为登录页）。
  *     · locked = false —— 已登录。渲染真实名称，href 指向档案页。
  *   🔴 但注意：预渲染的公开 HTML **恒为 locked 视图**（服务端不读 cookie，
  *      否则页面退化成 ƒ Dynamic ⇒ CF Workers Free CPU 超限 5xx）。
@@ -80,8 +80,10 @@ export type DirectoryEntry = DirectoryItem & {
   /**
    * 卡片跳转目标（**服务端算好**，客户端不做任何拼接）。
    *
-   * 锁定态（未登录）→ 登录页 `?next=<目录页>`，**刻意不带档案地址**：
-   *   档案地址含 slug，slug 含公司名，写进 href 等于公开 HTML 里泄漏真实名称。
+   * 锁定态（未登录）→ 🔴 2026-10-12 起同样指向真实档案页 `/suppliers/<slug>`。
+   *   原为登录页（`?next=<目录页>`）—— 那会让 32 家公开档案页在站内 0 入口，
+   *   Google 判「无人引用」⇒「已发现·尚未编入索引」。档案页公开且已进 sitemap，
+   *   slug 早已在本页 JSON-LD 出现，故改指档案页不新增泄露面。
    * 解锁态（已登录）→ 真实档案地址 `/suppliers/<slug>`。
    */
   href: string;
@@ -148,7 +150,7 @@ export default function DirectoryView({
   /** 当前语言 —— 只用于 `supplierDisplayName` 决定卡片展示用登记名还是企业自述英文名 */
   locale: string;
   // 阶段 1：`supplierPathPrefix` 已移除 —— 卡片的 href 由服务端算好放进
-  //   `items[].href`（锁定态指登录页、解锁态指档案页）。组件不再自己拼 URL，
+  //   `items[].href`（🔴 2026-10-12 起锁定/解锁态**都**指档案页）。组件不再自己拼 URL，
   //   这样「哪些链接能出现在公开 HTML 里」只有一处决策点（见 lib/directoryWall.ts）。
   dict: DirectoryDict;
   events: DirectoryEvents;

@@ -22,7 +22,7 @@ import type { TrustProfileDict } from "./VerificationBadge";
  *
  * 🔴 四条不可动摇的约束：
  *   1. **公开 HTML 只含锁定视图**。服务端传进来的 `items` 已由
- *      `lib/directoryWall.ts` 脱敏（真实公司名置空、href 指登录页）。
+ *      `lib/directoryWall.ts` 脱敏（真实公司名置空；href 指档案页，🔴 2026-10-12 起）。
  *      这里**不再**由客户端决定"谁能看名字" —— 那会退化成权限边界后退。
  *   2. **完整档只来自授权接口**。已登录时才去 `/api/suppliers/directory`
  *      取真实名称与档案地址；接口在**服务端**校验 cookie，客户端传什么都不信。

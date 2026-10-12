@@ -85,9 +85,11 @@ export default async function SuppliersPage({ params }: Props) {
 
   // ── 阶段 1（2026-09-30）：登录墙 ──────────────────────────────────────────
   // 派生值仍在服务端算好（唯一构造点 = lib/directoryItems.ts，与授权接口共用），
-  // 但**公开 HTML 里下发的恒为「锁定视图」**：真实公司名被置为空串、
-  // 卡片 href 指向登录页而非档案页。已登录用户由客户端从
-  // /api/suppliers/directory 取完整档后替换（见 components/supplier/DirectoryGrid.tsx）。
+  // 但**公开 HTML 里下发的恒为「锁定视图」**：真实公司名被置为空串、卡片只画骨架条。
+  // 🔴 2026-10-12：卡片 href **不再**指登录页，而是直接指向真实档案页（恢复内链，
+  // 详见 lib/directoryWall.ts 顶部约束 #1 与 R25 产物门的修订记录）。
+  // 已登录用户由客户端从 /api/suppliers/directory 取完整档后替换
+  // （见 components/supplier/DirectoryGrid.tsx）。
   //
   // 🔴 这里**绝不读 cookie 判定登录** —— 一读页面就退化成 ƒ Dynamic，
   //    而 CF Workers Free（CPU 10ms/req）下的 5xx 主因正是这种动态渲染。
@@ -100,10 +102,12 @@ export default async function SuppliersPage({ params }: Props) {
     loginPath,
     directoryPath,
     supplierPathPrefix,
-    // CTA 文案复用既有键（阶段 1 零新增叶）：
-    //   locked   → login.form.submit   （"Sign in"）
-    //   unlocked → suppliers.cardCta   （"View Supplier"）
-    lockedCta: t.login.form.submit,
+    // CTA 文案复用既有键（零新增叶）：
+    //   🔴 2026-10-12：锁定态卡片已改指**真实档案页**（恢复内链，见 lib/directoryWall.ts），
+    //      故两个视图的 CTA 统一用 suppliers.cardCta（"View Supplier"）。
+    //      原先锁定态复用 login.form.submit（"Sign in"）—— 卡片写着"登录"却跳到档案页，
+    //      会自相矛盾。
+    lockedCta: s.cardCta,
     unlockedCta: s.cardCta,
   });
 
