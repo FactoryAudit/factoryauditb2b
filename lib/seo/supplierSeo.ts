@@ -902,7 +902,7 @@ function tidy(text: string): string {
     .trim();
 }
 
-const TITLE_MAX = 46;
+const TITLE_MAX = 44;
 const DESC_MAX = 200;
 
 // =============================================================================

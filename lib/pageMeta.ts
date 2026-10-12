@@ -26,6 +26,13 @@ type MetaInput = {
   description: string;
   robots?: Partial<Metadata["robots"]>; // 例如 { index: false }
   withBrand?: boolean; // 是否自动追加 "| FactoryAuditB2B"
+  /**
+   * 传 false ⇒ **不裁 title 主体**（默认裁）。
+   * 供应商档案页传 false：它的标题已由 `lib/seo/supplierSeo.ts` 的
+   * `generateSupplierTitle()` 按候选链自行管理长度（含「绝不在公司名中间截断」铁律），
+   * 再经本函数二次裁剪只会把公司名或定位段切坏。
+   */
+  trimTitle?: boolean;
 };
 
 // ── meta description 长度闸门（工单 SEO-20260918-FAB 任务 2.1）─────────────────
@@ -126,14 +133,29 @@ export function trimMetaDescription(
 //   · 幂等：未超预算的 title 原样返回。
 const TITLE_BRAND_TOKEN = "FactoryAuditB2B";
 const TITLE_SEPARATOR_RE = /[|｜—–·:：/／]/;
-const TITLE_LATIN_BODY_BUDGET = 65;
+// 句末标点也是天然断句点："What Is a Factory Audit? How Buyers…" → "What Is a Factory Audit?"
+// 🔴 刻意**不含句点 `.`**：公司法定名里满是缩写点（"Co., Ltd."、"A.B. Trading"），
+//    把 `.` 当断点会在公司名中间切开 —— 这违反本项目「绝不在公司名中间截断」的铁律。
+const TITLE_SENTENCE_END_RE = /[。!！?？]/;
+// 断句后若停在功能词上（"…Rejection Risk with"、"…Verification &"），继续往前退 ──
+// 否则会产出 "…Verification & | FactoryAuditB2B" 这类悬空断句，比截断更难看。
+const TITLE_TRAILING_STOPWORD_RE =
+  /\s+(?:&|and|or|with|for|to|of|in|on|at|by|from|into|as|the|a|an|vs|versus|your|its|their)$/i;
+// 🔴 2026-10-12：拉丁预算 65 → 42。
+//   旧值只作用于「品牌段之前的主体」，而 " | FactoryAuditB2B"（19 字符）是随后由
+//   buildPageMetadata 追加的 ⇒ 实际总长可达 84（线上实测最长 83，62 个页面被 SERP 截断）。
+//   42 + 19 = 61，落在 SERP 的实用展示宽度内。
+//   ⚠️ 不能只把数字改小：必须同时靠上面的 TITLE_SENTENCE_END_RE / TITLE_TRAILING_STOPWORD_RE
+//      保住断句质量，否则会产出 "…Verification & |"、"…Risk with |" 这类悬空断句。
+//   CJK 预算保持 36 不动（实测中文标题最长 36 字，本就是零命中；汉字单字宽约拉丁两倍）。
+const TITLE_LATIN_BODY_BUDGET = 42;
 const TITLE_CJK_BODY_BUDGET = 36;
 // 分隔符断句至少保留预算的这一比例，避免退化成 "PPAP" 这类几乎无信息的标题
 const TITLE_MIN_KEEP_RATIO = 0.35;
 
 export function trimMetaTitle(
   text: string,
-  opts?: { cjkBudget?: number; latinBudget?: number }
+  opts?: { cjkBudget?: number; latinBudget?: number; noTrimBody?: boolean }
 ): string {
   if (!text) return text;
   // 1) 把「品牌段及其前置分隔符」整体划为不可裁的尾巴
@@ -167,22 +189,44 @@ export function trimMetaTitle(
   //    text 里品牌段前的分隔符可能是坏的（"…Train Your| FactoryAuditB2B" 无空格，
   //    或 " | " 与 "|" 混用）—— 直接返回原串就把坏分隔符原样放行了。
   if (chars.length <= budget) return body + tail;
+  // 🔴 2026-10-12：调用方已自行管理长度时（供应商档案页的 generateSupplierTitle
+  //    有完整候选链 + 「绝不截断公司名」铁律）⇒ 只归一化品牌段，**不裁主体**。
+  //    否则本函数会把 "Ho Chi Minh Garment JSC | Ho Chi Minh, Vietnam" 这类
+  //    已被上游判定为合规的标题，在分隔符处二次切掉定位段。
+  if (opts?.noTrimBody) return body + tail;
   const head = chars.slice(0, budget).join("");
   const minKeep = Math.max(12, Math.floor(budget * TITLE_MIN_KEEP_RATIO));
-  // ① 分隔符断句
-  for (let i = head.length - 1; i >= 0; i--) {
-    if (TITLE_SEPARATOR_RE.test(head[i]) && i >= minKeep) {
-      return head.slice(0, i).replace(DANGLING_TAIL_RE, "").trim() + tail;
-    }
+  // ① 分隔符 / 句末标点断句（取预算内**最靠后**的一处，最大化保留信息）
+  for (let i = head.length - 1; i >= minKeep; i--) {
+    const ch = head[i];
+    const isSep = TITLE_SEPARATOR_RE.test(ch);
+    const isEnd = TITLE_SENTENCE_END_RE.test(ch);
+    if (!isSep && !isEnd) continue;
+    // 句末标点**保留标点本身**（"…Audit?" 比 "…Audit" 更像一个完整标题）；分隔符则丢掉
+    const kept = isEnd && !isSep ? head.slice(0, i + 1) : head.slice(0, i);
+    return kept.replace(DANGLING_TAIL_RE, "").trim() + tail;
   }
-  // ② 词边界
+  // ② 没有**强断点**（句末标点 / 分隔符）⇒ 宁可保留完整短语，让搜索引擎按像素自行截断。
+  //    理由（2026-10-12 预演实测）：靠词边界硬裁会产出
+  //      "Cuori Electrical Appliances (Group) | FactoryAuditB2B"（公司名被切）、
+  //      "A key process was subcontracted and not | FactoryAuditB2B"（半句话）、
+  //      "Social Compliance & Audit Guides (SA8000 | FactoryAuditB2B"（括号不闭合）
+  //    —— 全都比「长标题被 SERP 截断」更难看，且第一条直接违反「不截断公司名」铁律。
+  //    仅当主体极端超长（> 预算 2 倍）时才退到词边界硬裁。
+  if (chars.length <= budget * 2) return body + tail;
+  // ③ 词边界断句，然后退掉结尾的悬空功能词（& / with / and / vs …）
   const sp = head.lastIndexOf(" ");
-  const trimmed = (sp >= minKeep ? head.slice(0, sp) : head).replace(DANGLING_TAIL_RE, "").trim();
-  // ③ 兜底：裁完几乎没有信息量，就宁可保留原文（长标题仍可被搜素引擎自行截断）
+  let trimmed = (sp >= minKeep ? head.slice(0, sp) : head)
+    .replace(DANGLING_TAIL_RE, "")
+    .trim();
+  while (TITLE_TRAILING_STOPWORD_RE.test(trimmed)) {
+    trimmed = trimmed.replace(TITLE_TRAILING_STOPWORD_RE, "").replace(DANGLING_TAIL_RE, "").trim();
+  }
+  // ④ 兜底：裁完几乎没有信息量，就宁可保留原文（长标题仍可被搜索引擎自行截断）
   if ([...trimmed].length < Math.min(12, minKeep)) return text;
   return trimmed + tail;
 }
-export function buildPageMetadata({ locale, path, title, description, robots, withBrand = true }: MetaInput): Metadata {
+export function buildPageMetadata({ locale, path, title, description, robots, withBrand = true, trimTitle = true }: MetaInput): Metadata {
   // 去重：部分页面（如集群页 seo_title）已自带品牌名，避免 "... | FactoryAuditB2B | FactoryAuditB2B"
   const BRAND_SUFFIX = " | FactoryAuditB2B";
   // 去重前先清掉标题尾部的悬空分隔符（如 "Pricing |"），避免拼出 "Pricing | | FactoryAuditB2B"。
@@ -190,7 +234,8 @@ export function buildPageMetadata({ locale, path, title, description, robots, wi
   const finalTitle = trimMetaTitle(
     withBrand && !cleanedTitle.includes("FactoryAuditB2B")
       ? `${cleanedTitle}${BRAND_SUFFIX}`
-      : cleanedTitle
+      : cleanedTitle,
+    trimTitle ? undefined : { noTrimBody: true }
   );
   // ── description 长度闸门统一收口（2026-09-29）────────────────────────────
   // 此前 `trimMetaDescription` 只在少数静态页被手动调用，而 guides / audit-guide /

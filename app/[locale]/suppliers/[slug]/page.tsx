@@ -199,6 +199,10 @@ export async function generateMetadata({
     path,
     title,
     description,
+    // 🔴 标题长度由 lib/seo/supplierSeo.ts 的 generateSupplierTitle() 按候选链自行管理
+    //    （含「绝不在公司名中间截断」铁律）⇒ 不让 lib/pageMeta.ts 再裁一次，
+    //    否则 "… | <城市>, <国家>" 的定位段会被分隔符规则切掉。
+    trimTitle: false,
     robots: verdict.indexable && !blocked
       ? { index: true, follow: true }
       : { index: false, follow: true },
