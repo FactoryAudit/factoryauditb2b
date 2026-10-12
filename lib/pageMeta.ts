@@ -199,7 +199,10 @@ export function trimMetaTitle(
   // ① 分隔符 / 句末标点断句（取预算内**最靠后**的一处，最大化保留信息）
   for (let i = head.length - 1; i >= minKeep; i--) {
     const ch = head[i];
-    const isSep = TITLE_SEPARATOR_RE.test(ch);
+    // ASCII 连字符（"-"）**只有两侧都是空格时**才算分隔符 ——
+    // 否则会把词内连字符（"On-Site"、"Cross-Border"、"B2B"）当成断点把词切开。
+    const spacedHyphen = ch === "-" && head[i - 1] === " " && head[i + 1] === " ";
+    const isSep = TITLE_SEPARATOR_RE.test(ch) || spacedHyphen;
     const isEnd = TITLE_SENTENCE_END_RE.test(ch);
     if (!isSep && !isEnd) continue;
     // 句末标点**保留标点本身**（"…Audit?" 比 "…Audit" 更像一个完整标题）；分隔符则丢掉
