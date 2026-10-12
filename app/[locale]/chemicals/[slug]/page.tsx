@@ -9,6 +9,7 @@ import { buildPageMetadata, trimMetaDescription } from "@/lib/pageMeta";
 import { pickZhPair, twText } from "@/lib/tw";
 import JsonLd from "@/components/JsonLd";
 import RfqForm from "@/components/RfqForm";
+import { buildArticleSchema } from "@/lib/seo/articleSchema";
 
 const BASE = "https://factoryauditb2b.com";
 // 🔴 化工行业的 RFQ 落在 industry_code = chemicals 下；
@@ -90,15 +91,12 @@ export default async function ChemicalPage({ params }: { params: Promise<Params>
     <main className="mx-auto max-w-3xl px-4 py-10">
       <JsonLd
         data={[
-          {
-            "@context": "https://schema.org",
-            "@type": "Article",
+          buildArticleSchema({
+            locale,
+            url: `${BASE}${lp(`/chemicals/${slug}`)}`,
             headline: `${name} (CAS ${chem.cas})`,
             description: pickZhPair(locale, chem.application.en, chem.application.zh),
-            inLanguage: locale,
-            url: `${BASE}${lp(`/chemicals/${slug}`)}`,
-            publisher: { "@id": `${BASE}/#organization` },
-          },
+          }),
           {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",

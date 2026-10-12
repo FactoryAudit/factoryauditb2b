@@ -11,6 +11,7 @@ import { pickZhPair } from "@/lib/tw";
 import JsonLd from "@/components/JsonLd";
 import RfqForm from "@/components/RfqForm";
 import RelatedGuides from "@/components/RelatedGuides";
+import { buildArticleSchema } from "@/lib/seo/articleSchema";
 
 const BASE = "https://factoryauditb2b.com";
 
@@ -98,15 +99,12 @@ export default async function IndustryTopicPage({ params }: { params: Promise<Pa
     <main className="mx-auto max-w-3xl px-4 py-10">
       <JsonLd
         data={[
-          {
-            "@context": "https://schema.org",
-            "@type": "Article",
+          buildArticleSchema({
+            locale,
+            url: `${BASE}${lp(`/industry/${slug}/${topicSlug}`)}`,
             headline: title,
             description,
-            inLanguage: locale,
-            url: `${BASE}${lp(`/industry/${slug}/${topicSlug}`)}`,
-            publisher: { "@id": `${BASE}/#organization` },
-          },
+          }),
           {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",

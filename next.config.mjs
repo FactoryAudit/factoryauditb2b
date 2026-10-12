@@ -111,7 +111,15 @@ const nextConfig = {
         source: "/(.*)",
         headers: [
           { key: "X-Content-Type-Options", value: "nosniff" },
-          { key: "X-Frame-Options", value: "SAMEORIGIN" }
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          // 2026-10-12 全站 SEO 体检补：此前只有上面两项，缺 HSTS / Referrer-Policy。
+          // 这三项不是排名因素，但属于 Google「最佳实践」审计项，且 HSTS 能避免
+          // 首访的一次 http→https 明文跳转（同时消除 sitemap 里 http 变体的隐患）。
+          { key: "Strict-Transport-Security", value: "max-age=31536000" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" }
+          // 🔴 刻意不加 Content-Security-Policy：本站大量使用内联样式与 Next 注入的
+          //    内联脚本，CSP 需逐条白名单化，配错会整站白屏。属独立变更，另行评估。
         ]
       }
     ];

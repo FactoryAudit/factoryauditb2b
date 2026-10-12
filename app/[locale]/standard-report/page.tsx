@@ -7,6 +7,7 @@ import { SECTIONS, type Bi, type Lang } from "@/lib/standardReport";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import { buildArticleSchema } from "@/lib/seo/articleSchema";
 
 // /{locale}/standard-report —— 公开的标准版报告样张
 //
@@ -50,14 +51,13 @@ export default async function StandardReportPage({ params }: Props) {
 
   const jsonLd = [
     {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      headline: s.h1,
-      description: s.metaDesc,
-      url: `${BASE}${p(PATH)}`,
-      inLanguage: locale,
+      ...buildArticleSchema({
+        locale,
+        url: `${BASE}${p(PATH)}`,
+        headline: s.h1,
+        description: s.metaDesc,
+      }),
       about: { "@type": "Thing", name: "Supplier due diligence report" },
-      publisher: { "@id": `${BASE}/#organization` },
     },
     {
       "@context": "https://schema.org",

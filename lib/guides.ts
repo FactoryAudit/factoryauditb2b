@@ -321,6 +321,7 @@ export const GUIDES: Guide[] = [
     category: "audit",
     titleEn: "Factory Audit Checklist: What Auditors Actually Check",
     titleZh: "工厂验厂检查表：审核员实际看什么",
+    metaTitleEn: "Factory Audit Checklist",
     metaDescEn:
       "A factory audit checklist covering documentation and production control. Covers quality, social compliance and the records auditors ask for.",
     metaDescZh:
@@ -544,6 +545,7 @@ export const GUIDES: Guide[] = [
     category: "risk",
     titleEn: "Supplier Risk Assessment: How to Score a Supplier",
     titleZh: "供应商风险评估：如何给供应商打分",
+    metaTitleEn: "Supplier Risk Assessment",
     metaDescEn:
       "How supplier risk assessment works across six risk dimensions. See what evidence moves the score and how to act on the result.",
     metaDescZh:
@@ -1238,6 +1240,7 @@ export const GUIDES: Guide[] = [
     category: "audit",
     titleEn: "What Is a Factory Audit? How Buyers Choose a Reliable Audit Firm",
     titleZh: "什么是第三方验厂？海外买家如何选择靠谱的验厂机构",
+    metaTitleEn: "What Is a Factory Audit?",
     metaDescEn:
       "What a B2B factory audit is and why overseas buyers need one. See how to choose a third-party audit firm for your own product.",
     metaDescZh:
@@ -1410,6 +1413,7 @@ export const GUIDES: Guide[] = [
     category: "verification",
     titleEn: "Supplier Evaluation Checklist 2026: Cut B2B Sourcing Risk",
     titleZh: "2026供应商评估清单(Checklist)：全面降低B2B采购风险",
+    metaTitleEn: "Supplier Evaluation Checklist 2026",
     metaDescEn:
       "A 2026 supplier evaluation checklist for legality, capacity and ESG. Covers the quality system, documentation and records auditors ask for.",
     metaDescZh:
@@ -1594,6 +1598,7 @@ export const GUIDES: Guide[] = [
     category: "audit",
     titleEn: "On-Site vs Desk Audit: Which Supplier Check Should You Use?",
     titleZh: "工厂实地审核 vs 线上文件审核：B2B采购该怎么选？",
+    metaTitleEn: "On-Site vs Desk Audit",
     metaDescEn:
       "On-site versus desk supplier audits, the trade-offs explained. See when each works and how to combine them for safe sourcing.",
     metaDescZh:
@@ -1766,6 +1771,7 @@ export const GUIDES: Guide[] = [
     category: "risk",
     titleEn: "Supply Chain Risk: What a Third-Party Factory Audit Actually Fixes",
     titleZh: "供应链风控必看：专业的第三方验厂能为你解决哪些痛点？",
+    metaTitleEn: "What a Third-Party Factory Audit Finds",
     metaDescEn:
       "How a third-party factory audit solves the biggest sourcing pains. Fake factories, unstable quality and missed delivery dates, fixed.",
     metaDescZh:
@@ -1938,6 +1944,7 @@ export const GUIDES: Guide[] = [
     category: "audit",
     titleEn: "Capacity Audit: How to Prevent Supplier Delivery Delays",
     titleZh: "产能审核(Capacity Audit)全解析：如何从源头避免交期延误？",
+    metaTitleEn: "Capacity Audit Guide",
     metaDescEn:
       "What a capacity audit checks and why certificates do not prove output. See the data that predicts whether your order will ship on time.",
     metaDescZh:
@@ -2229,6 +2236,7 @@ export const GUIDES: Guide[] = [
     category: "audit",
     titleEn: "PPI vs DUPRO: Which Production Inspection Matters More?",
     titleZh: "生产初期检验(PPI) vs 生产中期检验(DUPRO)：哪个更重要？",
+    metaTitleEn: "PPI vs DUPRO Inspection",
     metaDescEn: "PPI and DUPRO inspections move quality control earlier in the run. Compare timing, focus and cost, and see why DUPRO often wins.",
     metaDescZh: "生产初期检验(PPI)与生产中期检验(DUPRO)把质量控制前移到终检之前。本指南对比时机、重点与成本，并说明为何 DUPRO 通常性价比更高。",
     metaDescJa:
@@ -2342,6 +2350,7 @@ export const GUIDES: Guide[] = [
     category: "audit",
     titleEn: "Why Cross-Border Buyers Use 100% Full Inspection",
     titleZh: "为什么跨国采购一定要做全检？避免退货率飙升的关键",
+    metaTitleEn: "100% Full Inspection Explained",
     metaDescEn: "Why 100% full inspection is replacing AQL sampling for high-value goods. See when the extra cost is worth it for cross-border orders.",
     metaDescZh: "为何全检(100% Inspection)正在取代 AQL 抽样，成为跨境、高价值与高合规货物的标配，以及何时这笔额外成本值得花。",
     metaDescJa:
@@ -2451,6 +2460,7 @@ export const GUIDES: Guide[] = [
     category: "audit",
     titleEn: "Control Amazon FBA Rejection Risk with Inspection",
     titleZh: "B2B跨境电商卖家必备：如何通过验货控制亚马逊FBA拒收风险？",
+    metaTitleEn: "Amazon FBA Rejection Risk",
     metaDescEn: "How to build FBA inbound compliance into your inspection process. Check labels, drop tests, weighing and inner packaging before shipping.",
     metaDescZh: "如何把 FBA 入仓合规植入验货流程：最常见的拒收雷区，以及覆盖标签、跌落测试、称重量与内部包装的四步清单。",
     metaDescJa:
@@ -2566,6 +2576,7 @@ export const GUIDES: Guide[] = [
     category: "audit",
     titleEn: "Failed Inspection? 5 Strategies to Negotiate with Your Supplier",
     titleZh: "产品检验不合格怎么办？与供应商谈判及处理纠纷的5个策略",
+    metaTitleEn: "Failed Inspection? How to Negotiate",
     metaDescEn: "A failed inspection is the start of a negotiation, not the end. Five strategies to sort defects, freeze payment and re-rate the supplier.",
     metaDescZh: "一份不合格验货报告是谈判的开始而非订单的终结。五个策略：区分缺陷、冻结尾款、索要纠正计划、界定返工成本、重新评估供应商。",
     metaDescJa:
@@ -2808,6 +2819,7 @@ export const GUIDES: Guide[] = [
     category: "compliance",
     titleEn: "SA8000 Certification: How Hard Is It and What It Really Takes",
     titleZh: "SA8000 认证：到底难在哪、要准备什么",
+    metaTitleEn: "SA8000 Certification Guide",
     metaDescEn:
       "A realistic look at SA8000 certification and what the standard demands. See why it is harder than a one-off social audit before you commit.",
     metaDescZh:
@@ -2929,6 +2941,7 @@ export const GUIDES: Guide[] = [
     category: "compliance",
     titleEn: "ESG Supplier Audit: What It Covers Beyond Social Compliance",
     titleZh: "ESG 供应商审核：超出社会责任合规的部分",
+    metaTitleEn: "ESG Supplier Audit Guide",
     metaDescEn:
       "How an ESG supplier audit differs from a traditional social audit. Covers the environment, governance and traceability layers buyers add.",
     metaDescZh:
@@ -3171,6 +3184,7 @@ export const GUIDES: Guide[] = [
     category: "risk",
     titleEn: "12 Red Flags of a Chinese Supplier Scam (Spot Them Before You Pay)",
     titleZh: "中国供应商诈骗的 12 个红旗信号：下单前这样识别",
+    metaTitleEn: "Chinese Supplier Scam: 12 Red Flags",
     metaDescEn:
       "The most common warning signs that a China supplier is a scam. Pressure tactics, no verifiable entity, fake certificates, and the fix.",
     metaDescZh:
@@ -3288,6 +3302,7 @@ export const GUIDES: Guide[] = [
     category: "risk",
     titleEn: "How to Check a China Company Registration (License & Credit Code)",
     titleZh: "如何查中国公司工商注册：营业执照与信用代码核验",
+    metaTitleEn: "How to Check a China Company Registration",
     metaDescEn:
       "How to verify a Chinese supplier's registration on public registries. Check the legal name, credit code and business scope, then compare.",
     metaDescZh:
@@ -3404,6 +3419,7 @@ export const GUIDES: Guide[] = [
     category: "risk",
     titleEn: "Alibaba Trade Assurance: How It Protects Your Sourcing Payment",
     titleZh: "阿里 Trade Assurance 安全付款：保护你的采购资金",
+    metaTitleEn: "Alibaba Trade Assurance Explained",
     metaDescEn:
       "What Alibaba Trade Assurance covers and where its protection stops. See how to combine escrow payment with inspection for safe sourcing.",
     metaDescZh:
@@ -3520,6 +3536,7 @@ export const GUIDES: Guide[] = [
     category: "risk",
     titleEn: "Verify a Supplier Before Paying Deposit: 5-Step Checklist",
     titleZh: "付定金前验证供应商：5 步清单避免被骗",
+    metaTitleEn: "Verify a Supplier Before Deposit",
     metaDescEn:
       "A pre-deposit verification sequence that protects your advance payment. Run the entity check, sample, video call and references before paying.",
     metaDescZh:
@@ -3638,6 +3655,7 @@ export const GUIDES: Guide[] = [
     category: "risk",
     titleEn: "Common B2B Procurement Fraud Tactics (with Real Cases)",
     titleZh: "B2B 采购常见诈骗手法与真实案例解析",
+    metaTitleEn: "B2B Procurement Fraud Tactics",
     metaDescEn:
       "The tactics behind B2B sourcing fraud and how each one is stopped. Fake factories, phantom shipments, invoice redirect and certificate reuse.",
     metaDescZh:
@@ -3871,6 +3889,7 @@ export const GUIDES: Guide[] = [
     category: "audit",
     titleEn: "ISO 9001 vs ISO 13485: Which Quality System Fits Your Supplier",
     titleZh: "ISO 9001 与 ISO 13485 区别：质量体系怎么选",
+    metaTitleEn: "ISO 9001 vs ISO 13485",
     metaDescEn:
       "The real difference between ISO 9001 and ISO 13485 explained. See when a medical-device grade system is required before sourcing.",
     metaDescZh:
@@ -4103,6 +4122,7 @@ export const GUIDES: Guide[] = [
     category: "audit",
     titleEn: "PPAP: Production Part Approval Process for Automotive and Precision Sourcing",
     titleZh: "PPAP 生产件批准流程：汽车与精密制造准入",
+    metaTitleEn: "PPAP: Production Part Approval",
     metaDescEn:
       "What PPAP is, the 18 elements it requires and when it applies. See how to use it to qualify a supplier before mass production.",
     metaDescZh:
@@ -4327,6 +4347,7 @@ export const GUIDES: Guide[] = [
     category: "verification",
     titleEn: "How to Verify an Alibaba Supplier Before Paying a Deposit",
     titleZh: "付定金前如何核验阿里巴巴供应商",
+    metaTitleEn: "Verify an Alibaba Supplier",
     metaDescEn:
       "How to verify an Alibaba supplier before paying a deposit. Confirm the legal entity, factory address, certificates and payment entity.",
     metaDescZh:
@@ -4682,6 +4703,7 @@ export const GUIDES: Guide[] = [
     category: "verification",
     titleEn: "Factory or Trading Company? How to Check Your Chinese Supplier",
     titleZh: "工厂还是贸易公司？如何判断中国供应商的真实身份",
+    metaTitleEn: "Factory or Trading Company?",
     metaDescEn:
       "How to tell whether a Chinese supplier is a factory or a trader. Read the business scope, match addresses and check equipment evidence.",
     metaDescZh:
@@ -5302,6 +5324,7 @@ export const GUIDES: Guide[] = [
     category: "audit",
     titleEn: "When Should You Order a Factory Audit in China?",
     titleZh: "什么时候该在中国做工厂验厂？",
+    metaTitleEn: "When to Order a Factory Audit",
     metaDescEn:
       "A risk-based guide to deciding when to order a factory audit. Weigh order value, product risk, evidence gaps and supplier change.",
     metaDescZh:
@@ -5628,6 +5651,7 @@ export const GUIDES: Guide[] = [
     category: "audit",
     titleEn: "China Factory Audit Cost in 2026: What Affects the Price",
     titleZh: "2026年中国工厂验厂费用：价格由什么决定",
+    metaTitleEn: "China Factory Audit Cost 2026",
     metaDescEn:
       "What determines China factory audit cost, line by line. Location, audit type, duration, sites, standard and travel, plus quotes.",
     metaDescZh:
@@ -5961,6 +5985,7 @@ export const GUIDES: Guide[] = [
     category: "verification",
     titleEn: "Supplier Verification vs Factory Audit vs Inspection: What a Buyer Needs",
     titleZh: "供应商核验、工厂验厂与验货的区别：买家到底需要哪个",
+    metaTitleEn: "Supplier Verification vs Audit",
     metaDescEn:
       "Supplier verification versus factory audit versus pre-shipment inspection. See what each answers and which to order first in each situation.",
     metaDescZh:
@@ -7179,6 +7204,7 @@ export const GUIDES: Guide[] = [
     category: "compliance",
     titleEn: "SMETA 7 for Buyers: What to Check When Qualifying a Supplier",
     titleZh: "买家视角的 SMETA 7：审核报告该看什么",
+    metaTitleEn: "SMETA 7 for Buyers",
     metaDescEn:
       "How buyers should read a SMETA 7 report before they act on it. See 2-pillar versus 4-pillar scope, critical findings and follow-up.",
     metaDescZh:
@@ -7489,6 +7515,7 @@ export const GUIDES: Guide[] = [
     category: "compliance",
     titleEn: "RBA VAP vs SMETA vs BSCI: Which Supplier Audit Does a Buyer Need?",
     titleZh: "RBA VAP、SMETA 与 BSCI 对比：买家需要哪种供应商审核？",
+    metaTitleEn: "RBA VAP vs SMETA vs BSCI",
     metaDescEn:
       "A factual comparison of RBA VAP, SMETA and amfori BSCI. See what each covers, who requires it and whether one can replace another.",
     metaDescZh:
@@ -8102,6 +8129,7 @@ export const GUIDES: Guide[] = [
     category: "china",
     titleEn: "How Chinese Factories Can Become Buyer-Ready for International Sourcing",
     titleZh: "中国工厂如何具备面向国际采购的「买家就绪」状态",
+    metaTitleEn: "How Factories Become Buyer-Ready",
     metaDescEn:
       "What international buyers need to see from a Chinese factory. Legal details, real address, capacity, quality system and audit history.",
     metaDescZh:
@@ -8462,6 +8490,7 @@ export const GUIDES: Guide[] = [
     category: "audit",
     titleEn: "Factory Audit Timing Around China's 2026 Mid-Autumn and National Day Holidays",
     titleZh: "2026 中秋与国庆假期期间，中国工厂验厂该怎么排期",
+    metaTitleEn: "Factory Audit Timing Around China Holidays",
     metaDescEn:
       "How China's 2026 Mid-Autumn and National Day holidays affect audits. See which dates close factories and how to plan a visit that works.",
     metaDescZh:
@@ -8981,6 +9010,7 @@ export const GUIDES: Guide[] = [
     category: "audit",
     titleEn: "Factory Audit and Inspection for the Q4 Shipment Window: A Combination Guide",
     titleZh: "Q4 出货高峰前：工厂验厂与验货的组合作法",
+    metaTitleEn: "Q4 Shipment Window: Audit & Inspection",
     metaDescEn:
       "How to combine a factory audit with pre-shipment inspection in Q4. Plan around the shipment peak and the congestion, without paying twice.",
     metaDescZh:

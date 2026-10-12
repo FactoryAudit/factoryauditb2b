@@ -5,6 +5,7 @@ import { DIMENSION_STRUCTURE, TOTAL_WEIGHT, TOTAL_QUESTIONS } from "@/lib/riskEn
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import { buildArticleSchema } from "@/lib/seo/articleSchema";
 
 const PATH = "/methodology";
 const BASE = "https://factoryauditb2b.com";
@@ -48,14 +49,13 @@ export default async function MethodologyPage({ params }: Props) {
   });
 
   const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: m.h1,
-    description: m.metaDesc,
-    url: `${BASE}${p(PATH)}`,
-    inLanguage: locale,
+    ...buildArticleSchema({
+      locale,
+      url: `${BASE}${p(PATH)}`,
+      headline: m.h1,
+      description: m.metaDesc,
+    }),
     about: { "@type": "Thing", name: "Supplier risk assessment" },
-    publisher: { "@id": `${BASE}/#organization` },
   };
 
   return (

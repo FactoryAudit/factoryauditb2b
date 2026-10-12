@@ -353,7 +353,7 @@ const EN: SupplierSeoCopy = {
   unknownUnavailable: "Not available in the current supplier profile.",
   titleVerified: "{name} | {level} in {city}, {country}",
   titleVerifiedShort: "{name} | {level}",
-  titleUnverified: "{name} | Supplier profile in {city}, {country}",
+  titleUnverified: "{name} | {city}, {country}",
   titleFallback: "{name} | Supplier profile",
   descEvent: "{name} has a recorded verification event with FactoryAuditB2B.",
   descDeclared: "{name} is a supplier-declared profile.",
@@ -412,7 +412,7 @@ const ZH: SupplierSeoCopy = {
   unknownUnavailable: "当前供应商档案中没有该项信息。",
   titleVerified: "{name} | {city}、{country} {level}供应商档案",
   titleVerifiedShort: "{name} | {level}供应商档案",
-  titleUnverified: "{name} | {city}、{country}供应商档案",
+  titleUnverified: "{name} | {city}、{country}",
   titleFallback: "{name} | 供应商档案",
   descEvent: "{name} 在 FactoryAuditB2B 有核验事件记录。",
   descDeclared: "{name} 是供应商自述档案。",
@@ -469,7 +469,7 @@ const JA: SupplierSeoCopy = {
   unknownUnavailable: "現在のサプライヤープロフィールにはこの情報がありません。",
   titleVerified: "{name}｜{city}、{country}の{level}サプライヤー",
   titleVerifiedShort: "{name}｜{level}サプライヤー",
-  titleUnverified: "{name}｜{city}、{country}のサプライヤープロフィール",
+  titleUnverified: "{name}｜{city}、{country}",
   titleFallback: "{name}｜サプライヤープロフィール",
   descEvent: "{name} は FactoryAuditB2B に検証イベントの記録があります。",
   descDeclared: "{name} はサプライヤーの自己申告によるプロフィールです。",
@@ -528,7 +528,7 @@ const ES: SupplierSeoCopy = {
   unknownUnavailable: "No disponible en el perfil actual del proveedor.",
   titleVerified: "{name} | {level} en {city}, {country}",
   titleVerifiedShort: "{name} | {level}",
-  titleUnverified: "{name} | Perfil de proveedor en {city}, {country}",
+  titleUnverified: "{name} | {city}, {country}",
   titleFallback: "{name} | Perfil de proveedor",
   descEvent: "{name} tiene un evento de verificación registrado con FactoryAuditB2B.",
   descDeclared: "{name} es un perfil declarado por el proveedor.",
@@ -587,7 +587,7 @@ const DE: SupplierSeoCopy = {
   unknownUnavailable: "Im aktuellen Lieferantenprofil nicht verfügbar.",
   titleVerified: "{name} | {level} in {city}, {country}",
   titleVerifiedShort: "{name} | {level}",
-  titleUnverified: "{name} | Lieferantenprofil in {city}, {country}",
+  titleUnverified: "{name} | {city}, {country}",
   titleFallback: "{name} | Lieferantenprofil",
   descEvent: "{name} hat ein erfasstes Verifizierungsereignis bei FactoryAuditB2B.",
   descDeclared: "{name} ist ein vom Lieferanten selbst deklariertes Profil.",
@@ -646,7 +646,7 @@ const FR: SupplierSeoCopy = {
   unknownUnavailable: "Non disponible dans le profil fournisseur actuel.",
   titleVerified: "{name} | {level} à {city}, {country}",
   titleVerifiedShort: "{name} | {level}",
-  titleUnverified: "{name} | Profil fournisseur à {city}, {country}",
+  titleUnverified: "{name} | {city}, {country}",
   titleFallback: "{name} | Profil fournisseur",
   descEvent: "{name} dispose d'un événement de vérification enregistré auprès de FactoryAuditB2B.",
   descDeclared: "{name} est un profil déclaré par le fournisseur.",
@@ -705,7 +705,7 @@ const PT: SupplierSeoCopy = {
   unknownUnavailable: "Não disponível no perfil atual do fornecedor.",
   titleVerified: "{name} | {level} em {city}, {country}",
   titleVerifiedShort: "{name} | {level}",
-  titleUnverified: "{name} | Perfil de fornecedor em {city}, {country}",
+  titleUnverified: "{name} | {city}, {country}",
   titleFallback: "{name} | Perfil de fornecedor",
   descEvent: "{name} tem um evento de verificação registado na FactoryAuditB2B.",
   descDeclared: "{name} é um perfil declarado pelo fornecedor.",
@@ -764,7 +764,7 @@ const AR: SupplierSeoCopy = {
   unknownUnavailable: "غير متاحة في ملف المورّد الحالي.",
   titleVerified: "{name} | {level} في {city}، {country}",
   titleVerifiedShort: "{name} | {level}",
-  titleUnverified: "{name} | ملف مورّد في {city}، {country}",
+  titleUnverified: "{name} | {city}، {country}",
   titleFallback: "{name} | ملف مورّد",
   descEvent: "{name} لديه حدث تحقق مسجَّل لدى FactoryAuditB2B.",
   descDeclared: "{name} ملف مُصرَّح به من المورّد نفسه.",
@@ -902,7 +902,7 @@ function tidy(text: string): string {
     .trim();
 }
 
-const TITLE_MAX = 85;
+const TITLE_MAX = 46;
 const DESC_MAX = 200;
 
 // =============================================================================
@@ -988,6 +988,11 @@ export function generateSupplierTitle(
     candidates.push(formatTemplate(copy.titleUnverified, { name, city, country }));
   }
   candidates.push(formatTemplate(copy.titleFallback, { name }));
+  // 2026-10-12：末位补一个**裸公司名**候选。
+  //   法定名本身超长（> TITLE_MAX）时，这是唯一既不损失信息、又最短的形式 ——
+  //   品牌后缀由 buildPageMetadata 统一追加。此前末位是 `{name} | Supplier profile`
+  //   （中文 `{name} | 供应商档案`），对超长名会平白多挂一段无用后缀。
+  if (!candidates.includes(name)) candidates.push(name);
 
   return firstFitting(candidates, TITLE_MAX);
 }

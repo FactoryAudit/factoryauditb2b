@@ -9,6 +9,7 @@ import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i1
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { pickZhCopy, pickZhPair } from "@/lib/tw";
+import { buildArticleSchema } from "@/lib/seo/articleSchema";
 
 const BASE = "https://factoryauditb2b.com";
 type Params = { locale: string; slug: string };
@@ -66,16 +67,13 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
     .filter((g): g is NonNullable<typeof g> => Boolean(g));
 
   const jsonLd = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
+    buildArticleSchema({
+      locale,
+      url: `${BASE}${p(`/case-studies/${c.slug}`)}`,
       headline: title,
       description: pickZhPair(locale, c.metaDescEn, c.metaDescZh),
       dateModified: c.updated,
-      inLanguage: locale,
-      url: `${BASE}${p(`/case-studies/${c.slug}`)}`,
-      publisher: { "@id": `${BASE}/#organization` },
-    },
+    }),
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",

@@ -14,6 +14,7 @@ import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i1
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { pickZhCopy, pickZhPair } from "@/lib/tw";
+import { buildArticleSchema } from "@/lib/seo/articleSchema";
 
 const BASE = "https://factoryauditb2b.com";
 type Params = { locale: string; slug: string };
@@ -72,16 +73,13 @@ export default async function FieldReportPage({ params }: { params: Promise<Para
   });
 
   const jsonLd = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
+    buildArticleSchema({
+      locale,
+      url: `${BASE}${p(`/field-reports/${slug}`)}`,
       headline: title,
       description: pickZhPair(locale, r.metaDescEn, r.metaDescZh),
       dateModified: r.updated,
-      author: { "@type": "Organization", name: "FactoryAuditB2B", url: BASE },
-      publisher: { "@id": `${BASE}/#organization` },
-      mainEntityOfPage: `${BASE}${p(`/field-reports/${slug}`)}`,
-    },
+    }),
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",

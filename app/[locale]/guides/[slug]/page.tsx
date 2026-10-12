@@ -9,6 +9,7 @@ import { buildPageMetadata } from "@/lib/pageMeta";
 import { pickZhCopy, pickZhPair } from "@/lib/tw";
 import { pickGuideDesc } from "@/lib/pickGuideDesc";
 import { serviceKeyByHref } from "@/lib/nav";
+import { buildArticleSchema } from "@/lib/seo/articleSchema";
 
 const BASE = "https://factoryauditb2b.com";
 type Params = { locale: string; slug: string };
@@ -55,16 +56,13 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
     .filter((x): x is NonNullable<typeof x> => Boolean(x));
 
   const jsonLd = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
+    buildArticleSchema({
+      locale,
+      url: `${BASE}${p(`/guides/${slug}`)}`,
       headline: title,
       description: pickGuideDesc(locale, g),
       dateModified: g.updated,
-      inLanguage: locale,
-      url: `${BASE}${p(`/guides/${slug}`)}`,
-      publisher: { "@id": `${BASE}/#organization` },
-    },
+    }),
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
