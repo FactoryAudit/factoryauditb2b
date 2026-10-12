@@ -127,6 +127,12 @@ export default async function FieldReportPage({ params }: { params: Promise<Para
       </span>
       <h1 className="text-3xl font-bold mt-1">{title}</h1>
       <p className="mt-2 text-sm text-gray-500">
+        {/* 机构署名（2026-10-12，E-E-A-T）：与 schema 的 author(#organization) 一致，
+            并链到方法论页。品牌名无需翻译 ⇒ 零新增字典键。 */}
+        <Link href={p("/methodology")} className="font-medium text-[#171717] hover:underline">
+          FactoryAuditB2B
+        </Link>
+        {" · "}
         {f.updatedLabel} {r.updated}
       </p>
 

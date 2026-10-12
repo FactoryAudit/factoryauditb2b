@@ -103,7 +103,15 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
         {serviceLabel}
       </span>
       <h1 className="mt-3 text-3xl font-bold">{title}</h1>
-      <p className="mt-1 text-sm text-gray-500">{pickZhPair(locale, "Updated", "更新日期")}: {c.updated}</p>
+      <p className="mt-1 text-sm text-gray-500">
+        {/* 机构署名（2026-10-12，E-E-A-T）：与 schema 的 author(#organization) 一致，
+            并链到方法论页。品牌名无需翻译 ⇒ 零新增字典键。 */}
+        <Link href={p("/methodology")} className="font-medium text-[#171717] hover:underline">
+          FactoryAuditB2B
+        </Link>
+        {" · "}
+        {pickZhPair(locale, "Updated", "更新日期")}: {c.updated}
+      </p>
 
       <div className="mt-4 rounded-lg border border-[#d4232a]/30 bg-[#d4232a]/5 p-4 text-sm text-[#7f1d1d]">
         {disclosure}

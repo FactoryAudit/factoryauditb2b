@@ -100,7 +100,20 @@ export default async function GuidePage({ params }: { params: Promise<Params> })
       </nav>
 
       <h1 className="text-4xl font-extrabold text-[#171717]">{title}</h1>
-      <p className="text-sm text-[#6d6b66] mt-2">{t.supplierProfile.lastUpdated}: {g.updated}</p>
+      {/* 机构署名（2026-10-12，E-E-A-T）：内容须能被关联到**负责的实体**。
+          schema 侧的 author / publisher 已指向 #organization，这里补**可见**署名，
+          并链到方法论页 —— 让读者与爬虫都能从可见内容走到「我们如何做核验」。
+          品牌名无需翻译，故本改动零新增字典键。 */}
+      <p className="text-sm text-[#6d6b66] mt-2">
+        <Link
+          href={p("/methodology")}
+          className="font-medium text-[#171717] hover:underline"
+        >
+          FactoryAuditB2B
+        </Link>
+        {" · "}
+        {t.supplierProfile.lastUpdated}: {g.updated}
+      </p>
 
       {/* Quick Answer：AI Search 与 Google 摘要优先抓取这一段 */}
       <section className="mt-6 rounded-lg bg-[#f5f3ee] p-6">
