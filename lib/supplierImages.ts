@@ -612,12 +612,13 @@ export async function validateAndStoreFactoryPhoto(
   const dup = await findDuplicateByHash(input.supplierId, hash);
   if (dup) return { ok: false, code: "duplicate_file", status: 409 };
 
-  let path: string;
-  try {
-    path = buildImagePath(input.supplierId, extFromMime(v.mime), "");
-  } catch {
-    return { ok: false, code: "invalid_path", status: 400 };
-  }
+  // 🔴 2026-10-28 修复（照片「取不出来」的根因）：
+  //   此处原为 `path = buildImagePath(...)` 生成一次，落库用这个 path；
+  //   而 `uploadImageObject` 内部**又调了一次 buildImagePath**（crypto.randomUUID 重新生成），
+  //   文件实际写进的是第二个 uuid，库里记的却是第一个 ⇒ createSignedUrl 永远 Object not found。
+  //   实测：DB 记 e3abc2b2-…、存储实为 1b8d4ed8-…，12 条无一能对上。
+  //   现在只认 uploadImageObject 返回的 `up.path`（它就是真实写入的对象名），
+  //   不再在外层预先造路径。supplierId 合法性由 uploadImageObject 内部的 try 负责。
   const up = await uploadImageObject({
     supplierId: input.supplierId,
     ext: extFromMime(v.mime),
@@ -634,11 +635,12 @@ export async function validateAndStoreFactoryPhoto(
     height: input.height,
     size: bytes.byteLength,
     hash,
-    path,
+    path: up.path,
   });
   if (!rec.ok || !rec.id) {
     try {
-      await db.storage.from(IMAGE_BUCKET).remove([path]);
+      // 清理必须用**真实写入**的路径，否则残留孤儿对象
+      await db.storage.from(IMAGE_BUCKET).remove([up.path]);
     } catch {
       /* best-effort */
     }

@@ -98,7 +98,9 @@ export default function SupplierDashboard({
           <span className="text-3xl font-extrabold text-[#16a34a]">
             {visibilityPoints === null ? "—" : visibilityPoints}
           </span>
-          <span className="text-sm text-[#6d6b66]">/ 100+</span>
+          {/* 🔴 2026-10-28：原来这里写「/ 100+」，而实测分值可达 144 ——
+              分子 144、分母 "100+" 读起来像 bug。分值没有硬上限（多维度累加），
+              所以不写分母，只保留说明文字（visibilityDesc 已解释评分含义）。 */}
         </div>
         <p className="mt-2 text-sm text-[#6d6b66]">{sd.visibilityDesc}</p>
       </section>

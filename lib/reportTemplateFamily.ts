@@ -48,7 +48,8 @@ type Bi = { en: string; zh: string };
 export type ReportFamilyType =
   | "standard_due_diligence"
   | "social_compliance_audit"
-  | "quality_audit";
+  | "quality_audit"
+  | "self_assessment_summary";
 
 /** 章节骨架（不含任何结论性内容；结论来自 DB / 人工填写） */
 export type ChapterMeta = {
@@ -103,7 +104,7 @@ export type ReportFamilyMember = {
   /** 派生来源（模块 / 文件）。不删除既有代码，仅登记。 */
   source: string;
   /** 空白报告生成器（若存在） */
-  blankGenerator?: "emptyReportTemplate" | "buildBlankAuditReport";
+  blankGenerator?: "emptyReportTemplate" | "buildBlankAuditReport" | "buildSelfAssessmentReport";
   chapters: ChapterMeta[];
   /** 审核类报告：关联 audit_templates.code（72 项清单来源） */
   templateCode?: string;
@@ -305,6 +306,77 @@ const QUALITY_AUDIT: ReportFamilyMember = {
 };
 
 // =============================================================================
+// 4. self_assessment_summary（2026-10-28，6 章自评摘要报告）
+// =============================================================================
+//
+// 🔴 与前三个家族的本质区别：本家族**没有结论**。
+//    social/quality 两套的章节①是「采购建议 / 总分 / 严重问题」，那些是审核结论；
+//    自评报告一律不给 —— 无 overallScore、无 Risk Level、无 APPROVE/HOLD/REJECT。
+//    第 06 章不是结论，而是「买方还需核验什么」，由问卷实际缺口动态生成。
+
+const SELF_ASSESSMENT_SUMMARY: ReportFamilyMember = {
+  type: "self_assessment_summary",
+  label: { en: "Self-Assessment Summary", zh: "自评摘要报告" },
+  edition: { en: "Supplier-declared edition · no independent verification", zh: "企业自述版 · 不含独立核验" },
+  purpose: {
+    en: "Summarises what the supplier declared in its own questionnaire, and lists what a buyer still needs to verify. Contains no score and no audit conclusion.",
+    zh: "汇总供应商在其自填问卷中的声明，并列出买方仍需核验的事项。不含评分，不含审核结论。",
+  },
+  source: "audit_templates(stage=basic SUPPLIER_PROFILE + stage=module) + lib/selfAssessmentReport.ts",
+  blankGenerator: "buildSelfAssessmentReport",
+  chapters: [
+    {
+      no: "01",
+      titleEn: "Scope and limitations",
+      titleZh: "范围与局限",
+      kind: "list",
+      summaryEn: "Everything is self-reported; no score, grade or recommendation is given.",
+      summaryZh: "全部内容为企业自述；不提供分数、评级或建议。",
+    },
+    {
+      no: "02",
+      titleEn: "Company profile as declared",
+      titleZh: "企业档案（自述）",
+      kind: "fields",
+      summaryEn: "Identity and site information reproduced as submitted, not corrected.",
+      summaryZh: "身份与厂址信息按原样呈现，未经修正。",
+    },
+    {
+      no: "03",
+      titleEn: "Questionnaire completion",
+      titleZh: "问卷完成情况",
+      kind: "table",
+      summaryEn: "How many items were answered per module. Completion is not quality.",
+      summaryZh: "各模块实际答题数。完成度不等于质量。",
+    },
+    {
+      no: "04",
+      titleEn: "Self-declared answers",
+      titleZh: "自述答案分布",
+      kind: "table",
+      summaryEn: "Counts only — no weighting, scoring or ranking.",
+      summaryZh: "仅为计数，不加权、不评分、不排名。",
+    },
+    {
+      no: "05",
+      titleEn: "Declared certificates",
+      titleZh: "声明持有的证书",
+      kind: "fields",
+      summaryEn: "Declarations only; not checked against any issuer registry.",
+      summaryZh: "仅为声明，未与任何发证机构登记库核对。",
+    },
+    {
+      no: "06",
+      titleEn: "What a buyer still needs to verify",
+      titleZh: "买方仍需核验的事项",
+      kind: "list",
+      summaryEn: "Generated from actual gaps; each item names the check that would close it.",
+      summaryZh: "由实际缺口生成；每条注明可通过哪项核查关闭。",
+    },
+  ],
+};
+
+// =============================================================================
 // 家族登记（顺序即展示顺序）
 // =============================================================================
 
@@ -312,12 +384,14 @@ export const REPORT_FAMILY_ORDER: ReportFamilyType[] = [
   "standard_due_diligence",
   "social_compliance_audit",
   "quality_audit",
+  "self_assessment_summary",
 ];
 
 export const REPORT_FAMILY: Record<ReportFamilyType, ReportFamilyMember> = {
   standard_due_diligence: STANDARD_DUE_DILIGENCE,
   social_compliance_audit: SOCIAL_COMPLIANCE_AUDIT,
   quality_audit: QUALITY_AUDIT,
+  self_assessment_summary: SELF_ASSESSMENT_SUMMARY,
 };
 
 /** 审核类家族成员（social / quality），其清单来自 audit_templates */

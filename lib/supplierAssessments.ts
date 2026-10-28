@@ -55,7 +55,7 @@ export async function getChecklistTemplates(): Promise<AssessmentTemplate[]> {
   if (!db) return [];
   const { data: templates } = await db
     .from("audit_templates")
-    .select("id, code, name, name_zh, description")
+    .select("id, code, name, name_zh, description, stage")
     .eq("is_active", true)
     .order("code");
   if (!templates || templates.length === 0) return [];
@@ -108,11 +108,21 @@ export async function getChecklistTemplates(): Promise<AssessmentTemplate[]> {
     qBySec.set(q.section_id, list);
   }
 
-  return templates.map((t) => ({
+  // 排序：basic 恒在最前（前端「Step 1 基础档案 → Step 2 专项模块」依赖此顺序，
+  // 不依赖 code 字母序；SUPPLIER_PROFILE 恰好排后但必须排第一）。
+  const ordered = [...templates].sort((a, b) => {
+    const rank = (s: unknown) => (s === "basic" ? 0 : 1);
+    const d = rank(a.stage) - rank(b.stage);
+    return d !== 0 ? d : String(a.code).localeCompare(String(b.code));
+  });
+
+  return ordered.map((t) => ({
     code: t.code,
     name: t.name,
     nameZh: t.name_zh ?? "",
     description: t.description ?? null,
+    // 缺失/非法值一律降级 module，绝不因漏列把专项模块当成提交门槛
+    stage: t.stage === "basic" ? "basic" : "module",
     sections: (secByTpl.get(t.id) ?? []).map((s) => ({
       ...s,
       questions: qBySec.get(

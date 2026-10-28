@@ -64,13 +64,21 @@ export function lockedHref(o: Pick<MaskOptions, "loginPath" | "directoryPath">):
 }
 
 /**
- * 把一组目录项套上登录墙（未登录视图）。
+ * 把一组目录项套上「未登录视图」。
  *
- * 只动五个字段：legalName / englishName（清空）、href（改指档案页）、locked（true）、
- * cta（锁定态文案）。两个名称字段**必须同时清空** —— 展示名 `supplierDisplayName(locale, x)`
- * 在任何语种下都可能取到 englishName，只清 legalName 会让企业自述英文名漏进公开 HTML。
- * 其余公开维度（国家 / 城市 / 行业 / 产品 / 证据计数 / 核验等级 / 风险分数）**保持不变** ——
- * 这些是"脱敏样本"里仍然可看的公开信息，也是目录筛选与 SEO 的成立基础。
+ * 🔴 2026-10-28 拆墙（用户拍板「目录公开浏览，登录才看联系方式」）：
+ *   原实现把 legalName / englishName **置为空串**，预渲染 HTML 里目录页一个公司名都没有。
+ *   对搜索引擎而言那一页等于「无实质内容页」，同时让 32 家档案失去站内锚文本
+ *   （线上实测「已发现·尚未编入索引」1286 条的主要成因之一）。
+ *
+ *   现在只做三件事：
+ *     · href 指向真实档案页（保留内链，档案页仍是可索引资产）
+ *     · locked = true —— 语义收窄为「联系方式尚未解锁」，仅影响 CTA 文案与埋点，
+ *       **不再影响公司名渲染**
+ *     · cta 用锁定态文案
+ *
+ *   联系方式（邮箱 / 电话 / WhatsApp / 详细地址）本来就不在本页字段里，
+ *   它们由档案页的登录门控负责 —— 所以这条改动不新增任何联系方式的泄露面。
  */
 export function lockDirectoryItems(
   items: readonly DirectoryItem[],
@@ -78,13 +86,8 @@ export function lockDirectoryItems(
 ): DirectoryEntry[] {
   return items.map((x) => ({
     ...x,
-    legalName: "",
-    englishName: "",
-    // 🔴 2026-10-12：改为指向**真实档案页**（原为登录页）。
-    //   档案页本身公开（index,follow）、可索引，且已提交 sitemap；目录页若不给内链，
-    //   它在站内就 0 入口 ⇒ Google 判「无人引用」⇒ 「已发现·尚未编入索引」
-    //   （线上实测 1286 条的主因之一）。
-    //   slug 不算新增泄露面：它早已出现在本页 JSON-LD 的 itemListElement.url 中。
+    // slug 早已出现在本页 JSON-LD 的 itemListElement.url 中，且档案页本身公开可索引，
+    // 因此 href 指向档案页不构成新的泄露面。
     href: `${o.supplierPathPrefix}${x.slug}`,
     locked: true,
     cta: o.lockedCta,

@@ -3,7 +3,7 @@ import { notifyAdminSupplierClaim, notifyClaimReceived } from "@/lib/notify";
 import { insertLead } from "@/lib/leads";
 import { leadScore } from "@/lib/leadScore";
 import { checkRateLimit, clientIp } from "@/lib/rateLimit";
-import { STATIC_SUPPLIERS } from "@/lib/staticData";
+import { createAdminClient } from "@/lib/supabaseAdmin";
 
 // Supplier Claim Profile（需求 §24）：/suppliers/{slug}/claim 表单提交入口。
 //
@@ -52,8 +52,33 @@ export async function POST(req: NextRequest) {
     const slug = String(body?.slug ?? "").trim();
     const raw = body?.fields ?? {};
 
-    // slug 必须存在（防伪造 profile 认领）
-    const supplier = STATIC_SUPPLIERS.find((s) => s.slug === slug);
+    // slug 必须存在（防伪造 profile 认领）。
+    //
+    // 🔴 2026-10-28 修复（真实供应商邮件报告：认领表单提交返回 404 unknown_supplier）：
+    //   原实现查的是 `STATIC_SUPPLIERS` —— 那是 V2.0「DB-free」时期内置的**静态常量**，
+    //   只有 4 家。而实际档案存在 Supabase 里（已发布 32 家）⇒ **28 家供应商的认领
+    //   必然 404**，且前端把 404 显示成「Something went wrong. Please try again」，
+    //   供应商只会反复重试（实测有人试了两次后改用邮件）。
+    //   现在改为查库，只认真实存在的档案。
+    const db = createAdminClient();
+    if (!db) {
+      return NextResponse.json(
+        { ok: false, error: "service_unavailable", message: "Please email us directly." },
+        { status: 503 }
+      );
+    }
+    const { data: supplier, error: supplierErr } = await db
+      .from("suppliers")
+      .select("id, slug, legal_name, is_published, profile_status")
+      .eq("slug", slug)
+      .maybeSingle();
+    if (supplierErr) {
+      console.error("[supplier-claim] supplier lookup failed", supplierErr.message);
+      return NextResponse.json(
+        { ok: false, error: "lookup_failed", message: "Please email us directly." },
+        { status: 500 }
+      );
+    }
     if (!supplier) {
       return NextResponse.json({ ok: false, error: "unknown_supplier" }, { status: 404 });
     }
@@ -87,7 +112,7 @@ export async function POST(req: NextRequest) {
       email,
       firstName: f.contactName || null,
       company: f.companyName || null,
-      supplierName: supplier.legalName || null,
+      supplierName: supplier.legal_name || null,
       message: f.supportNote || null,
       score: leadScore({ email, company: f.companyName, message: f.supportNote, tool: "supplier-claim" }),
       payload: { slug, fields: f },
@@ -97,7 +122,7 @@ export async function POST(req: NextRequest) {
 
     // 双邮件（通道未配置时降级为日志，不阻塞）
     await Promise.allSettled([
-      notifyAdminSupplierClaim({ id: referenceId ?? id, slug, supplierName: supplier.legalName, fields: f }),
+      notifyAdminSupplierClaim({ id: referenceId ?? id, slug, supplierName: supplier.legal_name, fields: f }),
       notifyClaimReceived({ email, companyName: f.companyName, id: referenceId ?? id, slug }),
     ]);
 

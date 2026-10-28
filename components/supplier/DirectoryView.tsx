@@ -22,15 +22,19 @@ import { supplierDisplayName } from "@/lib/supplierDisplayName";
  *    全部由服务端算好放进 `items`（见 page.tsx 的 `items` 构造处）。
  *    客户端只做「按 URL 过滤 + 渲染」，不做任何判断。
  *
- * ── 阶段 1（2026-09-30）：供应商登录墙 ──────────────────────────────────────
- *   本组件现在同时承担**两种访问视图**，由 `items[].locked` 区分：
- *     · locked = true  —— 未登录。真实公司名不渲染（只画骨架条），
- *                         卡片 href 指向档案页（🔴 2026-10-12 起；原为登录页）。
- *     · locked = false —— 已登录。渲染真实名称，href 指向档案页。
- *   🔴 但注意：预渲染的公开 HTML **恒为 locked 视图**（服务端不读 cookie，
- *      否则页面退化成 ƒ Dynamic ⇒ CF Workers Free CPU 超限 5xx）。
- *      已登录视图由客户端在 hydration 后从 /api/suppliers/directory 取得。
- *      脱敏/解锁规则唯一实现在 `lib/directoryWall.ts`，本组件不复制该逻辑。
+ * ── 2026-10-28：目录墙拆除（公司名公开） ────────────────────────────────────
+ *   原「阶段 1 登录墙」（2026-09-30）让未登录视图连公司名都不渲染，只画骨架条。
+ *   实测后果：预渲染 HTML 的目录页**一个公司名都没有** ⇒ 对 Google 是「无实质内容页」，
+ *   且 32 家档案失去站内锚文本（线上 1286 条「已发现·尚未编入索引」的成因之一）。
+ *   现在：公司名 / 城市 / 产品 / 业务类型 / 证据计数 / 核验等级 / 风险 全部公开。
+ *   联系方式（邮箱 / 电话 / WhatsApp / 详细地址）本就不在本页字段内，
+ *   仍由档案页的登录门控负责 —— 拆墙不新增任何联系方式泄露面。
+ *
+ *   `items[].locked` 语义已收窄为「联系方式未解锁」，**只影响 CTA 文案与埋点**，
+ *   不再影响公司名渲染。脱敏/解锁规则唯一实现在 `lib/directoryWall.ts`。
+ *   🔴 预渲染的公开 HTML 恒为 locked 视图（服务端不读 cookie，
+ *      否则退化成 ƒ Dynamic ⇒ CF Workers Free CPU 超限 5xx）；
+ *      已登录视图由客户端 hydration 后从 /api/suppliers/directory 取得。
  */
 
 /** 单张目录卡片所需的**已收口**数据（派生值全部由服务端算好）。 */
@@ -306,24 +310,12 @@ export default function DirectoryView({
                 data-track={events.profileView}
                 data-track-value={x.locked ? "locked" : x.slug}
               >
-                {x.locked ? (
-                  // 阶段 1 登录墙：真实公司名**不进公开 HTML**（legalName 此时已置空串，
-                  // 渲染层只画骨架条）。骨架条用行内样式 —— 不引入新的 Tailwind 实用类，
-                  // 避开「改了 className 但生成的 CSS 仍是旧的」那一类扫描缓存陷阱。
-                  <span
-                    aria-hidden="true"
-                    className="inline-block rounded"
-                    style={{
-                      width: "10.5rem",
-                      maxWidth: "100%",
-                      height: "1rem",
-                      background: "#e4dfd6",
-                      verticalAlign: "-2px",
-                    }}
-                  />
-                ) : (
-                  <div className="font-semibold text-[#171717]">{supplierDisplayName(locale, x)}</div>
-                )}
+                {/* 🔴 2026-10-28 拆墙：公司名恒渲染，不再画骨架条。
+                    原逻辑（x.locked ⇒ 骨架条）依赖 lockDirectoryItems 把 legalName 置空，
+                    现在锁定语义收窄为「联系方式未解锁」，公司名 / 城市 / 产品 / 核验等级
+                    全部进入公开 HTML —— 这是目录页能成为 SEO 资产的前提。
+                    联系方式仍在档案页由登录门控，此处不涉及。 */}
+                <div className="font-semibold text-[#171717]">{supplierDisplayName(locale, x)}</div>
                 {/* CS-D：三态验证徽章（状态服务端推导，组件不自判） */}
                 <div className="mt-2">
                   <VerificationBadge state={x.badgeState} dict={trustProfileDict} />

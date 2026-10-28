@@ -17,6 +17,22 @@ import { lockedHref } from "@/lib/directoryWall";
 const BASE = "https://factoryauditb2b.com";
 type Props = { params: Promise<{ locale: string }> };
 
+/**
+ * 首页「Live Buyer Requests」区块开关。
+ *
+ * 🔴 2026-10-28 关闭渲染，原因：首页**不查数据库**（没有调用 listPublicRfqs），
+ *    这个区块从上线起就恒为空态 —— 页面上写着 "No active buyer requests yet."。
+ *    对第一次到访的海外采购商，这句话等于自曝「本站无人使用」，是首页最刺眼的负信号。
+ *
+ * 真实需求列表在 /suppliers 页顶部（那里 await listPublicRfqs(6)，且已有
+ * `buyerRequests.length > 0` 条件渲染，空则整块不出现）。
+ *
+ * 恢复条件：首页接入同一数据源后，把本常量删掉、改成数据驱动的条件渲染。
+ * 现在保留代码与全部字典键（liveTitle / liveLead / liveEmpty* 等 9 语），
+ * 不删 UI、不改叶子数 —— 随时可切回。
+ */
+const SHOW_HOME_LIVE_REQUESTS = false;
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: raw } = await params;
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
@@ -328,7 +344,11 @@ export default async function Home({ params }: Props) {
         </div>
       </section>
 
-      {/* ── 3. Live 采购需求（空态，如实） ──────────────────────── */}
+      {/* ── 3. Live 采购需求 ─────────────────────────────────────
+              🔴 2026-10-28：由 SHOW_HOME_LIVE_REQUESTS 关闭渲染。
+              原因与恢复条件见文件顶部该常量的注释 —— 首页无数据源，此块恒为空态。
+              代码与 9 语字典键全部保留，不删。 */}
+      {SHOW_HOME_LIVE_REQUESTS && (
       <section className="bg-[#f5f3ee] py-[68px]">
         <div className="container">
           <div className="mb-11 max-w-[720px]">
@@ -370,6 +390,7 @@ export default async function Home({ params }: Props) {
           </div>
         </div>
       </section>
+      )}
 
       {/* ── 4. 工业集群（数据源 = lib/coverage.ts 的 5 国） ──────── */}
       <section className="bg-white py-[92px]">

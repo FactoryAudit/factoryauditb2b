@@ -124,6 +124,10 @@ export async function PATCH(req: Request) {
   if (typeof body.employees === "string") {
     patch.employees = clamp(body.employees, 64) ?? "";
   }
+  // 2026-10-28：自评问卷 SP09 采纳通道
+  if (typeof body.factory_size === "string") {
+    patch.factory_size = clamp(body.factory_size, 120) ?? "";
+  }
   if (typeof body.verification_status === "string") {
     patch.verification_status = clamp(body.verification_status, 120) ?? "";
   }

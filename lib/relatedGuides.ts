@@ -69,6 +69,7 @@ const SERVICE_GUIDES: Record<string, string[]> = {
   verification: [
     "how-to-verify-a-chinese-supplier",
     "supplier-evaluation-checklist",
+    "accept-supplier-existing-audit-report",
     "supplier-verification-vs-factory-audit-vs-inspection",
     "verify-supplier-before-deposit",
     "china-factory-or-trading-company",
@@ -76,6 +77,7 @@ const SERVICE_GUIDES: Record<string, string[]> = {
   audit: [
     "what-is-a-factory-audit",
     "factory-audit-checklist",
+    "remote-video-factory-audit-vs-on-site",
     "on-site-vs-desk-audit",
     "how-to-read-a-factory-audit-report",
     "when-to-order-china-factory-audit",
@@ -88,6 +90,7 @@ const SERVICE_GUIDES: Record<string, string[]> = {
     "failed-inspection-dispute",
   ],
   improvement: [
+    "failed-factory-audit-next-steps",
     "what-is-quality-management-system",
     "supplier-quality-audit-checklist",
     "manufacturing-quality-control-process",
@@ -268,6 +271,7 @@ const TOOL_GUIDES: Record<string, string[]> = {
     "factory-audit-checklist",
     "supplier-quality-audit-checklist",
     "what-is-a-factory-audit",
+    "remote-video-factory-audit-vs-on-site",
     "how-to-read-a-factory-audit-report",
   ],
   "supplier-risk-assessment": [
@@ -283,6 +287,7 @@ const TOOL_GUIDES: Record<string, string[]> = {
     "on-site-vs-desk-audit",
   ],
   "audit-report-analyzer": [
+    "accept-supplier-existing-audit-report",
     "how-to-read-a-factory-audit-report",
     "third-party-audit-pain-points",
     "supplier-quality-audit-checklist",

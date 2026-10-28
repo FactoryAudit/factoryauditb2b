@@ -19,8 +19,8 @@ const L = (en: string, zh: string): Bi => ({ en, zh });
 // ---------- 报告头 ----------
 
 export const SPECIMEN_BANNER: Bi = L(
-  "STANDARD SPECIMEN — Fictional data for internal template review only. Not a real supplier assessment.",
-  "标准样张 — 虚构演示数据，仅供内部模板评审，不构成对任何真实供应商的评估结论。"
+  "STANDARD SPECIMEN — Fictional data, used to illustrate the report structure. Not an assessment of any real supplier.",
+  "标准样张 — 虚构演示数据，用于说明报告结构，不构成对任何真实供应商的评估结论。"
 );
 
 export const REPORT_HEADER = {

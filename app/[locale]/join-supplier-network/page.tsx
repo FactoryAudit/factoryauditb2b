@@ -96,6 +96,33 @@ export default async function Page({ params }: Props) {
             </li>
           ))}
         </ol>
+
+        {/* 🔴 2026-10-28：给「档案已存在」的供应商一条岔路。
+            实测案例：厦门一家企业在 9-19 / 9-21 / 9-22 连续三次提交入驻申请，全部无人处理；
+            它的档案其实早已在目录里且已发布 —— 它需要的是「认领」，而这四步流程从头到尾
+            只讲「提交申请」，没有一个字说明这件事。它试了一个半月，最后因认领表单报错才改用邮件找来。
+            这条岔路必须出现在流程说明里，否则每个已入库的供应商都会白走一次。 */}
+        <p className="mt-4 text-sm text-[#8a5410] bg-[#fff4e0] rounded-md px-4 py-3">
+          {locale === "zh" || locale === "zh-TW" ? (
+            <>
+              ⚠️ 您的公司可能已经在本目录中。如果能在{" "}
+              <a href={p("/suppliers")} className="underline font-medium">
+                供应商目录
+              </a>{" "}
+              里搜到自己的档案，请不要重复提交申请，直接认领现有档案即可 ——
+              认领后可以自行维护证书、照片和自评信息。
+            </>
+          ) : (
+            <>
+              ⚠️ Your company may already be listed. If you can find your profile in the{" "}
+              <a href={p("/suppliers")} className="underline font-medium">
+                supplier directory
+              </a>
+              , do not submit a new application — claim the existing profile instead, then maintain
+              its certificates, photos and self-assessment yourself.
+            </>
+          )}
+        </p>
       </section>
 
       {/* Status + Evidence */}

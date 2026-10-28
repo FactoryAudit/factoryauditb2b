@@ -9271,6 +9271,1113 @@ export const GUIDES: Guide[] = [
       ],
     },
   },
+  // ── 决策点专题一：供应商递来一份现成报告，能不能省下这笔钱 ─────────────────
+  // 为什么写：这是付款前最高频的费用决策，也是买家最容易误判的地方。
+  //   市面上的内容多讲「报告怎么看」，本篇讲「能不能采信」，即采信的五道边界：
+  //   签发方资质、范围、时效、可及性、整改闭环。
+  // 与既有内容的关系：`how-to-read-a-factory-audit-report` 讲报告内部结构；
+  //   `smeta-vs-bsci-social-audit-comparison` 讲标准差异；本篇讲采信判定，
+  //   三者互补。事实口径以 amfori 与 Sedex 官方发布为准，不用第三方转述数字。
+  {
+    slug: "accept-supplier-existing-audit-report",
+    category: "audit",
+    titleEn: "Can You Accept Your Supplier's Existing Audit Report?",
+    titleZh: "供应商已有的审核报告，能直接采信吗",
+    metaTitleEn: "Accept a Supplier's Existing Audit Report?",
+    metaDescEn:
+      "Five checks before you rely on a supplier's existing BSCI, SMETA or ISO report: issuer, scope, age, access and closed findings.",
+    metaDescZh:
+      "供应商递来现成的 BSCI、SMETA 或 ISO 报告时，先做五项核对：签发方资质、范围是否覆盖你的场地与产品、时效、报告可及性与整改闭环。",
+    updated: "2026-10-20",
+    tools: [
+      { href: "/tools/audit-report-analyzer" },
+      { href: "/tools/supplier-document-checker" },
+      { href: "/tools/supplier-verification-checklist" },
+    ],
+    services: [
+      { href: "/services/supplier-verification" },
+      { href: "/services/china-factory-audit" },
+    ],
+    related: [
+      "how-to-read-a-factory-audit-report",
+      "smeta-vs-bsci-social-audit-comparison",
+      "smeta-7-supplier-audit-buyer-guide",
+      "rba-vap-vs-smeta-vs-bsci",
+      "supplier-verification-vs-factory-audit-vs-inspection",
+      "remote-video-factory-audit-vs-on-site",
+      "failed-factory-audit-next-steps",
+    ],
+    links: [
+      { href: "/factory-audit/request", labelEn: "Request a factory audit", labelZh: "申请工厂验厂" },
+      { href: "/verify-supplier", labelEn: "Verify a supplier before you pay", labelZh: "付款前核验供应商" },
+    ],
+    en: {
+      quickAnswer:
+        "A supplier's existing report is evidence to be examined, not a decision made for you. Five checks settle whether you can rely on it: who audited and under what accreditation, whether the scope covers the entity, site and product you are buying, how old it is against the standard's own cycle, whether you can see the full report instead of a summary, and whether the non-conformances were closed with evidence. If all five pass, you can usually skip a duplicate full audit and run a lighter verification instead. If any one fails, the report becomes a list of questions rather than a reason to save money. Most report problems buyers meet are not forgeries. They are scope and age.",
+      definition:
+        "An audit report records what an auditor observed at a defined site, against a defined standard, during a defined window. A certificate is a different object: it is a decision by a certification body that a management system meets a standard, and it carries surveillance audits and a defined validity. The distinction matters because the two most common social audits in Chinese supply chains are not certifications. amfori states that BSCI is not a certification and that it does not issue pass or fail verdicts, and Sedex describes SMETA as an audit methodology that produces a report. Accepting a report therefore means accepting a snapshot with three boundaries: place, standard and date. The useful question is not whether a report exists, but whether those boundaries match the purchase you are about to make.",
+      keyPoints: [
+        "A report describes a site, a standard and a date. None of those three is your order.",
+        "BSCI and SMETA are audit methodologies, not certifications, so pass or fail language does not apply to them.",
+        "amfori runs a two-year BSCI cycle. An A or B overall rating is valid for 24 months. A C, D or E rating gives 12 months, with a follow-up audit between 2 and 12 months after the full audit.",
+        "Sedex publishes no official expiry for a SMETA report. Acceptance is set by buyer policy, commonly 12 months, and Sedex notes that some buyers accept reports up to 18 months old.",
+        "A 2-pillar SMETA covers labour and health and safety only. Environment and business ethics require the 4-pillar version.",
+        "Access is controlled by the supplier. A PDF forwarded by email is weaker evidence than a report shared on the platform, because a forward can be partial and cannot be checked against the original.",
+        "A report carrying open major non-conformances is a report about a problem in progress, not a clean result.",
+      ],
+      steps: [
+        {
+          title: "Identify what the document actually is",
+          body: "Ask for the cover page and the standard version before anything else. A self-assessment questionnaire completed by the factory is not an audit, a certificate of analysis is not a social audit, and a logo on a catalogue is neither. Naming the document correctly prevents the most common misunderstanding at the start.",
+        },
+        {
+          title: "Check the issuer, not just the logo",
+          body: "SMETA audits are carried out by Sedex Affiliate Audit Companies, and auditor registration can be checked through APSCA. For management system certificates, check the issuing body's accreditation and the certificate number against the accreditation body's own database. An audit company that has lost its approval status leaves the report valid as a document and unreliable as evidence.",
+        },
+        {
+          title: "Match the scope to your purchase",
+          body: "Confirm four things on the report: legal entity, physical site address, product categories, and standard version. A report issued to a trading company address does not cover the factory that will produce your goods, and a report for a sister site in the same group does not transfer. Scope is where most genuine reports stop being useful to you.",
+        },
+        {
+          title: "Age it against the standard's own cycle",
+          body: "For BSCI, the cycle is two years: 24 months of validity for an A or B overall rating, and 12 months for C, D or E with a follow-up audit due 2 to 12 months after the full audit. For SMETA there is no official expiry, so your own policy has to define one. Record the date you will next require an update in the supplier file, so the report cannot quietly age out of use.",
+        },
+        {
+          title: "Confirm you can see the full report",
+          body: "Ask for the report in full, including the findings section, the corrective action plan and the name of the audit company, or ask to be connected on the platform so you read the original. A summary page and a rating letter are not enough to judge findings. Without the full document you cannot tell whether a major finding sits in a process area that touches your product.",
+        },
+        {
+          title: "Read the findings, then read the closure",
+          body: "List every critical and major finding, then ask for dated evidence that each one was closed. If the same finding appears in two consecutive audits, treat repetition as the signal rather than the score, because a repeated finding describes a management system that does not correct itself. A clean report with no findings at all is also worth a second look, since it may mean a narrow scope.",
+        },
+        {
+          title: "Decide the residual work, and put it in writing",
+          body: "If the five checks pass, book a lighter verification that confirms the entity and site still match the report, and note the report as the baseline. If a check fails, scope a focused audit of the specific gap instead of commissioning a duplicate full audit. Write the decision and the reasoning into the supplier record so the next order does not reopen the same question.",
+        },
+      ],
+      examples: [
+        {
+          title: "Accepted on five checks",
+          body: "A European apparel buyer receives a 4-pillar SMETA report issued seven months earlier, shared on the platform, covering the correct entity and address. Two major findings are listed, both with closure evidence dated after the audit. The buyer verifies the legal entity and the production address, then places the order. Work avoided: one duplicate social audit. Work added: a short verification against the registration record.",
+        },
+        {
+          title: "Accepted on the logo only",
+          body: "An electronics buyer receives a forwarded PDF summary of a BSCI report with an A rating. The legal entity on the report matches, but the audited address is a different building from the one in the quotation. The buyer relies on the rating and skips verification. Production is later found to be subcontracted to a third site during peak season, and the finding is discovered at inspection, when lead time no longer allows a change of supplier.",
+        },
+        {
+          title: "Out of policy, still useful",
+          body: "A buyer receives a SMETA report 18 months old, outside the buyer's own 12-month policy. Rather than discarding it, the buyer uses it as a risk map: the reported findings point to working hours and fire safety. The buyer commissions a focused audit on those two areas at the actual production site. Cost: one narrow audit instead of a full duplicate, with a current date on the evidence.",
+        },
+      ],
+      checklist: [
+        "Document identified as an audit report, a certificate or a self-assessment.",
+        "Audit company approval status and auditor registration checked.",
+        "Report legal entity matched to the entity on the quotation and the contract.",
+        "Audited address matched to the production address, not to the office or a sister site.",
+        "Product categories on the report cover the goods being purchased.",
+        "Standard version and pillar scope confirmed, including 2-pillar versus 4-pillar for SMETA.",
+        "Report age checked against the standard's cycle and against your own acceptance policy.",
+        "Full report available with findings, corrective action plan and auditor details.",
+        "Critical and major findings listed and understood.",
+        "Closure evidence obtained with dates for each major finding.",
+        "Repeat findings across consecutive audits identified.",
+        "Residual verification scoped and written into the supplier record.",
+      ],
+      tables: [
+        {
+          title: "What Each Document Actually Proves",
+          headers: ["Document", "What it proves", "What it does not prove", "Typical validity"],
+          rows: [
+            [
+              "Social audit report (BSCI, SMETA)",
+              "Conditions observed at one site, on the audit date, against one standard",
+              "Your order, your specification, or the entity you pay",
+              "BSCI: 24 months for A or B, 12 months for C, D or E. SMETA: set by buyer policy, no official expiry",
+            ],
+            [
+              "Management system certificate (ISO 9001)",
+              "The system was assessed against the standard by a certification body",
+              "That a specific production batch conforms",
+              "Certificate cycle with annual surveillance audits",
+            ],
+            [
+              "Supplier self-assessment",
+              "What the supplier states about itself",
+              "Independent verification of any statement",
+              "None. It is a declaration that dates from the day it was signed",
+            ],
+            [
+              "Product test report",
+              "The tested sample conformed to the named standard",
+              "Consistency of production across later batches",
+              "Specific to the sample and the standard tested",
+            ],
+          ],
+        },
+        {
+          title: "Five Checks Before You Rely on a Report",
+          headers: ["Check", "Question to answer", "Fails when"],
+          rows: [
+            ["Issuer", "Who audited, and under which accreditation?", "Audit company approval lapsed, or auditor not registered"],
+            ["Scope", "Which entity, site, product and standard version?", "Address, entity or product category differs from your purchase"],
+            ["Age", "Within the standard's cycle and your own policy?", "Older than the applicable BSCI validity, or outside your SMETA policy"],
+            ["Access", "Full report with findings and corrective action plan?", "Summary page, screenshot or forwarded excerpt only"],
+            ["Closure", "Were non-conformances closed with dated evidence?", "Major findings open, or the same finding repeated across audits"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "Is a BSCI report the same as a BSCI certificate?",
+          a: "There is no BSCI certificate in the certification sense. amfori describes BSCI as a monitoring system and states that it is not a certification and does not issue pass or fail verdicts. What a supplier holds is an audit report with a rating, which is a different kind of evidence from a certificate issued by a certification body.",
+        },
+        {
+          q: "How old can a SMETA report be before I refuse it?",
+          a: "Sedex states that there is no official expiration period and that validity depends on buyer requirements, noting that some buyers accept a report up to 18 months old. The practical answer is to set your own limit in writing, commonly 12 months, and to apply it consistently across suppliers. Without a written policy, every report becomes a negotiation.",
+        },
+        {
+          q: "The factory offered a report for another site in the same group. Can I use it?",
+          a: "No, unless that site is the site that will produce your goods. Reports attach to a legal entity and an address. Group membership, shared ownership or a shared quality department does not transfer an audit result from one building to another, and a substitution of production site is exactly what a group-level report can conceal.",
+        },
+        {
+          q: "If the report is good, can I skip pre-shipment inspection?",
+          a: "No. A report describes the site and an inspection describes the batch. A factory with strong systems can still ship a defective order, and the inspection is the only step that answers whether this shipment matches your specification. Skipping inspection on the strength of an audit transfers risk from the factory to you.",
+        },
+        {
+          q: "The report has major findings. Is that an automatic rejection?",
+          a: "No. Findings are common and a report with findings is often more informative than one without. What matters is whether the findings touch your product or process, and whether there is dated evidence of closure. A major finding in an area unrelated to your order, closed with evidence, is a different risk from an open finding in the process that makes your goods.",
+        },
+      ],
+      sources: [
+        {
+          name: "amfori, amfori BSCI System Manual Part 2: The amfori BSCI Monitoring Approach",
+          note: "Two-year monitoring cycle; 24-month validity for an A or B overall rating; 12-month validity for C, D or E with a follow-up audit between 2 and 12 months.",
+        },
+        {
+          name: "amfori, amfori BSCI help pages",
+          note: "States that BSCI is not a certification and that amfori does not issue pass or fail verdicts; full reports are accessible to members and their audited suppliers on the amfori platform.",
+        },
+        {
+          name: "Sedex, membership FAQ: how long is a SMETA audit valid for",
+          note: "No official expiration period; validity depends on buyer, customer or industry requirements; some buyers accept reports up to 18 months old.",
+        },
+        {
+          name: "APSCA and the Sedex Affiliate Audit Company list",
+          note: "Sources for checking auditor registration and the current approval status of the audit company.",
+        },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "供应商递来的报告是要审的证据，不是替你做的决定。五项核对决定它能不能用：谁审的、在什么认可资质下审的；范围是否覆盖你实际要采购的主体、场地与产品；时效是否落在标准自身的周期内；你拿到的是完整报告还是摘要；不符合项是否有带日期的关闭证据。五项全过，通常可以省掉一次重复的全面审核，改做一次较轻的核验；任何一项不过，这份报告就变成一串待问的问题，而不是省钱的依据。买家遇到的报告问题，多数不是伪造，而是范围与时效。",
+      definition:
+        "审核报告记录的是审核员在某一时间窗内、对某一确定场地、按某一确定标准观察到的情况。认证证书是另一回事：它是认证机构对管理体系符合标准作出的判定，附带监督审核与确定的有效期。这个区分之所以重要，是因为中国供应链上最常见的两种社会责任审核都不是认证。amfori 明确说明 BSCI 不是认证，也不作通过或不通过的判定；Sedex 把 SMETA 定义为产出报告的审核方法。因此采信一份报告，等于采信一个带三重边界的快照：场地、标准、日期。真正有用的问题不是「有没有报告」，而是这三重边界是否与你即将下的这笔单对得上。",
+      keyPoints: [
+        "报告描述的是场地、标准与日期。这三样没有一样是你的订单。",
+        "BSCI 与 SMETA 是审核方法，不是认证，所以「通过/不通过」的说法对它们不成立。",
+        "amfori 的 BSCI 周期为两年：总评级 A 或 B 有效期为 24 个月；C、D 或 E 为 12 个月，且应在全面审核后 2 至 12 个月内做跟进审核。",
+        "Sedex 对 SMETA 报告未规定官方有效期，采信由买家政策决定，常见为 12 个月，Sedex 也提到部分买家可接受 18 个月内的报告。",
+        "SMETA 的 2-pillar 只覆盖劳工与健康安全；要覆盖环境与商业道德，需要 4-pillar。",
+        "共享权限由供应商控制。邮件转发的 PDF 弱于平台共享的原件，因为转发件可能不完整，也无法与原始记录比对。",
+        "带有未关闭严重不符合项的报告，是一份「问题仍在进行中」的报告，不是干净结论。",
+      ],
+      steps: [
+        {
+          title: "先弄清这份文件到底是什么",
+          body: "第一件事要封面与标准版本。工厂自填的自评问卷不是审核，成品的检测报告不是社会责任审核，样本册上的一个标识两者都不是。先把文件叫对名字，能避免最常见的起点误会。",
+        },
+        {
+          title: "查签发方，不只看标识",
+          body: "SMETA 由 Sedex 的关联审核公司执行，审核员注册情况可通过 APSCA 核对。管理体系证书应核对发证机构的认可资质，并用证书编号到认可机构自己的数据库查。一家已失去批准资质的审核公司，会让报告作为文件仍然存在、作为证据却不可靠。",
+        },
+        {
+          title: "把范围对着你的采购逐项核",
+          body: "在报告上确认四件事：法律主体、生产场地地址、产品类别、标准版本。开给贸易公司地址的报告，不覆盖将来为你生产的工厂；同集团另一处场地的报告不能平移。范围这一关，是多数真实报告对你失去用处的分界线。",
+        },
+        {
+          title: "按标准自身周期判时效",
+          body: "BSCI 周期为两年：总评级 A 或 B 为 24 个月有效期，C、D 或 E 为 12 个月，且跟进审核应在全面审核后 2 至 12 个月内完成。SMETA 没有官方有效期，所以必须由你自己的政策定一个期限。把「下次需要更新报告的日期」记进供应商档案，报告才不会悄悄过期却继续被引用。",
+        },
+        {
+          title: "确认你能看到完整报告",
+          body: "要完整报告，包含不符合项章节、整改计划与审核公司名称；或者要求对方在平台建立连接，让你直接读原件。只有摘要页和评级函，不足以判断不符合项。看不到完整文件，你就无法判断某项严重不符合是否落在与你产品相关的工序上。",
+        },
+        {
+          title: "先读不符合项，再读关闭证据",
+          body: "把致命与严重不符合项逐条列出，然后索取每一项带日期的关闭证据。如果同一不符合项在连续两次审核里都出现，请把重复本身当作信号，而不是看评级分数，因为重复意味着这套管理体系不会自我纠错。一份一条不符合项都没有的干净报告，也值得再看一眼，可能意味着范围很窄。",
+        },
+        {
+          title: "把剩余工作定下来，并写进记录",
+          body: "五项都过，就安排一次较轻的核验，确认主体与场地仍与报告一致，并把这份报告记为基线。某一项不过，就针对具体缺口做一次聚焦审核，而不是重复做一次全面审核。把判断结论与理由写进供应商档案，下一笔订单就不会重新争论同一个问题。",
+        },
+      ],
+      examples: [
+        {
+          title: "五项核对通过后采信",
+          body: "一家欧洲服装买家收到 7 个月前签发的 4-pillar SMETA 报告，在平台共享，主体与地址都对。报告列有两项严重不符合，均附有审核之后日期的关闭证据。买家核验了法律主体与生产地址，随后下单。省掉的是一次重复社会责任审核，增加的是对着注册记录的一次短核验。",
+        },
+        {
+          title: "只凭标识就采信",
+          body: "一家电子买家收到转发的 BSCI 报告摘要，评级 A。报告上的法律主体对得上，但受审地址与报价单上的厂址是两栋不同的楼。买家凭评级省掉了核验。旺季时发现生产被分包到第三个场地，而发现时点在验货环节，交期已经不允许换供应商。",
+        },
+        {
+          title: "超出政策，但仍可用",
+          body: "买家收到的 SMETA 报告为 18 个月前，超出其自身 12 个月的政策。买家没有直接作废，而是当作风险地图用：报告中的不符合项指向工时与消防安全。买家据此对真实生产场地做了一次聚焦这两项的审核。代价是一次窄范围审核，换回一份带当前日期的证据。",
+        },
+      ],
+      checklist: [
+        "已确认文件性质：审核报告、认证证书，还是自评问卷。",
+        "已核对审核公司的批准状态与审核员注册信息。",
+        "报告上的法律主体与报价单、合同主体一致。",
+        "受审地址与生产地址一致，不是办公室地址，也不是同集团其他场地。",
+        "报告上的产品类别覆盖本次采购的产品。",
+        "已确认标准版本与 pillar 范围，含 SMETA 的 2-pillar 与 4-pillar 之别。",
+        "已按标准周期与自身采信政策核对报告时效。",
+        "已拿到含不符合项、整改计划与审核员信息的完整报告。",
+        "已逐条列清致命与严重不符合项。",
+        "已取得每项严重不符合带日期的关闭证据。",
+        "已识别连续两次审核中重复出现的不符合项。",
+        "已确定剩余核验范围，并写入供应商档案。",
+      ],
+      tables: [
+        {
+          title: "各类文件分别能证明什么",
+          headers: ["文件", "能证明", "不能证明", "常见有效期"],
+          rows: [
+            [
+              "社会责任审核报告（BSCI、SMETA）",
+              "某一日期、某一场地、按某一标准观察到的状况",
+              "你的订单、你的规格，或你付款的主体",
+              "BSCI：A 或 B 为 24 个月，C、D 或 E 为 12 个月；SMETA：由买家政策决定，无官方有效期",
+            ],
+            [
+              "管理体系认证证书（ISO 9001）",
+              "体系经认证机构按标准评估",
+              "某一具体生产批次符合要求",
+              "证书周期内每年监督审核",
+            ],
+            [
+              "供应商自评问卷",
+              "供应商对自己的陈述",
+              "对任何陈述的独立核实",
+              "无。它是签署当天的声明",
+            ],
+            [
+              "产品检测报告",
+              "送检样品符合所标标准",
+              "后续各批次生产的一致性",
+              "仅对应所检样品与所检标准",
+            ],
+          ],
+        },
+        {
+          title: "采信前的五项核对",
+          headers: ["核对项", "要回答的问题", "何种情况算不过"],
+          rows: [
+            ["签发方", "谁审的，在什么认可资质下审的？", "审核公司批准失效，或审核员未注册"],
+            ["范围", "哪个主体、场地、产品、标准版本？", "地址、主体或产品类别与本次采购不一致"],
+            ["时效", "在标准周期与自身政策之内吗？", "超出适用的 BSCI 有效期，或超出你的 SMETA 政策"],
+            ["可及性", "拿到的是含不符合项与整改计划的完整报告吗？", "只有摘要页、截图或转发片段"],
+            ["闭环", "不符合项是否有关闭及带日期证据？", "严重不符合仍开放，或同一不符合项跨审核重复"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "BSCI 报告和 BSCI 证书是一回事吗？",
+          a: "在认证意义上不存在 BSCI 证书。amfori 把 BSCI 描述为监督体系，并明确它不是认证、也不作通过或不通过的判定。供应商手上的是带评级的审核报告，这与认证机构签发的证书是两种证据。",
+        },
+        {
+          q: "SMETA 报告多久之内我还能接受？",
+          a: "Sedex 明确说明没有官方有效期，时效取决于买家要求，并提到部分买家可接受 18 个月内的报告。实务答案是书面定下你自己的上限，常见为 12 个月，并对所有供应商一致执行。没有书面政策，每一份报告都会变成一次谈判。",
+        },
+        {
+          q: "工厂提供了同集团另一处场地的报告，能用吗？",
+          a: "不能用，除非那处场地就是为你生产的那处。报告绑定法律主体与地址。同一集团、共同股东或共用质量部门，都不能把一处建筑的审核结果平移到另一处，而生产场地被替换，恰恰是集团层面报告最容易掩盖的事。",
+        },
+        {
+          q: "报告结果不错，可以不做出货前验货吗？",
+          a: "不行。报告描述场地，验货描述批次。体系强的工厂同样会发一批不良品，而验货是唯一回答「本批货是否符合规格」的动作。凭审核结果省掉验货，等于把风险从工厂转移给你自己。",
+        },
+        {
+          q: "报告里有严重不符合项，是否直接淘汰？",
+          a: "不必。不符合项很常见，有不符合项的报告往往比一条都没有的更有信息量。要看的是这些不符合是否触及你的产品或工序，以及是否有带日期的关闭证据。与你的订单无关、且已关闭的严重不符合，与落在你产品工序上的开放不符合，是两种不同性质的风险。",
+        },
+      ],
+      sources: [
+        {
+          name: "amfori《amfori BSCI 体系手册》第 2 部分：amfori BSCI 监督方法",
+          note: "两年监督周期；总评级 A 或 B 有效期为 24 个月；C、D 或 E 为 12 个月，跟进审核在全面审核后 2 至 12 个月内进行。",
+        },
+        {
+          name: "amfori BSCI 官方帮助页",
+          note: "明确 BSCI 不是认证、amfori 不作通过或不通过判定；完整报告仅会员及其被审供应商可在平台查看。",
+        },
+        {
+          name: "Sedex 会员常见问题：SMETA 审核的有效期",
+          note: "无官方有效期；时效取决于买家、客户或行业风险要求；部分买家可接受 18 个月内的报告。",
+        },
+        {
+          name: "APSCA 与 Sedex 关联审核公司（AAC）名录",
+          note: "用于核对审核员注册信息与审核公司当前批准状态的公开来源。",
+        },
+      ],
+    },
+  },
+  // ── 决策点专题二：视频验厂能不能替代现场 ───────────────────────────────────
+  // 为什么写：远程审核是买家最常见的降本选项，也是最容易被误用的一项。
+  //   市面上多讲「远程审核流程」，本篇讲**证据等级**：哪一问远程能答、哪一问答不了，
+  //   以及镜头控制权如何变成抽样控制权。
+  // 与既有内容的关系：`on-site-vs-desk-audit` 讲桌面审核（文件审核），
+  //   与视频远程审核不是同一件事；`how-to-audit-a-factory-in-vietnam` 讲地域。
+  // 事实口径以 ISO 19011:2018、IAF MD 4 与 CNAS-EC-063 为准。
+  {
+    slug: "remote-video-factory-audit-vs-on-site",
+    category: "audit",
+    titleEn: "Remote Video Factory Audit vs On-Site: What Each Can Prove",
+    titleZh: "视频远程验厂与现场验厂：各自能证明什么",
+    metaTitleEn: "Remote Video Audit vs On-Site Audit",
+    metaDescEn:
+      "What a remote video factory audit can and cannot prove, when an on-site visit is unavoidable, and how to design a hybrid audit that holds up.",
+    metaDescZh:
+      "视频远程验厂能证明什么、不能证明什么，什么情况下必须到现场，以及如何设计一份经得起复核的远程加现场混合审核方案。",
+    updated: "2026-10-20",
+    tools: [
+      { href: "/tools/audit-checklist" },
+      { href: "/tools/supplier-risk-calculator" },
+      { href: "/tools/supplier-scorecard" },
+    ],
+    services: [
+      { href: "/services/china-factory-audit" },
+      { href: "/services/supplier-verification" },
+    ],
+    related: [
+      "on-site-vs-desk-audit",
+      "what-is-a-factory-audit",
+      "china-factory-or-trading-company",
+      "third-party-audit-pain-points",
+      "failed-factory-audit-next-steps",
+      "accept-supplier-existing-audit-report",
+    ],
+    links: [
+      { href: "/factory-audit/request", labelEn: "Request a factory audit", labelZh: "申请工厂验厂" },
+      { href: "/methodology", labelEn: "How our audits are scoped", labelZh: "查看我们的审核方法" },
+    ],
+    en: {
+      quickAnswer:
+        "A remote video audit is a method, not a substitute for an on-site audit. It answers questions about existence, layout and documents well, and questions about labour records, subcontracting and safety practice badly. ISO 19011:2018 treats remote techniques as one option to be balanced inside an audit programme, and IAF MD 4 sets mandatory conditions for using them. The practical rule: use video to screen a site you have already identified, to follow up a closure, and to cover a site that cannot be visited in time. Do not use it to establish a baseline for a new factory, and do not use it where working hours, wages or structural safety are the point of the audit.",
+      definition:
+        "ISO 19011:2018 draws a distinction that buyers often blur. A remote audit is an audit conducted using information and communication technology when face to face methods are not realistic or not preferred. Auditing a virtual location is a different concept: it covers processes performed in a digital environment, such as automated equipment and software driven decisions. A factory tour by video call is a remote audit of a physical site. It is not a virtual audit, and the two do not share the same limitations. IAF MD 4 is the mandatory document governing the use of information and communication technology for audit purposes. It requires, among other conditions, that information security and confidentiality are assured, that both parties agree to the method, and that the necessary technical infrastructure is confirmed in advance rather than assumed.",
+      keyPoints: [
+        "Remote auditing is a technique inside an audit programme, not a replacement category for an on-site audit.",
+        "What video proves best is existence: the site is real, at that address, with that equipment and that layout.",
+        "What video proves worst is behaviour over time: real working hours, real wages, and whether the people speaking are speaking freely.",
+        "The camera is usually held by the party being audited, which means the auditee controls the sample. This is the central weakness, not bandwidth.",
+        "Subcontracting, hidden processes such as plating, spraying or heat treatment, and dormitory or canteen conditions are poorly served by a guided walk.",
+        "IAF MD 4 requires agreed conditions before the audit begins, including confidentiality, consent and tested infrastructure.",
+        "A hybrid sequence works: video to screen, on-site to establish the baseline, video to verify closure.",
+      ],
+      steps: [
+        {
+          title: "State the audit objective before choosing the method",
+          body: "Write down the question the audit must answer, in one sentence. If the question is whether the site exists and can perform the process, video may be enough. If the question is whether the reported working hours are real, video is not enough, because the evidence for that question sits in payroll, attendance records and private conversations with workers.",
+        },
+        {
+          title: "Test feasibility against the three conditions",
+          body: "Confirm that confidentiality and data protection are agreed, that both sides consent to the method, and that the connection, devices and platform have been tested rather than assumed. IAF MD 4 places these conditions before the audit, not during it. A visit that fails on bandwidth wastes the slot and produces a report with no evidentiary value.",
+        },
+        {
+          title: "Take control of the route",
+          body: "Send the route in advance and require that it be followed in the order given, then add at least two unannounced turns during the call, for example asking to return to a hall already shown or to open a door that was passed. If every request is refused or delayed, record the refusal. The pattern of refusals is itself a finding.",
+        },
+        {
+          title: "Demand records that cannot be prepared",
+          body: "Ask for a specific record during the call, chosen by you rather than offered by the factory: the production log for a named machine on a named date, the maintenance record for a named press, the calibration label on a named instrument. Pre-selected documents demonstrate filing discipline; documents pulled live demonstrate whether the records are real.",
+        },
+        {
+          title: "Cross-check the visual against the documentary",
+          body: "Count the workstations on camera, then compare with the headcount and capacity claimed in the quotation. Compare machine nameplates with the equipment list. Compare the warehouse volume on screen with the monthly output claimed. Remote audits reward buyers who do arithmetic, because the numbers are harder to stage than the rooms.",
+        },
+        {
+          title: "Mark what the method could not see",
+          body: "Close the report with an explicit limitations section: which areas were not shown, which questions could not be answered, which records were not produced. A report that states its own blind spots is more useful than one that implies full coverage, and it protects you if the same question returns later in a dispute.",
+        },
+        {
+          title: "Escalate to on-site where the residual risk sits",
+          body: "List the open questions after the video audit and map each one to a method. Anything that concerns people, hidden processes, structural safety or site substitution should be resolved on site. Anything that concerns documents or layout is usually closed by video.",
+        },
+      ],
+      examples: [
+        {
+          title: "Video used well, as a screen",
+          body: "A buyer has three candidate factories from a trade fair and a two-week window. Two video audits confirm that one candidate is a trading office with no production hall, and that a second has the claimed machinery but a warehouse far smaller than its stated monthly output. The buyer spends the on-site budget on the third candidate only. Cost: two video calls. Saved: two site visits that would have ended the conversation anyway.",
+        },
+        {
+          title: "Video used as a substitute, and the gap it left",
+          body: "A buyer accepts a video audit instead of an on-site visit for a new supplier. The walk is guided, the halls are clean, the noticeboards are current. Production is later found to run a night shift that the day-shift attendance records do not show, and two processes are subcontracted to a site across the road. Neither fact was visible through a guided camera, and neither was asked for as a live record during the call.",
+        },
+        {
+          title: "Hybrid, on a tight calendar",
+          body: "A buyer cannot travel before a seasonal deadline. The auditor runs a video session to establish layout and equipment, then commissions a one-day on-site visit focused on the questions video cannot answer: payroll sampling, worker interviews, fire safety and the actual production address. The report separates what was seen remotely from what was verified on site, so the evidence stands up later.",
+        },
+      ],
+      checklist: [
+        "Audit objective written as one answerable question before the method is chosen.",
+        "Confidentiality and data protection terms agreed in writing.",
+        "Both parties have consented to the remote method.",
+        "Connection, devices and platform tested in advance.",
+        "Route and time allocation sent before the call.",
+        "At least two unannounced turns included in the route.",
+        "Live document requests selected by the auditor, not pre-selected by the factory.",
+        "Workstation count and machine nameplates compared with claimed capacity.",
+        "Warehouse volume compared with claimed monthly output.",
+        "Areas not shown, and questions not answerable, recorded as limitations.",
+        "Open questions mapped to the method that can close them.",
+        "On-site visit scheduled where people, hidden processes or structural safety are at issue.",
+      ],
+      tables: [
+        {
+          title: "Evidence Strength by Question",
+          headers: ["Question", "Remote video", "On-site", "Why"],
+          rows: [
+            ["Does the site exist at this address?", "Strong", "Strong", "Address, geolocation and signage are visible and can be cross-checked"],
+            ["Is the claimed machinery present and running?", "Moderate to strong", "Strong", "Nameplates and operation can be shown, but a staged line is possible"],
+            ["Can this process be performed in house?", "Weak for hidden processes", "Strong", "Plating, spraying, heat treatment and similar are often off camera"],
+            ["Are the reported working hours real?", "Weak", "Strong", "Needs payroll and attendance cross-checks plus private worker interviews"],
+            ["Are wages and deductions compliant?", "Weak", "Strong", "Payslips shown on camera are selected samples, not a population"],
+            ["Is production subcontracted?", "Weak", "Moderate to strong", "Depends on unannounced access and shipping records"],
+            ["Is the building and fire safety adequate?", "Weak", "Strong", "Exits, width, storage and structural condition need physical inspection"],
+            ["Are dormitory and canteen conditions acceptable?", "Weak", "Strong", "Usually excluded from a guided route"],
+            ["Are management system records maintained?", "Moderate", "Strong", "Live retrieval tests whether records are real rather than prepared"],
+          ],
+        },
+        {
+          title: "When Video Is Not Enough",
+          headers: ["Trigger", "Why the remote method fails", "What to book"],
+          rows: [
+            ["New site, no prior baseline", "The auditee controls what the camera sees, so no independent baseline exists", "On-site audit before volume moves"],
+            ["Working hours or wages are the core concern", "Evidence sits in records and private interviews", "On-site with payroll sampling"],
+            ["Suspected subcontracting or site substitution", "The substitute site is never on the route", "Semi-announced or unannounced on-site visit"],
+            ["High-hazard processes on site", "Chemical storage, ventilation and fire load need physical inspection", "On-site audit with a safety scope"],
+            ["Building structure, exits or dormitories in scope", "Cannot be assessed from a handheld camera", "On-site audit"],
+            ["Customer or scheme requires an on-site visit", "Scheme rules override method preference", "On-site audit to the required standard"],
+          ],
+        },
+        {
+          title: "Sequencing the Two Methods",
+          headers: ["Stage", "Method", "What it produces"],
+          rows: [
+            ["Screening before commitment", "Video", "Existence, layout, equipment, and reasons to stop early"],
+            ["Baseline for a new site", "On-site", "An independent record of conditions on a known date"],
+            ["Closure of corrective actions", "Video or document review", "Evidence that a specific finding was fixed"],
+            ["Periodic re-check between audits", "Video", "Early warning of change, not a substitute for the next audit"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "Is a video audit cheaper than an on-site audit?",
+          a: "It costs less to run, and it can cost more in total if it is used to answer a question it cannot answer. The comparison that matters is not the fee for one method against the other, but the cost of the risk that goes unexamined. Screening three candidates by video and visiting one on site is usually cheaper than visiting three.",
+        },
+        {
+          q: "Can a video audit produce a report I can rely on in a dispute?",
+          a: "It can, if the report states its method, its date, who held the camera, which areas were shown and which were not, and which records were retrieved live. The weakness of remote evidence is not that it is inadmissible, but that a guided walk proves less than it appears to. Documenting the limits is what makes the evidence usable.",
+        },
+        {
+          q: "What is the difference between a remote audit and a virtual audit?",
+          a: "ISO 19011:2018 distinguishes them. A remote audit uses technology to audit a physical site when face to face methods are not realistic or not preferred. Auditing a virtual location concerns processes performed in a digital environment, such as automated equipment and software driven decisions. A factory tour by video call is the first, not the second.",
+        },
+        {
+          q: "How many cameras or what equipment do I need?",
+          a: "Less than most buyers assume. A stable connection, a phone with a working camera and a platform that both sides can operate are enough for a screening visit. What matters more is that the connection is tested before the call and that the auditee can move freely, including into areas you name rather than areas they choose.",
+        },
+        {
+          q: "Can I replace the annual on-site audit with video permanently?",
+          a: "Not where the audit exists to test labour conditions or structural safety. amfori and Sedex both treat audits as a point in time snapshot whose value depends on the evidence gathered, and neither treats remote techniques as equivalent for those questions. Where a customer or scheme mandates an on-site visit, method preference does not override the requirement.",
+        },
+      ],
+      sources: [
+        {
+          name: "ISO 19011:2018, Guidelines for auditing management systems, Annex A.16",
+          note: "Distinction between a remote audit and auditing a virtual location; remote techniques presented as one method within an audit programme rather than a replacement for on-site auditing.",
+        },
+        {
+          name: "ISO 9001 Auditing Practices Group, Guidance on: Remote Audits",
+          note: "Explains the relationship between ISO 19011 and IAF MD 4, feasibility conditions, and confidentiality, security and data protection requirements.",
+        },
+        {
+          name: "IAF MD 4, Use of Information and Communication Technology for Audit and Assessment",
+          note: "Mandatory document setting conditions for ICT based auditing, including agreed use, assured confidentiality and confirmed technical infrastructure.",
+        },
+        {
+          name: "CNAS-EC-063:2021《关于远程审核活动的说明》",
+          note: "中文技术说明，讨论远程审核中「获得全部内容还是被引导获得筛选后的图像」等取证限制，与本文镜头控制问题同源。",
+        },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "视频远程审核是一种方法，不是现场审核的替代品。它对「场地是否存在、布局如何、文件是否有」这类问题答得好，对「真实工时、工资、分包、安全实操」这类问题答得很差。ISO 19011:2018 把远程技术视为审核方案中需要平衡取舍的一种方法，IAF MD 4 则规定了使用它的强制性前提。实务规则是：用视频去筛选一个已锁定的场地、去验证整改关闭、去覆盖来不及到场的场地；不要用它为一个新工厂建立基线，也不要在工时、工资或建筑安全正是审核目的时使用它。",
+      definition:
+        "ISO 19011:2018 做了一个买家经常混淆的区分。远程审核是指在面对面方法不现实或不理想时，使用信息与通信技术实施的审核。审核虚拟场所是另一个概念：它指在数字环境中执行的流程，例如自动化设备与软件驱动的决策。用视频通话巡厂，是对实体场地的远程审核，不是虚拟审核，两者的局限并不相同。IAF MD 4 是规范审核中应用信息与通信技术的强制性文件，它要求信息安全与保密性得到保障、双方同意采用该方法、必要技术基础设施事先确认而非假设成立。",
+      keyPoints: [
+        "远程审核是审核方案内的一种技术，不是一个可以替代现场审核的类别。",
+        "视频最擅长证明的是存在性：场地真实、地址相符、设备与布局如所述。",
+        "视频最不擅长证明的是随时间发生的行为：真实工时、真实工资，以及发言的人是否在自由发言。",
+        "镜头通常由被审方拿着，意味着抽样权在被审方手上。这是核心弱点，不是网速。",
+        "分包、隐蔽工序（电镀、喷涂、热处理），以及宿舍与食堂条件，靠被引导的巡厂很难覆盖。",
+        "IAF MD 4 要求在审核开始前就约定条件，包括保密、同意与经过测试的基础设施。",
+        "可行的混合顺序是：视频筛选、现场建立基线、视频验证整改关闭。",
+      ],
+      steps: [
+        {
+          title: "先定审核目的，再选方法",
+          body: "用一句话写下这次审核必须回答的问题。如果问题是「场地是否存在、这道工序能否自己做」，视频可能够。如果问题是「申报工时是否真实」，视频不够，因为该问题的证据在工资表、考勤记录和与工人的私下交谈里。",
+        },
+        {
+          title: "按三个前提测可行性",
+          body: "确认保密与数据保护已约定、双方同意该方法、连接与设备与平台已实测而非假定。IAF MD 4 把这些条件放在审核之前，而不是审核当中。一次因带宽失败的访问，既浪费档期，也产出一份没有证据价值的报告。",
+        },
+        {
+          title: "把路线控制权拿回来",
+          body: "事先发路线并要求按给定顺序走，然后在通话中加入至少两个未经预告的转向，例如要求回到已经看过的车间，或打开刚走过去的那扇门。若每次要求都被拒绝或拖延，把拒绝记录下来。拒绝的模式本身就是一条发现。",
+        },
+        {
+          title: "索取无法提前准备的东西",
+          body: "在通话中指定你想要的记录，而不是接受对方递上来的记录：指定机器在某日的生产记录、指定压机的保养记录、指定仪器上的校准标签。预先挑好的文件说明归档做得整齐，现场临时调取的文件才说明记录是不是真的。",
+        },
+        {
+          title: "把看到的与文件里的做算术",
+          body: "数镜头里的工位数，再对报价单上的员工数与产能。抄设备铭牌，再对设备清单。看仓库画面体积，再对声称的月产量。远程审核对愿意做算术的买家更有利，因为数字比房间更难布置。",
+        },
+        {
+          title: "把看不到的写清楚",
+          body: "报告结尾必须有明确的局限说明：哪些区域没有展示、哪些问题无法回答、哪些记录没有提供。一份写明自身盲区的报告，比一份暗示自己已全覆盖的报告更有用，也能在日后争议中保护你。",
+        },
+        {
+          title: "把剩余风险交回现场",
+          body: "视频审核结束后，列出仍未回答的问题，逐个对应到方法上。凡是涉及人、隐蔽工序、建筑安全、场地被替换的，都应由现场解决；凡涉及文件与布局的，通常视频就能关掉。",
+        },
+      ],
+      examples: [
+        {
+          title: "视频用对了：当筛子",
+          body: "买家在展会上拿到三家候选工厂，只有两周窗口。两次视频审核确认：第一家是贸易办公室，没有生产车间；第二家设备属实，但仓库远小于其声称的月产量。买家把现场预算全部投给第三家。代价是两通视频，省下的是两次注定谈不下去的到访。",
+        },
+        {
+          title: "视频用错了：当替代品",
+          body: "买家接受视频审核替代现场访问，用于一家新供应商。巡厂是被引导的，车间干净，公告栏是最新的。后来发现生产有夜班，而白班考勤记录里看不到；另有两道工序分包给了马路对面的厂。这两件事在引导式镜头里都不会出现，通话中也没有被指定调取任何实时记录。",
+        },
+        {
+          title: "混合方案：赶在交期之前",
+          body: "买家在季节截止前无法出行。审核员先用视频确认布局与设备，再安排一天的现场访问，只做视频答不了的部分：工资抽样、工人访谈、消防安全、真实生产地址。报告把远程看到的内容与现场核实的内容分开写，证据在日后仍站得住。",
+        },
+      ],
+      checklist: [
+        "选方法之前，已把审核目的写成一句可回答的问题。",
+        "保密与数据保护条款已书面约定。",
+        "双方均已同意采用远程方法。",
+        "连接、设备与平台已提前实测。",
+        "通话前已发送路线与时间分配。",
+        "路线中至少安排两个未经预告的转向。",
+        "实时记录索取由审核方指定，而非工厂预先挑选。",
+        "工位数与设备铭牌已与声称产能对照。",
+        "仓库画面体积已与声称月产量对照。",
+        "未展示的区域与无法回答的问题，已写入局限说明。",
+        "未回答问题已逐条对应到能关闭它的方法。",
+        "涉及人、隐蔽工序或建筑安全的，已安排现场访问。",
+      ],
+      tables: [
+        {
+          title: "各类问题的证据强度",
+          headers: ["问题", "视频远程", "现场", "原因"],
+          rows: [
+            ["场地是否在这个地址存在？", "强", "强", "地址、定位与招牌可见，且可与登记记录交叉核对"],
+            ["声称的设备是否在位并运转？", "中到强", "强", "铭牌与运行可展示，但产线仍可布置"],
+            ["这道工序能否自己做？", "隐蔽工序上很弱", "强", "电镀、喷涂、热处理等常落在镜头之外"],
+            ["申报工时是否真实？", "弱", "强", "需工资与考勤交叉核对，加上与工人的私下访谈"],
+            ["工资与扣款是否合规？", "弱", "强", "镜头里出示的工资单是被选中的样本，不是总体"],
+            ["生产是否被分包？", "弱", "中到强", "取决于能否未预告进入与出货记录"],
+            ["建筑与消防是否达标？", "弱", "强", "通道、宽度、堆放与结构状况需实地查看"],
+            ["宿舍与食堂条件是否可接受？", "弱", "强", "通常不在引导路线内"],
+            ["管理体系记录是否持续维护？", "中", "强", "现场调取可检验记录是真实还是临时准备"],
+          ],
+        },
+        {
+          title: "什么情况下视频不够用",
+          headers: ["触发情形", "远程方法为何失效", "应安排什么"],
+          rows: [
+            ["新场地，无历史基线", "镜头由被审方控制，因而没有独立基线", "在放量之前做现场审核"],
+            ["工时或工资是核心关切", "证据在记录与私下访谈里", "现场审核并做工资抽样"],
+            ["怀疑分包或场地被替换", "被替换的场地不会出现在路线上", "半通知或未通知的现场访问"],
+            ["场内有高风险工序", "化学品存放、通风与火灾荷载需实地查看", "带安全范围的现场审核"],
+            ["范围包含建筑结构、通道或宿舍", "手持镜头无法评估", "现场审核"],
+            ["客户或体系强制要求现场访问", "体系规则优先于方法偏好", "按所需标准做现场审核"],
+          ],
+        },
+        {
+          title: "两种方法的排期顺序",
+          headers: ["阶段", "方法", "产出"],
+          rows: [
+            ["承诺之前的筛选", "视频", "存在性、布局、设备，以及提前叫停的理由"],
+            ["新场地的基线", "现场", "对某一已知日期状况的独立记录"],
+            ["整改关闭", "视频或文件复核", "某一具体不符合项已修复的证据"],
+            ["两次审核之间的定期复看", "视频", "变化的早期预警，不能替代下一次审核"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "视频审核比现场审核便宜吗？",
+          a: "执行成本更低，但若被用来回答它答不了的问题，总成本可能更高。真正要比较的不是两种方法各自的费用，而是未被检视的那部分风险的成本。用视频筛三家、现场访一家，通常比现场访三家更省。",
+        },
+        {
+          q: "视频审核出的报告，在争议中能用吗？",
+          a: "能，前提是报告写明方法、日期、谁持镜、哪些区域展示了、哪些没有、哪些记录是现场调取的。远程证据的弱点不在可否采用，而在于引导式巡厂证明的东西比它看起来的少。把局限写清楚，证据才可用。",
+        },
+        {
+          q: "远程审核与虚拟审核有什么区别？",
+          a: "ISO 19011:2018 将两者区分。远程审核是在面对面方法不现实或不理想时，用技术对实体场地实施审核。虚拟场所审核针对在数字环境中执行的流程，例如自动化设备与软件驱动的决策。视频巡厂属于前者，不是后者。",
+        },
+        {
+          q: "需要几个摄像头或什么设备？",
+          a: "比多数买家以为的少。稳定连接、一台可用的手机摄像头、双方都能操作的平台，就够做一次筛选访问。更重要的是通话前测试过连接，且被审方可以自由移动，包括走进你指定的区域而不是他们挑选的区域。",
+        },
+        {
+          q: "可以长期用视频替代年度现场审核吗？",
+          a: "在审核目的涉及劳动条件或建筑安全时不行。amfori 与 Sedex 都把审核视为某一时点的快照，其价值取决于采集到的证据，两者都没有把远程技术视为在这些问题上等效。当客户或体系强制要求现场访问时，方法偏好不能覆盖该要求。",
+        },
+      ],
+      sources: [
+        {
+          name: "ISO 19011:2018《管理体系审核指南》附录 A.16",
+          note: "区分远程审核与虚拟场所审核；远程技术作为审核方案内的一种方法，而非现场审核的替代。",
+        },
+        {
+          name: "ISO 9001 Auditing Practices Group《Guidance on: Remote Audits》",
+          note: "说明 ISO 19011 与 IAF MD 4 的关系、可行性条件，以及保密、安全与数据保护要求。",
+        },
+        {
+          name: "IAF MD 4《审核与评审中信息与通信技术的使用》",
+          note: "强制性文件，规定基于 ICT 审核的条件：使用需经同意、保密性须得到保障、技术基础设施须事先确认。",
+        },
+        {
+          name: "CNAS-EC-063:2021《关于远程审核活动的说明》",
+          note: "讨论远程审核中「获得全部内容还是被引导获得筛选后的图像」等取证限制，与本文镜头控制问题同源。",
+        },
+      ],
+    },
+  },
+  // ── 决策点专题三：验厂结果不好之后怎么走 ───────────────────────────────────
+  // 为什么写：这是买家在搜索里最急的一问，而现有内容只覆盖「如何读报告」
+  //   （how-to-read-a-factory-audit-report）与「验货争议」（failed-inspection-dispute），
+  //   没有一篇讲**不符合项分级 → 整改闭环 → 复验 → 止损**的处置链条。
+  //   本篇也是 /services/supplier-improvement 最自然的正文入口。
+  // 事实口径：amfori 跟进审核只评问题 PA、窗口 2-12 个月；ISO 9001 对
+  //   correction 与 corrective action 的区分；ISO 19011 的后续活动要求。
+  {
+    slug: "failed-factory-audit-next-steps",
+    category: "audit",
+    titleEn: "After a Failed Factory Audit: Findings, Corrective Actions and When to Walk Away",
+    titleZh: "验厂不通过之后：不符合项分级、整改闭环与何时止损",
+    metaTitleEn: "After a Failed Factory Audit",
+    metaDescEn:
+      "A failed factory audit is a result, not a verdict. How to grade findings, run a corrective action plan, re-verify, and decide when to walk away.",
+    metaDescZh:
+      "验厂不通过是一个结果，不是终局判决。如何给不符合项分级、推动整改闭环、复验取证，以及判断什么时候该放弃这家供应商。",
+    updated: "2026-10-20",
+    tools: [
+      { href: "/tools/audit-report-analyzer" },
+      { href: "/tools/audit-checklist" },
+      { href: "/tools/supplier-risk-calculator" },
+    ],
+    services: [
+      { href: "/services/supplier-improvement" },
+      { href: "/services/china-factory-audit" },
+    ],
+    related: [
+      "how-to-read-a-factory-audit-report",
+      "supplier-evaluation-checklist",
+      "third-party-audit-pain-points",
+      "supplier-quality-audit-checklist",
+      "accept-supplier-existing-audit-report",
+      "remote-video-factory-audit-vs-on-site",
+    ],
+    links: [
+      { href: "/services/supplier-improvement", labelEn: "Supplier improvement programmes", labelZh: "供应商改善服务" },
+      { href: "/rfq", labelEn: "Find an alternative supplier", labelZh: "寻找替代供应商" },
+    ],
+    en: {
+      quickAnswer:
+        "A failed audit is a result, not a verdict. Most social audit schemes do not even issue a pass or fail: amfori states that BSCI produces a rating and a report rather than a certification. The work after the audit has three parts. Grade the findings by severity and by whether they touch the process that makes your product. Require a corrective action plan that names a root cause, an action, an owner and a verification date for each finding. Re-verify with a scope proportional to what failed, then decide between four paths: correct and re-audit, reduce volume and tighten inspection, change supplier, or exit. Walk away when the finding is a red line, when the same finding survives a second cycle, or when access to evidence is refused.",
+      definition:
+        "Two words get used as if they were one. A correction fixes the thing that was found: the missing guard is fitted, the blocked exit is cleared, the expired certificate is renewed. A corrective action removes the reason it happened, which is why ISO 9001:2015 separates the two in clause 10.2. An audit finding is an observation against a criterion. It becomes a failed audit only when your own acceptance rule says so, and that rule should be written before the audit, not after. ISO 19011 treats follow-up as part of the audit programme rather than an optional extra, and amfori's own scheme reflects the same logic: a follow-up monitoring after a C, D or E rating assesses only the performance areas that were flagged, and it may not happen before two months have passed, because new records take time to exist.",
+      keyPoints: [
+        "A finding is an observation against a criterion. A failure is your own judgement against a rule you should have written in advance.",
+        "Most social audit schemes produce ratings, not pass or fail verdicts, so a C rating is a position on a scale rather than a rejection.",
+        "Grade findings on two axes: severity on its own, and relevance to the process that makes your product.",
+        "A correction fixes the symptom. A corrective action removes the cause. Accepting only the first is how the same finding returns next year.",
+        "Re-verification should be proportional. Re-auditing everything wastes money; re-auditing nothing wastes the audit.",
+        "Red lines exist regardless of score: child labour, forced labour, forged records, and refusal to open an area or produce a record.",
+        "A second cycle with the same open finding is information about management, not about the finding.",
+      ],
+      steps: [
+        {
+          title: "Read the rule before you read the report",
+          body: "Write down, or find, the acceptance rule you set for this supplier: which findings are disqualifying, which are acceptable with a plan, and which are noted only. If no rule exists, write one now and apply it to the next audit. Judging a report without a rule turns every finding into an argument about taste.",
+        },
+        {
+          title: "Grade each finding on two axes",
+          body: "Severity is the auditor's assessment: critical, major or minor. Relevance is yours: does the finding sit in the process, building or record set that produces your goods? A major finding in a warehouse that never touches your product is a different decision from a minor finding in the line that does.",
+        },
+        {
+          title: "Separate correction from corrective action",
+          body: "For each major or critical finding, require two things: evidence that the condition was fixed, and evidence that the cause was addressed. The first is usually fast. The second is what changes the next audit. If the supplier can only describe the fix, ask what would prevent the same condition from recurring next quarter.",
+        },
+        {
+          title: "Demand a plan with four fields per finding",
+          body: "Root cause, action, owner and verification date. A plan without an owner has no accountability, and a plan without a date has no schedule. Reject wording such as ongoing improvement, strengthened management or enhanced training, because none of those can be verified at a follow-up visit.",
+        },
+        {
+          title: "Scope the re-verification to what failed",
+          body: "Follow the principle the schemes use: assess the areas that were flagged, and sample enough elsewhere to confirm the fix did not create a new problem. A supplier whose working hours finding was closed by cutting recorded hours may have created a new problem in wage records, so a narrow re-check should still touch the adjacent record set.",
+        },
+        {
+          title: "Respect the minimum interval for evidence to exist",
+          body: "Some findings cannot be closed quickly, because the evidence is a pattern over time. amfori advises that a follow-up should not take place until a reasonable period has passed, and states that new records for remuneration and working hours need at least two to three months. Booking a re-audit in two weeks on a wage finding produces a second finding, not a closure.",
+        },
+        {
+          title: "Decide the path, and write down the trigger for changing it",
+          body: "Choose one of the four paths and state in advance what would move you to the next one. A path without a trigger becomes a delay. For example: if the same major finding is open at the second re-verification, the order moves to another supplier, and the decision does not need to be re-argued.",
+        },
+        {
+          title: "Protect the commercial position while you decide",
+          body: "Check what the contract and the purchase order say about corrective periods, inspection rights and termination. Hold any remaining deposit against documented evidence rather than against expectation, and keep the audit report, the plan and the correspondence together, because a later dispute will be decided on that file rather than on the relationship.",
+        },
+      ],
+      examples: [
+        {
+          title: "Corrected and re-verified",
+          body: "An audit returns two major findings: blocked fire exits and missing records for a subcontractor. The supplier clears the exits in three days and produces dated photographs. For the subcontractor, it registers the relationship and produces monthly declarations for two cycles. The buyer re-verifies the two areas at 90 days and samples wage records to make sure nothing was displaced. Volume is released in stages rather than all at once.",
+        },
+        {
+          title: "Correction accepted, cause untouched",
+          body: "A working hours finding is answered by a new attendance system that records fewer hours. The buyer accepts the closure. At the next audit the same performance area fails again, this time with a gap between attendance records and production logs. The buyer has spent two audit cycles and a year of lead time on a correction that never addressed why the hours were recorded that way.",
+        },
+        {
+          title: "Walked away at the right moment",
+          body: "During a follow-up visit the factory declines to open the second building and says the records are at the accountant's office. The buyer asks once more in writing, receives no answer within the agreed period, and terminates before the deposit is fully paid. The decision is made on refusal of access rather than on the original finding, which is the cleaner basis for exit and for recovering the deposit.",
+        },
+      ],
+      checklist: [
+        "Written acceptance rule exists, with disqualifying, conditional and noted categories.",
+        "Every finding graded by severity and by relevance to your product process.",
+        "Critical findings identified and treated as red lines regardless of overall score.",
+        "For each major finding, a correction and a corrective action are both requested.",
+        "Plan contains root cause, action, owner and verification date for each finding.",
+        "Vague commitments rejected and returned for specific wording.",
+        "Re-verification scope proportional to the findings, with adjacent areas sampled.",
+        "Minimum interval respected where evidence needs time to accumulate.",
+        "Re-verification booked with the same method that can answer the question.",
+        "A trigger written for moving from one path to the next.",
+        "Contract terms on corrective period, inspection rights and termination reviewed.",
+        "Deposit position and supporting file secured before the next payment.",
+      ],
+      tables: [
+        {
+          title: "Severity and Default Response",
+          headers: ["Grade", "Typical examples", "Default response", "Can trade continue"],
+          rows: [
+            [
+              "Critical",
+              "Child labour, forced labour indicators, forged records, undeclared production site, serious structural or fire risk",
+              "Stop. No corrective plan substitutes for the finding itself",
+              "No, until the condition is resolved and independently verified",
+            ],
+            [
+              "Major",
+              "System absent or not implemented in an area relevant to your product, repeated non-conformance, records not maintained",
+              "Conditional. Plan with owner and date, re-verify before volume increases",
+              "Yes, at reduced volume with tightened inspection",
+            ],
+            [
+              "Minor",
+              "Isolated documentation gaps, housekeeping, single missing record",
+              "Note and track. Verify at the next scheduled audit",
+              "Yes",
+            ],
+            [
+              "Observation",
+              "Improvement opportunity with no requirement breached",
+              "Record only",
+              "Yes",
+            ],
+          ],
+        },
+        {
+          title: "Corrective Action Wording: Weak vs Verifiable",
+          headers: ["Weak wording", "Why it fails at re-verification", "Verifiable replacement"],
+          rows: [
+            [
+              "We will strengthen management",
+              "No action, no owner, nothing to observe",
+              "A named manager will review the overtime approval log weekly, starting 1 November, records retained for 12 months",
+            ],
+            [
+              "Training has been enhanced",
+              "Attendance at a session does not show changed practice",
+              "All line supervisors trained by 15 November, with a post-training check of 10 worker interviews in December",
+            ],
+            [
+              "Overtime has been reduced",
+              "Reduced on paper is not reduced in fact",
+              "Monthly overtime hours capped at the legal limit, evidenced by payroll and production logs for three consecutive months",
+            ],
+            [
+              "The subcontractor issue is being handled",
+              "No scope, no date, no evidence",
+              "Subcontractor declared in writing, added to the audit scope, and included in monthly compliance declarations from December",
+            ],
+          ],
+        },
+        {
+          title: "The Four Paths After a Failed Audit",
+          headers: ["Path", "Fits when", "Cost", "Residual risk"],
+          rows: [
+            ["Correct and re-audit", "Major findings, supplier cooperative, cause addressable", "One re-verification plus management time", "Low if the cause was addressed, high if only the symptom was"],
+            ["Reduce volume and tighten inspection", "Findings not critical, supplier improving, deadline fixed", "Higher inspection rate, lower exposure per shipment", "Moderate. You are buying time, not a fix"],
+            ["Change supplier", "Repeated findings, red line, or capability gap", "Sourcing time, tooling transfer, qualification of a new site", "New supplier risk, which is why verification comes first"],
+            ["Exit and recover", "Refusal of access, forged records, breach of contract", "Legal cost, lost lead time, deposit at risk", "Low commercial risk, high schedule risk"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "Does a C rating on a BSCI audit mean the factory failed?",
+          a: "Not in the pass or fail sense, because amfori does not issue pass or fail verdicts. A C rating is a position on a scale, and under the BSCI scheme it carries a 12-month validity with a follow-up audit due between 2 and 12 months after the full audit. Whether it is acceptable for your order depends on your own rule and on whether the flagged areas touch your product.",
+        },
+        {
+          q: "How soon can I re-audit after a failed audit?",
+          a: "It depends on what failed. A blocked exit can be verified in days. A working hours or wage finding needs months of new records before a re-check means anything, and amfori states that at least two to three months are needed to generate new records for remuneration and working hours. Re-auditing too early produces a second finding rather than a closure.",
+        },
+        {
+          q: "Should I re-audit the whole factory or only the failed areas?",
+          a: "Only the failed areas, plus enough sampling elsewhere to confirm the fix did not displace the problem. That is the logic the schemes use for follow-up monitoring, which assesses the flagged performance areas rather than the full question set. A full re-audit is justified when the finding was systemic or when the first fix changed records in another area.",
+        },
+        {
+          q: "The factory says the problem is already fixed. Can I accept photos?",
+          a: "Photos are useful evidence of a correction and weak evidence of a corrective action. Accept them for a physical condition with a date and a location visible, and ask for records for anything that concerns behaviour over time. If the fix is a document, ask for the document as issued rather than as photographed.",
+        },
+        {
+          q: "When is it clearly time to walk away?",
+          a: "When access to evidence is refused, when records are shown to be forged, when a red line finding such as child labour or forced labour is confirmed, when the production site is not the site you contracted with, or when the same major finding is still open after a second verification cycle. Each of those is a management signal rather than a technical one, and management signals do not improve with another audit.",
+        },
+      ],
+      sources: [
+        {
+          name: "amfori, amfori BSCI System Manual Part 2",
+          note: "Follow-up monitoring after a C, D or E rating assesses only the flagged performance areas; follow-up should not take place before a reasonable period, with at least two to three months needed for new remuneration and working hours records.",
+        },
+        {
+          name: "ISO 9001:2015, clause 10.2 Nonconformity and corrective action",
+          note: "Separates correction, which addresses the nonconformity itself, from corrective action, which addresses the cause.",
+        },
+        {
+          name: "ISO 19011:2018, Guidelines for auditing management systems",
+          note: "Treats follow-up as part of the audit programme and requires that audit conclusions state what was covered and what limited the audit.",
+        },
+        {
+          name: "ILO indicators of forced labour",
+          note: "Reference point for red line indicators such as retention of identity documents, restriction of movement and debt bondage.",
+        },
+      ],
+    },
+    zh: {
+      quickAnswer:
+        "验厂不通过是一个结果，不是终局判决。多数社会责任审核体系本身并不发「通过/不通过」：amfori 明确说明 BSCI 产出的是评级与报告，不是认证。审核之后的工作分三段：按严重程度、以及是否触及生产你产品的那道工序，给不符合项分级；要求一份写明根因、措施、责任人与验证日期的整改计划；按失败范围做比例相称的复验，然后在四条路径中选择：整改复验、降量加严验货、换供应商、退出。触发止损的情形是：踩到红线、同一不符合项在第二轮仍未关闭、或对方拒绝提供证据。",
+      definition:
+        "有两个词常被当成一回事。「纠正」（correction）修的是被发现的那件事：护罩装上、被堵的通道清开、过期的证书换新。「纠正措施」（corrective action）去掉它发生的原因，这也是 ISO 9001:2015 在第 10.2 条把两者分开的原因。审核发现（finding）是相对于某条准则的观察结果；它只有在你的采信规则判定为不可接受时，才变成一次「不通过」，而这条规则应该在审核之前写下，而不是之后。ISO 19011 把后续跟踪视为审核方案的组成部分，而非可选项；amfori 的体系也遵循同样逻辑：C、D 或 E 评级后的跟进审核只评估被标注的绩效领域，且不得早于两个月进行，因为新记录需要时间才能形成。",
+      keyPoints: [
+        "发现是相对准则的观察；失败是你依据事先写好的规则作出的判断。",
+        "多数社会责任审核体系产出的是评级而非通过与否，所以 C 是量表上的一个位置，不是淘汰。",
+        "分级要看两个轴：严重程度本身，以及与你产品工序的相关性。",
+        "纠正修症状，纠正措施去根因。只接受前者，明年的不符合项还会是这一条。",
+        "复验应按失败范围成比例：全量重审是浪费，什么都不验是把审核也浪费了。",
+        "有些红线与分数无关：童工、强迫劳动、伪造记录、拒绝开放区域或拒绝提供记录。",
+        "第二轮仍开着同一个不符合项，说明的是管理层，不是这条不符合项本身。",
+      ],
+      steps: [
+        {
+          title: "先读规则，再读报告",
+          body: "找出或写清你为这家供应商设的采信规则：哪些不符合是淘汰项、哪些可带计划接受、哪些只做记录。如果没有规则，现在就写一条，从下一次审核开始用。没有规则去评判报告，每一条不符合都会变成口味之争。",
+        },
+        {
+          title: "每条不符合按两个轴分级",
+          body: "严重程度是审核员的判断：致命、严重、轻微。相关性是你的判断：这条不符合是否落在生产你产品的那道工序、那栋楼、那套记录里。一个与你产品无关的仓库严重不符合，和一条落在你产线上的轻微不符合，处理决定并不相同。",
+        },
+        {
+          title: "把纠正与纠正措施分开要",
+          body: "对每条严重或致命不符合，要求两样东西：状况已修好的证据，以及原因已被处理的证据。前者通常很快。后者才是改变下一次审核的东西。如果供应商只能描述怎么修的，就问：下一个季度，什么机制能让同样的情况不再出现。",
+        },
+        {
+          title: "整改计划必须四栏齐全",
+          body: "根因、措施、责任人、验证日期。没有责任人就没有问责，没有日期就没有进度。凡是写成「持续改善」「加强管理」「强化培训」的，一律退回，因为这些在复验现场都无法被观察。",
+        },
+        {
+          title: "复验范围按失败面成比例",
+          body: "沿用各体系的做法：评估被标注的区域，同时在别处抽足够的样，确认修法没有制造新问题。一家用「少记工时」来关闭工时不符合的工厂，很可能在工资记录上制造了新问题，所以窄范围复验仍应触及相邻的记录集。",
+        },
+        {
+          title: "给证据留出形成时间",
+          body: "有些不符合没法快速关闭，因为证据本身就是一段时间的模式。amfori 建议跟进审核不应早于合理期限，并说明薪酬与工时的新记录至少需要两到三个月。对一条工资类不符合，两周后就复验，得到的是一条新的不符合，而不是关闭。",
+        },
+        {
+          title: "定路径，同时定切换条件",
+          body: "在四条路径中选一条，并事先写清什么情况会把你推到下一条。没有切换条件的路径会变成拖延。例如：若第二次复验时同一严重不符合仍未关闭，订单转给其他供应商，且这个决定不需要重新争论。",
+        },
+        {
+          title: "在决定期间守住商务位置",
+          body: "核对合同与订单中关于纠正期限、查验权与终止的条款。剩余定金应对着有据可查的证据放款，而不是对着预期。把审核报告、整改计划与往来函件放在同一个卷宗里，因为日后争议是按这份卷宗判的，不是按关系判的。",
+        },
+      ],
+      examples: [
+        {
+          title: "纠正完成，复验通过",
+          body: "审核回来两条严重不符合：消防通道被堵、分包商无记录。供应商三天内清开通道并提供了带日期的照片。分包这一条，它登记了该关系，并连续两个周期出具月度声明。买家在 90 天就这两项做复验，同时抽了工资记录确认没有发生问题转移。放量是分批给的，不是一次全放。",
+        },
+        {
+          title: "只接受了纠正，根因没动",
+          body: "工时不符合的答复是上马一套新的考勤系统，记录出来的工时变少了。买家接受了关闭。下一次审核，同一绩效领域再次失败，这次是考勤记录与生产记录之间的缺口。买家花掉两个审核周期和一年交期，只为一次从未触及根因的纠正。",
+        },
+        {
+          title: "在正确的时点止损",
+          body: "跟进访问时，工厂拒绝打开第二栋楼，说记录在会计那里。买家书面再问一次，在约定期限内没有答复，于是在定金付满之前终止。这个决定建立在拒绝提供证据之上，而不是建立在最初那条不符合上，这是退出与追回定金更干净的依据。",
+        },
+      ],
+      checklist: [
+        "已存在书面采信规则，含淘汰项、有条件接受项与仅记录项。",
+        "每条不符合已按严重程度与产品工序相关性双轴分级。",
+        "致命不符合已识别，并按红线处理，不看总分。",
+        "每条严重不符合均同时要求纠正与纠正措施。",
+        "整改计划含根因、措施、责任人与验证日期四栏。",
+        "含糊承诺已退回，要求具体表述。",
+        "复验范围与不符合成比例，并抽样相邻区域。",
+        "证据需要时间形成的项目，已遵守最短间隔。",
+        "复验采用的方法能回答该问题。",
+        "已写明从一条路径切到下一条路径的条件。",
+        "已复核合同中的纠正期限、查验权与终止条款。",
+        "在下一笔付款之前，已锁定定金位置与证据卷宗。",
+      ],
+      tables: [
+        {
+          title: "分级与默认处置",
+          headers: ["等级", "常见例子", "默认处置", "能否继续交易"],
+          rows: [
+            [
+              "致命",
+              "童工、强迫劳动指标、伪造记录、未申报的生产场地、严重结构或消防风险",
+              "停。整改计划不能替代该不符合本身",
+              "不能，直至状况解决并经独立核实",
+            ],
+            [
+              "严重",
+              "与你产品相关的领域体系缺失或未执行、不符合项重复出现、记录未维护",
+              "有条件。带责任人与日期的计划，放量之前复验",
+              "可以，但降量并加严验货",
+            ],
+            [
+              "轻微",
+              "孤立的文件缺口、现场整理、单条记录缺失",
+              "记录并跟踪，在下次计划审核中核实",
+              "可以",
+            ],
+            [
+              "观察项",
+              "未违反要求但可改善之处",
+              "仅记录",
+              "可以",
+            ],
+          ],
+        },
+        {
+          title: "整改计划写法：含糊与可验证",
+          headers: ["含糊写法", "复验时为何不成立", "可验证的替代写法"],
+          rows: [
+            [
+              "将加强管理",
+              "没有动作、没有责任人，现场无可观察对象",
+              "由指定经理自 11 月 1 日起每周复核加班审批记录，记录保存 12 个月",
+            ],
+            [
+              "已强化培训",
+              "参加了培训不等于做法改变",
+              "11 月 15 日前完成全部线长培训，12 月对 10 名工人访谈做培训后核查",
+            ],
+            [
+              "已减少加班",
+              "纸面减少不等于实际减少",
+              "月度加班控制在法定上限内，以连续三个月的工资表与生产记录为证",
+            ],
+            [
+              "分包问题正在处理",
+              "没有范围、没有日期、没有证据",
+              "分包商书面申报、纳入审核范围，并自 12 月起纳入月度合规声明",
+            ],
+          ],
+        },
+        {
+          title: "验厂不通过后的四条路径",
+          headers: ["路径", "适用于", "成本", "残余风险"],
+          rows: [
+            ["整改并复验", "严重不符合、供应商配合、根因可处理", "一次复验加管理投入", "根因真处理则低，只修症状则高"],
+            ["降量并加严验货", "不符合不属致命、供应商在改善、交期已定", "验货比例提高，单批暴露下降", "中等。买的是时间，不是修复"],
+            ["更换供应商", "不符合反复、踩红线，或能力缺口", "寻源时间、模具转移、新场地资格认定", "新供应商风险，所以要先做核验"],
+            ["退出并追偿", "拒绝进入、伪造记录、违反合同", "法务成本、交期损失、定金风险", "商务风险低，进度风险高"],
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "BSCI 评级 C 是不是就等于验厂不通过？",
+          a: "在通过与否的意义上不是，因为 amfori 不作通过或不通过的判定。C 是量表上的一个位置，按 BSCI 规则对应 12 个月有效期，并应在全面审核后 2 至 12 个月内做跟进审核。它对你的订单是否可接受，取决于你自己的规则，以及被标注的领域是否触及你的产品。",
+        },
+        {
+          q: "验厂不通过后，最快多久可以复验？",
+          a: "取决于失败的是什么。被堵的通道几天就能核实。工时或工资类不符合需要数月的新记录，复验才有意义，amfori 也说明薪酬与工时至少需要两到三个月才能形成新记录。复验太早，得到的是一条新不符合，而不是关闭。",
+        },
+        {
+          q: "应该全厂重审，还是只验失败的部分？",
+          a: "只验失败的部分，同时在别处抽足够的样，确认修法没有把问题挪走。这正是各体系跟进审核的逻辑：评估被标注的绩效领域，而不是整套问题清单。当不符合是体系性的，或第一次修法动了另一处记录时，才有理由做全范围重审。",
+        },
+        {
+          q: "工厂说已经改好了，照片能作数吗？",
+          a: "照片是「纠正」的有用证据，是「纠正措施」的弱证据。实体状况、带日期与位置信息的照片可以接受；凡是涉及一段时间行为的，要记录。如果修的是文件，要签发件，不要拍照件。",
+        },
+        {
+          q: "什么情况下应该明确放弃？",
+          a: "拒绝提供证据、记录被证明是伪造、童工或强迫劳动这类红线被确认、生产场地不是你签约的场地，或同一严重不符合在第二轮复验后仍然开着。这几项都是管理层信号而非技术信号，而管理层信号不会因为再做一次审核而变好。",
+        },
+      ],
+      sources: [
+        {
+          name: "amfori《amfori BSCI 体系手册》第 2 部分",
+          note: "C、D 或 E 评级后的跟进审核只评估被标注的绩效领域；跟进不应早于合理期限，薪酬与工时的新记录至少需要两到三个月。",
+        },
+        {
+          name: "ISO 9001:2015 第 10.2 条 不符合与纠正措施",
+          note: "区分「纠正」（处置不符合本身）与「纠正措施」（处置原因）。",
+        },
+        {
+          name: "ISO 19011:2018《管理体系审核指南》",
+          note: "将后续跟踪纳入审核方案，并要求审核结论说明覆盖范围与限制审核的因素。",
+        },
+        {
+          name: "ILO 强迫劳动指标",
+          note: "红线指标的参照，例如扣留身份证件、限制行动自由、债务束缚。",
+        },
+      ],
+    },
+  },
 ];
 
 export const GUIDE_CATEGORY_ORDER: GuideCategory[] = [

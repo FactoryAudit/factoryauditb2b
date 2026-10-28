@@ -77,6 +77,17 @@ const BASE = "https://factoryauditb2b.com";
 const DIRECTORY_PATH = "/suppliers";
 
 /**
+ * 「登录后才可见」的快照行 id。
+ *
+ * 🔴 2026-10-28：官网（website）与注册地址（address）从公开层移除。
+ *   此前它们未登录即可见 ⇒ 采购商拿到官网直接联系工厂，平台的核验/审核服务被绕过。
+ *   处理方式：**服务端就把 value 清空**（真实值不进公开 HTML），渲染层给登录引导。
+ *
+ * ⚠️ 不要改成 CSS 隐藏或前端条件渲染 —— 那样真实值仍在 HTML 里，爬虫与游客都能拿到。
+ */
+const GATED_SNAPSHOT_IDS = new Set(["website", "address"]);
+
+/**
  * PHASE 03：把数据层的供应商视图映射成 SEO 推导输入。
  *
  * 映射逻辑**不在这里** —— 它在 `lib/seo/supplierSeo.ts` 的 `supplierSeoDataFromView()`，
@@ -345,7 +356,15 @@ export default async function SupplierProfilePage({
     // 留空让它不参与，绝不为了填满字段而给一个不存在的等级。
     scoreBand: riskBand ? t.risk.ui.level[riskBand] : "",
   };
-  const snapshot = generateSupplierSnapshot(seo, locale, snapshotLabels, seoOpts);
+  // 🔴 2026-10-28（海外采购商视角走查后补的洞）：
+  //   官网与注册地址此前是**未登录可见**的 —— 买家拿到官网可以直接绕开平台联系工厂，
+  //   核验服务就彻底失去意义。现在这两行的真实值在**服务端就被丢弃**，
+  //   公开 HTML 里连字符串都不存在（不是 CSS 隐藏），登录后才由 UnlockGate 之外的
+  //   授权接口下发（见下方渲染层的 gated 分支）。
+  const snapshotRaw = generateSupplierSnapshot(seo, locale, snapshotLabels, seoOpts);
+  const snapshot = snapshotRaw.map((row) =>
+    GATED_SNAPSHOT_IDS.has(row.id) ? { ...row, value: "", unknown: false } : row
+  );
 
   // 可索引性闸门与 generateMetadata / app/sitemap.ts 同源。
   // 页面本身不需要消费判定结果（robots 在 metadata 里），但把它算出来是刻意的：
@@ -425,6 +444,37 @@ export default async function SupplierProfilePage({
             <p className="mt-3 text-sm text-[#8a5410] bg-[#fff4e0] rounded-md px-3 py-2">
               {sp.featuredNote}
             </p>
+
+            {/* 工厂照片（2026-10-28）：填左栏底部空白。
+                该栏是 md:grid-cols-3 的 col-span-2，右侧状态卡更高，
+                左栏文字天然短 ⇒ 不填东西就是一大片空白（买家第一眼的位置）。
+                · 只渲染 listPublicFactoryImages 筛过的图（APPROVED + PUBLIC）
+                · src 用 ?v=thumbnail：Workers Free 不能跑运行时图片转码
+                · 无照片整块不渲染，绝不出现空占位 */}
+            {factoryPhotos.length > 0 && (
+              <div className="mt-4">
+                <div className="text-xs uppercase tracking-wide text-[#6d6b66]">
+                  {tp.photosTitle}
+                </div>
+                <div className="mt-2 grid grid-cols-3 gap-2">
+                  {factoryPhotos.slice(0, 3).map((img) => (
+                    <div
+                      key={img.id}
+                      className="overflow-hidden rounded-lg border border-[#ebe8e1] bg-white"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={`/api/supplier-image/${img.id}?v=thumbnail`}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        className="h-24 w-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* 信任摘要卡（公开） */}
@@ -543,7 +593,19 @@ export default async function SupplierProfilePage({
                   <dd
                     className={`text-right ${row.unknown ? "text-[#8c8982] italic" : "font-medium text-[#171717]"}`}
                   >
-                    {row.id === "industrialCluster" && clusterHref ? (
+                    {GATED_SNAPSHOT_IDS.has(row.id) ? (
+                      // 🔒 官网 / 注册地址：真实值未进入本 HTML（服务端已清空），
+                      //    这里只给登录引导。文案复用 login.form.submit，不新增字典键。
+                      <span className="text-[#b45309]">
+                        <span aria-hidden="true">🔒 </span>
+                        <Link
+                          href={`${p("/login")}?next=${encodeURIComponent(p(`/suppliers/${slug}`))}`}
+                          className="underline"
+                        >
+                          {t.login.form.submit}
+                        </Link>
+                      </span>
+                    ) : row.id === "industrialCluster" && clusterHref ? (
                       <Link
                         href={p(clusterHref)}
                         className="text-[#171717] hover:underline"
@@ -560,6 +622,29 @@ export default async function SupplierProfilePage({
             )}
           </dl>
           <p className="mt-3 text-xs text-[#6d6b66]">{t.suppliers.trustNote}</p>
+        </section>
+
+        {/* ── 买家行动区（2026-10-28 新增）─────────────────────────────
+            采购商视角走查暴露的缺口：看完档案想委托核验，**页面上找不到任何入口** ——
+            整个档案页没有一个按钮能通向付费服务，这是转化链路上的死结。
+            文案全部复用 suppliers.svcTitle / svcLead / svcCta / svcNote
+            （这三个键此前只在目录页用，档案页从未渲染），不新增字典 key。
+            🔴 刻意不写价格：供应商可见区域一律不出现金额。 */}
+        <section className="mt-8 card p-6">
+          <div className="flex flex-wrap items-start justify-between gap-5">
+            <div className="max-w-[560px]">
+              <h2 className="text-lg font-bold text-[#171717]">{t.suppliers.svcTitle}</h2>
+              <p className="mt-1 text-sm text-[#3f4650]">{t.suppliers.svcLead}</p>
+              <p className="mt-3 text-xs text-[#6d6b66]">{t.suppliers.svcNote}</p>
+            </div>
+            <Link
+              href={`${p("/factory-audit/request")}?supplier=${encodeURIComponent(slug)}`}
+              className="btn btn-primary btn-sm shrink-0"
+              data-track="supplier_profile_request_verification"
+            >
+              {t.suppliers.svcCta} →
+            </Link>
+          </div>
         </section>
 
         {/* Overview：公开字段 + 免费层锁区 */}
@@ -694,7 +779,15 @@ export default async function SupplierProfilePage({
 
         {/* CS-12：工商登记信息（公开层）。排在"平台核验范围"之前 ——
             这几行是档案的事实底座，读者应先看到"这家是谁"，再看"平台核验了什么"。 */}
-        <SupplierRegistrationPanel data={s} dict={sp} showLegalName={supplierNameDiffersFromLegal(locale, s)} />
+        {/* 🔴 2026-10-28：注册详情里的官网**与地址**都要置空（此前这里是第三个官网泄露点，
+            地址也在这里重复出现了一次，单锁 snapshot 不够）。
+            Row 组件对空值返回 null ⇒ 该行直接不渲染，不会出现空占位。
+            真实值仍可通过登录后的授权接口取得。 */}
+        <SupplierRegistrationPanel
+          data={{ ...s, website: "", address: "" }}
+          dict={sp}
+          showLegalName={supplierNameDiffersFromLegal(locale, s)}
+        />
 
         {/* 平台核验范围（方法论级，公开） */}
         <section className="mt-8 card p-6 bg-[#fbfaf7]">
@@ -727,8 +820,10 @@ export default async function SupplierProfilePage({
             版本顺序本身就在传递"平台核验过什么"与"工厂自己说了什么"的可信度差异。 */}
         <SupplierSelfReportedCerts data={s} dict={sp} />
 
-        {/* CS-22 / CS-A #7：工厂照片（只渲染 APPROVED + PUBLIC，不加载 original） */}
-        {profileIsPublic && (
+        {/* CS-22 / CS-A #7：工厂照片（只渲染 APPROVED + PUBLIC，不加载 original）
+            完整画廊只在照片多于 3 张时出现 —— 前 3 张已放在顶部左栏，
+            少于等于 3 张时再画一遍就是重复占版面。 */}
+        {profileIsPublic && factoryPhotos.length > 3 && (
           <FactoryPhotoGallery images={factoryPhotos} dict={tp} />
         )}
 

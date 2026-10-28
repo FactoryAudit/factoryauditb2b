@@ -19,8 +19,10 @@ import SupplierEditor, {
 } from "@/components/admin/SupplierEditor";
 import SupplierReportDownloadButton from "@/components/admin/SupplierReportDownloadButton";
 import AssessmentAdminPanel from "@/components/admin/AssessmentAdminPanel";
+import AssessmentAdoptPanel from "@/components/admin/AssessmentAdoptPanel";
 import SupplierReportEditor from "@/components/admin/SupplierReportEditor";
-import { ASSESSMENT_TYPE_LABELS } from "@/lib/supplierAssessments";
+import { ASSESSMENT_TYPE_LABELS, getSupplierSelfAssessment } from "@/lib/supplierAssessments";
+import { buildAdoptRows, hasBasicProfileAnswers } from "@/lib/assessmentAdopt";
 import {
   supplierCompleteness,
   completenessStateClass,
@@ -46,6 +48,16 @@ export default async function AdminSupplierEditPage({ params }: Props) {
 
   const row = await getAdminSupplier(slug);
   if (!row) notFound();
+
+  // 自评问卷基础档案 → 档案字段采纳通道（2026-10-28）。
+  // 只有问卷里真的填了基础档案才渲染，避免空面板占据后台版面。
+  const selfDraft = await getSupplierSelfAssessment(row.id);
+  const adopt = hasBasicProfileAnswers(selfDraft?.responses ?? null)
+    ? buildAdoptRows({
+        responses: (selfDraft?.responses ?? null) as Record<string, unknown> | null,
+        supplier: row,
+      })
+    : { rows: [], manual: [], hasAny: false };
 
   const audits = await listAdminAudits(slug);
   const consent = await getLatestSupplierConsent(slug);
@@ -241,6 +253,13 @@ export default async function AdminSupplierEditPage({ params }: Props) {
       <div className="mt-4">
         <SupplierReportDownloadButton reportData={reportData} defaultLang={defaultLang} />
       </div>
+
+      {/* 自评问卷 → 档案字段（只在供应商填过基础档案时出现） */}
+      {adopt.hasAny && (
+        <div className="mt-6">
+          <AssessmentAdoptPanel slug={row.slug} rows={adopt.rows} manual={adopt.manual} />
+        </div>
+      )}
 
       {/* CS-21：三标签审核管理块（标签①②③审核/发布） */}
       <div className="mt-6">

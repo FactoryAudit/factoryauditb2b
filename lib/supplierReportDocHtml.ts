@@ -224,6 +224,13 @@ export type BuildReportDocOptions = {
   slug: string;
   /** 生成时间（调用方传入，便于测试确定性） */
   generatedAt: string;
+  /**
+   * 覆盖页头/浏览器标题里默认的「Supplier Due Diligence Report」。
+   * 🔴 自评摘要报告（self_assessment_summary）必须传此值：
+   *    它不含任何独立核验，标题写成 Due Diligence Report 属于误导。
+   *    不传时保持原有行为（审核 / 尽调报告）。
+   */
+  titleOverride?: { en: string; zh: string };
 };
 
 export function buildReportDocHtml(
@@ -232,6 +239,8 @@ export function buildReportDocHtml(
   opts: BuildReportDocOptions
 ): string {
   const ctx: Ctx = { lang };
+  // 标题可被调用方覆盖（自评摘要报告不能用「尽职调查报告」这个名）
+  const titleBi: Bi = opts.titleOverride ?? UI.title;
 
   // ---- 报告头（留空即不渲染，不代填）----
   const metaRows: string[] = [];
@@ -289,7 +298,7 @@ export function buildReportDocHtml(
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex, nofollow" />
-<title>${esc(opts.supplierName)} — ${esc(UI.title[lang])}</title>
+<title>${esc(opts.supplierName)} — ${esc(titleBi[lang])}</title>
 <style>
   :root { --ink:#0f172a; --mut:#64748b; --line:#e2e8f0; --blue:#0f4c81; }
   * { box-sizing:border-box; }
@@ -344,7 +353,7 @@ export function buildReportDocHtml(
 <body>
 <div class="wrap">
   <div class="toolbar">
-    <h1>${esc(UI.title[lang])}</h1>
+    <h1>${esc(titleBi[lang])}</h1>
     <div>
       <button class="btn ghost" id="langBtn" type="button">${esc(UI.langToggle[lang])}</button>
       <button class="btn" type="button" onclick="window.print()">${esc(UI.print[lang])}</button>

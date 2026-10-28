@@ -106,7 +106,7 @@ export default async function Page({ params, searchParams }: Props) {
         </h1>
         <p className="text-[#6d6b66] mt-3 text-lg">
           {sa["pageDesc"] ??
-            "填写社会责任与质量两份清单（共 72 项检查点），提交后由平台审核并发布「工厂自评估」标签。"}
+            "填写 14 项基础档案（约 5 分钟）即可提交审核并发布企业档案；质量、社会责任、环保三个专项模块可按买家要求后续补充。"}
         </p>
       </section>
 

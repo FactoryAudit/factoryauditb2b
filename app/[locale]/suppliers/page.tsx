@@ -254,8 +254,13 @@ export default async function SuppliersPage({ params }: Props) {
           <DirectoryWallBanner
             loginHref={lockedHref({ loginPath, directoryPath })}
             registerHref={p("/register")}
-            title={t.login.h1}
-            note={t.login.metaDesc}
+            /* 🔴 2026-10-28 拆墙：横幅不再宣称「登录才能看档案」。
+               现在公司名 / 城市 / 产品 / 核验等级全部公开，登录是为了更深一层
+               （证据记录、验厂历史、风险拆解、联系方式）。复用字典里现成的
+               unlockTitle / unlockNote —— 它们本来就是为这个语义写的，
+               不必新增 key（避免动 9 语叶子数不变量）。 */
+            title={t.suppliers.unlockTitle}
+            note={t.suppliers.unlockNote}
             cta={t.login.form.submit}
             noAccount={t.login.noAccount}
             registerCta={t.login.registerLink}
@@ -263,7 +268,44 @@ export default async function SuppliersPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Live Buyer Requests —— 决策辅助（社交证明），只展示公开白名单字段。 */}
+      {/* 搜索 + 筛选 + 供应商目录（stage1.8：预渲染首屏 + 客户端过滤）──────────────
+          数据与派生态在构建期算好并内联进 HTML（无 JS 也完整可读，SEO 等价于改造前）；
+          过滤条件改由客户端读 URL 后本地应用（< 10ms，不再触发 Worker 中的 Supabase 往返）。
+          Suspense 的 fallback 刻意渲染**同一份** DirectoryView（无过滤）：
+          这样无论 Next 是否对 useSearchParams 做 CSR bailout，首屏 HTML 都带完整列表。
+          🔑 上限（D1 决策）：内联体积约 2.5 KB/家 ⇒ 已发布供应商不得超过 50 家
+             （回归脚本 s18-directory-static-regression 断言，非口头约定）。 */}
+      <Suspense
+        fallback={
+          <DirectoryView
+            items={items}
+            countries={countries}
+            industries={industries}
+            active={{ country: "", industry: "", q: "" }}
+            directoryPath={directoryPath}
+            locale={locale}
+            dict={directoryDict}
+            events={directoryEvents}
+            trustProfileDict={tp}
+          />
+        }
+      >
+        <DirectoryGrid
+          items={items}
+          countries={countries}
+          industries={industries}
+          directoryPath={directoryPath}
+          locale={locale}
+          dict={directoryDict}
+          events={directoryEvents}
+          trustProfileDict={tp}
+        />
+      </Suspense>
+
+      {/* Live Buyer Requests —— 🔴 2026-10-28 移到供应商目录之后。
+          原来它排在筛选和列表之前：6 张卡片把供应商列表推到第二屏，
+          而采购商来这一页的目的就是找供应商，不是看别人的询价。
+          社交证明保留（对转化有用），但不该挡住主路径。只展示公开白名单字段。 */}
       {buyerRequests.length > 0 && (
         <section className="mb-10">
           <div className="flex items-center justify-between gap-4 mb-4">
@@ -307,39 +349,6 @@ export default async function SuppliersPage({ params }: Props) {
         </section>
       )}
 
-      {/* 搜索 + 筛选 + 供应商目录（stage1.8：预渲染首屏 + 客户端过滤）──────────────
-          数据与派生态在构建期算好并内联进 HTML（无 JS 也完整可读，SEO 等价于改造前）；
-          过滤条件改由客户端读 URL 后本地应用（< 10ms，不再触发 Worker 中的 Supabase 往返）。
-          Suspense 的 fallback 刻意渲染**同一份** DirectoryView（无过滤）：
-          这样无论 Next 是否对 useSearchParams 做 CSR bailout，首屏 HTML 都带完整列表。
-          🔑 上限（D1 决策）：内联体积约 2.5 KB/家 ⇒ 已发布供应商不得超过 50 家
-             （回归脚本 s18-directory-static-regression 断言，非口头约定）。 */}
-      <Suspense
-        fallback={
-          <DirectoryView
-            items={items}
-            countries={countries}
-            industries={industries}
-            active={{ country: "", industry: "", q: "" }}
-            directoryPath={directoryPath}
-            locale={locale}
-            dict={directoryDict}
-            events={directoryEvents}
-            trustProfileDict={tp}
-          />
-        }
-      >
-        <DirectoryGrid
-          items={items}
-          countries={countries}
-          industries={industries}
-          directoryPath={directoryPath}
-          locale={locale}
-          dict={directoryDict}
-          events={directoryEvents}
-          trustProfileDict={tp}
-        />
-      </Suspense>
 
       {/* 服务转化：Supplier Discovery 免费，核验 / 验厂 / 验货 / 寻源为付费服务（§16 / §23） */}
       <section className="card p-8 mb-10">

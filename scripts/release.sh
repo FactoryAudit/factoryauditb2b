@@ -103,7 +103,15 @@ echo "=== 第 1.6 步：R25 登录墙产物门（访问控制）==="
 node scripts/_r25_verify_wall.cjs
 echo ""
 echo "=== 第 2 步：opennext build ==="
-node node_modules/@opennextjs/cloudflare/dist/cli/index.js build
+# 🔴 2026-10-28：必须带 --dangerouslyUseUnsupportedNextVersion
+#   原因：@opennextjs/cloudflare 1.20.5 新增了「Next major 版本支持窗口」检查，
+#   窗口 = major 发布日起 2 年。Next 15 在 2026-10 正好满 2 年 ⇒ 被判定为不受支持，
+#   build 直接以 ERROR 终止（首次出现在 2026-10-28 发布，此前同版本可正常构建）。
+#   ⚠️ 这是**时间到期**问题，不是代码问题：解锁只是让构建继续，不代表风险消失。
+#   ⚠️ 遗留：Next 15.x 已不再收官方安全补丁，应在独立周期评估升级到受支持的 major。
+#     在完成升级前，本 flag 是唯一能继续发布的手段。
+#   ⚠️ 该 flag 会输出一行 WARN/ERROR，属预期噪音，不得据此判定失败。
+node node_modules/@opennextjs/cloudflare/dist/cli/index.js build --dangerouslyUseUnsupportedNextVersion
 echo ""
 echo "=== 第 3 步：populate 缓存 ==="
 while :; do

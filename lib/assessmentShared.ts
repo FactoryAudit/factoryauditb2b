@@ -7,6 +7,18 @@
 
 export type AssessmentType = "self_assessment" | "platform_assessment" | "on_site_audit";
 
+/**
+ * 问卷分层（2026-10-28 起，迁移 036）：
+ *   basic  —— 基础档案问卷（SUPPLIER_PROFILE，14 项事实型）。供应商只需填完这一层即可提交，
+ *             后台审核通过后发布档案。这是「能不能上目录」的门槛。
+ *   module —— 专项模块（QUALITY / SOCIAL_COMPLIANCE / ENVIRONMENT）。按买家要求逐个补齐，
+ *             不阻塞档案发布。
+ *
+ * 🔴 为什么分层：此前 72 题（37+35）全部 mandatory=true，供应商一进页面就被要求填完，
+ *    完成率极低。分层后单次负担从 72 题降到 14 题。
+ */
+export type AssessmentStage = "basic" | "module";
+
 // CS-B：状态机含 action_required（管理员退回补件）/ resubmitted（供应商补件重交）。
 // 与 DB CHECK 约束（supplier_assessments_status_check）保持一致。
 export type AssessmentStatus =
@@ -57,11 +69,54 @@ export type AssessmentTemplate = {
   name: string;
   nameZh: string;
   description: string | null;
+  /** 分层归属（迁移 036 的 audit_templates.stage）。缺失时按 module 处理。 */
+  stage: AssessmentStage;
   sections: AssessmentSection[];
 };
 
+/** 兼容旧数据：stage 缺失一律视为 module —— basic 是新增的少数派，
+ *  不会因为漏列而把专项模块误判成「提交门槛」。 */
+export function stageOf(t: AssessmentTemplate): AssessmentStage {
+  return t.stage === "basic" ? "basic" : "module";
+}
+
+export function isBasicTemplate(t: AssessmentTemplate): boolean {
+  return stageOf(t) === "basic";
+}
+
 /** 文件类题型（photo/document/signature）—— 这类题答案以"证据"承载，responses_json 不存文件。 */
 export const FILE_RESPONSE_TYPES = new Set(["photo", "document", "signature"]);
+
+/**
+ * 基础档案题（SP01..SP14）的选项显示名。
+ *
+ * 为什么需要：DB 里 options 存的是**取值键**（factory / both / leased / iso9001），
+ * 直接渲染会把小写英文键丢到页面上（"both"、"leased"、"iso9001"）。
+ * 这里只映射这几个键，**不动 C/PC/NC/CR** —— 评分档缩写是审核清单的既有表达，
+ * 与基础档案的事实型选项不是一回事。
+ *
+ * 🔴 只影响显示，不改库值：lib/assessmentAdopt.ts 的 BUSINESS_TYPE_MAP 仍按取值键工作。
+ */
+const OPTION_LABELS: Record<string, string> = {
+  factory: "Factory",
+  trading: "Trading company",
+  both: "Factory & trading",
+  other: "Other",
+  owned: "Owned",
+  leased: "Leased",
+  mixed: "Mixed",
+  outsourced: "Mostly outsourced",
+  iso9001: "ISO 9001",
+  iso14001: "ISO 14001",
+  bsci: "BSCI",
+  smeta: "SMETA",
+  sa8000: "SA8000",
+  none: "None",
+};
+
+export function formatOptionLabel(value: string): string {
+  return OPTION_LABELS[value] ?? value;
+}
 
 export type AssessmentProgress = {
   total: number;

@@ -371,6 +371,9 @@ export async function updateAdminSupplier(
     business_type: string;
     established: number;
     employees: string;
+    // 2026-10-28：自评问卷 SP09（厂房面积）采纳通道需要此列。
+    //   此前不在白名单 ⇒ 后台即使提交也会被丢弃。
+    factory_size: string;
     main_products: string[];
     export_markets: string[];
     contact_person: string;

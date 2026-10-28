@@ -33,6 +33,16 @@ const url =
   (process.env.FAB2B_TRUST_ENV_PROXY === '1' ? AMBIENT : '') ||
   DEFAULT_PROXY;
 
+// 直连模式：FAB2B_PROXY=direct（或 none/off）
+//   用途：本机代理进程在跑但上游已失效（实测 7897 返回 502 / TLS wrong version），
+//   而 Supabase 与 api.cloudflare.com 直连均正常时，用直连跑构建，避免整条发布链被卡死。
+//   注意：直连是否真的能取到数据，由第 0 步数据源门（build-preflight-check.mjs）
+//   与第 1.5 步产物门兜底 —— 静默回落静态数据会被这两道门抓出来。
+if (/^(direct|none|off)$/i.test(url)) {
+  if (!process.env.FAB2B_PROXY_QUIET) console.log('[with-proxy] 直连模式（未启用代理）');
+  return;
+}
+
 if (AMBIENT && AMBIENT !== url) {
   console.warn(
     `[with-proxy] 已忽略环境里的代理变量 ${AMBIENT}（本机已知它不转发 supabase）；` +

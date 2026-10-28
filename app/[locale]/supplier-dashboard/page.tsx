@@ -168,6 +168,23 @@ export default async function Page({ params, searchParams }: Props) {
         <a className="underline" href={localePath(locale, "/supplier-assessment")}>
           {sd.backToAssessment ?? "Edit self-assessment"}
         </a>{" "}
+        ·{" "}
+        <a className="underline" href={localePath(locale, "/supplier-certificates")}>
+          {locale === "zh" || locale === "zh-TW" ? "证书申报" : "Certificates"}
+        </a>{" "}
+        ·{" "}
+        {/* 2026-10-28：供应商视角走查发现——报告生成入口只埋在问卷页最底部，
+            从看板找不到。这里补一个直达链接（同一套鉴权参数，接口即时生成不落库）。 */}
+        <a
+          className="underline"
+          href={`/api/supplier-report?supplier=${encodeURIComponent(supplierId)}&email=${encodeURIComponent(
+            access.identity.email ?? ""
+          )}&lang=${locale === "zh" || locale === "zh-TW" ? "zh" : "en"}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {locale === "zh" || locale === "zh-TW" ? "生成自评报告" : "Self-assessment report"}
+        </a>{" "}
         · FactoryAuditB2B
       </p>
     </main>
