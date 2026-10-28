@@ -108,6 +108,12 @@ export type LeadInsertInput = {
   /** 要核验 / 认领的供应商名 */
   supplierName?: string | null;
   supplierWebsite?: string | null;
+  /**
+   * 关联的供应商（suppliers.id）。
+   * 🔴 2026-10-28 新增：档案页询价必须能追到"是问的哪一家"，
+   * 否则一条 lead 只有公司名，归因和后续跟进都断了。
+   */
+  linkedSupplierId?: string | null;
   message?: string | null;
   /** leadScore 0–100；越界会被夹到 0–100，NaN/null → null */
   score?: number | null;
@@ -169,6 +175,7 @@ export async function insertLead(input: LeadInsertInput): Promise<LeadInsertResu
     sourcing: input.sourcing ?? null,
     supplier_name: input.supplierName ?? null,
     supplier_website: input.supplierWebsite ?? null,
+    linked_supplier_id: input.linkedSupplierId ?? null,
     message: input.message ?? null,
     score: clampScore(input.score),
     payload: fitPayload(input.payload),

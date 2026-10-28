@@ -30,6 +30,7 @@ import VerificationBadge, {
 } from "@/components/supplier/VerificationBadge";
 import VerificationDetails from "@/components/supplier/VerificationDetails";
 import FactoryPhotoGallery from "@/components/supplier/FactoryPhotoGallery";
+import SupplierInquiryForm from "@/components/supplier/SupplierInquiryForm";
 import ShareProfileButton from "@/components/supplier/ShareProfileButton";
 import ProfileViewTracker from "@/components/supplier/ProfileViewTracker";
 import { listPublicFactoryImages } from "@/lib/supplierImages";
@@ -637,6 +638,13 @@ export default async function SupplierProfilePage({
             文案全部复用 suppliers.svcTitle / svcLead / svcCta / svcNote
             （这三个键此前只在目录页用，档案页从未渲染），不新增字典 key。
             🔴 刻意不写价格：供应商可见区域一律不出现金额。 */}
+        {/* 询价（2026-10-28）：此前全页 8 个按钮都是"卖给买家的验厂服务"，
+            没有一个能让买家向这家供应商询价 —— 采购商看完就断了动作。
+            放在验厂 CTA 之前：询价是买家的第一自然动作，验厂是第二动作。 */}
+        <section className="mt-8">
+          <SupplierInquiryForm slug={slug} supplierName={supplierDisplayName(locale, s)} locale={locale} />
+        </section>
+
         <section className="mt-8 card p-6">
           <div className="flex flex-wrap items-start justify-between gap-5">
             <div className="max-w-[560px]">
