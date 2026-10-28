@@ -71,6 +71,9 @@ export async function POST(req: NextRequest) {
       bytes,
       width,
       height,
+      // 审计留痕：谁传的（session = 登录会话，email = 邮箱比对）。
+      // 照片是公开发布物，来源必须可追溯 —— 此前该字段从未写入，导致无法证明来源。
+      uploadedBy: `${access.identity.source}:${access.identity.email}`,
     });
     if (!result.ok) {
       return NextResponse.json({ ok: false, error: result.code }, { status: result.status ?? 400 });

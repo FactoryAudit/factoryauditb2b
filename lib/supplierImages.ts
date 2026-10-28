@@ -501,6 +501,14 @@ export async function recordFactoryPhoto(input: {
   size: number;
   hash: string;
   path: string;
+  /**
+   * 谁传的。格式 `<source>:<email>`，例如 `session:boss@factory.com`。
+   *
+   * 🔴 2026-10-28 补：`supplier_images.uploaded_by` 此前**从未被写入过**（字段存在但 insert 里没有它），
+   * 导致 12 张已上线照片无法追溯来源 —— 一旦出现"这张照片是谁放的"争议，拿不出证据。
+   * 照片是公开发布物，来源可追溯是底线，故补上。
+   */
+  uploadedBy?: string | null;
 }): Promise<{ ok: boolean; id?: string; error?: string }> {
   const db = createAdminClient();
   if (!db) return { ok: false, error: "storage_not_configured" };
@@ -521,6 +529,7 @@ export async function recordFactoryPhoto(input: {
       display_path: input.path,
       thumbnail_path: input.path,
       file_hash: input.hash,
+      uploaded_by: input.uploadedBy ?? null,
     })
     .select("id")
     .maybeSingle();
@@ -576,6 +585,8 @@ export type StorePhotoInput = {
   bytes: ArrayBuffer;
   width: number | null;
   height: number | null;
+  /** 上传者标识 `<source>:<email>`，落到 supplier_images.uploaded_by（见 recordFactoryPhoto 注释） */
+  uploadedBy?: string | null;
 };
 
 export type StorePhotoResult =
@@ -636,6 +647,7 @@ export async function validateAndStoreFactoryPhoto(
     size: bytes.byteLength,
     hash,
     path: up.path,
+    uploadedBy: input.uploadedBy ?? null,
   });
   if (!rec.ok || !rec.id) {
     try {
