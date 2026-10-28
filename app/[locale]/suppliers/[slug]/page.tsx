@@ -473,6 +473,13 @@ export default async function SupplierProfilePage({
                     </div>
                   ))}
                 </div>
+                {/* 左栏空间小，放不下每张的来源标签；若这批全是供应商上传，
+                    统一在下方标一次（平台拍摄的图会走完整画廊，那里逐张标）。 */}
+                {factoryPhotos.slice(0, 3).every((i) => i.source === "supplier") && (
+                  <div className="mt-1.5 text-[11px] leading-tight text-[#8c8982]">
+                    {sp.selfReported}
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -824,7 +831,11 @@ export default async function SupplierProfilePage({
             完整画廊只在照片多于 3 张时出现 —— 前 3 张已放在顶部左栏，
             少于等于 3 张时再画一遍就是重复占版面。 */}
         {profileIsPublic && factoryPhotos.length > 3 && (
-          <FactoryPhotoGallery images={factoryPhotos} dict={tp} />
+          <FactoryPhotoGallery
+            images={factoryPhotos}
+            dict={tp}
+            sourceLabels={{ platform: ev.reviewed, supplier: sp.selfReported }}
+          />
         )}
 
         {/* CS-22 / CS-A #8 #9：验证详情 + 验证历史

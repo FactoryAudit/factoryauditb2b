@@ -333,6 +333,17 @@ export async function removeImageObject(path: string): Promise<boolean> {
 // 公开侧读取（P0-D）：一律只给 display / thumbnail，永不返回 original_path
 // ---------------------------------------------------------------------------
 
+/**
+ * 照片来源分级 —— 直接决定买家该给这张图多少权重。
+ *
+ * · platform = 平台现场审核拍摄（uploaded_by 前缀 `audit:`）→ 可标「已核验」
+ * · supplier = 供应商自己上传（`session:` / `email:`，或历史上传未记录者）→ 只能标「自述」
+ *
+ * 🔴 2026-10-28：此前两者在页面上完全混同 —— 同一张车间照，平台拍的与工厂给的可信度
+ *    天差地别，却长得一样。这与平台「每条结论都标 Verified / Self-reported」的做法不一致。
+ */
+export type PhotoSource = "platform" | "supplier";
+
 export type PublicFactoryImage = {
   id: string;
   category: string;
@@ -341,6 +352,8 @@ export type PublicFactoryImage = {
   /** 展示图路径（服务端代理读取用，不直接暴露给浏览器） */
   displayPath: string | null;
   thumbnailPath: string | null;
+  /** 来源分级（见 PhotoSource） */
+  source: PhotoSource;
 };
 
 /**
@@ -356,7 +369,7 @@ export async function listPublicFactoryImages(
   if (!db) return [];
   const { data, error } = await db
     .from("supplier_images")
-    .select("id, category, width, height, display_path, thumbnail_path")
+    .select("id, category, width, height, display_path, thumbnail_path, uploaded_by")
     .eq("supplier_id", supplierId)
     .eq("status", "APPROVED")
     .eq("visibility", "PUBLIC")
@@ -373,6 +386,9 @@ export async function listPublicFactoryImages(
     height: r.height ?? null,
     displayPath: r.display_path ?? null,
     thumbnailPath: r.thumbnail_path ?? null,
+    // 只有明确带 `audit:` 前缀的才算平台拍摄；null（历史数据）一律按供应商上传处理 ——
+    // 宁可低估，不可把供应商自述当成平台核验。
+    source: (r.uploaded_by ?? "").startsWith("audit:") ? "platform" : "supplier",
   }));
 }
 

@@ -21,9 +21,17 @@ import type { PublicFactoryImage } from "@/lib/supplierImages";
 export default function FactoryPhotoGallery({
   images,
   dict,
+  sourceLabels,
 }: {
   images: PublicFactoryImage[];
   dict: { photosTitle: string; photosEmpty: string };
+  /**
+   * 来源标签文案（复用既有字典键：已核验 / 自述）。
+   * 🔴 2026-10-28：照片来源必须显示出来 —— 同一张车间照，「我们站那儿拍的」
+   *    和「工厂自己传的」可信度完全不同。不标，买家只能一律当宣传材料看，
+   *    那我们做现场审核拍的照片就白费了。
+   */
+  sourceLabels?: { platform: string; supplier: string };
 }) {
   return (
     <section className="mt-8 card p-6">
@@ -44,6 +52,15 @@ export default function FactoryPhotoGallery({
                 {...(img.height ? { height: img.height } : {})}
                 className="h-auto w-full object-cover"
               />
+              {sourceLabels && (
+                <div className="border-t border-[#ebe8e1] bg-[#fbfaf7] px-2 py-1 text-[11px] leading-tight">
+                  {img.source === "platform" ? (
+                    <span className="font-medium text-[#1f7a36]">✓ {sourceLabels.platform}</span>
+                  ) : (
+                    <span className="text-[#8c8982]">{sourceLabels.supplier}</span>
+                  )}
+                </div>
+              )}
             </li>
           ))}
         </ul>
