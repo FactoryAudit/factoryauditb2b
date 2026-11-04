@@ -14,8 +14,10 @@ export type AssessmentType = "self_assessment" | "platform_assessment" | "on_sit
  *   module —— 专项模块（QUALITY / SOCIAL_COMPLIANCE / ENVIRONMENT）。按买家要求逐个补齐，
  *             不阻塞档案发布。
  *
- * 🔴 为什么分层：此前 72 题（37+35）全部 mandatory=true，供应商一进页面就被要求填完，
- *    完成率极低。分层后单次负担从 72 题降到 14 题。
+ * 🔴 为什么分层：题库最初只有质量 35 + 社会责任 37 = 72 题，全部 mandatory=true，
+ *    供应商一进页面就被要求填完，完成率极低。分层后单次负担降到 14 题（只填 basic）。
+ *    ⚠️ 现在题库已扩到 96 项（基础 14 + 质量 35 + 社会责任 37 + 环保 10），
+ *    所以**不要在任何文案或注释里写死题量**——它还会变。
  */
 export type AssessmentStage = "basic" | "module";
 
@@ -49,7 +51,7 @@ export type AssessmentQuestion = {
   responseType: string;
   options: string[] | null;
   sortOrder: number;
-  /** audit_questions.mandatory —— 必答项。CS-B 提交前校验只信这一列，不自行假设全 72 项必填。 */
+  /** audit_questions.mandatory —— 必答项。CS-B 提交前校验只信这一列，不自行假设全量必填。 */
   mandatory: boolean;
   /** audit_questions.severity_if_failed —— critical/major/minor/observation/NULL。
    *  用于提示"为何需要证据"，不另建证据需求表。 */
@@ -137,7 +139,7 @@ function isAnswerPresent(v: AssessmentAnswerValue | undefined): boolean {
 
 /**
  * 计算自评进度（纯函数，无服务端依赖）。
- * @param templates 完整模板（含 72 项）
+ * @param templates 完整模板（含全部题目）
  * @param responses 已存答案（responses_json）
  * @param evidenceCountByItem 各 file 型题目已挂证据数 {itemKey: count}
  */

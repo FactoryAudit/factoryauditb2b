@@ -9,9 +9,9 @@
 //     1. standard_due_diligence  —— CS-20 通用在线尽调报告（13 章），空白件由
 //        lib/supplierReportTemplate.emptyReportTemplate() 生成。
 //     2. social_compliance_audit —— CS-18 社会责任审核报告（7 章，SMETA 7.0 /
-//        amfori BSCI），清单来自 audit_templates(code=SOCIAL_COMPLIANCE，72 项中 37 项)。
+//        amfori BSCI），清单来自 audit_templates(code=SOCIAL_COMPLIANCE，96 项中 37 项)。
 //     3. quality_audit           —— CS-18 质量审核报告（7 章，ISO 19011:2026 /
-//        ISO 9001），清单来自 audit_templates(code=QUALITY，72 项中 35 项)。
+//        ISO 9001），清单来自 audit_templates(code=QUALITY，96 项中 35 项)。
 //
 //   三者服务对象不同：CS-20 是「通用档案 / 在线背调」，CS-18 两套是「清单式
 //   现场 / 桌面审核报告」。合并会模糊语义，故并列共存。
@@ -24,7 +24,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 //   1. 纯模块：不 import 任何含样张数据 / supabase / next-headers 的模块，可被
 //      服务端 + 客户端同时安全 import。类型仅从 lib/supplierReports 取（该模块本身零依赖）。
-//   2. 审核报告(2/3)的清单 72 项不在此硬编码，运行时由 audit_templates 取；
+//   2. 审核报告(2/3)的清单不在此硬编码，运行时由 audit_templates 取；
 //      本文件只登记「分组骨架 + 评分 / 严重度 / 证据索引」等模板元数据。
 //   3. 🔴 风险口径不混用：审核报告里的 Risk Level 是 **3 档(LOW/MED/HIGH) 审核结论带**，
 //      与平台 supplier risk 指数(5 档 low/moderate/elevated/high/critical)是**两回事**，
@@ -106,7 +106,7 @@ export type ReportFamilyMember = {
   /** 空白报告生成器（若存在） */
   blankGenerator?: "emptyReportTemplate" | "buildBlankAuditReport" | "buildSelfAssessmentReport";
   chapters: ChapterMeta[];
-  /** 审核类报告：关联 audit_templates.code（72 项清单来源） */
+  /** 审核类报告：关联 audit_templates.code（题库来源） */
   templateCode?: string;
   /** 审核类报告：清单分组骨架（运行时取具体检查项） */
   checklistGroups?: ChecklistGroupRef[];
@@ -491,7 +491,7 @@ export function buildBlankAuditReport(
     methodologyRows(type)
   );
 
-  // 章节③ 审核清单（分组引用；具体 72 项运行时从 audit_templates 取）
+  // 章节③ 审核清单（分组引用；具体题目运行时从 audit_templates 取）
   const ch3Bullets: ReportBullet[] = (m.checklistGroups ?? []).map((g) =>
     bullet(
       `${g.code}. ${g.titleEn} (${g.itemCount} checkpoints)`,

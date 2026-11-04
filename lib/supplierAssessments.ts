@@ -5,7 +5,8 @@
 //    返回前端前由调用方裁剪；本文件不直接暴露给客户端组件。
 //
 // 三标签相互独立（每供应商每种类型一行）：
-//   self_assessment   工厂自评估（供应商自填两份清单 72 项）
+//   self_assessment   工厂自评估（供应商**只需填 14 项 basic**；质量 35 / 社会责任 37 /
+//                     环保 10 共 82 项为 module，按买家要求后续补充，不强制）
 //   platform_assessment 平台在线评估（平台线上背调/验证后出报告）
 //   on_site_audit     平台现场审核（供应商申请 → 平台线下 → 7 工作日 SLA → 上传报告）
 //
@@ -14,7 +15,7 @@
 //
 // CS-B 铁律：
 //   · 答案唯一来源 = supplier_assessments.responses_json（**绝不建 answers 表**）。
-//   · 模板 = audit_templates/sections/questions（72 项，前端不硬编码问题）。
+//   · 模板 = audit_templates/sections/questions（当前 96 项，前端不硬编码问题；题量会变，勿写死）。
 //   · 所有读写经 resolveSupplierAccess() 裁决归属（会话优先 / 邮箱兜底 / 歧义拒）。
 //   · 供应商**绝不可**写 verification_* / verified_at / expires_at（那些由 Admin CS-C 处理）。
 

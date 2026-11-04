@@ -16,7 +16,7 @@ import { getChecklistTemplates, getSupplierSelfAssessment } from "@/lib/supplier
 //    Verified 只能由 Admin 显式批准产生。本接口所有写操作均经 requireAdmin()。
 //    供应商上传材料 / 提交自评 绝不自动产生 Verified。
 //
-// GET  → 拉齐工作台所需全部数据（72 题 + 答案 + 证据 + 验证历史 + 快照）
+// GET  → 拉齐工作台所需全部数据（题库全量 + 答案 + 证据 + 验证历史 + 快照；题量随题库变化，勿写死）
 // POST → action:
 //        save_review        保存逐项审核结论到 item_review_json（不批准）
 //        request_more_info  保存结论并把自评状态置 action_required（供应商回补）

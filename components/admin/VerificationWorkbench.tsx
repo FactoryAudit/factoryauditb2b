@@ -4,7 +4,7 @@
 //
 // 职责（与用户 10 项需求一一对应）：
 //   1. 列出待核验自评（本组件挂载在选定供应商的工作台；队列由列表页提供）
-//   2. Assessment Review：渲染 72 项题面 + 供应商答案
+//   2. Assessment Review：渲染题库全部题面 + 供应商答案（题量随题库变化，不写死）
 //   3. Evidence Review：逐项展示供应商上传的证据（私有文件走 admin 签名短链预览）
 //   4. Item-level Approve / Reject / Need More Info（+ Reviewer Note）
 //   5. Review Progress：已审 / 总数 / 被标记项
@@ -296,7 +296,7 @@ export default function VerificationWorkbench({
         ) : null}
       </div>
 
-      {/* 72 项评审 */}
+      {/* 题库评审（全部题目） */}
       <div className="space-y-6">
         {templates.map((tpl) => (
           <div key={tpl.code}>
