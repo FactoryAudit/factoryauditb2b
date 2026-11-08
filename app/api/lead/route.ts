@@ -4,6 +4,7 @@ import { insertLead } from "@/lib/leads";
 import { getCurrentUser } from "@/lib/supabaseServer";
 import { notifyAdminNewLead, notifyCustomerLeadReceived } from "@/lib/notify";
 import { checkRateLimit, clientIp, clamp } from "@/lib/rateLimit";
+import { inspectLeadSubmission, HONEYPOT_FIELD } from "@/lib/leadGuard";
 
 // 保存 Lead 并通知管理员/客户（PRD §21 漏斗：工具使用 → 邮箱捕获 → Lead）
 //
@@ -25,6 +26,17 @@ import { checkRateLimit, clientIp, clamp } from "@/lib/rateLimit";
 // 每次提交会触发两封邮件，不限流等于给人一个免费的邮件轰炸入口。
 const LEAD_LIMIT = 5;
 const LEAD_WINDOW_MS = 60 * 60 * 1000;
+
+// 反灌水（2026-11-08 加，起因 LEAD-WCZ2BU）：
+//   该条线索 first_touch → 落库仅 15 秒，姓名/邮箱/公司/国家/留言 5 个字段一次填完，
+//   utm 与 referrer 全空、号码塞在正文里、公司名在瑞典公开公司库查无此主体。
+//   单靠 IP 限流挡不住这类「一路换 IP、每条都干净」的灌表脚本。
+//
+// 判定逻辑本身在 lib/leadGuard.ts（纯函数，可脱离数据库逐条验证）。本文件只负责：
+//   drop=true  ⇒ 静默丢弃，但**对外仍返回成功** —— 给 400 只会让脚本换策略重试；
+//   signals    ⇒ 软信号，照常落库发信，只写进 payload.botSignals 供运营参考。
+//   ⚠️ 诚实边界：这套只防「自动填表」与「极快提交」，防不了真人手工灌水。
+//      后者只能靠内容质量判断（零信息量 + 只要打电话），不能靠代码。
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -67,6 +79,27 @@ export async function POST(req: NextRequest) {
     const message = clamp(lead.message, 5000);
     const riskLevel = clamp(risk.level || lead.riskLevel, 32);
 
+    // --- 反灌水判定（逻辑见 lib/leadGuard.ts） ---
+    const guard = inspectLeadSubmission({
+      honeypot: lead[HONEYPOT_FIELD],
+      elapsedMs: (body as { elapsedMs?: unknown })?.elapsedMs,
+    });
+    const botSignals = guard.signals;
+
+    if (guard.drop) {
+      // 假成功：不落库、不发信，但对外与正常提交无差别，避免脚本察觉后换策略。
+      console.warn(
+        `[api/lead] honeypot hit, dropped silently · tool=${tool} ip=${ip} elapsedMs=${guard.elapsedMs ?? "-"} email=${email}`
+      );
+      return NextResponse.json({
+        ok: true,
+        leadId: crypto.randomUUID(),
+        referenceId: null,
+        stored: false,
+        score: 0,
+      });
+    }
+
     const score = leadScore({
       email,
       company,
@@ -96,7 +129,12 @@ export async function POST(req: NextRequest) {
       message,
       score,
       // 原始载荷无损兜底：上游表单以后加字段，即使列没跟上，这里也一定找得到
-      payload: { lead, result: risk },
+      // botSignals 只在有信号时写入，正常线索的 payload 结构保持原样不变。
+      payload: {
+        lead,
+        result: risk,
+        ...(botSignals.length ? { botSignals, elapsedMs: guard.elapsedMs } : {}),
+      },
       userId: user?.id ?? null,
     });
     const referenceId = saved.stored ? saved.referenceId : null;

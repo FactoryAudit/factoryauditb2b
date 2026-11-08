@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /**
  * 联系页表单。
@@ -44,6 +44,13 @@ export default function ContactForm({ copy }: { copy: ContactFormCopy }) {
   const [referenceId, setReferenceId] = useState<string | null>(null);
   const [errorText, setErrorText] = useState<string>(copy.errorBody);
 
+  // 反灌水：真实挂载时刻（useEffect 里取，避免 SSR / hydration 时钟差）。
+  // 只作**软信号**上报，服务端仅记录、不拦截 —— 见 app/api/lead/route.ts 顶部注释。
+  const mountedAt = useRef(0);
+  useEffect(() => {
+    mountedAt.current = Date.now();
+  }, []);
+
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
@@ -63,14 +70,19 @@ export default function ContactForm({ copy }: { copy: ContactFormCopy }) {
       company: String(fd.get("company") || "").trim(),
       country: String(fd.get("country") || "").trim(),
       message: String(fd.get("message") || "").trim(),
+      // 蜜罐：人类看不见这个字段，填上来的必是自动脚本。
+      // 服务端命中后静默丢弃并返回成功，正常用户永远不会触发。
+      hp_note: String(fd.get("hp_note") || "").trim(),
     };
+
+    const elapsedMs = mountedAt.current > 0 ? Date.now() - mountedAt.current : null;
 
     setStatus("sending");
     try {
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ lead, result: {} }),
+        body: JSON.stringify({ lead, result: {}, elapsedMs }),
       });
       const j = await res.json().catch(() => ({}));
       if (!res.ok || !j.ok) {
@@ -155,6 +167,30 @@ export default function ContactForm({ copy }: { copy: ContactFormCopy }) {
           rows={5}
           className={inputCls}
           placeholder={copy.messagePlaceholder}
+        />
+      </div>
+
+      {/* 反灌水蜜罐：移出视口、不可聚焦、不参与朗读。
+          真人没有任何可见入口能碰到它；自动填表脚本会照填。
+          服务端（app/api/lead/route.ts）命中后静默丢弃并返回成功。 */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          left: "-9999px",
+          top: "-9999px",
+          width: 1,
+          height: 1,
+          overflow: "hidden",
+        }}
+      >
+        <input
+          id="c-hp"
+          name="hp_note"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          defaultValue=""
         />
       </div>
 
