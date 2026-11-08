@@ -41,6 +41,9 @@ export async function POST(req: NextRequest) {
     const supplierId = String(form.get("supplierId") || "").trim();
     const category = String(form.get("category") || "").trim();
     const file = form.get("file");
+    // 缩略图（可选）：客户端 canvas 一并生成的长边 ≤480 版本。
+    // 缺失时服务端退回「与主图同源」的旧行为，不影响上传成功。
+    const thumb = form.get("thumb");
     const width = Number(form.get("width") || "0") || null;
     const height = Number(form.get("height") || "0") || null;
 
@@ -71,6 +74,8 @@ export async function POST(req: NextRequest) {
       bytes,
       width,
       height,
+      thumbBytes: thumb instanceof Blob ? await thumb.arrayBuffer() : undefined,
+      thumbMime: thumb instanceof Blob ? thumb.type : undefined,
       // 审计留痕：谁传的（session = 登录会话，email = 邮箱比对）。
       // 照片是公开发布物，来源必须可追溯 —— 此前该字段从未写入，导致无法证明来源。
       uploadedBy: `${access.identity.source}:${access.identity.email}`,

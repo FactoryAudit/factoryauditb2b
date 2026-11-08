@@ -27,6 +27,9 @@
  *    ⚠️ GA4 有 3–5s 批量延迟，关键步骤后必须留足等待再统计。
  */
 
+import * as fs from "node:fs";
+// 期望文案取自字典（2026-10-31 改过措辞），不硬编码某一句
+const FREE_CTA = JSON.parse(fs.readFileSync("i18n/dictionaries/en.json", "utf8")).supplierProfile.freeLockCta;
 const CDP_PORT = Number(process.env.CDP_PORT || 9334);
 const BASE = process.env.BASE || "https://factoryauditb2b.com";
 const KEY = "guest_supplier_access_v1";
@@ -321,7 +324,7 @@ await settle();
   const text = await bodyText();
   check("basic 字段被锁：employees 真值 1000+ 不在页面", !text.includes("1000+"));
   check("basic 字段被锁：exportMarkets 真值不在页面", !text.includes("USA, EU"));
-  check("注册门可见（Create free account）", text.includes("Create free account"));
+  check("注册门可见（字典 freeLockCta）", text.includes(FREE_CTA));
 
   const hrefs = await registerHrefs();
   const withNext = hrefs.filter((h) => h.includes("next="));
@@ -401,7 +404,7 @@ console.log("\n--- 步骤 9：Free Buyer（拦截 /api/me 模拟已登录）应�
   for (const slug of rounds) {
     await goto("/suppliers/" + slug, 3500);
     const text = await bodyText();
-    const locked = text.includes("Create free account");
+    const locked = text.includes(FREE_CTA);
     if (locked) allUnlocked = false;
     seen.push({ slug, locked });
   }

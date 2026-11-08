@@ -1,0 +1,21 @@
+# Cloudflare Workers Static Assets —— 响应头覆盖
+# 部署时由 OpenNext 随 public/ 一起复制到 .open-next/assets/_headers。
+#
+# ── 为什么必须有这个文件（2026-10-28 实测）──────────────────────────────────
+# 没有它时，`/_next/static/*.js` 返回的是 Workers 静态资源默认值：
+#     Cache-Control: public, max-age=0, must-revalidate
+# ⇒ 浏览器**不得**复用本地副本，每次访问都要为 11 个 chunk + CSS 逐个发条件
+#   请求回源。本站边缘节点是 LAX（洛杉矶），国内直连下行实测只有 21–40 KB/s，
+#   且偶发 25–45 秒零响应 ⇒ 首屏卡几十秒到几分钟，关键 chunk 拉不下来就白屏。
+# 这些文件名自带内容哈希（如 `1255-fc6c00ab2f765339.js`），内容永不变，
+# 因此可以、也必须永久缓存：`max-age=31536000, immutable`。
+
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# public/ 下的品牌资源没有哈希后缀，改版时会原地覆盖，给 1 天并允许重验证。
+/*.svg
+  Cache-Control: public, max-age=86400
+
+/og-image.png
+  Cache-Control: public, max-age=86400

@@ -213,11 +213,45 @@ section("B. 产物级 —— 预渲染覆盖与 D1 内联上限");
     );
   }
 
+  // ── B3 / B4：内联规模闸门（2026-10-31 由「≤50 家」修订）──────────────────
+  // 🔴 修订理由：原闸门假设「卡片只可能全量内联」，于是用家数（≤50）当体积代理。
+  //   分页上线后口径变了 —— **卡片仍必须全量内联**（R25：目录页是档案页唯一内链
+  //   来源，只渲染第 1 页会让第 25 家以后变成孤岛），前端只在 hydration 后切片。
+  //   因此闸门从「家数」改为「家数 + 体积」双上限：家数放宽到 300（可读性/构建时间），
+  //   体积卡在 4MB（gzip 后约 1/10，实测 34 家 = 320KB raw / 33KB gzip ⇒ ~9.4KB/家）。
+  //   任一条超限 ⇒ 必须改为**路径分页**（/suppliers/page/N），不能再放宽本闸门。
+  let maxHtml = 0;
+  for (const loc of LOCALES) {
+    const f = path.join(APP, loc, "suppliers.html");
+    if (fs.existsSync(f)) maxHtml = Math.max(maxHtml, fs.statSync(f).size);
+  }
   check(
-    "B3 🔑 D1 内联上限：任一语种卡片数 ≤ 50（超限须改分页或动态渲染）",
-    maxCards <= 50 && maxCards > 0,
+    "B3 🔑 内联规模闸门：任一语种卡片数 ≤ 300（超限须改路径分页）",
+    maxCards <= 300 && maxCards > 0,
     `实测最大 ${maxCards} 家`
   );
+  check(
+    "B4 🔑 内联体积闸门：目录 HTML ≤ 4MB（超限须改路径分页）",
+    maxHtml > 0 && maxHtml <= 4 * 1024 * 1024,
+    `实测最大 ${(maxHtml / 1024 / 1024).toFixed(2)}MB`
+  );
+
+  // ── B5 / B6：分页实现必须在位（防「为了让 B3 过而把卡片截断」的回退）──────
+  {
+    const grid = src(GRID);
+    const view = src(VIEW);
+    const mw = src(MW);
+    check(
+      "B5 分页常量与切片在位（DirectoryGrid 有 PAGE_SIZE 且首帧不切）",
+      /const\s+PAGE_SIZE\s*=\s*\d+/.test(grid) &&
+        /mounted\s*\?\s*filtered\.slice\(/.test(grid)
+    );
+    check(
+      "B6 分页条与 noindex 在位（View 渲染 pager，middleware 认 ?page=）",
+      /pager\.pageCount\s*>\s*1/.test(view) &&
+        /searchParams\.get\("page"\)/.test(mw)
+    );
+  }
 
   // JSON-LD 的 numberOfItems 必须等于卡片数（描述的就是这份 HTML）
   const enHtml = fs.existsSync(path.join(APP, "en", "suppliers.html"))

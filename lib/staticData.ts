@@ -37,6 +37,42 @@ export const STATIC_INDUSTRIES = [
   { code: "furniture", name: "Furniture / 家具" },
   { code: "packaging", name: "Packaging / 包装" },
   { code: "cosmetics", name: "Cosmetics / 化妆品" },
+
+  // ---------------------------------------------------------------------------
+  // 2026-10-31：行业体系 13 → 35。
+  // 起因：广交会 57 个展区里，五金/文具/礼品/陶瓷/建材/照明等 19 个展区无家可归，
+  // 导入时被硬塞进 food-beverage，导致「冰柜→食品饮料」「铅笔盒→食品饮料」这类错配。
+  // 现在每个展区都有对应代码（映射见 scripts/_cantonfair_build_pool.cjs 的 SECTION_MAP）。
+  //
+  // 加一行即被 /industry 索引、sitemap、llms.txt 三处自动接住（都由 listIndustries() 驱动），
+  // 页面代码零改动。未在 lib/industryContent.ts 配差异化文案的行业，
+  // Block A 与子主题两块整块不渲染（§44 质量门），不会套模板话术。
+  // ---------------------------------------------------------------------------
+  // 补齐历史遗留：suppliers.industry_code 里已有 'eyewear'（钟表眼镜展区），
+  // 但常量表缺失 ⇒ 该行业的供应商档案里「行业」链接指向不存在的页面（死链）。
+  { code: "eyewear", name: "Eyewear & Watches / 眼镜钟表" },
+
+  { code: "hardware", name: "Hardware / 五金" },
+  { code: "tools", name: "Tools / 工具" },
+  { code: "home-goods", name: "Home Goods / 家居用品" },
+  { code: "home-textiles", name: "Home Textiles / 家用纺织品" },
+  { code: "building-materials", name: "Building Materials / 建筑及装饰材料" },
+  { code: "kitchenware", name: "Kitchenware / 餐厨用具" },
+  { code: "apparel", name: "Apparel / 服装" },
+  { code: "gifts", name: "Gifts & Premiums / 礼品及赠品" },
+  { code: "bags-luggage", name: "Bags & Luggage / 箱包" },
+  { code: "home-decor", name: "Home Decor / 家居装饰品" },
+  { code: "ceramics-glass", name: "Ceramics & Glassware / 陶瓷玻璃" },
+  { code: "sporting-goods", name: "Sporting Goods / 体育休闲用品" },
+  { code: "stationery", name: "Stationery & Office Supplies / 办公文具" },
+  { code: "garden", name: "Garden & Outdoor / 园林用品" },
+  { code: "sanitary-ware", name: "Sanitary Ware / 卫浴设备" },
+  { code: "medical", name: "Medical & Healthcare / 医药保健及医疗器械" },
+  { code: "lighting", name: "Lighting / 照明产品" },
+  { code: "personal-care", name: "Personal Care / 个人护理用具" },
+  { code: "baby-products", name: "Baby & Maternity / 孕婴童用品" },
+  { code: "new-energy", name: "New Energy / 新能源" },
+  { code: "pet-supplies", name: "Pet Supplies / 宠物用品" },
 ];
 
 // ---------- 3. 审核 / 认证项目（同时充当 audit_type 与 standard 两张表的数据源） ----------

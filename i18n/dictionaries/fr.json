@@ -1972,7 +1972,7 @@
     "certificationsLabel": "Certifications",
     "freeLockTitle": "Le compte gratuit débloque plus de détails",
     "freeLockLead": "Créez un compte gratuit pour voir l'année de création, l'effectif, les marchés d'exportation et le statut d'audit.",
-    "freeLockCta": "Créer un compte gratuit",
+    "freeLockCta": "Inscription gratuite pour voir les détails",
     "paidLockTitle": "Les membres voient les preuves et les risques",
     "paidLockLead": "Les membres Founding Buyer (99 $/an) voient les enregistrements de preuves, les détails de risque, l'historique d'audit et les données d'inspection.",
     "paidLockCta": "Voir l'adhésion",
@@ -2007,7 +2007,9 @@
     "assessmentReportDownload": "Télécharger le rapport",
     "assessmentReportUnavailable": "Indisponible",
     "assessmentReportNote": "Le téléchargement payant sera bientôt disponible. Pour l'instant, un lien de rapport ouvre une demande de service personnalisé. Les prix suivent notre grille tarifaire publiée.",
-    "regLegalName": "Nom enregistré"
+    "regLegalName": "Nom enregistré",
+    "fairRecordTitle": "Participation à la Foire de Canton",
+    "fairRecordSource": "Source : annuaire officiel des exposants de la Foire de Canton."
   },
   "reportPreview": {
     "badge": "(Aperçu gratuit)",

@@ -131,7 +131,25 @@ export type DirectoryEvents = {
 };
 
 /** 当前过滤条件：空串 = 该维度不筛选（与改造前 searchParams 缺省语义一致）。 */
-export type DirectoryActive = { country: string; industry: string; q: string };
+export type DirectoryActive = {
+  country: string;
+  industry: string;
+  q: string;
+  /** 页码（1 起）。仅用于判断分页高亮，不参与数据派生。 */
+  page?: number;
+};
+
+/**
+ * 分页信息。
+ *
+ * 🔴 为什么「全量卡片仍写进 HTML，只在前端切片」：
+ *   R25 产物门已确立「目录页是档案页的**唯一**内链来源」。
+ *   若服务端只渲染第 1 页 24 张，第 25 家以后的档案页在爬虫眼里就是**孤岛**，
+ *   直接重演 2026-10 那批「已发现·尚未编入索引」。
+ *   因此：服务端恒渲染全量（无 JS / 爬虫 / 首屏 HTML 都是完整列表），
+ *   前端只在 hydration 后按 `?page=` 切片 —— 页面变轻，内链一条不少。
+ */
+export type DirectoryPager = { page: number; pageCount: number };
 
 export default function DirectoryView({
   items,
@@ -143,12 +161,22 @@ export default function DirectoryView({
   dict,
   events,
   trustProfileDict,
+  total,
+  pager,
 }: {
-  /** 已按当前过滤条件筛过的集合（无过滤时即全量） */
+  /** 当前页要渲染的集合（无分页时即全量 / 过滤结果全量） */
   items: DirectoryEntry[];
   countries: string[];
   industries: string[];
   active: DirectoryActive;
+  /**
+   * 结果总数。分页后 `items` 只是某一页，计数标签必须用总数，
+   * 否则会写成「24 suppliers」而实际有 100 家。
+   * 缺省回落到 `items.length`（服务端无分页渲染时两者恒等）。
+   */
+  total?: number;
+  /** 分页信息；缺省或 pageCount ≤ 1 时不渲染分页条 */
+  pager?: DirectoryPager;
   /** 已带语言前缀的目录页路径，如 /suppliers、/es/suppliers */
   directoryPath: string;
   /** 当前语言 —— 只用于 `supplierDisplayName` 决定卡片展示用登记名还是企业自述英文名 */
@@ -161,22 +189,30 @@ export default function DirectoryView({
   trustProfileDict: TrustProfileDict;
 }) {
   const { country, industry, q } = active;
+  const shown = total ?? items.length;
 
   // 筛选做成链接而不是表单：可被抓取，也让「国家 + 行业 + 关键词」组合形成真实索引路径。
   // stage1.8：`directoryPath` 已含语言前缀，拼接 query 的结果与改造前
   //   `localePath(locale, "/suppliers?…")` 逐字一致。
+  // 2026-10-31 分页：任何筛选变更都**丢弃页码**（回到第 1 页），
+  //   否则「在第 5 页筛选一个国家只剩 3 家」会出现空页。
   const linkWith = (next: {
     country?: string | null;
     industry?: string | null;
     q?: string | null;
+    page?: number | null;
   }) => {
     const params = new URLSearchParams();
     const c = next.country !== undefined ? next.country : country;
     const i = next.industry !== undefined ? next.industry : industry;
     const query = next.q !== undefined ? next.q : q;
+    // page === undefined ⇒ 保持当前页；传 null ⇒ 回第 1 页；传数字 ⇒ 指定页
+    const pg =
+      next.page === undefined ? (active.page && active.page > 1 ? active.page : null) : next.page;
     if (c) params.set("country", c);
     if (i) params.set("industry", i);
     if (query) params.set("q", query);
+    if (pg && pg > 1) params.set("page", String(pg));
     const qs = params.toString();
     return qs ? `${directoryPath}?${qs}` : directoryPath;
   };
@@ -207,7 +243,7 @@ export default function DirectoryView({
           </button>
           {q && (
             <Link
-              href={linkWith({ q: null })}
+              href={linkWith({ q: null, page: null })}
               className="text-sm text-[#171717] hover:underline"
             >
               {dict.searchClear}
@@ -222,7 +258,7 @@ export default function DirectoryView({
             </div>
             <div className="flex flex-wrap gap-2">
               <Link
-                href={linkWith({ country: null })}
+                href={linkWith({ country: null, page: null })}
                 className={`rounded-full px-3 py-1 text-sm border ${!country ? "bg-[#171717] text-white border-[#171717]" : "border-[#ddd9d0] text-[#3f4650] hover:border-[#171717]"}`}
                 data-track={events.directoryFilter}
                 data-track-value="all-countries"
@@ -232,7 +268,7 @@ export default function DirectoryView({
               {countries.map((c) => (
                 <Link
                   key={c}
-                  href={linkWith({ country: c })}
+                  href={linkWith({ country: c, page: null })}
                   className={`rounded-full px-3 py-1 text-sm border ${country === c ? "bg-[#171717] text-white border-[#171717]" : "border-[#ddd9d0] text-[#3f4650] hover:border-[#171717]"}`}
                   data-track={events.directoryFilter}
                   data-track-value={c}
@@ -249,7 +285,7 @@ export default function DirectoryView({
               </div>
               <div className="flex flex-wrap gap-2">
                 <Link
-                  href={linkWith({ industry: null })}
+                  href={linkWith({ industry: null, page: null })}
                   className={`rounded-full px-3 py-1 text-sm border ${!industry ? "bg-[#171717] text-white border-[#171717]" : "border-[#ddd9d0] text-[#3f4650] hover:border-[#171717]"}`}
                   data-track={events.directoryFilter}
                   data-track-value="all-industries"
@@ -259,7 +295,7 @@ export default function DirectoryView({
                 {industries.map((i) => (
                   <Link
                     key={i}
-                    href={linkWith({ industry: i })}
+                    href={linkWith({ industry: i, page: null })}
                     className={`rounded-full px-3 py-1 text-sm border ${industry === i ? "bg-[#171717] text-white border-[#171717]" : "border-[#ddd9d0] text-[#3f4650] hover:border-[#171717]"}`}
                     data-track={events.directoryFilter}
                     data-track-value={i}
@@ -283,7 +319,7 @@ export default function DirectoryView({
             <p className="text-sm text-[#6d6b66] mt-1">{dict.featuredLead}</p>
           </div>
           <p className="text-sm text-[#6d6b66] min-w-0 text-right">
-            {dict.countLabel.replace("{n}", String(items.length))}
+            {dict.countLabel.replace("{n}", String(shown))}
           </p>
         </div>
 
@@ -296,7 +332,7 @@ export default function DirectoryView({
         {items.length === 0 ? (
           <p className="text-[#3f4650] mb-10">{dict.empty}</p>
         ) : (
-          <section className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">
+          <section className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
             {items.map((x) => (
               // ★ 等级只由「真实证据」决定，绝不采信 legacy verification_status。
               //   详情与原始理由见 page.tsx 的 `items` 构造处（服务端唯一权威）。
@@ -386,6 +422,65 @@ export default function DirectoryView({
             ))}
           </section>
         )}
+
+        {/* 分页条（2026-10-31）────────────────────────────────────────────────
+            🔴 只用页码与箭头，**不用任何文字** —— 本页 9 种语言共用一套组件，
+            引入 "Previous/Next/Page X of Y" 会新增 3 个翻译叶 × 9 语，
+            而数字与箭头是语言无关的。可访问性靠 aria-current / aria-label（纯数字）。
+            🔴 `?page=` 已在 middleware 归入「筛选态 noindex, follow」，
+            不会产出重复索引页；canonical 仍恒指目录首页。 */}
+        {pager && pager.pageCount > 1 && (() => {
+          const cur = pager.page;
+          const last = pager.pageCount;
+          const nums: Array<number | "gap"> = [];
+          if (last <= 7) {
+            for (let i = 1; i <= last; i += 1) nums.push(i);
+          } else {
+            nums.push(1);
+            if (cur > 3) nums.push("gap");
+            for (let i = Math.max(2, cur - 1); i <= Math.min(last - 1, cur + 1); i += 1) nums.push(i);
+            if (cur < last - 2) nums.push("gap");
+            nums.push(last);
+          }
+          const base = "inline-flex items-center justify-center min-w-[2.25rem] h-9 px-2 rounded-md border text-sm";
+          return (
+            <nav className="flex flex-wrap items-center gap-2 mb-14" aria-label={String(cur)}>
+              <Link
+                href={linkWith({ page: Math.max(1, cur - 1) })}
+                aria-label={String(Math.max(1, cur - 1))}
+                aria-disabled={cur === 1}
+                className={`${base} border-[#ddd9d0] text-[#3f4650] hover:border-[#171717] ${cur === 1 ? "pointer-events-none opacity-40" : ""}`}
+              >
+                ←
+              </Link>
+              {nums.map((n, i) =>
+                n === "gap" ? (
+                  <span key={`gap-${i}`} className="px-1 text-[#8c8982]" aria-hidden="true">
+                    …
+                  </span>
+                ) : (
+                  <Link
+                    key={n}
+                    href={linkWith({ page: n })}
+                    aria-label={String(n)}
+                    aria-current={n === cur ? "page" : undefined}
+                    className={`${base} ${n === cur ? "bg-[#171717] text-white border-[#171717]" : "border-[#ddd9d0] text-[#3f4650] hover:border-[#171717]"}`}
+                  >
+                    {n}
+                  </Link>
+                )
+              )}
+              <Link
+                href={linkWith({ page: Math.min(last, cur + 1) })}
+                aria-label={String(Math.min(last, cur + 1))}
+                aria-disabled={cur === last}
+                className={`${base} border-[#ddd9d0] text-[#3f4650] hover:border-[#171717] ${cur === last ? "pointer-events-none opacity-40" : ""}`}
+              >
+                →
+              </Link>
+            </nav>
+          );
+        })()}
       </section>
     </>
   );

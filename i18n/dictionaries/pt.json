@@ -1972,7 +1972,7 @@
     "certificationsLabel": "Certificações",
     "freeLockTitle": "Conta gratuita desbloqueia mais detalhes",
     "freeLockLead": "Crie uma conta gratuita para ver ano de fundação, número de funcionários, mercados de exportação e o estado da auditoria.",
-    "freeLockCta": "Criar conta gratuita",
+    "freeLockCta": "Registe-se grátis para ver os detalhes",
     "paidLockTitle": "Assinantes veem evidências e detalhes de risco",
     "paidLockLead": "Assinantes Founding Buyer (US$ 99/ano) veem registros de evidências, detalhamentos de risco, histórico de auditoria e dados de inspeção.",
     "paidLockCta": "Ver assinatura",
@@ -2007,7 +2007,9 @@
     "assessmentReportDownload": "Baixar relatório",
     "assessmentReportUnavailable": "Indisponível",
     "assessmentReportNote": "O download pago será lançado em breve. Por enquanto, um link de relatório abre uma solicitação de serviço personalizado. Os preços seguem nossa tabela de preços publicada.",
-    "regLegalName": "Nome registado"
+    "regLegalName": "Nome registado",
+    "fairRecordTitle": "Participação na Feira de Cantão",
+    "fairRecordSource": "Fonte: diretório oficial de expositores da Feira de Cantão."
   },
   "reportPreview": {
     "badge": "Pré-visualização gratuita",

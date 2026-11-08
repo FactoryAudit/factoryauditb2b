@@ -20,9 +20,52 @@ function humanize(cat: string): string {
     .join(" ");
 }
 
-/** 客户端 canvas 重编码：降采样到 ≤1600px、EXIF 清理、输出 JPEG/WebP。
- *  服务端不再 sharp（Workers 10ms CPU），只做安全复检。 */
-async function reencode(file: File): Promise<{ bytes: ArrayBuffer; width: number; height: number; mime: string }> {
+/** 客户端 canvas 重编码：主图 ≤1600px、缩略图 ≤480px，EXIF 清理，优先 WebP。
+ *  服务端不再 sharp（Workers 10ms CPU），只做安全复检。
+ *
+ *  ── 2026-10-28：为什么一次产出两个尺寸 ──────────────────────────────────
+ *  此前只产出一张 1600px JPEG（客户端 q0.85），服务端把 display 与 thumbnail
+ *  指向同一个对象 ⇒ 档案页缩略图条下的是 258 KB 原图，缩略图完全没省带宽。
+ *  现在同一次解码里画两张 canvas：
+ *    · display 1600px WebP q0.82 —— 实测 258 KB → 147 KB
+ *    · thumb    480px WebP q0.78 —— 实测 258 KB → 20 KB（省 92%）
+ *  优先 WebP：不支持 WebP 的老浏览器 canvas.toBlob 会**静默回落 PNG**（体积反而
+ *  更大），所以必须检查返回的 blob.type，回落时改用 JPEG。 */
+type Encoded = {
+  bytes: ArrayBuffer;
+  width: number;
+  height: number;
+  mime: string;
+  thumbBytes: ArrayBuffer;
+  thumbMime: string;
+};
+
+/** 画到指定长边上限的 canvas 上（不放大）。 */
+function drawScaled(img: HTMLImageElement, maxDim: number) {
+  let w = img.naturalWidth;
+  let h = img.naturalHeight;
+  const scale = Math.min(1, maxDim / Math.max(w, h));
+  w = Math.max(1, Math.round(w * scale));
+  h = Math.max(1, Math.round(h * scale));
+  const canvas = document.createElement("canvas");
+  canvas.width = w;
+  canvas.height = h;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) throw new Error("no_ctx");
+  ctx.drawImage(img, 0, 0, w, h);
+  return { canvas, w, h };
+}
+
+/** WebP 优先，返回实际编码出的类型（可能是 webp / jpeg / png）。 */
+async function encodeCanvas(canvas: HTMLCanvasElement, quality: number): Promise<Blob> {
+  const webp = await new Promise<Blob | null>((res) => canvas.toBlob(res, "image/webp", quality));
+  if (webp && webp.type === "image/webp") return webp;
+  const jpeg = await new Promise<Blob | null>((res) => canvas.toBlob(res, "image/jpeg", quality));
+  if (!jpeg) throw new Error("encode_failed");
+  return jpeg;
+}
+
+async function reencode(file: File): Promise<Encoded> {
   const url = URL.createObjectURL(file);
   try {
     const img = await new Promise<HTMLImageElement>((resolve, reject) => {
@@ -31,23 +74,21 @@ async function reencode(file: File): Promise<{ bytes: ArrayBuffer; width: number
       el.onerror = () => reject(new Error("decode_failed"));
       el.src = url;
     });
-    const maxDim = 1600;
-    let w = img.naturalWidth;
-    let h = img.naturalHeight;
-    const scale = Math.min(1, maxDim / Math.max(w, h));
-    w = Math.max(1, Math.round(w * scale));
-    h = Math.max(1, Math.round(h * scale));
-    const canvas = document.createElement("canvas");
-    canvas.width = w;
-    canvas.height = h;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) throw new Error("no_ctx");
-    ctx.drawImage(img, 0, 0, w, h);
-    const mime = file.type === "image/png" ? "image/png" : "image/jpeg";
-    const blob: Blob | null = await new Promise((res) => canvas.toBlob(res, mime, 0.85));
-    if (!blob) throw new Error("encode_failed");
-    const bytes = await blob.arrayBuffer();
-    return { bytes, width: w, height: h, mime };
+
+    const d = drawScaled(img, 1600);
+    const dBlob = await encodeCanvas(d.canvas, 0.82);
+
+    const t = drawScaled(img, 480);
+    const tBlob = await encodeCanvas(t.canvas, 0.78);
+
+    return {
+      bytes: await dBlob.arrayBuffer(),
+      width: d.w,
+      height: d.h,
+      mime: dBlob.type,
+      thumbBytes: await tBlob.arrayBuffer(),
+      thumbMime: tBlob.type,
+    };
   } finally {
     URL.revokeObjectURL(url);
   }
@@ -84,7 +125,10 @@ export default function FactoryPhotoUploader({ supplierId, value, onChange, dict
       fd.append("category", pendingCat);
       fd.append("width", String(enc.width));
       fd.append("height", String(enc.height));
-      fd.append("file", new File([enc.bytes], file.name || "photo.jpg", { type: enc.mime }));
+      const ext = enc.mime === "image/webp" ? "webp" : enc.mime === "image/png" ? "png" : "jpg";
+      fd.append("file", new File([enc.bytes], file.name || `photo.${ext}`, { type: enc.mime }));
+      // 缩略图另存一份：服务端校验不过会自动退回「与主图同源」，不会让上传失败。
+      fd.append("thumb", new File([enc.thumbBytes], `thumb.${ext}`, { type: enc.thumbMime }));
       const res = await fetch("/api/supplier-factory-photo", { method: "POST", body: fd });
       const data = await res.json();
       if (!res.ok || !data.ok) {

@@ -45,6 +45,20 @@ function readActive(sp: { get(key: string): string | null }): DirectoryActive {
   };
 }
 
+/** 每页卡片数。
+ *  🔴 24 = 8 行 × 3 列（md 三列网格）。取 24 而非 30/50 是为了让最后一行不留残格，
+ *     且首屏之外只多渲染 7 行，滚动到底即见分页条。
+ *  🔴 与「服务端全量写进 HTML」并不冲突：服务端渲染全量（SEO / 无 JS 兜底），
+ *     本常量只在 hydration 之后生效（见下方 mounted 分支）。 */
+const PAGE_SIZE = 24;
+
+/** 读页码：非法值（NaN / ≤0 / 小数）一律回落第 1 页，绝不向上抛错。 */
+function readPage(sp: { get(key: string): string | null }): number {
+  const raw = Number(sp.get("page") ?? "1");
+  if (!Number.isFinite(raw) || raw < 1) return 1;
+  return Math.floor(raw);
+}
+
 export default function DirectoryGrid({
   items,
   countries,
@@ -122,12 +136,27 @@ export default function DirectoryGrid({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [source, active.country, active.industry, active.q]);
 
+  // ── 分页（2026-10-31）──────────────────────────────────────────────────────
+  // 🔴 首帧仍然渲染**全量**（`mounted === false`）⇒ 与预渲染 HTML 逐字一致，
+  //    既避免 hydration 不匹配，也保证「无 JS / 爬虫」拿到完整内链列表。
+  //    hydration 完成后才按 `?page=` 切片（这就是分页只在前端生效的原因）。
+  // 🔴 页码越界必须**夹紧**而不是渲染空页：筛选后结果变少时，
+  //    `?page=5` 可能已超出新页数 —— 此时显示最后一页，而不是「0 家供应商」。
+  const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const requested = mounted ? readPage(searchParams) : 1;
+  const page = Math.min(Math.max(1, requested), pageCount);
+  const visible = mounted
+    ? filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
+    : filtered;
+
   return (
     <DirectoryView
-      items={filtered}
+      items={visible}
+      total={mounted ? filtered.length : undefined}
+      pager={mounted && pageCount > 1 ? { page, pageCount } : undefined}
       countries={countries}
       industries={industries}
-      active={active}
+      active={mounted ? { ...active, page } : active}
       directoryPath={directoryPath}
       locale={locale}
       dict={dict}

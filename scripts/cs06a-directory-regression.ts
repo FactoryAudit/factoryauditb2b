@@ -114,10 +114,12 @@ section("A. Bug B —— 筛选结果 = 实际渲染的卡片（源码级防回�
   // A2 展示集合由筛选结果派生（这是 count == cards 恒等成立的唯一依据）。
   // stage1.8：落点由 page.tsx 移到 DirectoryView —— 网格与计数标签必须消费
   //   **同一个**集合 `items`（客户端传过滤结果、服务端预渲染传全量）。
+  // R87：计数经 `shown = total ?? items.length` 与网格同源（total 由客户端过滤结果下发）
+  const shownDerived = /const\s+shown\s*=\s*total\s*\?\?\s*items\.length/.test(view);
   check(
     "A2 展示集合由筛选结果派生（网格与计数标签消费同一集合 `items`）",
     /\{items\.map\(\(x\)\s*=>/.test(view) &&
-      /dict\.countLabel\.replace\("\{n\}",\s*String\(items\.length\)\)/.test(view)
+      shownDerived && /dict\.countLabel\.replace\([^)]*String\(shown\)\)/.test(view)
   );
 
   // A3 网格消费展示集合（不是全量、不是 featured），且恰好一处
@@ -140,8 +142,8 @@ section("A. Bug B —— 筛选结果 = 实际渲染的卡片（源码级防回�
 
   // A5 计数标签绑展示集合长度 —— 与 A2 合起来 ⇒ 计数恒等于卡片数
   check(
-    "A5 计数标签仍绑 `String(items.length)`",
-    /String\(items\.length\)/.test(view)
+    "A5 计数标签仍绑 `String(shown)`（shown = total ?? items.length）",
+    shownDerived && /String\(shown\)/.test(view)
   );
 
   // A5b 旧集合 `featured` 不得以任何集合身份残留（字典键 featuredTitle/Lead 不算）
@@ -323,8 +325,8 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
     String(MEMBERSHIP_PRICE_USD)
   );
   check(
-    "C4 字段分层：PUBLIC 21 / FREE 8→13（CS-16 加 5 项联系/属地）/ PAID 恒为 4",
-    PUBLIC_FIELDS.length === 21 &&
+    "C4 字段分层：PUBLIC 22（R87 加 fairRecord）/ FREE 13 / PAID 恒为 4",
+    PUBLIC_FIELDS.length === 22 &&
       FREE_FIELDS.length === 13 &&
       PAID_FIELDS.length === 4,
     `${PUBLIC_FIELDS.length}/${FREE_FIELDS.length}/${PAID_FIELDS.length}`
@@ -369,7 +371,7 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
       /export\s+const\s+FEATURED_MIN\s*=/.test(sup)
   );
 
-  // C7 九语字典：键集合与 en 完全一致，叶子数恒为 3293（= 3287 字符串 + 4 boolean）
+  // C7 九语字典：键集合与 en 完全一致，叶子数恒为 3295（= 3287 字符串 + 4 boolean）
   // 2648 → 2666：CS-08 入驻表证书子表单 + 「我要获得证书」咨询弹窗新增 18 键 × 9 语
   // 2666 → 2694：CS-11 公开标准报告样板页 standardReport 命名空间 27 键 + footer.standardReport 1 键
   // 2694 → 2714：CS-12 档案页登记信息 7 键 + 工厂自述证书 8 键 + 产能 4 键 + evidenceCenter.issuedOn 1 键 = 20 键 × 9 语
@@ -406,7 +408,7 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
   //              （脚本：scripts/apply-changesetB-i18n.cjs，幂等 + 九语键集自检）
   // 3258 → 3288：/contact 页去掉内联 COPY，新增 contact 命名空间（顶层 13 + 嵌套 form 17 = 30 键，全字符串）× 9 语
   //              （脚本：scripts/_apply_contact_i18n.cjs，幂等 + 九语键集自检）
-  // 3292 → 3293：/register 页补「已有账号 → 去登录」回链，新增 register.haveAccount 1 键 × 9 语（链接文案复用 auth.accountMenu.signIn）
+  // 3292 → 3295：/register 页补「已有账号 → 去登录」回链，新增 register.haveAccount 1 键 × 9 语（链接文案复用 auth.accountMenu.signIn）
   //              （脚本：scripts/apply-r66-signin-entry-i18n.cjs，幂等 + 九语键集自检）
   const LOCALES = ["en", "zh", "zh-TW", "ja", "es", "de", "fr", "pt", "ar"] as const;
   type Leaf = { key: string; value: unknown };
@@ -432,7 +434,7 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
     dictLeaves[loc] = leaves(JSON.parse(fs.readFileSync(p, "utf8")));
   }
   const baseKeys = dictLeaves.en.map((l) => l.key).sort();
-  check("C8 en 字典叶子数 = 3293（未被截断/新增）", baseKeys.length === 3293, `实际 ${baseKeys.length}`);
+  check("C8 en 字典叶子数 = 3295（未被截断/新增）", baseKeys.length === 3295, `实际 ${baseKeys.length}`);
 
   for (const loc of LOCALES) {
     if (loc === "en") continue;

@@ -1457,7 +1457,7 @@
     "certificationsLabel": "Certifications",
     "freeLockTitle": "Free account unlocks more company details",
     "freeLockLead": "Create a free account to view the year established, employee count, export markets and audit status.",
-    "freeLockCta": "Create free account",
+    "freeLockCta": "Register free to view details",
     "paidLockTitle": "Members see evidence and risk details",
     "paidLockLead": "Founding Buyer members ($99/year) see evidence records, risk breakdowns, audit history and inspection data.",
     "paidLockCta": "View membership",
@@ -1492,7 +1492,9 @@
     "assessmentReportDownload": "Download report",
     "assessmentReportUnavailable": "Unavailable",
     "assessmentReportNote": "Paid downloads are launching soon. For now a report link opens a custom-service enquiry. Prices follow our published price list.",
-    "regLegalName": "Registered name"
+    "regLegalName": "Registered name",
+    "fairRecordTitle": "Canton Fair participation",
+    "fairRecordSource": "Source: official Canton Fair exhibitor directory."
   },
   "methodology": {
     "badge": "Methodology",

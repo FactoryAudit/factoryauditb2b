@@ -372,7 +372,7 @@ section("TEST-04 cluster_slug = missing-cluster（产业带不存在）⇒ 正�
 /* =============================================================== 权限边界 */
 section("附带：不动权限口径（PUBLIC_FIELDS 仍 21）");
 {
-  check("P1 PUBLIC_FIELDS.length === 21", PUBLIC_FIELDS.length === 21, `实际 ${PUBLIC_FIELDS.length}`);
+  check("P1 PUBLIC_FIELDS.length === 22（R87 加 fairRecord）", PUBLIC_FIELDS.length === 22, `实际 ${PUBLIC_FIELDS.length}`);
   check("P2 未把 region/cluster 塞进 PUBLIC_FIELDS", !PUBLIC_FIELDS.includes("region") && !PUBLIC_FIELDS.includes("clusterName"));
   check(
     "P3 FREE/PAID 长度未变",

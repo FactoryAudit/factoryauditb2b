@@ -459,8 +459,8 @@ section("8. 访问分层 / 定价 / 路径未被波及");
 
 {
   check(
-    "PUBLIC 层 = CS-05c 的 15 项 + CS-12 的 6 项工商登记级字段 = 21",
-    PUBLIC_FIELDS.length === 21,
+    "PUBLIC 层 = CS-05c 的 15 项 + CS-12 的 6 项工商登记级字段 + R87 展位记录 1 项 = 22",
+    PUBLIC_FIELDS.length === 22,
     `实际 ${PUBLIC_FIELDS.length}`
   );
   check(

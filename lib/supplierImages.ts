@@ -525,6 +525,12 @@ export async function recordFactoryPhoto(input: {
    * 照片是公开发布物，来源可追溯是底线，故补上。
    */
   uploadedBy?: string | null;
+  /** 主图对象路径。缺省＝input.path（与主图同源） */
+  displayPath?: string | null;
+  displaySize?: number | null;
+  /** 缩略图对象路径与体积。缺省＝displayPath / displaySize（旧行为） */
+  thumbnailPath?: string | null;
+  thumbnailSize?: number | null;
 }): Promise<{ ok: boolean; id?: string; error?: string }> {
   const db = createAdminClient();
   if (!db) return { ok: false, error: "storage_not_configured" };
@@ -539,11 +545,12 @@ export async function recordFactoryPhoto(input: {
       width: input.width,
       height: input.height,
       original_size: input.size,
-      display_size: input.size,
-      thumbnail_size: input.size,
+      // 主图与缩略图可以指向两个不同的对象（2026-10-28 起）；未提供时回落到同源。
+      display_size: input.displaySize ?? input.size,
+      thumbnail_size: input.thumbnailSize ?? input.displaySize ?? input.size,
       original_path: input.path,
-      display_path: input.path,
-      thumbnail_path: input.path,
+      display_path: input.displayPath ?? input.path,
+      thumbnail_path: input.thumbnailPath ?? input.displayPath ?? input.path,
       file_hash: input.hash,
       uploaded_by: input.uploadedBy ?? null,
     })
@@ -601,6 +608,14 @@ export type StorePhotoInput = {
   bytes: ArrayBuffer;
   width: number | null;
   height: number | null;
+  /**
+   * 缩略图（长边 ≤480 的 WebP/JPEG），由客户端 canvas 一并生成。
+   * 缺省或校验不过时**退回与主图同源**（＝旧行为），绝不因此让整个上传失败。
+   * 🔴 为什么需要它（2026-10-28）：此前 display_path === thumbnail_path，
+   *    档案页缩略图条下的是 258 KB 原图，缩略图省不了任何带宽。
+   */
+  thumbBytes?: ArrayBuffer;
+  thumbMime?: string;
   /** 上传者标识 `<source>:<email>`，落到 supplier_images.uploaded_by（见 recordFactoryPhoto 注释） */
   uploadedBy?: string | null;
 };
@@ -654,6 +669,39 @@ export async function validateAndStoreFactoryPhoto(
   });
   if (!up.ok) return { ok: false, code: up.error, status: 500 };
 
+  // ── 缩略图（2026-10-28）────────────────────────────────────────────────────
+  // 客户端同时传一张长边 ≤480 的图，这里单独存成第二个对象，让档案页的缩略图条
+  // 拿 20 KB 而不是 258 KB。
+  // 刻意**不复用** validateImageUpload：那套逻辑会拿 MIN_PHOTO_WIDTH/HEIGHT 卡分辨率，
+  // 480px 的缩略图必然被判 resolution_too_low。缩略图只做型号嗅探 + 体积上限。
+  // 任何一步不过都静默退回「与主图同源」＝旧行为，绝不让缩略图问题拖垮整次上传。
+  let displayPath = up.path;
+  let displaySize = bytes.byteLength;
+  let thumbnailPath = up.path;
+  let thumbnailSize = bytes.byteLength;
+  if (input.thumbBytes && input.thumbBytes.byteLength > 0) {
+    const tBytes = new Uint8Array(input.thumbBytes);
+    const tSniff = sniffFileType(tBytes);
+    if (
+      tSniff.ok &&
+      isAllowedImageMime(tSniff.mime) &&
+      tBytes.byteLength <= MAX_PHOTO_BYTES &&
+      tBytes.byteLength < bytes.byteLength
+    ) {
+      const tUp = await uploadImageObject({
+        supplierId: input.supplierId,
+        ext: extFromMime(tSniff.mime),
+        mime: tSniff.mime,
+        bytes: input.thumbBytes,
+        suffix: "-thumb",
+      });
+      if (tUp.ok) {
+        thumbnailPath = tUp.path;
+        thumbnailSize = tBytes.byteLength;
+      }
+    }
+  }
+
   const rec = await recordFactoryPhoto({
     supplierId: input.supplierId,
     category: input.category,
@@ -663,12 +711,17 @@ export async function validateAndStoreFactoryPhoto(
     size: bytes.byteLength,
     hash,
     path: up.path,
+    displayPath,
+    displaySize,
+    thumbnailPath,
+    thumbnailSize,
     uploadedBy: input.uploadedBy ?? null,
   });
   if (!rec.ok || !rec.id) {
     try {
       // 清理必须用**真实写入**的路径，否则残留孤儿对象
-      await db.storage.from(IMAGE_BUCKET).remove([up.path]);
+      const extra = thumbnailPath !== up.path ? [thumbnailPath] : [];
+      await db.storage.from(IMAGE_BUCKET).remove([up.path, ...extra]);
     } catch {
       /* best-effort */
     }

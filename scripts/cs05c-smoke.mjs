@@ -34,6 +34,9 @@ const ROOT = path.resolve(__dirname, "..");
 const BASE = process.env.BASE || "https://factoryauditb2b.com";
 
 const LOCALES = ["en", "zh", "zh-TW", "ja", "es", "de", "fr", "pt", "ar"];
+// 期望文案取自字典：探针要表达「CTA == 字典值」这个不变量，不把某一句硬编码进来
+// （2026-10-31 freeLockCta 由「Create free account」改为「Register free to view details」一类）。
+const FREE_LOCK_CTA = JSON.parse(fs.readFileSync(path.join(ROOT, "i18n/dictionaries/en.json"), "utf8")).supplierProfile.freeLockCta;
 
 /** locale 路径前缀：英文是默认语言，不带前缀（与 lib/i18n 一致） */
 const prefix = (loc) => (loc === "en" ? "" : `/${loc}`);
@@ -210,8 +213,8 @@ section("3. 结构性守护：Guest 5 家 / Free 无限 / Paid 认证");
   const freeGate = titleIdx >= 0 ? html.slice(titleIdx, titleIdx + 900) : "";
 
   check(
-    "免费层注册门 CTA 是「创建免费账号」",
-    /Create free account/i.test(freeGate),
+    "免费层注册门 CTA 与字典 supplierProfile.freeLockCta 一致",
+    freeGate.includes(FREE_LOCK_CTA),
     freeGate.slice(0, 160)
   );
   check(

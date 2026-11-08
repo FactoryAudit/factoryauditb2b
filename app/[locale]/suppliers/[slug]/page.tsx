@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import { industryDisplayName, listIndustries } from "@/lib/taxonomy";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
-import { getSupplierDetail, listSupplierSlugs, lastCheckedOf } from "@/lib/queries";
+import {
+  getSupplierDetail,
+  listSupplierSlugs,
+  lastCheckedOf,
+  getSupplierPresenceFlags,
+} from "@/lib/queries";
 import {
   getSupplierPublicCertifications,
   getSupplierPublicAudits,
@@ -80,13 +87,19 @@ const DIRECTORY_PATH = "/suppliers";
 /**
  * 「登录后才可见」的快照行 id。
  *
- * 🔴 2026-10-28：官网（website）与注册地址（address）从公开层移除。
- *   此前它们未登录即可见 ⇒ 采购商拿到官网直接联系工厂，平台的核验/审核服务被绕过。
- *   处理方式：**服务端就把 value 清空**（真实值不进公开 HTML），渲染层给登录引导。
+ * 🔴 2026-10-31（文哥拍板，**撤销 10-28 的决定**）：官网与注册地址恢复公开。
+ *   10-28 曾把官网/地址清空，理由是「采购商拿官网绕过平台直接联系工厂」。
+ *   但代价是：未登录访客一行差异化信息都看不到 —— 名录页 70 家档案几乎全是模板文案，
+ *   对搜索引擎也是近似重复内容，反而拖累索引质量。
+ *   新判断：官网域名与工商注册地址本身是企业**公开自称/公开登记**的事实，
+ *   采购商照样能在展会名录、海关数据里找到，锁它换不来转化，只换来「空壳页」的观感。
+ *   真正需要锁的是**产能、员工规模、出口市场、联系方式**这类商业情报 —— 那部分没动。
  *
- * ⚠️ 不要改成 CSS 隐藏或前端条件渲染 —— 那样真实值仍在 HTML 里，爬虫与游客都能拿到。
+ * 现在恒为空集：保留这层机制，是为了以后要加回闸门时只改一处。
+ * ⚠️ 加任何 id 进来都必须是「服务端清空 value」，不要改成 CSS 隐藏或前端条件渲染 ——
+ *    那样真实值仍在 HTML 里，爬虫与游客都能拿到。
  */
-const GATED_SNAPSHOT_IDS = new Set(["website", "address"]);
+const GATED_SNAPSHOT_IDS = new Set<string>([]);
 
 /**
  * PHASE 03：把数据层的供应商视图映射成 SEO 推导输入。
@@ -325,7 +338,21 @@ export default async function SupplierProfilePage({
   // ===========================================================================
   // PHASE 03：SEO / GEO / AI-search 产物全部由 lib/seo/supplierSeo.ts 推导
   // ===========================================================================
+  // 行业代码 → 当前语种可读名称（STATIC_INDUSTRIES 是唯一权威）。
+  // 🔴 2026-10-31 修：档案页有两处显示行业 —— 概况格 与 Buyer Snapshot，
+  //    此前两处都直接渲染 industry_code（英文页 "food-beverage"、中文页也是代码）。
+  //    这里算一次，两处共用；未知代码回退原代码，绝不留空。
+  const industries = await listIndustries();
+  const industryHit = s.industryCode ? industries.find((i) => i.code === s.industryCode) : undefined;
+  const industryName = s.industryCode
+    ? industryHit
+      ? industryDisplayName(locale, industryHit.name)
+      : s.industryCode
+    : null;
   const { seo } = buildSupplierSeoData(s, verifiedAudits, verifiedCerts);
+  // Buyer Snapshot 的行业行读 seo.industryName（lib/seo/supplierSeo.ts 里默认透传 code），
+  // 这里用本地化名称覆盖，避免页面上出现裸行业码。
+  if (industryName) seo.industryName = industryName;
   const seoCopy = resolveSupplierSeoCopy(locale);
   const seoOpts = { copy: seoCopy, levelLabel: v.levelsShort[level] };
 
@@ -395,6 +422,29 @@ export default async function SupplierProfilePage({
     faq
   );
 
+  // ── 2026-10-31：公司概况「锁空气」修复（见 Overview 区块注释）─────────────
+  // 只算「有没有值」这一个布尔量，**绝不把值本身放进公开 HTML**；
+  // 真值仍由 UnlockedValue 走授权接口取。空值一律渲染「—」（NULL≠0）。
+  // 🔴 2026-10-31：存在性**必须单独查**，不能用页面上的 s.* 判断 ——
+  //    getSupplierDetail 在 visitor 档会把这几项整体裁掉（CS-12），
+  //    s.employees 恒为 undefined ⇒ 早先版本把「101-500 人」渲染成了「—」。
+  //    该函数只回布尔、不回值，公开 HTML 里仍然看不到真值。
+  const presence = await getSupplierPresenceFlags(slug);
+
+  const hasEmployees = presence.employees;
+  const hasExportMarkets = presence.exportMarkets;
+  const hasProductionCapacity = presence.productionCapacity;
+  const hasMonthlyOutput = presence.monthlyOutput;
+  const hasFactorySize = presence.factorySize;
+  const hasExportSince = presence.exportSince;
+  const anyOverviewLocked =
+    hasEmployees ||
+    hasExportMarkets ||
+    hasProductionCapacity ||
+    hasMonthlyOutput ||
+    hasFactorySize ||
+    hasExportSince;
+
   return (
     // CS-05b：整页共享同一次 Guest 额度判定（避免"字段 A 解锁、字段 B 锁着"的撕裂）。
     // key={s.id} —— 客户端在两家供应商之间跳转时强制重新判定，不沿用上一家的结果。
@@ -424,6 +474,35 @@ export default async function SupplierProfilePage({
               {s.businessType === "Manufacturer" ? sp.manufacturer : sp.tradingCompany}
             </p>
             <p className="mt-3 text-sm text-[#3f4650]">{s.mainProducts.join(" · ")}</p>
+
+            {/* 首屏主 CTA（2026-10-31）：只在「确有未解锁字段」时出现。
+                · 与概况区入口同源同文案（sp.freeLockCta），不再是第二套说法；
+                · 无可解锁内容 ⇒ 整块不渲染，绝不承诺打不开的东西（同「锁空气」修复口径）。 */}
+            {anyOverviewLocked && (
+              <div className="mt-4">
+                {/* 🔴 必须包在 UnlockGate 里：它是唯一知道「访客 / 已登录 / 已解锁」的判据。
+                    直接渲染按钮会让已付费或已登录的用户也看到「免费注册」—— 实测前就先修掉。 */}
+                <UnlockGate
+                  layer="free"
+                  variant="raw"
+                  registerHref={registerHref}
+                  membershipHref={p("/pricing#founding-buyer")}
+                  locked={
+                    <Link
+                      href={registerHref}
+                      className="btn btn-primary text-sm"
+                      data-track={ANALYTICS_EVENTS.profileFreeCta}
+                      data-track-position="hero"
+                      data-track-value={s.slug}
+                    >
+                      {sp.freeLockCta}
+                    </Link>
+                  }
+                >
+                  {null}
+                </UnlockGate>
+              </div>
+            )}
 
             <div className="mt-4 flex flex-wrap gap-2">
               {s.capabilities.map((c) => (
@@ -662,142 +741,156 @@ export default async function SupplierProfilePage({
           </div>
         </section>
 
-        {/* Overview：公开字段 + 免费层锁区 */}
+        {/* Overview：公开字段 + 免费层锁区
+            ── 2026-10-31 重构（「锁空气」修复）──────────────────────────────
+            改动前：6 个格子**无条件**各挂一个「🔒 创建免费账户」，再加底部 1 条横幅
+                    ⇒ 同屏 7 个同义 CTA。
+            实测数据（改前）：34 家线上档案里只有 28 家有员工规模、7 家有出口市场、
+                    2 家有产能；池内 8,566 家仅 2.4% 填了员工数。
+            ⇒ 绝大多数情况是「注册 → 解锁 → 看到 —」，用户付了成本拿到空气；
+              同时整块渲染出来全是 "Create free account" 几个字，对搜索引擎等于零信息。
+            改动后：
+              ① 字段为空 ⇒ 直接渲染「—」，**不上锁、不放 CTA**（NULL≠0，不编数）；
+              ② 只有真有值的字段才上锁，锁态只画 🔒 + 占位点，不再嵌链接；
+              ③ 整块只保留 1 处解锁入口，且**上移到表格之前**（用户滚过前就看到条件）；
+              ④ 全部字段都为空时不出现任何解锁入口（不承诺没有的东西）。 */} 
         <section className="mt-8">
           <h2 className="text-xl font-bold text-[#171717] mb-3">{sp.overviewTitle}</h2>
+
+          {anyOverviewLocked && (
+            <UnlockGate
+              layer="free"
+              variant="raw"
+              registerHref={registerHref}
+              membershipHref={p("/pricing#founding-buyer")}
+              locked={
+                <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#ddd9d0] bg-[#fbfaf7] px-4 py-3">
+                  <div className="text-sm text-[#3f4650]">
+                    <span className="font-semibold text-[#171717]">{sp.freeLockTitle}.</span>{" "}
+                    {sp.freeLockLead}
+                  </div>
+                  <Link
+                    href={registerHref}
+                    className="btn btn-outline text-sm"
+                    data-track={ANALYTICS_EVENTS.profileFreeCta}
+                    data-track-value={s.slug}
+                  >
+                    {sp.freeLockCta}
+                  </Link>
+                </div>
+              }
+            >
+              {null}
+            </UnlockGate>
+          )}
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="card p-4">
-              <div className="text-xs text-[#6d6b66]">{sp.businessTypeLabel}</div>
-              <div className="font-semibold">{s.businessType}</div>
-            </div>
-            <div className="card p-4">
-              <div className="text-xs text-[#6d6b66]">{sp.industryLabel}</div>
-              <div className="font-semibold">{s.industryCode ?? "—"}</div>
-            </div>
-            {/* 员工规模（free 层）—— 服务端只输出锁态，真值由客户端解锁后填入 */}
-            <UnlockGate
-              layer="free"
-              variant="raw"
-              registerHref={registerHref}
-              membershipHref={p("/pricing#founding-buyer")}
-              locked={
-                <div className="card p-4 opacity-80">
-                  <div className="text-xs text-[#6d6b66]">{sp.employeesLabel}</div>
-                  <div className="font-semibold text-[#8c8982]">
-                    🔒{" "}
-                    <Link href={registerHref} className="text-[#171717] underline">
-                      {sp.freeLockCta}
-                    </Link>
-                  </div>
-                </div>
-              }
-            >
-              <div className="card p-4">
-                <div className="text-xs text-[#6d6b66]">{sp.employeesLabel}</div>
-                <div className="font-semibold">
-                  <UnlockedValue slug={s.slug} locale={uiLocale} field="employees" />
-                </div>
-              </div>
-            </UnlockGate>
+            <OverviewTile label={sp.businessTypeLabel}>{s.businessType?.trim() ? s.businessType : "—"}</OverviewTile>
+            <OverviewTile label={sp.industryLabel}>{industryName ?? "—"}</OverviewTile>
 
-            {/* 出口市场（free 层） */}
-            <UnlockGate
-              layer="free"
-              variant="raw"
-              registerHref={registerHref}
-              membershipHref={p("/pricing#founding-buyer")}
-              locked={
-                <div className="card p-4 opacity-80">
-                  <div className="text-xs text-[#6d6b66]">{sp.exportMarketsLabel}</div>
-                  <div className="font-semibold text-[#8c8982]">
-                    🔒{" "}
-                    <Link href={registerHref} className="text-[#171717] underline">
-                      {sp.freeLockCta}
-                    </Link>
-                  </div>
-                </div>
-              }
-            >
-              <div className="card p-4">
-                <div className="text-xs text-[#6d6b66]">{sp.exportMarketsLabel}</div>
-                <div className="font-semibold">
-                  <UnlockedValue slug={s.slug} locale={uiLocale} field="exportMarkets" />
-                </div>
-              </div>
-            </UnlockGate>
-
-            {/* CS-12：产能与出口年限（free 层）。
-                这些是工厂在入驻表单里自填的商业情报，不是工商登记事实 ⇒
-                不随页面直出，和 established / employees 同等对待。 */}
-            {(
-              [
-                ["productionCapacity", sp.capacityProduction],
-                ["monthlyOutput", sp.capacityMonthly],
-                ["factorySize", sp.capacityFactorySize],
-                ["exportSince", sp.capacityExportSince],
-              ] as const
-            ).map(([field, label]) => (
+            {/* 员工规模（free 层）—— 有值才锁 */}
+            {hasEmployees ? (
               <UnlockGate
-                key={field}
                 layer="free"
                 variant="raw"
                 registerHref={registerHref}
                 membershipHref={p("/pricing#founding-buyer")}
-                locked={
-                  <div className="card p-4 opacity-80">
-                    <div className="text-xs text-[#6d6b66]">{label}</div>
-                    <div className="font-semibold text-[#8c8982]">
-                      🔒{" "}
-                      <Link href={registerHref} className="text-[#171717] underline">
-                        {sp.freeLockCta}
-                      </Link>
-                    </div>
-                  </div>
-                }
+                locked={<OverviewTileLocked label={sp.employeesLabel} />}
               >
-                <div className="card p-4">
-                  <div className="text-xs text-[#6d6b66]">{label}</div>
-                  <div className="font-semibold">
-                    <UnlockedValue slug={s.slug} locale={uiLocale} field={field} />
-                  </div>
-                </div>
+                <OverviewTile label={sp.employeesLabel}>
+                  <UnlockedValue slug={s.slug} locale={uiLocale} field="employees" />
+                </OverviewTile>
               </UnlockGate>
-            ))}
-          </div>
+            ) : (
+              <OverviewTile label={sp.employeesLabel}>—</OverviewTile>
+            )}
 
-          {/* 免费层解锁说明（已登录后不再显示注册引导） */}
-          <UnlockGate
-            layer="free"
-            variant="raw"
-            registerHref={registerHref}
-            membershipHref={p("/pricing#founding-buyer")}
-            locked={
-              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#ddd9d0] bg-[#fbfaf7] px-4 py-3">
-                <div className="text-sm text-[#3f4650]">
-                  <span className="font-semibold text-[#171717]">{sp.freeLockTitle}.</span>{" "}
-                  {sp.freeLockLead}
-                </div>
-                <Link
-                  href={registerHref}
-                  className="btn btn-outline text-sm"
-                  data-track={ANALYTICS_EVENTS.profileFreeCta}
-                  data-track-value={s.slug}
+            {/* 出口市场（free 层）—— 有值才锁 */}
+            {hasExportMarkets ? (
+              <UnlockGate
+                layer="free"
+                variant="raw"
+                registerHref={registerHref}
+                membershipHref={p("/pricing#founding-buyer")}
+                locked={<OverviewTileLocked label={sp.exportMarketsLabel} />}
+              >
+                <OverviewTile label={sp.exportMarketsLabel}>
+                  <UnlockedValue slug={s.slug} locale={uiLocale} field="exportMarkets" />
+                </OverviewTile>
+              </UnlockGate>
+            ) : (
+              <OverviewTile label={sp.exportMarketsLabel}>—</OverviewTile>
+            )}
+
+            {/* CS-12：产能与出口年限（free 层）—— 同样「有值才锁」。
+                这些是工厂在入驻表单里自填的商业情报，不是工商登记事实 ⇒
+                不随页面直出，和 established / employees 同等对待。
+                🔑 空格子绝不上锁：池内这批广交会名录档案这四项基本全空，
+                   若照旧渲染锁头，用户解锁后 100% 看到「—」。 */}
+            {(
+              [
+                ["productionCapacity", sp.capacityProduction, hasProductionCapacity],
+                ["monthlyOutput", sp.capacityMonthly, hasMonthlyOutput],
+                ["factorySize", sp.capacityFactorySize, hasFactorySize],
+                ["exportSince", sp.capacityExportSince, hasExportSince],
+              ] as const
+            ).map(([field, label, has]) =>
+              has ? (
+                <UnlockGate
+                  key={field}
+                  layer="free"
+                  variant="raw"
+                  registerHref={registerHref}
+                  membershipHref={p("/pricing#founding-buyer")}
+                  locked={<OverviewTileLocked label={label} />}
                 >
-                  {sp.freeLockCta}
-                </Link>
-              </div>
-            }
-          >
-            {null}
-          </UnlockGate>
+                  <OverviewTile label={label}>
+                    <UnlockedValue slug={s.slug} locale={uiLocale} field={field} />
+                  </OverviewTile>
+                </UnlockGate>
+              ) : (
+                <OverviewTile key={field} label={label}>
+                  —
+                </OverviewTile>
+              )
+            )}
+          </div>
         </section>
+
+        {/* migration 037：广交会参展记录 —— 举办方官方名录给出的公开事实。
+            每条 = 届次 + 期次 + 展馆 + 展位号，英文专有名词保持名录原样（不翻译、不改写）。
+            无记录 ⇒ 整块不渲染，绝不出现空占位或 "N/A"（NULL≠0 的同一条铁律）。
+            最多列 8 条：池内 95% 只有 1~2 条，极端行有 44 条（一家占多个展位），
+            超出部分只报数量，避免把一整屏塞满展位号、挤掉后面的核验说明。 */}
+        {s.fairRecord && s.fairRecord.length > 0 && (
+          <section className="mt-8">
+            <h2 className="text-xl font-bold text-[#171717] mb-3">{sp.fairRecordTitle}</h2>
+            <div className="card p-6">
+              <ul className="flex flex-wrap gap-2">
+                {s.fairRecord.slice(0, 8).map((rec) => (
+                  <li
+                    key={rec}
+                    className="rounded-md border border-[#ddd9d0] bg-[#fbfaf7] px-3 py-1.5 text-sm text-[#3f4650]"
+                  >
+                    {rec}
+                  </li>
+                ))}
+                {s.fairRecord.length > 8 && (
+                  <li className="rounded-md border border-[#ddd9d0] bg-[#fbfaf7] px-3 py-1.5 text-sm text-[#6d6b66]">
+                    +{s.fairRecord.length - 8}
+                  </li>
+                )}
+              </ul>
+              <p className="mt-3 text-xs text-[#6d6b66]">{sp.fairRecordSource}</p>
+            </div>
+          </section>
+        )}
 
         {/* CS-12：工商登记信息（公开层）。排在"平台核验范围"之前 ——
             这几行是档案的事实底座，读者应先看到"这家是谁"，再看"平台核验了什么"。 */}
-        {/* 🔴 2026-10-28：注册详情里的官网**与地址**都要置空（此前这里是第三个官网泄露点，
-            地址也在这里重复出现了一次，单锁 snapshot 不够）。
-            Row 组件对空值返回 null ⇒ 该行直接不渲染，不会出现空占位。
-            真实值仍可通过登录后的授权接口取得。 */}
+        {/* 🔴 2026-10-31：官网与地址已在「买家速览」公开（见 GATED_SNAPSHOT_IDS 注释），
+            这里继续置空**不再是为了锁**，而是去重 —— 同一页把同一行地址印两遍只是噪音。
+            Row 组件对空值返回 null ⇒ 该行直接不渲染，不会出现「空占位」。 */}
         <SupplierRegistrationPanel
           data={{ ...s, website: "", address: "" }}
           dict={sp}
@@ -1111,5 +1204,35 @@ export default async function SupplierProfilePage({
         {profileIsPublic && <ProfileViewTracker slug={slug} />}
       </main>
     </GuestAccessProvider>
+  );
+}
+
+/** 公司概况的普通格（标签 + 值）。值区可放任意节点（文本 / UnlockedValue）。 */
+function OverviewTile({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div className="card p-4">
+      <div className="text-xs text-[#6d6b66]">{label}</div>
+      <div className="font-semibold">{children}</div>
+    </div>
+  );
+}
+
+/**
+ * 公司概况的**锁定态**格。
+ *
+ * 🔴 2026-10-31：格内不再嵌「创建免费账户」链接。
+ *   改动前 6 个格子各挂一个同义链接 + 底部横幅 1 个 = 同屏 7 个 CTA，
+ *   用户直接无视（横幅盲区），整块也第一眼像硬付费墙。
+ *   现在整块只保留 1 处入口（在表格上方），格内只用 🔒 + 占位点表达「有值但未解锁」。
+ *   「••••」是语言无关的遮挡约定 —— 用文字就得新增 9 语词条，不值当。
+ */
+function OverviewTileLocked({ label }: { label: string }) {
+  return (
+    <div className="card p-4 opacity-80">
+      <div className="text-xs text-[#6d6b66]">{label}</div>
+      <div className="font-semibold text-[#8c8982]" aria-hidden="true">
+        🔒 ••••
+      </div>
+    </div>
   );
 }

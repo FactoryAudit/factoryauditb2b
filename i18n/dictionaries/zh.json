@@ -1327,7 +1327,7 @@
     "certificationsLabel": "认证",
     "freeLockTitle": "免费账号解锁更多公司信息",
     "freeLockLead": "注册免费账号，查看成立年份、员工规模、出口市场与验厂状态。",
-    "freeLockCta": "创建免费账号",
+    "freeLockCta": "免费注册查看详情",
     "paidLockTitle": "会员查看证据与风险明细",
     "paidLockLead": "Founding Buyer 会员（$99/年）可查看证据记录、风险明细、审核历史与验货数据。",
     "paidLockCta": "查看会员方案",
@@ -1362,7 +1362,9 @@
     "assessmentReportDownload": "下载报告",
     "assessmentReportUnavailable": "未发布",
     "assessmentReportNote": "付费下载功能即将上线；当前点击报告链接将转至定制服务咨询。价格以我们公布的价目表为准。",
-    "regLegalName": "登记名称"
+    "regLegalName": "登记名称",
+    "fairRecordTitle": "广交会参展记录",
+    "fairRecordSource": "来源：广交会官方参展商名录。"
   },
   "reportPreview": {
     "badge": "免费预览",

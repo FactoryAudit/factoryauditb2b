@@ -1972,7 +1972,7 @@
     "certificationsLabel": "認証",
     "freeLockTitle": "無料アカウントで会社情報をさらに表示",
     "freeLockLead": "無料アカウントを作成すると、設立年・従業員数・輸出市場・監査状況を確認できます。",
-    "freeLockCta": "無料アカウント作成",
+    "freeLockCta": "無料登録で詳細を見る",
     "paidLockTitle": "会員は証拠とリスク明細を閲覧",
     "paidLockLead": "Founding Buyer 会員（年間 $99）は証拠記録・リスク明細・監査履歴・検査データを閲覧できます。",
     "paidLockCta": "会員プランを見る",
@@ -2007,7 +2007,9 @@
     "assessmentReportDownload": "レポートをダウンロード",
     "assessmentReportUnavailable": "未公開",
     "assessmentReportNote": "有料ダウンロードは近日公開予定です。現在、レポートのリンクをクリックするとカスタムサービスへのお問い合わせに移動します。価格は公表している価格表に準じます。",
-    "regLegalName": "登記名"
+    "regLegalName": "登記名",
+    "fairRecordTitle": "広州交易会（広交会）出展記録",
+    "fairRecordSource": "出典：広州交易会の公式出展社名簿。"
   },
   "reportPreview": {
     "badge": "無料プレビュー",

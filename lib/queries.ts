@@ -46,6 +46,11 @@ export type SupplierView = {
   /** 多产业带标签（一个供应商可属多个产业带）。主值冗余在 cluster，两者不一致时以 cluster 为准 */
   clusterTags?: string[];
   /**
+   * migration 037：Canton Fair 展位记录（每条一个完整英文串，见 migration 037 注释）。
+   * 无记录 ⇒ undefined ⇒ 详情页整块不渲染（不是空数组、不是 "N/A"）。
+   */
+  fairRecord?: string[];
+  /**
    * STEP-04：产业带**展示名**（DB-first 解析 `cluster_slug` → `industrial_clusters.name`）。
    *
    * 🔴 解析规则（全部在 `lib/industrialClusters.ts` 的 resolvePublishedClusterNames 内，
@@ -285,6 +290,8 @@ type SupplierRow = {
   cluster: string | null;
   cluster_slug: string | null;
   cluster_tags: string[] | null;
+  /** migration 037：Canton Fair 展位记录（可空） */
+  fair_record: string[] | null;
   /**
    * ---- STEP-02（migration 023）：来源追踪 ----
    * ⚠️ 刻意**不进** ROW_SELECT：utm / referrer / landing_page 属内部归因数据，
@@ -335,7 +342,7 @@ const ROW_SELECT = `
   company_type, english_name, production_capacity, monthly_output, factory_size,
   export_since, self_reported_certificates,
   address, website, registration_number,
-  region, cluster, cluster_slug, cluster_tags,
+  region, cluster, cluster_slug, cluster_tags, fair_record,
   supplier_evidence ( id, type, status, source, date, note, visibility )
 `;
 
@@ -448,6 +455,8 @@ function rowToView(row: SupplierRow): SupplierView {
     cluster: nz(row.cluster),
     clusterSlug: nz(row.cluster_slug),
     clusterTags: row.cluster_tags && row.cluster_tags.length > 0 ? row.cluster_tags : undefined,
+    // migration 037：空数组与 NULL 一律收敛成 undefined —— 详情页只在有记录时渲染区块。
+    fairRecord: row.fair_record && row.fair_record.length > 0 ? row.fair_record : undefined,
   };
 }
 
@@ -1300,5 +1309,76 @@ export async function getSupplierPublicAudits(slug: string): Promise<PublicAudit
   } catch (e) {
     console.error("[queries] public audits exception", e);
     return [];
+  }
+}
+
+/**
+ * 免费层字段的「存在性」布尔集合。
+ *
+ * 为什么需要它：getSupplierDetail(visitor 档) 会把这些字段整体裁掉 —— employees /
+ * exportMarkets / productionCapacity / monthlyOutput / factorySize / exportSince
+ * 一并裁掉（CS-12：注册后可见），于是**访客态的页面根本不知道这些字段有没有值**。
+ * 结果就是 2026-10-31 修「锁空气」时踩到的坑：明明库里有「101-500 人」，页面却渲染「—」。
+ *
+ * 🔴 本函数**只返回值是否存在**，绝不返回字段值本身 —— 公开 HTML 里仍然只有一个布尔量，
+ *    真值只能走 UnlockedValue 的授权接口。字段名与页面上那六个格子一一对应。
+ * 🔴 失败方向：任何异常一律返回全 false。宁可少显示一个锁（用户看到「—」），
+ *    也不能凭空承诺「这里有东西、注册就能看」而实际打开是空的。
+ */
+export type SupplierPresenceFlags = {
+  employees: boolean;
+  exportMarkets: boolean;
+  productionCapacity: boolean;
+  monthlyOutput: boolean;
+  factorySize: boolean;
+  exportSince: boolean;
+};
+
+const NO_PRESENCE: SupplierPresenceFlags = {
+  employees: false,
+  exportMarkets: false,
+  productionCapacity: false,
+  monthlyOutput: false,
+  factorySize: false,
+  exportSince: false,
+};
+
+export async function getSupplierPresenceFlags(
+  slug: string
+): Promise<SupplierPresenceFlags> {
+  if (!useSupabase()) return NO_PRESENCE;
+  try {
+    const { createAdminClient } = await import("./supabaseAdmin");
+    const db = createAdminClient();
+    if (!db) return NO_PRESENCE;
+    const { data, error } = await db
+      .from("suppliers")
+      .select(
+        "employees, export_markets, production_capacity, monthly_output, factory_size, export_since"
+      )
+      .eq("slug", slug)
+      .eq("is_published", true)
+      .maybeSingle();
+    if (error || !data) return NO_PRESENCE;
+    const r = data as unknown as {
+      employees?: string | null;
+      export_markets?: string[] | null;
+      production_capacity?: string | null;
+      monthly_output?: string | null;
+      factory_size?: string | null;
+      export_since?: number | null;
+    };
+    const filled = (v: string | null | undefined) => typeof v === "string" && v.trim() !== "";
+    return {
+      employees: filled(r.employees),
+      exportMarkets: Array.isArray(r.export_markets) && r.export_markets.length > 0,
+      productionCapacity: filled(r.production_capacity),
+      monthlyOutput: filled(r.monthly_output),
+      factorySize: filled(r.factory_size),
+      exportSince: typeof r.export_since === "number" && r.export_since > 0,
+    };
+  } catch (e) {
+    console.error("[queries] getSupplierPresenceFlags exception", e);
+    return NO_PRESENCE;
   }
 }

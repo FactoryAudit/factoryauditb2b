@@ -54,7 +54,11 @@ export function middleware(req: NextRequest) {
     Boolean(
       req.nextUrl.searchParams.get("country") ||
         req.nextUrl.searchParams.get("industry") ||
-        req.nextUrl.searchParams.get("q")
+        req.nextUrl.searchParams.get("q") ||
+        // 2026-10-31 分页：`?page=n`（n>1）与过滤态同性质 ——
+        // 同一份预渲染 HTML 的切片视图，不产出独立内容 ⇒ 必须 noindex。
+        // 只认 n>1：`?page=1` 与主目录完全等价，不应触发。
+        Number(req.nextUrl.searchParams.get("page") ?? "1") > 1
     );
   const NOINDEX_FILTERED = { "X-Robots-Tag": "noindex, follow" };
 
