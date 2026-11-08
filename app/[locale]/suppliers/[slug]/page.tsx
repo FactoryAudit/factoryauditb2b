@@ -102,6 +102,38 @@ const DIRECTORY_PATH = "/suppliers";
 const GATED_SNAPSHOT_IDS = new Set<string>([]);
 
 /**
+ * 把供应商官网字段转成**可点击的出站链接**；不合法就返回 null（回落成纯文本）。
+ *
+ * 为什么现在才加（2026-11-08）：官网与地址在 2026-10-31 已经放开到公开层，
+ * 但一直是纯文本 `<dd>https://www.uwyes.com</dd>` —— 对网站没有出站链接价值，
+ * 对方也就没有理由在自己官网回链我们（反链邀请时手里没有对等筹码）。
+ *
+ * 🔴 安全边界（这是唯一一处把数据库里自由文本渲染成 href 的地方）：
+ *   · 只放行 http / https，其余协议（javascript: / data: / file:）一律 null；
+ *   · hostname 必须含点号 —— 挡掉 `localhost`、`javascript` 这类无点号的伪 host；
+ *   · 缺协议时补 https://（库里大量值是 `www.xxx.com` 这种写法）；
+ *   · 解析失败一律 null。绝不做字符串拼接式 href。
+ *   React 自身还会转义属性值，但这里不能依赖下游兜底。
+ *
+ * rel 用 `noopener`（防 tab-nabbing），**刻意不加 nofollow**：
+ *   这些是真实工厂的编辑性链接，不是付费或交换位；加了 nofollow 就等于
+ *   我们单方面宣告"这条链接没有价值"，反链邀请也就不成立。
+ */
+function toExternalHref(raw: string): string | null {
+  const v = raw.trim();
+  if (!v) return null;
+  const withProto = /^https?:\/\//i.test(v) ? v : `https://${v}`;
+  try {
+    const u = new URL(withProto);
+    if (u.protocol !== "http:" && u.protocol !== "https:") return null;
+    if (!u.hostname.includes(".")) return null;
+    return u.toString();
+  } catch {
+    return null;
+  }
+}
+
+/**
  * PHASE 03：把数据层的供应商视图映射成 SEO 推导输入。
  *
  * 映射逻辑**不在这里** —— 它在 `lib/seo/supplierSeo.ts` 的 `supplierSeoDataFromView()`，
@@ -700,6 +732,18 @@ export default async function SupplierProfilePage({
                       >
                         {row.value}
                       </Link>
+                    ) : row.id === "website" && toExternalHref(row.value) ? (
+                      // 供应商官网：出站链接（dofollow）。反链邀请的对等筹码之一 ——
+                      // 我们真的把买家往他们站点送，对方才有理由回链。
+                      <a
+                        href={toExternalHref(row.value) as string}
+                        target="_blank"
+                        rel="noopener"
+                        className="text-[#171717] underline decoration-[#c9c4b8] underline-offset-2 hover:decoration-[#171717]"
+                        data-track="supplier_site_outbound"
+                      >
+                        {row.value}
+                      </a>
                     ) : (
                       row.value
                     )}
