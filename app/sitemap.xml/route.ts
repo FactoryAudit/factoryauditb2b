@@ -22,6 +22,9 @@ import { SITEMAP_HEADERS, toSitemapIndex } from "@/lib/sitemapXml";
 export const dynamic = "force-static";
 
 export function GET() {
-  const locs = SITEMAP_LOCALES.map((l) => `${SITEMAP_BASE}/sitemaps/${l}`);
+  // ⚠️ 分片 URL 必须带 `.xml`，不能是裸的 `/sitemaps/en`：
+  //    middleware matcher 排除含点号的路径，裸路径会被语言前缀逻辑吃掉 → 404。
+  //    详见 app/sitemaps/[lang]/sitemap.xml/route.ts 顶部实测记录。
+  const locs = SITEMAP_LOCALES.map((l) => `${SITEMAP_BASE}/sitemaps/${l}/sitemap.xml`);
   return new NextResponse(toSitemapIndex(locs), { headers: SITEMAP_HEADERS });
 }
