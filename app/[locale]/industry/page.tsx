@@ -251,7 +251,7 @@ export default async function IndustryHubPage({ params }: Props) {
               <Link
                 key={x.code}
                 href={lp(`/industry/${x.code}`)}
-                className="lift card flex min-h-[132px] flex-col p-[22px]"
+                className="lift card flex min-h-[178px] flex-col p-[22px]"
               >
                 {/* 版式对齐 p2：.num 11px/800/ls .12em、.industry padding 22、
                     .industry h3 19px/1.24、.arrow accent 13px/800、.industryGrid 4 列 gap 16。
@@ -261,17 +261,20 @@ export default async function IndustryHubPage({ params }: Props) {
                     只有 food-beverage / chemicals 在 lib/industryContent.ts 有真实内容 ⇒
                     不在中间塞编造的行业描述，那一段由③详情预览区的真实审核项承接。
                     高度：设计稿 min-height 205 是按「有行业说明」填满算的，但 35 个行业里
-                    33 个只有名称（上面那条约束），205 会让空白占到六成。故收到 132 ——
-                    正好等于「编号 + 标题 + 底部箭头」的自然高度，有子主题的卡片由内容自行撑高。 */}
+                    33 个只有名称（上面那条约束），205 会让空白占到六成。
+                    现取值 178 = 「编号 + 标题 + 2 行子主题 + 底部箭头」的自然高度：
+                    子主题最多 2 行（见下方 max-h），超出部分裁掉，保证 35 张卡同一高度。
+                    只收到 132 会让有子主题的卡撑到 237，行间出现三档高度差，故折中到 178。 */}
                 <div className="mb-3 text-[11px] font-extrabold tracking-[.12em] text-[#e07a49]">
                   {x.no}
                 </div>
                 <h3 className="text-[19px] font-bold leading-[1.24] tracking-[-.45px] text-[#171717]">{x.name}</h3>
 
                 {/* 子主题只在 lib/industryContent.ts 配了内容的行业才渲染。
-                    未配置就只留行业名 —— 绝不用模板套话填充（§44 质量门）。 */}
+                    未配置就只留行业名 —— 绝不用模板套话填充（§44 质量门）。
+                    max-h 38px = 2 行（行高 15.6 + 行距 6），第 3 行起完全隐藏而不是裁半行。 */}
                 {x.topics.length > 0 && (
-                  <ul className="mt-3 flex flex-wrap gap-x-3 gap-y-1.5 text-[12.5px]">
+                  <ul className="mt-3 flex max-h-[38px] flex-wrap gap-x-3 gap-y-1.5 overflow-hidden text-[12.5px]">
                     {x.topics.map((tp) => (
                       <li key={tp.slug} className="text-[#6d6b66]">
                         {pickZhPair(locale, tp.title.en, tp.title.zh)}
