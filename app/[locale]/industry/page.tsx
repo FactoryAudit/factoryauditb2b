@@ -62,7 +62,6 @@ export default async function IndustryHubPage({ params }: Props) {
     code: i.code,
     no: String(idx + 1).padStart(2, "0"),
     name: industryDisplayName(locale, i.name),
-    topics: topicsForIndustry(i.code),
   }));
 
   /** 工作流带：3 步复用 home.*，后 2 步复用 servicesIndex.items.*（都已 9 语就位） */
@@ -246,53 +245,39 @@ export default async function IndustryHubPage({ params }: Props) {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {/* 目录式索引（2026-11-10 由「35 张等高卡片」改为目录）。
+              原因：35 个行业里只有 food-beverage / chemicals 在 lib/industryContent.ts
+              配了子主题，其余 33 个只有名称。卡片版每张预留 178px，实际内容约 74px，
+              空白占 ~58%；且 35 张卡 × 每张都重复一遍「Browse Suppliers →」，
+              是纯噪音。设计稿的 .industryGrid 是按「8 个行业 + 每个都有说明」算的，
+              搬到 35 个无说明的行业上必然撑不住。
+              目录版：每项 52px、无卡片边框、只用 1px 分隔线，35 项三栏排布，
+              总高从 ~1600px 降到 ~620px，一屏内可扫读。子主题不在这里展示 ——
+              它由下方③详情预览区的深色卡承接，避免同一信息在一页出现两次。
+              语义用 ol/li（有序目录），不再是装饰性卡片墙。 */}
+          <ol className="grid grid-cols-1 gap-x-10 border-t border-[#ddd9d0] sm:grid-cols-2 lg:grid-cols-3">
             {cards.map((x) => (
-              <Link
-                key={x.code}
-                href={lp(`/industry/${x.code}`)}
-                className="lift card flex min-h-[178px] flex-col p-[22px]"
-              >
-                {/* 版式对齐 p2：.num 11px/800/ls .12em、.industry padding 22、
-                    .industry h3 19px/1.24、.arrow accent 13px/800、.industryGrid 4 列 gap 16。
-                    .industry 本身是 flex + justify-between（设计稿自带的高度分配机制），
-                    故内容少时余量落在标题与箭头之间，读作留白，不是缺失。
-                    ⚠️ 本站没有逐行业的「一句话行业说明」（设计稿 x.s 是它对 8 个行业的样板填充），
-                    只有 food-beverage / chemicals 在 lib/industryContent.ts 有真实内容 ⇒
-                    不在中间塞编造的行业描述，那一段由③详情预览区的真实审核项承接。
-                    高度：设计稿 min-height 205 是按「有行业说明」填满算的，但 35 个行业里
-                    33 个只有名称（上面那条约束），205 会让空白占到六成。
-                    现取值 178 = 「编号 + 标题 + 2 行子主题 + 底部箭头」的自然高度：
-                    子主题最多 2 行（见下方 max-h），超出部分裁掉，保证 35 张卡同一高度。
-                    只收到 132 会让有子主题的卡撑到 237，行间出现三档高度差，故折中到 178。 */}
-                <div className="mb-3 text-[11px] font-extrabold tracking-[.12em] text-[#e07a49]">
-                  {x.no}
-                </div>
-                <h3 className="text-[19px] font-bold leading-[1.24] tracking-[-.45px] text-[#171717]">{x.name}</h3>
-
-                {/* 子主题只在 lib/industryContent.ts 配了内容的行业才渲染。
-                    未配置就只留行业名 —— 绝不用模板套话填充（§44 质量门）。
-                    max-h 38px = 2 行（行高 15.6 + 行距 6），第 3 行起完全隐藏而不是裁半行。 */}
-                {x.topics.length > 0 && (
-                  <ul className="mt-3 flex max-h-[38px] flex-wrap gap-x-3 gap-y-1.5 overflow-hidden text-[12.5px]">
-                    {x.topics.map((tp) => (
-                      <li key={tp.slug} className="text-[#6d6b66]">
-                        {pickZhPair(locale, tp.title.en, tp.title.zh)}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-                {/* p2 的 .arrow 文案是「Explore industry →」；9 语里没有对应键，而新增键会动
-                    en 叶子数 3192 这道闸门（常量散在 20 个脚本里）⇒ 复用已有的
-                    home.entryFindCta（「Browse Suppliers →」，自带箭头）。
-                    语义准确：点击进入该行业页，页上正是该行业的供应商名录与审核项。 */}
-                <span aria-hidden="true" className="mt-auto pt-5 text-[13px] font-extrabold text-[#e07a49]">
-                  {t.home.entryFindCta}
-                </span>
-              </Link>
+              <li key={x.code} className="border-b border-[#e6e2d9]">
+                <Link
+                  href={lp(`/industry/${x.code}`)}
+                  className="group flex min-h-[52px] items-center gap-3 py-3.5"
+                >
+                  <span className="w-6 flex-none text-[11px] font-extrabold tabular-nums tracking-[.12em] text-[#b6b1a8] transition-colors group-hover:text-[#e07a49]">
+                    {x.no}
+                  </span>
+                  <span className="min-w-0 flex-1 text-[15px] font-semibold leading-snug tracking-[-.2px] text-[#171717] transition-colors group-hover:text-[#c96235]">
+                    {x.name}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="flex-none text-[13px] font-bold text-[#c9c3b8] transition group-hover:translate-x-0.5 group-hover:text-[#e07a49]"
+                  >
+                    →
+                  </span>
+                </Link>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
