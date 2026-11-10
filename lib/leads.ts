@@ -125,6 +125,12 @@ export type LeadInsertInput = {
   score?: number | null;
   /** 原始业务字段全量兜底（会被 fitPayload 处理） */
   payload?: unknown;
+  /**
+   * 附件在私有 Storage 里的对象路径（migration 040）。
+   * NULL = 没有附件，是正常态（/careers 的简历为选填）。
+   * 后台按需换短时签名 URL，绝不下发公开地址。
+   */
+  attachmentPath?: string | null;
   userId?: string | null;
   // ---- STEP-02（migration 023）：来源追踪。全部可空，缺省即不写（历史语义零变化）----
   utmSource?: string | null;
@@ -185,6 +191,7 @@ export async function insertLead(input: LeadInsertInput): Promise<LeadInsertResu
     message: input.message ?? null,
     score: clampScore(input.score),
     payload: fitPayload(input.payload),
+    attachment_path: input.attachmentPath ?? null,
     user_id: input.userId ?? null,
     // ---- STEP-02：来源追踪（缺则写 NULL，绝不编造来源）----
     // R74：调用方显式传入优先；没传则用 readAttribution() 的兜底值。

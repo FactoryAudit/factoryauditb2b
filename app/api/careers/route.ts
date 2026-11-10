@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { checkRateLimit, clientIp, clamp } from "@/lib/rateLimit";
 import { notifyAdminCareerApplication, notifyApplicantCareerReceived } from "@/lib/notify";
 import { insertLead } from "@/lib/leads";
+import { uploadCareerCv } from "@/lib/storage";
 import { LOCALES } from "@/i18n/config";
 
 // POST /api/careers —— /careers 人才网络申请
@@ -130,6 +131,7 @@ export async function POST(req: Request) {
   }
   let filename: string | null = null;
   let content: string | null = null;
+  let cvBytes: ArrayBuffer | null = null;
   if (file) {
     filename = safeFilename(file.name || "cv");
     const ext = extOf(filename);
@@ -141,7 +143,26 @@ export async function POST(req: Request) {
         { status: 400, headers: NO_STORE }
       );
     }
-    content = Buffer.from(await file.arrayBuffer()).toString("base64");
+    // 同一份字节三处使用（Storage 上传 / 邮件附件 / 大小校验），只读一次
+    cvBytes = await file.arrayBuffer();
+    content = Buffer.from(cvBytes).toString("base64");
+  }
+
+  // ---- 简历存私有 bucket（migration 040）----
+  // 此前简历只进管理员邮箱：后台看得到「有简历」却点不开，邮件进垃圾箱就等于没有文件。
+  // 上传失败**不阻断**申请：先落库拿 Reference ID，再补附件事后补交也来得及。
+  let attachmentPath: string | null = null;
+  if (cvBytes && filename) {
+    const up = await uploadCareerCv({
+      fileName: filename,
+      mime: file?.type || "",
+      bytes: cvBytes,
+    });
+    if (up.ok) {
+      attachmentPath = up.path;
+    } else {
+      console.error(`[careers] cv upload skipped — reason=${up.error}`);
+    }
   }
 
   // ---- 先落库（拿到 Reference ID），再发邮件 ----
@@ -157,6 +178,7 @@ export async function POST(req: Request) {
     sourcing: specialization,
     message: introduction,
     score: null,
+    attachmentPath,
     payload: {
       fullName,
       city,

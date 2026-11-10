@@ -4,6 +4,7 @@ import { isLocale, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { requireAdmin } from "@/lib/adminData";
 import { listLeadActivation } from "@/lib/adminBusiness";
+import { createSignedUrl, CAREER_CV_BUCKET } from "@/lib/storage";
 import LeadStatusSelect from "@/components/admin/LeadStatusSelect";
 
 // Admin · 线索列表（CS-02D 建立 → STEP 13 CHANGE SET B 升级为「Lead 运营台」）
@@ -40,6 +41,19 @@ export default async function AdminLeadsPage({ params }: Props) {
   const rows = await listLeadActivation(200);
   const zh = locale === "zh" || locale === "zh-TW";
 
+  // 简历存在私有 bucket（migration 040）：按需换 1 小时签名 URL，绝不下发公开地址。
+  // 只有 /careers 申请可能带简历，通常 0–2 条，不会拖慢整页。
+  const cvUrls: Record<string, string> = {};
+  await Promise.all(
+    rows
+      .filter((r) => r.attachmentPath)
+      .slice(0, 20)
+      .map(async (r) => {
+        const url = await createSignedUrl(r.attachmentPath as string, 3600, CAREER_CV_BUCKET);
+        if (url) cvUrls[r.id] = url;
+      })
+  );
+
   // kind 与 status 都是内部运营口径：单人后台，不补 9 语翻译，直接显示库值
   const KIND_LABEL: Record<string, string> = {
     buyer_lead: "buyer",
@@ -64,6 +78,8 @@ export default async function AdminLeadsPage({ params }: Props) {
         blocked: "不可发布",
         published: "已发布",
         withdrawn: "已撤回",
+        cv: "简历下载",
+        cvUnavailable: "简历不可用",
       }
     : {
         colCompany: "Company",
@@ -78,6 +94,8 @@ export default async function AdminLeadsPage({ params }: Props) {
         blocked: "not publishable",
         published: "published",
         withdrawn: "WITHDRAWN",
+        cv: "CV download",
+        cvUnavailable: "CV unavailable",
       };
 
   return (
@@ -135,6 +153,27 @@ export default async function AdminLeadsPage({ params }: Props) {
                         不退回 first_name 的话这一格只剩「—」，等于看不到是谁。 */}
                     <td className="px-4 py-3 text-sm text-[#171717]">
                       {r.company || r.firstName || r.supplierName || "—"}
+                      {/* 审核员申请没有公司，专业方向才是可筛选信息（如 ISO9001 / 家具 / 电子） */}
+                      {r.kind === "auditor_application" && r.sourcing && (
+                        <div className="mt-0.5 text-[11px] text-[#6d6b66]">{r.sourcing}</div>
+                      )}
+                      {/* 简历存私有 bucket：这里只给短时签名链接，页面本身不含文件 */}
+                      {r.attachmentPath && (
+                        cvUrls[r.id] ? (
+                          <a
+                            href={cvUrls[r.id]}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-1 inline-block text-[11px] font-medium text-[#1a5fb4] underline"
+                          >
+                            {L.cv}
+                          </a>
+                        ) : (
+                          <span className="mt-1 inline-block text-[11px] text-[#8c8982]">
+                            {L.cvUnavailable}
+                          </span>
+                        )
+                      )}
                     </td>
                     <td className="px-4 py-3 text-xs text-[#3f4650]">{r.country || "—"}</td>
                     <td className="px-4 py-3 text-xs">

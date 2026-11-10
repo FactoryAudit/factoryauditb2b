@@ -51,6 +51,10 @@ export type LeadActivationRow = {
    * 后台是单人工具，直接展示原文，不补 9 语翻译。
    */
   internalNotes: string | null;
+  /** 要采购什么 / 所属行业。auditor_application 里存的是「专业方向」（体系/产品线）。 */
+  sourcing: string | null;
+  /** 附件对象路径（migration 040，私有 bucket）。NULL = 该线索没有附件。 */
+  attachmentPath: string | null;
   /** 按公司名匹配到的草稿供应商（无外键，只能名称匹配） */
   supplier: SupplierActivationRow | null;
   isTest: boolean;
@@ -188,7 +192,7 @@ export async function listLeadActivation(limit = 200): Promise<LeadActivationRow
     const [{ data, error }, suppliers] = await Promise.all([
       db
         .from("leads")
-        .select("id, reference_id, kind, status, company, first_name, supplier_name, country, email, internal_notes, created_at")
+        .select("id, reference_id, kind, status, company, first_name, supplier_name, country, email, sourcing, internal_notes, attachment_path, created_at")
         .order("created_at", { ascending: false })
         .limit(limit),
       listSupplierActivation(),
@@ -218,8 +222,10 @@ export async function listLeadActivation(limit = 200): Promise<LeadActivationRow
         supplierName,
         country: r.country == null ? null : String(r.country),
         email: String(r.email ?? ""),
+        sourcing: r.sourcing == null ? null : String(r.sourcing),
         createdAt: String(r.created_at ?? ""),
         internalNotes: r.internal_notes == null ? null : String(r.internal_notes),
+        attachmentPath: r.attachment_path == null ? null : String(r.attachment_path),
         supplier,
         isTest: isTestLead({ company, supplierName, email: r.email }),
       };

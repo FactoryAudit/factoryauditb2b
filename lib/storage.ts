@@ -164,14 +164,15 @@ export async function deleteDoc(path: string): Promise<boolean> {
  */
 export async function createSignedUrl(
   path: string,
-  expiresInSeconds = 300
+  expiresInSeconds = 300,
+  bucket: string = DOC_BUCKET
 ): Promise<string | null> {
   const { createAdminClient } = await import("./supabaseAdmin");
   const db = createAdminClient();
   if (!db) return null;
   try {
     const { data, error } = await db.storage
-      .from(DOC_BUCKET)
+      .from(bucket)
       .createSignedUrl(path, expiresInSeconds);
     if (error || !data) return null;
     return data.signedUrl;
@@ -240,6 +241,73 @@ export async function uploadAssessmentReport(params: {
 
   if (error) {
     console.error("[storage] assessment report upload failed", error.message);
+    return { ok: false, error: "upload_failed" };
+  }
+  return { ok: true, path };
+}
+
+// -----------------------------------------------------------------------------
+// /careers 审核员简历（migration 040 leads.attachment_path）
+// 独立私有 bucket `career-cv`：supplier-docs 的 allowed_mime_types 只含 pdf/图片，
+// doc/docx 简历会被 Storage 直接拒绝，因此另开桶而不是放宽原桶白名单。
+// -----------------------------------------------------------------------------
+
+/** 简历专用私有 bucket */
+export const CAREER_CV_BUCKET = "career-cv";
+
+/** 简历可接受的 MIME（与 /api/careers 白名单一致；docx 的 MIME 各浏览器不一） */
+const CAREER_CV_MIME = new Set([
+  "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+]);
+
+/** 简历对象路径：careers/{yyyy-mm}/{uuid}-{safeName} */
+export function buildCareerCvPath(fileName: string): string {
+  const month = new Date().toISOString().slice(0, 7);
+  const uid = crypto.randomUUID();
+  return `careers/${month}/${uid}-${sanitizeFileName(fileName)}`;
+}
+
+/**
+ * 上传简历到私有 bucket。
+ * 关键取舍：**上传失败不阻断申请**（简历丢了还能补，申请丢了就断了）。
+ * 调用方拿到 ok:false 时照常落库 + 发信，只是后台没有下载链接。
+ */
+export async function uploadCareerCv(params: {
+  fileName: string;
+  mime: string;
+  bytes: ArrayBuffer;
+}): Promise<UploadResult> {
+  const { createAdminClient } = await import("./supabaseAdmin");
+  const db = createAdminClient();
+  if (!db) return { ok: false, error: "storage_not_configured" };
+
+  // 浏览器偶尔给空 MIME 或 octet-stream：按扩展名推断，避免误拒真简历
+  const name = params.fileName.toLowerCase();
+  const declared = (params.mime || "").toLowerCase();
+  const mime = CAREER_CV_MIME.has(declared)
+    ? declared
+    : name.endsWith(".pdf")
+      ? "application/pdf"
+      : name.endsWith(".docx")
+        ? "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        : name.endsWith(".doc")
+          ? "application/msword"
+          : "";
+  if (!mime) return { ok: false, error: "mime_not_allowed" };
+
+  if (params.bytes.byteLength <= 0 || params.bytes.byteLength > MAX_DOC_BYTES) {
+    return { ok: false, error: "size_out_of_range" };
+  }
+
+  const path = buildCareerCvPath(params.fileName);
+  const { error } = await db.storage
+    .from(CAREER_CV_BUCKET)
+    .upload(path, params.bytes, { contentType: mime, upsert: false });
+
+  if (error) {
+    console.error("[storage] career cv upload failed", error.message);
     return { ok: false, error: "upload_failed" };
   }
   return { ok: true, path };
