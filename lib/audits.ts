@@ -278,6 +278,15 @@ export type CreateAuditRequestInput = {
   locale?: string;
   sourcePath?: string | null;
   userId?: string | null;
+  /**
+   * 建单时的起始状态。默认 `requested`（客户侧入口一律默认，行为零变化）。
+   *
+   * 后台手动建单用 `scheduled`：电话/微信里谈定的单，报价与客户确认
+   * **在系统外已经发生**，再让运营点四次状态机纯属补录。
+   * ⚠️ 这不是「跳步」——`scheduled` 就是事实，缺失的是系统记录而非业务动作。
+   *    `requested/quotation_sent/pending_approval` 三个中间态若写进去反而更假。
+   */
+  initialStatus?: "requested" | "scheduled";
 };
 
 export type CreateAuditRequestResult =
@@ -418,7 +427,9 @@ export async function createAuditRequest(input: CreateAuditRequestInput): Promis
     documents_available: Boolean(input.documentsAvailable),
     additional_comments: blankToNull(input.additionalComments),
     created_by: input.userId ?? blankToNull(input.buyerEmail) ?? "web",
-    status: "requested" as AuditStatus,
+    // 只有显式声明 'scheduled' 才提前；其余（含不传、传非法值）一律 requested ——
+    // 状态是业务事实，不接受任何"顺手传进来的东西"。
+    status: (input.initialStatus === "scheduled" ? "scheduled" : "requested") as AuditStatus,
   };
 
   for (let attempt = 1; attempt <= MAX_REF_ATTEMPTS; attempt++) {

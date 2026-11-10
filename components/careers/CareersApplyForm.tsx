@@ -258,11 +258,15 @@ export default function CareersApplyForm({
             <label className={labelCls} htmlFor="cv">
               {dict.labelCv}
             </label>
+            {/* 2026-11-10：简历改为**选填**。
+                真实反馈是「让他去注册，结果没提交」—— 上传简历是最大的一个卡点
+                （手机里没有 PDF/DOC 的人直接放弃）。而没有简历的申请，
+                也比一份不存在的申请有价值：至少能建联、能问、能补。
+                类型与大小校验仍保留（选填 ≠ 不校验）。 */}
             <input
               id="cv"
               name="cv"
               type="file"
-              required
               accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
               className="mt-1 w-full text-sm text-[#2b2b2b]"
             />

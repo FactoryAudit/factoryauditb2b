@@ -4,6 +4,7 @@ import { isLocale, type Locale } from "@/i18n/config";
 import { requireAdmin } from "@/lib/adminData";
 import { getAuditWorkflow } from "@/lib/auditWorkflow";
 import { AUDIT_STATUS_TRANSITIONS } from "@/lib/audits";
+import { listAuditorRoster } from "@/lib/auditorRoster";
 import AuditConsole from "@/components/admin/AuditConsole";
 
 export const dynamic = "force-dynamic";
@@ -28,6 +29,9 @@ export default async function AdminAuditDetailPage({ params }: Props) {
 
   const current = view.audit.status;
   const allowedNext = AUDIT_STATUS_TRANSITIONS[current as keyof typeof AUDIT_STATUS_TRANSITIONS] ?? [];
+
+  // 名录只用于派单框的快捷填充；取不到就空数组，页面照常可用（不比手打更差）
+  const roster = await listAuditorRoster();
 
   return (
     <div className="space-y-6">
@@ -103,6 +107,7 @@ export default async function AdminAuditDetailPage({ params }: Props) {
         currentStatus={current}
         allowedNext={allowedNext}
         initialView={view}
+        roster={roster}
       />
     </div>
   );

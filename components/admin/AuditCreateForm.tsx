@@ -56,6 +56,12 @@ export default function AuditCreateForm({ locale, suppliers }: Props) {
   const [date, setDate] = useState("");
   const [window, setWindow] = useState("");
   const [special, setSpecial] = useState("");
+  /**
+   * 起始状态。默认 requested（完整流程）。
+   * 选 scheduled 表示：报价与客户确认**已在平台外完成**，不再补点三次状态机。
+   * 只允许这两个值 —— 更靠后的状态需要证据（派单记录、现场记录），不能靠建单指定。
+   */
+  const [startAt, setStartAt] = useState<"requested" | "scheduled">("requested");
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -101,6 +107,7 @@ export default function AuditCreateForm({ locale, suppliers }: Props) {
           preferredDate: date,
           preferredWindow: window,
           specialRequirements: special,
+          startAt,
         }),
         cache: "no-store",
       });
@@ -266,12 +273,33 @@ export default function AuditCreateForm({ locale, suppliers }: Props) {
         </div>
       </div>
 
+      {/* 起始状态 —— 决定建单后要不要再点三次状态机 */}
+      <div className="card p-5">
+        <h2 className="text-sm font-bold text-[#171717]">Commercial status</h2>
+        <label className={`${label} mt-3 block`}>
+          Where does this order start?
+          <select
+            className={field}
+            value={startAt}
+            onChange={(e) => setStartAt(e.target.value === "scheduled" ? "scheduled" : "requested")}
+          >
+            <option value="requested">New request — quote and client approval still to do</option>
+            <option value="scheduled">Client already confirmed quote and date — start at “scheduled”</option>
+          </select>
+        </label>
+        <p className="mt-2 text-xs text-[#6d6b66]">
+          {startAt === "scheduled"
+            ? "Skipped: quotation_sent and pending_approval. They were handled outside the platform — this is recorded in the audit log. After assigning an auditor you advance once to “auditor_assigned”."
+            : "Full workflow: quotation_sent → pending_approval → scheduled → auditor_assigned (four advances)."}
+        </p>
+      </div>
+
       <div className="flex items-center gap-3">
         <button type="submit" disabled={busy} className="btn btn-primary">
           {busy ? "Creating…" : "Create audit"}
         </button>
         <span className="text-xs text-[#6d6b66]">
-          Created as <code>requested</code>. No email is sent to the buyer — this is an internal entry.
+          Created as <code>{startAt}</code>. No email is sent to the buyer — this is an internal entry.
         </span>
       </div>
     </form>

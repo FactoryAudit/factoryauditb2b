@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/adminData";
 import { createAuditRequest } from "@/lib/audits";
+import { createAdminClient } from "@/lib/supabaseAdmin";
 import { checkRateLimit, clamp } from "@/lib/rateLimit";
 
 // POST /api/admin/audits —— 后台手动建单（Phase 1）
@@ -58,6 +59,10 @@ export async function POST(req: Request) {
 
   const ext = (body.externalSupplier ?? {}) as Record<string, unknown>;
 
+  // 起始状态：默认按完整流程走；只有运营明确选「客户已确认」才直接落到 scheduled。
+  // 白名单收口 —— 不接受 'closed' / 'auditor_assigned' 这类需要前置证据的状态。
+  const startAt = body.startAt === "scheduled" ? "scheduled" : "requested";
+
   const r = await createAuditRequest({
     supplierSource: source,
     supplierId: source === "platform" ? clamp(body.supplierId, 64) : null,
@@ -86,6 +91,7 @@ export async function POST(req: Request) {
     additionalComments: clamp(body.additionalComments, 2000),
     sourcePath: "/admin/audits/new",
     userId: null,
+    initialStatus: startAt,
   });
 
   if (!r.stored) {
@@ -101,8 +107,32 @@ export async function POST(req: Request) {
     );
   }
 
+  // 以 scheduled 建单时，把「哪几步在系统外完成」写进审计日志。
+  // 不写的话，以后回看只看到一条 scheduled，会误以为状态机跳步了。
+  if (startAt === "scheduled" && r.id) {
+    const db = createAdminClient();
+    if (db) {
+      const { error } = await db.from("audit_logs").insert({
+        actor_id: admin.userId ?? null,
+        actor_email: admin.email ?? null,
+        action: "audit.create",
+        entity: "audits",
+        entity_id: r.id,
+        old_value: null,
+        new_value: {
+          status: "scheduled",
+          createdBy: "admin",
+          completedOffline: ["quotation_sent", "pending_approval"],
+          note: "Commercial terms and audit date agreed with the client outside the platform",
+        },
+      });
+      // 日志写失败不影响建单结果 —— 单已经建好了，报错只会让运营重复建单
+      if (error) console.error("[admin/audits] create log failed", error.message);
+    }
+  }
+
   return NextResponse.json(
-    { ok: true, id: r.id ?? null, auditCode: r.auditCode },
+    { ok: true, id: r.id ?? null, auditCode: r.auditCode, status: startAt },
     { status: 201, headers: NO_STORE }
   );
 }

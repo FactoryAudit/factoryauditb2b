@@ -28,9 +28,22 @@ type Props = {
   currentStatus: string;
   allowedNext: string[];
   initialView: AuditWorkflowView;
+  /**
+   * 审核员名录（服务端聚合，见 lib/auditorRoster.ts）。
+   * 只用来「少打几个字」—— 选中即填姓名+邮箱，仍然可以手打覆盖。
+   * 名录不是白名单：没在名录里的人照样能派单。
+   */
+  roster?: Array<{ name: string; email: string; assignments: number; country: string | null }>;
 };
 
-export default function AuditConsole({ auditId, supplierId, currentStatus, allowedNext, initialView }: Props) {
+export default function AuditConsole({
+  auditId,
+  supplierId,
+  currentStatus,
+  allowedNext,
+  initialView,
+  roster = [],
+}: Props) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [msg, setMsg] = useState<string | null>(null);
@@ -140,6 +153,38 @@ export default function AuditConsole({ auditId, supplierId, currentStatus, allow
         )}
 
         <div className="mt-3 flex flex-wrap items-end gap-3">
+          {/* 名录快捷入口：选中即填下面两个输入框。value 恒为空，
+              所以每次选人都能重复触发（不需要额外的重置逻辑）。
+              名录为空时明说一句，否则运营会以为这个框坏了。 */}
+          {roster.length > 0 ? (
+            <label className="block w-full text-xs text-[#6d6b66]">
+              Known auditors
+              <select
+                className="select mt-1 block w-full max-w-md"
+                value=""
+                onChange={(e) => {
+                  const r = roster.find((x) => x.email === e.target.value);
+                  if (r) {
+                    setAName(r.name);
+                    setAEmail(r.email);
+                  }
+                }}
+              >
+                <option value="">— pick from roster, or type below —</option>
+                {roster.map((r) => (
+                  <option key={r.email} value={r.email}>
+                    {r.name} · {r.email}
+                    {r.assignments > 0 ? ` · ${r.assignments} audit(s)` : " · applicant"}
+                  </option>
+                ))}
+              </select>
+            </label>
+          ) : (
+            <p className="w-full text-xs text-[#8c8982]">
+              Roster is empty. The first auditor you assign is remembered and shows up here next
+              time. Applicants from <code>/careers</code> appear here too.
+            </p>
+          )}
           <label className="text-xs text-[#6d6b66]">
             Auditor name
             <input

@@ -116,33 +116,33 @@ export async function POST(req: Request) {
     );
   }
 
-  // ---- 简历附件：类型 + 大小服务端复检 ----
+  // ---- 简历附件：选填 + 类型/大小服务端复检 ----
+  // 2026-11-10：由必填改为选填。上传是最容易卡住申请人的一步，
+  // 而「没简历的申请」仍可建联、追问、补交 —— 收下比丢掉有用。
+  // 但一旦上传，类型与大小仍然强制校验（选填 ≠ 不校验）。
   const fileRaw = form.get("cv");
   const file = fileRaw instanceof File && fileRaw.size > 0 ? fileRaw : null;
-  if (!file) {
-    return NextResponse.json(
-      { ok: false, error: "cv_required" },
-      { status: 400, headers: NO_STORE }
-    );
-  }
-  if (file.size > MAX_CV_BYTES) {
+  if (file && file.size > MAX_CV_BYTES) {
     return NextResponse.json(
       { ok: false, error: "file_too_large" },
       { status: 400, headers: NO_STORE }
     );
   }
-  const filename = safeFilename(file.name || "cv");
-  const ext = extOf(filename);
-  const mimeOk = ALLOWED_MIME.has((file.type || "").toLowerCase());
-  const extOk = ALLOWED_EXT.has(ext);
-  if (!extOk || (file.type && !mimeOk)) {
-    return NextResponse.json(
-      { ok: false, error: "invalid_file_type" },
-      { status: 400, headers: NO_STORE }
-    );
+  let filename: string | null = null;
+  let content: string | null = null;
+  if (file) {
+    filename = safeFilename(file.name || "cv");
+    const ext = extOf(filename);
+    const mimeOk = ALLOWED_MIME.has((file.type || "").toLowerCase());
+    const extOk = ALLOWED_EXT.has(ext);
+    if (!extOk || (file.type && !mimeOk)) {
+      return NextResponse.json(
+        { ok: false, error: "invalid_file_type" },
+        { status: 400, headers: NO_STORE }
+      );
+    }
+    content = Buffer.from(await file.arrayBuffer()).toString("base64");
   }
-
-  const content = Buffer.from(await file.arrayBuffer()).toString("base64");
 
   // ---- 先落库（拿到 Reference ID），再发邮件 ----
   // 顺序理由：库是防丢的兜底。邮件服务抖动时，申请至少还在后台能看到。
@@ -167,7 +167,7 @@ export async function POST(req: Request) {
       linkedin,
       availability,
       cvFilename: filename,
-      cvBytes: file.size,
+      cvBytes: file?.size ?? null,
       locale,
     },
   });
@@ -188,7 +188,8 @@ export async function POST(req: Request) {
     introduction,
     cvFilename: filename,
     locale,
-    attachments: [{ filename, content }],
+    // 没有简历时不带 attachments —— 传一个空数组/空文件会让 Resend 或收件端报错。
+    attachments: filename && content ? [{ filename, content }] : undefined,
   });
 
   // sendMail 是全局 fail-open（现有架构，不在本次改动范围）：
