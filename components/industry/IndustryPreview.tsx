@@ -57,8 +57,15 @@ export default function IndustryPreview({ kickerLabel, items }: Props) {
 
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-[.8fr_1.2fr]">
-      {/* .tabs —— 13 个真实行业。窄屏两列，避免 13 条竖排把深色卡顶到屏外。 */}
-      <div role="tablist" aria-label={kickerLabel} className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-1">
+      {/* .tabs —— 35 个真实行业。窄屏两列；桌面端限高滚动 + 右卡吸顶。
+          grid 默认 stretch 会把深色卡拉到与左列等高（35 条 ≈ 2100px），
+          而卡内 justify-between 又把按钮压到最底，中间留下上千像素空洞。
+          故桌面端给左列限高、给右列 self-start（否则 sticky 无位移空间）。 */}
+      <div
+        role="tablist"
+        aria-label={kickerLabel}
+        className="grid grid-cols-1 gap-2.5 sm:max-h-[560px] sm:grid-cols-2 sm:overflow-y-auto sm:overscroll-contain sm:pr-1.5 lg:grid-cols-1"
+      >
         {items.map((x) => {
           const on = x.code === activeCode;
           return (
@@ -85,11 +92,13 @@ export default function IndustryPreview({ kickerLabel, items }: Props) {
       </div>
 
       {/* .detail —— 深色卡。justify-between 是设计稿自带的高度分配机制：
-          内容少时余量自然落到「标题组」与「操作区」之间，读作构图留白。 */}
+          内容少时余量自然落到「标题组」与「操作区」之间，读作构图留白。
+          桌面端 sticky + self-start：高度只由内容决定（min-h 530），不再被左列拉伸，
+          滚动右侧列表时本卡留在视野内，切换行业无需回到顶部。 */}
       <article
         id="industry-preview-panel"
         role="tabpanel"
-        className="flex min-h-[530px] flex-col justify-between rounded-[18px] bg-[#1d1d1b] p-[26px] text-white lg:p-[36px]"
+        className="flex min-h-[530px] flex-col justify-between self-start rounded-[18px] bg-[#1d1d1b] p-[26px] text-white lg:sticky lg:top-[88px] lg:p-[36px]"
       >
         <div>
           <span className="text-[11px] font-extrabold uppercase tracking-[.14em] text-[#ffb29b]">

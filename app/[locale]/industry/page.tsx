@@ -251,16 +251,19 @@ export default async function IndustryHubPage({ params }: Props) {
               <Link
                 key={x.code}
                 href={lp(`/industry/${x.code}`)}
-                className="lift card flex min-h-[205px] flex-col p-[22px]"
+                className="lift card flex min-h-[132px] flex-col p-[22px]"
               >
-                {/* 版式对齐 p2：.num 11px/800/ls .12em/mb 20、.industry padding 22 / min-height 205、
+                {/* 版式对齐 p2：.num 11px/800/ls .12em、.industry padding 22、
                     .industry h3 19px/1.24、.arrow accent 13px/800、.industryGrid 4 列 gap 16。
                     .industry 本身是 flex + justify-between（设计稿自带的高度分配机制），
                     故内容少时余量落在标题与箭头之间，读作留白，不是缺失。
                     ⚠️ 本站没有逐行业的「一句话行业说明」（设计稿 x.s 是它对 8 个行业的样板填充），
                     只有 food-beverage / chemicals 在 lib/industryContent.ts 有真实内容 ⇒
-                    不在中间塞编造的行业描述，那一段由③详情预览区的真实审核项承接。 */}
-                <div className="mb-5 text-[11px] font-extrabold tracking-[.12em] text-[#e07a49]">
+                    不在中间塞编造的行业描述，那一段由③详情预览区的真实审核项承接。
+                    高度：设计稿 min-height 205 是按「有行业说明」填满算的，但 35 个行业里
+                    33 个只有名称（上面那条约束），205 会让空白占到六成。故收到 132 ——
+                    正好等于「编号 + 标题 + 底部箭头」的自然高度，有子主题的卡片由内容自行撑高。 */}
+                <div className="mb-3 text-[11px] font-extrabold tracking-[.12em] text-[#e07a49]">
                   {x.no}
                 </div>
                 <h3 className="text-[19px] font-bold leading-[1.24] tracking-[-.45px] text-[#171717]">{x.name}</h3>
