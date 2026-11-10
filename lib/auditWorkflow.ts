@@ -17,8 +17,10 @@ import { canTransitionAudit, isAuditStatus, type AuditStatus } from "@/lib/audit
 const OK = { ok: true } as const;
 
 // ── 通用失败返回型 ──────────────────────────────────────────────────────────
+// assigned：仅指派动作回填，供 route 发派单邮件（不在这里发信 —— 写库与发信
+// 分开，邮件失败不能让指派回滚，也不能让「指派成功但没人收到」被静默吞掉）。
 type WfResult =
-  | { ok: true; id?: string }
+  | { ok: true; id?: string; assigned?: { name: string | null; email: string | null } }
   | { ok: false; reason: string; message?: string };
 
 function notConfigured(): WfResult {
@@ -106,17 +108,36 @@ export async function advanceAuditStatus(input: AdvanceInput): Promise<WfResult>
 }
 
 // ── 指派审核员（§46）─────────────────────────────────────────────────────────
+// Phase 1：支持**外部审核员**（无平台账号）。两种指派方式二选一：
+//   · auditorId            —— 平台内账号（profiles.id），留给将来审核员门户；
+//   · auditorName + email  —— 外部审核员，写 038 migration 新增的两列。
+// 两者都没给 ⇒ 直接拒绝。写一条无法追溯「派给谁」的记录，比不派更糟。
 export type AssignInput = {
   auditId: string;
-  auditorId: string;
+  auditorId?: string | null;
+  auditorName?: string | null;
+  auditorEmail?: string | null;
   role?: "auditor" | "reviewer";
   actorId?: string | null;
   actorEmail?: string | null;
 };
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
 export async function assignAuditor(input: AssignInput): Promise<WfResult> {
   const db = createAdminClient();
   if (!db) return notConfigured();
+
+  const auditorId = input.auditorId ?? null;
+  const name = (input.auditorName ?? "").trim() || null;
+  const email = (input.auditorEmail ?? "").trim().toLowerCase() || null;
+
+  if (!auditorId && (!name || !email)) {
+    return { ok: false, reason: "auditor_contact_required" };
+  }
+  if (email && !EMAIL_RE.test(email)) {
+    return { ok: false, reason: "invalid_auditor_email" };
+  }
 
   const { data: cur, error: curErr } = await db
     .from("audits")
@@ -129,13 +150,21 @@ export async function assignAuditor(input: AssignInput): Promise<WfResult> {
 
   const { error: updErr } = await db
     .from("audits")
-    .update({ auditor_id: input.auditorId, assigned_at: new Date().toISOString(), updated_at: new Date().toISOString() })
+    .update({
+      auditor_id: auditorId,
+      auditor_name: name,
+      auditor_email: email,
+      assigned_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    })
     .eq("id", input.auditId);
   if (updErr) return { ok: false, reason: "update_failed", message: updErr.message };
 
   const { error: asnErr } = await db.from("audit_assignments").insert({
     audit_id: input.auditId,
-    auditor_id: input.auditorId,
+    auditor_id: auditorId,
+    auditor_name: name,
+    auditor_email: email,
     role: input.role ?? "auditor",
     assigned_by: input.actorId ?? null,
   });
@@ -148,9 +177,14 @@ export async function assignAuditor(input: AssignInput): Promise<WfResult> {
     entity: "audits",
     entityId: input.auditId,
     oldValue: { auditor_id: prev },
-    newValue: { auditor_id: input.auditorId, role: input.role ?? "auditor" },
+    newValue: {
+      auditor_id: auditorId,
+      auditor_name: name,
+      auditor_email: email,
+      role: input.role ?? "auditor",
+    },
   });
-  return OK;
+  return { ok: true, assigned: { name, email } };
 }
 
 // ── 发现项（§29）───────────────────────────────────────────────────────────
@@ -411,6 +445,13 @@ export type AuditWorkflowView = {
       phone: string | null;
       address: string | null;
     } | null;
+    /** Phase1：本次派单的审核员。三项全空 ⇒ null（尚未派单）。 */
+    auditor: {
+      id: string | null;
+      name: string | null;
+      email: string | null;
+      assignedAt: string | null;
+    } | null;
   };
   responses: Array<{ id: string; questionId: string; responseValue: string | null; responseText: string | null }>;
   findings: Array<{
@@ -431,7 +472,7 @@ export async function getAuditWorkflow(auditId: string): Promise<AuditWorkflowVi
   const { data: a } = await db
     .from("audits")
     .select(
-      "id, audit_code, supplier_id, supplier_source, external_supplier_name, external_supplier_contact, external_supplier_email, external_supplier_phone, external_supplier_address, audit_type, status, product, standard_protocol, created_at, suppliers(legal_name)"
+      "id, audit_code, supplier_id, supplier_source, external_supplier_name, external_supplier_contact, external_supplier_email, external_supplier_phone, external_supplier_address, audit_type, status, product, standard_protocol, auditor_id, auditor_name, auditor_email, assigned_at, created_at, suppliers(legal_name)"
     )
     .eq("id", auditId)
     .maybeSingle();
@@ -486,6 +527,16 @@ export async function getAuditWorkflow(auditId: string): Promise<AuditWorkflowVi
               email: ar.external_supplier_email ? String(ar.external_supplier_email) : null,
               phone: ar.external_supplier_phone ? String(ar.external_supplier_phone) : null,
               address: ar.external_supplier_address ? String(ar.external_supplier_address) : null,
+            }
+          : null,
+      // Phase1：三列全空 = 未派单。不要用 "—" 或空串冒充「已派给某人」。
+      auditor:
+        ar.auditor_id || ar.auditor_name || ar.auditor_email
+          ? {
+              id: ar.auditor_id ? String(ar.auditor_id) : null,
+              name: ar.auditor_name ? String(ar.auditor_name) : null,
+              email: ar.auditor_email ? String(ar.auditor_email) : null,
+              assignedAt: ar.assigned_at ? String(ar.assigned_at) : null,
             }
           : null,
     },

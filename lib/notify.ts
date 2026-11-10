@@ -804,6 +804,79 @@ export async function notifyAdminCareerApplication(data: {
   });
 }
 
+// ---------- Phase1：派单邮件（外部审核员，无平台账号）----------
+//
+// 为什么单独一封而不是复用管理员通知：
+//   · 收件人是外部合作方，不是内部员工 —— 不能带上买家邮箱、报价、内部备注；
+//   · 它同时充当「任务书」，审核员照这一封就能知道去哪、审什么、什么时候交、
+//     报告要包含什么。缺一项就会在微信里追问一轮。
+//
+// 语义红线：本邮件不构成任何认证/授权声明。审核员不是平台员工，平台也不
+// 因为发出这封信就对结果背书。终版报告由平台签发。
+export async function notifyAuditorAssigned(data: {
+  auditorEmail: string;
+  auditorName?: string | null;
+  auditCode: string;
+  supplierName?: string | null;
+  supplierAddress?: string | null;
+  auditType: string;
+  standardProtocol?: string | null;
+  preferredDate?: string | null;
+  preferredWindow?: string | null;
+  product?: string | null;
+  buyerCompany?: string | null;
+  specialRequirements?: string | null;
+}): Promise<boolean> {
+  if (!data.auditorEmail) return false;
+  const line = (label: string, val?: string | null) =>
+    val && String(val).trim() ? `${label}: ${String(val).trim()}` : null;
+  const body = [
+    `Dear ${data.auditorName?.trim() || "Colleague"},`,
+    "",
+    "You have been assigned the audit below. Please confirm your availability by replying to this email within 24 hours.",
+    "",
+    "— Assignment —",
+    line("Audit code", data.auditCode),
+    line("Audit type", data.auditType),
+    line("Standard / protocol", data.standardProtocol),
+    line("Preferred date", data.preferredDate),
+    line("Preferred window", data.preferredWindow),
+    line("Product / scope", data.product),
+    "",
+    "— Site —",
+    line("Supplier", data.supplierName),
+    line("Address", data.supplierAddress),
+    "",
+    "— Buyer requirement —",
+    line("Buyer", data.buyerCompany),
+    line("Special requirements", data.specialRequirements),
+    "",
+    "— What we need from you —",
+    "1) Confirm the audit date and your travel arrangement.",
+    "2) Work through the on-site checklist and record objective evidence for every finding.",
+    "3) Grade each finding: critical / major / minor / observation, and state the requirement it relates to.",
+    "4) Send the draft report (findings, evidence, photos) to support@factoryauditb2b.com within 3 business days of the site visit.",
+    "",
+    "— Notes —",
+    "· Please do not contact the buyer directly. All communication goes through FactoryAuditB2B.",
+    "· The report is prepared for the buyer. Treat all site information as confidential.",
+    "· Do not issue any certificate or claim certification on our behalf. The final report is issued by FactoryAuditB2B.",
+    "",
+    "If anything prevents you from taking this assignment, tell us immediately so we can reassign it.",
+    "",
+    "FactoryAuditB2B",
+    "support@factoryauditb2b.com",
+  ]
+    .filter((x) => x !== null)
+    .join("\n");
+
+  return sendMail({
+    to: data.auditorEmail,
+    subject: `[Audit Assignment] ${data.auditCode} — ${data.supplierName || "site audit"}`,
+    text: body,
+  });
+}
+
 // 买家回执：Reference ID + 人工跟进周期 + 明确「非核验结论」
 export async function notifyVerificationRequestReceived(data: {
   email: string;

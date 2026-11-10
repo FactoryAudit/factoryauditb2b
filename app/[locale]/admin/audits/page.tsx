@@ -42,8 +42,19 @@ export default async function AdminAuditsPage({ params }: Props) {
 
   return (
     <div>
-      <h1 className="text-xl font-bold text-[#171717]">Audit workbench ({rows.length})</h1>
-      <p className="mt-1 text-sm text-[#6d6b66]">All audit requests and their workflow status.</p>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h1 className="text-xl font-bold text-[#171717]">Audit workbench ({rows.length})</h1>
+          <p className="mt-1 text-sm text-[#6d6b66]">All audit requests and their workflow status.</p>
+        </div>
+        {/* Phase1：站外谈成的单必须有入口，否则只能留在邮件里 */}
+        <Link
+          href={p("/admin/audits/new")}
+          className="btn btn-primary"
+        >
+          New audit
+        </Link>
+      </div>
 
       <div className="mt-6 overflow-hidden rounded-lg border border-[#ebe8e1] bg-white">
         <table className="w-full text-sm">

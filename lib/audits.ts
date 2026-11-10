@@ -283,6 +283,8 @@ export type CreateAuditRequestInput = {
 export type CreateAuditRequestResult =
   | {
       stored: true;
+      /** 新建行 id。后台建单后直接跳详情页，避免再按 audit_code 反查一次。 */
+      id?: string;
       auditCode: string;
       attempts: number;
       /** 审核对象来源（R85）。调用方据此决定邮件/后台的呈现措辞。 */
@@ -422,10 +424,17 @@ export async function createAuditRequest(input: CreateAuditRequestInput): Promis
   for (let attempt = 1; attempt <= MAX_REF_ATTEMPTS; attempt++) {
     const auditCode = makeAuditCode();
     try {
-      const { error } = await db.from("audits").insert({ ...base, audit_code: auditCode });
+      // 带 .select("id") 是为了把新建行 id 一并带回（后台建单要立刻跳详情页）。
+      // 对原有调用方是纯增量：它们只读 stored / auditCode，不关心多出来的字段。
+      const { data: ins, error } = await db
+        .from("audits")
+        .insert({ ...base, audit_code: auditCode })
+        .select("id")
+        .maybeSingle();
       if (!error) {
         return {
           stored: true,
+          id: (ins as { id?: string } | null)?.id,
           auditCode,
           attempts: attempt,
           supplierSource: source,

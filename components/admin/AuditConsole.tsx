@@ -72,10 +72,103 @@ export default function AuditConsole({ auditId, supplierId, currentStatus, allow
   const [edesc, setEdesc] = useState("");
   const [capDesc, setCapDesc] = useState<Record<string, string>>({});
 
+  // Phase1：派单。写库与发信是两个结果，必须分别告诉运营 ——
+  // 「已指派但邮件没发出去」和「指派失败」是完全不同的处置。
+  const auditor = initialView.audit.auditor;
+  const [aName, setAName] = useState(auditor?.name ?? "");
+  const [aEmail, setAEmail] = useState(auditor?.email ?? "");
+  const [assignMsg, setAssignMsg] = useState<string | null>(null);
+  const [assignErr, setAssignErr] = useState<string | null>(null);
+
+  async function assign() {
+    setAssignErr(null);
+    setAssignMsg(null);
+    if (!aName.trim() || !aEmail.trim()) {
+      setAssignErr("Name and email are both required.");
+      return;
+    }
+    setBusy(true);
+    try {
+      const res = await fetch(`/api/admin/audits/${encodeURIComponent(auditId)}/assign`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ auditorName: aName.trim(), auditorEmail: aEmail.trim() }),
+        cache: "no-store",
+      });
+      const data = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        error?: string;
+        mailSent?: boolean;
+      };
+      if (!res.ok || !data.ok) {
+        setAssignErr(data.error ?? "assign_failed");
+        return;
+      }
+      setAssignMsg(
+        data.mailSent
+          ? "Assigned. The brief has been emailed to the auditor."
+          : "Assigned, but the email could not be sent. Check the mail channel and resend."
+      );
+      startTransition(() => router.refresh());
+    } catch {
+      setAssignErr("network_error");
+    } finally {
+      setBusy(false);
+    }
+  }
+
   return (
     <div className="space-y-6">
       {msg && !err && <p className="text-sm text-[#166534]">✓ {msg}</p>}
       {err && <p className="text-sm text-[#d4232a]">⚠ {err}</p>}
+
+      {/* Phase1：派单 —— 外部审核员只需姓名 + 邮箱，不依赖平台账号 */}
+      <div className="card p-4">
+        <h3 className="text-sm font-semibold text-[#171717]">Assignee</h3>
+        {auditor ? (
+          <p className="mt-2 text-sm text-[#3f4650]">
+            <span className="font-medium text-[#171717]">{auditor.name || "—"}</span>
+            {auditor.email && <span className="ml-2 text-[#6d6b66]">{auditor.email}</span>}
+            {auditor.assignedAt && (
+              <span className="ml-2 text-xs text-[#6d6b66]">
+                assigned {String(auditor.assignedAt).slice(0, 10)}
+              </span>
+            )}
+          </p>
+        ) : (
+          <p className="mt-2 text-sm text-[#6d6b66]">Not assigned yet.</p>
+        )}
+
+        <div className="mt-3 flex flex-wrap items-end gap-3">
+          <label className="text-xs text-[#6d6b66]">
+            Auditor name
+            <input
+              className="input mt-1 block"
+              placeholder="e.g. Nguyen Van A"
+              value={aName}
+              onChange={(e) => setAName(e.target.value)}
+            />
+          </label>
+          <label className="text-xs text-[#6d6b66]">
+            Email
+            <input
+              className="input mt-1 block"
+              placeholder="auditor@example.com"
+              value={aEmail}
+              onChange={(e) => setAEmail(e.target.value)}
+            />
+          </label>
+          <button type="button" disabled={busy || pending} onClick={assign} className="btn btn-primary">
+            {auditor ? "Reassign & send brief" : "Assign & send brief"}
+          </button>
+        </div>
+        <p className="mt-2 text-xs text-[#6d6b66]">
+          Sends the assignment brief (audit code, site, standard, date, report requirements) to the
+          auditor. No platform account is needed.
+        </p>
+        {assignMsg && <p className="mt-2 text-sm text-[#166534]">✓ {assignMsg}</p>}
+        {assignErr && <p className="mt-2 text-sm text-[#d4232a]">⚠ {assignErr}</p>}
+      </div>
 
       {/* §47 状态机推进 */}
       <div className="card p-4">

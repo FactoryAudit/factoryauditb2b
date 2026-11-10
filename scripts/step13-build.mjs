@@ -25,7 +25,17 @@ if (code === 0) {
   code = await run(["node_modules/next/dist/bin/next", "build"], "NEXT BUILD");
 }
 if (code === 0) {
-  code = await run(["node_modules/@opennextjs/cloudflare/dist/cli/index.js", "build"], "OPENNEXT BUILD");
+  // 2026-11-10：OpenNext 1.20.5 起对 Next.js 15.5.24 判定「超出官方支持期」并直接退出。
+  // 项目仍锁定 15.5.24（升级 Next 是独立任务，不能混在业务改动里做），
+  // 这里显式声明「知悉风险、继续使用」——否则整条发布链在 opennext 阶段 5 秒即失败。
+  code = await run(
+    [
+      "node_modules/@opennextjs/cloudflare/dist/cli/index.js",
+      "build",
+      "--dangerouslyUseUnsupportedNextVersion",
+    ],
+    "OPENNEXT BUILD"
+  );
 }
 if (code === 0) {
   code = await run(["scripts/cf-release.cjs"], "CF RELEASE");
