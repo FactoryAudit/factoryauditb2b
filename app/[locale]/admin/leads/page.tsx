@@ -45,6 +45,9 @@ export default async function AdminLeadsPage({ params }: Props) {
     buyer_lead: "buyer",
     supplier_application: "supplier",
     supplier_claim: "claim",
+    supplier_verification: "verify",
+    // migration 039：/careers 人才网络申请（审核员 / 顾问 / 项目人员）
+    auditor_application: "auditor",
   };
 
   const L = zh
@@ -128,7 +131,11 @@ export default async function AdminLeadsPage({ params }: Props) {
                         {KIND_LABEL[r.kind] ?? r.kind}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-sm text-[#171717]">{r.company || r.supplierName || "—"}</td>
+                    {/* auditor_application 是个人申请（无 company），
+                        不退回 first_name 的话这一格只剩「—」，等于看不到是谁。 */}
+                    <td className="px-4 py-3 text-sm text-[#171717]">
+                      {r.company || r.firstName || r.supplierName || "—"}
+                    </td>
                     <td className="px-4 py-3 text-xs text-[#3f4650]">{r.country || "—"}</td>
                     <td className="px-4 py-3 text-xs">
                       {r.supplier ? (

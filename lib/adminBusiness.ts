@@ -36,6 +36,12 @@ export type LeadActivationRow = {
   kind: string;
   status: string;
   company: string | null;
+  /**
+   * 联系人姓名。
+   * migration 039 之前后台从不展示它（供应商申请看公司名就够了），
+   * 但 auditor_application 是**个人**申请，没有 company —— 不显示姓名这行就只剩一个邮箱。
+   */
+  firstName: string | null;
   supplierName: string | null;
   country: string | null;
   email: string;
@@ -182,7 +188,7 @@ export async function listLeadActivation(limit = 200): Promise<LeadActivationRow
     const [{ data, error }, suppliers] = await Promise.all([
       db
         .from("leads")
-        .select("id, reference_id, kind, status, company, supplier_name, country, email, internal_notes, created_at")
+        .select("id, reference_id, kind, status, company, first_name, supplier_name, country, email, internal_notes, created_at")
         .order("created_at", { ascending: false })
         .limit(limit),
       listSupplierActivation(),
@@ -208,6 +214,7 @@ export async function listLeadActivation(limit = 200): Promise<LeadActivationRow
         kind: String(r.kind ?? ""),
         status: String(r.status ?? ""),
         company,
+        firstName: r.first_name == null ? null : String(r.first_name),
         supplierName,
         country: r.country == null ? null : String(r.country),
         email: String(r.email ?? ""),

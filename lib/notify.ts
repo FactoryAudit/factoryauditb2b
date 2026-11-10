@@ -804,8 +804,53 @@ export async function notifyAdminCareerApplication(data: {
   });
 }
 
-// ---------- Phase1：派单邮件（外部审核员，无平台账号）----------
-//
+/**
+ * 申请人回执 —— /careers 提交成功后发给本人。
+ *
+ * 为什么必须有：站上注册走 Supabase 且 `mailer_autoconfirm=true`，
+ * **注册/确认类邮件一封都不会发**。此前 /careers 提交完也是零反馈，
+ * 申请人只能靠猜 —— 于是就有了「我注册了，怎么没收到邮件」。
+ *
+ * 语义红线：
+ *   · 这里只说「收到了」，**绝不说**「已通过」「已录用」「成为我们的审核员」；
+ *   · 不承诺时限内一定答复，只说明会人工审阅后联系；
+ *   · 不回附 Applicant 自己上传的简历 —— 邮件发出即可，不在收件箱里再复制一份 PII。
+ */
+export async function notifyApplicantCareerReceived(data: {
+  email: string;
+  fullName: string;
+  role: string;
+  referenceId?: string | null;
+}): Promise<boolean> {
+  if (!data.email) return false;
+  const first = data.fullName.trim().split(/\s+/)[0] || "";
+  return sendMail({
+    to: data.email,
+    subject: "We received your application — FactoryAuditB2B",
+    text: [
+      `Dear ${data.fullName.trim() || "Colleague"},`,
+      "",
+      `Thank you for applying${first ? `, ${first}` : ""}. We have received your application for: ${data.role}.`,
+      data.referenceId ? `Reference ID: ${data.referenceId}` : null,
+      "",
+      "This is a confirmation of receipt only. It is not an offer, an engagement, or a statement that your profile has been approved.",
+      "",
+      "What happens next:",
+      "1) A coordinator reviews your profile and CV (usually within 3 business days).",
+      "2) If your background matches a live audit or project, we contact you with the scope, timing and fee.",
+      "3) We keep suitable profiles on file. Being on file does not guarantee work.",
+      "",
+      "If you need to add documents or correct something, reply to this email and quote the reference ID above.",
+      "",
+      "FactoryAuditB2B",
+      "support@factoryauditb2b.com",
+    ]
+      .filter((x) => x !== null)
+      .join("\n"),
+  });
+}
+
+// ---------- Phase1：派单邮件（外部审核员，无平台账号）----------//
 // 为什么单独一封而不是复用管理员通知：
 //   · 收件人是外部合作方，不是内部员工 —— 不能带上买家邮箱、报价、内部备注；
 //   · 它同时充当「任务书」，审核员照这一封就能知道去哪、审什么、什么时候交、

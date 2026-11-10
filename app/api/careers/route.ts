@@ -1,14 +1,23 @@
 import { NextResponse } from "next/server";
 import { checkRateLimit, clientIp, clamp } from "@/lib/rateLimit";
-import { notifyAdminCareerApplication } from "@/lib/notify";
+import { notifyAdminCareerApplication, notifyApplicantCareerReceived } from "@/lib/notify";
+import { insertLead } from "@/lib/leads";
 import { LOCALES } from "@/i18n/config";
 
 // POST /api/careers —— /careers 人才网络申请
 //
-// 第一版刻意**不落库、不建招聘后台**（用户明确要求）：
-//   申请连同 CV 附件直接进管理员邮箱，靠邮箱搜索完成筛选。
-//   主题行结构化成 `[Auditor Application] {国家} - {专业} - {姓名}`，
-//   以后按「国家 + 体系/专业 + 可出差」组合搜就能把人捞出来。
+// 第一版刻意**不建招聘后台**（用户明确要求），申请连同 CV 附件直接进管理员邮箱，
+// 靠邮箱搜索完成筛选。主题行结构化成 `[Auditor Application] {国家} - {专业} - {姓名}`。
+//
+// ⚠️ 2026-11-10 修正（migration 039）：
+//   只发邮件的后果是「申请人说注册了，后台什么都看不到」—— 线索页没有、成员页也没有
+//   （他没建账号），审核单更还没派到他。邮件在垃圾箱里就等于这条申请不存在。
+//   ⇒ 现在**同时落库** public.leads（kind=auditor_application），走既有 /admin/leads
+//     运营台。邮件仍是主通道（带 CV 附件），库是防丢的兜底 + 后台可见性。
+//   落库失败绝不阻断邮件与成功返回（与 lib/leads.ts 的铁律一致）。
+//
+// 申请人回执：此前提交后**零反馈**（Supabase autoconfirm=true，注册信根本不发），
+//   申请人只能猜「到底提交成功没有」。现补一封回执，带 Reference ID。
 //
 // 附件限制（服务端强制，前端提示只是提速）：
 //   类型 PDF / DOC / DOCX，最大 5 MB。
@@ -135,6 +144,35 @@ export async function POST(req: Request) {
 
   const content = Buffer.from(await file.arrayBuffer()).toString("base64");
 
+  // ---- 先落库（拿到 Reference ID），再发邮件 ----
+  // 顺序理由：库是防丢的兜底。邮件服务抖动时，申请至少还在后台能看到。
+  const stored = await insertLead({
+    kind: "auditor_application",
+    tool: "careers",
+    email,
+    firstName: fullName,
+    country,
+    phone,
+    // 岗位与专业是后台筛选审核员的两个主维度，放进可检索列而不是只塞 payload
+    sourcing: specialization,
+    message: introduction,
+    score: null,
+    payload: {
+      fullName,
+      city,
+      role,
+      specialization,
+      years,
+      languages,
+      linkedin,
+      availability,
+      cvFilename: filename,
+      cvBytes: file.size,
+      locale,
+    },
+  });
+  const referenceId = stored.stored ? stored.referenceId : null;
+
   const sent = await notifyAdminCareerApplication({
     fullName,
     country,
@@ -159,12 +197,36 @@ export async function POST(req: Request) {
   // 日志只写结果与非敏感字段，绝不打印 API Key / 收件地址外的凭据。
   if (!sent) {
     console.error(
-      `[careers] MAIL DELIVERY FAILED — application not delivered. country=${country} role=${role} specialization=${specialization} hasCv=${Boolean(filename)}`
+      `[careers] MAIL DELIVERY FAILED — application not delivered. country=${country} role=${role} specialization=${specialization} hasCv=${Boolean(filename)} ref=${referenceId ?? "none"}`
     );
   } else {
-    console.log(`[careers] application delivered. country=${country} role=${role}`);
+    console.log(
+      `[careers] application delivered. country=${country} role=${role} ref=${referenceId ?? "none"}`
+    );
+  }
+  if (!stored.stored) {
+    // 落库失败也要留痕：此时后台看不到这条申请，只剩邮件一条命。
+    console.error(`[careers] LEAD INSERT FAILED — ${stored.reason} ${stored.message ?? ""}`.trim());
+  }
+
+  // ---- 申请人回执 ----
+  // 目的只有一个：让他知道「提交成功了」，并给一个能在邮件里引用的单号。
+  // 失败不影响主流程（与上面的 fail-open 一致），只记日志。
+  const receiptSent = await notifyApplicantCareerReceived({
+    email,
+    fullName,
+    role,
+    referenceId,
+  });
+  if (!receiptSent) {
+    console.error(`[careers] applicant receipt not sent. role=${role} ref=${referenceId ?? "none"}`);
   }
 
   // 仍返回成功（保持现有 fail-open 行为，避免申请人反复提交），但把 degraded 带出去便于排查。
-  return NextResponse.json({ ok: true, degraded: !sent }, { headers: NO_STORE });
+  // referenceId：页面当前不展示（表单成功态只有一句致谢），留着给以后的「查询进度」用，
+  // 也方便验收脚本直接在响应里断言落库结果。
+  return NextResponse.json(
+    { ok: true, degraded: !sent || !stored.stored, referenceId },
+    { headers: NO_STORE }
+  );
 }

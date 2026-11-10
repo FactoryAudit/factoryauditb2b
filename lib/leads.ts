@@ -33,12 +33,18 @@ export type LeadKind =
   | "supplier_claim"
   /** STEP-02（migration 023 放宽 leads_kind_check）：买家提交「核验某供应商」请求。
    *  ⚠️ 与 supplier_claim 一样，只代表「收到一条请求」，绝不等同于 verified。 */
-  | "supplier_verification";
+  | "supplier_verification"
+  /** migration 039：/careers 人才网络申请（审核员 / 顾问 / 项目人员）。
+   *  ⚠️ 只代表「收到一份申请」—— 不等于通过审核、录用，也不构成平台账号。
+   *     派单走 audits.auditor_name / auditor_email，与账号解耦。 */
+  | "auditor_application";
 
 export const LEAD_KINDS: readonly LeadKind[] = [
   "buyer_lead",
   "supplier_application",
   "supplier_claim",
+  "supplier_verification",
+  "auditor_application",
 ];
 
 // 短号字符集：去掉易混淆的 0/O/1/I（与 /api/rfq 的 RFQ-XXXXXX 完全一致）
