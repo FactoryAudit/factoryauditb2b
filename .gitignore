@@ -119,6 +119,10 @@ step12-*.txt
 step12-*.json
 step12b-*.txt
 step13-*.txt
+# 构建链改名挪走的旧产物（step13-prune-old.mjs 每次构建自动收敛，仅保留最近一组）。
+# 不加这两条时 git status 会被若干 GB 的未跟踪目录持续污染。
+.next.step13-*/
+.open-next.step13-*/
 db*.txt
 dbapply_*.txt
 dbq*.txt

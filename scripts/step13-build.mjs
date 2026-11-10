@@ -22,6 +22,12 @@ const run = (args, label) =>
 
 let code = await run(["scripts/step13-rename-dirs.mjs"], "RENAME");
 if (code === 0) {
+  // 改名已完成，此处删的都是更早的组（保留最近 1 组做对照）。
+  // 脚本内部每目录独立超时、退出码恒 0 —— 清理永不阻塞发布。
+  // 不加这一步的后果：每次构建多留约 2.7GB，实测 9 个目录已累计 10.8GB。
+  await run(["scripts/step13-prune-old.mjs"], "PRUNE OLD BUILDS");
+}
+if (code === 0) {
   code = await run(["node_modules/next/dist/bin/next", "build"], "NEXT BUILD");
 }
 if (code === 0) {
