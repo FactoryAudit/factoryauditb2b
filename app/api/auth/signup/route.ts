@@ -1,9 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServerSupabase } from "@/lib/supabaseServer";
+import { createAdminClient } from "@/lib/supabaseAdmin";
 import { isSupabaseConfigured } from "@/lib/supabaseClient";
 import { checkRateLimit, clientIp, clamp } from "@/lib/rateLimit";
 import { notifyAdminBuyerRegister, notifyBuyerRegisterReceived } from "@/lib/notify";
 import { appendRegisterRow } from "@/lib/googleSheets";
+import {
+  normalizePhone,
+  normalizeServicesNeeded,
+  BUYER_PRODUCTS_MAX,
+  BUYER_PORT_MAX,
+} from "@/lib/buyerIntake";
 
 // POST /api/auth/signup —— 真实注册（V2.1）
 //
@@ -53,6 +60,11 @@ export async function POST(req: NextRequest) {
     const password = typeof body?.password === "string" ? body.password : "";
     const name = clamp(body?.name, 120) || "";
     const company = clamp(body?.company, 200) || "";
+    // ---- 买家画像（2026-11-13）：注册即采集，否则 25 个账号没有一个能拿去撮合 ----
+    const phone = normalizePhone(body?.phone);
+    const products = clamp(body?.products, BUYER_PRODUCTS_MAX) || "";
+    const destinationPort = clamp(body?.destination_port, BUYER_PORT_MAX) || "";
+    const servicesNeeded = normalizeServicesNeeded(body?.services);
 
     // --- 校验 ---
     if (!email || email.length > 254 || !EMAIL_RE.test(email)) {
@@ -64,6 +76,13 @@ export async function POST(req: NextRequest) {
     if (password.length < MIN_PASSWORD_LENGTH) {
       return NextResponse.json(
         { ok: false, error: "weak_password" },
+        { status: 400 }
+      );
+    }
+    // 产品是唯一能拿去匹配供应商的字段，必填；其余留空不拦。
+    if (!products) {
+      return NextResponse.json(
+        { ok: false, error: "products_required" },
         { status: 400 }
       );
     }
@@ -114,12 +133,47 @@ export async function POST(req: NextRequest) {
 
     const userId = data.user?.id ?? null;
 
+    // --- 买家画像写回 profiles ---
+    // 触发器（001_init.sql）建 profile 时只塞 email/full_name/locale，
+    // 新列必须在这里补写。用 service role 直连，绕过 RLS 的 self-update 策略差异。
+    // 🔴 fail-open：画像写失败不能让注册失败（账号已建好，回滚反而更糟），
+    //    但必须留日志 —— 否则「注册成功但后台看不到产品」会变成新的静默缺口。
+    if (userId) {
+      const admin = createAdminClient();
+      if (admin) {
+        try {
+          const { error: pe } = await admin
+            .from("profiles")
+            .update({
+              phone,
+              buyer_products: products,
+              destination_port: destinationPort || null,
+              services_needed: servicesNeeded,
+            })
+            .eq("id", userId);
+          if (pe) console.error("[signup] profile intake update failed", pe.message);
+        } catch (e) {
+          console.error("[signup] profile intake update exception", e);
+        }
+      }
+    }
+
+    const servicesLabel = (servicesNeeded ?? []).join(", ");
+
     // --- 通知通道（三路并行，任一失败不影响注册结果） ---
     // 注册已经成功，这些只是附加动作，绝不能因为它们失败就回滚账号
     await Promise.allSettled([
       notifyAdminBuyerRegister({
         id: userId ?? crypto.randomUUID(),
-        fields: { email, name, company },
+        fields: {
+          email,
+          name,
+          company,
+          phone: phone ?? "",
+          products,
+          destination_port: destinationPort,
+          services: servicesLabel,
+        },
       }),
       notifyBuyerRegisterReceived({ email, name, id: userId ?? "" }),
       appendRegisterRow({
@@ -129,6 +183,10 @@ export async function POST(req: NextRequest) {
         company,
         submittedAt: new Date().toISOString(),
         source: "buyer-signup",
+        phone: phone ?? "",
+        products,
+        destinationPort: destinationPort,
+        services: servicesLabel,
       }),
     ]);
 

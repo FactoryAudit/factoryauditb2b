@@ -3135,7 +3135,19 @@
       "successLeadInstant": "Sua conta gratuita está pronta. Entre para navegar pelos perfis de fornecedores.",
       "errorWeakPassword": "A senha deve ter pelo menos 8 caracteres.",
       "errorEmailInUse": "Não foi possível criar esta conta. Se você já tem uma, entre.",
-      "errorNotConfigured": "A criação de contas ainda não está disponível. Envie-nos um e-mail e vamos configurá-la."
+      "errorNotConfigured": "A criação de contas ainda não está disponível. Envie-nos um e-mail e vamos configurá-la.",
+      "phoneLabel": "Telefone / WhatsApp (opcional)",
+      "phonePlaceholder": "+55 11 90000 0000",
+      "productsLabel": "Produtos que compra",
+      "productsPlaceholder": "ex. bicicletas infantis, bicicletas elétricas, peças",
+      "portLabel": "Porto de destino (opcional)",
+      "portPlaceholder": "ex. Jebel Ali, Santos, Los Angeles",
+      "servicesLabel": "Serviços necessários (opcional)",
+      "servicesAudit": "Auditoria / verificação de fábrica",
+      "servicesInspection": "Inspeção antes do embarque",
+      "servicesSourcing": "Sourcing e pré-seleção de fornecedores",
+      "servicesDueDiligence": "Due diligence de fornecedores",
+      "errorProductsRequired": "Indique os produtos que compra."
     },
     "instant": {
       "metaTitle": "Crie sua conta de comprador grátis",

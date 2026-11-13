@@ -372,9 +372,12 @@ export async function notifyAdminBuyerRegister(data: {
     return false;
   }
   const f = data.fields;
+  // 2026-11-13：注册时采集买家画像。主题里带上产品，是为了避免
+  // 「主题只有一串 UUID」导致真实买家通知被埋在收件箱里（RFQ 通知踩过这个坑）。
+  const productTag = (f.products ?? "").replace(/\s+/g, " ").slice(0, 60);
   return sendMail({
     to: adminEmail,
-    subject: `[FactoryAuditB2B] New Buyer Sign-up ${data.id}`,
+    subject: `[FactoryAuditB2B] New Buyer Sign-up ${data.id}${productTag ? ` — ${productTag}` : ""}`,
     text: [
       `Account ID: ${data.id}`,
       "",
@@ -382,6 +385,10 @@ export async function notifyAdminBuyerRegister(data: {
       `Email: ${f.email ?? ""}`,
       `Name: ${f.name ?? ""}`,
       `Company: ${f.company ?? ""}`,
+      `Phone / WhatsApp: ${f.phone || "—"}`,
+      `Products of interest: ${f.products || "—"}`,
+      `Destination port: ${f.destination_port || "—"}`,
+      `Services needed: ${f.services || "—"}`,
       "",
       "Account was created automatically by Supabase Auth with a Free plan.",
       "No manual setup is required. Review memberships in the admin dashboard if they request an upgrade.",

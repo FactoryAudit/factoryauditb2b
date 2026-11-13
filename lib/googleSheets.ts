@@ -20,6 +20,11 @@ export interface RegisterSheetRow {
   company: string;
   submittedAt: string; // ISO 8601
   source: string; // "buyer-register"
+  /** 2026-11-13 买家画像（Apps Script 侧按表头取值，缺列不影响旧表） */
+  phone?: string;
+  products?: string;
+  destinationPort?: string;
+  services?: string;
 }
 
 const SHEET_LOG_PREFIX = "[google-sheets]";

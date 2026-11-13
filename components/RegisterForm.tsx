@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { trackEvent } from "@/lib/analytics";
 import { ANALYTICS_EVENTS } from "@/lib/suppliers";
 import { isSignupEnabled } from "@/lib/access";
+import { BUYER_SERVICE_KEYS, BUYER_SERVICE_DICT_SUFFIX } from "@/lib/buyerIntake";
 import { useAuth } from "./AuthProvider";
 
 export type RegisterFormDict = {
@@ -14,6 +15,18 @@ export type RegisterFormDict = {
   namePlaceholder: string;
   companyLabel: string;
   companyPlaceholder: string;
+  /** 2026-11-13 买家画像（缺键时按空串渲染，不阻塞旧字典） */
+  phoneLabel?: string;
+  phonePlaceholder?: string;
+  productsLabel?: string;
+  productsPlaceholder?: string;
+  portLabel?: string;
+  portPlaceholder?: string;
+  servicesLabel?: string;
+  servicesAudit?: string;
+  servicesInspection?: string;
+  servicesSourcing?: string;
+  servicesDueDiligence?: string;
   /** 仅 Supabase 已配置时渲染（真实建号需要密码） */
   passwordLabel: string;
   passwordPlaceholder: string;
@@ -33,6 +46,8 @@ export type RegisterFormDict = {
   errorWeakPassword: string;
   errorEmailInUse: string;
   errorNotConfigured: string;
+  /** 产品未填（服务端 products_required） */
+  errorProductsRequired?: string;
 };
 
 type Props = {
@@ -50,6 +65,16 @@ type Props = {
 
 /** 密码最短 8 位，与 app/api/auth/signup 的 MIN_PASSWORD_LENGTH 保持一致 */
 const MIN_PASSWORD_LENGTH = 8;
+
+/** 服务勾选项文案：字典缺键时退回键名兜底，绝不渲染 undefined */
+function serviceLabel(
+  t: RegisterFormDict,
+  key: (typeof BUYER_SERVICE_KEYS)[number]
+): string {
+  const field = `services${BUYER_SERVICE_DICT_SUFFIX[key]}` as keyof RegisterFormDict;
+  const v = t[field];
+  return typeof v === "string" && v ? v : key;
+}
 
 /**
  * 构建期常量：真实建号是否可用（判定逻辑见 lib/access.ts 的 isSignupEnabled）。
@@ -84,10 +109,20 @@ export default function RegisterForm({ t, nextHref }: Props) {
     const name = String(form.get("name") || "").trim();
     const company = String(form.get("company") || "").trim();
     const password = String(form.get("password") || "");
+    // 买家画像（2026-11-13）：产品必填，其余选填
+    const phone = String(form.get("phone") || "").trim();
+    const products = String(form.get("products") || "").trim();
+    const destinationPort = String(form.get("destination_port") || "").trim();
+    const services = form.getAll("services").map((v) => String(v));
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
       setStatus("error");
       setErrMsg(t.errorInvalidEmail);
+      return;
+    }
+    if (!products) {
+      setStatus("error");
+      setErrMsg(t.errorProductsRequired ?? t.errorGeneric);
       return;
     }
 
@@ -105,7 +140,16 @@ export default function RegisterForm({ t, nextHref }: Props) {
         const res = await fetch("/api/auth/signup", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password, name, company }),
+          body: JSON.stringify({
+            email,
+            password,
+            name,
+            company,
+            phone,
+            products,
+            destination_port: destinationPort,
+            services,
+          }),
         });
         const data = await res.json();
         if (data?.ok) {
@@ -127,7 +171,9 @@ export default function RegisterForm({ t, nextHref }: Props) {
               ? t.errorInvalidEmail
               : data?.error === "weak_password"
                 ? t.errorWeakPassword
-                : data?.error === "email_in_use"
+                : data?.error === "products_required"
+                  ? (t.errorProductsRequired ?? t.errorGeneric)
+                  : data?.error === "email_in_use"
                   ? t.errorEmailInUse
                   : data?.error === "auth_not_configured"
                     ? t.errorNotConfigured
@@ -146,7 +192,17 @@ export default function RegisterForm({ t, nextHref }: Props) {
       const res = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ fields: { email, name, company } }),
+        body: JSON.stringify({
+          fields: {
+            email,
+            name,
+            company,
+            phone,
+            products,
+            destination_port: destinationPort,
+            services: services.join(", "),
+          },
+        }),
       });
       const data = await res.json();
       if (data.ok) {
@@ -255,6 +311,68 @@ export default function RegisterForm({ t, nextHref }: Props) {
           className="input"
         />
       </div>
+
+      {/* ---- 买家画像（2026-11-13）----
+          注册是唯一一次能低成本问清「买什么、发哪个港、要不要验厂」的时机。
+          产品必填（唯一能拿去匹配供应商的字段），其余选填不拦转化。 */}
+      <div>
+        <label htmlFor="reg-phone" className="text-sm font-medium">
+          {t.phoneLabel}
+        </label>
+        <input
+          id="reg-phone"
+          name="phone"
+          type="tel"
+          inputMode="tel"
+          autoComplete="tel"
+          placeholder={t.phonePlaceholder}
+          className="input"
+        />
+      </div>
+
+      <div>
+        <label htmlFor="reg-products" className="text-sm font-medium">
+          {t.productsLabel} <span className="text-[#d4232a]">*</span>
+        </label>
+        <textarea
+          id="reg-products"
+          name="products"
+          rows={2}
+          required
+          placeholder={t.productsPlaceholder}
+          className="textarea"
+        />
+      </div>
+
+      <div>
+        <label htmlFor="reg-port" className="text-sm font-medium">
+          {t.portLabel}
+        </label>
+        <input
+          id="reg-port"
+          name="destination_port"
+          type="text"
+          placeholder={t.portPlaceholder}
+          className="input"
+        />
+      </div>
+
+      <fieldset>
+        <legend className="text-sm font-medium">{t.servicesLabel}</legend>
+        <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
+          {BUYER_SERVICE_KEYS.map((key) => (
+            <label key={key} className="flex items-start gap-2 text-sm text-[#3f4650]">
+              <input
+                type="checkbox"
+                name="services"
+                value={key}
+                className="mt-0.5 h-4 w-4 shrink-0"
+              />
+              <span>{serviceLabel(t, key)}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
 
       <p className="text-xs text-[#6d6b66]">{t.privacyNote}</p>
 

@@ -3135,7 +3135,19 @@
       "successLeadInstant": "Your free account is ready. Sign in to browse supplier profiles.",
       "errorWeakPassword": "Password must be at least 8 characters.",
       "errorEmailInUse": "We could not create this account. If you already have one, sign in instead.",
-      "errorNotConfigured": "Account creation is not available yet. Please email us and we will set it up."
+      "errorNotConfigured": "Account creation is not available yet. Please email us and we will set it up.",
+      "phoneLabel": "Phone / WhatsApp (optional)",
+      "phonePlaceholder": "+1 555 000 0000",
+      "productsLabel": "Products you buy",
+      "productsPlaceholder": "e.g. kids bicycles, e-bikes, spare parts",
+      "portLabel": "Destination port (optional)",
+      "portPlaceholder": "e.g. Jebel Ali, Felixstowe, Los Angeles",
+      "servicesLabel": "Services you need (optional)",
+      "servicesAudit": "Factory audit / verification",
+      "servicesInspection": "Pre-shipment inspection",
+      "servicesSourcing": "Sourcing & supplier shortlist",
+      "servicesDueDiligence": "Supplier due diligence",
+      "errorProductsRequired": "Please tell us what products you buy."
     },
     "instant": {
       "metaTitle": "Create your free buyer account",

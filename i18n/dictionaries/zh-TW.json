@@ -3135,7 +3135,19 @@
       "successLeadInstant": "免費帳號已就緒。登入後即可瀏覽供應商檔案。",
       "errorWeakPassword": "密碼至少需要 8 位。",
       "errorEmailInUse": "无法建立此帐号。如果你已经有帐号，请直接登入。",
-      "errorNotConfigured": "帳號建立功能尚未啟用。請來信給我們，我們會為你開通。"
+      "errorNotConfigured": "帳號建立功能尚未啟用。請來信給我們，我們會為你開通。",
+      "phoneLabel": "電話 / WhatsApp（選填）",
+      "phonePlaceholder": "+886 900 000 000",
+      "productsLabel": "您要採購的產品",
+      "productsPlaceholder": "例如：兒童自行車、電動自行車、零配件",
+      "portLabel": "目的港（選填）",
+      "portPlaceholder": "例如：傑貝阿里、費利克斯托、洛杉磯",
+      "servicesLabel": "需要的服務（選填）",
+      "servicesAudit": "驗廠 / 工廠核實",
+      "servicesInspection": "出貨前驗貨",
+      "servicesSourcing": "找廠與供應商初篩",
+      "servicesDueDiligence": "供應商背景調查",
+      "errorProductsRequired": "請填寫您要採購的產品。"
     },
     "instant": {
       "metaTitle": "建立免費買家帳號",

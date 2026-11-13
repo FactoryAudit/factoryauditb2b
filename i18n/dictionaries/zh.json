@@ -3135,7 +3135,19 @@
       "successLeadInstant": "免费账号已就绪。登录后即可浏览供应商档案。",
       "errorWeakPassword": "密码至少需要 8 位。",
       "errorEmailInUse": "无法创建该账号。如果你已有账号，请直接登录。",
-      "errorNotConfigured": "账号创建功能尚未开通。请发邮件给我们，我们会为你开通。"
+      "errorNotConfigured": "账号创建功能尚未开通。请发邮件给我们，我们会为你开通。",
+      "phoneLabel": "电话 / WhatsApp（选填）",
+      "phonePlaceholder": "+86 138 0000 0000",
+      "productsLabel": "您要采购的产品",
+      "productsPlaceholder": "例如：儿童自行车、电动自行车、零配件",
+      "portLabel": "目的港（选填）",
+      "portPlaceholder": "例如：杰贝阿里、费利克斯托、洛杉矶",
+      "servicesLabel": "需要的服务（选填）",
+      "servicesAudit": "验厂 / 工厂核实",
+      "servicesInspection": "出货前验货",
+      "servicesSourcing": "找厂与供应商初筛",
+      "servicesDueDiligence": "供应商背景调查",
+      "errorProductsRequired": "请填写您要采购的产品。"
     },
     "instant": {
       "metaTitle": "创建免费买家账号",

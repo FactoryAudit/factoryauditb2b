@@ -3135,7 +3135,19 @@
       "successLeadInstant": "無料アカウントの準備ができました。ログインしてサプライヤープロフィールを閲覧してください。",
       "errorWeakPassword": "パスワードは 8 文字以上で入力してください。",
       "errorEmailInUse": "このアカウントを作成できませんでした。すでにアカウントをお持ちの場合は、ログインしてください。",
-      "errorNotConfigured": "アカウント作成機能はまだ利用できません。メールでご連絡いただければ設定いたします。"
+      "errorNotConfigured": "アカウント作成機能はまだ利用できません。メールでご連絡いただければ設定いたします。",
+      "phoneLabel": "電話 / WhatsApp（任意）",
+      "phonePlaceholder": "+81 90 0000 0000",
+      "productsLabel": "購入する製品",
+      "productsPlaceholder": "例：子供用自転車、電動自転車、部品",
+      "portLabel": "仕向港（任意）",
+      "portPlaceholder": "例：ジェベルアリ、フェリクストウ、ロサンゼルス",
+      "servicesLabel": "必要なサービス（任意）",
+      "servicesAudit": "工場監査 / 実在確認",
+      "servicesInspection": "出荷前検品",
+      "servicesSourcing": "サプライヤー探索・一次選定",
+      "servicesDueDiligence": "サプライヤー Due Diligence",
+      "errorProductsRequired": "購入する製品をご記入ください。"
     },
     "instant": {
       "metaTitle": "無料のバイヤーアカウントを作成",

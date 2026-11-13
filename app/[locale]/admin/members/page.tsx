@@ -97,6 +97,7 @@ export default async function AdminMembersPage({ params }: Props) {
                 <tr>
                   <th className="px-4 py-3">{a.colName}</th>
                   <th className="px-4 py-3">{a.colEmail}</th>
+                  <th className="px-4 py-3">Buyer profile</th>
                   <th className="px-4 py-3">{a.colPlan}</th>
                   <th className="px-4 py-3">{a.colStatus}</th>
                   <th className="px-4 py-3">{a.colPeriodEnd}</th>
@@ -126,6 +127,26 @@ export default async function AdminMembersPage({ params }: Props) {
                           <span className="ml-2 rounded-full bg-[#fff4e0] px-2 py-0.5 text-xs text-[#8a5410]">
                             admin
                           </span>
+                        )}
+                      </td>
+                      <td className="px-4 py-3 max-w-[280px]">
+                        {r.buyer_products ? (
+                          <div className="text-xs text-[#3f4650] whitespace-pre-wrap">
+                            {r.buyer_products}
+                          </div>
+                        ) : (
+                          <div className="text-xs text-[#8c8982]">—</div>
+                        )}
+                        {(r.destination_port || r.services_needed?.length || r.phone) && (
+                          <div className="mt-1 text-[11px] text-[#8c8982]">
+                            {[
+                              r.phone,
+                              r.destination_port,
+                              (r.services_needed ?? []).join(", "),
+                            ]
+                              .filter(Boolean)
+                              .join(" · ")}
+                          </div>
                         )}
                       </td>
                       <td className="px-4 py-3">

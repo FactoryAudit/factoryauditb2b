@@ -371,7 +371,7 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
       /export\s+const\s+FEATURED_MIN\s*=/.test(sup)
   );
 
-  // C7 九语字典：键集合与 en 完全一致，叶子数恒为 3295（= 3287 字符串 + 4 boolean）
+  // C7 九语字典：键集合与 en 完全一致，叶子数恒为 3307（= 3299 字符串 + 4 boolean）
   // 2648 → 2666：CS-08 入驻表证书子表单 + 「我要获得证书」咨询弹窗新增 18 键 × 9 语
   // 2666 → 2694：CS-11 公开标准报告样板页 standardReport 命名空间 27 键 + footer.standardReport 1 键
   // 2694 → 2714：CS-12 档案页登记信息 7 键 + 工厂自述证书 8 键 + 产能 4 键 + evidenceCenter.issuedOn 1 键 = 20 键 × 9 语
@@ -410,6 +410,9 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
   //              （脚本：scripts/_apply_contact_i18n.cjs，幂等 + 九语键集自检）
   // 3292 → 3295：/register 页补「已有账号 → 去登录」回链，新增 register.haveAccount 1 键 × 9 语（链接文案复用 auth.accountMenu.signIn）
   //              （脚本：scripts/apply-r66-signin-entry-i18n.cjs，幂等 + 九语键集自检）
+  // 3295 → 3307：/register 加买家画像四字段（电话 / 采购产品 / 目的港 / 所需服务）——
+  //              register.form 新增 12 键 × 9 语
+  //              （脚本：scripts/apply-buyer-intake-i18n.cjs，幂等 + 九语键集自检）
   const LOCALES = ["en", "zh", "zh-TW", "ja", "es", "de", "fr", "pt", "ar"] as const;
   type Leaf = { key: string; value: unknown };
   function leaves(obj: unknown, prefix = "", out: Leaf[] = []): Leaf[] {
@@ -434,7 +437,7 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
     dictLeaves[loc] = leaves(JSON.parse(fs.readFileSync(p, "utf8")));
   }
   const baseKeys = dictLeaves.en.map((l) => l.key).sort();
-  check("C8 en 字典叶子数 = 3295（未被截断/新增）", baseKeys.length === 3295, `实际 ${baseKeys.length}`);
+  check("C8 en 字典叶子数 = 3307（未被截断/新增）", baseKeys.length === 3307, `实际 ${baseKeys.length}`);
 
   for (const loc of LOCALES) {
     if (loc === "en") continue;

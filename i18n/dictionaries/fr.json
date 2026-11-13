@@ -3135,7 +3135,19 @@
       "successLeadInstant": "Votre compte gratuit est prêt. Connectez-vous pour consulter les profils fournisseurs.",
       "errorWeakPassword": "Le mot de passe doit contenir au moins 8 caractères.",
       "errorEmailInUse": "Nous n'avons pas pu créer ce compte. Si vous en avez déjà un, connectez-vous.",
-      "errorNotConfigured": "La création de compte n'est pas encore disponible. Écrivez-nous et nous la configurerons."
+      "errorNotConfigured": "La création de compte n'est pas encore disponible. Écrivez-nous et nous la configurerons.",
+      "phoneLabel": "Téléphone / WhatsApp (facultatif)",
+      "phonePlaceholder": "+33 6 00 00 00 00",
+      "productsLabel": "Produits que vous achetez",
+      "productsPlaceholder": "ex. vélos enfants, vélos électriques, pièces détachées",
+      "portLabel": "Port de destination (facultatif)",
+      "portPlaceholder": "ex. Jebel Ali, Le Havre, Los Angeles",
+      "servicesLabel": "Services souhaités (facultatif)",
+      "servicesAudit": "Audit / vérification d'usine",
+      "servicesInspection": "Inspection avant expédition",
+      "servicesSourcing": "Sourcing et présélection de fournisseurs",
+      "servicesDueDiligence": "Due diligence fournisseurs",
+      "errorProductsRequired": "Merci d'indiquer les produits que vous achetez."
     },
     "instant": {
       "metaTitle": "Créer votre compte acheteur gratuit",

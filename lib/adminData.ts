@@ -961,6 +961,11 @@ export type AdminMemberRow = {
   full_name: string | null;
   /** 用户自填公司名。同上，未经核验，不可当作已认证主体。 */
   company: string | null;
+  /** 2026-11-13 注册画像：买家自己填的采购意向，未经核验，仅作撮合线索用 */
+  phone: string | null;
+  buyer_products: string | null;
+  destination_port: string | null;
+  services_needed: string[] | null;
   locale: string | null;
   role: string;
   plan: string;
@@ -992,7 +997,7 @@ export async function listAdminMembers(limit = 200): Promise<AdminMemberRow[]> {
     const { data, error } = await db
       .from("profiles")
       .select(
-        "id, email, full_name, company, locale, role, created_at, memberships(plan, status, current_period_end, provider, stripe_customer_id)"
+        "id, email, full_name, company, phone, buyer_products, destination_port, services_needed, locale, role, created_at, memberships(plan, status, current_period_end, provider, stripe_customer_id)"
       )
       .order("created_at", { ascending: false })
       .limit(limit);
@@ -1012,6 +1017,10 @@ export async function listAdminMembers(limit = 200): Promise<AdminMemberRow[]> {
       email: string | null;
       full_name: string | null;
       company: string | null;
+      phone: string | null;
+      buyer_products: string | null;
+      destination_port: string | null;
+      services_needed: string[] | null;
       locale: string | null;
       role: string | null;
       created_at: string;
@@ -1024,6 +1033,10 @@ export async function listAdminMembers(limit = 200): Promise<AdminMemberRow[]> {
         email: r.email ?? "",
         full_name: r.full_name ?? null,
         company: r.company ?? null,
+        phone: r.phone ?? null,
+        buyer_products: r.buyer_products ?? null,
+        destination_port: r.destination_port ?? null,
+        services_needed: r.services_needed ?? null,
         locale: r.locale ?? null,
         role: r.role ?? "buyer",
         plan: m?.plan ?? "free",
