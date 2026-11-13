@@ -602,6 +602,40 @@ export default async function Home({ params }: Props) {
               </div>
             ))}
           </div>
+
+          {/* 8.5 线下见面 —— 全站唯一一张实拍素材的第二次曝光。
+              为什么不铺到更多页面：同一张照片重复出现在首页/联系页/询盘页，
+              读起来像图库填充，反而削弱可信度。这里只做一次「可点击的证明」，
+              深链到 /trust#in-person 的完整说明（含「同一批人、不外包、同进视频」）。
+              文案复用 about.inPersonTitle / inPersonCaption 两键 ⇒ 不新增字典键，
+              叶子数闸门（3339）不动。 */}
+          <Link
+            href={`${p("/trust")}#in-person`}
+            className="mt-10 grid gap-5 rounded-[16px] border border-[#e6e1d7] bg-[#fbfaf7] p-5 transition hover:border-[#d9a18a] sm:grid-cols-[200px_1fr] sm:items-center sm:p-6"
+          >
+            {/* 480×360 缩略图（26KB）：大图 1200×900 是给 /trust 的，不在这里重复下载 */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/trust/team-at-sourcing-event-thumb.jpg"
+              alt={t.about.inPersonCaption}
+              width={480}
+              height={360}
+              loading="lazy"
+              decoding="async"
+              className="h-auto w-full max-w-[280px] rounded-[10px] sm:w-[200px]"
+            />
+            <div className="min-w-0">
+              <h3 className="text-[17px] font-bold tracking-[-.35px] text-[#171717]">
+                {t.about.inPersonTitle}
+              </h3>
+              <p className="mt-2 text-[13px] leading-relaxed text-[#726e67]">
+                {t.about.inPersonCaption}
+              </p>
+              <span className="muted-link mt-3 inline-block text-[12px]">
+                {t.trust.badge} <span aria-hidden="true">→</span>
+              </span>
+            </div>
+          </Link>
         </div>
       </section>
 

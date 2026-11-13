@@ -43,15 +43,19 @@ export default async function TrustPage({ params }: Props) {
   });
 
   const Section = ({
+    id,
     title,
     lead,
     children,
   }: {
+    /** 可选锚点：首页信任条深链到 #in-person 时，落地就是这张照片 */
+    id?: string;
     title: string;
     lead?: string;
     children: React.ReactNode;
   }) => (
-    <section className="mt-14">
+    // scroll-mt-24：页头 sticky 74px，没有滚动外边距时锚点会把标题压在页头下面
+    <section id={id} className="mt-14 scroll-mt-24">
       <h2 className="text-2xl font-bold text-[#171717]">{title}</h2>
       {lead && <p className="text-[#6d6b66] mt-2 max-w-3xl">{lead}</p>}
       <div className="mt-5">{children}</div>
@@ -218,8 +222,9 @@ export default async function TrustPage({ params }: Props) {
 
       {/* 线下见面 —— 真实活动签到现场照片。
           只用于证明「团队是真的人、线下可见、核验不外包」；
-          照片无法证明活动规模、场次、成交或客户数量，文案不涉及这些，也不暗示覆盖多个产业带。 */}
-      <Section title={t.about.inPersonTitle}>
+          照片无法证明活动规模、场次、成交或客户数量，文案不涉及这些，也不暗示覆盖多个产业带。
+          id="in-person"：首页信任条深链的落点（全站唯一实拍素材，故只做两处曝光）。 */}
+      <Section id="in-person" title={t.about.inPersonTitle}>
         <div className="grid gap-6 md:grid-cols-[minmax(0,320px)_1fr] md:items-center">
           <figure className="overflow-hidden rounded-lg border border-[#ebe8e1] bg-white">
             {/* 原生 img：与站点其它静态图一致，不引入 next/image 运行时 */}
