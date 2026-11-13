@@ -10,6 +10,7 @@
 //   FROM_EMAIL             发件地址，默认 support@factoryauditb2b.com
 import nodemailer from "nodemailer";
 import { MEMBERSHIP_PRICE_USD } from "./suppliers";
+import { requestTypeLabel, type RfqRequestType, type RfqServiceDetail } from "./buyerRequest";
 
 const mailProvider = (process.env.MAIL_PROVIDER || "smtp").toLowerCase();
 const httpMailConfigured = Boolean(process.env.MAIL_HTTP_KEY);
@@ -165,6 +166,167 @@ export async function notifyAdminNewLead(lead: {
     ]
       .filter(Boolean)
       .join("\n"),
+  });
+}
+
+/**
+ * 管理员通知 —— 正式询价单（/api/rfq）
+ *
+ * 为什么不复用 notifyAdminNewLead：
+ *   原主题是 `[FactoryAuditB2B] 新线索 rfq` —— 没有公司、没有国家、没有产品，
+ *   和一堆 `New Supplier Registration LEAD-xxxx` 混在收件箱里完全看不出价值。
+ *   2026-11-04 科威特那条真实询盘就是这么被漏掉的（管理员邮件其实投递成功了）。
+ *   主题必须一眼能判断「哪国 · 谁 · 要什么」。
+ *
+ * 文案铁律：只陈述买家填了什么，不替买家补任何推断。
+ */
+export async function notifyAdminNewRfq(rfq: {
+  referenceId: string;
+  stored: boolean;
+  requestType: RfqRequestType;
+  contactName?: string | null;
+  email: string;
+  company?: string | null;
+  country?: string | null;
+  phone?: string | null;
+  product: string;
+  quantity?: string | null;
+  message?: string | null;
+  serviceDetail?: RfqServiceDetail | null;
+  sourcePath?: string | null;
+  industryCode?: string | null;
+  certificationsReq?: string[] | null;
+  targetMarket?: string | null;
+  incoterm?: string | null;
+}): Promise<boolean> {
+  const adminEmail = process.env.NOTIFY_ADMIN_EMAIL;
+  if (!adminEmail) {
+    console.log("[notify] NOTIFY_ADMIN_EMAIL 未配置，跳过管理员通知");
+    return false;
+  }
+
+  const sd = rfq.serviceDetail;
+  const extras = [
+    sd?.factoryName ? `工厂/供应商: ${sd.factoryName}` : "",
+    sd?.factoryLocation ? `工厂所在地: ${sd.factoryLocation}` : "",
+    sd?.auditType ? `审核类型: ${sd.auditType}` : "",
+    sd?.inspectionStandard ? `验货标准: ${sd.inspectionStandard}` : "",
+    sd?.destinationPort ? `目的港: ${sd.destinationPort}` : "",
+    sd?.preferredDate ? `期望日期: ${sd.preferredDate}` : "",
+    rfq.quantity ? `数量/范围: ${rfq.quantity}` : "",
+    rfq.targetMarket ? `目标市场: ${rfq.targetMarket}` : "",
+    rfq.industryCode ? `行业: ${rfq.industryCode}` : "",
+    rfq.certificationsReq?.length
+      ? `认证要求: ${rfq.certificationsReq.join(", ")}`
+      : "",
+    rfq.incoterm ? `贸易条款: ${rfq.incoterm}` : "",
+  ].filter(Boolean);
+
+  const subjectBits = [
+    `[RFQ] ${requestTypeLabel(rfq.requestType)}`,
+    rfq.country || "国家未填",
+    rfq.company || rfq.contactName || "未署名",
+    (rfq.product || "").slice(0, 50),
+  ].filter(Boolean);
+
+  return sendMail({
+    to: adminEmail,
+    subject: subjectBits.join(" | "),
+    text: [
+      `编号: ${rfq.referenceId}${rfq.stored ? "" : "  ⚠️ 未落库（仅邮件）"}`,
+      `类型: ${requestTypeLabel(rfq.requestType)}`,
+      "",
+      `公司: ${rfq.company || "—"}`,
+      `联系人: ${rfq.contactName || "—"}`,
+      `邮箱: ${rfq.email || "—"}`,
+      `电话/WhatsApp: ${rfq.phone || "—"}`,
+      `国家/市场: ${rfq.country || "—"}`,
+      "",
+      "— 买家需求 —",
+      `产品/主题: ${rfq.product}`,
+      ...extras,
+      "",
+      "— 买家原文 —",
+      rfq.message || "（未填写）",
+      "",
+      `来源页: ${rfq.sourcePath || "—"}`,
+    ].join("\n"),
+  });
+}
+
+/**
+ * 管理员通知 —— 供应商对公开买家需求的报价（/api/rfq/respond）
+ *
+ * 语义：收到一份报价 ≠ 已选为供应商。邮件只转述，不做任何推荐结论。
+ */
+export async function notifyAdminSupplierQuote(data: {
+  referenceId: string;
+  rfqReference: string;
+  product: string;
+  stored: boolean;
+  company: string;
+  contactName?: string | null;
+  email: string;
+  phone?: string | null;
+  price?: string | null;
+  moq?: string | null;
+  leadTime?: string | null;
+  message?: string | null;
+}): Promise<boolean> {
+  const adminEmail = process.env.NOTIFY_ADMIN_EMAIL;
+  if (!adminEmail) {
+    console.log("[notify] NOTIFY_ADMIN_EMAIL 未配置，跳过管理员通知");
+    return false;
+  }
+  return sendMail({
+    to: adminEmail,
+    subject: [
+      `[Quote] ${data.rfqReference}`,
+      data.company,
+      data.price || null,
+    ]
+      .filter(Boolean)
+      .join(" | "),
+    text: [
+      `对应需求: ${data.rfqReference} — ${data.product}`,
+      `报价编号: ${data.referenceId}${data.stored ? "" : "  ⚠️ 未落库（仅邮件）"}`,
+      "",
+      `供应商: ${data.company}`,
+      `联系人: ${data.contactName || "—"}`,
+      `邮箱: ${data.email}`,
+      `电话/WhatsApp: ${data.phone || "—"}`,
+      "",
+      `单价: ${data.price || "—"}`,
+      `起订量: ${data.moq || "—"}`,
+      `交货期: ${data.leadTime || "—"}`,
+      "",
+      "— 供应商说明 —",
+      data.message || "（未填写）",
+    ].join("\n"),
+  });
+}
+
+/** 供应商报价回执（发供应商本人）。只确认「收到了」，不承诺被选中。 */
+export async function notifySupplierQuoteReceived(data: {
+  email: string;
+  company: string;
+  rfqReference: string;
+}): Promise<boolean> {
+  if (!data.email) return false;
+  return sendMail({
+    to: data.email,
+    subject: `We received your offer for ${data.rfqReference} — FactoryAuditB2B`,
+    text: [
+      `Hi ${data.company || "there"},`,
+      "",
+      `Thank you. We received your offer for buyer request ${data.rfqReference}.`,
+      "",
+      "Our team reviews offers and passes relevant ones to the buyer.",
+      "Submitting an offer does not mean you have been selected; we will contact you",
+      "if the buyer wants to take it further.",
+      "",
+      "FactoryAuditB2B",
+    ].join("\n"),
   });
 }
 

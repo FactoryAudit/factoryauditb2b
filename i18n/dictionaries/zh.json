@@ -1598,24 +1598,58 @@
   },
   "rfq": {
     "badge": "采购需求",
-    "h1": "发布询价单",
-    "lead": "告诉我们您要采购什么。我们会分享给已验证供应商，并连同能力与风险背景一并回复报价。",
+    "h1": "告诉我们您需要什么",
+    "lead": "采购产品、预约验厂、安排验货——选一项告诉我们，我们会给出方案与报价。",
     "form": {
       "labels": {
         "firstName": "您的称呼",
         "company": "公司",
         "email": "工作邮箱",
         "product": "产品",
-        "quantity": "数量",
-        "country": "目标国家",
-        "message": "规格说明",
+        "quantity": "数量 / 范围",
+        "country": "国家 / 目标市场",
+        "message": "规格 / 具体要求",
         "messageHint": "材料、尺寸、认证、目标价格……",
         "publicConsent": "允许将我的采购需求公开展示给供应商（隐藏我的联系方式）",
-        "submit": "发布询价单",
-        "submitting": "发布中…"
+        "submit": "提交需求",
+        "submitting": "提交中…",
+        "requestType": "您需要什么？",
+        "phone": "电话 / WhatsApp",
+        "optional": "选填",
+        "factoryName": "工厂 / 供应商名称",
+        "factoryLocation": "工厂所在地（城市、国家）",
+        "auditType": "审核类型",
+        "auditTypeHint": "例如社会责任（BSCI / Sedex）、质量、环境、工厂核实",
+        "preferredDate": "期望日期",
+        "destinationPort": "目的港",
+        "inspectionStandard": "验货标准（AQL）"
       },
-      "success": "询价单已收到，将邀请已验证供应商报价。",
-      "error": "提交失败，请重试或直接发邮件联系我们。"
+      "success": "已收到您的需求。我们会在 1 个工作日内人工审阅并回复您。",
+      "error": "提交失败，请重试或直接发邮件联系我们。",
+      "types": {
+        "product": "采购产品",
+        "sourcing": "寻找供应商",
+        "audit": "验厂 / 工厂核实",
+        "inspection": "验货 / 质检",
+        "other": "其他需求"
+      },
+      "hints": {
+        "audit": "审核范围、所需标准、工厂规模、期望日期……",
+        "inspection": "产品、订单数量、AQL 标准、期望验货日期……",
+        "other": "请描述您的需求，包括时间节点或预算……"
+      },
+      "offer": {
+        "price": "单价",
+        "moq": "起订量",
+        "leadTime": "交货期",
+        "notes": "您的报价说明"
+      },
+      "respond": {
+        "to": "正在回应需求 {ref}",
+        "note": "以下为买家授权公开的内容。提交报价后，我们会转交给买家。",
+        "success": "已收到您的报价。我们会先审核，如买家有意向会主动联系您。"
+      },
+      "errorRequired": "请填写带 * 的必填项。"
     },
     "metaTitle": "发布询价单 (RFQ)",
     "metaDesc": "发布面向中国及亚洲的采购需求，已验证供应商将回复报价、能力与合规背景。"

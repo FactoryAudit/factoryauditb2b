@@ -1226,24 +1226,58 @@
   },
   "rfq": {
     "badge": "Demande d'achat",
-    "h1": "Publier une demande de devis",
-    "lead": "Dites-nous ce que vous achetez. Nous le partageons avec des fournisseurs vérifiés et renvoyons des devis avec contexte de capacité et de risque.",
+    "h1": "Dites-nous ce qu'il vous faut",
+    "lead": "Acheter des produits, commander un audit d'usine ou organiser une inspection : choisissez une option, nous reviendrons avec un périmètre et un devis.",
     "form": {
       "labels": {
         "firstName": "Prénom",
         "company": "Entreprise",
         "email": "E-mail professionnel",
         "product": "Produit",
-        "quantity": "Quantité",
-        "country": "Pays cible",
-        "message": "Spécifications",
+        "quantity": "Quantité / périmètre",
+        "country": "Pays / marché cible",
+        "message": "Spécifications / exigences",
         "messageHint": "Matériaux, dimensions, certifications, prix cible…",
         "publicConsent": "Autoriser l'affichage public de ma demande aux fournisseurs, mes coordonnées masquées",
-        "submit": "Publier la demande",
-        "submitting": "Publication…"
+        "submit": "Envoyer la demande",
+        "submitting": "Envoi…",
+        "requestType": "De quoi avez-vous besoin ?",
+        "phone": "Téléphone / WhatsApp",
+        "optional": "facultatif",
+        "factoryName": "Nom de l'usine / du fournisseur",
+        "factoryLocation": "Localisation de l'usine (ville, pays)",
+        "auditType": "Type d'audit",
+        "auditTypeHint": "ex. conformité sociale (BSCI / Sedex), qualité, environnement, vérification d'usine",
+        "preferredDate": "Date souhaitée",
+        "destinationPort": "Port de destination",
+        "inspectionStandard": "Niveau d'inspection (AQL)"
       },
-      "success": "Votre demande a été reçue. Des fournisseurs vérifiés seront invités à répondre.",
-      "error": "Une erreur s'est produite. Veuillez réessayer ou nous contacter directement."
+      "success": "Nous avons reçu votre demande. Notre équipe l'examine et vous répond sous un jour ouvré.",
+      "error": "Une erreur s'est produite. Veuillez réessayer ou nous contacter directement.",
+      "types": {
+        "product": "Acheter des produits",
+        "sourcing": "Trouver des fournisseurs",
+        "audit": "Audit / vérification d'usine",
+        "inspection": "Inspection / contrôle qualité",
+        "other": "Autre besoin"
+      },
+      "hints": {
+        "audit": "Périmètre de l'audit, norme requise, taille de l'usine, dates souhaitées…",
+        "inspection": "Produit, quantité commandée, niveau AQL, date d'inspection souhaitée…",
+        "other": "Décrivez votre besoin, y compris les délais ou le budget…"
+      },
+      "offer": {
+        "price": "Prix unitaire",
+        "moq": "Quantité minimale",
+        "leadTime": "Délai de livraison",
+        "notes": "Votre offre"
+      },
+      "respond": {
+        "to": "Réponse à la demande {ref}",
+        "note": "Voici ce que l'acheteur a autorisé à publier. Envoyez votre offre, nous la transmettrons.",
+        "success": "Nous avons reçu votre offre. Notre équipe l'examine et vous contactera si l'acheteur souhaite aller plus loin."
+      },
+      "errorRequired": "Veuillez remplir les champs obligatoires marqués d'un *."
     },
     "metaTitle": "Publier une Demande de Devis (RFQ)",
     "metaDesc": "Publiez une demande d'achat pour des produits de Chine et d'Asie. Des fournisseurs vérifiés répondent avec des devis."

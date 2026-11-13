@@ -1226,24 +1226,58 @@
   },
   "rfq": {
     "badge": "採購需求",
-    "h1": "發佈詢價單",
-    "lead": "告訴我們您要採購什麼。我們會分享給已驗證供應商，並連同能力與風險背景一併回覆報價。",
+    "h1": "告訴我們您需要什麼",
+    "lead": "採購產品、預約驗廠、安排驗貨——選一項告訴我們，我們會提供方案與報價。",
     "form": {
       "labels": {
         "firstName": "您的稱呼",
         "company": "公司",
         "email": "工作郵箱",
         "product": "產品",
-        "quantity": "數量",
-        "country": "目標國家",
-        "message": "規格說明",
+        "quantity": "數量 / 範圍",
+        "country": "國家 / 目標市場",
+        "message": "規格 / 具體要求",
         "messageHint": "材料、尺寸、認證、目標價格……",
         "publicConsent": "允許將我的採購需求公開展示給供應商（隱藏我的聯絡方式）",
-        "submit": "發佈詢價單",
-        "submitting": "發佈中…"
+        "submit": "提交需求",
+        "submitting": "提交中…",
+        "requestType": "您需要什麼？",
+        "phone": "電話 / WhatsApp",
+        "optional": "選填",
+        "factoryName": "工廠 / 供應商名稱",
+        "factoryLocation": "工廠所在地（城市、國家）",
+        "auditType": "稽核類型",
+        "auditTypeHint": "例如社會責任（BSCI / Sedex）、品質、環境、工廠核實",
+        "preferredDate": "期望日期",
+        "destinationPort": "目的港",
+        "inspectionStandard": "驗貨標準（AQL）"
       },
-      "success": "詢價單已收到，將邀請已驗證供應商報價。",
-      "error": "提交失敗，請重試或直接發郵件聯繫我們。"
+      "success": "已收到您的需求。我們會在 1 個工作日內人工審閱並回覆您。",
+      "error": "提交失敗，請重試或直接發郵件聯繫我們。",
+      "types": {
+        "product": "採購產品",
+        "sourcing": "尋找供應商",
+        "audit": "驗廠 / 工廠核實",
+        "inspection": "驗貨 / 品質檢驗",
+        "other": "其他需求"
+      },
+      "hints": {
+        "audit": "稽核範圍、所需標準、工廠規模、期望日期……",
+        "inspection": "產品、訂單數量、AQL 標準、期望驗貨日期……",
+        "other": "請描述您的需求，包括時間節點或預算……"
+      },
+      "offer": {
+        "price": "單價",
+        "moq": "最小訂購量",
+        "leadTime": "交期",
+        "notes": "您的報價說明"
+      },
+      "respond": {
+        "to": "正在回應需求 {ref}",
+        "note": "以下為買家授權公開的內容。提交報價後，我們會轉交給買家。",
+        "success": "已收到您的報價。我們會先審核，如買家有意願會主動聯繫您。"
+      },
+      "errorRequired": "請填寫標示 * 的必填欄位。"
     },
     "metaTitle": "發佈詢價單 (RFQ)",
     "metaDesc": "發佈面向中國及亞洲的採購需求，已驗證供應商將回復報價、能力與合規背景。"

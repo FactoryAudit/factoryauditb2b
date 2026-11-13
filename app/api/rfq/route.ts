@@ -2,9 +2,17 @@ import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/supabaseServer";
 import { createAdminClient } from "@/lib/supabaseAdmin";
 import { checkRateLimit, clientIp, clamp } from "@/lib/rateLimit";
-import { notifyAdminNewLead, notifyCustomerRfqReceived } from "@/lib/notify";
+import { notifyAdminNewRfq, notifyCustomerRfqReceived } from "@/lib/notify";
 import { STATIC_INDUSTRIES } from "@/lib/staticData";
 import { LOCALES } from "@/i18n/config";
+import {
+  buildServiceDetail,
+  deriveRfqProduct,
+  normalizeRequestType,
+  requestTypeLabel,
+  TYPES_REQUIRING_PRODUCT,
+  type RfqServiceDetail,
+} from "@/lib/buyerRequest";
 
 // POST /api/rfq —— 询价单入库
 //
@@ -142,11 +150,23 @@ export async function POST(req: Request) {
   }
 
   const email = String(b.email ?? "").trim().toLowerCase();
-  const product = clamp(b.product, 300);
+  const productInput = clamp(b.product, 300);
   const quantity = clamp(b.quantity, 120);
   const company = clamp(b.company, 200);
   const country = clamp(b.country, 120);
   const message = clamp(b.message, 5000);
+  const phone = clamp(b.phone, 40);
+  // ---- migration 042：买家要什么（product / sourcing / audit / inspection / other）----
+  //   非法值一律回落 product，与列默认值一致；绝不按关键词猜类型。
+  const requestType = normalizeRequestType(b.request_type);
+  const serviceDetail: RfqServiceDetail | null = buildServiceDetail({
+    factory_name: b.factory_name,
+    factory_location: b.factory_location,
+    audit_type: b.audit_type,
+    preferred_date: b.preferred_date,
+    destination_port: b.destination_port,
+    inspection_standard: b.inspection_standard,
+  });
   // ---- CS-02C G3：行业化上下文（可空；只入新列，不碰既有 12 列的语义） ----
   const contactName = clamp(b.contact_name, 80); // 只进管理员邮件，不落库（rfqs 无姓名列）
   const industryCode = normalizeIndustryCode(b.industry_code);
@@ -170,12 +190,29 @@ export async function POST(req: Request) {
       { status: 400, headers: NO_STORE }
     );
   }
-  if (!product) {
+
+  // ---- 2026-11-13：必填项收口 ----
+  //   此前只有 email + product 两格必填，company / country / message 全可空，
+  //   库里的记录常常「知道有人问，但不知道谁问、问哪国、要什么」。
+  //   现在 email / company / country / message 四格必填；产品类需求另加 product。
+  //   返回 422 + 缺失字段名，前端据此提示，不再给一句笼统的「出错了」。
+  const missing: string[] = [];
+  if (!company) missing.push("company");
+  if (!country) missing.push("country");
+  if (!message) missing.push("message");
+  if (TYPES_REQUIRING_PRODUCT.includes(requestType) && !productInput) {
+    missing.push("product");
+  }
+  if (missing.length > 0) {
     return NextResponse.json(
-      { ok: false, error: "product_required" },
-      { status: 400, headers: NO_STORE }
+      { ok: false, error: "missing_fields", fields: missing },
+      { status: 422, headers: NO_STORE }
     );
   }
+
+  // rfqs.product 是 NOT NULL：服务类需求用真实可读标题兜住（工厂名 / 需求首句），
+  // 绝不写空串、也绝不编一个假产品名。
+  const product = deriveRfqProduct(requestType, productInput, serviceDetail, message);
 
   // 登录用户才带上 user_id（游客为 null，RLS 的 rfqs_insert_anyone 允许）
   const user = await getCurrentUser();
@@ -199,6 +236,10 @@ export async function POST(req: Request) {
         country: country ?? "",
         message: message ?? "",
         status: "new",
+        // ---- migration 042：买家要什么 + 电话 + 按类型而异的明细 ----
+        request_type: requestType,
+        phone: phone ?? null,
+        service_detail: serviceDetail,
         // ---- CS-02C G3：可空上下文，缺省 null，绝不给历史字段编值 ----
         industry_code: industryCode,
         certifications_req: certificationsReq,
@@ -233,28 +274,25 @@ export async function POST(req: Request) {
   // 两封都走 allSettled：任何一封失败都不影响接口返回成功
   // （sendMail 内部本身也是 fail-open），一单生意不能因为邮件通道抖动而丢失。
   await Promise.allSettled([
-    notifyAdminNewLead({
-      id: referenceId,
-      tool: stored ? "rfq" : "rfq (not stored)",
+    notifyAdminNewRfq({
+      referenceId,
+      stored,
+      requestType,
       // CS-02C：表单的 firstName 走 contact_name 进管理员邮件（rfqs 无姓名列，不落库）
-      firstName: contactName || company || "",
+      contactName: contactName || company || "",
       email,
-      company: company ?? "",
-      country: country ?? "",
-      message: [
-        `Product: ${product}`,
-        quantity ? `Quantity: ${quantity}` : "",
-        industryCode ? `Industry: ${industryCode}` : "",
-        certificationsReq?.length ? `Certifications required: ${certificationsReq.join(", ")}` : "",
-        oemRequired === true ? "OEM/ODM required: yes" : "",
-        targetMarket ? `Target market: ${targetMarket}` : "",
-        incoterm ? `Incoterm: ${incoterm}` : "",
-        sourcePath ? `Source: ${sourcePath}` : "",
-        message ?? "",
-      ]
-        .filter(Boolean)
-        .join("\n"),
-      score: stored ? 10 : 5,
+      company,
+      country,
+      phone,
+      product,
+      quantity,
+      message,
+      serviceDetail,
+      sourcePath,
+      industryCode,
+      certificationsReq,
+      targetMarket,
+      incoterm,
     }),
     notifyCustomerRfqReceived({
       email,

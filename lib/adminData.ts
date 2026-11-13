@@ -793,6 +793,12 @@ export type AdminRfqRow = {
   source_path: string | null;
   /** STEP 13 CS-C1：行业码（推荐打分的依据之一） */
   industry_code: string | null;
+  /** migration 042：买家要什么（product / sourcing / audit / inspection / other） */
+  request_type?: string | null;
+  /** migration 042：电话 / WhatsApp（买家自填，未经核验，不可当作已验证联系方式） */
+  phone?: string | null;
+  /** migration 042：按类型而异的明细（工厂名 / 所在地 / 审核类型 / 日期 / 目的港 / 验货标准） */
+  service_detail?: Record<string, unknown> | null;
 };
 
 export async function listAdminRfqs(limit = 100): Promise<AdminRfqRow[]> {
@@ -802,7 +808,7 @@ export async function listAdminRfqs(limit = 100): Promise<AdminRfqRow[]> {
     const { data, error } = await db
       .from("rfqs")
       .select(
-        "id, reference_id, product, quantity, country, email, company, message, status, created_at, user_id, is_public, published_at, source_type, source_path, industry_code"
+        "id, reference_id, product, quantity, country, email, company, message, status, created_at, user_id, is_public, published_at, source_type, source_path, industry_code, request_type, phone, service_detail"
       )
       .order("created_at", { ascending: false })
       .limit(limit);

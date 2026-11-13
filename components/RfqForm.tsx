@@ -2,24 +2,49 @@
 
 import { useRef, useState } from "react";
 import { ANALYTICS_EVENTS, trackEvent } from "@/lib/analytics";
+import { RFQ_REQUEST_TYPES, type RfqRequestType } from "@/lib/buyerRequest";
 
+/**
+ * 买家需求表单文案。
+ *
+ * 2026-11-13 重构：从「只问买货」改为「先问要什么，再问对应的问题」。
+ * 原来的字段只有 Product / Quantity / Target country，服务型买家（验厂、
+ * 验货、找供应商）无处可填 —— 科威特 RFQ-2MSL3N 就是这么被塞进 Product 的。
+ */
 export type RfqFormDict = {
   labels: {
+    requestType: string;
     firstName: string;
     company: string;
     email: string;
+    phone: string;
+    optional: string;
     product: string;
     quantity: string;
     country: string;
     message: string;
     messageHint: string;
-    /** STEP 12 C2：公开授权勾选项文案。默认不勾选 —— 未获明确同意绝不公开 RFQ。 */
     publicConsent: string;
     submit: string;
     submitting: string;
+    factoryName: string;
+    factoryLocation: string;
+    auditType: string;
+    auditTypeHint: string;
+    preferredDate: string;
+    destinationPort: string;
+    inspectionStandard: string;
   };
+  /** 五类需求的显示名，键与 RFQ_REQUEST_TYPES 一一对应 */
+  types: Record<RfqRequestType, string>;
+  /** 按类型而异的说明占位符 */
+  hints: { audit: string; inspection: string; other: string };
+  /** 供应商报价模式专用（/rfq?request=RFQ-XXXX），买家表单不渲染这组 */
+  offer: { price: string; moq: string; leadTime: string; notes: string };
+  respond: { to: string; note: string; success: string };
   success: string;
   error: string;
+  errorRequired: string;
 };
 
 /**
@@ -49,6 +74,13 @@ export type RfqFormContext = {
   defaultMessage?: string;
 };
 
+/** 需要买家填「产品」的类型：产品本身 / 产品品类 / 待验货的产品 */
+const PRODUCT_REQUIRED_TYPES: readonly RfqRequestType[] = [
+  "product",
+  "sourcing",
+  "inspection",
+];
+
 export default function RfqForm({
   t,
   context,
@@ -57,6 +89,10 @@ export default function RfqForm({
   context?: RfqFormContext;
 }) {
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
+  const [errMsg, setErrMsg] = useState<string>("");
+  // 默认「采购产品」：行业页 / 化学品页带来的都是买货意图，不改变既有转化路径。
+  const [requestType, setRequestType] = useState<RfqRequestType>("product");
+
   // rfq_start 只发一次：用户首次与表单交互即视为产生询价意图
   const startedRef = useRef(false);
   const handleFirstTouch = () => {
@@ -65,9 +101,12 @@ export default function RfqForm({
     trackEvent(ANALYTICS_EVENTS.rfqStart);
   };
 
+  const needsProduct = PRODUCT_REQUIRED_TYPES.includes(requestType);
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("loading");
+    setErrMsg("");
     // 必须在 await 之前捕获表单元素：React 17+ 在事件处理同步段结束后
     // 会把 e.currentTarget 置空，await 之后再读会拿到 null（此前导致
     // 提交成功却报"提交失败"的隐藏 bug）
@@ -88,15 +127,25 @@ export default function RfqForm({
     // STEP 12 C2：公开授权。勾选 = "on"，未勾选 = null ⇒ 严格 false。
     // 🔴 默认不勾选：没有买家明确同意，绝不把 RFQ 公开出去。
     const allowPublic = Boolean(form.get("allowPublic"));
-    const payload = {
-      // ---- 既有 12 列对应的字段 ----
+
+    const payload: Record<string, unknown> = {
+      // ---- 基础字段 ----
       contact_name: String(form.get("firstName") || ""), // 只进管理员邮件，不落库
       company: String(form.get("company") || ""),
       email: String(form.get("email") || ""),
+      phone: String(form.get("phone") || ""),
       country: String(form.get("country") || ""),
       product: String(form.get("product") || ""),
       quantity: String(form.get("quantity") || ""),
       message: String(form.get("message") || ""),
+      // ---- migration 042：先问「要什么」，再按类型收对应字段 ----
+      request_type: requestType,
+      factory_name: String(form.get("factory_name") || ""),
+      factory_location: String(form.get("factory_location") || ""),
+      audit_type: String(form.get("audit_type") || ""),
+      preferred_date: String(form.get("preferred_date") || ""),
+      destination_port: String(form.get("destination_port") || ""),
+      inspection_standard: String(form.get("inspection_standard") || ""),
       // ---- CS-02C G3：可空上下文；undefined 的键会被服务端归一为 NULL ----
       locale: context?.locale,
       industry_code: context?.industryCode,
@@ -109,29 +158,33 @@ export default function RfqForm({
       // STEP 12 C2：公开与否**只**来自买家明确授权；缺省 false，绝不自动公开
       is_public: allowPublic,
     };
+
     try {
-      // 🔴 CS-02C 修复：此前这里 POST /api/lead —— 只发邮件、**一行不落库**，
-      //    /account/rfqs 永远查不到记录，admin 匹配（rfq_matches）也无从谈起。
-      //    /api/rfq 才是「正式询价单」通道：落库 + 双邮件 + 限流 3/h。
       const res = await fetch("/api/rfq", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
       const data = await res.json();
-      setStatus(data.ok ? "ok" : "error");
-      // 业务真实性：rfq_submit 仅在「真实落库成功」时发。
-      // /api/rfq 返回 { ok, stored }；stored=false（落库失败）即使 ok=true 也绝不记为转化，
-      // 否则 Analytics 成功事件会与数据库写入真相解耦（见 STEP 08 Phase 1-2 审计）。
-      // 注：UI 成功/失败文案保持原样，不在本轮调整（FOLLOW-UP BUSINESS SEMANTICS ISSUE）。
-      if (data.ok && data.stored === true) {
-        // 核心转化：询价提交成功。
-        // 只发事件名，绝不附带表单内容（邮箱/电话/公司名等一律不进 Analytics）。
-        trackEvent(ANALYTICS_EVENTS.rfqSubmit);
-        formEl.reset();
+      if (data.ok) {
+        setStatus("ok");
+        // 业务真实性：rfq_submit 仅在「真实落库成功」时发。
+        // /api/rfq 返回 { ok, stored }；stored=false（落库失败）即使 ok=true 也绝不记为转化，
+        // 否则 Analytics 成功事件会与数据库写入真相解耦（见 STEP 08 Phase 1-2 审计）。
+        if (data.stored === true) {
+          // 核心转化：询价提交成功。
+          // 只发事件名，绝不附带表单内容（邮箱/电话/公司名等一律不进 Analytics）。
+          trackEvent(ANALYTICS_EVENTS.rfqSubmit);
+          formEl.reset();
+        }
+      } else {
+        setStatus("error");
+        // 缺必填项与「提交失败」必须分开说：前者用户自己能改，后者要联系我们。
+        setErrMsg(data.error === "missing_fields" ? t.errorRequired : t.error);
       }
     } catch {
       setStatus("error");
+      setErrMsg(t.error);
     }
   }
 
@@ -148,52 +201,250 @@ export default function RfqForm({
     <form
       onSubmit={handleSubmit}
       onFocus={handleFirstTouch}
-      className="card p-6 max-w-2xl space-y-4"
+      className="card p-6 max-w-2xl space-y-5"
     >
+      {/* ---- 第一问：要什么。选错这一步，后面所有问题都会问错 ---- */}
+      <fieldset>
+        <legend className="text-sm font-medium mb-2">
+          {t.labels.requestType} <span className="text-[#d4232a]">*</span>
+        </legend>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          {RFQ_REQUEST_TYPES.map((key) => (
+            <label
+              key={key}
+              className={`flex items-center gap-2 rounded-lg border p-3 text-sm cursor-pointer transition-colors ${
+                requestType === key
+                  ? "border-[#171717] bg-[#f5f3ee] font-medium"
+                  : "border-[#e5e2db] hover:border-[#c9c4b8]"
+              }`}
+            >
+              <input
+                type="radio"
+                name="request_type_choice"
+                value={key}
+                checked={requestType === key}
+                onChange={() => setRequestType(key)}
+                className="h-4 w-4 shrink-0"
+              />
+              <span>{t.types[key]}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="text-sm font-medium">{t.labels.firstName}</label>
-          <input className="input" name="firstName" placeholder={t.labels.firstName} />
+          <label className="text-sm font-medium" htmlFor="rfq-name">
+            {t.labels.firstName}
+          </label>
+          <input id="rfq-name" className="input" name="firstName" placeholder={t.labels.firstName} />
         </div>
         <div>
-          <label className="text-sm font-medium">{t.labels.company}</label>
-          <input className="input" name="company" placeholder={t.labels.company} />
-        </div>
-        <div>
-          <label className="text-sm font-medium">{t.labels.email}</label>
-          <input className="input" name="email" type="email" required placeholder={t.labels.email} />
-        </div>
-        <div>
-          <label className="text-sm font-medium">{t.labels.country}</label>
-          <input className="input" name="country" placeholder={t.labels.country} />
-        </div>
-        <div>
-          {/* /api/rfq 强制要求 product（product_required 400）。此前留空提交
-              在 /api/lead 时代静默成功，切到落库通道后必须在表单层拦住 */}
-          <label className="text-sm font-medium">{t.labels.product}</label>
+          <label className="text-sm font-medium" htmlFor="rfq-company">
+            {t.labels.company} <span className="text-[#d4232a]">*</span>
+          </label>
           <input
+            id="rfq-company"
             className="input"
-            name="product"
+            name="company"
             required
-            defaultValue={context?.defaultProduct ?? ""}
-            placeholder={t.labels.product}
+            placeholder={t.labels.company}
           />
         </div>
         <div>
-          <label className="text-sm font-medium">{t.labels.quantity}</label>
-          <input className="input" name="quantity" placeholder={t.labels.quantity} />
+          <label className="text-sm font-medium" htmlFor="rfq-email">
+            {t.labels.email} <span className="text-[#d4232a]">*</span>
+          </label>
+          <input
+            id="rfq-email"
+            className="input"
+            name="email"
+            type="email"
+            required
+            placeholder={t.labels.email}
+          />
         </div>
+        <div>
+          <label className="text-sm font-medium" htmlFor="rfq-phone">
+            {t.labels.phone}{" "}
+            <span className="text-[#6d6b66] font-normal">({t.labels.optional})</span>
+          </label>
+          <input
+            id="rfq-phone"
+            className="input"
+            name="phone"
+            type="tel"
+            inputMode="tel"
+            placeholder="+1 555 000 0000"
+          />
+        </div>
+        <div className="md:col-span-2">
+          <label className="text-sm font-medium" htmlFor="rfq-country">
+            {t.labels.country} <span className="text-[#d4232a]">*</span>
+          </label>
+          <input
+            id="rfq-country"
+            className="input"
+            name="country"
+            required
+            placeholder={t.labels.country}
+          />
+        </div>
+
+        {/* ---- 按类型展开的字段组 ---- */}
+        {needsProduct && (
+          <div>
+            <label className="text-sm font-medium" htmlFor="rfq-product">
+              {t.labels.product} <span className="text-[#d4232a]">*</span>
+            </label>
+            <input
+              id="rfq-product"
+              className="input"
+              name="product"
+              required
+              defaultValue={context?.defaultProduct ?? ""}
+              placeholder={t.labels.product}
+            />
+          </div>
+        )}
+
+        {(requestType === "product" || requestType === "sourcing") && (
+          <div>
+            <label className="text-sm font-medium" htmlFor="rfq-quantity">
+              {t.labels.quantity}{" "}
+              <span className="text-[#6d6b66] font-normal">({t.labels.optional})</span>
+            </label>
+            <input
+              id="rfq-quantity"
+              className="input"
+              name="quantity"
+              placeholder="5,000 pcs"
+            />
+          </div>
+        )}
+
+        {(requestType === "product" || requestType === "sourcing") && (
+          <div>
+            <label className="text-sm font-medium" htmlFor="rfq-port">
+              {t.labels.destinationPort}{" "}
+              <span className="text-[#6d6b66] font-normal">({t.labels.optional})</span>
+            </label>
+            <input
+              id="rfq-port"
+              className="input"
+              name="destination_port"
+              placeholder="Jebel Ali"
+            />
+          </div>
+        )}
+
+        {(requestType === "audit" || requestType === "inspection") && (
+          <div>
+            <label className="text-sm font-medium" htmlFor="rfq-factory-name">
+              {t.labels.factoryName}{" "}
+              <span className="text-[#6d6b66] font-normal">({t.labels.optional})</span>
+            </label>
+            <input
+              id="rfq-factory-name"
+              className="input"
+              name="factory_name"
+              placeholder={t.labels.factoryName}
+            />
+          </div>
+        )}
+
+        {(requestType === "audit" || requestType === "inspection") && (
+          <div>
+            <label className="text-sm font-medium" htmlFor="rfq-factory-location">
+              {t.labels.factoryLocation}
+            </label>
+            <input
+              id="rfq-factory-location"
+              className="input"
+              name="factory_location"
+              placeholder={t.labels.factoryLocation}
+            />
+          </div>
+        )}
+
+        {requestType === "audit" && (
+          <div>
+            <label className="text-sm font-medium" htmlFor="rfq-audit-type">
+              {t.labels.auditType}{" "}
+              <span className="text-[#6d6b66] font-normal">({t.labels.optional})</span>
+            </label>
+            <input
+              id="rfq-audit-type"
+              className="input"
+              name="audit_type"
+              placeholder={t.labels.auditTypeHint}
+            />
+          </div>
+        )}
+
+        {requestType === "inspection" && (
+          <>
+            <div>
+              <label className="text-sm font-medium" htmlFor="rfq-quantity">
+                {t.labels.quantity}{" "}
+                <span className="text-[#6d6b66] font-normal">({t.labels.optional})</span>
+              </label>
+              <input
+                id="rfq-quantity"
+                className="input"
+                name="quantity"
+                placeholder="5,000 pcs"
+              />
+            </div>
+            <div>
+              <label className="text-sm font-medium" htmlFor="rfq-aql">
+                {t.labels.inspectionStandard}{" "}
+                <span className="text-[#6d6b66] font-normal">({t.labels.optional})</span>
+              </label>
+              <input
+                id="rfq-aql"
+                className="input"
+                name="inspection_standard"
+                placeholder="AQL 2.5"
+              />
+            </div>
+          </>
+        )}
+
+        {(requestType === "audit" || requestType === "inspection") && (
+          <div>
+            <label className="text-sm font-medium" htmlFor="rfq-date">
+              {t.labels.preferredDate}{" "}
+              <span className="text-[#6d6b66] font-normal">({t.labels.optional})</span>
+            </label>
+            <input id="rfq-date" className="input" name="preferred_date" type="date" />
+          </div>
+        )}
       </div>
+
       <div>
-        <label className="text-sm font-medium">{t.labels.message}</label>
+        <label className="text-sm font-medium" htmlFor="rfq-message">
+          {t.labels.message} <span className="text-[#d4232a]">*</span>
+        </label>
         <textarea
+          id="rfq-message"
           className="textarea"
           name="message"
           rows={4}
+          required
           defaultValue={context?.defaultMessage ?? ""}
-          placeholder={t.labels.messageHint}
+          placeholder={
+            requestType === "audit"
+              ? t.hints.audit
+              : requestType === "inspection"
+                ? t.hints.inspection
+                : requestType === "other"
+                  ? t.hints.other
+                  : t.labels.messageHint
+          }
         />
       </div>
+
       {/* STEP 12 C2：公开授权勾选项（默认不勾选 —— 未获明确同意绝不公开） */}
       <label className="flex items-start gap-2 text-sm text-[#3f4650]">
         <input
@@ -203,10 +454,11 @@ export default function RfqForm({
         />
         <span>{t.labels.publicConsent}</span>
       </label>
+
       <button type="submit" disabled={status === "loading"} className="btn btn-accent w-full">
         {status === "loading" ? t.labels.submitting : t.labels.submit}
       </button>
-      {status === "error" && <p className="text-sm text-[#d4232a]">{t.error}</p>}
+      {status === "error" && <p className="text-sm text-[#d4232a]">{errMsg || t.error}</p>}
     </form>
   );
 }

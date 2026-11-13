@@ -1226,24 +1226,58 @@
   },
   "rfq": {
     "badge": "Einkaufsanfrage",
-    "h1": "Angebotsanfrage veröffentlichen",
-    "lead": "Beschreiben Sie, was Sie beschaffen. Wir teilen es geprüften Lieferanten mit und liefern Angebote mit Kapazitäts- und Risikokontext.",
+    "h1": "Sagen Sie uns, was Sie brauchen",
+    "lead": "Produkte einkaufen, ein Fabrikaudit beauftragen oder eine Prüfung organisieren – wählen Sie aus, und wir melden uns mit Umfang und Angebot.",
     "form": {
       "labels": {
         "firstName": "Name",
         "company": "Firma",
         "email": "Geschäftliche E-Mail",
         "product": "Produkt",
-        "quantity": "Menge",
-        "country": "Zielland",
-        "message": "Spezifikationen",
+        "quantity": "Menge / Umfang",
+        "country": "Land / Zielmarkt",
+        "message": "Spezifikationen / Anforderungen",
         "messageHint": "Materialien, Maße, Zertifizierungen, Zielpreis…",
         "publicConsent": "Meine Anfrage öffentlich für Lieferanten anzeigen lassen, ohne meine Kontaktdaten",
-        "submit": "Anfrage veröffentlichen",
-        "submitting": "Wird veröffentlicht…"
+        "submit": "Anfrage senden",
+        "submitting": "Wird gesendet…",
+        "requestType": "Was benötigen Sie?",
+        "phone": "Telefon / WhatsApp",
+        "optional": "optional",
+        "factoryName": "Fabrik- / Lieferantenname",
+        "factoryLocation": "Standort der Fabrik (Stadt, Land)",
+        "auditType": "Audittyp",
+        "auditTypeHint": "z. B. Sozialstandards (BSCI / Sedex), Qualität, Umwelt, Fabrikverifizierung",
+        "preferredDate": "Wunschtermin",
+        "destinationPort": "Bestimmungshafen",
+        "inspectionStandard": "Prüfniveau (AQL)"
       },
-      "success": "Ihre Anfrage ist eingegangen. Geprüfte Lieferanten werden zur Angebotsabgabe eingeladen.",
-      "error": "Etwas ist schiefgegangen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt."
+      "success": "Wir haben Ihre Anfrage erhalten. Unser Team prüft sie und antwortet innerhalb eines Werktags.",
+      "error": "Etwas ist schiefgegangen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.",
+      "types": {
+        "product": "Produkte einkaufen",
+        "sourcing": "Lieferanten finden",
+        "audit": "Fabrikaudit / Verifizierung",
+        "inspection": "Warenprüfung / QS",
+        "other": "Etwas anderes"
+      },
+      "hints": {
+        "audit": "Auditumfang, geforderte Norm, Fabrikgröße, Wunschtermine…",
+        "inspection": "Produkt, Bestellmenge, AQL-Niveau, Wunschtermin der Prüfung…",
+        "other": "Beschreiben Sie Ihren Bedarf, inklusive Fristen oder Budget…"
+      },
+      "offer": {
+        "price": "Stückpreis",
+        "moq": "Mindestmenge",
+        "leadTime": "Lieferzeit",
+        "notes": "Ihr Angebot"
+      },
+      "respond": {
+        "to": "Antwort auf Anfrage {ref}",
+        "note": "Dies ist der vom Käufer freigegebene Inhalt. Senden Sie Ihr Angebot, wir leiten es weiter.",
+        "success": "Wir haben Ihr Angebot erhalten. Unser Team prüft es und meldet sich, wenn der Käufer weitergehen möchte."
+      },
+      "errorRequired": "Bitte füllen Sie die mit * markierten Pflichtfelder aus."
     },
     "metaTitle": "Angebotsanfrage (RFQ) veröffentlichen",
     "metaDesc": "Veröffentlichen Sie eine Beschaffungsanfrage für Produkte aus China und Asien. Geprüfte Lieferanten antworten mit Angeboten."

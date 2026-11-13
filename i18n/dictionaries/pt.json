@@ -1226,24 +1226,58 @@
   },
   "rfq": {
     "badge": "Solicitação de compra",
-    "h1": "Publicar uma solicitação de cotação",
-    "lead": "Conte-nos o que você está comprando. Compartilhamos com fornecedores verificados e devolvemos cotações com contexto de capacidade e risco.",
+    "h1": "Diga-nos do que você precisa",
+    "lead": "Comprar produtos, contratar uma auditoria de fábrica ou agendar uma inspeção: escolha uma opção e voltamos com escopo e orçamento.",
     "form": {
       "labels": {
         "firstName": "Nome",
         "company": "Empresa",
         "email": "E-mail de trabalho",
         "product": "Produto",
-        "quantity": "Quantidade",
-        "country": "País-alvo",
-        "message": "Especificações",
+        "quantity": "Quantidade / escopo",
+        "country": "País / mercado-alvo",
+        "message": "Especificações / requisitos",
         "messageHint": "Materiais, dimensões, certificações, preço-alvo…",
         "publicConsent": "Permitir exibir meu pedido publicamente aos fornecedores, ocultando meus dados de contato",
-        "submit": "Publicar RFQ",
-        "submitting": "Publicando…"
+        "submit": "Enviar solicitação",
+        "submitting": "Enviando…",
+        "requestType": "Do que você precisa?",
+        "phone": "Telefone / WhatsApp",
+        "optional": "opcional",
+        "factoryName": "Nome da fábrica / fornecedor",
+        "factoryLocation": "Localização da fábrica (cidade, país)",
+        "auditType": "Tipo de auditoria",
+        "auditTypeHint": "ex. conformidade social (BSCI / Sedex), qualidade, ambiental, verificação de fábrica",
+        "preferredDate": "Data preferida",
+        "destinationPort": "Porto de destino",
+        "inspectionStandard": "Nível de inspeção (AQL)"
       },
-      "success": "Sua RFQ foi recebida. Fornecedores verificados serão convidados a cotar.",
-      "error": "Algo deu errado. Tente novamente ou entre em contato diretamente."
+      "success": "Recebemos sua solicitação. Nossa equipe vai analisar e responder em até um dia útil.",
+      "error": "Algo deu errado. Tente novamente ou entre em contato diretamente.",
+      "types": {
+        "product": "Comprar produtos",
+        "sourcing": "Encontrar fornecedores",
+        "audit": "Auditoria / verificação de fábrica",
+        "inspection": "Inspeção / controle de qualidade",
+        "other": "Outra necessidade"
+      },
+      "hints": {
+        "audit": "Escopo da auditoria, norma exigida, porte da fábrica, datas preferidas…",
+        "inspection": "Produto, quantidade do pedido, nível AQL, data de inspeção preferida…",
+        "other": "Descreva o que você precisa, incluindo prazos ou orçamento…"
+      },
+      "offer": {
+        "price": "Preço unitário",
+        "moq": "Quantidade mínima",
+        "leadTime": "Prazo de entrega",
+        "notes": "Sua oferta"
+      },
+      "respond": {
+        "to": "Respondendo à solicitação {ref}",
+        "note": "Este é o conteúdo que o comprador autorizou publicar. Envie sua oferta e nossa equipe encaminha.",
+        "success": "Recebemos sua oferta. Nossa equipe vai analisar e entrar em contato se o comprador quiser avançar."
+      },
+      "errorRequired": "Preencha os campos obrigatórios marcados com *."
     },
     "metaTitle": "Publicar uma Solicitação de Cotação (RFQ)",
     "metaDesc": "Publique uma solicitação de compra para produtos da China e da Ásia. Fornecedores verificados respondem com cotações."

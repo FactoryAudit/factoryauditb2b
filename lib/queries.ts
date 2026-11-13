@@ -722,6 +722,87 @@ export async function listPublicRfqs(
 }
 
 /**
+ * 单条公开需求 —— 供 /rfq?request=RFQ-XXXX 的「供应商报价」模式使用。
+ *
+ * 安全红线（与 listPublicRfqs 完全一致）：
+ *   · 只查 is_public = true 且未关闭的需求，买家没授权公开的绝不外露；
+ *   · 只 SELECT 公开白名单列，**绝不**返回 email / company / user_id / status；
+ *   · 需求原文按「买家已授权公开给供应商」的范围展示，但邮箱与长串电话号码
+ *     在返回前打码 —— 买家勾选的是「隐藏联系方式」，不是「公开联系方式」。
+ *
+ * 返回 null = 编号不存在 / 未公开 / 已关闭。调用方不应区分这三种情况。
+ */
+export async function getPublicRfqForResponse(
+  referenceId: string
+): Promise<(PublicRfq & { messageExcerpt: string | null }) | null> {
+  const ref = referenceId.trim().toUpperCase();
+  if (!/^RFQ-[A-Z0-9]{4,10}$/.test(ref)) return null;
+  if (!useSupabase()) return null;
+
+  const { createAdminClient } = await import("./supabaseAdmin");
+  const db = createAdminClient();
+  if (!db) return null;
+
+  try {
+    const { data, error } = await db
+      .from("rfqs")
+      .select(
+        "reference_id, product, quantity, target_market, industry_code, certifications_req, message, created_at"
+      )
+      .eq("reference_id", ref)
+      .eq("is_public", true)
+      .neq("status", "closed")
+      .maybeSingle();
+
+    if (error) {
+      if (!isMissingTable(error.code)) {
+        console.error("[queries] public rfq detail failed", error.code, error.message);
+      }
+      return null;
+    }
+    if (!data) return null;
+
+    const r = data as Record<string, unknown>;
+    return {
+      referenceId: String(r.reference_id ?? ""),
+      product: String(r.product ?? ""),
+      quantity: r.quantity == null ? null : String(r.quantity),
+      targetMarket: r.target_market == null ? null : String(r.target_market),
+      industryCode: r.industry_code == null ? null : String(r.industry_code),
+      certificationsReq: Array.isArray(r.certifications_req)
+        ? (r.certifications_req as unknown[]).map(String)
+        : null,
+      clusterSlug: null,
+      sourceName: null,
+      sourceUrl: null,
+      createdAt: String(r.created_at ?? ""),
+      messageExcerpt: maskContactDetails(
+        typeof r.message === "string" ? r.message : null
+      ),
+    };
+  } catch (e) {
+    console.error("[queries] public rfq detail exception", e);
+    return null;
+  }
+}
+
+/**
+ * 给公开页面用的需求原文：截断 + 联系方式打码。
+ * 买家勾选的是「隐藏我的联系方式」，所以邮箱与长串号码必须抹掉再展示。
+ */
+function maskContactDetails(raw: string | null, max = 400): string | null {
+  if (!raw) return null;
+  const masked = raw
+    .replace(/[\w.+-]+@[\w-]+\.[\w.-]+/g, "[contact hidden]")
+    // 长数字串视为电话；但别把 ISO 日期（2026-12-01）当电话涂掉
+    .replace(/\+?\d[\d\s()-]{6,}\d/g, (m) =>
+      /^\d{4}-\d{2}-\d{2}$/.test(m) ? m : "[contact hidden]"
+    );
+  const clipped = masked.trim().slice(0, max);
+  return clipped || null;
+}
+
+/**
  * 供应商详情：基本信息 + 证据 + 能力标签（能力标签按 locale 取名，避免英文页出现中文）
  *
  * @param tier 访问者档位。默认 visitor（SEO 直出场景）。

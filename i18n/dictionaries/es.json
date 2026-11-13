@@ -1226,24 +1226,58 @@
   },
   "rfq": {
     "badge": "Solicitud del comprador",
-    "h1": "Publicar una solicitud de abastecimiento",
-    "lead": "Díganos de qué se está abasteciendo. Lo compartimos con proveedores verificados y devolvemos presupuestos con capacidad y contexto de riesgo.",
+    "h1": "Díganos qué necesita",
+    "lead": "Comprar productos, solicitar una auditoría de fábrica o programar una inspección: elija una opción y le responderemos con alcance y presupuesto.",
     "form": {
       "labels": {
         "firstName": "Su nombre",
         "company": "Empresa",
         "email": "Correo de empresa",
         "product": "Producto",
-        "quantity": "Cantidad",
-        "country": "País objetivo",
-        "message": "Especificaciones",
+        "quantity": "Cantidad / alcance",
+        "country": "País / mercado objetivo",
+        "message": "Especificaciones / requisitos",
         "messageHint": "Materiales, dimensiones, certificaciones, precio objetivo…",
         "publicConsent": "Permitir mostrar mi solicitud públicamente a los proveedores, ocultando mis datos de contacto",
-        "submit": "Publicar RFQ",
-        "submitting": "Publicación"
+        "submit": "Enviar solicitud",
+        "submitting": "Enviando…",
+        "requestType": "¿Qué necesita?",
+        "phone": "Teléfono / WhatsApp",
+        "optional": "opcional",
+        "factoryName": "Nombre de la fábrica / proveedor",
+        "factoryLocation": "Ubicación de la fábrica (ciudad, país)",
+        "auditType": "Tipo de auditoría",
+        "auditTypeHint": "p. ej. cumplimiento social (BSCI / Sedex), calidad, medio ambiente, verificación de fábrica",
+        "preferredDate": "Fecha preferida",
+        "destinationPort": "Puerto de destino",
+        "inspectionStandard": "Nivel de inspección (AQL)"
       },
-      "success": "Se ha recibido su RFQ. Se invitará a los proveedores verificados a cotizar.",
-      "error": "Se ha producido un error. Inténtalo de nuevo o envíanos un correo electrónico directamente."
+      "success": "Hemos recibido su solicitud. Nuestro equipo la revisará y le responderá en un día hábil.",
+      "error": "Se ha producido un error. Inténtalo de nuevo o envíanos un correo electrónico directamente.",
+      "types": {
+        "product": "Comprar productos",
+        "sourcing": "Buscar proveedores",
+        "audit": "Auditoría / verificación de fábrica",
+        "inspection": "Inspección / control de calidad",
+        "other": "Otra necesidad"
+      },
+      "hints": {
+        "audit": "Alcance de la auditoría, norma exigida, tamaño de la fábrica, fechas preferidas…",
+        "inspection": "Producto, cantidad del pedido, nivel AQL, fecha de inspección preferida…",
+        "other": "Describa lo que necesita, incluidos plazos o presupuesto…"
+      },
+      "offer": {
+        "price": "Precio unitario",
+        "moq": "Pedido mínimo",
+        "leadTime": "Plazo de entrega",
+        "notes": "Su oferta"
+      },
+      "respond": {
+        "to": "Respondiendo a la solicitud {ref}",
+        "note": "Esto es lo que el comprador autorizó a publicar. Envíe su oferta y nuestro equipo la trasladará.",
+        "success": "Hemos recibido su oferta. Nuestro equipo la revisará y le contactará si el comprador quiere avanzar."
+      },
+      "errorRequired": "Complete los campos obligatorios marcados con *."
     },
     "metaTitle": "Petición de Oferta (RFQ)",
     "metaDesc": "Publica una solicitud de abastecimiento para productos de China y Asia. Los proveedores verificados responden con presupuestos, capacidades y contexto de cumplimiento."

@@ -1795,24 +1795,58 @@
   },
   "rfq": {
     "badge": "Buyer request",
-    "h1": "Post a sourcing request",
-    "lead": "Tell us what you are sourcing. We share it with verified suppliers and return quotes with capability and risk context.",
+    "h1": "Tell us what you need",
+    "lead": "Buying products, booking a factory audit or arranging an inspection — pick one and we will come back with scope and a quote.",
     "form": {
       "labels": {
         "firstName": "Your name",
         "company": "Company",
         "email": "Work email",
         "product": "Product",
-        "quantity": "Quantity",
-        "country": "Target country",
-        "message": "Specifications",
+        "quantity": "Quantity / scope",
+        "country": "Country / target market",
+        "message": "Specifications / requirements",
         "messageHint": "Materials, dimensions, certifications, target price…",
         "publicConsent": "Allow my request to be shown publicly to suppliers, with my contact details hidden",
-        "submit": "Post RFQ",
-        "submitting": "Posting…"
+        "submit": "Send request",
+        "submitting": "Sending…",
+        "requestType": "What do you need?",
+        "phone": "Phone / WhatsApp",
+        "optional": "optional",
+        "factoryName": "Factory / supplier name",
+        "factoryLocation": "Factory location (city, country)",
+        "auditType": "Audit type",
+        "auditTypeHint": "e.g. social compliance (BSCI / Sedex), quality, environmental, factory verification",
+        "preferredDate": "Preferred date",
+        "destinationPort": "Destination port",
+        "inspectionStandard": "Inspection level (AQL)"
       },
-      "success": "Your RFQ was received. Verified suppliers will be invited to quote.",
-      "error": "Something went wrong. Please try again or email us directly."
+      "success": "We received your request. Our team will review it and reply within one business day.",
+      "error": "Something went wrong. Please try again or email us directly.",
+      "types": {
+        "product": "Buying products",
+        "sourcing": "Finding suppliers",
+        "audit": "Factory audit / verification",
+        "inspection": "Inspection / QC",
+        "other": "Something else"
+      },
+      "hints": {
+        "audit": "Audit scope, required standard, factory size, preferred dates…",
+        "inspection": "Product, order quantity, AQL level, preferred inspection date…",
+        "other": "Describe what you need, including any deadline or budget…"
+      },
+      "offer": {
+        "price": "Unit price",
+        "moq": "MOQ",
+        "leadTime": "Lead time",
+        "notes": "Your offer"
+      },
+      "respond": {
+        "to": "Responding to request {ref}",
+        "note": "This is what the buyer chose to publish. Send your offer and our team will pass it on.",
+        "success": "Your offer was received. Our team will review it and contact you if the buyer wants to take it further."
+      },
+      "errorRequired": "Please fill in the required fields marked *."
     },
     "metaTitle": "Post a Request for Quotation (RFQ)",
     "metaDesc": "Post a sourcing request for products from China and Asia. Verified suppliers respond with quotes, capabilities and compliance context."

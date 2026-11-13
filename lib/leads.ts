@@ -37,7 +37,11 @@ export type LeadKind =
   /** migration 039：/careers 人才网络申请（审核员 / 顾问 / 项目人员）。
    *  ⚠️ 只代表「收到一份申请」—— 不等于通过审核、录用，也不构成平台账号。
    *     派单走 audits.auditor_name / auditor_email，与账号解耦。 */
-  | "auditor_application";
+  | "auditor_application"
+  /** migration 042：/suppliers 的「Respond to Request」—— 供应商对公开买家需求报价。
+   *  ⚠️ 只代表「收到一份报价」—— 不等于已选为供应商、不等于已核验、更不等于已成交。
+   *     与 supplier_application（入驻申请）严格分开：一个是对具体需求报价，一个是申请入驻。 */
+  | "supplier_quote";
 
 export const LEAD_KINDS: readonly LeadKind[] = [
   "buyer_lead",
@@ -45,6 +49,7 @@ export const LEAD_KINDS: readonly LeadKind[] = [
   "supplier_claim",
   "supplier_verification",
   "auditor_application",
+  "supplier_quote",
 ];
 
 // 短号字符集：去掉易混淆的 0/O/1/I（与 /api/rfq 的 RFQ-XXXXXX 完全一致）

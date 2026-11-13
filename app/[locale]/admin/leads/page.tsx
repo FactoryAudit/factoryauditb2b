@@ -62,6 +62,8 @@ export default async function AdminLeadsPage({ params }: Props) {
     supplier_verification: "verify",
     // migration 039：/careers 人才网络申请（审核员 / 顾问 / 项目人员）
     auditor_application: "auditor",
+    // migration 042：供应商对公开买家需求的报价（≠ 入驻申请）
+    supplier_quote: "quote",
   };
 
   const L = zh

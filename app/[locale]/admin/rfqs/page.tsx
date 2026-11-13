@@ -8,6 +8,7 @@ import RfqPublicToggle, {
   type RfqPublicToggleDict,
 } from "@/components/admin/RfqPublicToggle";
 import { isTestRfq } from "@/lib/adminBusiness";
+import { requestTypeLabel } from "@/lib/buyerRequest";
 
 // Admin · 询价单列表
 //
@@ -116,10 +117,33 @@ export default async function AdminRfqsPage({ params }: Props) {
                     )}
                   </td>
                   <td className="px-4 py-3">
+                    {/* migration 042：先看「要什么」再看「要什么产品」——
+                        否则验厂/验货需求会被当成一条买货询价误判 */}
+                    <div className="mb-1">
+                      <span className="rounded bg-[#f0ede5] px-1.5 py-0.5 text-[10px] font-semibold text-[#5c584f]">
+                        {requestTypeLabel(r.request_type)}
+                      </span>
+                    </div>
                     <div className="font-medium text-[#171717]">{r.product}</div>
                     {r.quantity && (
                       <div className="mt-0.5 text-xs text-[#8c8982]">{r.quantity}</div>
                     )}
+                    {(() => {
+                      const sd = (r.service_detail ?? {}) as Record<string, unknown>;
+                      const extra = [
+                        sd.factoryName,
+                        sd.factoryLocation,
+                        sd.auditType,
+                        sd.inspectionStandard,
+                        sd.destinationPort,
+                        sd.preferredDate,
+                      ]
+                        .filter((v): v is string => typeof v === "string" && Boolean(v))
+                        .join(" · ");
+                      return extra ? (
+                        <div className="mt-0.5 text-xs text-[#8c8982]">{extra}</div>
+                      ) : null;
+                    })()}
                     {r.message && (
                       <p className="mt-1 max-w-md whitespace-pre-wrap text-xs text-[#6d6b66]">
                         {r.message}
@@ -133,6 +157,9 @@ export default async function AdminRfqsPage({ params }: Props) {
                     >
                       {r.email}
                     </a>
+                    {r.phone && (
+                      <div className="mt-0.5 text-xs text-[#8c8982]">{r.phone}</div>
+                    )}
                   </td>
                   <td className="px-4 py-3 text-[#3f4650]">{r.country ?? "—"}</td>
                   <td className="px-4 py-3 text-xs">
