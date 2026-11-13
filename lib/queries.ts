@@ -672,6 +672,34 @@ export type PublicRfq = {
  * 安全红线不变：只 SELECT 公开白名单列，**绝不**返回 email/company/message/user_id/status/utm。
  * 新增的 industrial_cluster_slug 是公开元数据（集群详情页本就公开），不构成泄露。
  */
+/**
+ * 2026-11-13：公开采购公告的**有效期**判定。
+ *
+ * 为什么需要：`/suppliers` 的 Live Buyer Requests 里 13 条公告有 11 条已过截止日，
+ * 供应商点进去只能看到一条死标 —— "Live" 两个字就成了虚假宣传。
+ * 公告正文由 `scripts/_publish-procurement.mjs` 写入，固定带 `Deadline: YYYY-MM-DD`
+ * 一行；这里只解析这一行。解析不到（买家自行提交的 RFQ）一律视为「无截止日」。
+ *
+ * 判定：截止日当天 23:59:59 UTC 之前有效，之后过期。
+ */
+export function isPublicNoticeExpired(
+  message: string | null | undefined,
+  sourceName: string | null | undefined,
+  now = Date.now()
+): boolean {
+  // 只对「平台整理的公开公告」生效：买家自己发的 RFQ 没有 Deadline 行，
+  // 也不该因为我们解析不到日期就被藏起来。
+  if (!sourceName) return false;
+  const m = /Deadline:\s*(\d{4})-(\d{2})-(\d{2})/i.exec(message ?? "");
+  if (!m) return false;
+  const y = Number(m[1]);
+  const mo = Number(m[2]);
+  const d = Number(m[3]);
+  if (!(mo >= 1 && mo <= 12) || !(d >= 1 && d <= 31)) return false;
+  const end = Date.UTC(y, mo - 1, d, 23, 59, 59);
+  return Number.isFinite(end) && end < now;
+}
+
 export async function listPublicRfqs(
   limit = 5,
   opts?: { clusterSlug?: string }
@@ -681,15 +709,18 @@ export async function listPublicRfqs(
   const db = createAdminClient();
   if (!db) return [];
   try {
+    const take = Math.max(1, Math.min(limit, 20));
     let q = db
       .from("rfqs")
       .select(
-        "reference_id, product, quantity, target_market, industry_code, certifications_req, industrial_cluster_slug, source_name, source_url, created_at"
+        // message 只用于服务端解析 Deadline，**绝不进 DTO**
+        "reference_id, product, quantity, target_market, industry_code, certifications_req, industrial_cluster_slug, source_name, source_url, created_at, message"
       )
       .eq("is_public", true)
       .neq("status", "closed")
       .order("created_at", { ascending: false })
-      .limit(Math.max(1, Math.min(limit, 20)));
+      // 过期公告在内存里剔除，多取一些避免剔完不够数（表很小，最多 20 行）
+      .limit(Math.min(take * 4, 20));
     if (opts?.clusterSlug) {
       q = q.eq("industrial_cluster_slug", opts.clusterSlug);
     }
@@ -700,7 +731,16 @@ export async function listPublicRfqs(
       }
       return [];
     }
-    return ((data ?? []) as Array<Record<string, unknown>>).map((r) => ({
+    const rows = ((data ?? []) as Array<Record<string, unknown>>)
+      .filter(
+        (r) =>
+          !isPublicNoticeExpired(
+            typeof r.message === "string" ? r.message : null,
+            typeof r.source_name === "string" ? r.source_name : null
+          )
+      )
+      .slice(0, take);
+    return rows.map((r) => ({
       referenceId: String(r.reference_id ?? ""),
       product: String(r.product ?? ""),
       quantity: r.quantity == null ? null : String(r.quantity),
@@ -747,7 +787,7 @@ export async function getPublicRfqForResponse(
     const { data, error } = await db
       .from("rfqs")
       .select(
-        "reference_id, product, quantity, target_market, industry_code, certifications_req, message, created_at"
+        "reference_id, product, quantity, target_market, industry_code, certifications_req, source_name, message, created_at"
       )
       .eq("reference_id", ref)
       .eq("is_public", true)
@@ -763,6 +803,15 @@ export async function getPublicRfqForResponse(
     if (!data) return null;
 
     const r = data as Record<string, unknown>;
+    // 2026-11-13：过期公告等同「已关闭」—— 不给供应商一个早就截标的报价入口
+    if (
+      isPublicNoticeExpired(
+        typeof r.message === "string" ? r.message : null,
+        typeof r.source_name === "string" ? r.source_name : null
+      )
+    ) {
+      return null;
+    }
     return {
       referenceId: String(r.reference_id ?? ""),
       product: String(r.product ?? ""),
