@@ -220,7 +220,7 @@ export default async function TrustPage({ params }: Props) {
           只用于证明「团队是真的人、线下可见、核验不外包」；
           照片无法证明活动规模、场次、成交或客户数量，文案不涉及这些，也不暗示覆盖多个产业带。 */}
       <Section title={t.about.inPersonTitle}>
-        <div className="grid gap-6 md:grid-cols-[minmax(0,340px)_1fr] md:items-start">
+        <div className="grid gap-6 md:grid-cols-[minmax(0,320px)_1fr] md:items-center">
           <figure className="overflow-hidden rounded-lg border border-[#ebe8e1] bg-white">
             {/* 原生 img：与站点其它静态图一致，不引入 next/image 运行时 */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
