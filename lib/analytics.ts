@@ -53,6 +53,13 @@ export const ANALYTICS_EVENTS = {
   rfqCtaClick: "rfq_cta_click",
   /** /services Sourcing 卡片点击（sourcing 的落地页是 /rfq） */
   sourcingCtaClick: "sourcing_cta_click",
+  // ---- /trust 信任页（2026-11）：点击层，一律 *_cta_click，绝不计入转化桶 ----
+  /** 打开国家企业信用信息公示系统（自查运营主体） */
+  trustRegistryClick: "trust_registry_cta_click",
+  /** 打开标准尽职调查报告样张 */
+  trustSampleClick: "trust_sample_cta_click",
+  /** 信任页 → 询盘（scoped quote） */
+  trustRfqClick: "trust_rfq_cta_click",
   // ---- STEP-06：首页「What do you need?」四入口点击（CTA 点击层，不进转化桶）----
   // 与既有 *_cta_click 同口径；home_ 前缀用于区分首页来源，便于 GA4 分渠道看点击率。
   homeFindSuppliersClick: "home_find_suppliers_cta_click",

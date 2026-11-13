@@ -6,6 +6,8 @@ import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { pickZhCopy } from "@/lib/tw";
 import { ABOUT, OPERATOR, operatorEmail } from "@/lib/aboutContent";
+import { TP, CONTENT_REVIEWED, REGISTRY_URL } from "@/lib/trustPage";
+import { ANALYTICS_EVENTS } from "@/lib/analytics";
 import { COVERAGE_COUNTRIES } from "@/lib/coverage";
 import { STATIC_INDUSTRIES } from "@/lib/staticData";
 // CS-23：Trust Center 区块的互链件与合规邮箱（邮箱是标识符，不进 i18n 字典）
@@ -113,6 +115,13 @@ export default async function TrustPage({ params }: Props) {
         <p className="text-[#6d6b66] mt-4 text-lg max-w-3xl">
           {pickZhCopy(locale, ABOUT.hero.lead)}
         </p>
+        {/* 最近复核月份：常量写在 lib/trustPage.ts，不取 new Date()（自动取会让它永远是当月） */}
+        <p className="mt-4 flex flex-wrap items-center gap-x-2 text-sm text-[#6d6b66]">
+          <span className="font-semibold text-[#2b2b2b]">
+            {pickZhCopy(locale, TP.reviewedLabel)}:
+          </span>
+          <span>{pickZhCopy(locale, CONTENT_REVIEWED)}</span>
+        </p>
       </header>
 
       {/* 为什么做这件事 */}
@@ -211,6 +220,40 @@ export default async function TrustPage({ params }: Props) {
           ]}
         />
       </section>
+
+      {/* ══ 工作单 P0-2：How to verify us ══════════════════════════════════════
+          平台替别人做核验，自己必须也能被独立核验。
+          只写「能被第三方查到的四件事」：工商登记（gsxt.gov.cn 按中文全称检索）、
+          域名、TLS 证书、公开 WHOIS。不写任何未取得的认证。
+          SOC 2 / ISO 27001 只出现在「将来若取得」的条件句里（见 lib/trustPage.ts 铁律 2）。 */}
+      <Section title={pickZhCopy(locale, TP.verifyUs.title)}>
+        <p className="max-w-3xl leading-relaxed text-[#3f4650]">
+          {pickZhCopy(locale, TP.verifyUs.body)}
+        </p>
+        <a
+          href={REGISTRY_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-track={ANALYTICS_EVENTS.trustRegistryClick}
+          className="mt-4 inline-flex items-center gap-2 rounded-md border border-[#ddd9d0] bg-white px-4 py-2 text-sm font-semibold text-[#171717] hover:border-[#e07a49]"
+        >
+          {pickZhCopy(locale, TP.verifyUs.registryCta)}
+          <span aria-hidden="true">↗</span>
+        </a>
+        <p className="mt-5 max-w-3xl rounded-md border border-[#ebe8e1] bg-[#fbfaf7] p-4 text-sm leading-relaxed text-[#6d6b66]">
+          {pickZhCopy(locale, TP.verifyUs.future)}
+        </p>
+      </Section>
+
+      {/* ══ 工作单 P0-5：Who reviews your file ════════════════════════════════
+          🔴 平台目前没有在册审核员（auditor_application 5 条全为探针），实际由运营者本人核验。
+             所以这里写「运营者本人 / 不匿名池 / 开工前告知是谁 / 可要求视频通话」，
+             绝不写「lead auditor + QC engineer」这类组织架构 —— 那是虚构。 */}
+      <Section title={pickZhCopy(locale, TP.who.title)}>
+        <p className="max-w-3xl leading-relaxed text-[#3f4650]">
+          {pickZhCopy(locale, TP.who.body)}
+        </p>
+      </Section>
 
       {/* ── 以下三节自 /about 合并而来（阶段 1 任务 6：/about 308 → /trust）─────
           文案沿用 t.about.*（9 语齐备，无需新增字典键），可见内容不重写。 */}
@@ -414,6 +457,81 @@ export default async function TrustPage({ params }: Props) {
         </div>
       </Section>
 
+      {/* ══ 工作单 P0-1：Verification Levels（核验等级）════════════════════════
+          `t.trust.levelsTitle / levelsLead / levelDescs[5]` 是 9 语齐备的原文，
+          自 `eb35246` 重建 /trust 起就没再被渲染过（全仓零引用）。
+          这里只做「接线」：不新增文案、不改写、不加层级名称（名称一旦自造就会与
+          `suppliers.verification_level` 枚举对不上），用 01–05 序号呈现升序阶梯。 */}
+      <Section title={tc.levelsTitle} lead={tc.levelsLead}>
+        <ol className="grid list-none grid-cols-1 gap-2 p-0 sm:grid-cols-2">
+          {tc.levelDescs.map((desc, i) => (
+            <li
+              key={desc}
+              className="flex gap-3 rounded-md border border-[#ebe8e1] bg-white px-4 py-3"
+            >
+              <span
+                aria-hidden="true"
+                className="mt-0.5 shrink-0 text-[11px] font-extrabold tracking-[.12em] text-[#e07a49]"
+              >
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span className="text-sm leading-relaxed text-[#3f4650]">{desc}</span>
+            </li>
+          ))}
+        </ol>
+      </Section>
+
+      {/* ══ 工作单 P1-1：方法论入口 ════════════════════════════════════════════
+          🔴 不新建 /trust/methodology —— /methodology 已存在（8 维加权评分模型，
+             与「核验步骤」是两件事）。新建只会多一份互相稀释的薄页。 */}
+      <Section title={tc.methodTitle}>
+        <p className="max-w-3xl leading-relaxed text-[#3f4650]">{tc.methodLead}</p>
+        <Link
+          href={p("/methodology")}
+          className="muted-link mt-3 inline-block text-sm"
+        >
+          {tc.methodLink} <span aria-hidden="true">→</span>
+        </Link>
+      </Section>
+
+      {/* ══ 工作单 P0-6：Sample report ════════════════════════════════════════
+          🔴 不另做 sample-verification-report.pdf：站内已有 /standard-report
+             （13 章 / 8 维 / 证据分级，免费读、注册后下载样张），/sample-report 已 308 过去。
+             再做一份 PDF 会出现两套样张口径，反而更难维护。 */}
+      <Section title={pickZhCopy(locale, TP.sample.title)}>
+        <p className="max-w-3xl leading-relaxed text-[#3f4650]">
+          {pickZhCopy(locale, TP.sample.body)}
+        </p>
+        <Link
+          href={p("/standard-report")}
+          data-track={ANALYTICS_EVENTS.trustSampleClick}
+          className="btn btn-outline mt-4 inline-flex items-center gap-2"
+        >
+          {pickZhCopy(locale, TP.sample.cta)}
+          <span aria-hidden="true">→</span>
+        </Link>
+      </Section>
+
+      {/* ══ 工作单 P0-4：Mini-FAQ ═════════════════════════════════════════════
+          用原生 <details>/<summary>：无 JS 依赖，移动端可展开，也不引入新组件。
+          三个答案全部改写成站内既有口径（报告交付物 / 文件共享边界 / 负面发现），
+          没有新增任何事实性承诺。 */}
+      <Section title={pickZhCopy(locale, TP.faq.title)}>
+        <div className="space-y-3">
+          {pickZhCopy(locale, TP.faq.items).map((item) => (
+            <details
+              key={item.q}
+              className="rounded-lg border border-[#ebe8e1] bg-white p-4 open:border-[#d9a18a]"
+            >
+              <summary className="cursor-pointer list-none font-semibold text-[#171717] [&::-webkit-details-marker]:hidden">
+                {item.q}
+              </summary>
+              <p className="mt-2 text-sm leading-relaxed text-[#3f4650]">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </Section>
+
       {/* 运营主体 */}
       <Section title={pickZhCopy(locale, ABOUT.operated.title)}>
         <p className="text-[#3f4650] leading-relaxed">
@@ -455,22 +573,58 @@ export default async function TrustPage({ params }: Props) {
         <p className="mt-3 max-w-2xl text-[#dbeafe] leading-relaxed">
           {pickZhCopy(locale, ABOUT.cta.body)}
         </p>
+        {/* 工作单 P0-3：把「发什么、多久回、写不写清价格」讲明白。
+            按钮沿用 ABOUT.cta.buttons（/rfq 与 /custom-services），不新建表单 ——
+            /rfq 已有五类分流 + 蜜罐 + 外链降权，再建一套只会多一个灌水入口。 */}
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#c8d6e5]">
+          {pickZhCopy(locale, TP.ctaLine)}
+        </p>
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-          {ABOUT.cta.buttons.map((btn, i) => (
-            <Link
-              key={btn.href}
-              href={p(btn.href)}
-              className={
-                i === 0
-                  ? "inline-flex items-center justify-center rounded-md bg-white px-5 py-3 text-sm font-semibold text-[#171717] hover:bg-[#f5f3ee]"
-                  : "inline-flex items-center justify-center rounded-md border border-white/60 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
-              }
-            >
-              {pickZhCopy(locale, btn.label)}
-            </Link>
-          ))}
+          {/* 主按钮 = 工作单要的 scoped quote 入口，落到 /rfq（已有五类分流 + 反灌水）。
+              原有 /suppliers 与 /factory-audit/request 保留为次要按钮，/rfq 不重复出现。 */}
+          <Link
+            href={p("/rfq")}
+            data-track={ANALYTICS_EVENTS.trustRfqClick}
+            className="inline-flex items-center justify-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-semibold text-[#171717] hover:bg-[#f5f3ee]"
+          >
+            {pickZhCopy(locale, TP.ctaButton)}
+            <span aria-hidden="true">→</span>
+          </Link>
+          {ABOUT.cta.buttons
+            .filter((btn) => btn.href !== "/rfq")
+            .map((btn) => (
+              <Link
+                key={btn.href}
+                href={p(btn.href)}
+                className="inline-flex items-center justify-center rounded-md border border-white/60 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
+              >
+                {pickZhCopy(locale, btn.label)}
+              </Link>
+            ))}
         </div>
       </section>
+
+      {/* 页尾元信息（工作单 P1-3 的可核验版本）：复核月份 + 方法论 + 联系入口。
+          刻意不放「版本号 vX.Y」——版本号没有业务方确认就是自造。 */}
+      <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-[#ebe8e1] pt-5 text-xs text-[#6d6b66]">
+        <span>
+          {pickZhCopy(locale, TP.reviewedLabel)}: {pickZhCopy(locale, CONTENT_REVIEWED)}
+        </span>
+        <span className="flex flex-wrap items-center gap-x-5 gap-y-2">
+          <Link
+            href={p("/methodology")}
+            className="text-[#171717] underline decoration-[#e07a49] hover:decoration-2"
+          >
+            {tc.methodLink}
+          </Link>
+          <Link
+            href={p("/contact")}
+            className="text-[#171717] underline decoration-[#e07a49] hover:decoration-2"
+          >
+            {t.footer.contact}
+          </Link>
+        </span>
+      </div>
     </main>
   );
 }
