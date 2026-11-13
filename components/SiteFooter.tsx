@@ -3,6 +3,7 @@ import { localePath, type Locale } from "@/i18n/config";
 import SocialLinks from "@/components/SocialLinks";
 import { type ServiceMenuDict } from "@/lib/nav";
 import { operatorLine } from "@/lib/trust";
+import { contactConfigured, contactPhoneDisplay } from "@/lib/contact";
 
 export type FooterDict = {
   platform: string;
@@ -205,6 +206,18 @@ export default function SiteFooter({
         <div className="flex flex-col gap-5 pt-[22px] text-[11px] text-[#77736c] lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-[620px] leading-relaxed">{dict.copyright}</div>
           <div className="leading-relaxed lg:max-w-[420px] lg:text-right">
+            {/* 微信 / 手机号：与 WhatsApp 同号，跳到 /contact#wechat 扫码。
+                文案用品牌名（WeChat / WhatsApp），不需要本地化 —— 与同行 WhatsApp 按钮口径一致。 */}
+            {contactConfigured() && (
+              <p className="mb-2">
+                <Link
+                  href={`${p("/contact")}#wechat`}
+                  className="text-[12.5px] text-[#a9a59c] transition hover:text-white"
+                >
+                  WeChat / WhatsApp: {contactPhoneDisplay()}
+                </Link>
+              </p>
+            )}
             <SocialLinks className="mt-0 justify-start lg:justify-end" />
           </div>
         </div>
