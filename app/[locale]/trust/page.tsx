@@ -216,6 +216,31 @@ export default async function TrustPage({ params }: Props) {
         <p className="text-[#3f4650] leading-relaxed max-w-3xl">{t.about.storyBody}</p>
       </Section>
 
+      {/* 线下见面 —— 真实活动签到现场照片。
+          只用于证明「团队是真的人、线下可见、核验不外包」；
+          照片无法证明活动规模、场次、成交或客户数量，文案不涉及这些，也不暗示覆盖多个产业带。 */}
+      <Section title={t.about.inPersonTitle}>
+        <div className="grid gap-6 md:grid-cols-[minmax(0,340px)_1fr] md:items-start">
+          <figure className="overflow-hidden rounded-lg border border-[#ebe8e1] bg-white">
+            {/* 原生 img：与站点其它静态图一致，不引入 next/image 运行时 */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/trust/team-at-sourcing-event.jpg"
+              alt={t.about.inPersonCaption}
+              width={1200}
+              height={900}
+              loading="lazy"
+              decoding="async"
+              className="h-auto w-full"
+            />
+            <figcaption className="px-3 py-2 text-xs leading-relaxed text-[#6d6b66]">
+              {t.about.inPersonCaption}
+            </figcaption>
+          </figure>
+          <p className="max-w-3xl leading-relaxed text-[#3f4650]">{t.about.inPersonBody}</p>
+        </div>
+      </Section>
+
       {/* 数字 —— 原 /about 的 4 个数字里只有 2 项在仓库中找得到事实来源：
             "5 Countries" ✓（lib/coverage.ts）与 "Industry sectors" ✓（lib/staticData.ts）。
             另 2 项（"20+ Audit & compliance programs" 与 "< 1 day Typical response time"）
