@@ -61,6 +61,8 @@ export default function RfqRespondForm({
       moq: String(form.get("moq") || ""),
       lead_time: String(form.get("lead_time") || ""),
       message: String(form.get("message") || ""),
+      // 反灌水蜜罐（真人填不到，脚本会填满所有 input）
+      hp_website: String(form.get("hp_website") || ""),
     };
     try {
       const res = await fetch("/api/rfq/respond", {
@@ -174,6 +176,22 @@ export default function RfqRespondForm({
             rows={4}
             required
             placeholder={t.labels.message}
+          />
+        </div>
+
+        {/* ---- 反灌水蜜罐：离屏、aria-hidden、tabIndex=-1，只有脚本会填 ---- */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute h-0 w-0 overflow-hidden opacity-0"
+          style={{ left: "-9999px", top: 0 }}
+        >
+          <label htmlFor="rp-website">Website</label>
+          <input
+            id="rp-website"
+            name="hp_website"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
           />
         </div>
 

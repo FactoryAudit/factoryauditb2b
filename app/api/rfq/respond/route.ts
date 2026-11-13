@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabaseAdmin";
 import { checkRateLimit, clientIp, clamp } from "@/lib/rateLimit";
+import { isHoneypotFilled } from "@/lib/rfqSpam";
 import { insertLead } from "@/lib/leads";
 import { notifyAdminSupplierQuote, notifySupplierQuoteReceived } from "@/lib/notify";
 
@@ -56,6 +57,16 @@ export async function POST(req: Request) {
   }
 
   const reference = String(b.reference ?? "").trim().toUpperCase();
+  // ---- 2026-11-13：蜜罐。人看不见的隐藏域被填 = 脚本。
+  //   假成功：不落库、不发信、不报错，让爬虫以为成功而不重试。
+  //   放在任何 DB 查询之前，避免无意义的查询与写库。
+  if (isHoneypotFilled(b.hp_website)) {
+    console.warn("[api/rfq/respond] honeypot hit, dropped", { ip });
+    return NextResponse.json(
+      { ok: true, stored: false, referenceId: null },
+      { headers: NO_STORE }
+    );
+  }
   const company = clamp(b.company, 200);
   const contactName = clamp(b.contact_name, 80);
   const email = String(b.email ?? "").trim().toLowerCase();
