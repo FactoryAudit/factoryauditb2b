@@ -44,6 +44,12 @@ if (code === 0) {
   );
 }
 if (code === 0) {
+  // 扫描器探测拦截必须打在生成产物上（middleware matcher 排除了所有含 "." 的路径，
+  // /.env / *.php 根本不进 middleware）。脚本自带 40 条规则自测与锚点断言，
+  // 锚点对不上会非 0 退出，宁可停在发布前也不要静默发一份没护栏的产物。
+  code = await run(["scripts/patch-worker-scan-guard.mjs"], "PATCH SCAN GUARD");
+}
+if (code === 0) {
   code = await run(["scripts/cf-release.cjs"], "CF RELEASE");
 }
 appendFileSync(LOG, `\n===== ALL DONE code=${code} =====\n`, "utf8");
