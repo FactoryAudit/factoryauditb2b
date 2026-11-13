@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/supabaseServer";
 import { createAdminClient } from "@/lib/supabaseAdmin";
 import { checkRateLimit, clientIp, clamp } from "@/lib/rateLimit";
+import { isHoneypotFilled, screenRfqSubmission } from "@/lib/rfqSpam";
 import { notifyAdminNewRfq, notifyCustomerRfqReceived } from "@/lib/notify";
 import { STATIC_INDUSTRIES } from "@/lib/staticData";
 import { LOCALES } from "@/i18n/config";
@@ -150,6 +151,15 @@ export async function POST(req: Request) {
   }
 
   const email = String(b.email ?? "").trim().toLowerCase();
+  // ---- 2026-11-13：蜜罐。人看不见的隐藏域被填 = 脚本。
+  //   直接假成功：不落库、不发邮件、不报错，让爬虫以为提交成功而不重试。
+  if (isHoneypotFilled(b.hp_website)) {
+    console.warn("[api/rfq] honeypot hit, dropped", { ip });
+    return NextResponse.json(
+      { ok: true, stored: false, referenceId: null },
+      { headers: NO_STORE }
+    );
+  }
   const productInput = clamp(b.product, 300);
   const quantity = clamp(b.quantity, 120);
   const company = clamp(b.company, 200);
@@ -183,6 +193,15 @@ export async function POST(req: Request) {
   const effSourceType = sourceType ?? deriveSourceType(sourcePath);
   // ---- STEP 12 C2：公开与否**只**来自买家明确授权；缺省/未表态一律 false ----
   const publicConsent = normalizePublicConsent(b.is_public);
+  // ---- 2026-11-13：反灌水筛查 ----
+  //   只降权、不丢单：真实买家也会贴产品页/规格书链接，绝不能因此拒收。
+  //   命中信号 ⇒ 即使勾了「允许公开」也强制不公开，并把管理员邮件标为待核实。
+  const screening = screenRfqSubmission({
+    company,
+    product: productInput,
+    message,
+  });
+  const effectivePublic = publicConsent && !screening.suspicious;
 
   if (!email || email.length > 254 || !EMAIL_RE.test(email)) {
     return NextResponse.json(
@@ -252,7 +271,8 @@ export async function POST(req: Request) {
         source_type: effSourceType,
         industrial_cluster_slug: clusterSlug,
         // ---- STEP 12 C2：公开与否**只**来自买家明确授权，绝不自动公开 ----
-        is_public: publicConsent,
+        //     2026-11-13：再叠加反灌水筛查 —— 含外链的提交一律不公开
+        is_public: effectivePublic,
       });
       if (error) {
         console.error("[api/rfq] insert failed", error.message);
@@ -293,6 +313,9 @@ export async function POST(req: Request) {
       certificationsReq,
       targetMarket,
       incoterm,
+      // 2026-11-13：命中反灌水信号时，管理员邮件主题加 [RFQ!] 并把原因写进正文
+      suspicious: screening.suspicious,
+      screeningReason: screening.reason,
     }),
     notifyCustomerRfqReceived({
       email,

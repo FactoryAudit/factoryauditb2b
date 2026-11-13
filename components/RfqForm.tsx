@@ -155,6 +155,8 @@ export default function RfqForm({
       incoterm: context?.incoterm,
       source_path: srcParam,
       source_type: context?.sourceType,
+      // ---- 反灌水：蜜罐值（真人填不到，脚本会填满所有 input）----
+      hp_website: String(form.get("hp_website") || ""),
       // STEP 12 C2：公开与否**只**来自买家明确授权；缺省 false，绝不自动公开
       is_public: allowPublic,
     };
@@ -454,6 +456,23 @@ export default function RfqForm({
         />
         <span>{t.labels.publicConsent}</span>
       </label>
+
+      {/* ---- 反灌水蜜罐：不在视觉流里、Tab 也到不了，只有脚本会填 ----
+           aria-hidden + tabIndex=-1 保证读屏与键盘用户完全感知不到它 */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute h-0 w-0 overflow-hidden opacity-0"
+        style={{ left: "-9999px", top: 0 }}
+      >
+        <label htmlFor="rfq-website">Website</label>
+        <input
+          id="rfq-website"
+          name="hp_website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
 
       <button type="submit" disabled={status === "loading"} className="btn btn-accent w-full">
         {status === "loading" ? t.labels.submitting : t.labels.submit}

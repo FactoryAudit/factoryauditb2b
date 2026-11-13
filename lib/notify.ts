@@ -198,6 +198,10 @@ export async function notifyAdminNewRfq(rfq: {
   certificationsReq?: string[] | null;
   targetMarket?: string | null;
   incoterm?: string | null;
+  /** 2026-11-13：命中反灌水信号（正文带外链等）。true ⇒ 主题标 [RFQ!]、强制不公开。 */
+  suspicious?: boolean;
+  /** 命中信号的原因（人话），写进邮件正文供人工判断 */
+  screeningReason?: string | null;
 }): Promise<boolean> {
   const adminEmail = process.env.NOTIFY_ADMIN_EMAIL;
   if (!adminEmail) {
@@ -223,7 +227,8 @@ export async function notifyAdminNewRfq(rfq: {
   ].filter(Boolean);
 
   const subjectBits = [
-    `[RFQ] ${requestTypeLabel(rfq.requestType)}`,
+    // 命中反灌水信号时用 [RFQ!]：一眼能在收件箱里区分「正常询盘」与「待核实」
+    `[${rfq.suspicious ? "RFQ!" : "RFQ"}] ${requestTypeLabel(rfq.requestType)}`,
     rfq.country || "国家未填",
     rfq.company || rfq.contactName || "未署名",
     (rfq.product || "").slice(0, 50),
@@ -235,6 +240,13 @@ export async function notifyAdminNewRfq(rfq: {
     text: [
       `编号: ${rfq.referenceId}${rfq.stored ? "" : "  ⚠️ 未落库（仅邮件）"}`,
       `类型: ${requestTypeLabel(rfq.requestType)}`,
+      ...(rfq.suspicious
+        ? [
+            "",
+            `⚠️ 自动筛查：${rfq.screeningReason || "命中反灌水规则"}。`,
+            "   该条已强制不公开（不进 /suppliers 公开列表），请人工判断是否真实买家。",
+          ]
+        : []),
       "",
       `公司: ${rfq.company || "—"}`,
       `联系人: ${rfq.contactName || "—"}`,
