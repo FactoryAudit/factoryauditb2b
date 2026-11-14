@@ -22,7 +22,13 @@ const SECTION_FIELDS: Record<string, string[]> = {
   contact: ["contactName", "contactEmail", "contactPhone", "contactWhatsapp"],
 };
 
-const REQUIRED = new Set(["companyName", "factoryCountry", "mainProducts", "contactEmail"]);
+// 🔴 2026-11-14：factoryCity 加进必填。
+//    原因是它与发布闸门错位：lib/supplierCompleteness.ts 把「city 缺失」列为**阻断项**
+//    （missing city ⇒ publishable=false），但表单却允许留空 ⇒ 用户按提示填完带星号的四项
+//    提交后，档案 city 落 "unknown"、永远发不出去，后台只能人工补。
+//    2026-11 第一批 5 家正是这么卡住的（全是 city=unknown）。
+//    宁可让他在注册时多填一个城市，也不要事后由我们替他猜。
+const REQUIRED = new Set(["companyName", "factoryCountry", "factoryCity", "mainProducts", "contactEmail"]);
 
 export type SupplierNetworkFormDict = {
   sections: Record<string, string>;

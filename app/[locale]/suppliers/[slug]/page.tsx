@@ -765,25 +765,39 @@ export default async function SupplierProfilePage({
             没有一个能让买家向这家供应商询价 —— 采购商看完就断了动作。
             放在验厂 CTA 之前：询价是买家的第一自然动作，验厂是第二动作。 */}
         <section className="mt-8">
-          <SupplierInquiryForm slug={slug} supplierName={supplierDisplayName(locale, s)} locale={locale} />
+          <SupplierInquiryForm
+            slug={slug}
+            supplierName={supplierDisplayName(locale, s)}
+            locale={locale}
+            auditDeclined={s.auditAvailability === "no"}
+          />
         </section>
 
-        <section className="mt-8 card p-6">
-          <div className="flex flex-wrap items-start justify-between gap-5">
-            <div className="max-w-[560px]">
-              <h2 className="text-lg font-bold text-[#171717]">{t.suppliers.svcTitle}</h2>
-              <p className="mt-1 text-sm text-[#3f4650]">{t.suppliers.svcLead}</p>
-              <p className="mt-3 text-xs text-[#6d6b66]">{t.suppliers.svcNote}</p>
+        {/* 🔴 2026-11-14：供应商**明确拒绝**现场审核（auditAvailability === "no"）时，整块不渲染。
+            原先不看这个字段 —— 4 家已填 "no" 的供应商档案上仍然挂着「申请核验 →」，
+            买家点进去才发现对方不开放进厂，等于用平台的 CTA 卖给买家一个做不了的服务。
+            三态处理是刻意的：
+              "yes" / undefined(未询问)  ⇒ 正常显示（70 家广交会抓取档案都是未询问，不能被误杀）
+              "no"                       ⇒ 不显示，核验状态改由上方「核验等级 0/4 · 核验范围：无记录」呈现
+            零新增文案：不写「该供应商拒绝审核」这种需要翻译、又容易被理解成负面标签的句子。 */}
+        {s.auditAvailability !== "no" && (
+          <section className="mt-8 card p-6">
+            <div className="flex flex-wrap items-start justify-between gap-5">
+              <div className="max-w-[560px]">
+                <h2 className="text-lg font-bold text-[#171717]">{t.suppliers.svcTitle}</h2>
+                <p className="mt-1 text-sm text-[#3f4650]">{t.suppliers.svcLead}</p>
+                <p className="mt-3 text-xs text-[#6d6b66]">{t.suppliers.svcNote}</p>
+              </div>
+              <Link
+                href={`${p("/factory-audit/request")}?supplier=${encodeURIComponent(slug)}`}
+                className="btn btn-primary btn-sm shrink-0"
+                data-track="supplier_profile_request_verification"
+              >
+                {t.suppliers.svcCta} →
+              </Link>
             </div>
-            <Link
-              href={`${p("/factory-audit/request")}?supplier=${encodeURIComponent(slug)}`}
-              className="btn btn-primary btn-sm shrink-0"
-              data-track="supplier_profile_request_verification"
-            >
-              {t.suppliers.svcCta} →
-            </Link>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* Overview：公开字段 + 免费层锁区
             ── 2026-10-31 重构（「锁空气」修复）──────────────────────────────
@@ -798,10 +812,17 @@ export default async function SupplierProfilePage({
               ② 只有真有值的字段才上锁，锁态只画 🔒 + 占位点，不再嵌链接；
               ③ 整块只保留 1 处解锁入口，且**上移到表格之前**（用户滚过前就看到条件）；
               ④ 全部字段都为空时不出现任何解锁入口（不承诺没有的东西）。 */} 
-        <section className="mt-8">
-          <h2 className="text-xl font-bold text-[#171717] mb-3">{sp.overviewTitle}</h2>
+        {/* 🔴 2026-11-14：整块「有值才渲染」。
+            原先 6 个锁区字段全空时仍然渲染 section + 2 个基础格 + 6 个「—」，
+            实测这家（厦门翔龙）就是连续 6 个破折号 —— 比不显示更像残档，
+            而且和「无记录就不渲染」的 fairRecord 区块自相矛盾。
+            判定沿用 anyOverviewLocked（6 个锁区字段任一有值；presence 单独查库，
+            不依赖 visitor 档被裁掉的 s.*）。
+            企业类型 / 行业 不因此丢失：它们在「买家速览」里已各占一行。 */}
+        {anyOverviewLocked && (
+          <section className="mt-8">
+            <h2 className="text-xl font-bold text-[#171717] mb-3">{sp.overviewTitle}</h2>
 
-          {anyOverviewLocked && (
             <UnlockGate
               layer="free"
               variant="raw"
@@ -826,80 +847,80 @@ export default async function SupplierProfilePage({
             >
               {null}
             </UnlockGate>
-          )}
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <OverviewTile label={sp.businessTypeLabel}>{s.businessType?.trim() ? s.businessType : "—"}</OverviewTile>
-            <OverviewTile label={sp.industryLabel}>{industryName ?? "—"}</OverviewTile>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <OverviewTile label={sp.businessTypeLabel}>{s.businessType?.trim() ? s.businessType : "—"}</OverviewTile>
+              <OverviewTile label={sp.industryLabel}>{industryName ?? "—"}</OverviewTile>
 
-            {/* 员工规模（free 层）—— 有值才锁 */}
-            {hasEmployees ? (
-              <UnlockGate
-                layer="free"
-                variant="raw"
-                registerHref={registerHref}
-                membershipHref={p("/pricing#founding-buyer")}
-                locked={<OverviewTileLocked label={sp.employeesLabel} />}
-              >
-                <OverviewTile label={sp.employeesLabel}>
-                  <UnlockedValue slug={s.slug} locale={uiLocale} field="employees" />
-                </OverviewTile>
-              </UnlockGate>
-            ) : (
-              <OverviewTile label={sp.employeesLabel}>—</OverviewTile>
-            )}
-
-            {/* 出口市场（free 层）—— 有值才锁 */}
-            {hasExportMarkets ? (
-              <UnlockGate
-                layer="free"
-                variant="raw"
-                registerHref={registerHref}
-                membershipHref={p("/pricing#founding-buyer")}
-                locked={<OverviewTileLocked label={sp.exportMarketsLabel} />}
-              >
-                <OverviewTile label={sp.exportMarketsLabel}>
-                  <UnlockedValue slug={s.slug} locale={uiLocale} field="exportMarkets" />
-                </OverviewTile>
-              </UnlockGate>
-            ) : (
-              <OverviewTile label={sp.exportMarketsLabel}>—</OverviewTile>
-            )}
-
-            {/* CS-12：产能与出口年限（free 层）—— 同样「有值才锁」。
-                这些是工厂在入驻表单里自填的商业情报，不是工商登记事实 ⇒
-                不随页面直出，和 established / employees 同等对待。
-                🔑 空格子绝不上锁：池内这批广交会名录档案这四项基本全空，
-                   若照旧渲染锁头，用户解锁后 100% 看到「—」。 */}
-            {(
-              [
-                ["productionCapacity", sp.capacityProduction, hasProductionCapacity],
-                ["monthlyOutput", sp.capacityMonthly, hasMonthlyOutput],
-                ["factorySize", sp.capacityFactorySize, hasFactorySize],
-                ["exportSince", sp.capacityExportSince, hasExportSince],
-              ] as const
-            ).map(([field, label, has]) =>
-              has ? (
+              {/* 员工规模（free 层）—— 有值才锁 */}
+              {hasEmployees ? (
                 <UnlockGate
-                  key={field}
                   layer="free"
                   variant="raw"
                   registerHref={registerHref}
                   membershipHref={p("/pricing#founding-buyer")}
-                  locked={<OverviewTileLocked label={label} />}
+                  locked={<OverviewTileLocked label={sp.employeesLabel} />}
                 >
-                  <OverviewTile label={label}>
-                    <UnlockedValue slug={s.slug} locale={uiLocale} field={field} />
+                  <OverviewTile label={sp.employeesLabel}>
+                    <UnlockedValue slug={s.slug} locale={uiLocale} field="employees" />
                   </OverviewTile>
                 </UnlockGate>
               ) : (
-                <OverviewTile key={field} label={label}>
-                  —
-                </OverviewTile>
-              )
-            )}
-          </div>
-        </section>
+                <OverviewTile label={sp.employeesLabel}>—</OverviewTile>
+              )}
+
+              {/* 出口市场（free 层）—— 有值才锁 */}
+              {hasExportMarkets ? (
+                <UnlockGate
+                  layer="free"
+                  variant="raw"
+                  registerHref={registerHref}
+                  membershipHref={p("/pricing#founding-buyer")}
+                  locked={<OverviewTileLocked label={sp.exportMarketsLabel} />}
+                >
+                  <OverviewTile label={sp.exportMarketsLabel}>
+                    <UnlockedValue slug={s.slug} locale={uiLocale} field="exportMarkets" />
+                  </OverviewTile>
+                </UnlockGate>
+              ) : (
+                <OverviewTile label={sp.exportMarketsLabel}>—</OverviewTile>
+              )}
+
+              {/* CS-12：产能与出口年限（free 层）—— 同样「有值才锁」。
+                  这些是工厂在入驻表单里自填的商业情报，不是工商登记事实 ⇒
+                  不随页面直出，和 established / employees 同等对待。
+                  🔑 空格子绝不上锁：池内这批广交会名录档案这四项基本全空，
+                     若照旧渲染锁头，用户解锁后 100% 看到「—」。 */}
+              {(
+                [
+                  ["productionCapacity", sp.capacityProduction, hasProductionCapacity],
+                  ["monthlyOutput", sp.capacityMonthly, hasMonthlyOutput],
+                  ["factorySize", sp.capacityFactorySize, hasFactorySize],
+                  ["exportSince", sp.capacityExportSince, hasExportSince],
+                ] as const
+              ).map(([field, label, has]) =>
+                has ? (
+                  <UnlockGate
+                    key={field}
+                    layer="free"
+                    variant="raw"
+                    registerHref={registerHref}
+                    membershipHref={p("/pricing#founding-buyer")}
+                    locked={<OverviewTileLocked label={label} />}
+                  >
+                    <OverviewTile label={label}>
+                      <UnlockedValue slug={s.slug} locale={uiLocale} field={field} />
+                    </OverviewTile>
+                  </UnlockGate>
+                ) : (
+                  <OverviewTile key={field} label={label}>
+                    —
+                  </OverviewTile>
+                )
+              )}
+            </div>
+          </section>
+        )}
 
         {/* migration 037：广交会参展记录 —— 举办方官方名录给出的公开事实。
             每条 = 届次 + 期次 + 展馆 + 展位号，英文专有名词保持名录原样（不翻译、不改写）。

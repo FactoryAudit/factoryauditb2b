@@ -53,6 +53,19 @@ function parseList(s: string | undefined, max = 100): string[] {
     .slice(0, max);
 }
 
+/**
+ * 意愿类字段三态化：yes / no / null。
+ * 🔴 关键：只有明确提交 "no" 才落 "no"。
+ *    老表单、老数据、字段缺失一律 null —— 绝不把「没填」写成「拒绝」，
+ *    否则将来页面上会出现「该供应商不接受现场审核」这种凭空捏造的事实。
+ */
+function triState(s: string | undefined): "yes" | "no" | null {
+  const v = (s ?? "").trim().toLowerCase();
+  if (v === "yes") return "yes";
+  if (v === "no") return "no";
+  return null;
+}
+
 function toIntInRange(s: string | undefined, lo: number, hi: number): number | null {
   if (!s) return null;
   const n = Number(s);
@@ -120,6 +133,10 @@ type DraftInput = {
   contactWhatsapp?: string;
   contactVisibility?: string;
   certificatesJson?: string;
+  /** 「是否接受现场审核」——yes / no（表单未填为 no，服务端仍按三态存） */
+  auditAvailability?: string;
+  /** 「是否接受验货」——yes / no */
+  inspectionAvailability?: string;
   consentGiven: boolean;
   ip: string;
   ua: string | null;
@@ -173,6 +190,11 @@ async function createSupplierDraft(input: DraftInput): Promise<{ id: string; slu
     whatsapp: clamp(input.contactWhatsapp, 64),
     contact_visibility: visibility,
     self_reported_certificates: certs,
+    // 2026-11-14：这两项此前只进 leads.payload，suppliers 表没有列可落 ⇒
+    // 供应商明确勾了「不接受现场审核/验货」，档案页仍在向买家推销核验（信息丢失）。
+    // 三态存储：yes / no / null（老数据与未填都落 null，绝不把「没填」写成「拒绝」）。
+    audit_availability: triState(input.auditAvailability),
+    inspection_availability: triState(input.inspectionAvailability),
     is_published: false,
     profile_authorized: consentGiven,
     consent_version: SUPPLIER_CONSENT_VERSION,
@@ -367,6 +389,8 @@ export async function POST(req: NextRequest) {
       contactWhatsapp: f.contactWhatsapp,
       contactVisibility: f.contactVisibility,
       certificatesJson: f.certificatesJson,
+      auditAvailability: f.auditAvailability,
+      inspectionAvailability: f.inspectionAvailability,
       consentGiven: f.authorizeCompanyProfile === "yes",
       ip,
       ua,

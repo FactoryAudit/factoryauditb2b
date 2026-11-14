@@ -1283,7 +1283,11 @@ export function generateSupplierSnapshot(
  *    不把 free / paid 字段算进去（否则会暗示"档案很全"而实际游客看不到）。
  *    `profileScore` 不计入 —— 它不是档案属性，而是一个派生指标。
  */
-export const COVERAGE_ATTRIBUTE_IDS = [
+/**
+ * 资料类 12 项 —— 供应商可自行填报、或平台从官网与工商信息录入的属性。
+ * 「数据覆盖度」**只用这 12 项做分母**。
+ */
+export const COVERAGE_PROFILE_IDS = [
   "legalName",
   "englishName",
   "city",
@@ -1296,11 +1300,30 @@ export const COVERAGE_ATTRIBUTE_IDS = [
   "registrationNumber",
   "companyType",
   "selfReportedCertificates",
-  "verificationEvent",
-  "evidenceOnFile",
 ] as const;
 
-export function profileDataCoverage(data: SupplierSeoData): { filled: number; total: number } {
+/**
+ * 核验类 2 项 —— 只有跑完核验流程才可能为真，填表永远填不出来。
+ *
+ * 🔴 刻意**不计入**数据覆盖度分母。原先把这 2 项混进 14 项里，后果是：
+ *    任何刚注册的档案上限永远是 12/14，供应商读到「我该填的都填了还是不全」，
+ *    买家看到的是一个天生偏低的百分比 —— 等于用一个拿不到的指标惩罚未核验档案。
+ *    这两项的事实由相邻的「核验等级 0/4」「核验范围」两行单独呈现，不需要重复计入。
+ */
+export const COVERAGE_VERIFICATION_IDS = ["verificationEvent", "evidenceOnFile"] as const;
+
+/** 全量属性（含核验类），保留导出以兼容既有引用 */
+export const COVERAGE_ATTRIBUTE_IDS = [
+  ...COVERAGE_PROFILE_IDS,
+  ...COVERAGE_VERIFICATION_IDS,
+] as const;
+
+export function profileDataCoverage(data: SupplierSeoData): {
+  filled: number;
+  total: number;
+  verificationFilled: number;
+  verificationTotal: number;
+} {
   const flags: Record<(typeof COVERAGE_ATTRIBUTE_IDS)[number], boolean> = {
     legalName: Boolean(data.legalName?.trim()),
     englishName: Boolean(data.englishName?.trim()),
@@ -1317,9 +1340,11 @@ export function profileDataCoverage(data: SupplierSeoData): { filled: number; to
     verificationEvent: data.hasRealVerificationEvent && data.verificationLevel > 0,
     evidenceOnFile: (data.evidenceOnFile ?? 0) > 0,
   };
-  const total = COVERAGE_ATTRIBUTE_IDS.length;
-  const filled = COVERAGE_ATTRIBUTE_IDS.filter((k) => flags[k]).length;
-  return { filled, total };
+  const total = COVERAGE_PROFILE_IDS.length;
+  const filled = COVERAGE_PROFILE_IDS.filter((k) => flags[k]).length;
+  const verificationTotal = COVERAGE_VERIFICATION_IDS.length;
+  const verificationFilled = COVERAGE_VERIFICATION_IDS.filter((k) => flags[k]).length;
+  return { filled, total, verificationFilled, verificationTotal };
 }
 
 /** ISO → YYYY-MM-DD（无效值返回 undefined，绝不返回 "Invalid Date"） */

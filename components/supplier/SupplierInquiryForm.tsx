@@ -93,10 +93,20 @@ export default function SupplierInquiryForm({
   slug,
   supplierName,
   locale,
+  auditDeclined = false,
 }: {
   slug: string;
   supplierName: string;
   locale: string;
+  /**
+   * 供应商在入驻表单里**明确拒绝**现场审核（suppliers.audit_availability === "no"）。
+   *
+   * 🔴 为 true 时隐藏「I also want this supplier verified on site」勾选框。
+   *    理由：勾了也做不了 —— 现场核验需要供应商配合进厂。让买家勾一个注定落空的选项，
+   *    等于在询盘阶段就先欠他一次解释。
+   *    注意默认 false：未询问（70 家抓取档案、老表单）走默认值，继续显示。
+   */
+  auditDeclined?: boolean;
 }) {
   const L = locale === "es" ? ES : EN;
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
@@ -248,15 +258,17 @@ export default function SupplierInquiryForm({
           />
         </div>
 
-        <div className="sm:col-span-2 rounded-lg border border-[#ebe8e1] bg-[#fbfaf7] px-3 py-2.5">
-          <label className="flex items-start gap-2 text-sm text-[#171717] cursor-pointer">
-            <input type="checkbox" name="needsAudit" className="mt-1" />
-            <span>
-              {L.needsAudit}
-              <span className="block text-xs text-[#6d6b66] mt-0.5">{L.needsAuditHint}</span>
-            </span>
-          </label>
-        </div>
+        {!auditDeclined && (
+          <div className="sm:col-span-2 rounded-lg border border-[#ebe8e1] bg-[#fbfaf7] px-3 py-2.5">
+            <label className="flex items-start gap-2 text-sm text-[#171717] cursor-pointer">
+              <input type="checkbox" name="needsAudit" className="mt-1" />
+              <span>
+                {L.needsAudit}
+                <span className="block text-xs text-[#6d6b66] mt-0.5">{L.needsAuditHint}</span>
+              </span>
+            </label>
+          </div>
+        )}
 
         {status === "error" && (
           <p className="sm:col-span-2 text-sm text-[#b42318] bg-[#fef2f2] rounded px-3 py-2">{err}</p>

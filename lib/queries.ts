@@ -51,6 +51,18 @@ export type SupplierView = {
    */
   fairRecord?: string[];
   /**
+   * migration 045：供应商在入驻表单里对「是否接受现场审核」的回答。
+   *
+   * 🔴 三态语义，不可压成 boolean：
+   *      "yes"  明确接受
+   *      "no"   明确拒绝 —— 此时页面必须停止向买家推销现场核验（该服务做不了）
+   *      undefined 未询问（70 家广交会抓取档案、老表单都是这种）⇒ 按「未知」处理，
+   *                继续显示核验入口。**绝不把「没问过」当成「拒绝」**。
+   */
+  auditAvailability?: "yes" | "no";
+  /** migration 045：同一份表单里的「是否接受验货」，语义同上 */
+  inspectionAvailability?: "yes" | "no";
+  /**
    * STEP-04：产业带**展示名**（DB-first 解析 `cluster_slug` → `industrial_clusters.name`）。
    *
    * 🔴 解析规则（全部在 `lib/industrialClusters.ts` 的 resolvePublishedClusterNames 内，
@@ -257,6 +269,9 @@ type SupplierRow = {
   verification_status: string | null;
   /** CS-01 004_documents.sql 建，NOT NULL DEFAULT 'unverified' */
   verification_level: string;
+  /** migration 045：供应商入驻时对「是否接受审核/验货」的回答；NULL = 未询问（≠拒绝） */
+  audit_availability: string | null;
+  inspection_availability: string | null;
   /** 建档即有；由 suppliers_set_updated_at 触发器在每次 UPDATE 时刷新 */
   updated_at: string | null;
   risk_score: number | null;
@@ -343,6 +358,7 @@ const ROW_SELECT = `
   export_since, self_reported_certificates,
   address, website, registration_number,
   region, cluster, cluster_slug, cluster_tags, fair_record,
+  audit_availability, inspection_availability,
   supplier_evidence ( id, type, status, source, date, note, visibility )
 `;
 
@@ -457,6 +473,15 @@ function rowToView(row: SupplierRow): SupplierView {
     clusterTags: row.cluster_tags && row.cluster_tags.length > 0 ? row.cluster_tags : undefined,
     // migration 037：空数组与 NULL 一律收敛成 undefined —— 详情页只在有记录时渲染区块。
     fairRecord: row.fair_record && row.fair_record.length > 0 ? row.fair_record : undefined,
+    // migration 045：只有明确 yes / no 才透出；其他值（含 NULL）一律 undefined = 未询问。
+    auditAvailability:
+      row.audit_availability === "yes" || row.audit_availability === "no"
+        ? row.audit_availability
+        : undefined,
+    inspectionAvailability:
+      row.inspection_availability === "yes" || row.inspection_availability === "no"
+        ? row.inspection_availability
+        : undefined,
   };
 }
 
@@ -546,6 +571,18 @@ function redactViews(
       cluster: view.cluster,
       clusterSlug: view.clusterSlug,
       clusterName: view.clusterSlug ? clusterNames?.get(view.clusterSlug) : undefined,
+      // ---- migration 045：供应商意愿标识（yes / no / undefined）----
+      // 🔴 必须显式铺底：redactSupplier 是**白名单过滤**（visibleFieldsFor(tier)），
+      //    不进 PUBLIC_FIELDS 的字段在这一步会被整条丢掉 —— 2026-11-14 第一次
+      //    上线时就踩了这个坑：库里 audit_availability='no'，页面却仍渲染「申请核验」，
+      //    因为 rowToView 映射对了、却在 redactViews 重建对象时被过滤没了。
+      //
+      // 为什么走「铺底」而不进 PUBLIC_FIELDS：
+      //   它不是供应商内容，而是**行为开关** —— 决定页面要不要向买家提供现场核验入口。
+      //   三档位拿到同一个值，不构成任何付费内容泄漏；且改动 PUBLIC_FIELDS 会触发
+      //   cs05c / cs06a 的 `length === 21` 边界断言，属于无谓的权限口径变更。
+      auditAvailability: view.auditAvailability,
+      inspectionAvailability: view.inspectionAvailability,
       ...redacted,
     } as SupplierView;
   });
