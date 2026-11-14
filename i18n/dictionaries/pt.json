@@ -2633,9 +2633,10 @@
         "message": "Mensagem"
       },
       "labels": {
-        "companyName": "Nome da empresa *",
+        "companyName": "Nome da empresa",
         "englishName": "Nome Inglês",
         "companyType": "Tipo de empresa (fabricante, comercial, agente)",
+        "industryCode": "Setor principal",
         "registrationNumber": "Número de Registro Comercial:",
         "establishedYear": "Ano de criação",
         "website": "Sítios web",
@@ -2656,7 +2657,7 @@
         "contactWhatsapp": "WhatsApp",
         "auditAvailability": "Disponível para auditoria de fábrica",
         "inspectionAvailability": "Disponível para inspeção pré-embarque",
-        "authorizeCompanyProfile": "Autorizo a FactoryAuditB2B a apresentar o perfil da minha empresa a compradores internacionais *",
+        "authorizeCompanyProfile": "Autorizo a FactoryAuditB2B a apresentar o perfil da minha empresa a compradores internacionais",
         "authorizeCompanyProfileYes": "Sim, exibir perfil da empresa",
         "authorizeCompanyProfileNo": "Não, mantenha-o privado",
         "contactVisibility": "Visibilidade dos dados de contacto",
@@ -2683,6 +2684,9 @@
         "certHelpSuccess": "Obrigado. Recebemos o seu pedido e responderemos por e-mail.",
         "certHelpError": "Algo correu mal. Tente novamente ou escreva-nos diretamente."
       },
+      "intro": "Os campos marcados « Visível para compradores » aparecem no seu perfil público e nos resultados de pesquisa. Os campos marcados « Visível para membros » são mostrados apenas a compradores registados. O perfil só é publicado depois de o autorizar abaixo e de revermos os dados — quanto mais completo, mais fácil é para o comprador avaliar.",
+      "tagPublic": "Visível para compradores",
+      "tagMembers": "Visível para membros",
       "submit": "Submeter candidatura",
       "submitting": "A enviar…",
       "privacyNote": "Os dados pessoais de contacto são armazenados separadamente dos dados do perfil da empresa. A sua escolha de visibilidade de contacto acima é respeitada."

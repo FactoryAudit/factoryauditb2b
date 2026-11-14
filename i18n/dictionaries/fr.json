@@ -2633,13 +2633,14 @@
         "message": "Message"
       },
       "labels": {
-        "companyName": "Nom de la société *",
+        "companyName": "Nom de la société",
         "englishName": "Nom français",
         "companyType": "Type d'entreprise (fabricant, négociant, agent)",
+        "industryCode": "Secteur principal",
         "registrationNumber": "Numéro d&apos;inscription de l&apos;entreprise :",
         "establishedYear": "Année de création",
         "website": "Site web",
-        "factoryCountry": "Pays usine *",
+        "factoryCountry": "Pays usine",
         "factoryCity": "Ville de l'usine",
         "factoryAddress": "Adresse de l'usine",
         "employees": "Nombre d’employés",
@@ -2656,7 +2657,7 @@
         "contactWhatsapp": "WhatsApp",
         "auditAvailability": "Disponible pour audit d'usine",
         "inspectionAvailability": "Disponible pour l'inspection avant expédition",
-        "authorizeCompanyProfile": "J'autorise FactoryAuditB2B à afficher le profil de mon entreprise auprès d'acheteurs internationaux *",
+        "authorizeCompanyProfile": "J'autorise FactoryAuditB2B à afficher le profil de mon entreprise auprès d'acheteurs internationaux",
         "authorizeCompanyProfileYes": "Oui, afficher le profil de l'entreprise",
         "authorizeCompanyProfileNo": "Non, gardez-le privé",
         "contactVisibility": "Visibilité des coordonnées",
@@ -2683,6 +2684,9 @@
         "certHelpSuccess": "Merci. Nous avons reçu votre demande et vous répondrons par e-mail.",
         "certHelpError": "Une erreur est survenue. Réessayez ou écrivez-nous directement."
       },
+      "intro": "Les champs marqués « Visible par les acheteurs » apparaissent sur votre profil public et dans les résultats de recherche. Les champs marqués « Visible par les membres » ne sont montrés qu’aux acheteurs inscrits. Votre profil n’est publié qu’après votre autorisation ci-dessous et notre vérification — plus il est complet, plus il est facile pour un acheteur de vous évaluer.",
+      "tagPublic": "Visible par les acheteurs",
+      "tagMembers": "Visible par les membres",
       "submit": "Envoyer la candidature",
       "submitting": "Envoi en cours…",
       "privacyNote": "Les coordonnées personnelles sont stockées séparément des données de profil de l'entreprise. Votre choix de visibilité des contacts ci-dessus est respecté."

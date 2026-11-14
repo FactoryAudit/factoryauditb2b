@@ -12,6 +12,7 @@ const SECTION_FIELDS: Record<string, string[]> = {
     "companyName",
     "englishName",
     "companyType",
+    "industryCode",
     "registrationNumber",
     "establishedYear",
     "website",
@@ -28,7 +29,56 @@ const SECTION_FIELDS: Record<string, string[]> = {
 //    提交后，档案 city 落 "unknown"、永远发不出去，后台只能人工补。
 //    2026-11 第一批 5 家正是这么卡住的（全是 city=unknown）。
 //    宁可让他在注册时多填一个城市，也不要事后由我们替他猜。
-const REQUIRED = new Set(["companyName", "factoryCountry", "factoryCity", "mainProducts", "contactEmail"]);
+//
+// 🔴 2026-11-14：industryCode 同样加进必填，理由完全一致 ——
+//    `missing industry` 是第二个阻断项，而表单此前**没有这个字段**，
+//    于是每个走注册进来的草稿都缺 industry_code，只能人工补。
+//    它不是自由文本：选项来自 STATIC_INDUSTRIES（与 /industry、sitemap 同源），
+//    落库前服务端还会按白名单再过滤一次（见 app/api/supplier-register/route.ts）。
+const REQUIRED = new Set([
+  "companyName",
+  "factoryCountry",
+  "factoryCity",
+  "industryCode",
+  "mainProducts",
+  "contactEmail",
+]);
+
+/**
+ * 展示范围标签（2026-11-14）。
+ *
+ * 背景：供应商不知道「填了给谁看」，于是只填带星号的四五项，档案上线后一片空白。
+ * 这两组集合不是文案判断，而是**照抄 lib/suppliers.ts 的分层边界**：
+ *   PUBLIC_TAG  ⊆ PUBLIC_FIELDS —— 游客（含搜索引擎）直接可见
+ *   MEMBER_TAG  ⊆ FREE_FIELDS   —— 注册买家可见
+ *
+ * 🔴 严禁把某个字段凭直觉加进来。加错一行 = 页面对供应商作出的展示承诺是假的。
+ *    · 联系方式（contactName/contactEmail/contactPhone/contactWhatsapp）虽然在 FREE_FIELDS 里，
+ *      但它受下面 contactVisibility 三档控制 —— 选 private 就完全不展示，
+ *      所以**不给它打标签**，避免出现「标着买家可见、实际选了不展示」的矛盾。
+ *    · message 只是给我们看的说明，永不展示，也不打标签。
+ */
+const PUBLIC_TAG = new Set([
+  "companyName", // legalName
+  "englishName",
+  "companyType",
+  "industryCode",
+  "registrationNumber",
+  "website",
+  "factoryCountry", // country
+  "factoryCity", // city
+  "factoryAddress", // address
+  "mainProducts",
+]);
+const MEMBER_TAG = new Set([
+  "establishedYear", // established
+  "employees",
+  "factorySize",
+  "productionCapacity",
+  "monthlyOutput",
+  "exportMarkets",
+  "exportSince",
+]);
 
 export type SupplierNetworkFormDict = {
   sections: Record<string, string>;
@@ -36,12 +86,22 @@ export type SupplierNetworkFormDict = {
   submit: string;
   submitting: string;
   privacyNote: string;
+  /** 表单顶部说明：标签含义 + 为什么值得填全 */
+  intro: string;
+  /** 字段徽标：游客可见 */
+  tagPublic: string;
+  /** 字段徽标：注册买家可见 */
+  tagMembers: string;
 };
+
+/** 行业下拉选项（服务端算好标签后传入，客户端不 import server-only 的 taxonomy） */
+export type IndustryOption = { code: string; label: string };
 
 type Props = {
   t: SupplierNetworkFormDict;
   success: string;
   error: string;
+  industries: IndustryOption[];
 };
 
 const CONTACT_VISIBILITY = ["contactVisibilityPublic", "contactVisibilityPlatform", "contactVisibilityPrivate"] as const;
@@ -55,7 +115,7 @@ const MAX_CERTS = 10;
 type HelpFields = { wanted: string; company: string; contactName: string; contactEmail: string; note: string };
 const EMPTY_HELP: HelpFields = { wanted: "", company: "", contactName: "", contactEmail: "", note: "" };
 
-export default function SupplierRegistrationForm({ t, success, error }: Props) {
+export default function SupplierRegistrationForm({ t, success, error, industries }: Props) {
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
   const [errMsg, setErrMsg] = useState<string | null>(null);
   const [referenceId, setReferenceId] = useState<string | null>(null);
@@ -196,28 +256,58 @@ export default function SupplierRegistrationForm({ t, success, error }: Props) {
     );
   }
 
-  const renderField = (key: string) => (
-    <div key={key}>
-      <label className="text-sm font-medium">
-        {t.labels[key] || key}
-        {REQUIRED.has(key) && <span className="text-[#d4232a]">*</span>}
-      </label>
-      {key === "message" ? (
-        <textarea className="textarea" name={key} rows={4} />
-      ) : (
-        <input
-          className="input"
-          name={key}
-          type={key === "contactEmail" ? "email" : "text"}
-          required={REQUIRED.has(key)}
-        />
-      )}
-    </div>
-  );
+  const renderField = (key: string) => {
+    // 展示范围徽标：只有能被买家看到的字段才打标（见 PUBLIC_TAG / MEMBER_TAG 注释）
+    const tag = PUBLIC_TAG.has(key) ? { text: t.tagPublic, cls: "bg-[#e7f6ec] text-[#1f7a36]" }
+      : MEMBER_TAG.has(key) ? { text: t.tagMembers, cls: "bg-[#f2f0ea] text-[#6d6b66]" }
+      : null;
+    return (
+      <div key={key}>
+        <label className="text-sm font-medium">
+          {t.labels[key] || key}
+          {REQUIRED.has(key) && <span className="text-[#d4232a]">*</span>}
+          {tag && (
+            <span className={`ml-2 align-middle rounded px-1.5 py-0.5 text-[10px] font-medium ${tag.cls}`}>
+              {tag.text}
+            </span>
+          )}
+        </label>
+        {key === "industryCode" ? (
+          // 空选项 disabled：逼用户真选一个，而不是默认落在「第一个行业」上造成错配
+          <select className="input" name={key} required defaultValue="">
+            <option value="" disabled>
+              —
+            </option>
+            {industries.map((i) => (
+              <option key={i.code} value={i.code}>
+                {i.label}
+              </option>
+            ))}
+          </select>
+        ) : key === "message" ? (
+          <textarea className="textarea" name={key} rows={4} />
+        ) : (
+          <input
+            className="input"
+            name={key}
+            type={key === "contactEmail" ? "email" : "text"}
+            required={REQUIRED.has(key)}
+          />
+        )}
+      </div>
+    );
+  };
 
   return (
     <>
       <form onSubmit={handleSubmit} onFocus={handleFirstTouch} className="card p-6 max-w-3xl space-y-8">
+        {/* 展示范围说明（2026-11-14）：告诉供应商「你填的每一项会出现在哪里」。
+            此前表单只讲「我们会审核」，一个字都没说填完会展示给谁 —— 于是大部分申请人
+            只填带星号的四五项就提交，档案上线后买家看不到任何可判断的信息。 */}
+        <p className="rounded-lg border border-[#ebe8e1] bg-[#fbfaf7] px-4 py-3 text-sm text-[#3f4650]">
+          {t.intro}
+        </p>
+
         {Object.keys(t.sections).map((section) => {
           const keys = SECTION_FIELDS[section];
           return (

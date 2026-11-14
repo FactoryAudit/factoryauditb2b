@@ -5,6 +5,7 @@ import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config
 import { getDictionary } from "@/i18n/getDictionary";
 import { canonicalFor } from "@/i18n/hreflang";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import { industryDisplayName, listIndustries } from "@/lib/taxonomy";
 
 const PATH = "/join-supplier-network";
 type Props = { params: Promise<{ locale: string }> };
@@ -27,6 +28,20 @@ export default async function Page({ params }: Props) {
   const t = await getDictionary(locale);
   const s = t.supplierNetwork;
   const p = (href: string) => localePath(locale, href);
+
+  // 行业下拉选项：与 /industry、sitemap 共用 STATIC_INDUSTRIES 这一份事实来源。
+  // 🔴 为什么必须在注册表单里让供应商自己选：
+  //    suppliers.industry_code 是发布闸门的**阻断项**（lib/supplierCompleteness.ts
+  //    的 `missing industry`），但表单此前根本没有这个字段、createSupplierDraft 也不写它
+  //    ⇒ 每一个通过注册表单进来的草稿都发不出去，只能由管理员事后猜着补。
+  //    2026-11 第一批 5 家正是这么卡住的（industry_code 全空）。
+  //    让供应商自己选，既不猜也不伪造。
+  // 标签走 industryDisplayName：中文页取中文半边，其余语种取英文半边
+  // （行业名是专有名词，英文在 9 语站上均可读，与档案页行业格同一口径）。
+  const industries = (await listIndustries()).map((i) => ({
+    code: i.code,
+    label: industryDisplayName(locale, i.name),
+  }));
 
   const jsonLd = [
     {
@@ -157,7 +172,7 @@ export default async function Page({ params }: Props) {
       <section className="max-w-3xl mx-auto mb-12">
         <h2 className="text-2xl font-bold text-[#171717] mb-2 text-center">{s.formTitle}</h2>
         <p className="text-[#6d6b66] text-sm mb-6 text-center">{s.formLead}</p>
-        <SupplierRegistrationForm t={s.form} success={s.success} error={s.error} />
+        <SupplierRegistrationForm t={s.form} success={s.success} error={s.error} industries={industries} />
       </section>
 
       {/* Review process */}

@@ -7,6 +7,7 @@ import { checkRateLimit, clientIp, clamp } from "@/lib/rateLimit";
 import { createAdminClient } from "@/lib/supabaseAdmin";
 import { COVERAGE_COUNTRIES } from "@/lib/coverage";
 import { slugify } from "@/lib/supplierCreate";
+import { STATIC_INDUSTRIES } from "@/lib/staticData";
 
 // Supplier Network V1.0：供应商免费入驻表单统一入口。
 //
@@ -43,6 +44,14 @@ function maxFieldLength(key: string): number {
 //   IP/UA 服务端取，绝不信任客户端提交。
 // =============================================================================
 const SUPPLIER_CONSENT_VERSION = "1.0";
+
+/**
+ * 行业代码白名单（与 /industry、sitemap 共用 STATIC_INDUSTRIES）。
+ * 🔴 为什么要过滤而不是直接信任表单：industry_code 是**公开展示**字段（PUBLIC_FIELDS），
+ *    乱值会让档案页的行业格渲染出一个不存在的行业、或指向 404 的行业页。
+ *    不合法 ⇒ 落 null（草稿仍可保存，管理员在后台补），绝不落一个猜测值。
+ */
+const INDUSTRY_CODES = new Set<string>(STATIC_INDUSTRIES.map((i) => i.code));
 
 function parseList(s: string | undefined, max = 100): string[] {
   if (!s) return [];
@@ -114,6 +123,7 @@ type DraftInput = {
   companyName: string;
   englishName?: string;
   companyType?: string;
+  industryCode?: string;
   registrationNumber?: string;
   website?: string;
   factoryCountry?: string;
@@ -173,6 +183,11 @@ async function createSupplierDraft(input: DraftInput): Promise<{ id: string; slu
     city,
     english_name: clamp(input.englishName, 200),
     company_type: clamp(input.companyType, 120),
+    // 2026-11-14：industry_code 是发布闸门的阻断项（missing industry），
+    // 此前这一列从未被写入 ⇒ 每个注册草稿都发不出去，只能人工补。
+    industry_code: INDUSTRY_CODES.has((input.industryCode ?? "").trim())
+      ? (input.industryCode ?? "").trim()
+      : null,
     registration_number: clamp(input.registrationNumber, 120),
     website,
     address: clamp(input.factoryAddress, 400),
@@ -243,6 +258,7 @@ const KNOWN_FIELDS = [
   "companyName",
   "englishName",
   "companyType",
+  "industryCode",
   "registrationNumber",
   "establishedYear",
   "website",
@@ -370,6 +386,7 @@ export async function POST(req: NextRequest) {
       companyName: f.companyName,
       englishName: f.englishName,
       companyType: f.companyType,
+      industryCode: f.industryCode,
       registrationNumber: f.registrationNumber,
       website: f.website,
       factoryCountry: f.factoryCountry,

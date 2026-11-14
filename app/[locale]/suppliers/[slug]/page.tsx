@@ -477,6 +477,22 @@ export default async function SupplierProfilePage({
     hasFactorySize ||
     hasExportSince;
 
+  // 首屏公司类型（2026-11-14 修）：三级回退，全空则整段不渲染。
+  //   business_type 是结构化字段（Manufacturer / Trading company）⇒ 走九语字典；
+  //   company_type 是供应商自己填的原文 ⇒ 原样展示（不翻译、不再归类）；
+  //   两者都空 ⇒ 不显示，而不是套一个默认值。
+  // 🔴 此前这里是 `s.businessType === "Manufacturer" ? sp.manufacturer : sp.tradingCompany`
+  //    —— 二选一，空值全部落进 else。实测南京 MAXON 自述 "Wireless communication product
+  //    manufacturer"，线上首屏却渲染成 "Trading company"：把「没填」写成了「是贸易商」，
+  //    属事实错误。lib/seo/supplierSeo.ts:1018 早就是 `businessType || companyType` 口径，
+  //    首屏这一处是漏网的。
+  const displayType = (() => {
+    const bt = (s.businessType ?? "").trim();
+    if (bt === "Manufacturer") return sp.manufacturer;
+    if (bt === "Trading company") return sp.tradingCompany;
+    return bt || (s.companyType ?? "").trim();
+  })();
+
   return (
     // CS-05b：整页共享同一次 Guest 额度判定（避免"字段 A 解锁、字段 B 锁着"的撕裂）。
     // key={s.id} —— 客户端在两家供应商之间跳转时强制重新判定，不沿用上一家的结果。
@@ -502,8 +518,8 @@ export default async function SupplierProfilePage({
           <div className="md:col-span-2">
             <h1 className="text-3xl font-bold text-[#171717]">{supplierDisplayName(locale, s)}</h1>
             <p className="text-[#6d6b66] mt-1">
-              {s.city}, {s.countryName ?? s.country.toUpperCase()} ·{" "}
-              {s.businessType === "Manufacturer" ? sp.manufacturer : sp.tradingCompany}
+              {s.city}, {s.countryName ?? s.country.toUpperCase()}
+              {displayType ? ` · ${displayType}` : ""}
             </p>
             <p className="mt-3 text-sm text-[#3f4650]">{s.mainProducts.join(" · ")}</p>
 
