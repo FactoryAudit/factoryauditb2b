@@ -348,6 +348,11 @@ type SupplierRow = {
 //    PostgREST 把 `--` 当作 SQL 行注释，会把整段 select 连同后续列一起吞掉，
 //    导致 `failed to parse select parameter` —— 表现是构建期 SSG 全部查不到供应商、
 //    页面 200 但数据空（fail-open 回落静态常量），极难察觉。注释一律写在字符串外。
+// 🔴 2026-11-14：company_description 此前**既不在 ROW_SELECT、也没有渲染出口**。
+//    SupplierRow 类型有它、rowToView 映射它、PUBLIC/FREE 分层也登记了它，
+//    唯独这里是空 —— 查出来的 row 里根本没有这一列，映射结果恒为 undefined。
+//    现象：库里 40 家写了简介，详情页一个字也读不到（改页面也没用，因为源头没取）。
+//    这类「类型/映射/查询三处不同步」的字段，加列时必须以本字符串为准。
 const ROW_SELECT = `
   id, slug, legal_name, country_code, city, industry_code, business_type,
   established, employees, main_products, export_markets, verification_status,
@@ -357,6 +362,7 @@ const ROW_SELECT = `
   company_type, english_name, production_capacity, monthly_output, factory_size,
   export_since, self_reported_certificates,
   address, website, registration_number,
+  company_description,
   region, cluster, cluster_slug, cluster_tags, fair_record,
   audit_availability, inspection_availability,
   supplier_evidence ( id, type, status, source, date, note, visibility )

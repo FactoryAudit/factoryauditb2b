@@ -325,9 +325,9 @@ section("C. 未扩张 —— 本轮不得顺手改动的部分");
     String(MEMBERSHIP_PRICE_USD)
   );
   check(
-    "C4 字段分层：PUBLIC 22（R87 加 fairRecord）/ FREE 13 / PAID 恒为 4",
-    PUBLIC_FIELDS.length === 22 &&
-      FREE_FIELDS.length === 13 &&
+    "C4 字段分层：PUBLIC 23（R87 加 fairRecord + 2026-11-14 加 companyDescription）/ FREE 12 / PAID 恒为 4",
+    PUBLIC_FIELDS.length === 23 &&
+      FREE_FIELDS.length === 12 &&
       PAID_FIELDS.length === 4,
     `${PUBLIC_FIELDS.length}/${FREE_FIELDS.length}/${PAID_FIELDS.length}`
   );

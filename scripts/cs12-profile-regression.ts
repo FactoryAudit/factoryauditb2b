@@ -98,7 +98,7 @@ section("A. 公开边界（用户 2026-09-12 拍板：只放开工商登记级�
     CAPACITY_FIELDS.every((f) => freeFields.includes(f)) &&
       !CAPACITY_FIELDS.some((f) => publicFields.includes(f))
   );
-  check("A3 FREE 层 = 4 项 basic + 4 项产能 + 5 项 CS-16 联系/属地 = 13", freeFields.length === 13, String(freeFields.length));
+  check("A3 FREE 层 = 4 项 basic + 4 项产能 + 4 项 CS-16 联系/属地 = 12（简介已移入 PUBLIC）", freeFields.length === 12, String(freeFields.length));
   check(
     "A4 🔴 paid 层四项一字未动（付费墙未被本次扩容动过）",
     paidFields.length === 4 &&

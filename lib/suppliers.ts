@@ -63,6 +63,24 @@ export const PUBLIC_FIELDS = [
    *   非模板信息，页面沦为纯空壳。
    */
   "fairRecord",
+  /**
+   * 🔴 2026-11-14：公司简介从 FREE 层移到 PUBLIC 层。
+   *
+   * 原因（实测，不是偏好）：
+   *   详情页是 SSG，构建期只能拿到 visitor 档 ⇒ FREE 字段在公开 HTML 里恒为空，
+   *   且页面上也没有任何客户端解锁通道去取它。也就是说这个字段此前
+   *   **对所有人都不显示**（包括已注册买家、包括搜索引擎）—— 库里 40 家写了简介，
+   *   买家一个字看不到。字段存在但无出口 = 死数据。
+   *
+   * 边界判断：
+   *   · 这是企业自己写的自我介绍，与 mainProducts / companyType 同级，
+   *     不属 CS-12 点名的「产能 / 客户 / 价格」商业情报；
+   *   · FREE 层本身在 CS-05b 之后对所有访客开放（/api/suppliers/[slug]/unlocked
+   *     对 guest 也返回 basic 字段，额度只在 localStorage 记账）⇒ 放在 FREE 并没有
+   *     多一层保护，只是让它无法被服务端渲染。
+   *   · 公开页仍强制标注 Self-reported（见详情页 overview 区块），不冒充平台结论。
+   */
+  "companyDescription",
 ] as const;
 
 /** Free 层字段：注册后可见（基础工商信息 + 产能情报 + 联系方式） */
@@ -83,7 +101,8 @@ export const FREE_FIELDS = [
   "contactPerson",
   "contactEmail",
   "whatsapp",
-  "companyDescription",
+  // 🔴 2026-11-14：companyDescription 已移入 PUBLIC_FIELDS（原因见该处注释）。
+  //    FREE 层由 13 项回到 12 项。
 ] as const;
 
 /** Paid 层字段：Buyer Membership 可见（证据明细 / 认证明细 / 验货历史 / 风险明细）

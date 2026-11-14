@@ -145,11 +145,11 @@ const EN_LEAF = 3343;
     const sup = read("lib/suppliers.ts");
     const freeBlock = sup.slice(sup.indexOf("FREE_FIELDS = ["), sup.indexOf("] as const", sup.indexOf("FREE_FIELDS = [")));
     check("C1 FREE 含 province（CS-16 属地）", freeBlock.includes('"province"'));
-    check("C2 FREE 含 contactPerson/contactEmail/whatsapp/companyDescription（CS-16 联系）", ["contactPerson", "contactEmail", "whatsapp", "companyDescription"].every((f) => freeBlock.includes(`"${f}"`)));
+    check("C2 FREE 含 contactPerson/contactEmail/whatsapp（CS-16 联系）", ["contactPerson", "contactEmail", "whatsapp"].every((f) => freeBlock.includes(`"${f}"`)));
     check("C3 FREE 绝不含 certifications（防误放公开层）", !freeBlock.includes('"certifications"'));
     check("C4 PAID 含 certifications", sup.includes('"certifications"') && sup.includes("PAID_FIELDS = ["));
     const m = freeBlock.match(/"[a-zA-Z]+"/g);
-    check("C5 FREE 字段数 = 13（与 cs05c B4 同源）", m ? m.length === 13 : false, `实际 ${m ? m.length : 0}`);
+    check("C5 FREE 字段数 = 12（与 cs05c B4 同源）", m ? m.length === 12 : false, `实际 ${m ? m.length : 0}`);
   }
 
   // =========================================================================

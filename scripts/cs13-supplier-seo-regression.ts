@@ -477,8 +477,8 @@ async function main() {
     const end = arr.indexOf("] as const", start);
     return ((arr.slice(start, end).match(/"/g) || []).length / 2);
   };
-  check("F2a PUBLIC_FIELDS 仍 22 项（R87：21 + fairRecord）", countOf(supLib, "export const PUBLIC_FIELDS") === 22, String(countOf(supLib, "export const PUBLIC_FIELDS")));
-  check("F2b FREE_FIELDS 仍 13 项（4 basic + 4 产能 + 5 CS-16 联系/属地）", countOf(supLib, "export const FREE_FIELDS") === 13, String(countOf(supLib, "export const FREE_FIELDS")));
+  check("F2a PUBLIC_FIELDS 仍 23 项（R87 的 21 + fairRecord + 2026-11-14 companyDescription）", countOf(supLib, "export const PUBLIC_FIELDS") === 23, String(countOf(supLib, "export const PUBLIC_FIELDS")));
+  check("F2b FREE_FIELDS 仍 12 项（4 basic + 4 产能 + 4 CS-16 联系/属地）", countOf(supLib, "export const FREE_FIELDS") === 12, String(countOf(supLib, "export const FREE_FIELDS")));
   check("F2c PAID_FIELDS 仍 4 项", countOf(supLib, "export const PAID_FIELDS") === 4, String(countOf(supLib, "export const PAID_FIELDS")));
   const migDir = path.join(ROOT, "supabase/migrations");
   const migs = fs.readdirSync(migDir).filter((f) => f.endsWith(".sql"));

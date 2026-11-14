@@ -477,6 +477,22 @@ export default async function SupplierProfilePage({
     hasFactorySize ||
     hasExportSince;
 
+  // 🔴 2026-11-14：company_description 此前**没有任何渲染出口**。
+  //    SupplierView 里有这个字段、PUBLIC_FIELDS 里也有（公开层），
+  //    admin 后台能编辑，但公开页从头到尾没引用过它 —— 库里 34 家写了简介，
+  //    买家一个字都看不到（实测 MAXON 的简介在线上 HTML 里零命中）。
+  //    概览区块原先的渲染条件是 anyOverviewLocked（6 个锁区字段任一有值），
+  //    简介不参与判断 ⇒ 只有简介、没有产能数据的档案连区块都不出现。
+  //    现在把它并入同一区块：description 独立判断，锁区仍按 anyOverviewLocked。
+  //
+  // 🔴 2026-11-14 二次修正：不是所有写进 company_description 的都是「公司简介」。
+  //    导入环节曾把广交会名录字段拼成「第134届广交会展商（公开名录）。企业类型：…」
+  //    写进这一列（28 条），当 Company overview 摆出来既不成立、也与 fairRecord 重复。
+  //    这批已由 migration 051 清空；这里再留一道渲染闸，防后续导入再写进来。
+  const rawDescription = s.companyDescription?.trim() ?? "";
+  const isGeneratedNote = /^第\d+届广交会展商/.test(rawDescription);
+  const hasDescription = rawDescription.length > 0 && !isGeneratedNote;
+
   // 首屏公司类型（2026-11-14 修）：三级回退，全空则整段不渲染。
   //   business_type 是结构化字段（Manufacturer / Trading company）⇒ 走九语字典；
   //   company_type 是供应商自己填的原文 ⇒ 原样展示（不翻译、不再归类）；
@@ -578,38 +594,46 @@ export default async function SupplierProfilePage({
                 左栏文字天然短 ⇒ 不填东西就是一大片空白（买家第一眼的位置）。
                 · 只渲染 listPublicFactoryImages 筛过的图（APPROVED + PUBLIC）
                 · src 用 ?v=thumbnail：Workers Free 不能跑运行时图片转码
-                · 无照片整块不渲染，绝不出现空占位 */}
-            {factoryPhotos.length > 0 && (
-              <div className="mt-4">
-                <div className="text-xs uppercase tracking-wide text-[#6d6b66]">
-                  {tp.photosTitle}
-                </div>
-                <div className="mt-2 grid grid-cols-3 gap-2">
-                  {factoryPhotos.slice(0, 3).map((img) => (
-                    <div
-                      key={img.id}
-                      className="overflow-hidden rounded-lg border border-[#ebe8e1] bg-white"
-                    >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={`/api/supplier-image/${img.id}?v=thumbnail`}
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        className="h-24 w-full object-cover"
-                      />
-                    </div>
-                  ))}
-                </div>
-                {/* 左栏空间小，放不下每张的来源标签；若这批全是供应商上传，
-                    统一在下方标一次（平台拍摄的图会走完整画廊，那里逐张标）。 */}
-                {factoryPhotos.slice(0, 3).every((i) => i.source === "supplier") && (
-                  <div className="mt-1.5 text-[11px] leading-tight text-[#8c8982]">
-                    {sp.selfReported}
-                  </div>
-                )}
+                🔴 2026-11-14：改成「无图也出标题 + 一句空白说明」。
+                   原设计是「无照片整块不渲染，绝不出现空占位」，当时的假设是
+                   「没图是例外」。实测 75 家已发布档案里 74 家没照片（98.7%），
+                   例外变成了常态 —— 买家看到的是「这一块凭空消失」，
+                   分不清是供应商没传，还是页面挂了。现在明确写出来。 */}
+            <div className="mt-4">
+              <div className="text-xs uppercase tracking-wide text-[#6d6b66]">
+                {tp.photosTitle}
               </div>
-            )}
+              {factoryPhotos.length > 0 ? (
+                <>
+                  <div className="mt-2 grid grid-cols-3 gap-2">
+                    {factoryPhotos.slice(0, 3).map((img) => (
+                      <div
+                        key={img.id}
+                        className="overflow-hidden rounded-lg border border-[#ebe8e1] bg-white"
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={`/api/supplier-image/${img.id}?v=thumbnail`}
+                          alt=""
+                          loading="lazy"
+                          decoding="async"
+                          className="h-24 w-full object-cover"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  {/* 左栏空间小，放不下每张的来源标签；若这批全是供应商上传，
+                      统一在下方标一次（平台拍摄的图会走完整画廊，那里逐张标）。 */}
+                  {factoryPhotos.slice(0, 3).every((i) => i.source === "supplier") && (
+                    <div className="mt-1.5 text-[11px] leading-tight text-[#8c8982]">
+                      {sp.selfReported}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <p className="mt-1 text-xs leading-relaxed text-[#8c8982]">{tp.photosEmpty}</p>
+              )}
+            </div>
           </div>
 
           {/* 信任摘要卡（公开） */}
@@ -835,10 +859,24 @@ export default async function SupplierProfilePage({
             判定沿用 anyOverviewLocked（6 个锁区字段任一有值；presence 单独查库，
             不依赖 visitor 档被裁掉的 s.*）。
             企业类型 / 行业 不因此丢失：它们在「买家速览」里已各占一行。 */}
-        {anyOverviewLocked && (
+        {(anyOverviewLocked || hasDescription) && (
           <section className="mt-8">
             <h2 className="text-xl font-bold text-[#171717] mb-3">{sp.overviewTitle}</h2>
 
+            {/* 公司简介（公开层，来自供应商自述或企业官网）。
+                Self-reported 标签必须留着：这段文字未经平台核验，
+                和下面的锁区数据不是一回事，不能混成一个「平台结论」。 */}
+            {hasDescription && (
+              <div className="card p-6 mb-4">
+                <p className="text-[15px] leading-relaxed text-[#3f4650] whitespace-pre-line">
+                  {s.companyDescription}
+                </p>
+                <p className="mt-3 text-xs text-[#8c8982]">{sp.selfReported}</p>
+              </div>
+            )}
+
+            {anyOverviewLocked && (
+              <>
             <UnlockGate
               layer="free"
               variant="raw"
@@ -940,6 +978,8 @@ export default async function SupplierProfilePage({
                 )
               )}
             </div>
+              </>
+            )}
           </section>
         )}
 
