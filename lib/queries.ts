@@ -22,6 +22,8 @@ import { overallLevel } from "./riskEngine";
 import { publicVerificationLevel } from "./verification";
 import { isAdminConfigured } from "./supabaseAdmin";
 import { redactSupplier, redactEvidence, canAccess, type MembershipTier } from "./access";
+// 国名归一化：'CN' 与 'china' 并存，必须在展示前收口（详见 lib/countryNames.ts）
+import { countryDisplayName, normalizeCountryKey } from "./countryNames";
 
 // 与页面当前消费的供应商形状保持一致（mainProducts/exportMarkets/certifications 为数组）
 export type SupplierView = {
@@ -202,7 +204,12 @@ function useSupabase(): boolean {
 }
 
 function countryNameOf(code: string): string {
-  return STATIC_COUNTRIES.find((c) => c.code === code)?.name ?? code;
+  const staticHit = STATIC_COUNTRIES.find((c) => c.code === code)?.name;
+  if (staticHit) return staticHit;
+  // 非覆盖国（印尼 / 巴基斯坦 / 印度 / 美国…）与 ISO 码（'CN'）走统一归一化。
+  // 此前查不到就原样返回，页面因此把库里的原始码直接吐给买家：
+  // 线上实际出现过 "Surakarta, indonesia"、"Suqian, CN"、"Country CN"。
+  return countryDisplayName("en", code, "");
 }
 
 /** 证据里最新的核验日期。ISO 日期可直接按字符串比较。没有证据就返回 null。 */
@@ -222,7 +229,9 @@ function toView(s: (typeof STATIC_SUPPLIERS)[number]): SupplierView {
     legalName: s.legalName,
     // P1-16：英文名（企业对外使用名）。静态兜底数据不填 ⇒ 回退 legalName（缺值不编造）。
     englishName: s.englishName,
-    country: s.countryCode,
+    // country 归一化：库里 'CN'(抓取) 与 'china'(注册) 并存，不归一化会让目录页
+    // 出现两个代表中国的筛选 chip，且筛选时严格相等比较会漏掉另一套写法的全部档案。
+    country: normalizeCountryKey(s.countryCode),
     countryName: countryNameOf(s.countryCode),
     city: s.city,
     industryCode: s.industryCode,
@@ -428,7 +437,7 @@ function rowToView(row: SupplierRow): SupplierView {
     id: row.id,
     slug: row.slug,
     legalName: row.legal_name,
-    country: row.country_code,
+    country: normalizeCountryKey(row.country_code),
     countryName: countryNameOf(row.country_code),
     city: row.city,
     industryCode: row.industry_code ?? undefined,

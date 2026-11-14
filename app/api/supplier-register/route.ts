@@ -6,6 +6,7 @@ import { CERTIFICATION_REQUEST_FIELDS, CERTIFICATION_REQUEST_KIND } from "@/lib/
 import { checkRateLimit, clientIp, clamp } from "@/lib/rateLimit";
 import { createAdminClient } from "@/lib/supabaseAdmin";
 import { COVERAGE_COUNTRIES } from "@/lib/coverage";
+import { normalizeCountryKey, isKnownCountry } from "@/lib/countryNames";
 import { slugify } from "@/lib/supplierCreate";
 import { STATIC_INDUSTRIES } from "@/lib/staticData";
 
@@ -93,16 +94,36 @@ function toIntInRange(s: string | undefined, lo: number, hi: number): number | n
   return t;
 }
 
-// factoryCountry 是自由文本，归一化为 coverage country code；无法识别降级 "unknown"（草稿未发布，admin 发布前会修正）。
+// factoryCountry 是自由文本。归一化顺序：
+//   1) 服务覆盖国（COVERAGE_COUNTRIES）→ 直接用其 code
+//   2) 已收录国名表（含 ISO 码别名）→ 用规范 key（'IN' → 'india'）
+//   3) 未收录但形态合理的国名（≤30 字符、≤3 个词）→ 保留，展示层会首字母大写
+//   4) 其余降级 "unknown"（草稿未发布，admin 发布前修正）
+//
+// 🔴 第 3 步的词数/长度闸门不能去掉：曾有注册把整句
+//    "Not provided - trading supplier based in China" 填进国家，
+//    slugify 后存成 'not-provided-trading-supplier-based-in-china'，
+//    档案首屏直接渲染成 "Dalian, not-provided-trading-supplier-based-in-china"。
 async function resolveCountryCode(raw: string | undefined): Promise<string> {
   const v = (raw || "").trim();
   if (!v) return "unknown";
   const lower = v.toLowerCase();
+
   const hit = COVERAGE_COUNTRIES.find(
     (c) => c.code === lower || c.name.toLowerCase() === lower
   );
   if (hit) return hit.code;
-  return slugify(v) || "unknown";
+
+  // 平台不限中国：印度 / 印尼 / 巴基斯坦 / 美国…一律收（2026-11-14）
+  const known = normalizeCountryKey(v);
+  if (isKnownCountry(known)) return known;
+
+  const generated = slugify(v);
+  if (generated && generated.length <= 30 && generated.split("-").length <= 3) {
+    return generated;
+  }
+
+  return "unknown";
 }
 
 // 生成不重复的 slug（slug 唯一约束兜底）：base → base-2 → ... → base-<time36>

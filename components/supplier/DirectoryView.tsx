@@ -4,6 +4,8 @@ import VerificationBadge, {
   type TrustProfileDict,
 } from "./VerificationBadge";
 import { supplierDisplayName } from "@/lib/supplierDisplayName";
+import { countryDisplayName } from "@/lib/countryNames";
+import type { Locale } from "@/i18n/config";
 
 /**
  * stage1.8：/suppliers 目录的**展示层**（纯组件 —— 无 state、无 hooks、无副作用）。
@@ -273,7 +275,7 @@ export default function DirectoryView({
                   data-track={events.directoryFilter}
                   data-track-value={c}
                 >
-                  {c.toUpperCase()}
+                  {countryDisplayName(locale as Locale, c, c)}
                 </Link>
               ))}
             </div>
