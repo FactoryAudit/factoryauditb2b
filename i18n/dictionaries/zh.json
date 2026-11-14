@@ -2635,7 +2635,7 @@
       "labels": {
         "companyName": "公司名称",
         "englishName": "英文名称",
-        "companyType": "公司类型（工厂、贸易商、代理）",
+        "companyType": "公司类型（拥有自有工厂的制造商）",
         "industryCode": "所属行业",
         "registrationNumber": "营业执照注册号",
         "establishedYear": "成立年份",

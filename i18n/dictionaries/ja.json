@@ -2635,7 +2635,7 @@
       "labels": {
         "companyName": "会社名",
         "englishName": "英語名",
-        "companyType": "会社の種類(メーカー、取引、代理店)",
+        "companyType": "会社の種類（自社工場を持つメーカー）",
         "industryCode": "主な業界",
         "registrationNumber": "営業登録番号",
         "establishedYear": "設立年月日",

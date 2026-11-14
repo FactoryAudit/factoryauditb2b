@@ -2635,7 +2635,7 @@
       "labels": {
         "companyName": "Nome da empresa",
         "englishName": "Nome Inglês",
-        "companyType": "Tipo de empresa (fabricante, comercial, agente)",
+        "companyType": "Tipo de empresa (fabricante com fábrica própria)",
         "industryCode": "Setor principal",
         "registrationNumber": "Número de Registro Comercial:",
         "establishedYear": "Ano de criação",

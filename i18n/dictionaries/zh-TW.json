@@ -2635,7 +2635,7 @@
       "labels": {
         "companyName": "公司名稱",
         "englishName": "英文名稱",
-        "companyType": "公司類型（工廠、貿易商、代理）",
+        "companyType": "公司類型（擁有自有工廠的製造商）",
         "industryCode": "所屬行業",
         "registrationNumber": "營業執照註冊號",
         "establishedYear": "成立年份",

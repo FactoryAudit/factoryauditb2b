@@ -2635,7 +2635,7 @@
       "labels": {
         "companyName": "Name des Unternehmens",
         "englishName": "Englischer Name",
-        "companyType": "Art des Unternehmens (Hersteller, Handelsvertreter, Vertreter)",
+        "companyType": "Art des Unternehmens (Hersteller mit eigener Fabrik)",
         "industryCode": "Hauptbranche",
         "registrationNumber": "Handelsregisternummer",
         "establishedYear": "Festgestelltes Jahr",

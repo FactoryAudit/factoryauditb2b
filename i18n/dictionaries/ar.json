@@ -2635,7 +2635,7 @@
       "labels": {
         "companyName": "اسم الشركة",
         "englishName": "الاسم الانكليزي",
-        "companyType": "نوع الشركة (مصنع، تجارة، وكيل)",
+        "companyType": "نوع الشركة (مصنع يمتلك منشأة إنتاج خاصة)",
         "industryCode": "القطاع الرئيسي",
         "registrationNumber": "رقم تسجيل الأعمال",
         "establishedYear": "السنة المنشأة",

@@ -36,8 +36,15 @@ const SECTION_FIELDS: Record<string, string[]> = {
 //    于是每个走注册进来的草稿都缺 industry_code，只能人工补。
 //    它不是自由文本：选项来自 STATIC_INDUSTRIES（与 /industry、sitemap 同源），
 //    落库前服务端还会按白名单再过滤一次（见 app/api/supplier-register/route.ts）。
+// 🔴 2026-11-15：companyType 加进必填（用户口径「不要非工厂的」）。
+//    它不是发布闸门（lib/supplierCompleteness.ts 的 blockers 里没有），
+//    但它决定审核时能不能一眼判断申请人是不是工厂：留空就只能逐家翻官网。
+//    下一批 14 家里有 2 家非工厂混进来（自述「贸易商」、官网写「20+ partner factories」），
+//    都是类型字段没被当成筛选条件。
+//    同步改过九语 label：由「工厂、贸易商、代理」→「拥有自有工厂的制造商」。
 const REQUIRED = new Set([
   "companyName",
+  "companyType",
   "factoryCountry",
   "factoryCity",
   "industryCode",
