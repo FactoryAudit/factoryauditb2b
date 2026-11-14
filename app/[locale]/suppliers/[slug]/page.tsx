@@ -865,7 +865,12 @@ export default async function SupplierProfilePage({
             </UnlockGate>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <OverviewTile label={sp.businessTypeLabel}>{s.businessType?.trim() ? s.businessType : "—"}</OverviewTile>
+              {/* 2026-11-14：与首屏 displayType 统一口径。
+                  此前只看 business_type（结构化枚举），该列为空就直接渲染「—」——
+                  而供应商在表单里填的 company_type 原文（如「Manufacturer & Trading company」）
+                  在同一页的首屏已正常显示，概览格却显示破折号，同一事实两种呈现。
+                  三级回退：结构化 business_type → 供应商原文 company_type → 破折号。 */}
+              <OverviewTile label={sp.businessTypeLabel}>{displayType || "—"}</OverviewTile>
               <OverviewTile label={sp.industryLabel}>{industryName ?? "—"}</OverviewTile>
 
               {/* 员工规模（free 层）—— 有值才锁 */}
