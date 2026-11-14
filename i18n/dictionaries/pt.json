@@ -2682,7 +2682,8 @@
         "certHelpSubmit": "Enviar pedido",
         "certHelpSubmitting": "A enviar…",
         "certHelpSuccess": "Obrigado. Recebemos o seu pedido e responderemos por e-mail.",
-        "certHelpError": "Algo correu mal. Tente novamente ou escreva-nos diretamente."
+        "certHelpError": "Algo correu mal. Tente novamente ou escreva-nos diretamente.",
+        "companyDescription": "Descrição da empresa (produtos, clientes, produção)"
       },
       "intro": "Os campos marcados « Visível para compradores » aparecem no seu perfil público e nos resultados de pesquisa. Os campos marcados « Visível para membros » são mostrados apenas a compradores registados. O perfil só é publicado depois de o autorizar abaixo e de revermos os dados — quanto mais completo, mais fácil é para o comprador avaliar.",
       "tagPublic": "Visível para compradores",
@@ -2737,7 +2738,13 @@
     ],
     "contactTitle": "Precisa de ajuda?",
     "contactLead": "Dúvidas sobre adesão, verificação, auditorias ou inspeções? Deixe uma mensagem e a nossa equipa responderá no prazo de um dia útil.",
-    "contactCta": "Fale com a nossa equipa"
+    "contactCta": "Fale com a nossa equipa",
+    "nextTitle": "Próximo passo: complete o seu perfil",
+    "nextLead": "A sua candidatura está em análise. Os compradores avaliam o próprio perfil, por isso estes dados valem mais do que qualquer texto que escrevamos sobre si.",
+    "nextPhoto": "Carregue pelo menos 3 fotografias reais da fábrica: oficina, linha de produção, armazém. Fotos de telemóvel servem.",
+    "nextDesc": "Escreva 2 a 3 frases: o que fabrica, a quem fornece e como produz.",
+    "nextCapacity": "Acrescente a área da fábrica, o número de trabalhadores e os principais mercados de exportação.",
+    "nextCta": "Completar o meu perfil"
   },
   "sampleReport": {
     "metaTitle": "Amostra de Relatório de Due Diligence do Fornecedor — Veja o que você recebe",

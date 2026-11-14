@@ -16,6 +16,7 @@ const SECTION_FIELDS: Record<string, string[]> = {
     "registrationNumber",
     "establishedYear",
     "website",
+    "companyDescription",
   ],
   factory: ["factoryCountry", "factoryCity", "factoryAddress", "employees", "factorySize"],
   products: ["mainProducts", "productionCapacity", "monthlyOutput"],
@@ -69,6 +70,8 @@ const PUBLIC_TAG = new Set([
   "factoryCity", // city
   "factoryAddress", // address
   "mainProducts",
+  // 简介已从 FREE_FIELDS 移入 PUBLIC_FIELDS（2026-11-14），标的是一致的事实
+  "companyDescription",
 ]);
 const MEMBER_TAG = new Set([
   "establishedYear", // established
@@ -97,11 +100,26 @@ export type SupplierNetworkFormDict = {
 /** 行业下拉选项（服务端算好标签后传入，客户端不 import server-only 的 taxonomy） */
 export type IndustryOption = { code: string; label: string };
 
+/** 成功页「下一步」文案（字典 supplierNetwork.next*） */
+export type NextStepDict = {
+  title: string;
+  lead: string;
+  photo: string;
+  desc: string;
+  capacity: string;
+  cta: string;
+};
+
 type Props = {
   t: SupplierNetworkFormDict;
   success: string;
   error: string;
   industries: IndustryOption[];
+  /** 成功页下一步清单（页面级文案，不在 form 命名空间下） */
+  next: NextStepDict;
+  /** 当前语言段（如 zh / en）。成功页要在这里拼出带语言前缀的站内链接，
+   *  不能用固定 /supplier-dashboard —— 那会把中文用户扔回英文站。 */
+  locale: string;
 };
 
 const CONTACT_VISIBILITY = ["contactVisibilityPublic", "contactVisibilityPlatform", "contactVisibilityPrivate"] as const;
@@ -115,10 +133,14 @@ const MAX_CERTS = 10;
 type HelpFields = { wanted: string; company: string; contactName: string; contactEmail: string; note: string };
 const EMPTY_HELP: HelpFields = { wanted: "", company: "", contactName: "", contactEmail: "", note: "" };
 
-export default function SupplierRegistrationForm({ t, success, error, industries }: Props) {
+export default function SupplierRegistrationForm({ t, success, error, industries, next, locale }: Props) {
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
   const [errMsg, setErrMsg] = useState<string | null>(null);
   const [referenceId, setReferenceId] = useState<string | null>(null);
+  // 成功页的下一步链接需要这两个值：supplierId 用于精确指定档案，email 用于归属兜底。
+  // 提交成功后表单会 reset，所以必须在 await 之前把值留下来。
+  const [contactEmail, setContactEmail] = useState<string>("");
+  const [draftSupplierId, setDraftSupplierId] = useState<string>("");
   // 结构化证书行（至少 1 行；行内容可全空，提交时自动过滤）
   const [certs, setCerts] = useState<CertRow[]>([{ ...EMPTY_CERT }]);
   // 认证辅导需求弹窗
@@ -203,9 +225,13 @@ export default function SupplierRegistrationForm({ t, success, error, industries
         // CS-02D：优先展示落库短号 LEAD-XXXXXX（供应商可直接拿它问进度），
         // 落库失败时接口没有 referenceId，退回旧键 supplierId（UUID）保持 UX 不空窗。
         setStatus("ok");
-        setReferenceId(String(data.referenceId || data.supplierId || ""));
-        formEl.reset();
         setCerts([{ ...EMPTY_CERT }]);
+        setReferenceId(String(data.referenceId || data.supplierId || ""));
+        // 先留住跳转所需的值，再 reset 表单
+        setContactEmail(String(fields.contactEmail || "").trim());
+        // draftId 是 suppliers 行的真实主键；supplierId 为兜底（老接口可能只回它）
+        setDraftSupplierId(String(data.draftId || data.supplierId || ""));
+        formEl.reset();
         return;
       }
       setStatus("error");
@@ -244,13 +270,52 @@ export default function SupplierRegistrationForm({ t, success, error, industries
     }
   }
 
+  // 提交成功 —— 不再只是「我们收到了」。
+  // 2026-11-14 审计发现：73 家已发布档案里照片只有 1 家、真实简介 11 条。
+  // 用户在提交那一刻的意愿最强，错过这个时刻，之后再喊「来补资料」基本没人回来。
+  // 所以成功态直接给出三条下一步 + 一个直达自评页的入口（带归属参数，无需登录）。
   if (status === "ok") {
+    const qs = new URLSearchParams();
+    if (draftSupplierId) qs.set("supplier", draftSupplierId);
+    if (contactEmail) qs.set("email", contactEmail);
+    const suffix = qs.toString() ? `?${qs.toString()}` : "";
+    const profileHref = `/${locale}/supplier-assessment${suffix}`;
+    const steps = [next.photo, next.desc, next.capacity].filter(Boolean);
+
     return (
-      <div className="card p-6 text-center bg-[#f0fdf4]">
-        <div className="text-2xl mb-2">✓</div>
-        <p className="font-semibold text-[#1f7a36]">{success}</p>
-        {referenceId && (
-          <p className="text-xs text-[#6d6b66] mt-2 break-all">Reference: {referenceId}</p>
+      <div className="card p-6 max-w-3xl space-y-6">
+        <div className="rounded-lg border border-[#d7f0dd] bg-[#f0fdf4] p-5 text-center">
+          <div className="text-2xl mb-2">✓</div>
+          <p className="font-semibold text-[#1f7a36]">{success}</p>
+          {referenceId && (
+            <p className="text-xs text-[#6d6b66] mt-2 break-all">Reference: {referenceId}</p>
+          )}
+        </div>
+
+        <div>
+          <h2 className="text-xl font-bold text-[#171717]">{next.title}</h2>
+          <p className="text-sm text-[#3f4650] mt-2 leading-relaxed">{next.lead}</p>
+          {steps.length > 0 && (
+            <ul className="mt-4 space-y-3">
+              {steps.map((line, i) => (
+                <li key={i} className="flex gap-3 text-sm text-[#2b2b2b] leading-relaxed">
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#171717] text-[11px] font-bold text-white">
+                    {i + 1}
+                  </span>
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {/* 没有邮箱就不给按钮：归属裁决要求邮箱，缺了只会把用户送到一张「请登录」的墙 */}
+        {contactEmail && (
+          <div>
+            <a className="btn-primary inline-block px-6 py-3" href={profileHref}>
+              {next.cta}
+            </a>
+          </div>
         )}
       </div>
     );
@@ -262,7 +327,7 @@ export default function SupplierRegistrationForm({ t, success, error, industries
       : MEMBER_TAG.has(key) ? { text: t.tagMembers, cls: "bg-[#f2f0ea] text-[#6d6b66]" }
       : null;
     return (
-      <div key={key}>
+      <div key={key} className={key === "companyDescription" ? "md:col-span-2" : undefined}>
         <label className="text-sm font-medium">
           {t.labels[key] || key}
           {REQUIRED.has(key) && <span className="text-[#d4232a]">*</span>}
@@ -286,6 +351,9 @@ export default function SupplierRegistrationForm({ t, success, error, industries
           </select>
         ) : key === "message" ? (
           <textarea className="textarea" name={key} rows={4} />
+        ) : key === "companyDescription" ? (
+          // 上限与服务端 clamp 一致（1200），避免用户敲了长文被静默截断
+          <textarea className="textarea" name={key} rows={4} maxLength={1200} />
         ) : (
           <input
             className="input"

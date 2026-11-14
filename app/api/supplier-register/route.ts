@@ -31,7 +31,16 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const LONG_TEXT_FIELDS = new Set<string>(["message", "certificates", "certificatesJson"]);
 const MEDIUM_TEXT_FIELDS = new Set<string>(["certHelpWanted", "certHelpNote"]);
 
+/**
+ * 公司简介长度上限。
+ * 🔴 三处必须一致：表单 textarea 的 maxLength、这里、createSupplierDraft 的 clamp。
+ *    此前默认上限是 300（自由文本没单独声明就被截），一段两百来字的简介会被**静默截断**，
+ *    用户看不到任何提示 —— 与「字段有类型没查询」同类的静默丢失。
+ */
+const COMPANY_DESCRIPTION_MAX = 1200;
+
 function maxFieldLength(key: string): number {
+  if (key === "companyDescription") return COMPANY_DESCRIPTION_MAX;
   if (LONG_TEXT_FIELDS.has(key)) return 5000;
   if (MEDIUM_TEXT_FIELDS.has(key)) return 500;
   if (key.includes("Address")) return 500;
@@ -133,6 +142,10 @@ type DraftInput = {
   factorySize?: string;
   establishedYear?: string;
   mainProducts?: string;
+  /** 2026-11-14：注册时即收公司简介，直接落 company_description。
+   *  此前这一列只能靠人工事后补，审计实测 73 家已发布档案里只有 11 条真实简介，
+   *  而它是档案页唯一能回答「这家厂到底做什么」的段落。 */
+  companyDescription?: string;
   productionCapacity?: string;
   monthlyOutput?: string;
   exportMarkets?: string;
@@ -198,6 +211,7 @@ async function createSupplierDraft(input: DraftInput): Promise<{ id: string; slu
     established: toIntInRange(input.establishedYear, 1800, 2100),
     export_since: toIntInRange(input.exportSince, 1800, 2100),
     main_products: parseList(input.mainProducts),
+    company_description: clamp(input.companyDescription, COMPANY_DESCRIPTION_MAX),
     export_markets: parseList(input.exportMarkets),
     contact_person: clamp(input.contactName, 120),
     contact_email: contactEmail,
@@ -268,6 +282,7 @@ const KNOWN_FIELDS = [
   "employees",
   "factorySize",
   "mainProducts",
+  "companyDescription",
   "productionCapacity",
   "monthlyOutput",
   "exportMarkets",
@@ -396,6 +411,7 @@ export async function POST(req: NextRequest) {
       factorySize: f.factorySize,
       establishedYear: f.establishedYear,
       mainProducts: f.mainProducts,
+      companyDescription: f.companyDescription,
       productionCapacity: f.productionCapacity,
       monthlyOutput: f.monthlyOutput,
       exportMarkets: f.exportMarkets,
@@ -454,7 +470,11 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       ok: true,
-      supplierId: id,
+      // 🔴 必须是 suppliers 行的真实主键。此前这里返回的是上面 `crypto.randomUUID()`
+      //    临时生成、不指向任何行的 id —— 客户端拿它拼 /supplier-assessment?supplier=
+      //    会在 lib/supplierAccess 里撞 ownership_mismatch 403（声明 ≠ 邮箱裁决结果）。
+      //    注册成功页的「去完善档案」按钮正是靠这个字段，必须真实。
+      supplierId: draft?.id ?? id,
       referenceId,
       stored: saved.stored,
       draftSlug: draft?.slug ?? null,

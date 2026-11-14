@@ -2682,7 +2682,8 @@
         "certHelpSubmit": "Enviar solicitud",
         "certHelpSubmitting": "Enviando…",
         "certHelpSuccess": "Gracias. Hemos recibido tu solicitud y te contactaremos por correo.",
-        "certHelpError": "Algo salió mal. Inténtalo de nuevo o escríbenos directamente."
+        "certHelpError": "Algo salió mal. Inténtalo de nuevo o escríbenos directamente.",
+        "companyDescription": "Descripción de la empresa (productos, clientes, producción)"
       },
       "intro": "Los campos marcados «Los compradores lo ven» aparecen en tu perfil público y en los resultados de búsqueda. Los campos marcados «Los miembros lo ven» solo se muestran a compradores registrados. Tu perfil no se publica hasta que lo autorices abajo y hayamos revisado los datos: cuanto más completo esté, más fácil será para un comprador evaluarte.",
       "tagPublic": "Los compradores lo ven",
@@ -2737,7 +2738,13 @@
     ],
     "contactTitle": "¿Necesita ayuda?",
     "contactLead": "¿Tiene preguntas sobre la incorporación, la verificación, las auditorías o las inspecciones? Deja un mensaje y nuestro equipo te responderá en el plazo de un día hábil.",
-    "contactCta": "Hable con nuestro equipo:"
+    "contactCta": "Hable con nuestro equipo:",
+    "nextTitle": "Siguiente paso: complete su perfil",
+    "nextLead": "Su solicitud está en revisión. Los compradores juzgan el perfil en sí, así que estos datos importan más que cualquier texto que escribamos sobre usted.",
+    "nextPhoto": "Suba al menos 3 fotos reales de la fábrica: taller, línea de producción, almacén. Sirven fotos de móvil.",
+    "nextDesc": "Escriba 2–3 frases: qué fabrica, a quién suministra y cómo produce.",
+    "nextCapacity": "Añada la superficie de la fábrica, el número de empleados y los principales mercados de exportación.",
+    "nextCta": "Completar mi perfil"
   },
   "sampleReport": {
     "metaTitle": "Ejemplo de informe de diligencia debida del proveedor: vea lo que obtiene",

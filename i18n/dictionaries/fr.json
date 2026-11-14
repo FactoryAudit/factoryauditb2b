@@ -2682,7 +2682,8 @@
         "certHelpSubmit": "Envoyer la demande",
         "certHelpSubmitting": "Envoi…",
         "certHelpSuccess": "Merci. Nous avons reçu votre demande et vous répondrons par e-mail.",
-        "certHelpError": "Une erreur est survenue. Réessayez ou écrivez-nous directement."
+        "certHelpError": "Une erreur est survenue. Réessayez ou écrivez-nous directement.",
+        "companyDescription": "Description de l'entreprise (produits, clients, production)"
       },
       "intro": "Les champs marqués « Visible par les acheteurs » apparaissent sur votre profil public et dans les résultats de recherche. Les champs marqués « Visible par les membres » ne sont montrés qu’aux acheteurs inscrits. Votre profil n’est publié qu’après votre autorisation ci-dessous et notre vérification — plus il est complet, plus il est facile pour un acheteur de vous évaluer.",
       "tagPublic": "Visible par les acheteurs",
@@ -2737,7 +2738,13 @@
     ],
     "contactTitle": "Besoin d'aide ?&#10;",
     "contactLead": "Des questions sur l'adhésion, la vérification, les audits ou les inspections ? Laissez un message et notre équipe vous répondra dans un délai d'un jour ouvrable.",
-    "contactCta": "Nous contacter"
+    "contactCta": "Nous contacter",
+    "nextTitle": "Étape suivante : compléter votre profil",
+    "nextLead": "Votre demande est en cours d'examen. Les acheteurs jugent le profil lui-même : ces informations comptent plus que tout texte que nous écririons sur vous.",
+    "nextPhoto": "Téléversez au moins 3 photos réelles de l'usine : atelier, ligne de production, entrepôt. Les photos de téléphone suffisent.",
+    "nextDesc": "Rédigez 2 à 3 phrases : ce que vous fabriquez, à qui vous vendez, comment vous produisez.",
+    "nextCapacity": "Ajoutez la surface de l'usine, le nombre de salariés et vos principaux marchés d'exportation.",
+    "nextCta": "Compléter mon profil"
   },
   "sampleReport": {
     "metaTitle": "Exemple de rapport de diligence raisonnable des fournisseurs — Voir ce que vous obtenez",

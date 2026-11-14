@@ -172,7 +172,21 @@ export default async function Page({ params }: Props) {
       <section className="max-w-3xl mx-auto mb-12">
         <h2 className="text-2xl font-bold text-[#171717] mb-2 text-center">{s.formTitle}</h2>
         <p className="text-[#6d6b66] text-sm mb-6 text-center">{s.formLead}</p>
-        <SupplierRegistrationForm t={s.form} success={s.success} error={s.error} industries={industries} />
+        <SupplierRegistrationForm
+          t={s.form}
+          success={s.success}
+          error={s.error}
+          industries={industries}
+          locale={locale}
+          next={{
+            title: s.nextTitle,
+            lead: s.nextLead,
+            photo: s.nextPhoto,
+            desc: s.nextDesc,
+            capacity: s.nextCapacity,
+            cta: s.nextCta,
+          }}
+        />
       </section>
 
       {/* Review process */}

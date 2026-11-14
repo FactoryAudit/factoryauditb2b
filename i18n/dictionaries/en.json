@@ -2682,7 +2682,8 @@
         "certHelpSubmit": "Send request",
         "certHelpSubmitting": "Sending...",
         "certHelpSuccess": "Thanks. We received your request and will follow up by email.",
-        "certHelpError": "Something went wrong. Please try again or email us directly."
+        "certHelpError": "Something went wrong. Please try again or email us directly.",
+        "companyDescription": "Company description (products, customers, production)"
       },
       "intro": "Fields marked Buyers see this appear on your public profile and in search results. Fields marked Members see this are shown only to registered buyers. Your profile is not published until you authorise it below and we have reviewed the data — profiles with more detail are easier for buyers to evaluate.",
       "tagPublic": "Buyers see this",
@@ -2737,7 +2738,13 @@
     ],
     "contactTitle": "Need help?",
     "contactLead": "Questions about joining, verification, audits or inspections? Leave a message and our team will reply within one business day.",
-    "contactCta": "Talk to our team"
+    "contactCta": "Talk to our team",
+    "nextTitle": "Next step: complete your profile",
+    "nextLead": "Your application is in review. Buyers judge the profile itself, so these details matter more than anything we write about you.",
+    "nextPhoto": "Upload at least 3 real factory photos — workshop, production line, warehouse. Phone photos are fine.",
+    "nextDesc": "Write 2–3 sentences: what you make, who you supply, how you produce.",
+    "nextCapacity": "Add factory floor area, staff count and main export markets.",
+    "nextCta": "Complete my profile"
   },
   "sampleReport": {
     "metaTitle": "Sample Supplier Due Diligence Report — See What You Get",

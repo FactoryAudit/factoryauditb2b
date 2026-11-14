@@ -2682,7 +2682,8 @@
         "certHelpSubmit": "Anfrage senden",
         "certHelpSubmitting": "Wird gesendet …",
         "certHelpSuccess": "Danke. Wir haben Ihre Anfrage erhalten und melden uns per E-Mail.",
-        "certHelpError": "Etwas ist schiefgelaufen. Bitte erneut versuchen oder direkt per E-Mail kontaktieren."
+        "certHelpError": "Etwas ist schiefgelaufen. Bitte erneut versuchen oder direkt per E-Mail kontaktieren.",
+        "companyDescription": "Unternehmensbeschreibung (Produkte, Kunden, Fertigung)"
       },
       "intro": "Mit „Für Käufer sichtbar“ markierte Felder erscheinen in Ihrem öffentlichen Profil und in Suchergebnissen. Mit „Für Mitglieder sichtbar“ markierte Felder werden nur registrierten Käufern angezeigt. Ihr Profil wird erst veröffentlicht, wenn Sie es unten freigeben und wir die Angaben geprüft haben — je vollständiger es ist, desto leichter können Käufer Sie einschätzen.",
       "tagPublic": "Für Käufer sichtbar",
@@ -2737,7 +2738,13 @@
     ],
     "contactTitle": "Brauchen Sie Hilfe?",
     "contactLead": "Fragen zu Beitritt, Verifizierung, Audits oder Inspektionen? Hinterlasse eine Nachricht und unser Team wird innerhalb eines Werktages antworten.",
-    "contactCta": "Sprechen Sie mit unserem Team"
+    "contactCta": "Sprechen Sie mit unserem Team",
+    "nextTitle": "Nächster Schritt: Profil vervollständigen",
+    "nextLead": "Ihre Bewerbung wird geprüft. Käufer entscheiden anhand des Profils – diese Angaben sind daher wichtiger als jeder Text, den wir über Sie schreiben.",
+    "nextPhoto": "Laden Sie mindestens 3 echte Werksfotos hoch – Werkstatt, Produktionslinie, Lager. Handyfotos genügen.",
+    "nextDesc": "Schreiben Sie 2–3 Sätze: was Sie fertigen, wen Sie beliefern, wie Sie produzieren.",
+    "nextCapacity": "Ergänzen Sie Werksfläche, Mitarbeiterzahl und wichtigste Exportmärkte.",
+    "nextCta": "Profil vervollständigen"
   },
   "sampleReport": {
     "metaTitle": "Beispiel Supplier Due Diligence Report - Sehen Sie, was Sie bekommen",
