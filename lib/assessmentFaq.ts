@@ -269,7 +269,7 @@ const BUYER_FAQ: LocaleFaq = {
           },
           {
             q: "What is an SAQ, and how does it relate to this?",
-            a: "SAQ stands for Self-Assessment Questionnaire. Buyer programmes such as Sedex SMETA use an SAQ as a first, low-cost screen before any on-site audit. FactoryAuditB2B follows the same idea: the supplier's self-assessment is a screening layer, not a substitute for audit.",
+            a: "SAQ stands for Self-Assessment Questionnaire. Buyer platforms such as Sedex require suppliers to complete an SAQ as a first, low-cost screen before any on-site audit (such as SMETA). FactoryAuditB2B follows the same idea: the supplier's self-assessment is a screening layer, not a substitute for audit.",
           },
         ],
       },
@@ -343,7 +343,7 @@ const BUYER_FAQ: LocaleFaq = {
           },
           {
             q: "SAQ 是什么？和这个有什么关系？",
-            a: "SAQ 是 Self-Assessment Questionnaire（自评问卷）的缩写。Sedex SMETA 等买家项目把 SAQ 当作现场审核前的第一道低成本筛查。FactoryAuditB2B 沿用同一思路：供应商自评是筛查层，不是审核的替代品。",
+            a: "SAQ 是 Self-Assessment Questionnaire（自评问卷）的缩写。Sedex 等买方平台要求供应商先完成 SAQ，把它作为现场审核（如 SMETA）之前的第一道低成本筛查。FactoryAuditB2B 沿用同一思路：供应商自评是筛查层，不是审核的替代品。",
           },
         ],
       },
