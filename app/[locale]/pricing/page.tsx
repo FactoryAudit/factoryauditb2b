@@ -167,6 +167,13 @@ export default async function PricingPage({
           ${COMMERCIAL.membershipAnnualUsd}
           <span className="text-base font-normal text-[#6d6b66]">/ {m.pricePeriod}</span>
         </p>
+        {/* 四币种等值整数价（只收 USD/CNY/EUR/HKD）。币种符号国际通用、数字来自
+            COMMERCIAL.membershipPrice 单一真源，不进字典，避免为纯数字牵动 9 语。 */}
+        <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-[#6d6b66] -mt-2 mb-3">
+          <span>¥{COMMERCIAL.membershipPrice.cny}</span>
+          <span>€{COMMERCIAL.membershipPrice.eur}</span>
+          <span>HK${COMMERCIAL.membershipPrice.hkd}</span>
+        </div>
         <ul className="text-sm text-[#3f4650] space-y-1 mb-4">
           {m.benefits.slice(0, 4).map((b: string) => (
             <li key={b}>✓ {b}</li>

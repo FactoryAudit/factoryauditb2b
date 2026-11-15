@@ -23,8 +23,21 @@ export const COMMERCIAL = {
   /** Pricing 版本号。订单表 pricing_version 字段同源，历史订单不受影响。 */
   pricingVersion: "2026-09",
 
-  /** Founding Buyer 会员（可选买家效率工具，非服务，spec §57/§58） */
-  membershipAnnualUsd: 99,
+  /** Founding Buyer 会员（可选买家效率工具，非服务，spec §57/§58）
+   *  2026-11-15 改价：$99 → $399。四币种整数展示价（仅收 USD/CNY/EUR/HKD）：
+   *    USD $399（真源）；CNY ¥2680 / EUR €362 / HKD HK$3130
+   *    （按 2026-11-13 中国外汇交易中心中间价 1 USD=6.7152 CNY、1 EUR=7.4023 CNY、
+   *     100 HKD=85.604 CNY 换算取整，仅展示锚点，不参与结算）。
+   *    结算仍以 USD 为准（Stripe 按 USD 收）；其余三币种仅供对客报价展示。 */
+  membershipAnnualUsd: 399,
+
+  /** Founding Buyer 四币种整数展示价（仅展示，结算以 USD 为准） */
+  membershipPrice: {
+    usd: 399,
+    cny: 2680,
+    eur: 362,
+    hkd: 3130,
+  } as const,
 
   /** 供应商验证（文档/基础尽调，spec §四） */
   supplierVerification: {

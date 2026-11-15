@@ -475,7 +475,7 @@ section("8. 访问分层 / 定价 / 路径未被波及");
       (PAID_FIELDS as readonly string[]).includes(f)
     )
   );
-  check("MEMBERSHIP_PRICE_USD 仍为 99", MEMBERSHIP_PRICE_USD === 99);
+  check("MEMBERSHIP_PRICE_USD 仍为 399", MEMBERSHIP_PRICE_USD === 399);
   check("DIRECTORY_PATH 仍为 /suppliers", DIRECTORY_PATH === "/suppliers");
   check("GUEST_PROFILE_LIMIT 仍为 5", GUEST_PROFILE_LIMIT === 5);
 }

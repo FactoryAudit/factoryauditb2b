@@ -287,6 +287,12 @@ export type MeResponse = {
   currentPeriodEnd: string | null;
   email: string | null;
   isAdmin: boolean;
+  /**
+   * 当前登录用户是否是一家供应商的归属人（按 suppliers.contact_email 匹配）。
+   * 用于 Portal 双角色分流：true → 供应商工作台，false → 买家工作台。
+   * 只暴露布尔，绝不泄漏 supplier UUID 或任何供应商字段。
+   */
+  isSupplier: boolean;
 };
 
 /**
@@ -312,6 +318,7 @@ export function buildMeResponse(opts: {
   currentPeriodEnd: string | null;
   email: string | null;
   isAdmin: boolean;
+  isSupplier?: boolean;
 }): MeResponse {
   const basicAccess = basicAccessFor(opts.tier, opts.isAdmin);
   const isGuestLimited = basicAccess === "guest_limited";
@@ -331,5 +338,7 @@ export function buildMeResponse(opts: {
     currentPeriodEnd: opts.currentPeriodEnd,
     email: opts.email,
     isAdmin: opts.isAdmin,
+    // 未登录（visitor）不可能归属供应商，恒为 false；已登录由 /api/me 传入派生值。
+    isSupplier: opts.isSupplier ?? false,
   };
 }

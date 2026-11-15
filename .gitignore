@@ -70,6 +70,7 @@ _test-*.cjs
 .next_bak*/
 .next.bak*/
 .next_prev*/
+.next_verify_*/
 .open-next.bak*/
 .prisma-cache/
 .prisma-tmp*/

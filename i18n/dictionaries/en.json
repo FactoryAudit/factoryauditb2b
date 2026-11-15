@@ -1459,7 +1459,7 @@
     "freeLockLead": "Create a free account to view the year established, employee count, export markets and audit status.",
     "freeLockCta": "Register free to view details",
     "paidLockTitle": "Members see evidence and risk details",
-    "paidLockLead": "Founding Buyer members ($99/year) see evidence records, risk breakdowns, audit history and inspection data.",
+    "paidLockLead": "Founding Buyer members ($399/year) see evidence records, risk breakdowns, audit history and inspection data.",
     "paidLockCta": "View membership",
     "paidLockNote": "The risk score is public. Evidence and verification details are member content.",
     "certClaimsReported": "Reported certification claims",
@@ -2127,7 +2127,7 @@
       },
       {
         "h": "Membership, billing and renewal",
-        "b": "Founding Buyer Membership is an annual subscription priced at USD 99 per year. Payment is handled by a third-party payment provider. Your subscription renews automatically each year unless you cancel before the renewal date. We email you before each renewal date, so you can cancel in advance if you do not want to continue. You can cancel by replying to that email or by writing to support@factoryauditb2b.com. Online payment is not open yet; until it is, our team sets up your subscription and confirms the billing arrangement with you by email."
+        "b": "Founding Buyer Membership is an annual subscription priced at USD 399 per year. Payment is handled by a third-party payment provider. Your subscription renews automatically each year unless you cancel before the renewal date. We email you before each renewal date, so you can cancel in advance if you do not want to continue. You can cancel by replying to that email or by writing to support@factoryauditb2b.com. Online payment is not open yet; until it is, our team sets up your subscription and confirms the billing arrangement with you by email."
       },
       {
         "h": "Refunds and cancellation",
@@ -2299,7 +2299,7 @@
         "href": "/monitoring"
       }
     ],
-    "comingSoonNote": "Supplier Monitoring is quoted per supplier per year. Founding Buyer Membership is an annual subscription at USD 99 per year. Both renew automatically each year, and you can cancel either at any time by emailing support@factoryauditb2b.com. Other items on this page are quoted per project.",
+    "comingSoonNote": "Supplier Monitoring is quoted per supplier per year. Founding Buyer Membership is an annual subscription at USD 399 per year. Both renew automatically each year, and you can cancel either at any time by emailing support@factoryauditb2b.com. Other items on this page are quoted per project.",
     "alsoTitle": "Also available",
     "alsoItems": [
       "Inspection: in-line and pre-shipment checks, quoted per man-day",
@@ -2365,7 +2365,7 @@
     "ctaText": "Need a quote or a human?",
     "ctaButton": "Talk to our team",
     "fallbackAnswers": {
-      "pricing": "Free tools are $0. Supplier verification is $99 – $129 per supplier, factory audits start at 399 USD per man-day plus travel, and supplier monitoring is quoted per supplier per year. Founding Buyer membership is $99/year for full database access. Sourcing carries a 3–5% commission, quoted before you order. All prices in USD. Tell me your product and country.",
+      "pricing": "Free tools are $0. Supplier verification is $99 – $129 per supplier, factory audits start at 399 USD per man-day plus travel, and supplier monitoring is quoted per supplier per year. Founding Buyer membership is $399/year for full database access. Sourcing carries a 3–5% commission, quoted before you order. All prices in USD. Tell me your product and country.",
       "audit": "We cover supplier verification, factory audits and pre-shipment inspections against programs such as SMETA, BSCI, ISO 9001, ISO 14001, SA8000, WRAP and Sedex. We do not sell certificates; we verify and then train. Share your product and target market and we will scope it.",
       "coverage": "We cover China, Vietnam, Thailand, Malaysia and the Philippines. Tell me which country you are sourcing from and I will confirm what we can check there.",
       "training": "Yes. We audit your factory and then train the teams in quality systems, QC and production process. Plans are Starter $280/factory and Pro $950/factory, with a custom Enterprise option. Every plan starts with a gap audit.",
@@ -3158,7 +3158,7 @@
     "nextTitle": "What happens next",
     "nextLead": "After you submit, our team reviews your request manually and replies within one business day.",
     "noCard": "No credit card required.",
-    "membershipLink": "Learn about Founding Buyer membership ($99/year)",
+    "membershipLink": "Learn about Founding Buyer membership ($399/year)",
     "haveAccount": "Already have an account?",
     "formTitle": "Sign up",
     "form": {
@@ -3208,8 +3208,8 @@
   },
   "membership": {
     "badge": "Buyer membership",
-    "metaTitle": "Founding Buyer Membership — $99/year",
-    "metaDesc": "Founding Buyer membership: full supplier database, risk breakdowns, evidence summaries and factory details. $99/year.",
+    "metaTitle": "Founding Buyer Membership — $399/year",
+    "metaDesc": "Founding Buyer membership: full supplier database, risk breakdowns, evidence summaries and factory details. $399/year.",
     "h1": "Founding Buyer membership",
     "lead": "For sourcing teams that need to evaluate suppliers in depth. One subscription, all supplier intelligence features for a year.",
     "planName": "Founding Buyer",
@@ -3234,7 +3234,7 @@
     "faq": [
       {
         "q": "How much does membership cost?",
-        "a": "Founding Buyer is $99/year (USD). One subscription covers a full year. The founding price may increase later."
+        "a": "Founding Buyer is $399/year (USD). One subscription covers a full year. The founding price may increase later."
       },
       {
         "q": "How do I pay?",

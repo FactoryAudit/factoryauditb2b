@@ -145,6 +145,11 @@ export default async function Page({ params, searchParams }: Props) {
         <a className="underline" href={localePath(locale, "/join-supplier-network")}>
           {sa["becomeSupplier"] ?? "Become a supplier"}
         </a>{" "}
+        ·{" "}
+        {/* 自评 FAQ 入口：供应商填表答疑（四大 SAQ 支柱 + 14 题基础档案） */}
+        <a className="underline" href={localePath(locale, "/assessment-faq")}>
+          {locale === "zh" || locale === "zh-TW" ? "自评 FAQ" : "Self-assessment FAQ"}
+        </a>{" "}
         · FactoryAuditB2B
       </p>
     </main>

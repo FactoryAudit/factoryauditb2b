@@ -150,6 +150,9 @@ async function collectPathEntries(): Promise<SitemapPathEntry[]> {
     "/verify-supplier",
     "/join-supplier-network",
     "/suppliers",
+    // 自评 FAQ：供应商填表答疑 + 买家认知答疑（FAQPage schema，indexable）
+    "/assessment-faq",
+    "/assessment-faq/buyer",
     // CS-01：/register、/login、/account 属账户体系页面，不得进 sitemap。
     // V2.2 §75：/membership 已 301/308 合并进 /pricing，不得继续出现。
     "/pricing",

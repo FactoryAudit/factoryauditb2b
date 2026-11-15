@@ -199,7 +199,7 @@ export default function AccountMenu({
             </div>
 
             <Link
-              href={p("/account")}
+              href={p("/portal")}
               role="menuitem"
               className="block rounded-md px-3 py-2 text-sm hover:bg-[#f5f3ee]"
               onClick={() => setOpen(false)}

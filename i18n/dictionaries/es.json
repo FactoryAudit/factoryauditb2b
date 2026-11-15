@@ -1417,7 +1417,7 @@
       },
       {
         "h": "Membresía, facturación y renovación",
-        "b": "La Membresía Founding Buyer es una suscripción anual de 99 USD al año. El pago lo gestiona un proveedor de pagos externo. La suscripción se renueva automáticamente cada año, salvo que la cancele antes de la fecha de renovación. Le escribimos antes de cada fecha de renovación, de modo que pueda cancelar con antelación si no desea continuar. Puede cancelar respondiendo a ese correo o escribiendo a support@factoryauditb2b.com. El pago en línea aún no está disponible; hasta entonces, nuestro equipo configura su suscripción y le confirma por correo electrónico cómo se gestionará el cobro."
+        "b": "La Membresía Founding Buyer es una suscripción anual de 399 USD al año. El pago lo gestiona un proveedor de pagos externo. La suscripción se renueva automáticamente cada año, salvo que la cancele antes de la fecha de renovación. Le escribimos antes de cada fecha de renovación, de modo que pueda cancelar con antelación si no desea continuar. Puede cancelar respondiendo a ese correo o escribiendo a support@factoryauditb2b.com. El pago en línea aún no está disponible; hasta entonces, nuestro equipo configura su suscripción y le confirma por correo electrónico cómo se gestionará el cobro."
       },
       {
         "h": "Reembolsos y cancelación",
@@ -1589,7 +1589,7 @@
         "href": "/monitoring"
       }
     ],
-    "comingSoonNote": "El monitoreo de proveedores se presupuesta por proveedor y año. La Membresía Founding Buyer es una suscripción anual de 99 USD al año. Ambas se renuevan automáticamente cada año y puede cancelar cualquiera de ellas en cualquier momento escribiendo a support@factoryauditb2b.com. El resto de los conceptos de esta página se presupuestan por proyecto.",
+    "comingSoonNote": "El monitoreo de proveedores se presupuesta por proveedor y año. La Membresía Founding Buyer es una suscripción anual de 399 USD al año. Ambas se renuevan automáticamente cada año y puede cancelar cualquiera de ellas en cualquier momento escribiendo a support@factoryauditb2b.com. El resto de los conceptos de esta página se presupuestan por proyecto.",
     "alsoTitle": "También disponible",
     "alsoItems": [
       "Inspección: controles en línea y previos al envío, presupuesto por día-hombre",
@@ -2011,7 +2011,7 @@
     "freeLockLead": "Crea una cuenta gratuita para ver el año de fundación, el número de empleados, los mercados de exportación y el estado de la auditoría.",
     "freeLockCta": "Regístrate gratis para ver los detalles",
     "paidLockTitle": "Los miembros ven evidencias y detalles de riesgo",
-    "paidLockLead": "Los miembros Founding Buyer (99 $/año) ven registros de evidencia, desgloses de riesgo, historial de auditoría y datos de inspección.",
+    "paidLockLead": "Los miembros Founding Buyer (399 $/año) ven registros de evidencia, desgloses de riesgo, historial de auditoría y datos de inspección.",
     "paidLockCta": "Ver membresía",
     "paidLockNote": "La puntuación de riesgo es pública. Las evidencias y los detalles de verificación son contenido para miembros.",
     "certClaimsReported": "Certificaciones declaradas",
@@ -3158,7 +3158,7 @@
     "nextTitle": "Qué sigue",
     "nextLead": "Después de enviar, nuestro equipo revisa la solicitud manualmente y responde en un día hábil.",
     "noCard": "No se requiere tarjeta de crédito.",
-    "membershipLink": "Conoce la membresía Founding Buyer (99 $/año)",
+    "membershipLink": "Conoce la membresía Founding Buyer (399 $/año)",
     "haveAccount": "¿Ya tienes cuenta?",
     "formTitle": "Registrarse",
     "form": {
@@ -3208,8 +3208,8 @@
   },
   "membership": {
     "badge": "Membresía de comprador",
-    "metaTitle": "Membresía Founding Buyer — 99 $/año",
-    "metaDesc": "Membresía Founding Buyer: base completa de proveedores, desgloses de riesgo, resúmenes de evidencia e información de fábrica. 99 $/año.",
+    "metaTitle": "Membresía Founding Buyer — 399 $/año",
+    "metaDesc": "Membresía Founding Buyer: base completa de proveedores, desgloses de riesgo, resúmenes de evidencia e información de fábrica. 399 $/año.",
     "h1": "Membresía Founding Buyer",
     "lead": "Para equipos de compra que necesitan evaluar proveedores a fondo. Una suscripción, todas las funciones de inteligencia de proveedores por un año.",
     "planName": "Comprador fundador",
@@ -3234,7 +3234,7 @@
     "faq": [
       {
         "q": "¿Cuánto cuesta la membresía?",
-        "a": "Founding Buyer cuesta 99 $/año (USD). Precio fundacional, puede subir."
+        "a": "Founding Buyer cuesta 399 $/año (USD). Precio fundacional, puede subir."
       },
       {
         "q": "¿Cómo pago?",

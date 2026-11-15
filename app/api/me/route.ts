@@ -3,6 +3,7 @@ import { getCurrentUser } from "@/lib/supabaseServer";
 import {
   getMembershipRecord,
   isAdminUser,
+  isSupplierUser,
 } from "@/lib/membership";
 import { buildMeResponse, resolveTier } from "@/lib/access";
 
@@ -45,10 +46,11 @@ export async function GET() {
       }), { headers: NO_STORE });
     }
 
-    // 并行取会员记录与用量，减少一次往返
-    const [record, isAdmin] = await Promise.all([
+    // 并行取会员记录、管理员身份、供应商归属（Portal 双角色分流信号），减少往返
+    const [record, isAdmin, isSupplier] = await Promise.all([
       getMembershipRecord(user.id),
       isAdminUser(user.id),
+      isSupplierUser(user.email),
     ]);
 
     // 🔴 两个口径必须分开算，绝不可混用：
@@ -69,6 +71,7 @@ export async function GET() {
       currentPeriodEnd: record?.current_period_end ?? null,
       email: user.email ?? null,
       isAdmin,
+      isSupplier,
     }), { headers: NO_STORE });
   } catch (e) {
     console.error("[api/me] failed", e);

@@ -1417,7 +1417,7 @@
       },
       {
         "h": "Adhésion, facturation et renouvellement",
-        "b": "L’adhésion Founding Buyer est un abonnement annuel au prix de 99 USD par an. Le paiement est traité par un prestataire de paiement tiers. Votre abonnement se renouvelle automatiquement chaque année, sauf si vous l’annulez avant la date de renouvellement. Nous vous écrivons avant chaque date de renouvellement, afin que vous puissiez annuler par avance si vous ne souhaitez pas continuer. Vous pouvez annuler en répondant à cet e-mail ou en écrivant à support@factoryauditb2b.com. Le paiement en ligne n’est pas encore disponible ; d’ici là, notre équipe met en place votre abonnement et vous confirme par e-mail les modalités de facturation."
+        "b": "L’adhésion Founding Buyer est un abonnement annuel au prix de 399 USD par an. Le paiement est traité par un prestataire de paiement tiers. Votre abonnement se renouvelle automatiquement chaque année, sauf si vous l’annulez avant la date de renouvellement. Nous vous écrivons avant chaque date de renouvellement, afin que vous puissiez annuler par avance si vous ne souhaitez pas continuer. Vous pouvez annuler en répondant à cet e-mail ou en écrivant à support@factoryauditb2b.com. Le paiement en ligne n’est pas encore disponible ; d’ici là, notre équipe met en place votre abonnement et vous confirme par e-mail les modalités de facturation."
       },
       {
         "h": "Remboursements et annulation",
@@ -1589,7 +1589,7 @@
         "href": "/monitoring"
       }
     ],
-    "comingSoonNote": "Le monitoring fournisseur est devisé par fournisseur et par an. L’adhésion Founding Buyer est un abonnement annuel au prix de 99 USD par an. Ces deux abonnements se renouvellent automatiquement chaque année et vous pouvez annuler l’un ou l’autre à tout moment en écrivant à support@factoryauditb2b.com. Les autres éléments de cette page sont devisés au projet.",
+    "comingSoonNote": "Le monitoring fournisseur est devisé par fournisseur et par an. L’adhésion Founding Buyer est un abonnement annuel au prix de 399 USD par an. Ces deux abonnements se renouvellent automatiquement chaque année et vous pouvez annuler l’un ou l’autre à tout moment en écrivant à support@factoryauditb2b.com. Les autres éléments de cette page sont devisés au projet.",
     "alsoTitle": "Également disponible",
     "alsoItems": [
       "Inspection : contrôles en cours de production et avant expédition, devis par jour-homme",
@@ -2011,7 +2011,7 @@
     "freeLockLead": "Créez un compte gratuit pour voir l'année de création, l'effectif, les marchés d'exportation et le statut d'audit.",
     "freeLockCta": "Inscription gratuite pour voir les détails",
     "paidLockTitle": "Les membres voient les preuves et les risques",
-    "paidLockLead": "Les membres Founding Buyer (99 $/an) voient les enregistrements de preuves, les détails de risque, l'historique d'audit et les données d'inspection.",
+    "paidLockLead": "Les membres Founding Buyer (399 $/an) voient les enregistrements de preuves, les détails de risque, l'historique d'audit et les données d'inspection.",
     "paidLockCta": "Voir l'adhésion",
     "paidLockNote": "Le score de risque est public. Les preuves et les détails de vérification sont réservés aux membres.",
     "certClaimsReported": "Certifications déclarées",
@@ -3158,7 +3158,7 @@
     "nextTitle": "Prochaines étapes",
     "nextLead": "Après envoi, notre équipe examine votre demande manuellement et répond sous un jour ouvré.",
     "noCard": "Aucune carte de crédit requise.",
-    "membershipLink": "Découvrir l'adhésion Founding Buyer (99 $/an)",
+    "membershipLink": "Découvrir l'adhésion Founding Buyer (399 $/an)",
     "haveAccount": "Vous avez déjà un compte ?",
     "formTitle": "S'inscrire",
     "form": {
@@ -3208,8 +3208,8 @@
   },
   "membership": {
     "badge": "Adhésion acheteur",
-    "metaTitle": "Adhésion Founding Buyer — 99 $/an",
-    "metaDesc": "Adhésion Founding Buyer : base complète de fournisseurs, détails de risque, résumés de preuves et informations d'usine. 99 $/an.",
+    "metaTitle": "Adhésion Founding Buyer — 399 $/an",
+    "metaDesc": "Adhésion Founding Buyer : base complète de fournisseurs, détails de risque, résumés de preuves et informations d'usine. 399 $/an.",
     "h1": "Adhésion Founding Buyer",
     "lead": "Pour les équipes d'achat qui doivent évaluer les fournisseurs en profondeur. Un abonnement, toutes les fonctionnalités d'intelligence fournisseur pour un an.",
     "planName": "Acquéreur fondateur",
@@ -3234,7 +3234,7 @@
     "faq": [
       {
         "q": "Combien coûte l'adhésion ?",
-        "a": "Founding Buyer coûte 99 $/an (USD). Prix de lancement, susceptible d'augmenter."
+        "a": "Founding Buyer coûte 399 $/an (USD). Prix de lancement, susceptible d'augmenter."
       },
       {
         "q": "Comment payer ?",

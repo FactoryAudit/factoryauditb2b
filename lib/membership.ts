@@ -66,6 +66,35 @@ export async function isAdminUser(userId: string): Promise<boolean> {
 }
 
 /**
+ * 当前用户是否是一家供应商的归属人。
+ *
+ * 归属依据与 lib/supplierAccess.ts 完全一致：按 `suppliers.contact_email`
+ * 精确匹配（大小写归一）。这里只做布尔判断，用于 Portal 双角色分流，
+ * 不返回任何供应商内部字段，绝不泄漏 supplier UUID。
+ *
+ * fail-safe：出错一律 false（当作普通买家），数据库抖动时不误判身份。
+ */
+export async function isSupplierUser(email: string | null | undefined): Promise<boolean> {
+  if (!email) return false;
+  const db = createAdminClient();
+  if (!db) return false;
+  try {
+    const normalized = email.trim().toLowerCase();
+    const { data, error } = await db
+      .from("suppliers")
+      .select("id, contact_email")
+      .ilike("contact_email", normalized)
+      .limit(1);
+    if (error) return false;
+    return (data ?? []).some(
+      (r) => (r.contact_email ?? "").trim().toLowerCase() === normalized
+    );
+  } catch {
+    return false;
+  }
+}
+
+/**
  * 免费用户本月已用额度（去重后的 profile 数）。
  * 付费用户不需要调用这个（不限量）。
  */

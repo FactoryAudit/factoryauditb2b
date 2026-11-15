@@ -1417,7 +1417,7 @@
       },
       {
         "h": "Mitgliedschaft, Abrechnung und Verlängerung",
-        "b": "Die Founding Buyer Membership ist ein Jahresabonnement für 99 USD pro Jahr. Die Zahlung wird von einem externen Zahlungsdienstleister abgewickelt. Ihr Abonnement verlängert sich jedes Jahr automatisch, sofern Sie nicht vor dem Verlängerungsdatum kündigen. Wir schreiben Ihnen vor jedem Verlängerungsdatum, sodass Sie vorher kündigen können, wenn Sie nicht fortfahren möchten. Sie können kündigen, indem Sie auf diese E-Mail antworten oder an support@factoryauditb2b.com schreiben. Der Online-Zahlungsverkehr ist noch nicht freigeschaltet; bis dahin richtet unser Team Ihr Abonnement ein und bestätigt Ihnen die Abrechnung per E-Mail."
+        "b": "Die Founding Buyer Membership ist ein Jahresabonnement für 399 USD pro Jahr. Die Zahlung wird von einem externen Zahlungsdienstleister abgewickelt. Ihr Abonnement verlängert sich jedes Jahr automatisch, sofern Sie nicht vor dem Verlängerungsdatum kündigen. Wir schreiben Ihnen vor jedem Verlängerungsdatum, sodass Sie vorher kündigen können, wenn Sie nicht fortfahren möchten. Sie können kündigen, indem Sie auf diese E-Mail antworten oder an support@factoryauditb2b.com schreiben. Der Online-Zahlungsverkehr ist noch nicht freigeschaltet; bis dahin richtet unser Team Ihr Abonnement ein und bestätigt Ihnen die Abrechnung per E-Mail."
       },
       {
         "h": "Erstattungen und Kündigung",
@@ -1589,7 +1589,7 @@
         "href": "/monitoring"
       }
     ],
-    "comingSoonNote": "Lieferanten-Monitoring wird pro Lieferant und Jahr angeboten. Die Founding Buyer Membership ist ein Jahresabonnement für 99 USD pro Jahr. Beide verlängern sich jedes Jahr automatisch; kündigen können Sie beide jederzeit per E-Mail an support@factoryauditb2b.com. Alle anderen Posten auf dieser Seite werden pro Projekt angeboten.",
+    "comingSoonNote": "Lieferanten-Monitoring wird pro Lieferant und Jahr angeboten. Die Founding Buyer Membership ist ein Jahresabonnement für 399 USD pro Jahr. Beide verlängern sich jedes Jahr automatisch; kündigen können Sie beide jederzeit per E-Mail an support@factoryauditb2b.com. Alle anderen Posten auf dieser Seite werden pro Projekt angeboten.",
     "alsoTitle": "Ebenfalls verfügbar",
     "alsoItems": [
       "Inspektion: Kontrollen während der Produktion und vor dem Versand, Angebot pro Personentag",
@@ -2011,7 +2011,7 @@
     "freeLockLead": "Erstellen Sie ein kostenloses Konto, um Gründungsjahr, Mitarbeiterzahl, Exportmärkte und Prüfungsstatus zu sehen.",
     "freeLockCta": "Kostenlos registrieren für Details",
     "paidLockTitle": "Mitglieder sehen Nachweise und Risikodetails",
-    "paidLockLead": "Founding-Buyer-Mitglieder (99 $/Jahr) sehen Nachweisaufzeichnungen, Risikoaufschlüsselungen, Audit-Historie und Inspektionsdaten.",
+    "paidLockLead": "Founding-Buyer-Mitglieder (399 $/Jahr) sehen Nachweisaufzeichnungen, Risikoaufschlüsselungen, Audit-Historie und Inspektionsdaten.",
     "paidLockCta": "Mitgliedschaft ansehen",
     "paidLockNote": "Der Risiko-Score ist öffentlich. Nachweise und Verifizierungsdetails sind Mitglieder-Inhalte.",
     "certClaimsReported": "Gemeldete Zertifikatsangaben",
@@ -3158,7 +3158,7 @@
     "nextTitle": "Nächste Schritte",
     "nextLead": "Nach dem Absenden prüft unser Team Ihre Anfrage manuell und antwortet innerhalb eines Werktags.",
     "noCard": "Keine Kreditkarte erforderlich.",
-    "membershipLink": "Mehr zur Founding-Buyer-Mitgliedschaft (99 $/Jahr)",
+    "membershipLink": "Mehr zur Founding-Buyer-Mitgliedschaft (399 $/Jahr)",
     "haveAccount": "Bereits ein Konto?",
     "formTitle": "Registrieren",
     "form": {
@@ -3208,8 +3208,8 @@
   },
   "membership": {
     "badge": "Käufer-Mitgliedschaft",
-    "metaTitle": "Founding-Buyer-Mitgliedschaft — 99 $/Jahr",
-    "metaDesc": "Founding-Buyer-Mitgliedschaft: komplette Lieferantendatenbank, Risikoaufschlüsselungen, Nachweis-Zusammenfassungen und Werksdetails. 99 $/Jahr.",
+    "metaTitle": "Founding-Buyer-Mitgliedschaft — 399 $/Jahr",
+    "metaDesc": "Founding-Buyer-Mitgliedschaft: komplette Lieferantendatenbank, Risikoaufschlüsselungen, Nachweis-Zusammenfassungen und Werksdetails. 399 $/Jahr.",
     "h1": "Founding-Buyer-Mitgliedschaft",
     "lead": "Für Einkaufsteams, die Lieferanten gründlich bewerten müssen. Eine Abonnement, alle Lieferanten-Intelligenz-Funktionen für ein Jahr.",
     "planName": "Gründungskäufer",
@@ -3234,7 +3234,7 @@
     "faq": [
       {
         "q": "Was kostet die Mitgliedschaft?",
-        "a": "Founding Buyer kostet 99 $/Jahr (USD). Gründerpreis, kann später steigen."
+        "a": "Founding Buyer kostet 399 $/Jahr (USD). Gründerpreis, kann später steigen."
       },
       {
         "q": "Wie bezahle ich?",

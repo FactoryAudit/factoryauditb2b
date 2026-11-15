@@ -1417,7 +1417,7 @@
       },
       {
         "h": "Assinatura, cobrança e renovação",
-        "b": "A assinatura Founding Buyer é uma assinatura anual de 99 USD por ano. O pagamento é processado por um provedor de pagamentos terceirizado. A assinatura renova automaticamente todos os anos, salvo se você cancelar antes da data de renovação. Enviamos um e-mail antes de cada data de renovação, para que você possa cancelar com antecedência caso não queira continuar. Você pode cancelar respondendo a esse e-mail ou escrevendo para support@factoryauditb2b.com. O pagamento online ainda não está disponível; até lá, a nossa equipe configura a sua assinatura e confirma por e-mail como a cobrança será feita."
+        "b": "A assinatura Founding Buyer é uma assinatura anual de 399 USD por ano. O pagamento é processado por um provedor de pagamentos terceirizado. A assinatura renova automaticamente todos os anos, salvo se você cancelar antes da data de renovação. Enviamos um e-mail antes de cada data de renovação, para que você possa cancelar com antecedência caso não queira continuar. Você pode cancelar respondendo a esse e-mail ou escrevendo para support@factoryauditb2b.com. O pagamento online ainda não está disponível; até lá, a nossa equipe configura a sua assinatura e confirma por e-mail como a cobrança será feita."
       },
       {
         "h": "Reembolsos e cancelamento",
@@ -1589,7 +1589,7 @@
         "href": "/monitoring"
       }
     ],
-    "comingSoonNote": "O monitoramento de fornecedores é orçado por fornecedor e por ano. A assinatura Founding Buyer é uma assinatura anual de 99 USD por ano. Ambas se renovam automaticamente todos os anos e você pode cancelar qualquer uma a qualquer momento escrevendo para support@factoryauditb2b.com. Os demais itens desta página são orçados por projeto.",
+    "comingSoonNote": "O monitoramento de fornecedores é orçado por fornecedor e por ano. A assinatura Founding Buyer é uma assinatura anual de 399 USD por ano. Ambas se renovam automaticamente todos os anos e você pode cancelar qualquer uma a qualquer momento escrevendo para support@factoryauditb2b.com. Os demais itens desta página são orçados por projeto.",
     "alsoTitle": "Também disponível",
     "alsoItems": [
       "Inspeção: verificações em linha e pré-embarque, orçadas por homem-dia",
@@ -1655,7 +1655,7 @@
     "ctaText": "Precisa de um orçamento ou falar com alguém?",
     "ctaButton": "Fale com nossa equipe",
     "fallbackAnswers": {
-      "pricing": "As ferramentas gratuitas custam $0. A verificação de fornecedores custa $99 – $129 por fornecedor, a auditoria de fábrica a partir de 399 USD por homem-dia mais deslocação, e o monitoramento é orçado por fornecedor e por ano. A assinatura Founding Buyer custa US$ 99/ano e dá acesso a toda a base de fornecedores. O sourcing tem comissão de 3–5%, orçada antes do pedido. Todos os preços em USD. Diga-nos o seu produto e país.",
+      "pricing": "As ferramentas gratuitas custam $0. A verificação de fornecedores custa $99 – $129 por fornecedor, a auditoria de fábrica a partir de 399 USD por homem-dia mais deslocação, e o monitoramento é orçado por fornecedor e por ano. A assinatura Founding Buyer custa US$ 399/ano e dá acesso a toda a base de fornecedores. O sourcing tem comissão de 3–5%, orçada antes do pedido. Todos os preços em USD. Diga-nos o seu produto e país.",
       "audit": "Cobrimos verificação de fornecedores, auditorias de fábrica e inspeções pré-embarque em programas como SMETA, BSCI, ISO 9001, ISO 14001, SA8000, WRAP e Sedex. Não vendemos certificados; verificamos e depois treinamos. Compartilhe seu produto e mercado-alvo e definiremos o escopo.",
       "coverage": "Cobrimos China, Vietnã, Tailândia, Malásia e Filipinas. Diga de qual país você compra e confirmaremos o que podemos verificar lá.",
       "training": "Sim. Auditamos sua fábrica e depois treinamos as equipes em sistemas de qualidade, controle de qualidade e processos de produção. Os planos são Starter US$ 280/fábrica e Pro US$ 950/fábrica, com opção Enterprise personalizada. Todo plano começa com uma auditoria de lacunas.",
@@ -2011,7 +2011,7 @@
     "freeLockLead": "Crie uma conta gratuita para ver ano de fundação, número de funcionários, mercados de exportação e o estado da auditoria.",
     "freeLockCta": "Registe-se grátis para ver os detalhes",
     "paidLockTitle": "Assinantes veem evidências e detalhes de risco",
-    "paidLockLead": "Assinantes Founding Buyer (US$ 99/ano) veem registros de evidências, detalhamentos de risco, histórico de auditoria e dados de inspeção.",
+    "paidLockLead": "Assinantes Founding Buyer (US$ 399/ano) veem registros de evidências, detalhamentos de risco, histórico de auditoria e dados de inspeção.",
     "paidLockCta": "Ver assinatura",
     "paidLockNote": "A pontuação de risco é pública. Evidências e detalhes de verificação são conteúdo para assinantes.",
     "certClaimsReported": "Certificações declaradas",
@@ -3158,7 +3158,7 @@
     "nextTitle": "Próximos passos",
     "nextLead": "Após o envio, nossa equipe revisa a solicitação manualmente e responde em um dia útil.",
     "noCard": "Sem cartão de crédito.",
-    "membershipLink": "Conheça a assinatura Founding Buyer (US$ 99/ano)",
+    "membershipLink": "Conheça a assinatura Founding Buyer (US$ 399/ano)",
     "haveAccount": "Já tem uma conta?",
     "formTitle": "Cadastrar",
     "form": {
@@ -3208,8 +3208,8 @@
   },
   "membership": {
     "badge": "Assinatura de comprador",
-    "metaTitle": "Assinatura Founding Buyer — US$ 99/ano",
-    "metaDesc": "Assinatura Founding Buyer: base completa de fornecedores, detalhamentos de risco, resumos de evidências e informações de fábrica. US$ 99/ano.",
+    "metaTitle": "Assinatura Founding Buyer — US$ 399/ano",
+    "metaDesc": "Assinatura Founding Buyer: base completa de fornecedores, detalhamentos de risco, resumos de evidências e informações de fábrica. US$ 399/ano.",
     "h1": "Assinatura Founding Buyer",
     "lead": "Para equipes de compra que precisam avaliar fornecedores a fundo. Uma assinatura, todos os recursos de inteligência de fornecedores por um ano.",
     "planName": "Comprador Fundador",
@@ -3234,7 +3234,7 @@
     "faq": [
       {
         "q": "Quanto custa a assinatura?",
-        "a": "Founding Buyer custa US$ 99/ano. Preço de fundação, pode aumentar."
+        "a": "Founding Buyer custa US$ 399/ano. Preço de fundação, pode aumentar."
       },
       {
         "q": "Como pagar?",
