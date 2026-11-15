@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
 import AuditChecklistTool from "@/components/tools/AuditChecklistTool";
+import ToolFaqSection from "@/components/tools/ToolFaqSection";
 import type { AuditChecklistUi } from "@/lib/toolUiTypes";
 import { isLocale, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
+import { canonicalFor } from "@/i18n/hreflang";
+import { getToolFaq, faqPageJsonLd } from "@/lib/toolFaqs";
 import RelatedGuides from "@/components/RelatedGuides";
 
 const PATH = "/tools/audit-checklist";
@@ -30,15 +34,32 @@ export default async function Page({ params }: Props) {
     industryNames: t.toolsUi.industryNames,
     auditTypeNames: t.toolsUi.auditTypeNames,
   } as unknown as AuditChecklistUi;
+  const faq = getToolFaq("audit-checklist", locale);
+
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      name: t.toolsUi.auditChecklist.metaTitle,
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      url: canonicalFor(locale, PATH),
+      inLanguage: locale,
+    },
+    faqPageJsonLd(faq),
+  ];
 
   return (
     <main className="container py-12" data-track-page="tool_audit_checklist">
+      <JsonLd data={jsonLd} />
       <span className="inline-block px-3 py-1 rounded-full bg-[#f5f3ee] text-[#171717] text-sm font-semibold mb-4">
         {t.common.freeTool}
       </span>
       <h1 className="text-3xl font-bold text-[#171717]">{ui.h1}</h1>
       <p className="text-[#6d6b66] mt-2 mb-6 max-w-3xl">{ui.lead}</p>
       <AuditChecklistTool ui={ui as unknown as AuditChecklistUi} />
+      <ToolFaqSection faq={faq} faqTitle={t.common.faq} />
       <p className="text-xs text-[#8c8982] mt-10 max-w-3xl text-center">{t.common.disclaimer}</p>
       <RelatedGuides locale={locale} hub="tool:audit-checklist" />
     </main>
