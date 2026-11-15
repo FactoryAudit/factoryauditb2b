@@ -11,9 +11,9 @@ export interface SocialLink {
 }
 
 export const SOCIAL_LINKS: SocialLink[] = [
-  // Facebook 入口已关闭（用户 2026-09-03 反馈：页脚图标太丑）
-  { platform: "facebook", url: "" },
-  { platform: "youtube", url: "" },
+  // 2026-11-15 上线主页：Facebook 用数字 ID 链接（用户名未设，设好后换成短链接即可）。
+  { platform: "facebook", url: "https://www.facebook.com/profile.php?id=61596530612726" },
+  { platform: "youtube", url: "https://www.youtube.com/@factoryauditb2b" },
   { platform: "linkedin", url: "" },
 ];
 

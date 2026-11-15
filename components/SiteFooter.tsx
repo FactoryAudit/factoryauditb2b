@@ -218,7 +218,7 @@ export default function SiteFooter({
                 </Link>
               </p>
             )}
-            <SocialLinks className="mt-0 justify-start lg:justify-end" />
+            <SocialLinks className="mt-0 justify-start lg:justify-end" locale={locale} />
           </div>
         </div>
       </div>
