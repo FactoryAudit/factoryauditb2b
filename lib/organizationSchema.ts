@@ -132,23 +132,26 @@ export function organizationSchema(
     org.legalName = cfg.legalEntity;
   }
 
+  // ---- 地址：城市级不算敏感「登记细节」，独立于 configured 输出 ----
+  //    🔴 cfg.country 默认值 "China" 恒非空，若把它计入条件，会输出一个只含国家的
+  //    残缺 address —— 而 ProfessionalService(=LocalBusiness 子类型) 的 address
+  //    是必填语义，残缺值比不输出更容易被判失败。故只以 city/registeredAddress 为准。
+  //    城市级地址（TRUST_CITY）足以让 @type 升级为 ProfessionalService，无需等注册号
+  //    等敏感项配齐；门牌号仍走 TRUST_REGISTERED_ADDRESS 脱敏后才输出。
+  if (cfg.city || cfg.registeredAddress) {
+    org.address = {
+      "@type": "PostalAddress",
+      // registeredAddress 已过 maskAddress 脱敏；未配置则为空串，此时只给到城市/国家
+      ...(cfg.registeredAddress ? { streetAddress: cfg.registeredAddress } : {}),
+      ...(cfg.city ? { addressLocality: cfg.city } : {}),
+      addressCountry: cfg.country || undefined,
+    };
+  }
+
   // ---- 以下为登记细节，仅在有真实配置时逐项输出（不编造） ----
   if (cfg.configured) {
     if (cfg.registrationYear) {
       org.foundingDate = cfg.registrationYear;
-    }
-    // 🔴 地址只在有真实登记地址或城市时输出。
-    //    cfg.country 默认值 "China" 恒非空，若把它计入条件，会输出一个只含国家的
-    //    残缺 address —— 而 ProfessionalService(=LocalBusiness 子类型) 的 address
-    //    是必填语义，残缺值比不输出更容易被判失败。
-    if (cfg.city || cfg.registeredAddress) {
-      org.address = {
-        "@type": "PostalAddress",
-        // registeredAddress 已过 maskAddress 脱敏；未配置则为空串，此时只给到城市/国家
-        ...(cfg.registeredAddress ? { streetAddress: cfg.registeredAddress } : {}),
-        ...(cfg.city ? { addressLocality: cfg.city } : {}),
-        addressCountry: cfg.country || undefined,
-      };
     }
     if (cfg.registrationNumber) {
       // 统一社会信用代码用 identifier 表达，值已过 maskCode 脱敏
