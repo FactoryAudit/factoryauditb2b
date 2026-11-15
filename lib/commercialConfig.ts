@@ -45,15 +45,18 @@ export const COMMERCIAL = {
     maxUsd: 129,
   },
 
-  /** 现场工厂审核（spec §四） */
+  /** 现场工厂审核（spec §四）
+   *  2026-11-16 用户定价决策：**399 美元/次**（不再按人天叠加），单次报价含报告。
+   *  ⚠️ 成本提示：境外差旅通常高于 399，跨国项目需在报价时单独核差旅，或限定区域内。 */
   factoryAudit: {
     startingUsd: 399,
-    billing: "per_man_day_plus_travel" as const,
+    billing: "per_audit" as const,
   },
 
-  /** 产品验货（spec §七/§三十六：统一 From USD 199 / man-day） */
+  /** 产品验货（spec §七/§三十六）
+   *  2026-11-16 用户定价决策：**268 美元起**（原 199），仍按人天报价。 */
   inspection: {
-    startingUsd: 199,
+    startingUsd: 268,
     billing: "per_man_day_plus_travel" as const,
   },
 
@@ -96,7 +99,7 @@ export type CommercialConfig = typeof COMMERCIAL;
  */
 export const PRICE_ANCHORS = {
   verification: `USD ${COMMERCIAL.supplierVerification.minUsd}–${COMMERCIAL.supplierVerification.maxUsd}`,
-  audit: `USD ${COMMERCIAL.factoryAudit.startingUsd}+`,
+  audit: `USD ${COMMERCIAL.factoryAudit.startingUsd}/audit`,
   inspection: `USD ${COMMERCIAL.inspection.startingUsd}+`,
   membership: `USD ${COMMERCIAL.membershipAnnualUsd}/year`,
   sourcing: `${COMMERCIAL.sourcing.commissionMinPct}–${COMMERCIAL.sourcing.commissionMaxPct}%`,

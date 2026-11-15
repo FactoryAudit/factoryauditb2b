@@ -46,6 +46,12 @@ const SUPPLIER_FAQ: LocaleFaq = {
         groupZh: "开始之前",
         items: [
           {
+            // 商业逻辑硬约束（2026-11-16 用户明确）：自评免费，只有线下审核收费。
+            // 这条必须排在最前 —— 供应商第一个疑问就是"要不要钱"。
+            q: "Does the self-assessment cost anything?",
+            a: "No. Filling in your profile, uploading factory photos and submitting for review are all free — the online self-assessment never carries a charge. A fee applies only if you ask our team to conduct an on-site audit: USD 399 per audit, or the equivalent in CNY.",
+          },
+          {
             q: "What is the self-assessment, and why should I complete it?",
             a: "It is a structured questionnaire about your company and factory. The 14-item basic profile (about 5 minutes) is all you need to submit your listing for review and get it published. The quality, social compliance and environmental modules are optional and can be added later when a buyer asks for them.",
           },
@@ -149,6 +155,11 @@ const SUPPLIER_FAQ: LocaleFaq = {
         group: "Getting started",
         groupZh: "开始之前",
         items: [
+          {
+            // 商业逻辑硬约束（2026-11-16 用户明确）：自评免费，只有线下审核收费。
+            q: "做自评要花钱吗？",
+            a: "不需要。填写档案、上传工厂照片、提交审核全部免费，在线自评永远不收费。只有当你申请我们的线下实地审核时才收费：399 美元/次（或等值人民币）。",
+          },
           {
             q: "什么是自评？我为什么要填？",
             a: "它是一套关于你公司和工厂的结构化问卷。只需填完 14 项基础档案（约 5 分钟）就能提交审核并发布企业档案；质量、社会责任、环保三个专项模块是选填的，可以等买家要求时再补。",

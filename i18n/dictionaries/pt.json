@@ -1523,7 +1523,7 @@
   },
   "pricing": {
     "metaTitle": "Serviços e planos: preços em resumo",
-    "metaDesc": "Ferramentas gratuitas, verificação de fornecedores desde 99 USD, auditorias de fábrica desde 399 USD e inspeção desde 199 USD. Preços em USD.",
+    "metaDesc": "Ferramentas gratuitas, verificação de fornecedores desde 99 USD, auditorias de fábrica a 399 USD por auditoria e inspeção desde 268 USD. Preços em USD.",
     "h1": "Serviços e planos",
     "lead": "As ferramentas são gratuitas. Você só paga quando precisa de alguém para verificar o fornecedor no local.",
     "currencyNote": "Todos os preços em USD. Verificação e auditoria são orçadas por projeto.",
@@ -1561,8 +1561,8 @@
       },
       {
         "name": "Auditoria de fábrica",
-        "price": "A partir de 399 USD",
-        "note": "Por homem-dia mais deslocamento",
+        "price": "399 USD / auditoria",
+        "note": "Por auditoria no local, relatório incluído",
         "available": true,
         "features": [
           "Avaliação no local conforme o padrão exigido",
@@ -1607,13 +1607,13 @@
       },
       {
         "name": "Inspeção de produto",
-        "range": "USD 199+",
+        "range": "USD 268+",
         "note": "Orçado por homem-dia mais deslocamento, conforme país e escopo."
       },
       {
         "name": "Auditoria de fábrica no local",
-        "range": "USD 399+",
-        "note": "Orçado por homem-dia mais deslocamento, conforme país, porte da planta e padrão."
+        "range": "USD 399 / audit",
+        "note": "Orçado por auditoria, relatório incluído, conforme país, porte da planta e padrão."
       }
     ],
     "reportsNote": "O pagamento online ainda não está aberto. Cada item acima é orçado e faturado pela nossa equipe: nada aqui é assinatura e nada renova automaticamente.",
@@ -1655,7 +1655,7 @@
     "ctaText": "Precisa de um orçamento ou falar com alguém?",
     "ctaButton": "Fale com nossa equipe",
     "fallbackAnswers": {
-      "pricing": "As ferramentas gratuitas custam $0. A verificação de fornecedores custa $99 – $129 por fornecedor, a auditoria de fábrica a partir de 399 USD por homem-dia mais deslocação, e o monitoramento é orçado por fornecedor e por ano. A assinatura Founding Buyer custa US$ 399/ano e dá acesso a toda a base de fornecedores. O sourcing tem comissão de 3–5%, orçada antes do pedido. Todos os preços em USD. Diga-nos o seu produto e país.",
+      "pricing": "As ferramentas gratuitas custam $0. A verificação de fornecedores custa $99 – $129 por fornecedor, a a auditoria de fábrica custa 399 USD por auditoria, relatório incluído, e o monitoramento é orçado por fornecedor e por ano. A assinatura Founding Buyer custa US$ 399/ano e dá acesso a toda a base de fornecedores. O sourcing tem comissão de 3–5%, orçada antes do pedido. Todos os preços em USD. Diga-nos o seu produto e país.",
       "audit": "Cobrimos verificação de fornecedores, auditorias de fábrica e inspeções pré-embarque em programas como SMETA, BSCI, ISO 9001, ISO 14001, SA8000, WRAP e Sedex. Não vendemos certificados; verificamos e depois treinamos. Compartilhe seu produto e mercado-alvo e definiremos o escopo.",
       "coverage": "Cobrimos China, Vietnã, Tailândia, Malásia e Filipinas. Diga de qual país você compra e confirmaremos o que podemos verificar lá.",
       "training": "Sim. Auditamos sua fábrica e depois treinamos as equipes em sistemas de qualidade, controle de qualidade e processos de produção. Os planos são Starter US$ 280/fábrica e Pro US$ 950/fábrica, com opção Enterprise personalizada. Todo plano começa com uma auditoria de lacunas.",
@@ -2499,7 +2499,7 @@
       "Recomendação clara: PASS, FAIL ou REWORK"
     ],
     "pricingTitle": "Preços",
-    "pricingLead": "Os preços começam em USD 199 por homem-dia. Orçado por inspeção — o preço final depende do tipo de inspeção, escopo, localização, duração e disponibilidade do inspetor.",
+    "pricingLead": "Os preços começam em USD 268 por homem-dia. Orçado por inspeção — o preço final depende do tipo de inspeção, escopo, localização, duração e disponibilidade do inspetor.",
     "pricingNote": "Ainda não publicamos pacotes fixos. Assim que os pedidos reais nos fornecerem dados de custo honestos por região, categoria de produto e estágio, ofereceremos opções padrão.",
     "pricingCta": "Solicitar um orçamento de inspeção",
     "faqTitle": "Perguntas frequentes",

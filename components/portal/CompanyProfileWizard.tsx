@@ -230,6 +230,17 @@ export default function CompanyProfileWizard({
               ? "检查并确认详细信息。确认后，你可以进入下一步。"
               : "Check and confirm your details, then continue to the next step."}
           </p>
+          {/* 商业逻辑硬约束（2026-11-16）：填写档案与提交审核免费，只有线下审核收费。 */}
+          <p className="mt-3 flex items-start gap-1.5 rounded-lg bg-[#f1f7f3] px-3.5 py-2.5 text-[13px] leading-relaxed text-[#2e7d4f]">
+            <span aria-hidden="true" className="mt-0.5">
+              ✓
+            </span>
+            <span>
+              {zh
+                ? "填写档案与提交审核完全免费。只有申请线下实地审核时才收费 —— 399 美元/次（或等值人民币）。"
+                : "Filling in your profile and submitting for review are free. A fee applies only to an on-site audit — USD 399 per audit (or the equivalent in CNY)."}
+            </span>
+          </p>
         </header>
 
         {!isDone ? (

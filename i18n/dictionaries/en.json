@@ -2233,7 +2233,7 @@
   },
   "pricing": {
     "metaTitle": "Services & Plans: Pricing Overview",
-    "metaDesc": "Free supplier evaluation tools, supplier verification from USD 99, factory audits from USD 399 and product inspection from USD 199. All prices in USD.",
+    "metaDesc": "Free supplier evaluation tools, supplier verification from USD 99, factory audits at USD 399 per audit and product inspection from USD 268. All prices in USD.",
     "h1": "Services & Plans",
     "lead": "Use the tools free. Pay only when you need someone to check a supplier on the ground.",
     "currencyNote": "All prices in USD. Verification and audit are quoted per project.",
@@ -2271,8 +2271,8 @@
       },
       {
         "name": "Factory Audit",
-        "price": "From $399",
-        "note": "Per man-day plus travel",
+        "price": "$399 / audit",
+        "note": "Per on-site audit, report included",
         "available": true,
         "features": [
           "On-site assessment against your required standard",
@@ -2317,13 +2317,13 @@
       },
       {
         "name": "Product inspection",
-        "range": "USD 199+",
+        "range": "USD 268+",
         "note": "Quoted per man-day plus travel, based on country and scope."
       },
       {
         "name": "On-site factory audit",
-        "range": "USD 399+",
-        "note": "Quoted per man-day plus travel, based on country, site size and standard."
+        "range": "USD 399 / audit",
+        "note": "Quoted per audit, report included, based on country, site size and standard."
       }
     ],
     "reportsNote": "Online payment is not open yet. Every item above is quoted and invoiced by our team, so nothing here is a subscription and nothing renews.",
@@ -2365,7 +2365,7 @@
     "ctaText": "Need a quote or a human?",
     "ctaButton": "Talk to our team",
     "fallbackAnswers": {
-      "pricing": "Free tools are $0. Supplier verification is $99 – $129 per supplier, factory audits start at 399 USD per man-day plus travel, and supplier monitoring is quoted per supplier per year. Founding Buyer membership is $399/year for full database access. Sourcing carries a 3–5% commission, quoted before you order. All prices in USD. Tell me your product and country.",
+      "pricing": "Free tools are $0. Supplier verification is $99 – $129 per supplier, factory audits are 399 USD per audit, report included, and supplier monitoring is quoted per supplier per year. Founding Buyer membership is $399/year for full database access. Sourcing carries a 3–5% commission, quoted before you order. All prices in USD. Tell me your product and country.",
       "audit": "We cover supplier verification, factory audits and pre-shipment inspections against programs such as SMETA, BSCI, ISO 9001, ISO 14001, SA8000, WRAP and Sedex. We do not sell certificates; we verify and then train. Share your product and target market and we will scope it.",
       "coverage": "We cover China, Vietnam, Thailand, Malaysia and the Philippines. Tell me which country you are sourcing from and I will confirm what we can check there.",
       "training": "Yes. We audit your factory and then train the teams in quality systems, QC and production process. Plans are Starter $280/factory and Pro $950/factory, with a custom Enterprise option. Every plan starts with a gap audit.",
@@ -2499,7 +2499,7 @@
       "Clear recommendation: PASS, FAIL or REWORK"
     ],
     "pricingTitle": "Pricing",
-    "pricingLead": "Pricing starts from USD 199 per man-day. Quoted per inspection — final price depends on inspection type, scope, location, duration and inspector availability.",
+    "pricingLead": "Pricing starts from USD 268 per man-day. Quoted per inspection — final price depends on inspection type, scope, location, duration and inspector availability.",
     "pricingNote": "Standard single-site PSI in major manufacturing hubs typically falls around USD 200–350 per man-day, with travel potentially added outside major hubs. We confirm the exact quote after reviewing your requirements.",
     "pricingCta": "Request an inspection quote",
     "faqTitle": "Frequently asked questions",

@@ -34,6 +34,10 @@ type Props = {
   initialItemReview: Record<string, { status: string; note: string }> | null;
   initialEvidence: EvidenceMeta[];
   initialPhotos: FactoryPhotoMeta[];
+  /** 进入页面时自动展开的专项模块模板 code（如 SOCIAL_COMPLIANCE / ENVIRONMENT）。
+   *  来源：/portal 工作台的模块卡片用 ?module=xxx 跳过来，否则供应商点进来看不到
+   *  自己要填的那一份，还得自己找。 */
+  initialOpenModule?: string | null;
 };
 
 const STATUS_BADGE: Record<string, { cls: string; key: string }> = {
@@ -58,6 +62,7 @@ export default function SelfAssessmentForm({
   initialItemReview,
   initialEvidence,
   initialPhotos,
+  initialOpenModule,
 }: Props) {
   const t = (k: string) => dict[k] ?? k;
   /** 新增分层标签：dict 尚未收录 9 语翻译时回退英文，避免把 key 直接渲染到页面。
@@ -112,9 +117,23 @@ export default function SelfAssessmentForm({
   //   module = 质量 / 社会责任 / 环保，按买家要求逐个补，不阻塞档案发布
   // 分层的唯一目的：把「一进页面就要填 72 题」降到「先填 14 题」。
   const basicTemplates = useMemo(() => templates.filter(isBasicTemplate), [templates]);
-  const moduleTemplates = useMemo(() => templates.filter((t) => !isBasicTemplate(t)), [templates]);
+  // onlyModule（=initialOpenModule）有值时进入「单模块」模式：
+  //   只保留这一份专项模块，页面不再把基础档案 + 全部模块 + 照片 + 报告堆成一长条。
+  //   原实现 96 题全铺在一页，滚动长度极长（2026-11-16 用户反馈"太长了"）。
+  const moduleTemplates = useMemo(() => {
+    const mods = templates.filter((t) => !isBasicTemplate(t));
+    return initialOpenModule ? mods.filter((t) => t.code === initialOpenModule) : mods;
+  }, [templates, initialOpenModule]);
+  /** 单模块模式：只聚焦一份问卷 */
+  const focusMode = Boolean(initialOpenModule);
   // 折叠状态：默认全部收起 —— 首屏只看见「基础档案 + 3 张模块卡片」，不刷出 80 多道题。
-  const [openModules, setOpenModules] = useState<Record<string, boolean>>({});
+  const [openModules, setOpenModules] = useState<Record<string, boolean>>(() =>
+    // 从工作台模块卡片带 ?module=xxx 进来时，直接展开那一份，省得供应商自己找
+    initialOpenModule ? { [initialOpenModule]: true } : {}
+  );
+
+  /** 章节折叠状态（仅单模块模式使用）。默认只展开第一章。 */
+  const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
 
   const basicProgress = useMemo(
     () => computeAssessmentProgress(basicTemplates, responses, evidenceCounts),
@@ -370,30 +389,62 @@ export default function SelfAssessmentForm({
   }
 
   /** 渲染一个模板下的所有分组与题目（基础档案与专项模块共用同一套渲染） */
-  function renderSections(tpl: AssessmentTemplate) {
-    return tpl.sections.map((sec) => (
-      <div key={sec.code} className="mt-6">
-        <h3 className="text-lg font-semibold text-[#171717] border-l-4 border-[#171717] pl-3">
-          {sec.code}. {showZh && sec.titleZh ? sec.titleZh : sec.title}
-        </h3>
-        <div className="mt-3 space-y-4">
-          {sec.questions.map((q) => (
-            <div key={q.code} className="border rounded-lg p-3 bg-white">
-              <div className="flex items-start justify-between gap-3">
-                <p className="font-medium text-[#171717]">
-                  <span className="text-[#6d6b66]">{q.code}</span> {showZh && q.titleZh ? q.titleZh : q.title}
-                  {q.mandatory && <span className="text-[#b45309] ml-1">*</span>}
-                </p>
-              </div>
-              {showZh && q.requirementZh && (
-                <p className="text-xs text-[#6d6b66] mt-1">{q.requirementZh}</p>
-              )}
-              {renderAnswer(q)}
+  function renderSections(tpl: AssessmentTemplate, collapsible = false) {
+    return tpl.sections.map((sec, idx) => {
+      // 章节内已答数（折叠态也要显示进度，否则用户不知道哪章没填）
+      const secDone = sec.questions.filter((q) => {
+        const v = responses[q.code];
+        return Array.isArray(v) ? v.length > 0 : v != null && String(v).trim() !== "";
+      }).length;
+      // collapsible 模式（单模块）：默认只展开第一章，其余折叠。
+      // 社会责任 37 题分 9 章，全展开是 15 屏；折叠后回到 2–3 屏。
+      const isOpen = collapsible ? openSections[sec.code] ?? idx === 0 : true;
+
+      return (
+        <div key={sec.code} className={collapsible ? "mt-3 rounded-lg border bg-white" : "mt-6"}>
+          {collapsible ? (
+            <button
+              type="button"
+              onClick={() =>
+                setOpenSections((prev) => ({ ...prev, [sec.code]: !isOpen }))
+              }
+              aria-expanded={isOpen}
+              className="flex w-full items-center justify-between gap-3 p-4 text-left"
+            >
+              <span className="font-semibold text-[#171717]">
+                <span className="mr-1 text-[#9a968d]">{isOpen ? "▾" : "▸"}</span>
+                {sec.code}. {showZh && sec.titleZh ? sec.titleZh : sec.title}
+              </span>
+              <span className="shrink-0 text-xs text-[#6d6b66]">
+                {secDone}/{sec.questions.length}
+              </span>
+            </button>
+          ) : (
+            <h3 className="text-lg font-semibold text-[#171717] border-l-4 border-[#171717] pl-3">
+              {sec.code}. {showZh && sec.titleZh ? sec.titleZh : sec.title}
+            </h3>
+          )}
+          {isOpen && (
+            <div className={collapsible ? "space-y-4 px-4 pb-4" : "mt-3 space-y-4"}>
+              {sec.questions.map((q) => (
+                <div key={q.code} className="border rounded-lg p-3 bg-white">
+                  <div className="flex items-start justify-between gap-3">
+                    <p className="font-medium text-[#171717]">
+                      <span className="text-[#6d6b66]">{q.code}</span> {showZh && q.titleZh ? q.titleZh : q.title}
+                      {q.mandatory && <span className="text-[#b45309] ml-1">*</span>}
+                    </p>
+                  </div>
+                  {showZh && q.requirementZh && (
+                    <p className="text-xs text-[#6d6b66] mt-1">{q.requirementZh}</p>
+                  )}
+                  {renderAnswer(q)}
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
-      </div>
-    ));
+      );
+    });
   }
 
   /** 自评报告链接（GET 生成，浏览器直接打开即可看，也可另存为 HTML） */
@@ -412,11 +463,26 @@ export default function SelfAssessmentForm({
   return (
     <div className="space-y-6">
       {/* 状态 + 双层进度（基础档案 = 门槛 / 专项模块 = 加分） */}
+      {/* 状态 + 进度。单模块模式下只显示「这一份问卷」的进度，
+          不再并列 Step 1 / Step 2 两套数字（那会让供应商以为要填两份）。 */}
       <div className="card p-4 text-sm">
         <div className="flex items-center gap-3 flex-wrap">
           <span className="text-[#2b2b2b]">
-            {tOr("stageBasicLabel", "Step 1 · Company profile")}:{" "}
-            <strong className="text-[#171717]">{basicProgress.answered}</strong> / {basicProgress.total}
+            {focusMode ? (
+              <>
+                {(() => {
+                  const tpl = moduleTemplates[0];
+                  return tpl ? (showZh && tpl.nameZh ? tpl.nameZh : tpl.name) : tOr("stageModuleLabel", "Module");
+                })()}
+                {": "}
+                <strong className="text-[#171717]">{moduleProgress.answered}</strong> / {moduleProgress.total}
+              </>
+            ) : (
+              <>
+                {tOr("stageBasicLabel", "Step 1 · Company profile")}:{" "}
+                <strong className="text-[#171717]">{basicProgress.answered}</strong> / {basicProgress.total}
+              </>
+            )}
           </span>
           {badge && (
             <span className={`px-2 py-0.5 rounded-full text-xs ${badge.cls}`}>{t(badge.key)}</span>
@@ -428,17 +494,33 @@ export default function SelfAssessmentForm({
             </span>
           )}
         </div>
-        <div className="mt-1 text-xs text-[#6d6b66]">
-          {tOr("stageModuleLabel", "Step 2 · Optional modules")} {moduleProgress.answered}/{moduleProgress.total}
-        </div>
+        {!focusMode && (
+          <div className="mt-1 text-xs text-[#6d6b66]">
+            {tOr("stageModuleLabel", "Step 2 · Optional modules")} {moduleProgress.answered}/{moduleProgress.total}
+          </div>
+        )}
         <div className="mt-2 h-2 bg-[#ebe8e1] rounded-full overflow-hidden">
           <div
             className="h-full bg-[#171717]"
-            style={{ width: `${basicProgress.total ? (basicProgress.answered / basicProgress.total) * 100 : 0}%` }}
+            style={{
+              width: `${
+                focusMode
+                  ? moduleProgress.total
+                    ? (moduleProgress.answered / moduleProgress.total) * 100
+                    : 0
+                  : basicProgress.total
+                  ? (basicProgress.answered / basicProgress.total) * 100
+                  : 0
+              }%`,
+            }}
           />
         </div>
         <p className="mt-2 text-xs text-[#6d6b66]">
-          {basicsDone
+          {focusMode
+            ? showZh
+              ? "这一份问卷不影响档案发布 —— 买家要看时再补也可以。填过的会自动存草稿。"
+              : "This module does not block your listing — add it whenever a buyer asks. Answers are saved as a draft automatically."
+            : basicsDone
             ? tOr("stageBasicDone", "Company profile complete — you can submit for review now.")
             : tOr("stageBasicHint", "Complete the company profile below to submit for review. Optional modules are not required.")}
         </p>
@@ -473,46 +555,63 @@ export default function SelfAssessmentForm({
         }}
         className="space-y-6"
       >
-        {/* ---------------- Step 1 · 基础档案（提交门槛，恒展开） ---------------- */}
-        {basicTemplates.map((tpl) => (
-          <section key={tpl.code} className="card p-6">
-            <div className="flex items-start justify-between gap-3 flex-wrap">
-              <h2 className="text-2xl font-bold text-[#171717]">
-                {tOr("stageBasicLabel", "Step 1 · Company profile")}
-              </h2>
-              <span className="text-sm text-[#6d6b66]">
-                {basicProgress.answered}/{basicProgress.total}
-              </span>
-            </div>
-            <p className="text-sm text-[#8c8982] mt-1">
-              {showZh && tpl.nameZh ? tpl.nameZh : tpl.name}
-              {tpl.description ? ` — ${tpl.description}` : ""}
-            </p>
-            {renderSections(tpl)}
-          </section>
-        ))}
+        {/* ---------------- Step 1 · 基础档案（提交门槛，恒展开） ----------------
+            单模块模式（从工作台模块卡片进来）下整段跳过：用户目标就是填那一份问卷，
+            再把 14 题基础档案铺在前面只会让页面更长。 */}
+        {!focusMode &&
+          basicTemplates.map((tpl) => (
+            <section key={tpl.code} className="card p-6">
+              <div className="flex items-start justify-between gap-3 flex-wrap">
+                <h2 className="text-2xl font-bold text-[#171717]">
+                  {tOr("stageBasicLabel", "Step 1 · Company profile")}
+                </h2>
+                <span className="text-sm text-[#6d6b66]">
+                  {basicProgress.answered}/{basicProgress.total}
+                </span>
+              </div>
+              <p className="text-sm text-[#8c8982] mt-1">
+                {showZh && tpl.nameZh ? tpl.nameZh : tpl.name}
+                {tpl.description ? ` — ${tpl.description}` : ""}
+              </p>
+              {renderSections(tpl)}
+            </section>
+          ))}
 
         {/* ---------------- Step 2 · 专项模块（默认折叠，不阻塞提交） ---------------- */}
         {moduleTemplates.length > 0 && (
           <section className="card p-6">
             <div className="flex items-start justify-between gap-3 flex-wrap">
               <h2 className="text-2xl font-bold text-[#171717]">
-                {tOr("stageModuleLabel", "Step 2 · Optional modules")}
+                {focusMode
+                  ? (() => {
+                      const tpl = moduleTemplates[0];
+                      return tpl ? (showZh && tpl.nameZh ? tpl.nameZh : tpl.name) : tOr("stageModuleLabel", "Module");
+                    })()
+                  : tOr("stageModuleLabel", "Step 2 · Optional modules")}
               </h2>
               <span className="text-sm text-[#6d6b66]">
                 {moduleProgress.answered}/{moduleProgress.total}
               </span>
             </div>
             <p className="text-sm text-[#8c8982] mt-1">
-              {tOr(
-                "stageModuleHint",
-                "Fill these in when a buyer asks for them. They are not required to publish your company profile."
-              )}
+              {focusMode
+                ? showZh
+                  ? "按章节填写即可，随时保存草稿。"
+                  : "Fill it section by section — your answers are saved as a draft."
+                : tOr(
+                    "stageModuleHint",
+                    "Fill these in when a buyer asks for them. They are not required to publish your company profile."
+                  )}
             </p>
             <div className="mt-4 space-y-3">
               {moduleTemplates.map((tpl) => {
                 const p = progressOfOne(tpl);
                 const open = !!openModules[tpl.code];
+                // 单模块模式：外层不再套折叠 —— 内层已按章节折叠，
+                // 再套一层会出现「模块折叠 → 章节折叠」两级，用户要点两次才看到题目。
+                if (focusMode) {
+                  return <div key={tpl.code}>{renderSections(tpl, true)}</div>;
+                }
                 return (
                   <div key={tpl.code} className="border rounded-lg bg-white">
                     <button
@@ -535,7 +634,7 @@ export default function SelfAssessmentForm({
                         {p.answered}/{p.total}
                       </span>
                     </button>
-                    {open && <div className="px-4 pb-4">{renderSections(tpl)}</div>}
+                    {open && <div className="px-4 pb-4">{renderSections(tpl, false)}</div>}
                   </div>
                 );
               })}
@@ -562,7 +661,10 @@ export default function SelfAssessmentForm({
           />
         </section>
 
-        {/* 自评报告（Self-Assessment Summary）——即时生成，不落库、不对外 */}
+        {/* 自评报告（Self-Assessment Summary）——即时生成，不落库、不对外。
+            单模块模式下隐藏：报告基于基础档案，而此模式不渲染 Step 1，
+            会冒出「请先完成 Step 1」的自相矛盾提示。 */}
+        {!focusMode && (
         <section className="card p-6">
           <h3 className="text-lg font-semibold text-[#171717]">
             {tOr("reportTitle", "Self-assessment report")}
@@ -606,6 +708,7 @@ export default function SelfAssessmentForm({
             )}
           </p>
         </section>
+        )}
 
         {submitBlocked && (
           <div className="p-3 rounded-lg text-sm bg-amber-50 text-amber-800">{submitBlocked}</div>

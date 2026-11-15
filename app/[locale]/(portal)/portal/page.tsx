@@ -5,6 +5,8 @@ import { getCurrentUser } from "@/lib/supabaseServer";
 import { resolveSupplierAccess } from "@/lib/supplierAccess";
 import { getSupplierStats } from "@/lib/visibility";
 import { getTrustSnapshot } from "@/lib/trustProfile";
+import { getChecklistTemplates } from "@/lib/supplierAssessments";
+import { computeAssessmentProgress, type AssessmentResponses } from "@/lib/assessmentShared";
 import { createAdminClient } from "@/lib/supabaseAdmin";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
@@ -126,39 +128,54 @@ export default async function PortalPage({
     let slug = "";
     let completenessPercent: number | null = null;
     let legalName = "";
+    let isPublished = false;
     if (db) {
       const { data: row } = await db
         .from("suppliers")
-        .select("slug, legal_name, completeness_percent")
+        .select("slug, legal_name, completeness_percent, is_published")
         .eq("id", supplierId)
         .maybeSingle();
       slug = row?.slug ?? "";
       legalName = row?.legal_name ?? "";
       completenessPercent = row?.completeness_percent ?? null;
+      isPublished = row?.is_published === true;
     }
 
-    // 自评进度：已提交=100，仅有草稿=30，未开始=0
+    // 自评数据：一次取出 responses + 状态，同时用于「基础档案 / 社会责任 / 环境」三个进度。
+    // 之前只查了 id（判断有没有提交），导致专项模块进度无从计算。
     let selfPct = 0;
+    let responses: AssessmentResponses = {};
     if (db) {
-      const { data: sub } = await db
+      const { data: rec } = await db
         .from("supplier_assessments")
-        .select("id")
+        .select("status, responses_json")
         .eq("supplier_id", supplierId)
         .eq("assessment_type", "self_assessment")
-        .eq("status", "submitted")
-        .limit(1);
-      if (sub && sub.length > 0) {
-        selfPct = 100;
-      } else {
-        const { data: draft } = await db
-          .from("supplier_assessments")
-          .select("id")
-          .eq("supplier_id", supplierId)
-          .eq("assessment_type", "self_assessment")
-          .limit(1);
-        if (draft && draft.length > 0) selfPct = 30;
+        .order("updated_at", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      if (rec) {
+        selfPct = rec.status === "submitted" ? 100 : 30;
+        const rj = (rec as { responses_json?: unknown }).responses_json;
+        responses =
+          rj && typeof rj === "object" && !Array.isArray(rj)
+            ? (rj as AssessmentResponses)
+            : {};
       }
     }
+
+    // 专项模块进度（社会责任 / 环境）。与 /supplier-assessment 读写同一份 responses，
+    // 所以这里算出来的就是供应商在自评页真实填到的进度，不是另记一份。
+    const templates = await getChecklistTemplates();
+    const modulePct = (code: string): number | null => {
+      const tpl = templates.find((t) => t.code === code);
+      if (!tpl) return null;
+      const p = computeAssessmentProgress([tpl], responses, {});
+      if (p.total === 0) return 0;
+      return Math.round((p.answered / p.total) * 100);
+    };
+    const socialPct = modulePct("SOCIAL_COMPLIANCE");
+    const envPct = modulePct("ENVIRONMENT");
 
     // 核验进度：现场/线上核验=100，自评=50，无=0
     const snap = await getTrustSnapshot(supplierId);
@@ -262,6 +279,46 @@ export default async function PortalPage({
           />
         </div>
 
+        {/* 专项模块（社会责任 / 环境）。
+            这两个模块的题库一直在库里（SOCIAL_COMPLIANCE 37 题 / ENVIRONMENT 10 题），
+            但后台此前没有任何入口，供应商根本找不到 —— 等于白建。这里补上并列卡片，
+            与 Sedex 那种「自我评估表 / 环境」两张卡的布局对齐。
+            进度取自同一份 responses（和 /supplier-assessment 完全同源）。 */}
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          <RingCard
+            value={socialPct}
+            title={zh ? "社会责任问卷" : "Social compliance"}
+            desc={
+              zh
+                ? "劳工权益、健康安全、工作时间与商业道德。买家常把它当作现场审核前的初筛。"
+                : "Labour rights, health & safety, working hours and business ethics — often used as a pre-audit screen."
+            }
+            ctaLabel={
+              socialPct && socialPct > 0
+                ? zh
+                  ? "继续填写"
+                  : "Continue"
+                : zh
+                ? "开始填写"
+                : "Start"
+            }
+            ctaHref={p("/supplier-assessment") + "?module=SOCIAL_COMPLIANCE"}
+          />
+          <RingCard
+            value={envPct}
+            title={zh ? "环境问卷" : "Environment"}
+            desc={
+              zh
+                ? "环保许可、废水废气、危废处理与能耗管理。"
+                : "Environmental permits, wastewater and emissions, hazardous waste and energy use."
+            }
+            ctaLabel={
+              envPct && envPct > 0 ? (zh ? "继续填写" : "Continue") : zh ? "开始填写" : "Start"
+            }
+            ctaHref={p("/supplier-assessment") + "?module=ENVIRONMENT"}
+          />
+        </div>
+
         {/* 表现数据 */}
         <Panel>
           <h2 className="text-[15px] font-bold text-[#171717]">
@@ -288,7 +345,8 @@ export default async function PortalPage({
           </Link>
         </Panel>
 
-        {/* 公开档案 */}
+        {/* 公开档案。未发布时不给链接 —— 之前这里无条件渲染「查看」，
+            点到 /suppliers/<slug> 是 404（未发布档案本就不对外），等于给死链。 */}
         {slug ? (
           <Panel className="flex items-center justify-between gap-4">
             <div>
@@ -296,12 +354,24 @@ export default async function PortalPage({
                 {zh ? "你的公开档案" : "Your public profile"}
               </h2>
               <p className="mt-1 text-sm text-[#6d6b66]">
-                {zh ? "看看买家眼中的企业档案。" : "See how buyers view your listing."}
+                {isPublished
+                  ? zh
+                    ? "看看买家眼中的企业档案。"
+                    : "See how buyers view your listing."
+                  : zh
+                  ? "档案尚未发布。提交审核并通过后，买家才能在目录里看到它。"
+                  : "Not published yet — it becomes visible in the directory once your submission is approved."}
               </p>
             </div>
-            <Link href={p(`/suppliers/${slug}`)} className="btn btn-outline shrink-0 text-sm">
-              {zh ? "查看" : "View"}
-            </Link>
+            {isPublished ? (
+              <Link href={p(`/suppliers/${slug}`)} className="btn btn-outline shrink-0 text-sm">
+                {zh ? "查看" : "View"}
+              </Link>
+            ) : (
+              <span className="shrink-0 rounded-full bg-[#f2efe9] px-3 py-1 text-xs font-medium text-[#6d6b66]">
+                {zh ? "未发布" : "Not published"}
+              </span>
+            )}
           </Panel>
         ) : null}
       </div>

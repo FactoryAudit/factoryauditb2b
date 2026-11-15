@@ -1523,7 +1523,7 @@
   },
   "pricing": {
     "metaTitle": "Services et formules : tarifs et forfaits",
-    "metaDesc": "Outils gratuits, vérification de fournisseur dès 99 USD, audits d'usine dès 399 USD et inspection de produit dès 199 USD. Tous les prix en USD.",
+    "metaDesc": "Outils gratuits, vérification de fournisseur dès 99 USD, audits d'usine à 399 USD par audit et inspection de produit dès 268 USD. Tous les prix en USD.",
     "h1": "Services et formules",
     "lead": "Les outils sont gratuits. Vous ne payez que lorsque quelqu'un doit vérifier un fournisseur sur le terrain.",
     "currencyNote": "Tous les prix sont en USD. La vérification et l'audit sont devisés par projet.",
@@ -1561,8 +1561,8 @@
       },
       {
         "name": "Audit d'usine",
-        "price": "À partir de 399 USD",
-        "note": "Par jour-homme plus déplacement",
+        "price": "399 USD / audit",
+        "note": "Par audit sur site, rapport inclus",
         "available": true,
         "features": [
           "Évaluation sur site selon le standard requis",
@@ -1607,13 +1607,13 @@
       },
       {
         "name": "Inspection produit",
-        "range": "USD 199+",
+        "range": "USD 268+",
         "note": "Devis par jour-homme plus déplacement, selon le pays et le périmètre."
       },
       {
         "name": "Audit d'usine sur site",
-        "range": "USD 399+",
-        "note": "Devis par jour-homme plus déplacement, selon le pays, la taille du site et le standard."
+        "range": "USD 399 / audit",
+        "note": "Devis par audit, rapport inclus, selon le pays, la taille du site et le standard."
       }
     ],
     "reportsNote": "Le paiement en ligne n'est pas encore ouvert. Chaque poste ci-dessus est devisé et facturé par notre équipe : rien ici n'est un abonnement et rien ne se renouvelle.",
@@ -1655,7 +1655,7 @@
     "ctaText": "Besoin d'un devis ou d'un interlocuteur ?",
     "ctaButton": "Parler à notre équipe",
     "fallbackAnswers": {
-      "pricing": "Les outils gratuits sont à $0. La vérification fournisseur coûte $99 – $129 par fournisseur, l'audit d'usine à partir de 399 USD par jour-homme plus le déplacement, et le monitoring est chiffré par fournisseur et par an. L'adhésion Founding Buyer coûte 99 $/an et donne accès à toute la base de fournisseurs. Le sourcing est facturé avec une commission de 3–5 %, chiffrée avant la commande. Tous les prix en USD. Indiquez-nous votre produit et votre pays.",
+      "pricing": "Les outils gratuits sont à $0. La vérification fournisseur coûte $99 – $129 par fournisseur, l'audit d'usine coûte 399 USD par audit, rapport inclus, et le monitoring est chiffré par fournisseur et par an. L'adhésion Founding Buyer coûte 99 $/an et donne accès à toute la base de fournisseurs. Le sourcing est facturé avec une commission de 3–5 %, chiffrée avant la commande. Tous les prix en USD. Indiquez-nous votre produit et votre pays.",
       "audit": "Nous couvrons la vérification de fournisseurs, les audits d'usine et les inspections avant expédition selon des programmes tels que SMETA, BSCI, ISO 9001, ISO 14001, SA8000, WRAP et Sedex. Nous ne vendons pas de certificats : nous vérifions, puis nous formons. Indiquez-nous votre produit et votre marché cible, nous définirons le périmètre.",
       "coverage": "Nous couvrons la Chine, le Vietnam, la Thaïlande, la Malaisie et les Philippines. Indiquez-nous votre pays d'approvisionnement et nous confirmerons ce que nous pouvons vérifier sur place.",
       "training": "Oui. Nous auditons votre usine, puis nous formons les équipes aux systèmes qualité, au contrôle qualité et aux processus de production. Les formules sont Starter 280 $/usine et Pro 950 $/usine, avec une option Entreprise sur mesure. Chaque formule commence par un audit des écarts.",
@@ -2499,7 +2499,7 @@
       "Recommandation claire : PASS, FAIL ou RÉPERTOIRE"
     ],
     "pricingTitle": "Tarification",
-    "pricingLead": "Les prix commencent à USD 199 par jour-homme. Devis par inspection — le prix final dépend du type d'inspection, de la portée, de l'emplacement, de la durée et de la disponibilité de l'inspecteur.",
+    "pricingLead": "Les prix commencent à USD 268 par jour-homme. Devis par inspection — le prix final dépend du type d'inspection, de la portée, de l'emplacement, de la durée et de la disponibilité de l'inspecteur.",
     "pricingNote": "Nous ne publions pas encore de packages fixes. Une fois que les commandes réelles nous donneront des données de coûts honnêtes par région, catégorie de produit et étape, nous proposerons des options standard.",
     "pricingCta": "Demander un devis d'inspection",
     "faqTitle": "Questions fréquemment posées",

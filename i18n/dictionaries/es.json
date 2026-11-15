@@ -1523,7 +1523,7 @@
   },
   "pricing": {
     "metaTitle": "Servicios y planes: precios y paquetes",
-    "metaDesc": "Herramientas gratuitas, verificación de proveedores desde 99 USD, auditorías de fábrica desde 399 USD e inspección de producto desde 199 USD. Precios en USD.",
+    "metaDesc": "Herramientas gratuitas, verificación de proveedores desde 99 USD, auditorías de fábrica a 399 USD por auditoría e inspección de producto desde 268 USD. Precios en USD.",
     "h1": "Servicios y planes",
     "lead": "Las herramientas son gratuitas. Solo pagas cuando necesitas que alguien verifique al proveedor sobre el terreno.",
     "currencyNote": "Todos los precios en USD. La verificación y la auditoría se presupuestan por proyecto.",
@@ -1561,8 +1561,8 @@
       },
       {
         "name": "Auditoría de fábrica",
-        "price": "Desde 399 USD",
-        "note": "Por día-hombre más viaje",
+        "price": "399 USD / auditoría",
+        "note": "Por auditoría in situ, informe incluido",
         "available": true,
         "features": [
           "Evaluación in situ según el estándar requerido",
@@ -1607,13 +1607,13 @@
       },
       {
         "name": "Inspección de producto",
-        "range": "USD 199+",
+        "range": "USD 268+",
         "note": "Presupuesto por día-hombre más viaje, según país y alcance."
       },
       {
         "name": "Auditoría de fábrica in situ",
-        "range": "USD 399+",
-        "note": "Presupuesto por día-hombre más viaje, según país, tamaño de la planta y estándar."
+        "range": "USD 399 / audit",
+        "note": "Presupuesto por auditoría, informe incluido, según país, tamaño de la planta y estándar."
       }
     ],
     "reportsNote": "El pago en línea aún no está abierto. Cada concepto anterior lo presupuesta y factura nuestro equipo: nada aquí es una suscripción y nada se renueva automáticamente.",
@@ -1655,7 +1655,7 @@
     "ctaText": "¿Necesitas un presupuesto o un ser humano?",
     "ctaButton": "Hable con nuestro equipo:",
     "fallbackAnswers": {
-      "pricing": "Las herramientas gratuitas cuestan $0. La verificación de proveedores cuesta $99 – $129 por proveedor, la auditoría de fábrica desde 399 USD por día-hombre más viaje, y el monitoreo se presupuesta por proveedor y año. La membresía Founding Buyer cuesta 99 $/año y da acceso a toda la base de proveedores. El sourcing tiene una comisión del 3–5 %, presupuestada antes del pedido. Todos los precios en USD. Dime tu producto y país.",
+      "pricing": "Las herramientas gratuitas cuestan $0. La verificación de proveedores cuesta $99 – $129 por proveedor, la auditoría de fábrica cuesta 399 USD por auditoría, informe incluido, y el monitoreo se presupuesta por proveedor y año. La membresía Founding Buyer cuesta 99 $/año y da acceso a toda la base de proveedores. El sourcing tiene una comisión del 3–5 %, presupuestada antes del pedido. Todos los precios en USD. Dime tu producto y país.",
       "audit": "Cubrimos la verificación de proveedores, las auditorías de fábrica y las inspecciones previas al envío con programas como SMETA, BSCI, ISO 9001, ISO 14001, SA8000, WRAP y Sedex. No vendemos certificados; verificamos y luego capacitamos. Comparta su producto y mercado objetivo y lo analizaremos.",
       "coverage": "Cubrimos China, Vietnam, Tailandia, Malasia y Filipinas. Dime desde qué país compras y confirmaré qué podemos verificar allí.",
       "training": "Sí, auditamos su fábrica y luego capacitamos a los equipos en sistemas de calidad, control de calidad y proceso de producción. Los planes son Starter $ 280/fábrica y Pro $ 950/fábrica, con una opción Enterprise personalizada. Cada plan comienza con una auditoría de deficiencias.",
@@ -2499,7 +2499,7 @@
       "Recomendación clara: PASS, FAIL o REWORK"
     ],
     "pricingTitle": "Precio",
-    "pricingLead": "Los precios empiezan en USD 199 por hombre-día. Cotizado por inspección — el precio final depende del tipo de inspección, el alcance, la ubicación, la duración y la disponibilidad del inspector.",
+    "pricingLead": "Los precios empiezan en USD 268 por hombre-día. Cotizado por inspección — el precio final depende del tipo de inspección, el alcance, la ubicación, la duración y la disponibilidad del inspector.",
     "pricingNote": "Aún no publicamos paquetes fijos. Una vez que los pedidos reales nos proporcionen datos de costes honestos por región, categoría de producto y etapa, ofreceremos opciones estándar.",
     "pricingCta": "Solicitar presupuesto de inspección",
     "faqTitle": "Preguntas frecuentes",

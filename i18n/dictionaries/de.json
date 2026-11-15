@@ -1523,7 +1523,7 @@
   },
   "pricing": {
     "metaTitle": "Leistungen & Pläne: Preise im Überblick",
-    "metaDesc": "Kostenlose Tools, Lieferantenverifizierung ab 99 USD, Werksaudits ab 399 USD und Produktinspektion ab 199 USD. Alle Preise in USD.",
+    "metaDesc": "Kostenlose Tools, Lieferantenverifizierung ab 99 USD, Werksaudits für 399 USD pro Audit und Produktinspektion ab 268 USD. Alle Preise in USD.",
     "h1": "Leistungen & Pläne",
     "lead": "Die Tools sind kostenlos. Sie zahlen nur, wenn jemand einen Lieferanten vor Ort prüfen soll.",
     "currencyNote": "Alle Preise in USD. Verifizierung und Audit werden pro Projekt angeboten.",
@@ -1561,8 +1561,8 @@
       },
       {
         "name": "Werksaudit",
-        "price": "ab 399 USD",
-        "note": "Pro Personentag plus Reisekosten",
+        "price": "399 USD / Audit",
+        "note": "Pro Vor-Ort-Audit, Bericht inklusive",
         "available": true,
         "features": [
           "Bewertung vor Ort nach dem geforderten Standard",
@@ -1607,13 +1607,13 @@
       },
       {
         "name": "Produktinspektion",
-        "range": "USD 199+",
+        "range": "USD 268+",
         "note": "Angebot pro Personentag plus Reisekosten, je nach Land und Umfang."
       },
       {
         "name": "Werksaudit vor Ort",
-        "range": "USD 399+",
-        "note": "Angebot pro Personentag plus Reisekosten, je nach Land, Werksgröße und Standard."
+        "range": "USD 399 / audit",
+        "note": "Angebot pro Audit, Bericht inklusive, je nach Land, Werksgröße und Standard."
       }
     ],
     "reportsNote": "Die Online-Zahlung ist noch nicht freigeschaltet. Jeder Posten oben wird von unserem Team angeboten und in Rechnung gestellt. Nichts davon ist ein Abonnement und nichts verlängert sich automatisch.",
@@ -1655,7 +1655,7 @@
     "ctaText": "Angebot oder persönlichen Kontakt benötigt?",
     "ctaButton": "Mit unserem Team sprechen",
     "fallbackAnswers": {
-      "pricing": "Kostenlose Tools kosten $0. Die Lieferantenverifizierung kostet $99 – $129 pro Lieferant, das Werksaudit ab 399 USD pro Personentag zuzüglich Reisekosten, und das Lieferanten-Monitoring wird pro Lieferant und Jahr angeboten. Die Founding-Buyer-Mitgliedschaft kostet 99 $/Jahr und umfasst die gesamte Lieferantendatenbank. Sourcing wird mit 3–5 % Provision auf den Auftragswert berechnet, vor Auftragserteilung angeboten. Alle Preise in USD. Nennen Sie uns Produkt und Land.",
+      "pricing": "Kostenlose Tools kosten $0. Die Lieferantenverifizierung kostet $99 – $129 pro Lieferant, das Werksaudit kostet 399 USD pro Audit, Bericht inklusive, und das Lieferanten-Monitoring wird pro Lieferant und Jahr angeboten. Die Founding-Buyer-Mitgliedschaft kostet 99 $/Jahr und umfasst die gesamte Lieferantendatenbank. Sourcing wird mit 3–5 % Provision auf den Auftragswert berechnet, vor Auftragserteilung angeboten. Alle Preise in USD. Nennen Sie uns Produkt und Land.",
       "audit": "Wir decken Lieferantenprüfung, Werksaudits und Vorversandinspektionen nach Programmen wie SMETA, BSCI, ISO 9001, ISO 14001, SA8000, WRAP und Sedex ab. Wir verkaufen keine Zertifikate; wir prüfen und schulen anschließend. Nennen Sie uns Produkt und Zielmarkt, dann erstellen wir den Umfang.",
       "coverage": "Wir decken China, Vietnam, Thailand, Malaysia und die Philippinen ab. Nennen Sie uns Ihr Beschaffungsland und wir bestätigen, was wir dort prüfen können.",
       "training": "Ja. Wir prüfen Ihre Fabrik und schulen die Teams anschließend in Qualitätsmanagement, QC und Produktionsprozessen. Die Pläne sind Starter 280 $/Fabrik und Pro 950 $/Fabrik, dazu eine individuelle Enterprise-Option. Jeder Plan beginnt mit einem Gap-Audit.",
@@ -2499,7 +2499,7 @@
       "Klare Empfehlung: PASS, FAIL oder REWORK"
     ],
     "pricingTitle": "Preisgestaltung",
-    "pricingLead": "Preise ab USD 199 pro Mann-Tag. Angebot je Inspektion — der endgültige Preis hängt von Inspektionsart, Umfang, Standort, Dauer und Verfügbarkeit des Inspektors ab.",
+    "pricingLead": "Preise ab USD 268 pro Mann-Tag. Angebot je Inspektion — der endgültige Preis hängt von Inspektionsart, Umfang, Standort, Dauer und Verfügbarkeit des Inspektors ab.",
     "pricingNote": "Wir veröffentlichen noch keine festen Pakete. Sobald uns echte Bestellungen ehrliche Kostendaten pro Region, Produktkategorie und Phase liefern, bieten wir Standardoptionen an.",
     "pricingCta": "Fordern Sie ein Inspektionsangebot an",
     "faqTitle": "Häufig gestellte Fragen",
