@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ProgressRing from "@/components/portal/ProgressRing";
 import { getCurrentUser } from "@/lib/supabaseServer";
 import { resolveSupplierAccess } from "@/lib/supplierAccess";
 import { getSupplierStats } from "@/lib/visibility";
+import { getTrustSnapshot } from "@/lib/trustProfile";
 import { createAdminClient } from "@/lib/supabaseAdmin";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 
-// /portal —— 工作台总览页（内容）。
-//
-// 侧边栏外壳已由 (portal)/layout.tsx 统一提供，本页面只渲染工作台内容。
-// 服务端按身份分流：供应商 → 供应商工作台；买家 → 买家工作台。
-// 未登录时由 layout 直接放行 children，本页面渲染「请登录」引导。
+// /portal —— 工作台总览（视觉参照 Sedex 后台：进度环卡片组 + 大留白）
+// 侧边栏外壳由 (portal)/layout.tsx 提供，本页只渲染内容。
 
 const PATH = "/portal";
 
@@ -35,6 +34,55 @@ export async function generateMetadata({
   });
 }
 
+/** Sedex 风格的白卡片 */
+function Panel({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <section className={"rounded-xl border border-[#ecebe7] bg-white p-6 sm:p-7 " + className}>
+      {children}
+    </section>
+  );
+}
+
+/** 带进度环的卡片 */
+function RingCard({
+  value,
+  title,
+  desc,
+  ctaLabel,
+  ctaHref,
+}: {
+  value: number | null;
+  title: string;
+  desc: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}) {
+  return (
+    <div className="flex items-start gap-5 rounded-xl border border-[#ecebe7] bg-white p-6">
+      <ProgressRing value={value} />
+      <div className="min-w-0 flex-1">
+        <h3 className="text-[15px] font-bold text-[#171717]">{title}</h3>
+        <p className="mt-1 text-sm leading-relaxed text-[#6d6b66]">{desc}</p>
+        {ctaLabel && ctaHref ? (
+          <Link
+            href={ctaHref}
+            className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-[#171717] hover:underline"
+          >
+            {ctaLabel}
+            <span aria-hidden="true">→</span>
+          </Link>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
 export default async function PortalPage({
   params,
 }: {
@@ -48,10 +96,9 @@ export default async function PortalPage({
 
   const user = await getCurrentUser();
 
-  // 未登录 → 请登录引导（服务端直出，不依赖客户端 /api/me）
   if (!user) {
     return (
-      <div className="card p-8 text-center max-w-xl mx-auto">
+      <Panel className="text-center">
         <h1 className="text-2xl font-bold text-[#171717]">{t.account.signInTitle}</h1>
         <p className="mt-2 text-[#6d6b66]">{t.account.signInLead}</p>
         <div className="mt-6 flex justify-center gap-3">
@@ -62,11 +109,10 @@ export default async function PortalPage({
             {t.account.panel.registerCta}
           </Link>
         </div>
-      </div>
+      </Panel>
     );
   }
 
-  // 供应商归属裁决（复用唯一裁决层，session 邮箱反查 suppliers.contact_email）
   const access = await resolveSupplierAccess({
     claimedSupplierId: null,
     email: null,
@@ -80,113 +126,184 @@ export default async function PortalPage({
     let slug = "";
     let completenessPercent: number | null = null;
     let legalName = "";
-    let verificationStatus: string | null = null;
     if (db) {
       const { data: row } = await db
         .from("suppliers")
-        .select("slug, legal_name, completeness_percent, verification_status")
+        .select("slug, legal_name, completeness_percent")
         .eq("id", supplierId)
         .maybeSingle();
       slug = row?.slug ?? "";
       legalName = row?.legal_name ?? "";
       completenessPercent = row?.completeness_percent ?? null;
-      verificationStatus = row?.verification_status ?? null;
     }
+
+    // 自评进度：已提交=100，仅有草稿=30，未开始=0
+    let selfPct = 0;
+    if (db) {
+      const { data: sub } = await db
+        .from("supplier_assessments")
+        .select("id")
+        .eq("supplier_id", supplierId)
+        .eq("assessment_type", "self_assessment")
+        .eq("status", "submitted")
+        .limit(1);
+      if (sub && sub.length > 0) {
+        selfPct = 100;
+      } else {
+        const { data: draft } = await db
+          .from("supplier_assessments")
+          .select("id")
+          .eq("supplier_id", supplierId)
+          .eq("assessment_type", "self_assessment")
+          .limit(1);
+        if (draft && draft.length > 0) selfPct = 30;
+      }
+    }
+
+    // 核验进度：现场/线上核验=100，自评=50，无=0
+    const snap = await getTrustSnapshot(supplierId);
+    const verifyPct =
+      snap.status === "ON_SITE_VERIFIED" || snap.status === "ONLINE_VERIFIED"
+        ? 100
+        : snap.status === "SELF_ASSESSED"
+        ? 50
+        : 0;
+
     const stats = await getSupplierStats(supplierId);
 
     return (
-      <div>
-        <header className="mb-6">
-          <h1 className="text-3xl font-extrabold text-[#171717]">
-            {zh ? "供应商工作台" : "Supplier Workspace"}
+      <div className="space-y-5">
+        <header>
+          <h1 className="text-2xl font-extrabold text-[#171717]">
+            {zh ? "我的工作台" : "My workspace"}
           </h1>
-          {legalName ? <p className="mt-1 text-[#6d6b66]">{legalName}</p> : null}
+          {legalName ? <p className="mt-1 text-sm text-[#6d6b66]">{legalName}</p> : null}
         </header>
 
-        {/* 档案完成度 + 核验状态 */}
-        <section className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <div className="card p-5">
-            <div className="text-xs uppercase tracking-wide text-[#6d6b66]">
-              {zh ? "档案完成度" : "Profile completeness"}
-            </div>
-            <div className="mt-1 text-2xl font-extrabold text-[#171717]">
-              {completenessPercent === null ? "—" : `${completenessPercent}%`}
-            </div>
-          </div>
-          <div className="card p-5">
-            <div className="text-xs uppercase tracking-wide text-[#6d6b66]">
-              {zh ? "核验状态" : "Verification status"}
-            </div>
-            <div className="mt-1 text-2xl font-extrabold text-[#171717]">
-              {verificationStatus === null || verificationStatus === ""
-                ? "—"
-                : verificationStatus}
-            </div>
-          </div>
-        </section>
+        {/* 顶部行动卡（对齐 Sedex「立即获取完整访问权限」） */}
+        <Panel>
+          <h2 className="text-[17px] font-bold text-[#171717]">
+            {zh ? "让更多买家找到你" : "Get discovered by more buyers"}
+          </h2>
+          <p className="mt-1.5 text-sm leading-relaxed text-[#6d6b66]">
+            {zh
+              ? "完成基础档案与自评问卷、取得核验后，你的企业档案会出现在更多买家的搜索结果中。"
+              : "Complete your profile and self-assessment, then get verified — your listing appears in more buyer searches."}
+          </p>
+          <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm text-[#3f4650]">
+            {[
+              zh ? "更高曝光" : "Higher visibility",
+              zh ? "获得买家信任" : "Build buyer trust",
+              zh ? "缩短成交周期" : "Close deals faster",
+            ].map((s) => (
+              <li key={s} className="flex items-center gap-1.5">
+                <span aria-hidden="true" className="text-[#e07a49]">
+                  ✓
+                </span>
+                {s}
+              </li>
+            ))}
+          </ul>
+          <Link
+            href={p("/supplier-assessment")}
+            className="btn btn-primary mt-5 inline-flex items-center text-sm"
+          >
+            {zh ? "继续完善档案" : "Continue your profile"}
+            <span aria-hidden="true" className="ml-1">
+              →
+            </span>
+          </Link>
+        </Panel>
 
-        {/* 看板摘要 */}
-        <section className="card p-5 mt-6">
-          <h2 className="text-lg font-bold text-[#171717]">
+        {/* 档案完整度 */}
+        <RingCard
+          value={completenessPercent}
+          title={zh ? "公司及工厂详细信息" : "Company & site details"}
+          desc={
+            zh
+              ? "企业身份、生产实体与业务能力。填得越完整，买家越容易判断你是否匹配。"
+              : "Company identity, production facility and capability. The more complete, the easier buyers can assess fit."
+          }
+          ctaLabel={zh ? "添加 / 更新信息" : "Add / update details"}
+          ctaHref={p("/supplier-assessment")}
+        />
+
+        {/* 自评 + 核验 */}
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          <RingCard
+            value={selfPct}
+            title={zh ? "自我评估表 (SAQ)" : "Self-assessment (SAQ)"}
+            desc={
+              zh
+                ? "覆盖劳工、健康安全、环境与商业道德四大支柱。"
+                : "Covers labour, health & safety, environment and business ethics."
+            }
+            ctaLabel={
+              selfPct === 100
+                ? zh
+                  ? "查看自评"
+                  : "View assessment"
+                : zh
+                ? "添加详细信息"
+                : "Add details"
+            }
+            ctaHref={p("/supplier-assessment")}
+          />
+          <RingCard
+            value={verifyPct}
+            title={zh ? "核验状态" : "Verification"}
+            desc={
+              zh
+                ? "自评不等于核验。取得平台核验后，档案可信度显著提升。"
+                : "Self-assessment is not verification. Platform verification lifts your credibility."
+            }
+            ctaLabel={zh ? "查看表现看板" : "View performance"}
+            ctaHref={p("/supplier-dashboard")}
+          />
+        </div>
+
+        {/* 表现数据 */}
+        <Panel>
+          <h2 className="text-[15px] font-bold text-[#171717]">
             {zh ? "档案表现" : "Profile performance"}
           </h2>
-          <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
+          <div className="mt-4 grid grid-cols-3 gap-3">
             {[
-              { label: zh ? "档案浏览" : "Profile views", value: stats.profileViews },
-              { label: zh ? "独立访客" : "Unique visitors", value: stats.uniqueVisitors },
-              { label: zh ? "被分享" : "Times shared", value: stats.shares },
+              { label: zh ? "档案浏览" : "Views", value: stats.profileViews },
+              { label: zh ? "独立访客" : "Visitors", value: stats.uniqueVisitors },
+              { label: zh ? "被分享" : "Shares", value: stats.shares },
             ].map((c) => (
-              <div key={c.label} className="rounded-lg border border-[#ebe8e1] bg-white p-4 text-center">
+              <div key={c.label} className="rounded-lg bg-[#f7f6f3] px-4 py-3 text-center">
                 <div className="text-xl font-extrabold text-[#171717]">{c.value}</div>
-                <div className="mt-1 text-xs text-[#6d6b66]">{c.label}</div>
+                <div className="mt-0.5 text-xs text-[#6d6b66]">{c.label}</div>
               </div>
             ))}
           </div>
-          <Link href={p("/supplier-dashboard")} className="muted-link mt-4 inline-block text-sm">
-            {zh ? "查看完整看板 →" : "View full dashboard →"}
-          </Link>
-        </section>
-
-        {/* 快捷入口 */}
-        <section className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Link
-            href={p("/supplier-assessment")}
-            className="card p-5 transition hover:border-[#171717]"
+            href={p("/supplier-dashboard")}
+            className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#171717] hover:underline"
           >
-            <div className="font-semibold text-[#171717]">
-              {zh ? "完成自评问卷" : "Complete self-assessment"}
-            </div>
-            <p className="mt-1 text-sm text-[#3f4650]">
-              {zh
-                ? "填写基础档案即可提交发布；质量、社会责任、环保模块按需补充。"
-                : "Complete the basic profile to submit for review; add quality, social and environmental modules as needed."}
-            </p>
+            {zh ? "查看完整看板" : "View full dashboard"}
+            <span aria-hidden="true">→</span>
           </Link>
-          {slug ? (
-            <Link
-              href={p(`/suppliers/${slug}`)}
-              className="card p-5 transition hover:border-[#171717]"
-            >
-              <div className="font-semibold text-[#171717]">
-                {zh ? "查看公开档案" : "View public profile"}
-              </div>
-              <p className="mt-1 text-sm text-[#3f4650]">
-                {zh ? "看看买家眼中的你的企业档案。" : "See how buyers view your supplier profile."}
-              </p>
-            </Link>
-          ) : (
-            <div className="card p-5 opacity-60">
-              <div className="font-semibold text-[#171717]">
-                {zh ? "公开档案未生成" : "Public profile not ready"}
-              </div>
-              <p className="mt-1 text-sm text-[#3f4650]">
-                {zh
-                  ? "完成自评并提交审核后生成。"
-                  : "Available after you complete the self-assessment and submit for review."}
+        </Panel>
+
+        {/* 公开档案 */}
+        {slug ? (
+          <Panel className="flex items-center justify-between gap-4">
+            <div>
+              <h2 className="text-[15px] font-bold text-[#171717]">
+                {zh ? "你的公开档案" : "Your public profile"}
+              </h2>
+              <p className="mt-1 text-sm text-[#6d6b66]">
+                {zh ? "看看买家眼中的企业档案。" : "See how buyers view your listing."}
               </p>
             </div>
-          )}
-        </section>
+            <Link href={p(`/suppliers/${slug}`)} className="btn btn-outline shrink-0 text-sm">
+              {zh ? "查看" : "View"}
+            </Link>
+          </Panel>
+        ) : null}
       </div>
     );
   }
@@ -201,58 +318,100 @@ export default async function PortalPage({
         .from("saved_suppliers")
         .select("supplier_id", { count: "exact", head: true })
         .eq("user_id", user.id),
-      db
-        .from("rfqs")
-        .select("id", { count: "exact", head: true })
-        .eq("user_id", user.id),
+      db.from("rfqs").select("id", { count: "exact", head: true }).eq("user_id", user.id),
     ]);
     savedCount = savedRes.count ?? 0;
     rfqCount = rfqRes.count ?? 0;
   }
 
   return (
-    <div>
-      <header className="mb-6">
-        <h1 className="text-3xl font-extrabold text-[#171717]">
-          {zh ? "买家工作台" : "Buyer Workspace"}
+    <div className="space-y-5">
+      <header>
+        <h1 className="text-2xl font-extrabold text-[#171717]">
+          {zh ? "我的工作台" : "My workspace"}
         </h1>
       </header>
 
-      {/* 活动统计 */}
-      <section className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <Link href={p("/account/saved")} className="card p-5 transition hover:border-[#171717]">
-          <div className="text-xs uppercase tracking-wide text-[#6d6b66]">
+      {/* 顶部行动卡 */}
+      <Panel>
+        <h2 className="text-[17px] font-bold text-[#171717]">
+          {zh ? "找到经过核验的供应商" : "Source from verified suppliers"}
+        </h2>
+        <p className="mt-1.5 text-sm leading-relaxed text-[#6d6b66]">
+          {zh
+            ? "按国家、行业与风险评分筛选，收藏、对比并直接发起询价。"
+            : "Filter by country, industry and risk score — save, compare and send RFQs directly."}
+        </p>
+        <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm text-[#3f4650]">
+          {[
+            zh ? "风险评分参考" : "Risk scores",
+            zh ? "证据与核验记录" : "Evidence records",
+            zh ? "直接对接工厂" : "Direct factory contact",
+          ].map((s) => (
+            <li key={s} className="flex items-center gap-1.5">
+              <span aria-hidden="true" className="text-[#e07a49]">
+                ✓
+              </span>
+              {s}
+            </li>
+          ))}
+        </ul>
+        <Link href={p("/suppliers")} className="btn btn-primary mt-5 inline-flex items-center text-sm">
+          {zh ? "浏览供应商" : "Browse suppliers"}
+          <span aria-hidden="true" className="ml-1">
+            →
+          </span>
+        </Link>
+      </Panel>
+
+      {/* 活动数据 */}
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+        <Link
+          href={p("/account/saved")}
+          className="group rounded-xl border border-[#ecebe7] bg-white p-6 transition hover:border-[#d9d5cc]"
+        >
+          <p className="text-xs uppercase tracking-wide text-[#6d6b66]">
             {zh ? "收藏的供应商" : "Saved suppliers"}
-          </div>
-          <div className="mt-1 text-2xl font-extrabold text-[#171717]">{savedCount}</div>
+          </p>
+          <p className="mt-2 text-3xl font-extrabold text-[#171717]">{savedCount}</p>
+          <p className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-[#171717] group-hover:underline">
+            {zh ? "查看收藏" : "View saved"}
+            <span aria-hidden="true">→</span>
+          </p>
         </Link>
-        <Link href={p("/account/rfqs")} className="card p-5 transition hover:border-[#171717]">
-          <div className="text-xs uppercase tracking-wide text-[#6d6b66]">
+        <Link
+          href={p("/account/rfqs")}
+          className="group rounded-xl border border-[#ecebe7] bg-white p-6 transition hover:border-[#d9d5cc]"
+        >
+          <p className="text-xs uppercase tracking-wide text-[#6d6b66]">
             {zh ? "我的询价" : "My RFQs"}
-          </div>
-          <div className="mt-1 text-2xl font-extrabold text-[#171717]">{rfqCount}</div>
+          </p>
+          <p className="mt-2 text-3xl font-extrabold text-[#171717]">{rfqCount}</p>
+          <p className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-[#171717] group-hover:underline">
+            {zh ? "查看询价" : "View RFQs"}
+            <span aria-hidden="true">→</span>
+          </p>
         </Link>
-      </section>
+      </div>
 
       {/* 快捷入口 */}
-      <section className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <Link href={p("/suppliers")} className="card p-5 transition hover:border-[#171717]">
-          <div className="font-semibold text-[#171717]">
-            {zh ? "查找供应商" : "Find suppliers"}
-          </div>
-          <p className="mt-1 text-sm text-[#3f4650]">
-            {zh ? "按国家、行业、风险评分筛选已验证供应商。" : "Browse verified suppliers by country, industry and risk score."}
-          </p>
-        </Link>
-        <Link href={p("/rfq")} className="card p-5 transition hover:border-[#171717]">
-          <div className="font-semibold text-[#171717]">
-            {zh ? "发起询价" : "Submit an RFQ"}
-          </div>
-          <p className="mt-1 text-sm text-[#3f4650]">
-            {zh ? "提交采购需求，让匹配的供应商主动联系你。" : "Post your sourcing request and let matched suppliers reach out."}
-          </p>
-        </Link>
-      </section>
+      <Panel>
+        <h2 className="text-[15px] font-bold text-[#171717]">{zh ? "下一步" : "Next steps"}</h2>
+        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <Link
+            href={p("/rfq")}
+            className="rounded-lg border border-[#ecebe7] px-4 py-3 text-sm font-medium text-[#171717] transition hover:border-[#d9d5cc] hover:bg-[#f7f6f3]"
+          >
+            {zh ? "发起询价 →" : "Submit an RFQ →"}
+          </Link>
+          <Link
+            href={p("/assessment-faq/buyer")}
+            className="rounded-lg border border-[#ecebe7] px-4 py-3 text-sm font-medium text-[#171717] transition hover:border-[#d9d5cc] hover:bg-[#f7f6f3]"
+          >
+            {zh ? "读懂供应商自评 →" : "Understand self-assessments →"}
+          </Link>
+        </div>
+      </Panel>
     </div>
   );
 }

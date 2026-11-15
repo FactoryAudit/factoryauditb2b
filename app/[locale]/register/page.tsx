@@ -68,6 +68,7 @@ export default async function RegisterPage({
   const t = await getDictionary(locale);
   const r = t.register;
   const p = (href: string) => localePath(locale, href);
+  const zh = locale === "zh" || locale === "zh-TW";
 
   const rawNext = (await searchParams)?.next;
   const nextHref = sanitizeReturnPath(
@@ -148,6 +149,28 @@ export default async function RegisterPage({
               {t.auth.accountMenu.signIn}
             </Link>
           </p>
+
+          {/* 供应商入驻入口。2026-11-15 补：
+              此前 /register 只有买家注册，供应商在注册页找不到任何入口 ——
+              而供应商入驻走的是独立表单 /join-supplier-network。这条链不通，
+              供应商工作台（/portal）就没人能注册进来。
+              文案用双语常量，不为 2 个内部标签补 9 语字典键。 */}
+          <div className="mt-6 rounded-xl border border-[#ecebe7] bg-[#fbfaf7] p-5">
+            <h3 className="font-semibold text-[#171717]">
+              {zh ? "你是供应商？" : "Are you a supplier?"}
+            </h3>
+            <p className="mt-1 text-sm leading-relaxed text-[#3f4650]">
+              {zh
+                ? "供应商入驻走独立的申请表：填写企业与工厂信息，提交后由平台审核。"
+                : "Supplier onboarding uses a separate application — submit your company and factory details for review."}
+            </p>
+            <Link
+              href={p("/join-supplier-network")}
+              className="btn btn-outline mt-3 inline-block text-sm"
+            >
+              {zh ? "申请入驻供应商网络 →" : "Apply to join the supplier network →"}
+            </Link>
+          </div>
         </section>
       </div>
     </main>

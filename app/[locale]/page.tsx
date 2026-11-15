@@ -184,6 +184,12 @@ export default async function Home({ params }: Props) {
               <Link href={p("/rfq")} className="btn btn-outline">
                 {t.home.ctaSecondary}
               </Link>
+              {/* 供应商入口。2026-11-15 补：首页此前只有「找供应商」和「发询价」，
+                  供应商侧零入口 —— 而供应商入驻走 /join-supplier-network。
+                  文案复用 selfAssessment.becomeSupplier（9 语既有键，不新增）。 */}
+              <Link href={p("/join-supplier-network")} className="btn btn-outline">
+                {t.selfAssessment.becomeSupplier}
+              </Link>
             </div>
 
             <dl className="mt-7 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-[#ddd9d0] pt-6 sm:grid-cols-4">

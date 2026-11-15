@@ -236,6 +236,15 @@ export default async function SuppliersPage({ params }: Props) {
           >
             {t.home.verifyCta}
           </Link>
+          {/* 供应商入口。2026-11-15 补：目录页只有买家视角的按钮，
+              供应商在「找供应商」的页面上找不到「成为供应商」的门。
+              文案复用 selfAssessment.becomeSupplier（9 语既有键）。 */}
+          <Link
+            href={p("/join-supplier-network")}
+            className="btn btn-outline font-semibold"
+          >
+            {t.selfAssessment.becomeSupplier}
+          </Link>
           <Link
             href={p("/pricing#founding-buyer")}
             className="text-sm text-[#171717] hover:underline"

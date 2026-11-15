@@ -57,6 +57,7 @@ export default async function PortalLayout({ children, params }: Props) {
   const nav: PortalNavItem[] = isSupplier
     ? [
         { href: p("/portal"), label: zh ? "工作台总览" : "Overview" },
+        { href: p("/portal/company"), label: zh ? "公司信息" : "Company details" },
         { href: p("/supplier-assessment"), label: zh ? "自评问卷" : "Self-assessment" },
         { href: p("/supplier-dashboard"), label: zh ? "表现看板" : "Performance" },
         { href: p("/supplier-certificates"), label: zh ? "证书申报" : "Certificates" },
@@ -77,6 +78,7 @@ export default async function PortalLayout({ children, params }: Props) {
       nav={nav}
       homeHref={p("/")}
       logoutHref={p("/login")}
+      backLabel={zh ? "返回网站" : "Back to site"}
     >
       {children}
     </PortalShell>

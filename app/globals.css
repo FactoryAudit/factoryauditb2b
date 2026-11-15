@@ -156,3 +156,31 @@ body {
 .btn.inline-block {
   display: inline-flex;
 }
+
+/* ─── Portal 后台：隐藏前台外壳，让工作台全屏独立 ─────────────────────
+   背景：Portal 的 (portal)/layout.tsx 仍嵌在 [locale]/layout.tsx 里，
+   于是前台 SiteHeader（header.sticky）、SiteFooter（footer）会包在后台外面，
+   看起来像「前台页面里塞了个后台」。Sedex 式的后台应是全屏独立。
+
+   为什么用 CSS 而不是在 layout 里做条件渲染：
+     [locale]/layout.tsx 若读 headers()/pathname 判断路径，会让整棵 [locale]
+     子树退出静态生成（见该文件 CS-19 注释的实测事故），得不偿失。
+     改用 `:has()`：只在携带 data-portal-shell 的页面隐藏前台外壳，
+     不影响任何其他页面的 SSG。
+
+   · `body:has([data-portal-shell]) > header` —— header 是 body 直接子元素
+     （AuthProvider 不产生 DOM），Portal 页面内部的 <header> 在 <main> 里，
+     不会被这条命中。
+   · footer 同理。
+   · 客服浮层（fixed 定位）在后台也隐藏：后台有自己的导航，浮层只会挡内容。 */
+body:has([data-portal-shell]) > header,
+body:has([data-portal-shell]) > footer {
+  display: none !important;
+}
+
+/* 客服浮层（右下角微信/WhatsApp/聊天按钮）在后台隐藏：
+   它的根节点是 `.fixed.bottom-6.z-50`（按钮态与展开态都是这组类），
+   后台有自己的侧边栏导航，浮层只会挡住内容区。 */
+body:has([data-portal-shell]) .fixed.bottom-6.z-50 {
+  display: none !important;
+}
