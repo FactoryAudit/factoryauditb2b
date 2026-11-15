@@ -11,7 +11,8 @@ export interface SocialLink {
 }
 
 export const SOCIAL_LINKS: SocialLink[] = [
-  // 2026-11-15 上线主页：Facebook 用数字 ID 链接（用户名未设，设好后换成短链接即可）。
+  // 2026-11-15 上线主页：仍用数字 ID 链接（短链 facebook.com/factoryauditb2b 实测打不开，
+  // 说明用户名短链未生效；待用户在 FB 后台确认真实用户名后再换）。
   { platform: "facebook", url: "https://www.facebook.com/profile.php?id=61596530612726" },
   { platform: "youtube", url: "https://www.youtube.com/@factoryauditb2b" },
   { platform: "linkedin", url: "" },
