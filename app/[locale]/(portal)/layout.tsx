@@ -58,6 +58,7 @@ export default async function PortalLayout({ children, params }: Props) {
     ? [
         { href: p("/portal"), label: zh ? "工作台总览" : "Overview" },
         { href: p("/portal/company"), label: zh ? "公司信息" : "Company details" },
+        { href: p("/portal/profile"), label: zh ? "完善档案" : "Full profile" },
         { href: p("/supplier-assessment"), label: zh ? "自评问卷" : "Self-assessment" },
         { href: p("/supplier-dashboard"), label: zh ? "表现看板" : "Performance" },
         { href: p("/supplier-certificates"), label: zh ? "证书申报" : "Certificates" },
