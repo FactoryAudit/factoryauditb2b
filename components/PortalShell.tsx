@@ -26,9 +26,6 @@ export type PortalShellProps = {
   logoutHref: string;
   /** 回前台的文案 */
   backLabel?: string;
-  /** 管理后台入口（仅管理员传入；不传则不渲染） */
-  adminHref?: string;
-  adminLabel?: string;
   children: React.ReactNode;
 };
 
@@ -45,6 +42,15 @@ function Icon({ href }: { href: string }) {
     strokeLinejoin: "round" as const,
     "aria-hidden": true,
   };
+  // 管理后台：齿轮（放在最前，避免被后面的 includes 判断抢走）
+  if (/\/admin(\/|$)/.test(href)) {
+    return (
+      <svg {...common}>
+        <circle cx="12" cy="12" r="3" />
+        <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1A1.7 1.7 0 0 0 8.9 19a1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 5 8.9a1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" />
+      </svg>
+    );
+  }
   if (href.includes("assessment-faq")) {
     return (
       <svg {...common}>
@@ -118,8 +124,6 @@ export default function PortalShell({
   homeHref,
   logoutHref,
   backLabel = "Back to site",
-  adminHref,
-  adminLabel = "Admin",
   children,
 }: PortalShellProps) {
   const pathname = usePathname();
@@ -167,18 +171,23 @@ export default function PortalShell({
           <nav aria-label="Portal" className="flex-1 space-y-1 px-3 pb-4">
             {nav.map((item) => {
               const active = pathname === item.href;
+              // 管理后台这一项用橙色强调 —— 它是跨角色入口（供应商后台里的管理员通道），
+              // 与普通菜单项视觉区分，避免在菜单里被当成又一个「我的页面」忽略掉。
+              const isAdminLink = /\/admin(\/|$)/.test(item.href);
+              const cls = active
+                ? "bg-[#f2efe9] font-semibold text-[#171717]"
+                : isAdminLink
+                ? "font-semibold text-[#e07a49] hover:bg-[#fdf3e7]"
+                : "font-medium text-[#4a4740] hover:bg-[#f7f6f3] hover:text-[#171717]";
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   className={
-                    "flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm transition-colors " +
-                    (active
-                      ? "bg-[#f2efe9] font-semibold text-[#171717]"
-                      : "font-medium text-[#4a4740] hover:bg-[#f7f6f3] hover:text-[#171717]")
+                    "flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm transition-colors " + cls
                   }
                 >
-                  <span className={active ? "text-[#e07a49]" : "text-[#9a968d]"}>
+                  <span className={active || isAdminLink ? "text-[#e07a49]" : "text-[#9a968d]"}>
                     <Icon href={item.href} />
                   </span>
                   <span className="truncate">{item.label}</span>
@@ -209,16 +218,6 @@ export default function PortalShell({
               >
                 {backLabel}
               </Link>
-              {/* 管理后台入口：只在管理员登录时由 layout 传入 adminHref，
-                  普通供应商/买家看不到（也就不存在"后台存在"的暴露面）。 */}
-              {adminHref ? (
-                <Link
-                  href={adminHref}
-                  className="font-medium text-[#e07a49] hover:underline"
-                >
-                  {adminLabel} →
-                </Link>
-              ) : null}
             </div>
           </div>
         </aside>

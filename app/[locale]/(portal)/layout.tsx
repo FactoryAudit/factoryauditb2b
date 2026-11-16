@@ -77,6 +77,14 @@ export default async function PortalLayout({ children, params }: Props) {
         { href: p("/assessment-faq/buyer"), label: zh ? "读懂自评" : "Understanding SAQ" },
       ];
 
+  // 管理后台入口放进菜单**第二项**（紧跟「工作台总览」）。
+  // 原来放在侧边栏底部那排小字里（退出登录 / 返回网站 旁边），用户反馈找不到 ——
+  // 那里视觉权重太低，管理员每天要进后台，不该让他翻到角落。PortalShell 对 /admin
+  // 这一项有橙色强调（见该组件 isAdminLink）。
+  if (isAdmin) {
+    nav.splice(1, 0, { href: p("/admin"), label: zh ? "管理后台" : "Admin console" });
+  }
+
   return (
     <PortalShell
       email={user.email ?? null}
@@ -85,8 +93,6 @@ export default async function PortalLayout({ children, params }: Props) {
       homeHref={p("/")}
       logoutHref={p("/login")}
       backLabel={zh ? "返回网站" : "Back to site"}
-      adminHref={isAdmin ? p("/admin") : undefined}
-      adminLabel={zh ? "管理后台" : "Admin"}
     >
       {children}
     </PortalShell>
