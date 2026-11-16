@@ -25,6 +25,7 @@ import {
 } from "@/lib/reportTemplateFamily";
 import { buildReportDocHtml, reportDocFileName } from "@/lib/supplierReportDocHtml";
 import type { AutofillCandidate } from "@/lib/reportAutofill";
+import { VERIFICATION_FIELDS, VERIFICATION_GROUPS } from "@/lib/reportAutofill";
 
 // components/admin/SupplierReportEditor.tsx —— CS-20 报告正文编辑器
 //
@@ -155,6 +156,8 @@ export default function SupplierReportEditor({
   const [err, setErr] = useState<string | null>(null);
   /** 预填结果提示（填了几项 / 跳过几项已有值） */
   const [fillNote, setFillNote] = useState<string | null>(null);
+  /** 平台核验录入面板展开状态 */
+  const [showVerify, setShowVerify] = useState(false);
   const [meta, setMeta] = useState<{ by: string | null; at: string | null }>({
     by: updatedBy,
     at: updatedAt,
@@ -332,6 +335,33 @@ export default function SupplierReportEditor({
     setFillNote(parts.join(" · "));
   }
 
+  /* ---- 平台核验字段读写（写 level=verified，因为这是平台亲自核过的） ---- */
+  function verifyValue(sectionNo: string, labelZh: string): string {
+    const sec = doc.sections.find((s) => s.no === sectionNo);
+    const f = (sec?.fields ?? []).find((x) => x.lZh === labelZh);
+    return f?.v ?? "";
+  }
+
+  function setVerifyValue(sectionNo: string, labelZh: string, value: string) {
+    setDoc((prev) => {
+      const next: SupplierReportDoc = {
+        ...prev,
+        sections: prev.sections.map((s) => ({
+          ...s,
+          fields: s.fields ? s.fields.map((f) => ({ ...f })) : s.fields,
+        })),
+      };
+      const sec = next.sections.find((s) => s.no === sectionNo);
+      const f = (sec?.fields ?? []).find((x) => x.lZh === labelZh);
+      if (f) {
+        f.v = value;
+        // 有值 ⇒ 已核验；清空 ⇒ 回到「未标注」，不留假的 verified
+        f.level = value.trim() ? "verified" : null;
+      }
+      return next;
+    });
+  }
+
   /* ---- 导出自包含 HTML ---- */
   function download(lang: "en" | "zh") {
     try {
@@ -392,6 +422,64 @@ export default function SupplierReportEditor({
             {fillNote}
           </p>
         ) : null}
+
+        {/* ===== 平台核验录入（B 组：供应商填不了的 18 项）=====
+            这些必须平台核验后录：司法记录、税务评级、经营资质、产能核验、现场核验。
+            写入时 level 标为 verified（与「从档案预填」的 reported 区分开）。 */}
+        <div className="mt-4 rounded-lg border border-[#e2e8f0] bg-[#f8fafc]">
+          <button
+            type="button"
+            onClick={() => setShowVerify((x) => !x)}
+            aria-expanded={showVerify}
+            className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left"
+          >
+            <span className="text-sm font-semibold text-[#171717]">
+              {showVerify ? "▾" : "▸"} 平台核验录入 · {VERIFICATION_FIELDS.length} 项
+              <span className="ml-2 text-xs font-normal text-[#6d6b66]">
+                供应商填不了的部分（司法/税务/资质/现场核验）
+              </span>
+            </span>
+            <span className="shrink-0 text-xs text-[#6d6b66]">
+              {VERIFICATION_FIELDS.filter((f) => verifyValue(f.sectionNo, f.labelZh).trim()).length}/
+              {VERIFICATION_FIELDS.length} 已填
+            </span>
+          </button>
+
+          {showVerify ? (
+            <div className="space-y-5 border-t border-[#e2e8f0] px-4 py-4">
+              {VERIFICATION_GROUPS.map((g) => {
+                const items = VERIFICATION_FIELDS.filter((f) => f.group === g);
+                if (items.length === 0) return null;
+                return (
+                  <div key={g}>
+                    <h4 className="text-xs font-semibold uppercase tracking-wide text-[#8c8982]">
+                      {g}
+                    </h4>
+                    <div className="mt-2 grid grid-cols-1 gap-3 md:grid-cols-2">
+                      {items.map((f) => (
+                        <label key={`${f.sectionNo}-${f.labelZh}`} className="block">
+                          <span className="text-xs font-medium text-[#3f4650]">
+                            {f.sectionNo} · {f.labelZh}
+                          </span>
+                          <input
+                            className="mt-1 w-full rounded-md border border-[#e2e8f0] bg-white px-3 py-2 text-sm text-[#171717] focus:border-[#171717] focus:outline-none"
+                            value={verifyValue(f.sectionNo, f.labelZh)}
+                            placeholder={f.placeholder}
+                            onChange={(e) => setVerifyValue(f.sectionNo, f.labelZh, e.target.value)}
+                          />
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+              <p className="text-xs leading-relaxed text-[#8c8982]">
+                填了即标为「已核验」并写入对应章节；留空则报告显示「无记录」。
+                没有真实核验依据的项请留空 —— 报告不替平台做无据声称。
+              </p>
+            </div>
+          ) : null}
+        </div>
 
         {/* ===== 报告模板家族选择器（按类型生成空白骨架） ===== */}
         <div className="mt-4 flex flex-wrap items-end gap-3 border-t border-[#eef2f7] pt-4">

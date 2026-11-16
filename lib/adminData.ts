@@ -296,6 +296,16 @@ export type AdminSupplierDetail = AdminSupplierRow & {
   phone: string | null;
   whatsapp: string | null;
   company_description: string | null;
+  // ---- 2026-11-16：13 章报告所需字段（迁移 059 新增 5 列 + 3 个旧列首次纳入白名单）----
+  legal_representative: string | null;
+  registered_capital: string | null;
+  business_scope: string | null;
+  production_workers: string | null;
+  reference_customers: string | null;
+  monthly_output: string | null;
+  production_capacity: string | null;
+  export_since: number | null;
+  factory_size: string | null;
   authorized_at: string | null;
   authorized_by: string | null;
   consent_version: string | null;
@@ -381,6 +391,15 @@ export async function updateAdminSupplier(
     phone: string;
     whatsapp: string;
     company_description: string;
+    // 2026-11-16：13 章报告所需字段（迁移 059 新增 5 列 + 3 个旧列首次纳入白名单）
+    legal_representative: string;
+    registered_capital: string;
+    business_scope: string;
+    production_workers: string;
+    reference_customers: string;
+    monthly_output: string;
+    production_capacity: string;
+    export_since: number;
     verification_status: string;
     risk_score: number;
     audit_status: string;

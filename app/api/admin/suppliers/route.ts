@@ -186,6 +186,27 @@ export async function PATCH(req: Request) {
   if (typeof body.company_description === "string")
     patch.company_description = clamp(body.company_description, 2000) ?? "";
 
+  // ---- 2026-11-16：报告 13 章所需的供应商档案字段 ----
+  // 目的：供应商填档案 → 报告自动带出，运营不用在 13 章正文里重抄一遍。
+  // 🔴 白名单不加这里，前端传了也会被静默丢弃（本项目踩过）。
+  if (typeof body.legal_representative === "string")
+    patch.legal_representative = clamp(body.legal_representative, 120) ?? "";
+  if (typeof body.registered_capital === "string")
+    patch.registered_capital = clamp(body.registered_capital, 120) ?? "";
+  if (typeof body.business_scope === "string")
+    patch.business_scope = clamp(body.business_scope, 1000) ?? "";
+  if (typeof body.production_workers === "string")
+    patch.production_workers = clamp(body.production_workers, 60) ?? "";
+  if (typeof body.reference_customers === "string")
+    patch.reference_customers = clamp(body.reference_customers, 500) ?? "";
+  // 下面三个列早已存在，但一直不在白名单里 ⇒ 后台从来改不了
+  if (typeof body.monthly_output === "string")
+    patch.monthly_output = clamp(body.monthly_output, 120) ?? "";
+  if (typeof body.production_capacity === "string")
+    patch.production_capacity = clamp(body.production_capacity, 200) ?? "";
+  const exportSince = toInt(body.export_since);
+  if (exportSince !== null) patch.export_since = exportSince;
+
   // ---- STEP 10-B：供应商关联产业带（白名单 + 存在性校验） ----
   // 只允许空串（清除关联）或已发布的产业带 slug；其余值丢弃，避免写入不存在的 slug
   // 造成指向不存在产业带的链接（spec §24：管理员手工关联必须验证 cluster_slug 存在）。

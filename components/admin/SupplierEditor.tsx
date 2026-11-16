@@ -89,6 +89,16 @@ export type SupplierFormValues = {
   phone: string;
   whatsapp: string;
   company_description: string;
+  // ---- 2026-11-16：13 章报告所需字段（供应商档案侧）----
+  legal_representative: string; // 法定代表人
+  registered_capital: string; // 注册资本（保留原币种文本）
+  business_scope: string; // 经营范围
+  production_workers: string; // 生产一线人数
+  reference_customers: string; // 可披露的参考客户
+  monthly_output: string; // 月产量
+  production_capacity: string; // 年产能
+  export_since: string; // 出口起始年份
+  factory_size: string; // 厂房面积（白名单早有，但表单一直没给输入口）
   verification_status: string;
   audit_status: string;
   risk_score: string;
@@ -375,6 +385,62 @@ export default function SupplierEditor({
           <span className="text-sm font-medium text-[#171717]">{L.companyDescription}</span>
           <textarea className={`mt-1 ${inputClass}`} rows={3} value={v.company_description} onChange={(e) => set("company_description", e.target.value)} />
         </label>
+
+        {/* ===== 报告档案字段（2026-11-16）=====
+            用途：13 章尽职调查报告的数据源。供应商提供 + 平台核实后填入，
+            报告「从档案预填」时自动带出，运营不用在 13 章正文里重抄。
+            标签中英并列 —— 后台单人运营，不做 9 语翻译负担。 */}
+        <div className="rounded-lg border border-[#ecebe7] bg-[#fbfaf7] p-4">
+          <h3 className="text-sm font-bold text-[#171717]">
+            报告档案字段 · Report profile fields
+          </h3>
+          <p className="mt-1 text-xs text-[#6d6b66]">
+            这些字段会进入尽职调查报告的主体档案 / 生产能力 / 出口市场章节。留空即报告显示「无记录」，不会编造。
+          </p>
+
+          <div className="mt-3 grid grid-cols-1 gap-4 md:grid-cols-2">
+            <label className="block">
+              <span className="text-sm font-medium text-[#171717]">法定代表人 · Legal representative</span>
+              <input className={`mt-1 ${inputClass}`} value={v.legal_representative} onChange={(e) => set("legal_representative", e.target.value)} />
+            </label>
+            <label className="block">
+              <span className="text-sm font-medium text-[#171717]">注册资本 · Registered capital</span>
+              <input className={`mt-1 ${inputClass}`} value={v.registered_capital} onChange={(e) => set("registered_capital", e.target.value)} placeholder="人民币 800 万元" />
+            </label>
+            <label className="block md:col-span-2">
+              <span className="text-sm font-medium text-[#171717]">经营范围 · Business scope</span>
+              <textarea className={`mt-1 ${inputClass}`} rows={2} value={v.business_scope} onChange={(e) => set("business_scope", e.target.value)} placeholder="取自营业执照原文" />
+            </label>
+            <label className="block">
+              <span className="text-sm font-medium text-[#171717]">员工总数 · Total employees</span>
+              <input className={`mt-1 ${inputClass}`} value={v.employees} onChange={(e) => set("employees", e.target.value)} />
+            </label>
+            <label className="block">
+              <span className="text-sm font-medium text-[#171717]">生产一线人数 · Production workers</span>
+              <input className={`mt-1 ${inputClass}`} value={v.production_workers} onChange={(e) => set("production_workers", e.target.value)} />
+            </label>
+            <label className="block">
+              <span className="text-sm font-medium text-[#171717]">厂房面积 · Factory size</span>
+              <input className={`mt-1 ${inputClass}`} value={v.factory_size} onChange={(e) => set("factory_size", e.target.value)} placeholder="如 12,000 m²" />
+            </label>
+            <label className="block">
+              <span className="text-sm font-medium text-[#171717]">月产量 · Monthly output</span>
+              <input className={`mt-1 ${inputClass}`} value={v.monthly_output} onChange={(e) => set("monthly_output", e.target.value)} />
+            </label>
+            <label className="block">
+              <span className="text-sm font-medium text-[#171717]">年产能 · Annual capacity</span>
+              <input className={`mt-1 ${inputClass}`} value={v.production_capacity} onChange={(e) => set("production_capacity", e.target.value)} />
+            </label>
+            <label className="block">
+              <span className="text-sm font-medium text-[#171717]">出口起始年份 · Export since</span>
+              <input type="number" className={`mt-1 ${inputClass}`} value={v.export_since} onChange={(e) => set("export_since", e.target.value)} placeholder="2015" />
+            </label>
+            <label className="block md:col-span-2">
+              <span className="text-sm font-medium text-[#171717]">参考客户 · Reference customers</span>
+              <input className={`mt-1 ${inputClass}`} value={v.reference_customers} onChange={(e) => set("reference_customers", e.target.value)} placeholder="逗号分隔；仅在获得客户同意后填写" />
+            </label>
+          </div>
+        </div>
 
         {/* 核验 / 风险（高信任字段，谨慎填写） */}
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

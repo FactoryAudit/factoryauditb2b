@@ -49,6 +49,17 @@ export type AutofillSupplier = {
   main_products?: string[] | null;
   certifications?: string[] | null;
   profile_authorized?: boolean | null;
+  // 2026-11-16 迁移 059 新增 / 首次纳入白名单
+  legal_representative?: string | null;
+  registered_capital?: string | null;
+  business_scope?: string | null;
+  production_workers?: string | null;
+  reference_customers?: string | null;
+  monthly_output?: string | null;
+  production_capacity?: string | null;
+  export_since?: number | null;
+  factory_size?: string | null;
+  address?: string | null;
 };
 
 /** 企业类型枚举 → 报告里的中文表述 */
@@ -73,6 +84,8 @@ const RULES: Array<{ key: string; source: SourceOf; get: Provider }> = [
   // ── 02 主体档案 ──
   { key: "02|企业名称", source: "supplier", get: (s) => str(s.legal_name) },
   { key: "02|统一社会信用代码", source: "SP03", get: (_s, r) => str(r.SP03) },
+  { key: "02|法定代表人", source: "supplier", get: (s) => str(s.legal_representative) },
+  { key: "02|注册资本", source: "supplier", get: (s) => str(s.registered_capital) },
   { key: "02|成立年份", source: "SP05", get: (s, r) => str(s.established) || str(r.SP05) },
   {
     key: "02|企业类型",
@@ -82,18 +95,24 @@ const RULES: Array<{ key: string; source: SourceOf; get: Provider }> = [
       return BUSINESS_TYPE_ZH[raw] ?? raw;
     },
   },
-  { key: "02|注册地址", source: "SP06", get: (_s, r) => str(r.SP06) },
+  { key: "02|注册地址", source: "SP06", get: (s, r) => str(s.address) || str(r.SP06) },
+  { key: "02|经营范围", source: "supplier", get: (s) => str(s.business_scope) },
 
   // ── 06 税务与进出口（只有出口市场有源）──
   { key: "06|主要出口市场", source: "SP12", get: (s, r) => str(s.export_markets) || str(r.SP12) },
 
   // ── 09 生产能力 ──
   { key: "09|员工总数", source: "SP08", get: (s, r) => str(s.employees) || str(r.SP08) },
-  { key: "09|厂房面积", source: "SP09", get: (_s, r) => str(r.SP09) },
+  { key: "09|生产一线人数", source: "supplier", get: (s) => str(s.production_workers) },
+  { key: "09|厂房面积", source: "SP09", get: (s, r) => str(s.factory_size) || str(r.SP09) },
   { key: "09|生产线数量", source: "SP10", get: (_s, r) => str(r.SP10) },
+  { key: "09|月产量", source: "supplier", get: (s) => str(s.monthly_output) },
+  { key: "09|年产能", source: "supplier", get: (s) => str(s.production_capacity) },
 
   // ── 11 出口与市场 ──
+  { key: "11|出口起始年份", source: "supplier", get: (s) => str(s.export_since) },
   { key: "11|主要出口市场", source: "SP12", get: (s, r) => str(r.SP12) || str(s.export_markets) },
+  { key: "11|参考客户", source: "supplier", get: (s) => str(s.reference_customers) },
 
   // ── 12 联系方式与授权 ──
   { key: "12|邮箱", source: "supplier", get: (s) => str(s.contact_email) },
@@ -163,3 +182,60 @@ export const AUTOFILL_SOURCE_LABEL: Record<AutofillSource, { zh: string; en: str
 export function fieldsWithoutSource(list: AutofillCandidate[]): AutofillCandidate[] {
   return list.filter((x) => !x.value);
 }
+
+// ─────────────────────────────────────────────────────────────
+// 平台核验录入（B 组）
+//
+// 这 18 项**供应商填不了**，必须平台核验后录：司法记录查不到/查过无记录、
+// 税务评级要看纳税信用系统、现场核验要人到位。
+// 与「从档案预填」的区别：预填写 level=reported（企业自报），这里写 level=verified（已核验）。
+// ─────────────────────────────────────────────────────────────
+
+export type VerificationField = {
+  sectionNo: string;
+  labelZh: string;
+  group: string;
+  /** 输入提示 */
+  placeholder?: string;
+};
+
+export const VERIFICATION_GROUPS = [
+  "司法记录",
+  "税务与海关",
+  "经营资质",
+  "产能核验",
+  "现场核验",
+  "披露设置",
+] as const;
+
+export const VERIFICATION_FIELDS: VerificationField[] = [
+  // 04 涉诉与执行（4）
+  { sectionNo: "04", labelZh: "案件总数（2019–2026）", group: "司法记录", placeholder: "如 0" },
+  { sectionNo: "04", labelZh: "在审案件", group: "司法记录", placeholder: "如 0" },
+  { sectionNo: "04", labelZh: "作为被告", group: "司法记录", placeholder: "如 0" },
+  { sectionNo: "04", labelZh: "被执行人", group: "司法记录", placeholder: "如 0（无被执行记录）" },
+
+  // 06 税务与进出口（4）
+  { sectionNo: "06", labelZh: "纳税信用评级", group: "税务与海关", placeholder: "如 A 级" },
+  { sectionNo: "06", labelZh: "增值税资格", group: "税务与海关", placeholder: "一般纳税人 / 小规模" },
+  { sectionNo: "06", labelZh: "海关注册编码", group: "税务与海关", placeholder: "10 位海关编码" },
+  { sectionNo: "06", labelZh: "出口额（2025）", group: "税务与海关", placeholder: "如 USD 1.2M（报关口径）" },
+
+  // 07 经营资质（3）
+  { sectionNo: "07", labelZh: "营业执照", group: "经营资质", placeholder: "在册 / 已核" },
+  { sectionNo: "07", labelZh: "进出口经营权", group: "经营资质", placeholder: "有 / 无" },
+  { sectionNo: "07", labelZh: "特种生产许可", group: "经营资质", placeholder: "如适用，填许可类别" },
+
+  // 09 产能核验（1）
+  { sectionNo: "09", labelZh: "产能核验", group: "产能核验", placeholder: "未核 / 现场测算 / 单据核对" },
+
+  // 10 工厂实地核验（5）
+  { sectionNo: "10", labelZh: "地址一致性", group: "现场核验", placeholder: "一致 / 不一致" },
+  { sectionNo: "10", labelZh: "厂区标牌", group: "现场核验", placeholder: "有标牌 / 无" },
+  { sectionNo: "10", labelZh: "现场视频", group: "现场核验", placeholder: "已录 / 未录" },
+  { sectionNo: "10", labelZh: "可见设备", group: "现场核验", placeholder: "如 CNC 12 台、冲压 8 台" },
+  { sectionNo: "10", labelZh: "现场工人", group: "现场核验", placeholder: "现场观察人数" },
+
+  // 12 联系方式可见性（1）
+  { sectionNo: "12", labelZh: "联系方式可见性", group: "披露设置", placeholder: "登录可见 / 会员可见" },
+];
