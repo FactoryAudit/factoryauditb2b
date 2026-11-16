@@ -62,7 +62,9 @@
       }
     ],
     "comparisonTitle": "逐项对照与自查要点",
-    "zeroToleranceTitle": "零容忍红线清单"
+    "zeroToleranceTitle": "零容忍红线清单",
+    "ctaLabel": "预约工厂审核",
+    "ctaHref": "/factory-audit"
   },
   {
     "slug": "bsci-audit-pass-rate-improvement",
@@ -127,6 +129,8 @@
       }
     ],
     "comparisonTitle": "逐项对照与自查要点",
-    "zeroToleranceTitle": "零容忍红线清单"
+    "zeroToleranceTitle": "零容忍红线清单",
+    "ctaLabel": "预约工厂审核",
+    "ctaHref": "/factory-audit"
   }
 ]
