@@ -52,6 +52,8 @@ export default async function GeoKnowledgeArticle({
 
   const table = page.comparisonTable;
   const zeroTolerance = page.zeroToleranceList;
+  // 页级 CTA 必须 label 与 href 同时有效才覆盖；否则退回全局默认（已上线 7 篇走这条）。
+  const pageCta = page.ctaLabel && page.ctaHref ? { label: page.ctaLabel, href: page.ctaHref } : null;
 
   return (
     <article className="container py-12 max-w-3xl">
@@ -208,11 +210,21 @@ export default async function GeoKnowledgeArticle({
         <h2 className="text-2xl font-bold text-white">{t.home.bottomTitle}</h2>
         <p className="mt-2 text-white/80">{t.home.bottomLead}</p>
         <div className="mt-5 flex flex-wrap gap-3">
-          <Link href={p("/services/supplier-verification")} className="btn btn-accent">
-            {t.home.bottomCta}
-          </Link>
-          <Link href={p("/tools/supplier-risk-calculator")} className="btn btn-outline-dark">
-            {t.methodology.ctaSecondary}
+          {pageCta ? (
+            <Link href={p(pageCta.href)} className="btn btn-accent" data-track="geoPageCta">
+              {pageCta.label}
+            </Link>
+          ) : (
+            <Link href={p("/services/supplier-verification")} className="btn btn-accent">
+              {t.home.bottomCta}
+            </Link>
+          )}
+          {/* 次 CTA 始终保留：页级 CTA 指向入驻时，次入口给买家侧工具，两边都不丢 */}
+          <Link
+            href={p(pageCta ? "/services/supplier-verification" : "/tools/supplier-risk-calculator")}
+            className="btn btn-outline-dark"
+          >
+            {pageCta ? t.home.bottomCta : t.methodology.ctaSecondary}
           </Link>
         </div>
       </section>

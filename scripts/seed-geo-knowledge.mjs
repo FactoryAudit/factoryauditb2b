@@ -155,6 +155,24 @@ function toRow(page, index) {
 
   errors.push(...validateTextList(page.zeroToleranceList, `${at}: zeroToleranceList`, { allowEmpty: true }));
 
+  // 页级 CTA：可选，但一旦提供必须成对且 href 是站内绝对路径。
+  // 与 lib/geoKnowledge.ts 的 safeInternalHref 同一口径，防止种子数据把用户导向外站。
+  let ctaLabel = null;
+  let ctaHref = null;
+  const hasCtaLabel = isText(page.ctaLabel);
+  const hasCtaHref = isText(page.ctaHref);
+  if (hasCtaLabel !== hasCtaHref) {
+    errors.push(`${at}: ctaLabel / ctaHref 必须同时提供或同时省略`);
+  } else if (hasCtaLabel) {
+    const href = page.ctaHref.trim();
+    if (!href.startsWith("/") || href.startsWith("//") || /[:\s]/.test(href.split("?")[0])) {
+      errors.push(`${at}: ctaHref 必须是站内绝对路径（以 / 开头、不含协议/主机）`);
+    } else {
+      ctaLabel = page.ctaLabel.trim();
+      ctaHref = href;
+    }
+  }
+
   let faqs = [];
   if (page.faqs != null) {
     if (!Array.isArray(page.faqs)) errors.push(`${at}: faqs 不是数组`);
@@ -184,6 +202,8 @@ function toRow(page, index) {
     zero_tolerance_title: isText(page.zeroToleranceTitle) ? page.zeroToleranceTitle.trim() : null,
     zero_tolerance_list: page.zeroToleranceList ?? [],
     faqs,
+    cta_label: ctaLabel,
+    cta_href: ctaHref,
   };
   return { row, errors: [] };
 }

@@ -1,0 +1,197 @@
+[
+  {
+    "slug": "how-chinese-factories-get-listed-on-international-b2b-platforms-for-free",
+    "locale": "en",
+    "category": "guide",
+    "targetAudience": "chinese_factory",
+    "h1Question": "How Can Chinese Factories Get Listed on International B2B Platforms for Free?",
+    "blufSummary": "Chinese manufacturers can create a free supplier profile on FactoryAuditB2B that international buyers can find in the supplier directory. The application and the basic profile are free. A free listing does not mean the factory has been independently verified, and it does not guarantee orders. Verification status is assigned by a human reviewer after documents are checked, and it is never sold.",
+    "comparisonTitle": "What a free listing includes, and what it does not",
+    "comparisonTable": {
+      "headers": ["Stage", "What happens", "Cost", "What it does not mean"],
+      "rows": [
+        ["Create a free profile", "Submit basic company information and select your industry; the profile enters a review queue.", "Free", "Not yet visible until a reviewer approves it"],
+        ["Manual document review", "A reviewer checks the information and documents you submitted before any status is assigned.", "Included", "Not an independent factory audit"],
+        ["Evidence level assigned", "Information is labelled by how it was confirmed, from Self-Declared up to Factory Audited.", "Included", "A high evidence level reflects records on file, not a quality score"],
+        ["Listed in the directory", "Approved profiles appear in the supplier directory where buyers can find them.", "Free", "No guaranteed inquiries or orders"],
+        ["Optional verification and audit services", "Supplier verification, factory audit and pre-shipment inspection are available as separate services.", "Quoted separately", "Buying a service does not change an evidence level without supporting records"]
+      ]
+    },
+    "zeroToleranceTitle": "What will block or remove a listing",
+    "zeroToleranceList": [
+      "Submitting a business licence or ISO certificate that does not belong to your company",
+      "Claiming manufacturing capability you cannot show on site",
+      "Using another factory's photos, equipment or production data as your own",
+      "Paying to have a verification status or evidence level changed without supporting records"
+    ],
+    "faqs": [
+      {
+        "question": "Does a free supplier profile guarantee orders from international buyers?",
+        "answer": "No. A free profile makes your company discoverable in the supplier directory. It does not guarantee inquiries, orders or any particular commercial outcome. Buyers decide who to contact based on the information and evidence available on the profile."
+      },
+      {
+        "question": "Is a free listing the same as being verified?",
+        "answer": "No. A profile starts as self-declared. A verification status is only assigned after a reviewer checks the information and documents you submitted. FactoryAuditB2B does not sell verification status, and it does not sell or issue certificates."
+      },
+      {
+        "question": "What information should I prepare before applying?",
+        "answer": "Prepare your registered company name, business licence, the products you make, your industry, factory location, basic production capability, and any certificates you hold. Profiles with complete, consistent information are easier for buyers to evaluate."
+      },
+      {
+        "question": "My company may already be in the directory. Should I apply again?",
+        "answer": "No. Search the supplier directory first. If your profile is already there, claim the existing profile instead of submitting a duplicate application. Claiming lets you maintain certificates, photos and self-assessment information yourself."
+      }
+    ],
+    "ctaLabel": "Create Your Free Supplier Profile",
+    "ctaHref": "/join-supplier-network"
+  },
+  {
+    "slug": "how-chinese-factories-get-discovered-by-international-buyers",
+    "locale": "en",
+    "category": "guide",
+    "targetAudience": "chinese_factory",
+    "h1Question": "How Can a Chinese Factory Get Discovered by International Buyers?",
+    "blufSummary": "International buyers usually shortlist suppliers from what they can verify before contact: a clear company identity, an export-ready company profile, specific product descriptions, stated production capability, current certificates, and real factory photos. A supplier directory profile is useful only when these details are complete and consistent, because buyers compare them side by side before sending an inquiry.",
+    "comparisonTitle": "What buyers check at each stage of discovery",
+    "comparisonTable": {
+      "headers": ["Discovery stage", "What the buyer looks for", "What your profile should show"],
+      "rows": [
+        ["Supplier directory search", "A company that matches product and industry", "Correct English company name, industry and main products"],
+        ["Company profile review", "Whether the company is a manufacturer and where it is located", "Registered name, factory location, company type and year established"],
+        ["Capability check", "Whether the factory can make the product at the required volume", "Production lines, equipment, monthly capacity and MOQ"],
+        ["Certification check", "Whether certificates are current and cover the right product", "Certificate name, issuing body, scope and validity, with records available"],
+        ["Evidence check", "How each claim was confirmed", "Evidence level shown on the profile, with documents on file where applicable"],
+        ["Inquiry decision", "Whether the supplier is worth contacting", "Complete, consistent information and a clear quality management description"]
+      ]
+    },
+    "zeroToleranceTitle": "Practices that damage buyer trust",
+    "zeroToleranceList": [
+      "Listing a trading company as a manufacturer",
+      "Showing certificates whose scope does not cover the products you offer",
+      "Publishing factory photos taken from another company",
+      "Stating production capacity that cannot be supported by equipment or records"
+    ],
+    "faqs": [
+      {
+        "question": "Do international buyers prefer manufacturers over trading companies?",
+        "answer": "Buyers work with both. What matters is that the company type is stated accurately. A trading company presented honestly can be useful for consolidating orders, while a factory should be able to show production equipment and records. Problems arise when the company type is misrepresented."
+      },
+      {
+        "question": "Why do factory photos matter on a supplier profile?",
+        "answer": "Photos let a buyer confirm that production facilities exist and match the stated capability. They should be your own, current and consistent with the equipment and products described in the profile. Photos taken from another factory undermine trust once noticed."
+      },
+      {
+        "question": "How does a buyer know which claims on a profile are verified?",
+        "answer": "Each profile shows an evidence level that reflects how information was confirmed, from self-declared through document reviewed to independently verified or factory audited. Buyers can use that level to decide which claims need further checking. An audit is a deeper on-site assessment than verification."
+      },
+      {
+        "question": "Will completing a profile bring inquiries automatically?",
+        "answer": "No. A complete profile makes your company easier to evaluate and more likely to be shortlisted, but inquiries depend on buyer demand and fit. FactoryAuditB2B does not promise orders or a specific number of inquiries."
+      }
+    ],
+    "ctaLabel": "Join the Supplier Network",
+    "ctaHref": "/join-supplier-network"
+  },
+  {
+    "slug": "how-to-build-a-professional-chinese-supplier-profile",
+    "locale": "en",
+    "category": "guide",
+    "targetAudience": "chinese_factory",
+    "h1Question": "How Do You Build a Professional Supplier Profile for a Chinese Factory?",
+    "blufSummary": "A professional factory profile answers the questions a buyer has before making contact: who the company is, where and what it manufactures, its products and MOQ, production capacity, quality management, certificates, export markets and real factory photos. Each claim should match the documents on file, because the profile is shown to buyers together with an evidence level that reflects how the information was confirmed.",
+    "comparisonTitle": "Sections a complete factory profile should cover",
+    "comparisonTable": {
+      "headers": ["Profile section", "What to include", "Why buyers need it"],
+      "rows": [
+        ["Company information", "Registered legal name in English and Chinese, company type, year established", "Confirms the legal entity a buyer would contract with"],
+        ["Factory information", "Factory address, site size, number of production lines", "Shows where and at what scale products are made"],
+        ["Manufacturing capability", "Core processes, key equipment, in-house versus outsourced steps", "Shows whether the factory can make the product itself"],
+        ["Products", "Specific product names, models and materials, not only a category label", "Lets buyers confirm product fit quickly"],
+        ["MOQ", "Minimum order quantity by product or product family", "Lets buyers assess whether their order size fits"],
+        ["Production capacity", "Realistic monthly or annual output with the basis stated", "Helps buyers judge lead time and scale"],
+        ["Quality management", "Incoming, in-process and final inspection, and corrective action process", "Shows how quality is controlled during production"],
+        ["Certifications", "Certificate name, issuing body, scope and validity period", "Lets buyers check whether certification covers their product"],
+        ["Export markets", "Countries or regions already supplied", "Indicates export experience and market familiarity"],
+        ["Factory photos", "Your own current photos of site, equipment and production", "Provides visual evidence of the stated capability"],
+        ["Company website", "Official site if you have one", "Gives buyers an additional channel to verify the company"]
+      ]
+    },
+    "zeroToleranceTitle": "Do not put unsupportable claims on a profile",
+    "zeroToleranceList": [
+      "A capacity figure with no equipment or production records behind it",
+      "Certificates that have expired or do not cover the listed products",
+      "Photos of facilities the company does not operate",
+      "An export market list that the company cannot support with transaction records"
+    ],
+    "faqs": [
+      {
+        "question": "What is the most common gap in a Chinese factory profile?",
+        "answer": "Product descriptions are often too broad. A category label alone does not tell a buyer what you make. Specific product names, materials and models, together with MOQ and capacity, make a profile far more useful for shortlisting."
+      },
+      {
+        "question": "Should I publish my factory address on the profile?",
+        "answer": "Publish the address you are willing to have buyers and inspectors visit. Buyers use it to confirm that the site exists. If you are not ready to publish it, complete the rest of the profile first and add it when the information is settled."
+      },
+      {
+        "question": "How are claims on my profile shown to buyers?",
+        "answer": "The profile shows an evidence level describing how information was confirmed. A claim that is only self-declared is marked as such. It is not presented as independently verified unless there are records to support that."
+      },
+      {
+        "question": "Can I edit the profile after it is published?",
+        "answer": "Yes. Claim an existing profile to maintain certificates, photos and self-assessment information yourself. Keep details current, especially certificate validity and capacity, so buyers are not evaluating outdated information."
+      }
+    ],
+    "ctaLabel": "Create Your Supplier Profile",
+    "ctaHref": "/join-supplier-network"
+  },
+  {
+    "slug": "what-international-buyers-look-for-when-choosing-chinese-manufacturers",
+    "locale": "en",
+    "category": "guide",
+    "targetAudience": "chinese_factory",
+    "h1Question": "What Do International Buyers Look for When Choosing Chinese Manufacturers?",
+    "blufSummary": "International buyers usually evaluate whether a Chinese supplier is legitimate, capable, consistent and low risk before placing an order. They check company identity, manufacturing capability, product quality controls, certificate authenticity, production capacity, delivery capability, communication, export experience and audit readiness. A factory that can show evidence for each of these points is easier to qualify than one that only makes claims.",
+    "comparisonTitle": "Buyer evaluation dimensions and the evidence behind them",
+    "comparisonTable": {
+      "headers": ["Evaluation dimension", "What the buyer asks", "Evidence that helps"],
+      "rows": [
+        ["Company legitimacy", "Is this a real registered entity?", "Business licence, registered name matching the profile, consistent company details"],
+        ["Manufacturing capability", "Do they make the product in house?", "Production lines, equipment list, process description, factory photos"],
+        ["Product quality", "How is quality controlled during production?", "Incoming, in-process and final inspection records and a corrective action process"],
+        ["Certificate authenticity", "Do certificates cover this product and are they current?", "Certificate scope, issuing body, validity and records available for review"],
+        ["Production capacity", "Can they supply the required volume?", "Documented capacity with the basis stated, not only a headline number"],
+        ["Delivery capability", "Can they meet the required lead time?", "Realistic lead times, staffing and scheduling information"],
+        ["Communication", "Are questions answered clearly and on time?", "Responsive contact, consistent technical answers, clear specifications"],
+        ["Export experience", "Have they supplied this market before?", "List of markets served and references that can be discussed"],
+        ["Audit readiness", "Would the site pass a factory audit?", "Records, safety conditions and corrective actions in place before an audit is booked"]
+      ]
+    },
+    "zeroToleranceTitle": "Issues that commonly stop an order",
+    "zeroToleranceList": [
+      "A company name on the bank account that does not match the contracting entity",
+      "Certificates that cannot be confirmed with the issuing body",
+      "No evidence of incoming or in-process inspection",
+      "Refusal to allow an independent verification or factory audit before a large order"
+    ],
+    "faqs": [
+      {
+        "question": "Do buyers always require a factory audit before ordering?",
+        "answer": "Not always. For a first small order, a buyer may rely on verification and document checks. For larger or recurring orders, many buyers request an independent factory audit. The audit scope depends on the product, industry and standard the buyer uses."
+      },
+      {
+        "question": "Does a high score or complete profile mean a factory is audited?",
+        "answer": "No. Profile completeness and self-assessment scores are not audit results. Only a factory audit records what was found on site. The profile distinguishes these with an evidence level so buyers do not mistake self-declared information for an independent assessment."
+      },
+      {
+        "question": "How should a factory prepare for buyer questions about quality?",
+        "answer": "Keep records of incoming material checks, in-process inspections and final inspection results, and show how corrective actions are closed. Buyers value a working process with records over a general statement that quality is important."
+      },
+      {
+        "question": "What can a factory do if it has no export experience yet?",
+        "answer": "State the capability accurately, show real production evidence, and complete the profile with certificates and factory photos. Buyers accept new exporters when the basic facts are clear and verifiable, even if the market list is short."
+      }
+    ],
+    "ctaLabel": "Complete Your Supplier Profile",
+    "ctaHref": "/join-supplier-network"
+  }
+]

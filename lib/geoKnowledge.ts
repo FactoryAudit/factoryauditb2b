@@ -65,6 +65,9 @@ export type GeoKnowledgePage = {
   zeroToleranceTitle: string | null;
   zeroToleranceList: string[];
   faqs: GeoFaq[];
+  /** 可选页级 CTA：两者都有效时才覆盖渲染壳的全局默认 CTA */
+  ctaLabel: string | null;
+  ctaHref: string | null;
   /** ISO 时间串；sitemap 的 lastmod 直接用它，缺失则不传（R60） */
   updatedAt: string | null;
 };
@@ -88,8 +91,21 @@ type GeoRow = {
   zero_tolerance_title: string | null;
   zero_tolerance_list: unknown;
   faqs: unknown;
+  cta_label: string | null;
+  cta_href: string | null;
   updated_at: string | null;
 };
+
+/**
+ * 页级 CTA 链接校验：只接受站内绝对路径。
+ * 拒绝协议相对（//evil.com）、带协议/主机、javascript: 等，杜绝种子数据外链注入。
+ */
+function safeInternalHref(v: unknown): string | null {
+  const href = text(v);
+  if (!href || !href.startsWith("/") || href.startsWith("//")) return null;
+  if (/[:\s]/.test(href.split("?")[0])) return null; // 路径段里不应有冒号或空白
+  return href;
+}
 
 function text(v: unknown): string | null {
   if (typeof v !== "string") return null;
@@ -180,15 +196,20 @@ function toPage(row: GeoRow): GeoKnowledgePage | null {
     zeroToleranceTitle: text(row.zero_tolerance_title),
     zeroToleranceList: textList(row.zero_tolerance_list),
     faqs: normalizeFaqs(row.faqs, slug),
+    ctaLabel: text(row.cta_label),
+    ctaHref: safeInternalHref(row.cta_href),
     updatedAt: text(row.updated_at),
   };
 }
 
 // ─────────────────────────── 取数 ───────────────────────────
 
+// 🔴 显式列字段：新增 DB 列必须同步这里，否则 toPage 永远读到 undefined 且 tsc 不报
+//    （GeoRow 是手写类型）。2026-11-16 加 cta_label/cta_href 时就踩过这个坑。
 const SELECT =
   "slug,locale,category,target_audience,h1_question,bluf_summary," +
-  "comparison_title,comparison_table,zero_tolerance_title,zero_tolerance_list,faqs,updated_at";
+  "comparison_title,comparison_table,zero_tolerance_title,zero_tolerance_list,faqs," +
+  "cta_label,cta_href,updated_at";
 
 /**
  * 构建期缓存。9 个语言分片 × 3 个路由族会让 generateStaticParams / 页面 / sitemap
