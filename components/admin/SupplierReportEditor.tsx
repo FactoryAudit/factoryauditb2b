@@ -276,7 +276,7 @@ export default function SupplierReportEditor({
     }
   }
 
-  /* ---- 从档案预填（只填空字段，不覆盖人工录入；分级写「企业自报」） ---- */
+  /* ---- 从档案预填（40 个字段全覆盖；只填空、不覆盖；分级只写「自报/无记录」） ---- */
   function applyAutofill() {
     const list = autofill ?? [];
     if (list.length === 0) {
@@ -284,6 +284,7 @@ export default function SupplierReportEditor({
       return;
     }
     let filled = 0;
+    let marked = 0;
     let kept = 0;
     const missing: string[] = [];
 
@@ -307,18 +308,27 @@ export default function SupplierReportEditor({
           kept++; // 已有值：人工录入优先，绝不覆盖
           continue;
         }
-        field.v = c.value;
-        // 🔴 绝不预选成 verified —— 这些值来自企业自评/档案，只能标「企业自报」
-        if (!field.level) field.level = "reported";
-        filled++;
+        if (c.value) {
+          field.v = c.value;
+          // 🔴 绝不预选成 verified —— 这些值来自企业自评/档案，只能标「企业自报」
+          if (!field.level) field.level = "reported";
+          filled++;
+        } else {
+          // 无数据源：标「无记录」而不是留 null ——
+          // sectionHasContent 认为 level !== null 即有内容，这样该章仍会出现在导出件里，
+          // 读者能看到「这一项我们确实没有记录」，而不是整章静默消失。
+          if (!field.level) field.level = "none";
+          marked++;
+        }
       }
       return next;
     });
 
-    const parts = [`已预填 ${filled} 项`];
+    const parts = [`预填 ${filled} 项`];
+    if (marked) parts.push(`${marked} 项无数据源已标「无记录」`);
     if (kept) parts.push(`跳过 ${kept} 项（已有值，未覆盖）`);
-    if (missing.length) parts.push(`${missing.length} 项找不到对应字段`);
-    parts.push("分级已标为「企业自报」，请逐项核对");
+    if (missing.length) parts.push(`${missing.length} 项未匹配`);
+    parts.push("请逐项核对后保存");
     setFillNote(parts.join(" · "));
   }
 
