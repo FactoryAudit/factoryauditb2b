@@ -1234,10 +1234,21 @@ export async function notifyAdminNewAuditRequest(data: {
   ]
     .filter((x): x is string => x !== null)
     .join("\n");
+  // 🔴 发布探针识别（2026-11-16）：release.sh 第 0.6 步（R79 邮件门）每次发布都真发一封
+  //    管理员通知邮件，运营商收件箱会被这些测试信塞满。
+  //    这里只改**主题前缀与文首提示**，收件人与链路不变 —— 门禁仍然验证"真能到你邮箱"，
+  //    但你可以在邮箱里对 `[TEST]` 设一条过滤规则直接归档。
+  const isProbe =
+    /@resend\.dev$/i.test(data.buyerEmail ?? "") ||
+    /R\d+\s*(gate|mail)|gate probe|mail gate/i.test(data.additionalComments ?? "");
+  const subjectPrefix = isProbe ? "[TEST] " : "";
+  const probeNote = isProbe
+    ? "[测试探针] 这封是发布验收生成的，不是真实客户。可设过滤规则：主题含 [TEST] 直接归档。\n\n"
+    : "";
   return sendMail({
     to: adminEmail,
-    subject: `[FactoryAuditB2B] New Audit Request ${data.auditCode}`,
-    text: body,
+    subject: `${subjectPrefix}[FactoryAuditB2B] New Audit Request ${data.auditCode}`,
+    text: probeNote + body,
   });
 }
 
