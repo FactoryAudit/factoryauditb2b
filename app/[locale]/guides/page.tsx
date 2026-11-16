@@ -13,6 +13,7 @@ import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { pickZhPair } from "@/lib/tw";
 import { pickGuideDesc } from "@/lib/pickGuideDesc";
+import { GEO_ROUTE_SEGMENT, geoPath, listGeoPages } from "@/lib/geoKnowledge";
 
 const PATH = "/guides";
 const BASE = "https://factoryauditb2b.com";
@@ -36,6 +37,13 @@ export default async function GuidesIndex({ params }: Props) {
   const t = await getDictionary(locale);
   const p = (href: string) => localePath(locale, href);
   const cats = guideCategoriesWithGuides();
+
+  // GEO 问答页（category 走 /guides/ 的那几类）也必须在目录页出现。
+  // 为什么：页面只进 sitemap 而没有站内入口，就是孤岛 —— 爬虫和 AI 抽取都缺一条路径。
+  // 过滤依据唯一真源 GEO_ROUTE_SEGMENT，不在这里复制 category 枚举。
+  const geoGuides = (await listGeoPages(locale)).filter(
+    (g) => GEO_ROUTE_SEGMENT[g.category] === "guides",
+  );
 
   const jsonLd = [
     {
@@ -120,6 +128,25 @@ export default async function GuidesIndex({ params }: Props) {
           </section>
         );
       })}
+
+      {/* GEO 问答页专区：标题复用既有 relatedGuides 键（字典 9 语已冻结，不新增键） */}
+      {geoGuides.length > 0 && (
+        <section className="mt-12">
+          <h2 className="text-2xl font-bold text-[#171717]">{t.common.ui.relatedGuides}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-4">
+            {geoGuides.map((g) => (
+              <Link key={g.slug} href={p(geoPath(g))} className="card p-6 hover:border-[#171717]">
+                <h3 className="text-xl font-bold text-[#171717]">{g.h1Question}</h3>
+                {g.blufSummary && (
+                  <p className="text-sm text-[#3f4650] mt-2">
+                    {g.blufSummary.length > 140 ? `${g.blufSummary.slice(0, 140)}…` : g.blufSummary}
+                  </p>
+                )}
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
     </main>
   );
 }
