@@ -14,31 +14,70 @@ import JsonLd from "@/components/JsonLd";
 import WhatsAppLink from "@/components/WhatsAppLink";
 import RfqForm from "@/components/RfqForm";
 import RelatedGuides from "@/components/RelatedGuides";
+// GEO 问答页（category = 'industry'）。行业税表优先，未命中才查库。
+import { getGeoPage, listGeoPages, type GeoKnowledgePage } from "@/lib/geoKnowledge";
+import { buildGeoMetadata } from "@/lib/geoKnowledgeSeo";
+import GeoKnowledgeArticle from "@/components/geo/GeoKnowledgeArticle";
 
 const BASE = "https://factoryauditb2b.com";
 
 type Params = { locale: string; slug: string };
 
+/** 本路由承接的 GEO category。 */
+const GEO_CATEGORIES_HERE = ["industry"] as const;
+
 export async function generateStaticParams() {
   const industries = await listIndustries();
-  return LOCALES.flatMap((locale) => industries.map((i) => ({ locale, slug: i.code })));
+  const staticParams = LOCALES.flatMap((locale) => industries.map((i) => ({ locale, slug: i.code })));
+
+  // GEO 行业文章：slug 不与行业代码重叠（重叠时行业页优先，见 resolve()）
+  const codes = new Set(industries.map((i) => i.code));
+  const geo = await listGeoPages();
+  const geoParams = LOCALES.flatMap((locale) =>
+    geo
+      .filter((p) => (GEO_CATEGORIES_HERE as readonly string[]).includes(p.category))
+      .filter((p) => !codes.has(p.slug))
+      .map((p) => ({ locale, slug: p.slug }))
+  );
+
+  return [...staticParams, ...geoParams];
 }
 
-async function resolve(slug: string, locale: string) {
+/**
+ * 一个 slug 在本路由可能指向两种页面，必须先辨明再渲染：
+ *   · industry  —— 行业税表里的行业枢纽页（带该行业已核验供应商列表）
+ *   · geo       —— 表里的行业向问答文章
+ * 🔴 顺序不可颠倒：行业代码优先，避免库里的行覆盖既有枢纽页的 URL。
+ */
+type RouteTarget =
+  | { kind: "industry"; code: string; name: string; description: string | null }
+  | { kind: "geo"; page: GeoKnowledgePage };
+
+async function resolve(slug: string, locale: string): Promise<RouteTarget> {
   const industries = await listIndustries();
   const industry = industries.find((i) => i.code === slug);
-  if (!industry) notFound();
-  // name 在 zh-TW 下就地繁化（「Electronics / 电子」→「Electronics / 電子」）
-  return { code: industry.code, name: industryDisplayName(locale, industry.name), description: null };
+  if (industry) {
+    // name 在 zh-TW 下就地繁化（「Electronics / 电子」→「Electronics / 電子」）
+    return {
+      kind: "industry",
+      code: industry.code,
+      name: industryDisplayName(locale, industry.name),
+      description: null,
+    };
+  }
+  const geo = await getGeoPage(slug, locale, GEO_CATEGORIES_HERE);
+  if (geo) return { kind: "geo", page: geo };
+  notFound();
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { locale: raw, slug } = await params;
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
-  const industry = await resolve(slug, locale);
+  const target = await resolve(slug, locale);
   const t = await getDictionary(locale);
-  const title = `${industry.name} ${t.industryPage.pageTitle}`;
-  const description = t.industryPage.metaDesc.replaceAll("{industry}", industry.name);
+  if (target.kind === "geo") return buildGeoMetadata(target.page, locale);
+  const title = `${target.name} ${t.industryPage.pageTitle}`;
+  const description = t.industryPage.metaDesc.replaceAll("{industry}", target.name);
   return buildPageMetadata({ locale, path: `/industry/${slug}`, title, description });
 }
 
@@ -47,7 +86,14 @@ export default async function IndustryPage({ params }: { params: Promise<Params>
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const t = await getDictionary(locale);
   const lp = (href: string) => localePath(locale, href);
-  const industry = await resolve(slug, locale);
+  const target = await resolve(slug, locale);
+
+  // GEO 分支：走共用渲染壳，完全跳过下面的行业枢纽逻辑（不查供应商、不渲染 RFQ）
+  if (target.kind === "geo") {
+    return <GeoKnowledgeArticle page={target.page} locale={locale} t={t} />;
+  }
+
+  const industry = target;
   const p = t.industryPage;
 
   const suppliers = await listSuppliersByIndustry(slug);

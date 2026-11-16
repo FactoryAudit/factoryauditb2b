@@ -169,9 +169,11 @@ async function loadConstants() {
         'import { LOCALES } from "./i18n/config";',
         'import { GUIDES } from "./lib/guides";',
         'import { STATIC_SUPPLIERS } from "./lib/staticData";',
+        'import { GEO_ROUTE_SEGMENT } from "./lib/geoKnowledge";',
         "export const LOCALE_COUNT = LOCALES.length;",
         "export const GUIDE_COUNT = GUIDES.length;",
         "export const STATIC_SUPPLIER_COUNT = STATIC_SUPPLIERS.length;",
+        "export const GEO_ROUTE_SEGMENT_JSON = JSON.stringify(GEO_ROUTE_SEGMENT);",
       ].join("\n"),
       resolveDir: ROOT,
       sourcefile: "preflight-consts.ts",
@@ -191,6 +193,7 @@ async function loadConstants() {
     localeCount: mod.LOCALE_COUNT,
     guideCount: mod.GUIDE_COUNT,
     staticSupplierCount: mod.STATIC_SUPPLIER_COUNT,
+    geoRouteSegment: JSON.parse(mod.GEO_ROUTE_SEGMENT_JSON),
   };
 }
 
@@ -233,6 +236,42 @@ async function queryWithRetry(url, key) {
   return { ...last, attempts: ATTEMPTS };
 }
 
+/**
+ * 查 GEO 问答表里走 `/guides/` 路由的页数（category → 路由段映射取自源码，不硬编码）。
+ *
+ * 为什么必须算进 guides 基线：GEO 页与静态指南共用 `app/[locale]/guides/[slug]`
+ * 路由，产物里都是 `guides/<slug>.html`。若基线只算静态 GUIDES.length，第 1.5 步
+ * 会把「合法新增的 GEO 页」误判成产物膨胀而中止发布（2026-11-16 实测 450→495）。
+ *
+ * 只读 category 列（不取正文），按 GEO_ROUTE_SEGMENT 过滤出 segment==='guides' 的行。
+ * 查询失败一律返回 null：调用方据此以「只算静态」降级并显式告警，绝不一味放行。
+ */
+async function queryGeoGuides(url, key, routeSegment) {
+  const endpoint = `${url.replace(/\/+$/, "")}/rest/v1/geo_knowledge_pages?select=category`;
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
+  try {
+    const r = await fetch(endpoint, {
+      headers: { apikey: key, Authorization: `Bearer ${key}` },
+      signal: ctrl.signal,
+    });
+    const body = await r.text();
+    if (!r.ok) {
+      console.log(`[preflight] ⚠️ GEO 表查询 HTTP ${r.status}：${body.slice(0, 160)}（guides 基线只算静态）`);
+      return null;
+    }
+    const rows = JSON.parse(body);
+    if (!Array.isArray(rows)) return null;
+    const n = rows.filter((r) => routeSegment[r.category] === "guides").length;
+    return { count: n, total: rows.length };
+  } catch (e) {
+    console.log(`[preflight] ⚠️ GEO 表查询失败：${e.message}（guides 基线只算静态）`);
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 // ────────────────────────────── 5. 主流程 ──────────────────────────────
 function abort(reason) {
   console.error("");
@@ -257,7 +296,7 @@ async function main() {
   } catch (e) {
     return abort(`无法从源码求取期望值（esbuild 取 GUIDES/LOCALES 失败）：${e.message}`);
   }
-  const { localeCount, guideCount, staticSupplierCount } = consts;
+  const { localeCount, guideCount, staticSupplierCount, geoRouteSegment } = consts;
 
   // ---- 模式判定：与 lib/queries.ts 的 useSupabase() 逐条对齐 ----
   //   static                → 强制静态常量（构建**有意**不用库）
@@ -285,6 +324,9 @@ async function main() {
 
   if (!useSupabase) {
     // 走到这里只剩一种情况：显式 static 且已用 FAB2B_PREFLIGHT_ALLOW_STATIC=1 确认过。
+    // 注意：GEO 读取层（lib/geoKnowledge.ts）按 service_role 是否配齐独立判定，
+    // 与 SUPPLIER_DATA_SOURCE 无关；但显式 static 是「有意不用库」的演练模式，
+    // 这里同样不查 GEO 表，基线只算静态 —— 演练产物本就不该含库驱动页。
     console.log(`[preflight] SUPPLIER_DATA_SOURCE=static（已显式允许）—— 期望值取静态常量`);
     console.log(`EXPECTED_SUPPLIERS=${staticSupplierCount}, EXPECTED_GUIDES=${guideCount}`);
     console.log(
@@ -296,6 +338,8 @@ async function main() {
       mode: "static",
       expectedSuppliers: staticSupplierCount,
       expectedGuides: guideCount,
+      staticGuideCount: guideCount,
+      geoGuideCount: 0,
       localeCount,
       supplierPages: staticSupplierCount * localeCount,
       guidePages: guideCount * localeCount,
@@ -321,22 +365,37 @@ async function main() {
   }
 
   const supplierPages = result.count * localeCount;
-  const guidePages = guideCount * localeCount;
+
+  // GEO 问答页与静态指南共用 /guides/[slug] 路由 ⇒ 基线必须把走 guides 的 GEO 页算进去。
+  // 走库（与构建同源）；查不到则降级为只算静态并告警，绝不放宽成「不检查」。
+  const geo = await queryGeoGuides(url, key, geoRouteSegment);
+  const geoGuideCount = geo?.count ?? 0;
+  const totalGuideCount = guideCount + geoGuideCount;
+  const guidePages = totalGuideCount * localeCount;
 
   console.log(
     `[preflight] 数据源 OK：supabase，is_published=true 共 ${result.count} 行` +
       `（HTTP 200，${result.attempts} 次尝试，代理=${proxy ?? "直连"}）`,
   );
-  console.log(`EXPECTED_SUPPLIERS=${result.count}, EXPECTED_GUIDES=${guideCount}`);
+  if (geo) {
+    console.log(
+      `[preflight] GEO 页 ${geo.total} 篇，其中走 /guides/ 的 ${geoGuideCount} 篇` +
+        `（guide + comparison + capa-guide）→ 并入 guides 基线`,
+    );
+  }
+  console.log(`EXPECTED_SUPPLIERS=${result.count}, EXPECTED_GUIDES=${totalGuideCount}`);
   console.log(
     `[preflight] 派生产物基线（构建后逐字比对）：` +
       `/suppliers/*.html=${supplierPages}（${result.count}×${localeCount}，排除 */claim.html）、` +
-      `/guides/*.html=${guidePages}（${guideCount}×${localeCount}，-maxdepth 3）`,
+      `/guides/*.html=${guidePages}（${totalGuideCount}×${localeCount}，-maxdepth 3；` +
+      `静态 ${guideCount} + GEO ${geoGuideCount}）`,
   );
   writeBaseline({
     mode: "supabase",
     expectedSuppliers: result.count,
-    expectedGuides: guideCount,
+    expectedGuides: totalGuideCount,
+    staticGuideCount: guideCount,
+    geoGuideCount,
     localeCount,
     supplierPages,
     guidePages,

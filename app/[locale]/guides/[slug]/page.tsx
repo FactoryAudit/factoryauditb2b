@@ -3,6 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
 import { GUIDES, findGuide } from "@/lib/guides";
+// GEO 问答页（表 geo_knowledge_pages）：guide / comparison 两个 category 都落在本路由。
+// 静态指南优先，未命中才查库 —— 保证既有 3000+ 篇指南的渲染路径一字不动。
+import { getGeoPage, listGeoPages } from "@/lib/geoKnowledge";
+import { buildGeoMetadata } from "@/lib/geoKnowledgeSeo";
+import GeoKnowledgeArticle from "@/components/geo/GeoKnowledgeArticle";
 import { isLocale, DEFAULT_LOCALE, localePath, LOCALES, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import { buildPageMetadata } from "@/lib/pageMeta";
@@ -14,8 +19,24 @@ import { buildArticleSchema } from "@/lib/seo/articleSchema";
 const BASE = "https://factoryauditb2b.com";
 type Params = { locale: string; slug: string };
 
+/** 本路由承接的 GEO category。换值必须同步迁移 060/061 的约束与 /standards、/industry 路由。 */
+const GEO_CATEGORIES_HERE = ["guide", "comparison", "capa-guide"] as const;
+
 export async function generateStaticParams() {
-  return LOCALES.flatMap((locale) => GUIDES.map((g) => ({ locale, slug: g.slug })));
+  // 静态指南：9 语种 × 全部 GUIDES（原逻辑不变）
+  const staticParams = LOCALES.flatMap((locale) => GUIDES.map((g) => ({ locale, slug: g.slug })));
+  // GEO 问答页：正文目前只有 en，其余语种由 lib/geoKnowledge 回退到 en 渲染，
+  // 因此 9 个语种都要生成参数（否则 /de/guides/<geo-slug> 会掉进运行时 404）。
+  const staticSlugs = new Set(GUIDES.map((g) => g.slug));
+  const geo = await listGeoPages();
+  const geoParams = LOCALES.flatMap((locale) =>
+    geo
+      .filter((p) => (GEO_CATEGORIES_HERE as readonly string[]).includes(p.category))
+      // 同一 slug 若已存在于静态指南，静态版优先，绝不产出重复参数
+      .filter((p) => !staticSlugs.has(p.slug))
+      .map((p) => ({ locale, slug: p.slug }))
+  );
+  return [...staticParams, ...geoParams];
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
@@ -23,6 +44,9 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
   const g = findGuide(slug);
   if (!g) {
+    // 未命中静态指南 ⇒ 再试 GEO 表；也没有才算 404
+    const geo = await getGeoPage(slug, locale, GEO_CATEGORIES_HERE);
+    if (geo) return buildGeoMetadata(geo, locale);
     return buildPageMetadata({
       locale,
       path: `/guides/${slug}`,
@@ -43,10 +67,17 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 export default async function GuidePage({ params }: { params: Promise<Params> }) {
   const { locale: raw, slug } = await params;
   const locale: Locale = isLocale(raw) ? raw : DEFAULT_LOCALE;
-  const g = findGuide(slug);
-  if (!g) notFound();
-
   const t = await getDictionary(locale);
+
+  const g = findGuide(slug);
+  if (!g) {
+    // GEO 分支：独立渲染壳，与下面静态指南的版式互不影响。
+    // 放在 getDictionary 之后取 t，是为了复用缓存里同一份字典实例。
+    const geo = await getGeoPage(slug, locale, GEO_CATEGORIES_HERE);
+    if (geo) return <GeoKnowledgeArticle page={geo} locale={locale} t={t} />;
+    notFound();
+  }
+
   const p = (href: string) => localePath(locale, href);
   const c = pickZhCopy(locale, g);
   const title = pickZhPair(locale, g.titleEn, g.titleZh);

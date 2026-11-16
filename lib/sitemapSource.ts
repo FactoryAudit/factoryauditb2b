@@ -43,6 +43,8 @@ import { CHEMICALS } from "@/lib/chemicals";
 import { listPublishedClusters } from "@/lib/industrialClusters";
 import { listIndexableAuditGuideCombos } from "@/lib/auditGuideIndexability";
 import { buildClusterCanonicalPath } from "@/lib/clusterRoutes";
+// GEO 问答页：提交集合 = 库里实际存在的行，与三个路由的 generateStaticParams 同源。
+import { geoPath, listGeoPages } from "@/lib/geoKnowledge";
 
 /** 分片 key = 语言。顺序即 sitemapindex 里的顺序。 */
 export const SITEMAP_LOCALES: readonly Locale[] = LOCALES;
@@ -107,12 +109,13 @@ function seoFor(path: string): { changeFrequency: SitemapChangeFrequency; priori
     return { changeFrequency: "monthly", priority: 0.7 };
   if (
     path.startsWith("/guides") ||
+    path.startsWith("/standards") ||
     path.startsWith("/case-studies") ||
     path.startsWith("/field-reports") ||
     path.startsWith("/resources") ||
     path.startsWith("/audit-guide")
   )
-    return { changeFrequency: "monthly", priority: 0.6 }; // 博客 / 指南 / 案例
+    return { changeFrequency: "monthly", priority: 0.6 }; // 博客 / 指南 / 案例 / 标准解读
   if (path.startsWith("/industry/")) return { changeFrequency: "monthly", priority: 0.6 };
   if (path.startsWith("/chemicals/")) return { changeFrequency: "monthly", priority: 0.5 };
   if (path.startsWith("/countries/")) return { changeFrequency: "monthly", priority: 0.6 };
@@ -208,7 +211,7 @@ async function collectPathEntries(): Promise<SitemapPathEntry[]> {
     })),
   ];
 
-  const [countries, industries, standards, supplierRows, seo, clusterRows, indexableCombos] =
+  const [countries, industries, standards, supplierRows, seo, clusterRows, indexableCombos, geoPages] =
     await Promise.all([
       listCountries(),
       listIndustries(),
@@ -217,6 +220,7 @@ async function collectPathEntries(): Promise<SitemapPathEntry[]> {
       getSeoMatrix(),
       listPublishedClusters(),
       listIndexableAuditGuideCombos(),
+      listGeoPages(),
     ]);
 
   // 用 Map 去重：同一 path 若被多处产出，后写的 lastModified 生效（与原 flatMap 行为一致）。
@@ -287,6 +291,16 @@ async function collectPathEntries(): Promise<SitemapPathEntry[]> {
   industries.forEach((i) => {
     add(`/industry/${i.code}`);
     topicsForIndustry(i.code).forEach((tp) => add(`/industry/${i.code}/${tp.slug}`));
+  });
+
+  // GEO / AI Search 问答页（表 geo_knowledge_pages）。
+  // 提交集合 = 库内实际存在的行，与 /guides、/standards、/industry 三个路由的
+  // generateStaticParams 完全同源 —— 页面能渲染的才提交，提交的一定能渲染。
+  // 🔴 lastmod 只透传库里的 updated_at（由触发器维护）；取不到就不传，
+  //    绝不回落 new Date()（R60：否则每次构建刷全量 lastmod，Google 直接忽略该字段）。
+  geoPages.forEach((p) => {
+    const lm = p.updatedAt ? new Date(p.updatedAt) : undefined;
+    add(geoPath(p), lm && !Number.isNaN(lm.getTime()) ? lm : undefined);
   });
 
   // standards 目前不参与 sitemap：对应的 /supplier-audit/{code} 路由尚未建成，

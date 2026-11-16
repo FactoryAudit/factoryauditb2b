@@ -153,6 +153,82 @@ export type AnalyticsEventName =
   (typeof ANALYTICS_EVENTS)[keyof typeof ANALYTICS_EVENTS];
 
 /**
+ * GEO-V1.0 PART 10.2 要求的 9 个转化事件 ↔ 本项目既有事件名的对账表。
+ *
+ * 文档写的是「语义名」，本项目自 CS-04 起已有一套等价事件（命名更早、口径更严：
+ * 只在服务端 data.ok 之后发射，且经过 sanitizeParams 的 PII 清洗）。
+ * 这张表是唯一对账依据 —— GA4 后台配置「关键事件」时按右列的实际事件名配，
+ * 不要照抄文档左列（那些名字在本站从未发射，配了只会得到恒为 0 的假转化）。
+ *
+ * 每行都标注了 emitter 与其「成功守卫」，改动 emitter 时必须同步核对守卫仍在。
+ */
+export const GEO_V1_CONVERSION_MAP = [
+  {
+    docName: "supplier_registration_started",
+    event: ANALYTICS_EVENTS.supplierNetworkStart,
+    emitter: "SupplierRegistrationForm.tsx:162",
+    guard: "表单前端校验通过、用户提交时（漏斗上层，started 语义正确）",
+    isConversion: false,
+  },
+  {
+    docName: "supplier_registration_completed",
+    event: ANALYTICS_EVENTS.supplierNetworkSubmit,
+    emitter: "SupplierRegistrationForm.tsx:231",
+    guard: "/api/supplier-register 返回 ok",
+    isConversion: true,
+  },
+  {
+    docName: "supplier_profile_claimed",
+    event: ANALYTICS_EVENTS.claimSubmit,
+    emitter: "ClaimForm.tsx:75",
+    guard: "/api/supplier-claim 返回 ok",
+    isConversion: true,
+  },
+  {
+    docName: "buyer_registration_completed",
+    event: ANALYTICS_EVENTS.signupComplete,
+    emitter: "RegisterForm.tsx:158/212",
+    guard: "/api/auth/signup 或 /api/register 返回 ok",
+    isConversion: true,
+  },
+  {
+    docName: "rfq_submitted",
+    event: ANALYTICS_EVENTS.rfqSubmit,
+    emitter: "RfqForm.tsx:179",
+    guard: "data.ok 且 data.stored === true（落库失败不计转化）",
+    isConversion: true,
+  },
+  {
+    docName: "verification_request_submitted",
+    event: ANALYTICS_EVENTS.verifySupplierSubmit,
+    emitter: "VerifySupplierForm.tsx:138",
+    guard: "/api/verify-supplier/request 返回 ok",
+    isConversion: true,
+  },
+  {
+    docName: "factory_audit_request_submitted",
+    event: ANALYTICS_EVENTS.auditRequestSubmit,
+    emitter: "AuditRequestForm.tsx:199",
+    guard: "data.ok 且 data.auditCode 存在",
+    isConversion: true,
+  },
+  {
+    docName: "inspection_request_submitted",
+    event: ANALYTICS_EVENTS.inspectionRequestSubmit,
+    emitter: "InspectionRequestForm.tsx:78",
+    guard: "/api/lead 返回 ok",
+    isConversion: true,
+  },
+  {
+    docName: "contact_submitted",
+    event: ANALYTICS_EVENTS.customServiceSubmit,
+    emitter: "CustomServiceForm.tsx:61",
+    guard: "/api/lead 返回 ok",
+    isConversion: true,
+  },
+] as const;
+
+/**
  * 核心转化事件（Core Conversions）
  *
  * CS-04 口径铁律（不可违反）：
@@ -178,6 +254,10 @@ export const CONVERSION_EVENTS = [
   // 恒为 0 的假转化。已移入 UNWIRED_EVENTS，与同类的 quotaReached 一致。
   ANALYTICS_EVENTS.standardReportSubmit, // 标准报告样张下载留资提交（/standard-report）
   ANALYTICS_EVENTS.supplierNetworkSubmit, // 供应商入驻提交
+  // GEO-V1 PART 10.2「supplier_profile_claimed」：供应商认领自己的档案并提交成功。
+  // emitter 在 components/ClaimForm.tsx（/api/supplier-claim 返回 ok 之后），语义是真实表单提交，
+  // 符合 CS-04 口径。此前只发事件、却漏进转化桶，GA4 后台据此配置会漏掉这条转化。
+  ANALYTICS_EVENTS.claimSubmit,
   // STEP-05：/verify-supplier 真实表单提交 —— 这是本 Change Set 的**唯一**转化事件。
   // 页面浏览（verify_supplier_view）属漏斗上层，刻意不进本清单。
   ANALYTICS_EVENTS.verifySupplierSubmit,
