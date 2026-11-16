@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import PortalShell, { type PortalNavItem } from "@/components/PortalShell";
 import { getCurrentUser } from "@/lib/supabaseServer";
 import { resolveSupplierAccess } from "@/lib/supplierAccess";
+import { isAdminUser } from "@/lib/membership";
 import { isLocale, DEFAULT_LOCALE, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 
@@ -51,6 +52,10 @@ export default async function PortalLayout({ children, params }: Props) {
   });
   const isSupplier = access.ok;
 
+  // 管理后台入口：只有 profiles.role='admin' 的人能看到。
+  // 普通用户连链接都不渲染 —— 后台的「存在性」不对外暴露（/admin 本身也 404）。
+  const isAdmin = await isAdminUser(user.id);
+
   // 导航按角色动态：供应商看到「供应商工作台」菜单（4 页均在 group 内，统一侧边栏）；
   // 买家看到「买家工作台」菜单（收藏/询价等指向 /account 下既有页面，跳转后由
   // 各页面自带的面包屑导航承接 —— 买家功能少，不强求侧边栏贯穿）。
@@ -80,6 +85,8 @@ export default async function PortalLayout({ children, params }: Props) {
       homeHref={p("/")}
       logoutHref={p("/login")}
       backLabel={zh ? "返回网站" : "Back to site"}
+      adminHref={isAdmin ? p("/admin") : undefined}
+      adminLabel={zh ? "管理后台" : "Admin"}
     >
       {children}
     </PortalShell>

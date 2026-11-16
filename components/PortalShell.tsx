@@ -26,6 +26,9 @@ export type PortalShellProps = {
   logoutHref: string;
   /** 回前台的文案 */
   backLabel?: string;
+  /** 管理后台入口（仅管理员传入；不传则不渲染） */
+  adminHref?: string;
+  adminLabel?: string;
   children: React.ReactNode;
 };
 
@@ -115,6 +118,8 @@ export default function PortalShell({
   homeHref,
   logoutHref,
   backLabel = "Back to site",
+  adminHref,
+  adminLabel = "Admin",
   children,
 }: PortalShellProps) {
   const pathname = usePathname();
@@ -204,6 +209,16 @@ export default function PortalShell({
               >
                 {backLabel}
               </Link>
+              {/* 管理后台入口：只在管理员登录时由 layout 传入 adminHref，
+                  普通供应商/买家看不到（也就不存在"后台存在"的暴露面）。 */}
+              {adminHref ? (
+                <Link
+                  href={adminHref}
+                  className="font-medium text-[#e07a49] hover:underline"
+                >
+                  {adminLabel} →
+                </Link>
+              ) : null}
             </div>
           </div>
         </aside>
