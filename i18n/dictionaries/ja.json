@@ -2046,7 +2046,8 @@
     "assessmentReportNote": "有料ダウンロードは近日公開予定です。現在、レポートのリンクをクリックするとカスタムサービスへのお問い合わせに移動します。価格は公表している価格表に準じます。",
     "regLegalName": "登記名",
     "fairRecordTitle": "広州交易会（広交会）出展記録",
-    "fairRecordSource": "出典：広州交易会の公式出展社名簿。"
+    "fairRecordSource": "出典：広州交易会の公式出展社名簿。",
+    "assessmentReportInPreparation": "レポート作成中 — 完成後にダウンロード可能になります。"
   },
   "reportPreview": {
     "badge": "無料プレビュー",

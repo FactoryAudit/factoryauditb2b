@@ -10,7 +10,7 @@ import { localePath, type Locale } from "@/i18n/config";
 // 文案一律走字典：由服务端（供应商详情页）按 locale 预解析后经 dict 传入，
 // 本组件内不再出现任何硬编码文案（项目铁律：永不硬编码文案，一律用 dict key）。
 
-/** 本区块 7 条文案；由服务端从 dict.supplierProfile.assessmentReport* 取好后传入。 */
+/** 本区块 8 条文案；由服务端从 dict.supplierProfile.assessmentReport* 取好后传入。 */
 export type AssessmentReportPaywallDict = {
   title: string;
   lead: string;
@@ -18,6 +18,8 @@ export type AssessmentReportPaywallDict = {
   notPublished: string;
   download: string;
   unavailable: string;
+  /** 已发布、但定稿文件还没上传（点下载必然 404，所以不给按钮） */
+  inPreparation: string;
   note: string;
 };
 
@@ -43,15 +45,20 @@ function fill(template: string, price: string): string {
 export default function AssessmentReportPaywall({
   supplierId,
   tags,
+  readyTags,
   locale,
   dict,
 }: {
   supplierId: string;
+  /** 已发布的类型（标签口径） */
   tags: AssessmentType[];
+  /** 已发布 **且** 定稿文件已上传的类型（下载口径）—— 只有这些才给下载按钮 */
+  readyTags: AssessmentType[];
   locale: Locale;
   dict: AssessmentReportPaywallDict;
 }) {
   const published = new Set(tags);
+  const ready = new Set(readyTags);
   const p = (href: string) => localePath(locale, href);
   const zhLike = locale === "zh" || locale === "zh-TW";
 
@@ -79,11 +86,17 @@ export default function AssessmentReportPaywall({
                   )}
                 </div>
                 <div className="mt-1 text-xs text-[#6d6b66]">
-                  {isPublished ? fill(dict.priceReady, PRICE[type]) : dict.notPublished}
+                  {!isPublished
+                    ? dict.notPublished
+                    : ready.has(type)
+                    ? fill(dict.priceReady, PRICE[type])
+                    : dict.inPreparation}
                 </div>
               </div>
 
-              {isPublished ? (
+              {/* 🔴 只有「已发布 + 定稿文件已上传」才给下载按钮。
+                  此前只看 isPublished ⇒ 文件没上传时按钮照样出现，点了 404。 */}
+              {isPublished && ready.has(type) ? (
                 <a
                   href={`/api/assessment-report/${supplierId}/${type}`}
                   className="btn btn-primary btn-sm"
@@ -95,7 +108,7 @@ export default function AssessmentReportPaywall({
                 </a>
               ) : (
                 <span className="rounded-md bg-[#f5f3ee] px-3 py-1.5 text-xs text-[#8c8982]">
-                  {dict.unavailable}
+                  {isPublished ? dict.inPreparation : dict.unavailable}
                 </span>
               )}
             </div>

@@ -22,7 +22,7 @@ import {
   SupplierSelfReportedCerts,
 } from "@/components/SupplierRegistrationPanel";
 // CS-21：三标签审核徽章（工厂自评估 / 平台在线评估 / 平台现场审核）
-import { getSupplierTags } from "@/lib/supplierAssessments";
+import { getSupplierTags, getDownloadableReportTypes } from "@/lib/supplierAssessments";
 import AssessmentTags from "@/components/supplier/AssessmentTags";
 // CS-22 / CS-A：公开档案页增强 —— 验证徽章 / 详情 / 历史 / 工厂照片 / 分享
 // 状态一律由服务端推导（lib/trustProfile.ts），组件只渲染、绝不自判 Verified。
@@ -300,6 +300,8 @@ export default async function SupplierProfilePage({
 
   // CS-21：三标签审核（仅展示已发布 published 的标签）
   const assessmentTags = await getSupplierTags(s.id);
+  // 「已发布」≠「可下载」：只有定稿文件已上传的才给下载按钮（否则点了 404）
+  const readyReportTypes = await getDownloadableReportTypes(s.id);
 
   // ==========================================================================
   // CS-22 / CS-A：信任档案（徽章 / 详情 / 历史 / 工厂照片 / 分享）
@@ -1251,6 +1253,7 @@ export default async function SupplierProfilePage({
         <AssessmentReportPaywall
           supplierId={s.id}
           tags={assessmentTags}
+          readyTags={readyReportTypes}
           locale={locale}
           dict={{
             title: sp.assessmentReportTitle,
@@ -1259,6 +1262,7 @@ export default async function SupplierProfilePage({
             notPublished: sp.assessmentReportNotPublished,
             download: sp.assessmentReportDownload,
             unavailable: sp.assessmentReportUnavailable,
+            inPreparation: sp.assessmentReportInPreparation,
             note: sp.assessmentReportNote,
           }}
         />

@@ -1494,7 +1494,8 @@
     "assessmentReportNote": "Paid downloads are launching soon. For now a report link opens a custom-service enquiry. Prices follow our published price list.",
     "regLegalName": "Registered name",
     "fairRecordTitle": "Canton Fair participation",
-    "fairRecordSource": "Source: official Canton Fair exhibitor directory."
+    "fairRecordSource": "Source: official Canton Fair exhibitor directory.",
+    "assessmentReportInPreparation": "Report in preparation — download will open once finalised."
   },
   "methodology": {
     "badge": "Methodology",

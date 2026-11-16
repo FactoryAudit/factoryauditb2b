@@ -2046,7 +2046,8 @@
     "assessmentReportNote": "Le téléchargement payant sera bientôt disponible. Pour l'instant, un lien de rapport ouvre une demande de service personnalisé. Les prix suivent notre grille tarifaire publiée.",
     "regLegalName": "Nom enregistré",
     "fairRecordTitle": "Participation à la Foire de Canton",
-    "fairRecordSource": "Source : annuaire officiel des exposants de la Foire de Canton."
+    "fairRecordSource": "Source : annuaire officiel des exposants de la Foire de Canton.",
+    "assessmentReportInPreparation": "Rapport en préparation — le téléchargement ouvrira une fois finalisé."
   },
   "reportPreview": {
     "badge": "(Aperçu gratuit)",

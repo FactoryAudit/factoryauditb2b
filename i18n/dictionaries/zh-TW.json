@@ -2046,7 +2046,8 @@
     "assessmentReportNote": "付費下載功能即將上線；目前點擊報告連結將轉至客製服務諮詢。價格以我們公布的價目表為準。",
     "regLegalName": "登記名稱",
     "fairRecordTitle": "廣交會參展紀錄",
-    "fairRecordSource": "來源：廣交會官方參展商名錄。"
+    "fairRecordSource": "來源：廣交會官方參展商名錄。",
+    "assessmentReportInPreparation": "報告定稿中，暫未開放下載。"
   },
   "reportPreview": {
     "badge": "免費預覽",

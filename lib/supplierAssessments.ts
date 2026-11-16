@@ -351,6 +351,30 @@ export async function getSupplierTags(supplierId: string): Promise<AssessmentTyp
 }
 
 // -----------------------------------------------------------------------------
+// 「能下载的报告」：已发布 **且** 定稿文件已上传（report_file_path 非空）
+//
+// 🔴 为什么必须与 getSupplierTags 分开（2026-11-16 修）：
+//    付费墙下载按钮此前只看 status=published 就渲染，但 /api/assessment-report
+//    还要求 report_file_path 非空 ⇒ 点了必然 404（真实投诉）。
+//    「已发布」是标签口径，「可下载」是文件口径，两者不是一回事。
+// -----------------------------------------------------------------------------
+export async function getDownloadableReportTypes(supplierId: string): Promise<AssessmentType[]> {
+  const db = createAdminClient();
+  if (!db) return [];
+  const { data } = await db
+    .from("supplier_assessments")
+    .select("assessment_type, report_file_path")
+    .eq("supplier_id", supplierId)
+    .eq("status", "published")
+    .not("report_file_path", "is", null);
+  if (!data) return [];
+  return data
+    .filter((r) => typeof r.report_file_path === "string" && r.report_file_path.trim() !== "")
+    .map((r) => r.assessment_type as AssessmentType)
+    .filter((t): t is AssessmentType => typeof t === "string");
+}
+
+// -----------------------------------------------------------------------------
 // 标签③读取：供应商侧查看自己的现场审核申请状态（含 SLA 到期日）
 // -----------------------------------------------------------------------------
 export type OnSiteAuditState = {

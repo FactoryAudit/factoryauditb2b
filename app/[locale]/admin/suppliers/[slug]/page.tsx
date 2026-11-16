@@ -4,15 +4,12 @@ import { isLocale, localePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 import {
   getAdminSupplier,
-  listAdminAudits,
   requireAdmin,
   getLatestSupplierConsent,
   getAdminSupplierReport,
 } from "@/lib/adminData";
 import { listPublishedClusters } from "@/lib/industrialClusters";
 import { COVERAGE_COUNTRIES } from "@/lib/coverage";
-// CS-D #19：报告核验状态必须与 Public Profile 同源（resolveVerificationBadge）
-import { getSupplierVerificationStatus } from "@/lib/trustProfile";
 import SupplierEditor, {
   type SupplierFormValues,
   type SupplierAuthInfo,
@@ -29,7 +26,7 @@ import {
   completenessStateLabel,
 } from "@/lib/supplierCompleteness";
 import { emptyReportTemplate } from "@/lib/supplierReportTemplate";
-import type { SupplierReportInput, ReportLang } from "@/lib/supplierReportHtml";
+import type { ReportLang } from "@/lib/supplierReportHtml";
 
 export const dynamic = "force-dynamic";
 export const metadata = { robots: { index: false, follow: false } };
@@ -59,18 +56,7 @@ export default async function AdminSupplierEditPage({ params }: Props) {
       })
     : { rows: [], manual: [], hasAny: false };
 
-  const audits = await listAdminAudits(slug);
   const consent = await getLatestSupplierConsent(slug);
-
-  // CS-D #19：报告核验状态用服务端 resolver 推导（与 Public Profile 同一函数），
-  // 绝不读 suppliers.verification_level 自行判断。结果本地化后注入报告输入。
-  const vs = await getSupplierVerificationStatus(row.id);
-  const vsLabel =
-    vs.status === "ON_SITE_VERIFIED" ? t.trustProfile.statusOnSite
-    : vs.status === "ONLINE_VERIFIED" ? t.trustProfile.statusOnline
-    : vs.status === "SELF_ASSESSED" ? t.trustProfile.statusSelf
-    : vs.status === "EXPIRED" ? t.trustProfile.statusExpired
-    : t.trustProfile.statusNone;
 
   // STEP 10-B：已发布产业带（仅这些可作为供应商关联下拉项；value=slug）。
   const publishedClusters = await listPublishedClusters();
@@ -83,38 +69,9 @@ export default async function AdminSupplierEditPage({ params }: Props) {
   // 🔴 绝不用样张的虚构数据当默认值（emptyReportTemplate 只带章节标题与来源说明）。
   const reportRow = await getAdminSupplierReport(slug);
 
-  // 组装「核验报告」输入：只取 DB 中的真实记录，绝不编造。
-  const reportData: SupplierReportInput = {
-    legalName: row.legal_name,
-    slug: row.slug,
-    countryCode: row.country_code,
-    city: row.city ?? null,
-    industryCode: row.industry_code ?? null,
-    businessType: row.business_type ?? null,
-    established: row.established,
-    employees: row.employees ?? null,
-    mainProducts: row.main_products ?? [],
-    exportMarkets: row.export_markets ?? [],
-    certifications: row.certifications ?? [],
-    auditStatus: row.audit_status ?? null,
-    inspectionHistory: row.inspection_history ?? 0,
-    riskScore: row.risk_score,
-    verificationLevel: row.verification_level,
-    verificationBadgeLabel: vsLabel,
-    audits: audits.map((a) => ({
-      auditType: a.audit_type,
-      auditDate: a.audit_date,
-      auditorName: a.auditor_name ?? null,
-      auditorOrg: a.auditor_org ?? null,
-      result: a.result ?? null,
-      verificationStatus: a.verification_status,
-      findingsCritical: a.findings_critical,
-      findingsMajor: a.findings_major,
-      findingsMinor: a.findings_minor,
-      notes: a.notes ?? null,
-    })),
-    generatedAt: new Date().toISOString(),
-  };
+  // 🔴 2026-11-16：原此处还组装了一份 reportData（SupplierReportInput）用于
+  //    「简化核验摘要」下载。该出口与平台 13 章报告内容不符，已改用 reportRow.doc
+  //    统一渲染，故连同它独占的 audits / vsLabel 查询一并移除（少一次 listAdminAudits）。
 
   const defaultLang: ReportLang = locale === "zh" || locale === "zh-TW" ? "zh" : "en";
 
@@ -251,7 +208,16 @@ export default async function AdminSupplierEditPage({ params }: Props) {
       })()}
 
       <div className="mt-4">
-        <SupplierReportDownloadButton reportData={reportData} defaultLang={defaultLang} />
+        {/* 与下方「报告正文」编辑器同一份 doc —— 下载件即平台内容（13 章完整档案）。
+            2026-11-16 修：此前传 reportData 走 buildSupplierReportHtml，
+            生成的是 2 区块简化摘要，与平台展示严重不符。 */}
+        <SupplierReportDownloadButton
+          doc={reportRow?.doc ?? emptyReportTemplate()}
+          slug={row.slug}
+          supplierName={row.legal_name}
+          defaultLang={defaultLang}
+          hasContent={Boolean(reportRow)}
+        />
       </div>
 
       {/* 自评问卷 → 档案字段（只在供应商填过基础档案时出现） */}

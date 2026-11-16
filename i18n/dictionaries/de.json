@@ -2046,7 +2046,8 @@
     "assessmentReportNote": "Der kostenpflichtige Download startet in Kürze. Derzeit öffnet ein Berichtslink eine Anfrage für individuelle Leistungen. Die Preise richten sich nach unserer veröffentlichten Preisliste.",
     "regLegalName": "Eingetragener Name",
     "fairRecordTitle": "Teilnahme an der Canton Fair",
-    "fairRecordSource": "Quelle: offizielles Ausstellerverzeichnis der Canton Fair."
+    "fairRecordSource": "Quelle: offizielles Ausstellerverzeichnis der Canton Fair.",
+    "assessmentReportInPreparation": "Bericht in Vorbereitung — Download wird nach Fertigstellung freigeschaltet."
   },
   "reportPreview": {
     "badge": "Kostenlose Preview",
