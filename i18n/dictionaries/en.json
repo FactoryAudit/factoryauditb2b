@@ -3827,9 +3827,9 @@
   "standardReport": {
     "metaTitle": "Standard Supplier Due Diligence Report",
     "metaDesc": "Read the full standard supplier due diligence report free and without registering: 13 sections, 8 scored dimensions, evidence grading. Register once to download the specimen.",
-    "badge": "Standard report specimen",
+    "badge": "Standard report specimen · DEMO",
     "h1": "Standard supplier due diligence report",
-    "lead": "This is the exact structure every FactoryAuditB2B report follows. Read all 13 sections below — no account needed.",
+    "lead": "This is the exact structure every FactoryAuditB2B report follows. Read all 13 sections below — no account needed. The company name and every figure in this specimen are fictional, used only to demonstrate the structure and layout — they do not describe any real supplier.",
     "freeNote": "Free to read in full — no registration required. Registration is only needed to download a copy.",
     "tocTitle": "Contents",
     "downloadTitle": "Download this report",

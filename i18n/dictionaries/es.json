@@ -3827,9 +3827,9 @@
   "standardReport": {
     "metaTitle": "Informe estándar de diligencia debida",
     "metaDesc": "Lea gratis y sin registrarse el informe estándar completo: 13 secciones, 8 dimensiones puntuadas y clasificación de evidencias. Descargue el espécimen tras un breve registro.",
-    "badge": "Espécimen de informe estándar",
+    "badge": "Espécimen de informe estándar · DEMO",
     "h1": "Informe estándar de diligencia debida de proveedores",
-    "lead": "Esta es la estructura exacta que sigue cada informe de FactoryAuditB2B. Lea las 13 secciones a continuación, sin crear una cuenta.",
+    "lead": "Esta es la estructura exacta que sigue cada informe de FactoryAuditB2B. Lea las 13 secciones a continuación, sin crear una cuenta. El nombre de la empresa y todas las cifras de este espécimen son ficticios; sirven solo para mostrar la estructura y el formato, no describen a ningún proveedor real.",
     "freeNote": "Lectura completa gratuita, sin registro. El registro solo es necesario para descargar una copia.",
     "tocTitle": "Contenido",
     "downloadTitle": "Descargar este informe",

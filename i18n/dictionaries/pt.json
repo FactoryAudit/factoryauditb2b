@@ -3827,9 +3827,9 @@
   "standardReport": {
     "metaTitle": "Relatório padrão de diligência devida",
     "metaDesc": "Leia gratuitamente e sem cadastro o relatório padrão completo: 13 seções, 8 dimensões pontuadas e classificação de evidências. Baixe o espécime após um breve cadastro.",
-    "badge": "Espécime de relatório padrão",
+    "badge": "Espécime de relatório padrão · DEMO",
     "h1": "Relatório padrão de diligência de fornecedores",
-    "lead": "Esta é a estrutura exata que todo relatório da FactoryAuditB2B segue. Leia as 13 seções abaixo, sem criar uma conta.",
+    "lead": "Esta é a estrutura exata que todo relatório da FactoryAuditB2B segue. Leia as 13 seções abaixo, sem criar uma conta. O nome da empresa e todos os números deste espécime são fictícios; servem apenas para ilustrar a estrutura e o layout, sem descrever nenhum fornecedor real.",
     "freeNote": "Leitura completa gratuita, sem cadastro. O cadastro só é necessário para baixar uma cópia.",
     "tocTitle": "Conteúdo",
     "downloadTitle": "Baixar este relatório",

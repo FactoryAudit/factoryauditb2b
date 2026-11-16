@@ -3827,9 +3827,9 @@
   "standardReport": {
     "metaTitle": "Standardbericht zur Lieferantenprüfung",
     "metaDesc": "Lesen Sie den vollständigen Standardbericht kostenlos und ohne Registrierung: 13 Abschnitte, 8 bewertete Dimensionen, Kennzeichnung der Belege. Download nach kurzer Registrierung.",
-    "badge": "Muster des Standardberichts",
+    "badge": "Muster des Standardberichts · DEMO",
     "h1": "Standardbericht zur Lieferantenprüfung",
-    "lead": "Dies ist die Struktur, der jeder FactoryAuditB2B-Bericht folgt. Lesen Sie alle 13 Abschnitte unten — ohne Konto.",
+    "lead": "Dies ist die Struktur, der jeder FactoryAuditB2B-Bericht folgt. Lesen Sie alle 13 Abschnitte unten — ohne Konto. Firmenname und sämtliche Zahlen in diesem Muster sind fiktiv und dienen nur der Darstellung von Struktur und Layout — sie beschreiben keinen realen Lieferanten.",
     "freeNote": "Vollständig kostenlos lesbar, ohne Registrierung. Eine Registrierung ist nur für den Download nötig.",
     "tocTitle": "Inhalt",
     "downloadTitle": "Diesen Bericht herunterladen",

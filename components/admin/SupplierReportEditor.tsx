@@ -24,6 +24,7 @@ import {
   type ReportFamilyType,
 } from "@/lib/reportTemplateFamily";
 import { buildReportDocHtml, reportDocFileName } from "@/lib/supplierReportDocHtml";
+import type { AutofillCandidate } from "@/lib/reportAutofill";
 
 // components/admin/SupplierReportEditor.tsx —— CS-20 报告正文编辑器
 //
@@ -44,6 +45,9 @@ type Props = {
   isNew: boolean;
   updatedBy: string | null;
   updatedAt: string | null;
+  /** 「从档案预填」候选（供应商档案 + 自评问卷里已有的确定值）。
+   *  只填空字段、绝不覆盖人工录入；证据分级统一写成「企业自报」，不写「已核验」。 */
+  autofill?: AutofillCandidate[];
 };
 
 /* -------------------------------------------------------------------------- */
@@ -142,12 +146,15 @@ export default function SupplierReportEditor({
   isNew,
   updatedBy,
   updatedAt,
+  autofill,
 }: Props) {
   const [doc, setDoc] = useState<SupplierReportDoc>(initial);
   const [openNo, setOpenNo] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
   const [err, setErr] = useState<string | null>(null);
+  /** 预填结果提示（填了几项 / 跳过几项已有值） */
+  const [fillNote, setFillNote] = useState<string | null>(null);
   const [meta, setMeta] = useState<{ by: string | null; at: string | null }>({
     by: updatedBy,
     at: updatedAt,
@@ -269,6 +276,52 @@ export default function SupplierReportEditor({
     }
   }
 
+  /* ---- 从档案预填（只填空字段，不覆盖人工录入；分级写「企业自报」） ---- */
+  function applyAutofill() {
+    const list = autofill ?? [];
+    if (list.length === 0) {
+      setFillNote("没有可预填的内容 —— 供应商档案与自评问卷里还没有对应数据。");
+      return;
+    }
+    let filled = 0;
+    let kept = 0;
+    const missing: string[] = [];
+
+    setDoc((prev) => {
+      const next: SupplierReportDoc = {
+        ...prev,
+        sections: prev.sections.map((s) => ({
+          ...s,
+          fields: s.fields ? s.fields.map((f) => ({ ...f })) : s.fields,
+        })),
+      };
+      for (const c of list) {
+        const sec = next.sections.find((s) => s.no === c.sectionNo);
+        if (!sec) continue;
+        const field = (sec.fields ?? []).find((f) => f.lZh === c.labelZh);
+        if (!field) {
+          missing.push(`${c.sectionNo} ${c.labelZh}`);
+          continue;
+        }
+        if (String(field.v ?? "").trim()) {
+          kept++; // 已有值：人工录入优先，绝不覆盖
+          continue;
+        }
+        field.v = c.value;
+        // 🔴 绝不预选成 verified —— 这些值来自企业自评/档案，只能标「企业自报」
+        if (!field.level) field.level = "reported";
+        filled++;
+      }
+      return next;
+    });
+
+    const parts = [`已预填 ${filled} 项`];
+    if (kept) parts.push(`跳过 ${kept} 项（已有值，未覆盖）`);
+    if (missing.length) parts.push(`${missing.length} 项找不到对应字段`);
+    parts.push("分级已标为「企业自报」，请逐项核对");
+    setFillNote(parts.join(" · "));
+  }
+
   /* ---- 导出自包含 HTML ---- */
   function download(lang: "en" | "zh") {
     try {
@@ -309,6 +362,9 @@ export default function SupplierReportEditor({
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
+            <button type="button" className="btn btn-outline" onClick={applyAutofill}>
+              从档案预填
+            </button>
             <button type="button" className="btn btn-outline" onClick={() => download("zh")}>
               导出中文
             </button>
@@ -320,6 +376,12 @@ export default function SupplierReportEditor({
             </button>
           </div>
         </div>
+
+        {fillNote ? (
+          <p className="mt-3 rounded-md bg-[#f1f7f3] px-3 py-2 text-xs leading-relaxed text-[#2e7d4f]">
+            {fillNote}
+          </p>
+        ) : null}
 
         {/* ===== 报告模板家族选择器（按类型生成空白骨架） ===== */}
         <div className="mt-4 flex flex-wrap items-end gap-3 border-t border-[#eef2f7] pt-4">

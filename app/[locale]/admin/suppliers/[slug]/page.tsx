@@ -19,6 +19,7 @@ import AssessmentAdminPanel from "@/components/admin/AssessmentAdminPanel";
 import AssessmentAdoptPanel from "@/components/admin/AssessmentAdoptPanel";
 import SupplierReportEditor from "@/components/admin/SupplierReportEditor";
 import { ASSESSMENT_TYPE_LABELS, getSupplierSelfAssessment } from "@/lib/supplierAssessments";
+import { buildReportAutofill } from "@/lib/reportAutofill";
 import { buildAdoptRows, hasBasicProfileAnswers } from "@/lib/assessmentAdopt";
 import {
   supplierCompleteness,
@@ -320,6 +321,8 @@ export default async function AdminSupplierEditPage({ params }: Props) {
           isNew={!reportRow}
           updatedBy={reportRow?.updatedBy ?? null}
           updatedAt={reportRow?.updatedAt ?? null}
+          // 从档案 + 自评问卷预填能确定的字段（只填空、不覆盖、分级记为「企业自报」）
+          autofill={buildReportAutofill(row, selfDraft?.responses ?? null)}
         />
       </div>
     </div>
