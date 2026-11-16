@@ -174,13 +174,16 @@ body {
    · footer 同理。
    · 客服浮层（fixed 定位）在后台也隐藏：后台有自己的导航，浮层只会挡内容。 */
 body:has([data-portal-shell]) > header,
-body:has([data-portal-shell]) > footer {
+body:has([data-portal-shell]) > footer,
+body:has([data-admin-shell]) > header,
+body:has([data-admin-shell]) > footer {
   display: none !important;
 }
 
 /* 客服浮层（右下角微信/WhatsApp/聊天按钮）在后台隐藏：
    它的根节点是 `.fixed.bottom-6.z-50`（按钮态与展开态都是这组类），
    后台有自己的侧边栏导航，浮层只会挡住内容区。 */
-body:has([data-portal-shell]) .fixed.bottom-6.z-50 {
+body:has([data-portal-shell]) .fixed.bottom-6.z-50,
+body:has([data-admin-shell]) .fixed.bottom-6.z-50 {
   display: none !important;
 }

@@ -113,3 +113,139 @@ export async function listAuditorRoster(limit = 60): Promise<AuditorRosterEntry[
     return [];
   }
 }
+
+// ─────────────────────────────────────────────────────────────
+// 管理视角（/admin/auditors）
+//
+// 与 listAuditorRoster 的区别：名录是「派单下拉用」，必须干净（过滤探针/已拒绝）；
+// 管理页恰恰要**看到全部** —— 包括被拒的人、测试数据、从没接过单的申请者，
+// 否则运营无法回答「上个月申请的那个人哪去了」。
+//
+// 状态口径（派生，不新增字段）：
+//   test      明显是测试/探针邮箱（不进任何统计）
+//   rejected  leads.status = 'rejected'（保留可查，但不派单）
+//   active    真派过单（audit_assignments 有记录）
+//   pending   只提交过申请、还没派过单
+// ─────────────────────────────────────────────────────────────
+
+export type AuditorState = "active" | "pending" | "rejected" | "test";
+
+export type AuditorAdminEntry = AuditorRosterEntry & {
+  state: AuditorState;
+  /** leads.status 原值（pending / contacted / approved / rejected…），派单来源可能为 null */
+  leadStatus: string | null;
+  /** 首次申请时间（只有 leads 来源有） */
+  appliedAt: string | null;
+  /** 简历附件路径（私有 bucket，需签名后才能看） */
+  cvPath: string | null;
+};
+
+export async function listAuditorManagement(limit = 200): Promise<AuditorAdminEntry[]> {
+  const db = createAdminClient();
+  if (!db) return [];
+
+  try {
+    const [asnRes, appRes] = await Promise.all([
+      db
+        .from("audit_assignments")
+        .select("auditor_name, auditor_email, created_at")
+        .not("auditor_email", "is", null)
+        .order("created_at", { ascending: false })
+        .limit(500),
+      // ⚠️ 这里**不过滤** status=rejected —— 管理页要看得见被拒的人
+      db
+        .from("leads")
+        .select("first_name, email, country, sourcing, status, created_at, attachment_path")
+        .eq("kind", "auditor_application")
+        .order("created_at", { ascending: false })
+        .limit(500),
+    ]);
+
+    const map = new Map<string, AuditorAdminEntry>();
+
+    const upsert = (
+      emailRaw: unknown,
+      nameRaw: unknown,
+      at: unknown,
+      init: Partial<AuditorAdminEntry>,
+      isAssignment: boolean
+    ) => {
+      const email = String(emailRaw ?? "").trim().toLowerCase();
+      const name = String(nameRaw ?? "").trim();
+      if (!email) return;
+      const at2 = String(at ?? "");
+      const isTest = looksLikeTest(email, name, init.specialization ?? undefined);
+
+      const cur = map.get(email);
+      if (cur) {
+        cur.assignments += isAssignment ? 1 : 0;
+        cur.applied = cur.applied || !isAssignment;
+        if (isAssignment) cur.state = "active";
+        if (!isTest && cur.state === "test") cur.state = isAssignment ? "active" : "pending";
+        if (at2 > cur.lastSeenAt) {
+          cur.lastSeenAt = at2;
+          if (name) cur.name = name;
+          if (init.country) cur.country = init.country;
+          if (init.specialization) cur.specialization = init.specialization;
+        }
+        if (init.leadStatus) cur.leadStatus = init.leadStatus;
+        if (init.appliedAt) cur.appliedAt = init.appliedAt;
+        if (init.cvPath) cur.cvPath = init.cvPath;
+        return;
+      }
+
+      map.set(email, {
+        name: name || email.split("@")[0],
+        email,
+        country: init.country ?? null,
+        specialization: init.specialization ?? null,
+        assignments: isAssignment ? 1 : 0,
+        lastSeenAt: at2,
+        applied: !isAssignment,
+        state: isTest
+          ? "test"
+          : init.leadStatus === "rejected"
+          ? "rejected"
+          : isAssignment
+          ? "active"
+          : "pending",
+        leadStatus: init.leadStatus ?? null,
+        appliedAt: init.appliedAt ?? null,
+        cvPath: init.cvPath ?? null,
+      });
+    };
+
+    for (const r of (asnRes.data ?? []) as Array<Record<string, unknown>>) {
+      upsert(r.auditor_email, r.auditor_name, r.created_at, {}, true);
+    }
+    for (const r of (appRes.data ?? []) as Array<Record<string, unknown>>) {
+      upsert(
+        r.email,
+        r.first_name,
+        r.created_at,
+        {
+          country: r.country == null ? null : String(r.country),
+          specialization: r.sourcing == null ? null : String(r.sourcing),
+          leadStatus: r.status == null ? null : String(r.status),
+          appliedAt: r.created_at == null ? null : String(r.created_at),
+          cvPath: r.attachment_path == null ? null : String(r.attachment_path),
+        },
+        false
+      );
+    }
+
+    // 排序：可用的排前面（按接单数），然后待评估、已拒绝、测试
+    const rank: Record<AuditorState, number> = { active: 0, pending: 1, rejected: 2, test: 3 };
+    return Array.from(map.values())
+      .sort(
+        (a, b) =>
+          rank[a.state] - rank[b.state] ||
+          b.assignments - a.assignments ||
+          b.lastSeenAt.localeCompare(a.lastSeenAt)
+      )
+      .slice(0, limit);
+  } catch (e) {
+    console.error("[auditorRoster] management list failed", e);
+    return [];
+  }
+}

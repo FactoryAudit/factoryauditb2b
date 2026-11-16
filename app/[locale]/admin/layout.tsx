@@ -58,6 +58,7 @@ export default async function AdminLayout({ children, params }: Props) {
     { href: "/admin/orders", label: a.orders.ordersTitle },
     // CS-18：审核工作流后台。标签用双语常量，不为内部导航补 9 语键（后台单人、noindex）
     { href: "/admin/audits", label: locale === "zh" || locale === "zh-TW" ? "验厂工单" : "Audits" },
+    { href: "/admin/auditors", label: locale === "zh" || locale === "zh-TW" ? "审核员管理" : "Auditors" },
     { href: "/admin/members", label: a.navMembers },
     { href: "/admin/pending-review", label: t.evidenceCenter.adminNavPending },
     // CS-22 CHANGE SET C：供应商核验工作台（后台单人、noindex，双语常量）
@@ -70,7 +71,7 @@ export default async function AdminLayout({ children, params }: Props) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#fbfaf7]">
+    <div className="min-h-screen bg-[#fbfaf7]" data-admin-shell>
       {/* 顶部：返回前台 + 当前管理员 */}
       <div className="border-b border-[#ebe8e1] bg-white">
         <div className="container flex items-center justify-between py-3 text-sm">
