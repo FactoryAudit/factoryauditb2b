@@ -61,7 +61,15 @@ const LOCALES = ['en', 'zh', 'zh-TW', 'ja', 'es', 'de', 'fr', 'pt', 'ar'];
 /** 默认关键路由集：都为预渲染产物（应始终静态）+ 覆盖历次改动热点。
  *  这份清单不只是「对拍对象」，还是一条**不变量**：这些路由必须保持预渲染。
  *  其中 `/industrial-clusters` 曾是 `force-dynamic`（stage1.8 改为预渲染）——
- *  它一旦被改回动态渲染，在 CF Workers 免费额度下就是 5xx / 1102 的隐患。 */
+ *  它一旦被改回动态渲染，在 CF Workers 免费额度下就是 5xx / 1102 的隐患。
+ *
+ *  🔴 2026-11-16：`/rfq` 已从本清单**移除** —— 它是**设计上的动态页**：
+ *     `/rfq?request=RFQ-XXXX` 要服务端按编号查库（getPublicRfqForResponse）
+ *     取买家已授权公开的那条需求，再渲染供应商报价表单。这一步无法挪到客户端
+ *     （需服务端权限 + 查库），所以它读 searchParams、必然无预渲染产物。
+ *     此前把它列为「必须预渲染」是清单错误，导致**连续 6 次发布**第 8 步都报同一个假错。
+ *     它的守护改用内容探针：curl 200 + 页面含 RFQ 表单标识（见 release.sh 第 8 步之后的补充断言）。
+ */
 const DEFAULT_TARGETS = [
   '/',
   '/pricing',
@@ -77,7 +85,6 @@ const DEFAULT_TARGETS = [
   '/confidentiality',
   '/integrity',
   '/monitoring',
-  '/rfq',
   '/custom-services',
   '/services/inspection',
 ];
@@ -329,6 +336,10 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   }
   console.log('');
   console.log('LIVE_MD5_OK');
+  // 非阻塞提示：/rfq 是设计上的动态页（`?request=` 要服务端查库），不参与 md5 对拍。
+  // 不设为门禁是刻意的 —— 它是动态页，判据天然不适用；但也不能就此无声无息。
+  console.log('  提示：/rfq 为动态页（读 searchParams 查库），不在本对拍集。');
+  console.log('        如需确认它活着：curl -sS -o /dev/null -w "%{http_code}" https://factoryauditb2b.com/zh/rfq');
   if (opts.json) console.log(JSON.stringify(results, null, 2));
   process.exit(0);
 })().catch((e) => {
