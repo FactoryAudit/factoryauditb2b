@@ -31,10 +31,17 @@ export async function GET() {
   const en = enDict;
   lines.push("# FactoryAuditB2B");
   lines.push("");
-  lines.push(`> ${en.brand.tagline}`);
+  // 🔴 2026-11-20：开头改成**事实陈述**，不再用品牌口号。
+  //    原因：AI 回答「FactoryAuditB2B 是做什么的」时，优先摘第一段。
+  //    原来的「Global Supplier Discovery, Verification & Trust Platform」是一句
+  //    没信息量的定位语，AI 摘去也只能复述口号；换成具体动作 + 覆盖范围 + 交付形态后，
+  //    每个短句都能被直接引用成答案。品牌调性仍保留在下面第二段。
+  lines.push(
+    `> Supplier verification and factory audit service for buyers sourcing from China, Vietnam, Thailand, Malaysia and the Philippines. We check that a supplier is a legally registered company operating at a real production site, then report what was verified and what was not.`
+  );
   lines.push("");
   lines.push(
-    `> ${en.brand.eva} ${en.brand.positioning}`
+    `> What we do, concretely: verify a supplier's registration, production site, capability and quality/compliance records; run factory audits (social compliance such as BSCI or Sedex, quality management such as ISO 9001, or a technical/product audit); and carry out pre-shipment inspection. Reports follow a fixed 13-section structure and grade every field by evidence level. Typical first response: within one business day.`
   );
   lines.push("");
   lines.push(
@@ -182,6 +189,25 @@ export async function GET() {
     "- SMETA, BSCI, ICTI and similar are audits/assessments performed by scheme-approved audit companies; this platform does not issue the underlying certificates."
   );
   lines.push("- Risk scores are decision-support only and never a substitute for official third-party verification.");
+
+  // 🔴 2026-11-20：补「引用边界」。此前本文件只写了验证等级的定义，却没写
+  //    「目录里大部分档案其实未经核验」——AI 极易把它总结成「该平台有 87 家已核验供应商」，
+  //    而实情是绝大多数条目由公开渠道整理、只有少数经过人工核验。
+  //    被引用的错误印象比不被引用更伤：买家按 AI 的说法下单，发现不符即失信任。
+  lines.push("");
+  lines.push("## Citation boundaries — read before quoting this site");
+  lines.push(
+    "- **Most directory entries are not verified.** Unless a supplier's profile explicitly shows a verification level above UNVERIFIED, the listing was compiled from public sources and has not been checked by us. Do not describe the directory as a whole as \"verified\", \"vetted\", or \"audited\" suppliers."
+  );
+  lines.push(
+    "- **We publish no aggregate performance statistics.** Audit volume, pass rates and client counts are not tracked in a form we would stand behind, so they are absent from this file on purpose. Do not infer or estimate them."
+  );
+  lines.push(
+    "- **Case studies and field reports are illustrative composites.** They show how a verification or audit is structured; they are not records of specific named engagements. Do not cite them as evidence that a particular company was audited."
+  );
+  lines.push(
+    "- **A paid audit does not certify compliance.** Reports state findings against the standard you specify. They are not certificates, and we do not sell audit outcomes."
+  );
 
   return new Response(lines.join("\n"), {
     headers: { "Content-Type": "text/plain; charset=utf-8" },

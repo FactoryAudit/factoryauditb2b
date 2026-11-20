@@ -119,7 +119,6 @@ export function organizationSchema(
       "@type": "ContactPoint",
       contactType: "customer support",
       telephone: `+${whatsapp}`,
-      contactOption: "TollFree",
       availableLanguage: [...LOCALES],
     });
   }

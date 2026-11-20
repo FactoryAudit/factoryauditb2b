@@ -26,6 +26,12 @@ const ALLOWED_BOTS = [
   "PerplexityBot-User",
   "Claude-SearchBot",
   "Claude-User",
+  // 2026-11-20：Google-Extended 从 B 组移到 A 组。
+  //   它是「内容可否用于 Gemini / Vertex AI 生成式回答」的开关，不是训练开关 ——
+  //   禁它 = 用户在 Gemini 里问「中国有哪些验厂服务商」时，答案里永远不会出现本站。
+  //   而 Google 搜索的 AI Overviews 走的是 Googlebot（上面已有），本来就正常，不受此影响。
+  //   ⚠️ 必须同时在 Cloudflare 的 AI Crawl Control 里放行同 UA，否则边缘先拒、源站放行也没用。
+  "Google-Extended",
 ];
 
 // ---- B. 禁止：AI 训练爬虫 ----
@@ -44,11 +50,7 @@ const DISALLOWED_BOTS = [
   "Amazonbot",
   "cohere-ai",
   "FacebookBot",
-  // Google-Extended 控制内容是否用于 Gemini / Vertex AI 生成式接口。
-  // Cloudflare 托管段已将其 Disallow，这里保持一致，避免同 UA 指令冲突。
-  // ⚠️ 若后续希望在 Gemini 回答中获得引用，需**先在 Cloudflare 的 AI Crawl Control
-  //    里放行 Google-Extended**，再把本行移到 A 组 —— 只改这里不会生效。
-  "Google-Extended",
+  // Google-Extended 已于 2026-11-20 移到 A 组（放行，用于 Gemini 引用）。此处不再出现。
   "CloudflareBrowserRenderingCrawler",
 ];
 
