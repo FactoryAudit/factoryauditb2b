@@ -39,6 +39,10 @@ export async function POST(req: NextRequest) {
 
     const form = await req.formData();
     const supplierId = String(form.get("supplierId") || "").trim();
+    // 未登录自评流程的邮箱兜底（登录态下服务端用 session 忽略它）。
+    // 🔴 前端 FactoryPhotoUploader 现已随 fd 传 email；缺它会走 resolveSupplierAccess 的
+    //    session→email 链，未登录用户必然 email_required。
+    const email = String(form.get("email") || "").trim() || null;
     const category = String(form.get("category") || "").trim();
     const file = form.get("file");
     // 缩略图（可选）：客户端 canvas 一并生成的长边 ≤480 版本。
@@ -55,7 +59,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: false, error: "file required" }, { status: 400 });
     }
 
-    const access = await resolveSupplierAccess({ claimedSupplierId: supplierId });
+    const access = await resolveSupplierAccess({ claimedSupplierId: supplierId, email });
     if (!access.ok) {
       return NextResponse.json({ ok: false, error: access.code }, { status: access.status ?? 403 });
     }

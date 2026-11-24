@@ -8,6 +8,9 @@ type SA = Record<string, string>;
 
 type Props = {
   supplierId: string;
+  /** 未登录自评流程的邮箱兜底（登录态下服务端用 session 忽略它）。
+   *  必须传：否则未登录用户 POST 照片时 resolveSupplierAccess 拿不到身份 → email_required。 */
+  email?: string;
   value: FactoryPhotoMeta[];
   onChange: (photos: FactoryPhotoMeta[]) => void;
   dict: SA;
@@ -94,7 +97,7 @@ async function reencode(file: File): Promise<Encoded> {
   }
 }
 
-export default function FactoryPhotoUploader({ supplierId, value, onChange, dict }: Props) {
+export default function FactoryPhotoUploader({ supplierId, email, value, onChange, dict }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
@@ -122,6 +125,7 @@ export default function FactoryPhotoUploader({ supplierId, value, onChange, dict
       const enc = await reencode(file);
       const fd = new FormData();
       fd.append("supplierId", supplierId);
+      if (email) fd.append("email", email);
       fd.append("category", pendingCat);
       fd.append("width", String(enc.width));
       fd.append("height", String(enc.height));
@@ -132,15 +136,22 @@ export default function FactoryPhotoUploader({ supplierId, value, onChange, dict
       const res = await fetch("/api/supplier-factory-photo", { method: "POST", body: fd });
       const data = await res.json();
       if (!res.ok || !data.ok) {
+        // 🔴 错误必须按真实 code 映射，不能全兜底成「文件类型不支持」——
+        //    曾把 email_required（未登录自评流程缺身份）误显示成 wrongType，误导用户换文件。
+        const code = data.error;
         setErr(
           t(
-            data.error === "file_too_large"
+            code === "file_too_large"
               ? "tooLarge"
-              : data.error === "resolution_too_low"
+              : code === "resolution_too_low"
               ? "resolutionLow"
-              : data.error === "photo_limit_reached"
+              : code === "photo_limit_reached"
               ? "photoLimit"
-              : "wrongType"
+              : code === "mime_not_allowed" || code === "mime_mismatch" || code === "unknown_type"
+                ? "wrongType"
+                : code === "email_required" || code === "not_owner" || code === "invalid_email"
+                  ? "signInRequired"
+                  : "uploadFailed"
           )
         );
         return;

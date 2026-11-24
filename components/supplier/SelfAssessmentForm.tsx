@@ -644,7 +644,7 @@ export default function SelfAssessmentForm({
 
         {/* 工厂展示图（与证据分离的业务对象） */}
         <section className="card p-6">
-          <FactoryPhotoUploader supplierId={supplierId} value={photos} onChange={setPhotos} dict={dict} />
+          <FactoryPhotoUploader supplierId={supplierId} email={email} value={photos} onChange={setPhotos} dict={dict} />
         </section>
 
         {/* 自评说明 */}
