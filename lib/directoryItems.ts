@@ -86,6 +86,15 @@ export async function buildDirectoryItems(
           : "#6d6b66",
       lastCheckedText: x.lastChecked ?? sp.noCheckRecord,
       badgeState: (badgeMap.get(x.id) ?? "NONE") as BadgeState,
+      // 公开层自述字段：NULL ≠ 0 / 空串，缺失一律空串，渲染层据此不显示。
+      // 与 lib/queries.ts rowToMatrix 同款过滤：广交会拼接串不是公司简介。
+      companyDescription: (() => {
+        const raw = (x.companyDescription ?? "").trim();
+        if (!raw || /^第\d+届广交会展商/.test(raw)) return "";
+        return raw;
+      })(),
+      employees: x.employees ?? "",
+      established: x.established ?? 0,
     };
   });
 }

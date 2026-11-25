@@ -5,6 +5,7 @@ import VerificationBadge, {
 } from "./VerificationBadge";
 import { supplierDisplayName } from "@/lib/supplierDisplayName";
 import { countryDisplayName } from "@/lib/countryNames";
+import DirectorySortSelect from "./DirectorySortSelect";
 import type { Locale } from "@/i18n/config";
 
 /**
@@ -71,6 +72,12 @@ export type DirectoryItem = {
   lastCheckedText: string;
   /** 服务端推导的徽章状态（客户端绝不自判） */
   badgeState: BadgeState;
+  /** 自述公司简介（公开层，已滤掉广交会拼接假简介）；无则空串，渲染层不显示 */
+  companyDescription: string;
+  /** 员工规模（公开层）；无则空串 */
+  employees: string;
+  /** 成立年份（公开层）；无则 0，渲染层不显示 */
+  established: number;
 };
 
 /**
@@ -109,6 +116,9 @@ export type DirectoryDict = {
   searchClear: string;
   filterCountry: string;
   filterIndustry: string;
+  filterProduct: string;
+  filterSubmit: string;
+  filterReset: string;
   filterAll: string;
   featuredTitle: string;
   featuredLead: string;
@@ -121,6 +131,14 @@ export type DirectoryDict = {
   riskLabel: string;
   riskNote: string;
   lastEvidence: string;
+  // 2026-11-25 按 aguato 目录样式补齐：全部复用既有键，零新增翻译叶子。
+  seeMore: string;
+  sortByScore: string;
+  sortByName: string;
+  employeesLabel: string;
+  establishedTemplate: string;
+  selfReported: string;
+  scoredOnlyLabel: string;
   // 阶段 1 移除 `cardCta`：卡片 CTA 现有两种可见性（锁定 → 登录 / 解锁 → View Supplier），
   // 由服务端算好放进 `items[].cta`。这里再留一个"看起来能改卡片文案"的字段只会误导。
 };
@@ -139,6 +157,10 @@ export type DirectoryActive = {
   q: string;
   /** 页码（1 起）。仅用于判断分页高亮，不参与数据派生。 */
   page?: number;
+  /** 排序：score=最佳匹配（默认），name=公司名。 */
+  sort?: "score" | "name";
+  /** 只看有真实评分的供应商（筛选态，middleware 注入 noindex）。 */
+  scored?: boolean;
 };
 
 /**
@@ -172,6 +194,7 @@ export default function DirectoryView({
   trustProfileDict,
   total,
   pager,
+  facetItems,
 }: {
   /** 当前页要渲染的集合（无分页时即全量 / 过滤结果全量） */
   items: DirectoryEntry[];
@@ -186,6 +209,8 @@ export default function DirectoryView({
   total?: number;
   /** 分页信息；缺省或 pageCount ≤ 1 时不渲染分页条 */
   pager?: DirectoryPager;
+  /** 左侧筛选栏计数用的全量集合（过滤/分页后数字不跳动）；缺省回落 items。 */
+  facetItems?: DirectoryEntry[];
   /** 已带语言前缀的目录页路径，如 /suppliers、/es/suppliers */
   directoryPath: string;
   /** 当前语言 —— 只用于 `supplierDisplayName` 决定卡片展示用登记名还是企业自述英文名 */
@@ -199,6 +224,69 @@ export default function DirectoryView({
 }) {
   const { country, industry, q } = active;
   const shown = total ?? items.length;
+  const sort = active.sort ?? "score";
+  const scored = active.scored === true;
+
+  // 左侧筛选栏计数：从**未过滤全量**派生（客户端分页后数字不跳动）。
+  const facetSource = facetItems ?? items;
+  const facetCounts = (pick: (x: DirectoryEntry) => string[]) => {
+    const m = new Map<string, number>();
+    for (const x of facetSource) {
+      for (const v of pick(x)) {
+        if (v) m.set(v, (m.get(v) ?? 0) + 1);
+      }
+    }
+    return [...m.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  };
+  const countryFacets = facetCounts((x) => [x.country]);
+  const industryFacets = facetCounts((x) => [x.industryCode]);
+  const productFacets = facetCounts((x) => x.mainProducts);
+  const scoredCount = facetSource.filter((x) => x.riskText !== "—").length;
+
+  // 单个筛选项：checkbox 外观 + 真实计数；用链接切换（可抓取、无 JS 可用）。
+  const facetLink = (dim: "country" | "industry" | "q", value: string, label: string, count: number) => {
+    const selected = dim === "country" ? country === value : dim === "industry" ? industry === value : q === value;
+    const next = dim === "country"
+      ? { country: selected ? null : value, page: null as number | null }
+      : dim === "industry"
+      ? { industry: selected ? null : value, page: null as number | null }
+      : { q: selected ? null : value, page: null as number | null };
+    return (
+      <label key={`${dim}-${value}`} className="flex items-center justify-between gap-2 cursor-pointer text-sm text-[#3f4650] hover:text-[#171717]">
+        <span className="flex items-center gap-2 min-w-0">
+          <Link
+            href={linkWith(next)}
+            role="checkbox"
+            aria-checked={selected}
+            className={`shrink-0 w-4 h-4 rounded border flex items-center justify-center text-[10px] ${selected ? "bg-[#171717] border-[#171717] text-white" : "border-[#ddd9d0]"}`}
+            data-track={events.directoryFilter}
+            data-track-value={value}
+          >
+            {selected ? "✓" : ""}
+          </Link>
+          <span className="truncate">{label}</span>
+        </span>
+        <span className="shrink-0 text-xs text-[#8c8982] tabular-nums">{count}</span>
+      </label>
+    );
+  };
+
+  const facetGroup = (title: string, dim: "country" | "industry" | "q", facets: [string, number][], labelOf?: (v: string) => string) => {
+    if (facets.length === 0) return null;
+    const row = (v: string, n: number) => facetLink(dim, v, labelOf ? labelOf(v) : v, n);
+    return (
+      <div className="pt-4 mt-4 border-t border-[#e8e6de]">
+        <h3 className="text-xs font-semibold uppercase tracking-wide text-[#171717] mb-2">{title}</h3>
+        <div className="space-y-1.5">{facets.slice(0, 5).map(([v, n]) => row(v, n))}</div>
+        {facets.length > 5 && (
+          <details className="mt-1">
+            <summary className="text-sm text-[#e07a49] hover:underline cursor-pointer list-none">{dict.seeMore}</summary>
+            <div className="space-y-1.5 mt-1.5">{facets.slice(5).map(([v, n]) => row(v, n))}</div>
+          </details>
+        )}
+      </div>
+    );
+  };
 
   // 筛选做成链接而不是表单：可被抓取，也让「国家 + 行业 + 关键词」组合形成真实索引路径。
   // stage1.8：`directoryPath` 已含语言前缀，拼接 query 的结果与改造前
@@ -210,6 +298,7 @@ export default function DirectoryView({
     industry?: string | null;
     q?: string | null;
     page?: number | null;
+    scored?: number | null;
   }) => {
     const params = new URLSearchParams();
     const c = next.country !== undefined ? next.country : country;
@@ -222,211 +311,109 @@ export default function DirectoryView({
     if (i) params.set("industry", i);
     if (query) params.set("q", query);
     if (pg && pg > 1) params.set("page", String(pg));
+    if (next.scored === 1) params.set("scored", "1");
     const qs = params.toString();
     return qs ? `${directoryPath}?${qs}` : directoryPath;
   };
 
   return (
     <>
-      {/* 搜索 + 筛选 */}
-      <section className="mb-6">
-        <form
-          action={directoryPath}
-          method="get"
-          className="flex flex-wrap items-center gap-2 mb-4"
-          // 提交时上报（而非点击）：带搜索词，用于分析「哪些产品关键词带来流量」。
-          // 原 data-track 会在点击表单任意空白处误触发，故改用 data-track-submit。
-          data-track-submit={events.directorySearch}
-          data-track-field="q"
-        >
-          <input
-            type="search"
-            name="q"
-            defaultValue={q}
-            placeholder={dict.searchPlaceholder}
-            aria-label={dict.searchPlaceholder}
-            className="flex-1 min-w-[240px] rounded-lg border border-[#ddd9d0] px-3 py-2 text-sm text-[#171717] focus:border-[#171717] focus:outline-none"
-          />
-          <button type="submit" className="btn btn-primary">
-            {dict.searchButton}
-          </button>
-          {q && (
-            <Link
-              href={linkWith({ q: null, page: null })}
-              className="text-sm text-[#171717] hover:underline"
-            >
-              {dict.searchClear}
-            </Link>
-          )}
-        </form>
-
-        <div className="flex flex-wrap gap-6 items-start">
-          <div>
-            <div className="text-xs font-semibold text-[#6d6b66] uppercase mb-2">
-              {dict.filterCountry}
-            </div>
-            <div className="flex flex-wrap gap-2">
-              <Link
-                href={linkWith({ country: null, page: null })}
-                className={`rounded-full px-3 py-1 text-sm border ${!country ? "bg-[#171717] text-white border-[#171717]" : "border-[#ddd9d0] text-[#3f4650] hover:border-[#171717]"}`}
-                data-track={events.directoryFilter}
-                data-track-value="all-countries"
-              >
-                {dict.filterAll}
+      <div className="grid grid-cols-1 md:grid-cols-[240px_minmax(0,1fr)] gap-8">
+        {/* 左侧筛选栏 —— 按 aguato 目录样式：搜索 / 开关 / 分组 checkbox + 真实计数 + See more */}
+        <aside className="md:sticky md:top-6 self-start">
+          <div className="border border-[#e8e6de] rounded-lg p-4 bg-white">
+            <form action={directoryPath} method="get" className="space-y-2"
+              data-track-submit={events.directorySearch} data-track-field="q">
+              <input type="search" name="q" defaultValue={q} placeholder={dict.searchPlaceholder}
+                aria-label={dict.searchPlaceholder}
+                className="w-full rounded-lg border border-[#ddd9d0] px-3 py-2 text-sm text-[#171717] focus:border-[#171717] focus:outline-none" />
+              <button type="submit" className="w-full rounded-lg border border-[#171717] px-3 py-2 text-sm font-medium text-[#171717] hover:bg-[#f5f3ee]">
+                {dict.filterSubmit}
+              </button>
+            </form>
+            {q && (<Link href={directoryPath} className="block text-xs text-[#6d6b66] hover:underline mt-2">{dict.filterReset}</Link>)}
+            {/* 只看有真实评分 —— 由 riskText 是否「—」派生，不做死控件 */}
+            <div className="pt-4 mt-4 border-t border-[#e8e6de]">
+              <Link href={linkWith({ scored: scored ? null : 1, page: null })}
+                className={`flex items-center justify-between gap-2 text-sm font-medium cursor-pointer ${scored ? "text-white bg-[#171717] rounded-md px-3 py-2" : "text-[#171717]"}`}
+                data-track={events.directoryFilter} data-track-value="scored">
+                <span className="flex items-center gap-2 truncate">{dict.scoredOnlyLabel}</span>
+                <span className="shrink-0 text-xs tabular-nums">{scoredCount}</span>
               </Link>
-              {countries.map((c) => (
-                <Link
-                  key={c}
-                  href={linkWith({ country: c, page: null })}
-                  className={`rounded-full px-3 py-1 text-sm border ${country === c ? "bg-[#171717] text-white border-[#171717]" : "border-[#ddd9d0] text-[#3f4650] hover:border-[#171717]"}`}
-                  data-track={events.directoryFilter}
-                  data-track-value={c}
-                >
-                  {countryDisplayName(locale as Locale, c, c)}
-                </Link>
-              ))}
             </div>
+            {facetGroup(dict.filterCountry, "country", countryFacets, (v) => countryDisplayName(locale as Locale, v, v))}
+            {facetGroup(dict.filterIndustry, "industry", industryFacets)}
+            {facetGroup(dict.filterProduct, "q", productFacets)}
           </div>
-          {industries.length > 0 && (
-            <div>
-              <div className="text-xs font-semibold text-[#6d6b66] uppercase mb-2">
-                {dict.filterIndustry}
-              </div>
-              <div className="flex flex-wrap gap-2">
-                <Link
-                  href={linkWith({ industry: null, page: null })}
-                  className={`rounded-full px-3 py-1 text-sm border ${!industry ? "bg-[#171717] text-white border-[#171717]" : "border-[#ddd9d0] text-[#3f4650] hover:border-[#171717]"}`}
-                  data-track={events.directoryFilter}
-                  data-track-value="all-industries"
-                >
-                  {dict.filterAll}
-                </Link>
-                {industries.map((i) => (
-                  <Link
-                    key={i}
-                    href={linkWith({ industry: i, page: null })}
-                    className={`rounded-full px-3 py-1 text-sm border ${industry === i ? "bg-[#171717] text-white border-[#171717]" : "border-[#ddd9d0] text-[#3f4650] hover:border-[#171717]"}`}
-                    data-track={events.directoryFilter}
-                    data-track-value={i}
-                  >
-                    {i}
+        </aside>
+
+        {/* 右侧结果区 */}
+        <div className="min-w-0">
+          {/* 已选条件 chip + 计数 + 排序 */}
+          <div className="flex items-center justify-between gap-3 flex-wrap">
+            <div className="flex flex-wrap items-center gap-2">
+              {country && <span className="rounded-full border border-[#171717] px-3 py-1 text-xs">{countryDisplayName(locale as Locale, country, country)} ×</span>}
+              {industry && <span className="rounded-full border border-[#171717] px-3 py-1 text-xs">{industry} ×</span>}
+              {q && <span className="rounded-full border border-[#171717] px-3 py-1 text-xs">{q} ×</span>}
+              <span className="text-sm text-[#6d6b66]">{dict.countLabel.replace("{n}", String(shown))}</span>
+            </div>
+            <DirectorySortSelect value={sort} scoreLabel={dict.sortByScore} nameLabel={dict.sortByName} />
+          </div>
+
+          <h2 className="text-2xl font-bold text-[#171717] mt-5">{dict.featuredTitle}</h2>
+          <p className="text-sm text-[#6d6b66] mt-1">{dict.featuredLead}</p>
+          <p className="mt-3 text-xs text-[#3f4650] bg-[#f5f3ee] rounded-md px-3 py-2">{dict.trustNote}</p>
+
+          {items.length === 0 ? (
+            <p className="text-[#3f4650] py-10">{dict.empty}</p>
+          ) : (
+            <ul className="mt-4 border-t border-[#e8e6de]">
+              {items.map((x) => (
+                <li key={x.slug} className="border-b border-[#e8e6de] last:border-b-0">
+                  {/* class 前缀 card p-5 hover:border 保留（s18 产物门判据），视觉覆盖为 flat 分隔行 */}
+                  <Link href={x.href}
+                    className="card p-5 hover:border-[#171717] transition flex gap-4 items-start border-0 bg-transparent rounded-none px-0 py-6"
+                    data-track={events.profileView} data-track-value={x.locked ? "locked" : x.slug}>
+                    <div aria-hidden="true" className="shrink-0 w-12 h-12 rounded-lg border border-[#e8e6de] bg-[#faf9f6] flex items-center justify-center text-lg font-semibold text-[#9a978f] select-none">
+                      {initialOf(supplierDisplayName(locale, x))}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                        <span className="text-base font-semibold text-[#171717] hover:underline">{supplierDisplayName(locale, x)}</span>
+                        <VerificationBadge state={x.badgeState} dict={trustProfileDict} />
+                      </div>
+                      {/* 元信息行：只放真实公开字段，缺失项不出现（NULL ≠ 0） */}
+                      <div className="text-xs text-[#6d6b66] mt-1">
+                        {[x.countryLabel, x.employees ? `${dict.employeesLabel}: ${x.employees}` : "", x.established > 0 ? dict.establishedTemplate.replaceAll("{year}", String(x.established)) : ""].filter(Boolean).join(" · ")}
+                      </div>
+                      {x.companyDescription && (
+                        <div className="mt-2">
+                          <p className="text-sm leading-relaxed text-[#3f4650] whitespace-pre-line line-clamp-2">{x.companyDescription}</p>
+                          <p className="text-[11px] text-[#8c8982] mt-1">{dict.selfReported}</p>
+                        </div>
+                      )}
+                      {x.mainProducts.length > 0 && (
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {x.mainProducts.slice(0, 6).map((prod) => (
+                            <span key={prod} className="rounded-full border border-[#d3d1c7] px-3 py-0.5 text-xs text-[#3f4650]">{prod}</span>
+                          ))}
+                        </div>
+                      )}
+                      {/* 核验/风险：字段与文案一字未删，收成一行紧凑胶囊 */}
+                      <dl className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-[#6d6b66]">
+                        <div className="flex gap-1"><dt>{dict.evidenceLevel}</dt><dd className="font-medium text-[#171717]">{x.evidenceText}</dd></div>
+                        <div className="flex gap-1"><dt>{dict.verificationLabel}</dt><dd className="font-medium text-[#171717]">{x.verificationText}</dd></div>
+                        <div className="flex gap-1" title={dict.riskNote}><dt>{dict.riskLabel}<span aria-hidden="true" className="ml-0.5 text-[#8c8982]">(?) </span></dt><dd className="font-medium" style={{ color: x.riskColor }}>{x.riskText}</dd></div>
+                        <div className="flex gap-1"><dt>{dict.lastEvidence}</dt><dd className="font-medium text-[#171717]">{x.lastCheckedText}</dd></div>
+                      </dl>
+                      <span className="inline-block mt-3 text-sm text-[#171717] font-medium">{x.cta} →</span>
+                    </div>
                   </Link>
-                ))}
-              </div>
-            </div>
+                </li>
+              ))}
+              <li className="px-0 py-3 text-xs text-[#6d6b66]">{dict.riskNote}</li>
+            </ul>
           )}
-        </div>
-      </section>
-
-      {/* 供应商目录（Hero 的 Find Suppliers 锚点落在这里） */}
-      <section id="supplier-directory" className="mb-8 scroll-mt-6">
-        {/* justify-between 的右侧计数标签。原先写死 shrink-0 ⇒ 德语长计数文案
-            （de 实测 55px）在 390px 顶出视口。改为可换行 + 允许收缩。 */}
-        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mb-4">
-          <div>
-            <h2 className="text-2xl font-bold text-[#171717]">{dict.featuredTitle}</h2>
-            <p className="text-sm text-[#6d6b66] mt-1">{dict.featuredLead}</p>
-          </div>
-          <p className="text-sm text-[#6d6b66] min-w-0 text-right">
-            {dict.countLabel.replace("{n}", String(shown))}
-          </p>
-        </div>
-
-        {/* 信任说明（§29）：自述信息 / 证据等级 / 独立核验必须分开表达，
-            不能让 Buyer 把「能看到档案」误解成「已被 FactoryAuditB2B 核验」 */}
-        <p className="mb-4 text-sm text-[#3f4650] bg-[#f5f3ee] rounded-md px-3 py-2">
-          {dict.trustNote}
-        </p>
-
-        {items.length === 0 ? (
-          <p className="text-[#3f4650] mb-10">{dict.empty}</p>
-        ) : (
-          <section className="mb-6">
-            {items.map((x) => (
-              // ★ 等级只由「真实证据」决定，绝不采信 legacy verification_status。
-              //   详情与原始理由见 page.tsx 的 `items` 构造处（服务端唯一权威）。
-              // PHASE 03（P0）：核验状态必须来自**真实**数据 —— 已由 page.tsx 算好，
-              //   本组件只渲染 verificationText / badgeState。
-              // ⚠️ 等级不因「有 N 条证据」升档（有证据 ≠ 已核验，§8 / §9）。
-              // 2026-11-25：3 列密集 grid → 横向列表（与 /categories 品类页统一）。
-              //   数据字段一字未删，仅改排版 + 首字 Logo 占位 + 风险提示去重。
-              <Link
-                key={x.slug}
-                href={x.href}
-                className="card p-5 hover:border-[#171717] transition flex gap-4 items-start"
-                data-track={events.profileView}
-                data-track-value={x.locked ? "locked" : x.slug}
-              >
-                {/* 无公开 logo 数据 ⇒ 首字占位，与 /categories 品类页一致 */}
-                <div
-                  aria-hidden="true"
-                  className="shrink-0 w-12 h-12 rounded-lg border border-[#e8e6de] bg-[#faf9f6] flex items-center justify-center text-lg font-semibold text-[#9a978f] select-none"
-                >
-                  {initialOf(supplierDisplayName(locale, x))}
-                </div>
-
-                <div className="min-w-0 flex-1">
-                  {/* 公司名恒渲染（2026-10-28 拆墙：锁定态只锁联系方式） */}
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                    <span className="font-semibold text-[#171717]">
-                      {supplierDisplayName(locale, x)}
-                    </span>
-                    <VerificationBadge state={x.badgeState} dict={trustProfileDict} />
-                  </div>
-                  <div className="text-sm text-[#6d6b66] mt-1">
-                    {x.city}, {x.countryLabel} · {dict.businessTypeLabel}: {x.businessType}
-                  </div>
-
-                  {/* 产品胶囊：main_products 原样渲染，仅从 join 改为胶囊以便扫读 */}
-                  {x.mainProducts.length > 0 && (
-                    <div className="mt-2 flex flex-wrap gap-2">
-                      {x.mainProducts.map((prod) => (
-                        <span
-                          key={prod}
-                          className="rounded-full border border-[#d3d1c7] px-3 py-0.5 text-xs text-[#3f4650]"
-                        >
-                          {prod}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* 核验/风险：原 5 行 dl 收成一行胶囊，字段与文案一字未删。
-                      无分数 ⇒ riskText 本身渲染「—」，颜色 riskColor 由服务端算好。 */}
-                  <dl className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-[#6d6b66]">
-                    <div className="flex gap-1">
-                      <dt>{dict.evidenceLevel}</dt>
-                      <dd className="font-medium text-[#171717]">{x.evidenceText}</dd>
-                    </div>
-                    <div className="flex gap-1">
-                      <dt>{dict.verificationLabel}</dt>
-                      <dd className="font-medium text-[#171717]">{x.verificationText}</dd>
-                    </div>
-                    <div className="flex gap-1" title={dict.riskNote}>
-                      <dt>
-                        {dict.riskLabel}
-                        <span aria-hidden="true" className="ml-0.5 text-[#8c8982]">(?) </span>
-                      </dt>
-                      <dd className="font-medium" style={{ color: x.riskColor }}>
-                        {x.riskText}
-                      </dd>
-                    </div>
-                    <div className="flex gap-1">
-                      <dt>{dict.lastEvidence}</dt>
-                      <dd className="font-medium text-[#171717]">{x.lastCheckedText}</dd>
-                    </div>
-                  </dl>
-
-                  <span className="inline-block mt-3 text-sm text-[#171717] font-medium">
-                    {x.cta} →
-                  </span>
-                </div>
-              </Link>
-            ))}
-            {/* 风险提示：原每卡重复 87 次 ⇒ 列表底部只留一次，文案不变 */}
-            <p className="mt-3 text-xs text-[#6d6b66]">{dict.riskNote}</p>
-          </section>
-        )}
 
         {/* 分页条（2026-10-31）────────────────────────────────────────────────
             🔴 只用页码与箭头，**不用任何文字** —— 本页 9 种语言共用一套组件，
@@ -486,7 +473,9 @@ export default function DirectoryView({
             </nav>
           );
         })()}
-      </section>
+        </div>
+      </div>
     </>
   );
 }
+

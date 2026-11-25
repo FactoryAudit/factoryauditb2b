@@ -58,7 +58,10 @@ export function middleware(req: NextRequest) {
         // 2026-10-31 分页：`?page=n`（n>1）与过滤态同性质 ——
         // 同一份预渲染 HTML 的切片视图，不产出独立内容 ⇒ 必须 noindex。
         // 只认 n>1：`?page=1` 与主目录完全等价，不应触发。
-        Number(req.nextUrl.searchParams.get("page") ?? "1") > 1
+        Number(req.nextUrl.searchParams.get("page") ?? "1") > 1 ||
+        // 2026-11-25：排序/只看有评分 —— 同一份预渲染 HTML 的视图变体，同样 noindex。
+        Boolean(req.nextUrl.searchParams.get("sort")) ||
+        req.nextUrl.searchParams.get("scored") === "1"
     );
   const NOINDEX_FILTERED = { "X-Robots-Tag": "noindex, follow" };
 

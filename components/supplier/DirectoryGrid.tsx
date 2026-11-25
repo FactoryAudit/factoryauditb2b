@@ -42,6 +42,8 @@ function readActive(sp: { get(key: string): string | null }): DirectoryActive {
     industry: sp.get("industry") ?? "",
     // 与改造前服务端口径逐字一致：`rawQ?.trim().slice(0, 80).toLowerCase() ?? ""`
     q: (sp.get("q") ?? "").trim().slice(0, 80).toLowerCase(),
+    sort: sp.get("sort") === "name" ? "name" : "score",
+    scored: sp.get("scored") === "1",
   };
 }
 
@@ -119,22 +121,35 @@ export default function DirectoryGrid({
   // 首帧（服务端预渲染 + 客户端 hydration 首帧）一律不过滤 ⇒ 与静态 HTML 一致。
   const active: DirectoryActive = mounted
     ? readActive(searchParams)
-    : { country: "", industry: "", q: "" };
+    : { country: "", industry: "", q: "", sort: "score", scored: false };
 
   const filtered = useMemo(() => {
-    const { country, industry, q } = active;
-    return source.filter(
+    const { country, industry, q, sort, scored } = active;
+    const out = source.filter(
       (x) =>
         (!country || x.country === country) &&
         (!industry || x.industryCode === industry) &&
+        (!scored || x.riskText !== "—") &&
         (!q ||
           x.legalName.toLowerCase().includes(q) ||
           x.mainProducts.some((m) => m.toLowerCase().includes(q)) ||
           x.city.toLowerCase().includes(q))
     );
-    // active 每次渲染都是新对象，依赖收敛到三个原始值
+    // 排序：score=风险分降序（无评分排最后，NULL ≠ 0）；name=公司名。
+    // 🔴 分数语义：越高风险越低（项目全局定义），故降序即「最佳匹配」。
+    if (sort === "name") {
+      out.sort((a, b) => a.legalName.localeCompare(b.legalName));
+    } else {
+      const scoreOf = (x: DirectoryEntry) => {
+        const n = Number.parseInt(x.riskText, 10);
+        return Number.isFinite(n) ? n : -1;
+      };
+      out.sort((a, b) => scoreOf(b) - scoreOf(a));
+    }
+    return out;
+    // active 每次渲染都是新对象，依赖收敛到原始值
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [source, active.country, active.industry, active.q]);
+  }, [source, active.country, active.industry, active.q, active.sort, active.scored]);
 
   // ── 分页（2026-10-31）──────────────────────────────────────────────────────
   // 🔴 首帧仍然渲染**全量**（`mounted === false`）⇒ 与预渲染 HTML 逐字一致，
@@ -162,6 +177,7 @@ export default function DirectoryGrid({
       dict={dict}
       events={events}
       trustProfileDict={trustProfileDict}
+      facetItems={source}
     />
   );
 }

@@ -140,6 +140,9 @@ export default async function SuppliersPage({ params }: Props) {
     searchClear: s.searchClear,
     filterCountry: s.filterCountry,
     filterIndustry: s.filterIndustry,
+    filterProduct: s.filterProduct,
+    filterSubmit: s.filterSubmit,
+    filterReset: s.filterReset,
     filterAll: s.filterAll,
     featuredTitle: s.featuredTitle,
     featuredLead: s.featuredLead,
@@ -152,6 +155,14 @@ export default async function SuppliersPage({ params }: Props) {
     riskLabel: s.riskLabel,
     riskNote: s.riskNote,
     lastEvidence: s.lastEvidence,
+    // 按 aguato 目录样式补齐：全部复用既有键，零新增翻译叶子（叶子数 3352 不变）。
+    seeMore: t.nav.more,
+    sortByScore: s.sortBestMatch,
+    sortByName: t.claim.companyNameLabel,
+    employeesLabel: t.supplierProfile.employees,
+    establishedTemplate: t.supplierProfile.established,
+    selfReported: t.supplierProfile.selfReported,
+    scoredOnlyLabel: s.riskLabel,
   };
 
   // 埋点事件名从 lib/analytics.ts 取，不在客户端组件里硬编码字符串（CS-04 口径铁律）。
@@ -307,7 +318,7 @@ export default async function SuppliersPage({ params }: Props) {
             items={items}
             countries={countries}
             industries={industries}
-            active={{ country: "", industry: "", q: "" }}
+            active={{ country: "", industry: "", q: "", sort: "score", scored: false }}
             directoryPath={directoryPath}
             locale={locale}
             dict={directoryDict}
