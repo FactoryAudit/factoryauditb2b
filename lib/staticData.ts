@@ -215,6 +215,9 @@ export type StaticSupplier = {
   certifications: string[];
   auditStatus: string;
   inspectionHistory: number;
+  /** 供应商自述公司简介（公开层，来自 company_description）。仅供品类目录卡片展示；
+   *  广交会名录拼接的假简介在 rowToMatrix 已过滤为 undefined。静态兜底数据无此字段。 */
+  companyDescription?: string;
   capabilities: StaticCapability[];
   evidence: StaticEvidence[];
 };

@@ -1173,6 +1173,13 @@ function rowToMatrix(row: SupplierRow): StaticSupplier {
     certifications: [],
     auditStatus: row.audit_status ?? "",
     inspectionHistory: row.inspection_history ?? 0,
+    // 供应商自述简介（公开层）：档案页已公开展示，品类卡片复用同一份。
+    // 与档案页同款过滤：广交会名录拼接的假简介不是公司简介，宁可不显示。
+    companyDescription: (() => {
+      const raw = (row.company_description ?? "").trim();
+      if (!raw || /^第\d+届广交会展商/.test(raw)) return undefined;
+      return raw;
+    })(),
     capabilities: [],
     evidence: [],
   };
