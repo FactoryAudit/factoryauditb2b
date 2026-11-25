@@ -1336,7 +1336,8 @@
     "founderCta": "View Founding Buyer",
     "cardCta": "View Supplier",
     "faq4q": "What does the risk signal mean?",
-    "faq4a": "Risk signals are based on currently available supplier information and evidence. They are not a substitute for independent verification or an on-site audit."
+    "faq4a": "Risk signals are based on currently available supplier information and evidence. They are not a substitute for independent verification or an on-site audit.",
+    "sortBestMatch": "Best match"
   },
   "verification": {
     "levelLabel": "Verification level",

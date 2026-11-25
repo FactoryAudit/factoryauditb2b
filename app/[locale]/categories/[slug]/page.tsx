@@ -157,7 +157,7 @@ export default async function CategoryDirectoryPage({ params }: Props) {
           filterProduct: t.suppliers.filterProduct,
           scoredOnly: t.suppliers.riskLabel,
           countLabel: t.suppliers.countLabel,
-          sortByScore: t.toolsUi.scorecard.scoreLabel,
+          sortByScore: t.suppliers.sortBestMatch,
           sortByName: t.claim.companyNameLabel,
           employeesLabel: t.supplierProfile.employeesLabel,
           establishedTemplate: t.supplierProfile.established,

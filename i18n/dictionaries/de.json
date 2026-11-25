@@ -1031,7 +1031,8 @@
     "founderCta": "Founding Buyer ansehen",
     "cardCta": "Lieferant ansehen",
     "faq4q": "Was bedeutet das Risikosignal?",
-    "faq4a": "Risikosignale basieren auf verfügbaren Informationen und Evidenz. Sie ersetzen keine unabhängige Verifizierung oder ein Vor-Ort-Audit."
+    "faq4a": "Risikosignale basieren auf verfügbaren Informationen und Evidenz. Sie ersetzen keine unabhängige Verifizierung oder ein Vor-Ort-Audit.",
+    "sortBestMatch": "Beste Übereinstimmung"
   },
   "common": {
     "relatedTools": "Ähnliche Werkzeuge",

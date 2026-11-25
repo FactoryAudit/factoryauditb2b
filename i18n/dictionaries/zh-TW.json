@@ -1031,7 +1031,8 @@
     "founderCta": "了解 Founding Buyer",
     "cardCta": "查看供應商",
     "faq4q": "風險訊號是什麼意思？",
-    "faq4a": "風險訊號基於目前可得的供應商資訊與證據，不能取代獨立驗證或現場審核。"
+    "faq4a": "風險訊號基於目前可得的供應商資訊與證據，不能取代獨立驗證或現場審核。",
+    "sortBestMatch": "最佳匹配"
   },
   "common": {
     "relatedTools": "相關工具",

@@ -153,6 +153,13 @@ export type DirectoryActive = {
  */
 export type DirectoryPager = { page: number; pageCount: number };
 
+/** 无 logo 时的文字占位：取公司显示名首字，与 /categories 品类页一致。 */
+function initialOf(name: string): string {
+  const s = name.trim();
+  if (!s) return "—";
+  return Array.from(s)[0]?.toUpperCase() ?? "—";
+}
+
 export default function DirectoryView({
   items,
   countries,
@@ -334,94 +341,90 @@ export default function DirectoryView({
         {items.length === 0 ? (
           <p className="text-[#3f4650] mb-10">{dict.empty}</p>
         ) : (
-          <section className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+          <section className="mb-6">
             {items.map((x) => (
               // ★ 等级只由「真实证据」决定，绝不采信 legacy verification_status。
               //   详情与原始理由见 page.tsx 的 `items` 构造处（服务端唯一权威）。
               // PHASE 03（P0）：核验状态必须来自**真实**数据 —— 已由 page.tsx 算好，
               //   本组件只渲染 verificationText / badgeState。
               // ⚠️ 等级不因「有 N 条证据」升档（有证据 ≠ 已核验，§8 / §9）。
+              // 2026-11-25：3 列密集 grid → 横向列表（与 /categories 品类页统一）。
+              //   数据字段一字未删，仅改排版 + 首字 Logo 占位 + 风险提示去重。
               <Link
                 key={x.slug}
                 href={x.href}
-                className="card p-5 hover:border-[#171717] transition"
+                className="card p-5 hover:border-[#171717] transition flex gap-4 items-start"
                 data-track={events.profileView}
                 data-track-value={x.locked ? "locked" : x.slug}
               >
-                {/* 🔴 2026-10-28 拆墙：公司名恒渲染，不再画骨架条。
-                    原逻辑（x.locked ⇒ 骨架条）依赖 lockDirectoryItems 把 legalName 置空，
-                    现在锁定语义收窄为「联系方式未解锁」，公司名 / 城市 / 产品 / 核验等级
-                    全部进入公开 HTML —— 这是目录页能成为 SEO 资产的前提。
-                    联系方式仍在档案页由登录门控，此处不涉及。 */}
-                <div className="font-semibold text-[#171717]">{supplierDisplayName(locale, x)}</div>
-                {/* CS-D：三态验证徽章（状态服务端推导，组件不自判） */}
-                <div className="mt-2">
-                  <VerificationBadge state={x.badgeState} dict={trustProfileDict} />
+                {/* 无公开 logo 数据 ⇒ 首字占位，与 /categories 品类页一致 */}
+                <div
+                  aria-hidden="true"
+                  className="shrink-0 w-12 h-12 rounded-lg border border-[#e8e6de] bg-[#faf9f6] flex items-center justify-center text-lg font-semibold text-[#9a978f] select-none"
+                >
+                  {initialOf(supplierDisplayName(locale, x))}
                 </div>
-                <div className="text-sm text-[#6d6b66] mt-1">
-                  {x.city}, {x.countryLabel}
+
+                <div className="min-w-0 flex-1">
+                  {/* 公司名恒渲染（2026-10-28 拆墙：锁定态只锁联系方式） */}
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                    <span className="font-semibold text-[#171717]">
+                      {supplierDisplayName(locale, x)}
+                    </span>
+                    <VerificationBadge state={x.badgeState} dict={trustProfileDict} />
+                  </div>
+                  <div className="text-sm text-[#6d6b66] mt-1">
+                    {x.city}, {x.countryLabel} · {dict.businessTypeLabel}: {x.businessType}
+                  </div>
+
+                  {/* 产品胶囊：main_products 原样渲染，仅从 join 改为胶囊以便扫读 */}
+                  {x.mainProducts.length > 0 && (
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {x.mainProducts.map((prod) => (
+                        <span
+                          key={prod}
+                          className="rounded-full border border-[#d3d1c7] px-3 py-0.5 text-xs text-[#3f4650]"
+                        >
+                          {prod}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* 核验/风险：原 5 行 dl 收成一行胶囊，字段与文案一字未删。
+                      无分数 ⇒ riskText 本身渲染「—」，颜色 riskColor 由服务端算好。 */}
+                  <dl className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-[#6d6b66]">
+                    <div className="flex gap-1">
+                      <dt>{dict.evidenceLevel}</dt>
+                      <dd className="font-medium text-[#171717]">{x.evidenceText}</dd>
+                    </div>
+                    <div className="flex gap-1">
+                      <dt>{dict.verificationLabel}</dt>
+                      <dd className="font-medium text-[#171717]">{x.verificationText}</dd>
+                    </div>
+                    <div className="flex gap-1" title={dict.riskNote}>
+                      <dt>
+                        {dict.riskLabel}
+                        <span aria-hidden="true" className="ml-0.5 text-[#8c8982]">(?) </span>
+                      </dt>
+                      <dd className="font-medium" style={{ color: x.riskColor }}>
+                        {x.riskText}
+                      </dd>
+                    </div>
+                    <div className="flex gap-1">
+                      <dt>{dict.lastEvidence}</dt>
+                      <dd className="font-medium text-[#171717]">{x.lastCheckedText}</dd>
+                    </div>
+                  </dl>
+
+                  <span className="inline-block mt-3 text-sm text-[#171717] font-medium">
+                    {x.cta} →
+                  </span>
                 </div>
-                <div className="text-sm mt-3">{x.mainProducts.join(" · ")}</div>
-
-                <dl className="mt-4 space-y-1 text-sm">
-                  <div className="flex justify-between gap-2">
-                    <dt className="text-[#6d6b66]">{dict.businessTypeLabel}</dt>
-                    <dd className="font-medium text-[#171717] text-right">
-                      {x.businessType}
-                    </dd>
-                  </div>
-                  <div className="flex justify-between gap-2">
-                    <dt className="text-[#6d6b66]">{dict.evidenceLevel}</dt>
-                    <dd className="font-medium text-[#171717] text-right">
-                      {x.evidenceText}
-                    </dd>
-                  </div>
-                  {/* 核验状态独立一行（P0 修复，2026-09-13）。
-                      修复前：无条件输出 verificationNotYet（"Not yet verified"），
-                      于是 guangzhou-sunny-food —— 它已有 1 条 VERIFIED 现场审核记录、
-                      verification_level='on_site_audit'、公开等级 Level 3 ——
-                      在目录卡上仍显示「未核验」，与它自己的档案页直接矛盾。
-                      现在按真实等级显示（level ≥ 1 → levelsShort[level]，与档案页同一字典）；
-                      level = 0 → 继续用 verificationNotYet，措辞与修复前逐字一致。 */}
-                  <div className="flex justify-between gap-2">
-                    <dt className="text-[#6d6b66]">{dict.verificationLabel}</dt>
-                    <dd className="font-medium text-[#171717] text-right">
-                      {x.verificationText}
-                    </dd>
-                  </div>
-                  <div className="flex justify-between gap-2">
-                    <dt className="text-[#6d6b66]" title={dict.riskNote}>
-                      {dict.riskLabel}
-                      <span aria-hidden="true" className="ml-1 text-[#8c8982]">
-                        (?)
-                      </span>
-                    </dt>
-                    {/* 无分数 ⇒ 中性灰（riskText 本身会渲染「—」）。
-                        绝不用 `overallLevel(x.riskScore ?? 0)` —— 那是 CRITICAL 的红，
-                        等于给一家「尚未评分」的企业涂上最高风险色。
-                        颜色由服务端算好放进 riskColor。 */}
-                    <dd
-                      className="font-medium text-right"
-                      title={dict.riskNote}
-                      style={{ color: x.riskColor }}
-                    >
-                      {x.riskText}
-                    </dd>
-                  </div>
-                  <div className="flex justify-between gap-2">
-                    <dt className="text-[#6d6b66]">{dict.lastEvidence}</dt>
-                    <dd className="font-medium text-[#171717] text-right">
-                      {x.lastCheckedText}
-                    </dd>
-                  </div>
-                </dl>
-                <p className="mt-2 text-xs text-[#6d6b66]">{dict.riskNote}</p>
-
-                <span className="inline-block mt-4 text-sm text-[#171717] font-medium">
-                  {x.cta} →
-                </span>
               </Link>
             ))}
+            {/* 风险提示：原每卡重复 87 次 ⇒ 列表底部只留一次，文案不变 */}
+            <p className="mt-3 text-xs text-[#6d6b66]">{dict.riskNote}</p>
           </section>
         )}
 

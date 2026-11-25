@@ -1031,7 +1031,8 @@
     "founderCta": "Ver Founding Buyer",
     "cardCta": "Ver proveedor",
     "faq4q": "¿Qué significa la señal de riesgo?",
-    "faq4a": "Las señales de riesgo se basan en la información y evidencia disponibles. No sustituyen una verificación independiente ni una auditoría in situ."
+    "faq4a": "Las señales de riesgo se basan en la información y evidencia disponibles. No sustituyen una verificación independiente ni una auditoría in situ.",
+    "sortBestMatch": "Mejor coincidencia"
   },
   "common": {
     "relatedTools": "Herramientas Relacionadas",

@@ -1206,7 +1206,8 @@
     "founderCta": "了解 Founding Buyer",
     "cardCta": "查看供应商",
     "faq4q": "风险信号是什么意思？",
-    "faq4a": "风险信号基于当前可得的供应商信息与证据，不能替代独立核验或现场审核。"
+    "faq4a": "风险信号基于当前可得的供应商信息与证据，不能替代独立核验或现场审核。",
+    "sortBestMatch": "最佳匹配"
   },
   "verification": {
     "levelLabel": "核验等级",
