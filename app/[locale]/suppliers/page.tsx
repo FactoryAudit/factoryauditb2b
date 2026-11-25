@@ -18,6 +18,8 @@ import { buildDirectoryItems } from "@/lib/directoryItems";
 import { lockDirectoryItems, lockedHref } from "@/lib/directoryWall";
 import { buildPageMetadata } from "@/lib/pageMeta";
 import { ANALYTICS_EVENTS } from "@/lib/suppliers";
+// 行业品类目录入口（对标 aguato 品类页）。清单是唯一开页源，入口与路由同源。
+import { CATEGORY_DIRECTORY } from "@/lib/categoryDirectory";
 
 const PATH = "/suppliers";
 const BASE = "https://factoryauditb2b.com";
@@ -253,6 +255,21 @@ export default async function SuppliersPage({ params }: Props) {
           >
             {s.memberCta}
           </Link>
+        </div>
+
+        {/* 行业品类目录入口：只列已够密度的品类，避免把人引到空页。
+            复用既有字典键，不新增翻译叶子（守住 9 语 3351 不变量）。 */}
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          <span className="text-sm text-[#6d6b66]">{s.filterIndustry}:</span>
+          {CATEGORY_DIRECTORY.map((c) => (
+            <Link
+              key={c.slug}
+              href={p(`/categories/${c.slug}`)}
+              className="rounded-full border border-[#d3d1c7] px-3 py-1 text-sm text-[#171717] hover:border-[#e07a49] hover:text-[#e07a49]"
+            >
+              {c.label}
+            </Link>
+          ))}
         </div>
 
         {/* 阶段 1（2026-09-30）：原 `s.exampleNote`（"Browse available suppliers

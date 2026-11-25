@@ -45,6 +45,9 @@ import { listIndexableAuditGuideCombos } from "@/lib/auditGuideIndexability";
 import { buildClusterCanonicalPath } from "@/lib/clusterRoutes";
 // GEO 问答页：提交集合 = 库里实际存在的行，与三个路由的 generateStaticParams 同源。
 import { geoPath, listGeoPages } from "@/lib/geoKnowledge";
+// 行业品类目录（对标 aguato 品类页）：提交集合 = 唯一开页清单 CATEGORY_DIRECTORY，
+// 与 /categories/[slug] 的 generateStaticParams 同源。密度不足的品类已在清单里剔除。
+import { CATEGORY_DIRECTORY } from "@/lib/categoryDirectory";
 
 /** 分片 key = 语言。顺序即 sitemapindex 里的顺序。 */
 export const SITEMAP_LOCALES: readonly Locale[] = LOCALES;
@@ -90,6 +93,8 @@ function seoFor(path: string): { changeFrequency: SitemapChangeFrequency; priori
   if (path.startsWith("/tools")) return { changeFrequency: "weekly", priority: 0.8 };
   if (path.startsWith("/services")) return { changeFrequency: "monthly", priority: 0.8 };
   if (path.startsWith("/suppliers")) return { changeFrequency: "weekly", priority: 0.8 };
+  // 行业品类目录：聚合着陆页，随供应商发布按需变化 ⇒ weekly / 0.8
+  if (path.startsWith("/categories")) return { changeFrequency: "weekly", priority: 0.8 };
   // 产业带目录与详情：目录型着陆页，但内容由运营按需新增 ⇒ 提交节奏用 monthly。
   if (path.startsWith("/industrial-clusters"))
     return { changeFrequency: "monthly", priority: 0.7 };
@@ -292,6 +297,12 @@ async function collectPathEntries(): Promise<SitemapPathEntry[]> {
     add(`/industry/${i.code}`);
     topicsForIndustry(i.code).forEach((tp) => add(`/industry/${i.code}/${tp.slug}`));
   });
+
+  // 行业品类目录（/categories/[slug]）。提交集合 = CATEGORY_DIRECTORY 唯一清单，
+  // 与页面 generateStaticParams 同源。品类页是聚合页，内容随供应商发布变化，
+  // 但库里没有「品类更新时间」这个真实字段 ⇒ 不传 lastModified，绝不回落 new Date()
+  // （R60：否则每次构建刷全量 lastmod，Google 直接忽略该字段）。
+  CATEGORY_DIRECTORY.forEach((c) => add(`/categories/${c.slug}`));
 
   // GEO / AI Search 问答页（表 geo_knowledge_pages）。
   // 提交集合 = 库内实际存在的行，与 /guides、/standards、/industry 三个路由的
